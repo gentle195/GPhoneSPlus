@@ -29,6 +29,11 @@ public class ManHinhServiceImpl implements ManHinhService {
     }
 
     @Override
+    public List<ManHinh> search(String search) {
+        return manHinhRepository.search(search);
+    }
+
+    @Override
     public ManHinh findById(UUID id) {
         return manHinhRepository.findById(id).orElse(null);
     }

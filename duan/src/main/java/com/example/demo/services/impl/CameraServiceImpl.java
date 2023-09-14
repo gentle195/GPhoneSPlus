@@ -28,6 +28,11 @@ public class CameraServiceImpl implements CameraService {
     }
 
     @Override
+    public List<Camera> search(String search) {
+        return cameraRepository.search(search);
+    }
+
+    @Override
     public Camera findById(UUID id) {
         return cameraRepository.findById(id).orElse(null);
     }
