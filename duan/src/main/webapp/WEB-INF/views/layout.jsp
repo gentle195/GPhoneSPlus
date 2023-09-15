@@ -84,7 +84,7 @@
                                         <ul class="nav child_menu">
                                             <li><a href="/chi-tiet-san-pham/hien-thi">Chi Tiết Sản Phẩm</a></li>
                                             <li><a href="/san-pham/hien-thi">Sản Phẩm</a></li>
-                                            <li><a href="/hang-san-pham/hien-thi">Hãng</a></li>
+                                            <li><a href="/hang-dien-thoai/hien-thi">Hãng</a></li>
                                             <li><a href="/mau-sac/hien-thi">Màu Sắc</a></li>
                                             <li><a href="/camera/hien-thi">Camera</a></li>
                                             <li><a href="/dung-luong-pin/hien-thi">Dung Lượng Pin</a></li>
