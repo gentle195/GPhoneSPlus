@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Camera;
+import com.example.demo.models.ManHinh;
 import com.example.demo.services.CameraService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,40 +44,29 @@ public class CameraController {
     }
 
     @GetMapping("/detail/{id}")
-    public String detail(Model model, @PathVariable("id") UUID id, @RequestParam("num") Optional<Integer> num,
-                         @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<Camera> list = cameraService.getAll(pageable);
+    public String detail(Model model, @PathVariable("id") UUID id) {
         Camera hsp = cameraService.findById(id);
         model.addAttribute("camera", hsp);
-        model.addAttribute("listCamera", list.getContent());
-        model.addAttribute("total", list.getTotalPages());
         model.addAttribute("contentPage", "camera/update.jsp");
         return "layout";
     }
 
+    @GetMapping("/view-add")
+    public String viewAdd(Model model, @ModelAttribute("camera") ManHinh camera) {
+        model.addAttribute("camera", new Camera());
+        model.addAttribute("contentPage", "camera/add.jsp");
+        return "layout";
+    }
+
     @PostMapping("/add")
-    public String add(Model model, @ModelAttribute("camera") @Valid Camera camera, BindingResult bindingResult,
-                      @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+    public String add(Model model, @ModelAttribute("camera") @Valid Camera camera, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("content", "Camera/hien-thi.jsp");
-            Sort sort = Sort.by("ngayTao").ascending();
-            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-            Page<Camera> list = cameraService.getAll(pageable);
-            model.addAttribute("listCamera", list.getContent());
-            model.addAttribute("total", list.getTotalPages());
             model.addAttribute("contentPage", "camera/hien-thi.jsp");
             return "layout";
         }
         camera.setNgayTao(Date.valueOf(LocalDate.now()));
-        camera.setMa("C" + String.valueOf(cameraService.findAll().size() + 1));
+        camera.setMa("CAM" + String.valueOf(cameraService.findAll().size() + 1));
         cameraService.add(camera);
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<Camera> list = cameraService.getAll(pageable);
-        model.addAttribute("listCamera", list.getContent());
-        model.addAttribute("total", list.getTotalPages());
         return "redirect:/camera/hien-thi";
         // Tiếp tục xử lý và trả về view tương ứng
     }
