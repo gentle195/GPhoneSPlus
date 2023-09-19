@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Camera;
+import com.example.demo.models.DiaChi;
+import com.example.demo.models.KhachHang;
 import com.example.demo.models.ManHinh;
 import com.example.demo.services.ManHinhService;
 import jakarta.validation.Valid;
@@ -32,7 +34,7 @@ public class ManHinhController {
     private ManHinhService manHinhService;
 
     @GetMapping("hien-thi")
-    public String hienthi(@ModelAttribute("manHinh") ManHinh manHinh, Model model, @RequestParam("num") Optional<Integer> num,
+    public String hienThi(@ModelAttribute("manHinh") ManHinh manHinh, Model model, @RequestParam("num") Optional<Integer> num,
                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
@@ -42,18 +44,18 @@ public class ManHinhController {
         model.addAttribute("contentPage", "man-hinh/hien-thi.jsp");
         return "layout";
     }
-
     @GetMapping("/detail/{id}")
-    public String detail(Model model, @PathVariable("id") UUID id,@RequestParam("num") Optional<Integer> num,
-                         @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+    public String detail(Model model, @PathVariable("id") UUID id) {
         ManHinh hsp = manHinhService.findById(id);
         model.addAttribute("manHinh", hsp);
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<ManHinh> list = manHinhService.getAll(pageable);
-        model.addAttribute("listManHinh", list.getContent());
-        model.addAttribute("total", list.getTotalPages());
         model.addAttribute("contentPage", "man-hinh/update.jsp");
+        return "layout";
+    }
+
+    @GetMapping("/view-add")
+    public String viewAdd(Model model, @ModelAttribute("manHinh") ManHinh manHinh) {
+        model.addAttribute("manHinh", new ManHinh());
+        model.addAttribute("contentPage", "man-hinh/add.jsp");
         return "layout";
     }
 
@@ -61,23 +63,12 @@ public class ManHinhController {
     public String add(Model model, @ModelAttribute("manHinh") @Valid ManHinh manHinh, BindingResult bindingResult,
                       @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("content", "ManHinh/hien-thi.jsp");
-            Sort sort = Sort.by("ngayTao").ascending();
-            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-            Page<ManHinh> list = manHinhService.getAll(pageable);
-            model.addAttribute("listManHinh", list.getContent());
-            model.addAttribute("total", list.getTotalPages());
-            model.addAttribute("contentPage", "man-hinh/hien-thi.jsp");
+            model.addAttribute("contentPage", "man-hinh/add.jsp");
             return "layout";
         }
         manHinh.setNgayTao(Date.valueOf(LocalDate.now()));
         manHinh.setMa("MH" + String.valueOf(manHinhService.findAll().size() + 1));
         manHinhService.add(manHinh);
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<ManHinh> list = manHinhService.getAll(pageable);
-        model.addAttribute("listManHinh", list.getContent());
-        model.addAttribute("total", list.getTotalPages());
         return "redirect:/man-hinh/hien-thi";
         // Tiếp tục xử lý và trả về view tương ứng
     }
@@ -116,10 +107,11 @@ public class ManHinhController {
         model.addAttribute("contentPage", "man-hinh/hien-thi.jsp");
         return "layout";
     }
+
     @PostMapping("/search")
     public String search(Model model, @ModelAttribute("manHinh") ManHinh manHinh, @RequestParam("search") String search) {
-        List<ManHinh> list=manHinhService.search(search);
-        model.addAttribute("listManHinh",list);
+        List<ManHinh> list = manHinhService.search(search);
+        model.addAttribute("listManHinh", list);
         model.addAttribute("contentPage", "man-hinh/hien-thi.jsp");
         return "layout";
     }

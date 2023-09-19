@@ -43,7 +43,7 @@
         </div>
     </div>
     <br>
-    <form:form action="/camera/update/${camera.id}" method="post" modelAttribute="camera">
+    <form:form action="/camera/add" method="post" modelAttribute="camera">
         <table class="table ">
             <tbody>
             <tr>
@@ -67,7 +67,7 @@
             <tr>
                 <td colspan="2" style="text-align: center">
                     <button type="submit" class="btn btn-success"
-                            id="btt" onclick="return myFunction2()">Update
+                            id="btt" onclick="return myFunction1()">Add
                     </button>
                 </td>
             </tr>

@@ -34,85 +34,20 @@
 <div class="container">
     <h1 style="text-align: center">Màn Hình</h1>
     <div>
-        <form:form action="/man-hinh/add" method="post" modelAttribute="manHinh">
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-floating mb-3 mt-3">
-                        <form:input class="form-control" placeholder="" path="thongSo"/>
-                        <form:label class="form-label" path="thongSo">Thông số màn hình:</form:label>
-                        <form:errors path="thongSo" cssStyle="color: red"></form:errors>
-                    </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <form:input class="form-control" placeholder="" path="loaiCamUng"/>
-                        <form:label class="form-label" path="loaiCamUng">Loại cảm ứng màn hình:</form:label>
-                        <form:errors path="loaiCamUng" cssStyle="color: red"></form:errors>
-                    </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <form:input class="form-control" placeholder="" path="tiLeKhungHinh"/>
-                        <form:label class="form-label" path="tiLeKhungHinh">Tỉ lệ khung hình:</form:label>
-                        <form:errors path="tiLeKhungHinh" cssStyle="color: red"></form:errors>
-                    </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <form:input class="form-control" placeholder="" path="congNghe"/>
-                        <form:label class="form-label" path="congNghe">Công nghệ màn hình:</form:label>
-                        <form:errors path="congNghe" cssStyle="color: red"></form:errors>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-floating mb-3 mt-3">
-                        <form:input class="form-control" placeholder="" path="doPhanGiai"/>
-                        <form:label class="form-label" path="doPhanGiai">Độ phân giải:</form:label>
-                        <form:errors path="doPhanGiai" cssStyle="color: red"></form:errors>
-                    </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <form:input class="form-control" placeholder="" path="tanSoQuet"/>
-                        <form:label class="form-label" path="tanSoQuet">Tần số quét:</form:label>
-                        <form:errors path="tanSoQuet" cssStyle="color: red"></form:errors>
-                    </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <form:input class="form-control" placeholder="" path="moTa"/>
-                        <form:label class="form-label" path="moTa">Mô tả:</form:label>
-                        <form:errors path="moTa" cssStyle="color: red"></form:errors>
-                    </div>
-                    <div class="form-check mb-3 mt-3">
-                        <form:label class="form-label" path="tinhTrang">Tình Trạng:</form:label>
-                        <form:radiobutton path="tinhTrang" value="0"/>Hoạt động
-                        <form:radiobutton path="tinhTrang" value="1" /> Ngừng hoạt động
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12" style="text-align: center">
-                        <button type="submit" class="btn btn-success"
-                                id="btt" onclick="return myFunction1()">Add
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </form:form>
-    </div>
-    <div>
         <table class="table container">
             <tbody>
             <tr>
-                <form action="/man-hinh/search" method="post">
+                <form action="/man-hinh/search" method="post" style="text-align: center;margin-top: 6px">
                     <td colspan="2" style="text-align: center">Tìm kiếm: <input type="text" name="search">
                         <button type="submit">Tìm kiếm</button>
                     </td>
                 </form>
-<%--                <td colspan="2" style="text-align: center">--%>
-<%--                    <a href="/man-hinh/modal-man-hinh" class="btn btn-info" data-bs-toggle="modal"--%>
-<%--                       data-bs-target="#modalManHinh">Thêm thông số màn hình</a>--%>
-<%--                    <div class="modal fade" id="modalManHinh" tabindex="-1" aria-hidden="true">--%>
-<%--                        <div class="modal-dialog modal-dialog-centered">--%>
-<%--                            <div class="modal-content">--%>
-<%--                                <div class="modal-body">--%>
-<%--                                    --%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </td>--%>
+                <td colspan="2" style="text-align: center">
+                    <button class="btn btn-info">
+                        <a style="color: white;text-decoration: none" href="/man-hinh/view-add"
+                           onclick="return myFunction5()">Thêm mới</a>
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -155,15 +90,16 @@
                 </td>
                 <td>${list.moTa}</td>
                 <td>
-                    <a class="btn btn-primary" href="/man-hinh/delete/${list.id}"
-                       onclick="return myFunction3()">Delete</a>
-                    <a class="btn btn-primary" href="/man-hinh/detail/${list.id}">Detail</a>
+                    <a class="btn btn-danger" href="/man-hinh/delete/${list.id}"
+                       onclick="return myFunction3()"><img src="/img/remove.png"></a>
+                    <a class="btn btn-light" href="/man-hinh/detail/${list.id}" onclick="return myFunction2()"><img
+                            src="/img/file.png"></a>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
-
+    <br>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center pagination-lg">
             <li class="page-item"><a class="page-link" href="/man-hinh/hien-thi?num=0">First</a></li>
@@ -206,6 +142,26 @@
         let kt = confirm(text);
         if (kt == true) {
             confirm("Xóa thành công");
+            return true
+        } else {
+            return false;
+        }
+    }
+
+    function myFunction4() {
+        let text = "Bạn chắc chắn muốn về lại trang hiển thị";
+        let kt = confirm(text);
+        if (kt == true) {
+            return true
+        } else {
+            return false;
+        }
+    }
+
+    function myFunction5() {
+        let text = "Bạn chắc chắn muốn sang trang thêm thông tin";
+        let kt = confirm(text);
+        if (kt == true) {
             return true
         } else {
             return false;

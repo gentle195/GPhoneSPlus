@@ -44,7 +44,7 @@
     </div>
     <br>
     <div>
-        <form:form action="/man-hinh/update/${manHinh.id}" method="post" modelAttribute="manHinh">
+        <form:form action="/man-hinh/add" method="post" modelAttribute="manHinh">
             <div class="row">
                 <div class="col-6">
                     <div class="form-floating mb-3 mt-3">
@@ -94,7 +94,7 @@
                 <div class="row">
                     <div class="col-12" style="text-align: center">
                         <button type="submit" class="btn btn-success"
-                                id="btt" onclick="return myFunction2()">Update
+                                id="btt" onclick="return myFunction1()">Add
                         </button>
                     </div>
                 </div>
@@ -144,7 +144,6 @@
             return false;
         }
     }
-
     function myFunction5() {
         let text = "Bạn chắc chắn muốn sang trang thêm thông tin";
         let kt = confirm(text);
@@ -154,6 +153,7 @@
             return false;
         }
     }
+
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
