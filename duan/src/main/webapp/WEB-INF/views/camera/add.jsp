@@ -31,49 +31,62 @@
     <link href="../../build/css/custom.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container" >
+<div class="container" style="border: 1px solid whitesmoke ; height: 1000px">
     <h1 style="text-align: center">Camera</h1>
     <br>
-    <div class="row">
-        <div class="col-12" style="text-align: center">
-            <button class="btn btn-info">
-                <a style="color: white;text-decoration: none" href="/camera/hien-thi"
-                   onclick="return myFunction4()">Trở về</a>
-            </button>
+    <div style="border: 1px solid grey">
+        <div>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a href="/camera/hien-thi" role="tab" onclick="return myFunction4()">
+                        <h6>Thông tin camera</h6>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab"
+                       aria-controls="review" aria-selected="true">
+                        <h6>Thêm mới camera</h6>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
+                    <div>
+                        <form:form action="/camera/add" method="post" modelAttribute="camera">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-floating mb-3 mt-3">
+                                        <form:input class="form-control" placeholder="" path="thongSo"/>
+                                        <form:label class="form-label" path="thongSo">Thông số Camera:</form:label>
+                                        <form:errors path="thongSo" cssStyle="color: red"></form:errors>
+                                    </div>
+                                    <div class="form-floating mb-3 mt-3">
+                                        <form:input class="form-control" placeholder="" path="moTa"/>
+                                        <form:label class="form-label" path="moTa">Mô tả:</form:label>
+                                        <form:errors path="moTa" cssStyle="color: red"></form:errors>
+                                    </div>
+                                    <div class="form-check mb-3 mt-3">
+                                        <form:label class="form-label" path="tinhTrang">Tình Trạng:</form:label>
+                                        <form:radiobutton path="tinhTrang" value="0"/>Hoạt động
+                                        <form:radiobutton path="tinhTrang" value="1"/> Ngừng hoạt động
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12" style="text-align: center">
+                                        <button type="submit" class="btn btn-success"
+                                                id="btt" onclick="return myFunction1()">Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form:form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <br>
-    <form:form action="/camera/add" method="post" modelAttribute="camera">
-        <table class="table ">
-            <tbody>
-            <tr>
-                <td style="text-align: center"><form:label path="thongSo">Thông số Camera</form:label></td>
-                <th style="text-align: center"><form:input path="thongSo" id="tent"/>
-                    <form:errors path="thongSo" cssClass="error text-danger"/></th>
-            </tr>
-
-            <tr>
-                <td style="text-align: center"><form:label path="tinhTrang">Trạng thái</form:label></td>
-                <th style="text-align: center"><form:radiobutton path="tinhTrang" value="0" label="Hoạt động"/>
-                    <form:radiobutton path="tinhTrang" value="1" label="Ngừng hoạt động"/>
-                </th>
-            </tr>
-
-            <tr>
-                <td style="text-align: center"><form:label path="moTa">Mô tả</form:label></td>
-                <th style="text-align: center"><form:textarea path="moTa"/>
-                    <form:errors path="moTa" cssClass="error text-danger"/></th>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align: center">
-                    <button type="submit" class="btn btn-success"
-                            id="btt" onclick="return myFunction1()">Add
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </form:form>
 </div>
 </body>
 <script>
@@ -117,6 +130,7 @@
             return false;
         }
     }
+
     function myFunction5() {
         let text = "Bạn chắc chắn muốn sang trang thêm thông tin";
         let kt = confirm(text);

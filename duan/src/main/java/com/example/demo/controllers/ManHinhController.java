@@ -109,10 +109,24 @@ public class ManHinhController {
     }
 
     @PostMapping("/search")
-    public String search(Model model, @ModelAttribute("manHinh") ManHinh manHinh, @RequestParam("search") String search) {
-        List<ManHinh> list = manHinhService.search(search);
-        model.addAttribute("listManHinh", list);
-        model.addAttribute("contentPage", "man-hinh/hien-thi.jsp");
-        return "layout";
+    public String search(Model model, @ModelAttribute("manHinh") ManHinh manHinh, @RequestParam("search") String search,
+                         @RequestParam("num") Optional<Integer> num,
+                         @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+        if(search.isEmpty()){
+            model.addAttribute("thongBao","Không để trống thông tin");
+            Sort sort = Sort.by("ngayTao").ascending();
+            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+            Page<ManHinh> list = manHinhService.getAll(pageable);
+            model.addAttribute("listManHinh", list.getContent());
+            model.addAttribute("total", list.getTotalPages());
+            model.addAttribute("contentPage", "man-hinh/hien-thi.jsp");
+            return "layout";
+        }else{
+            List<ManHinh> list = manHinhService.search(search);
+            model.addAttribute("listManHinh", list);
+            model.addAttribute("total", 0);
+            model.addAttribute("contentPage", "man-hinh/hien-thi.jsp");
+            return "layout";
+        }
     }
 }

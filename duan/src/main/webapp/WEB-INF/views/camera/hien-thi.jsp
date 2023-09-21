@@ -35,78 +35,105 @@
     <h1 style="text-align: center">Camera</h1>
     <br>
     <div>
-        <table class="table container">
-            <tbody>
-            <tr>
-                <form action="/camera/search" method="post">
-                    <td colspan="2" style="text-align: center">Tìm kiếm: <input type="text" name="search">
-                        <button type="submit">Tìm kiếm</button>
-                    </td>
-                </form>
-                <td colspan="2" style="text-align: center">
-                    <button class="btn btn-info">
-                        <a style="color: white;text-decoration: none" href="/camera/view-add"
-                           onclick="return myFunction5()">Thêm mới</a>
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+                   aria-controls="description" aria-selected="true">
+                    <h6>Thông tin camera</h6>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/camera/view-add" role="tab" onclick="return myFunction5()">
+                    <h6>Khôi phục dữ liệu </h6>
+                </a>
+            </li>
+        </ul>
     </div>
-    <br>
     <div>
-        <table class="table container">
-            <thead>
-            <tr>
-                <th>STT</th>
-                <th>Mã</th>
-                <th>Thông số</th>
-                <th>Ngày tạo</th>
-                <th>Ngày cập nhật</th>
-                <th>Tình trạng</th>
-                <th>Mô tả</th>
-                <th colspan="2">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="list" varStatus="i" items="${listCamera}">
-                <tr>
-                    <td>${i.index+1}</td>
-                    <td>${list.ma}</td>
-                    <td>${list.thongSo}</td>
-                    <td>${list.ngayTao}</td>
-                    <td>${list.ngayCapNhat}</td>
-                    <td>
-                        <c:if test="${list.tinhTrang==0}">Hoạt động</c:if>
-                        <c:if test="${list.tinhTrang==1}">Ngừng hoạt động</c:if>
-                    </td>
-                    <td>${list.moTa}</td>
-                    <td>
-                        <a class="btn btn-danger" href="/camera/delete/${list.id}"
-                           onclick="return myFunction3()"><img src="/img/remove.png"></a>
-                        <a class="btn btn-light" href="/camera/detail/${list.id}" onclick="return myFunction2()"><img
-                                src="/img/file.png"></a>
-                    </td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center pagination-lg">
-                <li class="page-item"><a class="page-link" href="/camera/hien-thi?num=0">First</a>
-                </li>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="description" role="tabpanel"
+                 aria-labelledby="description-tab">
+                <div>
+                    <table class="table container">
+                        <tbody>
+                        <tr>
+                            <form action="/camera/search" method="post">
+                                <td style="text-align: right">
+                                    <div class="row">
+                                        <div class="col-9" style="text-align: right">
+                                            <h6 style="color: red;margin-top: 10px">${thongBao}</h6>
+                                        </div>
+                                        <div class="col-3" style="text-align: left">
+                                            Tìm kiếm: <input type="text" name="search">
+                                            <button type="submit" class="btn btn-light">Tìm kiếm</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </form>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <table class="table container">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã</th>
+                            <th>Thông số</th>
+                            <th>Ngày tạo</th>
+                            <th>Ngày cập nhật</th>
+                            <th>Tình trạng</th>
+                            <th>Mô tả</th>
+                            <th colspan="2">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="list" varStatus="i" items="${listCamera}">
+                            <tr>
+                                <td>${i.index+1}</td>
+                                <td>${list.ma}</td>
+                                <td>${list.thongSo}</td>
+                                <td>${list.ngayTao}</td>
+                                <td>${list.ngayCapNhat}</td>
+                                <td>
+                                    <c:if test="${list.tinhTrang==0}">Hoạt động</c:if>
+                                    <c:if test="${list.tinhTrang==1}">Ngừng hoạt động</c:if>
+                                </td>
+                                <td>${list.moTa}</td>
+                                <td>
+                                    <a class="btn btn-danger" href="/camera/delete/${list.id}"
+                                       onclick="return myFunction3()"><img src="/img/remove.png"></a>
+                                    <a class="btn btn-light" href="/camera/detail/${list.id}"
+                                       onclick="return myFunction2()"><img
+                                            src="/img/file.png"></a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                    <c:if test="${total!= 0}">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center pagination-lg">
+                                <li class="page-item"><a class="page-link" href="/camera/hien-thi?num=0">First</a>
+                                </li>
 
-                <c:forEach begin="1" end="${total}" varStatus="status">
-                    <li class="page-item">
-                        <a href="${pageContext.request.contextPath}/camera/hien-thi?num=${status.index -1}"
-                           class="page-link">${status.index}</a>
-                    </li>
-                </c:forEach>
+                                <c:forEach begin="1" end="${total}" varStatus="status">
+                                    <li class="page-item">
+                                        <a href="${pageContext.request.contextPath}/camera/hien-thi?num=${status.index -1}"
+                                           class="page-link">${status.index}</a>
+                                    </li>
+                                </c:forEach>
 
-                <li class="page-item"><a class="page-link" href="/camera/hien-thi?num=${total-1}">Last</a>
-                </li>
-            </ul>
-        </nav>
+                                <li class="page-item"><a class="page-link"
+                                                         href="/camera/hien-thi?num=${total-1}">Last</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </c:if>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
