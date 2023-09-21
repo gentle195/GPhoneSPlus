@@ -33,73 +33,84 @@
 <body>
 <div class="container">
     <h1 style="text-align: center">Màn Hình</h1>
-    <br>
-    <div class="row">
-        <div class="col-12" style="text-align: center">
-            <button class="btn btn-info">
-                <a style="color: white;text-decoration: none" href="/man-hinh/hien-thi"
-                   onclick="return myFunction4()">Trở về</a>
-            </button>
-        </div>
-    </div>
-    <br>
     <div>
-        <form:form action="/man-hinh/add" method="post" modelAttribute="manHinh">
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-floating mb-3 mt-3">
-                        <form:input class="form-control" placeholder="" path="thongSo"/>
-                        <form:label class="form-label" path="thongSo">Thông số màn hình:</form:label>
-                        <form:errors path="thongSo" cssStyle="color: red"></form:errors>
-                    </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <form:input class="form-control" placeholder="" path="loaiCamUng"/>
-                        <form:label class="form-label" path="loaiCamUng">Loại cảm ứng màn hình:</form:label>
-                        <form:errors path="loaiCamUng" cssStyle="color: red"></form:errors>
-                    </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <form:input class="form-control" placeholder="" path="tiLeKhungHinh"/>
-                        <form:label class="form-label" path="tiLeKhungHinh">Tỉ lệ khung hình:</form:label>
-                        <form:errors path="tiLeKhungHinh" cssStyle="color: red"></form:errors>
-                    </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <form:input class="form-control" placeholder="" path="congNghe"/>
-                        <form:label class="form-label" path="congNghe">Công nghệ màn hình:</form:label>
-                        <form:errors path="congNghe" cssStyle="color: red"></form:errors>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-floating mb-3 mt-3">
-                        <form:input class="form-control" placeholder="" path="doPhanGiai"/>
-                        <form:label class="form-label" path="doPhanGiai">Độ phân giải:</form:label>
-                        <form:errors path="doPhanGiai" cssStyle="color: red"></form:errors>
-                    </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <form:input class="form-control" placeholder="" path="tanSoQuet"/>
-                        <form:label class="form-label" path="tanSoQuet">Tần số quét:</form:label>
-                        <form:errors path="tanSoQuet" cssStyle="color: red"></form:errors>
-                    </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <form:input class="form-control" placeholder="" path="moTa"/>
-                        <form:label class="form-label" path="moTa">Mô tả:</form:label>
-                        <form:errors path="moTa" cssStyle="color: red"></form:errors>
-                    </div>
-                    <div class="form-check mb-3 mt-3">
-                        <form:label class="form-label" path="tinhTrang">Tình Trạng:</form:label>
-                        <form:radiobutton path="tinhTrang" value="0"/>Hoạt động
-                        <form:radiobutton path="tinhTrang" value="1"/> Ngừng hoạt động
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a  href="/man-hinh/hien-thi" role="tab" onclick="return myFunction4()">
+                    <h6>Thông tin màn hình</h6>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab"
+                   aria-controls="review" aria-selected="true">
+                    <h6>Thêm mới màn hình</h6>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
+                <div>
+                    <form:form action="/man-hinh/add" method="post" modelAttribute="manHinh">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-floating mb-3 mt-3">
+                                    <form:input class="form-control" placeholder="" path="thongSo"/>
+                                    <form:label class="form-label" path="thongSo">Thông số màn hình:</form:label>
+                                    <form:errors path="thongSo" cssStyle="color: red"></form:errors>
+                                </div>
+                                <div class="form-floating mb-3 mt-3">
+                                    <form:input class="form-control" placeholder="" path="loaiCamUng"/>
+                                    <form:label class="form-label" path="loaiCamUng">Loại cảm ứng màn hình:</form:label>
+                                    <form:errors path="loaiCamUng" cssStyle="color: red"></form:errors>
+                                </div>
+                                <div class="form-floating mb-3 mt-3">
+                                    <form:input class="form-control" placeholder="" path="tiLeKhungHinh"/>
+                                    <form:label class="form-label" path="tiLeKhungHinh">Tỉ lệ khung hình:</form:label>
+                                    <form:errors path="tiLeKhungHinh" cssStyle="color: red"></form:errors>
+                                </div>
+                                <div class="form-floating mb-3 mt-3">
+                                    <form:input class="form-control" placeholder="" path="congNghe"/>
+                                    <form:label class="form-label" path="congNghe">Công nghệ màn hình:</form:label>
+                                    <form:errors path="congNghe" cssStyle="color: red"></form:errors>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-floating mb-3 mt-3">
+                                    <form:input class="form-control" placeholder="" path="doPhanGiai"/>
+                                    <form:label class="form-label" path="doPhanGiai">Độ phân giải:</form:label>
+                                    <form:errors path="doPhanGiai" cssStyle="color: red"></form:errors>
+                                </div>
+                                <div class="form-floating mb-3 mt-3">
+                                    <form:input class="form-control" placeholder="" path="tanSoQuet"/>
+                                    <form:label class="form-label" path="tanSoQuet">Tần số quét:</form:label>
+                                    <form:errors path="tanSoQuet" cssStyle="color: red"></form:errors>
+                                </div>
+                                <div class="form-floating mb-3 mt-3">
+                                    <form:input class="form-control" placeholder="" path="moTa"/>
+                                    <form:label class="form-label" path="moTa">Mô tả:</form:label>
+                                    <form:errors path="moTa" cssStyle="color: red"></form:errors>
+                                </div>
+                                <div class="form-check mb-3 mt-3">
+                                    <form:label class="form-label" path="tinhTrang">Tình Trạng:</form:label>
+                                    <form:radiobutton path="tinhTrang" value="0"/>Hoạt động
+                                    <form:radiobutton path="tinhTrang" value="1"/> Ngừng hoạt động
 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12" style="text-align: center">
-                        <button type="submit" class="btn btn-success"
-                                id="btt" onclick="return myFunction1()">Add
-                        </button>
-                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12" style="text-align: center">
+                                    <button type="submit" class="btn btn-success"
+                                            id="btt" onclick="return myFunction1()">Add
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form:form>
                 </div>
             </div>
-        </form:form>
+        </div>
     </div>
 </div>
 </body>

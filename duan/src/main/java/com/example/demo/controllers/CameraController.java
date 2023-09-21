@@ -61,7 +61,7 @@ public class CameraController {
     @PostMapping("/add")
     public String add(Model model, @ModelAttribute("camera") @Valid Camera camera, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("contentPage", "camera/hien-thi.jsp");
+            model.addAttribute("contentPage", "camera/add.jsp");
             return "layout";
         }
         camera.setNgayTao(Date.valueOf(LocalDate.now()));
@@ -102,10 +102,24 @@ public class CameraController {
     }
 
     @PostMapping("/search")
-    public String search(Model model, @ModelAttribute("camera") Camera camera, @RequestParam("search") String search) {
-        List<Camera> list = cameraService.search(search);
-        model.addAttribute("listCamera",list);
-        model.addAttribute("contentPage", "camera/hien-thi.jsp");
-        return "layout";
+    public String search(Model model, @ModelAttribute("camera") Camera camera, @RequestParam("search") String search, @RequestParam("num") Optional<Integer> num,
+                         @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+        if(search.isEmpty()){
+            model.addAttribute("thongBao","Không để trống thông tin");
+            Sort sort = Sort.by("ngayTao").descending();
+            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+            Page<Camera> list = cameraService.getAll(pageable);
+            model.addAttribute("listCamera", list.getContent());
+            model.addAttribute("total", list.getTotalPages());
+            model.addAttribute("contentPage", "camera/hien-thi.jsp");
+            return "layout";
+        }
+        else {
+            List<Camera> list = cameraService.search(search);
+            model.addAttribute("listCamera",list);
+            model.addAttribute("contentPage", "camera/hien-thi.jsp");
+            return "layout";
+        }
+
     }
 }
