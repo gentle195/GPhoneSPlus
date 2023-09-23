@@ -20,6 +20,16 @@ public interface HangKhachHangService {
     public HangKhachHang update(UUID id, HangKhachHang hangKhachHang);
 
     public Boolean delete(UUID id);
+    public Page<HangKhachHang> getAll00(Pageable pageable);
+    public HangKhachHang TimMa(String id);
+    public List<HangKhachHang> TimMT(String mt);
+
+    List<HangKhachHang> getall1();
+    Page<HangKhachHang> getall11(Pageable pageable);
+
+    void update0();
+
+    List<HangKhachHang> timkiemMT1(String timkiem);
 }
 
 

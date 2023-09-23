@@ -1,8 +1,5 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Camera;
-import com.example.demo.models.DiaChi;
-import com.example.demo.models.KhachHang;
 import com.example.demo.models.ManHinh;
 import com.example.demo.services.ManHinhService;
 import jakarta.validation.Valid;
