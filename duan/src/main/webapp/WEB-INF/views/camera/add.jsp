@@ -31,21 +31,21 @@
     <link href="../../build/css/custom.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container" >
+<div class="container" style="border: 1px solid whitesmoke ; height: 1000px">
     <h1 style="text-align: center">Camera</h1>
     <br>
     <div style="border: 1px solid grey">
         <div>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a href="/camera/hien-thi" role="tab" onclick="myFunction4()">
-                        <h6>Quay lại</h6>
+                    <a href="/camera/hien-thi" role="tab" onclick="return myFunction4()">
+                        <h6>Thông tin camera</h6>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab"
                        aria-controls="review" aria-selected="true">
-                        <h6>Chỉnh sửa camera</h6>
+                        <h6>Thêm mới camera</h6>
                     </a>
                 </li>
             </ul>
@@ -54,7 +54,7 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
                     <div>
-                        <form:form action="/camera/update/${camera.id}" method="post" modelAttribute="camera">
+                        <form:form action="/camera/add" method="post" modelAttribute="camera">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-floating mb-3 mt-3">
@@ -76,7 +76,7 @@
                                 <div class="row">
                                     <div class="col-12" style="text-align: center">
                                         <button type="submit" class="btn btn-success"
-                                                id="btt" onclick="return myFunction2()">Update
+                                                id="btt" onclick="return myFunction1()">Add
                                         </button>
                                     </div>
                                 </div>
@@ -130,6 +130,7 @@
             return false;
         }
     }
+
     function myFunction5() {
         let text = "Bạn chắc chắn muốn sang trang thêm thông tin";
         let kt = confirm(text);

@@ -71,15 +71,19 @@
                     <div class="col-6">
                         <div class="outer-border p-3 border border-secondary">
                             <div class="row">
-                                <div class="col-6">
-                                    <form method="post" action="/ban-hang/search-san-pham">
-                                        <input type="text" name="search-san-pham"
-                                               placeholder="Tìm kiếm sản phẩm">
-                                        <button type="submit">Tìm kiếm</button>
-                                    </form>
-                                    <h6 style="text-align: center;color: red">${thongBao}</h6>
+                                <div class="col-7">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <form method="post" action="/ban-hang/search-san-pham">
+                                                <input type="text" name="search-san-pham"
+                                                       placeholder="Tìm kiếm sản phẩm">
+                                                <button type="submit">Tìm kiếm</button>
+                                            </form>
+                                        </div>
+                                        <div class="col-6"><h6 style="text-align: center;color: red">${thongBao}</h6></div>
+                                    </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-5">
                                     <a href="/ban-hang/hien-thi-san-pham" class="btn btn-info" data-bs-toggle="modal"
                                        data-bs-target="#hienThiSanPham">Lọc sản phẩm</a>
                                     <div class="modal fade" id="hienThiSanPham" tabindex="-1"

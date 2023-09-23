@@ -57,7 +57,6 @@ public class BanHangTaiQuayController {
     private DiaChiService diaChiService;
     @Autowired
     private IMEIService imeiService;
-
     @Autowired
     private SanPhamService sanPhamService;
     @Autowired
@@ -233,6 +232,7 @@ public class BanHangTaiQuayController {
             model.addAttribute("listKhachHang", khachHangService.findAll());
             model.addAttribute("listDiaChi", diaChiService.findAll());
             model.addAttribute("listHangKhachHang",hangKhachHangService.findAll());
+            model.addAttribute("listHoaDonChiTiet",hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId()));
             model.addAttribute("contentPage", "ban-hang/hien-thi.jsp");
             return "layout";
         } else {
@@ -454,6 +454,7 @@ public class BanHangTaiQuayController {
         model.addAttribute("listKhachHang", khachHangService.findAll());
         model.addAttribute("listDiaChi", diaChiService.findAll());
         model.addAttribute("listHangKhachHang",hangKhachHangService.findAll());
+        model.addAttribute("listHoaDonChiTiet",hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId()));
         model.addAttribute("contentPage", "ban-hang/hien-thi.jsp");
         return "layout";
     }
