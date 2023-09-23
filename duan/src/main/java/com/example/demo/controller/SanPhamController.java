@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.models.Camera;
-import com.example.demo.models.HangSanPham;
-import com.example.demo.models.ManHinh;
-import com.example.demo.models.SanPham;
+import com.example.demo.models.*;
 import com.example.demo.services.CameraService;
 import com.example.demo.services.HangSanPhamService;
 import com.example.demo.services.ManHinhService;
@@ -21,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -83,7 +81,7 @@ public class SanPhamController {
         model.addAttribute("listManHinh", manHinhService.findAll());
         model.addAttribute("listHangSP", hangSanPhamService.findAll());
         model.addAttribute("listCamera", cameraService.findAll());
-        model.addAttribute("contentPage","san-pham/hien-thi.jsp");
+        model.addAttribute("contentPage","san-pham/update.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
         return "layout";
@@ -96,7 +94,7 @@ public class SanPhamController {
                       @ModelAttribute("hangSP") HangSanPham hangSanPham,
                       @ModelAttribute("camera") Camera camera) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("content", "SanPham/hien-thi.jsp");
+            model.addAttribute("content", "san-pham/hien-thi.jsp");
             Sort sort = Sort.by("ngayTao").ascending();
             Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
             Page<SanPham> list = sanPhamService.getAll(pageable);
@@ -155,10 +153,45 @@ public class SanPhamController {
         sanPhamService.delete(id);
         Pageable pageable = PageRequest.of(num.orElse(0), size);
         Page<SanPham> list = sanPhamService.getAll(pageable);
-        model.addAttribute("contentPage","SanPham/hien-thi.jsp");
+        model.addAttribute("contentPage","san-pham/hien-thi.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
         return "layout";
 
+    }
+    @PostMapping("/san-pham/search")
+    public String search(@RequestParam("search") String search, @ModelAttribute("dulieuxem") SanPham dulieuxem,
+                         @ModelAttribute("manHinh") ManHinh manHinh,
+                         @ModelAttribute("hangSP") HangSanPham hangSanPham,
+                         @ModelAttribute("camera") Camera camera,
+                         Model model, @RequestParam("num") Optional<Integer> num,
+                         @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+        List<SanPham> list = sanPhamService.search(search);
+
+
+        model.addAttribute("contentPage","san-pham/hien-thi.jsp");
+        model.addAttribute("listManHinh", manHinhService.findAll());
+        model.addAttribute("listHangSP", hangSanPhamService.findAll());
+        model.addAttribute("listCamera", cameraService.findAll());
+        model.addAttribute("hsp", list);
+//        model.addAttribute("total", list);
+        return "layout";
+    }
+    @GetMapping("/san-pham/form-add")
+    public String formadd(@ModelAttribute("dulieuxem") SanPham dulieuxem,
+                          @ModelAttribute("manHinh") ManHinh manHinh,
+                          @ModelAttribute("hangSP") HangSanPham hangSanPham,
+                          @ModelAttribute("camera") Camera camera,
+                          Model model, @RequestParam("num") Optional<Integer> num,
+                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+        Pageable pageable = PageRequest.of(num.orElse(0), size);
+        Page<SanPham> list = sanPhamService.getAll(pageable);
+        model.addAttribute("listManHinh", manHinhService.findAll());
+        model.addAttribute("listHangSP", hangSanPhamService.findAll());
+        model.addAttribute("listCamera", cameraService.findAll());
+        model.addAttribute("contentPage","san-pham/add.jsp");
+        model.addAttribute("hsp", list.getContent());
+        model.addAttribute("total", list.getTotalPages());
+        return "layout";
     }
 }

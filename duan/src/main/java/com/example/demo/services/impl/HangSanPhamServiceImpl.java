@@ -1,6 +1,7 @@
 package com.example.demo.services.impl;
 
 import com.example.demo.models.HangSanPham;
+import com.example.demo.models.Rom;
 import com.example.demo.repositories.HangSanPhamRepository;
 import com.example.demo.services.HangSanPhamService;
 import org.springframework.beans.BeanUtils;
@@ -31,6 +32,7 @@ public class HangSanPhamServiceImpl implements HangSanPhamService {
     }
 
     @Override
+
     public HangSanPham findById(UUID id) {
         return hangSanPhamRepository.findById(id).orElse(null);
     }
@@ -62,5 +64,9 @@ public class HangSanPhamServiceImpl implements HangSanPhamService {
             }
         }
         return false;
+    }
+    @Override
+    public List<HangSanPham>search(String dungluong){
+        return hangSanPhamRepository.search(dungluong);
     }
 }

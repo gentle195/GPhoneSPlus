@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="java.time.LocalDate" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,10 +10,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Rom</title>
-    <%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"--%>
-    <%--          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">--%>
-    <!-- Bootstrap -->
+    <title>Hang San Pham</title>
     <link rel="icon" href="/images/favicon.ico" type="image/ico"/>
 
     <title>Gentelella Alela!</title>
@@ -40,60 +38,57 @@
     <link href="/build/css/custom.min.css" rel="stylesheet">
 </head>
 <body>
-<%--<form:form  action="/rom/add" method="post" modelAttribute="dulieuxem" class="needs-validation">--%>
-<%--    <div class="row">--%>
-<%--        <div class="col-md-4 mb-3">--%>
-<%--            <form:label path="dungLuong"><b>Dung lượng:</b></form:label>--%>
-<%--            <form:input type="text" class="form-control" id="dungLuong" path="dungLuong" required="true" />--%>
-<%--            <div class="invalid-feedback">--%>
-<%--                Vui lòng nhập dung lượng.--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="col-md-4 mb-3">--%>
-<%--            <form:label path="tinhTrang"><b>Tình Trạng:</b></form:label>--%>
-<%--            <div class="form-check">--%>
-<%--                <form:radiobutton path="tinhTrang" id="thegemoi" value="0" />--%>
-<%--                <label class="form-check-label" for="thegemoi">Thế hệ mới</label>--%>
-<%--            </div>--%>
-<%--            <div class="form-check">--%>
-<%--                <form:radiobutton path="tinhTrang" id="thegemocu" value="1" />--%>
-<%--                <label class="form-check-label" for="thegemocu">Thế hệ cũ</label>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="col-md-4 mb-3">--%>
-<%--            <form:label path="moTa"><b>Mô Tả:</b></form:label>--%>
-<%--            <form:textarea class="form-control" id="moTa" path="moTa" rows="3"></form:textarea>--%>
-<%--        </div>--%>
+<form:form action="/hang-dien-thoai/add" method="post" modelAttribute="dulieuxem">
+    <div class="row">
+        <div class="col">
+            <form:label path="ten"><b>Tên:</b></form:label>
+            <form:input path="ten" class="form-control"></form:input>
+            <form:errors path="ten"></form:errors>
+        </div>
+        <div class="col">
+            <form:label path="xuatSu"><b>Xuất sứ:</b></form:label>
+            <form:input path="xuatSu" class="form-control"></form:input>
+            <form:errors path="xuatSu"></form:errors>
+        </div>
+        <div class="col">
+            <form:label path="tinhTrang"><b>Tình Trạng:</b></form:label>
+            <br>
+            <form:radiobutton path="tinhTrang" label="Thế hệ mới" value="0"></form:radiobutton>
+            <form:radiobutton path="tinhTrang" label="Thế hệ cũ" value="1"></form:radiobutton>
+        </div>
+        <div class="col">
+            <form:label path="moTa"><b>Mô Tả:</b></form:label>
+            <form:textarea path="moTa" class="form-control"></form:textarea>
+            <form:errors path="moTa"></form:errors>
+        </div>
+        <div style="margin-top: 20px;margin-bottom: 20px">
+            <button type="submit" class="btn btn-primary"
+                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Add
+            </button>
 
-<%--    </div>--%>
-<%--    <button type="submit" class="btn btn-primary" onclick="return confirm('Bạn có muốn thực hiện thao tác này không?')">Add</button>--%>
-<%--</form:form>--%>
+        </div>
 
 
-
+    </div>
+</form:form>
 <div>
     <table class="table">
         <tr>
-            <form action="/rom/search" method="post" onsubmit="return checkSearch()">
+            <form action="/hang-dien-thoai/search" method="post" onsubmit="return checkSearch()">
                 <td style="text-align: center" colspan="10">Tìm Kiếm: <input type="text" name="search"
                                                                              style="text-align: center ;">
                     <button class="btn btn-secondary">Search</button>
                 </td>
             </form>
         </tr>
-        
-        <tr>
-            <td><a href="/rom/form-add"  class="btn btn-outline-primary">Add</a></td>
-        </tr>
     </table>
 </div>
-
 <div class="">
     <div class="clearfix"></div>
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Rom<small></small></h2>
+                <h2>Hãng điện thoại<small>Users</small></h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -123,7 +118,8 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>Mã</th>
-                                    <th>Dung lượng</th>
+                                    <th>Tên hãng</th>
+                                    <th>Xuất sứ</th>
                                     <th>Ngày tạo</th>
                                     <th>Ngày cập nhật</th>
                                     <th>Tình trạng</th>
@@ -136,21 +132,24 @@
                                     <tr>
                                         <td>${i.index+1}</td>
                                         <td>${chip.ma}</td>
-                                        <td>${chip.dungLuong}</td>
+                                        <td>${chip.ten}</td>
+                                        <td>${chip.xuatSu}</td>
                                         <td>${chip.ngayTao}</td>
                                         <td>${chip.ngayCapNhat}</td>
-                                        <td>${chip.tinhTrang}</td>
+                                        <td><c:if test="${chip.tinhTrang==0}">Thế hệ mới</c:if>
+                                            <c:if test="${chip.tinhTrang==1}">Thế hệ cũ</c:if>
+                                        </td>
                                         <td>${chip.moTa}</td>
                                         <td>
                                                 <%--                                            <a href="/detail-chip/${chip.id}" class="btn btn-outline-primary"--%>
                                                 <%--                                               tabindex="-1"--%>
                                                 <%--                                               role="button"--%>
                                                 <%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Detail</a>--%>
-                                            <a href="/rom/delete/${chip.id}" class="btn btn-outline-primary"
+                                            <a href="/delete-hsp/${chip.id}" class="btn btn-outline-primary"
                                                tabindex="-1"
                                                role="button"
                                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Delete</a>
-                                            <a href="/rom/detail/${chip.id}" class="btn btn-outline-primary"
+                                            <a href="/hang-dien-thoai/detail/${chip.id}" class="btn btn-outline-primary"
                                                tabindex="-1"
                                                role="button">Update</a>
                                         </td>
@@ -165,57 +164,58 @@
         </div>
         <%--hết--%>
 
-
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center pagination-lg">
-                <li class="page-item"><a class="page-link" href="/rom/hien-thi?num=0">First</a></li>
+                <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi?num=0">First</a></li>
 
                 <c:forEach begin="1" end="${total}" varStatus="status">
                     <li class="page-item">
-                        <a href="${pageContext.request.contextPath}/rom/hien-thi?num=${status.index -1}"
+                        <a href="${pageContext.request.contextPath}/hang-dien-thoai/hien-thi?num=${status.index -1}"
                            class="page-link">${status.index}</a>
                     </li>
                 </c:forEach>
 
-                <li class="page-item"><a class="page-link" href="/rom/hien-thi?num=${total-1}">Last</a></li>
+                <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi?num=${total-1}">Last</a></li>
             </ul>
         </nav>
-
-        <div class="modal fade" id="exampleModalRom" tabindex="-1" aria-labelledby="exampleModalLabelRom"
+        <br>
+        <div class="modal fade" id="exampleModalHang" tabindex="-1" aria-labelledby="exampleModalLabelHang"
              aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabelRom">Rom</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabelRom">Hãng</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div>
                             <table class="table">
-                                <form:form action="/rom/add" method="post" modelAttribute="dulieuxem">
+                                <form:form action="/hang-dien-thoai/add" method="post" modelAttribute="dulieuxem">
                                     <div class="row">
                                         <div class="col">
-                                            <form:label path="dungLuong"><b>Dung Lượng:</b></form:label>
-                                            <form:input path="dungLuong" class="form-control"/>
-                                            <form:errors path="dungLuong"/>
+                                            <form:label path="ten"><b>Tên:</b></form:label>
+                                            <form:input path="ten" class="form-control"></form:input>
+                                            <form:errors path="ten"></form:errors>
+                                        </div>
+                                        <div class="col">
+                                            <form:label path="xuatSu"><b>Xuất sứ:</b></form:label>
+                                            <form:input path="xuatSu" class="form-control"></form:input>
+                                            <form:errors path="xuatSu"></form:errors>
                                         </div>
                                         <div class="col">
                                             <form:label path="tinhTrang"><b>Tình Trạng:</b></form:label>
                                             <br>
-                                            <form:radiobutton path="tinhTrang" label="Còn dùng"
-                                                              value="0"/>
-                                            <form:radiobutton path="tinhTrang" label="Không còn dùng"
-                                                              value="1"/>
+                                            <form:radiobutton path="tinhTrang" label="Thế hệ mới" value="0"></form:radiobutton>
+                                            <form:radiobutton path="tinhTrang" label="Thế hệ cũ" value="1"></form:radiobutton>
                                         </div>
                                         <div class="col">
                                             <form:label path="moTa"><b>Mô Tả:</b></form:label>
                                             <form:textarea path="moTa" class="form-control"></form:textarea>
-                                            <form:errors path="moTa"/>
+                                            <form:errors path="moTa"></form:errors>
                                         </div>
                                         <div style="margin-top: 20px;margin-bottom: 20px">
                                             <button type="submit" class="btn btn-primary"
-                                                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                                ADD
+                                                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">ADD
                                             </button>
                                         </div>
                                     </div>
@@ -229,14 +229,13 @@
                 </div>
             </div>
         </div>
-
 </body>
 <script>
     function myFunction1() {
         let text = "Bạn chắc chắn muốn thêm";
         let kt = confirm(text);
         if (kt == true) {
-            return true
+            return true;
         } else {
             return false;
         }
@@ -247,14 +246,6 @@
         let kt = confirm(text);
         if (kt == true) {
             return true
-        } else {
-            return false;
-        }
-    }
-    function checkSearch() {
-        var cf = confirm("Bạn có chắc chắn muốn tìm sản phẩm không?");
-        if (cf == true) {
-            return true;
         } else {
             return false;
         }
@@ -270,10 +261,47 @@
             return false;
         }
     }
-
-
 </script>
 
+<script src="/vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- FastClick -->
+<script src="/vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="/vendors/nprogress/nprogress.js"></script>
+<!-- Chart.js -->
+<script src="/vendors/Chart.js/dist/Chart.min.js"></script>
+<!-- gauge.js -->
+<script src="/vendors/gauge.js/dist/gauge.min.js"></script>
+<!-- bootstrap-progressbar -->
+<script src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<!-- iCheck -->
+<script src="/vendors/iCheck/icheck.min.js"></script>
+<!-- Skycons -->
+<script src="/vendors/skycons/skycons.js"></script>
+<!-- Flot -->
+<script src="/vendors/Flot/jquery.flot.js"></script>
+<script src="/vendors/Flot/jquery.flot.pie.js"></script>
+<script src="/vendors/Flot/jquery.flot.time.js"></script>
+<script src="/vendors/Flot/jquery.flot.stack.js"></script>
+<script src="/vendors/Flot/jquery.flot.resize.js"></script>
+<!-- Flot plugins -->
+<script src="/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+<script src="/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+<script src="/vendors/flot.curvedlines/curvedLines.js"></script>
+<!-- DateJS -->
+<script src="/vendors/DateJS/build/date.js"></script>
+<!-- JQVMap -->
+<script src="/vendors/jqvmap/dist/jquery.vmap.js"></script>
+<script src="/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+<script src="/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+<!-- bootstrap-daterangepicker -->
+<script src="/vendors/moment/min/moment.min.js"></script>
+<script src="/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="/build/js/custom.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         $('div[id^="nhapImei_"]').on('show.bs.modal', async function (e) {
@@ -305,26 +333,6 @@
         });
     });
 </script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var inputElements = document.querySelectorAll(".form-control");
-        var submitButton = document.getElementById("submitButton");
-
-        for (var i = 0; i < inputElements.length; i++) {
-            inputElements[i].addEventListener("input", function () {
-                var allInputsValid = true;
-                for (var j = 0; j < inputElements.length; j++) {
-                    if (inputElements[j].value.trim() === "") {
-                        allInputsValid = false;
-                        break;
-                    }
-                }
-                submitButton.disabled = !allInputsValid;
-            });
-        }
-    });
-</script>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <%--<script src="https://code.jquery.com/jquery-3.7.0.min.js"--%>
 <%--        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>--%>

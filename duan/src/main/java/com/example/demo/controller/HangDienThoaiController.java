@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.models.HangSanPham;
+import com.example.demo.models.Rom;
 import com.example.demo.services.HangSanPhamService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -44,7 +46,7 @@ public class HangDienThoaiController {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<HangSanPham> list = hangSanPhamService.getAll(pageable);
-        model.addAttribute("contentPage","hang-dien-thoai/hien-thi.jsp");
+        model.addAttribute("contentPage","hang-dien-thoai/update.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
 
@@ -55,14 +57,14 @@ public class HangDienThoaiController {
     public String add(Model model, @ModelAttribute("dulieuxem") @Valid HangSanPham dulieuxem, BindingResult bindingResult, @RequestParam("num") Optional<Integer> num,
                       @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("content", "HangSanPham/hien-thi.jsp");
+            model.addAttribute("content", "hang-dien-thoai/hien-thi.jsp");
             Sort sort = Sort.by("ngayTao").ascending();
             Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
             Page<HangSanPham> list = hangSanPhamService.getAll(pageable);
-            model.addAttribute("contentPage","HangSanPham/hien-thi.jsp");
+            model.addAttribute("contentPage","hang-dien-thoai/hien-thi.jsp");
             model.addAttribute("hsp", list.getContent());
             model.addAttribute("total", list.getTotalPages());
-            return "hang-dien-thoai/hien-thi";
+            return "layout";
         }
 
         dulieuxem.setNgayTao(Date.valueOf(LocalDate.now()));
@@ -94,7 +96,7 @@ public class HangDienThoaiController {
         return "redirect:/hang-dien-thoai/hien-thi";
     }
 
-    @GetMapping("/delete-hsp/{id}")
+    @GetMapping("/hang-dien-thoai/delete/{id}")
     public String delete(Model model, @ModelAttribute("dulieuxem") HangSanPham dulieuxem, @PathVariable("id") UUID id, @RequestParam("num") Optional<Integer> num,
                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         hangSanPhamService.delete(id);
@@ -105,5 +107,28 @@ public class HangDienThoaiController {
         model.addAttribute("total", list.getTotalPages());
         return "layout";
 
+    }
+    @PostMapping("/hang-dien-thoai/search")
+    public String search(@RequestParam("search") String search, @ModelAttribute("dulieuxem") HangSanPham dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
+                         @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+        List<HangSanPham> list = hangSanPhamService.search(search);
+
+
+        model.addAttribute("contentPage","hang-dien-thoai/hien-thi.jsp");
+        model.addAttribute("hsp", list);
+//        model.addAttribute("total", list);
+        return "layout";
+    }
+    @GetMapping("/hang-dien-thoai/form-add")
+    public String formadd( @ModelAttribute("dulieuxem") HangSanPham dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
+                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+        Sort sort = Sort.by("ngayTao").ascending();
+        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+
+        Page<HangSanPham> list = hangSanPhamService.getAll(pageable);
+        model.addAttribute("contentPage","hang-dien-thoai/add.jsp");
+        model.addAttribute("hsp", list.getContent());
+        model.addAttribute("total", list.getTotalPages());
+        return "layout";
     }
 }

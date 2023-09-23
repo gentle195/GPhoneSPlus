@@ -16,6 +16,8 @@ public interface RomService {
 
     public Rom add(Rom rom);
 
+    List<Rom>search(String dungluong);
+
     public Rom update(UUID id, Rom rom);
 
     public Boolean delete(UUID id);

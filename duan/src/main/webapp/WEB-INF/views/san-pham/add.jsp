@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -59,102 +60,102 @@
     </style>
 </head>
 <body>
-<%--<div class="form-container">--%>
-<%--    <form:form action="/san-pham/add" method="post" modelAttribute="dulieuxem">--%>
-<%--        <h1 style="text-align: center">Add Sản Phẩm</h1>--%>
+<div class="form-container">
+    <form:form action="/san-pham/add" method="post" modelAttribute="dulieuxem">
+        <h1 style="text-align: center">Add Sản Phẩm</h1>
 
-<%--        <div class="form-row">--%>
-<%--            <label for="ten">Tên:</label>--%>
-<%--            <form:input path="ten" id="ten"/>--%>
-<%--            <form:errors path="ten" cssClass="error text-danger"/>--%>
+        <div class="form-row">
+            <label for="ten">Tên:</label>
+            <form:input path="ten" id="ten"/>
+            <form:errors path="ten" cssClass="error text-danger"/>
 
-<%--            <label for="heDieuHanh">Hệ điều hành:</label>--%>
-<%--            <form:input path="heDieuHanh" id="heDieuHanht"/>--%>
-<%--            <form:errors path="heDieuHanh" cssClass="error text-danger"/>--%>
+            <label for="heDieuHanh">Hệ điều hành:</label>
+            <form:input path="heDieuHanh" id="heDieuHanht"/>
+            <form:errors path="heDieuHanh" cssClass="error text-danger"/>
 
-<%--            <label for="soSim">Số khe sim:</label>--%>
-<%--            <form:input path="soSim" type="number"/>--%>
-<%--            <form:errors path="soSim" cssClass="error text-danger"/>--%>
-<%--        </div>--%>
+            <label for="soSim">Số khe sim:</label>
+            <form:input path="soSim" type="number"/>
+            <form:errors path="soSim" cssClass="error text-danger"/>
+        </div>
 
-<%--        <div class="form-row">--%>
-<%--            <label for="bluetooth">Kết nối bluetooth:</label>--%>
-<%--            <form:input path="bluetooth"/>--%>
-<%--            <form:errors path="bluetooth" cssClass="error text-danger"/>--%>
+        <div class="form-row">
+            <label for="bluetooth">Kết nối bluetooth:</label>
+            <form:input path="bluetooth"/>
+            <form:errors path="bluetooth" cssClass="error text-danger"/>
 
-<%--            <label for="hoTroMang">Hỗ trợ mạng:</label>--%>
-<%--            <form:input path="hoTroMang"/>--%>
-<%--            <form:errors path="hoTroMang" cssClass="error text-danger"/>--%>
+            <label for="hoTroMang">Hỗ trợ mạng:</label>
+            <form:input path="hoTroMang"/>
+            <form:errors path="hoTroMang" cssClass="error text-danger"/>
 
-<%--            <label for="congGiaoTiep">Cổng giao tiếp:</label>--%>
-<%--            <form:input path="congGiaoTiep"/>--%>
-<%--            <form:errors path="congGiaoTiep" cssClass="error text-danger"/>--%>
-<%--        </div>--%>
+            <label for="congGiaoTiep">Cổng giao tiếp:</label>
+            <form:input path="congGiaoTiep"/>
+            <form:errors path="congGiaoTiep" cssClass="error text-danger"/>
+        </div>
 
-<%--        <div class="form-row">--%>
-<%--            <label for="thongSoWifi">Thông số Wifi:</label>--%>
-<%--            <form:input path="thongSoWifi"/>--%>
-<%--            <form:errors path="thongSoWifi" cssClass="error text-danger"/>--%>
+        <div class="form-row">
+            <label for="thongSoWifi">Thông số Wifi:</label>
+            <form:input path="thongSoWifi"/>
+            <form:errors path="thongSoWifi" cssClass="error text-danger"/>
 
-<%--            <label for="kichThuoc">Kích thước sản phẩm:</label>--%>
-<%--            <form:input path="kichThuoc"/>--%>
-<%--            <form:errors path="kichThuoc" cssClass="error text-danger"/>--%>
+            <label for="kichThuoc">Kích thước sản phẩm:</label>
+            <form:input path="kichThuoc"/>
+            <form:errors path="kichThuoc" cssClass="error text-danger"/>
 
-<%--            <label for="trongLuong">Trọng lượng:</label>--%>
-<%--            <form:input path="trongLuong"/>--%>
-<%--            <form:errors path="trongLuong" cssClass="error text-danger"/>--%>
-<%--        </div>--%>
+            <label for="trongLuong">Trọng lượng:</label>
+            <form:input path="trongLuong"/>
+            <form:errors path="trongLuong" cssClass="error text-danger"/>
+        </div>
 
-<%--        <div class="form-row">--%>
-<%--            <label for="chatLieu">Chất liệu:</label>--%>
-<%--            <form:input path="chatLieu"/>--%>
-<%--            <form:errors path="chatLieu" cssClass="error text-danger"/>--%>
+        <div class="form-row">
+            <label for="chatLieu">Chất liệu:</label>
+            <form:input path="chatLieu"/>
+            <form:errors path="chatLieu" cssClass="error text-danger"/>
 
-<%--            <label for="tinhTrang">Trạng thái:</label>--%>
-<%--            <div>--%>
-<%--                <form:radiobutton path="tinhTrang" value="0" label="Hoạt động"/>--%>
-<%--                <form:radiobutton path="tinhTrang" value="1" label="Ngừng hoạt động"/>--%>
-<%--            </div>--%>
+            <label for="tinhTrang">Trạng thái:</label>
+            <div>
+                <form:radiobutton path="tinhTrang" value="0" label="Hoạt động"/>
+                <form:radiobutton path="tinhTrang" value="1" label="Ngừng hoạt động"/>
+            </div>
 
-<%--            <label for="moTa">Mô tả:</label>--%>
-<%--            <form:textarea path="moTa"/>--%>
-<%--            <form:errors path="moTa" cssClass="error text-danger"/>--%>
-<%--        </div>--%>
+            <label for="moTa">Mô tả:</label>
+            <form:textarea path="moTa"/>
+            <form:errors path="moTa" cssClass="error text-danger"/>
+        </div>
 
-<%--        <div class="form-row">--%>
-<%--            <label for="hangSanPham">Hãng Sản Phẩm:</label>--%>
-<%--            <form:select path="hangSanPham" items="${listHangSP}" itemValue="id" itemLabel="ten"/>--%>
-<%--            <div class="btn-group">--%>
-<%--                <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalHangSanPham">--%>
-<%--                    <img src="https://emojigraph.org/media/twitter/plus_2795.png" style="width: 25px; height: 60%">--%>
-<%--                </a>--%>
-<%--            </div>--%>
+        <div class="form-row">
+            <label for="hangSanPham">Hãng Sản Phẩm:</label>
+            <form:select path="hangSanPham" items="${listHangSP}" itemValue="id" itemLabel="ten"/>
+            <div class="btn-group">
+                <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalHangSanPham">
+                    <img src="https://emojigraph.org/media/twitter/plus_2795.png" style="width: 25px; height: 60%">
+                </a>
+            </div>
 
-<%--            <label for="manHinh">Màn Hình:</label>--%>
-<%--            <form:select path="manHinh" items="${listManHinh}" itemValue="id" itemLabel="thongSo"/>--%>
-<%--            <div class="btn-group">--%>
-<%--                <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalManHinh">--%>
-<%--                    <img src="https://emojigraph.org/media/twitter/plus_2795.png" style="width: 25px; height: 60%">--%>
-<%--                </a>--%>
-<%--            </div>--%>
+            <label for="manHinh">Màn Hình:</label>
+            <form:select path="manHinh" items="${listManHinh}" itemValue="id" itemLabel="thongSo"/>
+            <div class="btn-group">
+                <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalManHinh">
+                    <img src="https://emojigraph.org/media/twitter/plus_2795.png" style="width: 25px; height: 60%">
+                </a>
+            </div>
 
-<%--            <label for="camera">Camera:</label>--%>
-<%--            <form:select path="camera" items="${listCamera}" itemValue="id" itemLabel="thongSo"/>--%>
-<%--            <div class="btn-group">--%>
-<%--                <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalCamera">--%>
-<%--                    <img src="https://emojigraph.org/media/twitter/plus_2795.png" style="width: 25px; height: 60%">--%>
-<%--                </a>--%>
-<%--            </div>--%>
-<%--        </div>--%>
+            <label for="camera">Camera:</label>
+            <form:select path="camera" items="${listCamera}" itemValue="id" itemLabel="thongSo"/>
+            <div class="btn-group">
+                <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalCamera">
+                    <img src="https://emojigraph.org/media/twitter/plus_2795.png" style="width: 25px; height: 60%">
+                </a>
+            </div>
+        </div>
 
-<%--        <!-- Thêm các trường khác vào đây -->--%>
+        <!-- Thêm các trường khác vào đây -->
 
-<%--        <div class="form-row">--%>
-<%--            <button type="submit" class="btn btn-success" id="btt" onclick="return myFunction1()">Add</button>--%>
-<%--        </div>--%>
+        <div class="form-row">
+            <button type="submit" class="btn btn-success" id="btt" onclick="return myFunction1()">Add</button>
+        </div>
 
-<%--    </form:form>--%>
-<%--</div>--%>
+    </form:form>
+</div>
 
 <div>
     <table class="table">
@@ -165,9 +166,6 @@
                     <button class="btn btn-secondary">Search</button>
                 </td>
             </form>
-        </tr>
-        <tr>
-            <td><a href="/san-pham/form-add"  class="btn btn-outline-primary">Add</a></td>
         </tr>
     </table>
 </div>

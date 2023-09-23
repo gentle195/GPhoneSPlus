@@ -40,34 +40,34 @@
     <link href="/build/css/custom.min.css" rel="stylesheet">
 </head>
 <body>
-<%--<form:form  action="/rom/add" method="post" modelAttribute="dulieuxem" class="needs-validation">--%>
-<%--    <div class="row">--%>
-<%--        <div class="col-md-4 mb-3">--%>
-<%--            <form:label path="dungLuong"><b>Dung lượng:</b></form:label>--%>
-<%--            <form:input type="text" class="form-control" id="dungLuong" path="dungLuong" required="true" />--%>
-<%--            <div class="invalid-feedback">--%>
-<%--                Vui lòng nhập dung lượng.--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="col-md-4 mb-3">--%>
-<%--            <form:label path="tinhTrang"><b>Tình Trạng:</b></form:label>--%>
-<%--            <div class="form-check">--%>
-<%--                <form:radiobutton path="tinhTrang" id="thegemoi" value="0" />--%>
-<%--                <label class="form-check-label" for="thegemoi">Thế hệ mới</label>--%>
-<%--            </div>--%>
-<%--            <div class="form-check">--%>
-<%--                <form:radiobutton path="tinhTrang" id="thegemocu" value="1" />--%>
-<%--                <label class="form-check-label" for="thegemocu">Thế hệ cũ</label>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="col-md-4 mb-3">--%>
-<%--            <form:label path="moTa"><b>Mô Tả:</b></form:label>--%>
-<%--            <form:textarea class="form-control" id="moTa" path="moTa" rows="3"></form:textarea>--%>
-<%--        </div>--%>
+<form:form action="/rom/add" method="post" modelAttribute="dulieuxem" class="needs-validation">
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <form:label path="dungLuong"><b>Dung lượng:</b></form:label>
+            <form:input type="text" class="form-control" id="dungLuong" path="dungLuong" required="true" />
+            <div class="invalid-feedback">
+                Vui lòng nhập dung lượng.
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <form:label path="tinhTrang"><b>Tình Trạng:</b></form:label>
+            <div class="form-check">
+                <form:radiobutton path="tinhTrang" id="thegemoi" value="0" />
+                <label class="form-check-label" for="thegemoi">Thế hệ mới</label>
+            </div>
+            <div class="form-check">
+                <form:radiobutton path="tinhTrang" id="thegemocu" value="1" />
+                <label class="form-check-label" for="thegemocu">Thế hệ cũ</label>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <form:label path="moTa"><b>Mô Tả:</b></form:label>
+            <form:textarea class="form-control" id="moTa" path="moTa" rows="3"></form:textarea>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form:form>
 
-<%--    </div>--%>
-<%--    <button type="submit" class="btn btn-primary" onclick="return confirm('Bạn có muốn thực hiện thao tác này không?')">Add</button>--%>
-<%--</form:form>--%>
 
 
 
@@ -80,10 +80,6 @@
                     <button class="btn btn-secondary">Search</button>
                 </td>
             </form>
-        </tr>
-        
-        <tr>
-            <td><a href="/rom/form-add"  class="btn btn-outline-primary">Add</a></td>
         </tr>
     </table>
 </div>

@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.models.Rom;
+import com.example.demo.models.*;
 import com.example.demo.services.RomService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -44,7 +45,19 @@ public class RomController {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<Rom> list = romService.getAll(pageable);
-        model.addAttribute("contentPage","rom/hien-thi.jsp");
+        model.addAttribute("contentPage","rom/update.jsp");
+        model.addAttribute("hsp", list.getContent());
+        model.addAttribute("total", list.getTotalPages());
+        return "layout";
+    }
+    @GetMapping("/rom/form-add")
+    public String formadd( @ModelAttribute("dulieuxem") Rom dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
+                              @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+        Sort sort = Sort.by("ngayTao").ascending();
+        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+
+        Page<Rom> list = romService.getAll(pageable);
+        model.addAttribute("contentPage","rom/add.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
         return "layout";
@@ -116,4 +129,16 @@ public class RomController {
         return "layout";
 
     }
+    @PostMapping("/rom/search")
+    public String search( @RequestParam("search") String search,@ModelAttribute("dulieuxem") Rom dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
+                         @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+        List<Rom> list = romService.search(search);
+
+
+        model.addAttribute("contentPage","rom/hien-thi.jsp");
+        model.addAttribute("hsp", list);
+//        model.addAttribute("total", list);
+        return "layout";
+    }
+
 }

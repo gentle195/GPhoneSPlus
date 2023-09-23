@@ -38,150 +38,142 @@
     <link href="/build/css/custom.min.css" rel="stylesheet">
 </head>
 <body>
-<%--<form:form action="/hang-dien-thoai/add" method="post" modelAttribute="dulieuxem">--%>
-<%--    <div class="row">--%>
-<%--        <div class="col">--%>
-<%--            <form:label path="ten"><b>Tên:</b></form:label>--%>
-<%--            <form:input path="ten" class="form-control"></form:input>--%>
-<%--            <form:errors path="ten"></form:errors>--%>
-<%--        </div>--%>
-<%--        <div class="col">--%>
-<%--            <form:label path="xuatSu"><b>Xuất sứ:</b></form:label>--%>
-<%--            <form:input path="xuatSu" class="form-control"></form:input>--%>
-<%--            <form:errors path="xuatSu"></form:errors>--%>
-<%--        </div>--%>
-<%--        <div class="col">--%>
-<%--            <form:label path="tinhTrang"><b>Tình Trạng:</b></form:label>--%>
-<%--            <br>--%>
-<%--            <form:radiobutton path="tinhTrang" label="Thế hệ mới" value="0"></form:radiobutton>--%>
-<%--            <form:radiobutton path="tinhTrang" label="Thế hệ cũ" value="1"></form:radiobutton>--%>
-<%--        </div>--%>
-<%--        <div class="col">--%>
-<%--            <form:label path="moTa"><b>Mô Tả:</b></form:label>--%>
-<%--            <form:textarea path="moTa" class="form-control"></form:textarea>--%>
-<%--            <form:errors path="moTa"></form:errors>--%>
-<%--        </div>--%>
-<%--        <div style="margin-top: 20px;margin-bottom: 20px">--%>
-<%--            <button type="submit" class="btn btn-primary"--%>
-<%--                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Add--%>
-<%--            </button>--%>
-
-<%--        </div>--%>
-
-
-<%--    </div>--%>
-<%--</form:form>--%>
-<div>
-    <table class="table">
-        <tr>
-            <form action="/hang-dien-thoai/search" method="post" onsubmit="return checkSearch()">
-                <td style="text-align: center" colspan="10">Tìm Kiếm: <input type="text" name="search"
-                                                                             style="text-align: center ;">
-                    <button class="btn btn-secondary">Search</button>
-                </td>
-
-            </form>
-        </tr>
-        <tr>
-            <td><a href="/hang-dien-thoai/form-add"  class="btn btn-outline-primary">Add</a></td>
-        </tr>
-    </table>
-</div>
-<div class="">
-    <div class="clearfix"></div>
-    <div class="col-md-12 col-sm-12 ">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>Hãng điện thoại<small>Users</small></h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-expanded="false"><i
-                                class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
-                        </div>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                </ul>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card-box table-responsive">
-
-                            <table id="datatable-responsive"
-                                   class="table table-striped table-bordered dt-responsive nowrap"
-                                   cellspacing="0" width="100%">
-                                <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Mã</th>
-                                    <th>Tên hãng</th>
-                                    <th>Xuất sứ</th>
-                                    <th>Ngày tạo</th>
-                                    <th>Ngày cập nhật</th>
-                                    <th>Tình trạng</th>
-                                    <th>Mô tả </th>
-                                    <th colspan="2">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${hsp}" var="chip" varStatus="i">
-                                    <tr>
-                                        <td>${i.index+1}</td>
-                                        <td>${chip.ma}</td>
-                                        <td>${chip.ten}</td>
-                                        <td>${chip.xuatSu}</td>
-                                        <td>${chip.ngayTao}</td>
-                                        <td>${chip.ngayCapNhat}</td>
-                                        <td><c:if test="${chip.tinhTrang==0}">Thế hệ mới</c:if>
-                                            <c:if test="${chip.tinhTrang==1}">Thế hệ cũ</c:if>
-                                        </td>
-                                        <td>${chip.moTa}</td>
-                                        <td>
-                                                <%--                                            <a href="/detail-chip/${chip.id}" class="btn btn-outline-primary"--%>
-                                                <%--                                               tabindex="-1"--%>
-                                                <%--                                               role="button"--%>
-                                                <%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Detail</a>--%>
-                                            <a href="/delete-hsp/${chip.id}" class="btn btn-outline-primary"
-                                               tabindex="-1"
-                                               role="button"
-                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Delete</a>
-                                            <a href="/hang-dien-thoai/detail/${chip.id}" class="btn btn-outline-primary"
-                                               tabindex="-1"
-                                               role="button">Update</a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<form:form action="/hang-dien-thoai/update/${dulieuxem.id}" method="post" modelAttribute="dulieuxem">
+    <div class="row">
+        <div class="col">
+            <form:label path="ten"><b>Tên:</b></form:label>
+            <form:input path="ten" class="form-control"></form:input>
+            <form:errors path="ten"></form:errors>
         </div>
+        <div class="col">
+            <form:label path="xuatSu"><b>Xuất sứ:</b></form:label>
+            <form:input path="xuatSu" class="form-control"></form:input>
+            <form:errors path="xuatSu"></form:errors>
+        </div>
+        <div class="col">
+            <form:label path="tinhTrang"><b>Tình Trạng:</b></form:label>
+            <br>
+            <form:radiobutton path="tinhTrang" label="Thế hệ mới" value="0"></form:radiobutton>
+            <form:radiobutton path="tinhTrang" label="Thế hệ cũ" value="1"></form:radiobutton>
+        </div>
+        <div class="col">
+            <form:label path="moTa"><b>Mô Tả:</b></form:label>
+            <form:textarea path="moTa" class="form-control"></form:textarea>
+            <form:errors path="moTa"></form:errors>
+        </div>
+        <div style="margin-top: 20px;margin-bottom: 20px">
+            <button type="submit" class="btn btn-primary"
+                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">UPDATE
+            </button>
+<%--            <div class="col-1" style="margin-left: 999px;margin-top: 0px">--%>
+<%--                <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalHang">--%>
+<%--                    <img src="../img/plus.png">--%>
+<%--                </a>--%>
+<%--            </div>--%>
+        </div>
+
+    </div>
+</form:form>
+<table class="table">
+    <tr>
+        <td><a href="/hang-dien-thoai/hien-thi" class="btn btn-outline-primary">BACK</a></td>
+    </tr>
+</table>
+<%--<div class="">--%>
+<%--    <div class="clearfix"></div>--%>
+<%--    <div class="col-md-12 col-sm-12 ">--%>
+<%--        <div class="x_panel">--%>
+<%--            <div class="x_title">--%>
+<%--                <h2>Hãng điện thoại<small></small></h2>--%>
+<%--                <ul class="nav navbar-right panel_toolbox">--%>
+<%--                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>--%>
+<%--                    </li>--%>
+<%--                    <li class="dropdown">--%>
+<%--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"--%>
+<%--                           aria-expanded="false"><i--%>
+<%--                                class="fa fa-wrench"></i></a>--%>
+<%--                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--%>
+<%--                            <a class="dropdown-item" href="#">Settings 1</a>--%>
+<%--                            <a class="dropdown-item" href="#">Settings 2</a>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
+<%--                    <li><a class="close-link"><i class="fa fa-close"></i></a>--%>
+<%--                    </li>--%>
+<%--                </ul>--%>
+<%--                <div class="clearfix"></div>--%>
+<%--            </div>--%>
+<%--            <div class="x_content">--%>
+<%--                <div class="row">--%>
+<%--                    <div class="col-sm-12">--%>
+<%--                        <div class="card-box table-responsive">--%>
+
+<%--                            <table id="datatable-responsive"--%>
+<%--                                   class="table table-striped table-bordered dt-responsive nowrap"--%>
+<%--                                   cellspacing="0" width="100%">--%>
+<%--                                <thead>--%>
+<%--                                <tr>--%>
+<%--                                    <th>STT</th>--%>
+<%--                                    <th>Mã</th>--%>
+<%--                                    <th>Tên hãng</th>--%>
+<%--                                    <th>Xuất sứ</th>--%>
+<%--                                    <th>Ngày tạo</th>--%>
+<%--                                    <th>Ngày cập nhật</th>--%>
+<%--                                    <th>Tình trạng</th>--%>
+<%--                                    <th>Mô tả </th>--%>
+<%--                                    <th colspan="2">Action</th>--%>
+<%--                                </tr>--%>
+<%--                                </thead>--%>
+<%--                                <tbody>--%>
+<%--                                <c:forEach items="${hsp}" var="chip" varStatus="i">--%>
+<%--                                    <tr>--%>
+<%--                                        <td>${i.index+1}</td>--%>
+<%--                                        <td>${chip.ma}</td>--%>
+<%--                                        <td>${chip.ten}</td>--%>
+<%--                                        <td>${chip.xuatSu}</td>--%>
+<%--                                        <td>${chip.ngayTao}</td>--%>
+<%--                                        <td>${chip.ngayCapNhat}</td>--%>
+<%--                                        <td><c:if test="${chip.tinhTrang==0}">Thế hệ mới</c:if>--%>
+<%--                                            <c:if test="${chip.tinhTrang==1}">Thế hệ cũ</c:if>--%>
+<%--                                        </td>--%>
+<%--                                        <td>${chip.moTa}</td>--%>
+<%--                                        <td>--%>
+<%--                                                &lt;%&ndash;                                            <a href="/detail-chip/${chip.id}" class="btn btn-outline-primary"&ndash;%&gt;--%>
+<%--                                                &lt;%&ndash;                                               tabindex="-1"&ndash;%&gt;--%>
+<%--                                                &lt;%&ndash;                                               role="button"&ndash;%&gt;--%>
+<%--                                                &lt;%&ndash;                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Detail</a>&ndash;%&gt;--%>
+<%--                                            <a href="/delete-hsp/${chip.id}" class="btn btn-outline-primary"--%>
+<%--                                               tabindex="-1"--%>
+<%--                                               role="button"--%>
+<%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Delete</a>--%>
+<%--                                            <a href="/hang-dien-thoai/detail/${chip.id}" class="btn btn-outline-primary"--%>
+<%--                                               tabindex="-1"--%>
+<%--                                               role="button">Update</a>--%>
+<%--                                        </td>--%>
+<%--                                    </tr>--%>
+<%--                                </c:forEach>--%>
+<%--                                </tbody>--%>
+<%--                            </table>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
         <%--hết--%>
 
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center pagination-lg">
-                <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi?num=0">First</a></li>
+<%--        <nav aria-label="Page navigation example">--%>
+<%--            <ul class="pagination justify-content-center pagination-lg">--%>
+<%--                <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi?num=0">First</a></li>--%>
 
-                <c:forEach begin="1" end="${total}" varStatus="status">
-                    <li class="page-item">
-                        <a href="${pageContext.request.contextPath}/hang-dien-thoai/hien-thi?num=${status.index -1}"
-                           class="page-link">${status.index}</a>
-                    </li>
-                </c:forEach>
+<%--                <c:forEach begin="1" end="${total}" varStatus="status">--%>
+<%--                    <li class="page-item">--%>
+<%--                        <a href="${pageContext.request.contextPath}/hang-dien-thoai/hien-thi?num=${status.index -1}"--%>
+<%--                           class="page-link">${status.index}</a>--%>
+<%--                    </li>--%>
+<%--                </c:forEach>--%>
 
-                <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi?num=${total-1}">Last</a></li>
-            </ul>
-        </nav>
+<%--                <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi?num=${total-1}">Last</a></li>--%>
+<%--            </ul>--%>
+<%--        </nav>--%>
         <br>
         <div class="modal fade" id="exampleModalHang" tabindex="-1" aria-labelledby="exampleModalLabelHang"
              aria-hidden="true" data-backdrop="static">

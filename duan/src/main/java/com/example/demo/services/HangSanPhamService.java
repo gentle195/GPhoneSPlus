@@ -19,6 +19,8 @@ public interface HangSanPhamService {
     public HangSanPham update(UUID id, HangSanPham hangSanPham);
 
     public Boolean delete(UUID id);
+
+    List<HangSanPham>search(String dungluong);
 }
 
 
