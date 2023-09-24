@@ -1,5 +1,5 @@
-﻿CREATE DATABASE DB_DU_AN_TOT_NGHIEP;
-USE DB_DU_AN_TOT_NGHIEP
+﻿--CREATE DATABASE DB_DU_AN_TOT_NGHIEP;
+--USE DB_DU_AN_TOT_NGHIEP
 
 SET ANSI_NULLS ON
 GO
@@ -15,12 +15,7 @@ CREATE TABLE hang_dien_thoai(
   tinh_trang int DEFAULT 0,
   mo_ta NVARCHAR(MAX) NULL
 );
---select ct.* from imei i left join chi_tiet_san_pham ct on i.id_chi_tiet_san_pham=ct.id where i.id= '74B8C5C7-7139-4D16-8442-34C456CF9756'
---select ct.* from chi_tiet_san_pham ct left  join imei  i on ct.id=i.id_chi_tiet_san_pham left join hoa_don_chi_tiet hd on i.id=hd.id_imei where hd.id='96E06F89-7177-43E8-A95B-133FFB18529C'
-select * from imei
---select*from imei where id_chi_tiet_san_pham = 'AD9DD38E-12DB-4314-BA18-50AE7C292626'
-select*from hoa_don_chi_tiet
-delete from hoa_don
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -331,6 +326,7 @@ CREATE TABLE khach_hang (
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
   ma VARCHAR(30) NULL,
   ho_ten NVARCHAR(50) NULL,
+  anh NVARCHAR(Max) NULL,
   gioi_tinh BIT DEFAULT 1,
   email VARCHAR(255) NULL,
   sdt VARCHAR(30) null,

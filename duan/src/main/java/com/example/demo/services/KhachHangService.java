@@ -1,6 +1,8 @@
 package com.example.demo.services;
 
 import com.example.demo.models.KhachHang;
+import com.example.demo.viewmodels.KhachHangHoaDon;
+import com.example.demo.viewmodels.KhachHangLSMuaHang;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -20,7 +22,16 @@ public interface KhachHangService {
 
     public Boolean delete(UUID id);
 
-    public List<KhachHang> getALL0();
+    public Page<KhachHang> getALL0(Pageable pageable);
+    public Page<KhachHang> getALL1(Pageable pageable);
+
+    public List<KhachHang> findAll00();
+    public List<KhachHang> findAll11();
+    public List<KhachHangLSMuaHang> fillLSMuaHang(UUID uuid);
+    List<KhachHangHoaDon> getHD();
+    List<KhachHang> timkiem(String timkiem);
+    List<KhachHang> timkiem1(String timkiem);
+    Page<KhachHangLSMuaHang> getLSMuaHangPage(Pageable pageable, UUID idkh);
 }
 
 

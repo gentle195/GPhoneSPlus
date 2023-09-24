@@ -68,4 +68,40 @@ public class HangKhachHangServiceImpl implements HangKhachHangService {
         }
         return false;
     }
+
+    @Override
+    public Page<HangKhachHang> getAll00(Pageable pageable) {
+        return hangKhachHangRepository.getall00(pageable);
+    }
+
+    @Override
+    public HangKhachHang TimMa(String id) {
+        System.out.println("---"+id);
+        return hangKhachHangRepository.timkiemma(id);
+    }
+
+    @Override
+    public List<HangKhachHang> TimMT(String mt) {
+        return hangKhachHangRepository.timkiemMT(mt);
+    }
+
+    @Override
+    public List<HangKhachHang> getall1() {
+        return hangKhachHangRepository.getall1();
+    }
+
+    @Override
+    public Page<HangKhachHang> getall11(Pageable pageable) {
+        return hangKhachHangRepository.getall11(pageable);
+    }
+
+    @Override
+    public void update0() {
+        hangKhachHangRepository.update0();
+    }
+
+    @Override
+    public List<HangKhachHang> timkiemMT1(String timkiem) {
+        return hangKhachHangRepository.timkiemMT1(timkiem);
+    }
 }

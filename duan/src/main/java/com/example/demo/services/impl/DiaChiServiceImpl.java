@@ -31,7 +31,7 @@ public class DiaChiServiceImpl implements DiaChiService {
     }
 
     @Override
-    public List<DiaChi> getAll0() {
+    public List<DiaChi> getALL0() {
         return diaChiRepository.getall0();
     }
 
@@ -41,17 +41,17 @@ public class DiaChiServiceImpl implements DiaChiService {
     }
 
     @Override
-    public DiaChi add(DiaChi diaChi) {
-        return diaChiRepository.save(diaChi);
+    public DiaChi add(DiaChi hangKhachHang) {
+        return diaChiRepository.save(hangKhachHang);
     }
 
     @Override
-    public DiaChi update(UUID id, DiaChi diaChi) {
+    public DiaChi update(UUID id, DiaChi hangKhachHang) {
         if (id != null) {
-            DiaChi diaChiUpdate = diaChiRepository.findById(id).orElse(null);
-            if (diaChiUpdate != null) {
-                BeanUtils.copyProperties(diaChi, diaChiUpdate);
-                diaChiRepository.save(diaChiUpdate);
+            DiaChi hangKhachHangUpdate = diaChiRepository.findById(id).orElse(null);
+            if (hangKhachHangUpdate != null) {
+                BeanUtils.copyProperties(hangKhachHang, hangKhachHangUpdate);
+                diaChiRepository.save(hangKhachHangUpdate);
             }
         }
         return null;
@@ -60,12 +60,48 @@ public class DiaChiServiceImpl implements DiaChiService {
     @Override
     public Boolean delete(UUID id) {
         if (id != null) {
-            DiaChi diaChi = diaChiRepository.findById(id).orElse(null);
-            if (diaChi != null) {
-                diaChiRepository.delete(diaChi);
+            DiaChi hangKhachHang = diaChiRepository.findById(id).orElse(null);
+            if (hangKhachHang != null) {
+                diaChiRepository.delete(hangKhachHang);
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public Page<DiaChi> getAll00(Pageable pageable) {
+        return diaChiRepository.getall00(pageable);
+    }
+
+    @Override
+    public DiaChi TimMa(String id) {
+        System.out.println("---"+id);
+        return diaChiRepository.timkiemma(id);
+    }
+
+    @Override
+    public List<DiaChi> TimMT(String mt) {
+        return diaChiRepository.timkiemMT(mt);
+    }
+
+    @Override
+    public List<DiaChi> getall1() {
+        return diaChiRepository.getall1();
+    }
+
+    @Override
+    public Page<DiaChi> getall11(Pageable pageable) {
+        return diaChiRepository.getall11(pageable);
+    }
+
+    @Override
+    public void update0() {
+        diaChiRepository.update0();
+    }
+
+    @Override
+    public List<DiaChi> timkiemMT1(String timkiem) {
+        return diaChiRepository.timkiemMT1(timkiem);
     }
 }
