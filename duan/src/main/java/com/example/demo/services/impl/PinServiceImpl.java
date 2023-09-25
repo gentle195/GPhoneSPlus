@@ -63,4 +63,9 @@ public class PinServiceImpl implements PinService {
         }
         return false;
     }
+
+    @Override
+    public List<Pin> search(String ten) {
+        return pinRepository.sreach(ten);
+    }
 }

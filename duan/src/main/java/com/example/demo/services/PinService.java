@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.models.Chip;
 import com.example.demo.models.Pin;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,8 @@ public interface PinService {
     public Pin update(UUID id, Pin pin);
 
     public Boolean delete(UUID id);
+
+    public List<Pin> search(String ten);
 }
 
 
