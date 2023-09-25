@@ -2,8 +2,11 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.DiaChi;
 import com.example.demo.models.KhachHang;
+import com.example.demo.models.Pin;
 import com.example.demo.services.DiaChiService;
+import com.example.demo.services.DungLuongPinService;
 import com.example.demo.services.KhachHangService;
+import com.example.demo.services.PinService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

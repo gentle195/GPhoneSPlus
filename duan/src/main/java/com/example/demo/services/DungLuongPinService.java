@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.models.Chip;
 import com.example.demo.models.DungLuongPin;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,8 @@ public interface DungLuongPinService {
     public DungLuongPin update(UUID id, DungLuongPin dungLuongPin);
 
     public Boolean delete(UUID id);
+
+    public List<DungLuongPin> search(String ten);
 }
 
 

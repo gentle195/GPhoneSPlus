@@ -10,6 +10,8 @@ import java.util.UUID;
 public interface ChipService {
     public Page<Chip> getAll(Pageable pageable);
 
+    public Page<Chip> getAll1(Pageable pageable);
+
     public List<Chip> findAll();
 
     public Chip findById(UUID id);
@@ -18,7 +20,11 @@ public interface ChipService {
 
     public Chip update(UUID id, Chip chip);
 
-    public Boolean delete(UUID id);
-}
+    public void updateTT();
 
+    public Boolean delete(UUID id);
+
+    public List<Chip> search0(String ten);
+    public List<Chip> search1(String ten);
+}
 

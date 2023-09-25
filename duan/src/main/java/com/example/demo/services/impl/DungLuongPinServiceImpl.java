@@ -63,4 +63,9 @@ public class DungLuongPinServiceImpl implements DungLuongPinService {
         }
         return false;
     }
+
+    @Override
+    public List<DungLuongPin> search(String ten) {
+        return dungLuongPinRepository.sreach(ten);
+    }
 }
