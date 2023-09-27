@@ -452,4 +452,5 @@ public class BanHangTaiQuayController {
         khachHangService.add(khachHang);
         return "redirect:/ban-hang/hien-thi";
     }
+
 }

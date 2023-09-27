@@ -29,6 +29,7 @@ public interface ChiTietSanPhamService {
     public ChiTietSanPham update1(ChiTietSanPham chiTietSanPham);
 
     public Boolean delete(UUID id);
+    public List<ChiTietSanPham> findAllTT1();
 }
 
 

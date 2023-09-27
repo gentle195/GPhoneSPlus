@@ -36,7 +36,7 @@ public class ChiTietSanPham {
     @Column(name = "id")
     private UUID id;
 
-    @NotBlank(message = "Không để trống thông tin")
+//    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "url_anh")
     private String urlAnh;
 

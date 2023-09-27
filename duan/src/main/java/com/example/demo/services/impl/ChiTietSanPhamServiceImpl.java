@@ -87,4 +87,10 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
         }
         return false;
     }
+
+    @Override
+    public List<ChiTietSanPham> findAllTT1() {
+        return chiTietSanPhamRepository.getChiTietSanPhamOn();
+
+    }
 }
