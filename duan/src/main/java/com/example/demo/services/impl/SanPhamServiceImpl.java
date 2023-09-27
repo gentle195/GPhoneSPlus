@@ -53,10 +53,7 @@ public class SanPhamServiceImpl implements SanPhamService {
         return null;
     }
 
-    @Override
-    public SanPham update(SanPham sanPham) {
-        return sanPhamRepository.save(sanPham);
-    }
+
 
     @Override
     public Boolean delete(UUID id) {

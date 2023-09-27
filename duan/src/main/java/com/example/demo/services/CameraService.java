@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.models.Camera;
+import com.example.demo.models.Chip;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -10,9 +11,9 @@ import java.util.UUID;
 public interface CameraService {
     public Page<Camera> getAll(Pageable pageable);
 
-    public List<Camera> findAll();
+    public Page<Camera> getAll1(Pageable pageable);
 
-    public List<Camera> search(String search);
+    public List<Camera> findAll();
 
     public Camera findById(UUID id);
 
@@ -20,6 +21,11 @@ public interface CameraService {
 
     public Camera update(UUID id, Camera camera);
 
+    public void updateTT();
+
     public Boolean delete(UUID id);
+
+    public List<Camera> search0(String ten);
+    public List<Camera> search1(String ten);
 
 }

@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controllers;
 
 import com.example.demo.models.HangSanPham;
 import com.example.demo.models.Rom;
@@ -31,8 +31,22 @@ public class HangDienThoaiController {
                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<HangSanPham> list = hangSanPhamService.getAll(pageable);
+        Page<HangSanPham> list = hangSanPhamService.getAll0(pageable);
+
         model.addAttribute("contentPage","hang-dien-thoai/hien-thi.jsp");
+        model.addAttribute("hsp", list.getContent());
+        model.addAttribute("total", list.getTotalPages());
+
+        return "layout";
+    }
+
+    @GetMapping("/hang-dien-thoai/hien-thi-tung-xoa")
+    public String hienthixoa(@ModelAttribute("dulieuxem") Rom dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
+                             @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+        Sort sort = Sort.by("ngayTao").ascending();
+        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+        Page<HangSanPham> list = hangSanPhamService.getall1(pageable);
+        model.addAttribute("contentPage","hang-dien-thoai/hang-tung-xoa.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
         return "layout";
@@ -96,12 +110,15 @@ public class HangDienThoaiController {
         return "redirect:/hang-dien-thoai/hien-thi";
     }
 
-    @GetMapping("/hang-dien-thoai/delete/{id}")
-    public String delete(Model model, @ModelAttribute("dulieuxem") HangSanPham dulieuxem, @PathVariable("id") UUID id, @RequestParam("num") Optional<Integer> num,
+    @GetMapping("hang-dien-thoai/delete/{id}")
+    public String delete(Model model, @ModelAttribute("dulieuxem") Rom dulieuxem, @PathVariable("id") UUID id, @RequestParam("num") Optional<Integer> num,
                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
-        hangSanPhamService.delete(id);
+        HangSanPham rom=hangSanPhamService.findById(id);
+
+        rom.setTinhTrang(1);
+        hangSanPhamService.add(rom);
         Pageable pageable = PageRequest.of(num.orElse(0), size);
-        Page<HangSanPham> list = hangSanPhamService.getAll(pageable);
+        Page<HangSanPham> list = hangSanPhamService.getAll0(pageable);
         model.addAttribute("contentPage","hang-dien-thoai/hien-thi.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
@@ -129,6 +146,32 @@ public class HangDienThoaiController {
         model.addAttribute("contentPage","hang-dien-thoai/add.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
+        return "layout";
+    }
+    @GetMapping("/hang-dien-thoai/khoi-phuc/{id}")
+    public String khoiphuc(
+            Model model,
+            @PathVariable("id") UUID id,
+//            @ModelAttribute("HKHHangKhachHang") HangKhachHang HKHHangKhachHang,
+            @RequestParam("num") Optional<Integer> num,
+            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
+
+
+    ) {
+
+        HangSanPham rom1=hangSanPhamService.findById(id);
+        rom1.setTinhTrang(0);
+        hangSanPhamService.add(rom1);
+        Sort sort = Sort.by("ma").descending();
+        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+        Page<HangSanPham> list = hangSanPhamService.getall1(pageable);
+
+        model.addAttribute("contentPage","hang-dien-thoai/hang-tung-xoa.jsp");
+        model.addAttribute("hsp", list.getContent());
+        model.addAttribute("total", list.getTotalPages());
+
+
+
         return "layout";
     }
 }

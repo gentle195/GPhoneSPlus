@@ -10,41 +10,23 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Màn hình</title>
-    <link rel="icon" href="../../images/favicon.ico" type="image/ico"/>
-    <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
-    <!-- bootstrap-progressbar -->
-    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    <!-- JQVMap -->
-    <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-    <!-- bootstrap-daterangepicker -->
-    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
-    <!-- Custom Theme Style -->
-    <link href="../../build/css/custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../vendors/feather/feather.css">
+    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+    <link rel="shortcut icon" href="../../images/favicon.png"/>
 </head>
 <body>
-<div class="container">
+<div>
     <h1 style="text-align: center">Màn Hình</h1>
     <div>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
             <li class="nav-item">
-                <a  href="/man-hinh/hien-thi" role="tab" onclick="myFunction4()">
-                    <h6>Thông tin màn hình</h6>
-                </a>
+                <a class="nav-link" href="/man-hinh/hien-thi" role="tab" onclick="myFunction4()">Thông tin màn hình </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab"
-                   aria-controls="review" aria-selected="true">
-                    <h6>Chỉnh sửa màn hình</h6>
-                </a>
+                <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+                   aria-controls="description" aria-selected="true">Update</a>
             </li>
         </ul>
     </div>
@@ -53,57 +35,102 @@
             <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
                 <div>
                     <form:form action="/man-hinh/update/${manHinh.id}" method="post" modelAttribute="manHinh">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-floating mb-3 mt-3">
-                                    <form:input class="form-control" placeholder="" path="thongSo"/>
-                                    <form:label class="form-label" path="thongSo">Thông số màn hình:</form:label>
-                                    <form:errors path="thongSo" cssStyle="color: red"></form:errors>
-                                </div>
-                                <div class="form-floating mb-3 mt-3">
-                                    <form:input class="form-control" placeholder="" path="loaiCamUng"/>
-                                    <form:label class="form-label" path="loaiCamUng">Loại cảm ứng màn hình:</form:label>
-                                    <form:errors path="loaiCamUng" cssStyle="color: red"></form:errors>
-                                </div>
-                                <div class="form-floating mb-3 mt-3">
-                                    <form:input class="form-control" placeholder="" path="tiLeKhungHinh"/>
-                                    <form:label class="form-label" path="tiLeKhungHinh">Tỉ lệ khung hình:</form:label>
-                                    <form:errors path="tiLeKhungHinh" cssStyle="color: red"></form:errors>
-                                </div>
-                                <div class="form-floating mb-3 mt-3">
-                                    <form:input class="form-control" placeholder="" path="congNghe"/>
-                                    <form:label class="form-label" path="congNghe">Công nghệ màn hình:</form:label>
-                                    <form:errors path="congNghe" cssStyle="color: red"></form:errors>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-floating mb-3 mt-3">
-                                    <form:input class="form-control" placeholder="" path="doPhanGiai"/>
-                                    <form:label class="form-label" path="doPhanGiai">Độ phân giải:</form:label>
-                                    <form:errors path="doPhanGiai" cssStyle="color: red"></form:errors>
-                                </div>
-                                <div class="form-floating mb-3 mt-3">
-                                    <form:input class="form-control" placeholder="" path="tanSoQuet"/>
-                                    <form:label class="form-label" path="tanSoQuet">Tần số quét:</form:label>
-                                    <form:errors path="tanSoQuet" cssStyle="color: red"></form:errors>
-                                </div>
-                                <div class="form-floating mb-3 mt-3">
-                                    <form:input class="form-control" placeholder="" path="moTa"/>
-                                    <form:label class="form-label" path="moTa">Mô tả:</form:label>
-                                    <form:errors path="moTa" cssStyle="color: red"></form:errors>
-                                </div>
-                                <div class="form-check mb-3 mt-3">
-                                    <form:label class="form-label" path="tinhTrang">Tình Trạng:</form:label>
-                                    <form:radiobutton path="tinhTrang" value="0"/>Hoạt động
-                                    <form:radiobutton path="tinhTrang" value="1"/> Ngừng hoạt động
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12" style="text-align: center">
-                                    <button type="submit" class="btn btn-success"
-                                            id="btt" onclick="return myFunction2()">Update
-                                    </button>
+                        <div class="col-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Thêm màn hình</h4>
+                                    <form class="form-sample">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <form:label class="col-sm-3 col-form-label" path="thongSo"><b>Thông số
+                                                        màn hình:</b></form:label>
+                                                    <div class="col-sm-9">
+                                                        <form:input class="form-control" placeholder="" path="thongSo"/>
+                                                        <form:errors path="thongSo" cssStyle="color: red"></form:errors>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <form:label class="col-sm-3 col-form-label" path="loaiCamUng"><b>Loại
+                                                        cảm ứng màn hình:</b></form:label>
+                                                    <div class="col-sm-9">
+                                                        <form:input class="form-control" placeholder="" path="loaiCamUng"/>
+                                                        <form:errors path="loaiCamUng" cssStyle="color: red"></form:errors>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <form:label class="col-sm-3 col-form-label" path="tiLeKhungHinh"><b>Tỉ
+                                                        lệ khung hình:</b></form:label>
+                                                    <div class="col-sm-9">
+                                                        <form:input class="form-control" placeholder=""
+                                                                    path="tiLeKhungHinh"/>
+                                                        <form:errors path="tiLeKhungHinh"
+                                                                     cssStyle="color: red"></form:errors>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <form:label class="col-sm-3 col-form-label" path="doPhanGiai"><b>Độ phân
+                                                        giải:</b></form:label>
+                                                    <div class="col-sm-9">
+                                                        <form:input class="form-control" placeholder="" path="doPhanGiai"/>
+                                                        <form:errors path="doPhanGiai" cssStyle="color: red"></form:errors>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <form:label class="col-sm-3 col-form-label" path="tanSoQuet"><b>Tần số
+                                                        quét:</b></form:label>
+                                                    <div class="col-sm-9">
+                                                        <form:input class="form-control" placeholder="" path="tanSoQuet"/>
+                                                        <form:errors path="tanSoQuet" cssStyle="color: red"></form:errors>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <form:label class="col-sm-3 col-form-label" path="congNghe"><b>Công nghệ
+                                                        màn hình:</b></form:label>
+                                                    <div class="col-sm-9">
+                                                        <form:input class="form-control" placeholder="" path="congNghe"/>
+                                                        <form:errors path="congNghe" cssStyle="color: red"></form:errors>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group row">
+                                                    <form:label class="col-sm-3 col-form-label" path="moTa"><b>Mô
+                                                        tả:</b></form:label>
+                                                    <div class="col-sm-12">
+                                                        <form:input class="form-control" placeholder="" path="moTa"/>
+                                                        <form:errors path="moTa" cssStyle="color: red"></form:errors>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div style="text-align: center">
+                                                    <button type="submit" class="btn btn-primary mr-2"
+                                                            onclick="return myFunction2()">
+                                                        UPDATE
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -165,8 +192,13 @@
             return false;
         }
     }
-
 </script>
+<script src="../../vendors/js/vendor.bundle.base.js"></script>
+<script src="../../js/off-canvas.js"></script>
+<script src="../../js/hoverable-collapse.js"></script>
+<script src="../../js/template.js"></script>
+<script src="../../js/settings.js"></script>
+<script src="../../js/todolist.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 </html>

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface RomService {
-    public Page<Rom> getAll(Pageable pageable);
+
 
     public List<Rom> findAll();
 
@@ -21,6 +21,12 @@ public interface RomService {
     public Rom update(UUID id, Rom rom);
 
     public Boolean delete(UUID id);
+
+    public Page<Rom> getAll0(Pageable pageable);
+
+    Page<Rom> getall1(Pageable pageable);
+
+    void update0();
 }
 
 

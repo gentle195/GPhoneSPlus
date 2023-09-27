@@ -71,164 +71,252 @@
 
 
 
-<div>
-    <table class="table">
-        <tr>
-            <form action="/rom/search" method="post" onsubmit="return checkSearch()">
-                <td style="text-align: center" colspan="10">Tìm Kiếm: <input type="text" name="search"
-                                                                             style="text-align: center ;">
-                    <button class="btn btn-secondary">Search</button>
-                </td>
-            </form>
-        </tr>
-        
-        <tr>
-            <td><a href="/rom/form-add"  class="btn btn-outline-primary">Add</a></td>
-        </tr>
-    </table>
-</div>
+<div class="content">
 
-<div class="">
-    <div class="clearfix"></div>
-    <div class="col-md-12 col-sm-12 ">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>Rom<small></small></h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="card">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="description-tab"
+                        <%--                   data-toggle="tab" --%>
+                           href="/rom/hien-thi" role="tab"
+                           aria-controls="description" aria-selected="true">
+                            <h6>Thông tin Rom</h6>
+                        </a>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-expanded="false"><i
-                                class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
-                        </div>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    <li class="nav-item">
+                        <a href="/rom/hien-thi-tung-xoa" role="tab" >
+                            <h6>Rom xóa</h6>
+                        </a>
                     </li>
                 </ul>
+
+
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card-box table-responsive">
+                <div class="col-md-12 col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+<%--                            <h2>Rom<small></small></h2>--%>
 
-                            <table id="datatable-responsive"
-                                   class="table table-striped table-bordered dt-responsive nowrap"
-                                   cellspacing="0" width="100%">
-                                <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Mã</th>
-                                    <th>Dung lượng</th>
-                                    <th>Ngày tạo</th>
-                                    <th>Ngày cập nhật</th>
-                                    <th>Tình trạng</th>
-                                    <th>Mô tả </th>
-                                    <th colspan="2">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${hsp}" var="chip" varStatus="i">
-                                    <tr>
-                                        <td>${i.index+1}</td>
-                                        <td>${chip.ma}</td>
-                                        <td>${chip.dungLuong}</td>
-                                        <td>${chip.ngayTao}</td>
-                                        <td>${chip.ngayCapNhat}</td>
-                                        <td>${chip.tinhTrang}</td>
-                                        <td>${chip.moTa}</td>
-                                        <td>
-                                                <%--                                            <a href="/detail-chip/${chip.id}" class="btn btn-outline-primary"--%>
-                                                <%--                                               tabindex="-1"--%>
-                                                <%--                                               role="button"--%>
-                                                <%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Detail</a>--%>
-                                            <a href="/rom/delete/${chip.id}" class="btn btn-outline-primary"
-                                               tabindex="-1"
-                                               role="button"
-                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Delete</a>
-                                            <a href="/rom/detail/${chip.id}" class="btn btn-outline-primary"
-                                               tabindex="-1"
-                                               role="button">Update</a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <%--hết--%>
-
-
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center pagination-lg">
-                <li class="page-item"><a class="page-link" href="/rom/hien-thi?num=0">First</a></li>
-
-                <c:forEach begin="1" end="${total}" varStatus="status">
-                    <li class="page-item">
-                        <a href="${pageContext.request.contextPath}/rom/hien-thi?num=${status.index -1}"
-                           class="page-link">${status.index}</a>
-                    </li>
-                </c:forEach>
-
-                <li class="page-item"><a class="page-link" href="/rom/hien-thi?num=${total-1}">Last</a></li>
-            </ul>
-        </nav>
-
-        <div class="modal fade" id="exampleModalRom" tabindex="-1" aria-labelledby="exampleModalLabelRom"
-             aria-hidden="true" data-backdrop="static">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabelRom">Rom</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
                             <table class="table">
-                                <form:form action="/rom/add" method="post" modelAttribute="dulieuxem">
-                                    <div class="row">
-                                        <div class="col">
-                                            <form:label path="dungLuong"><b>Dung Lượng:</b></form:label>
-                                            <form:input path="dungLuong" class="form-control"/>
-                                            <form:errors path="dungLuong"/>
+                                <tr>
+                                    <form action="/rom/search" method="post" onsubmit="return checkSearch()">
+                                        <td style="text-align: center" colspan="10">Tìm Kiếm: <input type="text" name="search" placeholder="Dung Lượng"
+                                                                                                     style="text-align: center ;">
+                                            <button class="btn btn-secondary">Search</button>
+                                        </td>
+                                    </form>
+                                </tr>
+
+                                <tr>
+                                    <form:form action="/rom/add" method="post" modelAttribute="dulieuxem" class="needs-validation">
+                                        <div class="form-row">
+                                            <div class="col-md-4 mb-3">
+                                                <form:label path="dungLuong"><b>Dung lượng:</b></form:label>
+                                                <form:input type="text" class="form-control" id="dungLuong" path="dungLuong" required="true" />
+                                                <div class="invalid-feedback">
+                                                    Vui lòng nhập dung lượng.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <form:label path="tinhTrang"><b>Tình Trạng:</b></form:label>
+                                                <div class="form-check">
+                                                    <form:radiobutton path="tinhTrang" id="thegemoi" value="0" />
+                                                    <label class="form-check-label" for="thegemoi">Thế hệ mới</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <form:radiobutton path="tinhTrang" id="thegemocu" value="1" />
+                                                    <label class="form-check-label" for="thegemocu">Thế hệ cũ</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <form:label path="moTa"><b>Mô Tả:</b></form:label>
+                                                <form:textarea class="form-control" id="moTa" path="moTa" rows="3"></form:textarea>
+                                            </div>
                                         </div>
-                                        <div class="col">
-                                            <form:label path="tinhTrang"><b>Tình Trạng:</b></form:label>
-                                            <br>
-                                            <form:radiobutton path="tinhTrang" label="Còn dùng"
-                                                              value="0"/>
-                                            <form:radiobutton path="tinhTrang" label="Không còn dùng"
-                                                              value="1"/>
-                                        </div>
-                                        <div class="col">
-                                            <form:label path="moTa"><b>Mô Tả:</b></form:label>
-                                            <form:textarea path="moTa" class="form-control"></form:textarea>
-                                            <form:errors path="moTa"/>
-                                        </div>
-                                        <div style="margin-top: 20px;margin-bottom: 20px">
-                                            <button type="submit" class="btn btn-primary"
-                                                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                                ADD
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form:form>
+                                        <button type="submit" class="btn btn-primary">Add</button>
+                                    </form:form>
+                                </tr>
                             </table>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-expanded="false"><i
+                                            class="fa fa-wrench"></i></a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Settings 1</a>
+                                        <a class="dropdown-item" href="#">Settings 2</a>
+                                    </div>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
                         </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card-box table-responsive">
+
+                                        <table id="datatable-responsive"
+                                               class="table table-striped table-bordered dt-responsive nowrap"
+                                               cellspacing="0" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Mã</th>
+                                                <th>Dung lượng</th>
+                                                <th>Ngày tạo</th>
+                                                <th>Ngày cập nhật</th>
+                                                <th>Tình trạng</th>
+                                                <th>Mô tả </th>
+                                                <th colspan="2">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${hsp}" var="chip" varStatus="i">
+                                                <tr>
+                                                    <td>${i.index+1}</td>
+                                                    <td>${chip.ma}</td>
+                                                    <td>${chip.dungLuong}</td>
+                                                    <td>${chip.ngayTao}</td>
+                                                    <td>${chip.ngayCapNhat}</td>
+                                                    <td style="color: green">${chip.tt()}</td>
+                                                    <td>${chip.moTa}</td>
+                                                    <td>
+                                                            <%--                                            <a href="/detail-chip/${chip.id}" class="btn btn-outline-primary"--%>
+                                                            <%--                                               tabindex="-1"--%>
+                                                            <%--                                               role="button"--%>
+                                                            <%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Detail</a>--%>
+                                                        <a href="/rom/delete/${chip.id}" class="btn btn-outline-primary"
+                                                           tabindex="-1"
+                                                           role="button"
+                                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Delete</a>
+                                                        <a href="/rom/detail/${chip.id}" class="btn btn-outline-primary"
+                                                           tabindex="-1"
+                                                           role="button">Update</a>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+    </div>
+
+</div>
+
+
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <div class="clearfix"></div>
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Rom<small></small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false"><i
+                                        class="fa fa-wrench"></i></a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Settings 1</a>
+                                    <a class="dropdown-item" href="#">Settings 2</a>
+                                </div>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card-box table-responsive">
+
+                                    <table id="datatable-responsive"
+                                           class="table table-striped table-bordered dt-responsive nowrap"
+                                           cellspacing="0" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Mã</th>
+                                            <th>Dung lượng</th>
+                                            <th>Ngày tạo</th>
+                                            <th>Ngày cập nhật</th>
+                                            <th>Tình trạng</th>
+                                            <th>Mô tả </th>
+                                            <th colspan="2">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach items="${rom}" var="chip" varStatus="i">
+                                            <tr>
+                                                <td>${i.index+1}</td>
+                                                <td>${chip.ma}</td>
+                                                <td>${chip.dungLuong}</td>
+                                                <td>${chip.ngayTao}</td>
+                                                <td>${chip.ngayCapNhat}</td>
+                                                <td style="color: green">${chip.tt()}</td>
+                                                <td>${chip.moTa}</td>
+                                                <td>
+                                                        <%--                                            <a href="/detail-chip/${chip.id}" class="btn btn-outline-primary"--%>
+                                                        <%--                                               tabindex="-1"--%>
+                                                        <%--                                                 role="button"--%>
+                                                        <%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Detail</a>--%>
+                                                    <a href="/rom/delete/${chip.id}" class="btn btn-outline-primary"
+                                                       tabindex="-1"
+                                                       role="button"
+                                                       onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Delete</a>
+                                                    <a href="/rom/detail/${chip.id}" class="btn btn-outline-primary"
+                                                       tabindex="-1"
+                                                       role="button">Update</a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
+        </div>
+            </div>
+        </div>
+    </div>
+</div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center pagination-lg">
+        <li class="page-item"><a class="page-link" href="/rom/hien-thi?num=0">First</a></li>
+
+        <c:forEach begin="1" end="${total}" varStatus="status">
+            <li class="page-item">
+                <a href="${pageContext.request.contextPath}/rom/hien-thi?num=${status.index -1}"
+                   class="page-link">${status.index}</a>
+            </li>
+        </c:forEach>
+
+        <li class="page-item"><a class="page-link" href="/rom/hien-thi?num=${total-1}">Last</a></li>
+    </ul>
+</nav>
 
 </body>
 <script>

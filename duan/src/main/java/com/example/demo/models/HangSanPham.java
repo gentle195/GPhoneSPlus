@@ -39,8 +39,8 @@ public class HangSanPham {
     @Column(name = "ten")
     private String ten;
 
-    @NotBlank(message = "Không để trống thông tin")
-    @Size(min = 4, message = "Tên phải lớn hơn hoặc bằng 4 kí tự")
+//    @NotBlank(message = "Không để trống thông tin")
+//    @Size(min = 4, message = "Tên phải lớn hơn hoặc bằng 4 kí tự")
     @Column(name = "xuat_su")
     private String xuatSu;
 
@@ -57,4 +57,11 @@ public class HangSanPham {
     @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")
     private String moTa;
+
+    public String tt() {
+        if (tinhTrang == 0) {
+            return "Còn hoạt động";
+        }
+        return "Không còn hoạt động";
+    }
 }

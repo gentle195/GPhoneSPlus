@@ -19,7 +19,7 @@ public interface SanPhamService {
 
     public SanPham update(UUID id, SanPham sanPham);
 
-    public SanPham update(SanPham sanPham);
+
 
     public Boolean delete(UUID id);
 

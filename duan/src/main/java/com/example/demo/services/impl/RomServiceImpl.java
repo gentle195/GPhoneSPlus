@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+import com.example.demo.models.KhachHang;
 import com.example.demo.models.Rom;
 import com.example.demo.repositories.RomRepository;
 import com.example.demo.services.RomService;
@@ -19,11 +20,17 @@ public class RomServiceImpl implements RomService {
     @Autowired
     RomRepository romRepository;
 
+//    @Override
+//    public Page<Rom> getALL0(Pageable pageable) {
+//        return romRepository.getall0(pageable);
+//    }
 
-    @Override
-    public Page<Rom> getAll(Pageable pageable) {
-        return romRepository.findAll(pageable);
-    }
+//    @Override
+//    public Page<Rom> getAll(Pageable pageable) {
+//        return romRepository.findAll(pageable);
+//    }
+
+
 
     @Override
     public List<Rom> findAll() {
@@ -67,5 +74,19 @@ public class RomServiceImpl implements RomService {
             }
         }
         return false;
+    }
+
+    @Override
+    public Page<Rom> getAll0(Pageable pageable) {
+        return romRepository.getall0(pageable);
+    }
+
+    @Override
+    public Page<Rom> getall1(Pageable pageable) {
+        return romRepository.getall1(pageable);
+    }
+    @Override
+    public void update0() {
+        romRepository.update0();
     }
 }

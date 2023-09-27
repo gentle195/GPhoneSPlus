@@ -22,7 +22,12 @@ public class DungLuongPinServiceImpl implements DungLuongPinService {
 
     @Override
     public Page<DungLuongPin> getAll(Pageable pageable) {
-        return dungLuongPinRepository.findAll(pageable);
+        return dungLuongPinRepository.getAll(pageable);
+    }
+
+    @Override
+    public Page<DungLuongPin> getAll1(Pageable pageable) {
+        return dungLuongPinRepository.getAll1(pageable);
     }
 
     @Override
@@ -53,6 +58,11 @@ public class DungLuongPinServiceImpl implements DungLuongPinService {
     }
 
     @Override
+    public void updateTT() {
+        dungLuongPinRepository.updateTT();
+    }
+
+    @Override
     public Boolean delete(UUID id) {
         if (id != null) {
             DungLuongPin dungLuongPin = dungLuongPinRepository.findById(id).orElse(null);
@@ -62,5 +72,15 @@ public class DungLuongPinServiceImpl implements DungLuongPinService {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<DungLuongPin> search0(String ten) {
+        return dungLuongPinRepository.sreach0(ten);
+    }
+
+    @Override
+    public List<DungLuongPin> search1(String ten) {
+        return dungLuongPinRepository.sreach1(ten);
     }
 }

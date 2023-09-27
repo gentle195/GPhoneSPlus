@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controllers;
 
 import com.example.demo.models.*;
 import com.example.demo.services.CameraService;
@@ -139,6 +139,7 @@ public class SanPhamController {
         hsp.setChatLieu(dulieuxem.getChatLieu());
         hsp.setNgayTao(ngayTao);
         hsp.setHangSanPham(dulieuxem.getHangSanPham());
+        hsp.setCamera(dulieuxem.getCamera());
         // Gán ngày hiện tại
         hsp.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         hsp.setTinhTrang(dulieuxem.getTinhTrang());

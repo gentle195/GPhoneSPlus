@@ -1,40 +1,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/images/favicon.ico" type="image/ico"/>
-
-    <title>Gentelella Alela!</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
-    <link rel="icon" href="/images/favicon.ico" type="image/ico"/>
-    <!-- Bootstrap -->
-    <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
-    <!-- bootstrap-progressbar -->
-    <link href="/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    <!-- JQVMap -->
-    <link href="/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-    <!-- bootstrap-daterangepicker -->
-    <link href="/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
-    <!-- Custom Theme Style -->
-    <link href="/build/css/custom.min.css" rel="stylesheet">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Skydash Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="vendors/feather/feather.css">
+  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="css/vertical-layout-light/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="images/favicon.png" />
 </head>
+<<<<<<< HEAD
 
 <body class="nav-md">
 <div class="container body">
@@ -120,222 +111,449 @@
                     </a>
                 </div>
                 <!-- /menu footer buttons -->
+=======
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="images/logo.svg" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"/></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+        <ul class="navbar-nav mr-lg-2">
+          <li class="nav-item nav-search d-none d-lg-block">
+            <div class="input-group">
+              <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                <span class="input-group-text" id="search">
+                  <i class="icon-search"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+>>>>>>> abde1bdd73bf3ca0f8a9ad8f80fc08e0520db004
             </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item dropdown">
+            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+              <i class="icon-bell mx-0"></i>
+              <span class="count"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+              <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-success">
+                    <i class="ti-info-alt mx-0"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <h6 class="preview-subject font-weight-normal">Application Error</h6>
+                  <p class="font-weight-light small-text mb-0 text-muted">
+                    Just now
+                  </p>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-warning">
+                    <i class="ti-settings mx-0"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <h6 class="preview-subject font-weight-normal">Settings</h6>
+                  <p class="font-weight-light small-text mb-0 text-muted">
+                    Private message
+                  </p>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-info">
+                    <i class="ti-user mx-0"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <h6 class="preview-subject font-weight-normal">New user registration</h6>
+                  <p class="font-weight-light small-text mb-0 text-muted">
+                    2 days ago
+                  </p>
+                </div>
+              </a>
+            </div>
+          </li>
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <img src="images/faces/face28.jpg" alt="profile"/>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <a class="dropdown-item">
+                <i class="ti-settings text-primary"></i>
+                Settings
+              </a>
+              <a class="dropdown-item">
+                <i class="ti-power-off text-primary"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+          <li class="nav-item nav-settings d-none d-lg-flex">
+            <a class="nav-link" href="#">
+              <i class="icon-ellipsis"></i>
+            </a>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      <div class="theme-setting-wrapper">
+        <div id="settings-trigger"><i class="ti-settings"></i></div>
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close ti-close"></i>
+          <p class="settings-heading">SIDEBAR SKINS</p>
+          <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+          <p class="settings-heading mt-2">HEADER SKINS</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles success"></div>
+            <div class="tiles warning"></div>
+            <div class="tiles danger"></div>
+            <div class="tiles info"></div>
+            <div class="tiles dark"></div>
+            <div class="tiles default"></div>
+          </div>
         </div>
+      </div>
+      <div id="right-sidebar" class="settings-panel">
+        <i class="settings-close ti-close"></i>
+        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="chats-tab" data-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="setting-content">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+            <div class="add-items d-flex px-3 mb-0">
+              <form class="form w-100">
+                <div class="form-group d-flex">
+                  <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
+                  <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Add</button>
+                </div>
+              </form>
+            </div>
+            <div class="list-wrapper px-3">
+              <ul class="d-flex flex-column-reverse todo-list">
+                <li>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox">
+                      Team review meeting at 3.00 PM
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+                <li>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox">
+                      Prepare for presentation
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+                <li>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox">
+                      Resolve all the low priority tickets due today
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+                <li class="completed">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox" checked>
+                      Schedule meeting for next week
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+                <li class="completed">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox" checked>
+                      Project review
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+              </ul>
+            </div>
+            <h4 class="px-3 text-muted mt-5 font-weight-light mb-0">Events</h4>
+            <div class="events pt-4 px-3">
+              <div class="wrapper d-flex mb-2">
+                <i class="ti-control-record text-primary mr-2"></i>
+                <span>Feb 11 2018</span>
+              </div>
+              <p class="mb-0 font-weight-thin text-gray">Creating component page build a js</p>
+              <p class="text-gray mb-0">The total number of sessions</p>
+            </div>
+            <div class="events pt-4 px-3">
+              <div class="wrapper d-flex mb-2">
+                <i class="ti-control-record text-primary mr-2"></i>
+                <span>Feb 7 2018</span>
+              </div>
+              <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
+              <p class="text-gray mb-0 ">Call Sarah Graves</p>
+            </div>
+          </div>
+          <!-- To do section tab ends -->
+          <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
+            <div class="d-flex align-items-center justify-content-between border-bottom">
+              <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
+              <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 font-weight-normal">See All</small>
+            </div>
+            <ul class="chat-list">
+              <li class="list active">
+                <div class="profile"><img src="images/faces/face1.jpg" alt="image"><span class="online"></span></div>
+                <div class="info">
+                  <p>Thomas Douglas</p>
+                  <p>Available</p>
+                </div>
+                <small class="text-muted my-auto">19 min</small>
+              </li>
+              <li class="list">
+                <div class="profile"><img src="images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+                <div class="info">
+                  <div class="wrapper d-flex">
+                    <p>Catherine</p>
+                  </div>
+                  <p>Away</p>
+                </div>
+                <div class="badge badge-success badge-pill my-auto mx-2">4</div>
+                <small class="text-muted my-auto">23 min</small>
+              </li>
+              <li class="list">
+                <div class="profile"><img src="images/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                <div class="info">
+                  <p>Daniel Russell</p>
+                  <p>Available</p>
+                </div>
+                <small class="text-muted my-auto">14 min</small>
+              </li>
+              <li class="list">
+                <div class="profile"><img src="images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                <div class="info">
+                  <p>James Richardson</p>
+                  <p>Away</p>
+                </div>
+                <small class="text-muted my-auto">2 min</small>
+              </li>
+              <li class="list">
+                <div class="profile"><img src="images/faces/face5.jpg" alt="image"><span class="online"></span></div>
+                <div class="info">
+                  <p>Madeline Kennedy</p>
+                  <p>Available</p>
+                </div>
+                <small class="text-muted my-auto">5 min</small>
+              </li>
+              <li class="list">
+                <div class="profile"><img src="images/faces/face6.jpg" alt="image"><span class="online"></span></div>
+                <div class="info">
+                  <p>Sarah Graves</p>
+                  <p>Available</p>
+                </div>
+                <small class="text-muted my-auto">47 min</small>
+              </li>
+            </ul>
+          </div>
+          <!-- chat tab ends -->
+        </div>
+      </div>
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/ban-hang/hien-thi">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Bán Hàng</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Hoá đơn</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="icon-columns menu-icon"></i>
+              <span class="menu-title">Form elements</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Basic Elements</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+              <i class="icon-bar-graph menu-icon"></i>
+              <span class="menu-title">Thống kê</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="charts">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+              <i class="icon-grid-2 menu-icon"></i>
+              <span class="menu-title">Quản Lý Sản Phẩm</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/chi-tiet-san-pham/hien-thi">Chi Tiết Sản Phẩm</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/san-pham/hien-thi">Sản Phẩm</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/hang/hien-thi">Hãng</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/mau-sac/hien-thi">Màu Sắc</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/camera/hien-thi">Camera</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/dung-luong-pin/hien-thi">Dung Lượng Pin</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/pin/hien-thi">Pin</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/man-hinh/hien-thi">Màn Hình</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/ram/hien-thi">Ram</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/rom/hien-thi">Rom</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/chip/hien-thi">Chip</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+              <i class="icon-contract menu-icon"></i>
+              <span class="menu-title">Quản Lý Acount</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="icons">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/nhan-vien/hien-thi">Nhân Viên</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/chuc-vu/hien-thi">Chức Vụ</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/khach-hang/hien-thi">Khách Hàng</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/hang-khach-hang/hien-thi">Hạng Khách Hàng</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/dia-chi/hien-thi">Địa Chỉ</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+              <i class="icon-head menu-icon"></i>
+              <span class="menu-title">User Pages</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
+              <i class="icon-ban menu-icon"></i>
+              <span class="menu-title">Error pages</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="error">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/documentation/documentation.html">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Documentation</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- partial -->
 
-        <!-- top navigation -->
-<%--        <div class="top_nav">--%>
-<%--            <div class="nav_menu">--%>
-<%--                <div class="nav toggle">--%>
-<%--                    <a id="menu_toggle"><i class="fa fa-bars"></i></a>--%>
-<%--                </div>--%>
-<%--                <nav class="nav navbar-nav">--%>
-<%--                    <ul class=" navbar-right">--%>
-<%--                        <li class="nav-item dropdown open" style="padding-left: 15px;">--%>
-<%--                            <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"--%>
-<%--                               id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">--%>
-<%--                                <img src="../../images/img.jpg" alt="">John Doe--%>
-<%--                            </a>--%>
-<%--                            <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">--%>
-<%--                                <a class="dropdown-item" href="javascript:;"> Profile</a>--%>
-<%--                                <a class="dropdown-item" href="javascript:;">--%>
-<%--                                    <span class="badge bg-red pull-right">50%</span>--%>
-<%--                                    <span>Settings</span>--%>
-<%--                                </a>--%>
-<%--                                <a class="dropdown-item" href="javascript:;">Help</a>--%>
-<%--                                <a class="dropdown-item" href="login.html"><i class="fa fa-sign-out pull-right"></i> Log--%>
-<%--                                    Out</a>--%>
-<%--                            </div>--%>
-<%--                        </li>--%>
-
-<%--                        <li role="presentation" class="nav-item dropdown open">--%>
-<%--                            <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1"--%>
-<%--                               data-toggle="dropdown" aria-expanded="false">--%>
-<%--                                <i class="fa fa-envelope-o"></i>--%>
-<%--                                <span class="badge bg-green">6</span>--%>
-<%--                            </a>--%>
-<%--                            <ul class="dropdown-menu list-unstyled msg_list" role="menu"--%>
-<%--                                aria-labelledby="navbarDropdown1">--%>
-<%--                                <li class="nav-item">--%>
-<%--                                    <a class="dropdown-item">--%>
-<%--                                        <span class="image"><img src="../../images/img.jpg" alt="Profile Image"/></span>--%>
-<%--                                        <span>--%>
-<%--                          <span>John Smith</span>--%>
-<%--                          <span class="time">3 mins ago</span>--%>
-<%--                        </span>--%>
-<%--                                        <span class="message">--%>
-<%--                          Film festivals used to be do-or-die moments for movie makers. They were where...--%>
-<%--                        </span>--%>
-<%--                                    </a>--%>
-<%--                                </li>--%>
-<%--                                <li class="nav-item">--%>
-<%--                                    <a class="dropdown-item">--%>
-<%--                                        <span class="image"><img src="../../images/img.jpg" alt="Profile Image"/></span>--%>
-<%--                                        <span>--%>
-<%--                          <span>John Smith</span>--%>
-<%--                          <span class="time">3 mins ago</span>--%>
-<%--                        </span>--%>
-<%--                                        <span class="message">--%>
-<%--                          Film festivals used to be do-or-die moments for movie makers. They were where...--%>
-<%--                        </span>--%>
-<%--                                    </a>--%>
-<%--                                </li>--%>
-<%--                                <li class="nav-item">--%>
-<%--                                    <a class="dropdown-item">--%>
-<%--                                        <span class="image"><img src="../../images/img.jpg" alt="Profile Image"/></span>--%>
-<%--                                        <span>--%>
-<%--                          <span>John Smith</span>--%>
-<%--                          <span class="time">3 mins ago</span>--%>
-<%--                        </span>--%>
-<%--                                        <span class="message">--%>
-<%--                          Film festivals used to be do-or-die moments for movie makers. They were where...--%>
-<%--                        </span>--%>
-<%--                                    </a>--%>
-<%--                                </li>--%>
-<%--                                <li class="nav-item">--%>
-<%--                                    <a class="dropdown-item">--%>
-<%--                                        <span class="image"><img src="../../images/img.jpg" alt="Profile Image"/></span>--%>
-<%--                                        <span>--%>
-<%--                          <span>John Smith</span>--%>
-<%--                          <span class="time">3 mins ago</span>--%>
-<%--                        </span>--%>
-<%--                                        <span class="message">--%>
-<%--                          Film festivals used to be do-or-die moments for movie makers. They were where...--%>
-<%--                        </span>--%>
-<%--                                    </a>--%>
-<%--                                </li>--%>
-<%--                                <li class="nav-item">--%>
-<%--                                    <div class="text-center">--%>
-<%--                                        <a class="dropdown-item">--%>
-<%--                                            <strong>See All Alerts</strong>--%>
-<%--                                            <i class="fa fa-angle-right"></i>--%>
-<%--                                        </a>--%>
-<%--                                    </div>--%>
-<%--                                </li>--%>
-<%--                            </ul>--%>
-<%--                        </li>--%>
-<%--                    </ul>--%>
-<%--                </nav>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-        <!-- /top navigation -->
-
-        <!-- page content -->
-        <div class="right_col" role="main">
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="right_col" role="main">
             <!-- top tiles -->
+
             <jsp:include page="${contentPage}"/>
+          </div>
         </div>
-        <!-- /top tiles -->
-        <!-- /page content -->
-
-        <!-- footer content -->
-        <footer>
-            <div class="pull-right">
-                Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-            </div>
-            <div class="clearfix"></div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
+          </div>
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a href="https://www.themewagon.com/" target="_blank">Themewagon</a></span>
+          </div>
         </footer>
-
-        <!-- /footer content -->
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
     </div>
-</div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
 
+  <!-- plugins:js -->
+  <script src="vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="vendors/chart.js/Chart.min.js"></script>
+  <script src="vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="js/dataTables.select.min.js"></script>
 
-<script src="/vendors/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap -->
-<script src="/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<!-- FastClick -->
-<script src="/vendors/fastclick/lib/fastclick.js"></script>
-<!-- NProgress -->
-<script src="/vendors/nprogress/nprogress.js"></script>
-<!-- Chart.js -->
-<script src="/vendors/Chart.js/dist/Chart.min.js"></script>
-<!-- gauge.js -->
-<script src="/vendors/gauge.js/dist/gauge.min.js"></script>
-<!-- bootstrap-progressbar -->
-<script src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-<!-- iCheck -->
-<script src="/vendors/iCheck/icheck.min.js"></script>
-<!-- Skycons -->
-<script src="/vendors/skycons/skycons.js"></script>
-<!-- Flot -->
-<script src="/vendors/Flot/jquery.flot.js"></script>
-<script src="/vendors/Flot/jquery.flot.pie.js"></script>
-<script src="/vendors/Flot/jquery.flot.time.js"></script>
-<script src="/vendors/Flot/jquery.flot.stack.js"></script>
-<script src="/vendors/Flot/jquery.flot.resize.js"></script>
-<!-- Flot plugins -->
-<script src="/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-<script src="/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-<script src="/vendors/flot.curvedlines/curvedLines.js"></script>
-<!-- DateJS -->
-<script src="/vendors/DateJS/build/date.js"></script>
-<!-- JQVMap -->
-<script src="/vendors/jqvmap/dist/jquery.vmap.js"></script>
-<script src="/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-<script src="/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-<!-- bootstrap-daterangepicker -->
-<script src="/vendors/moment/min/moment.min.js"></script>
-<script src="/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-<!-- Custom Theme Scripts -->
-<script src="/build/js/custom.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        $('div[id^="nhapImei_"]').on('show.bs.modal', async function (e) {
-            const ctspId = e.currentTarget.id.split("_")[1];
-            const url = "http://localhost:8080/ban-hang/them-san-pham/" + ctspId;
-            console.log(ctspId, url);
-            try {
-                const resp = await fetch(url);
-                const data = await resp.json();
-                console.log(data)
-                let html = '';
-                for (let i = 0; i < data.length; i++) {
-                    const imei = data[i];
-                    const tr = `
-            <tr>
-                <td>` + (i + 1) + `</td>
-                <td>` + imei.soImei + `</td>
-                <td>` + (imei.tinhTrang == 0 ? "Chưa bán" : "Đã bán") + `</td>
-                <td><a href="/ban-hang/them-imei/` + imei.id + `">Thêm IMEI</a></td>
-            </tr>
-            `;
-                    html += tr;
-                }
-
-                $("#listImei_" + ctspId).html(html);
-            } catch (err) {
-                console.error(err)
-            }
-        });
-    });
-
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<%--<script src="https://code.jquery.com/jquery-3.7.0.min.js"--%>
-<%--        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>--%>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
-<script>
-    $(document).ready(function () {
-        $('#selectSanPham').select2();
-    });
-    $(document).ready(function () {
-        $('#selectRam').select2();
-    });
-    $(document).ready(function () {
-        $('#selectRom').select2();
-    });
-    $(document).ready(function () {
-        $('#selectPin').select2();
-    });
-    $(document).ready(function () {
-        $('#selectMauSac').select2();
-    });
-    $(document).ready(function () {
-        $('#selectChip').select2();
-    });
-</script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="js/off-canvas.js"></script>
+  <script src="js/hoverable-collapse.js"></script>
+  <script src="js/template.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="js/dashboard.js"></script>
+  <script src="js/Chart.roundedBarCharts.js"></script>
+  <!-- End custom js for this page-->
 </body>
+
 </html>
+

@@ -22,8 +22,11 @@ public class ChipServiceImpl implements ChipService {
 
     @Override
     public Page<Chip> getAll(Pageable pageable) {
-        return chipRepository.findAll(pageable);
+        return chipRepository.getAll(pageable);
     }
+
+    @Override
+    public Page<Chip> getAll1(Pageable pageable) { return chipRepository.getAll1(pageable); }
 
     @Override
     public List<Chip> findAll() {
@@ -53,6 +56,11 @@ public class ChipServiceImpl implements ChipService {
     }
 
     @Override
+    public void updateTT() {
+        chipRepository.updateTT();
+    }
+
+    @Override
     public Boolean delete(UUID id) {
         if (id != null) {
             Chip chip = chipRepository.findById(id).orElse(null);
@@ -63,4 +71,15 @@ public class ChipServiceImpl implements ChipService {
         }
         return false;
     }
+
+    @Override
+    public List<Chip> search0(String ten) {
+        return chipRepository.sreach0(ten);
+    }
+
+    @Override
+    public List<Chip> search1(String ten) {
+        return chipRepository.sreach1(ten);
+    }
+
 }

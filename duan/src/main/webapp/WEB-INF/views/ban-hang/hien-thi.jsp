@@ -13,29 +13,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-    <link rel="icon" href="/images/favicon.ico" type="image/ico"/>
-    <!-- Bootstrap -->
-    <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
-    <!-- bootstrap-progressbar -->
-    <link href="/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    <!-- JQVMap -->
-    <link href="/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-    <!-- bootstrap-daterangepicker -->
-    <link href="/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
-    <!-- Custom Theme Style -->
-    <link href="/build/css/custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../vendors/feather/feather.css">
+    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+    <link rel="shortcut icon" href="../../images/favicon.png"/>
 </head>
-<body class="container outer-border p-3 border border-secondary">
+<body>
 <section style="text-align: center">
-    <div class="row outer-border border border-secondary" style="height: 40px">
+    <div class="row outer-border border border-secondary" style="height: 45px">
         <div class="col-3">
             <form action="/ban-hang/add-hoa-don" method="post" style="text-align: center;margin-top: 6px">
                 <button type="submit"><img src="/img/plus.png"></button>
@@ -55,13 +41,13 @@
         </div>
     </div>
     <br>
-    <div class="row " style="text-align: center">
-        <h2 style="color: red">${thongBaoHoaDon}</h2>
+    <div class="row">
+        <h4 style="color: red;margin: 10px;text-align: center">${thongBaoHoaDon}</h4>
     </div>
     <br>
     <c:if test="${hoaDon==null}">
         <div class="row outer-border border border-secondary" style="text-align: center">
-            <h2 style="color: red">Mời chọn hóa đơn</h2>
+            <h3 style="color: red;margin: 10px">Mời chọn hóa đơn</h3>
         </div>
     </c:if>
     <c:if test="${hoaDon!=null}">
@@ -80,7 +66,8 @@
                                                 <button type="submit">Tìm kiếm</button>
                                             </form>
                                         </div>
-                                        <div class="col-6"><h6 style="text-align: center;color: red">${thongBao}</h6></div>
+                                        <div class="col-6"><h6 style="text-align: center;color: red">${thongBao}</h6>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-5">
@@ -532,6 +519,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
         integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
         crossorigin="anonymous"></script>
+<script src="../../vendors/js/vendor.bundle.base.js"></script>
+<script src="../../js/off-canvas.js"></script>
+<script src="../../js/hoverable-collapse.js"></script>
+<script src="../../js/template.js"></script>
+<script src="../../js/settings.js"></script>
+<script src="../../js/todolist.js"></script>
 <script>
     function myFunction1() {
         let text = "Bạn chắc chắn muốn thêm";
