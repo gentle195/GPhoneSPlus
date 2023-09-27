@@ -49,7 +49,7 @@ public class KhachHangController {
             Model model,
             @ModelAttribute("kh") KhachHang khachHang,
             @ModelAttribute("hangKhachHang") HangKhachHang hangKhachHang,
-             @RequestParam("num") Optional<Integer> num,
+            @RequestParam("num") Optional<Integer> num,
             @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
 
     ) {
@@ -104,11 +104,11 @@ public class KhachHangController {
 
     @PostMapping("/khach-hang/tim-kiem-tung-xoa")
     public String timkiemtungxoa(Model model,
-                          @RequestParam("matk") String matk,
-                          @ModelAttribute("kh") KhachHang khachHang,
-                          @ModelAttribute("hangKhachHang") HangKhachHang hangKhachHang,
-                          @RequestParam("num") Optional<Integer> num,
-                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
+                                 @RequestParam("matk") String matk,
+                                 @ModelAttribute("kh") KhachHang khachHang,
+                                 @ModelAttribute("hangKhachHang") HangKhachHang hangKhachHang,
+                                 @RequestParam("num") Optional<Integer> num,
+                                 @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
 
 
     ) {
@@ -188,8 +188,11 @@ public class KhachHangController {
                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
 
     ) {
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
         KhachHang khachHang1 = khachHangService.findById(id);
         khachHang1.setTinhTrang(1);
+        khachHang1.setNgayCapNhat(date);
         khachHangService.add(khachHang1);
 
 
@@ -219,15 +222,18 @@ public class KhachHangController {
 
     @GetMapping("/khach-hang/khoi-phuc/{id}")
     public String khoiphuc(Model model,
-                         @PathVariable("id") UUID id,
-                         @ModelAttribute("kh") KhachHang khachHang,
-                         @ModelAttribute("hangKhachHang") HangKhachHang hangKhachHang,
+                           @PathVariable("id") UUID id,
+                           @ModelAttribute("kh") KhachHang khachHang,
+                           @ModelAttribute("hangKhachHang") HangKhachHang hangKhachHang,
                            @RequestParam("num") Optional<Integer> num,
                            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
 
     ) {
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
         KhachHang khachHang1 = khachHangService.findById(id);
         khachHang1.setTinhTrang(0);
+        khachHang1.setNgayCapNhat(date);
         khachHangService.add(khachHang1);
 
 
@@ -257,16 +263,18 @@ public class KhachHangController {
     @GetMapping("/khach-hang/khoi-phuc-het")
     public String khoiphuchet(Model model,
 //                           @PathVariable("id") UUID id,
-                           @ModelAttribute("kh") KhachHang khachHang,
-                           @ModelAttribute("hangKhachHang") HangKhachHang hangKhachHang,
-                           @RequestParam("num") Optional<Integer> num,
-                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
+                              @ModelAttribute("kh") KhachHang khachHang,
+                              @ModelAttribute("hangKhachHang") HangKhachHang hangKhachHang,
+                              @RequestParam("num") Optional<Integer> num,
+                              @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
 
     ) {
         List<KhachHang> khachHang1 = khachHangService.findAll11();
-
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
         for (KhachHang vt:khachHang1){
-               vt.setTinhTrang(0);
+            vt.setTinhTrang(0);
+            vt.setNgayCapNhat(date);
             khachHangService.add(vt);
         }
 //        khachHang1.setTinhTrang(0);
@@ -313,9 +321,9 @@ public class KhachHangController {
     }
     @PostMapping("/khach-hang/them-hang-khach-hang-update")
     public String themhkhupdate(Model model,
-                             @RequestParam("idkh") UUID id,
-                             @ModelAttribute("kh") KhachHang khachHang,
-                             @ModelAttribute("KHHangKhachHang") HangKhachHang hangKhachHang
+                                @RequestParam("idkh") UUID id,
+                                @ModelAttribute("kh") KhachHang khachHang,
+                                @ModelAttribute("KHHangKhachHang") HangKhachHang hangKhachHang
 
 
 
@@ -344,8 +352,8 @@ public class KhachHangController {
 
     @PostMapping("/khach-hang/them-hang-khach-hang-add")
     public String themhkhuadd(Model model,
-                                @ModelAttribute("kh") KhachHang khachHang,
-                                @ModelAttribute("KHHangKhachHang") HangKhachHang hangKhachHang
+                              @ModelAttribute("kh") KhachHang khachHang,
+                              @ModelAttribute("KHHangKhachHang") HangKhachHang hangKhachHang
 
 
     ) {
@@ -377,8 +385,8 @@ public class KhachHangController {
 
     @GetMapping("/khach-hang/view-detail/{id}")
     public String detail(Model model,
-                             @PathVariable("id") UUID id,
-                             @ModelAttribute("kh") KhachHang khachHang,
+                         @PathVariable("id") UUID id,
+                         @ModelAttribute("kh") KhachHang khachHang,
                          @RequestParam("num") Optional<Integer> num,
                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
 
@@ -415,7 +423,7 @@ public class KhachHangController {
 
     public String viewadd(Model model,
 //                             @PathVariable("id") UUID id,
-                             @ModelAttribute("kh") KhachHang khachHang,
+                          @ModelAttribute("kh") KhachHang khachHang,
                           @ModelAttribute("KHHangKhachHang") HangKhachHang hangKhachHang
 
 
@@ -503,13 +511,13 @@ public class KhachHangController {
         }
 
 
-         String mhd="";
+        String mhd="";
         Integer sl = khachHangService.findAll().size() + 1;
-            if(sl<10){
-                 mhd = "MKH0" + sl;
-            }else {
-                 mhd = "MKH" + sl;
-            }
+        if(sl<10){
+            mhd = "MKH0" + sl;
+        }else {
+            mhd = "MKH" + sl;
+        }
         khachHang.setMa(mhd);
         khachHang.setNgayTao(date);
         khachHang.setNgayCapNhat(date);
@@ -525,7 +533,7 @@ public class KhachHangController {
             String uploadDir = "src/main/webapp/uploads/";
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         }
-       khachHang.setAnh(fileName);
+        khachHang.setAnh(fileName);
         khachHangService.add(khachHang);
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);

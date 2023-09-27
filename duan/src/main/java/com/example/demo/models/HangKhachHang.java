@@ -27,7 +27,7 @@ public class HangKhachHang {
     @Column(name = "ma")
     private String ma;
 
-//    @NotBlank(message = "Không để trống thông tin")
+    //    @NotBlank(message = "Không để trống thông tin")
     @Size(min = 6, message = "Tên phải lớn hơn hoặc bằng 6 kí tự")
     @Column(name = "ten")
     private String ten;
