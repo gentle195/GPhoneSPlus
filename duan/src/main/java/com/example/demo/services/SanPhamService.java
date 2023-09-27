@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.models.Rom;
 import com.example.demo.models.SanPham;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,9 +19,11 @@ public interface SanPhamService {
 
     public SanPham update(UUID id, SanPham sanPham);
 
-    public SanPham update(SanPham sanPham);
+
 
     public Boolean delete(UUID id);
+
+    List<SanPham>search(String dungluong);
 }
 
 

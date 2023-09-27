@@ -25,6 +25,93 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
+<<<<<<< HEAD
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                <div class="navbar nav_title" style="border: 0;">
+                    <a href="production/index.jsp" class="site_title"><i class="fa fa-paw"></i>
+                        <span>GPhoneS <br></span></a>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <!-- menu profile quick info -->
+                <div class="profile clearfix">
+<%--                    <div class="profile_pic">--%>
+<%--                        <img src="../../images/img.jpg" alt="..." class="img-circle profile_img">--%>
+<%--                    </div>--%>
+<%--                    <div class="profile_info">--%>
+<%--                        <span>Welcome,</span>--%>
+<%--                        <h2>John Doe</h2>--%>
+<%--                    </div>--%>
+                </div>
+                <!-- /menu profile quick info -->
+
+                <br/>
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <h3>General</h3>
+                        <ul class="nav side-menu">
+                            <li><a href="/ban-hang/hien-thi"><i class="fa fa-home"></i> Bán Hàng <span></span></a></li>
+                            <li><a><i class="fa fa-edit"></i> Hoá Đơn <span></span></a>
+                            <li><a><i class="fa fa-home"></i> Quản Lý Thông Tin <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a>Quản lý Acount<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="#level2_1">Nhân Viên</a></li>
+                                            <li><a href="/khach-hang/hien-thi">Khách Hàng</a></li>
+                                            <li><a href="/hang-khach-hang/hien-thi">Hạng Khách Hàng</a></li>
+                                            <li><a href="#level2_2">Chức Vụ</a></li>
+                                            <li><a href="/dia-chi/hien-thi">Địa Chỉ</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a>Quản Lý Sản Phẩm<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="/chi-tiet-san-pham/hien-thi">Chi Tiết Sản Phẩm</a></li>
+                                            <li><a href="/san-pham/hien-thi">Sản Phẩm</a></li>
+                                            <li><a href="/hang-dien-thoai/hien-thi">Hãng</a></li>
+                                            <li><a href="/mau-sac/hien-thi">Màu Sắc</a></li>
+                                            <li><a href="/camera/hien-thi">Camera</a></li>
+                                            <li><a href="/dung-luong-pin/hien-thi">Dung Lượng Pin</a></li>
+                                            <li><a href="/pin/hien-thi">Pin</a></li>
+                                            <li><a href="/man-hinh/hien-thi">Màn Hình</a></li>
+                                            <li><a href="/ram/hien-thi">Ram</a></li>
+                                            <li><a href="/rom/hien-thi">Rom</a></li>
+                                            <li><a href="/chip/hien-thi">Chip</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-bar-chart-o"></i>Thống Kê <span></span></a>
+                            <li><a><i class="fa fa-angellist"></i>Khuyễn Mãi <span></span></a>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /sidebar menu -->
+
+                <!-- /menu footer buttons -->
+                <div class="sidebar-footer hidden-small">
+                    <a data-toggle="tooltip" data-placement="top" title="Settings">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="Lock">
+                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                    </a>
+                </div>
+                <!-- /menu footer buttons -->
+=======
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
@@ -46,6 +133,7 @@
                 </span>
               </div>
               <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+>>>>>>> abde1bdd73bf3ca0f8a9ad8f80fc08e0520db004
             </div>
           </li>
         </ul>

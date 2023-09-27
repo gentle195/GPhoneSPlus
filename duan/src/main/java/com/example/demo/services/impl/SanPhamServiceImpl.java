@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+import com.example.demo.models.Rom;
 import com.example.demo.models.SanPham;
 import com.example.demo.repositories.SanPhamRepository;
 import com.example.demo.services.SanPhamService;
@@ -52,10 +53,7 @@ public class SanPhamServiceImpl implements SanPhamService {
         return null;
     }
 
-    @Override
-    public SanPham update(SanPham sanPham) {
-        return sanPhamRepository.save(sanPham);
-    }
+
 
     @Override
     public Boolean delete(UUID id) {
@@ -67,5 +65,9 @@ public class SanPhamServiceImpl implements SanPhamService {
             }
         }
         return false;
+    }
+    @Override
+    public List<SanPham>search(String dungluong){
+        return sanPhamRepository.search(dungluong);
     }
 }
