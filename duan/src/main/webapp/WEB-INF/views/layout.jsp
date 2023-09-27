@@ -300,7 +300,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/ban-hang/hien-thi">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Bán Hàng</span>
             </a>
@@ -351,7 +351,7 @@
             </a>
             <div class="collapse" id="tables">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/chip/hien-thi">Chi Tiết Sản Phẩm</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/chi-tiet-san-pham/hien-thi">Chi Tiết Sản Phẩm</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/san-pham/hien-thi">Sản Phẩm</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/hang/hien-thi">Hãng</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/mau-sac/hien-thi">Màu Sắc</a></li>
