@@ -22,7 +22,12 @@ public class PinServiceImpl implements PinService {
 
     @Override
     public Page<Pin> getAll(Pageable pageable) {
-        return pinRepository.findAll(pageable);
+        return pinRepository.getAll(pageable);
+    }
+
+    @Override
+    public Page<Pin> getAll1(Pageable pageable) {
+        return pinRepository.getAll1(pageable);
     }
 
     @Override
@@ -53,6 +58,11 @@ public class PinServiceImpl implements PinService {
     }
 
     @Override
+    public void updateTT() {
+          pinRepository.updateTT();
+    }
+
+    @Override
     public Boolean delete(UUID id) {
         if (id != null) {
             Pin pin = pinRepository.findById(id).orElse(null);
@@ -64,8 +74,15 @@ public class PinServiceImpl implements PinService {
         return false;
     }
 
+
+
     @Override
-    public List<Pin> search(String ten) {
-        return pinRepository.sreach(ten);
+    public List<Pin> search1(String ten) {
+        return pinRepository.sreach1(ten);
+    }
+
+    @Override
+    public List<Pin> search0(String ten) {
+        return pinRepository.sreach0(ten);
     }
 }
