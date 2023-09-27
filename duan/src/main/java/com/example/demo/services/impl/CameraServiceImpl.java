@@ -1,6 +1,7 @@
 package com.example.demo.services.impl;
 
 import com.example.demo.models.Camera;
+import com.example.demo.models.Chip;
 import com.example.demo.repositories.CameraRepository;
 import com.example.demo.services.CameraService;
 import org.springframework.beans.BeanUtils;
@@ -19,7 +20,12 @@ public class CameraServiceImpl implements CameraService {
 
     @Override
     public Page<Camera> getAll(Pageable pageable) {
-        return cameraRepository.findAll(pageable);
+        return cameraRepository.getAll(pageable);
+    }
+
+    @Override
+    public Page<Camera> getAll1(Pageable pageable) {
+        return cameraRepository.getAll1(pageable);
     }
 
     @Override
@@ -28,41 +34,51 @@ public class CameraServiceImpl implements CameraService {
     }
 
     @Override
-    public List<Camera> search(String search) {
-        return cameraRepository.search(search);
-    }
-
-    @Override
     public Camera findById(UUID id) {
         return cameraRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Camera add(Camera camera) {
-        return cameraRepository.save(camera);
+    public Camera add(Camera chip) {
+        return cameraRepository.save(chip);
     }
 
     @Override
-    public Camera update(UUID id, Camera camera) {
+    public Camera update(UUID id, Camera chip) {
         if (id != null) {
-            Camera cameraUpdate = cameraRepository.findById(id).orElse(null);
-            if (cameraUpdate != null) {
-                BeanUtils.copyProperties(camera, cameraUpdate);
-                cameraRepository.save(cameraUpdate);
+            Camera chipUpdate = cameraRepository.findById(id).orElse(null);
+            if (chipUpdate != null) {
+                BeanUtils.copyProperties(chip, chipUpdate);
+                cameraRepository.save(chipUpdate);
             }
         }
         return null;
+    }
+
+    @Override
+    public void updateTT() {
+        cameraRepository.updateTT();
     }
 
     @Override
     public Boolean delete(UUID id) {
         if (id != null) {
-            Camera camera = cameraRepository.findById(id).orElse(null);
-            if (camera != null) {
-                cameraRepository.delete(camera);
+            Camera chip = cameraRepository.findById(id).orElse(null);
+            if (chip != null) {
+                cameraRepository.delete(chip);
                 return true;
             }
         }
-        return null;
+        return false;
+    }
+
+    @Override
+    public List<Camera> search0(String ten) {
+        return cameraRepository.sreach0(ten);
+    }
+
+    @Override
+    public List<Camera> search1(String ten) {
+        return cameraRepository.sreach1(ten);
     }
 }

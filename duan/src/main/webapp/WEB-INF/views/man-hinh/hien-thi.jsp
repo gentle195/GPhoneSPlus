@@ -10,41 +10,22 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Màn hình</title>
-    <link rel="icon" href="../../images/favicon.ico" type="image/ico"/>
-    <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
-    <!-- bootstrap-progressbar -->
-    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    <!-- JQVMap -->
-    <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-    <!-- bootstrap-daterangepicker -->
-    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
-    <!-- Custom Theme Style -->
-    <link href="../../build/css/custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../vendors/feather/feather.css">
+    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+    <link rel="shortcut icon" href="../../images/favicon.png"/>
 </head>
 <body>
-<div class="container">
-    <h1 style="text-align: center">Màn Hình</h1>
+<div>
     <div>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-                   aria-controls="description" aria-selected="true">
-                    <h6>Thông tin màn hình</h6>
-                </a>
+                   aria-controls="description" aria-selected="true">Thông tin màn hình</a>
             </li>
             <li class="nav-item">
-                <a href="/man-hinh/view-add" role="tab" onclick="return myFunction5()">
-                    <h6>Thêm mới màn hình</h6>
-                </a>
+                <a class="nav-link" href="/man-hinh/hien-thi-delete" role="tab">Màn hình đã xoá</a>
             </li>
         </ul>
     </div>
@@ -52,176 +33,211 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="description" role="tabpanel"
                  aria-labelledby="description-tab">
-                <div>
-                    <table class="table container">
-                        <tbody>
-                        <tr>
-                            <form action="/man-hinh/search" method="post">
-                                <td style="text-align: right">
+                <form:form action="/man-hinh/add" method="post" modelAttribute="manHinh">
+                    <div class="col-12 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Thêm màn hình</h4>
+                                <form class="form-sample">
                                     <div class="row">
-                                        <div class="col-9" style="text-align: right">
-                                            <h6 style="color: red;margin-top: 10px">${thongBao}</h6>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <form:label class="col-sm-3 col-form-label" path="thongSo"><b>Thông số
+                                                    màn hình:</b></form:label>
+                                                <div class="col-sm-9">
+                                                    <form:input class="form-control" placeholder="" path="thongSo"/>
+                                                    <form:errors path="thongSo" cssStyle="color: red"></form:errors>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-3" style="text-align: left">
-                                            Tìm kiếm: <input type="text" name="search">
-                                            <button type="submit" class="btn btn-light">Tìm kiếm</button>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <form:label class="col-sm-3 col-form-label" path="loaiCamUng"><b>Loại
+                                                    cảm ứng màn hình:</b></form:label>
+                                                <div class="col-sm-9">
+                                                    <form:input class="form-control" placeholder="" path="loaiCamUng"/>
+                                                    <form:errors path="loaiCamUng" cssStyle="color: red"></form:errors>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </td>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <form:label class="col-sm-3 col-form-label" path="tiLeKhungHinh"><b>Tỉ
+                                                    lệ khung hình:</b></form:label>
+                                                <div class="col-sm-9">
+                                                    <form:input class="form-control" placeholder=""
+                                                                path="tiLeKhungHinh"/>
+                                                    <form:errors path="tiLeKhungHinh"
+                                                                 cssStyle="color: red"></form:errors>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <form:label class="col-sm-3 col-form-label" path="doPhanGiai"><b>Độ phân
+                                                    giải:</b></form:label>
+                                                <div class="col-sm-9">
+                                                    <form:input class="form-control" placeholder="" path="doPhanGiai"/>
+                                                    <form:errors path="doPhanGiai" cssStyle="color: red"></form:errors>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <form:label class="col-sm-3 col-form-label" path="tanSoQuet"><b>Tần số
+                                                    quét:</b></form:label>
+                                                <div class="col-sm-9">
+                                                    <form:input class="form-control" placeholder="" path="tanSoQuet"/>
+                                                    <form:errors path="tanSoQuet" cssStyle="color: red"></form:errors>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <form:label class="col-sm-3 col-form-label" path="congNghe"><b>Công nghệ
+                                                    màn hình:</b></form:label>
+                                                <div class="col-sm-9">
+                                                    <form:input class="form-control" placeholder="" path="congNghe"/>
+                                                    <form:errors path="congNghe" cssStyle="color: red"></form:errors>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <form:label class="col-sm-3 col-form-label" path="moTa"><b>Mô
+                                                    tả:</b></form:label>
+                                                <div class="col-sm-12">
+                                                    <form:input class="form-control" placeholder="" path="moTa"/>
+                                                    <form:errors path="moTa" cssStyle="color: red"></form:errors>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div style="text-align: center">
+                                                <button type="submit" class="btn btn-primary mr-2"
+                                                        onclick="return myFunction1()">
+                                                    ADD
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </form:form>
+                <br>
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title" style="float: left">Danh sách Màn hình</h4>
+                            <%--            Tìm kiếm               --%>
+                            <form action="/man-hinh/search-0" method="post">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h6 style="float: right; margin: 14px;color: red">${thongBao}</h6></div>
+                                    <div class="col-4">
+                                        <div class="input-group" style="width: 100%; float: left">
+                                            <input type="text" class="form-control" placeholder="Bạn tìm gì..."
+                                                   aria-label="Bạn tìm gì..." name="search">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-sm btn-primary" type="submit"
+                                                        onclick="return myFunction5()">Search
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
-                        </tr>
-                        </tbody>
-                    </table>
+                            <%--           kết thúc tìm kiếm         --%>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Mã</th>
+                                        <th>Thông số</th>
+                                        <th>Loại cảm ứng</th>
+                                        <th>Tỉ lệ khung hình</th>
+                                        <th>Công nghệ màn hình</th>
+                                        <th>Độ phân giải màn hình</th>
+                                        <th>Tần số quét</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Ngày cập nhật</th>
+                                        <th>Tình trạng</th>
+                                        <th>Mô tả</th>
+                                        <th colspan="2">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach var="list" varStatus="i" items="${listManHinh}">
+                                        <tr>
+                                            <td>${list.ma}</td>
+                                            <td>${list.thongSo}</td>
+                                            <td>${list.loaiCamUng}</td>
+                                            <td>${list.tiLeKhungHinh}</td>
+                                            <td>${list.congNghe}</td>
+                                            <td>${list.doPhanGiai}</td>
+                                            <td>${list.tanSoQuet}</td>
+                                            <td>${list.ngayTao}</td>
+                                            <td>${list.ngayCapNhat}</td>
+                                            <td>
+                                                <c:if test="${list.tinhTrang==0}">Hoạt động</c:if>
+                                                <c:if test="${list.tinhTrang==1}">Ngừng hoạt động</c:if>
+                                            </td>
+                                            <td>${list.moTa}</td>
+                                            <td>
+                                                <a class="btn btn-warning btn-icon-text"
+                                                   href="/man-hinh/detail/${list.id}"
+                                                   onclick="return myFunction2()">
+                                                    <i class="ti-file btn-icon-prepend"></i>
+                                                    Update</a>
+                                                <a class="btn btn-danger btn-icon-text"
+                                                   href="/man-hinh/update-status/${list.id}"
+                                                   onclick="return myFunction3()"><i
+                                                        class="ti-reload btn-icon-prepend"></i>
+                                                    Status</a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <table class="table container">
-                        <thead>
-                        <tr>
-                            <th>STT</th>
-                            <th>Mã</th>
-                            <th>Thông số</th>
-                            <th>Loại cảm ứng</th>
-                            <th>Tỉ lệ khung hình</th>
-                            <th>Công nghệ màn hình</th>
-                            <th>Độ phân giải màn hình</th>
-                            <th>Tần số quét</th>
-                            <th>Ngày tạo</th>
-                            <th>Ngày cập nhật</th>
-                            <th>Tình trạng</th>
-                            <th>Mô tả</th>
-                            <th colspan="2">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="list" varStatus="i" items="${listManHinh}">
-                            <tr>
-                                <td>${i.index+1}</td>
-                                <td>${list.ma}</td>
-                                <td>${list.thongSo}</td>
-                                <td>${list.loaiCamUng}</td>
-                                <td>${list.tiLeKhungHinh}</td>
-                                <td>${list.congNghe}</td>
-                                <td>${list.doPhanGiai}</td>
-                                <td>${list.tanSoQuet}</td>
-                                <td>${list.ngayTao}</td>
-                                <td>${list.ngayCapNhat}</td>
-                                <td>
-                                    <c:if test="${list.tinhTrang==0}">Hoạt động</c:if>
-                                    <c:if test="${list.tinhTrang==1}">Ngừng hoạt động</c:if>
-                                </td>
-                                <td>${list.moTa}</td>
-                                <td>
-                                    <a class="btn btn-danger" href="/man-hinh/delete/${list.id}"
-                                       onclick="return myFunction3()"><img src="/img/remove.png"></a>
-                                    <a class="btn btn-light" href="/man-hinh/detail/${list.id}"
-                                       onclick="return myFunction2()"><img
-                                            src="/img/file.png"></a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                    <br>
-                    <c:if test="${total!= 0}">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center pagination-lg">
-                                <li class="page-item"><a class="page-link" href="/man-hinh/hien-thi?num=0">First</a>
-                                </li>
-
-                                <c:forEach begin="1" end="${total}" varStatus="status">
-                                    <li class="page-item">
-                                        <a href="${pageContext.request.contextPath}/man-hinh/hien-thi?num=${status.index -1}"
-                                           class="page-link">${status.index}</a>
+                <div align="center">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <c:if test="${total!= 0}">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center pagination-lg">
+                                    <li class="page-item"><a class="page-link" href="/man-hinh/hien-thi?num=0"><</a>
                                     </li>
-                                </c:forEach>
 
-                                <li class="page-item"><a class="page-link"
-                                                         href="/man-hinh/hien-thi?num=${total-1}">Last</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </c:if>
+                                    <c:forEach begin="1" end="${total}" varStatus="status">
+                                        <li class="page-item">
+                                            <a href="${pageContext.request.contextPath}/man-hinh/hien-thi?num=${status.index -1}"
+                                               class="page-link">${status.index}</a>
+                                        </li>
+                                    </c:forEach>
+
+                                    <li class="page-item"><a class="page-link" href="/man-hinh/hien-thi?num=${total-1}">></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </c:if>
+                    </div>
                 </div>
             </div>
-            <%--            <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">--%>
-            <%--                <div>--%>
-            <%--                    <form:form action="/man-hinh/add" method="post" modelAttribute="manHinh">--%>
-            <%--                        <div class="row">--%>
-            <%--                            <div class="col-6">--%>
-            <%--                                <div class="form-floating mb-3 mt-3">--%>
-            <%--                                    <form:input class="form-control" placeholder="" path="thongSo"/>--%>
-            <%--                                    <form:label class="form-label" path="thongSo">Thông số màn hình:</form:label>--%>
-            <%--                                    <form:errors path="thongSo" cssStyle="color: red"></form:errors>--%>
-            <%--                                </div>--%>
-            <%--                                <div class="form-floating mb-3 mt-3">--%>
-            <%--                                    <form:input class="form-control" placeholder="" path="loaiCamUng"/>--%>
-            <%--                                    <form:label class="form-label" path="loaiCamUng">Loại cảm ứng màn hình:</form:label>--%>
-            <%--                                    <form:errors path="loaiCamUng" cssStyle="color: red"></form:errors>--%>
-            <%--                                </div>--%>
-            <%--                                <div class="form-floating mb-3 mt-3">--%>
-            <%--                                    <form:input class="form-control" placeholder="" path="tiLeKhungHinh"/>--%>
-            <%--                                    <form:label class="form-label" path="tiLeKhungHinh">Tỉ lệ khung hình:</form:label>--%>
-            <%--                                    <form:errors path="tiLeKhungHinh" cssStyle="color: red"></form:errors>--%>
-            <%--                                </div>--%>
-            <%--                                <div class="form-floating mb-3 mt-3">--%>
-            <%--                                    <form:input class="form-control" placeholder="" path="congNghe"/>--%>
-            <%--                                    <form:label class="form-label" path="congNghe">Công nghệ màn hình:</form:label>--%>
-            <%--                                    <form:errors path="congNghe" cssStyle="color: red"></form:errors>--%>
-            <%--                                </div>--%>
-            <%--                            </div>--%>
-            <%--                            <div class="col-6">--%>
-            <%--                                <div class="form-floating mb-3 mt-3">--%>
-            <%--                                    <form:input class="form-control" placeholder="" path="doPhanGiai"/>--%>
-            <%--                                    <form:label class="form-label" path="doPhanGiai">Độ phân giải:</form:label>--%>
-            <%--                                    <form:errors path="doPhanGiai" cssStyle="color: red"></form:errors>--%>
-            <%--                                </div>--%>
-            <%--                                <div class="form-floating mb-3 mt-3">--%>
-            <%--                                    <form:input class="form-control" placeholder="" path="tanSoQuet"/>--%>
-            <%--                                    <form:label class="form-label" path="tanSoQuet">Tần số quét:</form:label>--%>
-            <%--                                    <form:errors path="tanSoQuet" cssStyle="color: red"></form:errors>--%>
-            <%--                                </div>--%>
-            <%--                                <div class="form-floating mb-3 mt-3">--%>
-            <%--                                    <form:input class="form-control" placeholder="" path="moTa"/>--%>
-            <%--                                    <form:label class="form-label" path="moTa">Mô tả:</form:label>--%>
-            <%--                                    <form:errors path="moTa" cssStyle="color: red"></form:errors>--%>
-            <%--                                </div>--%>
-            <%--                                <div class="form-check mb-3 mt-3">--%>
-            <%--                                    <form:label class="form-label" path="tinhTrang">Tình Trạng:</form:label>--%>
-            <%--                                    <form:radiobutton path="tinhTrang" value="0"/>Hoạt động--%>
-            <%--                                    <form:radiobutton path="tinhTrang" value="1"/> Ngừng hoạt động--%>
-
-            <%--                                </div>--%>
-            <%--                            </div>--%>
-            <%--                            <div class="row">--%>
-            <%--                                <div class="col-12" style="text-align: center">--%>
-            <%--                                    <button type="submit" class="btn btn-success"--%>
-            <%--                                            id="btt" onclick="return myFunction1()">Add--%>
-            <%--                                    </button>--%>
-            <%--                                </div>--%>
-            <%--                            </div>--%>
-            <%--                        </div>--%>
-            <%--                    </form:form>--%>
-            <%--                </div>--%>
-            <%--            </div>--%>
         </div>
     </div>
-    <%--    <table class="table container">--%>
-    <%--        <tbody>--%>
-    <%--        <tr>--%>
-    <%--            <form action="/man-hinh/search" method="post">--%>
-    <%--                <td colspan="2" style="text-align: center">Tìm kiếm: <input type="text" name="search">--%>
-    <%--                    <button type="submit">Tìm kiếm</button>--%>
-    <%--                </td>--%>
-    <%--            </form>--%>
-    <%--            <td colspan="2" style="text-align: center">--%>
-    <%--                <button class="btn btn-info">--%>
-    <%--                    <a style="color: white;text-decoration: none" href="/man-hinh/view-add"--%>
-    <%--                       onclick="return myFunction5()">Thêm mới</a>--%>
-    <%--                </button>--%>
-    <%--            </td>--%>
-    <%--        </tr>--%>
-    <%--        </tbody>--%>
-    <%--    </table>--%>
 </div>
 </body>
 <script>
@@ -246,10 +262,10 @@
     }
 
     function myFunction3() {
-        let text = "Bạn chắc chắn muốn xóa";
+        let text = "Bạn chắc chắn muốn thay đổi trạng thái";
         let kt = confirm(text);
         if (kt == true) {
-            confirm("Xóa thành công");
+            confirm("Thay đổi trạng thái thành công");
             return true
         } else {
             return false;
@@ -267,7 +283,7 @@
     }
 
     function myFunction5() {
-        let text = "Bạn chắc chắn muốn sang trang thêm thông tin";
+        let text = "Bạn chắc chắn muốn tìm kiếm thông tin";
         let kt = confirm(text);
         if (kt == true) {
             return true
@@ -278,6 +294,12 @@
 
 
 </script>
+<script src="../../vendors/js/vendor.bundle.base.js"></script>
+<script src="../../js/off-canvas.js"></script>
+<script src="../../js/hoverable-collapse.js"></script>
+<script src="../../js/template.js"></script>
+<script src="../../js/settings.js"></script>
+<script src="../../js/todolist.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 </html>

@@ -38,23 +38,23 @@
                     <form class="forms-sample">
                         <div class="form-group">
                             <form:label path="ten"><b>Tên:</b></form:label>
-                            <form:input path="ten" class="form-control"></form:input>
-                            <form:errors path="ten" cssStyle="color: red"></form:errors>
+                            <form:input path="ten" class="form-control"/>
+                            <form:errors path="ten" cssStyle="color: red"/>
                         </div>
                         <div class="form-group">
                             <form:label path="loaiChip"><b>Loại Chip:</b></form:label>
-                            <form:input path="loaiChip" class="form-control"></form:input>
-                            <form:errors path="loaiChip" cssStyle="color: red"></form:errors>
+                            <form:input path="loaiChip" class="form-control"/>
+                            <form:errors path="loaiChip" cssStyle="color: red"/>
                         </div>
                         <div class="form-group">
                             <form:label path="soNhan"><b>Số nhân:</b></form:label>
-                            <form:input path="soNhan" class="form-control" type="number"></form:input>
-                            <form:errors path="soNhan" cssStyle="color: red"></form:errors>
+                            <form:input path="soNhan" class="form-control" type="number"/>
+                            <form:errors path="soNhan" cssStyle="color: red"/>
                         </div>
                         <div class="form-group">
                             <form:label path="moTa"><b>Mô Tả:</b></form:label>
-                            <form:textarea path="moTa" class="form-control"></form:textarea>
-                            <form:errors path="moTa" cssStyle="color: red"></form:errors>
+                            <form:textarea path="moTa" class="form-control"/>
+                            <form:errors path="moTa" cssStyle="color: red"/>
                         </div>
                         <div style="text-align: center">
                             <button type="submit" class="btn btn-primary mr-2"
