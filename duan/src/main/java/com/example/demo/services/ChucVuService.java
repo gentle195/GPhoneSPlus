@@ -9,17 +9,24 @@ import java.util.UUID;
 
 public interface ChucVuService {
 
-    public Page<ChucVu> getAllByPages(Pageable pageable);
+
+    public Page<ChucVu> getAll(Pageable pageable);
+
+    public Page<ChucVu> getAll1(Pageable pageable);
 
     public List<ChucVu> findAll();
 
-    public ChucVu getById(UUID id);
+    public ChucVu findById(UUID id);
 
     public ChucVu add(ChucVu chucVu);
 
     public ChucVu update(UUID id, ChucVu chucVu);
 
     public Boolean delete(UUID id);
+
+    public void updateTT();
+
+    public List<ChucVu> search0(String ten);
+
+    public List<ChucVu> search1(String ten);
 }
-
-
