@@ -39,7 +39,7 @@ public class KhachHang {
     private Boolean gioiTinh;
 
 
-    @Pattern(regexp = "^.{8,}@gmail\\.com$", message = "Email phải có ít nhất 8 ký tự và phải có đuôi @gmail.com")
+    @Pattern(regexp = "^.{8,}@gmail\\.com$", message = "8 ký tự +@gmail.com")
 //    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "email")
     private String email;
@@ -111,7 +111,7 @@ public class KhachHang {
                      Date ngayTao,
                      Date ngayCapNhat,
                      int tinhTrang) {
-         this.ma=ma;
+        this.ma=ma;
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
         this.sdt = sdt;
