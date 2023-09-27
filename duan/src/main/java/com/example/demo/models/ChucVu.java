@@ -31,7 +31,7 @@ public class ChucVu {
     @Column(name = "id")
     private UUID id;
 
-//    @NotBlank(message = "Không để trống thông tin")
+    //    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "ma")
     private String ma;
 
@@ -53,4 +53,12 @@ public class ChucVu {
     @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")
     private String moTa;
+
+    public String trangThai() {
+        if (tinhTrang == 0) {
+            return "Còn dùng";
+        }
+        return "Không còn dùng";
+
+    }
 }

@@ -15,14 +15,18 @@ import java.util.UUID;
 @Service
 
 public class ChucVuServiceImpl implements ChucVuService {
-
     @Autowired
     ChucVuRepository chucVuRepository;
 
 
     @Override
-    public Page<ChucVu> getAllByPages(Pageable pageable) {
-        return chucVuRepository.findAll(pageable);
+    public Page<ChucVu> getAll(Pageable pageable) {
+        return chucVuRepository.getAll(pageable);
+    }
+
+    @Override
+    public Page<ChucVu> getAll1(Pageable pageable) {
+        return chucVuRepository.getAll1(pageable);
     }
 
     @Override
@@ -31,7 +35,7 @@ public class ChucVuServiceImpl implements ChucVuService {
     }
 
     @Override
-    public ChucVu getById(UUID id) {
+    public ChucVu findById(UUID id) {
         return chucVuRepository.findById(id).orElse(null);
     }
 
@@ -62,5 +66,21 @@ public class ChucVuServiceImpl implements ChucVuService {
             }
         }
         return false;
+    }
+
+    @Override
+    public void updateTT() {
+        chucVuRepository.updateTT();
+
+    }
+
+    @Override
+    public List<ChucVu> search0(String ten) {
+        return chucVuRepository.search0(ten);
+    }
+
+    @Override
+    public List<ChucVu> search1(String ten) {
+        return chucVuRepository.search1(ten);
     }
 }

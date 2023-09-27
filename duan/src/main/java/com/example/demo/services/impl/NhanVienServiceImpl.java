@@ -16,13 +16,19 @@ import java.util.UUID;
 
 public class NhanVienServiceImpl implements NhanVienService {
 
+
     @Autowired
     NhanVienRepository nhanVienRepository;
 
 
     @Override
-    public Page<NhanVien> getAllNhanVien(Pageable pageable) {
+    public Page<NhanVien> getAll(Pageable pageable) {
         return nhanVienRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<NhanVien> getAll1(Pageable pageable) {
+        return nhanVienRepository.getAll1(pageable);
     }
 
     @Override
@@ -31,7 +37,7 @@ public class NhanVienServiceImpl implements NhanVienService {
     }
 
     @Override
-    public NhanVien getById(UUID id) {
+    public NhanVien findById(UUID id) {
         return nhanVienRepository.findById(id).orElse(null);
     }
 
@@ -67,5 +73,21 @@ public class NhanVienServiceImpl implements NhanVienService {
     @Override
     public boolean existsByPhoneNumber(String sdt) {
         return existsByPhoneNumber(sdt);
+    }
+
+    @Override
+    public void updateTT() {
+        nhanVienRepository.updateTT();
+
+    }
+
+    @Override
+    public List<NhanVien> search0(String ten) {
+        return nhanVienRepository.search0(ten);
+    }
+
+    @Override
+    public List<NhanVien> search1(String ten) {
+        return nhanVienRepository.search1(ten);
     }
 }

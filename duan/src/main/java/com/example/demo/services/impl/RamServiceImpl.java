@@ -22,17 +22,17 @@ public class RamServiceImpl implements RamService {
 
     @Override
     public Page<Ram> getAll(Pageable pageable) {
-        return ramRepository.findAll(pageable);
+        return ramRepository.getAll(pageable);
+    }
+
+    @Override
+    public Page<Ram> getAll1(Pageable pageable) {
+        return ramRepository.getAll1(pageable);
     }
 
     @Override
     public List<Ram> findAll() {
         return ramRepository.findAll();
-    }
-
-    @Override
-    public List<Ram> getAll0() {
-        return ramRepository.getAll0();
     }
 
     @Override
@@ -67,5 +67,21 @@ public class RamServiceImpl implements RamService {
             }
         }
         return false;
+    }
+
+    @Override
+    public void updateTT() {
+        ramRepository.updateTT();
+
+    }
+
+    @Override
+    public List<Ram> search0(String ten) {
+        return ramRepository.search0(ten);
+    }
+
+    @Override
+    public List<Ram> search1(String ten) {
+        return ramRepository.search1(ten);
     }
 }
