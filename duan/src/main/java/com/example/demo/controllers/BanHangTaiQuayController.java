@@ -247,7 +247,7 @@ public class BanHangTaiQuayController {
 //            model.addAttribute("listHoaDon", list);
 //            return l;
 //        } else {}
-        List<IMEI> listIMEI = imeiService.search(search);
+        List<IMEI> listIMEI = imeiService.searchOn(search);
         System.out.println(listIMEI);
         model.addAttribute("hoaDon", hoaDonnn);
         model.addAttribute("listImei", listIMEI);
@@ -452,4 +452,5 @@ public class BanHangTaiQuayController {
         khachHangService.add(khachHang);
         return "redirect:/ban-hang/hien-thi";
     }
+
 }

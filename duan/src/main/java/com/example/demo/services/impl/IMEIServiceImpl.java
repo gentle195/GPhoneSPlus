@@ -31,8 +31,12 @@ public class IMEIServiceImpl implements IMEIService {
     }
 
     @Override
-    public List<IMEI> search(String imei) {
-        return imeiRepository.searchIMEI(imei);
+    public List<IMEI> searchOn(String imei) {
+        return imeiRepository.searchIMEIOn(imei);
+    }
+    @Override
+    public List<IMEI> searchOff(String imei) {
+        return imeiRepository.searchIMEIOff(imei);
     }
 
     @Override
@@ -72,7 +76,8 @@ public class IMEIServiceImpl implements IMEIService {
         if (id != null) {
             IMEI imei = imeiRepository.findById(id).orElse(null);
             if (imei != null) {
-                imeiRepository.delete(imei);
+                imei.setTinhTrang(1);
+                imeiRepository.save(imei);
                 return true;
             }
         }
@@ -87,5 +92,28 @@ public class IMEIServiceImpl implements IMEIService {
     @Override
     public void updatImei1(Date date, UUID id) {
         imeiRepository.updateImei1(date,id);
+    }
+
+    @Override
+    public Page<IMEI> getImeiOn(Pageable pageable) {
+        return imeiRepository.getImeiOn(pageable);
+    }
+
+    @Override
+    public Page<IMEI> getImeiOff(Pageable pageable) {
+        return imeiRepository.getImeiOff(pageable);
+    }
+
+    @Override
+    public List<IMEI> getImeiOff() {
+        return imeiRepository.getImeiOff();
+    }
+
+    @Override
+    public void khoiPhuc(UUID uuid) {
+        IMEI imei = imeiRepository.findById(uuid).orElse(null);
+        imei.setTinhTrang(0);
+
+
     }
 }

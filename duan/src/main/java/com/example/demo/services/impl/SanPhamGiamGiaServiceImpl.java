@@ -31,6 +31,31 @@ public class SanPhamGiamGiaServiceImpl implements SanPhamGiamGiaService {
     }
 
     @Override
+    public List<SanPhamGiamGia> searchSPGGOn(String spgg) {
+        return sanPhamGiamGiaRepository.searchSPGGOn(spgg);
+    }
+
+    @Override
+    public List<SanPhamGiamGia> searchSPGGOff(String spgg) {
+        return sanPhamGiamGiaRepository.searchSPGGOff(spgg);
+    }
+
+    @Override
+    public Page<SanPhamGiamGia> getSPGGOn(Pageable pageable) {
+        return sanPhamGiamGiaRepository.getSPGGOn(pageable);
+    }
+
+    @Override
+    public Page<SanPhamGiamGia> getSPGGOff(Pageable pageable) {
+        return sanPhamGiamGiaRepository.getSPGGOff(pageable);
+    }
+
+    @Override
+    public List<SanPhamGiamGia> getSPGGOff() {
+        return sanPhamGiamGiaRepository.getSPGGOff();
+    }
+
+    @Override
     public SanPhamGiamGia findById(UUID id) {
         return sanPhamGiamGiaRepository.findById(id).orElse(null);
     }
@@ -57,7 +82,8 @@ public class SanPhamGiamGiaServiceImpl implements SanPhamGiamGiaService {
         if (id != null) {
             SanPhamGiamGia sanPhamGiamGia = sanPhamGiamGiaRepository.findById(id).orElse(null);
             if (sanPhamGiamGia != null) {
-                sanPhamGiamGiaRepository.delete(sanPhamGiamGia);
+                sanPhamGiamGia.setTinhTrang(1);
+                sanPhamGiamGiaRepository.save(sanPhamGiamGia);
                 return true;
             }
         }
