@@ -10,32 +10,12 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hang San Pham</title>
-    <link rel="icon" href="/images/favicon.ico" type="image/ico"/>
-
-    <title>Gentelella Alela!</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
-    <link rel="icon" href="/images/favicon.ico" type="image/ico"/>
-    <!-- Bootstrap -->
-    <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
-    <!-- bootstrap-progressbar -->
-    <link href="/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    <!-- JQVMap -->
-    <link href="/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-    <!-- bootstrap-daterangepicker -->
-    <link href="/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
-    <!-- Custom Theme Style -->
-    <link href="/build/css/custom.min.css" rel="stylesheet">
+    <title>Hãng Điện Thoại</title>
+    <link rel="stylesheet" href="../../vendors/feather/feather.css">
+    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+    <link rel="shortcut icon" href="../../images/favicon.png"/>
 </head>
 <body>
 <form:form action="/hang-dien-thoai/add" method="post" modelAttribute="dulieuxem">
@@ -263,45 +243,12 @@
     }
 </script>
 
-<script src="/vendors/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap -->
-<script src="/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<!-- FastClick -->
-<script src="/vendors/fastclick/lib/fastclick.js"></script>
-<!-- NProgress -->
-<script src="/vendors/nprogress/nprogress.js"></script>
-<!-- Chart.js -->
-<script src="/vendors/Chart.js/dist/Chart.min.js"></script>
-<!-- gauge.js -->
-<script src="/vendors/gauge.js/dist/gauge.min.js"></script>
-<!-- bootstrap-progressbar -->
-<script src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-<!-- iCheck -->
-<script src="/vendors/iCheck/icheck.min.js"></script>
-<!-- Skycons -->
-<script src="/vendors/skycons/skycons.js"></script>
-<!-- Flot -->
-<script src="/vendors/Flot/jquery.flot.js"></script>
-<script src="/vendors/Flot/jquery.flot.pie.js"></script>
-<script src="/vendors/Flot/jquery.flot.time.js"></script>
-<script src="/vendors/Flot/jquery.flot.stack.js"></script>
-<script src="/vendors/Flot/jquery.flot.resize.js"></script>
-<!-- Flot plugins -->
-<script src="/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-<script src="/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-<script src="/vendors/flot.curvedlines/curvedLines.js"></script>
-<!-- DateJS -->
-<script src="/vendors/DateJS/build/date.js"></script>
-<!-- JQVMap -->
-<script src="/vendors/jqvmap/dist/jquery.vmap.js"></script>
-<script src="/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-<script src="/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-<!-- bootstrap-daterangepicker -->
-<script src="/vendors/moment/min/moment.min.js"></script>
-<script src="/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-<!-- Custom Theme Scripts -->
-<script src="/build/js/custom.min.js"></script>
+<script src="../../vendors/js/vendor.bundle.base.js"></script>
+<script src="../../js/off-canvas.js"></script>
+<script src="../../js/hoverable-collapse.js"></script>
+<script src="../../js/template.js"></script>
+<script src="../../js/settings.js"></script>
+<script src="../../js/todolist.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         $('div[id^="nhapImei_"]').on('show.bs.modal', async function (e) {

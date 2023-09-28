@@ -10,6 +10,8 @@ import java.util.UUID;
 public interface AnhService {
     public Page<Anh> getAll(Pageable pageable);
 
+    public Page<Anh> getAll1(Pageable pageable);
+
     public List<Anh> findAll();
 
     public Anh findById(UUID id);
@@ -18,7 +20,13 @@ public interface AnhService {
 
     public Anh update(UUID id, Anh anh);
 
+    public void updateTT();
+
     public Boolean delete(UUID id);
+
+    public List<Anh> search0(String ten);
+
+    public List<Anh> search1(String ten);
 }
 
 
