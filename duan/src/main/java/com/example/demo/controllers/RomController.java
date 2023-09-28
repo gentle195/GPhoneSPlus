@@ -32,7 +32,7 @@ public class RomController {
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<Rom> list = romService.getAll0(pageable);
 
-        model.addAttribute("contentPage","rom/hien-thi.jsp");
+        model.addAttribute("contentPage","rom/rom.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
 
@@ -40,7 +40,7 @@ public class RomController {
     }
     @GetMapping("/rom/hien-thi-tung-xoa")
     public String hienthixoa(@ModelAttribute("dulieuxem") Rom dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
-                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+                             @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<Rom> list = romService.getall1(pageable);
@@ -52,20 +52,20 @@ public class RomController {
 
     @GetMapping("/rom/detail/{id}")
     public String viewupdate( @PathVariable("id") UUID id,@ModelAttribute("dulieuxem") Rom dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
-                             @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+                              @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         Rom hsp = romService.findById(id);
         model.addAttribute("dulieuxem", hsp);
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<Rom> list = romService.getAll0(pageable);
-        model.addAttribute("contentPage","rom/update.jsp");
+        model.addAttribute("contentPage","rom/rom-update.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
         return "layout";
     }
     @GetMapping("/rom/form-add")
     public String formadd( @ModelAttribute("dulieuxem") Rom dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
-                              @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
 
@@ -80,7 +80,7 @@ public class RomController {
     public String add(Model model, @ModelAttribute("dulieuxem") @Valid Rom dulieuxem, BindingResult bindingResult,
                       @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("content", "Rom/hien-thi.jsp");
+            model.addAttribute("content", "Rom/rom.jsp");
             Sort sort = Sort.by("ngayTao").ascending();
             Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
             Page<Rom> list = romService.getAll0(pageable);
@@ -106,13 +106,13 @@ public class RomController {
 
     @PostMapping("rom/update/{id}")
     public String update( @ModelAttribute("dulieuxem") @Valid Rom dulieuxem, BindingResult bindingResult, @PathVariable("id") UUID id, Model model, @RequestParam("num") Optional<Integer> num,
-                         @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("content", "rom/update.jsp");
             Sort sort = Sort.by("ngayTao").ascending();
             Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
             Page<Rom> list = romService.getAll0(pageable);
-            model.addAttribute("contentPage","Rom/hien-thi.jsp");
+            model.addAttribute("contentPage","rom/rom-update.jsp");
             model.addAttribute("hsp", list.getContent());
             model.addAttribute("total", list.getTotalPages());
             return "Rom/update";
@@ -130,7 +130,7 @@ public class RomController {
         return "redirect:/rom/hien-thi";
     }
 
-//    @GetMapping("rom/delete/{id}")
+    //    @GetMapping("rom/delete/{id}")
 //    public String delete(Model model, @ModelAttribute("dulieuxem") Rom dulieuxem, @PathVariable("id") UUID id, @RequestParam("num") Optional<Integer> num,
 //                         @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
 //        romService.delete(id);
@@ -144,11 +144,23 @@ public class RomController {
 //    }
     @PostMapping("/rom/search")
     public String search( @RequestParam("search") String search,@ModelAttribute("dulieuxem") Rom dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
-                         @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         List<Rom> list = romService.search(search);
 
 
-        model.addAttribute("contentPage","rom/hien-thi.jsp");
+        model.addAttribute("contentPage","rom/rom.jsp");
+        model.addAttribute("hsp", list);
+//        model.addAttribute("total", list);
+        return "layout";
+    }
+
+    @PostMapping("/rom/search2")
+    public String search2( @RequestParam("search") String search,@ModelAttribute("dulieuxem") Rom dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
+                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+        List<Rom> list = romService.search2(search);
+
+
+        model.addAttribute("contentPage","rom/rom-tung-xoa.jsp");
         model.addAttribute("hsp", list);
 //        model.addAttribute("total", list);
         return "layout";
@@ -157,13 +169,13 @@ public class RomController {
     @GetMapping("rom/delete/{id}")
     public String delete(Model model, @ModelAttribute("dulieuxem") Rom dulieuxem, @PathVariable("id") UUID id, @RequestParam("num") Optional<Integer> num,
                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
-       Rom rom=romService.findById(id);
+        Rom rom=romService.findById(id);
 
-rom.setTinhTrang(1);
+        rom.setTinhTrang(1);
         romService.add(rom);
         Pageable pageable = PageRequest.of(num.orElse(0), size);
         Page<Rom> list = romService.getAll0(pageable);
-        model.addAttribute("contentPage","rom/hien-thi.jsp");
+        model.addAttribute("contentPage","rom/rom.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
         return "layout";

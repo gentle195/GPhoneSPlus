@@ -69,6 +69,10 @@ public class HangSanPhamServiceImpl implements HangSanPhamService {
     public List<HangSanPham>search(String dungluong){
         return hangSanPhamRepository.search(dungluong);
     }
+    @Override
+    public List<HangSanPham>search2(String dungluong){
+        return hangSanPhamRepository.search2(dungluong);
+    }
 
     @Override
     public Page<HangSanPham> getAll0(Pageable pageable) {

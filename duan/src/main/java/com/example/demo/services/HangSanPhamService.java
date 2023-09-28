@@ -1,7 +1,6 @@
 package com.example.demo.services;
 
 import com.example.demo.models.HangSanPham;
-import com.example.demo.models.Rom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -22,6 +21,9 @@ public interface HangSanPhamService {
     public Boolean delete(UUID id);
 
     List<HangSanPham>search(String dungluong);
+
+    List<HangSanPham>search2(String dungluong);
+
 
     public Page<HangSanPham> getAll0(Pageable pageable);
 

@@ -54,7 +54,7 @@ public class HangDienThoaiController {
 
     @GetMapping("/hang-dien-thoai/detail/{id}")
     public String viewupdate( @PathVariable("id") UUID id,@ModelAttribute("dulieuxem") HangSanPham dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
-                             @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+                              @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         HangSanPham hsp = hangSanPhamService.findById(id);
         model.addAttribute("dulieuxem", hsp);
         Sort sort = Sort.by("ngayTao").ascending();
@@ -129,6 +129,18 @@ public class HangDienThoaiController {
     public String search(@RequestParam("search") String search, @ModelAttribute("dulieuxem") HangSanPham dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         List<HangSanPham> list = hangSanPhamService.search(search);
+
+
+        model.addAttribute("contentPage","hang-dien-thoai/hien-thi.jsp");
+        model.addAttribute("hsp", list);
+//        model.addAttribute("total", list);
+        return "layout";
+    }
+
+    @PostMapping("/hang-dien-thoai/search2")
+    public String search2(@RequestParam("search") String search, @ModelAttribute("dulieuxem") HangSanPham dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
+                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+        List<HangSanPham> list = hangSanPhamService.search2(search);
 
 
         model.addAttribute("contentPage","hang-dien-thoai/hien-thi.jsp");

@@ -1,6 +1,5 @@
 package com.example.demo.repositories;
 
-import com.example.demo.models.KhachHang;
 import com.example.demo.models.Rom;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
@@ -15,8 +14,11 @@ import java.util.UUID;
 
 @Repository
 public interface RomRepository extends JpaRepository<Rom, UUID> {
-    @Query("SELECT r FROM Rom r WHERE r.dungLuong LIKE %:dungluong%")
+    @Query("SELECT r FROM Rom r WHERE r.dungLuong LIKE %:dungluong% and r.tinhTrang=0")
     List<Rom> search(String dungluong);
+
+    @Query("SELECT r FROM Rom r WHERE r.dungLuong LIKE %:dungluong% and r.tinhTrang=1")
+    List<Rom> search2(String dungluong);
 
     @Query("select r from Rom r  where r.tinhTrang=0")
     Page<Rom> getall0(Pageable pageable);
@@ -28,5 +30,4 @@ public interface RomRepository extends JpaRepository<Rom, UUID> {
     @Modifying
     @Query(value ="update rom set tinh_trang=0",nativeQuery = true)
     void update0();
-
 }

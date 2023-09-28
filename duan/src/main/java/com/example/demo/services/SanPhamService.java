@@ -19,11 +19,19 @@ public interface SanPhamService {
 
     public SanPham update(UUID id, SanPham sanPham);
 
-
+    public SanPham update(SanPham sanPham);
 
     public Boolean delete(UUID id);
 
     List<SanPham>search(String dungluong);
+
+    List<SanPham>search2(String dungluong);
+
+    public Page<SanPham> getAll0(Pageable pageable);
+
+    Page<SanPham> getall1(Pageable pageable);
+    void update0();
+    List<SanPham> loc(UUID idHang, UUID idMan, UUID idCamera);
 }
 
 

@@ -1,6 +1,5 @@
 package com.example.demo.services.impl;
 
-import com.example.demo.models.Rom;
 import com.example.demo.models.SanPham;
 import com.example.demo.repositories.SanPhamRepository;
 import com.example.demo.services.SanPhamService;
@@ -53,7 +52,10 @@ public class SanPhamServiceImpl implements SanPhamService {
         return null;
     }
 
-
+    @Override
+    public SanPham update(SanPham sanPham) {
+        return sanPhamRepository.save(sanPham);
+    }
 
     @Override
     public Boolean delete(UUID id) {
@@ -66,8 +68,34 @@ public class SanPhamServiceImpl implements SanPhamService {
         }
         return false;
     }
+
     @Override
-    public List<SanPham>search(String dungluong){
+    public List<SanPham> search(String dungluong) {
         return sanPhamRepository.search(dungluong);
+    }
+
+    @Override
+    public List<SanPham> search2(String dungluong) {
+        return sanPhamRepository.search2(dungluong);
+    }
+
+    @Override
+    public Page<SanPham> getAll0(Pageable pageable) {
+        return sanPhamRepository.getall0(pageable);
+    }
+
+    @Override
+    public Page<SanPham> getall1(Pageable pageable) {
+        return sanPhamRepository.getall1(pageable);
+    }
+
+    @Override
+    public void update0() {
+        sanPhamRepository.update0();
+    }
+
+    @Override
+    public List<SanPham> loc(UUID idHang, UUID idMan, UUID idCamera) {
+        return sanPhamRepository.loc(idHang,idMan,idCamera);
     }
 }

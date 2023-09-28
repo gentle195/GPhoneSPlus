@@ -1,7 +1,6 @@
 package com.example.demo.repositories;
 
 import com.example.demo.models.HangSanPham;
-import com.example.demo.models.Rom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,8 +12,11 @@ import java.util.UUID;
 
 @Repository
 public interface HangSanPhamRepository extends JpaRepository<HangSanPham, UUID> {
-    @Query("SELECT r FROM HangSanPham r WHERE r.ten LIKE %:dungluong%")
+    @Query("SELECT r FROM HangSanPham r WHERE r.ten LIKE %:dungluong% and r.tinhTrang=0")
     List<HangSanPham> search(String dungluong);
+
+    @Query("SELECT r FROM HangSanPham r WHERE r.ten LIKE %:dungluong% and r.tinhTrang=1")
+    List<HangSanPham> search2(String dungluong);
 
     @Query("select r from HangSanPham r  where r.tinhTrang=0")
     Page<HangSanPham> getall0(Pageable pageable);

@@ -19,7 +19,7 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/hang-dien-thoai/hien-thi" role="tab">Thông tin Hãng </a>
+            <a class="nav-link" href="/rom/hien-thi" role="tab">Thông tin Rom </a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
@@ -27,11 +27,11 @@
         </li>
     </ul>
 </div>
-<form:form action="/hang-dien-thoai/update/${dulieuxem.id}" method="post" modelAttribute="dulieuxem">
+<form:form action="/rom/update/${dulieuxem.id}" method="post" modelAttribute="dulieuxem">
     <%--    <div class="col-md-6 grid-margin stretch-card" >--%>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Update Hãng</h4>
+            <h4 class="card-title">Update Rom</h4>
             <form class="forms-sample">
                 <div class="form-group" style="display: none">
                     <form:label path="ma"><b>Mã:</b></form:label>
@@ -39,16 +39,12 @@
                     <form:errors path="ma" cssStyle="color: red"></form:errors>
                 </div>
                 <div class="form-group">
-                    <form:label path="ten"><b>Tên:</b></form:label>
-                    <form:input path="ten" class="form-control"></form:input>
-                    <form:errors path="ten"></form:errors>
+                    <form:label path="dungLuong"><b>Dung lượng:</b></form:label>
+                    <form:input type="text" class="form-control" id="dungLuong" path="dungLuong" required="true" />
+                    <form:errors path="dungLuong" cssStyle="color: red"></form:errors>
                 </div>
 
-                <div class="form-group">
-                    <form:label path="xuatSu"><b>Xuất sứ:</b></form:label>
-                    <form:input path="xuatSu" class="form-control"></form:input>
-                    <form:errors path="xuatSu"></form:errors>
-                </div>
+
 
                 <div class="form-group">
                     <form:label path="moTa"><b>Mô Tả:</b></form:label>
