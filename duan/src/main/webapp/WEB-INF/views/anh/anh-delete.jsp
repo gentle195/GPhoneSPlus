@@ -23,7 +23,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               aria-controls="description" aria-selected="true">Chip đã xoá</a>
+               aria-controls="description" aria-selected="true">Ảnh đã xoá</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/anh/view-add" role="tab" onclick="return myFunction1()">Thêm thông tin ảnh </a>
@@ -48,14 +48,16 @@
                     <%--            Tìm kiếm               --%>
                     <form action="/anh/search-1" method="post">
                         <div class="row">
-                            <div class="col-8" >
+                            <div class="col-8">
                                 <h6 style="float: right; margin: 14px;color: red">${thongBao}</h6></div>
                             <div class="col-4">
                                 <div class="input-group" style="width: 100%; float: left">
                                     <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                            aria-label="Bạn tìm gì..." name="search">
                                     <div class="input-group-append">
-                                        <button class="btn btn-sm btn-primary" type="submit" onclick="return myFunction5()">Search</button>
+                                        <button class="btn btn-sm btn-primary" type="submit"
+                                                onclick="return myFunction5()">Search
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -83,9 +85,21 @@
                                 <tr>
                                     <td>${list.ma}</td>
                                     <td>${list.ten}</td>
-                                    <td>${list.anh1}</td>
-                                    <td>${list.anh2}</td>
-                                    <td>${list.anh3}</td>
+                                    <td align="center">
+                                        <img src="../../../uploads/${list.anh1}" width="40" height="40"
+                                             style="border-radius:50% 50% 50% 50%">
+
+                                    </td>
+                                    <td align="center">
+                                        <img src="../../../uploads/${list.anh2}" width="40" height="40"
+                                             style="border-radius:50% 50% 50% 50%">
+
+                                    </td>
+                                    <td align="center">
+                                        <img src="../../../uploads/${list.anh3}" width="40" height="40"
+                                             style="border-radius:50% 50% 50% 50%">
+
+                                    </td>
                                     <td>${list.ngayTao}</td>
                                     <td>${list.ngayCapNhat}</td>
                                     <td>

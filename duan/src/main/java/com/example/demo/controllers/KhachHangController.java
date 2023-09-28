@@ -513,7 +513,7 @@ public class KhachHangController {
 
         String mhd="";
         Integer sl = khachHangService.findAll().size() + 1;
-        if(sl<10){
+        if(sl<9){
             mhd = "MKH0" + sl;
         }else {
             mhd = "MKH" + sl;
