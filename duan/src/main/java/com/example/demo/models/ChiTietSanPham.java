@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -40,10 +41,12 @@ public class ChiTietSanPham {
     @Column(name = "url_anh")
     private String urlAnh;
 
+    @DecimalMin(value = "0.01", message = "Giá nhập phải là số và lớn hơn 0")
     @NotNull(message = "Không để trống thông tin")
     @Column(name = "gia_nhap")
     private BigDecimal giaNhap;
 
+    @DecimalMin(value = "0.01", message = "Giá bán phải là số và lớn hơn 0")
     @NotNull(message = "Không để trống thông tin")
     @Column(name = "gia_ban")
     private BigDecimal giaBan;
@@ -58,10 +61,12 @@ public class ChiTietSanPham {
     @Column(name = "tinh_trang")
     private int tinhTrang;
 
+    @DecimalMin(value = "1", message = "Năm bảo hành phải lớn hơn 0")
     @NotNull(message = "Không để trống thông tin")
     @Column(name = "nam_bao_hanh")
     private int namBaoHanh;
 
+    @DecimalMin(value = "1", message = "Số lượng tồn phải lớn hơn 0")
     @NotNull(message = "Không để trống thông tin")
     @Column(name = "so_luong_ton")
     private int soLuong;
@@ -90,6 +95,7 @@ public class ChiTietSanPham {
     @JoinColumn(name = "id_rom")
     private Rom rom;
 
+//    @NotNull(message = "Khong de trong thong tin")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pin")
     private Pin pin;

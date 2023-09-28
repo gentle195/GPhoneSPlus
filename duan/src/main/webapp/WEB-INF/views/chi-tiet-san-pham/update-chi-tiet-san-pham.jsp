@@ -46,25 +46,28 @@
                             <div class="col-md-12 mx-auto">
                                 <div class="form-group">
 
-                                    <div id="image-container-1" class="image-container"
-                                         style="max-width: 300px; max-height: 300px; overflow: hidden;">
-                                        <img id="preview-image-1" class="preview-image"
-                                             src="/uploads/${ctsp.urlAnh}"
-                                             alt="Ảnh cũ" style="max-width: 100%; max-height: 100%;">
+                                    <div style="display: none">
+                                        <input style="" type="text"  name="checkanh" value="cu" id="cucheck" >
+                                        <br>
                                     </div>
 
-                                    <!-- Thẻ div hiển thị ảnh từ nguồn thứ hai (input file) -->
-                                    <div id="image-container-2" class="image-container"
-                                         style="max-width: 300px; max-height: 300px; overflow: hidden;">
-                                        <img id="preview-image-2" class="preview-image" src=""
-                                             alt="Ảnh xem trước" style="max-width: 100%; max-height: 100%;">
-                                    </div>
 
-                                    <!-- Ô input file -->
-                                    <input type="file" id="image-input" class="form-control" name="images"
-                                           accept="image/*">
+                                    <div align="center" >
+                                        <br>
+                                        <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;" for="anhmoi" >
+                                            <img id="preview-image-2" class="preview-image" src="../../../uploads/${ctsp.urlAnh}" alt=""
+                                                 width="100%" height="100%"
+                                                 style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
 
-                                </div>
+                                            <br><br>
+                                            ẢNH
+                                        </label>
+                                        <br>
+
+
+                                        <div style="display: none">
+                                            <input type="file"  name="images"  accept="image/jpeg, image/png" id="anhmoi"  >
+                                        </div>
 
                             </div>
 
@@ -632,28 +635,23 @@
 </div>
 </body>
 <script>
-    const imageInput = document.getElementById('image-input');
-    const previewImage1 = document.getElementById('preview-image-1');
+    const imageInput = document.getElementById('anhmoi');
+
     const previewImage2 = document.getElementById('preview-image-2');
 
     imageInput.addEventListener('change', function () {
+
         const file = imageInput.files[0];
         if (file) {
             const reader = new FileReader();
-
             reader.onload = function (e) {
                 previewImage2.src = e.target.result;
-                // Ẩn ảnh từ nguồn thứ nhất
-                previewImage1.style.display = 'none';
             };
-
             reader.readAsDataURL(file);
         } else {
-            // Xóa ảnh xem trước nếu không có tệp được chọn
             previewImage2.src = '';
-            // Hiển thị lại ảnh từ nguồn thứ nhất
-            previewImage1.style.display = 'block';
         }
+        document.getElementById('cucheck').value='moi';
     });
 </script>
 <script src="../../vendors/js/vendor.bundle.base.js"></script>

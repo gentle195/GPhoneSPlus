@@ -155,7 +155,7 @@
                             <tbody>
                             <i class="mdi mdi-border-color"></i>
                             <c:forEach items="${listCTSP}" var="ctsp" varStatus="index">
-                                <c:if test="${ctsp.tinhTrang==1}">
+
 
                                     <tr>
                                         <td>${ctsp.sanPham.ten}</td>
@@ -173,7 +173,7 @@
                                         <td>${ctsp.giaBan} VND</td>
                                         <td>${ctsp.ngayTao}</td>
                                         <td>${ctsp.ngayCapNhat}</td>
-                                        <td>${ctsp.tinhTrang==1?"Còn kinh doanh":"Ngừng kinh doanh"}</td>
+                                        <td>${ctsp.tinhTrang==0?"Còn kinh doanh":"Ngừng kinh doanh"}</td>
                                         <td>${ctsp.namBaoHanh}</td>
                                         <td>${ctsp.soLuong}</td>
                                         <td>${ctsp.moTa}</td>
@@ -194,7 +194,7 @@
                                                 Status</a>
                                         </td>
                                     </tr>
-                                </c:if>
+
                             </c:forEach>
 
                             </tbody>

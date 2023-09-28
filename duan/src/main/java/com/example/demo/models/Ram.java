@@ -48,7 +48,7 @@ public class Ram {
     @Column(name = "tinh_trang")
     private int tinhTrang;
 
-    @NotBlank(message = "Không để trống thông tin")
+//    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")
     private String moTa;
 

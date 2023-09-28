@@ -13,6 +13,7 @@ public interface ChiTietSanPhamService {
     public List<ChiTietSanPham> findAll();
 
     public List<ChiTietSanPham> search(String ten);
+    public List<ChiTietSanPham> search1(String ten);
 
     public List<ChiTietSanPham> loc(UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam);
 
@@ -29,7 +30,10 @@ public interface ChiTietSanPhamService {
     public ChiTietSanPham update1(ChiTietSanPham chiTietSanPham);
 
     public Boolean delete(UUID id);
-    public List<ChiTietSanPham> findAllTT1();
+    Page<ChiTietSanPham> finAllTTOn(Pageable pageable);
+    Page<ChiTietSanPham> finAllTTOff(Pageable pageable);
+    List<ChiTietSanPham> finAllTTOff();
+
 }
 
 

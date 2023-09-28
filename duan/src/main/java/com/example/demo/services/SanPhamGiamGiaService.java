@@ -11,6 +11,11 @@ public interface SanPhamGiamGiaService {
     public Page<SanPhamGiamGia> getAll(Pageable pageable);
 
     public List<SanPhamGiamGia> findAll();
+    public List<SanPhamGiamGia> searchSPGGOn(String spgg);
+    public List<SanPhamGiamGia> searchSPGGOff(String spgg);
+    public Page<SanPhamGiamGia> getSPGGOn(Pageable pageable);
+    public Page<SanPhamGiamGia> getSPGGOff(Pageable pageable);
+    public List<SanPhamGiamGia> getSPGGOff();
 
     public SanPhamGiamGia findById(UUID id);
 

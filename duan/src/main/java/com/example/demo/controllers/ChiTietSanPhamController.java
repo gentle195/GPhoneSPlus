@@ -78,7 +78,7 @@ public class ChiTietSanPhamController {
                          ) {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), 5);
-        Page<ChiTietSanPham> chiTietSanPhamPage = chiTietSanPhamService.getAll(pageable);
+        Page<ChiTietSanPham> chiTietSanPhamPage = chiTietSanPhamService.finAllTTOn(pageable);
         model.addAttribute("total", chiTietSanPhamPage.getTotalPages());
         model.addAttribute("list", chiTietSanPhamPage.getContent());
         model.addAttribute("size", chiTietSanPhamPage.getSize());
@@ -103,7 +103,8 @@ public class ChiTietSanPhamController {
     ) {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), 5);
-        Page<ChiTietSanPham> chiTietSanPhamPage = chiTietSanPhamService.getAll(pageable);
+//        Page<ChiTietSanPham> chiTietSanPhamPage = chiTietSanPhamService.getAll(pageable);
+        Page<ChiTietSanPham> chiTietSanPhamPage= chiTietSanPhamService.finAllTTOff(pageable);
         model.addAttribute("total", chiTietSanPhamPage.getTotalPages());
         model.addAttribute("list", chiTietSanPhamPage.getContent());
         model.addAttribute("size", chiTietSanPhamPage.getSize());
@@ -179,7 +180,7 @@ public class ChiTietSanPhamController {
         chiTietSanPham.setUrlAnh(fileName);
         LocalDate localDate = LocalDate.now();
         chiTietSanPham.setNgayTao(Date.valueOf(localDate));
-        chiTietSanPham.setTinhTrang(1);
+        chiTietSanPham.setTinhTrang(0);
         chiTietSanPhamService.add(chiTietSanPham);
         return "redirect:/chi-tiet-san-pham/hien-thi";
 
@@ -204,7 +205,7 @@ public class ChiTietSanPhamController {
         model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
         ChiTietSanPham chiTietSanPham1 = chiTietSanPhamService.findById(id);
         ngay = Date.valueOf(chiTietSanPham1.getNgayTao().toString());
-        System.out.println(chiTietSanPham1.getNgayTao());
+
         model.addAttribute("chitietsanphamupdate", chiTietSanPham1);
         model.addAttribute("ctsp", chiTietSanPham1);
         model.addAttribute("contentPage", "chi-tiet-san-pham/update-chi-tiet-san-pham.jsp");
@@ -257,7 +258,7 @@ public class ChiTietSanPhamController {
         LocalDate localDate = LocalDate.now();
         chiTietSanPham.setNgayCapNhat(Date.valueOf(localDate));
         chiTietSanPham.setNgayTao(ngay);
-        chiTietSanPham.setTinhTrang(1);
+        chiTietSanPham.setTinhTrang(0);
 
 
         chiTietSanPhamService.update(id, chiTietSanPham);
@@ -271,11 +272,11 @@ public class ChiTietSanPhamController {
     public String remove(@PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
                          @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, Model model) {
        ChiTietSanPham chiTietSanPham= chiTietSanPhamService.findById(id);
-       chiTietSanPham.setTinhTrang(0);
+       chiTietSanPham.setTinhTrang(1);
        chiTietSanPhamService.add(chiTietSanPham);
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<ChiTietSanPham> page = chiTietSanPhamService.getAll(pageable);
+        Page<ChiTietSanPham> page = chiTietSanPhamService.finAllTTOn(pageable);
         model.addAttribute("total", page.getTotalPages());
         model.addAttribute("list", page.getContent());
         model.addAttribute("size", page.getSize());
@@ -297,11 +298,11 @@ public class ChiTietSanPhamController {
     public String khoiPhuc(@PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
                          @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, Model model) {
         ChiTietSanPham chiTietSanPham= chiTietSanPhamService.findById(id);
-        chiTietSanPham.setTinhTrang(1);
+        chiTietSanPham.setTinhTrang(0);
         chiTietSanPhamService.add(chiTietSanPham);
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<ChiTietSanPham> page = chiTietSanPhamService.getAll(pageable);
+        Page<ChiTietSanPham> page = chiTietSanPhamService.finAllTTOff(pageable);
         model.addAttribute("total", page.getTotalPages());
         model.addAttribute("list", page.getContent());
         model.addAttribute("size", page.getSize());
@@ -323,9 +324,9 @@ public class ChiTietSanPhamController {
     public String khoiPhucAll( @RequestParam("pageNum") Optional<Integer> pageNum,
                            @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, Model model) {
 
-        List<ChiTietSanPham> chiTietSanPhams = chiTietSanPhamService.findAllTT1();
+        List<ChiTietSanPham> chiTietSanPhams = chiTietSanPhamService.finAllTTOff();
         for (ChiTietSanPham ctsp: chiTietSanPhams){
-            ctsp.setTinhTrang(1);
+            ctsp.setTinhTrang(0);
             chiTietSanPhamService.add(ctsp);
         }
         Sort sort = Sort.by("ngayTao").ascending();
@@ -359,6 +360,30 @@ public class ChiTietSanPhamController {
                          @ModelAttribute(name = "rom") Rom rom,
                          @ModelAttribute(name = "sanPham") SanPham sanPham) {
         List<ChiTietSanPham> list = chiTietSanPhamService.search(search);
+        model.addAttribute("listCTSP", list);
+        model.addAttribute("listSanPham", sanPhamService.findAll());
+        model.addAttribute("listMauSac", mauSacService.findAll());
+        model.addAttribute("listChip", chipService.findAll());
+        model.addAttribute("listRam", ramService.findAll());
+        model.addAttribute("listRom", romService.findAll());
+        model.addAttribute("listHang", hangSanPhamService.findAll());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
+        model.addAttribute("listPin", pinService.findAll());
+        model.addAttribute("listManHinh", manHinhService.findAll());
+        model.addAttribute("listCamera", cameraService.findAll());
+        model.addAttribute("contentPage", "chi-tiet-san-pham/index.jsp");
+        return "layout";
+    }
+    @PostMapping("/search-da-xoa")
+    public String searchDaXoa(Model model, @RequestParam("search") String search,
+                         @ModelAttribute("chitietsanpham") ChiTietSanPham chiTietSanPham,
+                         @ModelAttribute(name = "Pin") Pin pin,
+                         @ModelAttribute(name = "chip") Chip chip,
+                         @ModelAttribute(name = "ram") Ram ram,
+                         @ModelAttribute(name = "mauSac") MauSac mauSac,
+                         @ModelAttribute(name = "rom") Rom rom,
+                         @ModelAttribute(name = "sanPham") SanPham sanPham) {
+        List<ChiTietSanPham> list = chiTietSanPhamService.search1(search);
         model.addAttribute("listCTSP", list);
         model.addAttribute("listSanPham", sanPhamService.findAll());
         model.addAttribute("listMauSac", mauSacService.findAll());
@@ -439,7 +464,7 @@ public class ChiTietSanPhamController {
     ) {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), 5);
-        Page<ChiTietSanPham> chiTietSanPhamPage = chiTietSanPhamService.getAll(pageable);
+        Page<ChiTietSanPham> chiTietSanPhamPage = chiTietSanPhamService.finAllTTOn(pageable);
         model.addAttribute("total", chiTietSanPhamPage.getTotalPages());
         model.addAttribute("list", chiTietSanPhamPage.getContent());
         model.addAttribute("size", chiTietSanPhamPage.getSize());

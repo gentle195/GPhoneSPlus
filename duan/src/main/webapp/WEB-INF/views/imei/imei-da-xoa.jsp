@@ -19,18 +19,13 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi" role="tab">Thông tin chi tiết sản phẩm</a>
+            <a class="nav-link" href="/imei/hien-thi" role="tab">Thông tin Imei</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               aria-controls="description" aria-selected="true" role="tab">Sản phẩm đã xóa</a>
+               aria-controls="description" aria-selected="true">Imei đã xoá</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/chi-tiet-san-pham/view-add" role="tab">Thêm mới chi tiết sản phẩm</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-loc" role="tab">Lọc sản phẩm</a>
-        </li>
+
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">
@@ -40,9 +35,9 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title" style="float: left">Danh sách Chi tiết sản phẩm đã xóa</h4>
+                    <h4 class="card-title" style="float: left">Danh sách Imei đã xóa</h4>
                     <%--            Tìm kiếm               --%>
-                    <form action="/chi-tiet-san-pham/search-da-xoa" method="post">
+                    <form action="/imei/search-off" method="post">
                         <div class="input-group" style="width: 30%; float: right">
                             <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                    aria-label="Bạn tìm gì..." name="search">
@@ -51,7 +46,7 @@
                             </div>
                         </div>
                         <div style="float: right">
-                            <a href="/chi-tiet-san-pham/khoi-phuc-tat-ca" class="btn btn-danger btn-icon-text"
+                            <a href="/imei/khoi-phuc-tat-ca" class="btn btn-danger btn-icon-text"
                                tabindex="-1"
                                role="button"
                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
@@ -67,61 +62,41 @@
                             <thead>
                             <tr>
                                 <th scope="col">Tên sản phẩm</th>
-                                <th scope="col">Màu sắc</th>
-                                <th scope="col">Chip</th>
-                                <th scope="col">Ram</th>
-                                <th scope="col">Rom</th>
-                                <th scope="col">Pin</th>
-                                <th scope="col">Url Anh</th>
-                                <th scope="col">Giá nhập</th>
-                                <th scope="col">Giá bán</th>
+                                <th scope="col">Mã</th>
+                                <th scope="col">Số imei</th>
                                 <th scope="col">Ngày tạo</th>
                                 <th scope="col">Ngày cập nhật</th>
                                 <th scope="col">Tình trạng</th>
-                                <th scope="col">Năm bảo hành</th>
-                                <th scope="col">Số lượng tồn</th>
                                 <th scope="col">Mô tả</th>
                                 <th scope="col">Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <i class="mdi mdi-border-color"></i>
-                            <c:forEach items="${listCTSP}" var="ctsp" varStatus="index">
+                            <c:forEach items="${listImei}" var="imei" varStatus="index">
+                                <tr>
+                                    <td>${imei.chiTietSanPham.sanPham.ten}</td>
+                                    <td>${imei.ma}</td>
+                                    <td>${imei.soImei}</td>
 
+                                    <td>${imei.ngayTao}</td>
+                                    <td>${imei.ngayCapNhat}</td>
+                                    <td>${imei.tinhTrang==0?"Chưa bán":"Đã bán"}</td>
 
-                                    <tr>
-                                        <td>${ctsp.sanPham.ten}</td>
-                                        <td>${ctsp.mauSac.ten}</td>
-                                        <td>${ctsp.chip.ten}</td>
-                                        <td>${ctsp.ram.dungLuong}</td>
-                                        <td>${ctsp.rom.dungLuong}</td>
-                                        <td>${ctsp.pin.dungLuongPin.thongSo}</td>
-                                        <td align="center">
-                                                <%--                        <img src=".../.../${ctsp.urlAnh}" width="auto" height="auto" type="file">--%>
-                                            <img src="/uploads/${ctsp.urlAnh}" width="40" height="40">
-                                        </td>
+                                    <td>${imei.moTa}</td>
+                                    <td>
 
-                                        <td>${ctsp.giaNhap} VND</td>
-                                        <td>${ctsp.giaBan} VND</td>
-                                        <td>${ctsp.ngayTao}</td>
-                                        <td>${ctsp.ngayCapNhat}</td>
-                                        <td>${ctsp.tinhTrang==0?"Còn kinh doanh":"Ngừng kinh doanh"}</td>
-                                        <td>${ctsp.namBaoHanh}</td>
-                                        <td>${ctsp.soLuong}</td>
-                                        <td>${ctsp.moTa}</td>
-                                        <td>
+                                        <a href="/imei/khoi-phuc/${imei.id}"
+                                           class="btn btn-danger btn-icon-text"
+                                           tabindex="-1"
+                                           role="button"
+                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                            <i class="ti-reload btn-icon-prepend"></i>
+                                            Khôi phục</a>
 
-                                            <a href="/chi-tiet-san-pham/khoi-phuc/${ctsp.id}" class="btn btn-danger btn-icon-text"
-                                               tabindex="-1"
-                                               role="button"
-                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                                <i class="ti-reload btn-icon-prepend"></i>
-                                                Khôi phục</a>
-                                        </td>
-                                    </tr>
-
+                                    </td>
+                                </tr>
                             </c:forEach>
-
                             </tbody>
                         </table>
                     </div>
@@ -132,14 +107,14 @@
         <div align="center">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <ul class="pagination justify-content-center pagination-lg">
-                    <li class="page-item"><a class="page-link" href="/chi-tiet-san-pham/hien-thi-da-xoa?pageNum=0"><</a></li>
+                    <li class="page-item"><a class="page-link" href="/imei-da-xoa/hien-thi?pageNum=0"><</a></li>
                     <c:forEach begin="1" end="${total}" varStatus="status">
                         <li class="page-item">
-                            <a href="${pageContext.request.contextPath}/chi-tiet-san-pham/hien-thi-da-xoa?pageNum=${status.index -1}"
+                            <a href="${pageContext.request.contextPath}/imei-da-xoa/hien-thi?pageNum=${status.index -1}"
                                class="page-link">${status.index}</a>
                         </li>
                     </c:forEach>
-                    <li class="page-item"><a class="page-link" href="/chi-tiet-san-pham/hien-thi-da-xoa?pageNum=${total-1}">></a></li>
+                    <li class="page-item"><a class="page-link" href="/imei-da-xoa/hien-thi?pageNum=${total-1}">></a></li>
                 </ul>
             </div>
         </div>
@@ -154,4 +129,3 @@
 <script src="../../js/settings.js"></script>
 <script src="../../js/todolist.js"></script>
 </html>
-s
