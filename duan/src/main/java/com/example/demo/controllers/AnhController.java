@@ -68,6 +68,13 @@ public class AnhController {
         return "layout";
     }
 
+    @GetMapping("/detail/{id}")
+    public String detail(Model model, @ModelAttribute("anh") Anh anh, @PathVariable("id") UUID id) {
+        model.addAttribute("anh", anhService.findById(id));
+        model.addAttribute("contentPage", "anh/update.jsp");
+        return "layout";
+    }
+
     @GetMapping("/update-tt")
     public String updateTT(Model model, @RequestParam("pageNum") Optional<Integer> pageNum,
                            @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize,
@@ -172,9 +179,11 @@ public class AnhController {
     public String add(Model model,
                       @ModelAttribute("anh") @Valid Anh anh,
                       BindingResult bindingResult,
-                      @RequestParam("anh1") MultipartFile anh1,
-                      @RequestParam("anh2") MultipartFile anh2,
-                      @RequestParam("anh3") MultipartFile anh3
+                      @RequestParam("anh1s") MultipartFile anh1,
+                      @RequestParam("anh2s") MultipartFile anh2,
+                      @RequestParam("anh3s") MultipartFile anh3,
+                      @RequestParam("num") Optional<Integer> num,
+                      @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
     ) throws IOException {
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
@@ -182,14 +191,23 @@ public class AnhController {
             model.addAttribute("contentPage", "anh/add.jsp");
             return "layout";
         }
-        anh.setMa("ANH" + String.valueOf(anhService.findAll().size() + 1));
+        String mhd="";
+        Integer sl = anhService.findAll().size() + 1;
+        if(sl<9){
+            mhd = "ANH0" + sl;
+        }else {
+            mhd = "ANH" + sl;
+        }
+        anh.setMa(mhd);
         anh.setNgayTao(date);
-        anh.setNgayCapNhat(date);
         anh.setTinhTrang(0);
 
         // Xử lý ảnh 1
         String fileName1 = StringUtils.cleanPath(anh1.getOriginalFilename());
-        if (!fileName1.isEmpty()) {
+
+        if(fileName1.equals("")){
+
+        }else {
             String uploadDir = "src/main/webapp/uploads/";
             FileUploadUtil.saveFile(uploadDir, fileName1, anh1);
             anh.setAnh1(fileName1);
@@ -197,7 +215,10 @@ public class AnhController {
 
         // Xử lý ảnh 2
         String fileName2 = StringUtils.cleanPath(anh2.getOriginalFilename());
-        if (!fileName2.isEmpty()) {
+
+        if(fileName2.equals("")){
+
+        }else {
             String uploadDir = "src/main/webapp/uploads/";
             FileUploadUtil.saveFile(uploadDir, fileName2, anh2);
             anh.setAnh2(fileName2);
@@ -205,7 +226,10 @@ public class AnhController {
 
         // Xử lý ảnh 3
         String fileName3 = StringUtils.cleanPath(anh3.getOriginalFilename());
-        if (!fileName3.isEmpty()) {
+
+        if(fileName3.equals("")){
+
+        }else {
             String uploadDir = "src/main/webapp/uploads/";
             FileUploadUtil.saveFile(uploadDir, fileName3, anh3);
             anh.setAnh3(fileName3);
@@ -213,46 +237,62 @@ public class AnhController {
         anhService.add(anh);
         return "redirect:/anh/hien-thi";
     }
-//    @PostMapping("/khach-hang/update")
-//    public String updateDongSP(Model model, @ModelAttribute("kh") @Valid Anh anh,
-//                               BindingResult bindingResult,
-//                               @ModelAttribute("KHHangAnh") HangAnh hangAnh,
-//                               @RequestParam("checkanh") String checkanh,
-//                               @RequestParam("anh") MultipartFile multipartFile,
-//                               @RequestParam("num") Optional<Integer> num,
-//                               @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
-//    ) throws IOException {
-//        if (bindingResult.hasErrors()) {
-//            anh = anhService.findById(anh.getId());
-//            model.addAttribute("hkh", hangAnhService.getALL0());
-//            model.addAttribute("contentPage", "khach-hang/khach-hang-update.jsp");
-//            return "layout";
-//        }
-//        long millis = System.currentTimeMillis();
-//        Date date = new Date(millis);
-//        anh.setNgayCapNhat(date);
-//        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-//        if (checkanh.equals("cu")) {
-//        } else {
-//            if (fileName.equals("")) {
-//            } else {
-//                String uploadDir = "src/main/webapp/uploads/";
-//                FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-//            }
-//            anh.setAnh(fileName);
-//        }
-//
-//        anhService.add(anh);
-//        Sort sort = Sort.by("ma").descending();
-//        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-//        Page<Anh> list = anhService.getALL0(pageable);
-//        model.addAttribute("dulieu", list.getContent());
-//        model.addAttribute("total", kt(list.getTotalPages()));
-//        model.addAttribute("hkh", hangAnhService.getALL0());
-//        model.addAttribute("tong", anhService.findAll00().size());
-//        model.addAttribute("contentPage", "khach-hang/khach-hang.jsp");
-//
-//
-//        return "layout";
-//    }
+
+    @PostMapping("/update/{id}")
+    public String updateDongSP(Model model, @ModelAttribute("anh") @Valid Anh anh,
+                               BindingResult bindingResult,
+                               @PathVariable("id") UUID id,
+                               @RequestParam("checkanh1") String checkanh1,
+                               @RequestParam("checkanh2") String checkanh2,
+                               @RequestParam("checkanh3") String checkanh3,
+                               @RequestParam("anh1s") MultipartFile anh1,
+                               @RequestParam("anh2s") MultipartFile anh2,
+                               @RequestParam("anh3s") MultipartFile anh3,
+                               @RequestParam("num") Optional<Integer> num,
+                               @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
+    ) throws IOException {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("contentPage", "anh/update.jsp");
+            return "layout";
+        }
+        Anh tt = anhService.findById(id);
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        anh.setNgayCapNhat(date);
+        anh.setNgayTao(tt.getNgayTao());
+        anh.setTinhTrang(tt.getTinhTrang());
+        anh.setMa(tt.getMa());
+        String fileName1 = StringUtils.cleanPath(anh1.getOriginalFilename());
+        if (checkanh1.equals("cu1")) {
+        } else {
+            if (fileName1.equals("")) {
+            } else {
+                String uploadDir = "src/main/webapp/uploads/";
+                FileUploadUtil.saveFile(uploadDir, fileName1, anh1);
+            }
+            anh.setAnh1(fileName1);
+        }
+        String fileName2 = StringUtils.cleanPath(anh2.getOriginalFilename());
+        if (checkanh2.equals("cu2")) {
+        } else {
+            if (fileName2.equals("")) {
+            } else {
+                String uploadDir = "src/main/webapp/uploads/";
+                FileUploadUtil.saveFile(uploadDir, fileName2, anh2);
+            }
+            anh.setAnh2(fileName2);
+        }
+        String fileName3 = StringUtils.cleanPath(anh3.getOriginalFilename());
+        if (checkanh3.equals("cu3")) {
+        } else {
+            if (fileName3.equals("")) {
+            } else {
+                String uploadDir = "src/main/webapp/uploads/";
+                FileUploadUtil.saveFile(uploadDir, fileName3, anh3);
+            }
+            anh.setAnh3(fileName3);
+        }
+        anhService.update(id, anh);
+        return "redirect:/anh/hien-thi";
+    }
 }

@@ -15,12 +15,7 @@ CREATE TABLE hang_dien_thoai(
   tinh_trang int DEFAULT 0,
   mo_ta NVARCHAR(MAX) NULL
 );
---select ct.* from imei i left join chi_tiet_san_pham ct on i.id_chi_tiet_san_pham=ct.id where i.id= '74B8C5C7-7139-4D16-8442-34C456CF9756'
---select ct.* from chi_tiet_san_pham ct left  join imei  i on ct.id=i.id_chi_tiet_san_pham left join hoa_don_chi_tiet hd on i.id=hd.id_imei where hd.id='96E06F89-7177-43E8-A95B-133FFB18529C'
-select * from imei
---select*from imei where id_chi_tiet_san_pham = 'AD9DD38E-12DB-4314-BA18-50AE7C292626'
-select*from hoa_don_chi_tiet
-delete from hoa_don
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -29,9 +24,9 @@ CREATE TABLE anh(
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
   ma VARCHAR(30) NULL,
   ten VARCHAR(50) NULL,
-  url_anh1 VARCHAR(MAX) NULL,
-  url_anh2 VARCHAR(MAX) NULL,
-  url_anh3 VARCHAR(MAX) NULL,
+  url_anh1 NVARCHAR(MAX) NULL,
+  url_anh2 NVARCHAR(MAX) NULL,
+  url_anh3 NVARCHAR(MAX) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
   tinh_trang int DEFAULT 0,
@@ -301,21 +296,15 @@ CREATE TABLE nhan_vien (
   can_cuoc_con_dan VARCHAR(30) null,
   tai_khoan VARCHAR(50) NOT NULL,
   mat_khau VARCHAR(255) NOT NULL,
+  luong Decimal(20,1) null,
+  can_cuoc_cong_dan VARCHAR(30) null,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
   tinh_trang INT DEFAULT 0,
   id_chuc_vu UNIQUEIDENTIFIER NULL,
   FOREIGN KEY (id_chuc_vu) REFERENCES chuc_vu(id)
 );
-ALTER TABLE nhan_vien add luong Decimal(20,1) null;
-ALTER TABLE nhan_vien drop Column can_cuoc_con_dan
 
-ALTER TABLE nhan_vien add   can_cuoc_cong_dan VARCHAR(30) null;
-
-
-
-select * from nhan_vien
-ALTER TABLE nhan_vien CHANGE COLUMN can_cuoc_con_dan TO can_cuoc_cong_dan ;
 
 SET ANSI_NULLS ON
 GO
@@ -340,6 +329,7 @@ CREATE TABLE khach_hang (
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
   ma VARCHAR(30) NULL,
   ho_ten NVARCHAR(50) NULL,
+  anh NVARCHAR(MAX) NULL,
   gioi_tinh BIT DEFAULT 1,
   email VARCHAR(255) NULL,
   sdt VARCHAR(30) null,
@@ -353,7 +343,7 @@ CREATE TABLE khach_hang (
   id_hang_khach_hang UNIQUEIDENTIFIER NULL,
   FOREIGN KEY (id_hang_khach_hang) REFERENCES hang_khach_hang(id)
 );
-ALTER TABLE khach_hang add  anh VARCHAR(50) null;
+
 
 SET ANSI_NULLS ON
 GO
@@ -655,3 +645,6 @@ VALUES
   ('MH003', N'Độ phân giải QHD', '2022-03-20', N'Màn hình có độ phân giải QHD.'),
   ('MH004', N'Độ phân giải HD', '2022-04-25', N'Màn hình có độ phân giải HD.'),
   ('MH005', N'Độ phân giải 8K', '2022-05-30', N'Màn hình có độ phân giải 8K.');
+
+
+

@@ -46,45 +46,60 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-4">
-                                            <div align="center">
+                                            <div align="center" >
                                                 <br>
-                                                <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;"
-                                                       for="anhmoi1">
+                                                <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;" for="anhmoi1" >
                                                     <img id="preview-anh1-2" class="preview-image" src="" alt=""
                                                          width="100%" height="100%"
                                                          style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                                    <br><br>
+                                                    ẢNH
                                                 </label>
                                                 <br>
-                                                <input type="file" name="anh1" accept="image/jpeg, image/png"
-                                                       id="anhmoi1">
+                                                <div style="display: none">
+                                                    <input type="file"  name="anh1s"  accept="image/jpeg, image/png" id="anhmoi1"  >
+                                                </div>
+                                            </div>
+                                            <div style="display: none">
+                                                <form:input path="anh1"/>
                                             </div>
                                         </div>
                                         <div class="col-4">
-                                            <div align="center">
+                                            <div align="center" >
                                                 <br>
-                                                <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;"
-                                                       for="anhmoi2">
+                                                <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;" for="anhmoi2" >
                                                     <img id="preview-anh2-2" class="preview-image" src="" alt=""
                                                          width="100%" height="100%"
                                                          style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                                    <br><br>
+                                                    ẢNH
                                                 </label>
                                                 <br>
-                                                <input type="file" name="anh2" accept="image/jpeg, image/png"
-                                                       id="anhmoi2">
+                                                <div style="display: none">
+                                                    <input type="file"  name="anh2s"  accept="image/jpeg, image/png" id="anhmoi2"  >
+                                                </div>
+                                            </div>
+                                            <div style="display: none">
+                                                <form:input path="anh2"/>
                                             </div>
                                         </div>
                                         <div class="col-4">
-                                            <div align="center">
+                                            <div align="center" >
                                                 <br>
-                                                <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;"
-                                                       for="anhmoi3">
+                                                <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;" for="anhmoi3" >
                                                     <img id="preview-anh3-2" class="preview-image" src="" alt=""
                                                          width="100%" height="100%"
                                                          style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                                    <br><br>
+                                                    ẢNH
                                                 </label>
                                                 <br>
-                                                <input type="file" name="anh3" accept="image/jpeg, image/png"
-                                                       id="anhmoi3">
+                                                <div style="display: none">
+                                                    <input type="file"  name="anh3s"  accept="image/jpeg, image/png" id="anhmoi3"  >
+                                                </div>
+                                            </div>
+                                            <div style="display: none">
+                                                <form:input path="anh3"/>
                                             </div>
                                         </div>
                                     </div>
@@ -101,7 +116,7 @@
                                 </div>
                             </div>
                             <div style="text-align: center">
-                                <button type="submit" class="btn btn-primary mr-2">
+                                <button type="submit" class="btn btn-primary mr-2" onclick="return myFunction1()">
                                     ADD
                                 </button>
                             </div>

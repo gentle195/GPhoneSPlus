@@ -18,232 +18,177 @@
 
 <body>
 
-    <P style="font-size: 50px;text-align: center">
-        Thêm  khách hàng
-    </P>
+<P style="font-size: 50px;text-align: center">
+    Thêm khách hàng
+</P>
 
-    <br>
-
-    <div>
-        <ul class="nav nav-tabs border-top"
-            id="setting-panel" role="tablist">
-            <li class="nav-item">
-                <a href="/khach-hang/hien-thi"
-                   role="tab"
-                   class="nav-link" >
-                    Thông tin khách hàng
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link active"
-                   id="description-tab"
-                <%--                   data-toggle="tab"--%>
-                   href="/khach-hang/view-add"
-                    role="tab"
-                   aria-controls="description"
-                   aria-selected="true">
-                    Thêm khách hàng
-
-                </a>
-
-            </li>
-            <li class="nav-item">
-                <a href="/khach-hang/khach-hang-tung-xoa"
-                   role="tab"
-                   class="nav-link" >
-                    Khách hàng từng xóa
-                </a>
-            </li>
-        </ul>
-    </div>
-
-
-
-
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="description" role="tabpanel"
-             aria-labelledby="description-tab">
-
-            <div class="card">
-                <div class="card-body">
-
-
-    <form:form action="/khach-hang/add" method="post" modelAttribute="kh" enctype="multipart/form-data">
-
-    <div align="center" >
 <br>
-        <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;" for="anhmoi" >
-                <img id="preview-image-2" class="preview-image" src="" alt=""
-                     width="100%" height="100%"
-                     style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
 
-            <br><br>
-            ẢNH
-        </label>
-        <br>
+<div>
+    <ul class="nav nav-tabs border-top"
+        id="setting-panel" role="tablist">
+        <li class="nav-item">
+            <a href="/khach-hang/hien-thi"
+               role="tab"
+               class="nav-link">
+                Thông tin khách hàng
+            </a>
+        </li>
 
+        <li class="nav-item">
+            <a class="nav-link active"
+               id="description-tab"
+            <%--                   data-toggle="tab"--%>
+               href="/khach-hang/view-add"
+               role="tab"
+               aria-controls="description"
+               aria-selected="true">
+                Thêm khách hàng
 
-            <div style="display: none">
-            <input type="file"  name="images"  accept="image/jpeg, image/png" id="anhmoi"  >
-            </div>
+            </a>
 
+        </li>
+        <li class="nav-item">
+            <a href="/khach-hang/khach-hang-tung-xoa"
+               role="tab"
+               class="nav-link">
+                Khách hàng từng xóa
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="description" role="tabpanel"
+         aria-labelledby="description-tab">
 
-
-
-
-    </div>
-
-    <div style="display: none">
-        <form:input   path="anh" />
-    </div>
-
-
-
-    <table class="table">
-
-        <thead>
-        <tr>
-            <th colspan="2">
-                <form:label class="form-label" path="hoTen">Họ tên:
-                    <form:errors path="hoTen" cssStyle="color: red"></form:errors>
-                </form:label>
-        <form:input class="form-control" placeholder="" path="hoTen"/>
-            </th>
-
-        </tr>
-        </thead>
-
-        <thead>
-        <tr>
-            <th >
-                <form:label class="form-label" path="gioiTinh">Giới Tính:</form:label>
-                    <div class="form-control">
-                        <form:radiobutton path="gioiTinh" value="true"  />Nam
-                        <form:radiobutton path="gioiTinh" value="false"  cssStyle="margin-left: 1cm"/> Nữ
+        <div class="card">
+            <div class="card-body">
+                <form:form action="/khach-hang/add" method="post" modelAttribute="kh" enctype="multipart/form-data">
+                    <div align="center">
+                        <br>
+                        <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;"
+                               for="anhmoi">
+                            <img id="preview-image-2" class="preview-image" src="" alt=""
+                                 width="100%" height="100%"
+                                 style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                            <br><br>
+                            ẢNH
+                        </label>
+                        <br>
+                        <div style="display: none">
+                            <input type="file" name="images" accept="image/jpeg, image/png" id="anhmoi">
+                        </div>
                     </div>
+                    <div style="display: none">
+                        <form:input path="anh"/>
+                    </div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th colspan="2">
+                                <form:label class="form-label" path="hoTen">Họ tên:
+                                    <form:errors path="hoTen" cssStyle="color: red"></form:errors>
+                                </form:label>
+                                <form:input class="form-control" placeholder="" path="hoTen"/>
+                            </th>
+                        </tr>
+                        </thead>
+                        <thead>
+                        <tr>
+                            <th>
+                                <form:label class="form-label" path="gioiTinh">Giới Tính:</form:label>
+                                <div class="form-control">
+                                    <form:radiobutton path="gioiTinh" value="true"/>Nam
+                                    <form:radiobutton path="gioiTinh" value="false" cssStyle="margin-left: 1cm"/> Nữ
+                                </div>
+                            </th>
+                            <th>
+                                <form:label class="form-label" path="email">Email:
+                                    <form:errors path="email" cssStyle="color: red"></form:errors>
+                                </form:label>
+                                <form:input class="form-control" placeholder="" path="email"/>
+                            </th>
+                        </tr>
+                        </thead>
+                        <thead>
+                        <tr>
+                            <th>
+                                <form:label class="form-label" path="sdt">Sdt:
+                                    <form:errors path="sdt" cssStyle="color: red"></form:errors>
+                                </form:label>
+                                <form:input class="form-control" placeholder="" path="sdt"/>
+                            </th>
+                            <th>
+                                <form:label class="form-label" path="ngaySinh">
+                                    Ngày sinh:
+                                    <div id="tb" style="color: crimson;float: right"></div>
+                                </form:label>
+                                <form:input class="form-control" placeholder="" path="ngaySinh" type="date" id="ns"/>
+                            </th>
+                        </tr>
+                        </thead>
+                        <thead>
+                        <tr>
+                            <th>
+                                <form:label class="form-label" path="taiKhoan">Tài khoản:
+                                    <form:errors path="taiKhoan" cssStyle="color: red"></form:errors>
+                                </form:label>
+                                <form:input class="form-control" placeholder="" path="taiKhoan"/>
+                            </th>
+                            <th>
+                                <form:label class="form-label" path="matKhau">Mật khẩu:
+                                    <form:errors path="matKhau" cssStyle="color: red"></form:errors>
+                                </form:label>
+                                <form:input class="form-control" placeholder="" path="matKhau"/>
+                            </th>
+                        </tr>
+                        </thead>
+                        <thead>
+                        <tr>
+                            <th>
+                                <form:label class="form-label" path="diem">Điểm:
+                                    <form:errors path="diem" cssStyle="color: red"></form:errors>
+                                </form:label>
+                                <form:input class="form-control" placeholder="" path="diem" type="number"/>
+                            </th>
+                            <th>
 
+                                <div style="float: right;width: 15%;height: 50px;margin-right: 40px;margin-top: 23px">
+                                    <button type="button"
+                                            style="height: 100%"
+                                            class="btn btn-primary"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#myModal">
+                                        Thêm nhanh
+                                    </button>
+                                </div>
+                                <div style="width: 75%;height: 60px;margin-bottom: 15px">
+                                    <form:label class="form-label" path="hangKhachHang">Hãng khách hàng:
+                                        <form:errors path="hangKhachHang" cssStyle="color: red"/>
+                                    </form:label>
+                                    <form:select class="form-control"
+                                                 path="hangKhachHang"
+                                                 items="${hkh}"
+                                                 itemValue="id"
+                                                 itemLabel="ten"></form:select>
 
-            </th>
-            <th >
-
-                    <form:label class="form-label" path="email">Email:
-                        <form:errors path="email" cssStyle="color: red"></form:errors>
-                    </form:label>
-                    <form:input class="form-control" placeholder="" path="email"/>
-
-
-            </th>
-        </tr>
-        </thead>
-
-
-        <thead>
-        <tr>
-            <th >
-
-                <form:label class="form-label" path="sdt">Sdt:
-                    <form:errors path="sdt" cssStyle="color: red"></form:errors>
-                </form:label>
-                    <form:input class="form-control" placeholder="" path="sdt"/>
-
-
-
-            </th>
-            <th >
-
-                <form:label class="form-label" path="ngaySinh">
-                    Ngày sinh:
-                    <div id="tb" style="color: crimson;float: right"></div>
-
-
-                </form:label>
-                    <form:input class="form-control" placeholder="" path="ngaySinh" type="date" id="ns"/>
-
-            </th>
-        </tr>
-        </thead>
-
-
-        <thead>
-        <tr>
-
-            <th>
-                <form:label class="form-label" path="taiKhoan">Tài khoản:
-                    <form:errors path="taiKhoan" cssStyle="color: red"></form:errors>
-                </form:label>
-                    <form:input class="form-control" placeholder="" path="taiKhoan"  />
-
-            </th>
-
-
-            <th >
-                <form:label class="form-label" path="matKhau">Mật khẩu:
-                    <form:errors path="matKhau" cssStyle="color: red"></form:errors>
-                </form:label>
-                    <form:input class="form-control" placeholder="" path="matKhau"  />
-
-            </th>
-
-        </tr>
-        </thead>
-        <thead>
-        <tr>
-
-
-
-
-            <th >
-                <form:label class="form-label" path="diem">Điểm:
-                    <form:errors path="diem" cssStyle="color: red"></form:errors>
-                </form:label>
-                    <form:input class="form-control" placeholder="" path="diem"  type="number"  />
-            </th>
-            <th>
-
-                <div  style="float: right;width: 15%;height: 50px;margin-right: 40px;margin-top: 23px">
-                    <button type="button"
-                            style="height: 100%"
-                            class="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#myModal">
-                        Thêm nhanh
-                    </button>
-                </div>
-                <div style="width: 75%;height: 60px;margin-bottom: 15px">
-                    <form:label class="form-label" path="hangKhachHang">Hãng khách hàng:
-                        <form:errors path="hangKhachHang" cssStyle="color: red" />
-                    </form:label>
-                    <form:select  class="form-control"
-                                  path="hangKhachHang"
-                                  items="${hkh}"
-                                  itemValue="id"
-                                  itemLabel="ten"></form:select>
-
-                </div>
-            </th>
-
-        </tr>
-
-        </thead>
-
-
-        <P style="display: none">
-            <form:input path="id"></form:input>
-        </P>
-
-
-
-    </table>
-        <div align="center">
-        <BUTTON type="submit"  class="btn btn-warning"  style="" id="bt" onclick="return thongbao()">add</BUTTON>
-        </div>
-
-</form:form>
-                </div>
+                                </div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <P style="display: none">
+                            <form:input path="id"></form:input>
+                        </P>
+                    </table>
+                    <div align="center">
+                        <BUTTON type="submit" class="btn btn-warning" style="" id="bt" onclick="return thongbao()">add
+                        </BUTTON>
+                    </div>
+                </form:form>
             </div>
         </div>
     </div>
+</div>
 
 <div class="modal" id="myModal">
     <div class="modal-dialog">
@@ -258,42 +203,46 @@
             <!-- Modal body -->
             <div class="modal-body">
 
-                <form:form action="/khach-hang/them-hang-khach-hang-add" method="post" modelAttribute="KHHangKhachHang" >
+                <form:form action="/khach-hang/them-hang-khach-hang-add" method="post" modelAttribute="KHHangKhachHang">
 
                 <table class="table">
 
                     <thead>
                     <tr>
-                        <th >
+                        <th>
 
                             <div class="form-floating mb-3 mt-3">
-                                <form:label class="form-label" path="ten">Tên hạng:<label id="tenhkh1" style="color: red"></label>
+                                <form:label class="form-label"
+                                            path="ten">Tên hạng:<label id="tenhkh1" style="color: red"></label>
                                 </form:label>
-                                <form:input id="tenhkh" class="form-control" placeholder="" path="ten" />
+                                <form:input id="tenhkh" class="form-control" placeholder="" path="ten"/>
 
                             </div>
 
                         </th>
                     </tr>
                     <tr>
-                        <th >
+                        <th>
 
                             <div class="form-floating mb-3 mt-3">
-                                <form:label class="form-label" path="diem_toi_thieu">Điểm tối thiểu:<label id="diemtoithieuhkh1" style="color: red"></label>
+                                <form:label class="form-label"
+                                            path="diem_toi_thieu">Điểm tối thiểu:<label id="diemtoithieuhkh1" style="color: red"></label>
                                 </form:label>
-                                <form:input id="diemtoithieuhkh" class="form-control" placeholder="" path="diem_toi_thieu" />
+                                <form:input id="diemtoithieuhkh" class="form-control" placeholder=""
+                                            path="diem_toi_thieu"/>
 
                             </div>
 
                         </th>
                     </tr>
                     <tr>
-                        <th >
+                        <th>
 
                             <div class="form-floating mb-3 mt-3">
-                                <form:label class="form-label" path="moTa">Mô tả:<label id="motahkh1" style="color: red"></label>
+                                <form:label class="form-label"
+                                            path="moTa">Mô tả:<label id="motahkh1" style="color: red"></label>
                                 </form:label>
-                                <form:input id="motahkh" class="form-control" placeholder="" path="moTa" />
+                                <form:input id="motahkh" class="form-control" placeholder="" path="moTa"/>
 
                             </div>
 
@@ -303,12 +252,13 @@
                 </table>
 
 
-
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="submit" class="btn btn-warning" id="bthkh" onclick="return checkhkh()" >Thêm hãng khách hàng</button>
+                <button type="submit" class="btn btn-warning" id="bthkh" onclick="return checkhkh()">Thêm hãng khách
+                    hàng
+                </button>
             </div>
             </form:form>
         </div>
@@ -316,67 +266,64 @@
 </div>
 
 
-
-    <script>
-
+<script>
 
 
-        const imageInput = document.getElementById('anhmoi');
+    const imageInput = document.getElementById('anhmoi');
 
-        const previewImage2 = document.getElementById('preview-image-2');
+    const previewImage2 = document.getElementById('preview-image-2');
 
-        imageInput.addEventListener('change', function () {
-            const file = imageInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    previewImage2.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            } else {
-                previewImage2.src = '';
-            }
-        });
-    </script>
+    imageInput.addEventListener('change', function () {
+        const file = imageInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewImage2.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewImage2.src = '';
+        }
+    });
+</script>
 
 <script>
 
 
     function checkhkh() {
-        var tenhkh=document.getElementById("tenhkh").value;
-        var diemtoithieuhkh=document.getElementById("diemtoithieuhkh").value;
-        var motahkh=document.getElementById("motahkh").value;
+        var tenhkh = document.getElementById("tenhkh").value;
+        var diemtoithieuhkh = document.getElementById("diemtoithieuhkh").value;
+        var motahkh = document.getElementById("motahkh").value;
 
-        if(
-            tenhkh.trim().length<6 || tenhkh==''
-        ){
-            document.getElementById("bthkh").type="button";
-            document.getElementById("tenhkh1").innerHTML="Không để trống ,Tên ít nhất 6 ký tự";
-            return  false;
-        }else {
-            document.getElementById("tenhkh1").innerHTML="";
-            if(
+        if (
+            tenhkh.trim().length < 6 || tenhkh == ''
+        ) {
+            document.getElementById("bthkh").type = "button";
+            document.getElementById("tenhkh1").innerHTML = "Không để trống ,Tên ít nhất 6 ký tự";
+            return false;
+        } else {
+            document.getElementById("tenhkh1").innerHTML = "";
+            if (
 
                 diemtoithieuhkh <= 0 || diemtoithieuhkh % 1 != 0
-            ){
-                document.getElementById("bthkh").type="button";
-                document.getElementById("diemtoithieuhkh1").innerHTML="Phải là số nguyên dương ";
-                return  false;
-            }else {
-                document.getElementById("diemtoithieuhkh1").innerHTML="";
-                if(
-                    motahkh.trim()===''
-                ){
-                    document.getElementById("bthkh").type="button";
-                    document.getElementById("motahkh1").innerHTML="Không để trống ";
-                    return  false;
-                }else {
-                    document.getElementById("bthkh").type="submit";
+            ) {
+                document.getElementById("bthkh").type = "button";
+                document.getElementById("diemtoithieuhkh1").innerHTML = "Phải là số nguyên dương ";
+                return false;
+            } else {
+                document.getElementById("diemtoithieuhkh1").innerHTML = "";
+                if (
+                    motahkh.trim() === ''
+                ) {
+                    document.getElementById("bthkh").type = "button";
+                    document.getElementById("motahkh1").innerHTML = "Không để trống ";
+                    return false;
+                } else {
+                    document.getElementById("bthkh").type = "submit";
                     return true;
                 }
             }
         }
-
 
 
     }
@@ -384,17 +331,17 @@
 <script>
 
     function thongbao() {
-        var ns=document.getElementById("ns").value;
-        if(confirm("Bạn muốn dùng trức năng")==true){
-            if(ns.trim()===''){
-                document.getElementById("tb").innerHTML="Không để trống ngày sinh";
-                document.getElementById("bt").type="button"
+        var ns = document.getElementById("ns").value;
+        if (confirm("Bạn muốn dùng trức năng") == true) {
+            if (ns.trim() === '') {
+                document.getElementById("tb").innerHTML = "Không để trống ngày sinh";
+                document.getElementById("bt").type = "button"
                 return false;
-            }else {
-                document.getElementById("bt").type="submit";
+            } else {
+                document.getElementById("bt").type = "submit";
                 return true;
             }
-        }else {
+        } else {
             return false;
         }
 
@@ -430,9 +377,6 @@
     //     }
     // });
 </script>
-
-
-
 
 
 </body>

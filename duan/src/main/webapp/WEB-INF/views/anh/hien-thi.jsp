@@ -81,9 +81,21 @@
                                         <tr>
                                             <td>${list.ma}</td>
                                             <td>${list.ten}</td>
-                                            <td>${list.anh1}</td>
-                                            <td>${list.anh2}</td>
-                                            <td>${list.anh3}</td>
+                                            <td align="center">
+                                                <img src="../../../uploads/${list.anh1}" width="40" height="40"
+                                                     style="border-radius:50% 50% 50% 50%">
+
+                                            </td>
+                                            <td align="center">
+                                                <img src="../../../uploads/${list.anh2}" width="40" height="40"
+                                                     style="border-radius:50% 50% 50% 50%">
+
+                                            </td>
+                                            <td align="center">
+                                                <img src="../../../uploads/${list.anh3}" width="40" height="40"
+                                                     style="border-radius:50% 50% 50% 50%">
+
+                                            </td>
                                             <td>${list.ngayTao}</td>
                                             <td>${list.ngayCapNhat}</td>
                                             <td>
@@ -160,10 +172,9 @@
     }
 
     function myFunction3() {
-        let text = "Bạn chắc chắn muốn thay đổi trạng thái";
+        let text = "Bạn chắc chắn muốn sang trang trạng thái đã xóa";
         let kt = confirm(text);
         if (kt == true) {
-            confirm("Thay đổi trạng thái thành công");
             return true
         } else {
             return false;
