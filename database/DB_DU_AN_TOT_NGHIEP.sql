@@ -1,5 +1,5 @@
-﻿--CREATE DATABASE DB_DU_AN_TOT_NGHIEP;
---USE DB_DU_AN_TOT_NGHIEP
+﻿CREATE DATABASE DB_DU_AN_TOT_NGHIEP;
+USE DB_DU_AN_TOT_NGHIEP
 
 SET ANSI_NULLS ON
 GO
@@ -24,9 +24,9 @@ CREATE TABLE anh(
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
   ma VARCHAR(30) NULL,
   ten VARCHAR(50) NULL,
-  url_anh1 VARCHAR(MAX) NULL,
-  url_anh2 VARCHAR(MAX) NULL,
-  url_anh3 VARCHAR(MAX) NULL,
+  url_anh1 NVARCHAR(MAX) NULL,
+  url_anh2 NVARCHAR(MAX) NULL,
+  url_anh3 NVARCHAR(MAX) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
   tinh_trang int DEFAULT 0,
@@ -296,12 +296,15 @@ CREATE TABLE nhan_vien (
   can_cuoc_con_dan VARCHAR(30) null,
   tai_khoan VARCHAR(50) NOT NULL,
   mat_khau VARCHAR(255) NOT NULL,
+  luong Decimal(20,1) null,
+  can_cuoc_cong_dan VARCHAR(30) null,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
   tinh_trang INT DEFAULT 0,
   id_chuc_vu UNIQUEIDENTIFIER NULL,
   FOREIGN KEY (id_chuc_vu) REFERENCES chuc_vu(id)
 );
+
 
 SET ANSI_NULLS ON
 GO
@@ -326,7 +329,7 @@ CREATE TABLE khach_hang (
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
   ma VARCHAR(30) NULL,
   ho_ten NVARCHAR(50) NULL,
-  anh NVARCHAR(Max) NULL,
+  anh NVARCHAR(MAX) NULL,
   gioi_tinh BIT DEFAULT 1,
   email VARCHAR(255) NULL,
   sdt VARCHAR(30) null,
@@ -340,6 +343,7 @@ CREATE TABLE khach_hang (
   id_hang_khach_hang UNIQUEIDENTIFIER NULL,
   FOREIGN KEY (id_hang_khach_hang) REFERENCES hang_khach_hang(id)
 );
+
 
 SET ANSI_NULLS ON
 GO
@@ -565,11 +569,11 @@ VALUES
 
   INSERT INTO chuc_vu (ma, ten, ngay_cap_nhat, mo_ta)
 VALUES 
-('CV001', 'Nhân viên', '2022-01-01', 'Mô tả chức vụ nhân viên'),
-('CV002', 'Trưởng phòng', '2022-02-15', 'Mô tả chức vụ trưởng phòng'),
-('CV003', 'Giám đốc', '2022-03-10', 'Mô tả chức vụ giám đốc'),
-('CV004', 'Kế toán', '2022-04-20', 'Mô tả chức vụ kế toán'),
-('CV005', 'Quản lý dự án', '2022-05-05', 'Mô tả chức vụ quản lý dự án');
+('CV001', N'Nhân viên', '2022-01-01', N'Mô tả chức vụ nhân viên'),
+('CV002', N'Trưởng phòng', '2022-02-15', N'Mô tả chức vụ trưởng phòng'),
+('CV003', N'Giám đốc', '2022-03-10', N'Mô tả chức vụ giám đốc'),
+('CV004', N'Kế toán', '2022-04-20', N'Mô tả chức vụ kế toán'),
+('CV005', N'Quản lý dự án', '2022-05-05', N'Mô tả chức vụ quản lý dự án');
 
 
 INSERT INTO muc_quy_doi (so_diem, so_tien, ghi_chu)
@@ -641,3 +645,6 @@ VALUES
   ('MH003', N'Độ phân giải QHD', '2022-03-20', N'Màn hình có độ phân giải QHD.'),
   ('MH004', N'Độ phân giải HD', '2022-04-25', N'Màn hình có độ phân giải HD.'),
   ('MH005', N'Độ phân giải 8K', '2022-05-30', N'Màn hình có độ phân giải 8K.');
+
+
+

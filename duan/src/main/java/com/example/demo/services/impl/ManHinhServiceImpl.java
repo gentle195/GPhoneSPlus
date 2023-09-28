@@ -1,6 +1,7 @@
 package com.example.demo.services.impl;
 
 import com.example.demo.models.ManHinh;
+import com.example.demo.models.ManHinh;
 import com.example.demo.repositories.ManHinhRepository;
 import com.example.demo.services.ManHinhService;
 import org.springframework.beans.BeanUtils;
@@ -20,7 +21,12 @@ public class ManHinhServiceImpl implements ManHinhService {
 
     @Override
     public Page<ManHinh> getAll(Pageable pageable) {
-        return manHinhRepository.findAll(pageable);
+        return manHinhRepository.getAll(pageable);
+    }
+
+    @Override
+    public Page<ManHinh> getAll1(Pageable pageable) {
+        return manHinhRepository.getAll1(pageable);
     }
 
     @Override
@@ -29,41 +35,51 @@ public class ManHinhServiceImpl implements ManHinhService {
     }
 
     @Override
-    public List<ManHinh> search(String search) {
-        return manHinhRepository.search(search);
-    }
-
-    @Override
     public ManHinh findById(UUID id) {
         return manHinhRepository.findById(id).orElse(null);
     }
 
     @Override
-    public ManHinh add(ManHinh manHinh) {
-        return manHinhRepository.save(manHinh);
+    public ManHinh add(ManHinh chip) {
+        return manHinhRepository.save(chip);
     }
 
     @Override
-    public ManHinh update(UUID id, ManHinh manHinh) {
+    public ManHinh update(UUID id, ManHinh chip) {
         if (id != null) {
-            ManHinh manHinhUpdate = manHinhRepository.findById(id).orElse(null);
-            if (manHinhUpdate != null) {
-                BeanUtils.copyProperties(manHinh, manHinhUpdate);
-                manHinhRepository.save(manHinhUpdate);
+            ManHinh chipUpdate = manHinhRepository.findById(id).orElse(null);
+            if (chipUpdate != null) {
+                BeanUtils.copyProperties(chip, chipUpdate);
+                manHinhRepository.save(chipUpdate);
             }
         }
         return null;
+    }
+
+    @Override
+    public void updateTT() {
+        manHinhRepository.updateTT();
     }
 
     @Override
     public Boolean delete(UUID id) {
         if (id != null) {
-            ManHinh manHinh = manHinhRepository.findById(id).orElse(null);
-            if (manHinh != null) {
-                manHinhRepository.delete(manHinh);
+            ManHinh chip = manHinhRepository.findById(id).orElse(null);
+            if (chip != null) {
+                manHinhRepository.delete(chip);
                 return true;
             }
         }
-        return null;
+        return false;
+    }
+
+    @Override
+    public List<ManHinh> search0(String ten) {
+        return manHinhRepository.sreach0(ten);
+    }
+
+    @Override
+    public List<ManHinh> search1(String ten) {
+        return manHinhRepository.sreach1(ten);
     }
 }

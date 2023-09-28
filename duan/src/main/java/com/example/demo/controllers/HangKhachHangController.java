@@ -94,9 +94,11 @@ public class HangKhachHangController {
 
 
     ) {
-
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
         HangKhachHang hkh1=hangKhachHangService.findById(id);
         hkh1.setTinhTrang(0);
+        hkh1.setNgayCapNhat(date);
         hangKhachHangService.add(hkh1);
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
@@ -109,7 +111,8 @@ public class HangKhachHangController {
 
 
         model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang-tungxoa.jsp");
-        return "layout";
+//        return "layout";
+        return "redirect:/hang-khach-hang/hang-khach-hang-tung-xoa";
     }
 
 
@@ -233,8 +236,11 @@ public class HangKhachHangController {
                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
 
     ) {
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
         HangKhachHang hangKhachHang1 = hangKhachHangService.findById(id);
         hangKhachHang1.setTinhTrang(1);
+        hangKhachHang1.setNgayCapNhat(date);
         hangKhachHangService.add(hangKhachHang1);
 //        model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang.jsp");
 //        model.addAttribute("dulieu", hangKhachHangService.getALL0());
@@ -258,11 +264,11 @@ public class HangKhachHangController {
 
     @GetMapping("/hang-khach-hang/remove/{id}/{idsp}")
     public String removeupdate(Model model,
-                         @PathVariable("id") UUID id,
-                         @PathVariable("idsp") UUID idsp,
-                         @ModelAttribute("HKHHangKhachHang") HangKhachHang HKHHangKhachHang,
-                         @RequestParam("num") Optional<Integer> num,
-                         @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
+                               @PathVariable("id") UUID id,
+                               @PathVariable("idsp") UUID idsp,
+                               @ModelAttribute("HKHHangKhachHang") HangKhachHang HKHHangKhachHang,
+                               @RequestParam("num") Optional<Integer> num,
+                               @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
 
     ) {
         HangKhachHang hangKhachHang1 = hangKhachHangService.findById(id);
@@ -360,7 +366,7 @@ public class HangKhachHangController {
     public String updateadd(Model model,
 //                            @ModelAttribute("hkh")  HangKhachHang hangKhachHang,
 //
-                              @ModelAttribute("HKHHangKhachHang") @Valid HangKhachHang hangKhachHang,
+                            @ModelAttribute("HKHHangKhachHang") @Valid HangKhachHang hangKhachHang,
                             BindingResult bindingResult,
                             @RequestParam("num") Optional<Integer> num,
                             @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
@@ -382,7 +388,7 @@ public class HangKhachHangController {
         }
         Integer sl = hangKhachHangService.findAll().size() + 1;
         String mhd="";
-        if(sl<10){
+        if(sl<9){
             mhd = "MHKH0" + sl;
         }else {
             mhd = "MHKH" + sl;

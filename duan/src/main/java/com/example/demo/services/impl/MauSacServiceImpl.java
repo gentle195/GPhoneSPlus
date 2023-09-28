@@ -15,24 +15,23 @@ import java.util.UUID;
 @Service
 
 public class MauSacServiceImpl implements MauSacService {
-
     @Autowired
-     MauSacRepository mauSacRepository;
+    MauSacRepository mauSacRepository;
 
 
     @Override
     public Page<MauSac> getAll(Pageable pageable) {
-        return mauSacRepository.findAll(pageable);
+        return mauSacRepository.getAll(pageable);
+    }
+
+    @Override
+    public Page<MauSac> getAll1(Pageable pageable) {
+        return mauSacRepository.getAll1(pageable);
     }
 
     @Override
     public List<MauSac> findAll() {
         return mauSacRepository.findAll();
-    }
-
-    @Override
-    public List<MauSac> getAll0() {
-        return mauSacRepository.getAll0();
     }
 
     @Override
@@ -67,5 +66,21 @@ public class MauSacServiceImpl implements MauSacService {
             }
         }
         return false;
+    }
+
+    @Override
+    public void updateTT() {
+        mauSacRepository.updateTT();
+
+    }
+
+    @Override
+    public List<MauSac> search0(String ten) {
+        return mauSacRepository.search0(ten);
+    }
+
+    @Override
+    public List<MauSac> search1(String ten) {
+        return mauSacRepository.search1(ten);
     }
 }

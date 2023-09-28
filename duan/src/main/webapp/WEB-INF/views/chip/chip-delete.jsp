@@ -40,7 +40,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title" style="float: left">Danh sách Chip</h4>
+                    <h4 class="card-title" style="float: left">Danh sách đã xoá</h4>
                     <%--            Tìm kiếm               --%>
                     <form action="/chip/search-1" method="post">
                         <div class="input-group" style="width: 30%; float: right">
@@ -114,12 +114,11 @@
         <%--kết thúc phân trang--%>
     </div>
 </div>
+</body>
 <script src="../../vendors/js/vendor.bundle.base.js"></script>
 <script src="../../js/off-canvas.js"></script>
 <script src="../../js/hoverable-collapse.js"></script>
 <script src="../../js/template.js"></script>
 <script src="../../js/settings.js"></script>
 <script src="../../js/todolist.js"></script>
-</body>
-
 </html>

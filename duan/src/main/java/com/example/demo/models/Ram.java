@@ -30,7 +30,6 @@ public class Ram {
     @Column(name = "id")
     private UUID id;
 
-
     @Column(name = "ma")
     private String ma;
 
@@ -57,6 +56,5 @@ public class Ram {
             return "Còn dùng";
         }
         return "Không còn dùng";
-
     }
 }

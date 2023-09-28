@@ -83,7 +83,7 @@ public class DiaChiController {
         Date date = new Date(millis);
         String mhd="";
         Integer sl = khachHangService.findAll().size() + 1;
-        if(sl<10){
+        if(sl<9){
             mhd = "MKH0" + sl;
         }else {
             mhd = "MKH" + sl;
@@ -119,7 +119,7 @@ public class DiaChiController {
     @PostMapping("/dia-chi/add-khach-hang/{id}")
     public String themNhanhKHud(
             Model model,
-@PathVariable("id") UUID id,
+            @PathVariable("id") UUID id,
 //            @ModelAttribute("hkh") HangKhachHang hangKhachHang,
             @ModelAttribute("dc") DiaChi diaChi,
 //            @ModelAttribute("kh") KhachHang khachHang,
@@ -133,7 +133,7 @@ public class DiaChiController {
         Date date = new Date(millis);
         String mhd="";
         Integer sl = khachHangService.findAll().size() + 1;
-        if(sl<10){
+        if(sl<9){
             mhd = "MKH0" + sl;
         }else {
             mhd = "MKH" + sl;
@@ -193,64 +193,54 @@ public class DiaChiController {
         model.addAttribute("contentPage","dia-chi/dia-chi-tungxoa.jsp");
         return "layout";
     }
+    //
 //
 //
-//
-    @GetMapping("/dia-chi/dia-chi-tungxoa/khoi-phuc/{id}")
-    public String khoiphuc(
+    @GetMapping("/dia-chi/dia-chi-tung-xoa/khoi-phuc/{id2}")
+    public String khoiphuc1(
             Model model,
-            @PathVariable("id") UUID id,
-//            @ModelAttribute("HKHHangKhachHang") HangKhachHang HKHHangKhachHang,
+            @PathVariable("id2") UUID id2,
             @RequestParam("num") Optional<Integer> num,
             @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
-
-
     ) {
-
-        DiaChi hkh1=diaChiService.findById(id);
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        DiaChi hkh1=diaChiService.findById(id2);
         hkh1.setTinhTrang(0);
+        hkh1.setNgayCapNhat(date);
         diaChiService.add(hkh1);
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<DiaChi> list = diaChiService.getall11(pageable);
-
         model.addAttribute("dulieu", list.getContent());
         model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("tong", diaChiService.getall1().size());
         model.addAttribute("service", diaChiService);
-
-
         model.addAttribute("contentPage","dia-chi/dia-chi-tungxoa.jsp");
-        return "layout";
+        return "redirect:/dia-chi/dia-chi-tung-xoa";
+//        return "layout";
     }
-//
-//
-//
+
+
+
     @GetMapping("/dia-chi/dia-chi-tungxoa/khoi-phuc-het")
     public String khoiphuchet(
             Model model,
-//            @PathVariable("id") UUID id,
-//            @ModelAttribute("HKHHangKhachHang") HangKhachHang HKHHangKhachHang,
             @RequestParam("num") Optional<Integer> num,
             @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
 
 
     ) {
 
-//        HangKhachHang hkh1=hangKhachHangService.findById(id);
-//        hkh1.setTinhTrang(0);
-//        hangKhachHangService.add(hkh1);
+
         diaChiService.update0();
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<DiaChi> list = diaChiService.getall11(pageable);
-
         model.addAttribute("dulieu", list.getContent());
         model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("tong", diaChiService.getall1().size());
         model.addAttribute("service", diaChiService);
-
-
         model.addAttribute("contentPage","dia-chi/dia-chi-tungxoa.jsp");
         return "layout";
     }
@@ -262,7 +252,7 @@ public class DiaChiController {
             @ModelAttribute("dc") DiaChi diaChi,
             @RequestParam("num") Optional<Integer> num,
             @RequestParam(name = "size", defaultValue = "5", required = false) Integer size,
- @ModelAttribute("khmodal") KhachHang khachHang1
+            @ModelAttribute("khmodal") KhachHang khachHang1
 
     ) {
 
@@ -345,12 +335,13 @@ public class DiaChiController {
                          @ModelAttribute("khmodal") KhachHang khachHang1
 
     ) {
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
         DiaChi hangKhachHang1 = diaChiService.findById(id);
         hangKhachHang1.setTinhTrang(1);
+        hangKhachHang1.setNgayCapNhat(date);
         diaChiService.add(hangKhachHang1);
-//        model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang.jsp");
-//        model.addAttribute("dulieu", hangKhachHangService.getALL0());
-//        model.addAttribute("tong", hangKhachHangService.getALL0().size());
+
 
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
@@ -366,43 +357,14 @@ public class DiaChiController {
         return "layout";
     }
 
-    @GetMapping("/dia-chi/remove/{id}/{idsp}")
-    public String removeupdate(Model model,
-                         @PathVariable("id") UUID id,
-                               @PathVariable("idsp") UUID idsp,
-                         @ModelAttribute("dc") DiaChi diaChi,
-                         @RequestParam("num") Optional<Integer> num,
-                         @RequestParam(name = "size", defaultValue = "5", required = false) Integer size,
-                         @ModelAttribute("khmodal") KhachHang khachHang1
 
-    ) {
-        DiaChi hangKhachHang1 = diaChiService.findById(id);
-        hangKhachHang1.setTinhTrang(1);
-        diaChiService.add(hangKhachHang1);
-//
-
-        model.addAttribute("dc", diaChiService.findById(idsp));
-        Sort sort = Sort.by("ma").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<DiaChi> list = diaChiService.getAll00(pageable);
-
-        model.addAttribute("dulieu", list.getContent());
-        model.addAttribute("total", kt(list.getTotalPages()));
-        model.addAttribute("tong", diaChiService.getALL0().size());
-        model.addAttribute("service", diaChiService);
-        model.addAttribute("kh", khachHangService.findAll00());
-        model.addAttribute("contentPage","dia-chi/dia-chi-update.jsp");
-        return "layout";
-    }
-//
-//
     @GetMapping("/dia-chi/view-update/{id}")
     public String viewUpdate(Model model,
                              @PathVariable("id") UUID id,
                              @ModelAttribute("dc") DiaChi hangKhachHang,
                              @RequestParam("num") Optional<Integer> num,
                              @RequestParam(name = "size", defaultValue = "5", required = false) Integer size,
-                                         @ModelAttribute("khmodal") KhachHang khachHang1
+                             @ModelAttribute("khmodal") KhachHang khachHang1
 
     ) {
 
@@ -410,7 +372,6 @@ public class DiaChiController {
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<DiaChi> list = diaChiService.getAll00(pageable);
-
         model.addAttribute("dulieu", list.getContent());
         model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("tong", diaChiService.getALL0().size());
@@ -419,7 +380,7 @@ public class DiaChiController {
         model.addAttribute("contentPage","dia-chi/dia-chi-update.jsp");
         return "layout";
     }
-//
+    //
 //
     @PostMapping("/dia-chi/update")
     public String updateDongSP(Model model,
@@ -436,7 +397,6 @@ public class DiaChiController {
             Sort sort = Sort.by("ma").descending();
             Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
             Page<DiaChi> list = diaChiService.getAll00(pageable);
-
             model.addAttribute("dulieu", list.getContent());
             model.addAttribute("total", kt(list.getTotalPages()));
             model.addAttribute("tong", diaChiService.getALL0().size());
@@ -498,7 +458,7 @@ public class DiaChiController {
         }
         Integer sl = diaChiService.findAll().size() + 1;
         String mhd="";
-        if(sl<10){
+        if(sl<9){
             mhd = "MDC0" + sl;
         }else {
             mhd = "MDC" + sl;

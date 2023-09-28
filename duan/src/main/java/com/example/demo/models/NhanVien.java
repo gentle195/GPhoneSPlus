@@ -21,6 +21,7 @@ import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.UUID;
 
@@ -45,7 +46,7 @@ public class NhanVien {
     @Column(name = "ho_ten")
     private String hoTen;
 
-//    @NotBlank(message = "Không để trống thông tin")
+    //    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "url_anh")
     private String urlAnh;
 
@@ -71,7 +72,7 @@ public class NhanVien {
     private Date ngaySinh;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Column(name = "can_cuoc_con_dan")
+    @Column(name = "can_cuoc_cong_dan")
     private String canCuoc;
 
     @NotBlank(message = "Không để trống thông tin")
@@ -89,6 +90,10 @@ public class NhanVien {
     @Column(name = "ngay_cap_nhat")
     private Date ngayCapNhat;
 
+
+    @Column(name = "luong")
+    private BigDecimal luong;
+
     @NotNull(message = "Không để trống thông tin")
     @Column(name = "tinh_trang")
     private int tinhTrang;
@@ -96,4 +101,12 @@ public class NhanVien {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_chuc_vu")
     private ChucVu chucVu;
+
+    public String trangThai() {
+        if (tinhTrang == 0) {
+            return "Đang làm việc";
+        }
+        return "Đã nghỉ việc";
+    }
+
 }

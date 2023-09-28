@@ -41,6 +41,22 @@ public class ManHinhController {
         model.addAttribute("contentPage", "man-hinh/hien-thi.jsp");
         return "layout";
     }
+
+    @GetMapping("/hien-thi-delete")
+    public String hienThiDelete(Model model, @ModelAttribute("manHinh") ManHinh manHinh,
+                                @RequestParam("pageNum") Optional<Integer> num,
+                                @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer size) {
+
+        Sort sort = Sort.by("ngayTao").descending();
+        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+        Page<ManHinh> page = manHinhService.getAll1(pageable);
+        model.addAttribute("contentPage", "man-hinh/man-hinh-delete.jsp");
+        model.addAttribute("listManHinh", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+        return "layout";
+    }
+
     @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable("id") UUID id) {
         ManHinh hsp = manHinhService.findById(id);
@@ -49,21 +65,20 @@ public class ManHinhController {
         return "layout";
     }
 
-    @GetMapping("/view-add")
-    public String viewAdd(Model model, @ModelAttribute("manHinh") ManHinh manHinh) {
-        model.addAttribute("manHinh", new ManHinh());
-        model.addAttribute("contentPage", "man-hinh/add.jsp");
-        return "layout";
-    }
-
     @PostMapping("/add")
     public String add(Model model, @ModelAttribute("manHinh") @Valid ManHinh manHinh, BindingResult bindingResult,
                       @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("contentPage", "man-hinh/add.jsp");
+            Sort sort = Sort.by("ngayTao").ascending();
+            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+            Page<ManHinh> list = manHinhService.getAll(pageable);
+            model.addAttribute("listManHinh", list.getContent());
+            model.addAttribute("total", list.getTotalPages());
+            model.addAttribute("contentPage", "man-hinh/hien-thi.jsp");
             return "layout";
         }
         manHinh.setNgayTao(Date.valueOf(LocalDate.now()));
+        manHinh.setTinhTrang(0);
         manHinh.setMa("MH" + String.valueOf(manHinhService.findAll().size() + 1));
         manHinhService.add(manHinh);
         return "redirect:/man-hinh/hien-thi";
@@ -73,7 +88,7 @@ public class ManHinhController {
     @PostMapping("/update/{id}")
     public String update(Model model, @ModelAttribute("manHinh") @Valid ManHinh manHinh, BindingResult bindingResult, @PathVariable("id") UUID id) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("contentPage", "man-hinh/hien-thi.jsp");
+            model.addAttribute("contentPage", "man-hinh/update.jsp");
             return "layout";
         }
         ManHinh hsp = manHinhService.findById(id);
@@ -93,37 +108,103 @@ public class ManHinhController {
         return "redirect:/man-hinh/hien-thi";
     }
 
-    @GetMapping("/delete/{id}")
-    public String delete(Model model, @ModelAttribute("manHinh") ManHinh manHinh, @PathVariable("id") UUID id, @RequestParam("num") Optional<Integer> num,
-                         @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
-        manHinhService.delete(id);
-        Pageable pageable = PageRequest.of(num.orElse(0), size);
-        Page<ManHinh> list = manHinhService.getAll(pageable);
-        model.addAttribute("listManHinh", list.getContent());
-        model.addAttribute("total", list.getTotalPages());
-        model.addAttribute("contentPage", "man-hinh/hien-thi.jsp");
+    @GetMapping("/update-tt")
+    public String updateTT(Model model, @RequestParam("pageNum") Optional<Integer> pageNum,
+                           @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize,
+                           @ModelAttribute("manHinh") ManHinh manHinh) {
+        Sort sort = Sort.by("ngayTao").ascending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        manHinh.setNgayCapNhat(date);
+        manHinhService.updateTT();
+        Page<ManHinh> page = manHinhService.getAll1(pageable);
+        model.addAttribute("contentPage", "man-hinh/man-hinh-delete.jsp");
+        model.addAttribute("listManHinh", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
         return "layout";
     }
 
-    @PostMapping("/search")
-    public String search(Model model, @ModelAttribute("manHinh") ManHinh manHinh, @RequestParam("search") String search,
-                         @RequestParam("num") Optional<Integer> num,
-                         @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
-        if(search.isEmpty()){
-            model.addAttribute("thongBao","Không để trống thông tin");
-            Sort sort = Sort.by("ngayTao").ascending();
+    @GetMapping("/update-status/{id}")
+    public String updateStatus(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
+                               @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("manHinh") ManHinh manHinh) {
+        Sort sort = Sort.by("ngayTao").ascending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+
+        ManHinh manHinh1 = manHinhService.findById(id);
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        manHinh1.setNgayCapNhat(date);
+        manHinh1.setTinhTrang(1);
+        manHinhService.update(id, manHinh1);
+        Page<ManHinh> page = manHinhService.getAll(pageable);
+        model.addAttribute("contentPage", "man-hinh/hien-thi.jsp");
+        model.addAttribute("listManHinh", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+        return "layout";
+    }
+
+    @GetMapping("/reset-status/{id}")
+    public String resetStatus(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
+                              @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("manHinh") ManHinh manHinh) {
+        Sort sort = Sort.by("ngayTao").ascending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+        ManHinh manHinh1 = manHinhService.findById(id);
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        manHinh1.setNgayCapNhat(date);
+
+        manHinh1.setTinhTrang(0);
+        manHinhService.update(id, manHinh1);
+        Page<ManHinh> page = manHinhService.getAll1(pageable);
+        model.addAttribute("contentPage", "man-hinh/man-hinh-delete.jsp");
+        model.addAttribute("listManHinh", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+        return "layout";
+    }
+
+    @PostMapping("/search-0")
+    public String search0(Model model, @ModelAttribute("manHinh") ManHinh manHinh, @RequestParam("search") String search, @RequestParam("num") Optional<Integer> num,
+                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+        if (search.isEmpty()) {
+            model.addAttribute("thongBao", "Không để trống thông tin");
+            Sort sort = Sort.by("ngayTao").descending();
             Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
             Page<ManHinh> list = manHinhService.getAll(pageable);
             model.addAttribute("listManHinh", list.getContent());
             model.addAttribute("total", list.getTotalPages());
             model.addAttribute("contentPage", "man-hinh/hien-thi.jsp");
             return "layout";
-        }else{
-            List<ManHinh> list = manHinhService.search(search);
+        } else {
+            List<ManHinh> list = manHinhService.search0(search);
             model.addAttribute("listManHinh", list);
-            model.addAttribute("total", 0);
             model.addAttribute("contentPage", "man-hinh/hien-thi.jsp");
             return "layout";
         }
+
+    }
+
+    @PostMapping("/search-1")
+    public String search1(Model model, @ModelAttribute("manHinh") ManHinh manHinh, @RequestParam("search") String search, @RequestParam("num") Optional<Integer> num,
+                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+        if (search.isEmpty()) {
+            model.addAttribute("thongBao", "Không để trống thông tin");
+            Sort sort = Sort.by("ngayTao").descending();
+            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+            Page<ManHinh> list = manHinhService.getAll1(pageable);
+            model.addAttribute("listManHinh", list.getContent());
+            model.addAttribute("total", list.getTotalPages());
+            model.addAttribute("contentPage", "man-hinh/man-hinh-delete.jsp");
+            return "layout";
+        } else {
+            List<ManHinh> list = manHinhService.search1(search);
+            model.addAttribute("listManHinh", list);
+            model.addAttribute("contentPage", "man-hinh/man-hinh-delete.jsp");
+            return "layout";
+        }
+
     }
 }

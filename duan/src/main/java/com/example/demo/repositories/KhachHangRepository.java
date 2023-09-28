@@ -100,8 +100,8 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
             "on x.id=n.id_man_hinh\n" +
             "left join quy_doi y\n" +
             "on y.id=a.id_quy_doi\n"
-           ,nativeQuery = true)
-   List<KhachHangHoaDon> getHD();
+            ,nativeQuery = true)
+    List<KhachHangHoaDon> getHD();
 
 
     @Query("select kh from KhachHang kh  where kh.ma like %:timkiem% and kh.tinhTrang=0 or kh.hoTen like %:timkiem% and kh.tinhTrang=0 or kh.hangKhachHang.ten like %:timkiem% and kh.tinhTrang=0 ")

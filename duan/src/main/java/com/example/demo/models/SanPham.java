@@ -93,7 +93,7 @@ public class SanPham {
     @Column(name = "mo_ta")
     private String moTa;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_hang")
     private HangSanPham hangSanPham;
 
@@ -101,11 +101,11 @@ public class SanPham {
 //    @JoinColumn(name = "id_anh")
 //    private Anh anh;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_man_hinh")
     private ManHinh manHinh;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_camera")
     private Camera camera;
 }
