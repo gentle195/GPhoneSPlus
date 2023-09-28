@@ -47,14 +47,7 @@ public class Rom {
     @Column(name = "tinh_trang")
     private int tinhTrang;
 
-    @NotBlank(message = "Không để trống thông tin")
+//    @ NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")
     private String moTa;
-
-    public String tt() {
-        if (tinhTrang == 0) {
-            return "Còn hoạt động";
-        }
-        return "Không còn hoạt động";
-    }
 }
