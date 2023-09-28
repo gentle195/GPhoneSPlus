@@ -53,6 +53,11 @@ public class RomServiceImpl implements RomService {
     }
 
     @Override
+    public List<Rom> search2(String dungluong) {
+        return romRepository.search2(dungluong);
+    }
+
+    @Override
     public Rom update(UUID id, Rom rom) {
         if (id != null) {
             Rom romUpdate = romRepository.findById(id).orElse(null);

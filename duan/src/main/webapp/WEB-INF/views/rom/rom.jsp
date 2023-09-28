@@ -19,30 +19,51 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/hang-dien-thoai/hien-thi" role="tab">Thông tin Hãng </a>
+            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+               aria-controls="description" aria-selected="true">Thông tin Rom</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               aria-controls="description" aria-selected="true">Hãng đã xoá</a>
+            <a class="nav-link" href="/rom/hien-thi-tung-xoa" role="tab">Rom đã xoá</a>
         </li>
-        <a href="/rom/khoi-phuc-het" class="btn btn-outline-danger btn-icon-text" style="float: right; margin-left: 720px"
-           tabindex="-1"
-           role="button"
-           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-            <i class="ti-reload btn-icon-prepend"></i>
-            Status All
-        </a>
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="description" role="tabpanel"
          aria-labelledby="description-tab">
+        <form:form action="/rom/add" method="post" modelAttribute="dulieuxem">
+            <%--    <div class="col-md-6 grid-margin stretch-card" >--%>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Thêm Rom</h4>
+                    <form class="forms-sample">
+                        <div class="form-group">
+                            <form:label path="dungLuong"><b>Dung lượng:</b></form:label>
+                            <form:input type="text" class="form-control" id="dungLuong" path="dungLuong" required="true" />
+                            <form:errors path="dungLuong" cssStyle="color: red"></form:errors>
+                        </div>
+
+                        <div class="form-group">
+                            <form:label path="moTa"><b>Mô Tả:</b></form:label>
+                            <form:textarea class="form-control" id="moTa" path="moTa" rows="3"></form:textarea>
+                            <form:errors path="moTa" cssStyle="color: red"></form:errors>
+                        </div>
+                        <div style="text-align: center">
+                            <button type="submit" class="btn btn-primary mr-2"
+                                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                ADD
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <%--    </div>--%>
+        </form:form>
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title" style="float: left">Danh sách Rom</h4>
                     <%--            Tìm kiếm               --%>
-                    <form action="/hang-dien-thoai/search2" method="post">
+                    <form action="/rom/search" method="post">
                         <div class="input-group" style="width: 30%; float: right">
                             <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                    aria-label="Bạn tìm gì..." name="search">
@@ -58,8 +79,7 @@
                             <tr>
                                 <th>STT</th>
                                 <th>Mã</th>
-                                <th>Tên hãng</th>
-                                <th>Xuất sứ</th>
+                                <th>Dung lượng</th>
                                 <th>Ngày tạo</th>
                                 <th>Ngày cập nhật</th>
                                 <th>Tình trạng</th>
@@ -73,23 +93,24 @@
                                 <tr>
                                     <td>${i.index+1}</td>
                                     <td>${chip.ma}</td>
-                                    <td>${chip.ten}</td>
-                                    <td>${chip.xuatSu}</td>
+                                    <td>${chip.dungLuong}</td>
                                     <td>${chip.ngayTao}</td>
                                     <td>${chip.ngayCapNhat}</td>
-                                    <td>${chip.tt()}</td>
+                                    <td style="color: green">${chip.tt()}</td>
                                     <td>${chip.moTa}</td>
                                     <td>
-                                            <%--                                            <a href="/detail-chip/${chip.id}" class="btn btn-outline-primary"--%>
-                                            <%--                                               tabindex="-1"--%>
-                                            <%--                                               role="button"--%>
-                                            <%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Detail</a>--%>
-                                        <a href="/hang-dien-thoai/khoi-phuc/${chip.id}" class="btn btn-outline-primary"
+                                        <a href="/rom/detail/${chip.id}" class="btn btn-warning btn-icon-text"
                                            tabindex="-1"
                                            role="button"
-                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Khôi phục</a>
-
-
+                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                            <i class="ti-file btn-icon-prepend"></i>
+                                            Update</a>
+                                        <a href="/rom/delete/${chip.id}" class="btn btn-danger btn-icon-text"
+                                           tabindex="-1"
+                                           role="button"
+                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                            <i class="ti-reload btn-icon-prepend"></i>
+                                            Status</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -103,28 +124,27 @@
         <div align="center">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <ul class="pagination justify-content-center pagination-lg">
-                    <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi?num=0">First</a></li>
+                    <li class="page-item"><a class="page-link" href="/rom/hien-thi?num=0">First</a></li>
 
                     <c:forEach begin="1" end="${total}" varStatus="status">
                         <li class="page-item">
-                            <a href="${pageContext.request.contextPath}/hang-dien-thoai/hien-thi?num=${status.index -1}"
+                            <a href="${pageContext.request.contextPath}/rom/hien-thi?num=${status.index -1}"
                                class="page-link">${status.index}</a>
                         </li>
                     </c:forEach>
 
-                    <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi?num=${total-1}">Last</a></li>
+                    <li class="page-item"><a class="page-link" href="/rom/hien-thi?num=${total-1}">Last</a></li>
                 </ul>
             </div>
         </div>
         <%--kết thúc phân trang--%>
     </div>
 </div>
+</body>
 <script src="../../vendors/js/vendor.bundle.base.js"></script>
 <script src="../../js/off-canvas.js"></script>
 <script src="../../js/hoverable-collapse.js"></script>
 <script src="../../js/template.js"></script>
 <script src="../../js/settings.js"></script>
 <script src="../../js/todolist.js"></script>
-</body>
-
 </html>

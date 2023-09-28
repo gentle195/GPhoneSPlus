@@ -19,13 +19,13 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/hang-dien-thoai/hien-thi" role="tab">Thông tin Hãng </a>
+            <a class="nav-link" href="/san-pham/hien-thi" role="tab">Thông tin Sản Phẩm </a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               aria-controls="description" aria-selected="true">Hãng đã xoá</a>
+               aria-controls="description" aria-selected="true">Sản Phẩm đã xoá</a>
         </li>
-        <a href="/rom/khoi-phuc-het" class="btn btn-outline-danger btn-icon-text" style="float: right; margin-left: 720px"
+        <a href="/san-pham/khoi-phuc-het" class="btn btn-outline-danger btn-icon-text" style="float: right; margin-left: 720px"
            tabindex="-1"
            role="button"
            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
@@ -40,9 +40,9 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title" style="float: left">Danh sách Rom</h4>
+                    <h4 class="card-title" style="float: left">Danh sách Sản Phẩm</h4>
                     <%--            Tìm kiếm               --%>
-                    <form action="/hang-dien-thoai/search2" method="post">
+                    <form action="/san-pham/search2" method="post">
                         <div class="input-group" style="width: 30%; float: right">
                             <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                    aria-label="Bạn tìm gì..." name="search">
@@ -57,39 +57,59 @@
                             <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Mã</th>
-                                <th>Tên hãng</th>
-                                <th>Xuất sứ</th>
+                                <th>Mã SP</th>
+                                <th>Tên SP</th>
+                                <th>Thông số bluetooth</th>
+                                <th>Hỗ trợ mạng</th>
+                                <th>Cổng giao tiếp</th>
+                                <th>Thông số wifi</th>
+                                <th>Kich thước</th>
+                                <th>Trọng lượng</th>
+                                <th>Chất liệu máy</th>
+                                <th>Hệ điều hành</th>
+                                <th>Số khe sim</th>
                                 <th>Ngày tạo</th>
                                 <th>Ngày cập nhật</th>
                                 <th>Tình trạng</th>
-                                <th>Mô tả </th>
+                                <th>Mô tả</th>
+                                <th>Hãng</th>
                                 <th colspan="2">Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <i class="mdi mdi-border-color"></i>
-                            <c:forEach items="${hsp}" var="chip" varStatus="i">
+                            <c:forEach items="${hsp}" var="list" varStatus="i">
                                 <tr>
                                     <td>${i.index+1}</td>
-                                    <td>${chip.ma}</td>
-                                    <td>${chip.ten}</td>
-                                    <td>${chip.xuatSu}</td>
-                                    <td>${chip.ngayTao}</td>
-                                    <td>${chip.ngayCapNhat}</td>
-                                    <td>${chip.tt()}</td>
-                                    <td>${chip.moTa}</td>
+                                    <td>${list.ma}</td>
+                                    <td>${list.ten}</td>
+                                    <td>${list.bluetooth}</td>
+                                    <td>${list.hoTroMang}</td>
+                                    <td>${list.congGiaoTiep}</td>
+                                    <td>${list.thongSoWifi}</td>
+                                    <td>${list.kichThuoc}</td>
+                                    <td>${list.trongLuong}</td>
+                                    <td>${list.chatLieu}</td>
+                                    <td>${list.heDieuHanh}</td>
+                                    <td>${list.soSim}</td>
+                                    <td>${list.ngayTao}</td>
+                                    <td>${list.ngayCapNhat}</td>
+                                    <td><c:if test="${list.tinhTrang==0}">Hoạt động</c:if>
+                                        <c:if test="${list.tinhTrang==1}">Ngừng hoạt động</c:if>
+                                    </td>
+                                    <td>${list.moTa}</td>
+                                    <td>${list.hangSanPham.ten}</td>
                                     <td>
                                             <%--                                            <a href="/detail-chip/${chip.id}" class="btn btn-outline-primary"--%>
                                             <%--                                               tabindex="-1"--%>
                                             <%--                                               role="button"--%>
                                             <%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Detail</a>--%>
-                                        <a href="/hang-dien-thoai/khoi-phuc/${chip.id}" class="btn btn-outline-primary"
+                                        <a href="/san-pham/khoi-phuc/${list.id}" class="btn btn-danger btn-icon-text"
                                            tabindex="-1"
                                            role="button"
-                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Khôi phục</a>
-
-
+                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                            <i class="ti-reload btn-icon-prepend"></i>
+                                            Status</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -103,16 +123,16 @@
         <div align="center">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <ul class="pagination justify-content-center pagination-lg">
-                    <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi?num=0">First</a></li>
+                    <li class="page-item"><a class="page-link" href="/rom/hien-thi?num=0">First</a></li>
 
                     <c:forEach begin="1" end="${total}" varStatus="status">
                         <li class="page-item">
-                            <a href="${pageContext.request.contextPath}/hang-dien-thoai/hien-thi?num=${status.index -1}"
+                            <a href="${pageContext.request.contextPath}/rom/hien-thi?num=${status.index -1}"
                                class="page-link">${status.index}</a>
                         </li>
                     </c:forEach>
 
-                    <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi?num=${total-1}">Last</a></li>
+                    <li class="page-item"><a class="page-link" href="/rom/hien-thi?num=${total-1}">Last</a></li>
                 </ul>
             </div>
         </div>

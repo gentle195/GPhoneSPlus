@@ -355,9 +355,9 @@
             </a>
             <div class="collapse" id="tables">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/chip/hien-thi">Chi Tiết Sản Phẩm</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/chi-tiet-san-pham/hien-thi">Chi Tiết Sản Phẩm</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/san-pham/hien-thi">Sản Phẩm</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/hang/hien-thi">Hãng</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/hang-dien-thoai/hien-thi">Hãng</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/mau-sac/hien-thi">Màu Sắc</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/camera/hien-thi">Camera</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/dung-luong-pin/hien-thi">Dung Lượng Pin</a></li>

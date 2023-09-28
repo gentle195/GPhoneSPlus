@@ -171,7 +171,7 @@ public class ModalController {
                          @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<Rom> page = romService.getAll(pageable);
+        Page<Rom> page = romService.getAll0(pageable);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("list", page.getContent());

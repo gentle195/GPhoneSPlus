@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface RomService {
-
-
     public List<Rom> findAll();
 
     public Rom findById(UUID id);
@@ -17,6 +15,8 @@ public interface RomService {
     public Rom add(Rom rom);
 
     List<Rom>search(String dungluong);
+
+    List<Rom>search2(String dungluong);
 
     public Rom update(UUID id, Rom rom);
 

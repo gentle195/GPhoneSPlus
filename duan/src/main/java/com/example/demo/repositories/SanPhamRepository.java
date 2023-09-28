@@ -2,7 +2,11 @@ package com.example.demo.repositories;
 
 import com.example.demo.models.Rom;
 import com.example.demo.models.SanPham;
+import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +21,17 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
     @Query("SELECT r FROM SanPham r WHERE r.ten LIKE %:dungluong% or r.heDieuHanh LIKE %:dungluong% and r.tinhTrang=1")
     List<SanPham> search2(String dungluong);
 
+    @Query("select r from SanPham r  where r.tinhTrang=0")
+    Page<SanPham> getall0(Pageable pageable);
+
+    @Query("select r from SanPham r  where r.tinhTrang=1")
+    Page<SanPham> getall1(Pageable pageable);
+
+    @Transactional
+    @Modifying
+    @Query(value ="update san_pham set tinh_trang=0",nativeQuery = true)
+    void update0();
+
     @Query("select sp from SanPham sp left join ManHinh m on sp.manHinh.id=m.id " +
             "left join HangSanPham hang on sp.hangSanPham.id=hang.id" +
             " left join Camera c on sp.camera.id=c.id " +
@@ -28,5 +43,4 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
 //            +"and (:giaBanMin is null and :giaBanMax is null or ct.giaBan between :giaBanMin and :giaBanMax)"
     )
     List<SanPham> loc(UUID idHang, UUID idMan, UUID idCamera);
-
 }
