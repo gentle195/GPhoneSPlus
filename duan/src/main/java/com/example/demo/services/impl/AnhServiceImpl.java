@@ -19,10 +19,14 @@ public class AnhServiceImpl implements AnhService {
     @Autowired
     AnhRepository anhRepository;
 
-
     @Override
     public Page<Anh> getAll(Pageable pageable) {
-        return anhRepository.findAll(pageable);
+        return anhRepository.getAll(pageable);
+    }
+
+    @Override
+    public Page<Anh> getAll1(Pageable pageable) {
+        return anhRepository.getAll1(pageable);
     }
 
     @Override
@@ -36,31 +40,46 @@ public class AnhServiceImpl implements AnhService {
     }
 
     @Override
-    public Anh add(Anh anh) {
-        return anhRepository.save(anh);
+    public Anh add(Anh chip) {
+        return anhRepository.save(chip);
     }
 
     @Override
-    public Anh update(UUID id, Anh anh) {
+    public Anh update(UUID id, Anh chip) {
         if (id != null) {
-            Anh anhUpdate = anhRepository.findById(id).orElse(null);
-            if (anhUpdate != null) {
-                BeanUtils.copyProperties(anh, anhUpdate);
-                anhRepository.save(anhUpdate);
+            Anh chipUpdate = anhRepository.findById(id).orElse(null);
+            if (chipUpdate != null) {
+                BeanUtils.copyProperties(chip, chipUpdate);
+                anhRepository.save(chipUpdate);
             }
         }
         return null;
     }
 
     @Override
+    public void updateTT() {
+        anhRepository.updateTT();
+    }
+
+    @Override
     public Boolean delete(UUID id) {
         if (id != null) {
-            Anh anh = anhRepository.findById(id).orElse(null);
-            if (anh != null) {
-                anhRepository.delete(anh);
+            Anh chip = anhRepository.findById(id).orElse(null);
+            if (chip != null) {
+                anhRepository.delete(chip);
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public List<Anh> search0(String ten) {
+        return anhRepository.sreach0(ten);
+    }
+
+    @Override
+    public List<Anh> search1(String ten) {
+        return anhRepository.sreach1(ten);
     }
 }
