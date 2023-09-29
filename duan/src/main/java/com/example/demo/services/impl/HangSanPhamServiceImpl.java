@@ -32,6 +32,11 @@ public class HangSanPhamServiceImpl implements HangSanPhamService {
     }
 
     @Override
+    public List<HangSanPham> findAll0() {
+        return hangSanPhamRepository.findAll0();
+    }
+
+    @Override
 
     public HangSanPham findById(UUID id) {
         return hangSanPhamRepository.findById(id).orElse(null);
@@ -72,6 +77,11 @@ public class HangSanPhamServiceImpl implements HangSanPhamService {
     @Override
     public List<HangSanPham>search2(String dungluong){
         return hangSanPhamRepository.search2(dungluong);
+    }
+
+    @Override
+    public void updateTT() {
+        hangSanPhamRepository.update0();
     }
 
     @Override

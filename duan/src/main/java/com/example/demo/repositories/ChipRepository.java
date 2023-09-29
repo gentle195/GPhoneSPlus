@@ -20,6 +20,9 @@ public interface ChipRepository extends JpaRepository<Chip, UUID> {
     @Query("select c from Chip c  where c.tinhTrang=1")
     Page<Chip> getAll1(Pageable pageable);
 
+    @Query("select c from Chip c  where  c.tinhTrang = 0")
+    List<Chip> findAll0();
+
     @Query("select c from Chip c  where  c.tinhTrang = 0 and (c.ma like %:ten% or c.ten like %:ten% or c.loaiChip like %:ten%)")
     List<Chip> sreach0(String ten);
 
@@ -28,7 +31,7 @@ public interface ChipRepository extends JpaRepository<Chip, UUID> {
 
     @Transactional
     @Modifying
-    @Query(value ="update Chip set tinh_trang=0",nativeQuery = true)
+    @Query(value = "update Chip set tinh_trang=0", nativeQuery = true)
     void updateTT();
 
 }

@@ -19,6 +19,9 @@ public interface NhanVienRepository extends JpaRepository<NhanVien, UUID> {
     @Query("select nv from NhanVien nv  where nv.tinhTrang=0")
     Page<NhanVien> getAll(Pageable pageable);
 
+    @Query("select nv from NhanVien nv  where nv.tinhTrang=0")
+    List<NhanVien> findAll0();
+
     @Query("select nv from NhanVien nv  where nv.tinhTrang=1")
     Page<NhanVien> getAll1(Pageable pageable);
 

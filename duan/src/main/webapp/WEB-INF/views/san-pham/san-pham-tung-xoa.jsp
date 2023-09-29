@@ -22,10 +22,14 @@
             <a class="nav-link" href="/san-pham/hien-thi" role="tab">Thông tin Sản Phẩm </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="/san-pham/view-add" role="tab">Thêm sản phẩm </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
                aria-controls="description" aria-selected="true">Sản Phẩm đã xoá</a>
         </li>
-        <a href="/san-pham/khoi-phuc-het" class="btn btn-outline-danger btn-icon-text" style="float: right; margin-left: 720px"
+        <a href="/san-pham/khoi-phuc-het" class="btn btn-outline-danger btn-icon-text"
+           style="float: right; margin-left: 720px"
            tabindex="-1"
            role="button"
            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
@@ -56,9 +60,11 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>STT</th>
                                 <th>Mã SP</th>
                                 <th>Tên SP</th>
+                                <th>Hãng</th>
+                                <th>Màn hình</th>
+                                <th>Camera</th>
                                 <th>Thông số bluetooth</th>
                                 <th>Hỗ trợ mạng</th>
                                 <th>Cổng giao tiếp</th>
@@ -72,17 +78,18 @@
                                 <th>Ngày cập nhật</th>
                                 <th>Tình trạng</th>
                                 <th>Mô tả</th>
-                                <th>Hãng</th>
+
                                 <th colspan="2">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <i class="mdi mdi-border-color"></i>
                             <c:forEach items="${hsp}" var="list" varStatus="i">
                                 <tr>
-                                    <td>${i.index+1}</td>
                                     <td>${list.ma}</td>
                                     <td>${list.ten}</td>
+                                    <td>${list.hangSanPham.ten}</td>
+                                    <td>${list.manHinh.thongSo}</td>
+                                    <td>${list.camera.thongSo}</td>
                                     <td>${list.bluetooth}</td>
                                     <td>${list.hoTroMang}</td>
                                     <td>${list.congGiaoTiep}</td>
@@ -98,13 +105,14 @@
                                         <c:if test="${list.tinhTrang==1}">Ngừng hoạt động</c:if>
                                     </td>
                                     <td>${list.moTa}</td>
-                                    <td>${list.hangSanPham.ten}</td>
                                     <td>
-                                            <%--                                            <a href="/detail-chip/${chip.id}" class="btn btn-outline-primary"--%>
-                                            <%--                                               tabindex="-1"--%>
-                                            <%--                                               role="button"--%>
-                                            <%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Detail</a>--%>
-                                        <a href="/san-pham/khoi-phuc/${list.id}" class="btn btn-danger btn-icon-text"
+                                        <a href="/san-pham/detail/${list.id}" class="btn btn-warning btn-icon-text"
+                                           tabindex="-1"
+                                           role="button"
+                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                            <i class="ti-file btn-icon-prepend"></i>
+                                            Update</a>
+                                        <a href="/san-pham/delete/${list.id}" class="btn btn-danger btn-icon-text"
                                            tabindex="-1"
                                            role="button"
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">

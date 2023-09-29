@@ -39,7 +39,6 @@ public class MauSacController {
         mauSac.setTinhTrang(0);
         Page<MauSac> page = mauSacService.getAll(pageable);
         model.addAttribute("total", page.getTotalPages());
-
         model.addAttribute("listMauSac", page.getContent());
         model.addAttribute("list", page.getNumber());
         model.addAttribute("contentPage", "mausac/mau-sac.jsp");

@@ -20,6 +20,9 @@ public interface PinRepository extends JpaRepository<Pin, UUID> {
     @Query("select p from Pin p  where p.tinhTrang= 0")
     Page<Pin> getAll(Pageable pageable);
 
+    @Query("select p from Pin p  where p.tinhTrang= 0")
+    List<Pin> findAll0();
+
     @Query("select p from Pin p  where p.tinhTrang= 1")
     Page<Pin> getAll1(Pageable pageable);
 
@@ -31,6 +34,6 @@ public interface PinRepository extends JpaRepository<Pin, UUID> {
 
     @Transactional
     @Modifying
-    @Query(value ="update Pin set tinh_trang = 0",nativeQuery = true)
+    @Query(value = "update Pin set tinh_trang = 0", nativeQuery = true)
     void updateTT();
 }

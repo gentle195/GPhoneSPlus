@@ -14,6 +14,8 @@ public interface KhachHangService {
 
     public List<KhachHang> findAll();
 
+    public List<KhachHang> findAll0();
+
     public KhachHang findById(UUID id);
 
     public KhachHang add(KhachHang khachHang);
@@ -23,14 +25,21 @@ public interface KhachHangService {
     public Boolean delete(UUID id);
 
     public Page<KhachHang> getALL0(Pageable pageable);
+
     public Page<KhachHang> getALL1(Pageable pageable);
 
     public List<KhachHang> findAll00();
+
     public List<KhachHang> findAll11();
+
     public List<KhachHangLSMuaHang> fillLSMuaHang(UUID uuid);
+
     List<KhachHangHoaDon> getHD();
+
     List<KhachHang> timkiem(String timkiem);
+
     List<KhachHang> timkiem1(String timkiem);
+
     Page<KhachHangLSMuaHang> getLSMuaHangPage(Pageable pageable, UUID idkh);
 }
 

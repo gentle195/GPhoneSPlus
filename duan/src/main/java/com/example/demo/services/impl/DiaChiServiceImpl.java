@@ -31,6 +31,11 @@ public class DiaChiServiceImpl implements DiaChiService {
     }
 
     @Override
+    public List<DiaChi> findAll0() {
+        return diaChiRepository.findAll0();
+    }
+
+    @Override
     public List<DiaChi> getALL0() {
         return diaChiRepository.getall0();
     }

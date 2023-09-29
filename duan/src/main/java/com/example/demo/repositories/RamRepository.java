@@ -17,6 +17,9 @@ public interface RamRepository extends JpaRepository<Ram, UUID> {
     @Query("select r from Ram r where r.tinhTrang= 0")
     Page<Ram> getAll(Pageable pageable);
 
+    @Query("select r from Ram r where r.tinhTrang= 0")
+    List<Ram> findAll0();
+
     @Query("select r from Ram r where r.tinhTrang= 1")
     Page<Ram> getAll1(Pageable pageable);
 
@@ -28,6 +31,6 @@ public interface RamRepository extends JpaRepository<Ram, UUID> {
 
     @Transactional
     @Modifying
-    @Query(value ="update Ram set tinh_trang=0",nativeQuery = true)
+    @Query(value = "update Ram set tinh_trang=0", nativeQuery = true)
     void updateTT();
 }

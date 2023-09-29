@@ -36,6 +36,11 @@ public class PinServiceImpl implements PinService {
     }
 
     @Override
+    public List<Pin> findAll0() {
+        return pinRepository.findAll0();
+    }
+
+    @Override
     public Pin findById(UUID id) {
         return pinRepository.findById(id).orElse(null);
     }

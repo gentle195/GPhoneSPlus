@@ -30,6 +30,11 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     }
 
     @Override
+    public List<ChiTietSanPham> findAll0() {
+        return chiTietSanPhamRepository.findAll0();
+    }
+
+    @Override
     public List<ChiTietSanPham> search(String ten) {
         return chiTietSanPhamRepository.search(ten);
     }
@@ -40,8 +45,8 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     }
 
     @Override
-    public List<ChiTietSanPham> loc(UUID idHang,UUID idRam,UUID idRom,UUID idDLPin,UUID idChip,UUID moTaMan,UUID moTaCam) {
-        return chiTietSanPhamRepository.loc(idHang, idRam, idRom, idDLPin,idChip,moTaMan,moTaCam);
+    public List<ChiTietSanPham> loc(UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam) {
+        return chiTietSanPhamRepository.loc(idHang, idRam, idRom, idDLPin, idChip, moTaMan, moTaCam);
     }
 
     @Override
@@ -95,7 +100,7 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
 
     @Override
     public Page<ChiTietSanPham> finAllTTOn(Pageable pageable) {
-       return chiTietSanPhamRepository.getChiTietSanPhamOn(pageable);
+        return chiTietSanPhamRepository.getChiTietSanPhamOn(pageable);
     }
 
     @Override

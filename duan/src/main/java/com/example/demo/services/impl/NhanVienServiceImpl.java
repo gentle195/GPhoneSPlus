@@ -37,6 +37,11 @@ public class NhanVienServiceImpl implements NhanVienService {
     }
 
     @Override
+    public List<NhanVien> findAll0() {
+        return nhanVienRepository.findAll0();
+    }
+
+    @Override
     public NhanVien findById(UUID id) {
         return nhanVienRepository.findById(id).orElse(null);
     }

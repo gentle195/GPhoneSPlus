@@ -37,6 +37,6 @@ public interface HangKhachHangRepository extends JpaRepository<HangKhachHang, UU
 
     @Transactional
     @Modifying
-    @Query(value ="update hang_khach_hang set tinh_trang=0 , ngay_cap_nhat=convert(date,getdate(),105)",nativeQuery = true)
+    @Query(value = "update hang_khach_hang set tinh_trang=0 , ngay_cap_nhat=convert(date,getdate(),105)", nativeQuery = true)
     void update0();
 }

@@ -82,22 +82,22 @@ public class ChiTietSanPhamController {
         model.addAttribute("total", chiTietSanPhamPage.getTotalPages());
         model.addAttribute("list", chiTietSanPhamPage.getContent());
         model.addAttribute("size", chiTietSanPhamPage.getSize());
-        model.addAttribute("listSanPham", sanPhamService.findAll());
-        model.addAttribute("listSanPham", sanPhamService.findAll());
-        model.addAttribute("listMauSac", mauSacService.findAll());
-        model.addAttribute("listChip", chipService.findAll());
-        model.addAttribute("listRam", ramService.findAll());
-        model.addAttribute("listRom", romService.findAll());
-        model.addAttribute("listHang", hangSanPhamService.findAll());
-        model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
-        model.addAttribute("listPin", pinService.findAll());
-        model.addAttribute("listManHinh", manHinhService.findAll());
-        model.addAttribute("listCamera", cameraService.findAll());
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("contentPage", "chi-tiet-san-pham/index.jsp");
         model.addAttribute("page", chiTietSanPhamPage.getNumber());
         model.addAttribute("listCTSP", chiTietSanPhamPage.getContent());
         return "layout";
     }
+
     @GetMapping("/hien-thi-da-xoa")
     public String hienThiDaXoa(Model model, @RequestParam("pageNum") Optional<Integer> pageNum
     ) {
@@ -108,8 +108,7 @@ public class ChiTietSanPhamController {
         model.addAttribute("total", chiTietSanPhamPage.getTotalPages());
         model.addAttribute("list", chiTietSanPhamPage.getContent());
         model.addAttribute("size", chiTietSanPhamPage.getSize());
-        model.addAttribute("listSanPham", sanPhamService.findAll());
-
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
         model.addAttribute("contentPage", "chi-tiet-san-pham/san-pham-da-xoa.jsp");
         model.addAttribute("page", chiTietSanPhamPage.getNumber());
         model.addAttribute("listCTSP", chiTietSanPhamPage.getContent());
@@ -125,51 +124,42 @@ public class ChiTietSanPhamController {
                           @ModelAttribute(name = "sanPham") SanPham sanPham,
                           @ModelAttribute(name = "chitietsanpham") ChiTietSanPham chiTietSanPham) {
 
-        model.addAttribute("listSanPham", sanPhamService.findAll());
-        model.addAttribute("listMauSac", mauSacService.findAll());
-        model.addAttribute("listChip", chipService.findAll());
-        model.addAttribute("listRam", ramService.findAll());
-        model.addAttribute("listRom", romService.findAll());
-        model.addAttribute("listHang", hangSanPhamService.findAll());
-        model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
-        model.addAttribute("listPin", pinService.findAll());
-        model.addAttribute("listManHinh", manHinhService.findAll());
-        model.addAttribute("listCamera", cameraService.findAll());
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("contentPage", "chi-tiet-san-pham/add-chi-tiet-san-pham.jsp");
 
-
         return "layout";
-
-
     }
-
 
     @PostMapping("/add")
     public String add(@Valid @ModelAttribute(name = "chitietsanpham") ChiTietSanPham chiTietSanPham,
                       BindingResult result, Model model, @RequestParam("images")MultipartFile multipartFile) throws IOException {
 
         if (result.hasErrors()) {
-
-
-
             model.addAttribute("Pin", new Pin());
             model.addAttribute("chip", new Chip());
             model.addAttribute("ram", new Ram());
             model.addAttribute("rom", new Rom());
             model.addAttribute("sanPham", new SanPham());
             model.addAttribute("mauSac", new MauSac());
-
-
-            model.addAttribute("listSanPham", sanPhamService.findAll());
-            model.addAttribute("listMauSac", mauSacService.findAll());
-            model.addAttribute("listChip", chipService.findAll());
-            model.addAttribute("listRam", ramService.findAll());
-            model.addAttribute("listRom", romService.findAll());
-            model.addAttribute("listHang", hangSanPhamService.findAll());
-            model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
-            model.addAttribute("listPin", pinService.findAll());
-            model.addAttribute("listManHinh", manHinhService.findAll());
-            model.addAttribute("listCamera", cameraService.findAll());
+            model.addAttribute("listSanPham", sanPhamService.findAll0());
+            model.addAttribute("listMauSac", mauSacService.findAll0());
+            model.addAttribute("listChip", chipService.findAll0());
+            model.addAttribute("listRam", ramService.findAll0());
+            model.addAttribute("listRom", romService.findAll0());
+            model.addAttribute("listHang", hangSanPhamService.findAll0());
+            model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+            model.addAttribute("listPin", pinService.findAll0());
+            model.addAttribute("listManHinh", manHinhService.findAll0());
+            model.addAttribute("listCamera", cameraService.findAll0());
             model.addAttribute("contentPage", "chi-tiet-san-pham/add-chi-tiet-san-pham.jsp");
 
             return "layout";
@@ -184,7 +174,6 @@ public class ChiTietSanPhamController {
         chiTietSanPhamService.add(chiTietSanPham);
         return "redirect:/chi-tiet-san-pham/hien-thi";
 
-
     }
 
     @GetMapping("/view-update/{id}")
@@ -196,13 +185,13 @@ public class ChiTietSanPhamController {
                              @ModelAttribute(name = "rom") Rom rom,
                              @ModelAttribute(name = "sanPham") SanPham sanPham) {
 
-        model.addAttribute("listSanPham", sanPhamService.findAll());
-        model.addAttribute("listMauSac", mauSacService.findAll());
-        model.addAttribute("listChip", chipService.findAll());
-        model.addAttribute("listRam", ramService.findAll());
-        model.addAttribute("listRom", romService.findAll());
-        model.addAttribute("listPin", pinService.findAll());
-        model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
         ChiTietSanPham chiTietSanPham1 = chiTietSanPhamService.findById(id);
         ngay = Date.valueOf(chiTietSanPham1.getNgayTao().toString());
 
@@ -232,16 +221,16 @@ public class ChiTietSanPhamController {
             model.addAttribute("mauSac", new MauSac());
 
 
-            model.addAttribute("listSanPham", sanPhamService.findAll());
-            model.addAttribute("listMauSac", mauSacService.findAll());
-            model.addAttribute("listChip", chipService.findAll());
-            model.addAttribute("listRam", ramService.findAll());
-            model.addAttribute("listRom", romService.findAll());
-            model.addAttribute("listHang", hangSanPhamService.findAll());
-            model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
-            model.addAttribute("listPin", pinService.findAll());
-            model.addAttribute("listManHinh", manHinhService.findAll());
-            model.addAttribute("listCamera", cameraService.findAll());
+            model.addAttribute("listSanPham", sanPhamService.findAll0());
+            model.addAttribute("listMauSac", mauSacService.findAll0());
+            model.addAttribute("listChip", chipService.findAll0());
+            model.addAttribute("listRam", ramService.findAll0());
+            model.addAttribute("listRom", romService.findAll0());
+            model.addAttribute("listHang", hangSanPhamService.findAll0());
+            model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+            model.addAttribute("listPin", pinService.findAll0());
+            model.addAttribute("listManHinh", manHinhService.findAll0());
+            model.addAttribute("listCamera", cameraService.findAll0());
             ChiTietSanPham chiTietSanPham1 = chiTietSanPhamService.findById(id);
 //            model.addAttribute("chitietsanphamupdate",chiTietSanPham1);
             model.addAttribute("contentPage", "chi-tiet-san-pham/update-chi-tiet-san-pham.jsp");
@@ -280,16 +269,16 @@ public class ChiTietSanPhamController {
         model.addAttribute("total", page.getTotalPages());
         model.addAttribute("list", page.getContent());
         model.addAttribute("size", page.getSize());
-        model.addAttribute("listSanPham", sanPhamService.findAll());
-        model.addAttribute("listMauSac", mauSacService.findAll());
-        model.addAttribute("listChip", chipService.findAll());
-        model.addAttribute("listRam", ramService.findAll());
-        model.addAttribute("listRom", romService.findAll());
-        model.addAttribute("listHang", hangSanPhamService.findAll());
-        model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
-        model.addAttribute("listPin", pinService.findAll());
-        model.addAttribute("listManHinh", manHinhService.findAll());
-        model.addAttribute("listCamera", cameraService.findAll());
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("contentPage", "chi-tiet-san-pham/index.jsp");
         model.addAttribute("page", page.getNumber());
         return "redirect:/chi-tiet-san-pham/hien-thi";
@@ -306,16 +295,16 @@ public class ChiTietSanPhamController {
         model.addAttribute("total", page.getTotalPages());
         model.addAttribute("list", page.getContent());
         model.addAttribute("size", page.getSize());
-        model.addAttribute("listSanPham", sanPhamService.findAll());
-        model.addAttribute("listMauSac", mauSacService.findAll());
-        model.addAttribute("listChip", chipService.findAll());
-        model.addAttribute("listRam", ramService.findAll());
-        model.addAttribute("listRom", romService.findAll());
-        model.addAttribute("listHang", hangSanPhamService.findAll());
-        model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
-        model.addAttribute("listPin", pinService.findAll());
-        model.addAttribute("listManHinh", manHinhService.findAll());
-        model.addAttribute("listCamera", cameraService.findAll());
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("contentPage", "chi-tiet-san-pham/index.jsp");
         model.addAttribute("page", page.getNumber());
         return "redirect:/chi-tiet-san-pham/hien-thi-da-xoa";
@@ -335,16 +324,16 @@ public class ChiTietSanPhamController {
         model.addAttribute("total", page.getTotalPages());
         model.addAttribute("list", page.getContent());
         model.addAttribute("size", page.getSize());
-        model.addAttribute("listSanPham", sanPhamService.findAll());
-        model.addAttribute("listMauSac", mauSacService.findAll());
-        model.addAttribute("listChip", chipService.findAll());
-        model.addAttribute("listRam", ramService.findAll());
-        model.addAttribute("listRom", romService.findAll());
-        model.addAttribute("listHang", hangSanPhamService.findAll());
-        model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
-        model.addAttribute("listPin", pinService.findAll());
-        model.addAttribute("listManHinh", manHinhService.findAll());
-        model.addAttribute("listCamera", cameraService.findAll());
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("contentPage", "chi-tiet-san-pham/index.jsp");
         model.addAttribute("page", page.getNumber());
         return "redirect:/chi-tiet-san-pham/hien-thi-da-xoa";
@@ -361,16 +350,16 @@ public class ChiTietSanPhamController {
                          @ModelAttribute(name = "sanPham") SanPham sanPham) {
         List<ChiTietSanPham> list = chiTietSanPhamService.search(search);
         model.addAttribute("listCTSP", list);
-        model.addAttribute("listSanPham", sanPhamService.findAll());
-        model.addAttribute("listMauSac", mauSacService.findAll());
-        model.addAttribute("listChip", chipService.findAll());
-        model.addAttribute("listRam", ramService.findAll());
-        model.addAttribute("listRom", romService.findAll());
-        model.addAttribute("listHang", hangSanPhamService.findAll());
-        model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
-        model.addAttribute("listPin", pinService.findAll());
-        model.addAttribute("listManHinh", manHinhService.findAll());
-        model.addAttribute("listCamera", cameraService.findAll());
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("contentPage", "chi-tiet-san-pham/index.jsp");
         return "layout";
     }
@@ -385,16 +374,16 @@ public class ChiTietSanPhamController {
                          @ModelAttribute(name = "sanPham") SanPham sanPham) {
         List<ChiTietSanPham> list = chiTietSanPhamService.search1(search);
         model.addAttribute("listCTSP", list);
-        model.addAttribute("listSanPham", sanPhamService.findAll());
-        model.addAttribute("listMauSac", mauSacService.findAll());
-        model.addAttribute("listChip", chipService.findAll());
-        model.addAttribute("listRam", ramService.findAll());
-        model.addAttribute("listRom", romService.findAll());
-        model.addAttribute("listHang", hangSanPhamService.findAll());
-        model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
-        model.addAttribute("listPin", pinService.findAll());
-        model.addAttribute("listManHinh", manHinhService.findAll());
-        model.addAttribute("listCamera", cameraService.findAll());
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("contentPage", "chi-tiet-san-pham/index.jsp");
         return "layout";
     }
@@ -410,16 +399,16 @@ public class ChiTietSanPhamController {
         model.addAttribute("total", chiTietSanPhamPage.getTotalPages());
         model.addAttribute("list", chiTietSanPhamPage.getContent());
         model.addAttribute("size", chiTietSanPhamPage.getSize());
-        model.addAttribute("listSanPham", sanPhamService.findAll());
-        model.addAttribute("listMauSac", mauSacService.findAll());
-        model.addAttribute("listChip", chipService.findAll());
-        model.addAttribute("listRam", ramService.findAll());
-        model.addAttribute("listRom", romService.findAll());
-        model.addAttribute("listHang", hangSanPhamService.findAll());
-        model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
-        model.addAttribute("listPin", pinService.findAll());
-        model.addAttribute("listManHinh", manHinhService.findAll());
-        model.addAttribute("listCamera", cameraService.findAll());
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("contentPage", "chi-tiet-san-pham/index.jsp");
         model.addAttribute("page", chiTietSanPhamPage.getNumber());
         model.addAttribute("listCTSP", chiTietSanPhamPage.getContent());
@@ -444,16 +433,16 @@ public class ChiTietSanPhamController {
                       @ModelAttribute(name = "sanPham") SanPham sanPham) {
         List<ChiTietSanPham> list = chiTietSanPhamService.loc(hang, Ram, Rom, dungLuongPin, Chip, moTaMan, moTaCam);
         model.addAttribute("listCTSP", list);
-        model.addAttribute("listSanPham", sanPhamService.findAll());
-        model.addAttribute("listMauSac", mauSacService.findAll());
-        model.addAttribute("listChip", chipService.findAll());
-        model.addAttribute("listRam", ramService.findAll());
-        model.addAttribute("listRom", romService.findAll());
-        model.addAttribute("listHang", hangSanPhamService.findAll());
-        model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
-        model.addAttribute("listPin", pinService.findAll());
-        model.addAttribute("listManHinh", manHinhService.findAll());
-        model.addAttribute("listCamera", cameraService.findAll());
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("contentPage", "chi-tiet-san-pham/loc-ctsp.jsp");
         return "layout";
     }
@@ -468,17 +457,17 @@ public class ChiTietSanPhamController {
         model.addAttribute("total", chiTietSanPhamPage.getTotalPages());
         model.addAttribute("list", chiTietSanPhamPage.getContent());
         model.addAttribute("size", chiTietSanPhamPage.getSize());
-        model.addAttribute("listSanPham", sanPhamService.findAll());
-        model.addAttribute("listSanPham", sanPhamService.findAll());
-        model.addAttribute("listMauSac", mauSacService.findAll());
-        model.addAttribute("listChip", chipService.findAll());
-        model.addAttribute("listRam", ramService.findAll());
-        model.addAttribute("listRom", romService.findAll());
-        model.addAttribute("listHang", hangSanPhamService.findAll());
-        model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
-        model.addAttribute("listPin", pinService.findAll());
-        model.addAttribute("listManHinh", manHinhService.findAll());
-        model.addAttribute("listCamera", cameraService.findAll());
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("contentPage", "chi-tiet-san-pham/loc-ctsp.jsp");
         model.addAttribute("page", chiTietSanPhamPage.getNumber());
         model.addAttribute("listCTSP", chiTietSanPhamPage.getContent());

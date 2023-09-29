@@ -20,7 +20,7 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/rom/hien-thi" role="tab">Thông tin Rom </a>
+            <a class="nav-link" href="/san-pham/hien-thi" role="tab">Thông tin sản phẩm </a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
@@ -36,13 +36,10 @@
             <div class="card-body">
                 <h4 class="card-title">Sản Phẩm</h4>
                 <form class="form-sample">
-                    <p class="card-description">
-
-                    </p>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label"  for="ten">Tên:</label>
+                                <label class="col-sm-3 col-form-label" for="ten">Tên:</label>
                                 <div class="col-sm-9">
                                     <form:input type="text" class="form-control" path="ten" id="ten"/>
                                     <form:errors path="ten" cssClass="error text-danger"/>
@@ -51,7 +48,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label"  for="heDieuHanh">Hệ điều hành:</label>
+                                <label class="col-sm-3 col-form-label" for="heDieuHanh">Hệ điều hành:</label>
                                 <div class="col-sm-9">
                                     <form:input type="text" class="form-control" path="heDieuHanh" id="heDieuHanht"/>
                                     <form:errors path="heDieuHanh" cssClass="error text-danger"/>
@@ -64,7 +61,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="soSim">Số khe sim:</label>
                                 <div class="col-sm-9">
-                                    <form:input  class="form-control" path="soSim" type="number"/>
+                                    <form:input class="form-control" path="soSim" type="number"/>
                                     <form:errors path="soSim" cssClass="error text-danger"/>
                                 </div>
                             </div>
@@ -103,7 +100,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label  class="col-sm-3 col-form-label" for="thongSoWifi">Thông số Wifi:</label>
+                                <label class="col-sm-3 col-form-label" for="thongSoWifi">Thông số Wifi:</label>
                                 <div class="col-sm-9">
                                     <form:input type="text" class="form-control" path="thongSoWifi"/>
                                     <form:errors path="thongSoWifi" cssClass="error text-danger"/>
@@ -112,7 +109,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label  class="col-sm-3 col-form-label" for="kichThuoc">Kích thước </label>
+                                <label class="col-sm-3 col-form-label" for="kichThuoc">Kích thước </label>
                                 <div class="col-sm-9">
                                     <form:input type="text" class="form-control" path="kichThuoc"/>
                                     <form:errors path="kichThuoc" cssClass="error text-danger"/>
@@ -123,7 +120,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label  class="col-sm-3 col-form-label" for="trongLuong">Trọng lượng:</label>
+                                <label class="col-sm-3 col-form-label" for="trongLuong">Trọng lượng:</label>
                                 <div class="col-sm-9">
                                     <form:input type="text" class="form-control" path="trongLuong"/>
                                     <form:errors path="trongLuong" cssClass="error text-danger"/>
@@ -132,7 +129,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label  class="col-sm-3 col-form-label" for="chatLieu">Chất liệu:</label>
+                                <label class="col-sm-3 col-form-label" for="chatLieu">Chất liệu:</label>
                                 <div class="col-sm-9">
                                     <form:input type="text" class="form-control" path="chatLieu"/>
                                     <form:errors path="chatLieu" cssClass="error text-danger"/>
@@ -144,9 +141,9 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label  class="col-sm-3 col-form-label" for="moTa">Mô tả::</label>
+                                <label class="col-sm-3 col-form-label" for="moTa">Mô tả::</label>
                                 <div class="col-sm-9">
-                                    <form:textarea  type="text" class="form-control" path="moTa"/>
+                                    <form:textarea type="text" class="form-control" path="moTa"/>
                                     <form:errors path="moTa" cssClass="error text-danger"/>
                                 </div>
                             </div>
@@ -156,14 +153,10 @@
                                 <label class="col-sm-3 col-form-label" for="hangSanPham">Hãng Sản Phẩm:</label>
                                 <div class="col-sm-9">
                                     <div class="d-flex align-items-center"> <!-- Sử dụng d-flex để cùng một dòng -->
-                                        <form:select class="form-control" path="hangSanPham" items="${listHangSP}" itemValue="id" itemLabel="ten" />
-                                        <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalHangSanPham">
-                                            <img src="https://emojigraph.org/media/twitter/plus_2795.png" style="width: 25px; height: 60%" />
-                                        </a>
+                                        <form:select class="form-control" path="hangSanPham" items="${listHangSP}"
+                                                     itemValue="id" itemLabel="ten"/>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -174,10 +167,8 @@
                                 <label class="col-sm-3 col-form-label" for="manHinh">Màn Hình:</label>
                                 <div class="col-sm-9">
                                     <div class="d-flex align-items-center"> <!-- Sử dụng d-flex để cùng một dòng -->
-                                        <form:select class="form-control" path="manHinh" items="${listManHinh}" itemValue="id" itemLabel="thongSo" />
-                                        <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalManHinh">
-                                            <img src="https://emojigraph.org/media/twitter/plus_2795.png" style="width: 25px; height: 60%" />
-                                        </a>
+                                        <form:select class="form-control" path="manHinh" items="${listManHinh}"
+                                                     itemValue="id" itemLabel="thongSo"/>
                                     </div>
                                 </div>
                             </div>
@@ -187,10 +178,8 @@
                                 <label class="col-sm-3 col-form-label" for="camera">Camera:</label>
                                 <div class="col-sm-9">
                                     <div class="d-flex align-items-center"> <!-- Sử dụng d-flex để cùng một dòng -->
-                                        <form:select class="form-control" path="camera" items="${listCamera}" itemValue="id" itemLabel="thongSo" />
-                                        <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalCamera">
-                                            <img src="https://emojigraph.org/media/twitter/plus_2795.png" style="width: 25px; height: 60%" />
-                                        </a>
+                                        <form:select class="form-control" path="camera" items="${listCamera}"
+                                                     itemValue="id" itemLabel="thongSo"/>
                                     </div>
                                 </div>
                             </div>

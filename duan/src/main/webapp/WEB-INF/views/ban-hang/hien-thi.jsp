@@ -24,7 +24,7 @@
     <div class="row outer-border border border-secondary" style="height: 45px">
         <div class="col-3">
             <form action="/ban-hang/add-hoa-don" method="post" style="text-align: center;margin-top: 6px">
-                <button type="submit"><img src="/img/plus.png"></button>
+                <button type="submit"><img src="/uploads/plus.png"></button>
             </form>
         </div>
         <div class="col-9">
@@ -66,7 +66,7 @@
                                                 <button type="submit">Tìm kiếm</button>
                                             </form>
                                         </div>
-                                        <div class="col-6"><h6 style="text-align: center;color: red">${thongBao}</h6>
+                                        <div class="col-6"><h6 style="text-align: center;color: red;margin: 10px">${thongBao}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -174,151 +174,139 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Mã Sản Phẩm</th>
-                                    <th>Tên Sản Phẩm</th>
-                                    <th>Hãng</th>
-                                    <th>Đơn Giá</th>
-                                    <th>Số Lượng</th>
-                                    <th>Trạng Thái</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${listChiTietSanPham}" var="ctsp">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
                                     <tr>
-                                        <td>${ctsp.sanPham.ma}</td>
-                                        <td>${ctsp.sanPham.ten}</td>
-                                        <td>${ctsp.sanPham.hangSanPham.ten}</td>
-                                        <td>${ctsp.giaBan}</td>
-                                        <td>${ctsp.soLuong}</td>
-                                        <td>
-                                            <c:if test="${ctsp.tinhTrang==1}">Còn hàng</c:if>
-                                            <c:if test="${ctsp.tinhTrang==0}">Hết hàng</c:if>
-                                        </td>
-                                        <td class="btn-group">
-                                            <a href="/ban-hang/them-san-pham/${ctsp.id}"
-                                               class="btn btn-info"
-                                               data-bs-toggle="modal" data-bs-target="#nhapImei_${ctsp.id}"
-                                                <%--                                           onclick="openModal('nhapImei_${ctsp.id}')"--%>
-                                            >
-                                                Nhập IMEI</a>
-                                            <div class="modal fade" id="nhapImei_${ctsp.id}" tabindex="-1"
-                                                 aria-labelledby="exampleModalLabel"
-                                                 aria-hidden="true" data-backdrop="static">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5"
-                                                                id="exampleModalLabel">Danh sách IMEI</h1>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <table class="table">
-                                                                <tr>
-                                                                        <%--                                                                <form method="post" action="/ban-hang/search-imei"--%>
-                                                                        <%--                                                                      id="searchImeiForm">--%>
-                                                                    <div>
-                                                                        <th>Tìm kiếm IMEI: <input
-                                                                                type="text"
-                                                                                name="search-imei"
-                                                                                placeholder="Tìm kiếm IMEI"
-                                                                                id="imeiSearchInput"></th>
-                                                                        <th>
-                                                                            <button id="searchImei"
-                                                                                    type="button">
-                                                                                Tìm kiếm
-                                                                            </button>
-                                                                        </th>
-                                                                    </div>
-                                                                        <%--                                                                </form>--%>
-
-                                                                    <h6 style="text-align: center"
-                                                                        id="thongBaoIMEI">${thongBaoIMEI}</h6>
-                                                                </tr>
-                                                            </table>
-                                                            <div>
-                                                                <table class="table" id="table_id">
-                                                                    <thead>
-                                                                    <tr>
-                                                                        <th>STT</th>
-                                                                        <th>Số IMEI</th>
-                                                                        <th>Trạng Thái</th>
-                                                                        <th>Chức năng</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody id="listImei_${ctsp.id}"
-                                                                           class="imei_search">
-                                                                    </tbody>
-                                                                </table>
+                                        <th>Mã Sản Phẩm</th>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Hãng</th>
+                                        <th>Đơn Giá</th>
+                                        <th>Số Lượng</th>
+                                        <th>Trạng Thái</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${listChiTietSanPham}" var="ctsp">
+                                        <tr>
+                                            <td>${ctsp.sanPham.ma}</td>
+                                            <td>${ctsp.sanPham.ten}</td>
+                                            <td>${ctsp.sanPham.hangSanPham.ten}</td>
+                                            <td>${ctsp.giaBan}</td>
+                                            <td>${ctsp.soLuong}</td>
+                                            <td>
+                                                <c:if test="${ctsp.tinhTrang==1}">Còn hàng</c:if>
+                                                <c:if test="${ctsp.tinhTrang==0}">Hết hàng</c:if>
+                                            </td>
+                                            <td class="btn-group">
+                                                <a href="/ban-hang/them-san-pham/${ctsp.id}"
+                                                   class="btn btn-info"
+                                                   data-bs-toggle="modal" data-bs-target="#nhapImei_${ctsp.id}"
+                                                    <%--                                           onclick="openModal('nhapImei_${ctsp.id}')"--%>
+                                                >
+                                                    Nhập IMEI</a>
+                                                <div class="modal fade" id="nhapImei_${ctsp.id}" tabindex="-1"
+                                                     aria-labelledby="exampleModalLabel"
+                                                     aria-hidden="true" data-backdrop="static">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5"
+                                                                    id="exampleModalLabel">Danh sách IMEI</h1>
                                                             </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">
-                                                                Close
-                                                            </button>
+                                                            <div class="modal-body">
+                                                                <table class="table">
+                                                                    <tr>
+                                                                            <%--                                                                <form method="post" action="/ban-hang/search-imei"--%>
+                                                                            <%--                                                                      id="searchImeiForm">--%>
+                                                                        <div>
+                                                                            <th>Tìm kiếm IMEI: <input
+                                                                                    type="text"
+                                                                                    name="search-imei"
+                                                                                    placeholder="Tìm kiếm IMEI"
+                                                                                    id="imeiSearchInput"></th>
+                                                                            <th>
+                                                                                <button id="searchImei"
+                                                                                        type="button">
+                                                                                    Tìm kiếm
+                                                                                </button>
+                                                                            </th>
+                                                                        </div>
+                                                                            <%--                                                                </form>--%>
+
+                                                                        <h6 style="text-align: center"
+                                                                            id="thongBaoIMEI">${thongBaoIMEI}</h6>
+                                                                    </tr>
+                                                                </table>
+                                                                <div>
+                                                                    <table class="table" id="table_id">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th>STT</th>
+                                                                            <th>Số IMEI</th>
+                                                                            <th>Trạng Thái</th>
+                                                                            <th>Chức năng</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody id="listImei_${ctsp.id}"
+                                                                               class="imei_search">
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">
+                                                                    Close
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                        <%--                <div class="modal-footer">--%>
-                        <%--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close--%>
-                        <%--                    </button>--%>
-                        <%--                </div>--%>
-                        <%--                <a href="/ban-hang/hien-thi-san-pham" class="btn btn-info" data-bs-toggle="modal"--%>
-                        <%--                   data-bs-target="#hienThiSanPham">Thêm sản phẩm</a>--%>
-                        <%--                <div class="modal fade" id="hienThiSanPham" tabindex="-1" aria-labelledby="hienThiSanPhamLable"--%>
-                        <%--                     aria-hidden="true">--%>
-                        <%--                    <div class="modal-dialog modal-dialog-centered modal-xl">--%>
-                        <%--                        <div class="modal-content">--%>
-                        <%--                            <div class="modal-body">--%>
-                        <%--                                --%>
-                        <%--                            </div>--%>
-                        <%--                        </div>--%>
-                        <%--                    </div>--%>
-                        <%--                </div>--%>
                     <div class="col-6">
                         <div class="outer-border p-3 border border-secondary">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                        <%--                            <th>STT</th>--%>
-                                    <th>Tên Sản Phẩm</th>
-                                    <th>Số IMEI</th>
-                                    <th>Đơn Giá</th>
-                                    <th>Số Lượng</th>
-                                    <th>Thành tiền</th>
-                                    <th>Chức năng</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${listHoaDonChiTiet}" var="hdct" varStatus="i">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
                                     <tr>
-                                            <%--                                <td>${i.index+1}</td>--%>
-                                        <td>${hdct.imei.chiTietSanPham.sanPham.ten}</td>
-                                        <td>${hdct.imei.soImei}</td>
-                                        <td>${hdct.donGia}</td>
-                                        <td>${hdct.soLuong}</td>
-                                        <td>${hdct.donGia * hdct.soLuong}</td>
-                                        <td class="btn-group">
-                                            <button class="btn btn-info"><a
-                                                    href="/ban-hang/delete-hoa-don-chi-tiet/${hdct.id}"
-                                                    style="text-decoration: none">Xóa sản phẩm</a>
-                                            </button>
-                                        </td>
+                                            <%--                            <th>STT</th>--%>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Số IMEI</th>
+                                        <th>Đơn Giá</th>
+                                        <th>Số Lượng</th>
+                                        <th>Thành tiền</th>
+                                        <th>Chức năng</th>
                                     </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${listHoaDonChiTiet}" var="hdct" varStatus="i">
+                                        <tr>
+                                                <%--                                <td>${i.index+1}</td>--%>
+                                            <td>${hdct.imei.chiTietSanPham.sanPham.ten}</td>
+                                            <td>${hdct.imei.soImei}</td>
+                                            <td>${hdct.donGia}</td>
+                                            <td>${hdct.soLuong}</td>
+                                            <td>${hdct.donGia * hdct.soLuong}</td>
+                                            <td class="btn-group">
+                                                <button class="btn btn-info"><a
+                                                        href="/ban-hang/delete-hoa-don-chi-tiet/${hdct.id}"
+                                                        style="text-decoration: none">Xóa sản phẩm</a>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -353,7 +341,7 @@
                                     <div class="form-floating mb-2 mt-3 col-3">
                                         <a href="/ban-hang/modal-khach-hang" class="btn btn-secondary"
                                            data-bs-toggle="modal"
-                                           data-bs-target="#newKhachHang">Thêm khách hàng</a>
+                                           data-bs-target="#newKhachHang"><img src="/uploads/plus.png" alt=""></a>
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3 mt-3">

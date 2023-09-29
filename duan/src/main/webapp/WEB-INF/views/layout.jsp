@@ -304,7 +304,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/ban-hang/hien-thi">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Bán Hàng</span>
             </a>
@@ -366,6 +366,7 @@
                 <li class="nav-item"> <a class="nav-link" href="/ram/hien-thi">Ram</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/rom/hien-thi">Rom</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/chip/hien-thi">Chip</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/anh/hien-thi">Ảnh</a></li>
               </ul>
             </div>
           </li>

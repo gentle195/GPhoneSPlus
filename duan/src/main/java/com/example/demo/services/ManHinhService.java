@@ -15,6 +15,8 @@ public interface ManHinhService {
 
     public List<ManHinh> findAll();
 
+    public List<ManHinh> findAll0();
+
     public ManHinh findById(UUID id);
 
     public ManHinh add(ManHinh manHinh);

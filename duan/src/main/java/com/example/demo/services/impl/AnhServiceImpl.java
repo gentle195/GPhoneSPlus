@@ -35,6 +35,11 @@ public class AnhServiceImpl implements AnhService {
     }
 
     @Override
+    public List<Anh> findAll0() {
+        return anhRepository.findAll0();
+    }
+
+    @Override
     public Anh findById(UUID id) {
         return anhRepository.findById(id).orElse(null);
     }

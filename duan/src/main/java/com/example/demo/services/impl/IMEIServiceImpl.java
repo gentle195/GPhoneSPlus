@@ -34,6 +34,7 @@ public class IMEIServiceImpl implements IMEIService {
     public List<IMEI> searchOn(String imei) {
         return imeiRepository.searchIMEIOn(imei);
     }
+
     @Override
     public List<IMEI> searchOff(String imei) {
         return imeiRepository.searchIMEIOff(imei);
@@ -42,6 +43,11 @@ public class IMEIServiceImpl implements IMEIService {
     @Override
     public List<IMEI> findAll() {
         return imeiRepository.findAll();
+    }
+
+    @Override
+    public List<IMEI> findAll0() {
+        return imeiRepository.findAll0();
     }
 
     @Override
@@ -86,12 +92,12 @@ public class IMEIServiceImpl implements IMEIService {
 
     @Override
     public void updatImei(Date date, UUID id) {
-        imeiRepository.updateImei(date,id);
+        imeiRepository.updateImei(date, id);
     }
 
     @Override
     public void updatImei1(Date date, UUID id) {
-        imeiRepository.updateImei1(date,id);
+        imeiRepository.updateImei1(date, id);
     }
 
     @Override

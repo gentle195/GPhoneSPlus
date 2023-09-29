@@ -35,6 +35,11 @@ public class ManHinhServiceImpl implements ManHinhService {
     }
 
     @Override
+    public List<ManHinh> findAll0() {
+        return manHinhRepository.findAll0();
+    }
+
+    @Override
     public ManHinh findById(UUID id) {
         return manHinhRepository.findById(id).orElse(null);
     }

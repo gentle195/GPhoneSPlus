@@ -17,6 +17,8 @@ public interface NhanVienService {
 
     public List<NhanVien> findAll();
 
+    public List<NhanVien> findAll0();
+
     public NhanVien findById(UUID id);
 
     public NhanVien add(NhanVien nhanVien);

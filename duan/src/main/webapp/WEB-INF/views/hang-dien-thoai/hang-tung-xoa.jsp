@@ -25,7 +25,7 @@
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
                aria-controls="description" aria-selected="true">Hãng đã xoá</a>
         </li>
-        <a href="/rom/khoi-phuc-het" class="btn btn-outline-danger btn-icon-text" style="float: right; margin-left: 720px"
+        <a href="/hang-dien-thoai/khoi-phuc-het" class="btn btn-outline-danger btn-icon-text" style="float: right; margin-left: 720px"
            tabindex="-1"
            role="button"
            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">

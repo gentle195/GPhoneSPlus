@@ -31,6 +31,11 @@ public class HangKhachHangServiceImpl implements HangKhachHangService {
     }
 
     @Override
+    public List<HangKhachHang> findAll0() {
+        return hangKhachHangRepository.getall0();
+    }
+
+    @Override
     public List<HangKhachHang> getALL0() {
         return hangKhachHangRepository.getall0();
     }

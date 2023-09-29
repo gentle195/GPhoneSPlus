@@ -12,7 +12,10 @@ public interface HangKhachHangService {
 
     public List<HangKhachHang> findAll();
 
+    public List<HangKhachHang> findAll0();
+
     public List<HangKhachHang> getALL0();
+
     public HangKhachHang findById(UUID id);
 
     public HangKhachHang add(HangKhachHang hangKhachHang);
@@ -20,11 +23,15 @@ public interface HangKhachHangService {
     public HangKhachHang update(UUID id, HangKhachHang hangKhachHang);
 
     public Boolean delete(UUID id);
+
     public Page<HangKhachHang> getAll00(Pageable pageable);
+
     public HangKhachHang TimMa(String id);
+
     public List<HangKhachHang> TimMT(String mt);
 
     List<HangKhachHang> getall1();
+
     Page<HangKhachHang> getall11(Pageable pageable);
 
     void update0();

@@ -31,6 +31,7 @@ public class ImeiController {
     @Autowired
     ChiTietSanPhamService chiTietSanPhamService;
     private Date ngay;
+
     @GetMapping("/hien-thi")
     public String hienThi(Model model, @RequestParam(value = "pageNum", defaultValue = "0", required = false) Integer pageNum) {
         Pageable pageable = PageRequest.of(pageNum, 5);
@@ -38,9 +39,9 @@ public class ImeiController {
         model.addAttribute("total", imeiPage.getTotalPages());
         model.addAttribute("listImei", imeiPage.getContent());
         model.addAttribute("size", imeiPage.getSize());
-        model.addAttribute("listCTSP", chiTietSanPhamService.findAll());
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
         model.addAttribute("imei", new IMEI());
-        String ma = "IMEI"+ imeiService.findAll().size();
+        String ma = "IMEI" + imeiService.findAll().size();
         model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "imei/index.jsp");
         return "layout";
@@ -48,29 +49,31 @@ public class ImeiController {
     }
 
     @PostMapping("/search-on")
-    public String searchOn(Model model,@RequestParam("search") String search) {
-        List<IMEI> lissearch=imeiService.searchOn(search);
-        model.addAttribute("listCTSP", chiTietSanPhamService.findAll());
+    public String searchOn(Model model, @RequestParam("search") String search) {
+        List<IMEI> lissearch = imeiService.searchOn(search);
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
         model.addAttribute("listImei", lissearch);
         model.addAttribute("imei", new IMEI());
-        String ma = "IMEI"+ imeiService.findAll().size();
+        String ma = "IMEI" + imeiService.findAll().size();
         model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "imei/index.jsp");
         return "layout";
 
     }
+
     @PostMapping("/search-off")
-    public String searchOff(Model model,@RequestParam("search") String search) {
-        List<IMEI> lissearch=imeiService.searchOff(search);
-        model.addAttribute("listCTSP", chiTietSanPhamService.findAll());
+    public String searchOff(Model model, @RequestParam("search") String search) {
+        List<IMEI> lissearch = imeiService.searchOff(search);
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
         model.addAttribute("listImei", lissearch);
         model.addAttribute("imei", new IMEI());
-        String ma = "IMEI"+ imeiService.findAll().size();
+        String ma = "IMEI" + imeiService.findAll().size();
         model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "imei/imei-da-xoa.jsp");
         return "layout";
 
     }
+
     @GetMapping("/hien-thi-da-xoa")
     public String hienThiDaXoa(Model model, @RequestParam(value = "pageNum", defaultValue = "0", required = false) Integer pageNum) {
         Pageable pageable = PageRequest.of(pageNum, 5);
@@ -78,42 +81,38 @@ public class ImeiController {
         model.addAttribute("total", imeiPage.getTotalPages());
         model.addAttribute("listImei", imeiPage.getContent());
         model.addAttribute("size", imeiPage.getSize());
-
-        model.addAttribute("listCTSP", chiTietSanPhamService.findAll());
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
         model.addAttribute("imei", new IMEI());
-        String ma = "IMEI"+ imeiService.findAll().size();
+        String ma = "IMEI" + imeiService.findAll().size();
         model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "imei/imei-da-xoa.jsp");
-
-
-
         return "layout";
 
     }
 
     @GetMapping("/khoi-phuc/{id}")
     public String khoiPhuc(@PathVariable("id") UUID id) {
-        IMEI imei =imeiService.findById(id);
+        IMEI imei = imeiService.findById(id);
         imei.setTinhTrang(0);
         imeiService.add(imei);
         return "redirect:/imei/hien-thi-da-xoa";
     }
+
     @GetMapping("/khoi-phuc-tat-ca")
     public String khoiPhucAll() {
         List<IMEI> list = imeiService.getImeiOff();
-        for (IMEI imei: list){
+        for (IMEI imei : list) {
             imei.setTinhTrang(0);
             imeiService.add(imei);
         }
-
         return "redirect:/imei/hien-thi-da-xoa";
     }
 
     @GetMapping("/add")
     public String viewAd(Model model, @ModelAttribute("imei") IMEI imei) {
-        model.addAttribute("listCTSP", chiTietSanPhamService.findAll());
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
         model.addAttribute("imei", new IMEI());
-        String ma = "IMEI"+ imeiService.findAll().size();
+        String ma = "IMEI" + imeiService.findAll().size();
         model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "imei/add-imei.jsp");
 
@@ -124,21 +123,21 @@ public class ImeiController {
     public String add(@Valid @ModelAttribute(name = "imei") IMEI imei,
                       BindingResult result, Model model, @RequestParam(value = "pageNum", defaultValue = "0", required = false) Integer pageNum) {
 
-        if (result.hasErrors() ) {
+        if (result.hasErrors()) {
 
-            model.addAttribute("listCTSP", chiTietSanPhamService.findAll());
+            model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
             Pageable pageable = PageRequest.of(pageNum, 5);
             Page<IMEI> imeiPage = imeiService.getImeiOn(pageable);
             model.addAttribute("total", imeiPage.getTotalPages());
             model.addAttribute("listImei", imeiPage.getContent());
             model.addAttribute("size", imeiPage.getSize());
-            String ma = "IMEI"+ imeiService.findAll().size();
+            String ma = "IMEI" + imeiService.findAll().size();
             model.addAttribute("ma", ma);
             model.addAttribute("contentPage", "imei/index.jsp");
             return "layout";
 
         }
-        String ma = "IMEI"+ imeiService.findAll().size();
+        String ma = "IMEI" + imeiService.findAll().size();
         imei.setMa(ma);
         LocalDate localDate = LocalDate.now();
         imei.setNgayTao(Date.valueOf(localDate));
@@ -156,7 +155,7 @@ public class ImeiController {
 
     @GetMapping("/view-update/{id}")
     public String viewUpdate(Model model, @PathVariable("id") UUID id, @ModelAttribute("imeiupdate") IMEI imei) {
-        model.addAttribute("listCTSP", chiTietSanPhamService.findAll());
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
         IMEI imei1 = imeiService.findById(id);
         model.addAttribute("imeiupdate", imei1);
         model.addAttribute("contentPage", "imei/update-imei.jsp");
@@ -167,7 +166,7 @@ public class ImeiController {
     }
 
     @PostMapping("/update/{id}")
-    public String update(Model model,  @PathVariable("id") UUID id,@Valid @ModelAttribute("imeiupdate") IMEI imei,
+    public String update(Model model, @PathVariable("id") UUID id, @Valid @ModelAttribute("imeiupdate") IMEI imei,
                          BindingResult result) {
         if (result.hasErrors()) {
             model.addAttribute("listCTSP", chiTietSanPhamService.findAll());
@@ -182,9 +181,8 @@ public class ImeiController {
         imei1.setMoTa(imei.getMoTa());
         LocalDate localDate = LocalDate.now();
         imei1.setNgayCapNhat(Date.valueOf(localDate));
-
         imei1.setTinhTrang(imei.getTinhTrang());
-        imeiService.update(id,imei1);
+        imeiService.update(id, imei1);
         return "redirect:/imei/hien-thi";
 
 

@@ -15,6 +15,9 @@ import java.util.UUID;
 
 @Repository
 public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
+    @Query("SELECT r FROM SanPham r WHERE r.tinhTrang=0")
+    List<SanPham> findAll0();
+
     @Query("SELECT r FROM SanPham r WHERE r.ten LIKE %:dungluong% or r.heDieuHanh LIKE %:dungluong% and r.tinhTrang=0")
     List<SanPham> search(String dungluong);
 
@@ -29,7 +32,7 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
 
     @Transactional
     @Modifying
-    @Query(value ="update san_pham set tinh_trang=0",nativeQuery = true)
+    @Query(value = "update san_pham set tinh_trang=0", nativeQuery = true)
     void update0();
 
     @Query("select sp from SanPham sp left join ManHinh m on sp.manHinh.id=m.id " +

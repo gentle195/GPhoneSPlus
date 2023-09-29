@@ -17,6 +17,9 @@ public interface RomRepository extends JpaRepository<Rom, UUID> {
     @Query("SELECT r FROM Rom r WHERE r.dungLuong LIKE %:dungluong% and r.tinhTrang=0")
     List<Rom> search(String dungluong);
 
+    @Query("SELECT r FROM Rom r WHERE  r.tinhTrang=0")
+    List<Rom> findAll0();
+
     @Query("SELECT r FROM Rom r WHERE r.dungLuong LIKE %:dungluong% and r.tinhTrang=1")
     List<Rom> search2(String dungluong);
 
@@ -28,6 +31,6 @@ public interface RomRepository extends JpaRepository<Rom, UUID> {
 
     @Transactional
     @Modifying
-    @Query(value ="update rom set tinh_trang=0",nativeQuery = true)
+    @Query(value = "update rom set tinh_trang=0", nativeQuery = true)
     void update0();
 }

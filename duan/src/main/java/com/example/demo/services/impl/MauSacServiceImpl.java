@@ -35,6 +35,11 @@ public class MauSacServiceImpl implements MauSacService {
     }
 
     @Override
+    public List<MauSac> findAll0() {
+        return mauSacRepository.findAll0();
+    }
+
+    @Override
     public MauSac findById(UUID id) {
         return mauSacRepository.findById(id).orElse(null);
     }

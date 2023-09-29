@@ -85,8 +85,8 @@
                                         </div>
                                         <div class="col-1">
                                             <a type="button" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModalSanPham">
-                                                <img src="../img/plus.png">
+                                               data-bs-target="#exampleModalSanPham" style="margin: 10px">
+                                                <img src="/uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>
@@ -102,8 +102,8 @@
                                         </div>
                                         <div class="col-1">
                                             <a type="button" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModalMauSac">
-                                                <img src="../img/plus.png">
+                                               data-bs-target="#exampleModalMauSac" style="margin: 10px">
+                                                <img src="/uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>
@@ -118,8 +118,8 @@
                                             </form:select>
                                         </div>
                                         <div class="col-1">
-                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalChip">
-                                                <img src="../img/plus.png">
+                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalChip" style="margin: 10px">
+                                                <img src="/uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>
@@ -134,8 +134,8 @@
                                             </form:select>
                                         </div>
                                         <div class="col-1">
-                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalRam">
-                                                <img src="../img/plus.png">
+                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalRam" style="margin: 10px">
+                                                <img src="/uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>
@@ -150,8 +150,8 @@
                                             </form:select>
                                         </div>
                                         <div class="col-1">
-                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalRom">
-                                                <img src="../img/plus.png">
+                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalRom" style="margin: 10px">
+                                                <img src="/uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>
@@ -167,8 +167,8 @@
                                             </form:select>
                                         </div>
                                         <div class="col-1">
-                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalPin">
-                                                <img src="../img/plus.png">
+                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalPin" style="margin: 10px">
+                                                <img src="/uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>

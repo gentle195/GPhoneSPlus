@@ -12,7 +12,10 @@ public interface DiaChiService {
 
     public List<DiaChi> findAll();
 
+    public List<DiaChi> findAll0();
+
     public List<DiaChi> getALL0();
+
     public DiaChi findById(UUID id);
 
     public DiaChi add(DiaChi hangKhachHang);
@@ -20,11 +23,15 @@ public interface DiaChiService {
     public DiaChi update(UUID id, DiaChi hangKhachHang);
 
     public Boolean delete(UUID id);
+
     public Page<DiaChi> getAll00(Pageable pageable);
+
     public DiaChi TimMa(String id);
+
     public List<DiaChi> TimMT(String mt);
 
     List<DiaChi> getall1();
+
     Page<DiaChi> getall11(Pageable pageable);
 
     void update0();

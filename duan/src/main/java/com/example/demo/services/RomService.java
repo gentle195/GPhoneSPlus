@@ -10,13 +10,15 @@ import java.util.UUID;
 public interface RomService {
     public List<Rom> findAll();
 
+    public List<Rom> findAll0();
+
     public Rom findById(UUID id);
 
     public Rom add(Rom rom);
 
-    List<Rom>search(String dungluong);
+    List<Rom> search(String dungluong);
 
-    List<Rom>search2(String dungluong);
+    List<Rom> search2(String dungluong);
 
     public Rom update(UUID id, Rom rom);
 

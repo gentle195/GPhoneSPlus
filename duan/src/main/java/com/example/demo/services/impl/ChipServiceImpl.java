@@ -26,11 +26,18 @@ public class ChipServiceImpl implements ChipService {
     }
 
     @Override
-    public Page<Chip> getAll1(Pageable pageable) { return chipRepository.getAll1(pageable); }
+    public Page<Chip> getAll1(Pageable pageable) {
+        return chipRepository.getAll1(pageable);
+    }
 
     @Override
     public List<Chip> findAll() {
         return chipRepository.findAll();
+    }
+
+    @Override
+    public List<Chip> findAll0() {
+        return chipRepository.findAll0();
     }
 
     @Override

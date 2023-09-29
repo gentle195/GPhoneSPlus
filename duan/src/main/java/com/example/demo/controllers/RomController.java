@@ -31,7 +31,6 @@ public class RomController {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<Rom> list = romService.getAll0(pageable);
-
         model.addAttribute("contentPage","rom/rom.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());

@@ -39,23 +39,19 @@ public class ChucVuController {
         chucVu.setTinhTrang(0);
         Page<ChucVu> page = chucVuService.getAll(pageable);
         model.addAttribute("total", page.getTotalPages());
-
         model.addAttribute("listChucVu", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("contentPage", "chucvu/chuc-vu.jsp");
         return "layout";
     }
 
-
     @PostMapping("/add-chuc-vu")
     public String addMauSac(Model model, @ModelAttribute("chucVu") @Valid ChucVu chucVu, BindingResult bindingResult,
                             @RequestParam("pageNum") Optional<Integer> pageNum,
                             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<ChucVu> page = chucVuService.getAll(pageable);
-
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "chucvu/chuc-vu.jsp");
             model.addAttribute("listChucVu", page.getContent());
@@ -65,7 +61,6 @@ public class ChucVuController {
         }
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
-
         Integer sl = chucVuService.findAll().size();
         String maCV = "";
         if (sl < 10) {
@@ -73,19 +68,16 @@ public class ChucVuController {
         } else {
             maCV = "MaCV" + sl;
         }
-
 //        String maR = "Ram" + ramService.findAll().size();
         chucVu.setMa(maCV);
         chucVu.setNgayTao(date);
         chucVu.setNgayCapNhat(date);
         chucVu.setTinhTrang(0);
         chucVuService.add(chucVu);
-
         model.addAttribute("contentPage", "chucvu/chuc-vu.jsp");
         model.addAttribute("listChucVu", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-
         return "redirect:/chuc-vu/hien-thi";
     }
 
@@ -94,17 +86,14 @@ public class ChucVuController {
                              @RequestParam("pageNum") Optional<Integer> pageNum,
                              @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
         Sort sort = Sort.by("ma").ascending();
-
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize);
         ChucVu chucVu = chucVuService.findById(id);
         model.addAttribute("chucVu", chucVu);
         Page<ChucVu> page = chucVuService.getAll(pageable);
-
         model.addAttribute("contentPage", "chucvu/chuc-vu-update.jsp");
         model.addAttribute("listChucVu", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-
         return "layout";
     }
 
@@ -114,12 +103,10 @@ public class ChucVuController {
         if (bindingResult.hasErrors()) {
             return "chucvu/chuc-vu-update.jsp";
         }
-
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
 //        chucVu.setNgayTao(date);
         chucVu.setNgayCapNhat(date);
-
         chucVuService.update(id, chucVu);
         return "redirect:/chuc-vu/hien-thi";
     }
@@ -130,17 +117,14 @@ public class ChucVuController {
                                 @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
 
         Sort sort = Sort.by("ngayTao").descending();
-
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<ChucVu> page = chucVuService.getAll1(pageable);
-
         model.addAttribute("contentPage", "chucvu/chuc-vu-delete.jsp");
         model.addAttribute("listChucVu", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
         return "layout";
     }
-
 
     @GetMapping("/update-all-status")
     public String updateTT(Model model, @RequestParam("pageNum") Optional<Integer> pageNum,
@@ -151,10 +135,8 @@ public class ChucVuController {
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         chucVu.setNgayCapNhat(date);
-
         chucVuService.updateTT();
         Page<ChucVu> page = chucVuService.getAll1(pageable);
-
         model.addAttribute("contentPage", "chucvu/chuc-vu-delete.jsp");
         model.addAttribute("listChucVu", page.getContent());
         model.addAttribute("page", page.getNumber());
@@ -169,21 +151,17 @@ public class ChucVuController {
                                @ModelAttribute("chucVu") ChucVu chucVu) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-
         ChucVu chucVu1 = chucVuService.findById(id);
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         chucVu1.setNgayCapNhat(date);
         chucVu1.setTinhTrang(1);
-
         chucVuService.update(id, chucVu1);
         Page<ChucVu> page = chucVuService.getAll(pageable);
-
         model.addAttribute("contentPage", "chucvu/chuc-vu.jsp");
         model.addAttribute("listChucVu", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-
         return "layout";
     }
 
@@ -202,12 +180,10 @@ public class ChucVuController {
         chucVu1.setTinhTrang(0);
         chucVuService.update(id, chucVu1);
         Page<ChucVu> page = chucVuService.getAll1(pageable);
-
         model.addAttribute("contentPage", "chucvu/chuc-vu-delete.jsp");
         model.addAttribute("listChucVu", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-
         return "layout";
     }
 
