@@ -14,9 +14,12 @@ public interface IMEIService {
     public List<IMEI> getIMEI(UUID id);
 
     public List<IMEI> searchOn(String imei);
+
     public List<IMEI> searchOff(String imei);
 
     public List<IMEI> findAll();
+
+    public List<IMEI> findAll0();
 
     public IMEI findById(UUID id);
 
@@ -31,9 +34,13 @@ public interface IMEIService {
     public void updatImei(Date date, UUID id);
 
     public void updatImei1(Date date, UUID id);
+
     public Page<IMEI> getImeiOn(Pageable pageable);
+
     public Page<IMEI> getImeiOff(Pageable pageable);
+
     public List<IMEI> getImeiOff();
+
     public void khoiPhuc(UUID uuid);
 }
 

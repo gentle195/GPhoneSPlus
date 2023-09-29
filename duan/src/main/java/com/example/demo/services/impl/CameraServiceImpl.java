@@ -34,6 +34,11 @@ public class CameraServiceImpl implements CameraService {
     }
 
     @Override
+    public List<Camera> findAll0() {
+        return cameraRepository.findAll0();
+    }
+
+    @Override
     public Camera findById(UUID id) {
         return cameraRepository.findById(id).orElse(null);
     }

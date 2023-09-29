@@ -76,7 +76,7 @@ public class NhanVienController {
     @GetMapping("/view-add")
     public String viewAdd(Model model) {
 
-        List<ChucVu> listChucVu = chucVuRepository.findAll();
+        List<ChucVu> listChucVu = chucVuRepository.findAll0();
         model.addAttribute("listChucVu", listChucVu);
         model.addAttribute("nhanVien", new NhanVien());
         model.addAttribute("contentPage", "nhanvien/nhan-vien-add.jsp");
@@ -96,7 +96,7 @@ public class NhanVienController {
         nhanVien.setUrlAnh(fileName);
 
         if (bindingResult.hasErrors()) {
-            List<ChucVu> listChucVu = chucVuRepository.findAll();
+            List<ChucVu> listChucVu = chucVuRepository.findAll0();
             model.addAttribute("listChucVu", listChucVu);
             model.addAttribute("contentPage", "nhanvien/nhan-vien-add.jsp");
 
@@ -124,7 +124,7 @@ public class NhanVienController {
     @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
                          @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-        List<ChucVu> listChucVu = chucVuRepository.findAll();
+        List<ChucVu> listChucVu = chucVuRepository.findAll0();
         model.addAttribute("listChucVu", listChucVu);
         NhanVien nhanVien = nhanVienService.findById(id);
         model.addAttribute("nhanVien", nhanVien);
@@ -139,7 +139,6 @@ public class NhanVienController {
 
         nhanVien.setId(id);
         nhanVien.setNgayCapNhat(Date.valueOf(LocalDate.now()));
-
         // Xử lý tệp ảnh nếu người dùng đã chọn ảnh mới
         if (!file.isEmpty()) {
             String fileName = StringUtils.cleanPath(file.getOriginalFilename());

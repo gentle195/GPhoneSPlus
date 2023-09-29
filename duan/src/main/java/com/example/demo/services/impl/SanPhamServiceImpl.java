@@ -31,6 +31,11 @@ public class SanPhamServiceImpl implements SanPhamService {
     }
 
     @Override
+    public List<SanPham> findAll0() {
+        return sanPhamRepository.findAll0();
+    }
+
+    @Override
     public SanPham findById(UUID id) {
         return sanPhamRepository.findById(id).orElse(null);
     }
@@ -96,6 +101,6 @@ public class SanPhamServiceImpl implements SanPhamService {
 
     @Override
     public List<SanPham> loc(UUID idHang, UUID idMan, UUID idCamera) {
-        return sanPhamRepository.loc(idHang,idMan,idCamera);
+        return sanPhamRepository.loc(idHang, idMan, idCamera);
     }
 }

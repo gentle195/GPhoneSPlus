@@ -36,6 +36,11 @@ public class DungLuongPinServiceImpl implements DungLuongPinService {
     }
 
     @Override
+    public List<DungLuongPin> findAll0() {
+        return dungLuongPinRepository.findAll0();
+    }
+
+    @Override
     public DungLuongPin findById(UUID id) {
         return dungLuongPinRepository.findById(id).orElse(null);
     }

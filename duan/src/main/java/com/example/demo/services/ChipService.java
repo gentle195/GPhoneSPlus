@@ -14,6 +14,8 @@ public interface ChipService {
 
     public List<Chip> findAll();
 
+    public List<Chip> findAll0();
+
     public Chip findById(UUID id);
 
     public Chip add(Chip chip);
@@ -25,6 +27,7 @@ public interface ChipService {
     public Boolean delete(UUID id);
 
     public List<Chip> search0(String ten);
+
     public List<Chip> search1(String ten);
 }
 

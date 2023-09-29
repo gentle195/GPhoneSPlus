@@ -22,6 +22,9 @@ public interface DungLuongPinRepository extends JpaRepository<DungLuongPin, UUID
     @Query("select d from DungLuongPin d  where d.tinhTrang= 1")
     Page<DungLuongPin> getAll1(Pageable pageable);
 
+    @Query("select d from DungLuongPin d  where  d.tinhTrang = 0 ")
+    List<DungLuongPin> findAll0();
+
     @Query("select d from DungLuongPin d  where  d.tinhTrang = 0 and (d.ma like %:ten% or d.thongSo like %:ten% )")
     List<DungLuongPin> sreach0(String ten);
 
@@ -30,6 +33,6 @@ public interface DungLuongPinRepository extends JpaRepository<DungLuongPin, UUID
 
     @Transactional
     @Modifying
-    @Query(value ="update dung_luong_pin set tinh_trang = 0",nativeQuery = true)
+    @Query(value = "update dung_luong_pin set tinh_trang = 0", nativeQuery = true)
     void updateTT();
 }

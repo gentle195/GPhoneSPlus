@@ -48,21 +48,15 @@ public class DiaChiController {
             @RequestParam("num") Optional<Integer> num,
             @RequestParam(name = "size", defaultValue = "5", required = false) Integer size,
             @ModelAttribute("khmodal") KhachHang khachHang1
-
-
     ) {
-
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<DiaChi> list = diaChiService.getAll00(pageable);
-
         model.addAttribute("dulieu", list.getContent());
         model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("tong", diaChiService.getALL0().size());
         model.addAttribute("service", diaChiService);
         model.addAttribute("kh", khachHangService.findAll00());
-
-
         model.addAttribute("contentPage","dia-chi/dia-chi.jsp");
         return "layout";
     }

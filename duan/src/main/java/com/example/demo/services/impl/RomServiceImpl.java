@@ -38,6 +38,11 @@ public class RomServiceImpl implements RomService {
     }
 
     @Override
+    public List<Rom> findAll0() {
+        return romRepository.findAll0();
+    }
+
+    @Override
     public Rom findById(UUID id) {
         return romRepository.findById(id).orElse(null);
     }

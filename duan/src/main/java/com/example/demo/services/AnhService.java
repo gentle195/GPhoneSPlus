@@ -14,6 +14,8 @@ public interface AnhService {
 
     public List<Anh> findAll();
 
+    public List<Anh> findAll0();
+
     public Anh findById(UUID id);
 
     public Anh add(Anh anh);

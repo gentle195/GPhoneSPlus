@@ -15,6 +15,8 @@ public interface MauSacService {
 
     public List<MauSac> findAll();
 
+    public List<MauSac> findAll0();
+
     public MauSac findById(UUID id);
 
     public MauSac add(MauSac mauSac);

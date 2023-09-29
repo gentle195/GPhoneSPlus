@@ -39,7 +39,6 @@ public class RamController {
         ram.setTinhTrang(0);
         Page<Ram> page = ramService.getAll(pageable);
         model.addAttribute("total", page.getTotalPages());
-
         model.addAttribute("listRam", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("contentPage", "ram/ram.jsp");

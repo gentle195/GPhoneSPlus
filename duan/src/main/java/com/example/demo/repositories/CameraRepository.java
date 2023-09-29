@@ -21,6 +21,9 @@ public interface CameraRepository extends JpaRepository<Camera, UUID> {
     @Query("select c from Camera c  where c.tinhTrang=1")
     Page<Camera> getAll1(Pageable pageable);
 
+    @Query("select c from Camera c  where  c.tinhTrang = 0 ")
+    List<Camera> findAll0();
+
     @Query("select c from Camera c  where  c.tinhTrang = 0 and (c.ma like %:ten% or c.thongSo like %:ten%)")
     List<Camera> sreach0(String ten);
 

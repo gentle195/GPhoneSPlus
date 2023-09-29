@@ -20,6 +20,9 @@ public interface ManHinhRepository extends JpaRepository<ManHinh, UUID> {
     @Query("select c from ManHinh c  where c.tinhTrang=0")
     Page<ManHinh> getAll(Pageable pageable);
 
+    @Query("select c from ManHinh c  where c.tinhTrang=0")
+    List<ManHinh> findAll0();
+
     @Query("select c from ManHinh c  where c.tinhTrang=1")
     Page<ManHinh> getAll1(Pageable pageable);
 
@@ -33,6 +36,6 @@ public interface ManHinhRepository extends JpaRepository<ManHinh, UUID> {
 
     @Transactional
     @Modifying
-    @Query(value = "update ManHinh set tinh_trang=0", nativeQuery = true)
+    @Query(value = "update man_hinh set tinh_trang=0", nativeQuery = true)
     void updateTT();
 }

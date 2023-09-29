@@ -100,10 +100,9 @@ public class ModalController {
         Date date = new Date(millis);
         String ma = "CHIP" + pinService.findAll().size();
         pin.setMa(ma);
-//        pin.setNgayTao(date);
+        pin.setNgayTao(date);
         pin.setTinhTrang(0);
         pinService.add(pin);
-
         model.addAttribute("list", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
@@ -115,13 +114,12 @@ public class ModalController {
                             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<Pin> page = pinService.getAll(pageable);
+        Page<MauSac> page = mauSacService.getAll(pageable);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("list", page.getContent());
             model.addAttribute("page", page.getNumber());
             model.addAttribute("total", page.getTotalPages());
-            model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
             model.addAttribute("chitietsanpham", new ChiTietSanPham());
             return "chi-tiet-san-pham/add-chi-tiet-san-pham";
         }
@@ -225,7 +223,7 @@ public class ModalController {
                              @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<SanPham> page = sanPhamService.getAll(pageable);
+        Page<SanPham> page = sanPhamService.getAll0(pageable);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("list", page.getContent());
@@ -299,7 +297,7 @@ public class ModalController {
             Page<Camera> list = cameraService.getAll(pageable);
             model.addAttribute("listCamera", list.getContent());
             model.addAttribute("total", list.getTotalPages());
-            return "SanPham/hien-thi";
+            return "san-pham/hien-thi";
         }
         camera.setNgayTao(Date.valueOf(LocalDate.now()));
         camera.setMa("MH" + String.valueOf(cameraService.findAll().size() + 1));
@@ -319,19 +317,15 @@ public class ModalController {
             model.addAttribute("content", "HangSanPham/hien-thi.jsp");
             Sort sort = Sort.by("ngayTao").ascending();
             Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-            Page<HangSanPham> list = hangSanPhamService.getAll(pageable);
+            Page<HangSanPham> list = hangSanPhamService.getAll0(pageable);
             model.addAttribute("hsp", list.getContent());
             model.addAttribute("total", list.getTotalPages());
-            return "SanPham/hien-thi";
+            return "san-pham/hien-thi";
         }
-
         dulieuxem.setNgayTao(Date.valueOf(LocalDate.now()));
         dulieuxem.setMa("H" + String.valueOf(hangSanPhamService.findAll().size() + 1));
-
         hangSanPhamService.add(dulieuxem);
-
         return "redirect:/san-pham/hien-thi";
-
         // Tiếp tục xử lý và trả về view tương ứng
     }
 }

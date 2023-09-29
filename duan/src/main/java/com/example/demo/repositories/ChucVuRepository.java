@@ -21,6 +21,9 @@ public interface ChucVuRepository extends JpaRepository<ChucVu, UUID> {
     @Query("select cv from ChucVu cv  where cv.tinhTrang=1")
     Page<ChucVu> getAll1(Pageable pageable);
 
+    @Query("select cv from ChucVu cv  where cv.tinhTrang=0 ")
+    List<ChucVu> findAll0();
+
     @Query("select cv from ChucVu cv  where cv.tinhTrang=0 and (cv.ma like %:ten% or cv.ten like %:ten%)")
     List<ChucVu> search0(String ten);
 
@@ -29,6 +32,6 @@ public interface ChucVuRepository extends JpaRepository<ChucVu, UUID> {
 
     @Transactional
     @Modifying
-    @Query(value ="update  chuc_vu set tinh_trang=0",nativeQuery = true)
+    @Query(value = "update  chuc_vu set tinh_trang=0", nativeQuery = true)
     void updateTT();
 }

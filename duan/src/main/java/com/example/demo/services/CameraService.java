@@ -15,6 +15,8 @@ public interface CameraService {
 
     public List<Camera> findAll();
 
+    public List<Camera> findAll0();
+
     public Camera findById(UUID id);
 
     public Camera add(Camera camera);
@@ -26,6 +28,7 @@ public interface CameraService {
     public Boolean delete(UUID id);
 
     public List<Camera> search0(String ten);
+
     public List<Camera> search1(String ten);
 
 }

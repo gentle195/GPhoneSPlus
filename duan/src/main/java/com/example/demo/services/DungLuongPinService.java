@@ -15,6 +15,8 @@ public interface DungLuongPinService {
 
     public List<DungLuongPin> findAll();
 
+    public List<DungLuongPin> findAll0();
+
     public DungLuongPin findById(UUID id);
 
     public DungLuongPin add(DungLuongPin dungLuongPin);
@@ -26,6 +28,7 @@ public interface DungLuongPinService {
     public Boolean delete(UUID id);
 
     public List<DungLuongPin> search0(String ten);
+
     public List<DungLuongPin> search1(String ten);
 }
 

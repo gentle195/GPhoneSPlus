@@ -35,6 +35,11 @@ public class ChucVuServiceImpl implements ChucVuService {
     }
 
     @Override
+    public List<ChucVu> findAll0() {
+        return chucVuRepository.findAll0();
+    }
+
+    @Override
     public ChucVu findById(UUID id) {
         return chucVuRepository.findById(id).orElse(null);
     }

@@ -16,6 +16,8 @@ public interface ChucVuService {
 
     public List<ChucVu> findAll();
 
+    public List<ChucVu> findAll0();
+
     public ChucVu findById(UUID id);
 
     public ChucVu add(ChucVu chucVu);

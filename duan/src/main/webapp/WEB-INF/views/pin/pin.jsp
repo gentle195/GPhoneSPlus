@@ -60,9 +60,10 @@
                                                  itemValue="id"></form:select>
                                 </div>
                                 <div class="col-1">
-                                    <button type="button" class="btn btn-inverse-primary btn-fw" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModalDungLuongPin">Thêm nhanh
-                                    </button>
+                                    <a type="button" data-bs-toggle="modal"
+                                       data-bs-target="#exampleModalDungLuongPin" style="margin: 10px">
+                                        <img src="/uploads/plus.png">
+                                    </a>
                                 </div>
                             </div>
                         </div>

@@ -78,7 +78,7 @@ public class DungLuongPinController {
 
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
-        String ma = "DLP" + dungLuongPinService.findAll().size();
+        String ma = "DLP" + (dungLuongPinService.findAll().size()+1);
         dungLuongPin.setMa(ma);
         dungLuongPin.setNgayTao(date);
         dungLuongPin.setTinhTrang(0);

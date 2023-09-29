@@ -44,7 +44,7 @@ public class PinController {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<Pin> page = pinService.getAll(pageable);
-        model.addAttribute("listDungLuongPin", dungLuongPinService.findAll());
+        model.addAttribute("listDungLuongPin", dungLuongPinService.findAll0());
         model.addAttribute("contentPage", "pin/pin.jsp");
         model.addAttribute("listPin", page.getContent());
         model.addAttribute("page", page.getNumber());
@@ -60,7 +60,7 @@ public class PinController {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<Pin> page = pinService.getAll1(pageable);
-        model.addAttribute("listDungLuongPin", dungLuongPinService.findAll());
+        model.addAttribute("listDungLuongPin", dungLuongPinService.findAll0());
         model.addAttribute("contentPage", "pin/pin-delete.jsp");
         model.addAttribute("listPin", page.getContent());
         model.addAttribute("page", page.getNumber());
@@ -131,10 +131,10 @@ public class PinController {
                             @RequestParam(name = "pageSize", required = false, defaultValue = "3") Integer pageSize) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("listDungLuongPin", dungLuongPinService.findAll());
+            model.addAttribute("listDungLuongPin", dungLuongPinService.findAll0());
             return "pin/pin-update";
         }
-        model.addAttribute("listDungLuongPin", dungLuongPinService.findAll());
+        model.addAttribute("listDungLuongPin", dungLuongPinService.findAll0());
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         pin.setNgayCapNhat(date);
@@ -210,7 +210,7 @@ public class PinController {
         Sort sort = Sort.by("ma").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<Pin> page = pinService.getAll(pageable);
-        model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
         model.addAttribute("contentPage", "pin/pin-update.jsp");
         model.addAttribute("listPin", page.getContent());
         model.addAttribute("page", page.getNumber());
@@ -221,7 +221,7 @@ public class PinController {
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("pin") Pin pin, @RequestParam("pageNum") Optional<Integer> pageNum,
                           @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-        model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
         model.addAttribute("contentPage", "pin/pin-add.jsp");
         return "layout";
     }

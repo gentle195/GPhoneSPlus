@@ -16,6 +16,8 @@ public interface PinService {
 
     public List<Pin> findAll();
 
+    public List<Pin> findAll0();
+
     public Pin findById(UUID id);
 
     public Pin add(Pin pin);
@@ -27,6 +29,7 @@ public interface PinService {
     public Boolean delete(UUID id);
 
     public List<Pin> search0(String ten);
+
     public List<Pin> search1(String ten);
 }
 

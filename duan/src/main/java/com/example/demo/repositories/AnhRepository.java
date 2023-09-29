@@ -20,6 +20,9 @@ public interface AnhRepository extends JpaRepository<Anh, UUID> {
     @Query("select c from Anh c  where c.tinhTrang=1")
     Page<Anh> getAll1(Pageable pageable);
 
+    @Query("select c from Anh c  where  c.tinhTrang = 0")
+    List<Anh> findAll0();
+
     @Query("select c from Anh c  where  c.tinhTrang = 0 and (c.ma like %:ten% or c.ten like %:ten%)")
     List<Anh> sreach0(String ten);
 

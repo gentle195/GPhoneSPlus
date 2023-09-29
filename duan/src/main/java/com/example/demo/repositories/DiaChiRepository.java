@@ -29,6 +29,9 @@ public interface DiaChiRepository extends JpaRepository<DiaChi, UUID> {
     @Query("select kh from DiaChi kh  where kh.ma like %:timkiem% and kh.tinhTrang=0 or kh.diaChi like %:timkiem%  and kh.tinhTrang=0")
     List<DiaChi> timkiemMT(String timkiem);
 
+    @Query("select hkh from DiaChi hkh  where hkh.tinhTrang=0")
+    List<DiaChi> findAll0();
+
     @Query("select hkh from DiaChi hkh  where hkh.tinhTrang=1")
     List<DiaChi> getall1();
 
@@ -40,6 +43,6 @@ public interface DiaChiRepository extends JpaRepository<DiaChi, UUID> {
 
     @Transactional
     @Modifying
-    @Query(value ="update dia_chi set tinh_trang=0 , ngay_cap_nhat=convert(date,getdate(),105)",nativeQuery = true)
+    @Query(value = "update dia_chi set tinh_trang=0 , ngay_cap_nhat=convert(date,getdate(),105)", nativeQuery = true)
     void update0();
 }
