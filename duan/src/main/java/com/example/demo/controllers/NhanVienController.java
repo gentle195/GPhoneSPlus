@@ -2,7 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.ChucVu;
 import com.example.demo.models.NhanVien;
-import com.example.demo.repositories.ChucVuRepository;
+import com.example.demo.services.ChucVuService;
 import com.example.demo.services.NhanVienService;
 import com.example.demo.util.FileUploadUtil;
 import jakarta.validation.Valid;
@@ -40,7 +40,7 @@ public class NhanVienController {
     @Autowired
     private NhanVienService nhanVienService;
     @Autowired
-    private ChucVuRepository chucVuRepository;
+    private ChucVuService chucVuService;
 
     @GetMapping("/hien-thi")
     public String hienThi(Model model, @ModelAttribute("nhanVien") NhanVien nhanVien,
@@ -52,10 +52,12 @@ public class NhanVienController {
         Page<NhanVien> page = nhanVienService.getAll(pageable);
         model.addAttribute("contentPage", "nhanvien/nhan-vien.jsp");
         model.addAttribute("listNhanVien", page.getContent());
+        model.addAttribute("listChucVu", chucVuService.findAll());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
         return "layout";
     }
+
 
     @GetMapping("/hien-thi-delete")
     public String hienThiDelete(Model model, @ModelAttribute("nhanVien") NhanVien nhanVien,
@@ -72,59 +74,114 @@ public class NhanVienController {
         return "layout";
     }
 
+    @GetMapping("/loc")
+    public String hienThiLoc(Model model,
+                             @RequestParam("ten1") String tenChucVu,
+                             @RequestParam("gioiTinh1") String gioiTinh,
+                             @RequestParam("pageNum") Optional<Integer> pageNum,
+                             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+
+        Sort sort = Sort.by("ngayTao").descending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+
+        // Gọi phương thức mới để lọc theo chức vụ và giới tính
+        List<NhanVien> filteredNhanViens = nhanVienService.searchByChucVuAndGioiTinh(tenChucVu, gioiTinh, pageable);
+        List<ChucVu> listChucVu = chucVuService.findAll();
+
+        // Đặt danh sách chức vụ vào mô hình
+        model.addAttribute("listChucVu", listChucVu);
+        model.addAttribute("contentPage", "nhanvien/nhan-vien.jsp");
+        model.addAttribute("listNhanVien", filteredNhanViens);
+//        model.addAttribute("page", pageable.getPageNumber());
+//        model.addAttribute("total", pageable.getPageSize());
+        return "layout";
+    }
+
 
     @GetMapping("/view-add")
-    public String viewAdd(Model model) {
+    public String viewAdd(Model model, @ModelAttribute("nhanVien") NhanVien nhanVien,
+                          @ModelAttribute("chucVu") ChucVu chucVu) {
 
-        List<ChucVu> listChucVu = chucVuRepository.findAll0();
+        nhanVien.setTinhTrang(0);
+        nhanVien.setGioiTinh(true);
+//        nhanVien.setMatKhau(nhanVien.getMatKhau());
+        List<ChucVu> listChucVu = chucVuService.findAll();
         model.addAttribute("listChucVu", listChucVu);
-        model.addAttribute("nhanVien", new NhanVien());
+//        model.addAttribute("nhanVien", new NhanVien());
         model.addAttribute("contentPage", "nhanvien/nhan-vien-add.jsp");
 
         return "layout";
     }
 
     @PostMapping("/add")
-    public String addNhanVien(Model model, @ModelAttribute("nhanVien") @Valid NhanVien nhanVien, BindingResult bindingResult,
+    public String addNhanVien(Model model, @ModelAttribute("nhanVien") @Valid NhanVien nhanVien,
+                              BindingResult bindingResult,
+                              @ModelAttribute("chucVu") ChucVu chucVu,
                               @RequestParam("pageNum") Optional<Integer> pageNum,
+//                              @RequestParam("urlAnh") String anh,
+                              @RequestParam("matKhau") String mk,
+                              @RequestParam("email") String email,
                               @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize,
                               @RequestParam("images") MultipartFile multipartFile) throws IOException {
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        String uploadDir = "src/main/webapp/uploads/";
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
-        nhanVien.setUrlAnh(fileName);
 
         if (bindingResult.hasErrors()) {
-            List<ChucVu> listChucVu = chucVuRepository.findAll0();
+            List<ChucVu> listChucVu = chucVuService.findAll();
+            nhanVien.setTinhTrang(0);
+            nhanVien.setGioiTinh(true);
+//            model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listChucVu", listChucVu);
             model.addAttribute("contentPage", "nhanvien/nhan-vien-add.jsp");
 
             return "layout";
 //            return "nhanvien/nhan-vien-add.jsp";
         }
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        String uploadDir = "src/main/webapp/uploads/";
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        nhanVien.setUrlAnh(fileName);
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
 
+        Sort sort = Sort.by("ma").descending();
         Integer nv = nhanVienService.findAll().size();
         String maNV = "";
         if (nv < 10) {
             maNV = "MaNV0" + nv;
         } else {
-            maNV = "MaMS" + nv;
+            maNV = "MaNV" + nv;
         }
         nhanVien.setMa(maNV);
-        nhanVien.setNgayTao(Date.valueOf(LocalDate.now()));
+        nhanVien.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        nhanVien.setNgayTao(date);
+        nhanVien.setTinhTrang(0);
+        nhanVien.setMatKhau(mk);
+        nhanVien.setEmail(email);
         nhanVienService.add(nhanVien);
-        List<ChucVu> listChucVu = chucVuRepository.findAll();
+        List<ChucVu> listChucVu = chucVuService.findAll();
+
+        Page<NhanVien> page = nhanVienService.getAll(Pageable.unpaged());
 
         model.addAttribute("listChucVu", listChucVu);
+        model.addAttribute("nhanVien", new NhanVien());
+        model.addAttribute("listNhanVien", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+
         model.addAttribute("contentPage", "nhanvien/nhan-vien.jsp");
         return "redirect:/nhan-vien/hien-thi";
+//        return "layout";
     }
 
     @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
+//                         @RequestParam("matKhau") String mk,
+//                         @RequestParam("email") String email,
+//                         @ModelAttribute("nhanVien") NhanVien nhanVien,
                          @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-        List<ChucVu> listChucVu = chucVuRepository.findAll0();
+        List<ChucVu> listChucVu = chucVuService.findAll();
+//        nhanVien.setMatKhau(mk);
+//        nhanVien.setEmail(email);
         model.addAttribute("listChucVu", listChucVu);
         NhanVien nhanVien = nhanVienService.findById(id);
         model.addAttribute("nhanVien", nhanVien);
@@ -134,11 +191,33 @@ public class NhanVienController {
 
 
     @PostMapping("/update/{id}")
-    public String update(Model model, @PathVariable("id") UUID id, @ModelAttribute("nhanVien") @Valid NhanVien nhanVien
-            , BindingResult bindingResult, @RequestParam("images") MultipartFile file) {
+    public String update(Model model, @PathVariable("id") UUID id,
+                         @RequestParam("matKhau") String mk,
+                         @RequestParam("email") String email,
+                         @ModelAttribute("nhanVien") @Valid NhanVien nhanVien
+            , BindingResult bindingResult, @RequestParam("images") MultipartFile file) throws IOException {
 
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
         nhanVien.setId(id);
         nhanVien.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        nhanVien.setNgayTao(date);
+        nhanVien.setTinhTrang(0);
+        nhanVien.setMatKhau(mk);
+        nhanVien.setEmail(email);
+
+
+        if (bindingResult.hasErrors()) {
+            List<ChucVu> listChucVu = chucVuService.findAll();
+            nhanVien.setTinhTrang(0);
+            nhanVien.setGioiTinh(true);
+//            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listChucVu", listChucVu);
+            model.addAttribute("contentPage", "nhanvien/nhan-vien-update.jsp");
+
+            return "layout";
+//            return "nhanvien/nhan-vien-add.jsp";
+        }
         // Xử lý tệp ảnh nếu người dùng đã chọn ảnh mới
         if (!file.isEmpty()) {
             String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -153,10 +232,127 @@ public class NhanVienController {
                 // Xử lý lỗi nếu cần
             }
         }
+        List<ChucVu> listChucVu = chucVuService.findAll();
+        model.addAttribute("listChucVu", listChucVu);
         nhanVienService.update(id, nhanVien);
         model.addAttribute("contentPage", "nhanvien/nhan-vien.jsp");
 
         return "redirect:/nhan-vien/hien-thi";
 
+    }
+
+
+    @PostMapping("/search-0")
+    public String search0(Model model, @ModelAttribute("nhanVien") NhanVien nhanVien, @RequestParam("search") String search) {
+        List<NhanVien> list = nhanVienService.search0(search);
+        model.addAttribute("listNhanVien", list);
+        model.addAttribute("contentPage", "nhanvien/nhan-vien.jsp");
+        return "layout";
+    }
+
+    @PostMapping("/search-1")
+    public String search1(Model model, @ModelAttribute("nhanVien") NhanVien nhanVien, @RequestParam("search") String search) {
+        List<NhanVien> list = nhanVienService.search1(search);
+        model.addAttribute("listNhanVien", list);
+        model.addAttribute("contentPage", "nhanvien/nhan-vien-delete.jsp");
+        return "layout";
+    }
+
+    @GetMapping("/update-all-status")
+    public String updateTT(Model model, @RequestParam("pageNum") Optional<Integer> pageNum,
+                           @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize,
+                           @ModelAttribute("nhanVien") NhanVien nhanVien) {
+        Sort sort = Sort.by("ngayTao").ascending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        nhanVien.setNgayCapNhat(date);
+
+        nhanVienService.updateTT();
+        Page<NhanVien> page = nhanVienService.getAll1(pageable);
+        model.addAttribute("contentPage", "nhanvien/nhan-vien-delete.jsp");
+        model.addAttribute("listNhanVien", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+        return "layout";
+    }
+
+    @GetMapping("/update-status/{id}")
+    public String updateStatus(Model model, @PathVariable("id") UUID id,
+                               @RequestParam("pageNum") Optional<Integer> pageNum,
+                               @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("nhanVien") NhanVien nhanVien) {
+        Sort sort = Sort.by("ngayTao").ascending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+
+        NhanVien nhanVien1 = nhanVienService.findById(id);
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        nhanVien1.setNgayCapNhat(date);
+        nhanVien1.setTinhTrang(1);
+        nhanVienService.update(id, nhanVien1);
+        Page<NhanVien> page = nhanVienService.getAll(pageable);
+        model.addAttribute("contentPage", "nhanvien/nhan-vien.jsp");
+        model.addAttribute("listNhanVien", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+        return "layout";
+    }
+
+    @GetMapping("/reset-status/{id}")
+    public String resetStatus(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
+                              @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("nhanVien") NhanVien nhanVien) {
+        Sort sort = Sort.by("ngayTao").ascending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+        NhanVien nhanVien1 = nhanVienService.findById(id);
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        nhanVien1.setNgayCapNhat(date);
+
+        nhanVien1.setTinhTrang(0);
+        nhanVienService.update(id, nhanVien1);
+        Page<NhanVien> page = nhanVienService.getAll1(pageable);
+        model.addAttribute("contentPage", "nhanvien/nhan-vien-delete.jsp");
+        model.addAttribute("listNhanVien", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+        return "layout";
+    }
+
+    @PostMapping("/modal-add-chuc-vu")
+    public String addChucVu(Model model, @ModelAttribute("chucVu") @Valid ChucVu chucVu,
+                            BindingResult bindingResult, @RequestParam("pageNum") Optional<Integer> pageNum,
+                            @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+        Sort sort = Sort.by("ngayTao").ascending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+        Page<ChucVu> page = chucVuService.getAll1(pageable);
+
+        List<ChucVu> list = chucVuService.findAll();
+
+        if (bindingResult.hasErrors()) {
+//            model.addAttribute("contentPage", "chucvu/chuc-vu.jsp");
+            model.addAttribute("listChucVu", page.getContent());
+            model.addAttribute("page", page.getNumber());
+            model.addAttribute("total", page.getTotalPages());
+            return "nhan-vien/add";
+        }
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+
+        Integer sl = chucVuService.findAll().size();
+        String maCV = "";
+        if (sl < 10) {
+            maCV = "MaCV0" + sl;
+        } else {
+            maCV = "MaCV" + sl;
+        }
+        chucVu.setMa(maCV);
+        chucVu.setNgayTao(date);
+        chucVu.setNgayCapNhat(date);
+        chucVu.setTinhTrang(0);
+        chucVuService.add(chucVu);
+        model.addAttribute("listChucVu", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+        return "redirect:/nhan-vien/add";
     }
 }

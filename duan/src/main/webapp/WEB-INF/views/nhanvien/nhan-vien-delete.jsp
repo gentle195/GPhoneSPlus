@@ -19,19 +19,15 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/chuc-vu/hien-thi" role="tab">Thông tin Chức vụ </a>
+            <a class="nav-link" href="/nhan-vien/hien-thi" role="tab">Thông tin nhân viên</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               aria-controls="description" aria-selected="true">Chức vụ đã xoá</a>
+            <a class="nav-link" href="/nhan-vien/view-add" role="tab">Thêm nhân viên</a>
         </li>
-        <a href="/chuc-vu/update-all-status" class="btn btn-outline-danger btn-icon-text" style="float: right; margin-left: 720px"
-           tabindex="-1"
-           role="button"
-           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-            <i class="ti-reload btn-icon-prepend"></i>
-            Status All
-        </a>
+        <li class="nav-item">
+            <a class="nav-link" href="/nhan-vien/hien-thi-delete" role="tab">Nhân viên đã xoá</a>
+        </li>
+
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">
@@ -40,9 +36,19 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title" style="float: left">Danh sách Chức vụ</h4>
+                    <h4 class="card-title" style="float: left">Danh sách Nhân viên đã xóa</h4>
+
+                    <a href="/nhan-vien/update-all-status" class="btn btn-outline-danger btn-icon-text"
+                       style="float: right; margin-left: 900px"
+                       tabindex="-1"
+                       role="button"
+                       onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                        <i class="ti-reload btn-icon-prepend"></i>
+                        Status All
+                    </a>
+                    <br>
                     <%--            Tìm kiếm               --%>
-                    <form action="/chuc-vu/search-1" method="post">
+                    <form action="/nhan-vien/search-1" method="post">
                         <div class="input-group" style="width: 30%; float: right">
                             <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                    aria-label="Bạn tìm gì..." name="search">
@@ -55,29 +61,42 @@
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
-                            <tr><th>STT</th>
+                            <tr>
+                                <th>STT</th>
                                 <th>Mã</th>
-                                <th>Tên</th>
-                                <th>Ngày Tạo</th>
-                                <th>Ngày Cập Nhật</th>
-                                <th>Tình Trạng</th>
-                                <th>Mô tả</th>
+                                <th>Ảnh</th>
+                                <th>Họ tên</th>
+                                <th>Giới tính</th>
+                                <th>SĐT</th>
+                                <th>Chức vụ</th>
+                                <th>Lương</th>
+                                <th>Quê quán</th>
+                                <th>Trạng thái</th>
+                                <%--                                <th>Mô tả</th>--%>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <i class="mdi mdi-border-color"></i>
-                            <c:forEach items="${listChucVu}" var="chucVu" varStatus="i">
+                            <c:forEach items="${listNhanVien}" var="nhanVien" varStatus="i">
                                 <tr>
                                     <th scope="row">${i.index+1}</th>
-                                    <td>${chucVu.ma}</td>
-                                    <td>${chucVu.ten}</td>
-                                    <td>${chucVu.ngayTao}</td>
-                                    <td>${chucVu.ngayCapNhat}</td>
-                                    <td>${chucVu.trangThai()}</td>
-                                    <td>${chucVu.moTa}</td>
+                                    <td>${nhanVien.ma}</td>
+                                    <td align="center">
+                                        <img src="/uploads/${nhanVien.urlAnh}" width="40" height="40"></td>
+                                    <td>${nhanVien.hoTen}</td>
                                     <td>
-                                        <a href="/chuc-vu/reset-status/${chucVu.id}" class="btn btn-danger btn-icon-text"
+                                        <c:if test="${nhanVien.gioiTinh == true}">Nam</c:if>
+                                        <c:if test="${nhanVien.gioiTinh == false}">Nữ</c:if>
+                                    </td>
+                                    <td>${nhanVien.sdt}</td>
+                                    <td>${nhanVien.chucVu.ten}</td>
+                                    <td>${nhanVien.luong}</td>
+                                    <td>${nhanVien.queQuan}</td>
+                                    <td>${nhanVien.trangThai()}</td>
+                                    <td>
+                                        <a href="/nhan-vien/reset-status/${nhanVien.id}"
+                                           class="btn btn-danger btn-icon-text"
                                            tabindex="-1"
                                            role="button"
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
@@ -96,14 +115,14 @@
         <div align="center">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <ul class="pagination justify-content-center pagination-lg">
-                    <li class="page-item"><a class="page-link" href="/chuc-vu/hien-thi?pageNum=0"><</a></li>
+                    <li class="page-item"><a class="page-link" href="/nhan-vien/hien-thi?pageNum=0"><</a></li>
                     <c:forEach begin="1" end="${total}" varStatus="status">
                         <li class="page-item">
-                            <a href="${pageContext.request.contextPath}/chuc-vu/hien-thi?pageNum=${status.index -1}"
+                            <a href="${pageContext.request.contextPath}/nhan-vien/hien-thi?pageNum=${status.index -1}"
                                class="page-link">${status.index}</a>
                         </li>
                     </c:forEach>
-                    <li class="page-item"><a class="page-link" href="/chuc-vu/hien-thi?pageNum=${total-1}">></a></li>
+                    <li class="page-item"><a class="page-link" href="/nhan-vien/hien-thi?pageNum=${total-1}">></a></li>
                 </ul>
             </div>
         </div>
