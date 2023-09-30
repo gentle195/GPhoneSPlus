@@ -76,7 +76,7 @@ public class BanHangTaiQuayController {
         model.addAttribute("listManHinh", manHinhService.findAll0());
         model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
-        model.addAttribute("listNhanVien", nhanVienService.findAll0());
+        model.addAttribute("listNhanVien", nhanVienService.findAll());
         model.addAttribute("listKhachHang", khachHangService.findAll0());
         model.addAttribute("listDiaChi", diaChiService.findAll0());
         model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
@@ -102,7 +102,7 @@ public class BanHangTaiQuayController {
             model.addAttribute("listManHinh", manHinhService.findAll0());
             model.addAttribute("listCamera", cameraService.findAll0());
             model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
-            model.addAttribute("listNhanVien", nhanVienService.findAll0());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listKhachHang", khachHangService.findAll0());
             model.addAttribute("listDiaChi", diaChiService.findAll0());
             model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
@@ -135,7 +135,7 @@ public class BanHangTaiQuayController {
         model.addAttribute("listManHinh", manHinhService.findAll0());
         model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
-        model.addAttribute("listNhanVien", nhanVienService.findAll0());
+        model.addAttribute("listNhanVien", nhanVienService.findAll());
         model.addAttribute("listKhachHang", khachHangService.findAll0());
         model.addAttribute("listDiaChi", diaChiService.findAll0());
         model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
@@ -170,7 +170,7 @@ public class BanHangTaiQuayController {
         model.addAttribute("listManHinh", manHinhService.findAll0());
         model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
-        model.addAttribute("listNhanVien", nhanVienService.findAll0());
+        model.addAttribute("listNhanVien", nhanVienService.findAll());
         model.addAttribute("listKhachHang", khachHangService.findAll0());
         model.addAttribute("listDiaChi", diaChiService.findAll0());
         model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
@@ -207,7 +207,7 @@ public class BanHangTaiQuayController {
             model.addAttribute("listManHinh", manHinhService.findAll0());
             model.addAttribute("listCamera", cameraService.findAll0());
             model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
-            model.addAttribute("listNhanVien", nhanVienService.findAll0());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listKhachHang", khachHangService.findAll0());
             model.addAttribute("listDiaChi", diaChiService.findAll0());
             model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
@@ -227,7 +227,7 @@ public class BanHangTaiQuayController {
             model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
             model.addAttribute("listManHinh", manHinhService.findAll0());
             model.addAttribute("listCamera", cameraService.findAll0());
-            model.addAttribute("listNhanVien", nhanVienService.findAll0());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listKhachHang", khachHangService.findAll0());
             model.addAttribute("listDiaChi", diaChiService.findAll0());
             model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
@@ -305,7 +305,7 @@ public class BanHangTaiQuayController {
             model.addAttribute("listManHinh", manHinhService.findAll0());
             model.addAttribute("listCamera", cameraService.findAll0());
             model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
-            model.addAttribute("listNhanVien", nhanVienService.findAll0());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listKhachHang", khachHangService.findAll0());
             model.addAttribute("listDiaChi", diaChiService.findAll0());
             model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
@@ -333,7 +333,7 @@ public class BanHangTaiQuayController {
             model.addAttribute("listManHinh", manHinhService.findAll0());
             model.addAttribute("listCamera", cameraService.findAll0());
             model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
-            model.addAttribute("listNhanVien", nhanVienService.findAll0());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listKhachHang", khachHangService.findAll0());
             model.addAttribute("listDiaChi", diaChiService.findAll0());
             model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
@@ -376,7 +376,7 @@ public class BanHangTaiQuayController {
         model.addAttribute("listManHinh", manHinhService.findAll0());
         model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
-        model.addAttribute("listNhanVien", nhanVienService.findAll0());
+        model.addAttribute("listNhanVien", nhanVienService.findAll());
         model.addAttribute("listKhachHang", khachHangService.findAll0());
         model.addAttribute("listDiaChi", diaChiService.findAll0());
         model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
@@ -429,7 +429,7 @@ public class BanHangTaiQuayController {
         model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
         model.addAttribute("listManHinh", manHinhService.findAll0());
         model.addAttribute("listCamera", cameraService.findAll0());
-        model.addAttribute("listNhanVien", nhanVienService.findAll0());
+        model.addAttribute("listNhanVien", nhanVienService.findAll());
         model.addAttribute("listKhachHang", khachHangService.findAll0());
         model.addAttribute("listDiaChi", diaChiService.findAll0());
         model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
