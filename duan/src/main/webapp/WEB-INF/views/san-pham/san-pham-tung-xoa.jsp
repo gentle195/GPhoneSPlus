@@ -25,6 +25,12 @@
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
                aria-controls="description" aria-selected="true">Sản Phẩm đã xoá</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/san-pham/view-add" role="tab">Thêm mới sản phẩm</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/san-pham/hien-thi-loc" role="tab">Lọc</a>
+        </li>
         <a href="/san-pham/khoi-phuc-het" class="btn btn-outline-danger btn-icon-text" style="float: right; margin-left: 720px"
            tabindex="-1"
            role="button"

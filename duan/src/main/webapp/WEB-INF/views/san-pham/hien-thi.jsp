@@ -27,197 +27,22 @@
         <li class="nav-item">
             <a class="nav-link" href="/san-pham/hien-thi-tung-xoa" role="tab">Sản Phẩm đã xoá</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/san-pham/view-add" role="tab">Thêm mới sản phẩm</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/san-pham/hien-thi-loc" role="tab">Lọc</a>
+        </li>
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="description" role="tabpanel"
          aria-labelledby="description-tab">
-        <form:form action="/san-pham/add" method="post" modelAttribute="dulieuxem">
-            <%--    <div class="col-md-6 grid-margin stretch-card" >--%>
-            <div class="col-12 grid-margin">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Sản Phẩm</h4>
-                        <form class="form-sample">
-                            <p class="card-description">
 
-                            </p>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label"  for="ten">Tên:</label>
-                                        <div class="col-sm-9">
-                                        <form:input type="text" class="form-control" path="ten" id="ten"/>
-                                        <form:errors path="ten" cssClass="error text-danger"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label"  for="heDieuHanh">Hệ điều hành:</label>
-                                        <div class="col-sm-9">
-                                        <form:input type="text" class="form-control" path="heDieuHanh" id="heDieuHanht"/>
-                                        <form:errors path="heDieuHanh" cssClass="error text-danger"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="soSim">Số khe sim:</label>
-                                        <div class="col-sm-9">
-                                        <form:input  class="form-control" path="soSim" type="number"/>
-                                        <form:errors path="soSim" cssClass="error text-danger"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="bluetooth">Kết nối bluetooth:</label>
-                                        <div class="col-sm-9">
-                                        <form:input type="text" class="form-control" path="bluetooth"/>
-                                        <form:errors path="bluetooth" cssClass="error text-danger"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Hỗ trợ mạng:</label>
-                                        <div class="col-sm-9">
-                                            <form:input type="text" class="form-control" path="hoTroMang"/>
-                                            <form:errors path="hoTroMang" cssClass="error text-danger"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Cổng giao tiếp:</label>
-                                        <div class="col-sm-9">
-                                            <form:input type="text" class="form-control" path="congGiaoTiep"/>
-                                            <form:errors path="congGiaoTiep" cssClass="error text-danger"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label  class="col-sm-3 col-form-label" for="thongSoWifi">Thông số Wifi:</label>
-                                        <div class="col-sm-9">
-                                        <form:input type="text" class="form-control" path="thongSoWifi"/>
-                                        <form:errors path="thongSoWifi" cssClass="error text-danger"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label  class="col-sm-3 col-form-label" for="kichThuoc">Kích thước </label>
-                                        <div class="col-sm-9">
-                                        <form:input type="text" class="form-control" path="kichThuoc"/>
-                                        <form:errors path="kichThuoc" cssClass="error text-danger"/>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label  class="col-sm-3 col-form-label" for="trongLuong">Trọng lượng:</label>
-                                        <div class="col-sm-9">
-                                        <form:input type="text" class="form-control" path="trongLuong"/>
-                                        <form:errors path="trongLuong" cssClass="error text-danger"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label  class="col-sm-3 col-form-label" for="chatLieu">Chất liệu:</label>
-                                        <div class="col-sm-9">
-                                        <form:input type="text" class="form-control" path="chatLieu"/>
-                                        <form:errors path="chatLieu" cssClass="error text-danger"/>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label  class="col-sm-3 col-form-label" for="moTa">Mô tả::</label>
-                                        <div class="col-sm-9">
-                                            <form:textarea  type="text" class="form-control" path="moTa"/>
-                                            <form:errors path="moTa" cssClass="error text-danger"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="hangSanPham">Hãng Sản Phẩm:</label>
-                                        <div class="col-sm-9">
-                                            <div class="d-flex align-items-center"> <!-- Sử dụng d-flex để cùng một dòng -->
-                                                <form:select class="form-control" path="hangSanPham" items="${listHangSP}" itemValue="id" itemLabel="ten" />
-                                                <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalHangSanPham">
-                                                    <img src="https://emojigraph.org/media/twitter/plus_2795.png" style="width: 25px; height: 60%" />
-                                                </a>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="manHinh">Màn Hình:</label>
-                                        <div class="col-sm-9">
-                                            <div class="d-flex align-items-center"> <!-- Sử dụng d-flex để cùng một dòng -->
-                                                <form:select class="form-control" path="manHinh" items="${listManHinh}" itemValue="id" itemLabel="thongSo" />
-                                                <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalManHinh">
-                                                    <img src="https://emojigraph.org/media/twitter/plus_2795.png" style="width: 25px; height: 60%" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="camera">Camera:</label>
-                                        <div class="col-sm-9">
-                                            <div class="d-flex align-items-center"> <!-- Sử dụng d-flex để cùng một dòng -->
-                                                <form:select class="form-control" path="camera" items="${listCamera}" itemValue="id" itemLabel="thongSo" />
-                                                <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalCamera">
-                                                    <img src="https://emojigraph.org/media/twitter/plus_2795.png" style="width: 25px; height: 60%" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div style="text-align: center">
-                                <button type="submit" class="btn btn-primary mr-2"
-                                        onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                    ADD
-                                </button>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <%--    </div>--%>
-        </form:form>
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title" style="float: left">Danh sách Rom</h4>
+                    <h4 class="card-title" style="float: left">Danh sách Sản Phẩm</h4>
                     <%--            Tìm kiếm               --%>
                     <form action="/san-pham/search" method="post">
                         <div class="input-group" style="width: 30%; float: right">

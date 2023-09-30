@@ -20,7 +20,7 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/rom/hien-thi" role="tab">Thông tin Rom </a>
+            <a class="nav-link" href="/san-pham/hien-thi" role="tab">Sản phẩm</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
