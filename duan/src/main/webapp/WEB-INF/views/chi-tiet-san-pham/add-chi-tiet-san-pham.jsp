@@ -255,7 +255,7 @@
                     </div>
                     <div class="mb-3">
                         <form:label path="moTa"><b>Mô Tả:</b></form:label>
-                        <form:textarea path="moTa" class="form-control" rows="3" />
+                        <form:textarea path="moTa" class="form-control" rows="3"/>
 
                     </div>
                     <div class="mb-3">
@@ -397,7 +397,7 @@
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary"
-                                >ADD
+                        >ADD
                         </button>
                     </div>
                 </form:form>
@@ -440,7 +440,7 @@
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary"
-                                >ADD
+                        >ADD
                         </button>
                     </div>
                 </form:form>
@@ -476,7 +476,7 @@
                             </div>
                             <div class="mb-3">
                                 <form:label path="ten"><b>Tên:</b></form:label>
-                                <form:input path="ten"  class="form-control" id="tenSanPham"/>
+                                <form:input path="ten" class="form-control" id="tenSanPham"/>
                                 <span class="text-danger" id="tenSanPhamError"></span>
                             </div>
                             <div class="mb-3">
@@ -489,7 +489,7 @@
                             </div>
                             <div class="mb-3">
                                 <form:label path="soSim"><b>Số khe sim:</b></form:label>
-                                <form:select path="soSim"  class="form-control">
+                                <form:select path="soSim" class="form-control">
                                     <form:option value="1">1 khe sim vật lý</form:option>
                                     <form:option value="2">2 khe sim vật lý</form:option>
                                     <form:option value="3">1 khe sim vật lý, 1 esim</form:option>
@@ -552,12 +552,13 @@
                                 </form:select>
                             </div>
                             <div class="mb-3">
-                                <form:label path="kichThuoc"><b>Kích thước sản phẩm (Chiều dài(mm) x Chiều rộng(mm) x Độ dày(mm)):</b></form:label>
+                                <form:label path="kichThuoc"><b>Kích thước sản phẩm (Chiều dài(mm) x Chiều rộng(mm) x Độ
+                                    dày(mm)):</b></form:label>
                                 <form:input path="kichThuoc" class="form-control"/>
                                 <span class="text-danger" id="kichThuocError"></span>
                             </div>
 
-                            <div class="mb-3" >
+                            <div class="mb-3">
                                 <form:label path="moTa"><b>Mô tả:</b></form:label>
                                 <form:textarea path="moTa" class="form-control"></form:textarea>
                                 <form:errors path="moTa" cssClass="error text-danger"/>
@@ -566,7 +567,9 @@
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success" id="btt" onclick="return validateFormSanPham()">ADD</button>
+                        <button type="submit" class="btn btn-success" id="btt" onclick="return validateFormSanPham()">
+                            ADD
+                        </button>
                     </div>
                 </form:form>
             </div>
@@ -578,42 +581,41 @@
 </div>
 
 
-
 </body>
 <script>
-    function  validateFormSanPham(){
-        var tenSanPham=document.getElementById("tenSanPham").value;
-        var kichThuoc=document.getElementById("kichThuoc").value;
-        var trongLuong=document.getElementById("trongLuong").value;
-        var chatLieu=document.getElementById("chatLieu").value;
-        var btt =document.getElementById("btt");
+    function validateFormSanPham() {
+        var tenSanPham = document.getElementById("tenSanPham").value;
+        var kichThuoc = document.getElementById("kichThuoc").value;
+        var trongLuong = document.getElementById("trongLuong").value;
+        var chatLieu = document.getElementById("chatLieu").value;
+        var btt = document.getElementById("btt");
         var isValid = true;
-        if (tenSanPham.trim()===""||tenSanPham.trim().length<6){
+        if (tenSanPham.trim() === "" || tenSanPham.trim().length < 6) {
             document.getElementById("tenSanPhamError").innerHTML = "Tên sản phẩm không được để trống và phải có tối thiểu 6 kí tự";
-            btt.type="button";
+            btt.type = "button";
             return false;
         } else {
             document.getElementById("tenSanPhamError").innerHTML = ""; // Xóa thông báo lỗi
-            if (kichThuoc.trim()===""){
+            if (kichThuoc.trim() === "") {
                 document.getElementById("kichThuocError").innerHTML = "Kích thước không được để trống";
-                btt.type="button";
+                btt.type = "button";
                 return false;
             } else {
                 document.getElementById("kichThuocError").innerHTML = ""; // Xóa thông báo lỗi
-                if (trongLuong.trim()===""){
+                if (trongLuong.trim() === "") {
                     document.getElementById("trongLuongError").innerHTML = "Trọng lượng không được để trống";
-                    btt.type="button";
+                    btt.type = "button";
                     return false;
                 } else {
                     document.getElementById("trongLuongError").innerHTML = ""; // Xóa thông báo lỗi
-                    if (chatLieu.trim()===""){
+                    if (chatLieu.trim() === "") {
                         document.getElementById("chatLieuError").innerHTML = "Chất liệu không được để trống";
-                        btt.type="button";
+                        btt.type = "button";
 
                         return false;
                     } else {
                         document.getElementById("chatLieuError").innerHTML = ""; // Xóa thông báo lỗi
-                        btt.type="submit";
+                        btt.type = "submit";
                         return true;
                     }
                 }
@@ -624,6 +626,7 @@
 
 
     }
+
     function validateFormPin() {
         // Lấy giá trị từ các ô input
         var loaiPin = document.getElementById("loaiPin").value;
@@ -632,12 +635,12 @@
 
         // Khai báo biến để theo dõi việc xác thực
         var isValid = true;
-        var btnPin=document.getElementById("btnPin");
+        var btnPin = document.getElementById("btnPin");
 
         // Kiểm tra từng ô input và hiển thị thông báo lỗi nếu cần
-        if (loaiPin.trim() === ""||loaiPin.trim().length<6) {
+        if (loaiPin.trim() === "" || loaiPin.trim().length < 6) {
             document.getElementById("loaiPinError").innerHTML = "Loại Pin không được để trống và phải lớn hơn 6 kí tự";
-            btnPin.type="button";
+            btnPin.type = "button";
             return false;
         } else {
             document.getElementById("loaiPinError").innerHTML = ""; // Xóa thông báo lỗi
@@ -645,7 +648,7 @@
 
         if (congNghePin.trim() === "") {
             document.getElementById("congNghePinError").innerHTML = "Công nghệ Pin không được để trống";
-            btnPin.type="button";
+            btnPin.type = "button";
             return false;
         } else {
             document.getElementById("congNghePinError").innerHTML = "";
@@ -654,56 +657,57 @@
         }
 
 
-
     }
+
     function validateFormChip() {
         // Lấy giá trị từ các ô input
         var tenChip = document.getElementById("tenChip").value;
         var loaiChip = document.getElementById("loaiChip").value;
         var soNhan = parseInt(document.getElementById("soNhan").value);
-        var btnChip=document.getElementById("btnChip");
+        var btnChip = document.getElementById("btnChip");
 
         // Khai báo biến để theo dõi việc xác thực
         var isValid = true;
 
         // Kiểm tra từng ô input và hiển thị thông báo lỗi nếu cần
-        if (tenChip.trim() === ""||tenChip.trim().length<=6) {
+        if (tenChip.trim() === "" || tenChip.trim().length <= 6) {
             document.getElementById("tenChipError").innerHTML = "Tên chip không được để trống và tối thiểu có 6 kí tự";
-            btnChip.type="button";
+            btnChip.type = "button";
             return false;
         } else {
             document.getElementById("tenChipError").innerHTML = ""; // Xóa thông báo lỗi
-            if (loaiChip.trim() === ""||loaiChip.trim().length<=2) {
+            if (loaiChip.trim() === "" || loaiChip.trim().length <= 2) {
                 document.getElementById("loaiChipError").innerHTML = "Loại chip không được để trống";
-                btnChip.type="button";
+                btnChip.type = "button";
                 return false;
             } else {
                 document.getElementById("loaiChipError").innerHTML = "";
-                if (soNhan<=0) {
+                if (soNhan <= 0) {
                     document.getElementById("soNhanError").innerHTML = "Số nhân phải lớn hơn 0";
-                    btnChip.type="button";
+                    btnChip.type = "button";
                     return false;
                 } else {
                     document.getElementById("soNhanError").innerHTML = "";
-                    btnChip.type="submit";
+                    btnChip.type = "submit";
                     return true;
                 }
             }
 
         }
-        if (tenChip.trim()===""||loaiChip.trim()===""){
+        if (tenChip.trim() === "" || loaiChip.trim() === "") {
             alert("Hãy điền đủ thông tin!");
-            isValid=false;
+            isValid = false;
         }
         // Nếu có lỗi, ngăn form được gửi đi
         if (!isValid) {
             return false;
         }
     }
-    function validateFormMauSac(){
+
+    function validateFormMauSac() {
         var tenMauSac = document.getElementById("tenMauSac").value;
         var isValid = true;
-        if (tenMauSac.trim()===0||tenMauSac.trim().length<6){
+        if (tenMauSac.trim() === 0 || tenMauSac.trim().length < 6) {
             document.getElementById("tenMauSacError").innerHTML = "Tên màu sắc không được để trống và phải lớn hơn 6 kí tự";
             isValid = false;
         } else {
