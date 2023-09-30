@@ -49,7 +49,7 @@
 
                                 <div class="form-group">
 
-                                    <select name="hang" class="form-control" style="font-weight: bold; width: 100%">
+                                    <select name="hang" class="form-control" style="font-weight: bold; width: 100%" id="selectHang">
                                         <option selected disabled>Hãng</option>
                                         <c:forEach items="${listHang}" var="hang" varStatus="i">
                                             <option value="${hang.id}">${hang.ten}</option>
@@ -57,7 +57,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <select name="ram" class="form-control" style="font-weight: bold; width: 100%">
+                                    <select name="ram" class="form-control" style="font-weight: bold; width: 100%" id="selectRam">
                                         <option selected disabled>Ram</option>
                                         <c:forEach items="${listRam}" var="ram" varStatus="i">
                                             <option value="${ram.id}">${ram.dungLuong}</option>
@@ -65,7 +65,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <select name="rom" class="form-control" style="font-weight: bold; width: 100%">
+                                    <select name="rom" class="form-control" style="font-weight: bold; width: 100%" id="selectRom">
                                         <option selected disabled>Rom</option>
                                         <c:forEach items="${listRom}" var="rom" varStatus="i">
                                             <option value="${rom.id}">${rom.dungLuong}</option>
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="form-group">
                                     <select name="dungLuongPin" class="form-control"
-                                            style="font-weight: bold; width: 100%">
+                                            style="font-weight: bold; width: 100%" id="selectPin">
                                         <option selected disabled>Dung Lượng Pin</option>
                                         <c:forEach items="${dungLuongPin}" var="pin" varStatus="i">
                                             <option value="${pin.id}">${pin.thongSo}</option>
@@ -85,7 +85,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <select name="chip" class="form-control" style="font-weight: bold; width: 100%">
+                                    <select name="chip" class="form-control" style="font-weight: bold; width: 100%" id="selectChip">
                                         <option selected disabled>Chip</option>
                                         <c:forEach items="${listChip}" var="chip" varStatus="i">
                                             <option value="${chip.id}">${chip.ten}</option>
@@ -93,7 +93,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <select name="manHinh" class="form-control" style="font-weight: bold; width: 100%">
+                                    <select name="manHinh" class="form-control" style="font-weight: bold; width: 100%" id="selectManHinh">
                                         <option selected disabled>Màn Hình</option>
                                         <c:forEach items="${listManHinh}" var="man" varStatus="i">
                                             <option value="${man.id}">${man.thongSo}</option>
@@ -101,7 +101,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <select name="camera" class="form-control" style="font-weight: bold; width: 100%">
+                                    <select name="camera" class="form-control" style="font-weight: bold; width: 100%" id="selectCamera">
                                         <option selected disabled>Camera</option>
                                         <c:forEach items="${listCamera}" var="cam" varStatus="i">
                                             <option value="${cam.id}">${cam.thongSo}</option>

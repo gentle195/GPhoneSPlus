@@ -71,7 +71,7 @@ public class ChiTietSanPham {
     @Column(name = "so_luong_ton")
     private int soLuong;
 
-    @NotBlank(message = "Không để trống thông tin")
+//    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")
     private String moTa;
 
