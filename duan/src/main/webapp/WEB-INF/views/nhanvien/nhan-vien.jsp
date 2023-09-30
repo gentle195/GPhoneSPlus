@@ -20,7 +20,7 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+            <a class="nav-link active" id="description-tab" data-toggle="tab" href="/nhan-vien/hien-thi" role="tab"
                aria-controls="description" aria-selected="true">Thông tin nhân viên</a>
         </li>
         <li class="nav-item">
@@ -40,40 +40,44 @@
                 <div class="card-body">
                     <h4 class="card-title" style="float: left">Danh sách Nhân viên</h4>
 
-<%--                    <div class="row">--%>
-<%--                        <div class="col-md-6">--%>
-<%--                            <div class="form-group row">--%>
-<%--                                <label class="col-sm-3 col-form-label">Giới tính:</label>--%>
-<%--                                <div class="col-sm-9" style="margin-top: 0.5cm">--%>
-<%--&lt;%&ndash;                                    <form:radiobutton path="gioiTinh" value="true" checked="true"/>Nam&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <form:radiobutton path="gioiTinh" value="false"&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                                      cssStyle="margin-left: 1cm"/> Nữ&ndash;%&gt;--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div class="col-md-6">--%>
-<%--                            <div class="form-group row">--%>
-<%--                                <label class="col-sm-3 col-form-label">Chức vụ:</label>--%>
-<%--                                <div class="col-sm-9" style="margin-top: 0.4cm; font-size: 20px">--%>
-<%--&lt;%&ndash;                                    <form:select          path="chucVu">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        <form:options items="${listChucVu}" itemValue="id" itemLabel="ten"/>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    </form:select></div>&ndash;%&gt;--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <%--                        <div class="col">--%>
+                        <form method="get" action="/nhan-vien/loc">
+                            <label for="chucVu">Chức vụ:</label>
+                            <select id="chucVu" name="ten1">
+                                <option value="">Chọn chức vụ</option>
+                                <c:forEach items="${listChucVu}" var="chucVu">
+                                    <option value="${chucVu.ten}">${chucVu.ten}</option>
+                                </c:forEach>
+                            </select>
 
-                        <br>
+                            <label for="gioiTinh">Giới tính:</label>
+                            <select id="gioiTinh" name="gioiTinh1">
+                                <%--                            <option value="">Tất cả</option>--%>
+                                <option value="true">Nam</option>
+                                <option value="false">Nữ</option>
+                                <!-- Thêm các option cho giới tính khác -->
+                            </select>
+                            <button type="submit" class="btn btn-primary">Lọc</button>
+                        </form>
+                        <%--                        </div>--%>
 
-                <%--            Tìm kiếm               --%>
-                    <form action="/nhan-vien/search-0" method="post">
-                        <div class="input-group" style="width: 30%; float: right">
-                            <input type="text" class="form-control" placeholder="Bạn tìm gì..."
-                                   aria-label="Bạn tìm gì..." name="search">
-                            <div class="input-group-append">
-                                <button class="btn btn-sm btn-primary" type="submit">Search</button>
-                            </div>
+
+                        <div class="col">
+                            <%--            Tìm kiếm               --%>
+                            <form action="/nhan-vien/search-0" method="post">
+                                <div class="input-group" style="width: 30%; float: right">
+                                    <input type="text" class="form-control" placeholder="Bạn tìm gì..."
+                                           aria-label="Bạn tìm gì..." name="search">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-sm btn-primary" type="submit">Search</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -85,11 +89,12 @@
                                 <th>Họ tên</th>
                                 <th>Giới tính</th>
                                 <th>SĐT</th>
+                                <th>Tài khoản</th>
                                 <th>Chức vụ</th>
                                 <th>Lương</th>
                                 <th>Quê quán</th>
                                 <th>Trạng thái</th>
-<%--                                <th>Mô tả</th>--%>
+                                <%--                                <th>Mô tả</th>--%>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -107,6 +112,7 @@
                                         <c:if test="${nhanVien.gioiTinh == false}">Nữ</c:if>
                                     </td>
                                     <td>${nhanVien.sdt}</td>
+                                    <td>${nhanVien.taiKhoan}</td>
                                     <td>${nhanVien.chucVu.ten}</td>
                                     <td>${nhanVien.luong}</td>
                                     <td>${nhanVien.queQuan}</td>
@@ -137,6 +143,7 @@
         </div>
 
         <%--phân trang--%>
+
         <div align="center">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <ul class="pagination justify-content-center pagination-lg">

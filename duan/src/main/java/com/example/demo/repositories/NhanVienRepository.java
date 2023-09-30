@@ -15,17 +15,16 @@ import java.util.UUID;
 @Repository
 public interface NhanVienRepository extends JpaRepository<NhanVien, UUID> {
 
+    @Query("select nv from NhanVien nv  where nv.tinhTrang=0")
+    List<NhanVien> findAll();
 
     @Query("select nv from NhanVien nv  where nv.tinhTrang=0")
     Page<NhanVien> getAll(Pageable pageable);
 
-    @Query("select nv from NhanVien nv  where nv.tinhTrang=0")
-    List<NhanVien> findAll0();
-
     @Query("select nv from NhanVien nv  where nv.tinhTrang=1")
     Page<NhanVien> getAll1(Pageable pageable);
 
-    @Query("select nv from NhanVien nv  where nv.tinhTrang=0 and (nv.ma like %:ten% or nv.hoTen like %:ten% or nv.queQuan like %:ten% or nv.taiKhoan like %:ten% " +
+    @Query("select nv from NhanVien nv INNER JOIN nv.chucVu cv  where nv.tinhTrang=0 and (cv.ten like %:ten% or nv.ma like %:ten% or nv.hoTen like %:ten% or nv.queQuan like %:ten% or nv.taiKhoan like %:ten% " +
             "or nv.sdt like %:ten% or nv.canCuoc like %:ten% or nv.email like %:ten%)")
     List<NhanVien> search0(String ten);
 
@@ -37,4 +36,12 @@ public interface NhanVienRepository extends JpaRepository<NhanVien, UUID> {
     @Modifying
     @Query(value = "update  nhan_vien set tinh_trang=0", nativeQuery = true)
     void updateTT();
+
+
+    @Query("SELECT nv FROM NhanVien nv " +
+            "INNER JOIN nv.chucVu cv " +
+            "WHERE  cv.ten = :tenChucVu " +
+            "AND  nv.gioiTinh = :gioiTinh")
+    List<NhanVien> searchByTenChucVuAndGioiTinh( String tenChucVu,
+                                                 Boolean gioiTinh);
 }

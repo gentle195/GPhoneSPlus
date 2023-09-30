@@ -18,6 +18,10 @@ public interface ChucVuRepository extends JpaRepository<ChucVu, UUID> {
     @Query("select cv from ChucVu cv  where cv.tinhTrang=0")
     Page<ChucVu> getAll(Pageable pageable);
 
+
+    @Query("select cv from ChucVu cv  where cv.tinhTrang=0")
+    List<ChucVu> findAll();
+
     @Query("select cv from ChucVu cv  where cv.tinhTrang=1")
     Page<ChucVu> getAll1(Pageable pageable);
 

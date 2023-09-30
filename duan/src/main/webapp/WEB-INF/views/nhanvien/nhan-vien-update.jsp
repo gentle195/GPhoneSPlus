@@ -38,29 +38,10 @@
         .input-hidden {
             display: none;
         }
-
-        /*.image-container {*/
-        /*    width: 200px;*/
-        /*    height: 200px;*/
-        /*    border-radius: 50%;*/
-        /*    overflow: hidden;*/
-        /*    display: flex;*/
-        /*    justify-content: center;*/
-        /*    align-items: center;*/
-        /*    border: 2px solid #ccc;*/
-        /*    margin: 0 auto;*/
-        /*}*/
-
-        /*.image-container img {*/
-        /*    max-width: 100%;*/
-        /*    max-height: 100%;*/
-        /*    object-fit: cover;*/
-        /*}*/
     </style>
 </head>
 <body>
 <div class="main" style="border: 2px solid black; border-radius: 1.8% 0% 0% 0%">
-
     <div>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
             <li class="nav-item">
@@ -75,47 +56,56 @@
             </li>
         </ul>
     </div>
-
     <div class="container">
         <form:form action="/nhan-vien/update/${nhanVien.id}" method="post" modelAttribute="nhanVien"
                    enctype="multipart/form-data">
-            <%--    <div class="col-md-6 grid-margin stretch-card" >--%>
             <div class="col-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                            <%--                        <h4 class="card-title">Thêm nhân viên</h4>--%>
                         <form class="form-sample">
 
                             <div class="row">
                                 <div class="col">
                                     <input type="file" class="form-control input-hidden" name="images"
                                            accept="image/jpeg, image/png, image/jpg"
-                                           id="imageInput" required>
+                                           id="imageInput">
                                 </div>
                             </div>
                             <div class="image-container" onclick="selectImage()">
-                                <img id="selectedImage" src="/uploads/${nhanVien.urlAnh}" alt="Chọn ảnh">
-
+                                <img id="selectedImage" src="../../../uploads/${nhanVien.urlAnh}" alt="Chọn ảnh">
                             </div>
                             <br>
+                            <div class="row" style="display: none">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Mã:</label>
+                                        <div class="col-sm-9" style="display: none">
+                                            <form:input cssStyle="display: none" class="form-control" id="form-control"
+                                                        placeholder=""
+                                                        path="ma"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Họ tên:</label>
+                                        <label class="col-sm-3 col-form-label">Họ tên:<form:errors path="hoTen"
+                                                                                                   cssStyle="color: red"></form:errors></label>
                                         <div class="col-sm-9">
                                             <form:input class="form-control" id="form-control" placeholder=""
                                                         path="hoTen"/>
-                                            <form:errors path="hoTen" cssStyle="color: red"></form:errors>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Tài khoản:</label>
+                                        <label class="col-sm-3 col-form-label">Tài khoản:
+                                            <form:errors path="taiKhoan" cssStyle="color: red"></form:errors>
+                                        </label>
                                         <div class="col-sm-9">
                                             <form:input class="form-control" placeholder="" path="taiKhoan"/>
-                                            <form:errors path="taiKhoan" cssStyle="color: red"></form:errors>
                                         </div>
                                     </div>
                                 </div>
@@ -123,20 +113,22 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Email:</label>
+                                        <label class="col-sm-3 col-form-label">Email:
+                                            <form:errors path="email"
+                                                         cssStyle="color: red"></form:errors></label>
                                         <div class="col-sm-9">
-                                            <input id="email" path="email" value="${nhanVien.email}"
+                                            <input id="email" name="email" value="${nhanVien.email}"
                                                    class="form-control" placeholder=""/>
-                                            <div id="email-error" style="color: red"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Mật khẩu:</label>
+                                        <label class="col-sm-3 col-form-label">Mật khẩu:
+                                            <form:errors path="matKhau"
+                                                         cssStyle="color: red"></form:errors></label>
                                         <div class="col-sm-9 password-container">
-
-                                            <input id="password" path="matKhau" value="${nhanVien.matKhau}"
+                                            <input id="password" name="matKhau" value="${nhanVien.matKhau}"
                                                    class="form-control" type="password"
                                                    placeholder="*******"/>
                                             <div id="password-error" style="color: red"></div>
@@ -144,64 +136,42 @@
                                                  onclick="togglePassword()">
                                                 Show
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                                <%--                            <div class="row">--%>
-                                <%--                                <div class="col-md-6">--%>
-                                <%--                                    <div class="form-group row">--%>
-                                <%--                                        <label class="col-sm-3 col-form-label">Email:</label>--%>
-                                <%--                                        <div class="col-sm-9">--%>
-                                <%--                                            <form:input class="form-control" placeholder="" path="email"/>--%>
-                                <%--                                            <form:errors path="email" cssStyle="color: red"></form:errors>--%>
-                                <%--                                        </div>--%>
-                                <%--                                    </div>--%>
-                                <%--                                </div>--%>
-                                <%--                                <div class="col-md-6">--%>
-                                <%--                                    <div class="form-group row">--%>
-                                <%--                                        <label class="col-sm-3 col-form-label">Mật khẩu:</label>--%>
-                                <%--                                        <div class="col-sm-9">--%>
-                                <%--                                            <form:input class="form-control" placeholder="" path="matKhau"/>--%>
-                                <%--                                            <form:errors path="matKhau" cssStyle="color: red"></form:errors>--%>
-                                <%--                                        </div>--%>
-                                <%--                                    </div>--%>
-                                <%--                                </div>--%>
-                                <%--                            </div>--%>
-
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">SĐT:</label>
+                                        <label class="col-sm-3 col-form-label">SĐT:
+                                            <form:errors path="sdt" cssStyle="color: red"></form:errors>
+                                        </label>
                                         <div class="col-sm-9">
                                             <form:input class="form-control" placeholder="" path="sdt"></form:input>
-                                            <form:errors path="sdt" cssStyle="color: red"></form:errors>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Ngày sinh:</label>
+                                        <label class="col-sm-3 col-form-label">Ngày sinh:
+                                            <div id="tb" style="color: crimson;float: right"></div>
+                                        </label>
                                         <div class="col-sm-9">
                                             <form:input class="form-control" type="date" value="${nhanVien.ngaySinh}"
                                                         placeholder=""
                                                         path="ngaySinh"></form:input>
-                                            <form:errors path="ngaySinh" cssStyle="color: red"></form:errors>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">CCCD:</label>
+                                        <label class="col-sm-3 col-form-label">CCCD:
+                                            <form:errors path="canCuoc" cssStyle="color: red"></form:errors>
+                                        </label>
                                         <div class="col-sm-9">
                                             <form:input class="form-control" placeholder="" path="canCuoc"></form:input>
-                                            <form:errors path="canCuoc" cssStyle="color: red"></form:errors>
                                         </div>
                                     </div>
                                 </div>
@@ -220,10 +190,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Quê quán:</label>
+                                        <label class="col-sm-3 col-form-label">Quê quán:
+                                            <form:errors path="queQuan" cssStyle="color: red"></form:errors>
+                                        </label>
                                         <div class="col-sm-9">
                                             <form:input class="form-control" placeholder="" path="queQuan"></form:input>
-                                            <form:errors path="queQuan" cssStyle="color: red"></form:errors>
                                         </div>
                                     </div>
                                 </div>
@@ -268,10 +239,16 @@
 </div>
 </body>
 
-
 <script>
+    // const emailInput = document.getElementById('email');
+    // const emailError = document.getElementById('email-error');
+
+    const passwordInput = document.getElementById('password');
+    const passwordError = document.getElementById('password-error');
+    const passwordToggle = document.getElementById('password-toggle');
+
     // Phần load ảnh
-    const imageInput = document.getElementById('images');
+    const imageInput = document.getElementById('imageInput');
     const selectedImage = document.getElementById('selectedImage');
 
     function selectImage() {
@@ -293,12 +270,6 @@
 
 
     // Gmail/password
-    const emailInput = document.getElementById('email');
-    const emailError = document.getElementById('email-error');
-    const passwordInput = document.getElementById('password');
-    const passwordError = document.getElementById('password-error');
-    const passwordToggle = document.getElementById('password-toggle');
-
     function togglePassword() {
         if (passwordInput.type === 'password') {
             passwordInput.type = 'text';
@@ -307,19 +278,38 @@
             passwordInput.type = 'password';
             passwordToggle.innerText = 'Show';
         }
-    }
+    };
 
-    function validateEmail() {
-        const email = emailInput.value;
-        const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+([a-zA-Z]{2,7}|\w{2,7}\.edu)$/; // Điều kiện email
-        if (!emailRegex.test(email)) {
-            emailError.textContent = 'Email không hợp lệ';
+    //
+    // function validateEmail() {
+    //     const email = emailInput.value;
+    //     const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+([a-zA-Z]{2,7}|\w{2,7}\.edu)$/; // Điều kiện email
+    //     if (!emailRegex.test(email)) {
+    //         emailError.textContent = 'Email không hợp lệ';
+    //     } else {
+    //         emailError.textContent = '';
+    //     }
+    // }
+
+    // emailInput.addEventListener('blur', validateEmail);
+
+    function thongBao() {
+        // if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;
+        var ngaySinh = document.getElementById("check").value;
+        if (confirm("Bạn muốn dùng trức năng này không") == true) {
+            if (ngaySinh.trim() === '') {
+                document.getElementById("tb").innerHTML = "Không để trống ngày sinh!";
+                document.getElementById("bt").type = "button"
+                return false;
+            } else {
+                document.getElementById("tb").innerHTML = "";
+                document.getElementById("bt").type = "submit";
+                return true;
+            }
         } else {
-            emailError.textContent = '';
+            return false;
         }
-    }
-
-    emailInput.addEventListener('blur', validateEmail);
+    };
 
 </script>
 <script src="../../vendors/js/vendor.bundle.base.js"></script>
