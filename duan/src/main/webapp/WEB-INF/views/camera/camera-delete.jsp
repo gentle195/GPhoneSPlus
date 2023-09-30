@@ -19,7 +19,7 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/camera/hien-thi" role="tab" onclick="return myFunction4()">Thông tin Chip </a>
+            <a class="nav-link" href="/camera/hien-thi" role="tab" onclick="return myFunction4()">Thông tin Camera </a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
