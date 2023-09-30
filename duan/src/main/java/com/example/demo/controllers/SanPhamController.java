@@ -236,9 +236,9 @@ public class SanPhamController {
                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         Pageable pageable = PageRequest.of(num.orElse(0), size);
         Page<SanPham> list = sanPhamService.getAll(pageable);
-        model.addAttribute("listManHinh", manHinhService.findAll0());
-        model.addAttribute("listHangSP", hangSanPhamService.findAll0());
-        model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll());
+        model.addAttribute("listHangSP", hangSanPhamService.findAll());
+        model.addAttribute("listCamera", cameraService.findAll());
         model.addAttribute("contentPage", "san-pham/add.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
@@ -268,16 +268,33 @@ public class SanPhamController {
     @PostMapping("/san-pham/loc")
     public String loc(Model model, @RequestParam(value = "hang", required = false) UUID hang,
 
+
                       @RequestParam(value = "manHinh", required = false) UUID moTaMan,
                       @RequestParam(value = "camera", required = false) UUID moTaCam,
                       @ModelAttribute("sanpham") SanPham sanPham
     ) {
         List<SanPham> list = sanPhamService.loc(hang, moTaMan, moTaCam);
-        model.addAttribute("listSP", list);
-        model.addAttribute("listHang", hangSanPhamService.findAll0());
-        model.addAttribute("listManHinh", manHinhService.findAll0());
-        model.addAttribute("listCamera", cameraService.findAll0());
-        model.addAttribute("contentPage", "san-pham/index.jsp");
+        model.addAttribute("hsp", list);
+        model.addAttribute("listHang", hangSanPhamService.findAll());
+        model.addAttribute("listManHinh", manHinhService.findAll());
+        model.addAttribute("listCamera", cameraService.findAll());
+        model.addAttribute("contentPage", "san-pham/tim-kiem-loc.jsp");
+        return "layout";
+    }
+    @GetMapping("/san-pham/hien-thi-loc")
+    public String hienThiLoc(Model model, @RequestParam("pageNum") Optional<Integer> pageNum
+    ) {
+        Sort sort = Sort.by("ngayTao").descending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), 5);
+        Page<SanPham> chiTietSanPhamPage = sanPhamService.getAll0(pageable);
+        model.addAttribute("total", chiTietSanPhamPage.getTotalPages());
+        model.addAttribute("list", chiTietSanPhamPage.getContent());
+        model.addAttribute("listHang", hangSanPhamService.findAll());
+        model.addAttribute("listManHinh", manHinhService.findAll());
+        model.addAttribute("listCamera", cameraService.findAll());
+        model.addAttribute("contentPage", "san-pham/tim-kiem-loc.jsp");
+        model.addAttribute("page", chiTietSanPhamPage.getNumber());
+        model.addAttribute("hsp", chiTietSanPhamPage.getContent());
         return "layout";
     }
 }

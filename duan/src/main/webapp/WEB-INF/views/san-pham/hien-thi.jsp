@@ -27,10 +27,13 @@
                aria-controls="description" aria-selected="true">Thông tin Sản Phẩm</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/san-pham/view-add" role="tab">Thêm sản phẩm</a>
+            <a class="nav-link" href="/san-pham/hien-thi-tung-xoa" role="tab">Sản Phẩm đã xoá</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/san-pham/hien-thi-tung-xoa" role="tab">Sản Phẩm đã xoá</a>
+            <a class="nav-link" href="/san-pham/view-add" role="tab">Thêm mới sản phẩm</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/san-pham/hien-thi-loc" role="tab">Lọc</a>
         </li>
     </ul>
 </div>
