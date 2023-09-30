@@ -85,8 +85,8 @@
                                         </div>
                                         <div class="col-1">
                                             <a type="button" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModalSanPham" style="margin: 10px">
-                                                <img src="/uploads/plus.png">
+                                               data-bs-target="#exampleModalSanPham">
+                                                <img src="../uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>
@@ -102,8 +102,8 @@
                                         </div>
                                         <div class="col-1">
                                             <a type="button" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModalMauSac" style="margin: 10px">
-                                                <img src="/uploads/plus.png">
+                                               data-bs-target="#exampleModalMauSac">
+                                                <img src="../uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>
@@ -118,8 +118,8 @@
                                             </form:select>
                                         </div>
                                         <div class="col-1">
-                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalChip" style="margin: 10px">
-                                                <img src="/uploads/plus.png">
+                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalChip">
+                                                <img src="../uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>
@@ -134,8 +134,8 @@
                                             </form:select>
                                         </div>
                                         <div class="col-1">
-                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalRam" style="margin: 10px">
-                                                <img src="/uploads/plus.png">
+                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalRam">
+                                                <img src="../uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>
@@ -150,8 +150,8 @@
                                             </form:select>
                                         </div>
                                         <div class="col-1">
-                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalRom" style="margin: 10px">
-                                                <img src="/uploads/plus.png">
+                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalRom">
+                                                <img src="../uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>
@@ -167,8 +167,8 @@
                                             </form:select>
                                         </div>
                                         <div class="col-1">
-                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalPin" style="margin: 10px">
-                                                <img src="/uploads/plus.png">
+                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalPin">
+                                                <img src="../uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>
@@ -266,7 +266,7 @@
                     </div>
                     <div class="text-center">
                             <%--                        <button type="submit" class="btn btn-primary" onclick="validateForm()" >ADD</button>--%>
-                        <button type="submit" class="btn btn-primary mr-2"
+                        <button type="submit" class="btn btn-primary mr-2" id="btnPin"
                                 onclick="return validateFormPin()">
                             ADD
                         </button>
@@ -305,7 +305,7 @@
                     <div class="mb-3">
                         <form:label path="soNhan"><b>Số Nhân:</b></form:label>
                         <form:input path="soNhan" class="form-control" type="number" id="soNhan"/>
-                        <form:errors path="soNhan" class="text-danger"/>
+                        <span class="text-danger" id="soNhanError"></span>
                     </div>
                     <div class="mb-3">
                         <form:label path="tinhTrang"><b>Tình Trạng:</b></form:label>
@@ -318,7 +318,7 @@
                         <form:textarea path="moTa" class="form-control"/>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary"
+                        <button type="submit" class="btn btn-primary" id="btnChip"
                                 onclick="return validateFormChip()">ADD
                         </button>
                     </div>
@@ -454,7 +454,7 @@
 
 <div class="modal fade" id="exampleModalSanPham" tabindex="-1" aria-labelledby="exampleModalLabelSanPham"
      aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title" id="exampleModalLabelSanPham">Add New Sản Phẩm</h2>
@@ -463,7 +463,7 @@
             <div class="modal-body">
                 <form:form action="/chi-tiet-san-pham/modal-add-san-pham" method="post" modelAttribute="sanPham">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-md-4">
                             <div class="mb-3">
                                 <form:label path="hangSanPham"><b>Hãng Sản Phẩm:</b></form:label>
                                 <form:select path="hangSanPham" items="${listHang}" itemValue="id" itemLabel="ten"
@@ -496,6 +496,8 @@
                                 </form:select>
                                 <form:errors path="soSim" cssClass="error text-danger"/>
                             </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="mb-3">
                                 <form:label path="bluetooth"><b>Kết nối bluetooth:</b></form:label>
                                 <form:select path="bluetooth" class="form-control">
@@ -516,36 +518,11 @@
                                     <form:option value="4G">4G</form:option>
                                     <form:option value="5G">5G</form:option>
                                 </form:select>
-
                             </div>
-                        </div>
-                        <div class="col">
                             <div class="mb-3">
                                 <form:label path="camera"><b>Camera:</b></form:label>
                                 <form:select path="camera" items="${listCamera}" itemValue="id" itemLabel="thongSo"
                                              class="form-control"/>
-                            </div>
-                            <div class="mb-3">
-                                <form:label path="congGiaoTiep"><b>Cổng giao tiếp:</b></form:label>
-                                <form:select path="congGiaoTiep" class="form-control">
-                                    <form:option value="Micro USB">Micro USB</form:option>
-                                    <form:option value="Lightning">Lightning</form:option>
-                                    <form:option value="USB-C">USB-C (Type C)</form:option>
-                                </form:select>
-
-                            </div>
-                            <div class="mb-3">
-                                <form:label path="thongSoWifi"><b>Thông số Wifi:</b></form:label>
-                                <form:select path="thongSoWifi" class="form-control">
-                                    <form:option value="2.4GHz">2.4GHz</form:option>
-                                    <form:option value="5GHz">5GHz</form:option>
-                                </form:select>
-
-                            </div>
-                            <div class="mb-3">
-                                <form:label path="kichThuoc"><b>Kích thước sản phẩm (Chiều dài(mm) x Chiều rộng(mm) x Độ dày(mm)):</b></form:label>
-                                <form:input path="kichThuoc" class="form-control"/>
-                                <form:errors path="kichThuoc" cssClass="error text-danger"/>
                             </div>
                             <div class="mb-3">
                                 <form:label path="trongLuong"><b>Trọng lượng(g):</b></form:label>
@@ -557,24 +534,39 @@
                                 <form:input path="chatLieu" class="form-control" id="chatLieu"/>
                                 <span class="text-danger" id="chatLieuError"></span>
                             </div>
-                            <div class="mb-3" hidden>
-                                <form:label path="tinhTrang"><b>Trạng thái:</b></form:label><br>
-                                <form:radiobutton path="tinhTrang" value="0" label="Hoạt động"/><br>
-                                <form:radiobutton path="tinhTrang" value="1" label="Ngừng hoạt động"/>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <form:label path="congGiaoTiep"><b>Cổng giao tiếp:</b></form:label>
+                                <form:select path="congGiaoTiep" class="form-control">
+                                    <form:option value="Micro USB">Micro USB</form:option>
+                                    <form:option value="Lightning">Lightning</form:option>
+                                    <form:option value="USB-C">USB-C (Type C)</form:option>
+                                </form:select>
+                            </div>
+                            <div class="mb-3">
+                                <form:label path="thongSoWifi"><b>Thông số Wifi:</b></form:label>
+                                <form:select path="thongSoWifi" class="form-control">
+                                    <form:option value="2.4GHz">2.4GHz</form:option>
+                                    <form:option value="5GHz">5GHz</form:option>
+                                </form:select>
+                            </div>
+                            <div class="mb-3">
+                                <form:label path="kichThuoc"><b>Kích thước sản phẩm (Chiều dài(mm) x Chiều rộng(mm) x Độ dày(mm)):</b></form:label>
+                                <form:input path="kichThuoc" class="form-control"/>
+                                <span class="text-danger" id="kichThuocError"></span>
+                            </div>
+
+                            <div class="mb-3" >
+                                <form:label path="moTa"><b>Mô tả:</b></form:label>
+                                <form:textarea path="moTa" class="form-control"></form:textarea>
+                                <form:errors path="moTa" cssClass="error text-danger"/>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <form:label path="moTa"><b>Mô tả:</b></form:label>
-                        <form:textarea path="moTa" class="form-control"></form:textarea>
-                        <form:errors path="moTa" cssClass="error text-danger"/>
-                    </div>
-
-
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success" id="btt" onclick="return validateFormSanPham()">ADD
-                        </button>
+                        <button type="submit" class="btn btn-success" id="btt" onclick="return validateFormSanPham()">ADD</button>
                     </div>
                 </form:form>
             </div>
@@ -586,6 +578,7 @@
 </div>
 
 
+
 </body>
 <script>
     function  validateFormSanPham(){
@@ -593,36 +586,42 @@
         var kichThuoc=document.getElementById("kichThuoc").value;
         var trongLuong=document.getElementById("trongLuong").value;
         var chatLieu=document.getElementById("chatLieu").value;
+        var btt =document.getElementById("btt");
         var isValid = true;
         if (tenSanPham.trim()===""||tenSanPham.trim().length<6){
             document.getElementById("tenSanPhamError").innerHTML = "Tên sản phẩm không được để trống và phải có tối thiểu 6 kí tự";
-            isValid = false;
+            btt.type="button";
+            return false;
         } else {
             document.getElementById("tenSanPhamError").innerHTML = ""; // Xóa thông báo lỗi
             if (kichThuoc.trim()===""){
                 document.getElementById("kichThuocError").innerHTML = "Kích thước không được để trống";
-                isValid = false;
+                btt.type="button";
+                return false;
             } else {
                 document.getElementById("kichThuocError").innerHTML = ""; // Xóa thông báo lỗi
                 if (trongLuong.trim()===""){
                     document.getElementById("trongLuongError").innerHTML = "Trọng lượng không được để trống";
-                    isValid = false;
+                    btt.type="button";
+                    return false;
                 } else {
                     document.getElementById("trongLuongError").innerHTML = ""; // Xóa thông báo lỗi
                     if (chatLieu.trim()===""){
                         document.getElementById("chatLieuError").innerHTML = "Chất liệu không được để trống";
-                        isValid = false;
+                        btt.type="button";
+
+                        return false;
                     } else {
                         document.getElementById("chatLieuError").innerHTML = ""; // Xóa thông báo lỗi
+                        btt.type="submit";
+                        return true;
                     }
                 }
             }
 
 
         }
-        if (!isValid) {
-            return false;
-        }
+
 
     }
     function validateFormPin() {
@@ -633,38 +632,36 @@
 
         // Khai báo biến để theo dõi việc xác thực
         var isValid = true;
+        var btnPin=document.getElementById("btnPin");
 
         // Kiểm tra từng ô input và hiển thị thông báo lỗi nếu cần
-        if (loaiPin.trim() === "") {
-            document.getElementById("loaiPinError").innerHTML = "Loại Pin không được để trống";
-            isValid = false;
+        if (loaiPin.trim() === ""||loaiPin.trim().length<6) {
+            document.getElementById("loaiPinError").innerHTML = "Loại Pin không được để trống và phải lớn hơn 6 kí tự";
+            btnPin.type="button";
+            return false;
         } else {
             document.getElementById("loaiPinError").innerHTML = ""; // Xóa thông báo lỗi
         }
 
         if (congNghePin.trim() === "") {
             document.getElementById("congNghePinError").innerHTML = "Công nghệ Pin không được để trống";
-            isValid = false;
+            btnPin.type="button";
+            return false;
         } else {
             document.getElementById("congNghePinError").innerHTML = "";
 
 
         }
 
-        if (loaiPin.trim()===""||congNghePin.trim()===""){
-            alert("Hãy điền đủ thông tin!");
-            isValid=false;
-        }
-        // Nếu có lỗi, ngăn form được gửi đi
-        if (!isValid) {
-            return false;
-        }
+
+
     }
     function validateFormChip() {
         // Lấy giá trị từ các ô input
         var tenChip = document.getElementById("tenChip").value;
         var loaiChip = document.getElementById("loaiChip").value;
         var soNhan = parseInt(document.getElementById("soNhan").value);
+        var btnChip=document.getElementById("btnChip");
 
         // Khai báo biến để theo dõi việc xác thực
         var isValid = true;
@@ -672,19 +669,24 @@
         // Kiểm tra từng ô input và hiển thị thông báo lỗi nếu cần
         if (tenChip.trim() === ""||tenChip.trim().length<=6) {
             document.getElementById("tenChipError").innerHTML = "Tên chip không được để trống và tối thiểu có 6 kí tự";
-            isValid = false;
+            btnChip.type="button";
+            return false;
         } else {
             document.getElementById("tenChipError").innerHTML = ""; // Xóa thông báo lỗi
             if (loaiChip.trim() === ""||loaiChip.trim().length<=2) {
                 document.getElementById("loaiChipError").innerHTML = "Loại chip không được để trống";
-                isValid = false;
+                btnChip.type="button";
+                return false;
             } else {
                 document.getElementById("loaiChipError").innerHTML = "";
                 if (soNhan<=0) {
                     document.getElementById("soNhanError").innerHTML = "Số nhân phải lớn hơn 0";
-                    isValid = false;
+                    btnChip.type="button";
+                    return false;
                 } else {
                     document.getElementById("soNhanError").innerHTML = "";
+                    btnChip.type="submit";
+                    return true;
                 }
             }
 

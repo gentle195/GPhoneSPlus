@@ -41,7 +41,7 @@ public class IMEI {
     private String ma;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Pattern(regexp = "\\d{15}",message = "Imei phai la so va co dung 15 ki tu")
+    @Pattern(regexp = "\\d{15}",message = "Imei phải là số và có đúng 15 kí tự")
 
     @Column(name = "so_imei")
     private String soImei;

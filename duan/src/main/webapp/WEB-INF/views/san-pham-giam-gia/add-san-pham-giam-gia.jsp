@@ -69,15 +69,16 @@
                                             <form:options items="${listCTSP}" itemLabel="sanPham.ten" itemValue="id"/>
                                         </form:select>
                                         <form:label class="form-label" path="chiTietSanPham">Sản phẩm:</form:label>
-                                        <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalSanPham">
+                                        <a type="button" href="/chi-tiet-san-pham/view-add">
                                             <img src="../img/plus.png">
                                         </a>
                                     </div>
                                     <div class="form-floating mb-3 mt-3">
+                                        <form:label class="form-label" path="khuyenMai">Khuyến mãi:</form:label>
                                         <form:select path="khuyenMai" class="form-control">
                                             <form:options items="${listKM}" itemLabel="ten" itemValue="id"/>
                                         </form:select>
-                                        <form:label class="form-label" path="khuyenMai">Khuyến mãi:</form:label>
+
 
                                     </div>
                                     <div class="form-check mb-3 mt-3">

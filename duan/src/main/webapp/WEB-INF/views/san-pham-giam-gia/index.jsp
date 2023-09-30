@@ -40,24 +40,26 @@
                                 <div class="row">
                                     <div class="col-11">
                                         <form:select path="chiTietSanPham" class="form-control"
-                                                     cssStyle="font-weight: bold; width: 100%">
+                                                     cssStyle="font-weight: bold; width: 100%" id="selectSanPham">
                                             <option selected disabled>Sản phẩm</option>
                                             <form:options items="${listCTSP}" itemLabel="sanPham.ten" itemValue="id"/>
                                         </form:select>
                                     </div>
                                     <div class="col-1">
-                                        <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalSanPham">
+                                        <a type="button" href="/chi-tiet-san-pham/view-add">
                                             <img src="../img/plus.png">
                                         </a>
                                     </div>
                                 </div>
 
+
                             </div>
                             <div class="form-group">
-                                <form:select path="khuyenMai" class="form-control">
-                                    <form:options items="${listKM}" itemLabel="ma" itemValue="id"/>
-                                </form:select>
+
                                 <form:label class="form-label" path="khuyenMai">Khuyến mãi:</form:label>
+                                <form:select path="khuyenMai" class="form-control">
+                                    <form:options items="${listKM}" itemLabel="ten" itemValue="id"/>
+                                </form:select>
                             </div>
 
                             <div class="form-group">
@@ -114,7 +116,7 @@
                                     <td>${spgg.moTa}</td>
 
                                     <td>
-                                        <a href="/san-pham-giam-gia/view-update/${spgg.id}"
+                                        <a href="/san-pham-giam-gia/update/${spgg.id}"
                                            class="btn btn-warning btn-icon-text"
                                            tabindex="-1"
                                            role="button"
@@ -148,7 +150,8 @@
                                class="page-link">${status.index}</a>
                         </li>
                     </c:forEach>
-                    <li class="page-item"><a class="page-link" href="/san-pham-giam-gia/hien-thi?pageNum=${total-1}">></a></li>
+                    <li class="page-item"><a class="page-link"
+                                             href="/san-pham-giam-gia/hien-thi?pageNum=${total-1}">></a></li>
                 </ul>
             </div>
         </div>

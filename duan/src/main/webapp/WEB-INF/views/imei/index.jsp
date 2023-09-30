@@ -37,11 +37,20 @@
                         <h4 class="card-title">Thêm Imei</h4>
                         <form class="forms-sample">
                             <div class="form-group">
-                                <form:select path="chiTietSanPham" class="form-control"
-                                             cssStyle="font-weight: bold; width: 100%">
-                                    <option selected disabled>Sản phẩm</option>
-                                    <form:options items="${listCTSP}" itemLabel="sanPham.ten" itemValue="id"/>
-                                </form:select>
+                                <div class="row">
+                                    <div class="col-11">
+                                        <form:select path="chiTietSanPham" class="form-control"
+                                                     cssStyle="font-weight: bold; width: 100%" id="selectSanPham">
+                                            <option selected disabled>Sản phẩm</option>
+                                            <form:options items="${listCTSP}" itemLabel="sanPham.ten" itemValue="id"/>
+                                        </form:select>
+                                    </div>
+                                    <div class="col-1">
+                                        <a type="button" href="/chi-tiet-san-pham/view-add">
+                                            <img src="../img/plus.png">
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <form:label class="form-label" path="ma">Ma:</form:label>

@@ -304,7 +304,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="/ban-hang/hien-thi">
+            <a class="nav-link" href="index.html">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Bán Hàng</span>
             </a>
@@ -366,7 +366,6 @@
                 <li class="nav-item"> <a class="nav-link" href="/ram/hien-thi">Ram</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/rom/hien-thi">Rom</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/chip/hien-thi">Chip</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/anh/hien-thi">Ảnh</a></li>
               </ul>
             </div>
           </li>
@@ -493,6 +492,21 @@
   });
   $(document).ready(function () {
     $('#selectChip').select2();
+  });
+  $(document).ready(function () {
+    $('#selectRam').select2();
+  });
+  $(document).ready(function () {
+    $('#selectCamera').select2();
+  });
+  $(document).ready(function () {
+    $('#selectManHinh').select2();
+  });
+  $(document).ready(function () {
+    $('#selectCamera').select2();
+  });
+  $(document).ready(function () {
+    $('#selectHang').select2();
   });
 </script>
 
