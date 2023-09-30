@@ -14,30 +14,30 @@
     <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
     <link rel="shortcut icon" href="../../images/favicon.png"/>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"></script>
-
 </head>
 <body>
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/san-pham/hien-thi" role="tab">Thông tin Sản Phẩm</a>
+            <a class="nav-link" href="/san-pham/hien-thi" role="tab">Thông tin  sản phẩm</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" id="description-tab" data-toggle="tab" href="/san-pham/hien-thi" role="tab"
-               aria-controls="description" aria-selected="true">Thêm sản phẩm</a>
+            <a class="nav-link" href="/san-pham/hien-thi-tung-xoa" role="tab">Sản phẩm đã xóa</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/san-pham/hien-thi-tung-xoa" role="tab">Sản Phẩm đã xoá</a>
+            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+               aria-controls="description" aria-selected="true" role="tab">Thêm mới sản phẩm</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/san-pham/hien-thi-loc" role="tab">Lọc sản phẩm</a>
         </li>
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="description" role="tabpanel"
          aria-labelledby="description-tab">
-        <form:form action="/san-pham/add" method="post" modelAttribute="dulieuxem">
+        <form:form action="/san-pham/add" method="post" modelAttribute="dulieuxem"
+                   enctype="multipart/form-data">
             <%--    <div class="col-md-6 grid-margin stretch-card" >--%>
             <div class="col-12 grid-margin">
                 <div class="card">
@@ -50,7 +50,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="ten">Tên:</label>
+                                        <label class="col-sm-3 col-form-label"  for="ten">Tên:</label>
                                         <div class="col-sm-9">
                                             <form:input type="text" class="form-control" path="ten" id="ten"/>
                                             <form:errors path="ten" cssClass="error text-danger"/>
@@ -59,10 +59,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="heDieuHanh">Hệ điều hành:</label>
+                                        <label class="col-sm-3 col-form-label"  for="heDieuHanh">Hệ điều hành:</label>
                                         <div class="col-sm-9">
-                                            <form:input type="text" class="form-control" path="heDieuHanh"
-                                                        id="heDieuHanht"/>
+                                            <form:input type="text" class="form-control" path="heDieuHanh" id="heDieuHanht"/>
                                             <form:errors path="heDieuHanh" cssClass="error text-danger"/>
                                         </div>
                                     </div>
@@ -73,15 +72,14 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label" for="soSim">Số khe sim:</label>
                                         <div class="col-sm-9">
-                                            <form:input class="form-control" path="soSim" type="number"/>
+                                            <form:input  class="form-control" path="soSim" type="number"/>
                                             <form:errors path="soSim" cssClass="error text-danger"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="bluetooth">Kết nối
-                                            bluetooth:</label>
+                                        <label class="col-sm-3 col-form-label" for="bluetooth">Kết nối bluetooth:</label>
                                         <div class="col-sm-9">
                                             <form:input type="text" class="form-control" path="bluetooth"/>
                                             <form:errors path="bluetooth" cssClass="error text-danger"/>
@@ -113,7 +111,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="thongSoWifi">Thông số Wifi:</label>
+                                        <label  class="col-sm-3 col-form-label" for="thongSoWifi">Thông số Wifi:</label>
                                         <div class="col-sm-9">
                                             <form:input type="text" class="form-control" path="thongSoWifi"/>
                                             <form:errors path="thongSoWifi" cssClass="error text-danger"/>
@@ -122,7 +120,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="kichThuoc">Kích thước </label>
+                                        <label  class="col-sm-3 col-form-label" for="kichThuoc">Kích thước </label>
                                         <div class="col-sm-9">
                                             <form:input type="text" class="form-control" path="kichThuoc"/>
                                             <form:errors path="kichThuoc" cssClass="error text-danger"/>
@@ -133,7 +131,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="trongLuong">Trọng lượng:</label>
+                                        <label  class="col-sm-3 col-form-label" for="trongLuong">Trọng lượng:</label>
                                         <div class="col-sm-9">
                                             <form:input type="text" class="form-control" path="trongLuong"/>
                                             <form:errors path="trongLuong" cssClass="error text-danger"/>
@@ -142,7 +140,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="chatLieu">Chất liệu:</label>
+                                        <label  class="col-sm-3 col-form-label" for="chatLieu">Chất liệu:</label>
                                         <div class="col-sm-9">
                                             <form:input type="text" class="form-control" path="chatLieu"/>
                                             <form:errors path="chatLieu" cssClass="error text-danger"/>
@@ -154,29 +152,28 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="moTa">Mô tả::</label>
+                                        <label  class="col-sm-3 col-form-label" for="moTa">Mô tả::</label>
                                         <div class="col-sm-9">
-                                            <form:textarea type="text" class="form-control" path="moTa"/>
+                                            <form:textarea  type="text" class="form-control" path="moTa"/>
                                             <form:errors path="moTa" cssClass="error text-danger"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="hangSanPham">Hãng Sản Phẩm:</label>
+                                        <label class="col-sm-3 col-form-label" for="manHinh">Hãng Sản Phẩm:</label>
                                         <div class="col-sm-9">
                                             <div class="d-flex align-items-center">
-                                                <!-- Sử dụng d-flex để cùng một dòng -->
-                                                <form:select class="form-control" path="hangSanPham"
-                                                             items="${listHangSP}" itemValue="id" itemLabel="ten"/>
-                                                <a type="button" data-bs-toggle="modal" data-bs-toggle="modal"
-                                                   data-bs-target="#exampleModalHangSanPham" style="margin: 10px">
-                                                    <img src="/uploads/plus.png" alt="">
+                                                <form:select path="hangSanPham" class="form-control" id="selectMauSac"
+                                                             cssStyle="font-weight: bold; width: 100%">
+                                                    <option selected disabled>Tên Hãng </option>
+                                                    <form:options items="${listHangSP}" itemLabel="ten" itemValue="id"/>
+                                                </form:select>
+                                                <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLabelHangSanPham">
+                                                    <img src="https://emojigraph.org/media/twitter/plus_2795.png" style="width: 25px; height: 60%" />
                                                 </a>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -184,15 +181,16 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="manHinh">Màn Hình:</label>
+                                        <label class="col-sm-3 col-form-label" for="manHinh">Màn hình:</label>
                                         <div class="col-sm-9">
                                             <div class="d-flex align-items-center">
-                                                <!-- Sử dụng d-flex để cùng một dòng -->
-                                                <form:select class="form-control" path="manHinh" items="${listManHinh}"
-                                                             itemValue="id" itemLabel="thongSo"/>
-                                                <a type="button" data-bs-toggle="modal" data-bs-toggle="modal"
-                                                   data-bs-target="#exampleModalManHinh" style="margin: 10px">
-                                                    <img src="/uploads/plus.png" alt="">
+                                                <form:select path="manHinh" class="form-control" id="selectRam"
+                                                             cssStyle="font-weight: bold; width: 100%">
+                                                    <option selected disabled>Thông số màn </option>
+                                                    <form:options items="${listManHinh}" itemLabel="thongSo" itemValue="id"/>
+                                                </form:select>
+                                                <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalManHinh">
+                                                    <img src="https://emojigraph.org/media/twitter/plus_2795.png" style="width: 25px; height: 60%" />
                                                 </a>
                                             </div>
                                         </div>
@@ -203,15 +201,16 @@
                                         <label class="col-sm-3 col-form-label" for="camera">Camera:</label>
                                         <div class="col-sm-9">
                                             <div class="d-flex align-items-center">
-                                                <!-- Sử dụng d-flex để cùng một dòng -->
-                                                <form:select class="form-control" path="camera" items="${listCamera}"
-                                                             itemValue="id" itemLabel="thongSo"/>
-                                                <a type="button" data-bs-toggle="modal" data-bs-toggle="modal"
-                                                   data-bs-target="#exampleModalCamera" style="margin: 10px">
-                                                    <img src="/uploads/plus.png" alt="">
+                                                <form:select path="camera" class="form-control " id="selectChip">
+                                                    <option selected disabled>Thông số camera</option>
+                                                    <form:options items="${listCamera}" itemLabel="thongSo" itemValue="id"/>
+                                                </form:select>
+                                                <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalCamera">
+                                                    <img src="https://emojigraph.org/media/twitter/plus_2795.png" style="width: 25px; height: 60%" />
                                                 </a>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -227,13 +226,12 @@
                     </div>
                 </div>
             </div>
-
             <%--    </div>--%>
         </form:form>
+
+        <%--kết thúc phân trang--%>
     </div>
 </div>
-</body>
-
 <div class="modal fade" id="exampleModalManHinh" tabindex="-1" aria-labelledby="exampleModalLabelManHinh"
      aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
@@ -266,8 +264,7 @@
                                 <tr>
                                     <td><form:label path="tiLeKhungHinh">Tỉ lệ khung hình</form:label></td>
                                     <th><form:input path="tiLeKhungHinh" id="tent"></form:input></th>
-                                    <th><form:errors path="tiLeKhungHinh"
-                                                     cssClass="error text-danger"></form:errors></th>
+                                    <th><form:errors path="tiLeKhungHinh" cssClass="error text-danger"></form:errors></th>
                                 </tr>
                                 </tbody>
                                 <tbody>
@@ -359,10 +356,8 @@
                                 <tbody>
                                 <tr>
                                     <td> Trang thai:</td>
-                                    <th><form:radiobutton path="tinhTrang" value="0"
-                                                          label="Hoạt động"></form:radiobutton>
-                                        <form:radiobutton path="tinhTrang" value="1"
-                                                          label="Ngừng hoạt động"></form:radiobutton>
+                                    <th><form:radiobutton path="tinhTrang" value="0" label="Hoạt động"></form:radiobutton>
+                                        <form:radiobutton path="tinhTrang" value="1" label="Ngừng hoạt động"></form:radiobutton>
                                     </th>
                                 </tr>
                                 </tbody>
@@ -453,10 +448,157 @@
     </div>
 </div>
 
+
+</body>
+<script>
+    function  validateFormSanPham(){
+        var tenSanPham=document.getElementById("tenSanPham").value;
+        var kichThuoc=document.getElementById("kichThuoc").value;
+        var trongLuong=document.getElementById("trongLuong").value;
+        var chatLieu=document.getElementById("chatLieu").value;
+        var isValid = true;
+        if (tenSanPham.trim()===""||tenSanPham.trim().length<6){
+            document.getElementById("tenSanPhamError").innerHTML = "Tên sản phẩm không được để trống và phải có tối thiểu 6 kí tự";
+            isValid = false;
+        } else {
+            document.getElementById("tenSanPhamError").innerHTML = ""; // Xóa thông báo lỗi
+            if (kichThuoc.trim()===""){
+                document.getElementById("kichThuocError").innerHTML = "Kích thước không được để trống";
+                isValid = false;
+            } else {
+                document.getElementById("kichThuocError").innerHTML = ""; // Xóa thông báo lỗi
+                if (trongLuong.trim()===""){
+                    document.getElementById("trongLuongError").innerHTML = "Trọng lượng không được để trống";
+                    isValid = false;
+                } else {
+                    document.getElementById("trongLuongError").innerHTML = ""; // Xóa thông báo lỗi
+                    if (chatLieu.trim()===""){
+                        document.getElementById("chatLieuError").innerHTML = "Chất liệu không được để trống";
+                        isValid = false;
+                    } else {
+                        document.getElementById("chatLieuError").innerHTML = ""; // Xóa thông báo lỗi
+                    }
+                }
+            }
+
+
+        }
+        if (!isValid) {
+            return false;
+        }
+
+    }
+    function validateFormPin() {
+        // Lấy giá trị từ các ô input
+        var loaiPin = document.getElementById("loaiPin").value;
+        var congNghePin = document.getElementById("congNghePin").value;
+        var moTa = document.getElementById("moTa").value;
+
+        // Khai báo biến để theo dõi việc xác thực
+        var isValid = true;
+
+        // Kiểm tra từng ô input và hiển thị thông báo lỗi nếu cần
+        if (loaiPin.trim() === "") {
+            document.getElementById("loaiPinError").innerHTML = "Loại Pin không được để trống";
+            isValid = false;
+        } else {
+            document.getElementById("loaiPinError").innerHTML = ""; // Xóa thông báo lỗi
+        }
+
+        if (congNghePin.trim() === "") {
+            document.getElementById("congNghePinError").innerHTML = "Công nghệ Pin không được để trống";
+            isValid = false;
+        } else {
+            document.getElementById("congNghePinError").innerHTML = "";
+
+
+        }
+
+        if (loaiPin.trim()===""||congNghePin.trim()===""){
+            alert("Hãy điền đủ thông tin!");
+            isValid=false;
+        }
+        // Nếu có lỗi, ngăn form được gửi đi
+        if (!isValid) {
+            return false;
+        }
+    }
+    function validateFormChip() {
+        // Lấy giá trị từ các ô input
+        var tenChip = document.getElementById("tenChip").value;
+        var loaiChip = document.getElementById("loaiChip").value;
+        var soNhan = parseInt(document.getElementById("soNhan").value);
+
+        // Khai báo biến để theo dõi việc xác thực
+        var isValid = true;
+
+        // Kiểm tra từng ô input và hiển thị thông báo lỗi nếu cần
+        if (tenChip.trim() === ""||tenChip.trim().length<=6) {
+            document.getElementById("tenChipError").innerHTML = "Tên chip không được để trống và tối thiểu có 6 kí tự";
+            isValid = false;
+        } else {
+            document.getElementById("tenChipError").innerHTML = ""; // Xóa thông báo lỗi
+            if (loaiChip.trim() === ""||loaiChip.trim().length<=2) {
+                document.getElementById("loaiChipError").innerHTML = "Loại chip không được để trống";
+                isValid = false;
+            } else {
+                document.getElementById("loaiChipError").innerHTML = "";
+                if (soNhan<=0) {
+                    document.getElementById("soNhanError").innerHTML = "Số nhân phải lớn hơn 0";
+                    isValid = false;
+                } else {
+                    document.getElementById("soNhanError").innerHTML = "";
+                }
+            }
+
+        }
+        if (tenChip.trim()===""||loaiChip.trim()===""){
+            alert("Hãy điền đủ thông tin!");
+            isValid=false;
+        }
+        // Nếu có lỗi, ngăn form được gửi đi
+        if (!isValid) {
+            return false;
+        }
+    }
+    function validateFormMauSac(){
+        var tenMauSac = document.getElementById("tenMauSac").value;
+        var isValid = true;
+        if (tenMauSac.trim()===0||tenMauSac.trim().length<6){
+            document.getElementById("tenMauSacError").innerHTML = "Tên màu sắc không được để trống và phải lớn hơn 6 kí tự";
+            isValid = false;
+        } else {
+            document.getElementById("tenMauSacError").innerHTML = "";
+        }
+        if (!isValid) {
+            return false;
+        }
+
+    }
+
+    const imageInput = document.getElementById('anhmoi');
+
+    const previewImage2 = document.getElementById('preview-image-2');
+
+    imageInput.addEventListener('change', function () {
+        const file = imageInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewImage2.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewImage2.src = '';
+        }
+    });
+</script>
 <script src="../../vendors/js/vendor.bundle.base.js"></script>
 <script src="../../js/off-canvas.js"></script>
 <script src="../../js/hoverable-collapse.js"></script>
 <script src="../../js/template.js"></script>
 <script src="../../js/settings.js"></script>
 <script src="../../js/todolist.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </html>
