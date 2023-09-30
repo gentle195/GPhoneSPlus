@@ -101,7 +101,6 @@ public class DungLuongPinController {
         Date date = new Date(millis);
         dungLuongPin.setNgayCapNhat(date);
         dungLuongPinService.update(id, dungLuongPin);
-
         return "redirect:/dung-luong-pin/hien-thi";
     }
 

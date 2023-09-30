@@ -169,7 +169,7 @@
                                                     <option selected disabled>Tên Hãng </option>
                                                     <form:options items="${listHangSP}" itemLabel="ten" itemValue="id"/>
                                                 </form:select>
-                                                <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalLabelHangSanPham">
+                                                <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalHangSanPham">
                                                     <img src="https://emojigraph.org/media/twitter/plus_2795.png" style="width: 25px; height: 60%" />
                                                 </a>
                                             </div>
