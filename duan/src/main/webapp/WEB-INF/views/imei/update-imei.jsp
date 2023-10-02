@@ -27,26 +27,27 @@
         </li>
     </ul>
 </div>
-<form:form action="/imei/update/${imeiupdate.id}"  method="post" modelAttribute="imeiupdate" enctype="multipart/form-data">
+<form:form action="/imei/update/${imeiupdate.id}" method="post" modelAttribute="imeiupdate"
+           enctype="multipart/form-data">
     <%--    <div class="col-md-6 grid-margin stretch-card" >--%>
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Update Imei</h4>
             <form class="forms-sample">
-                <div class="form-group" >
+                <div class="form-group">
                     <form:select path="chiTietSanPham" class="form-control" cssStyle="font-weight: bold; width: 100%">
                         <option selected disabled>Sản phẩm</option>
                         <form:options items="${listCTSP}" itemLabel="sanPham.ten" itemValue="id"/>
                     </form:select>
                 </div>
                 <div class="form-group">
+                    <form:label class="form-label" path="ma"><b>Mã:</b></form:label>
                     <form:input class="form-control" placeholder="" path="ma" value="${ma}" readonly="true"/>
-                    <form:label class="form-label" path="ma">Ma:</form:label>
                     <form:errors path="ma" cssStyle="color: red"></form:errors>
                 </div>
                 <div class="form-group">
+                    <form:label class="form-label" path="soImei"><b>Imei:</b></form:label>
                     <form:input class="form-control" placeholder="Imei" path="soImei"/>
-                    <form:label class="form-label" path="soImei">Imei:</form:label>
                     <form:errors path="soImei" cssStyle="color: red"></form:errors>
                 </div>
 

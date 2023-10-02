@@ -27,6 +27,8 @@ public interface HoaDonService {
     public Boolean delete(UUID id);
 
     public void update(UUID id, int tinhTrang, Date ngayCapNhat);
+
+    public void autoUpdate();
 }
 
 

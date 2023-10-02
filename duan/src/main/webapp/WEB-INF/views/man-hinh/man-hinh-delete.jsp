@@ -19,7 +19,8 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/man-hinh/hien-thi" role="tab" onclick="return myFunction4()">Thông tin màn hình </a>
+            <a class="nav-link" href="/man-hinh/hien-thi" role="tab" onclick="return myFunction4()">Thông tin màn
+                hình </a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
@@ -52,7 +53,9 @@
                                     <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                            aria-label="Bạn tìm gì..." name="search">
                                     <div class="input-group-append">
-                                        <button class="btn btn-sm btn-primary" type="submit" onclick="return myFunction5()">Search</button>
+                                        <button class="btn btn-sm btn-primary" type="submit"
+                                                onclick="return myFunction5()">Search
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -115,17 +118,18 @@
                 <c:if test="${total!= 0}">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center pagination-lg">
-                            <li class="page-item"><a class="page-link" href="/man-hinh/hien-thi?num=0"><</a>
+                            <li class="page-item"><a class="page-link" href="/man-hinh/hien-thi-delete?num=0"><</a>
                             </li>
 
                             <c:forEach begin="1" end="${total}" varStatus="status">
                                 <li class="page-item">
-                                    <a href="${pageContext.request.contextPath}/man-hinh/hien-thi?num=${status.index -1}"
+                                    <a href="${pageContext.request.contextPath}/man-hinh/hien-thi-delete?num=${status.index -1}"
                                        class="page-link">${status.index}</a>
                                 </li>
                             </c:forEach>
 
-                            <li class="page-item"><a class="page-link" href="/man-hinh/hien-thi?num=${total-1}">></a>
+                            <li class="page-item"><a class="page-link"
+                                                     href="/man-hinh/hien-thi-delete?num=${total-1}">></a>
                             </li>
                         </ul>
                     </nav>

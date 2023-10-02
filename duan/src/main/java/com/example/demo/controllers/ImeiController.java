@@ -41,7 +41,7 @@ public class ImeiController {
         model.addAttribute("size", imeiPage.getSize());
         model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
         model.addAttribute("imei", new IMEI());
-        String ma = "IMEI" + imeiService.findAll().size();
+        String ma = "IMEI" + (imeiService.findAll().size()+1);
         model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "imei/index.jsp");
         return "layout";

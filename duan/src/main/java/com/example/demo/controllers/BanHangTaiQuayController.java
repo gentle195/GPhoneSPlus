@@ -283,7 +283,7 @@ public class BanHangTaiQuayController {
         ct.setNgayTao(date);
         imeiService.updatImei(date, id);
         if (ct.getSoLuong() == 0) {
-            ct.setTinhTrang(0);
+            ct.setTinhTrang(1);
             chiTietSanPhamService.update1(ct);
             List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId());
             for (HoaDonChiTiet hd : list
@@ -352,7 +352,7 @@ public class BanHangTaiQuayController {
         Date date = new Date(millis);
         ct.setNgayTao(date);
         if (ct.getSoLuong() > 0) {
-            ct.setTinhTrang(1);
+            ct.setTinhTrang(0);
         }
         chiTietSanPhamService.update1(ct);
         imeiService.updatImei1(date, id);
