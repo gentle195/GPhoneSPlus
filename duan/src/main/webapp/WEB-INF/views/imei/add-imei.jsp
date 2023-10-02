@@ -50,14 +50,15 @@
                 <div class="form-floating mb-3 mt-3">
                     <div class="row">
                         <div class="col-11">
-                            <form:select path="chiTietSanPham" class="form-control" cssStyle="font-weight: bold; width: 100%">
+                            <form:select path="chiTietSanPham" class="form-control"
+                                         cssStyle="font-weight: bold; width: 100%">
                                 <option selected disabled>Sản phẩm</option>
                                 <form:options items="${listCTSP}" itemLabel="sanPham.ten" itemValue="id"/>
                             </form:select>
                         </div>
                         <div class="col-1">
                             <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalSanPham">
-                                <img src="../img/plus.png">
+                                <img src="/uploads/plus.png">
                             </a>
                         </div>
                     </div>
@@ -88,19 +89,297 @@
                     <form:label class="form-label" path="moTa">Mota:</form:label>
                     <form:errors path="moTa" cssStyle="color: red"></form:errors>
                 </div>
-
-
             </div>
-
             <form:button type="submit" class="btn btn-primary"
                          onclick="if(!(confirm('Bạn có muốn thêm ? ')))return false;else return true">Add</form:button>
         </form:form>
     </div>
     <br>
+    <div class="modal fade" id="exampleModalChiTietSanPham" tabindex="-1"
+             aria-labelledby="exampleModalLabel" aria-hidden="true"
+             data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">Add New Pin</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form:form action="/chi-tiet-san-pham/add" method="post"
+                           modelAttribute="chitietsanpham"
+                           enctype="multipart/form-data">
+                    <%--    <div class="col-md-6 grid-margin stretch-card" >--%>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Thêm mới chi tiết sản phẩm</h4>
+                        <form class="forms-sample" justify-content-center>
+                            <div class="row">
+                                <div class="col-md-12 mx-auto">
+                                    <div class="form-group">
+
+                                        <div align="center">
+                                            <br>
+                                            <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;"
+                                                   for="anhmoi">
+                                                <img id="preview-image-2"
+                                                     class="preview-image"
+                                                     src="" alt=""
+                                                     width="100%" height="100%"
+                                                     style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+
+                                                <br><br>
+                                                ẢNH
+                                            </label>
+                                            <br>
+                                            <div style="display: none">
+                                                <input type="file" name="images"
+                                                       accept="image/jpeg, image/png"
+                                                       id="anhmoi"
+                                                       required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+
+                                        <div class="row">
+                                            <div class="col-11">
+                                                <form:select path="sanPham"
+                                                             class="form-control"
+                                                             id="selectSanPham"
+                                                             cssStyle="font-weight: bold; width: 100%">
+                                                    <option selected disabled>
+                                                        Sản phẩm
+                                                    </option>
+                                                    <form:options
+                                                            items="${listSanPham}"
+                                                            itemLabel="ten"
+                                                            itemValue="id"/>
+                                                </form:select>
+                                                <form:errors path="sanPham"/>
+                                            </div>
+                                            <div class="col-1">
+                                                <a type="button"
+                                                   data-bs-toggle="modal"
+                                                   data-bs-target="#exampleModalSanPham">
+                                                    <img src="../uploads/plus.png">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-11">
+                                                <form:select path="mauSac"
+                                                             class="form-control"
+                                                             id="selectMauSac"
+                                                             cssStyle="font-weight: bold; width: 100%">
+                                                    <option selected disabled>
+                                                        Màu sắc
+                                                    </option>
+                                                    <form:options
+                                                            items="${listMauSac}"
+                                                            itemLabel="ten"
+                                                            itemValue="id"/>
+                                                </form:select>
+                                            </div>
+                                            <div class="col-1">
+                                                <a type="button"
+                                                   data-bs-toggle="modal"
+                                                   data-bs-target="#exampleModalMauSac">
+                                                    <img src="../uploads/plus.png">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-11">
+                                                <form:select path="chip"
+                                                             class="form-control"
+                                                             id="selectChip"
+                                                             cssStyle="font-weight: bold; width: 100%">
+                                                    <option selected disabled>
+                                                        Chip
+                                                    </option>
+                                                    <form:options
+                                                            items="${listChip}"
+                                                            itemLabel="ten"
+                                                            itemValue="id"/>
+                                                </form:select>
+                                            </div>
+                                            <div class="col-1">
+                                                <a type="button"
+                                                   data-bs-toggle="modal"
+                                                   data-bs-target="#exampleModalChip">
+                                                    <img src="../uploads/plus.png">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-11">
+                                                <form:select path="ram"
+                                                             class="form-control"
+                                                             id="selectRam"
+                                                             cssStyle="font-weight: bold; width: 100%">
+                                                    <option selected disabled>
+                                                        Dung lượng bộ nhớ
+                                                    </option>
+                                                    <form:options
+                                                            items="${listRam}"
+                                                            itemLabel="dungLuong"
+                                                            itemValue="id"/>
+                                                </form:select>
+                                            </div>
+                                            <div class="col-1">
+                                                <a type="button"
+                                                   data-bs-toggle="modal"
+                                                   data-bs-target="#exampleModalRam">
+                                                    <img src="../uploads/plus.png">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-11">
+                                                <form:select path="rom"
+                                                             class="form-control"
+                                                             id="selectRom"
+                                                             cssStyle="font-weight: bold; width: 100%">
+                                                    <option selected disabled>
+                                                        Dung lượng lưu trữ
+                                                    </option>
+                                                    <form:options
+                                                            items="${listRom}"
+                                                            itemLabel="dungLuong"
+                                                            itemValue="id"/>
+                                                </form:select>
+                                            </div>
+                                            <div class="col-1">
+                                                <a type="button"
+                                                   data-bs-toggle="modal"
+                                                   data-bs-target="#exampleModalRom">
+                                                    <img src="../uploads/plus.png">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-11">
+                                                <form:select path="pin"
+                                                             class="form-control"
+                                                             id="selectPin"
+                                                             cssStyle="font-weight: bold; width: 100%">
+                                                    <option selected disabled>
+                                                        Pin
+                                                    </option>
+                                                    <form:options
+                                                            items="${listPin}"
+                                                            itemLabel="dungLuongPin.thongSo"
+                                                            itemValue="id"/>
+                                                </form:select>
+                                            </div>
+                                            <div class="col-1">
+                                                <a type="button"
+                                                   data-bs-toggle="modal"
+                                                   data-bs-target="#exampleModalPin">
+                                                    <img src="../uploads/plus.png">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <form:label class="form-label"
+                                                    path="giaNhap">Giá nhập:</form:label>
+                                        <form:input class="form-control"
+                                                    placeholder=""
+                                                    path="giaNhap"
+                                                    type="number"/>
+                                        <form:errors path="giaNhap"
+                                                     cssStyle="color: red"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label class="form-label"
+                                                    path="giaBan">Giá bán:</form:label>
+                                        <form:input class="form-control"
+                                                    placeholder="" path="giaBan"
+                                                    type="number"/>
+                                        <form:errors path="giaBan"
+                                                     cssStyle="color: red"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <form:label class="form-label"
+                                                    path="namBaoHanh">Năm bảo hành:</form:label>
+                                        <form:input class="form-control"
+                                                    placeholder=""
+                                                    path="namBaoHanh"
+                                                    type="number"/>
+                                        <form:errors path="namBaoHanh"
+                                                     cssStyle="color: red"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label class="form-label"
+                                                    path="soLuong">Số lượng tồn:</form:label>
+                                        <form:input class="form-control"
+                                                    placeholder=""
+                                                    path="soLuong"
+                                                    type="number"/>
+                                        <form:errors path="soLuong"
+                                                     cssStyle="color: red"/>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <form:label class="form-label"
+                                                    path="moTa">Mô tả:</form:label>
+                                        <form:textarea class="form-control"
+                                                       placeholder=""
+                                                       path="moTa"/>
+                                        <form:errors path="moTa"
+                                                     cssStyle="color: red"/>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div style="text-align: center">
+                                <button type="submit"
+                                        class="btn btn-primary mr-2"
+                                        onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                    ADD
+                                </button>
+                            </div>
 
 
-
-
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </form:form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Close
+            </button>
+        </div>
+    </div>
+</div>
 
 </section>
 </body>

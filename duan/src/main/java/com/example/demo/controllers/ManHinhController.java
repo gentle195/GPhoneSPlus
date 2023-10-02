@@ -44,7 +44,7 @@ public class ManHinhController {
 
     @GetMapping("/hien-thi-delete")
     public String hienThiDelete(Model model, @ModelAttribute("manHinh") ManHinh manHinh,
-                                @RequestParam("pageNum") Optional<Integer> num,
+                                @RequestParam("num") Optional<Integer> num,
                                 @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer size) {
 
         Sort sort = Sort.by("ngayTao").descending();
@@ -109,7 +109,7 @@ public class ManHinhController {
     }
 
     @GetMapping("/update-tt")
-    public String updateTT(Model model, @RequestParam("pageNum") Optional<Integer> pageNum,
+    public String updateTT(Model model, @RequestParam("num") Optional<Integer> pageNum,
                            @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize,
                            @ModelAttribute("manHinh") ManHinh manHinh) {
         Sort sort = Sort.by("ngayTao").ascending();
@@ -127,7 +127,7 @@ public class ManHinhController {
     }
 
     @GetMapping("/update-status/{id}")
-    public String updateStatus(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
+    public String updateStatus(Model model, @PathVariable("id") UUID id, @RequestParam("num") Optional<Integer> pageNum,
                                @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("manHinh") ManHinh manHinh) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
@@ -147,7 +147,7 @@ public class ManHinhController {
     }
 
     @GetMapping("/reset-status/{id}")
-    public String resetStatus(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
+    public String resetStatus(Model model, @PathVariable("id") UUID id, @RequestParam("num") Optional<Integer> pageNum,
                               @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("manHinh") ManHinh manHinh) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);

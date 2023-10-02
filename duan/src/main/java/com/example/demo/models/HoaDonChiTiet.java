@@ -24,7 +24,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "hoa_don_chi_tiet")
 public class HoaDonChiTiet {
@@ -42,11 +41,11 @@ public class HoaDonChiTiet {
     @Column(name = "don_gia")
     private BigDecimal donGia;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_hoa_don")
     private HoaDon hoaDon;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_imei")
     private IMEI imei;
 }

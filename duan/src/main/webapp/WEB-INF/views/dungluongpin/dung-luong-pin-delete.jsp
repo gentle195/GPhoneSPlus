@@ -25,7 +25,8 @@
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
                aria-controls="description" aria-selected="true">Chip đã xoá</a>
         </li>
-        <a href="/dung-luong-pin/update-tt" class="btn btn-outline-danger btn-icon-text" style="float: right; margin-left: 720px"
+        <a href="/dung-luong-pin/update-tt" class="btn btn-outline-danger btn-icon-text"
+           style="float: right; margin-left: 720px"
            tabindex="-1"
            role="button"
            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
@@ -96,14 +97,15 @@
 <div align="center">
     <div class="btn-group" role="group" aria-label="Basic example">
         <ul class="pagination justify-content-center pagination-lg">
-            <li class="page-item"><a class="page-link" href="/dung-luong-pin/hien-thi?pageNum=0"><</a></li>
+            <li class="page-item"><a class="page-link" href="/dung-luong-pin/hien-thi-delete?pageNum=0"><</a></li>
             <c:forEach begin="1" end="${total}" varStatus="status">
                 <li class="page-item">
-                    <a href="${pageContext.request.contextPath}/dung-luong-pin/hien-thi?pageNum=${status.index -1}"
+                    <a href="${pageContext.request.contextPath}/dung-luong-pin/hien-thi-delete?pageNum=${status.index -1}"
                        class="page-link">${status.index}</a>
                 </li>
             </c:forEach>
-            <li class="page-item"><a class="page-link" href="/dung-luong-pin/hien-thi?pageNum=${total-1}">></a></li>
+            <li class="page-item"><a class="page-link" href="/dung-luong-pin/hien-thi-delete?pageNum=${total-1}">></a>
+            </li>
         </ul>
     </div>
 </div>

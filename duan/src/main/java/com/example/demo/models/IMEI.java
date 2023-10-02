@@ -27,7 +27,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "imei",uniqueConstraints = {@UniqueConstraint(columnNames = {"so_imei"})})
 public class IMEI {

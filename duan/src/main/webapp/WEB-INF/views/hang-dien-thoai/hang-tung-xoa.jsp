@@ -103,16 +103,16 @@
         <div align="center">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <ul class="pagination justify-content-center pagination-lg">
-                    <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi?num=0">First</a></li>
+                    <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi-tung-xoa?num=0">First</a></li>
 
                     <c:forEach begin="1" end="${total}" varStatus="status">
                         <li class="page-item">
-                            <a href="${pageContext.request.contextPath}/hang-dien-thoai/hien-thi?num=${status.index -1}"
+                            <a href="${pageContext.request.contextPath}/hang-dien-thoai/hien-thi-tung-xoa?num=${status.index -1}"
                                class="page-link">${status.index}</a>
                         </li>
                     </c:forEach>
 
-                    <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi?num=${total-1}">Last</a></li>
+                    <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi-tung-xoa?num=${total-1}">Last</a></li>
                 </ul>
             </div>
         </div>

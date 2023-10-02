@@ -196,8 +196,8 @@
                                             <td>${ctsp.giaBan}</td>
                                             <td>${ctsp.soLuong}</td>
                                             <td>
-                                                <c:if test="${ctsp.tinhTrang==1}">Còn hàng</c:if>
-                                                <c:if test="${ctsp.tinhTrang==0}">Hết hàng</c:if>
+                                                <c:if test="${ctsp.tinhTrang==0}">Còn hàng</c:if>
+                                                <c:if test="${ctsp.tinhTrang==1}">Hết hàng</c:if>
                                             </td>
                                             <td class="btn-group">
                                                 <a href="/ban-hang/them-san-pham/${ctsp.id}"

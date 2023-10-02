@@ -101,29 +101,20 @@
             </div>
         </div>
         <%--phân trang--%>
-        <div align="center">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <c:if test="${total!= 0}">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center pagination-lg">
-                            <li class="page-item"><a class="page-link" href="/camera/hien-thi?num=0"><</a>
-                            </li>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center pagination-lg">
+                <li class="page-item"><a class="page-link" href="/camera/hien-thi-delete?pageNum=0">  < </a></li>
 
-                            <c:forEach begin="1" end="${total}" varStatus="status">
-                                <li class="page-item">
-                                    <a href="${pageContext.request.contextPath}/camera/hien-thi?num=${status.index -1}"
-                                       class="page-link">${status.index}</a>
-                                </li>
-                            </c:forEach>
+                <c:forEach begin="1" end="${total}" varStatus="status">
+                    <li class="page-item">
+                        <a href="/camera/hien-thi-delete?pageNum=${status.index-1}"
+                           class="page-link">${status.index}</a>
+                    </li>
+                </c:forEach>
 
-                            <li class="page-item"><a class="page-link"
-                                                     href="/camera/hien-thi?num=${total-1}">></a>
-                            </li>
-                        </ul>
-                    </nav>
-                </c:if>
-            </div>
-        </div>
+                <li class="page-item"><a class="page-link" href="/camera/hien-thi-delete?pageNum=${total-1}"> > </a></li>
+            </ul>
+        </nav>
         <%--kết thúc phân trang--%>
     </div>
 </div>

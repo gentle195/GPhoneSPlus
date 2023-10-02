@@ -47,7 +47,7 @@
                                     </div>
                                     <div class="col-1">
                                         <a type="button" href="/chi-tiet-san-pham/view-add">
-                                            <img src="../img/plus.png">
+                                            <img src="/uploads/plus.png">
                                         </a>
                                     </div>
                                 </div>

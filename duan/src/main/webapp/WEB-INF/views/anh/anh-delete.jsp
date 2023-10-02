@@ -130,18 +130,18 @@
                 <c:if test="${total!= 0}">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center pagination-lg">
-                            <li class="page-item"><a class="page-link" href="/anh/hien-thi?num=0"><</a>
+                            <li class="page-item"><a class="page-link" href="/anh/hien-thi-delete?num=0"><</a>
                             </li>
 
                             <c:forEach begin="1" end="${total}" varStatus="status">
                                 <li class="page-item">
-                                    <a href="${pageContext.request.contextPath}/anh/hien-thi?num=${status.index -1}"
+                                    <a href="${pageContext.request.contextPath}/anh/hien-thi-delete?num=${status.index -1}"
                                        class="page-link">${status.index}</a>
                                 </li>
                             </c:forEach>
 
                             <li class="page-item"><a class="page-link"
-                                                     href="/anh/hien-thi?num=${total-1}">></a>
+                                                     href="/anh/hien-thi-delete?num=${total-1}">></a>
                             </li>
                         </ul>
                     </nav>

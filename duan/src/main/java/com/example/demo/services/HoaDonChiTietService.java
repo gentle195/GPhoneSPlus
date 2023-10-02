@@ -23,6 +23,8 @@ public interface HoaDonChiTietService {
     public HoaDonChiTiet update(UUID id, HoaDonChiTiet hoaDonChiTiet);
 
     public Boolean delete(UUID id);
+
+
 }
 
 
