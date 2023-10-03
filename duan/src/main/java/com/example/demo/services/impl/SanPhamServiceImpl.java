@@ -58,7 +58,7 @@ public class SanPhamServiceImpl implements SanPhamService {
     }
 
     @Override
-    public SanPham update(SanPham sanPham) {
+    public SanPham update1(SanPham sanPham) {
         return sanPhamRepository.save(sanPham);
     }
 

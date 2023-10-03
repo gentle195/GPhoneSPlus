@@ -31,6 +31,6 @@ public interface AnhRepository extends JpaRepository<Anh, UUID> {
 
     @Transactional
     @Modifying
-    @Query(value = "update Anh set tinh_trang=0", nativeQuery = true)
+    @Query(value = "update Anh set tinh_trang=0, ngay_cap_nhat=convert(date,getdate(),105)", nativeQuery = true)
     void updateTT();
 }

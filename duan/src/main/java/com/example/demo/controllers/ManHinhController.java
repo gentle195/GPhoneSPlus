@@ -92,19 +92,11 @@ public class ManHinhController {
             return "layout";
         }
         ManHinh hsp = manHinhService.findById(id);
-        Date ngayTao = hsp.getNgayTao();
-        hsp.setThongSo(manHinh.getThongSo());
-        hsp.setTiLeKhungHinh(manHinh.getTiLeKhungHinh());
-        hsp.setCongNghe(manHinh.getCongNghe());
-        hsp.setTanSoQuet(manHinh.getTanSoQuet());
-        hsp.setDoPhanGiai(manHinh.getDoPhanGiai());
-        hsp.setLoaiCamUng(manHinh.getLoaiCamUng());
-        hsp.setNgayTao(ngayTao);
-        // Gán ngày hiện tại
-        hsp.setNgayCapNhat(Date.valueOf(LocalDate.now()));
-        hsp.setTinhTrang(manHinh.getTinhTrang());
-        hsp.setMoTa(manHinh.getMoTa());
-        manHinhService.update(id, hsp);
+        manHinh.setMa(hsp.getMa());
+        manHinh.setTinhTrang(hsp.getTinhTrang());
+        manHinh.setNgayTao(hsp.getNgayTao());
+        manHinh.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        manHinhService.update(id, manHinh);
         return "redirect:/man-hinh/hien-thi";
     }
 

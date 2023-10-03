@@ -36,6 +36,6 @@ public interface ChucVuRepository extends JpaRepository<ChucVu, UUID> {
 
     @Transactional
     @Modifying
-    @Query(value = "update  chuc_vu set tinh_trang=0", nativeQuery = true)
+    @Query(value = "update  chuc_vu set tinh_trang=0, ngay_cap_nhat=convert(date,getdate(),105)", nativeQuery = true)
     void updateTT();
 }

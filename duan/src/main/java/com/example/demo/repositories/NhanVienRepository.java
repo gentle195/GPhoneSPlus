@@ -34,7 +34,7 @@ public interface NhanVienRepository extends JpaRepository<NhanVien, UUID> {
 
     @Transactional
     @Modifying
-    @Query(value = "update  nhan_vien set tinh_trang=0", nativeQuery = true)
+    @Query(value = "update  nhan_vien set tinh_trang=0, ngay_cap_nhat=convert(date,getdate(),105)", nativeQuery = true)
     void updateTT();
 
 

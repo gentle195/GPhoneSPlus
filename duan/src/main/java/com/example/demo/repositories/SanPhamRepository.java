@@ -32,14 +32,14 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
 
     @Transactional
     @Modifying
-    @Query(value = "update san_pham set tinh_trang=0", nativeQuery = true)
+    @Query(value = "update san_pham set tinh_trang=0, ngay_cap_nhat=convert(date,getdate(),105)", nativeQuery = true)
     void update0();
 
     @Query("select sp from SanPham sp left join ManHinh m on sp.manHinh.id=m.id " +
             "left join HangSanPham hang on sp.hangSanPham.id=hang.id" +
             " left join Camera c on sp.camera.id=c.id " +
 
-            "where" +
+            "where sp.tinhTrang=0 and" +
             " (:idHang is null or hang.id =:idHang) " +
             "and (:idMan is null or m.id=: idMan) " +
             "and (:idCamera is null or c.id=: idCamera) "
