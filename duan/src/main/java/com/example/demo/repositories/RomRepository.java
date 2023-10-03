@@ -31,6 +31,6 @@ public interface RomRepository extends JpaRepository<Rom, UUID> {
 
     @Transactional
     @Modifying
-    @Query(value = "update rom set tinh_trang=0", nativeQuery = true)
+    @Query(value = "update rom set tinh_trang=0, ngay_cap_nhat=convert(date,getdate(),105)", nativeQuery = true)
     void update0();
 }

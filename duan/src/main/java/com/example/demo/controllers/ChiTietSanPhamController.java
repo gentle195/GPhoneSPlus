@@ -75,7 +75,7 @@ public class ChiTietSanPhamController {
 
     @GetMapping("/hien-thi")
     public String hienThi(Model model, @RequestParam("pageNum") Optional<Integer> pageNum
-                         ) {
+    ) {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), 5);
         Page<ChiTietSanPham> chiTietSanPhamPage = chiTietSanPhamService.finAllTTOn(pageable);
@@ -98,13 +98,14 @@ public class ChiTietSanPhamController {
         model.addAttribute("listCTSP", chiTietSanPhamPage.getContent());
         return "layout";
     }
+
     @GetMapping("/hien-thi-da-xoa")
     public String hienThiDaXoa(Model model, @RequestParam("pageNum") Optional<Integer> pageNum
     ) {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), 5);
 //        Page<ChiTietSanPham> chiTietSanPhamPage = chiTietSanPhamService.getAll(pageable);
-        Page<ChiTietSanPham> chiTietSanPhamPage= chiTietSanPhamService.finAllTTOff(pageable);
+        Page<ChiTietSanPham> chiTietSanPhamPage = chiTietSanPhamService.finAllTTOff(pageable);
         model.addAttribute("total", chiTietSanPhamPage.getTotalPages());
         model.addAttribute("list", chiTietSanPhamPage.getContent());
         model.addAttribute("size", chiTietSanPhamPage.getSize());
@@ -146,10 +147,9 @@ public class ChiTietSanPhamController {
 
     @PostMapping("/add")
     public String add(@Valid @ModelAttribute(name = "chitietsanpham") ChiTietSanPham chiTietSanPham,
-                      BindingResult result, Model model, @RequestParam("images")MultipartFile multipartFile) throws IOException {
+                      BindingResult result, Model model, @RequestParam("images") MultipartFile multipartFile) throws IOException {
 
         if (result.hasErrors()) {
-
 
 
             model.addAttribute("Pin", new Pin());
@@ -174,9 +174,9 @@ public class ChiTietSanPhamController {
 
             return "layout";
         }
-        String fileName= StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         String uploadDir = "src/main/webapp/uploads/";
-        FileUploadUtil.saveFile(uploadDir,fileName,multipartFile);
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         chiTietSanPham.setUrlAnh(fileName);
         LocalDate localDate = LocalDate.now();
         chiTietSanPham.setNgayTao(Date.valueOf(localDate));
@@ -221,7 +221,7 @@ public class ChiTietSanPhamController {
 
     @PostMapping("/update/{id}")
     public String update(@PathVariable("id") UUID id, @Valid @ModelAttribute("chitietsanphamupdate") ChiTietSanPham chiTietSanPham,
-                         BindingResult result,@RequestParam("images")MultipartFile multipartFile, Model model, @ModelAttribute(name = "Pin") Pin pin,
+                         BindingResult result, @RequestParam("images") MultipartFile multipartFile, Model model, @ModelAttribute(name = "Pin") Pin pin,
                          @ModelAttribute(name = "Chip") Chip chip,
                          @ModelAttribute(name = "Ram") Ram ram,
                          @ModelAttribute(name = "MauSac") MauSac mauSac,
@@ -252,10 +252,10 @@ public class ChiTietSanPhamController {
 
             return "layout";
         }
-        if (!multipartFile.isEmpty()){
-            String fileName= StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        if (!multipartFile.isEmpty()) {
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             String uploadDir = "src/main/webapp/uploads/";
-            FileUploadUtil.saveFile(uploadDir,fileName,multipartFile);
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
             chiTietSanPham.setUrlAnh(fileName);
         }
 
@@ -275,9 +275,9 @@ public class ChiTietSanPhamController {
     @GetMapping("/delete/{id}")
     public String remove(@PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
                          @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, Model model) {
-       ChiTietSanPham chiTietSanPham= chiTietSanPhamService.findById(id);
-       chiTietSanPham.setTinhTrang(1);
-       chiTietSanPhamService.add(chiTietSanPham);
+        ChiTietSanPham chiTietSanPham = chiTietSanPhamService.findById(id);
+        chiTietSanPham.setTinhTrang(1);
+        chiTietSanPhamService.add(chiTietSanPham);
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<ChiTietSanPham> page = chiTietSanPhamService.finAllTTOn(pageable);
@@ -298,10 +298,11 @@ public class ChiTietSanPhamController {
         model.addAttribute("page", page.getNumber());
         return "redirect:/chi-tiet-san-pham/hien-thi";
     }
+
     @GetMapping("/khoi-phuc/{id}")
     public String khoiPhuc(@PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
-                         @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, Model model) {
-        ChiTietSanPham chiTietSanPham= chiTietSanPhamService.findById(id);
+                           @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, Model model) {
+        ChiTietSanPham chiTietSanPham = chiTietSanPhamService.findById(id);
         chiTietSanPham.setTinhTrang(0);
         chiTietSanPhamService.add(chiTietSanPham);
         Sort sort = Sort.by("ngayTao").ascending();
@@ -324,13 +325,15 @@ public class ChiTietSanPhamController {
         model.addAttribute("page", page.getNumber());
         return "redirect:/chi-tiet-san-pham/hien-thi-da-xoa";
     }
+
     @GetMapping("/khoi-phuc-tat-ca")
-    public String khoiPhucAll( @RequestParam("pageNum") Optional<Integer> pageNum,
-                           @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, Model model) {
+    public String khoiPhucAll(@RequestParam("pageNum") Optional<Integer> pageNum,
+                              @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, Model model) {
 
         List<ChiTietSanPham> chiTietSanPhams = chiTietSanPhamService.finAllTTOff();
-        for (ChiTietSanPham ctsp: chiTietSanPhams){
+        for (ChiTietSanPham ctsp : chiTietSanPhams) {
             ctsp.setTinhTrang(0);
+            ctsp.setNgayCapNhat(Date.valueOf(LocalDate.now()));
             chiTietSanPhamService.add(ctsp);
         }
         Sort sort = Sort.by("ngayTao").ascending();
@@ -378,15 +381,16 @@ public class ChiTietSanPhamController {
         model.addAttribute("contentPage", "chi-tiet-san-pham/index.jsp");
         return "layout";
     }
+
     @PostMapping("/search-da-xoa")
     public String searchDaXoa(Model model, @RequestParam("search") String search,
-                         @ModelAttribute("chitietsanpham") ChiTietSanPham chiTietSanPham,
-                         @ModelAttribute(name = "Pin") Pin pin,
-                         @ModelAttribute(name = "chip") Chip chip,
-                         @ModelAttribute(name = "ram") Ram ram,
-                         @ModelAttribute(name = "mauSac") MauSac mauSac,
-                         @ModelAttribute(name = "rom") Rom rom,
-                         @ModelAttribute(name = "sanPham") SanPham sanPham) {
+                              @ModelAttribute("chitietsanpham") ChiTietSanPham chiTietSanPham,
+                              @ModelAttribute(name = "Pin") Pin pin,
+                              @ModelAttribute(name = "chip") Chip chip,
+                              @ModelAttribute(name = "ram") Ram ram,
+                              @ModelAttribute(name = "mauSac") MauSac mauSac,
+                              @ModelAttribute(name = "rom") Rom rom,
+                              @ModelAttribute(name = "sanPham") SanPham sanPham) {
         List<ChiTietSanPham> list = chiTietSanPhamService.search1(search);
         model.addAttribute("listCTSP", list);
         model.addAttribute("listSanPham", sanPhamService.findAll());

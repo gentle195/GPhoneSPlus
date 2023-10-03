@@ -33,6 +33,6 @@ public interface DungLuongPinRepository extends JpaRepository<DungLuongPin, UUID
 
     @Transactional
     @Modifying
-    @Query(value = "update dung_luong_pin set tinh_trang = 0", nativeQuery = true)
+    @Query(value = "update dung_luong_pin set tinh_trang = 0, ngay_cap_nhat=convert(date,getdate(),105)", nativeQuery = true)
     void updateTT();
 }

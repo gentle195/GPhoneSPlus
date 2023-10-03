@@ -89,7 +89,7 @@ public class SanPham {
     @Column(name = "tinh_trang")
     private int tinhTrang;
 
-//    @NotBlank(message = "Không để trống thông tin")
+    //    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")
     private String moTa;
 
@@ -97,9 +97,9 @@ public class SanPham {
     @JoinColumn(name = "id_hang")
     private HangSanPham hangSanPham;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_anh")
-//    private Anh anh;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_anh")
+    private Anh anh;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_man_hinh")

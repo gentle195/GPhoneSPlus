@@ -31,6 +31,6 @@ public interface RamRepository extends JpaRepository<Ram, UUID> {
 
     @Transactional
     @Modifying
-    @Query(value = "update Ram set tinh_trang=0", nativeQuery = true)
+    @Query(value = "update Ram set tinh_trang=0, ngay_cap_nhat=convert(date,getdate(),105)", nativeQuery = true)
     void updateTT();
 }

@@ -102,13 +102,12 @@ public class CameraController {
         }
         Camera hsp = cameraService.findById(id);
         Date ngayTao = hsp.getNgayTao();
-        hsp.setThongSo(camera.getThongSo());
-        hsp.setNgayTao(ngayTao);
+        camera.setNgayTao(ngayTao);
+        camera.setMa(hsp.getMa());
         // Gán ngày hiện tại
-        hsp.setNgayCapNhat(Date.valueOf(LocalDate.now()));
-        hsp.setTinhTrang(camera.getTinhTrang());
-        hsp.setMoTa(camera.getMoTa());
-        cameraService.update(id, hsp);
+        camera.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        camera.setTinhTrang(hsp.getTinhTrang());
+        cameraService.update(id, camera);
         return "redirect:/camera/hien-thi";
     }
 
