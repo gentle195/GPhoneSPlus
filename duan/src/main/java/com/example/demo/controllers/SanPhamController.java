@@ -139,11 +139,7 @@ public class SanPhamController {
 
     @PostMapping("/san-pham/update/{id}")
     public String update(Model model, @ModelAttribute("dulieuxem") @Valid SanPham dulieuxem,
-                         BindingResult bindingResult, @PathVariable("id") UUID id,
-                         @ModelAttribute("ManHinh") ManHinh manHinh,
-                         @ModelAttribute("hangSP") HangSanPham hangSanPham,
-                         @ModelAttribute("anh") Anh anh,
-                         @ModelAttribute("camera") Camera camera) {
+                         BindingResult bindingResult, @PathVariable("id") UUID id) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "san-pham/update.jsp");
             return "layout";

@@ -46,9 +46,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
-
                                 <div class="form-group">
-
                                     <select name="hang" class="form-control" style="font-weight: bold; width: 100%" id="selectHang">
                                         <option selected disabled>Hãng</option>
                                         <c:forEach items="${listHang}" var="hang" varStatus="i">

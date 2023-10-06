@@ -144,26 +144,30 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="anh">Hình ảnh:</label>
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-12">
                                             <div class="d-flex align-items-center">
                                                 <!-- Sử dụng d-flex để cùng một dòng -->
-                                                <form:select class="form-control" path="anh" items="${listAnh}"
-                                                             id="selectAnh"
-                                                             itemValue="id" itemLabel="ten"/>
+                                                <form:select path="anh" class="form-control" id="selectAnh"
+                                                             cssStyle="font-weight: bold; width: 100%">
+                                                    <option selected disabled>Hình Ảnh</option>
+                                                    <form:options items="${listAnh}" itemLabel="ten"
+                                                                  itemValue="id"/>
+                                                </form:select>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="hangSanPham">Hãng Sản Phẩm:</label>
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-12">
                                             <div class="d-flex align-items-center">
                                                 <!-- Sử dụng d-flex để cùng một dòng -->
-                                                <form:select class="form-control" path="hangSanPham"
-                                                             items="${listHangSP}" id="selectHang"
-                                                             itemValue="id" itemLabel="ten"/>
+                                                <form:select path="hangSanPham" class="form-control" id="selectHang"
+                                                             cssStyle="font-weight: bold; width: 100%">
+                                                    <option selected disabled>Hãng Sản Phẩm</option>
+                                                    <form:options items="${listHangSP}"
+                                                                  itemValue="id" itemLabel="ten"/>
+                                                </form:select>
                                             </div>
                                         </div>
                                     </div>
@@ -172,24 +176,30 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="manHinh">Màn Hình:</label>
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-12">
                                             <div class="d-flex align-items-center">
                                                 <!-- Sử dụng d-flex để cùng một dòng -->
-                                                <form:select class="form-control" path="manHinh" items="${listManHinh}"
-                                                             id="selectManHinh" itemValue="id" itemLabel="thongSo"/>
+                                                <form:select path="manHinh" class="form-control" id="selectManHinh"
+                                                             cssStyle="font-weight: bold; width: 100%">
+                                                    <option selected disabled>Màn Hình</option>
+                                                    <form:options items="${listManHinh}"
+                                                                  itemValue="id" itemLabel="thongSo"/>
+                                                </form:select>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="camera">Camera:</label>
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-12">
                                             <div class="d-flex align-items-center">
                                                 <!-- Sử dụng d-flex để cùng một dòng -->
-                                                <form:select class="form-control" path="camera" items="${listCamera}"
-                                                             id="selectCamera" itemValue="id" itemLabel="thongSo"/>
+                                                <form:select path="camera" class="form-control" id="selectCamera"
+                                                             cssStyle="font-weight: bold; width: 100%">
+                                                    <option selected disabled>Camera</option>
+                                                    <form:options items="${listCamera}"
+                                                                  itemValue="id" itemLabel="thongSo"/>
+                                                </form:select>
                                             </div>
                                         </div>
                                     </div>
@@ -217,7 +227,6 @@
                     </div>
                 </div>
             </div>
-            <%--    </div>--%>
         </form:form>
     </div>
 </div>

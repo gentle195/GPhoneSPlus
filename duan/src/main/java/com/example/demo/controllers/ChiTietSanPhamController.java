@@ -264,7 +264,6 @@ public class ChiTietSanPhamController {
         chiTietSanPham.setNgayTao(ngay);
         chiTietSanPham.setTinhTrang(0);
 
-
         chiTietSanPhamService.update(id, chiTietSanPham);
         System.out.println(chiTietSanPham.getNgayTao());
         return "redirect:/chi-tiet-san-pham/hien-thi";

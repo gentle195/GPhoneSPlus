@@ -551,6 +551,12 @@
     $(document).ready(function () {
         $('#selectAnh').select2();
     });
+    $(document).ready(function () {
+        $('#selectKhachHang').select2();
+    });
+    $(document).ready(function () {
+        $('#selectDiaChi').select2();
+    });
 </script>
 
 </html>
