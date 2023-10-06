@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -146,4 +147,19 @@ public class HoaDonServiceImpl implements HoaDonService {
         }
         return resultList;
     }
+
+    @Override
+    public List<HoaDon> search(String ten, BigDecimal soTienQuyDoi) {
+        return hoaDonRepository.search(ten, soTienQuyDoi);
+    }
+
+    @Override
+    public List<HoaDon> locHoaDon(UUID idKH, UUID idNV) {
+        return hoaDonRepository.loc(idKH, idNV
+//                startDate, endDate,
+//                shipStartDate, shipEndDate,
+//                receiveStartDate, receiveEndDate
+        );
+    }
+
 }
