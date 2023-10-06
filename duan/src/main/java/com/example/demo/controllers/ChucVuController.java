@@ -204,6 +204,5 @@ public class ChucVuController {
         return "layout";
     }
 
-
 }
 
