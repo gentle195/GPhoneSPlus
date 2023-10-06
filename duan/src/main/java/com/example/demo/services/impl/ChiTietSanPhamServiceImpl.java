@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,6 +48,11 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     @Override
     public List<ChiTietSanPham> loc(UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam) {
         return chiTietSanPhamRepository.loc(idHang, idRam, idRom, idDLPin, idChip, moTaMan, moTaCam);
+    }
+
+    @Override
+    public List<ChiTietSanPham> locBanHang(UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam, BigDecimal giaBanMin, BigDecimal giaBanMax) {
+        return chiTietSanPhamRepository.locBanHang(idHang, idRam, idRom, idDLPin, idChip, moTaMan, moTaCam, giaBanMin, giaBanMax);
     }
 
     @Override

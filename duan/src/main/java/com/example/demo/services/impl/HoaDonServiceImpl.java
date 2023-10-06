@@ -116,15 +116,18 @@ public class HoaDonServiceImpl implements HoaDonService {
                     }
                     chiTietSanPhamRepository.save(ctsp);
                     imeiRepository.updateImei1(date, ct.getId());
-                    hoaDonRepository.deleteById(ct.getId());
+                    ct.setTinhTrang(8);
+                    hoaDonChiTietRepository.save(ct);
                 }
                 // Cập nhật tình trạng và ngày cập nhật sau khi xử lý tất cả HoaDonChiTiet
                 hd.setTinhTrang(8);
+                hd.setGhiChu("Treo hóa đơn quá lâu");
                 hd.setNgayCapNhat(getDate);
                 hoaDonRepository.save(hd);
             } else {
                 // Cập nhật tình trạng và ngày cập nhật sau khi xử lý tất cả HoaDonChiTiet
                 hd.setTinhTrang(8);
+                hd.setGhiChu("Treo hóa đơn quá lâu");
                 hd.setNgayCapNhat(getDate);
                 hoaDonRepository.save(hd);
             }

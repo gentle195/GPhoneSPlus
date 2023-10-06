@@ -60,6 +60,7 @@ public class BanHangTaiQuayController {
     private CameraService cameraService;
 
     private HoaDon hoaDonnn = new HoaDon();
+    private UUID idHoaDon = null;
     private BigDecimal total = BigDecimal.ZERO;
 
     @GetMapping("hien-thi")
@@ -120,8 +121,10 @@ public class BanHangTaiQuayController {
     @GetMapping("/thong-tin-hoa-don/{id}")
     public String thongTin(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon, @PathVariable("id") UUID id, @ModelAttribute("modalAddKhachHang") KhachHang khachHang) {
         HoaDon hd = hoaDonService.findById(id);
-        model.addAttribute("hoaDon", hd);
+        idHoaDon = id;
         hoaDonnn = hd;
+        model.addAttribute("hoaDon", hoaDonnn);
+        model.addAttribute("hoaDon", hd);
         List<HoaDon> list = hoaDonService.find();
         model.addAttribute("listHoaDon", list);
         List<HoaDonChiTiet> listHDCT = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
@@ -177,18 +180,38 @@ public class BanHangTaiQuayController {
         model.addAttribute("contentPage", "ban-hang/hien-thi.jsp");
         return "layout";
     }
-//    @GetMapping("/thay-doi-trang-thai/{id}")
-//    public String updateTrangThai(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon, @PathVariable("id") UUID id) {
-//        HoaDon hd = hoaDonService.findById(id);
-//        LocalDate ngayCapNhat = LocalDate.now();
-//        if (hd.getTinhTrang() == 0) {
-//            hoaDonService.update(id, 1, Date.valueOf(ngayCapNhat));
-//            return "redirect:/ban-hang/hien-thi";
-//        } else {
-//            hoaDonService.update(id, 0, Date.valueOf(ngayCapNhat));
-//            return "redirect:/ban-hang/hien-thi";
-//        }
-//    }
+
+    @GetMapping("/remove/{id}")
+    public String updateTrangThai(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon, @PathVariable("id") UUID id) {
+        HoaDon hd = hoaDonService.findById(id);
+        LocalDate ngayCapNhat = LocalDate.now();
+        List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
+        if (!list.isEmpty()) {
+            for (HoaDonChiTiet hdct : list
+            ) {
+                ChiTietSanPham ctsp = chiTietSanPhamService.getChiTiet(hdct.getImei().getId());
+                ctsp.setSoLuong(ctsp.getSoLuong() + 1);
+                long millis = System.currentTimeMillis();
+                Date date = new Date(millis);
+                ctsp.setNgayTao(date);
+                if (ctsp.getSoLuong() > 0) {
+                    ctsp.setTinhTrang(0);
+                }
+                chiTietSanPhamService.update1(ctsp);
+                imeiService.updatImei1(date, hdct.getId());
+                hdct.setTinhTrang(8);
+                hoaDonChiTietService.update(hdct.getId(), hdct);
+            }
+            hd.setTinhTrang(8);
+            hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+            hoaDonService.update(id, hd);
+        } else {
+            hd.setTinhTrang(8);
+            hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+            hoaDonService.update(id, hd);
+        }
+        return "redirect:/ban-hang/hien-thi";
+    }
 
     @PostMapping("search-san-pham")
     public String search(Model model, @RequestParam("search-san-pham") String search,
@@ -197,6 +220,7 @@ public class BanHangTaiQuayController {
         if (search.isEmpty()) {
             model.addAttribute("thongBao", "Không để trống thông tin");
             List<HoaDon> list = hoaDonService.find();
+            model.addAttribute("hoaDon", hoaDonnn);
             model.addAttribute("listHoaDon", list);
             model.addAttribute("listHang", hangSanPhamService.findAll0());
             model.addAttribute("listMauSac", mauSacService.findAll0());
@@ -219,6 +243,7 @@ public class BanHangTaiQuayController {
             model.addAttribute("listChiTietSanPham", listCT);
             List<HoaDon> list = hoaDonService.find();
             model.addAttribute("listHoaDon", list);
+            model.addAttribute("hoaDon", hoaDonnn);
             model.addAttribute("listHang", hangSanPhamService.findAll0());
             model.addAttribute("listMauSac", mauSacService.findAll0());
             model.addAttribute("listChip", chipService.findAll0());
@@ -280,7 +305,7 @@ public class BanHangTaiQuayController {
         ct.setSoLuong(ct.getSoLuong() - 1);
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
-        ct.setNgayTao(date);
+        ct.setNgayCapNhat(date);
         imeiService.updatImei(date, id);
         if (ct.getSoLuong() == 0) {
             ct.setTinhTrang(1);
@@ -289,7 +314,9 @@ public class BanHangTaiQuayController {
             for (HoaDonChiTiet hd : list
             ) {
                 total = total.add(hd.getDonGia());
+                hoaDonnn.setTongTien(total);
             }
+            hoaDonService.update(hoaDonnn.getId(), hoaDonnn);
             System.out.println(total);
             model.addAttribute("tong", String.valueOf(total));
             model.addAttribute("listHoaDonChiTiet", list);
@@ -317,7 +344,9 @@ public class BanHangTaiQuayController {
             for (HoaDonChiTiet hd : list
             ) {
                 total = total.add(hd.getDonGia());
+                hoaDonnn.setTongTien(total);
             }
+            hoaDonService.update(hoaDonnn.getId(), hoaDonnn);
             System.out.println(total);
             model.addAttribute("tong", String.valueOf(total));
             model.addAttribute("listHoaDonChiTiet", list);
@@ -350,7 +379,7 @@ public class BanHangTaiQuayController {
         ct.setSoLuong(ct.getSoLuong() + 1);
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
-        ct.setNgayTao(date);
+        ct.setNgayCapNhat(date);
         if (ct.getSoLuong() > 0) {
             ct.setTinhTrang(0);
         }
@@ -358,10 +387,20 @@ public class BanHangTaiQuayController {
         imeiService.updatImei1(date, id);
         hoaDonChiTietService.delete(id);
         List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId());
-        for (HoaDonChiTiet hdd : list
-        ) {
-            total = total.add(hdd.getDonGia());
+        if (list.isEmpty()) {
+            hoaDonnn.setTongTien(BigDecimal.ZERO);
+        } else {
+            // Tính tổng đơn giá trong list hóa đơn chi tiết còn lại
+            BigDecimal subTotal = list.stream()
+                    .map(hdd -> hdd.getDonGia())
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+            // Set tổng tiền bằng tổng đơn giá trong list hóa đơn chi tiết còn lại
+            total = subTotal;
+            hoaDonnn.setTongTien(subTotal);
         }
+        System.out.println(hoaDonnn.getTongTien());
+        hoaDonService.update(hoaDonnn.getId(), hoaDonnn);
         model.addAttribute("tong", String.valueOf(total));
         model.addAttribute("listHoaDonChiTiet", list);
         model.addAttribute("hoaDon", hoaDonnn);
@@ -417,9 +456,12 @@ public class BanHangTaiQuayController {
                       @RequestParam(value = "chip", required = false) UUID chip,
                       @RequestParam(value = "manHinh", required = false) UUID moTaMan,
                       @RequestParam(value = "camera", required = false) UUID moTaCam,
+                      @RequestParam(value = "giaBanMin", required = false) BigDecimal giaBanMin,
+                      @RequestParam(value = "giaBanMax", required = false) BigDecimal giaBanMax,
                       @ModelAttribute("hoaDon") HoaDon hoaDon, @ModelAttribute("modalAddKhachHang") KhachHang khachHang) {
-        List<ChiTietSanPham> list = chiTietSanPhamService.loc(hang, ram, rom, dungLuongPin, chip, moTaMan, moTaCam);
+        List<ChiTietSanPham> list = chiTietSanPhamService.locBanHang(hang, ram, rom, dungLuongPin, chip, moTaMan, moTaCam,giaBanMin,giaBanMax);
         model.addAttribute("listChiTietSanPham", list);
+        model.addAttribute("hoaDon", hoaDonnn);
         model.addAttribute("listHoaDon", hoaDonService.find());
         model.addAttribute("listHang", hangSanPhamService.findAll0());
         model.addAttribute("listMauSac", mauSacService.findAll0());
@@ -451,7 +493,7 @@ public class BanHangTaiQuayController {
         khachHang.setNgayTao(Date.valueOf(LocalDate.now()));
         khachHang.setTinhTrang(0);
         khachHangService.add(khachHang);
-        return "redirect:/ban-hang/hien-thi";
+        return "redirect:/ban-hang/thong-tin-hoa-don/" + idHoaDon;
     }
 
 }

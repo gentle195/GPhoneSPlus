@@ -11,7 +11,8 @@ public class ScheduledTasks {
     @Autowired
     private HoaDonService hoaDonService;
 
-    @Scheduled(cron = "0 0/30 * * * ?")
+//    @Scheduled(cron = "0 0/30 * * * ?")
+    @Scheduled(cron = "0 0 */4 * * ?")
     public void updateBillStatus() {
         hoaDonService.autoUpdate();
         System.out.println("alo");
