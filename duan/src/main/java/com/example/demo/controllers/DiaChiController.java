@@ -2,11 +2,8 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.DiaChi;
 import com.example.demo.models.KhachHang;
-import com.example.demo.models.Pin;
 import com.example.demo.services.DiaChiService;
-import com.example.demo.services.DungLuongPinService;
 import com.example.demo.services.KhachHangService;
-import com.example.demo.services.PinService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,10 +13,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -57,8 +57,8 @@ public class DiaChiController {
         model.addAttribute("tong", diaChiService.getALL0().size());
         model.addAttribute("service", diaChiService);
         model.addAttribute("kh", khachHangService.findAll00());
-        model.addAttribute("contentPage","dia-chi/dia-chi.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../dia-chi/dia-chi.jsp");
+        return "/home/layout";
     }
 
     @PostMapping("/dia-chi/add-khach-hang")
@@ -106,8 +106,8 @@ public class DiaChiController {
         model.addAttribute("kh", khachHangService.findAll00());
         model.addAttribute("khmodal",new KhachHang());
 
-        model.addAttribute("contentPage","dia-chi/dia-chi.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../dia-chi/dia-chi.jsp");
+        return "/home/layout";
     }
 
     @PostMapping("/dia-chi/add-khach-hang/{id}")
@@ -158,8 +158,8 @@ public class DiaChiController {
         model.addAttribute("service", diaChiService);
         model.addAttribute("kh", khachHangService.findAll00());
         model.addAttribute("khmodal",new KhachHang());
-        model.addAttribute("contentPage","dia-chi/dia-chi-update.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../dia-chi/dia-chi-update.jsp");
+        return "/home/layout";
     }
 
 
@@ -184,8 +184,8 @@ public class DiaChiController {
         model.addAttribute("service", diaChiService);
 
 
-        model.addAttribute("contentPage","dia-chi/dia-chi-tungxoa.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../dia-chi/dia-chi-tungxoa.jsp");
+        return "/home/layout";
     }
     //
 //
@@ -210,9 +210,9 @@ public class DiaChiController {
         model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("tong", diaChiService.getall1().size());
         model.addAttribute("service", diaChiService);
-        model.addAttribute("contentPage","dia-chi/dia-chi-tungxoa.jsp");
+        model.addAttribute("contentPage","../dia-chi/dia-chi-tungxoa.jsp");
         return "redirect:/dia-chi/dia-chi-tung-xoa";
-//        return "layout";
+//        return "/home/layout";
     }
 
 
@@ -235,8 +235,8 @@ public class DiaChiController {
         model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("tong", diaChiService.getall1().size());
         model.addAttribute("service", diaChiService);
-        model.addAttribute("contentPage","dia-chi/dia-chi-tungxoa.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../dia-chi/dia-chi-tungxoa.jsp");
+        return "/home/layout";
     }
 
     @PostMapping("/dia-chi/tim-kiem")
@@ -260,8 +260,8 @@ public class DiaChiController {
         model.addAttribute("service", diaChiService);
         model.addAttribute("kh", khachHangService.findAll00());
 
-        model.addAttribute("contentPage","dia-chi/dia-chi.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../dia-chi/dia-chi.jsp");
+        return "/home/layout";
     }
 
 
@@ -289,8 +289,8 @@ public class DiaChiController {
         model.addAttribute("service", diaChiService);
         model.addAttribute("kh", khachHangService.findAll00());
 
-        model.addAttribute("contentPage","dia-chi/dia-chi-update.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../dia-chi/dia-chi-update.jsp");
+        return "/home/layout";
     }
 
     @PostMapping("/dia-chi/tim-kiem-tung-xoa")
@@ -315,8 +315,8 @@ public class DiaChiController {
         model.addAttribute("service", diaChiService);
 
 
-        model.addAttribute("contentPage","dia-chi/dia-chi-tungxoa.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../dia-chi/dia-chi-tungxoa.jsp");
+        return "/home/layout";
     }
 
 
@@ -347,8 +347,8 @@ public class DiaChiController {
         model.addAttribute("service", diaChiService);
         model.addAttribute("kh", khachHangService.findAll00());
 
-        model.addAttribute("contentPage","dia-chi/dia-chi.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../dia-chi/dia-chi.jsp");
+        return "/home/layout";
     }
 
 
@@ -371,8 +371,8 @@ public class DiaChiController {
         model.addAttribute("tong", diaChiService.getALL0().size());
         model.addAttribute("service", diaChiService);
         model.addAttribute("kh", khachHangService.findAll00());
-        model.addAttribute("contentPage","dia-chi/dia-chi-update.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../dia-chi/dia-chi-update.jsp");
+        return "/home/layout";
     }
     //
 //
@@ -396,8 +396,8 @@ public class DiaChiController {
             model.addAttribute("tong", diaChiService.getALL0().size());
             model.addAttribute("service", diaChiService);
             model.addAttribute("kh", khachHangService.findAll00());
-            model.addAttribute("contentPage","dia-chi/dia-chi-update.jsp");
-            return "layout";
+            model.addAttribute("contentPage","../dia-chi/dia-chi-update.jsp");
+            return "/home/layout";
         }
 
 
@@ -406,7 +406,7 @@ public class DiaChiController {
         hangKhachHang.setNgayCapNhat(date);
         hangKhachHang.setNgayTao(diaChiService.findById(hangKhachHang.getId()).getNgayTao());
         diaChiService.add(hangKhachHang);
-//        model.addAttribute("contentPage","dia-chi/dia-chi.jsp");
+//        model.addAttribute("contentPage","../dia-chi/dia-chi.jsp");
 //        model.addAttribute("dulieu", diaChiService.getALL0());
 //        model.addAttribute("tong", diaChiService.getALL0().size());
         Sort sort = Sort.by("ma").descending();
@@ -419,8 +419,8 @@ public class DiaChiController {
         model.addAttribute("service", diaChiService);
         model.addAttribute("dc",new DiaChi());
         model.addAttribute("kh", khachHangService.findAll00());
-        model.addAttribute("contentPage","dia-chi/dia-chi.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../dia-chi/dia-chi.jsp");
+        return "/home/layout";
     }
 
 
@@ -447,8 +447,8 @@ public class DiaChiController {
             model.addAttribute("service", diaChiService);
 
             model.addAttribute("kh", khachHangService.findAll00());
-            model.addAttribute("contentPage","dia-chi/dia-chi.jsp");
-            return "layout";
+            model.addAttribute("contentPage","../dia-chi/dia-chi.jsp");
+            return "/home/layout";
         }
         Integer sl = diaChiService.findAll().size() + 1;
         String mhd="";
@@ -475,9 +475,9 @@ public class DiaChiController {
         model.addAttribute("service", diaChiService);
         model.addAttribute("dc",new DiaChi());
         model.addAttribute("kh", khachHangService.findAll00());
-        model.addAttribute("contentPage","dia-chi/dia-chi.jsp");
+        model.addAttribute("contentPage","../dia-chi/dia-chi.jsp");
 
-        return "layout";
+        return "/home/layout";
     }
 
 }

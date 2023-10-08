@@ -21,6 +21,10 @@ public interface IMEIService {
 
     public List<IMEI> findAll0();
 
+    public IMEI searchSoImei(String imei);
+
+    public String searchSoImei2(String imei);
+
     public IMEI findById(UUID id);
 
     public IMEI add(IMEI imei);

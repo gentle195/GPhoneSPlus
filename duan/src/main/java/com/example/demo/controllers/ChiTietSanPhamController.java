@@ -93,10 +93,10 @@ public class ChiTietSanPhamController {
         model.addAttribute("listPin", pinService.findAll());
         model.addAttribute("listManHinh", manHinhService.findAll());
         model.addAttribute("listCamera", cameraService.findAll());
-        model.addAttribute("contentPage", "chi-tiet-san-pham/index.jsp");
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
         model.addAttribute("page", chiTietSanPhamPage.getNumber());
         model.addAttribute("listCTSP", chiTietSanPhamPage.getContent());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/hien-thi-da-xoa")
@@ -111,10 +111,10 @@ public class ChiTietSanPhamController {
         model.addAttribute("size", chiTietSanPhamPage.getSize());
         model.addAttribute("listSanPham", sanPhamService.findAll());
 
-        model.addAttribute("contentPage", "chi-tiet-san-pham/san-pham-da-xoa.jsp");
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/san-pham-da-xoa.jsp");
         model.addAttribute("page", chiTietSanPhamPage.getNumber());
         model.addAttribute("listCTSP", chiTietSanPhamPage.getContent());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/view-add")
@@ -136,10 +136,10 @@ public class ChiTietSanPhamController {
         model.addAttribute("listPin", pinService.findAll());
         model.addAttribute("listManHinh", manHinhService.findAll());
         model.addAttribute("listCamera", cameraService.findAll());
-        model.addAttribute("contentPage", "chi-tiet-san-pham/add-chi-tiet-san-pham.jsp");
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/add-chi-tiet-san-pham.jsp");
 
 
-        return "layout";
+        return "/home/layout";
 
 
     }
@@ -170,9 +170,9 @@ public class ChiTietSanPhamController {
             model.addAttribute("listPin", pinService.findAll());
             model.addAttribute("listManHinh", manHinhService.findAll());
             model.addAttribute("listCamera", cameraService.findAll());
-            model.addAttribute("contentPage", "chi-tiet-san-pham/add-chi-tiet-san-pham.jsp");
+            model.addAttribute("contentPage", "../chi-tiet-san-pham/add-chi-tiet-san-pham.jsp");
 
-            return "layout";
+            return "/home/layout";
         }
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         String uploadDir = "src/main/webapp/uploads/";
@@ -212,9 +212,9 @@ public class ChiTietSanPhamController {
 
         model.addAttribute("chitietsanphamupdate", chiTietSanPham1);
         model.addAttribute("ctsp", chiTietSanPham1);
-        model.addAttribute("contentPage", "chi-tiet-san-pham/update-chi-tiet-san-pham.jsp");
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/update-chi-tiet-san-pham.jsp");
 
-        return "layout";
+        return "/home/layout";
 
 
     }
@@ -248,9 +248,9 @@ public class ChiTietSanPhamController {
             model.addAttribute("listCamera", cameraService.findAll());
             ChiTietSanPham chiTietSanPham1 = chiTietSanPhamService.findById(id);
 //            model.addAttribute("chitietsanphamupdate",chiTietSanPham1);
-            model.addAttribute("contentPage", "chi-tiet-san-pham/update-chi-tiet-san-pham.jsp");
+            model.addAttribute("contentPage", "../chi-tiet-san-pham/update-chi-tiet-san-pham.jsp");
 
-            return "layout";
+            return "/home/layout";
         }
         if (!multipartFile.isEmpty()) {
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -263,6 +263,7 @@ public class ChiTietSanPhamController {
         chiTietSanPham.setNgayCapNhat(Date.valueOf(localDate));
         chiTietSanPham.setNgayTao(ngay);
         chiTietSanPham.setTinhTrang(0);
+
 
         chiTietSanPhamService.update(id, chiTietSanPham);
         System.out.println(chiTietSanPham.getNgayTao());
@@ -293,7 +294,7 @@ public class ChiTietSanPhamController {
         model.addAttribute("listPin", pinService.findAll());
         model.addAttribute("listManHinh", manHinhService.findAll());
         model.addAttribute("listCamera", cameraService.findAll());
-        model.addAttribute("contentPage", "chi-tiet-san-pham/index.jsp");
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
         model.addAttribute("page", page.getNumber());
         return "redirect:/chi-tiet-san-pham/hien-thi";
     }
@@ -320,7 +321,7 @@ public class ChiTietSanPhamController {
         model.addAttribute("listPin", pinService.findAll());
         model.addAttribute("listManHinh", manHinhService.findAll());
         model.addAttribute("listCamera", cameraService.findAll());
-        model.addAttribute("contentPage", "chi-tiet-san-pham/index.jsp");
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
         model.addAttribute("page", page.getNumber());
         return "redirect:/chi-tiet-san-pham/hien-thi-da-xoa";
     }
@@ -351,7 +352,7 @@ public class ChiTietSanPhamController {
         model.addAttribute("listPin", pinService.findAll());
         model.addAttribute("listManHinh", manHinhService.findAll());
         model.addAttribute("listCamera", cameraService.findAll());
-        model.addAttribute("contentPage", "chi-tiet-san-pham/index.jsp");
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
         model.addAttribute("page", page.getNumber());
         return "redirect:/chi-tiet-san-pham/hien-thi-da-xoa";
     }
@@ -377,8 +378,8 @@ public class ChiTietSanPhamController {
         model.addAttribute("listPin", pinService.findAll());
         model.addAttribute("listManHinh", manHinhService.findAll());
         model.addAttribute("listCamera", cameraService.findAll());
-        model.addAttribute("contentPage", "chi-tiet-san-pham/index.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
+        return "/home/layout";
     }
 
     @PostMapping("/search-da-xoa")
@@ -402,8 +403,8 @@ public class ChiTietSanPhamController {
         model.addAttribute("listPin", pinService.findAll());
         model.addAttribute("listManHinh", manHinhService.findAll());
         model.addAttribute("listCamera", cameraService.findAll());
-        model.addAttribute("contentPage", "chi-tiet-san-pham/index.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
+        return "/home/layout";
     }
 
     @GetMapping("/detail/{id}")
@@ -427,10 +428,10 @@ public class ChiTietSanPhamController {
         model.addAttribute("listPin", pinService.findAll());
         model.addAttribute("listManHinh", manHinhService.findAll());
         model.addAttribute("listCamera", cameraService.findAll());
-        model.addAttribute("contentPage", "chi-tiet-san-pham/index.jsp");
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
         model.addAttribute("page", chiTietSanPhamPage.getNumber());
         model.addAttribute("listCTSP", chiTietSanPhamPage.getContent());
-        return "layout";
+        return "/home/layout";
 
     }
 
@@ -461,8 +462,8 @@ public class ChiTietSanPhamController {
         model.addAttribute("listPin", pinService.findAll());
         model.addAttribute("listManHinh", manHinhService.findAll());
         model.addAttribute("listCamera", cameraService.findAll());
-        model.addAttribute("contentPage", "chi-tiet-san-pham/loc-ctsp.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/loc-ctsp.jsp");
+        return "/home/layout";
     }
 
 
@@ -486,10 +487,10 @@ public class ChiTietSanPhamController {
         model.addAttribute("listPin", pinService.findAll());
         model.addAttribute("listManHinh", manHinhService.findAll());
         model.addAttribute("listCamera", cameraService.findAll());
-        model.addAttribute("contentPage", "chi-tiet-san-pham/loc-ctsp.jsp");
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/loc-ctsp.jsp");
         model.addAttribute("page", chiTietSanPhamPage.getNumber());
         model.addAttribute("listCTSP", chiTietSanPhamPage.getContent());
-        return "layout";
+        return "/home/layout";
     }
 
 }

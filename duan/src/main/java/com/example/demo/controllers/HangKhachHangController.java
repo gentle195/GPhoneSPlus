@@ -11,7 +11,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
 import java.util.Optional;
@@ -52,8 +56,8 @@ public class HangKhachHangController {
         model.addAttribute("service", hangKhachHangService);
 
 
-        model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../hang-khach-hang/hang-khach-hang.jsp");
+        return "/home/layout";
     }
 
 
@@ -78,8 +82,8 @@ public class HangKhachHangController {
         model.addAttribute("service", hangKhachHangService);
 
 
-        model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang-tungxoa.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../hang-khach-hang/hang-khach-hang-tungxoa.jsp");
+        return "/home/layout";
     }
 
 
@@ -110,8 +114,8 @@ public class HangKhachHangController {
         model.addAttribute("service", hangKhachHangService);
 
 
-        model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang-tungxoa.jsp");
-//        return "layout";
+        model.addAttribute("contentPage","../hang-khach-hang/hang-khach-hang-tungxoa.jsp");
+//        return "/home/layout";
         return "redirect:/hang-khach-hang/hang-khach-hang-tung-xoa";
     }
 
@@ -142,8 +146,8 @@ public class HangKhachHangController {
         model.addAttribute("service", hangKhachHangService);
 
 
-        model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang-tungxoa.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../hang-khach-hang/hang-khach-hang-tungxoa.jsp");
+        return "/home/layout";
     }
     @PostMapping("/hang-khach-hang/tim-kiem")
     public String timmt(
@@ -166,8 +170,8 @@ public class HangKhachHangController {
         model.addAttribute("service", hangKhachHangService);
 
 
-        model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../hang-khach-hang/hang-khach-hang.jsp");
+        return "/home/layout";
     }
 
 
@@ -193,8 +197,8 @@ public class HangKhachHangController {
         model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("tong", hangKhachHangService.getALL0().size());
         model.addAttribute("service", hangKhachHangService);
-        model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang-update.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../hang-khach-hang/hang-khach-hang-update.jsp");
+        return "/home/layout";
     }
 
 
@@ -224,8 +228,8 @@ public class HangKhachHangController {
         model.addAttribute("service", hangKhachHangService);
 
 
-        model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang-tungxoa.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../hang-khach-hang/hang-khach-hang-tungxoa.jsp");
+        return "/home/layout";
     }
     @GetMapping("/hang-khach-hang/remove/{id}")
 
@@ -242,7 +246,7 @@ public class HangKhachHangController {
         hangKhachHang1.setTinhTrang(1);
         hangKhachHang1.setNgayCapNhat(date);
         hangKhachHangService.add(hangKhachHang1);
-//        model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang.jsp");
+//        model.addAttribute("contentPage","../hang-khach-hang/hang-khach-hang.jsp");
 //        model.addAttribute("dulieu", hangKhachHangService.getALL0());
 //        model.addAttribute("tong", hangKhachHangService.getALL0().size());
 
@@ -256,8 +260,8 @@ public class HangKhachHangController {
         model.addAttribute("service", hangKhachHangService);
 
 
-        model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../hang-khach-hang/hang-khach-hang.jsp");
+        return "/home/layout";
     }
 
 
@@ -274,7 +278,7 @@ public class HangKhachHangController {
         HangKhachHang hangKhachHang1 = hangKhachHangService.findById(id);
         hangKhachHang1.setTinhTrang(1);
         hangKhachHangService.add(hangKhachHang1);
-//        model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang.jsp");
+//        model.addAttribute("contentPage","../hang-khach-hang/hang-khach-hang.jsp");
 //        model.addAttribute("dulieu", hangKhachHangService.getALL0());
 //        model.addAttribute("tong", hangKhachHangService.getALL0().size());
 
@@ -288,8 +292,8 @@ public class HangKhachHangController {
         model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("tong", hangKhachHangService.getALL0().size());
         model.addAttribute("service", hangKhachHangService);
-        model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang-update.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../hang-khach-hang/hang-khach-hang-update.jsp");
+        return "/home/layout";
     }
 
 
@@ -311,8 +315,8 @@ public class HangKhachHangController {
         model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("tong", hangKhachHangService.getALL0().size());
         model.addAttribute("service", hangKhachHangService);
-        model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang-update.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../hang-khach-hang/hang-khach-hang-update.jsp");
+        return "/home/layout";
     }
 
 
@@ -335,8 +339,8 @@ public class HangKhachHangController {
             model.addAttribute("total", kt(list.getTotalPages()));
             model.addAttribute("tong", hangKhachHangService.getALL0().size());
             model.addAttribute("service", hangKhachHangService);
-            model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang-update.jsp");
-            return "layout";
+            model.addAttribute("contentPage","../hang-khach-hang/hang-khach-hang-update.jsp");
+            return "/home/layout";
         }
 
 
@@ -345,7 +349,7 @@ public class HangKhachHangController {
         hangKhachHang.setNgayCapNhat(date);
         hangKhachHang.setNgayTao(hangKhachHangService.findById(hangKhachHang.getId()).getNgayTao());
         hangKhachHangService.add(hangKhachHang);
-//        model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang.jsp");
+//        model.addAttribute("contentPage","../hang-khach-hang/hang-khach-hang.jsp");
 //        model.addAttribute("dulieu", hangKhachHangService.getALL0());
 //        model.addAttribute("tong", hangKhachHangService.getALL0().size());
         Sort sort = Sort.by("ma").descending();
@@ -357,8 +361,8 @@ public class HangKhachHangController {
         model.addAttribute("tong", hangKhachHangService.getALL0().size());
         model.addAttribute("service", hangKhachHangService);
         model.addAttribute("HKHHangKhachHang",new HangKhachHang());
-        model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../hang-khach-hang/hang-khach-hang.jsp");
+        return "/home/layout";
     }
 
 
@@ -383,8 +387,8 @@ public class HangKhachHangController {
             model.addAttribute("tong", hangKhachHangService.getALL0().size());
             model.addAttribute("service", hangKhachHangService);
 
-            model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang.jsp");
-            return "layout";
+            model.addAttribute("contentPage","../hang-khach-hang/hang-khach-hang.jsp");
+            return "/home/layout";
         }
         Integer sl = hangKhachHangService.findAll().size() + 1;
         String mhd="";
@@ -410,9 +414,9 @@ public class HangKhachHangController {
         model.addAttribute("tong", hangKhachHangService.getALL0().size());
         model.addAttribute("service", hangKhachHangService);
         model.addAttribute("HKHHangKhachHang",new HangKhachHang());
-        model.addAttribute("contentPage","hang-khach-hang/hang-khach-hang.jsp");
+        model.addAttribute("contentPage","../hang-khach-hang/hang-khach-hang.jsp");
 
-        return "layout";
+        return "/home/layout";
     }
 
 }

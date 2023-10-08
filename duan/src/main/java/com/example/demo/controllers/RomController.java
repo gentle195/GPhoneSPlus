@@ -1,6 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.*;
+import com.example.demo.models.Rom;
 import com.example.demo.services.RomService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -31,11 +35,11 @@ public class RomController {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<Rom> list = romService.getAll0(pageable);
-        model.addAttribute("contentPage","rom/rom.jsp");
+        model.addAttribute("contentPage","../rom/rom.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
 
-        return "layout";
+        return "/home/layout";
     }
     @GetMapping("/rom/hien-thi-tung-xoa")
     public String hienthixoa(@ModelAttribute("dulieuxem") Rom dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
@@ -43,10 +47,10 @@ public class RomController {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<Rom> list = romService.getall1(pageable);
-        model.addAttribute("contentPage","rom/rom-tung-xoa.jsp");
+        model.addAttribute("contentPage","../rom/rom-tung-xoa.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/rom/detail/{id}")
@@ -57,10 +61,10 @@ public class RomController {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<Rom> list = romService.getAll0(pageable);
-        model.addAttribute("contentPage","rom/rom-update.jsp");
+        model.addAttribute("contentPage","../rom/rom-update.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
     @GetMapping("/rom/form-add")
     public String formadd( @ModelAttribute("dulieuxem") Rom dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
@@ -72,7 +76,7 @@ public class RomController {
         model.addAttribute("contentPage","rom/add.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @PostMapping("rom/add")
@@ -111,7 +115,7 @@ public class RomController {
             Sort sort = Sort.by("ngayTao").ascending();
             Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
             Page<Rom> list = romService.getAll0(pageable);
-            model.addAttribute("contentPage","rom/rom-update.jsp");
+            model.addAttribute("contentPage","../rom/rom-update.jsp");
             model.addAttribute("hsp", list.getContent());
             model.addAttribute("total", list.getTotalPages());
             return "Rom/update";
@@ -138,7 +142,7 @@ public class RomController {
 //        model.addAttribute("contentPage","rom/hien-thi.jsp");
 //        model.addAttribute("hsp", list.getContent());
 //        model.addAttribute("total", list.getTotalPages());
-//        return "layout";
+//        return "/home/layout";
 //
 //    }
     @PostMapping("/rom/search")
@@ -147,10 +151,10 @@ public class RomController {
         List<Rom> list = romService.search(search);
 
 
-        model.addAttribute("contentPage","rom/rom.jsp");
+        model.addAttribute("contentPage","../rom/rom.jsp");
         model.addAttribute("hsp", list);
 //        model.addAttribute("total", list);
-        return "layout";
+        return "/home/layout";
     }
 
     @PostMapping("/rom/search2")
@@ -159,10 +163,10 @@ public class RomController {
         List<Rom> list = romService.search2(search);
 
 
-        model.addAttribute("contentPage","rom/rom-tung-xoa.jsp");
+        model.addAttribute("contentPage","../rom/rom-tung-xoa.jsp");
         model.addAttribute("hsp", list);
 //        model.addAttribute("total", list);
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("rom/delete/{id}")
@@ -174,10 +178,10 @@ public class RomController {
         romService.add(rom);
         Pageable pageable = PageRequest.of(num.orElse(0), size);
         Page<Rom> list = romService.getAll0(pageable);
-        model.addAttribute("contentPage","rom/rom.jsp");
+        model.addAttribute("contentPage","../rom/rom.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "layout";
+        return "/home/layout";
 
     }
     @GetMapping("/rom/khoi-phuc/{id}")
@@ -198,13 +202,13 @@ public class RomController {
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<Rom> list = romService.getall1(pageable);
 
-        model.addAttribute("contentPage","rom/rom-tung-xoa.jsp");
+        model.addAttribute("contentPage","../rom/rom-tung-xoa.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
 
 
 
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/rom/khoi-phuc-het")
@@ -226,12 +230,12 @@ public class RomController {
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<Rom> list = romService.getall1(pageable);
 
-        model.addAttribute("contentPage","rom/rom-tung-xoa.jsp");
+        model.addAttribute("contentPage","../rom/rom-tung-xoa.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
 
 
 
-        return "layout";
+        return "/home/layout";
     }
 }

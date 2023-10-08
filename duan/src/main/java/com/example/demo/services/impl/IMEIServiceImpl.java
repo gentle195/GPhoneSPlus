@@ -51,6 +51,17 @@ public class IMEIServiceImpl implements IMEIService {
     }
 
     @Override
+    public IMEI searchSoImei(String imei) {
+        return imeiRepository.searchSoImei(imei);
+    }
+
+
+    @Override
+    public String searchSoImei2(String imei) {
+        return imeiRepository.searchSoImei2(imei);
+    }
+
+    @Override
     public IMEI findById(UUID id) {
         return imeiRepository.findById(id).orElse(null);
     }

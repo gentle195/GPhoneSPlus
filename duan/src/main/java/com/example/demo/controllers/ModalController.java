@@ -261,7 +261,7 @@ public class ModalController {
         Date date = new Date(millis);
         if (bindingResult.hasErrors()) {
             model.addAttribute("dulieu", hangKhachHangService.getALL0());
-            return "khach-hang/khach-hang";
+            return "../khach-hangkhach-hang";
         }
         Integer sl = hangKhachHangService.findAll().size() + 1;
         String mhd = "MHKH" + sl;
@@ -279,7 +279,7 @@ public class ModalController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "san-pham/add.jsp");
             model.addAttribute("listManHinh", manHinhService.findAll0());
-            return "layout";
+            return "/home//home/layout";
         }
         manHinh.setNgayTao(Date.valueOf(LocalDate.now()));
         manHinh.setMa("MH" + String.valueOf(manHinhService.findAll().size() + 1));
@@ -299,7 +299,7 @@ public class ModalController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "san-pham/add.jsp");
             model.addAttribute("listCamera", cameraService.findAll0());
-            return "layout";
+            return "/home/layout";
         }
         camera.setNgayTao(Date.valueOf(LocalDate.now()));
         camera.setMa("MH" + String.valueOf(cameraService.findAll().size() + 1));
@@ -319,7 +319,7 @@ public class ModalController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "san-pham/add.jsp");
             model.addAttribute("listHangSP", hangSanPhamService.findAll0());
-            return "layout";
+            return "/home/layout";
         }
         dulieuxem.setNgayTao(Date.valueOf(LocalDate.now()));
         dulieuxem.setMa("H" + String.valueOf(hangSanPhamService.findAll().size() + 1));
@@ -337,8 +337,8 @@ public class ModalController {
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         if (bindingResult.hasErrors()) {
-            model.addAttribute("contentPage", "san-pham/add.jsp");
-            return "layout";
+            model.addAttribute("contentPage", "../san-pham/add.jsp");
+            return "/home/layout";
         }
         String mhd = "";
         Integer sl = anhService.findAll().size() + 1;

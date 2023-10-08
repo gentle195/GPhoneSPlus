@@ -41,8 +41,8 @@ public class RamController {
         model.addAttribute("total", page.getTotalPages());
         model.addAttribute("listRam", page.getContent());
         model.addAttribute("page", page.getNumber());
-        model.addAttribute("contentPage", "ram/ram.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../ram/ram.jsp");
+        return "/home/layout";
     }
 
     @PostMapping("/add-ram")
@@ -53,14 +53,14 @@ public class RamController {
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<Ram> page = ramService.getAll(pageable);
         if (bindingResult.hasErrors()) {
-            model.addAttribute("contentPage", "ram/ram.jsp");
+            model.addAttribute("contentPage", "../ram/ram.jsp");
             model.addAttribute("listRam", page.getContent());
             model.addAttribute("page", page.getNumber());
             model.addAttribute("total", page.getTotalPages());
-            return "layout";
+            return "/home/layout";
         }
         long millis = System.currentTimeMillis();
-        Date date = new java.sql.Date(millis);
+        Date date = new Date(millis);
         Integer sl = ramService.findAll().size();
         String maRam = "";
         if (sl < 10) {
@@ -73,7 +73,7 @@ public class RamController {
         ram.setNgayCapNhat(date);
         ram.setTinhTrang(0);
         ramService.add(ram);
-        model.addAttribute("contentPage", "ram/ram.jsp");
+        model.addAttribute("contentPage", "../ram/ram.jsp");
         model.addAttribute("listRam", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
@@ -89,21 +89,21 @@ public class RamController {
         Ram ram = ramService.findById(id);
         model.addAttribute("ram", ram);
         Page<Ram> page = ramService.getAll(pageable);
-        model.addAttribute("contentPage", "ram/ram-update.jsp");
+        model.addAttribute("contentPage", "../ram/ram-update.jsp");
         model.addAttribute("listRam", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @PostMapping("/update-ram/{id}")
     public String updateRam(Model model, @PathVariable("id") UUID id, @ModelAttribute("ram") @Valid Ram ram,
                             BindingResult bindingResult, @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
         if (bindingResult.hasErrors()) {
-            return "ram/ram-update";
+            return "../ram/ram-update";
         }
         long millis = System.currentTimeMillis();
-        Date date = new java.sql.Date(millis);
+        Date date = new Date(millis);
 
         ram.setNgayCapNhat(date);
         ramService.update(id, ram);
@@ -117,11 +117,11 @@ public class RamController {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<Ram> page = ramService.getAll1(pageable);
-        model.addAttribute("contentPage", "ram/ram-delete.jsp");
+        model.addAttribute("contentPage", "../ram/ram-delete.jsp");
         model.addAttribute("listRam", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/update-all-status")
@@ -134,11 +134,11 @@ public class RamController {
         ram.setNgayCapNhat(date);
         ramService.updateTT();
         Page<Ram> page = ramService.getAll1(pageable);
-        model.addAttribute("contentPage", "ram/ram-delete.jsp");
+        model.addAttribute("contentPage", "../ram/ram-delete.jsp");
         model.addAttribute("listRam", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/update-status/{id}")
@@ -154,11 +154,11 @@ public class RamController {
         ram1.setTinhTrang(1);
         ramService.update(id, ram1);
         Page<Ram> page = ramService.getAll(pageable);
-        model.addAttribute("contentPage", "ram/ram.jsp");
+        model.addAttribute("contentPage", "../ram/ram.jsp");
         model.addAttribute("listRam", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
@@ -174,27 +174,27 @@ public class RamController {
         ram1.setTinhTrang(0);
         ramService.update(id, ram1);
         Page<Ram> page = ramService.getAll1(pageable);
-        model.addAttribute("contentPage", "ram/ram-delete.jsp");
+        model.addAttribute("contentPage", "../ram/ram-delete.jsp");
         model.addAttribute("listRam", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @PostMapping("/search-0")
     public String search0(Model model, @ModelAttribute("ram") Ram ram, @RequestParam("search") String search) {
         List<Ram> list = ramService.search0(search);
         model.addAttribute("listRam", list);
-        model.addAttribute("contentPage", "ram/ram.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../ram/ram.jsp");
+        return "/home/layout";
     }
 
     @PostMapping("/search-1")
     public String search1(Model model, @ModelAttribute("ram") Ram ram, @RequestParam("search") String search) {
         List<Ram> list = ramService.search1(search);
         model.addAttribute("listRam", list);
-        model.addAttribute("contentPage", "ram/ram-delete.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../ram/ram-delete.jsp");
+        return "/home/layout";
     }
 }
 

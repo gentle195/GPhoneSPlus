@@ -5,15 +5,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Skydash Admin</title>
-    <link rel="stylesheet" href="../../vendors/feather/feather.css">
-    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
-    <link rel="shortcut icon" href="../../images/favicon.png"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Focus - Bootstrap Admin Dashboard </title>
+    <!-- Favicon icon -->
 
 </head>
 <body>
@@ -144,30 +140,26 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <div class="col-sm-12">
+                                        <label class="col-sm-3 col-form-label" for="anh">Hình ảnh:</label>
+                                        <div class="col-sm-9">
                                             <div class="d-flex align-items-center">
                                                 <!-- Sử dụng d-flex để cùng một dòng -->
-                                                <form:select path="anh" class="form-control" id="selectAnh"
-                                                             cssStyle="font-weight: bold; width: 100%">
-                                                    <option selected disabled>Hình Ảnh</option>
-                                                    <form:options items="${listAnh}" itemLabel="ten"
-                                                                  itemValue="id"/>
-                                                </form:select>
+                                                <form:select class="form-control" path="anh" items="${listAnh}"
+                                                             id="selectAnh"
+                                                             itemValue="id" itemLabel="ten"/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <div class="col-sm-12">
+                                        <label class="col-sm-3 col-form-label" for="hangSanPham">Hãng Sản Phẩm:</label>
+                                        <div class="col-sm-9">
                                             <div class="d-flex align-items-center">
                                                 <!-- Sử dụng d-flex để cùng một dòng -->
-                                                <form:select path="hangSanPham" class="form-control" id="selectHang"
-                                                             cssStyle="font-weight: bold; width: 100%">
-                                                    <option selected disabled>Hãng Sản Phẩm</option>
-                                                    <form:options items="${listHangSP}"
-                                                                  itemValue="id" itemLabel="ten"/>
-                                                </form:select>
+                                                <form:select class="form-control" path="hangSanPham"
+                                                             items="${listHangSP}" id="selectHang"
+                                                             itemValue="id" itemLabel="ten"/>
                                             </div>
                                         </div>
                                     </div>
@@ -176,30 +168,24 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <div class="col-sm-12">
+                                        <label class="col-sm-3 col-form-label" for="manHinh">Màn Hình:</label>
+                                        <div class="col-sm-9">
                                             <div class="d-flex align-items-center">
                                                 <!-- Sử dụng d-flex để cùng một dòng -->
-                                                <form:select path="manHinh" class="form-control" id="selectManHinh"
-                                                             cssStyle="font-weight: bold; width: 100%">
-                                                    <option selected disabled>Màn Hình</option>
-                                                    <form:options items="${listManHinh}"
-                                                                  itemValue="id" itemLabel="thongSo"/>
-                                                </form:select>
+                                                <form:select class="form-control" path="manHinh" items="${listManHinh}"
+                                                             id="selectManHinh" itemValue="id" itemLabel="thongSo"/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <div class="col-sm-12">
+                                        <label class="col-sm-3 col-form-label" for="camera">Camera:</label>
+                                        <div class="col-sm-9">
                                             <div class="d-flex align-items-center">
                                                 <!-- Sử dụng d-flex để cùng một dòng -->
-                                                <form:select path="camera" class="form-control" id="selectCamera"
-                                                             cssStyle="font-weight: bold; width: 100%">
-                                                    <option selected disabled>Camera</option>
-                                                    <form:options items="${listCamera}"
-                                                                  itemValue="id" itemLabel="thongSo"/>
-                                                </form:select>
+                                                <form:select class="form-control" path="camera" items="${listCamera}"
+                                                             id="selectCamera" itemValue="id" itemLabel="thongSo"/>
                                             </div>
                                         </div>
                                     </div>
@@ -227,15 +213,10 @@
                     </div>
                 </div>
             </div>
+            <%--    </div>--%>
         </form:form>
     </div>
 </div>
-<script src="../../vendors/js/vendor.bundle.base.js"></script>
-<script src="../../js/off-canvas.js"></script>
-<script src="../../js/hoverable-collapse.js"></script>
-<script src="../../js/template.js"></script>
-<script src="../../js/settings.js"></script>
-<script src="../../js/todolist.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
