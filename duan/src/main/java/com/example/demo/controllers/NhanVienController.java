@@ -50,12 +50,12 @@ public class NhanVienController {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<NhanVien> page = nhanVienService.getAll(pageable);
-        model.addAttribute("contentPage", "nhanvien/nhan-vien.jsp");
+        model.addAttribute("contentPage", "../nhanvien/nhan-vien.jsp");
         model.addAttribute("listNhanVien", page.getContent());
         model.addAttribute("listChucVu", chucVuService.findAll());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
 
@@ -67,11 +67,11 @@ public class NhanVienController {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<NhanVien> page = nhanVienService.getAll1(pageable);
-        model.addAttribute("contentPage", "nhanvien/nhan-vien-delete.jsp");
+        model.addAttribute("contentPage", "../nhanvien/nhan-vien-delete.jsp");
         model.addAttribute("listNhanVien", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/loc")
@@ -90,11 +90,11 @@ public class NhanVienController {
 
         // Đặt danh sách chức vụ vào mô hình
         model.addAttribute("listChucVu", listChucVu);
-        model.addAttribute("contentPage", "nhanvien/nhan-vien.jsp");
+        model.addAttribute("contentPage", "../nhanvien/nhan-vien.jsp");
         model.addAttribute("listNhanVien", filteredNhanViens);
 //        model.addAttribute("page", pageable.getPageNumber());
 //        model.addAttribute("total", pageable.getPageSize());
-        return "layout";
+        return "/home/layout";
     }
 
 
@@ -108,9 +108,9 @@ public class NhanVienController {
         List<ChucVu> listChucVu = chucVuService.findAll();
         model.addAttribute("listChucVu", listChucVu);
 //        model.addAttribute("nhanVien", new NhanVien());
-        model.addAttribute("contentPage", "nhanvien/nhan-vien-add.jsp");
+        model.addAttribute("contentPage", "../nhanvien/nhan-vien-add.jsp");
 
-        return "layout";
+        return "/home/layout";
     }
 
     @PostMapping("/add")
@@ -131,10 +131,10 @@ public class NhanVienController {
             nhanVien.setGioiTinh(true);
 //            model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listChucVu", listChucVu);
-            model.addAttribute("contentPage", "nhanvien/nhan-vien-add.jsp");
+            model.addAttribute("contentPage", "../nhanvien/nhan-vien-add.jsp");
 
-            return "layout";
-//            return "nhanvien/nhan-vien-add.jsp";
+            return "/home/layout";
+//            return "../nhanvien/nhan-vien-add.jsp";
         }
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         String uploadDir = "src/main/webapp/uploads/";
@@ -168,9 +168,9 @@ public class NhanVienController {
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
 
-        model.addAttribute("contentPage", "nhanvien/nhan-vien.jsp");
+        model.addAttribute("contentPage", "../nhanvien/nhan-vien.jsp");
         return "redirect:/nhan-vien/hien-thi";
-//        return "layout";
+//        return "/home/layout";
     }
 
     @GetMapping("/detail/{id}")
@@ -185,8 +185,8 @@ public class NhanVienController {
         model.addAttribute("listChucVu", listChucVu);
         NhanVien nhanVien = nhanVienService.findById(id);
         model.addAttribute("nhanVien", nhanVien);
-        model.addAttribute("contentPage", "nhanvien/nhan-vien-update.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../nhanvien/nhan-vien-update.jsp");
+        return "/home/layout";
     }
 
 
@@ -213,10 +213,10 @@ public class NhanVienController {
             nhanVien.setGioiTinh(true);
 //            model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listChucVu", listChucVu);
-            model.addAttribute("contentPage", "nhanvien/nhan-vien-update.jsp");
+            model.addAttribute("contentPage", "../nhanvien/nhan-vien-update.jsp");
 
-            return "layout";
-//            return "nhanvien/nhan-vien-add.jsp";
+            return "/home/layout";
+//            return "../nhanvien/nhan-vien-add.jsp";
         }
         // Xử lý tệp ảnh nếu người dùng đã chọn ảnh mới
         if (!file.isEmpty()) {
@@ -235,7 +235,7 @@ public class NhanVienController {
         List<ChucVu> listChucVu = chucVuService.findAll();
         model.addAttribute("listChucVu", listChucVu);
         nhanVienService.update(id, nhanVien);
-        model.addAttribute("contentPage", "nhanvien/nhan-vien.jsp");
+        model.addAttribute("contentPage", "../nhanvien/nhan-vien.jsp");
 
         return "redirect:/nhan-vien/hien-thi";
 
@@ -246,16 +246,16 @@ public class NhanVienController {
     public String search0(Model model, @ModelAttribute("nhanVien") NhanVien nhanVien, @RequestParam("search") String search) {
         List<NhanVien> list = nhanVienService.search0(search);
         model.addAttribute("listNhanVien", list);
-        model.addAttribute("contentPage", "nhanvien/nhan-vien.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../nhanvien/nhan-vien.jsp");
+        return "/home/layout";
     }
 
     @PostMapping("/search-1")
     public String search1(Model model, @ModelAttribute("nhanVien") NhanVien nhanVien, @RequestParam("search") String search) {
         List<NhanVien> list = nhanVienService.search1(search);
         model.addAttribute("listNhanVien", list);
-        model.addAttribute("contentPage", "nhanvien/nhan-vien-delete.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../nhanvien/nhan-vien-delete.jsp");
+        return "/home/layout";
     }
 
     @GetMapping("/update-all-status")
@@ -270,11 +270,11 @@ public class NhanVienController {
 
         nhanVienService.updateTT();
         Page<NhanVien> page = nhanVienService.getAll1(pageable);
-        model.addAttribute("contentPage", "nhanvien/nhan-vien-delete.jsp");
+        model.addAttribute("contentPage", "../nhanvien/nhan-vien-delete.jsp");
         model.addAttribute("listNhanVien", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/update-status/{id}")
@@ -291,11 +291,11 @@ public class NhanVienController {
         nhanVien1.setTinhTrang(1);
         nhanVienService.update(id, nhanVien1);
         Page<NhanVien> page = nhanVienService.getAll(pageable);
-        model.addAttribute("contentPage", "nhanvien/nhan-vien.jsp");
+        model.addAttribute("contentPage", "../nhanvien/nhan-vien.jsp");
         model.addAttribute("listNhanVien", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
@@ -311,11 +311,11 @@ public class NhanVienController {
         nhanVien1.setTinhTrang(0);
         nhanVienService.update(id, nhanVien1);
         Page<NhanVien> page = nhanVienService.getAll1(pageable);
-        model.addAttribute("contentPage", "nhanvien/nhan-vien-delete.jsp");
+        model.addAttribute("contentPage", "../nhanvien/nhan-vien-delete.jsp");
         model.addAttribute("listNhanVien", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @PostMapping("/modal-add-chuc-vu")

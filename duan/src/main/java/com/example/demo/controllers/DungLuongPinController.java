@@ -1,7 +1,6 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.DungLuongPin;
-import com.example.demo.models.DungLuongPin;
 import com.example.demo.services.DungLuongPinService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -40,11 +38,11 @@ public class DungLuongPinController {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<DungLuongPin> page = dungLuongPinService.getAll(pageable);
-        model.addAttribute("contentPage", "dungluongpin/dung-luong-pin.jsp");
+        model.addAttribute("contentPage", "../dungluongpin/dung-luong-pin.jsp");
         model.addAttribute("listDungLuongPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/hien-thi-delete")
@@ -55,11 +53,11 @@ public class DungLuongPinController {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<DungLuongPin> page = dungLuongPinService.getAll1(pageable);
-        model.addAttribute("contentPage", "dungluongpin/dung-luong-pin-delete.jsp");
+        model.addAttribute("contentPage", "../dungluongpin/dung-luong-pin-delete.jsp");
         model.addAttribute("listDungLuongPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @PostMapping("/add")
@@ -69,11 +67,11 @@ public class DungLuongPinController {
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<DungLuongPin> page = dungLuongPinService.getAll(pageable);
         if (bindingResult.hasErrors()) {
-            model.addAttribute("contentPage", "dungluongpin/dung-luong-pin.jsp");
+            model.addAttribute("contentPage", "../dungluongpin/dung-luong-pin.jsp");
             model.addAttribute("listDungLuongPin", page.getContent());
             model.addAttribute("page", page.getNumber());
             model.addAttribute("total", page.getTotalPages());
-            return "layout";
+            return "/home/layout";
         }
 
         long millis = System.currentTimeMillis();
@@ -94,7 +92,7 @@ public class DungLuongPinController {
     public String updateDungLuongPin(Model model, @PathVariable("id") UUID id, @ModelAttribute("dungLuongPin") @Valid DungLuongPin dungLuongPin, BindingResult bindingResult, @RequestParam("pageNum") Optional<Integer> pageNum,
                                      @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
         if (bindingResult.hasErrors()) {
-            return "dungluongpin/dung-luong-pin-update";
+            return "../dungluongpin/dung-luong-pin-update";
         }
 
         long millis = System.currentTimeMillis();
@@ -116,11 +114,11 @@ public class DungLuongPinController {
         dungLuongPinService.updateTT();
         System.out.println("cc: ");
         Page<DungLuongPin> page = dungLuongPinService.getAll1(pageable);
-        model.addAttribute("contentPage","dungluongpin/dung-luong-pin-delete.jsp");
+        model.addAttribute("contentPage","../dungluongpin/dung-luong-pin-delete.jsp");
         model.addAttribute("listDungLuongPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/update-status/{id}")
@@ -136,11 +134,11 @@ public class DungLuongPinController {
         dungLuongPin1.setTinhTrang(1);
         dungLuongPinService.update(id,dungLuongPin1);
         Page<DungLuongPin> page = dungLuongPinService.getAll(pageable);
-        model.addAttribute("contentPage","dungluongpin/dung-luong-pin.jsp");
+        model.addAttribute("contentPage","../dungluongpin/dung-luong-pin.jsp");
         model.addAttribute("listDungLuongPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
@@ -156,11 +154,11 @@ public class DungLuongPinController {
         dungLuongPin1.setTinhTrang(0);
         dungLuongPinService.update(id,dungLuongPin1);
         Page<DungLuongPin> page = dungLuongPinService.getAll1(pageable);
-        model.addAttribute("contentPage","dungluongpin/dung-luong-pin-delete.jsp");
+        model.addAttribute("contentPage","../dungluongpin/dung-luong-pin-delete.jsp");
         model.addAttribute("listDungLuongPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
 
@@ -172,26 +170,26 @@ public class DungLuongPinController {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<DungLuongPin> page = dungLuongPinService.getAll(pageable);
-        model.addAttribute("contentPage", "dungluongpin/dung-luong-pin-update.jsp");
+        model.addAttribute("contentPage", "../dungluongpin/dung-luong-pin-update.jsp");
         model.addAttribute("listDungLuongPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @PostMapping("/search-0")
     public String search0(Model model, @RequestParam("search") String sreach, @ModelAttribute("dungLuongPin") DungLuongPin dungLuongPin) {
         List<DungLuongPin> listDungLuongPin = dungLuongPinService.search0(sreach);
         model.addAttribute("listDungLuongPin", listDungLuongPin);
-        model.addAttribute("contentPage", "dungluongpin/dung-luong-pin.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../dungluongpin/dung-luong-pin.jsp");
+        return "/home/layout";
     }
 
     @PostMapping("/search-1")
     public String search1(Model model, @RequestParam("search") String sreach, @ModelAttribute("dungLuongPin") DungLuongPin dungLuongPin) {
         List<DungLuongPin> listDungLuongPin = dungLuongPinService.search1(sreach);
         model.addAttribute("listDungLuongPin", listDungLuongPin);
-        model.addAttribute("contentPage", "dungluongpin/dung-luong-pin-delete.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../dungluongpin/dung-luong-pin-delete.jsp");
+        return "/home/layout";
     }
 }

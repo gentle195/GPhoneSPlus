@@ -1,6 +1,10 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.*;
+import com.example.demo.models.Anh;
+import com.example.demo.models.Camera;
+import com.example.demo.models.HangSanPham;
+import com.example.demo.models.ManHinh;
+import com.example.demo.models.SanPham;
 import com.example.demo.services.AnhService;
 import com.example.demo.services.CameraService;
 import com.example.demo.services.HangSanPhamService;
@@ -15,7 +19,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -51,10 +59,10 @@ public class SanPhamController {
         model.addAttribute("listHangSP", hangSanPhamService.findAll0());
         model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("listAnh", anhService.findAll0());
-        model.addAttribute("contentPage", "san-pham/hien-thi.jsp");
+        model.addAttribute("contentPage", "../san-pham/hien-thi.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/san-pham/hien-thi-tung-xoa")
@@ -71,10 +79,10 @@ public class SanPhamController {
         model.addAttribute("listHangSP", hangSanPhamService.findAll0());
         model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("listAnh", anhService.findAll0());
-        model.addAttribute("contentPage", "san-pham/san-pham-tung-xoa.jsp");
+        model.addAttribute("contentPage", "../san-pham/san-pham-tung-xoa.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/san-pham/view-add")
@@ -88,11 +96,11 @@ public class SanPhamController {
         model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("listAnh", anhService.findAll0());
         model.addAttribute("dulieuxem", new SanPham());
-        model.addAttribute("contentPage", "san-pham/add.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../san-pham/add.jsp");
+        return "/home/layout";
     }
 
-    @GetMapping("san-pham/detail/{id}")
+    @GetMapping("/san-pham/detail/{id}")
     public String viewupdate(@PathVariable("id") UUID id, @ModelAttribute("dulieuxem") SanPham dulieuxem,
                              @ModelAttribute("ManHinh") ManHinh manHinh,
                              @ModelAttribute("hangSP") HangSanPham hangSanPham,
@@ -108,10 +116,10 @@ public class SanPhamController {
         model.addAttribute("listHangSP", hangSanPhamService.findAll0());
         model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("listAnh", anhService.findAll0());
-        model.addAttribute("contentPage", "san-pham/update.jsp");
+        model.addAttribute("contentPage", "../san-pham/update.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @PostMapping("/san-pham/add")
@@ -126,8 +134,8 @@ public class SanPhamController {
             model.addAttribute("listHangSP", hangSanPhamService.findAll0());
             model.addAttribute("listCamera", cameraService.findAll0());
             model.addAttribute("listAnh", anhService.findAll0());
-            model.addAttribute("contentPage", "san-pham/add.jsp");
-            return "layout";
+            model.addAttribute("contentPage", "../san-pham/add.jsp");
+            return "/home/layout";
         }
         dulieuxem.setNgayTao(Date.valueOf(LocalDate.now()));
         dulieuxem.setMa("SP" + String.valueOf(sanPhamService.findAll().size() + 1));
@@ -139,10 +147,14 @@ public class SanPhamController {
 
     @PostMapping("/san-pham/update/{id}")
     public String update(Model model, @ModelAttribute("dulieuxem") @Valid SanPham dulieuxem,
-                         BindingResult bindingResult, @PathVariable("id") UUID id) {
+                         BindingResult bindingResult, @PathVariable("id") UUID id,
+                         @ModelAttribute("ManHinh") ManHinh manHinh,
+                         @ModelAttribute("hangSP") HangSanPham hangSanPham,
+                         @ModelAttribute("anh") Anh anh,
+                         @ModelAttribute("camera") Camera camera) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("contentPage", "san-pham/update.jsp");
-            return "layout";
+            model.addAttribute("contentPage", "../san-pham/update.jsp");
+            return "/home/layout";
         }
         SanPham hsp = sanPhamService.findById(id);
         dulieuxem.setMa(hsp.getMa());
@@ -167,8 +179,8 @@ public class SanPhamController {
         Page<SanPham> list = sanPhamService.getAll0(pageable);
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        model.addAttribute("contentPage", "san-pham/hien-thi.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../san-pham/hien-thi.jsp");
+        return "/home/layout";
 
     }
 
@@ -182,10 +194,10 @@ public class SanPhamController {
         sanPhamService.add(sp1);
         Pageable pageable = PageRequest.of(num.orElse(0), size);
         Page<SanPham> list = sanPhamService.getall1(pageable);
-        model.addAttribute("contentPage", "san-pham/san-pham-tung-xoa.jsp");
+        model.addAttribute("contentPage", "../san-pham/san-pham-tung-xoa.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "layout";
+        return "/home/layout";
 
     }
 
@@ -197,13 +209,13 @@ public class SanPhamController {
                          Model model, @RequestParam("num") Optional<Integer> num,
                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         List<SanPham> list = sanPhamService.search(search);
-        model.addAttribute("contentPage", "san-pham/hien-thi.jsp");
+        model.addAttribute("contentPage", "../san-pham/hien-thi.jsp");
         model.addAttribute("listManHinh", manHinhService.findAll0());
         model.addAttribute("listHangSP", hangSanPhamService.findAll0());
         model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("hsp", list);
 //        model.addAttribute("total", list);
-        return "layout";
+        return "/home/layout";
     }
 
     @PostMapping("/san-pham/search2")
@@ -215,13 +227,13 @@ public class SanPhamController {
                           Model model, @RequestParam("num") Optional<Integer> num,
                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         List<SanPham> list = sanPhamService.search2(search);
-        model.addAttribute("contentPage", "san-pham/san-pham-tung-xoa.jsp");
+        model.addAttribute("contentPage", "../san-pham/san-pham-tung-xoa.jsp");
         model.addAttribute("listManHinh", manHinhService.findAll0());
         model.addAttribute("listHangSP", hangSanPhamService.findAll0());
         model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("hsp", list);
 //        model.addAttribute("total", list);
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/san-pham/khoi-phuc-het")
@@ -235,11 +247,11 @@ public class SanPhamController {
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<SanPham> list = sanPhamService.getall1(pageable);
 
-        model.addAttribute("contentPage", "san-pham/san-pham-tung-xoa.jsp");
+        model.addAttribute("contentPage", "../san-pham/san-pham-tung-xoa.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
 
-        return "layout";
+        return "/home/layout";
     }
 
     @PostMapping("/san-pham/loc")
@@ -253,8 +265,8 @@ public class SanPhamController {
         model.addAttribute("listHang", hangSanPhamService.findAll());
         model.addAttribute("listManHinh", manHinhService.findAll());
         model.addAttribute("listCamera", cameraService.findAll());
-        model.addAttribute("contentPage", "san-pham/tim-kiem-loc.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../san-pham/tim-kiem-loc.jsp");
+        return "/home/layout";
     }
 
     @GetMapping("/san-pham/hien-thi-loc")
@@ -268,9 +280,9 @@ public class SanPhamController {
         model.addAttribute("listHang", hangSanPhamService.findAll());
         model.addAttribute("listManHinh", manHinhService.findAll());
         model.addAttribute("listCamera", cameraService.findAll());
-        model.addAttribute("contentPage", "san-pham/tim-kiem-loc.jsp");
+        model.addAttribute("contentPage", "../san-pham/tim-kiem-loc.jsp");
         model.addAttribute("page", chiTietSanPhamPage.getNumber());
         model.addAttribute("hsp", chiTietSanPhamPage.getContent());
-        return "layout";
+        return "/home/layout";
     }
 }

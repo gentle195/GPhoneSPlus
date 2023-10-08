@@ -39,11 +39,11 @@ public class ChipController {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<Chip> page = chipService.getAll(pageable);
-        model.addAttribute("contentPage","chip/chip.jsp");
+        model.addAttribute("contentPage","../chip/chip.jsp");
         model.addAttribute("listChip", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
     @GetMapping("/hien-thi-delete")
     public String hienThiDelete(Model model, @ModelAttribute("chip") Chip chip,
@@ -53,11 +53,11 @@ public class ChipController {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<Chip> page = chipService.getAll1(pageable);
-        model.addAttribute("contentPage","chip/chip-delete.jsp");
+        model.addAttribute("contentPage","../chip/chip-delete.jsp");
         model.addAttribute("listChip", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
 
@@ -69,11 +69,11 @@ public class ChipController {
         Page<Chip> page = chipService.getAll(pageable);
 
         if(bindingResult.hasErrors()){
-            model.addAttribute("contentPage","chip/chip.jsp");
+            model.addAttribute("contentPage","../chip/chip.jsp");
             model.addAttribute("listChip", page.getContent());
             model.addAttribute("page", page.getNumber());
             model.addAttribute("total", page.getTotalPages());
-            return "layout";
+            return "/home/layout";
         }
 
         long millis = System.currentTimeMillis();
@@ -83,7 +83,7 @@ public class ChipController {
         chip.setNgayTao(date);
         chip.setTinhTrang(0);
         chipService.add(chip);
-        model.addAttribute("contentPage","chip/chip.jsp");
+        model.addAttribute("contentPage","../chip/chip.jsp");
         model.addAttribute("listChip", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
@@ -95,7 +95,7 @@ public class ChipController {
                             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
 
         if(bindingResult.hasErrors()){
-            return "chip/chip-update";
+            return "../chip/chip-update";
         }
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
@@ -116,11 +116,11 @@ public class ChipController {
 
         chipService.updateTT();
         Page<Chip> page = chipService.getAll1(pageable);
-        model.addAttribute("contentPage","chip/chip-delete.jsp");
+        model.addAttribute("contentPage","../chip/chip-delete.jsp");
         model.addAttribute("listChip", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/update-status/{id}")
@@ -136,11 +136,11 @@ public class ChipController {
         chip1.setTinhTrang(1);
         chipService.update(id,chip1);
         Page<Chip> page = chipService.getAll(pageable);
-        model.addAttribute("contentPage","chip/chip.jsp");
+        model.addAttribute("contentPage","../chip/chip.jsp");
         model.addAttribute("listChip", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
@@ -156,11 +156,11 @@ public class ChipController {
         chip1.setTinhTrang(0);
         chipService.update(id,chip1);
         Page<Chip> page = chipService.getAll1(pageable);
-        model.addAttribute("contentPage","chip/chip-delete.jsp");
+        model.addAttribute("contentPage","../chip/chip-delete.jsp");
         model.addAttribute("listChip", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/detail/{id}")
@@ -171,26 +171,26 @@ public class ChipController {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<Chip> page = chipService.getAll(pageable);
-        model.addAttribute("contentPage","chip/chip-update.jsp");
+        model.addAttribute("contentPage","../chip/chip-update.jsp");
         model.addAttribute("listChip", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @PostMapping("/search-0")
     public String search0(Model model, @ModelAttribute("chip") Chip chip, @RequestParam("search") String search) {
         List<Chip> list = chipService.search0(search);
         model.addAttribute("listChip",list);
-        model.addAttribute("contentPage","chip/chip.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../chip/chip.jsp");
+        return "/home/layout";
     }
 
     @PostMapping("/search-1")
     public String search1(Model model, @ModelAttribute("chip") Chip chip, @RequestParam("search") String search) {
         List<Chip> list = chipService.search1(search);
         model.addAttribute("listChip",list);
-        model.addAttribute("contentPage","chip/chip-delete.jsp");
-        return "layout";
+        model.addAttribute("contentPage","../chip/chip-delete.jsp");
+        return "/home/layout";
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,12 @@ public interface IMEIRepository extends JpaRepository<IMEI, UUID> {
 
     @Query("select i from IMEI i where i.tinhTrang=0 and (i.soImei like %:imei% or i.ma like %:imei% or i.chiTietSanPham.sanPham.ten like %:imei%)")
     List<IMEI> searchIMEIOn(String imei);
+
+    @Query(value = "SELECT id FROM IMEI WHERE so_imei =:imei", nativeQuery = true)
+    String searchSoImei2(@Param("imei") String imei);
+
+    @Query(value = "SELECT * FROM IMEI WHERE so_imei =:imei", nativeQuery = true)
+    IMEI searchSoImei(@Param("imei") String imei);
 
     @Transactional
     @Modifying

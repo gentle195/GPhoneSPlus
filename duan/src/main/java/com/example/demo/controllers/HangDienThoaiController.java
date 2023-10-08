@@ -1,6 +1,5 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Camera;
 import com.example.demo.models.HangSanPham;
 import com.example.demo.models.Rom;
 import com.example.demo.services.HangSanPhamService;
@@ -13,7 +12,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -33,10 +36,10 @@ public class HangDienThoaiController {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<HangSanPham> list = hangSanPhamService.getAll0(pageable);
-        model.addAttribute("contentPage","hang-dien-thoai/hien-thi.jsp");
+        model.addAttribute("contentPage","../hang-dien-thoai/hien-thi.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/hang-dien-thoai/hien-thi-tung-xoa")
@@ -45,10 +48,10 @@ public class HangDienThoaiController {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<HangSanPham> list = hangSanPhamService.getall1(pageable);
-        model.addAttribute("contentPage","hang-dien-thoai/hang-tung-xoa.jsp");
+        model.addAttribute("contentPage","../hang-dien-thoai/hang-tung-xoa.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/hang-dien-thoai/detail/{id}")
@@ -59,25 +62,25 @@ public class HangDienThoaiController {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<HangSanPham> list = hangSanPhamService.getAll(pageable);
-        model.addAttribute("contentPage","hang-dien-thoai/update.jsp");
+        model.addAttribute("contentPage","../hang-dien-thoai/update.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
 
-        return "layout";
+        return "/home/layout";
     }
 
     @PostMapping("/hang-dien-thoai/add")
     public String add(Model model, @ModelAttribute("dulieuxem") @Valid HangSanPham dulieuxem, BindingResult bindingResult, @RequestParam("num") Optional<Integer> num,
                       @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("content", "hang-dien-thoai/hien-thi.jsp");
+            model.addAttribute("content", "../hang-dien-thoai/hien-thi.jsp");
             Sort sort = Sort.by("ngayTao").ascending();
             Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
             Page<HangSanPham> list = hangSanPhamService.getAll(pageable);
-            model.addAttribute("contentPage","hang-dien-thoai/hien-thi.jsp");
+            model.addAttribute("contentPage","../hang-dien-thoai/hien-thi.jsp");
             model.addAttribute("hsp", list.getContent());
             model.addAttribute("total", list.getTotalPages());
-            return "layout";
+            return "/home/layout";
         }
 
         dulieuxem.setNgayTao(Date.valueOf(LocalDate.now()));
@@ -92,9 +95,9 @@ public class HangDienThoaiController {
     @PostMapping("/hang-dien-thoai/update/{id}")
     public String update(Model model, @ModelAttribute("dulieuxem") @Valid HangSanPham dulieuxem, BindingResult bindingResult, @PathVariable("id") UUID id) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("content", "hang-dien-thoai/update.jsp");
+            model.addAttribute("content", "../hang-dien-thoai/update.jsp");
 
-            return "hang-dien-thoai/update";
+            return "../hang-dien-thoai/update";
         }
         HangSanPham hsp = hangSanPhamService.findById(id);
         Date ngayTao = hsp.getNgayTao();
@@ -109,7 +112,7 @@ public class HangDienThoaiController {
         return "redirect:/hang-dien-thoai/hien-thi";
     }
 
-    @GetMapping("hang-dien-thoai/delete/{id}")
+    @GetMapping("../hang-dien-thoai/delete/{id}")
     public String delete(Model model, @ModelAttribute("dulieuxem") Rom dulieuxem, @PathVariable("id") UUID id, @RequestParam("num") Optional<Integer> num,
                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         HangSanPham rom=hangSanPhamService.findById(id);
@@ -117,7 +120,7 @@ public class HangDienThoaiController {
         hangSanPhamService.add(rom);
 //        Pageable pageable = PageRequest.of(num.orElse(0), size);
 //        Page<HangSanPham> list = hangSanPhamService.getAll0(pageable);
-//        model.addAttribute("contentPage","hang-dien-thoai/hien-thi.jsp");
+//        model.addAttribute("contentPage","../hang-dien-thoai/hien-thi.jsp");
 //        model.addAttribute("hsp", list.getContent());
 //        model.addAttribute("total", list.getTotalPages());
         return "redirect:/hang-dien-thoai/hien-thi";
@@ -128,10 +131,10 @@ public class HangDienThoaiController {
                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         List<HangSanPham> list = hangSanPhamService.search(search);
 
-        model.addAttribute("contentPage","hang-dien-thoai/hien-thi.jsp");
+        model.addAttribute("contentPage","../hang-dien-thoai/hien-thi.jsp");
         model.addAttribute("hsp", list);
 //        model.addAttribute("total", list);
-        return "layout";
+        return "/home/layout";
     }
 
     @PostMapping("/hang-dien-thoai/search2")
@@ -140,10 +143,10 @@ public class HangDienThoaiController {
         List<HangSanPham> list = hangSanPhamService.search2(search);
 
 
-        model.addAttribute("contentPage","hang-dien-thoai/hien-thi.jsp");
+        model.addAttribute("contentPage","../hang-dien-thoai/hien-thi.jsp");
         model.addAttribute("hsp", list);
 //        model.addAttribute("total", list);
-        return "layout";
+        return "/home/layout";
     }
     @GetMapping("/hang-dien-thoai/form-add")
     public String formadd( @ModelAttribute("dulieuxem") HangSanPham dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
@@ -151,10 +154,10 @@ public class HangDienThoaiController {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<HangSanPham> list = hangSanPhamService.getAll(pageable);
-        model.addAttribute("contentPage","hang-dien-thoai/add.jsp");
+        model.addAttribute("contentPage","../hang-dien-thoai/add.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
     @GetMapping("/hang-dien-thoai/khoi-phuc/{id}")
     public String khoiphuc(
@@ -172,10 +175,10 @@ public class HangDienThoaiController {
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<HangSanPham> list = hangSanPhamService.getall1(pageable);
 
-        model.addAttribute("contentPage","hang-dien-thoai/hang-tung-xoa.jsp");
+        model.addAttribute("contentPage","../hang-dien-thoai/hang-tung-xoa.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/hang-dien-thoai/khoi-phuc-het")
@@ -189,10 +192,10 @@ public class HangDienThoaiController {
         dulieuxem.setNgayCapNhat(date);
         hangSanPhamService.updateTT();
         Page<HangSanPham> page = hangSanPhamService.getall1(pageable);
-        model.addAttribute("contentPage","hang-dien-thoai/hang-tung-xoa.jsp");
+        model.addAttribute("contentPage","../hang-dien-thoai/hang-tung-xoa.jsp");
         model.addAttribute("hsp", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 }
