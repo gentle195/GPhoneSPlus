@@ -101,7 +101,7 @@
                                     <th scope="row">${i.index+1}</th>
                                     <td>${nhanVien.ma}</td>
                                     <td align="center">
-                                        <img src="/uploads/${nhanVien.urlAnh}" width="40" height="40"></td>
+                                        <img src="/../../uploads/${nhanVien.urlAnh}" width="40" height="40"></td>
                                     <td>${nhanVien.hoTen}</td>
                                     <td>
                                         <c:if test="${nhanVien.gioiTinh == true}">Nam</c:if>

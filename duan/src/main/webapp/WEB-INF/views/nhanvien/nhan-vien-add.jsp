@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -68,7 +69,7 @@
                                 <input type="file" class="form-control input-hidden" name="images"
 
                                        accept="image/jpeg, image/png, image/jpg"
-                                       id="imageInput" >
+                                       id="imageInput">
                             </div>
                         </div>
                         <div class="image-container" onclick="selectImage()">
@@ -206,73 +207,35 @@
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Chức vụ:</label>
-                                    <div class="col-sm-9" style="margin-top: 0.4cm; font-size: 20px">
+                                    <div class="col-sm-6" style="margin-top: 0.4cm; font-size: 20px">
                                         <form:select path="chucVu">
                                             <form:options items="${listChucVu}" itemValue="id" itemLabel="ten"/>
                                         </form:select>
                                     </div>
+
+                                    <div class="col-sm-3" style="margin-top: 15px">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#exampleModal">
+                                            <img src="../uploads/plus.png"></src>
+
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <%--Màu sắc--%>
-                        <%--                            <div class="row">--%>
-                        <%--                                <button type="button" class="btn btn-primary" data-toggle="modal"--%>
-                        <%--                                        data-target="#exampleModal">--%>
-                        <%--                                    Thêm nhanh chức vụ--%>
-                        <%--                                </button>--%>
-
-                        <!-- Modal -->
-                        <%--                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
-                        <%--                                    <div class="modal-dialog" role="document">--%>
-                        <%--                                        <div class="modal-content">--%>
-                        <%--                                            <div class="modal-header">--%>
-                        <%--                                                <h5 class="modal-title" id="exampleModalLabel">ChucVu</h5>--%>
-                        <%--                                                <button type="button" class="close" data-dismiss="modal"--%>
-                        <%--                                                        aria-label="Close">--%>
-                        <%--                                                    <span aria-hidden="true">&times;</span>--%>
-                        <%--                                                </button>--%>
-                        <%--                                            </div>--%>
-                        <%--                                            <form action="/nhan-vien/modal-add-nhan-vien"--%>
-                        <%--                                                       method="post" modelAttribute="nhanVien">--%>
-                        <%--                                                <div class="row">--%>
-                        <%--                                                    <div class="col">--%>
-                        <%--                                                        <label name="ten"><b>Tên:</b></label>--%>
-                        <%--                                                        <input name="ten" class="form-control"/>--%>
-                        <%--                                                    </div>--%>
-                        <%--                                                    <div style="margin-top: 20px;margin-bottom: 20px">--%>
-                        <%--                                                        <button type="submit" class="btn btn-primary"--%>
-                        <%--                                                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">--%>
-                        <%--                                                            ADD--%>
-                        <%--                                                        </button>--%>
-                        <%--                                                    </div>--%>
-                        <%--                                                </div>--%>
-                        <%--                                            </form>--%>
-                        <%--                                        </div>--%>
-                        <%--                                    </div>--%>
-                        <%--                                </div>--%>
                         <br>
-                        <div class="row">
-                            <button style="text-align: center"
-                                    type="submit" class="btn btn-primary mr-2" id="bt" onclick="thongBao()">
+                        <div class="center">
+                            <button style="text-align: center; margin-left: 500px"
+                                    type="submit" class="btn btn-primary" id="bt" onclick="thongBao()">
                                 ADD
                             </button>
                         </div>
                     </form:form>
-                    <%--                        </form>--%>
                 </div>
             </div>
         </div>
-
-
     </div>
-</div>
 
-
-<div class="row">
-    <button type="button" class="btn btn-primary" data-toggle="modal"
-            data-target="#exampleModal">
-        <src img="/upload/plus.png"></src>
-    </button>
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -280,32 +243,34 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">ChucVu</h5>
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-label="Close">
+                    <h5 class="modal-title" id="exampleModalLabel">Chức vụ</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form:form action="/nhan-vien/modal-add-chuc-vu" method="post" modelAttribute="chucVu">
-                    <div class="row" style="width: 400px; height: 200px">
-                        <div class="col" style="width: 400px">
-                            <div class="form-group">
-                                <form:label path="ten"><b>Tên:</b></form:label>
-                                <form:input path="ten" class="form-control"></form:input>
-                                <form:errors path="ten" cssStyle="color: red"></form:errors>
-                            </div>
-                            <div class="form-group">
-                                <form:label path="moTa"><b>Mô Tả:</b></form:label>
-                                <form:textarea path="moTa" class="form-control"></form:textarea>
-                                <form:errors path="moTa" cssStyle="color: red"></form:errors>
-                            </div>
+                <form:form action="/nhan-vien/modal-add-chuc-vu" method="post" modelAttribute="chucVu"
+                           onsubmit="return checkCV()">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <form:label path="ten"><b>Tên:</b></form:label>
+                            <form:input path="ten" class="form-control" id="tenCV"></form:input>
+                            <form:errors path="ten" id="tenCV1" cssStyle="color: red"></form:errors>
+                            <div id="error-message" class="alert alert-danger" style="display: none;"></div>
+                            <label style="color: red; font-size: 15px">Chú ý: nhập tên chức vụ(>6 kí tự), sau đó
+                                thêm</label>
                         </div>
-                        <div style="margin-top: 30px">
-                            <button type="submit" class="btn btn-primary"
-                                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                ADD
-                            </button>
+                        <!-- Thêm một thẻ div để hiển thị thông báo lỗi -->
+                        <div class="form-group">
+                            <form:label path="moTa"><b>Mô Tả:</b></form:label>
+                            <form:textarea path="moTa" class="form-control"></form:textarea>
+                                <%--                        <form:errors path="moTa" cssStyle="color: red"></form:errors>--%>
                         </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning" id="btCV" onclick="return checkCV()">Thêm chức vụ
+                        </button>
                     </div>
                 </form:form>
             </div>
@@ -327,6 +292,32 @@
     const imageInput = document.getElementById('imageInput');
     const selectedImage = document.getElementById('selectedImage');
 
+    // Kiểm tra nếu có thuộc tính chucVuError thì hiển thị modal
+    <c:if test="${not empty chucVuError}">
+    $(document).ready(function () {
+        $('#chucVuModal').modal('show');
+    });
+    </c:if>
+    function checkCV() {
+        var tenCV = document.getElementById("tenCV").value;
+        var tenCVError = document.getElementById("tenCV1");
+        var errorMessage = document.getElementById("error-message");
+        var btnCV = document.getElementById("btCV");
+
+        if (tenCV.trim().length < 6 || tenCV.trim() === '') {
+            tenCVError.innerHTML = "Tên chức vụ không được để trống và phải có ít nhất 6 ký tự";
+            tenCVError.style.display = "block"; // Hiển thị thông báo lỗi
+            errorMessage.style.display = "none"; // Ẩn thông báo lỗi khác (nếu có)
+            btnCV.disabled = true; // Vô hiệu hóa nút Thêm chức vụ
+            return false;
+        } else {
+            tenCVError.innerHTML = ""; // Xóa thông báo lỗi tên chức vụ
+            tenCVError.style.display = "none"; // Ẩn thông báo lỗi tên chức vụ
+            errorMessage.style.display = "none"; // Ẩn thông báo lỗi khác (nếu có)
+            btnCV.disabled = false; // Kích hoạt lại nút Thêm chức vụ
+            return true;
+        }
+    }
     function selectImage() {
         imageInput.click(); // Khi khung tròn được nhấp vào, kích hoạt sự kiện click của input file
     }

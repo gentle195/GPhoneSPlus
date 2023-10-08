@@ -61,15 +61,21 @@
                         <form class="form-sample">
 
                             <div class="row">
-                                <div class="col">
+                                <div style="display: none">
+                                    <input style="" type="text" name="checkanh" value="cu" id="cucheck">
+                                    <br>
+                                <div class="col" style="display: none">
                                     <input type="file" class="form-control input-hidden" name="images"
                                            accept="image/jpeg, image/png, image/jpg"
                                            id="imageInput">
                                 </div>
                             </div>
+<%--                                <label for="imageInput">--%>
                             <div class="image-container" onclick="selectImage()">
-                                <img id="selectedImage" src="../../../uploads/${nhanVien.urlAnh}" alt="Chọn ảnh">
+                                <img id="selectedImage" name="selectedImage" src="/../../uploads/${nhanVien.urlAnh}" alt="Chọn ảnh">
                             </div>
+
+<%--                                </label>--%>
                             <br>
                             <div class="row" style="display: none">
                                 <div class="col-md-6">
@@ -262,6 +268,7 @@
         } else {
             selectedImage.src = ''; // Xóa ảnh nếu không có tệp nào được chọn
         }
+
     });
 
 
