@@ -41,11 +41,6 @@ public class ChiTietSanPham {
     @Column(name = "url_anh")
     private String urlAnh;
 
-    @DecimalMin(value = "0.01", message = "Giá nhập phải là số và lớn hơn 0")
-    @NotNull(message = "Không để trống thông tin")
-    @Column(name = "gia_nhap")
-    private BigDecimal giaNhap;
-
     @DecimalMin(value = "0.01", message = "Giá bán phải là số và lớn hơn 0")
     @NotNull(message = "Không để trống thông tin")
     @Column(name = "gia_ban")

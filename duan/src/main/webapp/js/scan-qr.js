@@ -1,4 +1,3 @@
-
 let scanner = new Instascan.Scanner({video: document.getElementById('video')});
 Instascan.Camera.getCameras().then(function (cameras) {
     if (cameras.length > 0) {
@@ -10,7 +9,7 @@ Instascan.Camera.getCameras().then(function (cameras) {
     console.error(e);
 });
 
-scanner.addListener("scan", function (soImei) {
+scanner.addListener("scan", function (qrcode) {
     // Chuyển người dùng đến trang controller khi quét thành công
     window.location.href =  `/ban-hang/them-gio-hang/${soImei}`;
 });

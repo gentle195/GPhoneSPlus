@@ -24,15 +24,94 @@
         <li class="nav-item">
             <a class="nav-link" href="/chi-tiet-san-pham/view-add" role="tab">Thêm mới chi tiết sản phẩm</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-loc" role="tab">Lọc sản phẩm</a>
-        </li>
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="description" role="tabpanel"
          aria-labelledby="description-tab">
+        <form action="/chi-tiet-san-pham/loc" method="post" onsubmit="return checkLoc()">
 
+            <%--    <div class="col-md-6 grid-margin stretch-card" >--%>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Lọc chi tiết sản phẩm</h4>
+                    <form class="forms-sample">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+
+                                    <select name="hang" class="form-control" style="font-weight: bold; width: 100%" id="selectHang">
+                                        <option selected disabled>Hãng</option>
+                                        <c:forEach items="${listHang}" var="hang" varStatus="i">
+                                            <option value="${hang.id}">${hang.ten}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="ram" class="form-control" style="font-weight: bold; width: 100%" id="selectRam">
+                                        <option selected disabled>Ram</option>
+                                        <c:forEach items="${listRam}" var="ram" varStatus="i">
+                                            <option value="${ram.id}">${ram.dungLuong}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="rom" class="form-control" style="font-weight: bold; width: 100%" id="selectRom">
+                                        <option selected disabled>Rom</option>
+                                        <c:forEach items="${listRom}" var="rom" varStatus="i">
+                                            <option value="${rom.id}">${rom.dungLuong}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="dungLuongPin" class="form-control"
+                                            style="font-weight: bold; width: 100%" id="selectPin">
+                                        <option selected disabled>Dung Lượng Pin</option>
+                                        <c:forEach items="${dungLuongPin}" var="pin" varStatus="i">
+                                            <option value="${pin.id}">${pin.thongSo}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select name="chip" class="form-control" style="font-weight: bold; width: 100%" id="selectChip">
+                                        <option selected disabled>Chip</option>
+                                        <c:forEach items="${listChip}" var="chip" varStatus="i">
+                                            <option value="${chip.id}">${chip.ten}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="manHinh" class="form-control" style="font-weight: bold; width: 100%" id="selectManHinh">
+                                        <option selected disabled>Màn Hình</option>
+                                        <c:forEach items="${listManHinh}" var="man" varStatus="i">
+                                            <option value="${man.id}">${man.thongSo}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="camera" class="form-control" style="font-weight: bold; width: 100%" id="selectCamera">
+                                        <option selected disabled>Camera</option>
+                                        <c:forEach items="${listCamera}" var="cam" varStatus="i">
+                                            <option value="${cam.id}">${cam.thongSo}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="text-align: center">
+                            <button type="submit" class="btn btn-primary mr-2"
+                                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                Lọc
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <%--    </div>--%>
+        </form>
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
@@ -50,32 +129,29 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive" >
-                        <table class="table table-striped" style="color: black">
+                        <table class="table table-striped" style="color: black; width: 2000px" >
                             <thead>
                             <tr>
-                                <th scope="col">Tên sản phẩm</th>
-                                <th scope="col">Màu sắc</th>
-                                <th scope="col">Chip</th>
-                                <th scope="col">Ram</th>
-                                <th scope="col">Rom</th>
-                                <th scope="col">Pin</th>
-                                <th scope="col">Url Anh</th>
-                                <th scope="col">Giá nhập</th>
-                                <th scope="col">Giá bán</th>
-                                <th scope="col">Ngày tạo</th>
-                                <th scope="col">Ngày cập nhật</th>
-                                <th scope="col">Tình trạng</th>
-                                <th scope="col">Năm bảo hành</th>
-                                <th scope="col">Số lượng tồn</th>
-                                <th scope="col">Mô tả</th>
-                                <th scope="col">Action</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Màu sắc</th>
+                                <th>Chip</th>
+                                <th>Ram</th>
+                                <th>Rom</th>
+                                <th>Pin</th>
+                                <th>Url Anh</th>
+                                <th>Giá bán</th>
+                                <th>Ngày tạo</th>
+                                <th>Ngày cập nhật</th>
+                                <th>Tình trạng</th>
+                                <th>Năm bảo hành</th>
+                                <th>Số lượng tồn</th>
+                                <th>Mô tả</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <i class="mdi mdi-border-color"></i>
                             <c:forEach items="${listCTSP}" var="ctsp" varStatus="index">
-
-
                                     <tr>
                                         <td>${ctsp.sanPham.ten}</td>
                                         <td>${ctsp.mauSac.ten}</td>
@@ -87,8 +163,6 @@
                                                 <%--                        <img src=".../.../${ctsp.urlAnh}" width="auto" height="auto" type="file">--%>
                                             <img src="/uploads/${ctsp.urlAnh}" width="40" height="40">
                                         </td>
-
-                                        <td>${ctsp.giaNhap} VND</td>
                                         <td>${ctsp.giaBan} VND</td>
                                         <td>${ctsp.ngayTao}</td>
                                         <td>${ctsp.ngayCapNhat}</td>
@@ -111,9 +185,7 @@
                                                 Status</a>
                                         </td>
                                     </tr>
-
                             </c:forEach>
-
                             </tbody>
                         </table>
                     </div>

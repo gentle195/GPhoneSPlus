@@ -925,7 +925,7 @@
         if (search === "") {
             let html = `
                 <tr>
-                    <td colspan="4" style="text-align: center; color: red"><strong>Vui lòng nhập IMEI trước khi tìm kiếm.</strong></td>
+<td colspan="4" style="text-align: center; color: red"><strong>Vui lòng nhập IMEI trước khi tìm kiếm.</strong></td>
                 </tr>`;
             parentModal.find(".imei_search").html(html);
             return;

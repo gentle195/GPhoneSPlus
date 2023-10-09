@@ -157,6 +157,7 @@ public class BanHangTaiQuayController {
         model.addAttribute("listDiaChi", diaChiService.findAll0());
         model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
         model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
+
         return "/home/layout";
     }
 

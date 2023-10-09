@@ -24,8 +24,6 @@
         <li class="nav-item">
             <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-da-xoa" role="tab">Sản phẩm đã xóa</a>
         </li>
-
-
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">
@@ -36,43 +34,33 @@
             <%--    <div class="col-md-6 grid-margin stretch-card" >--%>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Thông tin chi tiết sản phẩm</h4>
-                    <form class="forms-sample">
+                    <h4 class="card-title">Update chi tiết sản phẩm</h4>
+                    <form class="forms-sample" justify-content-center>
                         <div class="row">
                             <div class="col-md-12 mx-auto">
                                 <div class="form-group">
-
-                                    <div style="display: none">
-                                        <input style="" type="text"  name="checkanh" value="cu" id="cucheck" >
+                                    <div align="center">
                                         <br>
-                                    </div>
-
-
-                                    <div align="center" >
-                                        <br>
-                                        <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;" for="anhmoi" >
+                                        <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;"
+                                               for="anhmoi">
                                             <img id="preview-image-2" class="preview-image" src="../../../uploads/${ctsp.urlAnh}" alt=""
                                                  width="100%" height="100%"
                                                  style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
-
                                             <br><br>
-                                            ẢNH
+                                            <p style="color: black">Ảnh</p>
                                         </label>
                                         <br>
-
-
                                         <div style="display: none">
-                                            <input type="file"  name="images"  accept="image/jpeg, image/png" id="anhmoi"  >
+                                            <input type="file" name="images" accept="image/jpeg, image/png" id="anhmoi"
+                                                   required>
                                         </div>
-
+                                    </div>
+                                </div>
                             </div>
-
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-
-                                <div class="form-group">
-
+                        <div class="row" style="color: black">
+                            <div class="col-md-6" >
+                                <div class="form-group" >
                                     <div class="row">
                                         <div class="col-11">
                                             <form:select path="sanPham" class="form-control" id="selectSanPham"
@@ -85,23 +73,6 @@
                                         <div class="col-1">
                                             <a type="button" data-bs-toggle="modal"
                                                data-bs-target="#exampleModalSanPham">
-                                                <img src="/uploads/plus.png">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-11">
-                                            <form:select path="mauSac" class="form-control" id="selectMauSac"
-                                                         cssStyle="font-weight: bold; width: 100%">
-                                                <option selected disabled>Màu sắc</option>
-                                                <form:options items="${listMauSac}" itemLabel="ten" itemValue="id"/>
-                                            </form:select>
-                                        </div>
-                                        <div class="col-1">
-                                            <a type="button" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModalMauSac">
                                                 <img src="/uploads/plus.png">
                                             </a>
                                         </div>
@@ -126,22 +97,6 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-11">
-                                            <form:select path="ram" class="form-control" id="selectRam"
-                                                         cssStyle="font-weight: bold; width: 100%">
-                                                <option selected disabled>Dung lượng bộ nhớ</option>
-                                                <form:options items="${listRam}" itemLabel="dungLuong" itemValue="id"/>
-                                            </form:select>
-                                        </div>
-                                        <div class="col-1">
-                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalRam">
-                                                <img src="/uploads/plus.png">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-11">
                                             <form:select path="rom" class="form-control" id="selectRom"
                                                          cssStyle="font-weight: bold; width: 100%">
                                                 <option selected disabled>Dung lượng lưu trữ</option>
@@ -150,6 +105,41 @@
                                         </div>
                                         <div class="col-1">
                                             <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalRom">
+                                                <img src="/uploads/plus.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-11">
+                                            <form:select path="mauSac" class="form-control" id="selectMauSac"
+                                                         cssStyle="font-weight: bold; width: 100%">
+                                                <option selected disabled>Màu sắc</option>
+                                                <form:options items="${listMauSac}" itemLabel="ten" itemValue="id"/>
+                                            </form:select>
+                                        </div>
+                                        <div class="col-1">
+                                            <a type="button" data-bs-toggle="modal"
+                                               data-bs-target="#exampleModalMauSac">
+                                                <img src="/uploads/plus.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-11">
+                                            <form:select path="ram" class="form-control" id="selectRam"
+                                                         cssStyle="font-weight: bold; width: 100%">
+                                                <option selected disabled>Dung lượng bộ nhớ</option>
+                                                <form:options items="${listRam}" itemLabel="dungLuong" itemValue="id"/>
+                                            </form:select>
+                                        </div>
+                                        <div class="col-1">
+                                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalRam">
                                                 <img src="/uploads/plus.png">
                                             </a>
                                         </div>
@@ -173,60 +163,53 @@
                                     </div>
                                 </div>
                             </div>
-
-                                <%--                            <div class="form-group">--%>
-                                <%--                                <form:label class="form-label" path="tinhTrang">Tình Trạng:</form:label>--%>
-                                <%--                                <form:radiobutton path="tinhTrang" value="0"/>Ngừng kinh doanh--%>
-                                <%--                                <form:radiobutton path="tinhTrang" value="1" checked="true"/> Còn kinh doanh--%>
-                                <%--                            </div>--%>
-
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <form:label class="form-label" path="giaNhap">Giá nhập:</form:label>
-                                    <form:input class="form-control" placeholder="" path="giaNhap"/>
-                                    <form:errors path="giaNhap" cssStyle="color: red"/>
+                                    <div class="row">
+                                        <div class="col-11">
+                                            <form:label class="form-label" path="giaBan">Giá bán:</form:label>
+                                            <form:input class="form-control" placeholder="" path="giaBan" type="number"/>
+                                            <form:errors path="giaBan" cssStyle="color: red"/>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <form:label class="form-label" path="giaBan">Giá bán:</form:label>
-                                    <form:input class="form-control" placeholder="" path="giaBan"/>
-                                    <form:errors path="giaBan" cssStyle="color: red"/>
-                                </div>
-
-                                <div class="form-group">
-                                    <form:label class="form-label" path="namBaoHanh">Năm bảo hành:</form:label>
-                                    <form:input class="form-control" placeholder="" path="namBaoHanh"/>
-                                    <form:errors path="namBaoHanh" cssStyle="color: red"/>
-                                </div>
-                                <div class="form-group">
-                                    <form:label class="form-label" path="soLuong">Số lượng tồn:</form:label>
-                                    <form:input class="form-control" placeholder="" path="soLuong"/>
-                                    <form:errors path="soLuong" cssStyle="color: red"/>
-                                </div>
-                                <div class="form-group" hidden>
-                                    <form:input class="form-control" placeholder="" path="urlAnh"/>
-                                    <form:label class="form-label" path="urlAnh">Ảnh:</form:label>
-                                    <form:errors path="urlAnh" cssStyle="color: red"/>                                </div>
-
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <form:label class="form-label" path="moTa">Mô tả:</form:label>
-                                    <form:textarea class="form-control" placeholder="" path="moTa"/>
-                                    <form:errors path="moTa" cssStyle="color: red"/>
+                                    <div class="row">
+                                        <div class="col-11">
+                                            <form:label class="form-label" path="namBaoHanh">Năm bảo hành:</form:label>
+                                            <form:input class="form-control" placeholder="" path="namBaoHanh" type="number"/>
+                                            <form:errors path="namBaoHanh" cssStyle="color: red"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-11">
+                                            <form:label class="form-label" path="soLuong">Số lượng tồn:</form:label>
+                                            <form:input class="form-control" placeholder="" path="soLuong" type="number"/>
+                                            <form:errors path="soLuong" cssStyle="color: red"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-11">
+                                            <form:label class="form-label" path="moTa">Mô tả:</form:label>
+                                            <form:textarea class="form-control" placeholder="" path="moTa"/>
+                                            <form:errors path="moTa" cssStyle="color: red"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
                         <div style="text-align: center">
                             <button type="submit" class="btn btn-primary mr-2"
-                                    onclick="if(!(confirm('Bạn có muốn cập nhật sản phẩm này ? ')))return false;">
-                                Update
+                                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                ADD
                             </button>
                         </div>
-
-
                     </form>
                 </div>
             </div>
@@ -258,7 +241,7 @@
                     </div>
                     <div class="mb-3">
                         <form:label path="moTa"><b>Mô Tả:</b></form:label>
-                        <form:textarea path="moTa" class="form-control" rows="3" />
+                        <form:textarea path="moTa" class="form-control" rows="3"/>
 
                     </div>
                     <div class="mb-3">
@@ -479,7 +462,7 @@
                             </div>
                             <div class="mb-3">
                                 <form:label path="ten"><b>Tên:</b></form:label>
-                                <form:input path="ten"  class="form-control" id="tenSanPham"/>
+                                <form:input path="ten" class="form-control" id="tenSanPham"/>
                                 <span class="text-danger" id="tenSanPhamError"></span>
                             </div>
                             <div class="mb-3">
@@ -492,7 +475,7 @@
                             </div>
                             <div class="mb-3">
                                 <form:label path="soSim"><b>Số khe sim:</b></form:label>
-                                <form:select path="soSim"  class="form-control">
+                                <form:select path="soSim" class="form-control">
                                     <form:option value="1">1 khe sim vật lý</form:option>
                                     <form:option value="2">2 khe sim vật lý</form:option>
                                     <form:option value="3">1 khe sim vật lý, 1 esim</form:option>
@@ -555,12 +538,13 @@
                                 </form:select>
                             </div>
                             <div class="mb-3">
-                                <form:label path="kichThuoc"><b>Kích thước sản phẩm (Chiều dài(mm) x Chiều rộng(mm) x Độ dày(mm)):</b></form:label>
+                                <form:label path="kichThuoc"><b>Kích thước sản phẩm (Chiều dài(mm) x Chiều rộng(mm) x Độ
+                                    dày(mm)):</b></form:label>
                                 <form:input path="kichThuoc" class="form-control"/>
                                 <span class="text-danger" id="kichThuocError"></span>
                             </div>
 
-                            <div class="mb-3" >
+                            <div class="mb-3">
                                 <form:label path="moTa"><b>Mô tả:</b></form:label>
                                 <form:textarea path="moTa" class="form-control"></form:textarea>
                                 <form:errors path="moTa" cssClass="error text-danger"/>
@@ -569,7 +553,9 @@
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success" id="btt" onclick="return validateFormSanPham()">ADD</button>
+                        <button type="submit" class="btn btn-success" id="btt" onclick="return validateFormSanPham()">
+                            ADD
+                        </button>
                     </div>
                 </form:form>
             </div>
@@ -581,39 +567,39 @@
 </div>
 </body>
 <script>
-    function  validateFormSanPham(){
-        var tenSanPham=document.getElementById("tenSanPham").value;
-        var kichThuoc=document.getElementById("kichThuoc").value;
-        var trongLuong=document.getElementById("trongLuong").value;
-        var chatLieu=document.getElementById("chatLieu").value;
-        var btt =document.getElementById("btt");
+    function validateFormSanPham() {
+        var tenSanPham = document.getElementById("tenSanPham").value;
+        var kichThuoc = document.getElementById("kichThuoc").value;
+        var trongLuong = document.getElementById("trongLuong").value;
+        var chatLieu = document.getElementById("chatLieu").value;
+        var btt = document.getElementById("btt");
         var isValid = true;
-        if (tenSanPham.trim()===""||tenSanPham.trim().length<6){
+        if (tenSanPham.trim() === "" || tenSanPham.trim().length < 6) {
             document.getElementById("tenSanPhamError").innerHTML = "Tên sản phẩm không được để trống và phải có tối thiểu 6 kí tự";
-            btt.type="button";
+            btt.type = "button";
             return false;
         } else {
             document.getElementById("tenSanPhamError").innerHTML = ""; // Xóa thông báo lỗi
-            if (kichThuoc.trim()===""){
+            if (kichThuoc.trim() === "") {
                 document.getElementById("kichThuocError").innerHTML = "Kích thước không được để trống";
-                btt.type="button";
+                btt.type = "button";
                 return false;
             } else {
                 document.getElementById("kichThuocError").innerHTML = ""; // Xóa thông báo lỗi
-                if (trongLuong.trim()===""){
+                if (trongLuong.trim() === "") {
                     document.getElementById("trongLuongError").innerHTML = "Trọng lượng không được để trống";
-                    btt.type="button";
+                    btt.type = "button";
                     return false;
                 } else {
                     document.getElementById("trongLuongError").innerHTML = ""; // Xóa thông báo lỗi
-                    if (chatLieu.trim()===""){
+                    if (chatLieu.trim() === "") {
                         document.getElementById("chatLieuError").innerHTML = "Chất liệu không được để trống";
-                        btt.type="button";
+                        btt.type = "button";
 
                         return false;
                     } else {
                         document.getElementById("chatLieuError").innerHTML = ""; // Xóa thông báo lỗi
-                        btt.type="submit";
+                        btt.type = "submit";
                         return true;
                     }
                 }
@@ -624,6 +610,7 @@
 
 
     }
+
     function validateFormPin() {
         // Lấy giá trị từ các ô input
         var loaiPin = document.getElementById("loaiPin").value;
@@ -634,7 +621,7 @@
         var isValid = true;
 
         // Kiểm tra từng ô input và hiển thị thông báo lỗi nếu cần
-        if (loaiPin.trim() === ""||loaiPin.trim().length<6) {
+        if (loaiPin.trim() === "" || loaiPin.trim().length < 6) {
             document.getElementById("loaiPinError").innerHTML = "Loại Pin không được để trống và phải lớn hơn 6 kí tự";
             isValid = false;
         } else {
@@ -650,63 +637,65 @@
 
         }
 
-        if (loaiPin.trim()===""||congNghePin.trim()===""){
+        if (loaiPin.trim() === "" || congNghePin.trim() === "") {
             alert("Hãy điền đủ thông tin!");
-            isValid=false;
+            isValid = false;
         }
         // Nếu có lỗi, ngăn form được gửi đi
         if (!isValid) {
             return false;
         }
     }
+
     function validateFormChip() {
         // Lấy giá trị từ các ô input
         var tenChip = document.getElementById("tenChip").value;
         var loaiChip = document.getElementById("loaiChip").value;
         var soNhan = parseInt(document.getElementById("soNhan").value);
-        var btnChip=document.getElementById("btnChip");
+        var btnChip = document.getElementById("btnChip");
 
         // Khai báo biến để theo dõi việc xác thực
         var isValid = true;
 
         // Kiểm tra từng ô input và hiển thị thông báo lỗi nếu cần
-        if (tenChip.trim() === ""||tenChip.trim().length<=6) {
+        if (tenChip.trim() === "" || tenChip.trim().length <= 6) {
             document.getElementById("tenChipError").innerHTML = "Tên chip không được để trống và tối thiểu có 6 kí tự";
-            btnChip.type="button";
+            btnChip.type = "button";
             return false;
         } else {
             document.getElementById("tenChipError").innerHTML = ""; // Xóa thông báo lỗi
-            if (loaiChip.trim() === ""||loaiChip.trim().length<=2) {
+            if (loaiChip.trim() === "" || loaiChip.trim().length <= 2) {
                 document.getElementById("loaiChipError").innerHTML = "Loại chip không được để trống";
-                btnChip.type="button";
+                btnChip.type = "button";
                 return false;
             } else {
                 document.getElementById("loaiChipError").innerHTML = "";
-                if (soNhan<=0) {
+                if (soNhan <= 0) {
                     document.getElementById("soNhanError").innerHTML = "Số nhân phải lớn hơn 0";
-                    btnChip.type="button";
+                    btnChip.type = "button";
                     return false;
                 } else {
                     document.getElementById("soNhanError").innerHTML = "";
-                    btnChip.type="submit";
+                    btnChip.type = "submit";
                     return true;
                 }
             }
 
         }
-        if (tenChip.trim()===""||loaiChip.trim()===""){
+        if (tenChip.trim() === "" || loaiChip.trim() === "") {
             alert("Hãy điền đủ thông tin!");
-            isValid=false;
+            isValid = false;
         }
         // Nếu có lỗi, ngăn form được gửi đi
         if (!isValid) {
             return false;
         }
     }
-    function validateFormMauSac(){
+
+    function validateFormMauSac() {
         var tenMauSac = document.getElementById("tenMauSac").value;
         var isValid = true;
-        if (tenMauSac.trim()===0||tenMauSac.trim().length<6){
+        if (tenMauSac.trim() === 0 || tenMauSac.trim().length < 6) {
             document.getElementById("tenMauSacError").innerHTML = "Tên màu sắc không được để trống và phải lớn hơn 6 kí tự";
             isValid = false;
         } else {
@@ -717,6 +706,7 @@
         }
 
     }
+
     const imageInput = document.getElementById('anhmoi');
 
     const previewImage2 = document.getElementById('preview-image-2');
@@ -733,7 +723,7 @@
         } else {
             previewImage2.src = '';
         }
-        document.getElementById('cucheck').value='moi';
+        document.getElementById('cucheck').value = 'moi';
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

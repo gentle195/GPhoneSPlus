@@ -126,7 +126,9 @@ public class HoaDonController {
 
         model.addAttribute("listHoaDon", filteredHoaDon);
         model.addAttribute("contentPage", "../hoadon/hoa-don-loc.jsp");
+
         return "/home/layout"; // Điều hướng về trang layout hoặc trang hiển thị kết quả lọc
+
     }
 
     @GetMapping("/detail/{id}")
