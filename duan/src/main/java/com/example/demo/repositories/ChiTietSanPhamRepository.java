@@ -65,8 +65,7 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             "and (:moTaMan is null or manHinh.id =:moTaMan) " +
             "and (:moTaCam is null or cam.id =:moTaCam) "+
             "and (:giaBanMin is null and :giaBanMax is null " +
-            "or ct.giaBan between :giaBanMin and ct.giaBan " +
-            "or ct.giaBan between 0 and :giaBanMax or ct.giaBan between :giaBanMin and :giaBanMax))"
+            "or ct.giaBan between :giaBanMin and ct.giaBan or ct.giaBan between 0 and :giaBanMax or ct.giaBan between :giaBanMin and :giaBanMax))"
     )
     List<ChiTietSanPham> locBanHang(UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam, BigDecimal giaBanMin, BigDecimal giaBanMax);
 

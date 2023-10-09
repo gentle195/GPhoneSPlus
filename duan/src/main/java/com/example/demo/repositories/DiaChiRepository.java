@@ -45,4 +45,7 @@ public interface DiaChiRepository extends JpaRepository<DiaChi, UUID> {
     @Modifying
     @Query(value = "update dia_chi set tinh_trang=0 , ngay_cap_nhat=convert(date,getdate(),105)", nativeQuery = true)
     void update0();
+
+    @Query("select kh from DiaChi kh  where kh.khachHang.id=:idKhachHang  and kh.tinhTrang=0")
+    List<DiaChi> timkiem(UUID idKhachHang);
 }

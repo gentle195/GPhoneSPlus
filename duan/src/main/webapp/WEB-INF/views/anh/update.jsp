@@ -47,7 +47,7 @@
                                                 <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;"
                                                        for="anhmoi1">
                                                     <img id="preview-anh1-2" class="preview-image"
-                                                         src="../../../uploads/${anh.anh1}" alt=""
+                                                         src="/uploads/${anh.anh1}" alt=""
                                                          width="100%" height="100%"
                                                          style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
                                                     <br><br>
@@ -73,7 +73,7 @@
                                                 <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;"
                                                        for="anhmoi2">
                                                     <img id="preview-anh2-2" class="preview-image"
-                                                         src="../../../uploads/${anh.anh2}" alt=""
+                                                         src="/uploads/${anh.anh2}" alt=""
                                                          width="100%" height="100%"
                                                          style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
                                                     <br><br>
@@ -99,7 +99,7 @@
                                                 <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;"
                                                        for="anhmoi3">
                                                     <img id="preview-anh3-2" class="preview-image"
-                                                         src="../../../uploads/${anh.anh3}" alt=""
+                                                         src="/uploads/${anh.anh3}" alt=""
                                                          width="100%" height="100%"
                                                          style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
                                                     <br><br>

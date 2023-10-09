@@ -38,6 +38,8 @@ public interface DiaChiService {
 
     List<DiaChi> timkiemMT1(String timkiem);
 
+    List<DiaChi> timkiem(UUID timkiem);
+
 }
 
 
