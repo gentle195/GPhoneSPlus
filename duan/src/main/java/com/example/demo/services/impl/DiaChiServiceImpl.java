@@ -81,7 +81,7 @@ public class DiaChiServiceImpl implements DiaChiService {
 
     @Override
     public DiaChi TimMa(String id) {
-        System.out.println("---"+id);
+        System.out.println("---" + id);
         return diaChiRepository.timkiemma(id);
     }
 
@@ -108,5 +108,10 @@ public class DiaChiServiceImpl implements DiaChiService {
     @Override
     public List<DiaChi> timkiemMT1(String timkiem) {
         return diaChiRepository.timkiemMT1(timkiem);
+    }
+
+    @Override
+    public List<DiaChi> timkiem(UUID timkiem) {
+        return diaChiRepository.timkiem(timkiem);
     }
 }

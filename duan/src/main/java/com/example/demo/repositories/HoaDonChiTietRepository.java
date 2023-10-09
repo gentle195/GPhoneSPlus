@@ -17,6 +17,9 @@ public interface HoaDonChiTietRepository extends JpaRepository<HoaDonChiTiet, UU
             "left join ChiTietSanPham ct on i.chiTietSanPham.id=ct.id where ct.id=: id or hd.id=: id")
     Page<HoaDonChiTiet> getHoaDonChiTiet(Pageable pageable, UUID id);
 
+    @Query("select hdct from HoaDonChiTiet hdct left join HoaDon hd on hdct.hoaDon.id=hd.id where hd.id=: id")
+    Page<HoaDonChiTiet> getHoaDonChiTietPage(Pageable pageable, UUID id);
+
     @Query("select hdct from HoaDonChiTiet hdct left join HoaDon hd on hdct.hoaDon.id=hd.id where hd.id=:id")
     List<HoaDonChiTiet> getHoaDonChiTiet(UUID id);
 }

@@ -59,7 +59,6 @@ public class IMEI {
     @Column(name = "mo_ta")
     private String moTa;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_chi_tiet_san_pham")
     private ChiTietSanPham chiTietSanPham;

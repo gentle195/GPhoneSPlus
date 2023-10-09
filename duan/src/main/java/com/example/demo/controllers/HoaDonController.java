@@ -63,11 +63,11 @@ public class HoaDonController {
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<HoaDon> page = hoaDonService.getAll(pageable);
-        model.addAttribute("contentPage", "hoadon/hoa-don.jsp");
+        model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
         model.addAttribute("listHoaDon", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "/home/layout";
     }
 
     @PostMapping("/search")
@@ -76,9 +76,9 @@ public class HoaDonController {
                          @RequestParam(name = "soTienQuyDoi", required = false) BigDecimal soTienQuyDoi) {
         List<HoaDon> list = hoaDonService.search(search, soTienQuyDoi);
         model.addAttribute("listHoaDon", list);
-        model.addAttribute("contentPage", "hoadon/hoa-don.jsp");
+        model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
 
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/view-loc")
@@ -93,9 +93,9 @@ public class HoaDonController {
         model.addAttribute("listKhachHang", listKhachHang);
         model.addAttribute("listNhanVien", listNhanVien);
 //        model.addAttribute("listDiaChi", listDiaChi);
-        model.addAttribute("contentPage", "hoadon/hoa-don-loc.jsp");
+        model.addAttribute("contentPage", "../hoadon/hoa-don-loc.jsp");
 
-        return "layout";
+        return "/home/layout";
     }
 
     @GetMapping("/loc")
@@ -125,8 +125,8 @@ public class HoaDonController {
 //        Sort sort = Sort.by("ngayTao").descending();
 
         model.addAttribute("listHoaDon", filteredHoaDon);
-        model.addAttribute("contentPage", "hoadon/hoa-don-loc.jsp");
-        return "layout"; // Điều hướng về trang layout hoặc trang hiển thị kết quả lọc
+        model.addAttribute("contentPage", "../hoadon/hoa-don-loc.jsp");
+        return "/home/layout"; // Điều hướng về trang layout hoặc trang hiển thị kết quả lọc
     }
 
     @GetMapping("/detail/{id}")
@@ -147,8 +147,8 @@ public class HoaDonController {
         HoaDon hoaDon = hoaDonService.findById(id);
         model.addAttribute("hoaDon", hoaDon);
         model.addAttribute("listHoaDonChiTiet", listHoaDonChiTiet);
-        model.addAttribute("contentPage", "hoadon/hoa-don-detail.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../hoadon/hoa-don-detail.jsp");
+        return "/home/layout";
     }
 
     @GetMapping("/view-add")
@@ -172,9 +172,9 @@ public class HoaDonController {
 //        List<QuyDoi> listQuyDoi = quyDoiService.findAll();
 //        model.addAttribute("listQuyDoi", listQuyDoi);
 //        model.addAttribute("nhanVien", new NhanVien());
-        model.addAttribute("contentPage", "hoadon/hoa-don-cho.jsp");
+        model.addAttribute("contentPage", "../hoadon/hoa-don-cho.jsp");
 
-        return "layout";
+        return "/home/layout";
     }
 
     @PostMapping("/add")
@@ -201,7 +201,7 @@ public class HoaDonController {
 //            model.addAttribute("listQuyDoi", listQuyDoi);
 
             hoaDon.setTinhTrang(0);
-            model.addAttribute("contentPage", "hoadon/hoa-don-cho-add.jsp");
+            model.addAttribute("contentPage", "../hoadon/hoa-don-cho-add.jsp");
         }
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
@@ -231,7 +231,7 @@ public class HoaDonController {
 
         hoaDonService.add(hoaDon);
 //        model.addAttribute("hoaDon", new HoaDon());
-        model.addAttribute("contentPage", "hoadon/hoa-don.jsp");
+        model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
         return "redirect:/hoa-don/hien-thi";
     }
 

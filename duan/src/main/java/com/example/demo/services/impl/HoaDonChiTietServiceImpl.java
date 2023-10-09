@@ -27,7 +27,12 @@ public class HoaDonChiTietServiceImpl implements HoaDonChiTietService {
 
     @Override
     public Page<HoaDonChiTiet> getHoaDonChiTiet(Pageable pageable, UUID id) {
-        return hoaDonChiTietRepository.getHoaDonChiTiet(pageable,id);
+        return hoaDonChiTietRepository.getHoaDonChiTiet(pageable, id);
+    }
+
+    @Override
+    public Page<HoaDonChiTiet> getHoaDonChiTietPage(Pageable pageable, UUID id) {
+        return hoaDonChiTietRepository.getHoaDonChiTietPage(pageable, id);
     }
 
     @Override

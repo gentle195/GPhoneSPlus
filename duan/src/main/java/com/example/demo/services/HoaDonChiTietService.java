@@ -12,6 +12,8 @@ public interface HoaDonChiTietService {
 
     public Page<HoaDonChiTiet> getHoaDonChiTiet(Pageable pageable, UUID id);
 
+    public Page<HoaDonChiTiet> getHoaDonChiTietPage(Pageable pageable, UUID id);
+
     public List<HoaDonChiTiet> findAll();
 
     public List<HoaDonChiTiet> getHoaDonChiTiet(UUID id);
