@@ -24,9 +24,6 @@
         <li class="nav-item">
             <a class="nav-link" href="/chi-tiet-san-pham/view-add" role="tab">Thêm mới chi tiết sản phẩm</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-loc" role="tab">Lọc sản phẩm</a>
-        </li>
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">
@@ -59,7 +56,7 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped" style="color: black">
+                        <table class="table table-striped" style="color: black;width: 2000px">
                             <thead>
                             <tr>
                                 <th scope="col">Tên sản phẩm</th>
@@ -69,7 +66,6 @@
                                 <th scope="col">Rom</th>
                                 <th scope="col">Pin</th>
                                 <th scope="col">Url Anh</th>
-                                <th scope="col">Giá nhập</th>
                                 <th scope="col">Giá bán</th>
                                 <th scope="col">Ngày tạo</th>
                                 <th scope="col">Ngày cập nhật</th>
@@ -96,8 +92,6 @@
                                                 <%--                        <img src=".../.../${ctsp.urlAnh}" width="auto" height="auto" type="file">--%>
                                             <img src="/uploads/${ctsp.urlAnh}" width="40" height="40">
                                         </td>
-
-                                        <td>${ctsp.giaNhap} VND</td>
                                         <td>${ctsp.giaBan} VND</td>
                                         <td>${ctsp.ngayTao}</td>
                                         <td>${ctsp.ngayCapNhat}</td>

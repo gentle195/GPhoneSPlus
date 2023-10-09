@@ -1,5 +1,7 @@
 ﻿CREATE DATABASE DB_DU_AN_TOT_NGHIEP;
+go
 USE DB_DU_AN_TOT_NGHIEP
+go
 
 SET ANSI_NULLS ON
 GO
@@ -219,7 +221,6 @@ CREATE TABLE chi_tiet_san_pham (
   id_rom UNIQUEIDENTIFIER NULL,
   id_pin UNIQUEIDENTIFIER NULL,
   url_anh VARCHAR(255) NULL,
-  gia_nhap  decimal(20, 0) NULL,
   gia_ban  decimal(20, 0) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,

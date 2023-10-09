@@ -11,6 +11,7 @@
     <title>Focus - Bootstrap Admin Dashboard </title>
     <!-- Favicon icon -->
 </head>
+
 <body>
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">

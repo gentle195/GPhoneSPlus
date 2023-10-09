@@ -41,7 +41,7 @@ public class MauSacController {
         model.addAttribute("total", page.getTotalPages());
         model.addAttribute("listMauSac", page.getContent());
         model.addAttribute("list", page.getNumber());
-        model.addAttribute("contentPage", "../mau-sac/mau-sac.jsp");
+        model.addAttribute("contentPage", "../mausac/mau-sac.jsp");
         return "/home/layout";
     }
 
@@ -53,7 +53,7 @@ public class MauSacController {
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<MauSac> page = mauSacService.getAll(pageable);
         if (bindingResult.hasErrors()) {
-            model.addAttribute("contentPage", "../mau-sac/mau-sac.jsp");
+            model.addAttribute("contentPage", "../mausac/mau-sac.jsp");
             model.addAttribute("listMauSac", page.getContent());
             model.addAttribute("page", page.getNumber());
             model.addAttribute("total", page.getTotalPages());
@@ -73,7 +73,7 @@ public class MauSacController {
         mauSac.setNgayCapNhat(date);
         mauSac.setTinhTrang(0);
         mauSacService.add(mauSac);
-        model.addAttribute("contentPage", "../mau-sac/mau-sac.jsp");
+        model.addAttribute("contentPage", "../mausac/mau-sac.jsp");
         model.addAttribute("listMauSac", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
@@ -89,7 +89,7 @@ public class MauSacController {
         MauSac mauSac = mauSacService.findById(id);
         model.addAttribute("mauSac", mauSac);
         Page<MauSac> page = mauSacService.getAll(pageable);
-        model.addAttribute("contentPage", "../mau-sac/mau-sac-update.jsp");
+        model.addAttribute("contentPage", "../mausac/mau-sac-update.jsp");
         model.addAttribute("listMauSac", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
@@ -100,7 +100,7 @@ public class MauSacController {
     public String updateRam(Model model, @PathVariable("id") UUID id, @ModelAttribute("mauSac") @Valid MauSac mauSac,
                             BindingResult bindingResult, @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
         if (bindingResult.hasErrors()) {
-            return "../mau-sac/mau-sac-update.jsp";
+            return "../mausac/mau-sac-update.jsp";
         }
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
@@ -118,7 +118,7 @@ public class MauSacController {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<MauSac> page = mauSacService.getAll1(pageable);
-        model.addAttribute("contentPage", "../mau-sac/mau-sac-delete.jsp");
+        model.addAttribute("contentPage", "../mausac/mau-sac-delete.jsp");
         model.addAttribute("listMauSac", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
@@ -135,7 +135,7 @@ public class MauSacController {
         mauSac.setNgayCapNhat(date);
         mauSacService.updateTT();
         Page<MauSac> page = mauSacService.getAll1(pageable);
-        model.addAttribute("contentPage", "../mau-sac/mau-sac-delete.jsp");
+        model.addAttribute("contentPage", "../mausac/mau-sac-delete.jsp");
         model.addAttribute("listMauSac", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
@@ -155,7 +155,7 @@ public class MauSacController {
         mauSac1.setTinhTrang(1);
         mauSacService.update(id, mauSac1);
         Page<MauSac> page = mauSacService.getAll(pageable);
-        model.addAttribute("contentPage", "../mau-sac/mau-sac.jsp");
+        model.addAttribute("contentPage", "../mausac/mau-sac.jsp");
         model.addAttribute("listMauSac", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
@@ -177,7 +177,7 @@ public class MauSacController {
         mauSac1.setTinhTrang(0);
         mauSacService.update(id, mauSac1);
         Page<MauSac> page = mauSacService.getAll1(pageable);
-        model.addAttribute("contentPage", "../mau-sac/mau-sac-delete.jsp");
+        model.addAttribute("contentPage", "../mausac/mau-sac-delete.jsp");
         model.addAttribute("listMauSac", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
@@ -188,7 +188,7 @@ public class MauSacController {
     public String search0(Model model, @ModelAttribute("mauSac") MauSac mauSac, @RequestParam("search") String search) {
         List<MauSac> list = mauSacService.search0(search);
         model.addAttribute("listMauSac", list);
-        model.addAttribute("contentPage", "../mau-sac/mau-sac.jsp");
+        model.addAttribute("contentPage", "../mausac/mau-sac.jsp");
         return "/home/layout";
     }
 
@@ -196,7 +196,7 @@ public class MauSacController {
     public String search1(Model model, @ModelAttribute("ram") Ram ram, @RequestParam("search") String search) {
         List<MauSac> list = mauSacService.search1(search);
         model.addAttribute("listMauSac", list);
-        model.addAttribute("contentPage", "../mau-sac/mau-sac-delete.jsp");
+        model.addAttribute("contentPage", "../mausac/mau-sac-delete.jsp");
         return "/home/layout";
     }
 }

@@ -190,11 +190,11 @@ public class AnhController {
             model.addAttribute("contentPage", "../anh/add.jsp");
             return "/home/layout";
         }
-        String mhd="";
+        String mhd = "";
         Integer sl = anhService.findAll().size() + 1;
-        if(sl<9){
+        if (sl < 9) {
             mhd = "ANH0" + sl;
-        }else {
+        } else {
             mhd = "ANH" + sl;
         }
         anh.setMa(mhd);
@@ -204,9 +204,9 @@ public class AnhController {
         // Xử lý ảnh 1
         String fileName1 = StringUtils.cleanPath(anh1.getOriginalFilename());
 
-        if(fileName1.equals("")){
+        if (fileName1.equals("")) {
 
-        }else {
+        } else {
             String uploadDir = "src/main/webapp/uploads/";
             FileUploadUtil.saveFile(uploadDir, fileName1, anh1);
             anh.setAnh1(fileName1);
@@ -215,9 +215,9 @@ public class AnhController {
         // Xử lý ảnh 2
         String fileName2 = StringUtils.cleanPath(anh2.getOriginalFilename());
 
-        if(fileName2.equals("")){
+        if (fileName2.equals("")) {
 
-        }else {
+        } else {
             String uploadDir = "src/main/webapp/uploads/";
             FileUploadUtil.saveFile(uploadDir, fileName2, anh2);
             anh.setAnh2(fileName2);
@@ -226,9 +226,9 @@ public class AnhController {
         // Xử lý ảnh 3
         String fileName3 = StringUtils.cleanPath(anh3.getOriginalFilename());
 
-        if(fileName3.equals("")){
+        if (fileName3.equals("")) {
 
-        }else {
+        } else {
             String uploadDir = "src/main/webapp/uploads/";
             FileUploadUtil.saveFile(uploadDir, fileName3, anh3);
             anh.setAnh3(fileName3);

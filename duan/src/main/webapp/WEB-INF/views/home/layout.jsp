@@ -49,9 +49,9 @@
     ***********************************-->
     <div class="nav-header">
         <a href="index.html" class="brand-logo">
-            <img class="logo-abbr" src="./images/logo.png" alt="">
-            <img class="logo-compact" src="./images/logo-text.png" alt="">
-            <img class="brand-title" src="./images/logo-text.png" alt="">
+            <img class="logo-abbr" src="../../../images/logo.png" alt="">
+            <img class="logo-compact" src="../../../images/logo-text.png" alt="">
+            <img class="brand-title" src="../../../images/logo-text.png" alt="">
         </a>
 
         <div class="nav-control">
@@ -313,8 +313,7 @@
 <!-- Data table -->
 <script src="../../../vendor/datatables/js/jquery.dataTables.min.js"></script>
 <script src="../../../js/plugins-init/datatables.init.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 <script>
     $(document).ready(function () {
         $('#selectSanPham').select2();
@@ -359,7 +358,8 @@
         $('#selectDiaChi').select2();
     });
 </script>
-
 </body>
-
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script src="../../../js/select-2.js"></script>
 </html>
