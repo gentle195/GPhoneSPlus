@@ -118,6 +118,7 @@ public class BanHangTaiQuayController {
         HoaDon hd = new HoaDon();
         hd.setMa("HD" + String.valueOf(hoaDonService.findAll().size() + 1));
         hd.setTinhTrang(0);
+        hd.setLoai(0);
         hd.setNgayTao(Date.valueOf(LocalDate.now()));
         hoaDonService.add(hd);
         return "redirect:/ban-hang/hien-thi";

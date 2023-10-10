@@ -22,7 +22,7 @@ public class QRCodeGenerator {
 
     public static void generatorQRCode(IMEI sp, String outputFolderPath) throws WriterException, IOException {
         // Generate code:
-        String qrCodeData = String.valueOf(sp.getId());
+        String qrCodeData = String.valueOf(sp.getSoImei());
 
 
         // Configure UTF-8 encoding
@@ -31,7 +31,7 @@ public class QRCodeGenerator {
 
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
 
-        String qrCodeName = outputFolderPath + File.separator + sp.getId() + ".png";
+        String qrCodeName = outputFolderPath + File.separator + sp.getSoImei() + ".png";
 
         BitMatrix bitMatrix = qrCodeWriter.encode(qrCodeData, BarcodeFormat.QR_CODE, 400, 400, hints);
         Path path = FileSystems.getDefault().getPath(qrCodeName);

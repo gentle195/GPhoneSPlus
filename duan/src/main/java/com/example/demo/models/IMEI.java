@@ -44,6 +44,9 @@ public class IMEI {
     @Column(name = "so_imei")
     private String soImei;
 
+    @Column(name = "ma_qr")
+    private String maQr;
+
     @CreationTimestamp
     @Column(name = "ngay_tao")
     private Date ngayTao;

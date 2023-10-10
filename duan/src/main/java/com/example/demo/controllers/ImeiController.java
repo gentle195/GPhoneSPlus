@@ -3,6 +3,8 @@ package com.example.demo.controllers;
 import com.example.demo.models.IMEI;
 import com.example.demo.services.ChiTietSanPhamService;
 import com.example.demo.services.IMEIService;
+import com.example.demo.util.QRCodeGenerator;
+import com.google.zxing.WriterException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,8 +20,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,6 +36,8 @@ import java.util.UUID;
 public class ImeiController {
     @Autowired
     IMEIService imeiService;
+
+    QRCodeGenerator qrCodeGenerator;
     @Autowired
     ChiTietSanPhamService chiTietSanPhamService;
     private Date ngay;
@@ -41,7 +51,7 @@ public class ImeiController {
         model.addAttribute("size", imeiPage.getSize());
         model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
         model.addAttribute("imei", new IMEI());
-        String ma = "IMEI" + (imeiService.findAll().size()+1);
+        String ma = "IMEI" + (imeiService.findAll().size() + 1);
         model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "../imei/index.jsp");
         return "/home/layout";
@@ -121,7 +131,7 @@ public class ImeiController {
 
     @PostMapping("/add")
     public String add(@Valid @ModelAttribute(name = "imei") IMEI imei,
-                      BindingResult result, Model model, @RequestParam(value = "pageNum", defaultValue = "0", required = false) Integer pageNum) {
+                      BindingResult result, Model model, @RequestParam(value = "pageNum", defaultValue = "0", required = false) Integer pageNum) throws IOException, WriterException {
 
         if (result.hasErrors()) {
 
@@ -139,8 +149,19 @@ public class ImeiController {
         }
         String ma = "IMEI" + imeiService.findAll().size();
         imei.setMa(ma);
+
+        String projectRootPath = System.getProperty("user.dir");
+
+        // Tạo đường dẫn động đến thư mục lưu ảnh
+        String outputFolderPath = projectRootPath + "/src/main/webapp/maqr";
+        QRCodeGenerator.generatorQRCode(imei, outputFolderPath);
+
+        // Set mã QR cho đối tượng imei
+        imei.setMaQr(imei.getSoImei() + ".png");
+
         LocalDate localDate = LocalDate.now();
         imei.setNgayTao(Date.valueOf(localDate));
+
         imeiService.add(imei);
         return "redirect:/imei/hien-thi";
 

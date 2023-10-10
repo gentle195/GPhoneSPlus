@@ -81,8 +81,16 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Basic Datatable</h4>
+                        <h4 class="card-title">Pin</h4>
                     </div>
+                    <a href="/pin/export-excel" class="btn btn-success btn-icon-text" tabindex="-1" role="button">
+                        <i class="ti-export btn-icon-prepend"></i>
+                        Xuất Excel
+                    </a>
+                    <a href="/pin/export-pdf" class="btn btn-danger btn-icon-text" tabindex="-1" role="button">
+                        <i class="ti-export btn-icon-prepend"></i>
+                        Xuất PDF
+                    </a>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="example" class="display" style="min-width: 845px; color: black">
