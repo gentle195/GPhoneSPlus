@@ -59,6 +59,7 @@
                                 <th>Điểm quy đổi</th>
                                 <th>SĐT</th>
                                 <th>Tổng tiền</th>
+                                <th>Tình trạng</th>
                                 <th>Ngày Tạo</th>
                                 <th>Ngày nhận</th>
                                 <th>Ngày ship</th>
@@ -77,18 +78,18 @@
                                     <td>${hoaDon.quyDoi.soTienQuyDoi}</td>
                                     <td>${hoaDon.sdt}</td>
                                     <td>${hoaDon.tongTien}</td>
-<%--                                    <td>--%>
-<%--                                        <c:if test="${hoaDon.tinhTrang == 0}">Đang chờ</c:if>--%>
-<%--                                        <c:if test="${hoaDon.tinhTrang == 1}">Đã xác nhận</c:if>--%>
-<%--                                        <c:if test="${hoaDon.tinhTrang == 2}">Đã thanh toán</c:if>--%>
-<%--                                        <c:if test="${hoaDon.tinhTrang == 3}">Chờ thanh toán</c:if>--%>
-<%--                                        <c:if test="${hoaDon.tinhTrang == 4}">Chờ vận chuyển</c:if>--%>
-<%--                                        <c:if test="${hoaDon.tinhTrang == 5}">Đang vận chuyển</c:if>--%>
-<%--                                        <c:if test="${hoaDon.tinhTrang == 6}">Vận chuyển hoàn tất</c:if>--%>
-<%--                                        <c:if test="${hoaDon.tinhTrang == 7}">Giao trễ</c:if>--%>
-<%--                                        <c:if test="${hoaDon.tinhTrang == 8}">Đã hủy</c:if>--%>
+                                    <td>
+                                        <c:if test="${hoaDon.tinhTrang == 0}">Đang chờ</c:if>
+                                        <c:if test="${hoaDon.tinhTrang == 1}">Đã xác nhận</c:if>
+                                        <c:if test="${hoaDon.tinhTrang == 2}">Đã thanh toán</c:if>
+                                        <c:if test="${hoaDon.tinhTrang == 3}">Chờ thanh toán</c:if>
+                                        <c:if test="${hoaDon.tinhTrang == 4}">Chờ vận chuyển</c:if>
+                                        <c:if test="${hoaDon.tinhTrang == 5}">Đang vận chuyển</c:if>
+                                        <c:if test="${hoaDon.tinhTrang == 6}">Vận chuyển hoàn tất</c:if>
+                                        <c:if test="${hoaDon.tinhTrang == 7}">Giao trễ</c:if>
+                                        <c:if test="${hoaDon.tinhTrang == 8}">Đã hủy</c:if>
 
-<%--                                    </td>--%>
+                                    </td>
 
                                     <td>${hoaDon.ngayTao}</td>
                                     <td>${hoaDon.ngayNhan}</td>
@@ -100,7 +101,8 @@
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                             <i class="ti-file btn-icon-prepend"></i>
                                             Detail</a>
-                                        <a href="/hoa-don/update-status/${hoaDon.id}" class="btn btn-danger btn-icon-text"
+                                        <a href="/hoa-don/update-status/${hoaDon.id}"
+                                           class="btn btn-danger btn-icon-text"
                                            tabindex="-1"
                                            role="button"
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">

@@ -46,6 +46,11 @@ public class HoaDonChiTietServiceImpl implements HoaDonChiTietService {
     }
 
     @Override
+    public List<HoaDonChiTiet> searchHDCTBanHangTaiQuay(UUID id, String search) {
+        return hoaDonChiTietRepository.searchHDCTBanHangTaiQuay(id, search);
+    }
+
+    @Override
     public HoaDonChiTiet findById(UUID id) {
         return hoaDonChiTietRepository.findById(id).orElse(null);
     }

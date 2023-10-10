@@ -18,6 +18,8 @@ public interface HoaDonChiTietService {
 
     public List<HoaDonChiTiet> getHoaDonChiTiet(UUID id);
 
+    public List<HoaDonChiTiet> searchHDCTBanHangTaiQuay(UUID id, String search);
+
     public HoaDonChiTiet findById(UUID id);
 
     public HoaDonChiTiet add(HoaDonChiTiet hoaDonChiTiet);

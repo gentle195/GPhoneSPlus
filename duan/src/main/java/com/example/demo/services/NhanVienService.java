@@ -33,8 +33,9 @@ public interface NhanVienService {
 
     public List<NhanVien> search1(String ten);
 
-
     List<NhanVien> searchByChucVuAndGioiTinh(String tenChucVu, String gioiTinh, Pageable pageable);
+
+    List<NhanVien> nhanVienThanhToan(UUID id);
 
 }
 

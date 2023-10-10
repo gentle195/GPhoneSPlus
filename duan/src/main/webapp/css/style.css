@@ -24440,6 +24440,7 @@ table#example {
     max-height: 33.25rem !important;
 }
 
+
 #employees, #custommers {
     padding: .5rem 0 1rem 0;
 }
@@ -28417,9 +28418,9 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
     color: #fff;
 }
 
-.dataTables_length {
-    display: none;
-}
+/*.dataTables_length {*/
+/*    display: none;*/
+/*}*/
 
 .dataTables_filter {
     display: none;
@@ -28429,13 +28430,4 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
     display: none;
 }
 
-.dataTables_length {
-    display: none;
-}
-.dataTables_filter{
-    display: none;
-}
-.dataTables_info{
-    display: none;
-}
 /*# sourceMappingURL=style.css.map */
