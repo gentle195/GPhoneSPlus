@@ -1,5 +1,6 @@
 package com.example.demo.repositories;
 
+import com.example.demo.models.KhachHang;
 import com.example.demo.models.NhanVien;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
@@ -44,4 +45,7 @@ public interface NhanVienRepository extends JpaRepository<NhanVien, UUID> {
             "AND  nv.gioiTinh = :gioiTinh")
     List<NhanVien> searchByTenChucVuAndGioiTinh( String tenChucVu,
                                                  Boolean gioiTinh);
+
+    @Query("select kh from NhanVien kh left join HoaDon hd on kh.id=hd.nhanVien.id where hd.id=:id")
+    List<NhanVien> nhanVienThanhToan(UUID id);
 }

@@ -42,7 +42,7 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
             "on d.id_hoa_don=b.id\n" +
             "group by \n" +
             "a.id,a.ma,a.ho_ten,b.ma,c.ho_ten,b.ngay_nhan,b.tong_tien,b.tinh_trang\n" +
-            "having a.id=:idkh",nativeQuery = true)
+            "having a.id=:idkh", nativeQuery = true)
     List<KhachHangLSMuaHang> getLSMuaHang(@Param("idkh") UUID idkh);
 
 
@@ -58,8 +58,8 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
             "on d.id_hoa_don=b.id\n" +
             "group by \n" +
             "a.id,a.ma,a.ho_ten,b.ma,c.ho_ten,b.ngay_nhan,b.tong_tien,b.tinh_trang\n" +
-            "having a.id=:idkh",nativeQuery = true)
-    Page<KhachHangLSMuaHang> getLSMuaHangPage(Pageable pageable,@Param("idkh") UUID idkh);
+            "having a.id=:idkh", nativeQuery = true)
+    Page<KhachHangLSMuaHang> getLSMuaHangPage(Pageable pageable, @Param("idkh") UUID idkh);
 
 
     @Query(value = "select a.ma as 'mahd',\n" +
@@ -100,7 +100,7 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
             "on x.id=n.id_man_hinh\n" +
             "left join quy_doi y\n" +
             "on y.id=a.id_quy_doi\n"
-            ,nativeQuery = true)
+            , nativeQuery = true)
     List<KhachHangHoaDon> getHD();
 
 
@@ -110,6 +110,10 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
     @Query("select kh from KhachHang kh  where kh.ma like %:timkiem% and kh.tinhTrang=1 or kh.hoTen like %:timkiem% and kh.tinhTrang=1")
     List<KhachHang> timkiem1(String timkiem);
 
+    @Query("select kh from KhachHang kh left join HoaDon hd on kh.id=hd.khachHang.id where hd.id=:id")
+    List<KhachHang> khachHangThanhToan(UUID id);
 
+    @Query("select kh from KhachHang kh left join HoaDon hd on kh.id=hd.khachHang.id where hd.id=:id")
+    KhachHang newKhachHang(UUID id);
 
 }

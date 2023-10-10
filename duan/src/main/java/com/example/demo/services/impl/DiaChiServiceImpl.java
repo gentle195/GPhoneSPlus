@@ -114,4 +114,9 @@ public class DiaChiServiceImpl implements DiaChiService {
     public List<DiaChi> timkiem(UUID timkiem) {
         return diaChiRepository.timkiem(timkiem);
     }
+
+    @Override
+    public List<DiaChi> diaChiThanhToan(UUID id) {
+        return diaChiRepository.diaChiThanhToan(id);
+    }
 }

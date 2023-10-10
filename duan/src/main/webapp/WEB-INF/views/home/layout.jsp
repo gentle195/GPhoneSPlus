@@ -314,50 +314,7 @@
 <script src="../../../vendor/datatables/js/jquery.dataTables.min.js"></script>
 <script src="../../../js/plugins-init/datatables.init.js"></script>
 
-<script>
-    $(document).ready(function () {
-        $('#selectSanPham').select2();
-    });
-    $(document).ready(function () {
-        $('#selectRam').select2();
-    });
-    $(document).ready(function () {
-        $('#selectRom').select2();
-    });
-    $(document).ready(function () {
-        $('#selectPin').select2();
-    });
-    $(document).ready(function () {
-        $('#selectMauSac').select2();
-    });
-    $(document).ready(function () {
-        $('#selectChip').select2();
-    });
-    $(document).ready(function () {
-        $('#selectRam').select2();
-    });
-    $(document).ready(function () {
-        $('#selectCamera').select2();
-    });
-    $(document).ready(function () {
-        $('#selectManHinh').select2();
-    });
-    $(document).ready(function () {
-        $('#selectCamera').select2();
-    });
-    $(document).ready(function () {
-        $('#selectHang').select2();
-    });
-    $(document).ready(function () {
-        $('#selectAnh').select2();
-    });
-    $(document).ready(function () {
-        $('#selectKhachHang').select2();
-    });
-    $(document).ready(function () {
-        $('#selectDiaChi').select2();
-    });
-</script>
+
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>

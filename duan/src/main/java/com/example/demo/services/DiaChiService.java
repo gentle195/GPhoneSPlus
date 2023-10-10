@@ -40,6 +40,7 @@ public interface DiaChiService {
 
     List<DiaChi> timkiem(UUID timkiem);
 
+    List<DiaChi> diaChiThanhToan(UUID id);
 }
 
 

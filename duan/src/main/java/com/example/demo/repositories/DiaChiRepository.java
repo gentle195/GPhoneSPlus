@@ -48,4 +48,7 @@ public interface DiaChiRepository extends JpaRepository<DiaChi, UUID> {
 
     @Query("select kh from DiaChi kh  where kh.khachHang.id=:idKhachHang  and kh.tinhTrang=0")
     List<DiaChi> timkiem(UUID idKhachHang);
+
+    @Query("select kh from DiaChi kh  where kh.khachHang.id=:id  and kh.tinhTrang=0")
+    List<DiaChi> diaChiThanhToan(UUID id);
 }

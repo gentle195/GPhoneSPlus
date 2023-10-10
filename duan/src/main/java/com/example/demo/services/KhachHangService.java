@@ -34,13 +34,17 @@ public interface KhachHangService {
 
     public List<KhachHangLSMuaHang> fillLSMuaHang(UUID uuid);
 
-    List<KhachHangHoaDon> getHD();
+    public List<KhachHangHoaDon> getHD();
 
-    List<KhachHang> timkiem(String timkiem);
+    public List<KhachHang> timkiem(String timkiem);
 
-    List<KhachHang> timkiem1(String timkiem);
+    public List<KhachHang> timkiem1(String timkiem);
 
-    Page<KhachHangLSMuaHang> getLSMuaHangPage(Pageable pageable, UUID idkh);
+    public Page<KhachHangLSMuaHang> getLSMuaHangPage(Pageable pageable, UUID idkh);
+
+    public List<KhachHang> khachHangThanhToan(UUID id);
+
+    public KhachHang newKhachHang(UUID id);
 }
 
 

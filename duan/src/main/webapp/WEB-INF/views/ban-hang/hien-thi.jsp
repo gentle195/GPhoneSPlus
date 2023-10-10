@@ -75,12 +75,13 @@
         <div class="col-11">
             <div class="row">
                 <c:forEach items="${listHoaDon}" var="hd" varStatus="i">
-                    <div class="col-4">
+                    <div class="col-2">
                         <div class="btn-group ">
                             <a href="/ban-hang/thong-tin-hoa-don/${hd.id}" class="btn btn-info"
-                               style="width: 120%;height: 47px">Hóa Đơn Chờ ${i.index+1}</a>
+                               style="width: 120%;height: 47px"><label style="margin: 6px">Hóa Đơn
+                                Chờ ${i.index+1}</label></a>
                             <a href="/ban-hang/remove/${hd.id}" class="btn btn-danger" style="width: 10px;height: 47px">
-                                X
+                                <label style="padding-top:5px;padding-right: 20px;margin-right: 20px">X</label>
                             </a>
                         </div>
                     </div>
@@ -108,15 +109,22 @@
                 <div class="card-body">
                     <h4 class="card-title" style="float: left">Danh sách Hóa đơn chi tiết</h4>
                         <%--            Tìm kiếm               --%>
-                    <form action="/ban-hang/search-hoa-don-chi-tiet" method="post">
-                        <div class="input-group" style="width: 30%; float: right">
-                            <input type="text" class="form-control" placeholder="Bạn tìm gì..."
-                                   aria-label="Bạn tìm gì..." name="search-hoa-don-chi-tiet">
-                            <div class="input-group-append">
-                                <button class="btn btn-sm btn-primary" type="submit">Search</button>
-                            </div>
+                    <div class="row">
+                        <div class="col-8"><strong
+                                style="float: right;color:red;margin-top: 10px">${thongBaoHoaDonChiTiet}</strong></div>
+                        <div class="col-4">
+                            <form action="/ban-hang/search-hoa-don-chi-tiet" method="post">
+                                <div class="input-group" style="width: 100%; float: right">
+                                    <input type="text" class="form-control" placeholder="Bạn tìm gì..."
+                                           aria-label="Bạn tìm gì..." name="search-hoa-don-chi-tiet">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-sm btn-primary" type="submit">Search</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
+
                         <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
                         <table class="table table-striped" style="color: black">
@@ -159,24 +167,26 @@
                             </tbody>
                         </table>
                     </div>
-                    <div align="center">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <ul class="pagination justify-content-center pagination-lg">
-                                <li class="page-item"><a class="page-link"
-                                                         href="/ban-hang/thong-tin-hoa-don/${idHoaDon}?pageNum=0"><</a>
-                                </li>
-                                <c:forEach begin="1" end="${total}" varStatus="status">
-                                    <li class="page-item">
-                                        <a href="${pageContext.request.contextPath}/ban-hang/thong-tin-hoa-don/${idHoaDon}?pageNum=${status.index -1}"
-                                           class="page-link">${status.index}</a>
-                                    </li>
-                                </c:forEach>
-                                <li class="page-item"><a class="page-link"
-                                                         href="/ban-hang/thong-tin-hoa-don/${idHoaDon}?pageNum=${total-1}">></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                        <%--                    <div class="card-footer">--%>
+                        <%--                        <div align="center">--%>
+                        <%--                            <div class="btn-group" role="group" aria-label="Basic example">--%>
+                        <%--                                <ul class="pagination justify-content-center pagination-lg">--%>
+                        <%--                                    <li class="page-item"><a class="page-link"--%>
+                        <%--                                                             href="/ban-hang/thong-tin-hoa-don/${idHoaDon}?pageNum=0"><</a>--%>
+                        <%--                                    </li>--%>
+                        <%--                                    <c:forEach begin="1" end="${total}" varStatus="status">--%>
+                        <%--                                        <li class="page-item">--%>
+                        <%--                                            <a href="${pageContext.request.contextPath}/ban-hang/thong-tin-hoa-don/${idHoaDon}?pageNum=${status.index -1}"--%>
+                        <%--                                               class="page-link">${status.index}</a>--%>
+                        <%--                                        </li>--%>
+                        <%--                                    </c:forEach>--%>
+                        <%--                                    <li class="page-item"><a class="page-link"--%>
+                        <%--                                                             href="/ban-hang/thong-tin-hoa-don/${idHoaDon}?pageNum=${total-1}">></a>--%>
+                        <%--                                    </li>--%>
+                        <%--                                </ul>--%>
+                        <%--                            </div>--%>
+                        <%--                        </div>--%>
+                        <%--                    </div>--%>
                 </div>
             </div>
         </div>
@@ -184,7 +194,7 @@
         <c:if test="${not listHoaDonChiTiet.isEmpty()}">
             <div class="row">
                 <div class="col-12 outer-border p-3 border border-secondary">
-                    <form:form action="/ban-hang/thanh-toan/${HoaDon.id}" modelAttribute="HoaDon" method="post">
+                    <form:form action="/ban-hang/xac-nhan/${HoaDon.id}" modelAttribute="HoaDon" method="post">
                         <div class="col-12 grid-margin" style="color: black">
                             <div class="card">
                                 <div class="card-body">
@@ -220,22 +230,21 @@
                                                                 path="khachHang">Khách Hàng:</form:label>
                                                     <div class="col-sm-9">
                                                         <div class="row">
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="col-10">
-                                                                    <form:select path="khachHang" class="form-control"
-                                                                                 id="selectKhachHang">
-                                                                        <option selected disabled>Khách hàng</option>
-                                                                        <form:options items="${listKhachHang}"
-                                                                                      itemLabel="hoTen" itemValue="id"/>
-                                                                    </form:select>
-                                                                </div>
-                                                                <div class="col-2">
-                                                                    <a href="/ban-hang/modal-khach-hang"
-                                                                       class="btn btn-secondary"
-                                                                       data-bs-toggle="modal"
-                                                                       data-bs-target="#newKhachHang"><img
-                                                                            src="/uploads/plus.png" alt=""></a>
-                                                                </div>
+
+                                                            <div class="col-10">
+                                                                <form:select path="khachHang" class="form-control"
+                                                                             id="selectKhachHang">
+                                                                    <option selected disabled>Khách hàng</option>
+                                                                    <form:options items="${listKhachHang}"
+                                                                                  itemLabel="hoTen" itemValue="id"/>
+                                                                </form:select>
+                                                            </div>
+                                                            <div class="col-2">
+                                                                <a href="/ban-hang/modal-khach-hang"
+                                                                   class="btn btn-secondary"
+                                                                   data-bs-toggle="modal"
+                                                                   data-bs-target="#newKhachHang"><img
+                                                                        src="/uploads/plus.png" alt=""></a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -753,10 +762,9 @@
     }
 
     function myFunction4() {
-        let text = "Bạn chắc chắn muốn thanh toán không";
+        let text = "Bạn chắc chắn muốn xác nhận hóa đơn không";
         let kt = confirm(text);
         if (kt == true) {
-            confirm("Thanh toán thành công");
             return true
         } else {
             return false;
@@ -925,7 +933,7 @@
         if (search === "") {
             let html = `
                 <tr>
-<td colspan="4" style="text-align: center; color: red"><strong>Vui lòng nhập IMEI trước khi tìm kiếm.</strong></td>
+                    <td colspan="4" style="text-align: center; color: red"><strong>Vui lòng nhập IMEI trước khi tìm kiếm.</strong></td>
                 </tr>`;
             parentModal.find(".imei_search").html(html);
             return;
@@ -1058,23 +1066,6 @@
             console.error(err)
         }
     });
-</script>
-<script>
-    const newSanPhamModal = document.querySelector('#newSanPhamModal');
-    const nhapImeiModal = document.querySelector('#nhapImeiModal');
-    if (newSanPhamModal) {
-        newSanPhamModal.addEventListener('click', function (event) {
-            if (event.target.classList.contains('btn-warning') && event.target.classList.contains('btn-icon-text')) {
-                newSanPhamModal.classList.remove('show');
-                newSanPhamModal.setAttribute('aria-hidden', 'true');
-                newSanPhamModal.removeAttribute('data-bs-backdrop');
-
-                nhapImeiModal.classList.add('show');
-                nhapImeiModal.setAttribute('aria-hidden', 'false');
-                nhapImeiModal.setAttribute('data-bs-backdrop', 'static');
-            }
-        });
-    }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>

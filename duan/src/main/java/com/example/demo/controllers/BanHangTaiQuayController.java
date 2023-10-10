@@ -94,7 +94,7 @@ public class BanHangTaiQuayController {
     @PostMapping("/add-hoa-don")
     public String addHoaDon(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon, @ModelAttribute("modalAddKhachHang") KhachHang khachHang) {
         List<HoaDon> list = hoaDonService.find();
-        if (list.size() >= 3) {
+        if (list.size() >= 6) {
             hoaDonnn = null;
             model.addAttribute("HoaDon", hoaDonnn);
             model.addAttribute("thongBaoHoaDon", "Đã quá số lượng hóa đơn chờ");
@@ -136,7 +136,7 @@ public class BanHangTaiQuayController {
         List<HoaDon> list = hoaDonService.find();
         model.addAttribute("listHoaDon", list);
 //        Pageable pageable = PageRequest.of(num.orElse(0), size);
-//        Page<HoaDonChiTiet> listHDCT = hoaDonChiTietService.getHoaDonChiTietPage(pageable, id);
+//        Page<HoaDonChiTiet> listHDCT = hoaDonChiTietService.getHoaDonChiTietPage(pageable, idHoaDon); // Truyền tham số idHoaDon cho phương thức getHoaDonChiTietPage()
 //        model.addAttribute("listHoaDonChiTiet", listHDCT.getContent());
 //        model.addAttribute("total", listHDCT.getTotalPages());
 
@@ -157,7 +157,6 @@ public class BanHangTaiQuayController {
         model.addAttribute("listDiaChi", diaChiService.findAll0());
         model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
         model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
-
         return "/home/layout";
     }
 
@@ -290,7 +289,7 @@ public class BanHangTaiQuayController {
         HoaDonChiTiet hdct = new HoaDonChiTiet();
         hdct.setImei(imei);
         hdct.setHoaDon(hoaDonnn);
-        hdct.setTinhTrang(1);
+        hdct.setTinhTrang(0);
         hdct.setDonGia(imei.getChiTietSanPham().getGiaBan());
         hdct.setSoLuong(1);
         hoaDonChiTietService.add(hdct);
@@ -380,6 +379,7 @@ public class BanHangTaiQuayController {
         List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId());
         if (list.isEmpty()) {
             hoaDonnn.setTongTien(BigDecimal.ZERO);
+            hoaDonnn.setTinhTrang(0);
         } else {
             // Tính tổng đơn giá trong list hóa đơn chi tiết còn lại
             BigDecimal subTotal = list.stream()
@@ -413,8 +413,44 @@ public class BanHangTaiQuayController {
         return "redirect:/ban-hang/thong-tin-hoa-don/" + idHoaDon;
     }
 
+    @PostMapping("/xac-nhan/{id}")
+    public String xacNhan(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon, @PathVariable("id") UUID id,
+                          @ModelAttribute("modalAddKhachHang") KhachHang khachHang, @ModelAttribute("modalAddDiaChi") DiaChi DiaChi) {
+//        if(hoaDon.getMa().isEmpty()){
+//            model.addAttribute("thongBaoThanhToan","Chưa chọn hóa đơn");
+//            model.addAttribute("HoaDon", hoaDonnn);
+//            List<HoaDon> listHD = hoaDonService.find();
+//            model.addAttribute("listHoaDon", listHD);
+//            return "../ban-hang/hien-thi";
+//        }
+        HoaDon hd = hoaDonService.findById(id);
+        hd.setKhachHang(hoaDon.getKhachHang());
+        hd.setDiaChi(hoaDon.getDiaChi());
+        hd.setNhanVien(hoaDon.getNhanVien());
+        hd.setTongTien(hoaDon.getTongTien());
+        hd.setQuyDoi(hoaDon.getQuyDoi());
+        hd.setSdt(hoaDon.getSdt());
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        hd.setNgayCapNhat(date);
+        hd.setNgayNhan(date);
+        hd.setNgayShip(date);
+        hd.setGhiChu(hoaDon.getGhiChu());
+        hd.setTinhTrang(1);
+        hoaDonService.thanhToan(hd);
+        idHoaDon = id;
+        model.addAttribute("HoaDon", hoaDonService.findById(id));
+        model.addAttribute("listKhachHang", khachHangService.khachHangThanhToan(id));
+        model.addAttribute("listDiaChi", diaChiService.diaChiThanhToan(hoaDonService.findById(id).getKhachHang().getId()));
+        model.addAttribute("listNhanVien", nhanVienService.nhanVienThanhToan(id));
+        model.addAttribute("listHoaDonChiTiet", hoaDonChiTietService.getHoaDonChiTiet(id));
+        model.addAttribute("contentPage", "../ban-hang/thanh-toan.jsp");
+        return "/home/layout";
+    }
+
     @PostMapping("/thanh-toan/{id}")
-    public String thanhToan(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon, @PathVariable("id") UUID id, @ModelAttribute("modalAddKhachHang") KhachHang khachHang) {
+    public String thanhToan(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon, @PathVariable("id") UUID id,
+                            @ModelAttribute("modalAddDiaChi") DiaChi DiaChi) {
 //        if(hoaDon.getMa().isEmpty()){
 //            model.addAttribute("thongBaoThanhToan","Chưa chọn hóa đơn");
 //            model.addAttribute("HoaDon", hoaDonnn);
@@ -436,6 +472,14 @@ public class BanHangTaiQuayController {
         hd.setNgayShip(date);
         hd.setGhiChu(hoaDon.getGhiChu());
         hd.setTinhTrang(2);
+        List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
+        if (!list.isEmpty()) {
+            for (HoaDonChiTiet hdct : list
+            ) {
+                hdct.setTinhTrang(1);
+                hoaDonChiTietService.update(hdct.getId(), hdct);
+            }
+        }
         hoaDonService.thanhToan(hd);
         return "redirect:/ban-hang/hien-thi";
     }
@@ -494,7 +538,7 @@ public class BanHangTaiQuayController {
         HoaDonChiTiet hdct = new HoaDonChiTiet();
         hdct.setImei(imei);
         hdct.setHoaDon(hoaDonnn);
-        hdct.setTinhTrang(1);
+        hdct.setTinhTrang(0);
         hdct.setDonGia(imei.getChiTietSanPham().getGiaBan());
         hdct.setSoLuong(1);
         hoaDonChiTietService.add(hdct);
@@ -566,4 +610,44 @@ public class BanHangTaiQuayController {
         }
     }
 
+    @PostMapping("/search-hoa-don-chi-tiet-thanh-toan")
+    public String searchHoaDonChiTietThanhToan(Model model, @RequestParam("search-hoa-don-chi-tiet-thanh-toan") String search,
+                                               @ModelAttribute("modalAddDiaChi") DiaChi DiaChi) {
+        if (search.isEmpty()) {
+            model.addAttribute("thongBaoHoaDonChiTiet", "Mời nhập thông tin cần tìm kiếm");
+            model.addAttribute("HoaDon", hoaDonService.findById(idHoaDon));
+            model.addAttribute("listKhachHang", khachHangService.khachHangThanhToan(idHoaDon));
+            model.addAttribute("listDiaChi", diaChiService.diaChiThanhToan(hoaDonService.findById(idHoaDon).getKhachHang().getId()));
+            model.addAttribute("listNhanVien", nhanVienService.nhanVienThanhToan(idHoaDon));
+            model.addAttribute("listHoaDonChiTiet", hoaDonChiTietService.getHoaDonChiTiet(idHoaDon));
+            model.addAttribute("contentPage", "../ban-hang/thanh-toan.jsp");
+            return "/home/layout";
+        } else {
+            List<HoaDonChiTiet> list = hoaDonChiTietService.searchHDCTBanHangTaiQuay(idHoaDon, search);
+            model.addAttribute("HoaDon", hoaDonService.findById(idHoaDon));
+            model.addAttribute("listKhachHang", khachHangService.khachHangThanhToan(idHoaDon));
+            model.addAttribute("listDiaChi", diaChiService.diaChiThanhToan(hoaDonService.findById(idHoaDon).getKhachHang().getId()));
+            model.addAttribute("listNhanVien", nhanVienService.nhanVienThanhToan(idHoaDon));
+            model.addAttribute("listHoaDonChiTiet", list);
+            model.addAttribute("contentPage", "../ban-hang/thanh-toan.jsp");
+            return "/home/layout";
+        }
+    }
+
+    @PostMapping("/add-dia-chi")
+    public String addDiaChi(Model model, @ModelAttribute("modalAddDiaChi") DiaChi diaChi) {
+        diaChi.setMa("DC" + String.valueOf(diaChiService.findAll().size()) + 1);
+        diaChi.setNgayTao(Date.valueOf(LocalDate.now()));
+        diaChi.setTinhTrang(0);
+        diaChi.setKhachHang(khachHangService.newKhachHang(idHoaDon));
+        diaChiService.add(diaChi);
+        model.addAttribute("HoaDon", hoaDonService.findById(idHoaDon));
+        model.addAttribute("listKhachHang", khachHangService.khachHangThanhToan(idHoaDon));
+        model.addAttribute("listDiaChi", diaChiService.diaChiThanhToan(hoaDonService.findById(idHoaDon).getKhachHang().getId()));
+        model.addAttribute("listNhanVien", nhanVienService.nhanVienThanhToan(idHoaDon));
+        model.addAttribute("listHoaDonChiTiet", hoaDonChiTietService.getHoaDonChiTiet(idHoaDon));
+        model.addAttribute("modalAddDiaChi", new DiaChi());
+        model.addAttribute("contentPage", "../ban-hang/thanh-toan.jsp");
+        return "/home/layout";
+    }
 }

@@ -40,3 +40,6 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#selectDiaChi').select2();
 });
+$(document).ready(function () {
+    $('#selectNhanVien').select2();
+});

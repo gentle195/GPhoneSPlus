@@ -77,7 +77,7 @@ public class KhachHangServiceImpl implements KhachHangService {
 
     @Override
     public Page<KhachHang> getALL1(Pageable pageable) {
-       return khachHangRepository.getall1(pageable);
+        return khachHangRepository.getall1(pageable);
     }
 
     @Override
@@ -112,7 +112,17 @@ public class KhachHangServiceImpl implements KhachHangService {
 
     @Override
     public Page<KhachHangLSMuaHang> getLSMuaHangPage(Pageable pageable, UUID idkh) {
-        return khachHangRepository.getLSMuaHangPage(pageable,idkh);
+        return khachHangRepository.getLSMuaHangPage(pageable, idkh);
+    }
+
+    @Override
+    public List<KhachHang> khachHangThanhToan(UUID id) {
+        return khachHangRepository.khachHangThanhToan(id);
+    }
+
+    @Override
+    public KhachHang newKhachHang(UUID id) {
+        return khachHangRepository.newKhachHang(id);
     }
 
 
