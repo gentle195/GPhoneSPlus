@@ -90,13 +90,14 @@
                         </div>
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
+                    <div class="table-responsive" >
+                        <table class="table table-striped" style="color: black">
                             <thead>
                             <tr>
                                 <th scope="col">Tên sản phẩm</th>
                                 <th scope="col">Mã</th>
                                 <th scope="col">Số imei</th>
+                                <th scope="col">Mã QR</th>
                                 <th scope="col">Ngày tạo</th>
                                 <th scope="col">Ngày cập nhật</th>
                                 <th scope="col">Tình trạng</th>
@@ -111,7 +112,9 @@
                                     <td>${imei.chiTietSanPham.sanPham.ten}</td>
                                     <td>${imei.ma}</td>
                                     <td>${imei.soImei}</td>
-
+                                    <td>
+                                        <img src="../maqr/${imei.maQr}" width="70" height="70">
+                                    </td>
                                     <td>${imei.ngayTao}</td>
                                     <td>${imei.ngayCapNhat}</td>
                                     <td>${imei.tinhTrang==0?"Chưa bán":"Đã bán"}</td>

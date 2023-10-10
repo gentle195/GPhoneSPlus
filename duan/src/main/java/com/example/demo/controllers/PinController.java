@@ -4,7 +4,21 @@ import com.example.demo.models.DungLuongPin;
 import com.example.demo.models.Pin;
 import com.example.demo.services.DungLuongPinService;
 import com.example.demo.services.PinService;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +34,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
@@ -54,8 +70,8 @@ public class PinController {
 
     @GetMapping("/hien-thi-delete")
     public String hienThi1(Model model, @ModelAttribute("pin") Pin pin,
-                          @RequestParam("pageNum") Optional<Integer> pageNum,
-                          @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+                           @RequestParam("pageNum") Optional<Integer> pageNum,
+                           @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
 
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
@@ -154,7 +170,7 @@ public class PinController {
 
         pinService.updateTT();
         Page<Pin> page = pinService.getAll1(pageable);
-        model.addAttribute("contentPage","../pin/pin-delete.jsp");
+        model.addAttribute("contentPage", "../pin/pin-delete.jsp");
         model.addAttribute("listPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
@@ -172,9 +188,9 @@ public class PinController {
         Date date = new Date(millis);
         pin1.setNgayCapNhat(date);
         pin1.setTinhTrang(1);
-        pinService.update(id,pin1);
+        pinService.update(id, pin1);
         Page<Pin> page = pinService.getAll(pageable);
-        model.addAttribute("contentPage","../pin/pin.jsp");
+        model.addAttribute("contentPage", "../pin/pin.jsp");
         model.addAttribute("listPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
@@ -192,9 +208,9 @@ public class PinController {
         pin1.setNgayCapNhat(date);
 
         pin1.setTinhTrang(0);
-        pinService.update(id,pin1);
+        pinService.update(id, pin1);
         Page<Pin> page = pinService.getAll1(pageable);
-        model.addAttribute("contentPage","../pin/pin-delete.jsp");
+        model.addAttribute("contentPage", "../pin/pin-delete.jsp");
         model.addAttribute("listPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
@@ -241,5 +257,165 @@ public class PinController {
         model.addAttribute("contentPage", "../pin/pin-delete.jsp");
         return "/home/layout";
     }
+    @GetMapping("/export-excel")
+    public String exportExcel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Lấy dữ liệu từ database
+        List<Pin> listPin = pinService.findAll();
 
+        // Tạo đối tượng XSSFWorkbook
+        XSSFWorkbook workbook = new XSSFWorkbook();
+
+        // Tạo bảng dữ liệu
+        XSSFSheet sheet = workbook.createSheet("Danh sách pin");
+
+        // Tạo tiêu đề bảng
+        Row row = sheet.createRow(0);
+        Cell cell;
+
+        cell = row.createCell(0);
+        cell.setCellValue("Mã");
+        cell = row.createCell(1);
+        cell.setCellValue("Loại Pin");
+        cell = row.createCell(2);
+        cell.setCellValue("Công nghệ Pin");
+        cell = row.createCell(3);
+        cell.setCellValue("Ngày Tạo");
+        cell = row.createCell(4);
+        cell.setCellValue("Ngày Cập Nhật");
+        cell = row.createCell(5);
+        cell.setCellValue("Tình Trạng");
+        cell = row.createCell(6);
+        cell.setCellValue("Mô Tả");
+        cell = row.createCell(7);
+        cell.setCellValue("Dung Lượng");
+
+        // Tạo đường viền cho tiêu đề bảng
+        CellStyle headerStyle = workbook.createCellStyle();
+        headerStyle.setBorderBottom(BorderStyle.THIN);
+        headerStyle.setBorderLeft(BorderStyle.THIN);
+        headerStyle.setBorderRight(BorderStyle.THIN);
+        headerStyle.setBorderTop(BorderStyle.THIN);
+
+        for (int i = 0; i < 8; i++) {
+            cell = row.getCell(i);
+            cell.setCellStyle(headerStyle);
+        }
+
+        // Thêm dữ liệu vào bảng
+        int rowNum = 1;
+        for (Pin pin : listPin) {
+            row = sheet.createRow(rowNum);
+            cell = row.createCell(0);
+            cell.setCellValue(pin.getMa());
+            cell = row.createCell(1);
+            cell.setCellValue(pin.getLoaiPin());
+            cell = row.createCell(2);
+            cell.setCellValue(pin.getCongNghePin());
+
+            // Tạo ô kiểu date
+            XSSFCellStyle dateStyle = workbook.createCellStyle();
+            dateStyle.setDataFormat(workbook.createDataFormat().getFormat("yyyy/mm/dd"));
+
+            cell = row.createCell(3);
+            cell.setCellValue(pin.getNgayTao());
+            cell.setCellStyle(dateStyle);
+
+            cell = row.createCell(4);
+            cell.setCellValue(pin.getNgayCapNhat());
+            cell.setCellStyle(dateStyle);
+
+            cell = row.createCell(5);
+            cell.setCellValue(pin.getTinhTrang() == 0 ? "Hoạt động" : "Ngừng hoạt động");
+
+            cell = row.createCell(6);
+            cell.setCellValue(pin.getMoTa());
+            cell = row.createCell(7);
+            cell.setCellValue(pin.getDungLuongPin().getThongSo());
+
+            rowNum++;
+        }
+
+        // Lưu tệp excel
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        workbook.write(outputStream);
+        byte[] bytes = outputStream.toByteArray();
+
+        // Trả về tệp excel
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setHeader("Content-Disposition", "attachment; filename=danh-sach-pin.xlsx");
+        response.getOutputStream().write(bytes);
+        response.getOutputStream().flush();
+        response.getOutputStream().close();
+
+        return null;
+    }
+
+
+
+    @GetMapping("/export-pdf")
+    public void exportPdf(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        List<Pin> listPin = pinService.findAll();
+
+        try (Workbook workbook = new XSSFWorkbook()) {
+            Sheet sheet = workbook.createSheet("Danh sách pin");
+
+            // Tạo tiêu đề bảng
+            Row row = sheet.createRow(0);
+            Cell cell;
+            cell = row.createCell(0);
+            cell.setCellValue("Mã");
+            cell = row.createCell(1);
+            cell.setCellValue("Loại Pin");
+            cell = row.createCell(2);
+            cell.setCellValue("Công nghệ Pin");
+            cell = row.createCell(3);
+            cell.setCellValue("Ngày Tạo");
+            cell = row.createCell(4);
+            cell.setCellValue("Ngày Cập Nhật");
+            cell = row.createCell(5);
+            cell.setCellValue("Tình Trạng");
+            cell = row.createCell(6);
+            cell.setCellValue("Mô Tả");
+            cell = row.createCell(7);
+            cell.setCellValue("Dung Lượng");
+
+            // Thêm dữ liệu vào bảng
+
+            int rowNum = 1;
+            for (Pin pin : listPin) {
+                row = sheet.createRow(rowNum);
+                cell = row.createCell(0);
+                cell.setCellValue(pin.getMa());
+                cell = row.createCell(1);
+                cell.setCellValue(pin.getLoaiPin());
+                cell = row.createCell(2);
+                cell.setCellValue(pin.getCongNghePin());
+                cell = row.createCell(3);
+                cell.setCellValue(pin.getNgayTao());
+                cell = row.createCell(4);
+                cell.setCellValue(pin.getNgayCapNhat());
+                cell = row.createCell(5);
+                cell.setCellValue(pin.getTinhTrang());
+                cell = row.createCell(6);
+                cell.setCellValue(pin.getMoTa());
+                cell = row.createCell(7);
+                cell.setCellValue(pin.getDungLuongPin().getThongSo());
+
+                rowNum++;
+            }
+
+            // Ghi dữ liệu PDF trực tiếp vào HttpServletResponse
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=danh-sach-pin.pdf");
+            // Đặt mã charset là UTF-8 để tránh lỗi font chữ
+            response.setCharacterEncoding("UTF-8");
+
+            try (ServletOutputStream servletOutputStream = response.getOutputStream()) {
+                workbook.write(servletOutputStream);
+            }
+        } catch (Exception e) {
+            // Xử lý ngoại lệ nếu có
+            e.printStackTrace();
+        }
+    }
 }
