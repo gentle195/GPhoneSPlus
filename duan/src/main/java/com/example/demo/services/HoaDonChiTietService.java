@@ -28,6 +28,10 @@ public interface HoaDonChiTietService {
 
     public Boolean delete(UUID id);
 
+    public Page<HoaDonChiTiet> search(String ten, Pageable pageable);
+
+    Page<HoaDonChiTiet> getHoaDonChiTietPage(UUID id, Pageable pageable);
+
 
 }
 
