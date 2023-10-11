@@ -83,5 +83,16 @@ public class HoaDonChiTietServiceImpl implements HoaDonChiTietService {
         }
         return false;
     }
+    @Override
+    public Page<HoaDonChiTiet> search(String ten, Pageable pageable) {
+        return hoaDonChiTietRepository.search(ten, pageable);
+    }
+
+    @Override
+    public Page<HoaDonChiTiet> getHoaDonChiTietPage(UUID id, Pageable pageable) {
+        return hoaDonChiTietRepository.getHoaDonChiTietPage(pageable,id);
+    }
+
+
 
 }

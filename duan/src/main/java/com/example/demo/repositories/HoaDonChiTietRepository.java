@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,4 +29,10 @@ public interface HoaDonChiTietRepository extends JpaRepository<HoaDonChiTiet, UU
             "imei.chiTietSanPham.sanPham.hangSanPham.ten like %:search% or imei.chiTietSanPham.mauSac.ten like %:search% or " +
             "imei.chiTietSanPham.chip.ten like %:search% or imei.chiTietSanPham.ram.dungLuong like %:search% or imei.chiTietSanPham.rom.dungLuong like %:search%)")
     List<HoaDonChiTiet> searchHDCTBanHangTaiQuay(UUID id, String search);
+
+
+    @Query("select hdct from HoaDonChiTiet hdct left join hdct.imei.chiTietSanPham.sanPham.ten where hdct.imei.chiTietSanPham.sanPham.ten like %:ten%")
+    Page<HoaDonChiTiet> search(@Param("ten") String ten, Pageable pageable);
+
+
 }

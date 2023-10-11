@@ -33,12 +33,8 @@ public interface HoaDonService {
 
     public List<HoaDon> search(String ten, BigDecimal soTienQuyDoi);
 
-    public List<HoaDon> locHoaDon(UUID idKH, UUID idNV
-//            , UUID idDC
-//                                  Date startDate, Date endDate,
-//                                  Date shipStartDate, Date shipEndDate,
-//                                  Date receiveStartDate, Date receiveEndDate);
-    );
+    public List<HoaDon> loc1(UUID idKH, UUID idNV, UUID idDC, Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate);
+
 }
 
 

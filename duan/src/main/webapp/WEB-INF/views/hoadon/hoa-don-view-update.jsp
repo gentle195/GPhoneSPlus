@@ -115,14 +115,14 @@
                         <div class="stepwizard-row setup-panel">
                             <c:if test="${hoaDon.tinhTrang == 0}">
                                 <div class="stepwizard-step">
-                                    <a href="#step-1" type="button"
+                                    <a href="" type="button"
                                        class="stepwizard-step-linear btn btn-primary btn-circle">0</a>
                                     <p>Đang chờ</p>
                                 </div>
                             </c:if>
                             <c:if test="${hoaDon.tinhTrang == 1}">
                                 <div class="stepwizard-step">
-                                    <a href="#step-2" type="button"
+                                    <a href="" type="button"
                                        class="stepwizard-step-linear btn btn-default btn-circle"
                                        disabled="disabled">1</a>
                                     <p>Đã xác nhận</p>
@@ -130,7 +130,7 @@
                             </c:if>
                             <c:if test="${hoaDon.tinhTrang == 2}">
                                 <div class="stepwizard-step">
-                                    <a href="#step-3" type="button"
+                                    <a href="" type="button"
                                        class="stepwizard-step-linear btn btn-default btn-circle"
                                        disabled="disabled">2</a>
                                     <p>Chờ thanh toán</p>
@@ -138,14 +138,14 @@
                             </c:if>
                             <c:if test="${hoaDon.tinhTrang == 3}">
                                 <div class="stepwizard-step">
-                                    <a href="#step-4" type="button"
+                                    <a href="" type="button"
                                        class="stepwizard-step-linear btn btn-default btn-circle"
                                        disabled="disabled">3</a>
                                     <p>Đã thanh toán</p>
                                 </div>
                             </c:if> <c:if test="${hoaDon.tinhTrang == 4}">
                             <div class="stepwizard-step">
-                                <a href="#step-5" type="button"
+                                <a href="" type="button"
                                    class="stepwizard-step-linear btn btn-default btn-circle"
                                    disabled="disabled">4</a>
                                 <p>Chờ vận chuyển</p>
@@ -153,7 +153,7 @@
                         </c:if>
                             <c:if test="${hoaDon.tinhTrang == 5}">
                                 <div class="stepwizard-step">
-                                    <a href="#step-6" type="button"
+                                    <a href="" type="button"
                                        class="stepwizard-step-linear btn btn-default btn-circle"
                                        disabled="disabled">5</a>
                                     <p>Đang vận chuyển</p>
@@ -161,7 +161,7 @@
                             </c:if>
                             <c:if test="${hoaDon.tinhTrang == 6}">
                                 <div class="stepwizard-step">
-                                    <a href="#step-7" type="button"
+                                    <a href="" type="button"
                                        class="stepwizard-step-linear btn btn-default btn-circle"
                                        disabled="disabled">6</a>
                                     <p>Vận chuyển hoàn tất</p>
@@ -169,7 +169,7 @@
                             </c:if>
                             <c:if test="${hoaDon.tinhTrang == 7}">
                                 <div class="stepwizard-step">
-                                    <a href="#step-8" type="button"
+                                    <a href="" type="button"
                                        class="stepwizard-step-linear btn btn-default btn-circle"
                                        disabled="disabled">7</a>
                                     <p>Giao trễ</p>
@@ -177,7 +177,7 @@
                             </c:if>
                             <c:if test="${hoaDon.tinhTrang == 8}">
                                 <div class="stepwizard-step">
-                                    <a href="#step-9" type="button"
+                                    <a href="" type="button"
                                        class="stepwizard-step-linear btn btn-default btn-circle"
                                        disabled="disabled">8</a>
                                     <p>Đã hủy</p>
@@ -186,7 +186,7 @@
                         </div>
                     </div>
                     <br><br>
-                    <form:form action="/hoa-don/detail/${hoaDon.id}" method="get" modelAttribute="hoaDon">
+                    <form:form action="/hoa-don/view-update/${hoaDon.id}" method="get" modelAttribute="hoaDon">
                         <%--                        <form class="form-sample">--%>
                         <%--                            <br>--%>
                         <%--                            --%>
@@ -206,9 +206,16 @@
                                     <label class="col-sm-3 col-form-label">Khách hàng:
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="khachHangInput" name="khachHang"
-                                               value="${hoaDon.khachHang.hoTen}" readonly>
-                                            <%--                                            <form:input  class="form-control"  path="hoTen">${hoaDon.khachHang.hoTen}</form:input>--%>
+                                        <select id="selectKhachHang1" name="khachHang" class="form-control select2"
+                                                style="font-weight: bold; width: 100%">
+                                            <option  id="khachHangInput" name="khachHang" selected disabled>${hoaDon.khachHang.hoTen}</option>
+                                            <c:forEach items="${listKhachHang}" var="khachHang">
+                                                <option value="${khachHang.id}">${khachHang.hoTen}</option>
+                                            </c:forEach>
+                                        </select>
+<%--                                        <input type="text" class="form-control" id="khachHangInput" name="khachHang"--%>
+<%--                                               value="${hoaDon.khachHang.hoTen}">--%>
+<%--                                            &lt;%&ndash;                                            <form:input  class="form-control"  path="hoTen">${hoaDon.khachHang.hoTen}</form:input>&ndash;%&gt;--%>
                                     </div>
                                 </div>
                             </div>
@@ -221,7 +228,7 @@
                                     </label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" id="nhanVienInput" name="nhanVien"
-                                               value="${hoaDon.nhanVien.hoTen}" readonly>
+                                               value="${hoaDon.nhanVien.hoTen}">
                                             <%--                                            <form:label class="form-label" path="khachHang">Hãng khách hàng: ${hoaDon.khachHang.hoTen}</form:label>--%>
                                             <%--                                            <form:input  class="form-control" path="hoTen"--%>
                                             <%--                                            >${hoaDon.nhanVien.hoTen}</form:input>--%>
@@ -233,48 +240,48 @@
                                     <label class="col-sm-3 col-form-label">SĐT:
                                     </label>
                                     <div class="col-sm-9">
-                                        <form:input class="form-control" placeholder="" readonly="true"
+                                        <form:input class="form-control" placeholder=""
                                                     path="sdt"></form:input>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Quy đổi:
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="quyDoiInput" name="quyDoi"
-                                               value="${hoaDon.quyDoi.soTienQuyDoi}" readonly>
+<%--                        <div class="row">--%>
+<%--                            <div class="col-md-6">--%>
+<%--                                <div class="form-group row">--%>
+<%--                                    <label class="col-sm-3 col-form-label">Quy đổi:--%>
+<%--                                    </label>--%>
+<%--                                    <div class="col-sm-9">--%>
+<%--                                        <input type="text" class="form-control" id="quyDoiInput" name="quyDoi"--%>
+<%--                                               value="${hoaDon.quyDoi.soTienQuyDoi}" readonly>--%>
 
-                                            <%--                                            <form:input class="form-control" path="quyDoi" readonly="true"--%>
-                                            <%--                                            >${hoaDon.quyDoi.soTienQuyDoi}</form:input>--%>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Địa chỉ:</label>
-                                        <div class="col-sm-9">
+<%--                                            &lt;%&ndash;                                            <form:input class="form-control" path="quyDoi" readonly="true"&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                            >${hoaDon.quyDoi.soTienQuyDoi}</form:input>&ndash;%&gt;--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-md-6">--%>
+<%--                                <div class="form-group row">--%>
+<%--                                    <div class="form-group row">--%>
+<%--                                        <label class="col-sm-3 col-form-label">Địa chỉ:</label>--%>
+<%--                                        <div class="col-sm-9">--%>
 
-                                            <input type="text" class="form-control" id="diaChiInput" name="diaChi"
-                                                   value="${hoaDon.diaChi.diaChi}" readonly>
+<%--                                            <input type="text" class="form-control" id="diaChiInput" name="diaChi"--%>
+<%--                                                   value="${hoaDon.diaChi.diaChi}">--%>
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Tổng tiền:
                                     </label>
                                     <div class="col-sm-9">
-                                        <form:input class="form-control" placeholder="" readonly="true"
+                                        <form:input class="form-control" placeholder=""
                                                     path="tongTien"></form:input>
                                     </div>
                                 </div>
@@ -285,7 +292,7 @@
                                         <div id="tb" style="color: crimson;float: right"></div>
                                     </label>
                                     <div class="col-sm-9">
-                                        <form:input readonly="true" class="form-control" type="date"
+                                        <form:input class="form-control" type="date"
                                                     value="${hoaDon.ngayTao}"
                                                     placeholder=""
                                                     path="ngayTao"></form:input>
@@ -301,7 +308,7 @@
                                         <div style="color: crimson;float: right"></div>
                                     </label>
                                     <div class="col-sm-9">
-                                        <form:input readonly="true" class="form-control" type="date"
+                                        <form:input class="form-control" type="date"
                                                     value="${hoaDon.ngayNhan}"
                                                     placeholder=""
                                                     path="ngayNhan"></form:input>
@@ -314,7 +321,7 @@
                                         <div style="color: crimson;float: right"></div>
                                     </label>
                                     <div class="col-sm-9">
-                                        <form:input readonly="true" class="form-control" type="date"
+                                        <form:input class="form-control" type="date"
                                                     value="${hoaDon.ngayShip}"
                                                     placeholder=""
                                                     path="ngayShip"></form:input>
@@ -322,7 +329,13 @@
                                 </div>
                             </div>
                         </div>
-                        </form>
+                        <div style="text-align: center">
+                            <button type="submit" class="btn btn-primary mr-2"
+                                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                SAVE
+                            </button>
+                        </div>
+
                     </form:form>
                 </div>
 
@@ -383,16 +396,16 @@
                     <div align="center">
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <ul class="pagination justify-content-center pagination-lg">
-                                <li class="page-item"><a class="page-link" href="/hoa-don/detail/${id}?pageNum=0"><</a>
+                                <li class="page-item"><a class="page-link" href="/hoa-don/view-update/${id}?pageNum=0"><</a>
                                 </li>
                                 <c:forEach begin="1" end="${total}" varStatus="status">
                                     <li class="page-item">
-                                        <a href="${pageContext.request.contextPath}/hoa-don/detail/${id}?pageNum=${status.index -1}"
+                                        <a href="${pageContext.request.contextPath}/hoa-don/view-update/${id}?pageNum=${status.index -1}"
                                            class="page-link">${status.index}</a>
                                     </li>
                                 </c:forEach>
                                 <li class="page-item"><a class="page-link"
-                                                         href="/hoa-don/detail/${id}?pageNum=${total-1}">></a>
+                                                         href="/hoa-don/view-update/${id}?pageNum=${total-1}">></a>
                                 </li>
                             </ul>
                         </div>
@@ -423,7 +436,19 @@
     </div>
 </div>
 </body>
+<script>
 
+    $('#selectKhachHang1').select2({
+        theme: 'bootstrap-5'
+    });
+    $('#selectNhanVien1').select2({
+        theme: 'bootstrap-5'
+    });
+    $('#selectDiaChi1').select2({
+        theme: 'bootstrap-5'
+    });
+
+</script>
 <script src="../../vendors/js/vendor.bundle.base.js"></script>
 <script src="../../js/off-canvas.js"></script>
 <script src="../../js/hoverable-collapse.js"></script>

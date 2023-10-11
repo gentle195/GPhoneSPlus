@@ -154,12 +154,10 @@ public class HoaDonServiceImpl implements HoaDonService {
     }
 
     @Override
-    public List<HoaDon> locHoaDon(UUID idKH, UUID idNV) {
-        return hoaDonRepository.loc(idKH, idNV
-//                startDate, endDate,
-//                shipStartDate, shipEndDate,
-//                receiveStartDate, receiveEndDate
-        );
+    public List<HoaDon> loc1(UUID idKH, UUID idNV, UUID idDC, Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate)
+    {
+        return hoaDonRepository.loc1(idKH,idNV,idDC, startDate,endDate,shipStartDate, shipEndDate,receiveStartDate,receiveEndDate);
     }
+
 
 }
