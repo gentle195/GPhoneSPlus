@@ -9,49 +9,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Focus - Bootstrap Admin Dashboard </title>
-    <style>
-        .btn-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 75%;
-        }
 
-        .btn-group .btn {
-            text-align: center;
-            margin: 0 auto;
-        }
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon.png">
+    <link rel="stylesheet" href="../../../vendor/owl-carousel/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../../../vendor/owl-carousel/css/owl.theme.default.min.css">
+    <link href="../../../vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="../../../vendor/jqvmap/css/jqvmap.min.css" rel="stylesheet">
+    <link href="../../../css/style.css" rel="stylesheet">
 
-        .btn-group .btn:nth-child(1) {
-            width: 150%;
-        }
-
-        .btn-group .btn:nth-child(2) {
-            width: 10px;
-        }
-
-        .search-form {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .search-form th {
-            width: 20%;
-        }
-
-        .search-form td {
-            width: 80%;
-        }
-
-        .search-form input {
-            border-radius: 5px;
-        }
-
-        .search-form button {
-            border-radius: 5px;
-        }
-    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="col-lg-6">
@@ -320,6 +286,7 @@
         </c:if>
     </c:if>
 </section>
+
 <div class="modal fade" id="newKhachHang" tabindex="-1" aria-labelledby="khachHangLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -477,167 +444,169 @@
     </div>
 </div>
 <div class="modal fade" id="newSanPham" tabindex="-1" aria-labelledby="modal-1-label" aria-hidden="true">
+
+
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
-                        <form class="forms-sample">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select name="hang" class="form-control"
-                                                style="font-weight: bold; width: 100%" id="locHang">
-                                            <option selected disabled>Hãng</option>
-                                            <c:forEach items="${listHang}" var="hang" varStatus="i">
-                                                <option value="${hang.id}">${hang.ten}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select name="rom" class="form-control"
-                                                style="font-weight: bold; width: 100%" id="locRom">
-                                            <option selected disabled>Rom</option>
-                                            <c:forEach items="${listRom}" var="rom" varStatus="i">
-                                                <option value="${rom.id}">${rom.dungLuong}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select name="manHinh" class="form-control"
-                                                style="font-weight: bold; width: 100%" id="locMan">
-                                            <option selected disabled>Màn Hình</option>
-                                            <c:forEach items="${listManHinh}" var="man" varStatus="i">
-                                                <option value="${man.id}">${man.thongSo}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select name="camera" class="form-control"
-                                                style="font-weight: bold; width: 100%" id="locCam">
-                                            <option selected disabled>Camera</option>
-                                            <c:forEach items="${listCamera}" var="cam" varStatus="i">
-                                                <option value="${cam.id}">${cam.thongSo}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select name="ram" class="form-control"
-                                                style="font-weight: bold; width: 100%" id="locRam">
-                                            <option selected disabled>Ram</option>
-                                            <c:forEach items="${listRam}" var="ram" varStatus="i">
-                                                <option value="${ram.id}">${ram.dungLuong}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select name="chip" class="form-control"
-                                                style="font-weight: bold; width: 100%" id="locChip">
-                                            <option selected disabled>Chip</option>
-                                            <c:forEach items="${listChip}" var="chip" varStatus="i">
-                                                <option value="${chip.id}">${chip.ten}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <select name="dungLuongPin" class="form-control"
-                                                style="font-weight: bold; width: 100%" id="locDungLuong">
-                                            <option selected disabled>Dung Lượng Pin</option>
-                                            <c:forEach items="${dungLuongPin}" var="pin" varStatus="i">
-                                                <option value="${pin.id}">${pin.thongSo}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <input type="number" name="giaBanMin"
-                                               placeholder="Giá min" id="locGiaMin">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <input type="number" name="giaBanMax"
-                                               placeholder="Giá max" id="locGiaMax">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div style="text-align: center">
-                                        <button type="button" class="btn btn-primary mr-2" id="buttonLoc">
-                                            Lọc
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="card-body">
-                            <h4 class="card-title" style="float: left">Danh sách sản phẩm</h4>
-                            <%--            Tìm kiếm               --%>
-                            <div class="input-group" style="width: 30%; float: right">
-                                <input type="text" class="form-control" placeholder="Bạn tìm gì..."
-                                       aria-label="Bạn tìm gì..." name="search-san-pham" id="sanPhamSearchInput">
-                                <div class="input-group-append">
-                                    <button class="btn btn-sm btn-primary" type="button" id="searchSanPham">Search
-                                    </button>
-                                </div>
-                            </div>
-                            <%--           kết thúc tìm kiếm         --%>
-                            <div class="table-responsive">
-                                <table id="example" class="display" style="min-width: 845px; color: black">
-                                    <thead>
-                                    <tr>
-                                        <th>Mã Sản Phẩm</th>
-                                        <th>Tên Sản Phẩm</th>
-                                        <th>Ảnh</th>
-                                        <th>Hãng</th>
-                                        <th>Màu Sắc</th>
-                                        <th>Ram</th>
-                                        <th>Bộ Nhớ</th>
-                                        <th>Đơn Giá</th>
-                                        <th>Số Lượng</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody class="san_pham_search" style="text-align: center">
-                                    <c:forEach items="${listChiTietSanPham}" var="ctsp">
-                                        <tr>
-                                            <td>${ctsp.sanPham.ma}</td>
-                                            <td>${ctsp.sanPham.ten}</td>
-                                            <td align="center">
-                                                <img src="/uploads/${ctsp.urlAnh}" width="40" height="40">
-                                            </td>
-                                            <td>${ctsp.sanPham.hangSanPham.ten}</td>
-                                            <td>${ctsp.mauSac.ten}</td>
-                                            <td>${ctsp.ram.dungLuong}</td>
-                                            <td>${ctsp.rom.dungLuong}</td>
-                                            <td>${ctsp.giaBan}</td>
-                                            <td>${ctsp.soLuong}</td>
-                                            <td>
-                                                <a class="btn btn-warning btn-icon-text"
-                                                   data-bs-toggle="modal" data-bs-target="#nhapImei">Nhập IMEI</a>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+
+
+
+
+<%--               1         --%>
+    <form class="forms-sample">
+        <div class="container px-0 px-lg-5 mt-0">
+            <div class="row gx-0 gx-lg-5 row-cols-0 row-cols-md-0 row-cols-xl-5 justify-content-center" style="width: 100%">
+                <div style="height: 1.5cm">
+                    <select  class="form-control" id="hangds1" onchange="clickcombobox()">
+                        <option selected value="null">Hãng sản phẩm</option>
+                        <c:forEach items="${hangds}" var="ht">
+                            <option  value="${ht.ten}">${ht.ten}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div>
+                    <select  class="form-control" id="camds1" onchange="clickcombobox()">
+                        <option selected value="null">Camera</option>
+                        <c:forEach items="${camds}" var="ht">
+                            <option  value="${ht.thongSo}">${ht.thongSo}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+
+                <div>
+                    <select  class="form-control" id="mands1" onchange="clickcombobox()">
+                        <option selected value="null">Màn hình</option>
+                        <c:forEach items="${mands}" var="ht">
+                            <option  value="${ht.thongSo}">${ht.thongSo}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div style="height: 1.5cm">
+                    <select  class="form-control" id="mauds1" onchange="clickcombobox()">
+                        <option selected value="null">Màu sắc</option>
+                        <c:forEach items="${mauds}" var="ht">
+                            <option  value="${ht.ten}">${ht.ten}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div>
+                    <select  class="form-control" id="ramds1" onchange="clickcombobox()">
+                        <option selected value="null">Ram</option>
+                        <c:forEach items="${ramds}" var="ht">
+                            <option  value="${ht.dungLuong}">${ht.dungLuong}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div>
+                    <select  class="form-control" id="romds1" onchange="clickcombobox()">
+                        <option selected value="null">Rom</option>
+                        <c:forEach items="${romds}" var="ht">
+                            <option  value="${ht.dungLuong}">${ht.dungLuong}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div style="height: 1.5cm">
+                    <select  class="form-control" id="pinds1" onchange="clickcombobox()">
+                        <option selected value="null">Pin</option>
+                        <c:forEach items="${pinds}" var="ht">
+                            <option  value="${ht.loaiPin}">${ht.loaiPin}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div>
+                    <select  class="form-control" id="dungds1" onchange="clickcombobox()">
+                        <option selected value="null">Dung lượng pin</option>
+                        <c:forEach items="${dungds}" var="ht">
+                            <option  value="${ht.thongSo}">${ht.thongSo}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div>
+                    <select  class="form-control" id="chipds1" onchange="clickcombobox()">
+                        <option selected value="null">Chíp</option>
+                        <c:forEach items="${chipds}" var="ht">
+                            <option  value="${ht.ten}">${ht.ten}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div>
+                    <select  class="form-control" id="sands1" onchange="clickcombobox()">
+                        <option selected value="null">Sản phẩm</option>
+                        <c:forEach items="${sands}" var="ht">
+                            <option  value="${ht.ten}">${ht.ten}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+<%--het 1--%>
+
+<%--2--%>
+    <div >
+        <div class="card-body" >
+            <h4 class="card-title" style="float: left">Danh sách sản phẩm</h4>
+            <%--            Tìm kiếm               --%>
+            <div class="input-group" style="width: 30%; float: right">
+                <input type="text" class="form-control" placeholder="Bạn tìm gì..."
+                       aria-label="Bạn tìm gì..." name="search-san-pham" id="sanPhamSearchInput">
+                <div class="input-group-append">
+                    <button class="btn btn-sm btn-primary" type="button" id="searchSanPham">Search
+                    </button>
+                </div>
+            </div>
+            <%--           kết thúc tìm kiếm         --%>
+            <div class="table-responsive">
+                <div >
+                <table id="example" class="display" style="min-width: 845px; color: black">
+                    <thead>
+                    <tr>
+                        <th>Mã Sản Phẩm</th>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Ảnh</th>
+                        <th>Hãng</th>
+                        <th>Màu Sắc</th>
+                        <th>Ram</th>
+                        <th>Bộ Nhớ</th>
+                        <th>Đơn Giá</th>
+                        <th>Số Lượng</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody class="san_pham_search" style="text-align: center" id="banglocthaydoi">
+                    <c:forEach items="${listChiTietSanPham}" var="ctsp">
+                        <tr>
+                            <td>${ctsp.sanPham.ma}</td>
+                            <td>${ctsp.sanPham.ten}</td>
+                            <td align="center">
+                                <img src="/uploads/${ctsp.urlAnh}" width="40" height="40">
+                            </td>
+                            <td>${ctsp.sanPham.hangSanPham.ten}</td>
+                            <td>${ctsp.mauSac.ten}</td>
+                            <td>${ctsp.ram.dungLuong}</td>
+                            <td>${ctsp.rom.dungLuong}</td>
+                            <td>${ctsp.giaBan}</td>
+                            <td>${ctsp.soLuong}</td>
+                            <td>
+                                <a class="btn btn-warning btn-icon-text"
+                                   data-bs-toggle="modal" data-bs-target="#nhapImei">Nhập IMEI</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<%--                        het 2--%>
+
+
                     </div>
                 </div>
 
@@ -645,6 +614,40 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="modal fade" id="nhapImei" tabindex="-1"
      aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -709,26 +712,26 @@
     </div>
 </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"
-        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
-        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
-        crossorigin="anonymous"></script>
-<script src="../../vendors/js/vendor.bundle.base.js"></script>
-<script src="../../js/off-canvas.js"></script>
-<script src="../../js/hoverable-collapse.js"></script>
-<script src="../../js/template.js"></script>
-<script src="../../js/settings.js"></script>
-<script src="../../js/todolist.js"></script>
+<%--<script src="https://code.jquery.com/jquery-3.7.0.min.js"--%>
+<%--        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>--%>
+<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"--%>
+<%--        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"--%>
+<%--        crossorigin="anonymous"></script>--%>
+<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"--%>
+<%--        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"--%>
+<%--        crossorigin="anonymous"></script>--%>
+<%--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"--%>
+<%--        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"--%>
+<%--        crossorigin="anonymous"></script>--%>
+<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"--%>
+<%--        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"--%>
+<%--        crossorigin="anonymous"></script>--%>
+<%--<script src="../../vendors/js/vendor.bundle.base.js"></script>--%>
+<%--<script src="../../js/off-canvas.js"></script>--%>
+<%--<script src="../../js/hoverable-collapse.js"></script>--%>
+<%--<script src="../../js/template.js"></script>--%>
+<%--<script src="../../js/settings.js"></script>--%>
+<%--<script src="../../js/todolist.js"></script>--%>
 <script>
     function myFunction1() {
         let text = "Bạn chắc chắn muốn thêm";
@@ -1067,6 +1070,118 @@
         }
     });
 </script>
+<script>
+    function loadInterface(interfaceUrl) {
+        fetch(interfaceUrl)
+            .then(response => response.text())
+            .then(data => {
+                const content = document.getElementById('banglocthaydoi');
+                content.innerHTML = data;
+
+                loadScripts();
+                // loadSelect2();
+
+
+            })
+            .catch(error => {
+                console.error('Error loading interface:', error);
+            });
+
+
+
+    }
+
+    function loadScripts() {
+        const scriptsToLoad = [
+            '../../../vendor/datatables/js/jquery.dataTables.min.js',
+            '../../../js/plugins-init/datatables.init.js'
+
+
+
+
+
+
+
+        ];
+
+        const head = document.head || document.getElementsByTagName('head')[0];
+
+        function loadScript(index) {
+            if (index < scriptsToLoad.length) {
+                const script = document.createElement('script');
+                script.src = scriptsToLoad[index];
+                script.onload = function () {
+                    loadScript(index + 1);
+                };
+                head.appendChild(script);
+                // loadSelect2();
+            }
+        }
+
+        // Bắt đầu quá trình tải script
+        loadScript(0);
+    }
+    function clickcombobox() {
+        var x1 = encodeURIComponent(document.getElementById("hangds1").value);
+        var x2 = encodeURIComponent(document.getElementById("camds1").value);
+        var x3 = encodeURIComponent(document.getElementById("mands1").value);
+        var x4 = encodeURIComponent(document.getElementById("mauds1").value);
+        var x5 = encodeURIComponent(document.getElementById("ramds1").value);
+        var x6 = encodeURIComponent(document.getElementById("romds1").value);
+        var x7 = encodeURIComponent(document.getElementById("pinds1").value);
+        var x8 = encodeURIComponent(document.getElementById("dungds1").value);
+        var x9 = encodeURIComponent(document.getElementById("chipds1").value);
+        var x10 = encodeURIComponent(document.getElementById("sands1").value);
+
+        var link='/ban-hang/loc/ban-hang-tai-quay/'+x1+'/'+x2+'/'+x3+'/'+x4+'/'+x5+'/'+x6+'/'+x7+'/'+x8+'/'+x9+'/'+x10;
+        // document.getElementById("vt").innerHTML=link
+        loadInterface(link);
+        // document.getElementById("demo").innerHTML = "You selected: " + x;
+    }
+
+
+    function loadSelect2() {
+        // Gọi .select2() cho các phần tử sau khi tất cả các tệp script đã được nạp
+        $('#hangds1').select2({
+            theme: 'bootstrap-5'
+        });
+        $( '#camds1' ).select2( {
+            theme: 'bootstrap-5'
+        } );
+        $( '#mands1' ).select2( {
+            theme: 'bootstrap-5'
+        } );
+        $( '#mauds1' ).select2( {
+            theme: 'bootstrap-5'
+        } );
+        $( '#ramds1' ).select2( {
+            theme: 'bootstrap-5'
+        } );
+        $( '#romds1' ).select2( {
+            theme: 'bootstrap-5'
+        } );
+
+        $( '#pinds1' ).select2( {
+            theme: 'bootstrap-5'
+        } );
+        $( '#dungds1' ).select2( {
+            theme: 'bootstrap-5'
+        } );
+
+        $( '#chipds1' ).select2( {
+            theme: 'bootstrap-5'
+        } );
+
+        $( '#sands1' ).select2( {
+            theme: 'bootstrap-5'
+        } );
+
+        // Gọi .select2() cho các phần tử khác ở đây (tương tự)
+    }
+
+    loadSelect2();
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
