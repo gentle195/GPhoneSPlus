@@ -63,6 +63,8 @@ public class BanHangTaiQuayController {
     private ManHinhService manHinhService;
     @Autowired
     private CameraService cameraService;
+    @Autowired
+    private BanHangOnlineService banHangOnlineService;
 
     private HoaDon hoaDonnn = new HoaDon();
     private UUID idHoaDon = null;
@@ -87,6 +89,20 @@ public class BanHangTaiQuayController {
         model.addAttribute("listDiaChi", diaChiService.findAll0());
         model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
         model.addAttribute("HoaDon", hoaDonnn);
+
+
+        model.addAttribute("hangds",hangSanPhamService.findAll0());
+        model.addAttribute("camds",cameraService.findAll0());
+        model.addAttribute("mands",manHinhService.findAll0());
+        model.addAttribute("mauds",mauSacService.findAll0());
+        model.addAttribute("ramds",ramService.findAll0());
+        model.addAttribute("romds",romService.findAll0());
+        model.addAttribute("pinds",pinService.findAll0());
+        model.addAttribute("dungds",dungLuongPinService.findAll0());
+        model.addAttribute("chipds",chipService.findAll0());
+        model.addAttribute("sands",sanPhamService.findAll0());
+
+
         model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
         return "/home/layout";
     }
@@ -158,6 +174,17 @@ public class BanHangTaiQuayController {
         model.addAttribute("listDiaChi", diaChiService.findAll0());
         model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
         model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
+
+        model.addAttribute("hangds",hangSanPhamService.findAll0());
+        model.addAttribute("camds",cameraService.findAll0());
+        model.addAttribute("mands",manHinhService.findAll0());
+        model.addAttribute("mauds",mauSacService.findAll0());
+        model.addAttribute("ramds",ramService.findAll0());
+        model.addAttribute("romds",romService.findAll0());
+        model.addAttribute("pinds",pinService.findAll0());
+        model.addAttribute("dungds",dungLuongPinService.findAll0());
+        model.addAttribute("chipds",chipService.findAll0());
+        model.addAttribute("sands",sanPhamService.findAll0());
         return "/home/layout";
     }
 
@@ -485,35 +512,67 @@ public class BanHangTaiQuayController {
         return "redirect:/ban-hang/hien-thi";
     }
 
-    @ResponseBody
-    @GetMapping("/loc")
-    public List<ChiTietSanPham> loc(Model model, @RequestParam(value = "hang", required = false) UUID hang, @RequestParam(value = "ram", required = false) UUID ram,
-                                    @RequestParam(value = "rom", required = false) UUID rom, @RequestParam(value = "dungLuongPin", required = false) UUID dungLuongPin,
-                                    @RequestParam(value = "chip", required = false) UUID chip,
-                                    @RequestParam(value = "manHinh", required = false) UUID moTaMan,
-                                    @RequestParam(value = "camera", required = false) UUID moTaCam,
-                                    @RequestParam(value = "giaBanMin", required = false) BigDecimal giaBanMin,
-                                    @RequestParam(value = "giaBanMax", required = false) BigDecimal giaBanMax,
-                                    @ModelAttribute("HoaDon") HoaDon hoaDon, @ModelAttribute("modalAddKhachHang") KhachHang khachHang) {
-        List<ChiTietSanPham> list = chiTietSanPhamService.locBanHang(hang, ram, rom, dungLuongPin, chip, moTaMan, moTaCam, giaBanMin, giaBanMax);
+
+    @GetMapping("/loc/ban-hang-tai-quay/{hang}/{rom}/{manHinh}/{camera}/{ram}/{chip}/{dungLuongPin}/{giaBanMin}/{giaBanMax}")
+    public String loc(Model model
+            , @PathVariable("hang") String hang,
+                                    @PathVariable("ram") String ram,
+                                    @PathVariable("rom") String rom,
+                                    @PathVariable("dungLuongPin") String dungLuongPin,
+                                    @PathVariable("chip") String chip,
+                                    @PathVariable("manHinh") String moTaMan,
+                                    @PathVariable("camera") String moTaCam
+//            ,
+//                                    @PathVariable("giaBanMin") BigDecimal giaBanMin,
+//                                    @PathVariable("giaBanMax") BigDecimal giaBanMax
+//                                    @ModelAttribute("HoaDon") HoaDon hoaDon,
+//                      @ModelAttribute("modalAddKhachHang") KhachHang khachHang
+    ) {
+
+
+//        System.out.println("hang:"+hang+",ram:"+ram+",rom:"+rom+",dungluongpin:"+dungLuongPin+",chip:"+chip+",motaman:"+moTaMan+",motacam:"+moTaCam);
+        List<ChiTietSanPham> list = banHangOnlineService.locbanhang(hang,moTaCam,moTaMan,"null",ram,rom,"null",dungLuongPin,chip,"null");
         model.addAttribute("listChiTietSanPham", list);
-        model.addAttribute("HoaDon", hoaDonnn);
-        model.addAttribute("listHoaDon", hoaDonService.find());
-        model.addAttribute("listHang", hangSanPhamService.findAll0());
-        model.addAttribute("listMauSac", mauSacService.findAll0());
-        model.addAttribute("listChip", chipService.findAll0());
-        model.addAttribute("listRam", ramService.findAll0());
-        model.addAttribute("listRom", romService.findAll0());
-        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
-        model.addAttribute("listManHinh", manHinhService.findAll0());
-        model.addAttribute("listCamera", cameraService.findAll0());
-        model.addAttribute("listNhanVien", nhanVienService.findAll());
-        model.addAttribute("listKhachHang", khachHangService.findAll0());
-        model.addAttribute("listDiaChi", diaChiService.findAll0());
-        model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
-        model.addAttribute("listHoaDonChiTiet", hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId()));
-        return list;
+        System.out.println("fjdkjffhkfhsf");
+//        model.addAttribute("HoaDon", hoaDonnn);
+//        model.addAttribute("listHoaDon", hoaDonService.find());
+//        model.addAttribute("listHang", hangSanPhamService.findAll0());
+//        model.addAttribute("listMauSac", mauSacService.findAll0());
+//        model.addAttribute("listChip", chipService.findAll0());
+//        model.addAttribute("listRam", ramService.findAll0());
+//        model.addAttribute("listRom", romService.findAll0());
+//        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+//        model.addAttribute("listManHinh", manHinhService.findAll0());
+//        model.addAttribute("listCamera", cameraService.findAll0());
+//        model.addAttribute("listNhanVien", nhanVienService.findAll());
+//        model.addAttribute("listKhachHang", khachHangService.findAll0());
+//        model.addAttribute("listDiaChi", diaChiService.findAll0());
+//        model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
+//        model.addAttribute("listHoaDonChiTiet", hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId()));
+
+        return "/ban-hang/bang-loc";
     }
+    @GetMapping("/loc/ban-hang-tai-quay/{x1}/{x2}/{x3}/{x4}/{x5}/{x6}/{x7}/{x8}/{x9}/{x10}")
+    public String locbanhang(
+            Model model,
+            @PathVariable("x1") String x1,
+            @PathVariable("x2") String x2,
+            @PathVariable("x3") String x3,
+            @PathVariable("x4") String x4,
+            @PathVariable("x5") String x5,
+            @PathVariable("x6") String x6,
+            @PathVariable("x7") String x7,
+            @PathVariable("x8") String x8,
+            @PathVariable("x9") String x9,
+            @PathVariable("x10") String x10
+    ) {
+
+        model.addAttribute("banhangonline",banHangOnlineService);
+        model.addAttribute("listChiTietSanPham",banHangOnlineService.locbanhang(x1,x2,x3,x4,x5,x6,x7,x8,x9,x10));
+        return "/ban-hang/bang-loc";
+    }
+
+
 
     @GetMapping("/modal-khach-hang")
     public String modalKhachHang(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon, @ModelAttribute("modalAddKhachHang") KhachHang khachHang) {
