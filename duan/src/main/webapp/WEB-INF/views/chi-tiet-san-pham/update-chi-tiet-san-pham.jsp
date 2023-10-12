@@ -41,26 +41,37 @@
                                 <div class="form-group">
                                     <div align="center">
                                         <br>
-                                        <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;"
-                                               for="anhmoi">
-                                            <img id="preview-image-2" class="preview-image" src="../../../uploads/${ctsp.urlAnh}" alt=""
-                                                 width="100%" height="100%"
-                                                 style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
-                                            <br><br>
-                                            <p style="color: black">Ảnh</p>
-                                        </label>
-                                        <br>
                                         <div style="display: none">
-                                            <input type="file" name="images" accept="image/jpeg, image/png" id="anhmoi"
-                                                   required>
+                                            <input style="" type="text" name="checkanh1" value="cu1" id="cucheck1">
+                                            <br>
+                                        </div>
+                                        <div align="center">
+                                            <br>
+                                            <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;"
+                                                   for="anhmoi1">
+                                                <img id="preview-anh1-2" class="preview-image"
+                                                     src="/uploads/${chitietsanphamupdate.urlAnh}" alt=""
+                                                     width="100%" height="100%"
+                                                     style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                                <br><br>
+                                                ẢNH
+                                            </label>
+                                            <br>
+                                            <div style="display: none">
+                                                <input type="file" name="anh1s" accept="image/jpeg, image/png"
+                                                       id="anhmoi1">
+                                            </div>
+                                            <div style="display: none">
+                                                <form:input path="urlAnh"/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row" style="color: black">
-                            <div class="col-md-6" >
-                                <div class="form-group" >
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <div class="row">
                                         <div class="col-11">
                                             <form:select path="sanPham" class="form-control" id="selectSanPham"
@@ -168,7 +179,8 @@
                                     <div class="row">
                                         <div class="col-11">
                                             <form:label class="form-label" path="giaBan">Giá bán:</form:label>
-                                            <form:input class="form-control" placeholder="" path="giaBan" type="number"/>
+                                            <form:input class="form-control" placeholder="" path="giaBan"
+                                                        type="number"/>
                                             <form:errors path="giaBan" cssStyle="color: red"/>
                                         </div>
                                     </div>
@@ -177,7 +189,8 @@
                                     <div class="row">
                                         <div class="col-11">
                                             <form:label class="form-label" path="namBaoHanh">Năm bảo hành:</form:label>
-                                            <form:input class="form-control" placeholder="" path="namBaoHanh" type="number"/>
+                                            <form:input class="form-control" placeholder="" path="namBaoHanh"
+                                                        type="number"/>
                                             <form:errors path="namBaoHanh" cssStyle="color: red"/>
                                         </div>
                                     </div>
@@ -188,7 +201,8 @@
                                     <div class="row">
                                         <div class="col-11">
                                             <form:label class="form-label" path="soLuong">Số lượng tồn:</form:label>
-                                            <form:input class="form-control" placeholder="" path="soLuong" type="number"/>
+                                            <form:input class="form-control" placeholder="" path="soLuong"
+                                                        type="number"/>
                                             <form:errors path="soLuong" cssStyle="color: red"/>
                                         </div>
                                     </div>
@@ -707,23 +721,22 @@
 
     }
 
-    const imageInput = document.getElementById('anhmoi');
+    const imageInput1 = document.getElementById('anhmoi1');
 
-    const previewImage2 = document.getElementById('preview-image-2');
+    const previewAnh12 = document.getElementById('preview-anh1-2');
 
-    imageInput.addEventListener('change', function () {
-
-        const file = imageInput.files[0];
+    imageInput1.addEventListener('change', function () {
+        const file = imageInput1.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function (e) {
-                previewImage2.src = e.target.result;
+                previewAnh12.src = e.target.result;
             };
             reader.readAsDataURL(file);
         } else {
-            previewImage2.src = '';
+            previewAnh12.src = '';
         }
-        document.getElementById('cucheck').value = 'moi';
+        document.getElementById('cucheck1').value = 'moi1';
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

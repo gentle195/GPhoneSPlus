@@ -66,7 +66,6 @@
                     <div class="loc" style="border: 1px solid #999999">
                         <form:form action="/hoa-don/loc" method="post" modelAttribute="hoaDon">
                             <div class="row" style="margin-top: 10px">
-
                                 <div class="col-md-4">
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">khách hàng:</label>
@@ -81,7 +80,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-4">
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Nhân viên:</label>
@@ -96,7 +94,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-4">
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Địa chỉ:</label>
@@ -112,7 +109,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group row">
@@ -239,8 +235,8 @@
                                         <c:if test="${hoaDon.tinhTrang == 7}">Giao trễ</c:if>
                                         <c:if test="${hoaDon.tinhTrang == 8}">Đã hủy</c:if>
                                     </td>
-                                    <td><c:if test="${hoaDon.loai == 0}">HĐ online</c:if>
-                                        <c:if test="${hoaDon.loai == 1}">HĐ quầy</c:if>
+                                    <td><c:if test="${hoaDon.loai == 1}">HĐ online</c:if>
+                                        <c:if test="${hoaDon.loai == 0}">HĐ quầy</c:if>
                                     </td>
                                     <td>${hoaDon.ngayTao}</td>
                                     <td>${hoaDon.ngayNhan}</td>
@@ -301,8 +297,6 @@
                                                 <i class="fas fa-times-circle"></i>
                                                 Update thông tin</a>
                                         </c:if>
-
-
                                     </td>
                                 </tr>
                             </c:forEach>

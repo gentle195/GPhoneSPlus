@@ -86,342 +86,298 @@
     </style>
 </head>
 <body>
-
-<div class="main" style="border: 2px solid black; border-radius: 1.8% 0% 0% 0%">
-    <div>
-        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-            <li class="nav-item">
-                <a href="/hoa-don/hien-thi" class="btn btn-danger btn-icon-text"
-                   tabindex="-1"
-                   role="button">
-                    <i class="ti-reload btn-icon-prepend"></i>
-                    Trang Hóa đơn</a>
-            </li>
-            <li class="nav-item" style="border-radius: 2%">
-                <a class="nav-link" role="tab">Xem hóa đơn</a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="container">
+<div>
+    <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+        <li class="nav-item">
+            <a href="/hoa-don/hien-thi" class="nav-link"
+               tabindex="-1"
+               role="button">
+                Trang Hóa đơn</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+               aria-controls="description" aria-selected="true">Xem hóa đơn</a>
+        </li>
+    </ul>
+</div>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
         <div class="col-12 grid-margin">
             <h3 style="text-align: center">Hóa đơn</h3>
-        </div>
-        <div class="card">
-            <div class="card-body">
-
-                <div class="container mt-5">
-                    <div class="stepwizard stepwizard-linear col-12">
-                        <div class="stepwizard-row setup-panel">
-                            <c:if test="${hoaDon.tinhTrang == 0}">
-                                <div class="stepwizard-step">
-                                    <a href="#step-1" type="button"
-                                       class="stepwizard-step-linear btn btn-primary btn-circle">0</a>
-                                    <p>Đang chờ</p>
-                                </div>
-                            </c:if>
-                            <c:if test="${hoaDon.tinhTrang == 1}">
-                                <div class="stepwizard-step">
-                                    <a href="#step-2" type="button"
-                                       class="stepwizard-step-linear btn btn-default btn-circle"
-                                       disabled="disabled">1</a>
-                                    <p>Đã xác nhận</p>
-                                </div>
-                            </c:if>
-                            <c:if test="${hoaDon.tinhTrang == 2}">
-                                <div class="stepwizard-step">
-                                    <a href="#step-3" type="button"
-                                       class="stepwizard-step-linear btn btn-default btn-circle"
-                                       disabled="disabled">2</a>
-                                    <p>Chờ thanh toán</p>
-                                </div>
-                            </c:if>
-                            <c:if test="${hoaDon.tinhTrang == 3}">
-                                <div class="stepwizard-step">
-                                    <a href="#step-4" type="button"
-                                       class="stepwizard-step-linear btn btn-default btn-circle"
-                                       disabled="disabled">3</a>
-                                    <p>Đã thanh toán</p>
-                                </div>
-                            </c:if> <c:if test="${hoaDon.tinhTrang == 4}">
-                            <div class="stepwizard-step">
-                                <a href="#step-5" type="button"
-                                   class="stepwizard-step-linear btn btn-default btn-circle"
-                                   disabled="disabled">4</a>
-                                <p>Chờ vận chuyển</p>
-                            </div>
-                        </c:if>
-                            <c:if test="${hoaDon.tinhTrang == 5}">
-                                <div class="stepwizard-step">
-                                    <a href="#step-6" type="button"
-                                       class="stepwizard-step-linear btn btn-default btn-circle"
-                                       disabled="disabled">5</a>
-                                    <p>Đang vận chuyển</p>
-                                </div>
-                            </c:if>
-                            <c:if test="${hoaDon.tinhTrang == 6}">
-                                <div class="stepwizard-step">
-                                    <a href="#step-7" type="button"
-                                       class="stepwizard-step-linear btn btn-default btn-circle"
-                                       disabled="disabled">6</a>
-                                    <p>Vận chuyển hoàn tất</p>
-                                </div>
-                            </c:if>
-                            <c:if test="${hoaDon.tinhTrang == 7}">
-                                <div class="stepwizard-step">
-                                    <a href="#step-8" type="button"
-                                       class="stepwizard-step-linear btn btn-default btn-circle"
-                                       disabled="disabled">7</a>
-                                    <p>Giao trễ</p>
-                                </div>
-                            </c:if>
-                            <c:if test="${hoaDon.tinhTrang == 8}">
-                                <div class="stepwizard-step">
-                                    <a href="#step-9" type="button"
-                                       class="stepwizard-step-linear btn btn-default btn-circle"
-                                       disabled="disabled">8</a>
-                                    <p>Đã hủy</p>
-                                </div>
-                            </c:if>
-                        </div>
-                    </div>
-                    <br><br>
-                    <form:form action="/hoa-don/detail/${hoaDon.id}" method="get" modelAttribute="hoaDon">
-                        <%--                        <form class="form-sample">--%>
-                        <%--                            <br>--%>
-                        <%--                            --%>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Mã:</label>
-                                    <div class="col-sm-9">
-                                        <form:input class="form-control" id="form-control" readonly="true"
-                                                    placeholder=""
-                                                    path="ma"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Khách hàng:
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="khachHangInput" name="khachHang"
-                                               value="${hoaDon.khachHang.hoTen}" readonly>
-                                            <%--                                            <form:input  class="form-control"  path="hoTen">${hoaDon.khachHang.hoTen}</form:input>--%>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Nhân viên:
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="nhanVienInput" name="nhanVien"
-                                               value="${hoaDon.nhanVien.hoTen}" readonly>
-                                            <%--                                            <form:label class="form-label" path="khachHang">Hãng khách hàng: ${hoaDon.khachHang.hoTen}</form:label>--%>
-                                            <%--                                            <form:input  class="form-control" path="hoTen"--%>
-                                            <%--                                            >${hoaDon.nhanVien.hoTen}</form:input>--%>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">SĐT:
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <form:input class="form-control" placeholder="" readonly="true"
-                                                    path="sdt"></form:input>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Quy đổi:
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="quyDoiInput" name="quyDoi"
-                                               value="${hoaDon.quyDoi.soTienQuyDoi}" readonly>
-
-                                            <%--                                            <form:input class="form-control" path="quyDoi" readonly="true"--%>
-                                            <%--                                            >${hoaDon.quyDoi.soTienQuyDoi}</form:input>--%>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Địa chỉ:</label>
-                                        <div class="col-sm-9">
-
-                                            <input type="text" class="form-control" id="diaChiInput" name="diaChi"
-                                                   value="${hoaDon.diaChi.diaChi}" readonly>
-
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div>
+                        <div class="card-body">
+                            <div>
+                                <div class="container mt-5">
+                                    <div class="stepwizard stepwizard-linear col-12">
+                                        <div class="stepwizard-row setup-panel">
+                                            <c:if test="${hoaDon.tinhTrang == 0}">
+                                                <div class="stepwizard-step">
+                                                    <a href="#step-1" type="button"
+                                                       class="stepwizard-step-linear btn btn-primary btn-circle">0</a>
+                                                    <p>Đang chờ</p>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${hoaDon.tinhTrang == 1}">
+                                                <div class="stepwizard-step">
+                                                    <a href="#step-2" type="button"
+                                                       class="stepwizard-step-linear btn btn-default btn-circle"
+                                                       disabled="disabled">1</a>
+                                                    <p>Đã xác nhận</p>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${hoaDon.tinhTrang == 2}">
+                                                <div class="stepwizard-step">
+                                                    <a href="#step-3" type="button"
+                                                       class="stepwizard-step-linear btn btn-default btn-circle"
+                                                       disabled="disabled">2</a>
+                                                    <p>Chờ thanh toán</p>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${hoaDon.tinhTrang == 3}">
+                                                <div class="stepwizard-step">
+                                                    <a href="#step-4" type="button"
+                                                       class="stepwizard-step-linear btn btn-default btn-circle"
+                                                       disabled="disabled">3</a>
+                                                    <p>Đã thanh toán</p>
+                                                </div>
+                                            </c:if> <c:if test="${hoaDon.tinhTrang == 4}">
+                                            <div class="stepwizard-step">
+                                                <a href="#step-5" type="button"
+                                                   class="stepwizard-step-linear btn btn-default btn-circle"
+                                                   disabled="disabled">4</a>
+                                                <p>Chờ vận chuyển</p>
+                                            </div>
+                                        </c:if>
+                                            <c:if test="${hoaDon.tinhTrang == 5}">
+                                                <div class="stepwizard-step">
+                                                    <a href="#step-6" type="button"
+                                                       class="stepwizard-step-linear btn btn-default btn-circle"
+                                                       disabled="disabled">5</a>
+                                                    <p>Đang vận chuyển</p>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${hoaDon.tinhTrang == 6}">
+                                                <div class="stepwizard-step">
+                                                    <a href="#step-7" type="button"
+                                                       class="stepwizard-step-linear btn btn-default btn-circle"
+                                                       disabled="disabled">6</a>
+                                                    <p>Vận chuyển hoàn tất</p>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${hoaDon.tinhTrang == 7}">
+                                                <div class="stepwizard-step">
+                                                    <a href="#step-8" type="button"
+                                                       class="stepwizard-step-linear btn btn-default btn-circle"
+                                                       disabled="disabled">7</a>
+                                                    <p>Giao trễ</p>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${hoaDon.tinhTrang == 8}">
+                                                <div class="stepwizard-step">
+                                                    <a href="#step-9" type="button"
+                                                       class="stepwizard-step-linear btn btn-default btn-circle"
+                                                       disabled="disabled">8</a>
+                                                    <p>Đã hủy</p>
+                                                </div>
+                                            </c:if>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Tổng tiền:
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <form:input class="form-control" placeholder="" readonly="true"
-                                                    path="tongTien"></form:input>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Ngày tạo:
-                                        <div id="tb" style="color: crimson;float: right"></div>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <form:input readonly="true" class="form-control" type="date"
-                                                    value="${hoaDon.ngayTao}"
-                                                    placeholder=""
-                                                    path="ngayTao"></form:input>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                    <br><br>
+                                    <form:form action="/hoa-don/detail/${hoaDon.id}" method="get"
+                                               modelAttribute="hoaDon">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Mã:</label>
+                                                    <div class="col-sm-9">
+                                                        <form:input class="form-control" id="form-control"
+                                                                    readonly="true"
+                                                                    placeholder=""
+                                                                    path="ma"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Khách hàng:
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="khachHangInput"
+                                                               name="khachHang"
+                                                               value="${hoaDon.khachHang.hoTen}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Ngày nhận:
-                                        <div style="color: crimson;float: right"></div>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <form:input readonly="true" class="form-control" type="date"
-                                                    value="${hoaDon.ngayNhan}"
-                                                    placeholder=""
-                                                    path="ngayNhan"></form:input>
-                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Nhân viên:
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="nhanVienInput"
+                                                               name="nhanVien"
+                                                               value="${hoaDon.nhanVien.hoTen}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">SĐT:
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <form:input class="form-control" placeholder="" readonly="true"
+                                                                    path="sdt"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Quy đổi:
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="quyDoiInput"
+                                                               name="quyDoi"
+                                                               value="${hoaDon.quyDoi.soTienQuyDoi}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Địa chỉ:</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" id="diaChiInput"
+                                                                   name="diaChi"
+                                                                   value="${hoaDon.diaChi.diaChi}" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Tổng tiền:
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <form:input class="form-control" placeholder="" readonly="true"
+                                                                    path="tongTien"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Ngày tạo:
+                                                        <div id="tb" style="color: crimson;float: right"></div>
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <form:input readonly="true" class="form-control" type="date"
+                                                                    value="${hoaDon.ngayTao}"
+                                                                    placeholder=""
+                                                                    path="ngayTao"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Ngày nhận:
+                                                        <div style="color: crimson;float: right"></div>
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <form:input readonly="true" class="form-control" type="date"
+                                                                    value="${hoaDon.ngayNhan}"
+                                                                    placeholder=""
+                                                                    path="ngayNhan"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Ngày ship:
+                                                        <div style="color: crimson;float: right"></div>
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <form:input readonly="true" class="form-control" type="date"
+                                                                    value="${hoaDon.ngayShip}"
+                                                                    placeholder=""
+                                                                    path="ngayShip"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </form:form>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Ngày ship:
-                                        <div style="color: crimson;float: right"></div>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <form:input readonly="true" class="form-control" type="date"
-                                                    value="${hoaDon.ngayShip}"
-                                                    placeholder=""
-                                                    path="ngayShip"></form:input>
+                            <br>
+                            <h3 style="text-align: center;">Hóa đơn chi tiết</h3>
+                            <br>
+                            <div class="search">
+                                <form action="/hoa-don/search-hdct" method="post">
+                                    <div class="input-group" style="width: 30%; float: right">
+                                        <input type="text" class="form-control" placeholder="Bạn tìm gì..."
+                                               aria-label="Bạn tìm gì..." name="search">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-sm btn-primary" type="submit">Search</button>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
-                        </div>
-                        </form>
-                    </form:form>
-                </div>
-
-                <br>
-                <h3 style="text-align: center;">Hóa đơn chi tiết</h3>
-                <br>
-                <div class="search">
-                    <form action="/hoa-don/search-hdct" method="post">
-                        <div class="input-group" style="width: 30%; float: right">
-                            <input type="text" class="form-control" placeholder="Bạn tìm gì..."
-                                   aria-label="Bạn tìm gì..." name="search">
-                            <div class="input-group-append">
-                                <button class="btn btn-sm btn-primary" type="submit">Search</button>
+                            <div class="table-responsive">
+                                <table id="example" class="display">
+                                    <thead>
+                                    <tr>
+                                        <th>Mã hóa đơn</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <%--                                        <th>Tình trạng</th>--%>
+                                        <th>Đơn giá</th>
+                                        <th>Thành tiền</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <i class="mdi mdi-border-color"></i>
+                                    <c:forEach items="${listHoaDonChiTiet}" var="hdct">
+                                        <tr>
+                                            <td>${hdct.hoaDon.ma}</td>
+                                            <td>${hdct.imei.chiTietSanPham.sanPham.ten}</td>
+                                            <td>${hdct.soLuong}</td>
+                                                <%--                                            <td>--%>
+                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 0}">Đang chờ</c:if>--%>
+                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 1}">Đã xác nhận</c:if>--%>
+                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 2}">Đã thanh toán</c:if>--%>
+                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 3}">Chờ thanh toán</c:if>--%>
+                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 4}">Chờ vận chuyển</c:if>--%>
+                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 5}">Đang vận chuyển</c:if>--%>
+                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 6}">Vận chuyển hoàn tất</c:if>--%>
+                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 7}">Giao trễ</c:if>--%>
+                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 8}">Đã hủy</c:if>--%>
+                                                <%--                                            </td>--%>
+                                            <td>${hdct.donGia}</td>
+                                            <td>${hdct.donGia * hdct.soLuong}</td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Mã hóa đơn</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Số lượng</th>
-                            <th>Tình trạng</th>
-                            <th>Đơn giá</th>
-                            <th>Thành tiền</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <i class="mdi mdi-border-color"></i>
-                        <c:forEach items="${listHoaDonChiTiet}" var="hdct">
-                            <tr>
-                                <td>${hdct.hoaDon.ma}</td>
-                                <td>${hdct.imei.chiTietSanPham.sanPham.ten}</td>
-                                <td>${hdct.soLuong}</td>
-                                <td>
-                                    <c:if test="${hoaDon.tinhTrang == 0}">Đang chờ</c:if>
-                                    <c:if test="${hoaDon.tinhTrang == 1}">Đã xác nhận</c:if>
-                                    <c:if test="${hoaDon.tinhTrang == 2}">Đã thanh toán</c:if>
-                                    <c:if test="${hoaDon.tinhTrang == 3}">Chờ thanh toán</c:if>
-                                    <c:if test="${hoaDon.tinhTrang == 4}">Chờ vận chuyển</c:if>
-                                    <c:if test="${hoaDon.tinhTrang == 5}">Đang vận chuyển</c:if>
-                                    <c:if test="${hoaDon.tinhTrang == 6}">Vận chuyển hoàn tất</c:if>
-                                    <c:if test="${hoaDon.tinhTrang == 7}">Giao trễ</c:if>
-                                    <c:if test="${hoaDon.tinhTrang == 8}">Đã hủy</c:if>
-                                </td>
-                                <td>${hdct.donGia}</td>
-                                <td>${hdct.donGia * hdct.soLuong}</td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-
-                    <br>
-                    <br>
-                    <%--                    <c:if test="${dem==4}">--%>
-                    <div align="center">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <ul class="pagination justify-content-center pagination-lg">
-                                <li class="page-item"><a class="page-link" href="/hoa-don/detail/${id}?pageNum=0"><</a>
-                                </li>
-                                <c:forEach begin="1" end="${total}" varStatus="status">
-                                    <li class="page-item">
-                                        <a href="${pageContext.request.contextPath}/hoa-don/detail/${id}?pageNum=${status.index -1}"
-                                           class="page-link">${status.index}</a>
-                                    </li>
-                                </c:forEach>
-                                <li class="page-item"><a class="page-link"
-                                                         href="/hoa-don/detail/${id}?pageNum=${total-1}">></a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
-                    <%--                    </c:if>--%>
-                    <c:if test="${dem==5}">
-                        <div align="center">
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <ul class="pagination justify-content-center pagination-lg">
-                                    <li class="page-item"><a class="page-link" href="/hoa-don/search-hdct?pageNum=0"><</a>
-                                    </li>
-                                    <c:forEach begin="1" end="${total}" varStatus="status">
-                                        <li class="page-item">
-                                            <a href="${pageContext.request.contextPath}/hoa-don/search-hdct?pageNum=${status.index -1}"
-                                               class="page-link">${status.index}</a>
-                                        </li>
-                                    </c:forEach>
-                                    <li class="page-item"><a class="page-link"
-                                                             href="/hoa-don/search?pageNum=${total-1}">></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </c:if>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 </body>
 
 <script src="../../vendors/js/vendor.bundle.base.js"></script>

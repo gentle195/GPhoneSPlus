@@ -32,8 +32,6 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
             "WHERE hd.ma LIKE %:ten% OR kh.hoTen LIKE %:ten% OR nv.hoTen LIKE %:ten% OR dc.diaChi LIKE %:ten% OR qd.soTienQuyDoi = :soTienQuyDoi OR hd.sdt like %:ten%")
     List<HoaDon> search(@Param("ten") String ten, @Param("soTienQuyDoi") BigDecimal soTienQuyDoi);
 
-
-
     @Query("select hd from HoaDon hd " +
             "left join hd.khachHang kh " +
             "LEFT JOIN hd.nhanVien nv " +
@@ -41,12 +39,12 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
             " where (:idKH IS NULL OR kh.id=:idKH) " +
             "and (:idNV IS NULL OR nv.id=:idNV)  " +
             "and (:idDC IS NULL OR dc.id=:idDC) " +
-            "AND (:startDate IS NULL OR hd.ngayTao >= :startDate) " +
-            "AND (:endDate IS NULL OR hd.ngayTao <= :endDate) " +
-            "AND (:shipStartDate IS NULL OR hd.ngayShip >= :shipStartDate) " +
-            "AND (:shipEndDate IS NULL OR hd.ngayShip <= :shipEndDate) " +
-            "AND (:receiveStartDate IS NULL OR hd.ngayNhan >= :receiveStartDate) " +
-            "AND (:receiveEndDate IS NULL OR hd.ngayNhan <= :receiveEndDate)")
+            "AND ((:startDate IS NULL and:endDate IS NULL) OR hd.ngayTao between :startDate and :endDate) " +
+            "AND ((:shipStartDate IS NULL and :shipEndDate IS NULL) OR hd.ngayShip between :shipStartDate and :shipEndDate) " +
+            "AND ((:receiveStartDate IS NULL and :receiveEndDate IS NULL) OR hd.ngayNhan between :receiveStartDate and :receiveEndDate) "
+//            +
+//            "AND ()"
+    )
     List<HoaDon> loc1(
             UUID idKH, UUID idNV, UUID idDC
             , @Param("startDate") Date startDate,
