@@ -32,7 +32,8 @@
                 <div class="card-body">
                     <div>
                         <h4 class="card-title" style="float: left">Danh sách hóa đơn</h4>
-                        <a href="/hoa-don/export-excel" class="btn btn-success btn-icon-text" tabindex="-1" role="button">
+                        <a href="/hoa-don/export-excel" class="btn btn-success btn-icon-text" tabindex="-1"
+                           role="button">
                             <i class="ti-export btn-icon-prepend"></i>
                             Xuất Excel
                         </a>
@@ -43,7 +44,7 @@
                     <br>
                     <br>
                     <div class="loc" style="border: 1px solid black; color: black">
-                        <form:form action="/hoa-don/loc" method="post" modelAttribute="hoaDon" >
+                        <form:form action="/hoa-don/loc" method="post" modelAttribute="hoaDon">
                             <div class="row" style="margin-top: 10px">
                                 <div class="col-md-4">
                                     <div class="form-group row">
@@ -185,6 +186,7 @@
                                 <th>Tổng tiền</th>
                                 <th>Trạng thái</th>
                                 <th>Loại HĐ</th>
+                                <th>Hình thức thanh toán</th>
                                 <th>Ngày Tạo</th>
                                 <th>Ngày Thanh Toán</th>
                                 <th>Ngày nhận</th>
@@ -217,6 +219,10 @@
                                     </td>
                                     <td><c:if test="${hoaDon.loai == 1}">HĐ online</c:if>
                                         <c:if test="${hoaDon.loai == 0}">HĐ quầy</c:if>
+                                    </td>
+                                    <td>
+                                        <c:if test="${hoaDon.hinhThucThanhToan == 0}">Online</c:if>
+                                        <c:if test="${hoaDon.hinhThucThanhToan == 1}">Tiền mặt</c:if>
                                     </td>
                                     <td>${hoaDon.ngayTao}</td>
                                     <td>${hoaDon.ngayThanhToan}</td>
