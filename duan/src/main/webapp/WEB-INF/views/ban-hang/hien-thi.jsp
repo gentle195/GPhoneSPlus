@@ -44,7 +44,7 @@
                     <div class="col-2">
                         <div class="btn-group ">
                             <a href="/ban-hang/thong-tin-hoa-don/${hd.id}" class="btn btn-info"
-                               style="width: 120%;height: 47px"><label style="margin: 6px">Hóa Đơn
+                               style="width: 120%;height: 47px"><label style="margin: 4px">Hóa Đơn
                                 Chờ ${i.index+1}</label></a>
                             <a href="/ban-hang/remove/${hd.id}" class="btn btn-danger" style="width: 10px;height: 47px">
                                 <label style="padding-top:5px;padding-right: 20px;margin-right: 20px">X</label>
@@ -451,201 +451,159 @@
             <div class="modal-body">
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
+                        <form class="forms-sample">
+                            <div class="container px-0 px-lg-5 mt-0">
+                                <div class="row gx-0 gx-lg-5 row-cols-0 row-cols-md-0 row-cols-xl-5 justify-content-center"
+                                     style="width: 100%">
+                                    <div style="height: 1.5cm">
+                                        <select class="form-control" id="hangds1" onchange="clickcombobox()">
+                                            <option selected value="null">Hãng sản phẩm</option>
+                                            <c:forEach items="${hangds}" var="ht">
+                                                <option value="${ht.ten}">${ht.ten}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <select class="form-control" id="camds1" onchange="clickcombobox()">
+                                            <option selected value="null">Camera</option>
+                                            <c:forEach items="${camds}" var="ht">
+                                                <option value="${ht.thongSo}">${ht.thongSo}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
 
+                                    <div>
+                                        <select class="form-control" id="mands1" onchange="clickcombobox()">
+                                            <option selected value="null">Màn hình</option>
+                                            <c:forEach items="${mands}" var="ht">
+                                                <option value="${ht.thongSo}">${ht.thongSo}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div style="height: 1.5cm">
+                                        <select class="form-control" id="mauds1" onchange="clickcombobox()">
+                                            <option selected value="null">Màu sắc</option>
+                                            <c:forEach items="${mauds}" var="ht">
+                                                <option value="${ht.ten}">${ht.ten}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <select class="form-control" id="ramds1" onchange="clickcombobox()">
+                                            <option selected value="null">Ram</option>
+                                            <c:forEach items="${ramds}" var="ht">
+                                                <option value="${ht.dungLuong}">${ht.dungLuong}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <select class="form-control" id="romds1" onchange="clickcombobox()">
+                                            <option selected value="null">Rom</option>
+                                            <c:forEach items="${romds}" var="ht">
+                                                <option value="${ht.dungLuong}">${ht.dungLuong}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+<%--                                    <div style="height: 1.5cm">--%>
+<%--                                        <select class="form-control" id="pinds1" onchange="clickcombobox()">--%>
+<%--                                            <option selected value="null">Pin</option>--%>
+<%--                                            <c:forEach items="${pinds}" var="ht">--%>
+<%--                                                <option value="${ht.loaiPin}">${ht.loaiPin}</option>--%>
+<%--                                            </c:forEach>--%>
+<%--                                        </select>--%>
+<%--                                    </div>--%>
+                                    <div>
+                                        <select class="form-control" id="dungds1" onchange="clickcombobox()">
+                                            <option selected value="null">Dung lượng pin</option>
+                                            <c:forEach items="${dungds}" var="ht">
+                                                <option value="${ht.thongSo}">${ht.thongSo}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <select class="form-control" id="chipds1" onchange="clickcombobox()">
+                                            <option selected value="null">Chip</option>
+                                            <c:forEach items="${chipds}" var="ht">
+                                                <option value="${ht.ten}">${ht.ten}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <select class="form-control" id="sands1" onchange="clickcombobox()">
+                                            <option selected value="null">Sản phẩm</option>
+                                            <c:forEach items="${sands}" var="ht">
+                                                <option value="${ht.ten}">${ht.ten}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div>
+                            <div class="card-body">
+                                <h4 class="card-title" style="float: left">Danh sách sản phẩm</h4>
+                                <%--            Tìm kiếm               --%>
+                                <div class="input-group" style="width: 30%; float: right">
+                                    <input type="text" class="form-control" placeholder="Bạn tìm gì..."
+                                           aria-label="Bạn tìm gì..." name="search-san-pham" id="sanPhamSearchInput">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-sm btn-primary" type="button" id="searchSanPham">Search
+                                        </button>
+                                    </div>
+                                </div>
+                                <%--           kết thúc tìm kiếm         --%>
+                                <div class="table-responsive">
+                                    <div>
+                                        <table id="example" class="display" style="min-width: 845px; color: black">
+                                            <thead>
+                                            <tr>
+                                                <th>Mã Sản Phẩm</th>
+                                                <th>Tên Sản Phẩm</th>
+                                                <th>Ảnh</th>
+                                                <th>Hãng</th>
+                                                <th>Màu Sắc</th>
+                                                <th>Ram</th>
+                                                <th>Bộ Nhớ</th>
+                                                <th>Đơn Giá</th>
+                                                <th>Số Lượng</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="san_pham_search" style="text-align: center"
+                                                   id="banglocthaydoi">
+                                            <c:forEach items="${listChiTietSanPham}" var="ctsp">
+                                                <tr>
+                                                    <td>${ctsp.sanPham.ma}</td>
+                                                    <td>${ctsp.sanPham.ten}</td>
+                                                    <td align="center">
+                                                        <img src="/uploads/${ctsp.urlAnh}" width="40" height="40">
+                                                    </td>
+                                                    <td>${ctsp.sanPham.hangSanPham.ten}</td>
+                                                    <td>${ctsp.mauSac.ten}</td>
+                                                    <td>${ctsp.ram.dungLuong}</td>
+                                                    <td>${ctsp.rom.dungLuong}</td>
+                                                    <td>${ctsp.giaBan}</td>
+                                                    <td>${ctsp.soLuong}</td>
+                                                    <td>
+                                                        <a class="btn btn-warning btn-icon-text"
+                                                           data-bs-toggle="modal" data-bs-target="#nhapImei">Nhập
+                                                            IMEI</a>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                            </tbody>
+                                        </table>
 
-
-
-<%--               1         --%>
-    <form class="forms-sample">
-        <div class="container px-0 px-lg-5 mt-0">
-            <div class="row gx-0 gx-lg-5 row-cols-0 row-cols-md-0 row-cols-xl-5 justify-content-center" style="width: 100%">
-                <div style="height: 1.5cm">
-                    <select  class="form-control" id="hangds1" onchange="clickcombobox()">
-                        <option selected value="null">Hãng sản phẩm</option>
-                        <c:forEach items="${hangds}" var="ht">
-                            <option  value="${ht.ten}">${ht.ten}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div>
-                    <select  class="form-control" id="camds1" onchange="clickcombobox()">
-                        <option selected value="null">Camera</option>
-                        <c:forEach items="${camds}" var="ht">
-                            <option  value="${ht.thongSo}">${ht.thongSo}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-
-                <div>
-                    <select  class="form-control" id="mands1" onchange="clickcombobox()">
-                        <option selected value="null">Màn hình</option>
-                        <c:forEach items="${mands}" var="ht">
-                            <option  value="${ht.thongSo}">${ht.thongSo}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div style="height: 1.5cm">
-                    <select  class="form-control" id="mauds1" onchange="clickcombobox()">
-                        <option selected value="null">Màu sắc</option>
-                        <c:forEach items="${mauds}" var="ht">
-                            <option  value="${ht.ten}">${ht.ten}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div>
-                    <select  class="form-control" id="ramds1" onchange="clickcombobox()">
-                        <option selected value="null">Ram</option>
-                        <c:forEach items="${ramds}" var="ht">
-                            <option  value="${ht.dungLuong}">${ht.dungLuong}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div>
-                    <select  class="form-control" id="romds1" onchange="clickcombobox()">
-                        <option selected value="null">Rom</option>
-                        <c:forEach items="${romds}" var="ht">
-                            <option  value="${ht.dungLuong}">${ht.dungLuong}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div style="height: 1.5cm">
-                    <select  class="form-control" id="pinds1" onchange="clickcombobox()">
-                        <option selected value="null">Pin</option>
-                        <c:forEach items="${pinds}" var="ht">
-                            <option  value="${ht.loaiPin}">${ht.loaiPin}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div>
-                    <select  class="form-control" id="dungds1" onchange="clickcombobox()">
-                        <option selected value="null">Dung lượng pin</option>
-                        <c:forEach items="${dungds}" var="ht">
-                            <option  value="${ht.thongSo}">${ht.thongSo}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div>
-                    <select  class="form-control" id="chipds1" onchange="clickcombobox()">
-                        <option selected value="null">Chíp</option>
-                        <c:forEach items="${chipds}" var="ht">
-                            <option  value="${ht.ten}">${ht.ten}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div>
-                    <select  class="form-control" id="sands1" onchange="clickcombobox()">
-                        <option selected value="null">Sản phẩm</option>
-                        <c:forEach items="${sands}" var="ht">
-                            <option  value="${ht.ten}">${ht.ten}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </form>
-<%--het 1--%>
-
-<%--2--%>
-    <div >
-        <div class="card-body" >
-            <h4 class="card-title" style="float: left">Danh sách sản phẩm</h4>
-            <%--            Tìm kiếm               --%>
-            <div class="input-group" style="width: 30%; float: right">
-                <input type="text" class="form-control" placeholder="Bạn tìm gì..."
-                       aria-label="Bạn tìm gì..." name="search-san-pham" id="sanPhamSearchInput">
-                <div class="input-group-append">
-                    <button class="btn btn-sm btn-primary" type="button" id="searchSanPham">Search
-                    </button>
-                </div>
-            </div>
-            <%--           kết thúc tìm kiếm         --%>
-            <div class="table-responsive">
-                <div >
-                <table id="example" class="display" style="min-width: 845px; color: black">
-                    <thead>
-                    <tr>
-                        <th>Mã Sản Phẩm</th>
-                        <th>Tên Sản Phẩm</th>
-                        <th>Ảnh</th>
-                        <th>Hãng</th>
-                        <th>Màu Sắc</th>
-                        <th>Ram</th>
-                        <th>Bộ Nhớ</th>
-                        <th>Đơn Giá</th>
-                        <th>Số Lượng</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody class="san_pham_search" style="text-align: center" id="banglocthaydoi">
-                    <c:forEach items="${listChiTietSanPham}" var="ctsp">
-                        <tr>
-                            <td>${ctsp.sanPham.ma}</td>
-                            <td>${ctsp.sanPham.ten}</td>
-                            <td align="center">
-                                <img src="/uploads/${ctsp.urlAnh}" width="40" height="40">
-                            </td>
-                            <td>${ctsp.sanPham.hangSanPham.ten}</td>
-                            <td>${ctsp.mauSac.ten}</td>
-                            <td>${ctsp.ram.dungLuong}</td>
-                            <td>${ctsp.rom.dungLuong}</td>
-                            <td>${ctsp.giaBan}</td>
-                            <td>${ctsp.soLuong}</td>
-                            <td>
-                                <a class="btn btn-warning btn-icon-text"
-                                   data-bs-toggle="modal" data-bs-target="#nhapImei">Nhập IMEI</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-<%--                        het 2--%>
-
-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <div class="modal fade" id="nhapImei" tabindex="-1"
@@ -712,8 +670,8 @@
     </div>
 </div>
 </body>
-<%--<script src="https://code.jquery.com/jquery-3.7.0.min.js"--%>
-<%--        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>--%>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"--%>
 <%--        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"--%>
 <%--        crossorigin="anonymous"></script>--%>
@@ -1080,26 +1038,16 @@
 
                 loadScripts();
                 // loadSelect2();
-
-
             })
             .catch(error => {
                 console.error('Error loading interface:', error);
             });
-
-
-
     }
 
     function loadScripts() {
         const scriptsToLoad = [
             '../../../vendor/datatables/js/jquery.dataTables.min.js',
             '../../../js/plugins-init/datatables.init.js'
-
-
-
-
-
 
 
         ];
@@ -1121,6 +1069,7 @@
         // Bắt đầu quá trình tải script
         loadScript(0);
     }
+
     function clickcombobox() {
         var x1 = encodeURIComponent(document.getElementById("hangds1").value);
         var x2 = encodeURIComponent(document.getElementById("camds1").value);
@@ -1128,12 +1077,12 @@
         var x4 = encodeURIComponent(document.getElementById("mauds1").value);
         var x5 = encodeURIComponent(document.getElementById("ramds1").value);
         var x6 = encodeURIComponent(document.getElementById("romds1").value);
-        var x7 = encodeURIComponent(document.getElementById("pinds1").value);
+        // var x7 = encodeURIComponent(document.getElementById("pinds1").value);
         var x8 = encodeURIComponent(document.getElementById("dungds1").value);
         var x9 = encodeURIComponent(document.getElementById("chipds1").value);
         var x10 = encodeURIComponent(document.getElementById("sands1").value);
 
-        var link='/ban-hang/loc/ban-hang-tai-quay/'+x1+'/'+x2+'/'+x3+'/'+x4+'/'+x5+'/'+x6+'/'+x7+'/'+x8+'/'+x9+'/'+x10;
+        var link = '/ban-hang/loc/ban-hang-tai-quay/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + 'null' + '/' + x8 + '/' + x9 + '/' + x10;
         // document.getElementById("vt").innerHTML=link
         loadInterface(link);
         // document.getElementById("demo").innerHTML = "You selected: " + x;
@@ -1145,36 +1094,36 @@
         $('#hangds1').select2({
             theme: 'bootstrap-5'
         });
-        $( '#camds1' ).select2( {
+        $('#camds1').select2({
             theme: 'bootstrap-5'
-        } );
-        $( '#mands1' ).select2( {
+        });
+        $('#mands1').select2({
             theme: 'bootstrap-5'
-        } );
-        $( '#mauds1' ).select2( {
+        });
+        $('#mauds1').select2({
             theme: 'bootstrap-5'
-        } );
-        $( '#ramds1' ).select2( {
+        });
+        $('#ramds1').select2({
             theme: 'bootstrap-5'
-        } );
-        $( '#romds1' ).select2( {
+        });
+        $('#romds1').select2({
             theme: 'bootstrap-5'
-        } );
+        });
 
-        $( '#pinds1' ).select2( {
+        $('#pinds1').select2({
             theme: 'bootstrap-5'
-        } );
-        $( '#dungds1' ).select2( {
+        });
+        $('#dungds1').select2({
             theme: 'bootstrap-5'
-        } );
+        });
 
-        $( '#chipds1' ).select2( {
+        $('#chipds1').select2({
             theme: 'bootstrap-5'
-        } );
+        });
 
-        $( '#sands1' ).select2( {
+        $('#sands1').select2({
             theme: 'bootstrap-5'
-        } );
+        });
 
         // Gọi .select2() cho các phần tử khác ở đây (tương tự)
     }

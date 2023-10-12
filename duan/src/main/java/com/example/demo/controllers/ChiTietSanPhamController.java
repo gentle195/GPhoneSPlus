@@ -221,7 +221,11 @@ public class ChiTietSanPhamController {
 
     @PostMapping("/update/{id}")
     public String update(@PathVariable("id") UUID id, @Valid @ModelAttribute("chitietsanphamupdate") ChiTietSanPham chiTietSanPham,
-                         BindingResult result, @RequestParam("images") MultipartFile multipartFile, Model model, @ModelAttribute(name = "Pin") Pin pin,
+                         BindingResult result,
+                         @RequestParam("anh1s") MultipartFile anh1,
+                         @RequestParam("checkanh1") String checkanh1,
+                         Model model,
+                         @ModelAttribute(name = "Pin") Pin pin,
                          @ModelAttribute(name = "Chip") Chip chip,
                          @ModelAttribute(name = "Ram") Ram ram,
                          @ModelAttribute(name = "MauSac") MauSac mauSac,
@@ -252,11 +256,15 @@ public class ChiTietSanPhamController {
 
             return "/home/layout";
         }
-        if (!multipartFile.isEmpty()) {
-            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-            String uploadDir = "src/main/webapp/uploads/";
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-            chiTietSanPham.setUrlAnh(fileName);
+        String fileName1 = StringUtils.cleanPath(anh1.getOriginalFilename());
+        if (checkanh1.equals("cu1")) {
+        } else {
+            if (fileName1.equals("")) {
+            } else {
+                String uploadDir = "src/main/webapp/uploads/";
+                FileUploadUtil.saveFile(uploadDir, fileName1, anh1);
+            }
+            chiTietSanPham.setUrlAnh(fileName1);
         }
 
         LocalDate localDate = LocalDate.now();

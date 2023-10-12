@@ -61,8 +61,8 @@ public class ChiTietSanPham {
     @Column(name = "nam_bao_hanh")
     private int namBaoHanh;
 
-    @DecimalMin(value = "1", message = "Số lượng tồn phải lớn hơn 0")
-    @NotNull(message = "Không để trống thông tin")
+//    @DecimalMin(value = "1", message = "Số lượng tồn phải lớn hơn 0")
+//    @NotNull(message = "Không để trống thông tin")
     @Column(name = "so_luong_ton")
     private int soLuong;
 

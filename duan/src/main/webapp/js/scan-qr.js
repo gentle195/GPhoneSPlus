@@ -11,7 +11,7 @@ Instascan.Camera.getCameras().then(function (cameras) {
 
 scanner.addListener("scan", function (qrcode) {
     // Chuyển người dùng đến trang controller khi quét thành công
-    window.location.href =  `/ban-hang/them-gio-hang/${soImei}`;
+    window.location.href =  `/ban-hang/them-gio-hang/${qrcode}`;
 });
 
 
