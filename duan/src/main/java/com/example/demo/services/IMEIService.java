@@ -16,6 +16,7 @@ public interface IMEIService {
     public List<IMEI> searchOn(String imei);
 
     public List<IMEI> searchOff(String imei);
+    public List<IMEI> searchOff2(String imei);
 
     public List<IMEI> findAll();
 
@@ -44,6 +45,10 @@ public interface IMEIService {
     public Page<IMEI> getImeiOff(Pageable pageable);
 
     public List<IMEI> getImeiOff();
+
+    Page<IMEI> getImeiOff3(Pageable pageable);
+
+    List<IMEI> findAll3();
 
     public void khoiPhuc(UUID uuid);
 }

@@ -5,29 +5,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Skydash Admin</title>
-    <link rel="stylesheet" href="../../vendors/feather/feather.css">
-    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
-    <link rel="shortcut icon" href="../../images/favicon.png"/>
-    <!-- Thêm CSS và JS của Select2 -->
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Focus - Bootstrap Admin Dashboard </title>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"/>
-    <!-- Or for RTL support -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css"/>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 
 </head>
 <body>
@@ -45,20 +28,17 @@
             <li class="nav-item" style="border-radius: 2%">
                 <a class="nav-link" href="/hoa-don/view-add" role="tab">Thêm hóa đơn chờ</a>
             </li>
-            <li class="nav-item" style="border-radius: 2%">
-                <a class="nav-link" href="/hoa-don/view-loc" role="tab">Lọc hóa đơn</a>
-            </li>
         </ul>
     </div>
 
-    <div class="container">
+    <div class="container" style="color: black">
         <div class="col-12 grid-margin">
             <div class="card">
                 <div class="card-body">
                     <form:form action="/hoa-don/add" method="post" modelAttribute="hoaDon">
-                        <div class="row">
+                        <div class="row" >
                             <div class="col-md-6">
-                                <div class="form-group row">
+                                <div class="form-group row" >
 
                                     <form:label path="khachHang"
                                                 class="col-sm-3 col-form-label">khách hàng:</form:label>
@@ -115,15 +95,6 @@
                                 </div>
                                 <label class="col-sm-3 col-form-label">Quy đổi:
                                 </label>
-                                <div class="col-sm-9">
-                                        <%--                                    <select id="searchQuyDoi" class="form-control select2"--%>
-                                        <%--                                            style="font-weight: bold; width: 100%">--%>
-                                        <%--                                        <option value="null">Nhập hoặc chọn trong danh sách</option>--%>
-                                        <%--                                        <c:forEach items="${listQuyDoi}" var="quyDoi">--%>
-                                        <%--                                            <option value="${quyDoi.id}">${quyDoi.hoTen}</option>--%>
-                                        <%--                                        </c:forEach>--%>
-                                        <%--                                    </select>--%>
-                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
@@ -196,12 +167,4 @@
 
 
 </script>
-
-<script src="../../vendors/js/vendor.bundle.base.js"></script>
-<script src="../../js/off-canvas.js"></script>
-<script src="../../js/hoverable-collapse.js"></script>
-<script src="../../js/template.js"></script>
-<script src="../../js/settings.js"></script>
-<script src="../../js/todolist.js"></script>
-
 </html>

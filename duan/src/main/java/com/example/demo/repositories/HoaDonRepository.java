@@ -54,5 +54,6 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
             @Param("receiveStartDate") Date receiveStartDate,
             @Param("receiveEndDate") Date receiveEndDate
     );
-
+    @Query("SELECT h FROM HoaDon h WHERE h.ngayThanhToan >= :startDate")
+    List<HoaDon> findAllByCreatedAtAfter(@Param("startDate") java.util.Date startDate);
 }

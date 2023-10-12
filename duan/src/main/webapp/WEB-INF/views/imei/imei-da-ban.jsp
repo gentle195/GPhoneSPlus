@@ -18,11 +18,11 @@
             <a class="nav-link" href="/imei/hien-thi" role="tab">Thông tin Imei</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/imei/hien-thi-da-ban" role="tab">Imei đã bán</a>
+            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+               aria-controls="description" aria-selected="true">Imei đã bán</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               aria-controls="description" aria-selected="true">Imei đã xoá</a>
+            <a class="nav-link" href="/imei/hien-thi-da-xoa" role="tab">Imei đã xoá</a>
         </li>
     </ul>
 </div>
@@ -33,9 +33,9 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title" style="float: left">Danh sách Imei đã xóa</h4>
+                    <h4 class="card-title" style="float: left">Danh sách Imei đã bán</h4>
                     <%--            Tìm kiếm               --%>
-                    <form action="/imei/search-off-2" method="post">
+                    <form action="/imei/search-off-1" method="post">
                         <div class="input-group" style="width: 30%; float: right">
                             <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                    aria-label="Bạn tìm gì..." name="search">
@@ -43,19 +43,10 @@
                                 <button class="btn btn-sm btn-primary" type="submit">Search</button>
                             </div>
                         </div>
-                        <div style="float: right">
-                            <a href="/imei/khoi-phuc-tat-ca" class="btn btn-danger btn-icon-text"
-                               tabindex="-1"
-                               role="button"
-                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                <i class="ti-reload btn-icon-prepend"></i>
-                                Khôi phục tất cả</a>
-                        </div>
-
 
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
-                    <div class="table-responsive">
+                    <div class="table-responsive" >
                         <table class="table table-striped" style="color: black">
                             <thead>
                             <tr>
@@ -79,22 +70,9 @@
 
                                     <td>${imei.ngayTao}</td>
                                     <td>${imei.ngayCapNhat}</td>
-                                    <td>
-                                        <c:if test="${imei.tinhTrang == 2}">Đã xoá</c:if>
-                                    </td>
+                                    <td>${imei.tinhTrang==0?"Chưa bán":"Đã bán"}</td>
 
                                     <td>${imei.moTa}</td>
-                                    <td>
-
-                                        <a href="/imei/khoi-phuc/${imei.id}"
-                                           class="btn btn-danger btn-icon-text"
-                                           tabindex="-1"
-                                           role="button"
-                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                            <i class="ti-reload btn-icon-prepend"></i>
-                                            Khôi phục</a>
-
-                                    </td>
                                 </tr>
                             </c:forEach>
                             </tbody>

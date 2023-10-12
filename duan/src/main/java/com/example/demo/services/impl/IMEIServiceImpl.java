@@ -41,6 +41,11 @@ public class IMEIServiceImpl implements IMEIService {
     }
 
     @Override
+    public List<IMEI> searchOff2(String imei) {
+        return imeiRepository.searchIMEIOff2(imei);
+    }
+
+    @Override
     public List<IMEI> findAll() {
         return imeiRepository.findAll();
     }
@@ -93,7 +98,7 @@ public class IMEIServiceImpl implements IMEIService {
         if (id != null) {
             IMEI imei = imeiRepository.findById(id).orElse(null);
             if (imei != null) {
-                imei.setTinhTrang(1);
+                imei.setTinhTrang(2);
                 imeiRepository.save(imei);
                 return true;
             }
@@ -124,6 +129,16 @@ public class IMEIServiceImpl implements IMEIService {
     @Override
     public List<IMEI> getImeiOff() {
         return imeiRepository.getImeiOff();
+    }
+
+    @Override
+    public Page<IMEI> getImeiOff3(Pageable pageable) {
+        return imeiRepository.getImeiOff3(pageable);
+    }
+
+    @Override
+    public List<IMEI> findAll3() {
+        return imeiRepository.findAll3();
     }
 
     @Override

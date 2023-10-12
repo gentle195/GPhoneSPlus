@@ -59,6 +59,9 @@ public class HoaDon {
     @Column(name = "ngay_ship")
     private Date ngayShip;
 
+    @Column(name = "ngay_thanh_toan")
+    private Date ngayThanhToan;
+
     @Column(name = "tinh_trang")
     private int tinhTrang;
 
