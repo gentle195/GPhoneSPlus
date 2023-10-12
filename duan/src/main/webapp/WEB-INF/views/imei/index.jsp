@@ -19,6 +19,9 @@
                aria-controls="description" aria-selected="true">Thông tin Imei</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="/imei/hien-thi-da-ban" role="tab">Imei đã bán</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="/imei/hien-thi-da-xoa" role="tab">Imei đã xoá</a>
         </li>
     </ul>
@@ -118,7 +121,6 @@
                                     <td>${imei.ngayTao}</td>
                                     <td>${imei.ngayCapNhat}</td>
                                     <td>${imei.tinhTrang==0?"Chưa bán":"Đã bán"}</td>
-
                                     <td>${imei.moTa}</td>
                                     <td>
                                         <a href="/imei/view-update/${imei.id}"

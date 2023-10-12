@@ -5,22 +5,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Skydash Admin</title>
-
-    <!-- thanh hóa đơn -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Liên kết CSS tùy chỉnh -->
-    <link rel="stylesheet" href="style.css">
-
-    <link rel="stylesheet" href="../../vendors/feather/feather.css">
-    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
-    <link rel="shortcut icon" href="../../images/favicon.png"/>
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Focus - Bootstrap Admin Dashboard </title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"/>
     <style>
         .stepwizard-step p {
             margin-top: 10px;
@@ -86,7 +76,6 @@
     </style>
 </head>
 <body>
-
 <div class="main" style="border: 2px solid black; border-radius: 1.8% 0% 0% 0%">
     <div>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
@@ -449,11 +438,4 @@
     });
 
 </script>
-<script src="../../vendors/js/vendor.bundle.base.js"></script>
-<script src="../../js/off-canvas.js"></script>
-<script src="../../js/hoverable-collapse.js"></script>
-<script src="../../js/template.js"></script>
-<script src="../../js/settings.js"></script>
-<script src="../../js/todolist.js"></script>
-
 </html>

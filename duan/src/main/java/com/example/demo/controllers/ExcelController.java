@@ -1,103 +1,180 @@
-//package com.example.demo.controllers;
-//
-//import java.io.ByteArrayOutputStream;
-//import java.io.IOException;
-//import java.io.InputStream;
-//import java.io.OutputStream;
-//import java.util.Base64;
-//import java.util.List;
-//
-//
-//import com.example.demo.models.Pin;
-//import com.example.demo.services.PinService;
-//import jakarta.servlet.ServletException;
-//import jakarta.servlet.annotation.WebServlet;
-//import jakarta.servlet.http.HttpServlet;
-//import jakarta.servlet.http.HttpServletRequest;
-//import jakarta.servlet.http.HttpServletResponse;
-//import org.apache.poi.ss.usermodel.Cell;
-//import org.apache.poi.ss.usermodel.Row;
-//import org.apache.poi.ss.usermodel.Sheet;
-//import org.apache.poi.ss.usermodel.Workbook;
-//import org.apache.poi.xssf.usermodel.XSSFSheet;
-//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.GetMapping;
-//
-//public class ExcelController extends HttpServlet {
-//
-//    @Autowired
-//    private PinService pinService;
-//
-//    @GetMapping("/export-excel")
-//    public String exportExcel(Model model, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        // Lấy dữ liệu từ database
-//        List<Pin> listPin = pinService.findAll();
-//
-//        // Tạo đối tượng XSSFWorkbook
-//        XSSFWorkbook workbook = new XSSFWorkbook();
-//
-//        // Tạo bảng dữ liệu
-//        XSSFSheet sheet = workbook.createSheet("Danh sách pin");
-//
-//        // Tạo tiêu đề bảng
-//        Row row = sheet.createRow(0);
-//        Cell cell;
-//        cell = row.createCell(0);
-//        cell.setCellValue("Mã");
-//        cell = row.createCell(1);
-//        cell.setCellValue("Loại pin");
-//        cell = row.createCell(2);
-//        cell.setCellValue("Công nghệ pin");
-//        cell = row.createCell(3);
-//        cell.setCellValue("Ngày tạo");
-//        cell = row.createCell(4);
-//        cell.setCellValue("Ngày cập nhật");
-//        cell = row.createCell(5);
-//        cell.setCellValue("Tình trạng");
-//        cell = row.createCell(6);
-//        cell.setCellValue("Mô tả");
-//        cell = row.createCell(7);
-//        cell.setCellValue("Dung lượng");
-//
-//        // Thêm dữ liệu vào bảng
-//        int rowNum = 1;
-//        for (Pin pin : listPin) {
-//            row = sheet.createRow(rowNum);
-//            cell = row.createCell(0);
-//            cell.setCellValue(pin.getMa());
-//            cell = row.createCell(1);
-//            cell.setCellValue(pin.getLoaiPin());
-//            cell = row.createCell(2);
-//            cell.setCellValue(pin.getCongNghePin());
-//            cell = row.createCell(3);
-//            cell.setCellValue(pin.getNgayTao());
-//            cell = row.createCell(4);
-//            cell.setCellValue(pin.getNgayCapNhat());
-//            cell = row.createCell(5);
-//            cell.setCellValue(pin.getTinhTrang());
-//            cell = row.createCell(6);
-//            cell.setCellValue(pin.getMoTa());
-//            cell = row.createCell(7);
-//            cell.setCellValue(pin.getDungLuongPin().getThongSo());
-//
-//            rowNum++;
-//        }
-//
-//        // Lưu tệp excel
-//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//        workbook.write(outputStream);
-//        byte[] bytes = outputStream.toByteArray();
-//
-//        // Chuyển đổi đối tượng XSSFWorkbook thành chuỗi
-//        String excelString = workbook.toString();
-//
-//        // Mã hóa chuỗi kết quả thành base64
-//        String base64String = Base64.getEncoder().encodeToString(excelString.getBytes());
-//
-//        // Trả về chuỗi base64 cho trình duyệt web
-//        model.addAttribute("contentPage", "../pin/pin.jsp");
-//        return "/home/layout";
-//    }
-//}
+package com.example.demo.controllers;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+
+import com.example.demo.models.HoaDon;
+import com.example.demo.services.HoaDonService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class ExcelController {
+
+    @Autowired
+    private HoaDonService hoaDonService;
+
+
+    @GetMapping("/hoa-don/export-excel")
+    public String exportExcel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        // thời gian theo 3 tháng gần nhẩt
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -3);
+        Date startDate =  calendar.getTime();
+
+        // Lấy dữ liệu từ database
+        List<HoaDon> listHoaDon = hoaDonService.findAllByCreatedAtAfter(startDate);
+
+        // Tạo đối tượng XSSFWorkbook
+        XSSFWorkbook workbook = new XSSFWorkbook();
+
+        // Tạo bảng dữ liệu
+        XSSFSheet sheet = workbook.createSheet("Danh sách hoá đơn đã thanh toán");
+
+        CellStyle borderStyle = workbook.createCellStyle();
+        borderStyle.setBorderBottom(BorderStyle.THIN);
+        borderStyle.setBorderLeft(BorderStyle.THIN);
+        borderStyle.setBorderRight(BorderStyle.THIN);
+        borderStyle.setBorderTop(BorderStyle.THIN);
+
+        // Tăng độ rộng excel
+        sheet.setDefaultColumnWidth(14);
+
+        // Tạo tiêu đề bảng
+        Row row = sheet.createRow(0);
+
+        Cell cell;
+
+        cell = row.createCell(0);
+        cell.setCellValue("Mã hoá đơn");
+        cell = row.createCell(1);
+        cell.setCellValue("Tên khách hàng");
+        cell = row.createCell(2);
+        cell.setCellValue("Tên nhân viên");
+        cell = row.createCell(3);
+        cell.setCellValue("Địa chỉ");
+        cell = row.createCell(4);
+        cell.setCellValue("Điểm quy đổi");
+        cell = row.createCell(5);
+        cell.setCellValue("SĐT nhận hàng");
+        cell = row.createCell(6);
+        cell.setCellValue("Tổng tiền");
+        cell = row.createCell(7);
+        cell.setCellValue("Tình trạng");
+        cell = row.createCell(8);
+        cell.setCellValue("Ngày tạo");
+        cell = row.createCell(9);
+        cell.setCellValue("Ngày thanh toán");
+        cell = row.createCell(10);
+        cell.setCellValue("Ngày nhận");
+        cell = row.createCell(11);
+        cell.setCellValue("Ngày ship");
+
+        // Tạo kiểu font đậm
+        Font boldFont = workbook.createFont();
+        boldFont.setBold(true);
+
+        // Tạo kiểu cell
+        CellStyle headerStyle = workbook.createCellStyle();
+        headerStyle.setFont(boldFont);
+
+        // Áp dụng kiểu cell cho dòng đầu
+        Row headerRow = sheet.getRow(0);
+        for (int i = 0; i < headerRow.getLastCellNum(); i++) {
+            headerRow.getCell(i).setCellStyle(headerStyle);
+        }
+
+        // Thêm dữ liệu vào bảng
+        int rowNum = 1;
+        for (HoaDon hoadon : listHoaDon) {
+            // Tạo ô kiểu date
+            XSSFCellStyle dateStyle = workbook.createCellStyle();
+            dateStyle.setDataFormat(workbook.createDataFormat().getFormat("yyyy/mm/dd"));
+
+            row = sheet.createRow(rowNum);
+            cell = row.createCell(0);
+            cell.setCellValue(hoadon.getMa());
+
+            String hoTen = null;
+            if (hoadon.getKhachHang() != null) {
+                hoTen = hoadon.getKhachHang().getHoTen();
+            }
+            if (hoTen == null) {
+                hoTen = " ";
+            } else {
+                cell = row.createCell(1);
+                cell.setCellValue(hoTen);
+            }
+
+
+            cell = row.createCell(2);
+            cell.setCellValue(hoadon.getNhanVien().getHoTen());
+
+            cell = row.createCell(3);
+            cell.setCellValue(hoadon.getDiaChi().getDiaChi());
+
+            cell = row.createCell(4);
+            cell.setCellValue(hoadon.getQuyDoi().getDiemQuyDoi());
+
+            cell = row.createCell(5);
+            cell.setCellValue(hoadon.getSdt());
+
+            cell = row.createCell(6);
+            cell.setCellValue(String.valueOf(hoadon.getTongTien()));
+
+            cell = row.createCell(7);
+            cell.setCellValue(hoadon.getTinhTrang());
+
+            cell = row.createCell(8);
+            cell.setCellValue(hoadon.getNgayTao());
+            cell.setCellStyle(dateStyle);
+
+            cell = row.createCell(9);
+            cell.setCellValue(hoadon.getNgayThanhToan());
+            cell.setCellStyle(dateStyle);
+
+            cell = row.createCell(10);
+            cell.setCellValue(hoadon.getNgayNhan());
+            cell.setCellStyle(dateStyle);
+
+            cell = row.createCell(11);
+            cell.setCellStyle(dateStyle);
+            cell.setCellValue(hoadon.getNgayShip());
+
+            rowNum++;
+
+        }
+
+
+        // Lưu tệp excel
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        workbook.write(outputStream);
+        byte[] bytes = outputStream.toByteArray();
+
+        // Trả về tệp excel
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setHeader("Content-Disposition", "attachment; filename=danh-sach-hoadon.xlsx");
+        response.getOutputStream().write(bytes);
+        response.getOutputStream().flush();
+        response.getOutputStream().close();
+
+        return null;
+    }
+}

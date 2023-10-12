@@ -30,8 +30,6 @@
     <div class="tab-pane fade show active" id="description" role="tabpanel"
          aria-labelledby="description-tab">
         <form action="/chi-tiet-san-pham/loc" method="post" onsubmit="return checkLoc()">
-
-            <%--    <div class="col-md-6 grid-margin stretch-card" >--%>
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Lọc chi tiết sản phẩm</h4>
@@ -39,7 +37,6 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-
                                     <select name="hang" class="form-control" style="font-weight: bold; width: 100%" id="selectHang">
                                         <option selected disabled>Hãng</option>
                                         <c:forEach items="${listHang}" var="hang" varStatus="i">
@@ -132,13 +129,13 @@
                         <table class="table table-striped" style="color: black; width: 2000px" >
                             <thead>
                             <tr>
+                                <th>Ảnh</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Màu sắc</th>
                                 <th>Chip</th>
                                 <th>Ram</th>
                                 <th>Rom</th>
                                 <th>Pin</th>
-                                <th>Url Anh</th>
                                 <th>Giá bán</th>
                                 <th>Ngày tạo</th>
                                 <th>Ngày cập nhật</th>
@@ -153,16 +150,15 @@
                             <i class="mdi mdi-border-color"></i>
                             <c:forEach items="${listCTSP}" var="ctsp" varStatus="index">
                                     <tr>
+                                        <td align="center">
+                                            <img src="/uploads/${ctsp.urlAnh}" width="40" height="40">
+                                        </td>
                                         <td>${ctsp.sanPham.ten}</td>
                                         <td>${ctsp.mauSac.ten}</td>
                                         <td>${ctsp.chip.ten}</td>
                                         <td>${ctsp.ram.dungLuong}</td>
                                         <td>${ctsp.rom.dungLuong}</td>
                                         <td>${ctsp.pin.dungLuongPin.thongSo}</td>
-                                        <td align="center">
-                                                <%--                        <img src=".../.../${ctsp.urlAnh}" width="auto" height="auto" type="file">--%>
-                                            <img src="/uploads/${ctsp.urlAnh}" width="40" height="40">
-                                        </td>
                                         <td>${ctsp.giaBan} VND</td>
                                         <td>${ctsp.ngayTao}</td>
                                         <td>${ctsp.ngayCapNhat}</td>

@@ -9,14 +9,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Focus - Bootstrap Admin Dashboard </title>
-
-    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon.png">
-    <link rel="stylesheet" href="../../../vendor/owl-carousel/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../../../vendor/owl-carousel/css/owl.theme.default.min.css">
-    <link href="../../../vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="../../../vendor/jqvmap/css/jqvmap.min.css" rel="stylesheet">
-    <link href="../../../css/style.css" rel="stylesheet">
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
 </head>
 <body>

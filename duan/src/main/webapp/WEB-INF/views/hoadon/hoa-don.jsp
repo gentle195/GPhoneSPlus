@@ -5,38 +5,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Skydash Admin</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-
-
-    <link rel="stylesheet" href="../../vendors/feather/feather.css">
-    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
-    <link rel="shortcut icon" href="../../images/favicon.png"/>
-    <!-- Thêm CSS và JS của Select2 -->
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Focus - Bootstrap Admin Dashboard </title>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"/>
-    <!-- Or for RTL support -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css"/>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 </head>
 <body>
 <div>
@@ -48,9 +22,6 @@
         <li class="nav-item">
             <a class="nav-link" href="/hoa-don/view-add" role="tab">Thêm hóa đơn chờ</a>
         </li>
-        <%--        <li class="nav-item" style="border-radius: 2%">--%>
-        <%--            <a class="nav-link" href="/hoa-don/view-loc" role="tab">Lọc hóa đơn</a>--%>
-        <%--        </li>--%>
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">
@@ -59,12 +30,20 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title" style="float: left">Danh sách hóa đơn</h4>
+                    <div>
+                        <h4 class="card-title" style="float: left">Danh sách hóa đơn</h4>
+                        <a href="/hoa-don/export-excel" class="btn btn-success btn-icon-text" tabindex="-1" role="button">
+                            <i class="ti-export btn-icon-prepend"></i>
+                            Xuất Excel
+                        </a>
+                    </div>
+
                     <%--            Tìm kiếm               --%>
+
                     <br>
                     <br>
-                    <div class="loc" style="border: 1px solid #999999">
-                        <form:form action="/hoa-don/loc" method="post" modelAttribute="hoaDon">
+                    <div class="loc" style="border: 1px solid black; color: black">
+                        <form:form action="/hoa-don/loc" method="post" modelAttribute="hoaDon" >
                             <div class="row" style="margin-top: 10px">
                                 <div class="col-md-4">
                                     <div class="form-group row">
@@ -194,7 +173,7 @@
                     </div>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped" style="color: black">
+                        <table class="table table-striped" style="color: black; width: 2000px">
                             <thead>
                             <tr>
                                 <th>Mã hóa đơn</th>
@@ -207,6 +186,7 @@
                                 <th>Trạng thái</th>
                                 <th>Loại HĐ</th>
                                 <th>Ngày Tạo</th>
+                                <th>Ngày Thanh Toán</th>
                                 <th>Ngày nhận</th>
                                 <th>Ngày ship</th>
                                 <th>Action</th>
@@ -239,6 +219,7 @@
                                         <c:if test="${hoaDon.loai == 0}">HĐ quầy</c:if>
                                     </td>
                                     <td>${hoaDon.ngayTao}</td>
+                                    <td>${hoaDon.ngayThanhToan}</td>
                                     <td>${hoaDon.ngayNhan}</td>
                                     <td>${hoaDon.ngayShip}</td>
                                     <td>
@@ -369,6 +350,9 @@
 </div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 <script>
 
     $('#selectKhachHang1').select2({
@@ -382,10 +366,7 @@
     });
 
 </script>
-<script src="../../vendors/js/vendor.bundle.base.js"></script>
-<script src="../../js/off-canvas.js"></script>
-<script src="../../js/hoverable-collapse.js"></script>
-<script src="../../js/template.js"></script>
-<script src="../../js/settings.js"></script>
-<script src="../../js/todolist.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </html>

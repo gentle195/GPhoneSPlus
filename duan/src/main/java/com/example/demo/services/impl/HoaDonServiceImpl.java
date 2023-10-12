@@ -159,5 +159,10 @@ public class HoaDonServiceImpl implements HoaDonService {
         return hoaDonRepository.loc1(idKH,idNV,idDC, startDate,endDate,shipStartDate, shipEndDate,receiveStartDate,receiveEndDate);
     }
 
+    @Override
+    public List<HoaDon> findAllByCreatedAtAfter(java.util.Date startDate) {
+        return hoaDonRepository.findAllByCreatedAtAfter(startDate);
+    }
+
 
 }

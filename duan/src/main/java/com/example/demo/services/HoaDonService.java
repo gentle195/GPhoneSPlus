@@ -35,6 +35,7 @@ public interface HoaDonService {
 
     public List<HoaDon> loc1(UUID idKH, UUID idNV, UUID idDC, Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate);
 
+    public List<HoaDon> findAllByCreatedAtAfter(java.util.Date startDate);
 }
 
 
