@@ -32,7 +32,14 @@
         <form action="/chi-tiet-san-pham/loc" method="post" onsubmit="return checkLoc()">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Lọc chi tiết sản phẩm</h4>
+                    <h4 class="card-title">Lọc chi tiết sản phẩm
+                        <a href="/chi-tiet-san-pham/export-excel"
+                           class="btn btn-success btn-icon-text"
+                           tabindex="-1"
+                           role="button">
+                            <i class="ti-export btn-icon-prepend"></i>
+                            Xuất Excel</a>
+                    </h4>
                     <form class="forms-sample">
                         <div class="row">
                             <div class="col-md-3">

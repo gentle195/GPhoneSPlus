@@ -31,7 +31,7 @@
 </div>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="description" role="tabpanel"
-         aria-labelledby="description-tab">
+         aria-labelledby="description-tab" style="color: black">
         <form:form action="/san-pham/add" method="post" modelAttribute="dulieuxem"
                    enctype="multipart/form-data">
             <div class="col-12 grid-margin">

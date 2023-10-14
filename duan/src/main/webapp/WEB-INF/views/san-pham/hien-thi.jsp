@@ -39,7 +39,15 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title" style="float: left">Danh sách sản phẩm</h4>
+                    <h4 class="card-title" style="float: left">Danh sách sản phẩm
+                        <a href="/san-pham/export-excel"
+                           class="btn btn-success btn-icon-text"
+                           tabindex="-1"
+                           role="button">
+                            <i class="ti-export btn-icon-prepend"></i>
+                            Xuất Excel
+                        </a>
+                    </h4>
                     <%--            Tìm kiếm               --%>
                     <form action="/san-pham/search" method="post">
                         <div class="input-group" style="width: 30%; float: right">
@@ -52,7 +60,7 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" style="color:black; width: 2000px ">
                             <thead>
                             <tr>
                                 <th>Mã SP</th>
