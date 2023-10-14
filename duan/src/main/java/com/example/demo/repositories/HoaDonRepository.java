@@ -5,8 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -33,27 +35,35 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
     List<HoaDon> search(@Param("ten") String ten, @Param("soTienQuyDoi") BigDecimal soTienQuyDoi);
 
     @Query("select hd from HoaDon hd " +
-            "left join hd.khachHang kh " +
-            "LEFT JOIN hd.nhanVien nv " +
-            "LEFT JOIN hd.diaChi dc " +
+            "LEFT JOIN KhachHang kh ON hd.khachHang.id = kh.id  " +
+            "LEFT JOIN NhanVien nv ON hd.nhanVien.id = nv.id " +
+            "LEFT JOIN DiaChi dc ON hd.diaChi.id = dc.id " +
             " where (:idKH IS NULL OR kh.id=:idKH) " +
             "and (:idNV IS NULL OR nv.id=:idNV)  " +
             "and (:idDC IS NULL OR dc.id=:idDC) " +
-            "AND ((:startDate IS NULL and:endDate IS NULL) OR hd.ngayTao between :startDate and :endDate) " +
-            "AND ((:shipStartDate IS NULL and :shipEndDate IS NULL) OR hd.ngayShip between :shipStartDate and :shipEndDate) " +
-            "AND ((:receiveStartDate IS NULL and :receiveEndDate IS NULL) OR hd.ngayNhan between :receiveStartDate and :receiveEndDate) "
-//            +
-//            "AND ()"
-    )
+            "AND (:trangThai is null or hd.tinhTrang=:trangThai)" +
+            "and(:loai is null or hd.loai=:loai) AND " +
+            "((:startDate IS NULL OR :endDate IS NULL) OR hd.ngayThanhToan >= COALESCE(:startDate, hd.ngayThanhToan) " +
+            "and hd.ngayThanhToan <= COALESCE(:endDate, hd.ngayThanhToan))  " +
+            "AND ((:shipStartDate IS NULL OR :shipEndDate IS NULL) OR hd.ngayShip >= COALESCE(:shipStartDate, hd.ngayShip) " +
+            "and hd.ngayShip <= COALESCE(:shipEndDate, hd.ngayShip))  " +
+            "AND ((:receiveStartDate IS NULL OR :receiveEndDate IS NULL) OR hd.ngayNhan >= COALESCE(:receiveStartDate, hd.ngayNhan) " +
+            "and hd.ngayNhan <= COALESCE(:receiveEndDate, hd.ngayNhan)) ")
     List<HoaDon> loc1(
-            UUID idKH, UUID idNV, UUID idDC
-            , @Param("startDate") Date startDate,
-            @Param("endDate") Date endDate,
-            @Param("shipStartDate") Date shipStartDate,
-            @Param("shipEndDate") Date shipEndDate,
-            @Param("receiveStartDate") Date receiveStartDate,
-            @Param("receiveEndDate") Date receiveEndDate
-    );
+            UUID idKH, UUID idNV, UUID idDC, Integer trangThai, Integer loai,
+            @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+            @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+            @RequestParam(value = "shipStartDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date shipStartDate,
+            @RequestParam(value = "shipEndDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date shipEndDate,
+            @RequestParam(value = "receiveStartDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date receiveStartDate,
+            @RequestParam(value = "receiveEndDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date receiveEndDate);
+
     @Query("SELECT h FROM HoaDon h WHERE h.ngayThanhToan >= :startDate")
     List<HoaDon> findAllByCreatedAtAfter(@Param("startDate") java.util.Date startDate);
+
+    @Query("SELECT h FROM HoaDon h WHERE h.ngayNhan >= :startDate")
+    List<HoaDon> findAllByNgayNhan(@Param("startDate") java.util.Date startDate);
+
+    @Query("SELECT h FROM HoaDon h WHERE h.ngayShip >= :startDate")
+    List<HoaDon> findAllByNgayShip(@Param("startDate") java.util.Date startDate);
 }

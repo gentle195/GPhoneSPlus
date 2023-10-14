@@ -57,7 +57,6 @@
                                 <th scope="col">Ngày cập nhật</th>
                                 <th scope="col">Tình trạng</th>
                                 <th scope="col">Mô tả</th>
-                                <th scope="col">Action</th>
                             </tr>
                             </thead>
                             <tbody>

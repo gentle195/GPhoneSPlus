@@ -33,9 +33,15 @@ public interface HoaDonService {
 
     public List<HoaDon> search(String ten, BigDecimal soTienQuyDoi);
 
-    public List<HoaDon> loc1(UUID idKH, UUID idNV, UUID idDC, Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate);
+    public List<HoaDon> loc1(UUID idKH, UUID idNV, UUID idDC, Integer trangThai, Integer loai,
+                             Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate
+    );
 
     public List<HoaDon> findAllByCreatedAtAfter(java.util.Date startDate);
+
+    public List<HoaDon> findAllByNgayNhan(java.util.Date startDate);
+
+    public List<HoaDon> findAllByNgayShip(java.util.Date startDate);
 }
 
 
