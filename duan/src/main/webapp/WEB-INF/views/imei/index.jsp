@@ -33,7 +33,9 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Thêm Imei</h4>
+                        <h4 class="card-title">Thêm Imei
+
+                        </h4>
                         <form class="forms-sample">
                             <div class="form-group">
                                 <div class="row">
@@ -81,7 +83,14 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title" style="float: left">Danh sách Imei</h4>
+                    <h4 class="card-title" style="float: left">Danh sách Imei
+                        <a href="/imei/export-excel"
+                           class="btn btn-success btn-icon-text"
+                           tabindex="-1"
+                           role="button">
+                            <i class="ti-export btn-icon-prepend"></i>
+                            Xuất Excel
+                        </a></h4>
                     <%--            Tìm kiếm               --%>
                     <form action="/imei/search-on" method="post">
                         <div class="input-group" style="width: 30%; float: right">
@@ -93,7 +102,7 @@
                         </div>
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
-                    <div class="table-responsive" >
+                    <div class="table-responsive">
                         <table class="table table-striped" style="color: black">
                             <thead>
                             <tr>

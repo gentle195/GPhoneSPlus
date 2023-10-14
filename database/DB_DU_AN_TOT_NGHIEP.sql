@@ -654,3 +654,4 @@ VALUES
   ('MH005', N'Độ phân giải 8K', '2022-05-30', N'Màn hình có độ phân giải 8K.');
 
 
+
