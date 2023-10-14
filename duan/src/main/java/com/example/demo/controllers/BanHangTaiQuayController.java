@@ -285,13 +285,6 @@ public class BanHangTaiQuayController {
     @GetMapping("/search-imei")
     public List<IMEI> searchIMEI(Model model, @RequestParam("search-imei") String search,
                                  @ModelAttribute("HoaDon") HoaDon hoaDon, @ModelAttribute("modalAddKhachHang") KhachHang khachHang) {
-//        if (search.isEmpty()) {
-//            model.addAttribute("thongBaoIMEI", "Không để trống thông tin");
-//            model.addAttribute("HoaDon", hoaDonnn);
-//            List<HoaDon> list = hoaDonService.find();
-//            model.addAttribute("listHoaDon", list);
-//            return l;
-//        } else {}
         List<IMEI> listIMEI = imeiService.searchOn(search);
         System.out.println(listIMEI);
         model.addAttribute("HoaDon", hoaDonnn);
@@ -305,13 +298,6 @@ public class BanHangTaiQuayController {
     @GetMapping("/them-imei/{id}")
     public String addIMEI(Model model, @PathVariable("id") UUID id,
                           @ModelAttribute("HoaDon") HoaDon hoaDon, @ModelAttribute("modalAddKhachHang") KhachHang khachHang) {
-//        if(hoaDonnn.getMa().isEmpty()){
-//            model.addAttribute("thongBaoImei","Chưa chọn hóa đơn");
-//            model.addAttribute("HoaDon", hoaDonnn);
-//            List<HoaDon> listHD = hoaDonService.find();
-//            model.addAttribute("listHoaDon", listHD);
-//            return "../ban-hang/hien-thi";
-//        }
         BigDecimal total = BigDecimal.ZERO;
         IMEI imei = imeiService.findById(id);
         HoaDonChiTiet hdct = new HoaDonChiTiet();
@@ -408,6 +394,7 @@ public class BanHangTaiQuayController {
         if (list.isEmpty()) {
             hoaDonnn.setTongTien(BigDecimal.ZERO);
             hoaDonnn.setTinhTrang(0);
+            hoaDonnn.setMa(hoaDonnn.getMa());
         } else {
             // Tính tổng đơn giá trong list hóa đơn chi tiết còn lại
             BigDecimal subTotal = list.stream()
@@ -444,13 +431,6 @@ public class BanHangTaiQuayController {
     @PostMapping("/xac-nhan/{id}")
     public String xacNhan(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon, @PathVariable("id") UUID id,
                           @ModelAttribute("modalAddKhachHang") KhachHang khachHang, @ModelAttribute("modalAddDiaChi") DiaChi DiaChi) {
-//        if(hoaDon.getMa().isEmpty()){
-//            model.addAttribute("thongBaoThanhToan","Chưa chọn hóa đơn");
-//            model.addAttribute("HoaDon", hoaDonnn);
-//            List<HoaDon> listHD = hoaDonService.find();
-//            model.addAttribute("listHoaDon", listHD);
-//            return "../ban-hang/hien-thi";
-//        }
         HoaDon hd = hoaDonService.findById(id);
         hd.setKhachHang(hoaDon.getKhachHang());
         hd.setDiaChi(hoaDon.getDiaChi());
@@ -461,8 +441,8 @@ public class BanHangTaiQuayController {
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         hd.setNgayCapNhat(date);
-        hd.setNgayNhan(date);
-        hd.setNgayShip(date);
+//        hd.setNgayNhan(date);
+//        hd.setNgayShip(date);
         hd.setGhiChu(hoaDon.getGhiChu());
         hd.setTinhTrang(1);
         hoaDonService.thanhToan(hd);
@@ -479,13 +459,6 @@ public class BanHangTaiQuayController {
     @PostMapping("/thanh-toan/{id}")
     public String thanhToan(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon, @PathVariable("id") UUID id,
                             @ModelAttribute("modalAddDiaChi") DiaChi DiaChi) {
-//        if(hoaDon.getMa().isEmpty()){
-//            model.addAttribute("thongBaoThanhToan","Chưa chọn hóa đơn");
-//            model.addAttribute("HoaDon", hoaDonnn);
-//            List<HoaDon> listHD = hoaDonService.find();
-//            model.addAttribute("listHoaDon", listHD);
-//            return "../ban-hang/hien-thi";
-//        }
         HoaDon hd = hoaDonService.findById(id);
         hd.setKhachHang(hoaDon.getKhachHang());
         hd.setDiaChi(hoaDon.getDiaChi());
@@ -496,10 +469,11 @@ public class BanHangTaiQuayController {
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         hd.setNgayCapNhat(date);
-        hd.setNgayNhan(date);
-        hd.setNgayShip(date);
+//        hd.setNgayNhan(date);
+//        hd.setNgayShip(date);
         hd.setGhiChu(hoaDon.getGhiChu());
         hd.setTinhTrang(2);
+        hd.setNgayThanhToan(date);
         List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
         if (!list.isEmpty()) {
             for (HoaDonChiTiet hdct : list
@@ -522,33 +496,10 @@ public class BanHangTaiQuayController {
                                     @PathVariable("chip") String chip,
                                     @PathVariable("manHinh") String moTaMan,
                                     @PathVariable("camera") String moTaCam
-//            ,
-//                                    @PathVariable("giaBanMin") BigDecimal giaBanMin,
-//                                    @PathVariable("giaBanMax") BigDecimal giaBanMax
-//                                    @ModelAttribute("HoaDon") HoaDon hoaDon,
-//                      @ModelAttribute("modalAddKhachHang") KhachHang khachHang
     ) {
-
-
-//        System.out.println("hang:"+hang+",ram:"+ram+",rom:"+rom+",dungluongpin:"+dungLuongPin+",chip:"+chip+",motaman:"+moTaMan+",motacam:"+moTaCam);
         List<ChiTietSanPham> list = banHangOnlineService.locbanhang(hang,moTaCam,moTaMan,"null",ram,rom,"null",dungLuongPin,chip,"null");
         model.addAttribute("listChiTietSanPham", list);
         System.out.println("fjdkjffhkfhsf");
-//        model.addAttribute("HoaDon", hoaDonnn);
-//        model.addAttribute("listHoaDon", hoaDonService.find());
-//        model.addAttribute("listHang", hangSanPhamService.findAll0());
-//        model.addAttribute("listMauSac", mauSacService.findAll0());
-//        model.addAttribute("listChip", chipService.findAll0());
-//        model.addAttribute("listRam", ramService.findAll0());
-//        model.addAttribute("listRom", romService.findAll0());
-//        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
-//        model.addAttribute("listManHinh", manHinhService.findAll0());
-//        model.addAttribute("listCamera", cameraService.findAll0());
-//        model.addAttribute("listNhanVien", nhanVienService.findAll());
-//        model.addAttribute("listKhachHang", khachHangService.findAll0());
-//        model.addAttribute("listDiaChi", diaChiService.findAll0());
-//        model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
-//        model.addAttribute("listHoaDonChiTiet", hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId()));
 
         return "/ban-hang/bang-loc";
     }

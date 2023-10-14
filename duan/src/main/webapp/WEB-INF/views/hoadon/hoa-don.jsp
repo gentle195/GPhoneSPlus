@@ -31,42 +31,50 @@
             <div class="card">
                 <div class="card-body">
                     <div>
-                        <h4 class="card-title" style="float: left">Danh sách hóa đơn</h4>
-                        <a href="/hoa-don/export-excel" class="btn btn-success btn-icon-text" tabindex="-1"
-                           role="button">
-                            <i class="ti-export btn-icon-prepend"></i>
-                            Xuất Excel
-                        </a>
+                        <h4 class="card-title" style="float: left">Danh sách hóa đơn
+                        </h4>
+                        <div class="basic-dropdown" style="float: right">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    <i class="ti-export btn-icon-prepend"></i>
+                                    Xuất Excel
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a href="/hoa-don/export-excel" class="dropdown-item" tabindex="-1">Theo ngày thanh
+                                        toán</a>
+                                    <a href="/hoa-don/export-excel-ngay-nhan" class="dropdown-item" tabindex="-1">Theo
+                                        ngày nhận</a>
+                                    <a href="/hoa-don/export-excel-ngay-ship" class="dropdown-item" tabindex="-1">Theo
+                                        ngày ship</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <%--            Tìm kiếm               --%>
-
                     <br>
                     <br>
-                    <div class="loc" style="border: 1px solid black; color: black">
+                    <div class="loc" style="color:black;">
                         <form:form action="/hoa-don/loc" method="post" modelAttribute="hoaDon">
                             <div class="row" style="margin-top: 10px">
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">khách hàng:</label>
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-12">
                                             <select id="selectKhachHang1" name="khachHang" class="form-control select2"
                                                     style="font-weight: bold; width: 100%">
-                                                <option selected disabled>Nhập tên hoặc chọn</option>
+                                                <option selected disabled>Khách hàng</option>
                                                 <c:forEach items="${listKhachHang}" var="khachHang">
                                                     <option value="${khachHang.id}">${khachHang.hoTen}</option>
                                                 </c:forEach>
                                             </select>
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Nhân viên:</label>
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-12">
                                             <select id="selectNhanVien1" name="nhanVien" class="form-control select2"
                                                     style="font-weight: bold; width: 100%">
-                                                <option selected disabled>Nhập tên hoặc chọn</option>
+                                                <option selected disabled>Nhân viên</option>
                                                 <c:forEach items="${listNhanVien}" var="nhanVien">
                                                     <option value="${nhanVien.id}">${nhanVien.hoTen}</option>
                                                 </c:forEach>
@@ -74,16 +82,46 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Địa chỉ:</label>
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-12">
                                             <select id="selectDiaChi1" name="diaChi" class="form-control select2"
                                                     style="font-weight: bold; width: 100%">
-                                                <option selected disabled>Nhập địa chỉ hoặc chọn</option>
+                                                <option selected disabled>Địa chỉ</option>
                                                 <c:forEach items="${listDiaChi}" var="diaChi">
                                                     <option value="${diaChi.id}">${diaChi.diaChi}</option>
                                                 </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <select id="selectTrangThai1" name="trangThai" class="form-control select2"
+                                                    style="font-weight: bold; width: 100%">
+                                                <option selected disabled>Trạng thái hóa đơn</option>
+                                                <option value="0">Hóa đơn chờ</option>
+                                                <option value="1">Hóa đơn đã xác nhận</option>
+                                                <option value="3">Hóa đơn chờ thanh toán</option>
+                                                <option value="2">Hóa đơn đã thanh toán</option>
+                                                    <%--                                                <option value="4">Nhập địa chỉ hoặc chọn</option>--%>
+                                                    <%--                                                <option value="5">Nhập địa chỉ hoặc chọn</option>--%>
+                                                    <%--                                                <option value="6">Nhập địa chỉ hoặc chọn</option>--%>
+                                                    <%--                                                <option value="7">Nhập địa chỉ hoặc chọn</option>--%>
+                                                <option value="8">Hóa đơn đã hủy</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <select name="loaiHoaDon" class="form-control select2"
+                                                    style="font-weight: bold; width: 100%" id="selectLoai1">
+                                                <option selected disabled>Loại hóa đơn</option>
+                                                <option value="0">Tại quầy</option>
+                                                <option value="1">Online</option>
                                             </select>
                                         </div>
                                     </div>
@@ -92,7 +130,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Từ ngày tạo:</label>
+                                        <label class="col-sm-4 col-form-label">Từ ngày thanh toán:</label>
                                         <div class="col-sm-8">
                                             <input type="date" id="ngayTao" name="startDate" class="form-control"
                                                    placeholder="Từ ngày">
@@ -124,7 +162,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Đến ngày tạo:</label>
+                                        <label class="col-sm-4 col-form-label">Đến ngày thanh toán:</label>
                                         <div class="col-sm-8">
                                             <input type="date" id="ngayTao1" name="endDate" class="form-control"
                                                    placeholder="Đến ngày">
@@ -159,7 +197,6 @@
                             </div>
                         </form:form>
                     </div>
-
                     <br>
                     <div class="search">
                         <form action="/hoa-don/search" method="post">
@@ -181,7 +218,7 @@
                                 <th>Tên khách hàng</th>
                                 <th>Tên nhân viên</th>
                                 <th>Địa chỉ</th>
-                                <th>Điểm quy đổi</th>
+                                <%--                                <th>Điểm quy đổi</th>--%>
                                 <th>SĐT</th>
                                 <th>Tổng tiền</th>
                                 <th>Trạng thái</th>
@@ -203,7 +240,7 @@
                                     <td>${hoaDon.nhanVien.hoTen}</td>
                                     <td>${hoaDon.diaChi.diaChi}</td>
 
-                                    <td>${hoaDon.quyDoi.soTienQuyDoi}</td>
+                                        <%--                                    <td>${hoaDon.quyDoi.soTienQuyDoi}</td>--%>
                                     <td>${hoaDon.sdt}</td>
                                     <td>${hoaDon.tongTien}</td>
                                     <td>
@@ -221,8 +258,8 @@
                                         <c:if test="${hoaDon.loai == 0}">HĐ quầy</c:if>
                                     </td>
                                     <td>
-                                        <c:if test="${hoaDon.hinhThucThanhToan == 0}">Online</c:if>
-                                        <c:if test="${hoaDon.hinhThucThanhToan == 1}">Tiền mặt</c:if>
+                                        <c:if test="${hoaDon.hinhThucThanhToan == 1}">Online</c:if>
+                                        <c:if test="${hoaDon.hinhThucThanhToan == 0}">Tiền mặt</c:if>
                                     </td>
                                     <td>${hoaDon.ngayTao}</td>
                                     <td>${hoaDon.ngayThanhToan}</td>
