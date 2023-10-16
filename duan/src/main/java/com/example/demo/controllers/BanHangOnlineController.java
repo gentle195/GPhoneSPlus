@@ -1,9 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.ChiTietSanPham;
-import com.example.demo.models.GioHangChiTiet;
-import com.example.demo.models.HangKhachHang;
-import com.example.demo.models.KhachHang;
+import com.example.demo.models.*;
 import com.example.demo.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -68,6 +66,8 @@ public class BanHangOnlineController {
     private BanHangOnlineService banHangOnlineService;
     @Autowired
     private GioHangChiTietService gioHangChiTietService ;
+    @Autowired
+    private GioHangService gioHangService ;
 
 
 
@@ -131,7 +131,7 @@ public class BanHangOnlineController {
         model.addAttribute("lamchon",lamchon);
         model.addAttribute("giamgia",banHangOnlineService);
         model.addAttribute("banhangonline",banHangOnlineService);
-        idkhachhang="5109F196-7EE6-4D9A-9B14-E2531D26453D";
+        idkhachhang="31354d99-1993-4a74-b905-c0474393c5bf";
         model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
         model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
         model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
@@ -430,6 +430,96 @@ public class BanHangOnlineController {
         model.addAttribute("listghct", banHangOnlineService.ListghTheoidghvsTT1(idgh));
         model.addAttribute("banhangonline", banHangOnlineService);
         return "ban-hang-online/trang-san-pham-duoc-chon-thanh-toan";
+    }
+
+    @GetMapping("/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-them-dia-chi/{diachi}/{quan}/{huyen}/{thanhpho}/{idgh}")
+    public String nutthemdiachi(
+            Model model,
+            @PathVariable("diachi") String diachi1,@PathVariable("quan") String quan,
+            @PathVariable("huyen") String huyen,@PathVariable("thanhpho") String thanhpho,
+            @PathVariable("idgh") UUID idgh
+    ) {
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        DiaChi diaChi=new DiaChi();
+        Integer sl = diaChiService.findAll().size();
+        String mhd="";
+        if(sl<10){
+            mhd = "MDC0" + sl;
+        }else {
+            mhd = "MDC" + sl;
+        }
+        diaChi.setMa(mhd);
+        diaChi.setNgayTao(date);
+        diaChi.setNgayCapNhat(date);
+        diaChi.setTinhTrang(0);
+       diaChi.setDiaChi(diachi1);
+        diaChi.setQuan(quan);
+        diaChi.setHuyen(huyen);
+        diaChi.setThanhPho(thanhpho);
+       KhachHang kh=khachHangService.findById(gioHangService.findById(idgh).getKhachHang().getId());
+       diaChi.setKhachHang(kh);
+        diaChiService.add(diaChi);
+
+        return  "redirect:/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-thanh-toan/"+idgh;
+    }
+
+
+    @GetMapping("/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-dat-hang/{idgh}/{tongtien}/{iddc}")
+    public String nutdathang(
+            Model model,
+            @PathVariable("idgh") UUID idgh,
+            @PathVariable("tongtien") BigDecimal tongtien,
+            @PathVariable("iddc") UUID iddc
+    ) {
+//        them hd
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        HoaDon hd=new HoaDon();
+        Integer sl = hoaDonService.findAll().size();
+        String mhd="";
+        if(sl<10){
+            mhd = "MHD0" + sl;
+        }else {
+            mhd = "MHD" + sl;
+        }
+        hd.setMa(mhd);
+        hd.setSdt(gioHangService.findById(idgh).getKhachHang().getSdt());
+        hd.setTongTien(tongtien);
+        hd.setNgayTao(date);
+        hd.setNgayCapNhat(date);
+        hd.setTinhTrang(3);
+        hd.setLoai(1);
+        KhachHang kh=khachHangService.findById(gioHangService.findById(idgh).getKhachHang().getId());
+        hd.setKhachHang(kh);
+        DiaChi dc= diaChiService.findById(iddc);
+        hd.setDiaChi(dc);
+        hoaDonService.add(hd);
+//    them hdct
+        List<GioHangChiTiet> listghct=banHangOnlineService.ListghTheoidghvsTT1(idgh);
+            for (int a=0;a<listghct.size();a=a+1){
+                for (int b=0;b<listghct.get(a).getSoLuong();b=b+1){
+                    HoaDonChiTiet hdct=new HoaDonChiTiet();
+                    hdct.setSoLuong(1);
+                    hdct.setTinhTrang(0);
+                    hdct.setDonGia(listghct.get(a).getDonGiaKhiGiam());
+                    HoaDon hd1=banHangOnlineService.timhdtheomahd(mhd);
+                    hdct.setHoaDon(hd1);
+                    List<IMEI> listimei=banHangOnlineService.timimeitheoidctspVSttO(listghct.get(a).getChiTietSanPham().getId());
+
+                    hdct.setImei(listimei.get(b));
+                    hoaDonChiTietService.add(hdct);
+// cập nhật trạng thái imei
+
+                }
+            }
+//xoa ghct TT=0 theo idgh
+        banHangOnlineService.xoaghcttheoIDGHvsTTO(idgh);
+//
+        model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(gioHangService.findById(idgh).getKhachHang().getId())).get(0).getId()));
+        model.addAttribute("tttong",1);
+        model.addAttribute("banhangonline",banHangOnlineService);
+        return "ban-hang-online/trang-gio-hang-chi-tiet";
     }
 
 

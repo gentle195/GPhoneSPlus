@@ -1,9 +1,6 @@
 package com.example.demo.services;
 
-import com.example.demo.models.ChiTietSanPham;
-import com.example.demo.models.DiaChi;
-import com.example.demo.models.GioHang;
-import com.example.demo.models.GioHangChiTiet;
+import com.example.demo.models.*;
 import com.example.demo.repositories.BanHangOnLinerepository;
 import com.example.demo.viewmodels.TongtienvsTongspchon;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,4 +34,7 @@ public interface BanHangOnlineService {
     void trangthaighct( Integer trangthai, UUID idgh);
     List<GioHangChiTiet> ListghTheoidghvsTT1( UUID idgh);
     List<DiaChi> Listdiachimotkhachang( UUID idkh);
+    HoaDon timhdtheomahd( String mahd);
+    List<IMEI> timimeitheoidctspVSttO( UUID idctsp);
+    void xoaghcttheoIDGHvsTTO( UUID idgh);
 }

@@ -1,9 +1,6 @@
 package com.example.demo.services.impl;
 
-import com.example.demo.models.ChiTietSanPham;
-import com.example.demo.models.DiaChi;
-import com.example.demo.models.GioHang;
-import com.example.demo.models.GioHangChiTiet;
+import com.example.demo.models.*;
 import com.example.demo.repositories.BanHangOnLinerepository;
 import com.example.demo.services.BanHangOnlineService;
 import com.example.demo.viewmodels.TongtienvsTongspchon;
@@ -106,6 +103,21 @@ return banHangOnLinerepository.tonggiamgia(UUID.fromString(idctsp));
     @Override
     public List<DiaChi> Listdiachimotkhachang(UUID idkh) {
         return banHangOnLinerepository.Listdiachimotkhachang(idkh);
+    }
+
+    @Override
+    public HoaDon timhdtheomahd(String mahd) {
+        return banHangOnLinerepository.timhdtheomahd(mahd);
+    }
+
+    @Override
+    public List<IMEI> timimeitheoidctspVSttO(UUID idctsp) {
+        return banHangOnLinerepository.timimeitheoidctspVSttO(idctsp);
+    }
+
+    @Override
+    public void xoaghcttheoIDGHvsTTO(UUID idgh) {
+        banHangOnLinerepository.xoaghcttheoIDGHvsTTO(idgh);
     }
 
 

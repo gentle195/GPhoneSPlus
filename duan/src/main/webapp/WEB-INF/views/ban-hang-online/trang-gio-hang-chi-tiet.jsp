@@ -80,7 +80,7 @@
             <div style="float: right">Tổng tiền :</div>
         </div>
  <br><br>
-        <button style="float: right" onclick="nutthanhtoansanphamduocchon('${listghct.get(0).gioHang.id}');">Thanh Toán</button>
+        <button style="float: right" onclick="nutthanhtoansanphamduocchon('${listghct.get(0).gioHang.id}');">Mua hàng</button>
     </c:if>
 </div>
 
