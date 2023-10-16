@@ -75,36 +75,7 @@
         /*    border: 1px solid red;*/
         /*}*/
     </style>
-<style>
-    .modal {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgba(0,0,0,0.5);
-        padding: 20px;
-        text-align: center;
-    }
 
-    .modal-content {
-        background-color: white;
-        padding: 20px;
-        border: 1px solid #888;
-    }
-
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    .close:hover {
-        color: black;
-    }
-</style>
 </head>
 <body>
 
@@ -871,8 +842,10 @@
             .then(data => {
                 const content = document.getElementById('content');
                 content.innerHTML = data;
-
                 thanhtienbenghct();
+                loadScripts();
+                loadSelect2();
+
 
             })
             .catch(error => {
@@ -1031,6 +1004,10 @@
         } );
 
         $( '#sands1' ).select2( {
+            theme: 'bootstrap-5'
+        } );
+
+        $( '#diachids1' ).select2( {
             theme: 'bootstrap-5'
         } );
 

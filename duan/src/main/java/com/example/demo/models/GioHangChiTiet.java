@@ -32,18 +32,18 @@ public class GioHangChiTiet {
     @Column(name = "id")
     private UUID id;
 
-    @NotBlank(message = "Không để trống thông tin")
+//    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "so_luong")
     private int soLuong;
 
     @Column(name = "tinh_trang")
     private int tinhTrang;
 
-    @NotBlank(message = "Không để trống thông tin")
+//    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "don_gia")
     private BigDecimal donGia;
 
-    @NotBlank(message = "Không để trống thông tin")
+//    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "don_gia_khi_giam")
     private BigDecimal donGiaKhiGiam;
 

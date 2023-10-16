@@ -25,15 +25,15 @@
                     </div>
 
                     <div class="product-preview">
-                        <img src="../../img/product03.png" alt="" style="width: 100%;height: 12cm; ">
+                        <img src="../../uploads/${motctsp.sanPham.anh.anh1}" alt="" style="width: 100%;height: 12cm; ">
                     </div>
 
                     <div class="product-preview">
-                        <img src="../../img/product06.png" alt="" style="width: 100%;height: 12cm; ">
+                        <img src="../../uploads/${motctsp.sanPham.anh.anh2}" alt="" style="width: 100%;height: 12cm; ">
                     </div>
 
                     <div class="product-preview">
-                        <img src="../../img/product08.png" alt="" style="width: 100%;height: 12cm; " >
+                        <img src="../../uploads/${motctsp.sanPham.anh.anh3}" alt="" style="width: 100%;height: 12cm; " >
                     </div>
                 </div>
             </div>
@@ -48,15 +48,15 @@
                     </div>
 
                     <div class="product-preview">
-                        <img src="../../img/product03.png" alt="" style="width: 3.5cm;height: 3.5cm" style="width: 100%;height:4cm;">
+                        <img src="../../uploads/${motctsp.sanPham.anh.anh1}" alt="" style="width: 3.5cm;height: 3.5cm" style="width: 100%;height:4cm;">
                     </div>
 
                     <div class="product-preview">
-                        <img src="../../img/product06.png" alt="" style="width: 3.5cm;height: 3.5cm" style="width: 100%;height:4cm;">
+                        <img src="../../uploads/${motctsp.sanPham.anh.anh2}" alt="" style="width: 3.5cm;height: 3.5cm" style="width: 100%;height:4cm;">
                     </div>
 
                     <div class="product-preview">
-                        <img src="../../img/product08.png" alt="" style="width: 3.5cm;height: 3.5cm" style="width: 100%;height:4cm;" >
+                        <img src="../../uploads/${motctsp.sanPham.anh.anh3}" alt="" style="width: 3.5cm;height: 3.5cm" style="width: 100%;height:4cm;" >
                     </div>
                 </div>
             </div>
