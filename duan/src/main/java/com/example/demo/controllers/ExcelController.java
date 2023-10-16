@@ -579,7 +579,7 @@ public class ExcelController {
     public String exportExcelCTSP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Lấy dữ liệu từ database
-        List<ChiTietSanPham> listChiTietSanPham = chiTietSanPhamService.findAll();
+        List<ChiTietSanPham> listChiTietSanPham = chiTietSanPhamService.findAll0();
 
         // Tạo đối tượng XSSFWorkbook
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -704,7 +704,144 @@ public class ExcelController {
 
         // Trả về tệp excel
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.setHeader("Content-Disposition", "attachment; filename=danh-sach-chiTietSanPham.xlsx");
+        response.setHeader("Content-Disposition", "attachment; filename=danh-sach-chi-tiet-san-pham-con-kinh-doanh.xlsx");
+        response.getOutputStream().write(bytes);
+        response.getOutputStream().flush();
+        response.getOutputStream().close();
+
+        return null;
+    }
+
+    @GetMapping("/chi-tiet-san-pham/export-excel-chi-tiet-san-pham-ngung-kinh-doanh")
+    public String exportExcelCTSPNgungKinhDoanh(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        // Lấy dữ liệu từ database
+        List<ChiTietSanPham> listChiTietSanPham = chiTietSanPhamService.finAllTTOff();
+
+        // Tạo đối tượng XSSFWorkbook
+        XSSFWorkbook workbook = new XSSFWorkbook();
+
+        // Tạo bảng dữ liệu
+        XSSFSheet sheet = workbook.createSheet("Danh sách chi tiết sản phẩm");
+
+        CellStyle borderStyle = workbook.createCellStyle();
+        borderStyle.setBorderBottom(BorderStyle.THIN);
+        borderStyle.setBorderLeft(BorderStyle.THIN);
+        borderStyle.setBorderRight(BorderStyle.THIN);
+        borderStyle.setBorderTop(BorderStyle.THIN);
+
+        // Tăng độ rộng excel
+        sheet.setDefaultColumnWidth(14);
+
+        // Tạo tiêu đề bảng
+        Row row = sheet.createRow(0);
+
+        Cell cell;
+
+        cell = row.createCell(0);
+        cell.setCellValue("Tên sản phẩm");
+        cell = row.createCell(1);
+        cell.setCellValue("Màu sắc");
+        cell = row.createCell(2);
+        cell.setCellValue("Chip");
+        cell = row.createCell(3);
+        cell.setCellValue("Ram");
+        cell = row.createCell(4);
+        cell.setCellValue("Rom");
+        cell = row.createCell(5);
+        cell.setCellValue("Pin");
+        cell = row.createCell(6);
+        cell.setCellValue("Giá bán");
+        cell = row.createCell(7);
+        cell.setCellValue("Ngày tạo");
+        cell = row.createCell(8);
+        cell.setCellValue("Ngày cập nhập");
+        cell = row.createCell(9);
+        cell.setCellValue("Tình trạng");
+        cell = row.createCell(10);
+        cell.setCellValue("Năm bảo hành");
+        cell = row.createCell(11);
+        cell.setCellValue("Số lượng tồn");
+        cell = row.createCell(12);
+        cell.setCellValue("Mô tả");
+
+        // Tạo kiểu font đậm
+        Font boldFont = workbook.createFont();
+        boldFont.setBold(true);
+
+        // Tạo kiểu cell
+        CellStyle headerStyle = workbook.createCellStyle();
+        headerStyle.setFont(boldFont);
+
+        // Áp dụng kiểu cell cho dòng đầu
+        Row headerRow = sheet.getRow(0);
+        for (int i = 0; i < headerRow.getLastCellNum(); i++) {
+            headerRow.getCell(i).setCellStyle(headerStyle);
+        }
+
+        // Thêm dữ liệu vào bảng
+        int rowNum = 1;
+        for (ChiTietSanPham chiTietSanPham : listChiTietSanPham) {
+            // Tạo ô kiểu date
+            XSSFCellStyle dateStyle = workbook.createCellStyle();
+            dateStyle.setDataFormat(workbook.createDataFormat().getFormat("yyyy/mm/dd"));
+
+            row = sheet.createRow(rowNum);
+            cell = row.createCell(0);
+            cell.setCellValue(chiTietSanPham.getSanPham().getTen());
+
+            cell = row.createCell(1);
+            cell.setCellValue(chiTietSanPham.getMauSac().getTen());
+
+            cell = row.createCell(2);
+            cell.setCellValue(chiTietSanPham.getChip().getTen());
+
+            cell = row.createCell(3);
+            cell.setCellValue(chiTietSanPham.getRam().getDungLuong());
+
+            cell = row.createCell(4);
+            cell.setCellValue(chiTietSanPham.getRom().getDungLuong());
+
+            cell = row.createCell(5);
+            cell.setCellValue(chiTietSanPham.getPin().getDungLuongPin().getThongSo());
+
+            cell = row.createCell(6);
+            cell.setCellValue(String.valueOf(chiTietSanPham.getGiaBan()));
+
+            cell = row.createCell(7);
+            cell.setCellValue(chiTietSanPham.getNgayTao());
+            cell.setCellStyle(dateStyle);
+
+            cell = row.createCell(8);
+            cell.setCellValue(chiTietSanPham.getNgayCapNhat());
+            cell.setCellStyle(dateStyle);
+
+            cell = row.createCell(9);
+            cell.setCellValue(chiTietSanPham.getTinhTrang() == 0 ? "Còn kinh doanh" : "Ngừng kinh doanh");
+
+            cell = row.createCell(10);
+            cell.setCellValue(chiTietSanPham.getNamBaoHanh());
+
+
+            cell = row.createCell(11);
+            cell.setCellValue(chiTietSanPham.getSoLuong());
+
+            cell = row.createCell(12);
+            cell.setCellValue(chiTietSanPham.getMoTa());
+
+            rowNum++;
+
+        }
+
+
+        // Lưu tệp excel
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        workbook.write(outputStream);
+        byte[] bytes = outputStream.toByteArray();
+
+        // Trả về tệp excel
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setHeader("Content-Disposition", "attachment; filename=danh-sach-chi-tiet-san-pham-ngung-kinh-doanh.xlsx");
         response.getOutputStream().write(bytes);
         response.getOutputStream().flush();
         response.getOutputStream().close();
@@ -721,7 +858,7 @@ public class ExcelController {
 //        Date startDate =  calendar.getTime();
 
         // Lấy dữ liệu từ database
-        List<IMEI> listIMEI = imeiService.findAll();
+        List<IMEI> listIMEI = imeiService.findAll0();
 
         // Tạo đối tượng XSSFWorkbook
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -818,7 +955,121 @@ public class ExcelController {
 
         // Trả về tệp excel
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.setHeader("Content-Disposition", "attachment; filename=danh-sach-imei.xlsx");
+        response.setHeader("Content-Disposition", "attachment; filename=danh-sach-imei-chua-ban.xlsx");
+        response.getOutputStream().write(bytes);
+        response.getOutputStream().flush();
+        response.getOutputStream().close();
+
+        return null;
+    }
+
+    @GetMapping("/imei/export-excel-imei-da-ban")
+    public String exportExcelImeiDaBan(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+//        // thời gian theo 3 tháng gần nhẩt
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.add(Calendar.MONTH, -3);
+//        Date startDate =  calendar.getTime();
+
+        // Lấy dữ liệu từ database
+        List<IMEI> listIMEI = imeiService.getImeiOff();
+
+        // Tạo đối tượng XSSFWorkbook
+        XSSFWorkbook workbook = new XSSFWorkbook();
+
+        // Tạo bảng dữ liệu
+        XSSFSheet sheet = workbook.createSheet("Danh sách imei");
+
+        CellStyle borderStyle = workbook.createCellStyle();
+        borderStyle.setBorderBottom(BorderStyle.THIN);
+        borderStyle.setBorderLeft(BorderStyle.THIN);
+        borderStyle.setBorderRight(BorderStyle.THIN);
+        borderStyle.setBorderTop(BorderStyle.THIN);
+
+        // Tăng độ rộng excel
+        sheet.setDefaultColumnWidth(14);
+
+        // Tạo tiêu đề bảng
+        Row row = sheet.createRow(0);
+
+        Cell cell;
+
+        cell = row.createCell(0);
+        cell.setCellValue("Tên sản phẩm");
+        cell = row.createCell(1);
+        cell.setCellValue("Mã");
+        cell = row.createCell(2);
+        cell.setCellValue("Số imei");
+        cell = row.createCell(3);
+        cell.setCellValue("Ngày tạo");
+        cell = row.createCell(4);
+        cell.setCellValue("Ngày cập nhật");
+        cell = row.createCell(5);
+        cell.setCellValue("Tình trạng");
+        cell = row.createCell(6);
+        cell.setCellValue("Mô tả");
+
+        // Tạo kiểu font đậm
+        Font boldFont = workbook.createFont();
+        boldFont.setBold(true);
+
+        // Tạo kiểu cell
+        CellStyle headerStyle = workbook.createCellStyle();
+        headerStyle.setFont(boldFont);
+
+        // Áp dụng kiểu cell cho dòng đầu
+        Row headerRow = sheet.getRow(0);
+        for (int i = 0; i < headerRow.getLastCellNum(); i++) {
+            headerRow.getCell(i).setCellStyle(headerStyle);
+        }
+
+        // Thêm dữ liệu vào bảng
+        int rowNum = 1;
+        for (IMEI imei : listIMEI) {
+            // Tạo ô kiểu date
+            XSSFCellStyle dateStyle = workbook.createCellStyle();
+            dateStyle.setDataFormat(workbook.createDataFormat().getFormat("yyyy/mm/dd"));
+
+            row = sheet.createRow(rowNum);
+
+            cell = row.createCell(0);
+            cell.setCellValue(imei.getChiTietSanPham().getSanPham().getTen());
+
+
+            cell = row.createCell(1);
+            cell.setCellValue(imei.getMa());
+
+
+            cell = row.createCell(2);
+            cell.setCellValue(imei.getSoImei());
+
+            cell = row.createCell(3);
+            cell.setCellValue(imei.getNgayTao());
+            cell.setCellStyle(dateStyle);
+
+            cell = row.createCell(4);
+            cell.setCellValue(imei.getNgayCapNhat());
+            cell.setCellStyle(dateStyle);
+
+            cell = row.createCell(5);
+            cell.setCellValue(imei.getTinhTrang());
+
+            cell = row.createCell(6);
+            cell.setCellValue(imei.getMoTa());
+
+            rowNum++;
+
+        }
+
+
+        // Lưu tệp excel
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        workbook.write(outputStream);
+        byte[] bytes = outputStream.toByteArray();
+
+        // Trả về tệp excel
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setHeader("Content-Disposition", "attachment; filename=danh-sach-imei-da-ban.xlsx");
         response.getOutputStream().write(bytes);
         response.getOutputStream().flush();
         response.getOutputStream().close();
@@ -835,7 +1086,7 @@ public class ExcelController {
 //        Date startDate = calendar.getTime();
 
         // Lấy dữ liệu từ database
-        List<SanPham> listSanPham = sanPhamService.findAll();
+        List<SanPham> listSanPham = sanPhamService.findAll0();
 
         // Tạo đối tượng XSSFWorkbook
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -984,7 +1235,173 @@ public class ExcelController {
 
         // Trả về tệp excel
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.setHeader("Content-Disposition", "attachment; filename=danh-sach-sanPham.xlsx");
+        response.setHeader("Content-Disposition", "attachment; filename=danh-sach-san-pham-con-kinh-doanh.xlsx");
+        response.getOutputStream().write(bytes);
+        response.getOutputStream().flush();
+        response.getOutputStream().close();
+
+        return null;
+    }
+
+    @GetMapping("/san-pham/export-excel-san-pham-da-ngung-kinh-doanh")
+    public String exportExcelSanPhamNgungKinhDoanh(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+//        // thời gian theo 3 tháng gần nhẩt
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.add(Calendar.MONTH, -3);
+//        Date startDate = calendar.getTime();
+
+        // Lấy dữ liệu từ database
+        List<SanPham> listSanPham = sanPhamService.findAll1();
+
+        // Tạo đối tượng XSSFWorkbook
+        XSSFWorkbook workbook = new XSSFWorkbook();
+
+        // Tạo bảng dữ liệu
+        XSSFSheet sheet = workbook.createSheet("Danh sách sản phẩm");
+
+        CellStyle borderStyle = workbook.createCellStyle();
+        borderStyle.setBorderBottom(BorderStyle.THIN);
+        borderStyle.setBorderLeft(BorderStyle.THIN);
+        borderStyle.setBorderRight(BorderStyle.THIN);
+        borderStyle.setBorderTop(BorderStyle.THIN);
+
+        // Tăng độ rộng excel
+        sheet.setDefaultColumnWidth(14);
+
+        // Tạo tiêu đề bảng
+        Row row = sheet.createRow(0);
+
+        Cell cell;
+
+        cell = row.createCell(0);
+        cell.setCellValue("Mã sản phẩm");
+        cell = row.createCell(1);
+        cell.setCellValue("Tên sản phẩm");
+        cell = row.createCell(2);
+        cell.setCellValue("Hãng");
+        cell = row.createCell(3);
+        cell.setCellValue("Màn hình");
+        cell = row.createCell(4);
+        cell.setCellValue("Camera");
+        cell = row.createCell(5);
+        cell.setCellValue("Thông số bluetooth");
+        cell = row.createCell(6);
+        cell.setCellValue("Hõ trợ mạng");
+        cell = row.createCell(7);
+        cell.setCellValue("Cổng giao tiếp");
+        cell = row.createCell(8);
+        cell.setCellValue("Thông số wifi");
+        cell = row.createCell(9);
+        cell.setCellValue("Kích thước");
+        cell = row.createCell(10);
+        cell.setCellValue("Trọng lượng");
+        cell = row.createCell(11);
+        cell.setCellValue("Chất liệu máy");
+        cell = row.createCell(12);
+        cell.setCellValue("Hệ điều hành");
+        cell = row.createCell(13);
+        cell.setCellValue("Số khe sim");
+        cell = row.createCell(14);
+        cell.setCellValue("Ngày tạo");
+        cell = row.createCell(15);
+        cell.setCellValue("Ngày cập nhật");
+        cell = row.createCell(16);
+        cell.setCellValue("Tình trạng");
+        cell = row.createCell(17);
+        cell.setCellValue("Mô tả");
+
+        // Tạo kiểu font đậm
+        Font boldFont = workbook.createFont();
+        boldFont.setBold(true);
+
+        // Tạo kiểu cell
+        CellStyle headerStyle = workbook.createCellStyle();
+        headerStyle.setFont(boldFont);
+
+        // Áp dụng kiểu cell cho dòng đầu
+        Row headerRow = sheet.getRow(0);
+        for (int i = 0; i < headerRow.getLastCellNum(); i++) {
+            headerRow.getCell(i).setCellStyle(headerStyle);
+        }
+
+        // Thêm dữ liệu vào bảng
+        int rowNum = 1;
+        for (SanPham sanPham : listSanPham) {
+            // Tạo ô kiểu date
+            XSSFCellStyle dateStyle = workbook.createCellStyle();
+            dateStyle.setDataFormat(workbook.createDataFormat().getFormat("yyyy/mm/dd"));
+
+            row = sheet.createRow(rowNum);
+            cell = row.createCell(0);
+            cell.setCellValue(sanPham.getMa());
+
+            cell = row.createCell(1);
+            cell.setCellValue(sanPham.getTen());
+
+            cell = row.createCell(2);
+            cell.setCellValue(sanPham.getHangSanPham().getTen());
+
+            cell = row.createCell(3);
+            cell.setCellValue(sanPham.getManHinh().getThongSo());
+
+            cell = row.createCell(4);
+            cell.setCellValue(sanPham.getCamera().getThongSo());
+
+            cell = row.createCell(5);
+            cell.setCellValue(sanPham.getBluetooth());
+
+            cell = row.createCell(6);
+            cell.setCellValue(sanPham.getHoTroMang());
+
+            cell = row.createCell(7);
+            cell.setCellValue(sanPham.getCongGiaoTiep());
+
+            cell = row.createCell(8);
+            cell.setCellValue(sanPham.getThongSoWifi());
+
+            cell = row.createCell(9);
+            cell.setCellValue(sanPham.getKichThuoc());
+
+            cell = row.createCell(10);
+            cell.setCellValue(sanPham.getTrongLuong());
+
+            cell = row.createCell(11);
+            cell.setCellValue(sanPham.getChatLieu());
+
+            cell = row.createCell(12);
+            cell.setCellValue(sanPham.getHeDieuHanh());
+
+            cell = row.createCell(13);
+            cell.setCellValue(sanPham.getSoSim());
+
+            cell = row.createCell(14);
+            cell.setCellValue(sanPham.getNgayTao());
+            cell.setCellStyle(dateStyle);
+
+            cell = row.createCell(15);
+            cell.setCellValue(sanPham.getNgayCapNhat());
+            cell.setCellStyle(dateStyle);
+
+            cell = row.createCell(16);
+            cell.setCellValue(sanPham.getTinhTrang() == 0 ? "Hoạt động" : "Còn hoạt động");
+
+            cell = row.createCell(17);
+            cell.setCellValue(sanPham.getMoTa());
+
+            rowNum++;
+
+        }
+
+
+        // Lưu tệp excel
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        workbook.write(outputStream);
+        byte[] bytes = outputStream.toByteArray();
+
+        // Trả về tệp excel
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setHeader("Content-Disposition", "attachment; filename=danh-sach-san-pham-ngung-kinh-doanh.xlsx");
         response.getOutputStream().write(bytes);
         response.getOutputStream().flush();
         response.getOutputStream().close();

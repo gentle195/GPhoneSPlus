@@ -33,12 +33,6 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Lọc chi tiết sản phẩm
-                        <a href="/chi-tiet-san-pham/export-excel"
-                           class="btn btn-success btn-icon-text"
-                           tabindex="-1"
-                           role="button">
-                            <i class="ti-export btn-icon-prepend"></i>
-                            Xuất Excel</a>
                     </h4>
                     <form class="forms-sample">
                         <div class="row">
@@ -136,7 +130,24 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title" style="float: left">Danh sách Chi tiết sản phẩm</h4>
+                    <h4 class="card-title" style="float: left">Danh sách Chi tiết sản phẩm
+                        <div class="basic-dropdown">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-primary dropdown-toggle"
+                                        data-toggle="dropdown">
+                                    <i class="ti-export btn-icon-prepend"></i>
+                                    Xuất Excel
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a href="/chi-tiet-san-pham/export-excel" class="dropdown-item" tabindex="-1">Sản
+                                        phẩm còn kinh doanh</a>
+                                    <a href="/chi-tiet-san-pham/export-excel-chi-tiet-san-pham-ngung-kinh-doanh" class="dropdown-item"
+                                       tabindex="-1">Sản phẩm ngừng kinh doanh
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </h4>
                     <%--            Tìm kiếm               --%>
                     <form action="/chi-tiet-san-pham/search" method="post">
                         <div class="input-group" style="width: 30%; float: right">

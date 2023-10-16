@@ -36,6 +36,11 @@ public class SanPhamServiceImpl implements SanPhamService {
     }
 
     @Override
+    public List<SanPham> findAll1() {
+        return sanPhamRepository.findAll1();
+    }
+
+    @Override
     public SanPham findById(UUID id) {
         return sanPhamRepository.findById(id).orElse(null);
     }
