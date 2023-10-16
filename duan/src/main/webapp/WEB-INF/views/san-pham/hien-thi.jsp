@@ -40,13 +40,22 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title" style="float: left">Danh sách sản phẩm
-                        <a href="/san-pham/export-excel"
-                           class="btn btn-success btn-icon-text"
-                           tabindex="-1"
-                           role="button">
-                            <i class="ti-export btn-icon-prepend"></i>
-                            Xuất Excel
-                        </a>
+                        <div class="basic-dropdown">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-primary dropdown-toggle"
+                                        data-toggle="dropdown">
+                                    <i class="ti-export btn-icon-prepend"></i>
+                                    Xuất Excel
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a href="/san-pham/export-excel" class="dropdown-item" tabindex="-1">Sản phẩm còn
+                                        kinh doanh</a>
+                                    <a href="/san-pham/export-excel-san-pham-da-ngung-kinh-doanh" class="dropdown-item"
+                                       tabindex="-1">Sản phẩm ngừng kinh doanh</a>
+
+                                </div>
+                            </div>
+                        </div>
                     </h4>
                     <%--            Tìm kiếm               --%>
                     <form action="/san-pham/search" method="post">
@@ -108,7 +117,7 @@
                                         <c:if test="${list.tinhTrang==1}">Ngừng hoạt động</c:if>
                                     </td>
                                     <td>${list.moTa}</td>
-                                    <td>
+                                    <td colspan="2">
                                         <a href="/san-pham/detail/${list.id}" class="btn btn-warning btn-icon-text"
                                            tabindex="-1"
                                            role="button"

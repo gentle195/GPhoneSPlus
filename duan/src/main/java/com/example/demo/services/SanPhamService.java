@@ -15,6 +15,8 @@ public interface SanPhamService {
 
     public List<SanPham> findAll0();
 
+    public List<SanPham> findAll1();
+
     public SanPham findById(UUID id);
 
     public SanPham add(SanPham sanPham);

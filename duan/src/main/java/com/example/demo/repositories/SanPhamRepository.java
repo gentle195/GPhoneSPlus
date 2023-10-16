@@ -18,6 +18,9 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
     @Query("SELECT r FROM SanPham r WHERE r.tinhTrang=0")
     List<SanPham> findAll0();
 
+    @Query("SELECT r FROM SanPham r WHERE r.tinhTrang=1")
+    List<SanPham> findAll1();
+
     @Query("SELECT r FROM SanPham r WHERE r.ten LIKE %:dungluong% or r.heDieuHanh LIKE %:dungluong% and r.tinhTrang=0")
     List<SanPham> search(String dungluong);
 

@@ -46,13 +46,14 @@
 
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
-                    <div class="table-responsive" >
+                    <div class="table-responsive">
                         <table class="table table-striped" style="color: black">
                             <thead>
                             <tr>
-                                <th scope="col">Tên sản phẩm</th>
                                 <th scope="col">Mã</th>
+                                <th scope="col">Tên sản phẩm</th>
                                 <th scope="col">Số imei</th>
+                                <th scope="col">Mã QR</th>
                                 <th scope="col">Ngày tạo</th>
                                 <th scope="col">Ngày cập nhật</th>
                                 <th scope="col">Tình trạng</th>
@@ -63,10 +64,12 @@
                             <i class="mdi mdi-border-color"></i>
                             <c:forEach items="${listImei}" var="imei" varStatus="index">
                                 <tr>
-                                    <td>${imei.chiTietSanPham.sanPham.ten}</td>
                                     <td>${imei.ma}</td>
+                                    <td>${imei.chiTietSanPham.sanPham.ten}</td>
                                     <td>${imei.soImei}</td>
-
+                                    <td>
+                                        <img src="../maqr/${imei.maQr}" width="70" height="70">
+                                    </td>
                                     <td>${imei.ngayTao}</td>
                                     <td>${imei.ngayCapNhat}</td>
                                     <td>${imei.tinhTrang==0?"Chưa bán":"Đã bán"}</td>
@@ -91,7 +94,8 @@
                                class="page-link">${status.index}</a>
                         </li>
                     </c:forEach>
-                    <li class="page-item"><a class="page-link" href="/imei-da-xoa/hien-thi?pageNum=${total-1}">></a></li>
+                    <li class="page-item"><a class="page-link" href="/imei-da-xoa/hien-thi?pageNum=${total-1}">></a>
+                    </li>
                 </ul>
             </div>
         </div>
