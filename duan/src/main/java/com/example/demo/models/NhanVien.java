@@ -79,8 +79,8 @@ public class NhanVien {
     @Column(name = "tai_khoan")
     private String taiKhoan;
 
-    @NotBlank(message = "Không để trống thông tin")
-    @Size(max = 8, message = "Mật khẩu không quá 8 ký tự")
+//    @NotBlank(message = "Không để trống thông tin")
+//    @Size(max = 8, message = "Mật khẩu không quá 8 ký tự")
     @Column(name = "mat_khau")
     private String matKhau;
 

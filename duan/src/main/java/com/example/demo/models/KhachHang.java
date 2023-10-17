@@ -39,8 +39,8 @@ public class KhachHang {
     private Boolean gioiTinh;
 
 
-    @Pattern(regexp = "^.{8,}@gmail\\.com$", message = "8 ký tự +@gmail.com")
-//    @NotBlank(message = "Không để trống thông tin")
+//    @Pattern(regexp = "^.{8,}@gmail\\.com$", message = "8 ký tự +@gmail.com")
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "email")
     private String email;
 
@@ -57,7 +57,7 @@ public class KhachHang {
     @Column(name = "tai_khoan")
     private String taiKhoan;
 
-    @NotBlank(message = "Không để trống thông tin")
+//    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mat_khau")
     private String matKhau;
 
