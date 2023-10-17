@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 import com.example.demo.models.ChucVu;
 import com.example.demo.models.NhanVien;
 import com.example.demo.services.ChucVuService;
+import com.example.demo.services.MailerService;
 import com.example.demo.services.NhanVienService;
 import com.example.demo.util.FileUploadUtil;
 import jakarta.validation.Valid;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -28,6 +30,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.SecureRandom;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -41,6 +44,10 @@ public class NhanVienController {
     private NhanVienService nhanVienService;
     @Autowired
     private ChucVuService chucVuService;
+    @Autowired
+    MailerService mailer;
+//    @Autowired
+//    private SMSService smsService;
 
     @GetMapping("/hien-thi")
     public String hienThi(Model model, @ModelAttribute("nhanVien") NhanVien nhanVien,
@@ -112,23 +119,37 @@ public class NhanVienController {
 
         return "/home/layout";
     }
+    private String generateRandomPassword(int length) {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
+        SecureRandom random = new SecureRandom();
+        StringBuilder password = new StringBuilder(length);
 
+        for (int i = 0; i < length; i++) {
+            int randomIndex = random.nextInt(characters.length());
+            password.append(characters.charAt(randomIndex));
+        }
+
+        return password.toString();
+    }
     @PostMapping("/add")
     public String addNhanVien(Model model, @ModelAttribute("nhanVien") @Valid NhanVien nhanVien,
                               BindingResult bindingResult,
                               @ModelAttribute("chucVu") ChucVu chucVu,
                               @RequestParam("pageNum") Optional<Integer> pageNum,
 //                              @RequestParam("urlAnh") String anh,
-                              @RequestParam("matKhau") String mk,
+
                               @RequestParam("email") String email,
                               @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize,
                               @RequestParam("images") MultipartFile multipartFile) throws IOException {
 
 
         if (bindingResult.hasErrors()) {
+
             List<ChucVu> listChucVu = chucVuService.findAll();
             nhanVien.setTinhTrang(0);
             nhanVien.setGioiTinh(true);
+
+
 //            model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listChucVu", listChucVu);
             model.addAttribute("contentPage", "../nhanvien/nhan-vien-add.jsp");
@@ -136,6 +157,17 @@ public class NhanVienController {
             return "/home/layout";
 //            return "../nhanvien/nhan-vien-add.jsp";
         }
+        NhanVien nvien=new NhanVien();
+        String randomPassword = generateRandomPassword(8);
+        nvien.setMatKhau(randomPassword);
+
+        String hashedPassword = BCrypt.hashpw(randomPassword, BCrypt.gensalt());
+        nhanVien.setMatKhau(hashedPassword);
+        String rawPassword = randomPassword;
+        String hashedPasswords = hashedPassword; // Mật khẩu đã được mã hóa
+        boolean matches = BCrypt.checkpw(rawPassword, hashedPassword);
+        System.out.println(matches);
+        System.out.println("MK Nè "+randomPassword.toString());
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         String uploadDir = "src/main/webapp/uploads/";
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
@@ -151,17 +183,22 @@ public class NhanVienController {
         } else {
             maNV = "MaNV" + nv;
         }
+
+
         nhanVien.setMa(maNV);
         nhanVien.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         nhanVien.setNgayTao(date);
         nhanVien.setTinhTrang(0);
-        nhanVien.setMatKhau(mk);
         nhanVien.setEmail(email);
         nhanVienService.add(nhanVien);
         List<ChucVu> listChucVu = chucVuService.findAll();
 
         Page<NhanVien> page = nhanVienService.getAll(Pageable.unpaged());
-
+        NhanVien nvv=nhanVienService.findById(nhanVien.getId());
+        String phone=nvv.getSdt();
+        String message = "Chào mừng bạn đã đăng ký tài khoản. Mật khẩu của bạn là: " + nvien.getMatKhau();
+//        smsService.sendSMS(phone, message);
+        mailer.queue(nvv.getEmail(), "Bạn đã đăng kí tài khoản thành công", "TK: " + nvv.getTaiKhoan() + "\nMK: " + nvien.getMatKhau());
         model.addAttribute("listChucVu", listChucVu);
         model.addAttribute("nhanVien", new NhanVien());
         model.addAttribute("listNhanVien", page.getContent());

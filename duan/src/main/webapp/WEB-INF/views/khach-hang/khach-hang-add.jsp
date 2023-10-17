@@ -132,10 +132,7 @@
                                 <form:input class="form-control" placeholder="" path="taiKhoan"/>
                             </th>
                             <th>
-                                <form:label class="form-label" path="matKhau">Mật khẩu:
-                                    <form:errors path="matKhau" cssStyle="color: red"></form:errors>
-                                </form:label>
-                                <form:input class="form-control" placeholder="" path="matKhau"/>
+                                <form:hidden path="matKhau" />
                             </th>
                         </tr>
                         </thead>

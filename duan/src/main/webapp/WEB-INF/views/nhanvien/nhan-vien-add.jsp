@@ -115,16 +115,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Mật khẩu: <form:errors path="matKhau"
-                                                                                                  cssStyle="color: red"></form:errors></label>
+                                    <form:hidden path="matKhau" />
                                     <div class="col-sm-9 password-container">
 
-                                        <input id="password" name="matKhau" class="form-control" type="password"
-                                               placeholder="*******"/>
-                                        <div id="password-error" style="color: red"></div>
-                                        <div class="password-toggle" id="password-toggle"
-                                             onclick="togglePassword()">Show
-                                        </div>
 
                                     </div>
                                 </div>
