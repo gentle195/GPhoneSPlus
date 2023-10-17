@@ -306,8 +306,11 @@ CREATE TABLE nhan_vien (
   id_chuc_vu UNIQUEIDENTIFIER NULL,
   FOREIGN KEY (id_chuc_vu) REFERENCES chuc_vu(id)
 );
-
-
+insert into nhan_vien (ma,ho_ten,gioi_tinh,email,sdt,que_quan,ngay_sinh,tai_khoan,mat_khau)
+values 
+('NV01','Hieu','1','tranhieu23tb@gmail.com','012345678','Thai Binh','1-1-1990','abcxyz','$2a$10$Q7SLkSmtpIix/Kr9hykEJubMeEKXgNgHuCiV9PGb8pwPDyczKposu')
+/*mk mTa3qW3m */
+delete from nhan_vien
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -345,6 +348,10 @@ CREATE TABLE khach_hang (
   id_hang_khach_hang UNIQUEIDENTIFIER NULL,
   FOREIGN KEY (id_hang_khach_hang) REFERENCES hang_khach_hang(id)
 );
+insert into khach_hang (ma,ho_ten,gioi_tinh,email,sdt,tai_khoan,mat_khau)
+values ('KH1','KhachHang','1','okokok@gmail.com','0123456789','khachhangmoi','$2a$10$6TcgZddE7GlPwJaR6Vxj0ex9f8Uexufl8pAzdmv7Ppi4JshAqoErS')
+
+/*mk I6E$XMSw*/
 
 
 SET ANSI_NULLS ON
@@ -411,21 +418,17 @@ CREATE TABLE hoa_don (
   sdt VARCHAR(30) null,
   tinh_trang int DEFAULT 0,
   loai int DEFAULT 0,
-  hinh_thuc_thanh_toan int DEFAULT 0,
   tong_tien decimal(20, 0) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
   ngay_nhan DATE NULL,
   ngay_ship DATE NULL,
-  ngay_thanh_toan DATE NULL,
   ghi_chu NVARCHAR(MAX) NULL,
   FOREIGN KEY (id_khach_hang) REFERENCES khach_hang(id),
   FOREIGN KEY (id_nhan_vien) REFERENCES Nhan_vien(id),
   FOREIGN KEY (id_dia_chi) REFERENCES dia_chi(id),
   FOREIGN KEY (id_quy_doi) REFERENCES quy_doi(id)
 );
-
-
 
 SET ANSI_NULLS ON
 GO
