@@ -48,4 +48,11 @@ public interface NhanVienRepository extends JpaRepository<NhanVien, UUID> {
 
     @Query("select kh from NhanVien kh left join HoaDon hd on kh.id=hd.nhanVien.id where hd.id=:id")
     List<NhanVien> nhanVienThanhToan(UUID id);
+
+//    @Query("SELECT nv.taiKhoan, nv.matKhau, kh.taiKhoan AS Expr1, kh.matKhau AS Expr2\n" +
+//            "FROM     NhanVien nv INNER JOIN\n" +
+//            "                  KhachHang  kh ON nv.id = kh.id")
+//    List<NhanVien> getAllTaiKhoanMatKhau();
+    NhanVien findByTaiKhoan(String username);
+
 }

@@ -68,6 +68,8 @@ public class BanHangOnlineController {
     private GioHangChiTietService gioHangChiTietService ;
     @Autowired
     private GioHangService gioHangService ;
+    @Autowired
+    private DataIntermediateService dataService;
 
 
 
@@ -131,7 +133,11 @@ public class BanHangOnlineController {
         model.addAttribute("lamchon",lamchon);
         model.addAttribute("giamgia",banHangOnlineService);
         model.addAttribute("banhangonline",banHangOnlineService);
-        idkhachhang="31354d99-1993-4a74-b905-c0474393c5bf";
+
+      KhachHang khachHang=  dataService.getSharedData();
+        System.out.println("id:"+khachHang.getId());
+        idkhachhang=String.valueOf(khachHang.getId());
+//        idkhachhang="f33013f5-993b-45d3-9806-dd74f2007522";
         model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
         model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
         model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));

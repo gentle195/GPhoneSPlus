@@ -152,7 +152,7 @@
                                 <i class="mdi mdi-account"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a href="./app-profile.html" class="dropdown-item">
+                                <a href="/thong-tin-ca-nhan" class="dropdown-item">
                                     <i class="icon-user"></i>
                                     <span class="ml-2">Profile </span>
                                 </a>
@@ -160,7 +160,7 @@
                                     <i class="icon-envelope-open"></i>
                                     <span class="ml-2">Inbox </span>
                                 </a>
-                                <a href="./page-login.html" class="dropdown-item">
+                                <a href="/logout" class="dropdown-item">
                                     <i class="icon-key"></i>
                                     <span class="ml-2">Logout </span>
                                 </a>
@@ -251,6 +251,7 @@
         <div class="container-fluid">
             <div class="right_col" role="main">
                 <!-- top tiles -->
+
                 <jsp:include page="${contentPage}"/>
             </div>
         </div>
