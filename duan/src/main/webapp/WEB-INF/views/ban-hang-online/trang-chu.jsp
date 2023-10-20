@@ -97,7 +97,7 @@
                     <ul class="header-links pull-right">
                         <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
                         <c:if test="${idkhachhang=='1'}">
-                            <li><a href="#"><i class="fa fa-user-o"></i> Chưa đăng nhập:<input id="tkmkidkhachhang" type="text" style="display: none" value="${idkhachhang}"></a></li>
+                            <li><a href="/thong-tin-ca-nhan"><i class="fa fa-user-o"></i> Chưa đăng nhập:<input id="tkmkidkhachhang" type="text" style="display: none" value="${idkhachhang}"></a></li>
 
                         </c:if>
                         <c:if test="${idkhachhang !='1'}">
