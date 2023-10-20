@@ -34,6 +34,42 @@
                 <div class="card-body">
                     <h4 class="card-title">Lọc chi tiết sản phẩm
                     </h4>
+                    <div class="dropdown-wrapper">
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                    data-toggle="dropdown">
+                                <i class="ti-export btn-icon-prepend"></i>
+                                Chọn sản phẩm
+                            </button>
+                            <div class="dropdown-menu">
+                                <a href="#" class="dropdown-item" tabindex="-1">Tất cả sản phẩm</a>
+                                <div class="dropdown-submenu">
+                                    <a href="#" class="dropdown-item dropdown-toggle" data-toggle="dropdown">Điện thoại</a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" class="dropdown-item" tabindex="-1">iPhone</a>
+                                        <a href="#" class="dropdown-item" tabindex="-1">Samsung</a>
+                                        <a href="#" class="dropdown-item" tabindex="-1">Xiaomi</a>
+                                    </div>
+                                </div>
+                                <div class="dropdown-submenu">
+                                    <a href="#" class="dropdown-item dropdown-toggle" data-toggle="dropdown">Máy tính</a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" class="dropdown-item" tabindex="-1">Laptop</a>
+                                        <a href="#" class="dropdown-item" tabindex="-1">PC</a>
+                                        <a href="#" class="dropdown-item" tabindex="-1">Máy tính bảng</a>
+                                    </div>
+                                </div>
+                                <div class="dropdown-submenu">
+                                    <a href="#" class="dropdown-item dropdown-toggle" data-toggle="dropdown">Tivi</a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" class="dropdown-item" tabindex="-1">Tivi LED</a>
+                                        <a href="#" class="dropdown-item" tabindex="-1">Tivi QLED</a>
+                                        <a href="#" class="dropdown-item" tabindex="-1">Tivi OLED</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <form class="forms-sample">
                         <div class="row">
                             <div class="col-md-3">
@@ -245,4 +281,22 @@
     </div>
 </div>
 </body>
+<script>
+    document.querySelectorAll('.dropdown-menu').forEach(function(dropdown) {
+        dropdown.style.display = 'none';
+    });
+
+    // Hiển thị/ẩn các dropdown menu con khi người dùng chọn một giá trị từ dropdown menu cha
+    document.querySelectorAll('.dropdown-toggle').forEach(function(dropdown) {
+        dropdown.addEventListener('click', function() {
+            const dropdownMenu = dropdown.nextElementSibling;
+
+            if (dropdownMenu.style.display === 'block') {
+                dropdownMenu.style.display = 'none';
+            } else {
+                dropdownMenu.style.display = 'block';
+            }
+        });
+    });
+</script>
 </html>

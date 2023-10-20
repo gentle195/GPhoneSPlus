@@ -229,6 +229,11 @@
                         <li><a href="/dia-chi/hien-thi">Địa Chỉ</a></li>
                     </ul>
                 </li>
+
+
+                <li><a href="/thong-ke/hien-thi" aria-expanded="false"><i
+                        class="icon icon-form"></i>Thống kê</a>
+                </li>
             </ul>
         </div>
 

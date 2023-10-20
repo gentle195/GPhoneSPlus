@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+import com.example.demo.DTO.DoanhThuTheoThang;
 import com.example.demo.models.HoaDon;
 import com.example.demo.repositories.ThongKeRepository;
 import com.example.demo.services.ThongKeService;
@@ -23,5 +24,10 @@ public class ThongKeServiceImpl implements ThongKeService {
     @Override
     public int avgHD() {
        return   thongKeRepository.avgHD();
+    }
+
+    @Override
+    public List<DoanhThuTheoThang> getDoanhThusInYear(int year) {
+        return thongKeRepository.getDoanhThusInYear(year);
     }
 }

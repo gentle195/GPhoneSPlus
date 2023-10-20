@@ -483,6 +483,7 @@ public class BanHangTaiQuayController {
             }
         }
         hoaDonService.thanhToan(hd);
+        hoaDonService.generatePdfDonTaiQuay(id);
         return "redirect:/ban-hang/hien-thi";
     }
 

@@ -272,7 +272,6 @@
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                             <i class="ti-file btn-icon-prepend"></i>
                                             Detail</a>
-
                                         <c:if test="${hoaDon.tinhTrang == 0}">
                                             <a href="/hoa-don/huy/${hoaDon.id}"
                                                class="btn btn-danger btn-icon-text"
@@ -304,6 +303,15 @@
                                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                                 <i class="fas fa-times-circle"></i>
                                                 Update thông tin</a>
+                                        </c:if>
+                                        <c:if test="${hoaDon.tinhTrang == 2}">
+                                            <a href="/hoa-don/xuat-pdf/${hoaDon.id}"
+                                               class="btn btn-outline-success btn-icon-text"
+                                               tabindex="-1"
+                                               role="button"
+                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                                <i class="ti-file btn-icon-prepend"></i>
+                                                Xuất PDF</a>
                                         </c:if>
                                         <c:if test="${hoaDon.tinhTrang == 3}">
                                             <a href="/hoa-don/huy/${hoaDon.id}"
