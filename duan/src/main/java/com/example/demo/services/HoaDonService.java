@@ -3,6 +3,7 @@ package com.example.demo.services;
 import com.example.demo.models.HoaDon;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -42,6 +43,8 @@ public interface HoaDonService {
     public List<HoaDon> findAllByNgayNhan(java.util.Date startDate);
 
     public List<HoaDon> findAllByNgayShip(java.util.Date startDate);
+
+    ResponseEntity<byte[]> generatePdfDonTaiQuay(UUID hoaDonId);
 }
 
 
