@@ -37,8 +37,14 @@ public interface IMEIRepository extends JpaRepository<IMEI, UUID> {
 
     @Transactional
     @Modifying
-    @Query("update IMEI i set i.tinhTrang= 1,i.ngayCapNhat=:date where i.id=:id")
+    @Query("update IMEI i set i.tinhTrang= 1,i.ngayCapNhat=:date where i.id=" +
+            "(select hdct.imei.id from HoaDonChiTiet  hdct where hdct.id=:id)")
     void updateImei(Date date, UUID id);
+
+    @Transactional
+    @Modifying
+    @Query("update IMEI i set i.tinhTrang= 3,i.ngayCapNhat=:date where i.id=:id")
+    void updateImeiChoXuLy(Date date, UUID id);
 
     @Transactional
     @Modifying
@@ -46,12 +52,11 @@ public interface IMEIRepository extends JpaRepository<IMEI, UUID> {
             "(select hdct.imei.id from HoaDonChiTiet  hdct where hdct.id=:id)")
     void updateImei1(Date date, UUID id);
 
-    @Query("select imei from  IMEI imei where imei.tinhTrang=1 ")
+    @Query("select imei from  IMEI imei where imei.tinhTrang=1 or imei.tinhTrang=3")
     Page<IMEI> getImeiOff(Pageable pageable);
 
-    @Query("select imei from  IMEI imei where imei.tinhTrang=1 ")
+    @Query("select imei from  IMEI imei where imei.tinhTrang=1 and imei.tinhTrang=3")
     List<IMEI> getImeiOff();
-
 
 
     @Query("select imei from  IMEI imei where imei.tinhTrang=0 ")
@@ -59,7 +64,6 @@ public interface IMEIRepository extends JpaRepository<IMEI, UUID> {
 
     @Query("select imei from  IMEI imei where imei.tinhTrang=0 ")
     List<IMEI> findAll0();
-
 
 
     @Query("select imei from  IMEI imei where imei.tinhTrang=2 ")

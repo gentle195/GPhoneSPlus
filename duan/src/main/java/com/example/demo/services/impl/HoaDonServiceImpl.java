@@ -29,8 +29,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+
 import java.io.ByteArrayOutputStream;
 
 @Service
@@ -51,6 +53,16 @@ public class HoaDonServiceImpl implements HoaDonService {
     @Override
     public Page<HoaDon> getAll(Pageable pageable) {
         return hoaDonRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<HoaDon> donHang() {
+        return hoaDonRepository.donHang();
+    }
+
+    @Override
+    public List<HoaDon> hoaDon() {
+        return hoaDonRepository.hoaDon();
     }
 
     @Override
@@ -148,7 +160,7 @@ public class HoaDonServiceImpl implements HoaDonService {
 
     private List<HoaDon> listAuto() {
         Date getDate = Date.valueOf(LocalDate.now());
-        List<HoaDon> list = hoaDonRepository.findAll();
+        List<HoaDon> list = hoaDonRepository.hoaDon();
         List<HoaDon> resultList = new ArrayList<>();
         for (HoaDon hd : list
         ) {
@@ -174,6 +186,12 @@ public class HoaDonServiceImpl implements HoaDonService {
     }
 
     @Override
+    public List<HoaDon> locDonHang(UUID idKH, UUID idNV, UUID idDC, Integer trangThai, Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate) {
+        return hoaDonRepository.locDonHang(idKH, idNV, idDC, trangThai,
+                startDate, endDate, shipStartDate, shipEndDate, receiveStartDate, receiveEndDate);
+    }
+
+    @Override
     public List<HoaDon> findAllByCreatedAtAfter(java.util.Date startDate) {
         return hoaDonRepository.findAllByCreatedAtAfter(startDate);
     }
@@ -188,6 +206,25 @@ public class HoaDonServiceImpl implements HoaDonService {
         return hoaDonRepository.findAllByNgayShip(startDate);
     }
 
+    @Override
+    public List<HoaDon> searchDonHang(String ten) {
+        return hoaDonRepository.searchDonHang(ten);
+    }
+
+    @Override
+    public List<HoaDon> findDonHangByCreatedAtAfter(java.util.Date startDate) {
+        return hoaDonRepository.findDonHangByCreatedAtAfter(startDate);
+    }
+
+    @Override
+    public List<HoaDon> findDonHangByNgayNhan(java.util.Date startDate) {
+        return hoaDonRepository.findDonHangByNgayNhan(startDate);
+    }
+
+    @Override
+    public List<HoaDon> findDonHangByNgayShip(java.util.Date startDate) {
+        return hoaDonRepository.findDonHangByNgayShip(startDate);
+    }
 
     @Override
     public ResponseEntity<byte[]> generatePdfDonTaiQuay(UUID hoaDonId) {
@@ -295,7 +332,7 @@ public class HoaDonServiceImpl implements HoaDonService {
             htmlContentBuilder.append("<body>");
 
             //Các nội dung của html
-            htmlContentBuilder.append("<h1>").append("LEOPARD STUDIO").append("</h1>");
+            htmlContentBuilder.append("<h1>").append("GPhoneS Store").append("</h1>");
 
             NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
             // Thêm thông tin đơn hàng
@@ -321,11 +358,10 @@ public class HoaDonServiceImpl implements HoaDonService {
 //            }
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            String formattedNgayTao = dateFormat.format(ngayTao);
 
             htmlContentBuilder.append("<h3>").append("Thông tin đơn hàng").append("</h1>");
             htmlContentBuilder.append("<p>Mã đơn hàng: ").append(hoaDon.getMa()).append("</p>");
-            htmlContentBuilder.append("<p>Ngày mua: ").append(formattedNgayTao).append("</p>");
+            htmlContentBuilder.append("<p>Ngày mua: ").append(dateFormat.format(hoaDon.getNgayThanhToan())).append("</p>");
             htmlContentBuilder.append("<p>Khách hàng: ").append(hoaDon.getKhachHang().getHoTen()).append("</p>");
             htmlContentBuilder.append("<p>Số điện thoại khách hàng: ").append(hoaDon.getSdt()).append("</p>");
             htmlContentBuilder.append("<p>Trạng thái đơn: Đã thanh toán</p>");
@@ -358,7 +394,7 @@ public class HoaDonServiceImpl implements HoaDonService {
 //            htmlContentBuilder.append("<p>Tiền giảm: ").append(formattedTienGiam).append("</p>");
 //            htmlContentBuilder.append("<p>Tổng tiền thanh toán: ").append(formattedTongTienHoaDon).append("</p>");
 
-            htmlContentBuilder.append("<h3>Xin chân thành cảm ơn sự ủng hộ của bạn dành cho LEOPARD STUDIO!</h3>");
+            htmlContentBuilder.append("<h3>Xin chân thành cảm ơn sự ủng hộ của bạn dành cho GPhoneS Store!</h3>");
             htmlContentBuilder.append("</body></html>");
 
             // Gọi phương thức tạo file PDF từ nội dung HTML, sử dụng thư viện iText
@@ -386,6 +422,204 @@ public class HoaDonServiceImpl implements HoaDonService {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @Override
+    public ResponseEntity<byte[]> generatePdfDonOnline(UUID hoaDonId) {
+        Optional<HoaDon> optHoaDon = hoaDonRepository.findById(hoaDonId);
+        if (optHoaDon.isPresent()) {
+            HoaDon hoaDon = optHoaDon.get();
+            // Tạo nội dung HTML cho hóa đơn (thay đổi cho phù hợp với mẫu HTML của bạn)
+            StringBuilder htmlContentBuilder = new StringBuilder();
+            htmlContentBuilder.append("<html><head>");
+            htmlContentBuilder.append("<meta charset=\"UTF-8\">");
+            htmlContentBuilder.append("<title>Đơn hàng online</title>");
+            htmlContentBuilder.append("<style>");
+            htmlContentBuilder.append("body {\n" +
+                    "    font-family: Arial, sans-serif;\n" +
+                    "    line-height: 1.6;\n" +
+                    "    background-color: #f9f9f9;\n" +
+                    "    padding: 20px;\n" +
+                    "}\n" +
+                    "\n" +
+                    "h1 {\n" +
+                    "    color: #338dbc;" +
+                    "    text-align: center;\n" +
+                    "    font-size: 24px;\n" +
+                    "    margin-bottom: 10px;\n" +
+                    "}\n" +
+                    "\n" +
+                    "p {\n" +
+                    "    margin-bottom: 10px;\n" +
+                    "    color: #333;" +
+                    "}\n" +
+                    "\n" +
+                    "h3 {\n" +
+                    "    margin-bottom: 10px;\n" +
+                    "    color: #333;\n" +
+                    "    text-align: center;" +
+                    "}\n" +
+                    "\n" +
+                    "table {\n" +
+                    "    width: 100%;\n" +
+                    "    border-collapse: collapse;\n" +
+                    "    margin-top: 20px;\n" +
+                    "    margin-bottom: 30px;\n" +
+                    "}\n" +
+                    "\n" +
+                    "th, td {\n" +
+                    "    padding: 12px 15px;\n" +
+                    "    border-bottom: 1px solid #ddd;\n" +
+                    "}\n" +
+                    "\n" +
+                    "th {\n" +
+                    "    background-color: #f2f2f2;\n" +
+                    "}\n" +
+                    "\n" +
+                    "tr:hover {\n" +
+                    "    background-color: #f5f5f5;\n" +
+                    "}\n" +
+                    "\n" +
+                    "h1.order-details-title {\n" +
+                    "    margin-top: 40px;\n" +
+                    "}\n" +
+                    "\n" +
+                    "p.footer-text {\n" +
+                    "    margin-top: 30px;\n" +
+                    "    text-align: center;\n" +
+                    "    color: #888;\n" +
+                    "}\n" +
+                    "\n" +
+                    ".container {\n" +
+                    "    max-width: 600px;\n" +
+                    "    margin: 0 auto;\n" +
+                    "}\n" +
+                    "\n" +
+                    ".header {\n" +
+                    "    text-align: center;\n" +
+                    "    margin-bottom: 30px;\n" +
+                    "}\n" +
+                    "\n" +
+                    ".footer {\n" +
+                    "    text-align: center;\n" +
+                    "    margin-top: 50px;\n" +
+                    "    padding-top: 20px;\n" +
+                    "    border-top: 1px solid #ddd;\n" +
+                    "    color: #888;\n" +
+                    "}\n" +
+                    "\n" +
+                    ".logo {\n" +
+                    "    width: 100px;\n" +
+                    "    height: auto;\n" +
+                    "}\n" +
+                    "\n" +
+                    ".product-table {\n" +
+                    "    border: 1px solid #ddd;\n" +
+                    "}\n" +
+                    "\n" +
+                    ".product-table th, .product-table td {\n" +
+                    "    text-align: left;\n" +
+                    "}\n" +
+                    "\n" +
+                    ".total-amount {\n" +
+                    "    font-weight: bold;\n" +
+                    "}\n" +
+                    "\n" +
+                    "/* Add more styles as needed */\n");
+            htmlContentBuilder.append("</style>");
+            htmlContentBuilder.append("<body>");
+
+            //Các nội dung của html
+            htmlContentBuilder.append("<h1>").append("GPhoneS Store").append("</h1>");
+
+            NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+            // Thêm thông tin đơn hàng
+            java.util.Date ngayTao = hoaDon.getNgayTao();
+//            String formattedTienGiam;
+//            KhuyenMai km = hoaDon.getKhuyenMai();
+//
+//            // Kiểm tra nếu khuyến mãi là null hoặc không có id
+//            if (km == null || km.getId() == null) {
+//                formattedTienGiam = "0 VNĐ";
+//            } else {
+//                BigDecimal tienGiamToiDa = BigDecimal.valueOf(km.getGiaTriToiThieu());
+//
+//                BigDecimal tienGiamHoaDon = hoaDon.getTien_giam();
+//
+//                if (tienGiamHoaDon == null) {
+//                    formattedTienGiam = "0 VNĐ";
+//                } else if (tienGiamHoaDon.compareTo(tienGiamToiDa) >= 0) {
+//                    formattedTienGiam = numberFormat.format(tienGiamHoaDon);
+//                } else {
+//                    formattedTienGiam = tienGiamHoaDon + "%";
+//                }
+//            }
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+            htmlContentBuilder.append("<h3>").append("Thông tin đơn hàng").append("</h1>");
+            htmlContentBuilder.append("<p>Mã đơn hàng: ").append(hoaDon.getMa()).append("</p>");
+            htmlContentBuilder.append("<p>Ngày mua: ").append(dateFormat.format(hoaDon.getNgayThanhToan())).append("</p>");
+            htmlContentBuilder.append("<p>Khách hàng: ").append(hoaDon.getKhachHang().getHoTen()).append("</p>");
+            htmlContentBuilder.append("<p>Số điện thoại khách hàng: ").append(hoaDon.getSdt()).append("</p>");
+            htmlContentBuilder.append("<p>Trạng thái đơn: Đã thanh toán</p>");
+            htmlContentBuilder.append("<p>Nhân viên bán hàng: ").append(hoaDon.getNhanVien().getHoTen()).append("</p>");
+
+
+            String formattedTongTienDonHang = numberFormat.format(hoaDon.getTongTien());
+//            String formattedTongTienHoaDon = numberFormat.format(hoaDon.getTongTienHoaDon());
+            // Thêm chi tiết đơn hàng
+            htmlContentBuilder.append("<h3>").append("Chi tiết đơn hàng").append("</h1>");
+            htmlContentBuilder.append("<table>");
+            htmlContentBuilder.append("<tr><th>Sản phẩm</th><th>Số lượng</th><th>Thành tiền</th></tr>");
+            for (HoaDonChiTiet hoaDonChiTiet : hoaDonChiTietRepository.getHoaDonChiTiet(hoaDonId)) {
+                NumberFormat fomatTien = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+                String fomatTienSanPham = fomatTien.format(hoaDonChiTiet.getDonGia());
+                htmlContentBuilder.append("<tr>");
+                htmlContentBuilder.append("<td>").append(hoaDonChiTiet.getImei().getChiTietSanPham().getSanPham().getTen())
+                        .append(" (").append(hoaDonChiTiet.getImei().getChiTietSanPham().getChip().getTen())
+                        .append("/").append(hoaDonChiTiet.getImei().getChiTietSanPham().getMauSac().getTen()).append(")")
+                        .append("</td>");
+
+                htmlContentBuilder.append("<td>").append(hoaDonChiTiet.getSoLuong()).append("</td>");
+                htmlContentBuilder.append("<td>").append(fomatTienSanPham).append("</td>");
+                htmlContentBuilder.append("</tr>");
+            }
+            htmlContentBuilder.append("</table>");
+
+            // Thêm tổng tiền và các thông tin khác của hóa đơn nếu cần
+            htmlContentBuilder.append("<p>Tổng giá trị đơn hàng: ").append(formattedTongTienDonHang).append("</p>");
+//            htmlContentBuilder.append("<p>Tiền giảm: ").append(formattedTienGiam).append("</p>");
+//            htmlContentBuilder.append("<p>Tổng tiền thanh toán: ").append(formattedTongTienHoaDon).append("</p>");
+
+            htmlContentBuilder.append("<h3>Xin chân thành cảm ơn sự ủng hộ của bạn dành cho GPhoneS Store!</h3>");
+            htmlContentBuilder.append("</body></html>");
+
+            // Gọi phương thức tạo file PDF từ nội dung HTML, sử dụng thư viện iText
+            byte[] pdfBytes = createPdfFromHtml(htmlContentBuilder);
+
+            // Lưu file PDF vào thư mục dự án
+            String projectRootPath = System.getProperty("user.dir");
+
+            // Tạo đường dẫn động đến thư mục lưu pdf
+            String filePath = projectRootPath + "/src/main/webapp/inHoaDon/hoa_don_" + hoaDonId + ".pdf";
+            try (FileOutputStream fileOutputStream = new FileOutputStream(filePath)) {
+                fileOutputStream.write(pdfBytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Xử lý lỗi nếu cần thiết
+            }
+
+            // Thiết lập thông tin phản hồi
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "hoa_don.pdf");
+
+            // Trả về file PDF dưới dạng byte[]
+            return ResponseEntity.ok().headers(headers).body(pdfBytes);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     private byte[] createPdfFromHtml(StringBuilder htmlContent) {
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

@@ -102,5 +102,10 @@ public class NhanVienServiceImpl implements NhanVienService {
         return nhanVienRepository.nhanVienThanhToan(id);
     }
 
+    @Override
+    public NhanVien nhanVienUpdateHoaDon(UUID id) {
+        return nhanVienRepository.nhanVienUpdateHoaDon(id);
+    }
+
 
 }

@@ -173,10 +173,8 @@
                                                     <form:label class="col-sm-3 col-form-label"
                                                                 path="nhanVien">Nhân Viên:</form:label>
                                                     <div class="col-sm-9">
-                                                        <form:select path="nhanVien" class="form-control">
-                                                            <form:options items="${listNhanVien}" itemLabel="hoTen"
-                                                                          itemValue="id"/>
-                                                        </form:select>
+                                                        <input type="text" class="form-control"
+                                                               value="${HoaDon.nhanVien.hoTen}" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -386,22 +384,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group row">
                                                 <form:label class="col-sm-3 col-form-label"
-                                                            path="matKhau" for="mkkh">Mật Khẩu:</form:label>
-                                                <div class="col-sm-9">
-                                                    <form:input class="form-control" placeholder=""
-                                                                path="matKhau" id="mkkh" readonly="true"/>
-                                                    <form:errors path="matKhau"
-                                                                 cssStyle="color: red"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group row">
-                                                <form:label class="col-sm-3 col-form-label"
                                                             path="hangKhachHang">Hạng Khách Hàng:</form:label>
-                                                <div class="col-sm-12">
+                                                <div class="col-sm-9">
                                                     <form:select path="hangKhachHang" class="form-control">
                                                         <form:options items="${listHangKhachHang}"
                                                                       itemLabel="ten"
@@ -436,8 +420,6 @@
     </div>
 </div>
 <div class="modal fade" id="newSanPham" tabindex="-1" aria-labelledby="modal-1-label" aria-hidden="true">
-
-
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-body">
@@ -463,7 +445,6 @@
                                             </c:forEach>
                                         </select>
                                     </div>
-
                                     <div>
                                         <select class="form-control" id="mands1" onchange="clickcombobox()">
                                             <option selected value="null">Màn hình</option>
@@ -496,14 +477,6 @@
                                             </c:forEach>
                                         </select>
                                     </div>
-<%--                                    <div style="height: 1.5cm">--%>
-<%--                                        <select class="form-control" id="pinds1" onchange="clickcombobox()">--%>
-<%--                                            <option selected value="null">Pin</option>--%>
-<%--                                            <c:forEach items="${pinds}" var="ht">--%>
-<%--                                                <option value="${ht.loaiPin}">${ht.loaiPin}</option>--%>
-<%--                                            </c:forEach>--%>
-<%--                                        </select>--%>
-<%--                                    </div>--%>
                                     <div>
                                         <select class="form-control" id="dungds1" onchange="clickcombobox()">
                                             <option selected value="null">Dung lượng pin</option>
@@ -596,8 +569,6 @@
         </div>
     </div>
 </div>
-
-
 <div class="modal fade" id="nhapImei" tabindex="-1"
      aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -754,22 +725,6 @@
             ketQuaElement.value = "Hãy nhập email";
         } else {
             ketQuaElement.value = tk;
-        }
-    }
-
-    document.getElementById("emailkh").addEventListener("keyup", function () {
-        matKhau();
-    });
-
-    function matKhau() {
-        var email = document.getElementById("emailkh").value;
-        var matKhau = "12345678";
-
-        var ketQuaElement = document.getElementById("mkkh");
-        if (email == '') {
-            ketQuaElement.value = "Hãy nhập email";
-        } else {
-            ketQuaElement.value = matKhau;
         }
     }
 
@@ -964,62 +919,7 @@
         }
     });
 </script>
-<script>
-    $('button[id^="buttonLoc"]').on('click', async function (e) {
-        const btn = $(this);
-        const parentModal = btn.closest('.modal'); // Lấy modal cha gần nhất của nút "Tìm kiếm" được nhấn
 
-        // Xây dựng một đối tượng lọc để lưu trữ các giá trị lọc của người dùng
-        const filter = {};
-
-        // Lặp qua các trường lọc và thêm các giá trị lọc đã chọn vào đối tượng lọc
-        filter.locRam = parentModal.find("#locRam").val();
-        filter.locRom = parentModal.find("#locRom").val();
-        filter.locCam = parentModal.find("#locCam").val();
-        filter.locHang = parentModal.find("#locHang").val();
-        filter.locMan = parentModal.find("#locMan").val();
-        filter.locDungLuong = parentModal.find("#locDungLuong").val();
-        filter.locChip = parentModal.find("#locChip").val();
-        filter.giaMin = parentModal.find("#locGiaMin").val();
-        filter.giaMax = parentModal.find("#locGiaMax").val();
-
-        // Xây dựng một URL lọc dựa trên các giá trị trong đối tượng lọc
-        const url = "http://localhost:8080/ban-hang/loc?" + $.param(filter);
-
-        try {
-            const resp = await fetch(url);
-            const data = await resp.json();
-            console.log(data)
-
-            // Hiển thị dữ liệu tìm kiếm được trả về từ máy chủ
-            let html = ``;
-            for (let i = 0; i < data.length; i++) {
-                const ctsp = data[i];
-                const tr = `
-            <tr>
-                <td>` + ctsp.sanPham.ma + `</td>
-                <td>` + ctsp.sanPham.ten + `</td>
-                <td align="center"><img src="/uploads/` + ctsp.urlAnh + `" width="40" height="40"></td>
-                <td>` + ctsp.sanPham.hangSanPham.ten + `</td>
-                <td>` + ctsp.mauSac.ten + `</td>
-                <td>` + ctsp.ram.dungLuong + `</td>
-                <td>` + ctsp.rom.dungLuong + `</td>
-                <td>` + ctsp.giaBan + `</td>
-                <td>` + ctsp.soLuong + `</td>
-                <td>
-                    <a class="btn btn-warning btn-icon-text"
-                    data-bs-toggle="modal" data-bs-target="#nhapImei">Nhập IMEI</a>
-                </td>
-            </tr>
-            `;
-                html += tr;
-            }
-            parentModal.find(".san_pham_search").html(html);
-        } catch (err) {
-            console.error(err)
-        }
-    });
-</script>
 <script>
     function loadInterface(interfaceUrl) {
         fetch(interfaceUrl)

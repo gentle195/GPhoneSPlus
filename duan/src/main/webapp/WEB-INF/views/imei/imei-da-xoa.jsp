@@ -83,7 +83,10 @@
                                     <td>${imei.ngayTao}</td>
                                     <td>${imei.ngayCapNhat}</td>
                                     <td>
-                                        <c:if test="${imei.tinhTrang == 2}">Đã xoá</c:if>
+                                        <c:if test="${imei.tinhTrang == 0}">Chưa bán</c:if>
+                                        <c:if test="${imei.tinhTrang == 1}">Đã bán</c:if>
+                                        <c:if test="${imei.tinhTrang == 2}">Đã hủy</c:if>
+                                        <c:if test="${imei.tinhTrang == 3}">Chờ xử lý</c:if>
                                     </td>
 
                                     <td>${imei.moTa}</td>

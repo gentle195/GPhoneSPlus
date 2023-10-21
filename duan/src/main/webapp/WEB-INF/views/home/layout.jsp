@@ -186,12 +186,10 @@
                 <li><a href="/home" aria-expanded="false">
                     <i class="icon icon-single-04"></i>Trang chủ</a>
                 </li>
-
                 <li class="nav-label">Apps</li>
                 <li><a href="/ban-hang/hien-thi" aria-expanded="false"><i
                         class="icon icon-app-store"></i>Bán hàng</a>
                 </li>
-
                 <li><a href="/hoa-don/hien-thi" aria-expanded="false"><i
                         class="icon icon-chart-bar-33"></i>Hoá đơn</a>
                 </li>
@@ -264,12 +262,7 @@
     <!--**********************************
         Footer start
     ***********************************-->
-    <div class="footer">
-        <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank">Quixkit</a> 2019</p>
-            <p>Distributed by <a href="https://themewagon.com/" target="_blank">Themewagon</a></p>
-        </div>
-    </div>
+
     <!--**********************************
         Footer end
     ***********************************-->

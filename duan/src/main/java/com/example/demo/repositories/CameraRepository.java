@@ -1,7 +1,6 @@
 package com.example.demo.repositories;
 
 import com.example.demo.models.Camera;
-import com.example.demo.models.Chip;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

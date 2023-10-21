@@ -43,24 +43,25 @@ public class LoginController {
 
         if (nhanVien != null) {
             boolean matches = BCrypt.checkpw(password, nhanVien.getMatKhau());
-            if (matches==true) {
+            if (matches == true) {
                 un = username;
                 NhanVien nhanVien1 = nhanVienRepository.findByTaiKhoan(un);
-                nhanVien2=nhanVien1;
+                nhanVien2 = nhanVien1;
+                service.setDataNhanVienLogin(nhanVien2);
                 System.out.println(nhanVien1.getTaiKhoan());
                 return "redirect:/home";
             }
         }
         KhachHang khachHang = khachHangRepository.getKhachHangByTaiKhoan(username);
         if (khachHang != null) {
-            boolean matchess = BCrypt.checkpw(password,khachHang.getMatKhau());
-            if (matchess==true) {
+            boolean matchess = BCrypt.checkpw(password, khachHang.getMatKhau());
+            if (matchess == true) {
                 un = username;
                 KhachHang khachHang1 = khachHangRepository.getKhachHangByTaiKhoan(un);
                 System.out.println(khachHang1.getTaiKhoan());
-                khachHang2=khachHang1;
+                khachHang2 = khachHang1;
                 service.setSharedData(khachHang2);
-                model.addAttribute("khachHang000",khachHang2);
+                model.addAttribute("khachHang000", khachHang2);
                 return "redirect:/ban-hang-online/dang-nhap/hien-thi";
             }
 
@@ -71,24 +72,26 @@ public class LoginController {
 
 
     }
+
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response){
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().invalidate();
         return "redirect:/login";
 
     }
+
     @GetMapping("/thong-tin-ca-nhan")
-    public String thongTinND(Model model){
-        if (nhanVien2!=null){
-            model.addAttribute("us",nhanVien2);
-            model.addAttribute("contentPage","/home/thong-tin-ca-nhan.jsp");
+    public String thongTinND(Model model) {
+        if (nhanVien2 != null) {
+            model.addAttribute("us", nhanVien2);
+            model.addAttribute("contentPage", "/home/thong-tin-ca-nhan.jsp");
             return "layout";
 
-        }else if (khachHang2!=null){
-            model.addAttribute("contentPage","/home/thong-tin-ca-nhan.jsp");
+        } else if (khachHang2 != null) {
+            model.addAttribute("contentPage", "/home/thong-tin-ca-nhan.jsp");
             return "layout";
         }
-        model.addAttribute("tb","Bạn phải đăng nhập trước!");
+        model.addAttribute("tb", "Bạn phải đăng nhập trước!");
         return "/home/layout";
 
 
