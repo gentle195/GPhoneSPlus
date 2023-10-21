@@ -8,6 +8,7 @@ import com.example.demo.services.DataIntermediateService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +42,8 @@ public class LoginController {
 
 
         if (nhanVien != null) {
-            if (password.contains(nhanVien.getMatKhau())) {
+            boolean matches = BCrypt.checkpw(password, nhanVien.getMatKhau());
+            if (matches==true) {
                 un = username;
                 NhanVien nhanVien1 = nhanVienRepository.findByTaiKhoan(un);
                 nhanVien2=nhanVien1;
@@ -51,7 +53,8 @@ public class LoginController {
         }
         KhachHang khachHang = khachHangRepository.getKhachHangByTaiKhoan(username);
         if (khachHang != null) {
-            if (password.contains(khachHang.getMatKhau())) {
+            boolean matchess = BCrypt.checkpw(password,khachHang.getMatKhau());
+            if (matchess==true) {
                 un = username;
                 KhachHang khachHang1 = khachHangRepository.getKhachHangByTaiKhoan(un);
                 System.out.println(khachHang1.getTaiKhoan());
