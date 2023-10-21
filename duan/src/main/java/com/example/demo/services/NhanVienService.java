@@ -37,6 +37,8 @@ public interface NhanVienService {
 
     List<NhanVien> nhanVienThanhToan(UUID id);
 
+    NhanVien nhanVienUpdateHoaDon(UUID id);
+
 }
 
 

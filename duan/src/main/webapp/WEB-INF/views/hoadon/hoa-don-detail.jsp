@@ -240,14 +240,13 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group row">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Địa chỉ:</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" id="diaChiInput"
-                                                                   name="diaChi"
-                                                                   value="${hoaDon.diaChi.diaChi}" readonly>
-                                                        </div>
+                                                    <label class="col-sm-3 col-form-label">Địa chỉ:</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="diaChiInput"
+                                                               name="diaChi"
+                                                               value="${hoaDon.diaChi.diaChi}" readonly>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -313,46 +312,44 @@
                             <h3 style="text-align: center;">Hóa đơn chi tiết</h3>
                             <br>
                             <div class="search">
-                                <form action="/hoa-don/search-hdct" method="post">
-                                    <div class="input-group" style="width: 30%; float: right">
-                                        <input type="text" class="form-control" placeholder="Bạn tìm gì..."
-                                               aria-label="Bạn tìm gì..." name="search">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-sm btn-primary" type="submit">Search</button>
-                                        </div>
+                                <div class="input-group" style="width: 30%; float: right">
+                                    <input type="text" class="form-control" placeholder="Bạn tìm gì..."
+                                           aria-label="Bạn tìm gì..." name="search" id="search">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-sm btn-primary" type="button" id="button-search">Search
+                                        </button>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                             <div class="table-responsive">
                                 <table id="example" class="display">
                                     <thead>
                                     <tr>
-                                        <th>Mã hóa đơn</th>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Số lượng</th>
-                                        <%--                                        <th>Tình trạng</th>--%>
-                                        <th>Đơn giá</th>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Ảnh</th>
+                                        <th>Hãng</th>
+                                        <th>Màu Sắc</th>
+                                        <th>Ram</th>
+                                        <th>Dung Lượng Bộ Nhớ</th>
+                                        <th>Số IMEI</th>
+                                        <th>Đơn Giá</th>
                                         <th>Thành tiền</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="table-search">
                                     <i class="mdi mdi-border-color"></i>
                                     <c:forEach items="${listHoaDonChiTiet}" var="hdct">
                                         <tr>
-                                            <td>${hdct.hoaDon.ma}</td>
                                             <td>${hdct.imei.chiTietSanPham.sanPham.ten}</td>
-                                            <td>${hdct.soLuong}</td>
-                                                <%--                                            <td>--%>
-                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 0}">Đang chờ</c:if>--%>
-                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 1}">Đã xác nhận</c:if>--%>
-                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 2}">Đã thanh toán</c:if>--%>
-                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 3}">Chờ thanh toán</c:if>--%>
-                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 4}">Chờ vận chuyển</c:if>--%>
-                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 5}">Đang vận chuyển</c:if>--%>
-                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 6}">Vận chuyển hoàn tất</c:if>--%>
-                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 7}">Giao trễ</c:if>--%>
-                                                <%--                                                <c:if test="${hoaDon.tinhTrang == 8}">Đã hủy</c:if>--%>
-                                                <%--                                            </td>--%>
+                                            <td align="center">
+                                                <img src="/uploads/${hdct.imei.chiTietSanPham.urlAnh}" width="40"
+                                                     height="40">
+                                            </td>
+                                            <td>${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
+                                            <td>${hdct.imei.chiTietSanPham.mauSac.ten}</td>
+                                            <td>${hdct.imei.chiTietSanPham.ram.dungLuong}</td>
+                                            <td>${hdct.imei.chiTietSanPham.rom.dungLuong}</td>
+                                            <td>${hdct.imei.soImei}</td>
                                             <td>${hdct.donGia}</td>
                                             <td>${hdct.donGia * hdct.soLuong}</td>
                                         </tr>
@@ -368,4 +365,40 @@
     </div>
 </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script>
+    $('button[id^="button-search"]').on('click', async function (e) {
+        const btn = $(this);
+        const search = $("#search").val();
+        const url = "http://localhost:8080/hoa-don/search-hdct?search=" + search;
+        try {
+            const resp = await fetch(url);
+            const data = await resp.json();
+            console.log(data)
+            // Hiển thị dữ liệu tìm kiếm
+            let html = ``;
+            for (let i = 0; i < data.length; i++) {
+                const hdct = data[i];
+                const tr = `
+            <tr>
+                <td>` + hdct.imei.chiTietSanPham.sanPham.ten + `</td>
+                <td align="center"><img src="/uploads/` + hdct.imei.chiTietSanPham.urlAnh + `" width="40" height="40"></td>
+                <td>` + hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten + `</td>
+                <td>` + hdct.imei.chiTietSanPham.mauSac.ten + `</td>
+                <td>` + hdct.imei.chiTietSanPham.ram.dungLuong + `</td>
+                <td>` + hdct.imei.chiTietSanPham.rom.dungLuong + `</td>
+                <td>` + hdct.imei.soImei + `</td>
+                <td>` + hdct.donGia + `</td>
+                <td>` + hdct.donGia * hdct.soLuong + `</td>
+            </tr>
+            `;
+                html += tr;
+            }
+            $("#table-search").html(html);
+        } catch (err) {
+            console.error(err)
+        }
+    });
+</script>
 </html>

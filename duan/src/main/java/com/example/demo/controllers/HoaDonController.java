@@ -8,6 +8,7 @@ import com.example.demo.models.KhachHang;
 import com.example.demo.models.NhanVien;
 import com.example.demo.models.QuyDoi;
 import com.example.demo.services.ChiTietSanPhamService;
+import com.example.demo.services.DataIntermediateService;
 import com.example.demo.services.DiaChiService;
 import com.example.demo.services.HoaDonChiTietService;
 import com.example.demo.services.HoaDonService;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -64,30 +66,32 @@ public class HoaDonController {
 
     @Autowired
     private HoaDonChiTietService hoaDonChiTietService;
+    @Autowired
+    DataIntermediateService dataIntermediateService;
 
     private int dem = 0;
+    private UUID idHoaDon = null;
+    BigDecimal total = BigDecimal.ZERO;
+    private HoaDon hoaDonnn = new HoaDon();
+    private int loai = 0;
+    private int httt = 0;
 
     @GetMapping("/hien-thi")
     public String hienThi(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon,
                           @RequestParam("pageNum") Optional<Integer> pageNum,
                           @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
         dem = 0;
-        Sort sort = Sort.by("ma").descending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<HoaDon> page = hoaDonService.getAll(pageable);
+        List<HoaDon> page = hoaDonService.hoaDon();
         List<NhanVien> listNhanVien = nhanVienService.findAll();
         List<KhachHang> listKhachHang = khachHangService.findAll00();
         List<DiaChi> listDiaChi = diaChiService.getALL0();
-
         model.addAttribute("listKhachHang", listKhachHang);
         model.addAttribute("listNhanVien", listNhanVien);
         model.addAttribute("listDiaChi", listDiaChi);
 
         model.addAttribute("dem", dem);
         model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
-        model.addAttribute("listHoaDon", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("listHoaDon", page);
         return "/home/layout";
     }
 
@@ -113,8 +117,6 @@ public class HoaDonController {
         model.addAttribute("listDiaChi", listDiaChi);
         model.addAttribute("listHoaDon", list);
         model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
-
-
         return "/home/layout";
     }
 
@@ -278,7 +280,7 @@ public class HoaDonController {
         List<DiaChi> listDiaChi = diaChiService.findAll();
         List<QuyDoi> listQuyDoi = quyDoiService.findAll();
         dem = 4;
-
+        idHoaDon = id;
         List<HoaDonChiTiet> listHoaDonChiTiet = hoaDonChiTietService.getHoaDonChiTiet(id);
         model.addAttribute("listKhachHang", listKhachHang);
         model.addAttribute("listNhanVien", listNhanVien);
@@ -286,10 +288,27 @@ public class HoaDonController {
         model.addAttribute("listQuyDoi", listQuyDoi);
         model.addAttribute("dem", dem);
         HoaDon hoaDon = hoaDonService.findById(id);
+        loai = hoaDon.getLoai();
+        httt= hoaDon.getHinhThucThanhToan();
         model.addAttribute("hoaDon", hoaDon);
         model.addAttribute("listHoaDonChiTiet", listHoaDonChiTiet);
         model.addAttribute("contentPage", "../hoadon/hoa-don-detail.jsp");
         return "/home/layout";
+    }
+
+    @GetMapping("/xuat-pdf/{id}")
+    public String xuatPDF(Model model, @PathVariable("id") UUID id) {
+        List<NhanVien> listNhanVien = nhanVienService.findAll();
+        List<KhachHang> listKhachHang = khachHangService.findAll();
+        List<DiaChi> listDiaChi = diaChiService.findAll();
+        List<QuyDoi> listQuyDoi = quyDoiService.findAll();
+        model.addAttribute("listKhachHang", listKhachHang);
+        model.addAttribute("listNhanVien", listNhanVien);
+        model.addAttribute("listDiaChi", listDiaChi);
+        model.addAttribute("listQuyDoi", listQuyDoi);
+        model.addAttribute("dem", dem);
+        hoaDonService.generatePdfDonTaiQuay(id);
+        return "redirect:/hoa-don/hien-thi";
     }
 
     @GetMapping("/view-add")
@@ -306,7 +325,6 @@ public class HoaDonController {
 
         List<NhanVien> listNhanVien = nhanVienService.findAll();
         model.addAttribute("listNhanVien", listNhanVien);
-
         List<DiaChi> listDiaChi = diaChiService.getALL0();
         model.addAttribute("listDiaChi", listDiaChi);
 
@@ -374,14 +392,16 @@ public class HoaDonController {
         List<DiaChi> listDiaChi = diaChiService.findAll();
         List<QuyDoi> listQuyDoi = quyDoiService.findAll();
         dem = 4;
-
+        idHoaDon = id;
         List<HoaDonChiTiet> listHoaDonChiTiet = hoaDonChiTietService.getHoaDonChiTiet(id);
         model.addAttribute("listKhachHang", listKhachHang);
         model.addAttribute("listNhanVien", listNhanVien);
         model.addAttribute("listDiaChi", listDiaChi);
         model.addAttribute("listQuyDoi", listQuyDoi);
-
         HoaDon hoaDon = hoaDonService.findById(id);
+        loai = hoaDonnn.getLoai();
+        httt= hoaDonnn.getHinhThucThanhToan();
+        hoaDonnn = hoaDon;
         model.addAttribute("hoaDon", hoaDon);
         model.addAttribute("listHoaDonChiTiet", listHoaDonChiTiet);
         model.addAttribute("contentPage", "../hoadon/hoa-don-view-update.jsp");
@@ -389,76 +409,156 @@ public class HoaDonController {
     }
 
     //
-    @GetMapping("/update/{id}")
+    @PostMapping("/update/{id}")
     public String Update(Model model, @PathVariable("id") UUID id,
-                         @ModelAttribute("hoaDon") HoaDon hoaDon, @RequestParam("pageNum") Optional<Integer> pageNum,
-                         @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
+                         @ModelAttribute("hoaDon") HoaDon hoaDon) {
+        if (hoaDon.getTinhTrang() == 8) {
+            HoaDon hd = hoaDonService.findById(id);
+            hd.setNhanVien(nhanVienService.nhanVienUpdateHoaDon(id));
+            hd.setLoai(loai);
+            hd.setHinhThucThanhToan(httt);
+            LocalDate ngayCapNhat = LocalDate.now();
+            List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
+            if (!list.isEmpty()) {
+                for (HoaDonChiTiet hdct : list
+                ) {
+                    ChiTietSanPham ctsp = chiTietSanPhamService.getChiTiet(hdct.getImei().getId());
+                    ctsp.setSoLuong(ctsp.getSoLuong() + 1);
+                    long millis = System.currentTimeMillis();
+                    Date date = new Date(millis);
+                    ctsp.setNgayTao(date);
+                    if (ctsp.getSoLuong() > 0) {
+                        ctsp.setTinhTrang(0);
+                    }
+                    chiTietSanPhamService.update1(ctsp);
+                    imeiService.updatImei1(date, hdct.getId());
+                    hdct.setTinhTrang(8);
+                    hoaDonChiTietService.update(hdct.getId(), hdct);
+                }
+                hd.setTinhTrang(8);
+                hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                hoaDonService.update(id, hd);
+                return "redirect:/hoa-don/hien-thi";
+            } else {
+                hd.setTinhTrang(8);
+                hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                hoaDonService.update(id, hd);
+                return "redirect:/hoa-don/hien-thi";
+            }
+        } else if (hoaDon.getTinhTrang() == 2) {
+            HoaDon hd = hoaDonService.findById(id);
+            hd.setNhanVien(nhanVienService.nhanVienUpdateHoaDon(id));
+            LocalDate ngayCapNhat = LocalDate.now();
+            List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
+            if (!list.isEmpty()) {
+                for (HoaDonChiTiet hdct : list
+                ) {
+                    long millis = System.currentTimeMillis();
+                    Date date = new Date(millis);
+                    imeiService.updatImei(date, hdct.getId());
+                    hdct.setTinhTrang(1);
+                    hoaDonChiTietService.update(hdct.getId(), hdct);
+                }
+                hd.setTinhTrang(2);
+                hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                hoaDonService.update(id, hd);
+            } else {
+                hd.setTinhTrang(2);
+                hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                hoaDonService.update(id, hd);
+            }
+        } else {
+            long millis = System.currentTimeMillis();
+            Date date = new Date(millis);
+            hoaDon.setId(id);
+            hoaDon.setNhanVien(nhanVienService.nhanVienUpdateHoaDon(id));
+            hoaDon.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+            hoaDon.setNgayTao(date);
+            hoaDonService.update(id, hoaDon);
+        }
+        model.addAttribute("listKhachHang", khachHangService.findAll0());
+        model.addAttribute("listNhanVien", nhanVienService.findAll());
+        model.addAttribute("listDiaChi", diaChiService.findAll0());
+        model.addAttribute("listHoaDonChiTiet", hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId()));
+        model.addAttribute("contentPage", "../hoadon/hoa-don-view-update.jsp");
+        return "/home/layout";
+    }
 
+    @ResponseBody
+    @GetMapping("/search-hdct")
+    public List<HoaDonChiTiet> searchHDCT(Model model, @RequestParam("search") String ten, @ModelAttribute("hoaDon") HoaDon hoaDon) {
         List<NhanVien> listNhanVien = nhanVienService.findAll();
         List<KhachHang> listKhachHang = khachHangService.findAll00();
-        List<DiaChi> listDiaChi = diaChiService.findAll0();
+        List<DiaChi> listDiaChi = diaChiService.getALL0();
+        List<QuyDoi> listQuyDoi = quyDoiService.findAll();
+        dem = 5;
+        List<HoaDonChiTiet> listHoaDonChiTiets = hoaDonChiTietService.search(idHoaDon, ten);
+
+        model.addAttribute("listKhachHang", listKhachHang);
+        model.addAttribute("listNhanVien", listNhanVien);
+        model.addAttribute("listDiaChi", listDiaChi);
+        model.addAttribute("listQuyDoi", listQuyDoi);
+        model.addAttribute("hoaDon", hoaDon);
+        return listHoaDonChiTiets;
+    }
+
+    @ResponseBody
+    @GetMapping("/search-hdct-update")
+    public List<HoaDonChiTiet> searchHDCTUpdate(Model model, @RequestParam("search") String ten, @ModelAttribute("hoaDon") HoaDon hoaDon) {
+        List<NhanVien> listNhanVien = nhanVienService.findAll();
+        List<KhachHang> listKhachHang = khachHangService.findAll00();
+        List<DiaChi> listDiaChi = diaChiService.getALL0();
+        List<QuyDoi> listQuyDoi = quyDoiService.findAll();
+        dem = 5;
+        List<HoaDonChiTiet> listHoaDonChiTiets = hoaDonChiTietService.search(idHoaDon, ten);
+
+        model.addAttribute("listKhachHang", listKhachHang);
+        model.addAttribute("listNhanVien", listNhanVien);
+        model.addAttribute("listDiaChi", listDiaChi);
+        model.addAttribute("listQuyDoi", listQuyDoi);
+        model.addAttribute("hoaDon", hoaDon);
+        return listHoaDonChiTiets;
+    }
+
+    @GetMapping("/delete-hoa-don-chi-tiet/{id}")
+    public String deleteHDCT(Model model, @PathVariable("id") UUID id,
+                             @ModelAttribute("HoaDon") HoaDon hoaDon) {
+
+        HoaDonChiTiet hd = hoaDonChiTietService.findById(id);
+        ChiTietSanPham ct = chiTietSanPhamService.getChiTiet(hd.getImei().getId());
+        ct.setSoLuong(ct.getSoLuong() + 1);
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
-        hoaDon.setId(id);
-        hoaDon.setNgayCapNhat(Date.valueOf(LocalDate.now()));
-        hoaDon.setNgayTao(date);
+        ct.setNgayCapNhat(date);
+        if (ct.getSoLuong() > 0) {
+            ct.setTinhTrang(0);
+        }
+        chiTietSanPhamService.update1(ct);
+        imeiService.updatImei1(date, id);
+        hoaDonChiTietService.delete(id);
+        List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId());
+        if (list.isEmpty()) {
+            hoaDonnn.setTongTien(BigDecimal.ZERO);
+            hoaDonnn.setTinhTrang(0);
+            hoaDonnn.setMa(hoaDonnn.getMa());
+        } else {
+            // Tính tổng đơn giá trong list hóa đơn chi tiết còn lại
+            BigDecimal subTotal = list.stream()
+                    .map(hdd -> hdd.getDonGia())
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        model.addAttribute("listKhachHang", listKhachHang);
-        model.addAttribute("listNhanVien", listNhanVien);
-        model.addAttribute("listDiaChi", listDiaChi);
-
-        hoaDonService.update(id, hoaDon);
-        model.addAttribute("contentPage", "../hoadon/hoa-don-view-update.jsp");
-
-        return "/home/layout";
+            // Set tổng tiền bằng tổng đơn giá trong list hóa đơn chi tiết còn lại
+            total = subTotal;
+            hoaDonnn.setTongTien(subTotal);
+        }
+        hoaDonService.update(hoaDonnn.getId(), hoaDonnn);
+        model.addAttribute("tong", String.valueOf(total));
+        model.addAttribute("listHoaDonChiTiet", list);
+        model.addAttribute("hoaDon", hoaDonnn);
+        model.addAttribute("listNhanVien", nhanVienService.findAll());
+        model.addAttribute("listKhachHang", khachHangService.findAll0());
+        model.addAttribute("listDiaChi", diaChiService.findAll0());
+        return "redirect:/hoa-don/view-update/" + idHoaDon;
     }
-
-
-    @PostMapping("/search-hdct")
-    public String searchHDCT(Model model, @ModelAttribute("ten") String ten,
-                             @RequestParam("pageNum") Optional<Integer> pageNum,
-                             @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
-        List<NhanVien> listNhanVien = nhanVienService.findAll();
-        List<KhachHang> listKhachHang = khachHangService.findAll00();
-        List<DiaChi> listDiaChi = diaChiService.getALL0();
-        List<QuyDoi> listQuyDoi = quyDoiService.findAll();
-        dem = 5;
-        Page<HoaDonChiTiet> listHoaDonChiTiets = hoaDonChiTietService.search(ten, Pageable.unpaged());
-
-        model.addAttribute("listKhachHang", listKhachHang);
-        model.addAttribute("listNhanVien", listNhanVien);
-        model.addAttribute("listDiaChi", listDiaChi);
-        model.addAttribute("listQuyDoi", listQuyDoi);
-//        model.addAttribute("hoaDon", hoaDon);
-        model.addAttribute("contentPage", "hoadon/hoa-don-detail.jsp");
-        model.addAttribute("listHoaDonChiTiet", listHoaDonChiTiets.getContent());
-        model.addAttribute("page", listHoaDonChiTiets.getNumber());
-        model.addAttribute("total", listHoaDonChiTiets.getTotalPages());
-        return "/home/layout";
-    }
-
-    @PostMapping("/search-hdct-update")
-    public String searchHDCTUpdate(Model model, @ModelAttribute("ten") String ten,
-                                   @RequestParam("pageNum") Optional<Integer> pageNum,
-                                   @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
-        List<NhanVien> listNhanVien = nhanVienService.findAll();
-        List<KhachHang> listKhachHang = khachHangService.findAll00();
-        List<DiaChi> listDiaChi = diaChiService.getALL0();
-        List<QuyDoi> listQuyDoi = quyDoiService.findAll();
-        dem = 5;
-        Page<HoaDonChiTiet> listHoaDonChiTiets = hoaDonChiTietService.search(ten, Pageable.unpaged());
-
-        model.addAttribute("listKhachHang", listKhachHang);
-        model.addAttribute("listNhanVien", listNhanVien);
-        model.addAttribute("listDiaChi", listDiaChi);
-        model.addAttribute("listQuyDoi", listQuyDoi);
-//        model.addAttribute("hoaDon", hoaDon);
-        model.addAttribute("contentPage", "hoadon/hoa-don-view-update.jsp");
-        model.addAttribute("listHoaDonChiTiet", listHoaDonChiTiets.getContent());
-        model.addAttribute("page", listHoaDonChiTiets.getNumber());
-        model.addAttribute("total", listHoaDonChiTiets.getTotalPages());
-        return "/home/layout";
-    }
-
 
 }

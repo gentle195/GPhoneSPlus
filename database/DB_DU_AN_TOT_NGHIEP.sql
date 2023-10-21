@@ -418,11 +418,14 @@ CREATE TABLE hoa_don (
   sdt VARCHAR(30) null,
   tinh_trang int DEFAULT 0,
   loai int DEFAULT 0,
+  hinh_thuc_thanh_toan int DEFAULT 0,
+  tinh_trang_giao_hang int DEFAULT 0,
   tong_tien decimal(20, 0) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
   ngay_nhan DATE NULL,
   ngay_ship DATE NULL,
+  ngay_thanh_toan Date NULL,
   ghi_chu NVARCHAR(MAX) NULL,
   FOREIGN KEY (id_khach_hang) REFERENCES khach_hang(id),
   FOREIGN KEY (id_nhan_vien) REFERENCES Nhan_vien(id),
@@ -655,6 +658,7 @@ VALUES
   ('MH003', N'Độ phân giải QHD', '2022-03-20', N'Màn hình có độ phân giải QHD.'),
   ('MH004', N'Độ phân giải HD', '2022-04-25', N'Màn hình có độ phân giải HD.'),
   ('MH005', N'Độ phân giải 8K', '2022-05-30', N'Màn hình có độ phân giải 8K.');
+
 
 
 

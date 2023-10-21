@@ -30,38 +30,38 @@
             <%--    <div class="col-md-6 grid-margin stretch-card" >--%>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Thêm Pin</h4>
+                    <h4 class="card-title">Update Pin</h4>
                     <form class="forms-sample">
                         <div class="form-group" style="display: none">
                             <form:label path="ma"><b>Mã:</b></form:label>
-                            <form:input path="ma" class="form-control"></form:input>
-                            <form:errors path="ma"></form:errors>
+                            <form:input path="ma" class="form-control"/>
+                            <form:errors path="ma"/>
                         </div>
                         <div class="form-group">
                             <form:label path="loaiPin"><b>Loại Pin:</b></form:label>
-                            <form:input path="loaiPin" class="form-control"></form:input>
-                            <form:errors path="loaiPin"></form:errors>
+                            <form:input path="loaiPin" class="form-control"/>
+                            <form:errors path="loaiPin"/>
                         </div>
                         <div class="form-group">
                             <form:label path="congNghePin"><b>Công nghệ Pin:</b></form:label>
-                            <form:input path="congNghePin" class="form-control"></form:input>
-                            <form:errors path="congNghePin"></form:errors>
+                            <form:input path="congNghePin" class="form-control"/>
+                            <form:errors path="congNghePin"/>
                         </div>
                         <div class="form-group" style="display: none">
                             <form:label path="ngayTao"><b>Ngày tạo:</b></form:label>
-                            <form:input path="ngayTao" class="form-control"></form:input>
-                            <form:errors path="ngayTao"></form:errors>
+                            <form:input path="ngayTao" class="form-control"/>
+                            <form:errors path="ngayTao"/>
                         </div>
                         <div class="form-group">
                             <form:label path="moTa"><b>Mô Tả:</b></form:label>
-                            <form:textarea path="moTa" class="form-control"></form:textarea>
-                            <form:errors path="moTa"></form:errors>
+                            <form:textarea path="moTa" class="form-control"/>
+                            <form:errors path="moTa"/>
                         </div>
                         <div class="form-group">
                             <form:label path="dungLuongPin"><b>Dung Lượng:</b></form:label>
                             <form:select path="dungLuongPin" items="${dungLuongPin}" class="form-control"
                                          itemLabel="thongSo"
-                                         itemValue="id"></form:select>
+                                         itemValue="id"/>
                         </div>
                         <div style="text-align: center">
                             <button type="submit" class="btn btn-primary mr-2"

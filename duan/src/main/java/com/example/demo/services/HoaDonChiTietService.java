@@ -28,7 +28,9 @@ public interface HoaDonChiTietService {
 
     public Boolean delete(UUID id);
 
-    public Page<HoaDonChiTiet> search(String ten, Pageable pageable);
+    void updateTinhTrangDelete(UUID id);
+
+    public List<HoaDonChiTiet> search(UUID id,String ten);
 
     Page<HoaDonChiTiet> getHoaDonChiTietPage(UUID id, Pageable pageable);
 

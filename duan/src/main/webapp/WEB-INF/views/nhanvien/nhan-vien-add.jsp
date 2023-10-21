@@ -39,29 +39,24 @@
     </style>
 </head>
 <body>
-<div class="main" style="border: 2px solid black; border-radius: 1.8% 0% 0% 0%">
+<div class="main">
     <div>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
             <li class="nav-item">
-                <a href="/nhan-vien/hien-thi" class="btn btn-danger btn-icon-text"
-                   tabindex="-1"
-                   role="button">
-                    <i class="ti-reload btn-icon-prepend"></i>
-                    Trang thông tin nhân viên</a>
+                <a class="nav-link" href="/nhan-vien/hien-thi" role="tab">Trang thông tin nhân viên</a>
             </li>
-            <li class="nav-item" style="border-radius: 2%">
+            <li class="nav-item" >
                 <a class="nav-link" role="tab">Thêm nhân viên</a>
             </li>
         </ul>
     </div>
     <br>
-    <div class="container">
-
+    <div>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
         <div class="col-12 grid-margin">
             <div class="card">
                 <div class="card-body">
-                    <%--                        <h4 class="card-title">Thêm nhân viên</h4>--%>
-                    <%--                        <form class="form-sample">--%>
                     <form:form action="/nhan-vien/add" method="post" modelAttribute="nhanVien"
                                enctype="multipart/form-data">
                         <div class="row">
@@ -115,26 +110,17 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <form:hidden path="matKhau" />
-                                    <div class="col-sm-9 password-container">
-
-
+                                    <label class="col-sm-3 col-form-label">SĐT:
+                                        <form:errors path="sdt" cssStyle="color: red"></form:errors>
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <form:input class="form-control" placeholder="" path="sdt"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">SĐT:
-                                        <form:errors path="sdt" cssStyle="color: red"></form:errors>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <form:input class="form-control" placeholder="" path="sdt"></form:input>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Ngày sinh:
@@ -143,24 +129,23 @@
                                     <div class="col-sm-9">
                                         <form:input class="form-control" type="date"
                                                     placeholder="" id="check"
-                                                    path="ngaySinh"></form:input>
-
+                                                    path="ngaySinh"/>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">CCCD:
                                         <form:errors path="canCuoc" cssStyle="color: red"></form:errors>
                                     </label>
                                     <div class="col-sm-9">
-                                        <form:input class="form-control" placeholder="" path="canCuoc"></form:input>
+                                        <form:input class="form-control" placeholder="" path="canCuoc"/>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Giới tính:</label>
@@ -171,9 +156,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Quê quán:
@@ -181,10 +163,13 @@
 
                                     </label>
                                     <div class="col-sm-9">
-                                        <form:input class="form-control" placeholder="" path="queQuan"></form:input>
+                                        <form:input class="form-control" placeholder="" path="queQuan"/>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Lương:</label>
@@ -194,24 +179,23 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Chức vụ:</label>
-                                    <div class="col-sm-6" style="margin-top: 0.4cm; font-size: 20px">
-                                        <form:select path="chucVu">
-                                            <form:options items="${listChucVu}" itemValue="id" itemLabel="ten"/>
-                                        </form:select>
-                                    </div>
-
-                                    <div class="col-sm-3" style="margin-top: 15px">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#exampleModal">
-                                            <img src="../uploads/plus.png"></src>
-
-                                        </button>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-11">
+                                            <form:select path="chucVu" class="form-control" id="selectSanPham"
+                                                         cssStyle="font-weight: bold; width: 100%">
+                                                <option selected disabled>Chức vụ</option>
+                                                <form:options items="${listChucVu}" itemValue="id" itemLabel="ten"/>
+                                            </form:select>
+                                            <form:errors path="chucVu"/>
+                                        </div>
+                                        <div class="col-1">
+                                            <a type="button" data-bs-toggle="modal"
+                                               data-bs-target="#exampleModal">
+                                                <img src="../uploads/plus.png">
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -233,21 +217,17 @@
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Chức vụ</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                 </div>
                 <form:form action="/nhan-vien/modal-add-chuc-vu" method="post" modelAttribute="chucVu"
                            onsubmit="return checkCV()">
                     <div class="modal-body">
-
                         <div class="form-group">
                             <form:label path="ten"><b>Tên:</b></form:label>
-                            <form:input path="ten" class="form-control" id="tenCV"></form:input>
+                            <form:input path="ten" class="form-control" id="tenCV"/>
                             <form:errors path="ten" id="tenCV1" cssStyle="color: red"></form:errors>
                             <div id="error-message" class="alert alert-danger" style="display: none;"></div>
                             <label style="color: red; font-size: 15px">Chú ý: nhập tên chức vụ(>6 kí tự), sau đó
@@ -291,6 +271,7 @@
         $('#chucVuModal').modal('show');
     });
     </c:if>
+
     function checkCV() {
         var tenCV = document.getElementById("tenCV").value;
         var tenCVError = document.getElementById("tenCV1");
@@ -311,6 +292,7 @@
             return true;
         }
     }
+
     function selectImage() {
         imageInput.click(); // Khi khung tròn được nhấp vào, kích hoạt sự kiện click của input file
     }
@@ -372,5 +354,5 @@
     };
 
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </html>

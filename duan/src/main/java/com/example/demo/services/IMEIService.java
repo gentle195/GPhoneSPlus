@@ -16,6 +16,7 @@ public interface IMEIService {
     public List<IMEI> searchOn(String imei);
 
     public List<IMEI> searchOff(String imei);
+
     public List<IMEI> searchOff2(String imei);
 
     public List<IMEI> findAll();
@@ -37,6 +38,8 @@ public interface IMEIService {
     public Boolean delete(UUID id);
 
     public void updatImei(Date date, UUID id);
+
+    public void updatImeiChoXuLy(Date date, UUID id);
 
     public void updatImei1(Date date, UUID id);
 

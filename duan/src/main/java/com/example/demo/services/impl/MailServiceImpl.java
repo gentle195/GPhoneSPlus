@@ -20,6 +20,7 @@ public class MailServiceImpl implements MailerService {
     @Autowired
     JavaMailSender sender;
     List<MailInfo> list = new ArrayList<>();
+
     @Override
     public void send(MailInfo mail) throws MessagingException {
         MimeMessage message = sender.createMimeMessage();
@@ -31,16 +32,16 @@ public class MailServiceImpl implements MailerService {
         helper.setText(mail.getBody(), true);
         helper.setReplyTo(mail.getFrom());
         String[] cc = mail.getCc();
-        if(cc != null && cc.length > 0) {
+        if (cc != null && cc.length > 0) {
             helper.setCc(cc);
         }
         String[] bcc = mail.getBcc();
-        if(bcc != null && bcc.length > 0) {
+        if (bcc != null && bcc.length > 0) {
             helper.setBcc(bcc);
         }
         String[] attachments = mail.getAttachments();
-        if(attachments != null && attachments.length > 0) {
-            for(String path: attachments) {
+        if (attachments != null && attachments.length > 0) {
+            for (String path : attachments) {
                 File file = new File(path);
                 helper.addAttachment(file.getName(), file);
             }
@@ -50,7 +51,6 @@ public class MailServiceImpl implements MailerService {
     }
 
 
-
     @Override
     public void send(String to, String subject, String body) throws MessagingException {
         // TODO Auto-generated method stub
@@ -58,13 +58,11 @@ public class MailServiceImpl implements MailerService {
     }
 
 
-
     @Override
     public void queue(MailInfo mail) {
         // TODO Auto-generated method stub
         list.add(mail);
     }
-
 
 
     @Override
@@ -76,7 +74,7 @@ public class MailServiceImpl implements MailerService {
     /* MailInfo từ hàng đợi và gửi đi (5 giây sẽ kiểm tra và gửi một lần) */
     @Scheduled(fixedDelay = 5000)
     public void run() {
-        while(!list.isEmpty()) {
+        while (!list.isEmpty()) {
             MailInfo mail = list.remove(0);
             try {
                 this.send(mail);

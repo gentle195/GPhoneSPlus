@@ -112,6 +112,11 @@ public class IMEIServiceImpl implements IMEIService {
     }
 
     @Override
+    public void updatImeiChoXuLy(Date date, UUID id) {
+        imeiRepository.updateImeiChoXuLy(date, id);
+    }
+
+    @Override
     public void updatImei1(Date date, UUID id) {
         imeiRepository.updateImei1(date, id);
     }

@@ -429,6 +429,25 @@ public class KhachHangController {
         }
         khachHang.setAnh(fileName);
         khachHangService.add(khachHang);
+        //      them gh
+        khachHangService.findAll();
+        String mghkh="";
+        Integer slgh = gioHangService.findAll().size();
+        if(slgh<10){
+            mghkh = "MGH0" + slgh;
+        }else {
+            mghkh = "MGH" + slgh;
+        }
+        GioHang ghkh=new GioHang();
+        ghkh.setMa(mghkh);
+        for (KhachHang kh11: khachHangService.findAll()){
+            if(kh11.getMa().equals(mhd)){
+                ghkh.setKhachHang(kh11);
+                break;
+            }
+        }
+        gioHangService.add(ghkh);
+// het them gh
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<KhachHang> list = khachHangService.getALL0(pageable);

@@ -14,13 +14,14 @@ import java.util.UUID;
 @Repository
 public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
 
-    @Query(value = "select count(h) from HoaDon h where  h.tinhTrang = 1")
+    @Query(value = "select count(h) from HoaDon h where  h.tinhTrang = 2")
     int countHD();
 
-    @Query(value = "select avg (h.tongTien) from HoaDon h  where h.tinhTrang = 1")
+    @Query(value = "select avg (h.tongTien) from HoaDon h  where h.tinhTrang = 2")
     int avgHD();
 
-    @Query(value = "SELECT SUM(tong_tien) AS doanh_thu, MONTH(ngay_thanh_toan) AS thang FROM hoa_don WHERE YEAR(ngay_thanh_toan) = ? GROUP BY thang", nativeQuery = true)
+    @Query(value = "SELECT SUM(tong_tien) AS doanh_thu, MONTH(ngay_thanh_toan) AS thang FROM " +
+            "hoa_don WHERE YEAR(ngay_thanh_toan) = ? GROUP BY thang", nativeQuery = true)
     List<DoanhThuTheoThang> getDoanhThusInYear(int year);
 
 //    @Query("select hd from HoaDon hd where hd.ngayTao <= :endDate and hd.ngayTao >= :startDate")

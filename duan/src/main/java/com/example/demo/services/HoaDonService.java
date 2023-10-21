@@ -3,6 +3,7 @@ package com.example.demo.services;
 import com.example.demo.models.HoaDon;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
@@ -13,6 +14,10 @@ import java.util.UUID;
 
 public interface HoaDonService {
     public Page<HoaDon> getAll(Pageable pageable);
+
+    List<HoaDon> donHang();
+
+    List<HoaDon> hoaDon();
 
     public List<HoaDon> findAll();
 
@@ -38,13 +43,27 @@ public interface HoaDonService {
                              Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate
     );
 
+    public List<HoaDon> locDonHang(UUID idKH, UUID idNV, UUID idDC, Integer trangThai,
+                                   Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate
+    );
+
+    List<HoaDon> searchDonHang(String ten);
+
     public List<HoaDon> findAllByCreatedAtAfter(java.util.Date startDate);
 
     public List<HoaDon> findAllByNgayNhan(java.util.Date startDate);
 
     public List<HoaDon> findAllByNgayShip(java.util.Date startDate);
 
+    List<HoaDon> findDonHangByCreatedAtAfter(@Param("startDate") java.util.Date startDate);
+
+    List<HoaDon> findDonHangByNgayNhan(@Param("startDate") java.util.Date startDate);
+
+    List<HoaDon> findDonHangByNgayShip(@Param("startDate") java.util.Date startDate);
+
     ResponseEntity<byte[]> generatePdfDonTaiQuay(UUID hoaDonId);
+
+    ResponseEntity<byte[]> generatePdfDonOnline(UUID hoaDonId);
 }
 
 
