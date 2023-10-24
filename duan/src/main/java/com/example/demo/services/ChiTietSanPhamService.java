@@ -43,6 +43,20 @@ public interface ChiTietSanPhamService {
 
     List<ChiTietSanPham> finAllTTOff();
 
+    List<ChiTietSanPham> findAllHang(UUID id);
+
+    List<ChiTietSanPham> findAllMan(UUID id);
+
+    List<ChiTietSanPham> findAllChip(UUID id);
+
+    List<ChiTietSanPham> findAllRam(UUID id);
+
+    List<ChiTietSanPham> findAllRom(UUID id);
+
+    List<ChiTietSanPham> findAllPin(UUID id);
+
+    List<ChiTietSanPham> findAllCam(UUID id);
+
 }
 
 

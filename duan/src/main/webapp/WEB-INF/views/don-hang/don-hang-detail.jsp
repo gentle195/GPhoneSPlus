@@ -229,17 +229,6 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Quy đổi:
-                                                    </label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" id="quyDoiInput"
-                                                               name="quyDoi"
-                                                               value="${donHang.quyDoi.soTienQuyDoi}" readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Địa chỉ:</label>
                                                     <div class="col-sm-9">
                                                         <input type="text" class="form-control" id="diaChiInput"
@@ -247,6 +236,18 @@
                                                                value="${donHang.diaChi.diaChi}" readonly>
                                                     </div>
 
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Hình thức TT:
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <form:input class="form-control" placeholder="" readonly="true"
+                                                                    path="hinhThucThanhToan"
+                                                                    value="${donHang.hinhThucThanhToan == 0 ? 'Tiền mặt' : 'Chuyển khoản'}"
+                                                        />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

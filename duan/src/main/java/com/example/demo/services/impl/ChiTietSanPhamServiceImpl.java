@@ -119,5 +119,40 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
         return chiTietSanPhamRepository.getChiTietSanPhamOff();
     }
 
+    @Override
+    public List<ChiTietSanPham> findAllHang(UUID id) {
+        return chiTietSanPhamRepository.findAllHang(id);
+    }
+
+    @Override
+    public List<ChiTietSanPham> findAllMan(UUID id) {
+        return chiTietSanPhamRepository.findAllMan(id);
+    }
+
+    @Override
+    public List<ChiTietSanPham> findAllChip(UUID id) {
+        return chiTietSanPhamRepository.findAllChip(id);
+    }
+
+    @Override
+    public List<ChiTietSanPham> findAllRam(UUID id) {
+        return chiTietSanPhamRepository.findAllRam(id);
+    }
+
+    @Override
+    public List<ChiTietSanPham> findAllRom(UUID id) {
+        return chiTietSanPhamRepository.findAllRom(id);
+    }
+
+    @Override
+    public List<ChiTietSanPham> findAllPin(UUID id) {
+        return chiTietSanPhamRepository.findAllPin(id);
+    }
+
+    @Override
+    public List<ChiTietSanPham> findAllCam(UUID id) {
+        return chiTietSanPhamRepository.findAllCam(id);
+    }
+
 
 }

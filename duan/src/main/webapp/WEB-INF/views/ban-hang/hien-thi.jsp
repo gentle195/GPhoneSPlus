@@ -12,17 +12,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
 </head>
 <body>
-<div class="col-lg-6">
-    <div class="ban-hang">
-        <video
-                style="border: 1px solid"
-                id="video"
-                autoplay="true"
-                width="200px"
-                height="120px"
-        ></video>
-    </div>
-</div>
 <section style="text-align: center">
     <div class="row outer-border border border-secondary" style="height: 47px; background-color: #f5f5f5">
         <div class="col-1">
@@ -53,6 +42,15 @@
     </div>
     <br>
     <c:if test="${HoaDon!=null}">
+        <div class="ban-hang" style="align-items: center">
+            <video
+                    style="border: 1px solid"
+                    id="video"
+                    autoplay="true"
+                    width="200px"
+                    height="120px"
+            ></video>
+        </div>
         <div class="row">
             <div class="col-12">
                 <a href="/ban-hang/modal-san-pham"
@@ -71,15 +69,16 @@
                         <div class="col-8"><strong
                                 style="float: right;color:red;margin-top: 10px">${thongBaoHoaDonChiTiet}</strong></div>
                         <div class="col-4">
-                            <form action="/ban-hang/search-hoa-don-chi-tiet" method="post">
-                                <div class="input-group" style="width: 100%; float: right">
-                                    <input type="text" class="form-control" placeholder="Bạn tìm gì..."
-                                           aria-label="Bạn tìm gì..." name="search-hoa-don-chi-tiet">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-sm btn-primary" type="submit">Search</button>
-                                    </div>
+                            <div class="input-group" style="width: 100%; float: right">
+                                <input type="text" class="form-control" placeholder="Bạn tìm gì..."
+                                       aria-label="Bạn tìm gì..." name="search-hoa-don-chi-tiet"
+                                       id="search-hoa-don-chi-tiet">
+                                <div class="input-group-append">
+                                    <button class="btn btn-sm btn-primary" type="button"
+                                            id="button-search-hoa-don-chi-tiet">Search
+                                    </button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
 
@@ -100,7 +99,7 @@
                                 <th></th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="table-search-hoa-don-chi-tiet">
                             <c:forEach items="${listHoaDonChiTiet}" var="hdct" varStatus="i">
                                 <tr>
                                     <td>${hdct.imei.chiTietSanPham.sanPham.ten}</td>
@@ -1022,7 +1021,47 @@
 
     loadSelect2();
 </script>
-
+<script>
+    $('button[id^="button-search-hoa-don-chi-tiet"]').on('click', async function (e) {
+        const btn = $(this);
+        const search = $("#search-hoa-don-chi-tiet").val();
+        const url = "http://localhost:8080/ban-hang/search-hoa-don-chi-tiet?search-hoa-don-chi-tiet=" + search;
+        try {
+            const resp = await fetch(url);
+            const data = await resp.json();
+            console.log(data)
+            // Hiển thị dữ liệu tìm kiếm
+            let html = ``;
+            for (let i = 0; i < data.length; i++) {
+                const hdct = data[i];
+                const tr = `
+            <tr>
+                <td>` + hdct.imei.chiTietSanPham.sanPham.ten + `</td>
+                <td align="center"><img src="/uploads/` + hdct.imei.chiTietSanPham.urlAnh + `" width="40" height="40"></td>
+                <td>` + hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten + `</td>
+                <td>` + hdct.imei.chiTietSanPham.mauSac.ten + `</td>
+                <td>` + hdct.imei.chiTietSanPham.ram.dungLuong + `</td>
+                <td>` + hdct.imei.chiTietSanPham.rom.dungLuong + `</td>
+                <td>` + hdct.imei.soImei + `</td>
+                <td>` + hdct.donGia + `</td>
+                <td>` + hdct.donGia + `</td>
+                <td>` + hdct.donGia * hdct.soLuong + `</td>
+                <td>
+                    <button class="btn btn-warning btn-icon-text"><a
+                    href="/ban-hang/delete-hoa-don-chi-tiet/` + hdct.id + `
+                    style="text-decoration: none">Xóa sản phẩm</a>
+                    </button>
+                </td>
+            </tr>
+            `;
+                html += tr;
+            }
+            $("#table-search-hoa-don-chi-tiet").html(html);
+        } catch (err) {
+            console.error(err)
+        }
+    });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>

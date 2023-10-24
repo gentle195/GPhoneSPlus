@@ -39,7 +39,7 @@ public class KhachHang {
     private Boolean gioiTinh;
 
 
-//    @Pattern(regexp = "^.{8,}@gmail\\.com$", message = "8 ký tự +@gmail.com")
+    //    @Pattern(regexp = "^.{8,}@gmail\\.com$", message = "8 ký tự +@gmail.com")
     @NotBlank(message = "Không để trống thông tin")
     @Column(name = "email")
     private String email;
@@ -57,7 +57,7 @@ public class KhachHang {
     @Column(name = "tai_khoan")
     private String taiKhoan;
 
-//    @NotBlank(message = "Không để trống thông tin")
+    //    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mat_khau")
     private String matKhau;
 
@@ -67,7 +67,6 @@ public class KhachHang {
 
     @Column(name = "ngay_cap_nhat")
     private Date ngayCapNhat;
-
 
 
     @Column(name = "tinh_trang")
@@ -86,9 +85,9 @@ public class KhachHang {
 
     public String goitinh() {
         if (gioiTinh == true) {
-            return "nam";
+            return "Nam";
         }
-        return "nu";
+        return "Nữ";
     }
 
     public String tt() {
@@ -100,7 +99,7 @@ public class KhachHang {
 
     public String getKHMT() {
 
-        return ma + "-" +hoTen ;
+        return ma + "-" + hoTen;
 
     }
 
@@ -111,7 +110,7 @@ public class KhachHang {
                      Date ngayTao,
                      Date ngayCapNhat,
                      int tinhTrang) {
-        this.ma=ma;
+        this.ma = ma;
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
         this.sdt = sdt;

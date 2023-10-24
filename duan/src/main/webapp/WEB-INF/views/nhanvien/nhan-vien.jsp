@@ -76,7 +76,7 @@
                     </div>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" style="color: black">
                             <thead>
                             <tr>
                                 <th>STT</th>

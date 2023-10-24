@@ -34,42 +34,6 @@
                 <div class="card-body">
                     <h4 class="card-title">Lọc chi tiết sản phẩm
                     </h4>
-                    <div class="dropdown-wrapper">
-                        <div class="dropdown">
-                            <button type="button" class="btn btn-primary dropdown-toggle"
-                                    data-toggle="dropdown">
-                                <i class="ti-export btn-icon-prepend"></i>
-                                Chọn sản phẩm
-                            </button>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item" tabindex="-1">Tất cả sản phẩm</a>
-                                <div class="dropdown-submenu">
-                                    <a href="#" class="dropdown-item dropdown-toggle" data-toggle="dropdown">Điện thoại</a>
-                                    <div class="dropdown-menu">
-                                        <a href="#" class="dropdown-item" tabindex="-1">iPhone</a>
-                                        <a href="#" class="dropdown-item" tabindex="-1">Samsung</a>
-                                        <a href="#" class="dropdown-item" tabindex="-1">Xiaomi</a>
-                                    </div>
-                                </div>
-                                <div class="dropdown-submenu">
-                                    <a href="#" class="dropdown-item dropdown-toggle" data-toggle="dropdown">Máy tính</a>
-                                    <div class="dropdown-menu">
-                                        <a href="#" class="dropdown-item" tabindex="-1">Laptop</a>
-                                        <a href="#" class="dropdown-item" tabindex="-1">PC</a>
-                                        <a href="#" class="dropdown-item" tabindex="-1">Máy tính bảng</a>
-                                    </div>
-                                </div>
-                                <div class="dropdown-submenu">
-                                    <a href="#" class="dropdown-item dropdown-toggle" data-toggle="dropdown">Tivi</a>
-                                    <div class="dropdown-menu">
-                                        <a href="#" class="dropdown-item" tabindex="-1">Tivi LED</a>
-                                        <a href="#" class="dropdown-item" tabindex="-1">Tivi QLED</a>
-                                        <a href="#" class="dropdown-item" tabindex="-1">Tivi OLED</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <form class="forms-sample">
                         <div class="row">
                             <div class="col-md-3">
@@ -165,9 +129,12 @@
         </form>
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
+                <div class="card-header">
+                    <h3 style="color: red;font-family: 'Times New Roman';text-align: center">${thongBao}</h3>
+                </div>
                 <div class="card-body">
                     <h4 class="card-title" style="float: left">Danh sách Chi tiết sản phẩm
-                        <div class="basic-dropdown">
+                        <div class="dropdown-wrapper">
                             <div class="dropdown">
                                 <button type="button" class="btn btn-primary dropdown-toggle"
                                         data-toggle="dropdown">
@@ -177,9 +144,80 @@
                                 <div class="dropdown-menu">
                                     <a href="/chi-tiet-san-pham/export-excel" class="dropdown-item" tabindex="-1">Sản
                                         phẩm còn kinh doanh</a>
-                                    <a href="/chi-tiet-san-pham/export-excel-chi-tiet-san-pham-ngung-kinh-doanh" class="dropdown-item"
+                                    <a href="/chi-tiet-san-pham/export-excel-chi-tiet-san-pham-ngung-kinh-doanh"
+                                       class="dropdown-item"
                                        tabindex="-1">Sản phẩm ngừng kinh doanh
                                     </a>
+                                    <div class="dropdown-submenu">
+                                        <a href="#" class="dropdown-item dropdown-toggle" data-toggle="dropdown">Hãng
+                                            sản phẩm</a>
+                                        <div class="dropdown-menu">
+                                            <c:forEach items="${listHang}" var="hang">
+                                                <a href="/chi-tiet-san-pham/export-excel-chi-theo-hang/${hang.id}"
+                                                   class="dropdown-item" tabindex="-1">${hang.ten}</a>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-submenu">
+                                        <a href="#" class="dropdown-item dropdown-toggle" data-toggle="dropdown">Loại
+                                            Chip</a>
+                                        <div class="dropdown-menu">
+                                            <c:forEach items="${listChip}" var="chip">
+                                                <a href="/chi-tiet-san-pham/export-excel-chi-theo-chip/${chip.id}"
+                                                   class="dropdown-item" tabindex="-1">${chip.ten}</a>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-submenu">
+                                        <a href="#" class="dropdown-item dropdown-toggle"
+                                           data-toggle="dropdown">Màn hình</a>
+                                        <div class="dropdown-menu">
+                                            <c:forEach items="${listManHinh}" var="man">
+                                                <a href="/chi-tiet-san-pham/export-excel-chi-theo-man/${man.id}"
+                                                   class="dropdown-item" tabindex="-1">${man.thongSo}</a>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-submenu">
+                                        <a href="#" class="dropdown-item dropdown-toggle"
+                                           data-toggle="dropdown">Dung lượng pin</a>
+                                        <div class="dropdown-menu">
+                                            <c:forEach items="${dungLuongPin}" var="pin">
+                                                <a href="/chi-tiet-san-pham/export-excel-chi-theo-pin/${pin.id}"
+                                                   class="dropdown-item" tabindex="-1">${pin.thongSo}</a>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-submenu">
+                                        <a href="#" class="dropdown-item dropdown-toggle"
+                                           data-toggle="dropdown">Ram</a>
+                                        <div class="dropdown-menu">
+                                            <c:forEach items="${listRam}" var="ram">
+                                                <a href="/chi-tiet-san-pham/export-excel-chi-theo-ram/${ram.id}"
+                                                   class="dropdown-item" tabindex="-1">${ram.dungLuong}</a>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-submenu">
+                                        <a href="#" class="dropdown-item dropdown-toggle"
+                                           data-toggle="dropdown">Rom</a>
+                                        <div class="dropdown-menu">
+                                            <c:forEach items="${listRom}" var="rom">
+                                                <a href="/chi-tiet-san-pham/export-excel-chi-theo-rom/${rom.id}"
+                                                   class="dropdown-item" tabindex="-1">${rom.dungLuong}</a>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-submenu">
+                                        <a href="#" class="dropdown-item dropdown-toggle"
+                                           data-toggle="dropdown">Camera</a>
+                                        <div class="dropdown-menu">
+                                            <c:forEach items="${listCamera}" var="cam">
+                                                <a href="/chi-tiet-san-pham/export-excel-chi-theo-cam/${cam.id}"
+                                                   class="dropdown-item" tabindex="-1">${cam.thongSo}</a>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -282,13 +320,13 @@
 </div>
 </body>
 <script>
-    document.querySelectorAll('.dropdown-menu').forEach(function(dropdown) {
+    document.querySelectorAll('.dropdown-menu').forEach(function (dropdown) {
         dropdown.style.display = 'none';
     });
 
     // Hiển thị/ẩn các dropdown menu con khi người dùng chọn một giá trị từ dropdown menu cha
-    document.querySelectorAll('.dropdown-toggle').forEach(function(dropdown) {
-        dropdown.addEventListener('click', function() {
+    document.querySelectorAll('.dropdown-toggle').forEach(function (dropdown) {
+        dropdown.addEventListener('click', function () {
             const dropdownMenu = dropdown.nextElementSibling;
 
             if (dropdownMenu.style.display === 'block') {

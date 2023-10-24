@@ -28,16 +28,65 @@
         <li class="nav-item">
             <a class="nav-link" href="/san-pham/view-add" role="tab">Thêm mới sản phẩm</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/san-pham/hien-thi-loc" role="tab">Lọc</a>
-        </li>
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="description" role="tabpanel"
          aria-labelledby="description-tab">
         <div class="col-lg-12 grid-margin stretch-card">
+            <form action="/san-pham/loc" method="post" onsubmit="return checkLoc()">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="forms-sample">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <select name="hang" class="form-control" style="font-weight: bold; width: 100%" id="selectHang">
+                                            <option selected disabled>Hãng</option>
+                                            <c:forEach items="${listHangSP}" var="hang" varStatus="i">
+                                                <option value="${hang.id}">${hang.ten}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <select name="camera" class="form-control" style="font-weight: bold; width: 100%" id="selectCamera">
+                                            <option selected disabled>Camera</option>
+                                            <c:forEach items="${listCamera}" var="cam" varStatus="i">
+                                                <option value="${cam.id}">${cam.thongSo}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <select name="manHinh" class="form-control" style="font-weight: bold; width: 100%" id="selectManHinh">
+                                            <option selected disabled>Màn Hình</option>
+                                            <c:forEach items="${listManHinh}" var="man" varStatus="i">
+                                                <option value="${man.id}">${man.thongSo}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="text-align: center">
+                                <button type="submit" class="btn btn-primary mr-2"
+                                        onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                    Lọc
+                                </button>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+                <%--    </div>--%>
+            </form>
             <div class="card">
+                <div class="card-header">
+                    <h3 style="color: red;font-family: 'Times New Roman';text-align: center">${thongBao}</h3>
+                </div>
                 <div class="card-body">
                     <h4 class="card-title" style="float: left">Danh sách sản phẩm
                         <div class="basic-dropdown">
@@ -69,7 +118,7 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped" style="color:black; width: 2000px ">
+                        <table class="table table-striped" style="color:black; width: 2500px ">
                             <thead>
                             <tr>
                                 <th>Mã SP</th>

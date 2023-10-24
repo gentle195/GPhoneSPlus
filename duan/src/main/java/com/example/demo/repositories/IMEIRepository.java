@@ -32,7 +32,7 @@ public interface IMEIRepository extends JpaRepository<IMEI, UUID> {
     @Query(value = "SELECT id FROM IMEI WHERE so_imei =:imei", nativeQuery = true)
     String searchSoImei2(@Param("imei") String imei);
 
-    @Query(value = "SELECT * FROM IMEI WHERE so_imei =:imei", nativeQuery = true)
+    @Query(value = "SELECT * FROM IMEI WHERE so_imei =:imei and tinh_trang=0", nativeQuery = true)
     IMEI searchSoImei(@Param("imei") String imei);
 
     @Transactional
@@ -71,4 +71,10 @@ public interface IMEIRepository extends JpaRepository<IMEI, UUID> {
 
     @Query("select imei from  IMEI imei where imei.tinhTrang=2 ")
     List<IMEI> findAll3();
+
+    @Query("select imei from  IMEI imei where imei.chiTietSanPham.sanPham.id=:id and imei.tinhTrang=0")
+    List<IMEI> statusSanPham(UUID id);
+
+    @Query("select imei from  IMEI imei where imei.tinhTrang=0 and imei.chiTietSanPham.id=:id ")
+    List<IMEI> statusCTSP(UUID id);
 }

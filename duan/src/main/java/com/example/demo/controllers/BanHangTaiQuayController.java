@@ -159,11 +159,6 @@ public class BanHangTaiQuayController {
         model.addAttribute("HoaDon", hoaDonnn);
         List<HoaDon> list = hoaDonService.find();
         model.addAttribute("listHoaDon", list);
-//        Pageable pageable = PageRequest.of(num.orElse(0), size);
-//        Page<HoaDonChiTiet> listHDCT = hoaDonChiTietService.getHoaDonChiTietPage(pageable, idHoaDon); // Truyền tham số idHoaDon cho phương thức getHoaDonChiTietPage()
-//        model.addAttribute("listHoaDonChiTiet", listHDCT.getContent());
-//        model.addAttribute("total", listHDCT.getTotalPages());
-
         List<HoaDonChiTiet> listHDCT = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
         model.addAttribute("listHoaDonChiTiet", listHDCT);
         model.addAttribute("idHoaDon", String.valueOf(id));
@@ -563,78 +558,82 @@ public class BanHangTaiQuayController {
         BigDecimal total = BigDecimal.ZERO;
 
         IMEI imei = imeiService.searchSoImei(id);
-        HoaDonChiTiet hdct = new HoaDonChiTiet();
-        hdct.setImei(imei);
-        hdct.setHoaDon(hoaDonnn);
-        hdct.setTinhTrang(0);
-        hdct.setDonGia(imei.getChiTietSanPham().getGiaBan());
-        hdct.setSoLuong(1);
-        hoaDonChiTietService.add(hdct);
-        ChiTietSanPham ct = chiTietSanPhamService.getChiTiet(imei.getId());
-        ct.setSoLuong(ct.getSoLuong() - 1);
-        long millis = System.currentTimeMillis();
-        Date date = new Date(millis);
-        ct.setNgayTao(date);
-        imeiService.updatImeiChoXuLy(date, imei.getId());
-        if (ct.getSoLuong() == 0) {
-            ct.setTinhTrang(1);
-            chiTietSanPhamService.update1(ct);
-            List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId());
-            for (HoaDonChiTiet hd : list
-            ) {
-                total = total.add(hd.getDonGia());
-                hoaDonnn.setTongTien(total);
-            }
-            hoaDonService.update(hoaDonnn.getId(), hoaDonnn);
-            System.out.println(total);
-            model.addAttribute("tong", String.valueOf(total));
-            model.addAttribute("listHoaDonChiTiet", list);
-            List<HoaDon> listHD = hoaDonService.find();
-            model.addAttribute("listHoaDon", listHD);
-            model.addAttribute("HoaDon", hoaDonnn);
-            model.addAttribute("listHang", hangSanPhamService.findAll0());
-            model.addAttribute("listMauSac", mauSacService.findAll0());
-            model.addAttribute("listChip", chipService.findAll0());
-            model.addAttribute("listRam", ramService.findAll0());
-            model.addAttribute("listRom", romService.findAll0());
-            model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
-            model.addAttribute("listManHinh", manHinhService.findAll0());
-            model.addAttribute("listCamera", cameraService.findAll0());
-            model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
-//            model.addAttribute("listNhanVien", nhanVienService.findAll());
-            model.addAttribute("listKhachHang", khachHangService.findAll0());
-            model.addAttribute("listDiaChi", diaChiService.findAll0());
-            model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
+        if (imei == null) {
             return "redirect:/ban-hang/thong-tin-hoa-don/" + idHoaDon;
         } else {
-            chiTietSanPhamService.update1(ct);
-            List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId());
-            for (HoaDonChiTiet hd : list
-            ) {
-                total = total.add(hd.getDonGia());
-                hoaDonnn.setTongTien(total);
-            }
-            hoaDonService.update(hoaDonnn.getId(), hoaDonnn);
-            System.out.println(total);
-            model.addAttribute("tong", String.valueOf(total));
-            model.addAttribute("listHoaDonChiTiet", list);
-            List<HoaDon> listHD = hoaDonService.find();
-            model.addAttribute("listHoaDon", listHD);
-            model.addAttribute("HoaDon", hoaDonnn);
-            model.addAttribute("listHang", hangSanPhamService.findAll0());
-            model.addAttribute("listMauSac", mauSacService.findAll0());
-            model.addAttribute("listChip", chipService.findAll0());
-            model.addAttribute("listRam", ramService.findAll0());
-            model.addAttribute("listRom", romService.findAll0());
-            model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
-            model.addAttribute("listManHinh", manHinhService.findAll0());
-            model.addAttribute("listCamera", cameraService.findAll0());
-            model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
+            HoaDonChiTiet hdct = new HoaDonChiTiet();
+            hdct.setImei(imei);
+            hdct.setHoaDon(hoaDonnn);
+            hdct.setTinhTrang(0);
+            hdct.setDonGia(imei.getChiTietSanPham().getGiaBan());
+            hdct.setSoLuong(1);
+            hoaDonChiTietService.add(hdct);
+            ChiTietSanPham ct = chiTietSanPhamService.getChiTiet(imei.getId());
+            ct.setSoLuong(ct.getSoLuong() - 1);
+            long millis = System.currentTimeMillis();
+            Date date = new Date(millis);
+            ct.setNgayTao(date);
+            imeiService.updatImeiChoXuLy(date, imei.getId());
+            if (ct.getSoLuong() == 0) {
+                ct.setTinhTrang(1);
+                chiTietSanPhamService.update1(ct);
+                List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId());
+                for (HoaDonChiTiet hd : list
+                ) {
+                    total = total.add(hd.getDonGia());
+                    hoaDonnn.setTongTien(total);
+                }
+                hoaDonService.update(hoaDonnn.getId(), hoaDonnn);
+                System.out.println(total);
+                model.addAttribute("tong", String.valueOf(total));
+                model.addAttribute("listHoaDonChiTiet", list);
+                List<HoaDon> listHD = hoaDonService.find();
+                model.addAttribute("listHoaDon", listHD);
+                model.addAttribute("HoaDon", hoaDonnn);
+                model.addAttribute("listHang", hangSanPhamService.findAll0());
+                model.addAttribute("listMauSac", mauSacService.findAll0());
+                model.addAttribute("listChip", chipService.findAll0());
+                model.addAttribute("listRam", ramService.findAll0());
+                model.addAttribute("listRom", romService.findAll0());
+                model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+                model.addAttribute("listManHinh", manHinhService.findAll0());
+                model.addAttribute("listCamera", cameraService.findAll0());
+                model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
 //            model.addAttribute("listNhanVien", nhanVienService.findAll());
-            model.addAttribute("listKhachHang", khachHangService.findAll0());
-            model.addAttribute("listDiaChi", diaChiService.findAll0());
-            model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
-            return "redirect:/ban-hang/thong-tin-hoa-don/" + idHoaDon;
+                model.addAttribute("listKhachHang", khachHangService.findAll0());
+                model.addAttribute("listDiaChi", diaChiService.findAll0());
+                model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
+                return "redirect:/ban-hang/thong-tin-hoa-don/" + idHoaDon;
+            } else {
+                chiTietSanPhamService.update1(ct);
+                List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId());
+                for (HoaDonChiTiet hd : list
+                ) {
+                    total = total.add(hd.getDonGia());
+                    hoaDonnn.setTongTien(total);
+                }
+                hoaDonService.update(hoaDonnn.getId(), hoaDonnn);
+                System.out.println(total);
+                model.addAttribute("tong", String.valueOf(total));
+                model.addAttribute("listHoaDonChiTiet", list);
+                List<HoaDon> listHD = hoaDonService.find();
+                model.addAttribute("listHoaDon", listHD);
+                model.addAttribute("HoaDon", hoaDonnn);
+                model.addAttribute("listHang", hangSanPhamService.findAll0());
+                model.addAttribute("listMauSac", mauSacService.findAll0());
+                model.addAttribute("listChip", chipService.findAll0());
+                model.addAttribute("listRam", ramService.findAll0());
+                model.addAttribute("listRom", romService.findAll0());
+                model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+                model.addAttribute("listManHinh", manHinhService.findAll0());
+                model.addAttribute("listCamera", cameraService.findAll0());
+                model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
+//            model.addAttribute("listNhanVien", nhanVienService.findAll());
+                model.addAttribute("listKhachHang", khachHangService.findAll0());
+                model.addAttribute("listDiaChi", diaChiService.findAll0());
+                model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
+                return "redirect:/ban-hang/thong-tin-hoa-don/" + idHoaDon;
+            }
         }
     }
 
@@ -691,4 +690,16 @@ public class BanHangTaiQuayController {
 
         return password.toString();
     }
+
+    @ResponseBody
+    @GetMapping("/search-hoa-don-chi-tiet")
+    public List<HoaDonChiTiet> searchHoaDonChiTiet(Model model,@RequestParam("search-hoa-don-chi-tiet") String search,
+                                                   @ModelAttribute("HoaDon") HoaDon hoaDon, @ModelAttribute("modalAddKhachHang") KhachHang khachHang){
+        List<HoaDonChiTiet> listHoaDonChiTiets = hoaDonChiTietService.searchHDCTBanHangTaiQuay(idHoaDon,search);
+        model.addAttribute("HoaDon", hoaDonnn);
+        List<HoaDon> list = hoaDonService.find();
+        model.addAttribute("listHoaDon", list);
+        return listHoaDonChiTiets;
+    }
+
 }

@@ -54,6 +54,10 @@ public interface IMEIService {
     List<IMEI> findAll3();
 
     public void khoiPhuc(UUID uuid);
+
+    List<IMEI> statusSanPham(UUID id);
+
+    List<IMEI> statusCTSP(UUID id);
 }
 
 
