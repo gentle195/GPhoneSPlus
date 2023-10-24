@@ -364,6 +364,8 @@ public class HoaDonServiceImpl implements HoaDonService {
             htmlContentBuilder.append("<p>Ngày mua: ").append(dateFormat.format(hoaDon.getNgayThanhToan())).append("</p>");
             htmlContentBuilder.append("<p>Khách hàng: ").append(hoaDon.getKhachHang().getHoTen()).append("</p>");
             htmlContentBuilder.append("<p>Số điện thoại khách hàng: ").append(hoaDon.getSdt()).append("</p>");
+            htmlContentBuilder.append("<p>Loại hóa đơn: ").append(hoaDon.getLoai() == 0 ? "Hóa đơn tại quầy" : "Hóa đơn Online").append("</p>");
+            htmlContentBuilder.append("<p>Hình thức thanh toán: ").append(hoaDon.getHinhThucThanhToan() == 0 ? "Tiền mặt" : "Chuyển khoản").append("</p>");
             htmlContentBuilder.append("<p>Trạng thái đơn: Đã thanh toán</p>");
             htmlContentBuilder.append("<p>Nhân viên bán hàng: ").append(hoaDon.getNhanVien().getHoTen()).append("</p>");
 
@@ -561,6 +563,8 @@ public class HoaDonServiceImpl implements HoaDonService {
             htmlContentBuilder.append("<p>Ngày mua: ").append(dateFormat.format(hoaDon.getNgayThanhToan())).append("</p>");
             htmlContentBuilder.append("<p>Khách hàng: ").append(hoaDon.getKhachHang().getHoTen()).append("</p>");
             htmlContentBuilder.append("<p>Số điện thoại khách hàng: ").append(hoaDon.getSdt()).append("</p>");
+            htmlContentBuilder.append("<p>Loại hóa đơn: ").append(hoaDon.getLoai() == 0 ? "Hóa đơn tại quầy" : "Hóa đơn Online").append("</p>");
+            htmlContentBuilder.append("<p>Hình thức thanh toán: ").append(hoaDon.getHinhThucThanhToan() == 0 ? "Tiền mặt" : "Chuyển khoản").append("</p>");
             htmlContentBuilder.append("<p>Trạng thái đơn: Đã thanh toán</p>");
             htmlContentBuilder.append("<p>Nhân viên bán hàng: ").append(hoaDon.getNhanVien().getHoTen()).append("</p>");
 

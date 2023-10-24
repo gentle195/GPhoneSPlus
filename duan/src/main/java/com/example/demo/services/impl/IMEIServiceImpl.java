@@ -153,4 +153,14 @@ public class IMEIServiceImpl implements IMEIService {
 
 
     }
+
+    @Override
+    public List<IMEI> statusSanPham(UUID id) {
+        return imeiRepository.statusSanPham(id);
+    }
+
+    @Override
+    public List<IMEI> statusCTSP(UUID id) {
+        return imeiRepository.statusCTSP(id);
+    }
 }

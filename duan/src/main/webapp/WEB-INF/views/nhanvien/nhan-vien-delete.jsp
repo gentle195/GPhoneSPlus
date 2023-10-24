@@ -55,7 +55,7 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" style="color: black">
                             <thead>
                             <tr>
                                 <th>STT</th>
@@ -68,7 +68,6 @@
                                 <th>Lương</th>
                                 <th>Quê quán</th>
                                 <th>Trạng thái</th>
-                                <%--                                <th>Mô tả</th>--%>
                                 <th>Action</th>
                             </tr>
                             </thead>

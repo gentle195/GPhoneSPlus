@@ -49,9 +49,8 @@
     ***********************************-->
     <div class="nav-header">
         <a href="index.html" class="brand-logo">
-            <img class="logo-abbr" src="../../../images/logo.png" alt="">
-            <img class="logo-compact" src="../../../images/logo-text.png" alt="">
-            <img class="brand-title" src="../../../images/logo-text.png" alt="">
+            <img class="logo-abbr" src="../../uploads/ti.jpg" alt="">
+            <h3 style="color: white; margin: 25px;font-family: Tahoma">GPhoneS</h3>
         </a>
 
         <div class="nav-control">
@@ -181,12 +180,12 @@
     <div class="quixnav">
         <div class="quixnav-scroll">
             <ul class="metismenu" id="menu">
-                <li class="nav-label first">Main Menu</li>
+                <li class="nav-label first">Trang chủ   </li>
 
                 <li><a href="/home" aria-expanded="false">
                     <i class="icon icon-single-04"></i>Trang chủ</a>
                 </li>
-                <li class="nav-label">Apps</li>
+                <li class="nav-label">Bán Hàng</li>
                 <li><a href="/ban-hang/hien-thi" aria-expanded="false"><i
                         class="icon icon-app-store"></i>Bán hàng</a>
                 </li>

@@ -64,7 +64,7 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             "and (:idDLPin is null or dungLuong.id=: idDLPin) " +
             "and (:idChip is null or chip.id=: idChip) " +
             "and (:moTaMan is null or manHinh.id =:moTaMan) " +
-            "and (:moTaCam is null or cam.id =:moTaCam) "+
+            "and (:moTaCam is null or cam.id =:moTaCam) " +
             "and (:giaBanMin is null and :giaBanMax is null " +
             "or ct.giaBan between :giaBanMin and ct.giaBan or ct.giaBan between 0 and :giaBanMax or ct.giaBan between :giaBanMin and :giaBanMax))"
     )
@@ -88,8 +88,24 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
     @Query("select ctsp from  ChiTietSanPham ctsp where ctsp.tinhTrang=0 ")
     List<ChiTietSanPham> findAll0();
 
+    @Query("select ctsp from  ChiTietSanPham ctsp where ctsp.tinhTrang=0 and ctsp.sanPham.hangSanPham.id=:id")
+    List<ChiTietSanPham> findAllHang(UUID id);
 
+    @Query("select ctsp from  ChiTietSanPham ctsp where ctsp.tinhTrang=0 and ctsp.sanPham.manHinh.id=:id")
+    List<ChiTietSanPham> findAllMan(UUID id);
 
+    @Query("select ctsp from  ChiTietSanPham ctsp where ctsp.tinhTrang=0 and ctsp.chip.id=:id")
+    List<ChiTietSanPham> findAllChip(UUID id);
 
+    @Query("select ctsp from  ChiTietSanPham ctsp where ctsp.tinhTrang=0 and ctsp.pin.dungLuongPin.id=:id")
+    List<ChiTietSanPham> findAllPin(UUID id);
 
+    @Query("select ctsp from  ChiTietSanPham ctsp where ctsp.tinhTrang=0 and ctsp.rom.id=:id")
+    List<ChiTietSanPham> findAllRom(UUID id);
+
+    @Query("select ctsp from  ChiTietSanPham ctsp where ctsp.tinhTrang=0 and ctsp.ram.id=:id")
+    List<ChiTietSanPham> findAllRam(UUID id);
+
+    @Query("select ctsp from  ChiTietSanPham ctsp where ctsp.tinhTrang=0 and ctsp.sanPham.camera.id=:id")
+    List<ChiTietSanPham> findAllCam(UUID id);
 }

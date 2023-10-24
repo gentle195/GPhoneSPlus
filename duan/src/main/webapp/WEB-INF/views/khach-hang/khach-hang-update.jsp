@@ -13,14 +13,6 @@
 </head>
 <body>
 <div style="border: 1px solid white;">
-
-
-    <P style="font-size: 50px;text-align: center">
-        Sửa thông tin khách hàng
-    </P>
-    <br>
-
-
     <div>
         <ul class="nav nav-tabs border-top"
             id="setting-panel" role="tablist">
@@ -75,25 +67,6 @@
                         <P style="display: none">
                             <form:input path="id"></form:input>
                         </P>
-                        <%--     <div >--%>
-
-
-                        <%--            <div style="border: 5px solid whitesmoke;width: 150px;height: 150px;margin-left: 17.5cm"   >--%>
-                        <%--                <input type="file"  name="images"  accept="image/jpeg, image/png" id="anhmoi" style="width:100%;height:100%;padding-top: 2cm">--%>
-                        <%--                <img src="../../../uploads/${kh.anh}" width="100%" height="100%" style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c" id="anhcu">--%>
-                        <%--            </div>--%>
-
-                        <%--        <br>--%>
-                        <%--            <div style="border: 1px solid white;text-align: center" >--%>
-                        <%--                <label class="form-label">ẢNH</label><br>--%>
-                        <%--                <input style="" type="radio"  name="checkanh" value="cu" id="cucheck" checked>Ảnh cũ--%>
-                        <%--                <input style="margin-left: 1cm" type="radio"  name="checkanh" value="moi" id="moicheck" >Ảnh Mới--%>
-                        <%--            </div>--%>
-
-
-                        <%--     </div>--%>
-
-
                         <div style="display: none">
                             <input style="" type="text" name="checkanh" value="cu" id="cucheck">
                             <br>
@@ -113,18 +86,12 @@
                             <div style="display: none">
                                 <input type="file" name="images" accept="image/jpeg, image/png" id="anhmoi">
                             </div>
-
-
                         </div>
-
-
                         <div style="display: none">
                             <form:input path="anh"/>
                         </div>
 
-
                         <table class="table">
-
                             <thead>
                             <tr>
                                 <th>
@@ -172,7 +139,6 @@
                                     </form:label>
                                     <form:input class="form-control" placeholder="" path="sdt"/>
 
-
                                 </th>
                                 <th>
 
@@ -182,39 +148,27 @@
                                     </form:label>
                                     <form:input class="form-control" placeholder="" path="ngaySinh" type="date"
                                                 id="ns"/>
-
-
                                 </th>
                             </tr>
                             </thead>
-
-
-                            <thead>
+                            <thead hidden>
                             <tr>
-
                                 <th>
                                     <form:label class="form-label" path="taiKhoan">Tài khoản:
                                         <form:errors path="taiKhoan" cssStyle="color: red"></form:errors>
                                     </form:label>
                                     <form:input class="form-control" placeholder="" path="taiKhoan"/>
-
                                 </th>
-
-
                                 <th>
                                     <form:label class="form-label" path="matKhau">Mật khẩu:
                                         <form:errors path="matKhau" cssStyle="color: red"></form:errors>
                                     </form:label>
                                     <form:input class="form-control" placeholder="" path="matKhau"/>
-
                                 </th>
-
                             </tr>
                             </thead>
                             <thead>
                             <tr>
-
-
                                 <th>
                                     <form:label class="form-label" path="diem">Điểm:
                                         <form:errors path="diem" cssStyle="color: red"></form:errors>
@@ -239,21 +193,15 @@
                                                      path="hangKhachHang"
                                                      items="${hkh}"
                                                      itemValue="id"
-                                                     itemLabel="ten"></form:select>
+                                                     itemLabel="ten"/>
 
                                     </div>
                                 </th>
-
                             </tr>
-
                             </thead>
-
-
                             <th style="display: none">
                                 <form:input path="ngayTao" type="date"></form:input>
                             </th>
-
-
                         </table>
                         <br>
                         <div align="center">
@@ -261,10 +209,7 @@
                                 update
                             </BUTTON>
                         </div>
-
                     </form:form>
-
-
                 </div>
             </div>
         </div>
