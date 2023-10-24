@@ -2,125 +2,182 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+<style>
+    /* Ẩn input radio */
+    input[type="radio"] {
+        display: none;
+    }
+
+    /* Tạo một giao diện tùy chỉnh cho label */
+    label {
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: #e0e0e0;
+        border: 1px solid #ccc;
+        cursor: pointer;
+    }
+
+    /* Khi label được nhấp vào, thay đổi màu nền để biểu thị lựa chọn */
+    input[type="radio"]:checked + label {
+        background-color: #007bff;
+        color: #fff;
+    }
+</style>
+
 <body>
+<p id="vt"></p>
+<div style="position: absolute;margin-left: 57%;width: 43%;margin-top: 10%;z-index: 2;">
+    <p style="display: none" id="tenspctsp">${motctsp.sanPham.ten}</p>
+    Màu sắc:
+    <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
 
-
-
-<div id="demo11" class="carousel slide" data-bs-ride="false" >
-    <!-- Indicators/dots -->
-    <div class="carousel">
-        <button class="carousel-prev" type="button" data-bs-target="#demo11" data-bs-slide="prev" >
-            <<
-        </button>
-        <c:forEach begin="1" end="${lamchon1}" varStatus="trang">
-            <button type="button" data-bs-target="#demo11" data-bs-slide-to="${trang.index-1}"  >${trang.index}</button>
-        </c:forEach>
-        <button class="carousel-next" type="button" data-bs-target="#demo11" data-bs-slide="next">
-            >>
-        </button>
-    </div>
-    </button>
-
-    <!-- The slideshow/carousel -->
-    <div class="carousel-inner" >
-        <c:set var = "vitri" scope = "session" value = "${-1}"/>
-        <c:forEach begin="1" end="${lamchon1}" varStatus="trang">
-        <c:set var = "salary" scope = "session" value = "${1}"/>
-        <c:if test = "${trang.index <2}">
-        <div class="carousel-item active">
+        <c:if test="${stt1.index==0}">
+            <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
+                <input type="radio" id="ms${stt1.index}" name="mauSac1"
+                       value="${ht1.mauSac.ten}" ${ht1.mauSac.ten==motctsp.mauSac.ten ?"checked":""}
+                       onchange="clickradio();">
+                <label for="ms${stt1.index}" style="border: 1px solid #00A000">${ht1.mauSac.ten}</label>
             </c:if>
-            <c:if test = "${trang.index >=2}">
-            <div class="carousel-item ">
+        </c:if>
+
+        <c:if test="${stt1.index>0}">
+            <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
+                <c:set var="checkck" scope="session" value="${-1}"/>
+                <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="checkht1" begin="0"
+                           end="${stt1.index-1}">
+                    <c:if test="${banhangonline.soluongcon(checkht1.id)>0}">
+                        <c:if test="${ht1.mauSac.ten==checkht1.mauSac.ten}">
+                            <c:set var="checkck" scope="session" value="${0}"/>
+                        </c:if>
+                    </c:if>
+                </c:forEach>
+                <c:if test="${checkck==-1}">
+                    <input type="radio" id="ms${stt1.index}" name="mauSac1"
+                           value="${ht1.mauSac.ten}" ${ht1.mauSac.ten==motctsp.mauSac.ten ?"checked":""}
+                           onchange="clickradio();">
+                    <label for="ms${stt1.index}" style="border: 1px solid #00A000">${ht1.mauSac.ten}</label>
+
                 </c:if>
+                <c:set var="checkck" scope="session" value="${-1}"/>
+            </c:if>
+        </c:if>
 
+    </c:forEach>
+    <br>
+    <br>
+    Rom:
+    <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
 
-                <div class="container px-0 px-lg-4 mt-0">
-                    <div class="row gx-0 gx-lg-0 row-cols-0 row-cols-md-0 row-cols-xl-4 justify-content-center"  style="width: 100%">
-                        <c:forEach items="${listsp}" var="ht" varStatus="stt">
-                            <c:if test="${banhangonline.soluongcon(ht.id)>0}">
-                            <c:if test = "${stt.index > vitri }">
-                                <%--                            phân trang số 9 là 8 dữ liệu--%>
-                                <c:if test = "${salary <9}">
-                                    <!-- product -->
+        <c:if test="${stt1.index==0}">
+            <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
+                <input type="radio" id="rom${stt1.index}" name="rom1"
+                       value="${ht1.rom.dungLuong}" ${ht1.rom.dungLuong==motctsp.rom.dungLuong ?"checked":""}
+                       onchange="clickradio();">
+                <label for="rom${stt1.index}" style="border: 1px solid #00A000">${ht1.rom.dungLuong}</label>
+            </c:if>
+        </c:if>
 
-                                    <div class="product" style="margin-left: 1%;width: 24%;" >
-                                        <div class="product-img" >
-                                            <img src="../../../uploads/${ht.urlAnh}" style="width: 90%;height: 6cm;margin-left: 5%" alt="">
-                                            <div class="product-label">
-                                                <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
-                                                <span class="new">Giảm giá</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-body" style="text-align: left;word-wrap: break-word;">
-                                                <%--                    <p class="product-category">Điện thoại</p>--%>
-                                            <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
-                                            <h4 class="product-price"><span style="font-size:15px">₫</span>${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}-<del class="product-old-price">${ht.giaBan}<span style="font-size:15px">₫</span></del></h4>
-                                                <%--                                            ${ht.tinhTrang} +  ${ht.sanPham.tinhTrang}--%>
-                                            <p class="product-category">Đã bán :${banhangonline.soluongdaban(ht.id)}--Còn :${banhangonline.soluongcon(ht.id)}</p>
-                                            <div  >
-                                                *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>
-                                                *Camera:${ht.sanPham.camera.thongSo}<br>
-                                                *Màn:${ht.sanPham.manHinh.thongSo}<br>
-                                                *Màu:${ht.mauSac.ten}<br>
-                                                *Ram:${ht.ram.dungLuong}<br>
-                                                *Rom:${ht.rom.dungLuong}<br>
-                                                *Pin:${ht.pin.loaiPin}<br>
-                                                *Dung lượng pin:${ht.pin.dungLuongPin.thongSo}<br>
-                                                *Chip:${ht.chip.ten}<br>
+        <c:if test="${stt1.index>0}">
+            <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
+                <c:set var="checkck" scope="session" value="${-1}"/>
+                <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="checkht1" begin="0"
+                           end="${stt1.index-1}">
+                    <c:if test="${banhangonline.soluongcon(checkht1.id)>0}">
+                        <c:if test="${ht1.rom.dungLuong==checkht1.rom.dungLuong}">
+                            <c:set var="checkck" scope="session" value="${0}"/>
+                        </c:if>
+                    </c:if>
+                </c:forEach>
+                <c:if test="${checkck==-1}">
+                    <input type="radio" id="rom${stt1.index}" name="rom1"
+                           value="${ht1.rom.dungLuong}" ${ht1.rom.dungLuong==motctsp.rom.dungLuong ?"checked":""}
+                           onchange="clickradio();">
+                    <label for="rom${stt1.index}" style="border: 1px solid #00A000">${ht1.rom.dungLuong}</label>
+                </c:if>
+                <c:set var="checkck" scope="session" value="${-1}"/>
+            </c:if>
+        </c:if>
+    </c:forEach>
 
+    <br>
+    <br>
+    Ram:
+    <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
+        <c:if test="${stt1.index==0}">
+            <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
+                <input type="radio" id="ram${stt1.index}" name="ram1"
+                       value="${ht1.ram.dungLuong}" ${ht1.ram.dungLuong==motctsp.ram.dungLuong ?"checked":""}
+                       onchange="clickradio();">
+                <label for="ram${stt1.index}" style="border: 1px solid #00A000">${ht1.ram.dungLuong}</label>
+            </c:if>
+        </c:if>
+        <c:if test="${stt1.index>0}">
+            <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
+                <c:set var="checkck" scope="session" value="${-1}"/>
+                <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="checkht1" begin="0"
+                           end="${stt1.index-1}">
+                    <c:if test="${banhangonline.soluongcon(checkht1.id)>0}">
+                        <c:if test="${ht1.ram.dungLuong==checkht1.ram.dungLuong}">
+                            <c:set var="checkck" scope="session" value="${0}"/>
+                        </c:if>
+                    </c:if>
+                </c:forEach>
+                <c:if test="${checkck==-1}">
+                    <input type="radio" id="ram${stt1.index}" name="ram1"
+                           value="${ht1.ram.dungLuong}" ${ht1.ram.dungLuong==motctsp.ram.dungLuong ?"checked":""}
+                           onchange="clickradio();">
+                    <label for="ram${stt1.index}" style="border: 1px solid #00A000">${ht1.ram.dungLuong}</label>
+                </c:if>
+                <c:set var="checkck" scope="session" value="${-1}"/>
+            </c:if>
+        </c:if>
 
-                                            </div>
-                                            <div class="product-rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <div class="product-btns">
-                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Thêm vào danh sách yêu thích</span></button>
-                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">Thêm để so sánh</span></button>
-                                                <button class="quick-view" onclick="loadInterface('/ban-hang-online/chi-tiet-san-pham/${ht.id}')"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></button>
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
-                                        </div>
-                                    </div>
-                                    <!-- /product -->
-                                    <c:set var = "vitri" scope = "session" value = "${stt.index}"/>
-                                    <c:set var = "salary" scope = "session" value = "${salary+1}"/>
-                                </c:if>
-                            </c:if>
-                            </c:if>
-                        </c:forEach>
-                    </div>
-                </div>
-                <br><br><br><br>
-            </div>
-            </c:forEach>
-        </div>
-        <!-- Indicators/dots -->
+    </c:forEach>
 
-        <div class="carousel">
-            <button class="carousel-prev" type="button" data-bs-target="#demo11" data-bs-slide="prev" >
-                <<
-            </button>
-            <c:forEach begin="1" end="${lamchon1}" varStatus="trang">
-                <button type="button" data-bs-target="#demo11" data-bs-slide-to="${trang.index-1}"  >${trang.index}</button>
-            </c:forEach>
-            <button class="carousel-next" type="button" data-bs-target="#demo11" data-bs-slide="next">
-                >>
-            </button>
-        </div>
-    </div>
+    <br>
+    <br>
+    Chíp:
+    <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
+        <c:if test="${stt1.index==0}">
+            <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
+                <input type="radio" id="chip${stt1.index}" name="chip1"
+                       value="${ht1.chip.ten}" ${ht1.chip.ten==motctsp.chip.ten ?"checked":""} onchange="clickradio();">
+                <label for="chip${stt1.index}" style="border: 1px solid #00A000">${ht1.chip.ten}</label>
+            </c:if>
+        </c:if>
+        <c:if test="${stt1.index>0}">
+            <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
+                <c:set var="checkck" scope="session" value="${-1}"/>
+                <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="checkht1" begin="0"
+                           end="${stt1.index-1}">
+                    <c:if test="${banhangonline.soluongcon(checkht1.id)>0}">
+                        <c:if test="${ht1.chip.ten==checkht1.chip.ten}">
+                            <c:set var="checkck" scope="session" value="${0}"/>
+                        </c:if>
+                    </c:if>
+                </c:forEach>
+                <c:if test="${checkck==-1}">
+                    <input type="radio" id="chip${stt1.index}" name="chip1"
+                           value="${ht1.chip.ten}" ${ht1.chip.ten==motctsp.chip.ten ?"checked":""}
+                           onchange="clickradio();">
+                    <label for="chip${stt1.index}" style="border: 1px solid #00A000">${ht1.chip.ten}</label>
+                </c:if>
+                <c:set var="checkck" scope="session" value="${-1}"/>
+            </c:if>
+        </c:if>
+
+    </c:forEach>
+
 </div>
-</body>
 
+</body>
 </html>
+
+
