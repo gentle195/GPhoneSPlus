@@ -116,6 +116,8 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
     @Query("select kh from KhachHang kh left join HoaDon hd on kh.id=hd.khachHang.id where hd.id=:id")
     KhachHang newKhachHang(UUID id);
 
+    @Query("select kh from KhachHang  kh where kh.taiKhoan like %:username% or kh.email like %:username%")
+
     KhachHang getKhachHangByTaiKhoan(String username);
 
 }

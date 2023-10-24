@@ -49,6 +49,7 @@ public class LoginController {
                 nhanVien2 = nhanVien1;
                 service.setDataNhanVienLogin(nhanVien2);
                 System.out.println(nhanVien1.getTaiKhoan());
+                model.addAttribute("nhanVien",nhanVien2);
                 return "redirect:/home";
             }
         }
@@ -76,6 +77,8 @@ public class LoginController {
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().invalidate();
+        nhanVien2=null;
+        khachHang2=null;
         return "redirect:/login";
 
     }
