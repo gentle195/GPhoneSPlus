@@ -45,6 +45,8 @@ public interface KhachHangService {
     public List<KhachHang> khachHangThanhToan(UUID id);
 
     public KhachHang newKhachHang(UUID id);
+
+    public KhachHang quenMatKhau(String username, String email);
 }
 
 

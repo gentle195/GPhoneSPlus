@@ -68,7 +68,7 @@ public class BanHangTaiQuayController {
     @Autowired
     private BanHangOnlineService banHangOnlineService;
     @Autowired
-    MailerService mailer;
+    private MailerService mailer;
     @Autowired
     DataIntermediateService dataIntermediateService;
 
@@ -139,7 +139,7 @@ public class BanHangTaiQuayController {
         }
         NhanVien nhanVien = dataIntermediateService.getSharedDataNhanVien();
         HoaDon hd = new HoaDon();
-        hd.setMa("HD" + String.valueOf(hoaDonService.findAll().size() + 1));
+        hd.setMa("HD" + (String.valueOf(hoaDonService.findAll().size() + 1)));
         hd.setTinhTrang(0);
         hd.setLoai(0);
         hd.setNgayTao(Date.valueOf(LocalDate.now()));
@@ -544,7 +544,7 @@ public class BanHangTaiQuayController {
         khh.setMatKhau(randomPW);
         String hashedPassword = BCrypt.hashpw(randomPW, BCrypt.gensalt());
         khachHang.setMatKhau(hashedPassword);
-        khachHang.setMa("KH" + String.valueOf(khachHangService.findAll().size()) + 1);
+        khachHang.setMa("KH" + (String.valueOf(khachHangService.findAll().size()) + 1));
         khachHang.setNgayTao(Date.valueOf(LocalDate.now()));
         khachHang.setTinhTrang(0);
         khachHangService.add(khachHang);

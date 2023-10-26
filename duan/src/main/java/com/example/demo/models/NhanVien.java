@@ -90,7 +90,6 @@ public class NhanVien {
     @Column(name = "ngay_cap_nhat")
     private Date ngayCapNhat;
 
-
     @Column(name = "luong")
     private BigDecimal luong;
 

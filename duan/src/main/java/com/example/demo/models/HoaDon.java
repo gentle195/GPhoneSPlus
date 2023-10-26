@@ -69,9 +69,9 @@ public class HoaDon {
 
     @Column(name = "hinh_thuc_thanh_toan")
     private int hinhThucThanhToan;
-    
-    @Column(name = "tinh_trang_giao_hang")
-    private int tinhTrangGiaoHang;
+
+//    @Column(name = "tinh_trang_giao_hang")
+//    private int tinhTrangGiaoHang;
 
     //    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "ghi_chu")

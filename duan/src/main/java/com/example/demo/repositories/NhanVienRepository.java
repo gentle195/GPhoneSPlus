@@ -56,7 +56,7 @@ public interface NhanVienRepository extends JpaRepository<NhanVien, UUID> {
 //            "FROM     NhanVien nv INNER JOIN\n" +
 //            "                  KhachHang  kh ON nv.id = kh.id")
 //    List<NhanVien> getAllTaiKhoanMatKhau();
-    @Query("select nv from NhanVien  nv where nv.taiKhoan like %:username% or nv.email like %:username%")
+    @Query("select nv from NhanVien  nv where nv.tinhTrang=0 and (nv.taiKhoan like %:username% or nv.email like %:username%) ")
     NhanVien findByTaiKhoan(String username);
 
 }
