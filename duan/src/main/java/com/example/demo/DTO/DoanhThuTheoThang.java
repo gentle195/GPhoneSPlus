@@ -1,23 +1,17 @@
 package com.example.demo.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.math.BigDecimal;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class DoanhThuTheoThang {
+public interface DoanhThuTheoThang {
 
-    private int thang;
-    private BigDecimal doanhThu;
-
+    Integer getThang();
+    Integer getNam();
+    Integer getSoLuongSP();
+    BigDecimal getDoanhThu();
+    BigDecimal getGiaMuaMin();
+    BigDecimal getGiaMuaMax();
+    BigDecimal getDoanhThuTrungBinh();
+    String getTen();
 
 }
 
