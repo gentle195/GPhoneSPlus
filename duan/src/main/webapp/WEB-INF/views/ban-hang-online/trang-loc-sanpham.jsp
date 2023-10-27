@@ -16,19 +16,22 @@
     /*}*/
 
     .carousel-prev {
-        background-color: white; /* Màu nền nút */
-        color: black; /* Màu chữ trên nút */
-        font-size: 16px; /* Kích cỡ chữ */
-        border: none; /* Loại bỏ viền nút */
+
+
+        background-color: white;
+        color: black;
+        font-size: 16px;
+        border: none;
+
         transition: background-color 0.3s, color 0.3s;
     }
 
     .carousel-prev:hover {
-        background-color: #0056b3; /* Màu nền khi di chuột qua */
-        color: #fff; /* Màu chữ khi di chuột qua */
+        background-color: #0056b3; 
+        color: #fff;
     }
     .carousel-next {
-        background-color: white; /* Màu nền nút */
+        background-color: white;
         color: black; /* Màu chữ trên nút */
         font-size: 16px; /* Kích cỡ chữ */
         border: none; /* Loại bỏ viền nút */

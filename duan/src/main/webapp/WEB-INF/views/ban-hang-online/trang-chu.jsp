@@ -105,154 +105,6 @@
 
 <!-- HEADER -->
 <header>
-    <!-- TOP HEADER -->
-
-    <!-- /TOP HEADER -->
-
-    <!-- MAIN HEADER -->
-    <%--    <div id="header">--%>
-    <%--        <!-- container -->--%>
-    <%--        <div class="container">--%>
-    <%--            <!-- row -->--%>
-
-    <%--            <div class="row">--%>
-
-    <%--                <div class="col-md-3">--%>
-
-    <%--                    <ul class="header-links">--%>
-
-    <%--                        <li><a href="#"><i class="fa fa-envelope-o"></i> gphonespluss@gmail.com</a></li>--%>
-
-    <%--                    </ul>--%>
-    <%--                </div>--%>
-    <%--                <!-- /LOGO -->--%>
-
-    <%--                <!-- SEARCH BAR -->--%>
-    <%--                <div class="col-md-6">--%>
-    <%--                    <div class="header-search">--%>
-    <%--                        <form>--%>
-    <%--                            <input class="input bor" placeholder="Tìm kiểm tại đây">--%>
-    <%--                            <button class="search-btn">Tìm kiếm</button>--%>
-    <%--                        </form>--%>
-    <%--                    </div>--%>
-    <%--                </div>--%>
-    <%--                <!-- /SEARCH BAR -->--%>
-
-    <%--                <!-- ACCOUNT -->--%>
-    <%--                <div class="col-md-3 clearfix">--%>
-    <%--                    <div class="header-ctn">--%>
-
-
-    <%--                        <!-- Cart -->--%>
-    <%--                        <div class="dropdown">--%>
-    <%--                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">--%>
-    <%--                                <i class="fa fa-shopping-cart"></i>--%>
-    <%--                                <span>Giỏ hàng</span>--%>
-    <%--                                <div class="qty">3</div>--%>
-    <%--                            </a>--%>
-
-    <%--                        </div>--%>
-    <%--                        <!-- /Cart -->--%>
-    <%--                        <ul class="header-links pull-right">--%>
-
-    <%--                            <c:if test="${idkhachhang=='1'}">--%>
-    <%--                                <li><a href="/thong-tin-ca-nhan"><i class="fa fa-user-o"></i> Chưa đăng nhập:<input--%>
-    <%--                                        id="tkmkidkhachhang" type="text" style="display: none"--%>
-    <%--                                        value="${idkhachhang}"></a></li>--%>
-
-    <%--                            </c:if>--%>
-    <%--                            <c:if test="${idkhachhang !='1'}">--%>
-    <%--                                <li><a href="#"><i class="fa fa-user-o"></i> ${khachhangdangnhap.hoTen}<input--%>
-    <%--                                        id="tkmkidkhachhang"--%>
-    <%--                                        type="text"--%>
-    <%--                                        style="display: none"--%>
-    <%--                                        value="${idkhachhang}"></a>--%>
-    <%--                                </li>--%>
-    <%--                            </c:if>--%>
-    <%--                        </ul>--%>
-    <%--                        <!-- Menu Toogle -->--%>
-    <%--                        <div class="menu-toggle">--%>
-    <%--                            <a href="#">--%>
-    <%--                                <i class="fa fa-bars"></i>--%>
-    <%--                                <span>Menu</span>--%>
-    <%--                            </a>--%>
-    <%--                        </div>--%>
-    <%--                        <!-- /Menu Toogle -->--%>
-    <%--                    </div>--%>
-    <%--                </div>--%>
-    <%--                <!-- /ACCOUNT -->--%>
-    <%--            </div>--%>
-    <%--            <!-- row -->--%>
-    <%--        </div>--%>
-    <%--        <!-- container -->--%>
-    <%--    </div>--%>
-<%--    <div id="header">--%>
-
-<%--        <div class="container">--%>
-
-<%--            <div class="row">--%>
-<%--                <div class="col-md-6">--%>
-<%--                    <ul class="header-links">--%>
-<%--                        <li><a href="#"><i class="fa fa-envelope-o"></i> gphonespluss@gmail.com</a></li>--%>
-<%--                    </ul>--%>
-<%--                </div>--%>
-<%--                <div class="col-md-6">--%>
-<%--                    <!-- Right-aligned header link -->--%>
-<%--                    <ul class="header-links pull-right">--%>
-<%--                        <!-- You can add your content for the right side here -->--%>
-<%--                        <c:if test="${idkhachhang=='1'}">--%>
-<%--                            <li><a href="/thong-tin-ca-nhan"><i class="fa fa-user-o"></i> Chưa đăng nhập:<input--%>
-<%--                                    id="tkmkidkhachhang" type="text" style="display: none"--%>
-<%--                                    value="${idkhachhang}"></a></li>--%>
-
-<%--                        </c:if>--%>
-<%--                        <c:if test="${idkhachhang !='1'}">--%>
-<%--                            <li><a href="#"><i class="fa fa-user-o"></i> ${khachhangdangnhap.hoTen}<input--%>
-<%--                                    id="tkmkidkhachhang"--%>
-<%--                                    type="text"--%>
-<%--                                    style="display: none"--%>
-<%--                                    value="${idkhachhang}"></a>--%>
-<%--                            </li>--%>
-<%--                        </c:if>--%>
-<%--                    </ul>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-
-<%--            <div class="row">--%>
-<%--                <div class="col-md-6">--%>
-
-<%--                    <div class="header-search">--%>
-<%--                        <form>--%>
-<%--                            <input class="input bor" placeholder="Tìm kiểm tại đây">--%>
-<%--                            <button class="search-btn">Tìm kiếm</button>--%>
-<%--                        </form>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="col-md-6">--%>
-
-<%--                    <div class="dropdown">--%>
-<%--                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">--%>
-<%--                            <i class="fa fa-shopping-cart"></i>--%>
-<%--                            <span>Giỏ hàng</span>--%>
-<%--                            <div class="qty">3</div>--%>
-<%--                        </a>--%>
-
-<%--                    </div>--%>
-
-
-
-<%--                </div>--%>
-<%--            </div>--%>
-
-<%--        </div>--%>
-
-<%--    </div>--%>
-
-
-
-
-
-
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
@@ -476,23 +328,7 @@
                                                         <del class="product-old-price">${ht.giaBan}<span
                                                                 style="font-size:15px">₫</span></del>
                                                     </h4>
-                                                        <%--                                            ${ht.tinhTrang} +  ${ht.sanPham.tinhTrang}--%>
-                                                        <%--                                                    <p class="product-category">Đã bán--%>
-                                                        <%--                                                        :${banhangonline.soluongdaban(ht.id)}--Còn--%>
-                                                        <%--                                                        :${banhangonline.soluongcon(ht.id)}</p>--%>
-                                                        <%--                                                    <div>--%>
-                                                        <%--                                                        *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>--%>
-                                                        <%--                                                        *Camera:${ht.sanPham.camera.thongSo}<br>--%>
-                                                        <%--                                                        *Màn:${ht.sanPham.manHinh.thongSo}<br>--%>
-                                                        <%--                                                        *Màu:${ht.mauSac.ten}<br>--%>
-                                                        <%--                                                        *Ram:${ht.ram.dungLuong}<br>--%>
-                                                        <%--                                                        *Rom:${ht.rom.dungLuong}<br>--%>
-                                                        <%--                                                        *Pin:${ht.pin.loaiPin}<br>--%>
-                                                        <%--                                                        *Dung lượng pin:${ht.pin.dungLuongPin.thongSo}<br>--%>
-                                                        <%--                                                        *Chip:${ht.chip.ten}<br>--%>
 
-
-                                                        <%--                                                    </div>--%>
                                                     <div class="product-rating">
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
@@ -588,23 +424,7 @@
                                                         <del class="product-old-price">${ht.giaBan}<span
                                                                 style="font-size:15px">₫</span></del>
                                                     </h4>
-                                                        <%--                                            ${ht.tinhTrang} +  ${ht.sanPham.tinhTrang}--%>
-                                                        <%--                                                    <p class="product-category">Đã bán--%>
-                                                        <%--                                                        :${banhangonline.soluongdaban(ht.id)}--Còn--%>
-                                                        <%--                                                        :${banhangonline.soluongcon(ht.id)}</p>--%>
-                                                        <%--                                                    <div>--%>
-                                                        <%--                                                        *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>--%>
-                                                        <%--                                                        *Camera:${ht.sanPham.camera.thongSo}<br>--%>
-                                                        <%--                                                        *Màn:${ht.sanPham.manHinh.thongSo}<br>--%>
-                                                        <%--                                                        *Màu:${ht.mauSac.ten}<br>--%>
-                                                        <%--                                                        *Ram:${ht.ram.dungLuong}<br>--%>
-                                                        <%--                                                        *Rom:${ht.rom.dungLuong}<br>--%>
-                                                        <%--                                                        *Pin:${ht.pin.loaiPin}<br>--%>
-                                                        <%--                                                        *Dung lượng pin:${ht.pin.dungLuongPin.thongSo}<br>--%>
-                                                        <%--                                                        *Chip:${ht.chip.ten}<br>--%>
-
-
-                                                        <%--                                                    </div>--%>
+                                                       
                                                     <div class="product-rating">
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
