@@ -76,6 +76,27 @@
         /*div{*/
         /*    border: 1px solid red;*/
         /*}*/
+        .input-with-button {
+            display: flex; /* Sử dụng flexbox để căn chỉnh nút bên trong input */
+            border: 1px solid #ccc; /* Tạo đường viền xung quanh hộp tìm kiếm */
+            border-radius: 25px; /* Đặt bán kính tròn cho hộp tìm kiếm */
+            overflow: hidden; /* Loại bỏ nút nếu nó bị tràn ra ngoài hộp */
+        }
+
+        .input-with-button input {
+            flex: 1; /* Làm cho input mở rộng để lấp đầy hộp */
+            border: none; /* Loại bỏ đường viền của input */
+            padding: 10px; /* Đặt khoảng cách nội dung bên trong input */
+            outline: none; /* Loại bỏ đường viền khi focus vào input */
+        }
+
+        .input-with-button button {
+            background: #007bff; /* Màu nền của nút */
+            color: #fff; /* Màu chữ trắng */
+            border: none; /* Loại bỏ đường viền của nút */
+            padding: 10px 20px; /* Đặt khoảng cách nội dung bên trong nút */
+            cursor: pointer; /* Biến con trỏ thành bàn tay khi trỏ vào nút */
+        }
     </style>
 
 </head>
@@ -85,25 +106,171 @@
 <!-- HEADER -->
 <header>
     <!-- TOP HEADER -->
+
+    <!-- /TOP HEADER -->
+
+    <!-- MAIN HEADER -->
+    <%--    <div id="header">--%>
+    <%--        <!-- container -->--%>
+    <%--        <div class="container">--%>
+    <%--            <!-- row -->--%>
+
+    <%--            <div class="row">--%>
+
+    <%--                <div class="col-md-3">--%>
+
+    <%--                    <ul class="header-links">--%>
+
+    <%--                        <li><a href="#"><i class="fa fa-envelope-o"></i> gphonespluss@gmail.com</a></li>--%>
+
+    <%--                    </ul>--%>
+    <%--                </div>--%>
+    <%--                <!-- /LOGO -->--%>
+
+    <%--                <!-- SEARCH BAR -->--%>
+    <%--                <div class="col-md-6">--%>
+    <%--                    <div class="header-search">--%>
+    <%--                        <form>--%>
+    <%--                            <input class="input bor" placeholder="Tìm kiểm tại đây">--%>
+    <%--                            <button class="search-btn">Tìm kiếm</button>--%>
+    <%--                        </form>--%>
+    <%--                    </div>--%>
+    <%--                </div>--%>
+    <%--                <!-- /SEARCH BAR -->--%>
+
+    <%--                <!-- ACCOUNT -->--%>
+    <%--                <div class="col-md-3 clearfix">--%>
+    <%--                    <div class="header-ctn">--%>
+
+
+    <%--                        <!-- Cart -->--%>
+    <%--                        <div class="dropdown">--%>
+    <%--                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">--%>
+    <%--                                <i class="fa fa-shopping-cart"></i>--%>
+    <%--                                <span>Giỏ hàng</span>--%>
+    <%--                                <div class="qty">3</div>--%>
+    <%--                            </a>--%>
+
+    <%--                        </div>--%>
+    <%--                        <!-- /Cart -->--%>
+    <%--                        <ul class="header-links pull-right">--%>
+
+    <%--                            <c:if test="${idkhachhang=='1'}">--%>
+    <%--                                <li><a href="/thong-tin-ca-nhan"><i class="fa fa-user-o"></i> Chưa đăng nhập:<input--%>
+    <%--                                        id="tkmkidkhachhang" type="text" style="display: none"--%>
+    <%--                                        value="${idkhachhang}"></a></li>--%>
+
+    <%--                            </c:if>--%>
+    <%--                            <c:if test="${idkhachhang !='1'}">--%>
+    <%--                                <li><a href="#"><i class="fa fa-user-o"></i> ${khachhangdangnhap.hoTen}<input--%>
+    <%--                                        id="tkmkidkhachhang"--%>
+    <%--                                        type="text"--%>
+    <%--                                        style="display: none"--%>
+    <%--                                        value="${idkhachhang}"></a>--%>
+    <%--                                </li>--%>
+    <%--                            </c:if>--%>
+    <%--                        </ul>--%>
+    <%--                        <!-- Menu Toogle -->--%>
+    <%--                        <div class="menu-toggle">--%>
+    <%--                            <a href="#">--%>
+    <%--                                <i class="fa fa-bars"></i>--%>
+    <%--                                <span>Menu</span>--%>
+    <%--                            </a>--%>
+    <%--                        </div>--%>
+    <%--                        <!-- /Menu Toogle -->--%>
+    <%--                    </div>--%>
+    <%--                </div>--%>
+    <%--                <!-- /ACCOUNT -->--%>
+    <%--            </div>--%>
+    <%--            <!-- row -->--%>
+    <%--        </div>--%>
+    <%--        <!-- container -->--%>
+    <%--    </div>--%>
+<%--    <div id="header">--%>
+
+<%--        <div class="container">--%>
+
+<%--            <div class="row">--%>
+<%--                <div class="col-md-6">--%>
+<%--                    <ul class="header-links">--%>
+<%--                        <li><a href="#"><i class="fa fa-envelope-o"></i> gphonespluss@gmail.com</a></li>--%>
+<%--                    </ul>--%>
+<%--                </div>--%>
+<%--                <div class="col-md-6">--%>
+<%--                    <!-- Right-aligned header link -->--%>
+<%--                    <ul class="header-links pull-right">--%>
+<%--                        <!-- You can add your content for the right side here -->--%>
+<%--                        <c:if test="${idkhachhang=='1'}">--%>
+<%--                            <li><a href="/thong-tin-ca-nhan"><i class="fa fa-user-o"></i> Chưa đăng nhập:<input--%>
+<%--                                    id="tkmkidkhachhang" type="text" style="display: none"--%>
+<%--                                    value="${idkhachhang}"></a></li>--%>
+
+<%--                        </c:if>--%>
+<%--                        <c:if test="${idkhachhang !='1'}">--%>
+<%--                            <li><a href="#"><i class="fa fa-user-o"></i> ${khachhangdangnhap.hoTen}<input--%>
+<%--                                    id="tkmkidkhachhang"--%>
+<%--                                    type="text"--%>
+<%--                                    style="display: none"--%>
+<%--                                    value="${idkhachhang}"></a>--%>
+<%--                            </li>--%>
+<%--                        </c:if>--%>
+<%--                    </ul>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+
+<%--            <div class="row">--%>
+<%--                <div class="col-md-6">--%>
+
+<%--                    <div class="header-search">--%>
+<%--                        <form>--%>
+<%--                            <input class="input bor" placeholder="Tìm kiểm tại đây">--%>
+<%--                            <button class="search-btn">Tìm kiếm</button>--%>
+<%--                        </form>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-md-6">--%>
+
+<%--                    <div class="dropdown">--%>
+<%--                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">--%>
+<%--                            <i class="fa fa-shopping-cart"></i>--%>
+<%--                            <span>Giỏ hàng</span>--%>
+<%--                            <div class="qty">3</div>--%>
+<%--                        </a>--%>
+
+<%--                    </div>--%>
+
+
+
+<%--                </div>--%>
+<%--            </div>--%>
+
+<%--        </div>--%>
+
+<%--    </div>--%>
+
+
+
+
+
+
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
-
                 <li><a href="#"><i class="fa fa-envelope-o"></i> gphonespluss@gmail.com</a></li>
-
             </ul>
             <ul class="header-links pull-right">
-
                 <c:if test="${idkhachhang=='1'}">
                     <li><a href="/thong-tin-ca-nhan"><i class="fa fa-user-o"></i> Chưa đăng nhập:<input
-                            id="tkmkidkhachhang" type="text" style="display: none" value="${idkhachhang}"></a></li>
+                            id="tkmkidkhachhang" type="text" style="display: none"
+                            value="${idkhachhang}"></a></li>
 
                 </c:if>
                 <c:if test="${idkhachhang !='1'}">
-                    <li><a href="#"><i class="fa fa-user-o"></i> ${khachhangdangnhap.hoTen}<input id="tkmkidkhachhang"
-                                                                                                  type="text"
-                                                                                                  style="display: none"
-                                                                                                  value="${idkhachhang}"></a>
+                    <li><a href="#"><i class="fa fa-user-o"></i> ${khachhangdangnhap.hoTen}<input
+                            id="tkmkidkhachhang"
+                            type="text"
+                            style="display: none"
+                            value="${idkhachhang}"></a>
                     </li>
                 </c:if>
             </ul>
@@ -121,8 +288,7 @@
                 <div class="col-md-3">
                     <div class="header-logo">
                         <a href="#" class="logo">
-                            <%--							<img src="../../img/logo.png" alt="">--%>
-                            <img src="/img/logo.png" alt="">
+                            <img src="./img/logo.png" alt="">
                         </a>
                     </div>
                 </div>
@@ -132,72 +298,33 @@
                 <div class="col-md-6">
                     <div class="header-search">
                         <form>
-                            <select class="input-select">
-                                <option value="0">All Categories</option>
-                                <option value="1">Category 01</option>
-                                <option value="1">Category 02</option>
-                            </select>
-                            <input class="input" placeholder="Search here">
-                            <button class="search-btn">Search</button>
+                            <div class="input-with-button">
+                                <input class="input" placeholder="Tìm kiếm sản phẩm...">
+                                <button class="search-btn">Search</button>
+                            </div>
                         </form>
                     </div>
                 </div>
+
+
                 <!-- /SEARCH BAR -->
 
                 <!-- ACCOUNT -->
                 <div class="col-md-3 clearfix">
                     <div class="header-ctn">
                         <!-- Wishlist -->
-                        <div>
-                            <a href="#">
-                                <i class="fa fa-heart-o"></i>
-                                <span>Your Wishlist</span>
-                                <div class="qty">2</div>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>Giỏ hàng</span>
+                                <div class="qty">3</div>
                             </a>
+
                         </div>
                         <!-- /Wishlist -->
 
                         <!-- Cart -->
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                <i class="fa fa-shopping-cart"></i>
-                                <span>Your Cart</span>
-                                <div class="qty">3</div>
-                            </a>
-                            <div class="cart-dropdown">
-                                <div class="cart-list">
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="/img/product01.png" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                            <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
-                                    </div>
 
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="/img/product02.png" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                            <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
-                                    </div>
-                                </div>
-                                <div class="cart-summary">
-                                    <small>3 Item(s) selected</small>
-                                    <h5>SUBTOTAL: $2940.00</h5>
-                                </div>
-                                <div class="cart-btns">
-                                    <a href="#">View Cart</a>
-                                    <a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
                         <!-- /Cart -->
 
                         <!-- Menu Toogle -->
@@ -216,7 +343,6 @@
         </div>
         <!-- container -->
     </div>
-    <!-- /MAIN HEADER -->
 </header>
 <!-- /HEADER -->
 
@@ -314,15 +440,8 @@
                 <!-- section title -->
                 <div class="col-md-12">
                     <div class="section-title">
-                        <h3 class="title">New Products</h3>
-                        <div class="section-nav">
-                            <ul class="section-tab-nav tab-nav">
-                                <li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
-                                <li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
-                                <li><a data-toggle="tab" href="#tab1">Cameras</a></li>
-                                <li><a data-toggle="tab" href="#tab1">Accessories</a></li>
-                            </ul>
-                        </div>
+                        <h3 class="title">Sản phẩm mới ra mắt</h3>
+
                     </div>
                 </div>
                 <!-- /section title -->
@@ -358,22 +477,22 @@
                                                                 style="font-size:15px">₫</span></del>
                                                     </h4>
                                                         <%--                                            ${ht.tinhTrang} +  ${ht.sanPham.tinhTrang}--%>
-                                                    <p class="product-category">Đã bán
-                                                        :${banhangonline.soluongdaban(ht.id)}--Còn
-                                                        :${banhangonline.soluongcon(ht.id)}</p>
-                                                    <div>
-                                                        *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>
-                                                        *Camera:${ht.sanPham.camera.thongSo}<br>
-                                                        *Màn:${ht.sanPham.manHinh.thongSo}<br>
-                                                        *Màu:${ht.mauSac.ten}<br>
-                                                        *Ram:${ht.ram.dungLuong}<br>
-                                                        *Rom:${ht.rom.dungLuong}<br>
-                                                        *Pin:${ht.pin.loaiPin}<br>
-                                                        *Dung lượng pin:${ht.pin.dungLuongPin.thongSo}<br>
-                                                        *Chip:${ht.chip.ten}<br>
+                                                        <%--                                                    <p class="product-category">Đã bán--%>
+                                                        <%--                                                        :${banhangonline.soluongdaban(ht.id)}--Còn--%>
+                                                        <%--                                                        :${banhangonline.soluongcon(ht.id)}</p>--%>
+                                                        <%--                                                    <div>--%>
+                                                        <%--                                                        *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>--%>
+                                                        <%--                                                        *Camera:${ht.sanPham.camera.thongSo}<br>--%>
+                                                        <%--                                                        *Màn:${ht.sanPham.manHinh.thongSo}<br>--%>
+                                                        <%--                                                        *Màu:${ht.mauSac.ten}<br>--%>
+                                                        <%--                                                        *Ram:${ht.ram.dungLuong}<br>--%>
+                                                        <%--                                                        *Rom:${ht.rom.dungLuong}<br>--%>
+                                                        <%--                                                        *Pin:${ht.pin.loaiPin}<br>--%>
+                                                        <%--                                                        *Dung lượng pin:${ht.pin.dungLuongPin.thongSo}<br>--%>
+                                                        <%--                                                        *Chip:${ht.chip.ten}<br>--%>
 
 
-                                                    </div>
+                                                        <%--                                                    </div>--%>
                                                     <div class="product-rating">
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
@@ -419,49 +538,7 @@
     <!-- /SECTION -->
 
     <!-- HOT DEAL SECTION -->
-    <div id="hot-deal" class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="hot-deal">
-                        <ul class="hot-deal-countdown">
-                            <li>
-                                <div>
-                                    <h3>02</h3>
-                                    <span>Days</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <h3>10</h3>
-                                    <span>Hours</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <h3>34</h3>
-                                    <span>Mins</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <h3>60</h3>
-                                    <span>Secs</span>
-                                </div>
-                            </li>
-                        </ul>
-                        <h2 class="text-uppercase">hot deal this week</h2>
-                        <p>New Collection Up to 50% OFF</p>
-                        <a class="primary-btn cta-btn" href="#">Shop now</a>
-                    </div>
-                </div>
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
-    </div>
+
     <!-- /HOT DEAL SECTION -->
 
     <!-- SECTION -->
@@ -474,14 +551,9 @@
                 <!-- section title -->
                 <div class="col-md-12">
                     <div class="section-title">
-                        <h3 class="title">Top selling</h3>
+                        <h3 class="title">Top sản phẩm bán chạy</h3>
                         <div class="section-nav">
-                            <ul class="section-tab-nav tab-nav">
-                                <li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
-                                <li><a data-toggle="tab" href="#tab2">Smartphones</a></li>
-                                <li><a data-toggle="tab" href="#tab2">Cameras</a></li>
-                                <li><a data-toggle="tab" href="#tab2">Accessories</a></li>
-                            </ul>
+
                         </div>
                     </div>
                 </div>
@@ -517,22 +589,22 @@
                                                                 style="font-size:15px">₫</span></del>
                                                     </h4>
                                                         <%--                                            ${ht.tinhTrang} +  ${ht.sanPham.tinhTrang}--%>
-                                                    <p class="product-category">Đã bán
-                                                        :${banhangonline.soluongdaban(ht.id)}--Còn
-                                                        :${banhangonline.soluongcon(ht.id)}</p>
-                                                    <div>
-                                                        *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>
-                                                        *Camera:${ht.sanPham.camera.thongSo}<br>
-                                                        *Màn:${ht.sanPham.manHinh.thongSo}<br>
-                                                        *Màu:${ht.mauSac.ten}<br>
-                                                        *Ram:${ht.ram.dungLuong}<br>
-                                                        *Rom:${ht.rom.dungLuong}<br>
-                                                        *Pin:${ht.pin.loaiPin}<br>
-                                                        *Dung lượng pin:${ht.pin.dungLuongPin.thongSo}<br>
-                                                        *Chip:${ht.chip.ten}<br>
+                                                        <%--                                                    <p class="product-category">Đã bán--%>
+                                                        <%--                                                        :${banhangonline.soluongdaban(ht.id)}--Còn--%>
+                                                        <%--                                                        :${banhangonline.soluongcon(ht.id)}</p>--%>
+                                                        <%--                                                    <div>--%>
+                                                        <%--                                                        *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>--%>
+                                                        <%--                                                        *Camera:${ht.sanPham.camera.thongSo}<br>--%>
+                                                        <%--                                                        *Màn:${ht.sanPham.manHinh.thongSo}<br>--%>
+                                                        <%--                                                        *Màu:${ht.mauSac.ten}<br>--%>
+                                                        <%--                                                        *Ram:${ht.ram.dungLuong}<br>--%>
+                                                        <%--                                                        *Rom:${ht.rom.dungLuong}<br>--%>
+                                                        <%--                                                        *Pin:${ht.pin.loaiPin}<br>--%>
+                                                        <%--                                                        *Dung lượng pin:${ht.pin.dungLuongPin.thongSo}<br>--%>
+                                                        <%--                                                        *Chip:${ht.chip.ten}<br>--%>
 
 
-                                                    </div>
+                                                        <%--                                                    </div>--%>
                                                     <div class="product-rating">
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
@@ -585,7 +657,7 @@
             <div class="row">
                 <div class="col-md-4 col-xs-6">
                     <div class="section-title">
-                        <h4 class="title">Top selling</h4>
+                        <h4 class="title">Top sản phẩm bán chạy</h4>
                         <div class="section-nav">
                             <div id="slick-nav-3" class="products-slick-nav"></div>
                         </div>
@@ -636,7 +708,7 @@
 
                 <div class="col-md-4 col-xs-6">
                     <div class="section-title">
-                        <h4 class="title">Top selling</h4>
+                        <h4 class="title">Top sản phẩm bán chạy</h4>
                         <div class="section-nav">
                             <div id="slick-nav-4" class="products-slick-nav"></div>
                         </div>
