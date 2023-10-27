@@ -19,12 +19,22 @@
         border: 1px solid #ccc;
         cursor: pointer;
     }
+    input[type="radio"] + label {
+        display: inline-block;
+        border: 2px solid #ccc;
+        padding: 5px 10px;
+        margin-right: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
 
     /* Khi label được nhấp vào, thay đổi màu nền để biểu thị lựa chọn */
     input[type="radio"]:checked + label {
         background-color: #007bff;
         color: #fff;
     }
+
 </style>
 
 <body>
@@ -37,7 +47,7 @@
         <c:if test="${stt1.index==0}">
             <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
                 <input type="radio" id="ms${stt1.index}" name="mauSac1" value="${ht1.mauSac.ten}" ${ht1.mauSac.ten==motctsp.mauSac.ten ?"checked":""} onchange="clickradio();" >
-                <label for="ms${stt1.index}" style="border: 1px solid #00A000">${ht1.mauSac.ten}</label>
+                <label for="ms${stt1.index}">${ht1.mauSac.ten}</label>
             </c:if>
         </c:if>
 
