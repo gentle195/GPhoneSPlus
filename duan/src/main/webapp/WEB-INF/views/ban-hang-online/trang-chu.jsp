@@ -476,23 +476,7 @@
                                                         <del class="product-old-price">${ht.giaBan}<span
                                                                 style="font-size:15px">₫</span></del>
                                                     </h4>
-                                                        <%--                                            ${ht.tinhTrang} +  ${ht.sanPham.tinhTrang}--%>
-                                                        <%--                                                    <p class="product-category">Đã bán--%>
-                                                        <%--                                                        :${banhangonline.soluongdaban(ht.id)}--Còn--%>
-                                                        <%--                                                        :${banhangonline.soluongcon(ht.id)}</p>--%>
-                                                        <%--                                                    <div>--%>
-                                                        <%--                                                        *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>--%>
-                                                        <%--                                                        *Camera:${ht.sanPham.camera.thongSo}<br>--%>
-                                                        <%--                                                        *Màn:${ht.sanPham.manHinh.thongSo}<br>--%>
-                                                        <%--                                                        *Màu:${ht.mauSac.ten}<br>--%>
-                                                        <%--                                                        *Ram:${ht.ram.dungLuong}<br>--%>
-                                                        <%--                                                        *Rom:${ht.rom.dungLuong}<br>--%>
-                                                        <%--                                                        *Pin:${ht.pin.loaiPin}<br>--%>
-                                                        <%--                                                        *Dung lượng pin:${ht.pin.dungLuongPin.thongSo}<br>--%>
-                                                        <%--                                                        *Chip:${ht.chip.ten}<br>--%>
-
-
-                                                        <%--                                                    </div>--%>
+                                                        
                                                     <div class="product-rating">
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
@@ -588,23 +572,7 @@
                                                         <del class="product-old-price">${ht.giaBan}<span
                                                                 style="font-size:15px">₫</span></del>
                                                     </h4>
-                                                        <%--                                            ${ht.tinhTrang} +  ${ht.sanPham.tinhTrang}--%>
-                                                        <%--                                                    <p class="product-category">Đã bán--%>
-                                                        <%--                                                        :${banhangonline.soluongdaban(ht.id)}--Còn--%>
-                                                        <%--                                                        :${banhangonline.soluongcon(ht.id)}</p>--%>
-                                                        <%--                                                    <div>--%>
-                                                        <%--                                                        *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>--%>
-                                                        <%--                                                        *Camera:${ht.sanPham.camera.thongSo}<br>--%>
-                                                        <%--                                                        *Màn:${ht.sanPham.manHinh.thongSo}<br>--%>
-                                                        <%--                                                        *Màu:${ht.mauSac.ten}<br>--%>
-                                                        <%--                                                        *Ram:${ht.ram.dungLuong}<br>--%>
-                                                        <%--                                                        *Rom:${ht.rom.dungLuong}<br>--%>
-                                                        <%--                                                        *Pin:${ht.pin.loaiPin}<br>--%>
-                                                        <%--                                                        *Dung lượng pin:${ht.pin.dungLuongPin.thongSo}<br>--%>
-                                                        <%--                                                        *Chip:${ht.chip.ten}<br>--%>
 
-
-                                                        <%--                                                    </div>--%>
                                                     <div class="product-rating">
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
@@ -855,7 +823,7 @@
     </div>
     <!-- /container -->
 </div>
-<!-- /NEWSLETTER -->
+
 
 <!-- FOOTER -->
 <footer id="footer">
