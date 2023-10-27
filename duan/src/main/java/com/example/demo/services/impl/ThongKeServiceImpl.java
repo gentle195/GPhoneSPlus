@@ -1,5 +1,7 @@
 package com.example.demo.services.impl;
 
+import com.example.demo.DTO.DoanhThuHang;
+import com.example.demo.DTO.DoanhThuSanPham;
 import com.example.demo.DTO.DoanhThuTheoThang;
 import com.example.demo.models.HoaDon;
 import com.example.demo.repositories.ThongKeRepository;
@@ -43,13 +45,28 @@ public class ThongKeServiceImpl implements ThongKeService {
     }
 
     @Override
-    public List<DoanhThuTheoThang> doanhThuSanPham() {
+    public List<DoanhThuSanPham> doanhThuSanPham() {
         return thongKeRepository.doanhThuSanPham();
     }
 
     @Override
-    public List<DoanhThuTheoThang> doanhThuHang() {
+    public List<DoanhThuHang> doanhThuHang() {
         return thongKeRepository.doanhThuHang();
+    }
+
+    @Override
+    public List<DoanhThuHang> locdoanhThuHang(Date startDate, Date endDate) {
+        return thongKeRepository.locdoanhThuHang(startDate, endDate);
+    }
+
+    @Override
+    public List<DoanhThuSanPham> selectedHang() {
+        return thongKeRepository.selectedHang();
+    }
+
+    @Override
+    public List<DoanhThuSanPham> locHang(String ten) {
+        return thongKeRepository.locHang(ten);
     }
 
 //    @Override

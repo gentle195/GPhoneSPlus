@@ -1,14 +1,13 @@
 package com.example.demo.repositories;
 
+import com.example.demo.DTO.DoanhThuHang;
+import com.example.demo.DTO.DoanhThuSanPham;
 import com.example.demo.DTO.DoanhThuTheoThang;
 import com.example.demo.models.HoaDon;
-import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
@@ -49,17 +48,46 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
     @Query(value = "SELECT YEAR(ngay_thanh_toan) AS Nam FROM hoa_don GROUP BY YEAR(ngay_thanh_toan)",nativeQuery = true)
     List<DoanhThuTheoThang> selectedYear();
 
-    @Query(value = "SELECT COUNT(san_pham.id) AS soLuongSP, san_pham.ten , SUM(don_gia) as DoanhThu\n" +
-            "            FROM hoa_don\n" +
-            "            LEFT JOIN hoa_don_chi_tiet ON hoa_don.id = hoa_don_chi_tiet.id_hoa_don\n" +
-            "            LEFT JOIN imei ON hoa_don_chi_tiet.id_imei = imei.id\n" +
-            "            LEFT JOIN chi_tiet_san_pham ON imei.id_chi_tiet_san_pham = chi_tiet_san_pham.id\n" +
-            "            LEFT JOIN san_pham ON chi_tiet_san_pham.id_san_pham = san_pham.id\n" +
-            "            WHERE hoa_don.tinh_trang = 2\n" +
-            "            GROUP BY san_pham.ten", nativeQuery = true)
-    List<DoanhThuTheoThang> doanhThuSanPham();
 
-    @Query(value = "SELECT hang_dien_thoai.ten,\n" +
+    @Query(value = "SELECT san_pham.ten as tenSanPham,\n" +
+            "COUNT(san_pham.id) AS soLuongSP,\n" +
+            "SUM(don_gia) as DoanhThu,\n" +
+            "MIN(don_gia) AS GiaMuaMin, MAX(don_gia) AS GiaMuaMax,\n" +
+            "AVG(don_gia) AS DoanhThuTrungBinh\n" +
+            "FROM hoa_don\n" +
+            "LEFT JOIN hoa_don_chi_tiet ON hoa_don.id = hoa_don_chi_tiet.id_hoa_don\n" +
+            "LEFT JOIN imei ON hoa_don_chi_tiet.id_imei = imei.id\n" +
+            "LEFT JOIN chi_tiet_san_pham ON imei.id_chi_tiet_san_pham = chi_tiet_san_pham.id \n" +
+            "LEFT JOIN san_pham ON chi_tiet_san_pham.id_san_pham = san_pham.id\n" +
+            "WHERE hoa_don.tinh_trang = 2\n" +
+            "GROUP BY san_pham.ten", nativeQuery = true)
+    List<DoanhThuSanPham> doanhThuSanPham();
+
+    @Query(value = "SELECT hang_dien_thoai.ten as tenHang," +
+            "san_pham.ten as tenSanPham ,\n" +
+            "COUNT(san_pham.id_hang) as soLuongSP,\n" +
+            "SUM(don_gia) AS DoanhThu,\n" +
+            "MIN(don_gia) AS GiaMuaMin, MAX(don_gia) AS GiaMuaMax,\n" +
+            "AVG(don_gia) AS DoanhThuTrungBinh\n" +
+            "FROM hoa_don LEFT JOIN hoa_don_chi_tiet ON hoa_don.id = hoa_don_chi_tiet.id_hoa_don\n" +
+            "             LEFT JOIN imei ON hoa_don_chi_tiet.id_imei = imei.id\n" +
+            "             LEFT JOIN chi_tiet_san_pham ON imei.id_chi_tiet_san_pham = chi_tiet_san_pham.id\n" +
+            "             LEFT JOIN san_pham ON chi_tiet_san_pham.id_san_pham = san_pham.id\n" +
+            "             LEFT JOIN hang_dien_thoai ON  hang_dien_thoai.id = san_pham.id_hang\n" +
+            "WHERE hang_dien_thoai.ten like %:ten%\n" +
+            "GROUP BY hang_dien_thoai.ten, san_pham.ten", nativeQuery = true)
+    List<DoanhThuSanPham> locHang(String ten);
+
+    @Query(value = "SELECT hang_dien_thoai.ten as tenHang\n" +
+            "FROM hoa_don LEFT JOIN hoa_don_chi_tiet ON hoa_don.id = hoa_don_chi_tiet.id_hoa_don\n" +
+            "             LEFT JOIN imei ON hoa_don_chi_tiet.id_imei = imei.id\n" +
+            "             LEFT JOIN chi_tiet_san_pham ON imei.id_chi_tiet_san_pham = chi_tiet_san_pham.id\n" +
+            "             LEFT JOIN san_pham ON chi_tiet_san_pham.id_san_pham = san_pham.id\n" +
+            "             LEFT JOIN hang_dien_thoai ON  hang_dien_thoai.id = san_pham.id_hang\n" +
+            "GROUP BY hang_dien_thoai.ten", nativeQuery = true)
+    List<DoanhThuSanPham> selectedHang();
+
+    @Query(value = "SELECT hang_dien_thoai.ten as tenHang,\n" +
             "COUNT(san_pham.id_hang) as soLuongSP,\n" +
             "SUM(don_gia) AS DoanhThu,\n" +
             "MIN(don_gia) AS GiaMuaMin, MAX(don_gia) AS GiaMuaMax,\n" +
@@ -71,5 +99,21 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "             LEFT JOIN hang_dien_thoai ON  hang_dien_thoai.id = san_pham.id_hang\n" +
             "WHERE hoa_don.tinh_trang = 2\n" +
             "GROUP BY hang_dien_thoai.ten", nativeQuery = true)
-    List<DoanhThuTheoThang> doanhThuHang();
+    List<DoanhThuHang> doanhThuHang();
+
+    @Query(value = "SELECT hang_dien_thoai.ten as tenHang,\n" +
+            "COUNT(san_pham.id_hang) as soLuongSP,\n" +
+            "SUM(don_gia) AS DoanhThu,\n" +
+            "MIN(don_gia) AS GiaMuaMin, MAX(don_gia) AS GiaMuaMax,\n" +
+            "AVG(don_gia) AS DoanhThuTrungBinh\n" +
+            "FROM hoa_don LEFT JOIN hoa_don_chi_tiet ON hoa_don.id = hoa_don_chi_tiet.id_hoa_don\n" +
+            "             LEFT JOIN imei ON hoa_don_chi_tiet.id_imei = imei.id\n" +
+            "             LEFT JOIN chi_tiet_san_pham ON imei.id_chi_tiet_san_pham = chi_tiet_san_pham.id\n" +
+            "             LEFT JOIN san_pham ON chi_tiet_san_pham.id_san_pham = san_pham.id\n" +
+            "             LEFT JOIN hang_dien_thoai ON  hang_dien_thoai.id = san_pham.id_hang\n" +
+            "WHERE hoa_don.tinh_trang = 2\n" +
+            "AND ngay_thanh_toan BETWEEN :startDate AND :endDate\n" +
+            "GROUP BY hang_dien_thoai.ten", nativeQuery = true)
+    List<DoanhThuHang> locdoanhThuHang(@Param("startDate") Date startDate,@Param("endDate") Date endDate);
+
 }

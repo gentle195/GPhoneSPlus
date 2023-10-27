@@ -72,14 +72,6 @@
                 <div class="collapse navbar-collapse justify-content-between">
                     <div class="header-left">
                         <div class="search_bar dropdown">
-                                <span class="search_icon p-3 c-pointer" data-toggle="dropdown">
-                                    <i class="mdi mdi-magnify"></i>
-                                </span>
-                            <div class="dropdown-menu p-0 m-0">
-                                <form>
-                                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                                </form>
-                            </div>
                         </div>
                     </div>
 
@@ -164,8 +156,13 @@
                 </li>
 
 
-                <li><a href="/thong-ke/hien-thi" aria-expanded="false"><i
-                        class="icon icon-form"></i>Thống kê</a>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                        class="icon icon-form"></i><span class="nav-text">Thống kê</span></a>
+                    <ul aria-expanded="false">
+                        <li><a href="/thong-ke/hien-thi">Doanh Thu theo tháng</a></li>
+                        <li><a href="/thong-ke/hien-thi-sp">Doanh thu theo sản phẩm</a></li>
+                        <li><a href="/thong-ke/hien-thi-hang">Doanh thu theo hãng</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
