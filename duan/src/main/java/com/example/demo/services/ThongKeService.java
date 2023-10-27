@@ -1,23 +1,25 @@
 package com.example.demo.services;
 
+import com.example.demo.DTO.DoanhThuHang;
+import com.example.demo.DTO.DoanhThuSanPham;
 import com.example.demo.DTO.DoanhThuTheoThang;
-import com.example.demo.models.HoaDon;
-import org.springframework.data.repository.query.Param;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 
 public interface ThongKeService {
 
-    public int countHD();
-    public int avgHD();
-    public List<DoanhThuTheoThang> doanhThu();
+    int countHD();
+    int avgHD();
+    List<DoanhThuTheoThang> doanhThu();
     List<DoanhThuTheoThang> selectedYear();
-    public List<DoanhThuTheoThang> loctheonam(Integer Nam);
+    List<DoanhThuTheoThang> loctheonam(Integer Nam);
 
-    List<DoanhThuTheoThang> doanhThuSanPham();
-    List<DoanhThuTheoThang> doanhThuHang();
+    List<DoanhThuHang> doanhThuHang();
+    List<DoanhThuHang> locdoanhThuHang(Date startDate, Date endDate);
 
+    List<DoanhThuSanPham> doanhThuSanPham();
+    List<DoanhThuSanPham> selectedHang();
+    List<DoanhThuSanPham> locHang(String ten);
 
 }
