@@ -104,10 +104,10 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
     List<KhachHangHoaDon> getHD();
 
 
-    @Query("select kh from KhachHang kh  where kh.ma like %:timkiem% and kh.tinhTrang=0 or kh.hoTen like %:timkiem% and kh.tinhTrang=0 or kh.hangKhachHang.ten like %:timkiem% and kh.tinhTrang=0 ")
+    @Query("select kh from KhachHang kh  where kh.tinhTrang=0 and (kh.ma like %:timkiem% or kh.hoTen like %:timkiem% or kh.hangKhachHang.ten like %:timkiem% or kh.email like %:timkiem%)")
     List<KhachHang> timkiem(String timkiem);
 
-    @Query("select kh from KhachHang kh  where kh.ma like %:timkiem% and kh.tinhTrang=1 or kh.hoTen like %:timkiem% and kh.tinhTrang=1")
+    @Query("select kh from KhachHang kh  where  kh.tinhTrang=1 and (kh.ma like %:timkiem% or kh.hoTen like %:timkiem% or kh.hangKhachHang.ten like %:timkiem% or kh.email like %:timkiem%)")
     List<KhachHang> timkiem1(String timkiem);
 
     @Query("select kh from KhachHang kh left join HoaDon hd on kh.id=hd.khachHang.id where hd.id=:id")
@@ -117,7 +117,9 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
     KhachHang newKhachHang(UUID id);
 
     @Query("select kh from KhachHang  kh where kh.taiKhoan like %:username% or kh.email like %:username%")
-
     KhachHang getKhachHangByTaiKhoan(String username);
+
+    @Query("select kh from KhachHang  kh where kh.tinhTrang=0 and (kh.taiKhoan like %:username% and kh.email like %:email%)")
+    KhachHang quenMatKhau(String username, String email);
 
 }

@@ -349,34 +349,34 @@
 
     }
 
-    // var checkbox = document.getElementsByName("checkanh");
-    // for (var i = 0; i < checkbox.length; i++){
-    //     if (checkbox[i].checked === true){
-    //         if (checkbox[i].value === 'cu'){
-    //             document.getElementById('anhcu').style.display=""
-    //             document.getElementById('anhmoi').style.display="none"
-    //         }else {
-    //             document.getElementById('anhcu').style.display="none"
-    //             document.getElementById('anhmoi').style.display=""
-    //         }}}
-    //
+    var checkbox = document.getElementsByName("checkanh");
+    for (var i = 0; i < checkbox.length; i++){
+        if (checkbox[i].checked === true){
+            if (checkbox[i].value === 'cu'){
+                document.getElementById('anhcu').style.display=""
+                document.getElementById('anhmoi').style.display="none"
+            }else {
+                document.getElementById('anhcu').style.display="none"
+                document.getElementById('anhmoi').style.display=""
+            }}}
 
 
-    // document.body.addEventListener('change', function (e) {
-    //     let target = e.target;
-    //
-    //     switch (target.id) {
-    //         case 'cucheck':
-    //             document.getElementById('anhcu').style.display=""
-    //             document.getElementById('anhmoi').style.display="none"
-    //             break;
-    //         case 'moicheck':
-    //             document.getElementById('anhcu').style.display="none"
-    //             document.getElementById('anhmoi').style.display=""
-    //             break;
-    //
-    //     }
-    // });
+
+    document.body.addEventListener('change', function (e) {
+        let target = e.target;
+
+        switch (target.id) {
+            case 'cucheck':
+                document.getElementById('anhcu').style.display=""
+                document.getElementById('anhmoi').style.display="none"
+                break;
+            case 'moicheck':
+                document.getElementById('anhcu').style.display="none"
+                document.getElementById('anhmoi').style.display=""
+                break;
+
+        }
+    });
 </script>
 
 

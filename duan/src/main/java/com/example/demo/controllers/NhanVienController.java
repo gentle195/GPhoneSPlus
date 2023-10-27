@@ -119,6 +119,7 @@ public class NhanVienController {
 
         return "/home/layout";
     }
+
     private String generateRandomPassword(int length) {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
         SecureRandom random = new SecureRandom();
@@ -131,6 +132,7 @@ public class NhanVienController {
 
         return password.toString();
     }
+
     @PostMapping("/add")
     public String addNhanVien(Model model, @ModelAttribute("nhanVien") @Valid NhanVien nhanVien,
                               BindingResult bindingResult,
@@ -157,7 +159,7 @@ public class NhanVienController {
             return "/home/layout";
 //            return "../nhanvien/nhan-vien-add.jsp";
         }
-        NhanVien nvien=new NhanVien();
+        NhanVien nvien = new NhanVien();
         String randomPassword = generateRandomPassword(8);
         nvien.setMatKhau(randomPassword);
 
@@ -167,7 +169,7 @@ public class NhanVienController {
         String hashedPasswords = hashedPassword; // Mật khẩu đã được mã hóa
         boolean matches = BCrypt.checkpw(rawPassword, hashedPassword);
         System.out.println(matches);
-        System.out.println("MK Nè "+randomPassword.toString());
+        System.out.println("MK Nè " + randomPassword.toString());
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         String uploadDir = "src/main/webapp/uploads/";
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
@@ -194,8 +196,8 @@ public class NhanVienController {
         List<ChucVu> listChucVu = chucVuService.findAll();
 
         Page<NhanVien> page = nhanVienService.getAll(Pageable.unpaged());
-        NhanVien nvv=nhanVienService.findById(nhanVien.getId());
-        String phone=nvv.getSdt();
+        NhanVien nvv = nhanVienService.findById(nhanVien.getId());
+        String phone = nvv.getSdt();
         String message = "Chào mừng bạn đã đăng ký tài khoản. Mật khẩu của bạn là: " + nvien.getMatKhau();
 //        smsService.sendSMS(phone, message);
         mailer.queue(nvv.getEmail(), "Bạn đã đăng kí tài khoản thành công", "TK: " + nvv.getTaiKhoan() + "\nMK: " + nvien.getMatKhau());
@@ -211,17 +213,10 @@ public class NhanVienController {
     }
 
     @GetMapping("/detail/{id}")
-    public String detail(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
-//                         @RequestParam("matKhau") String mk,
-//                         @RequestParam("email") String email,
-//                         @ModelAttribute("nhanVien") NhanVien nhanVien,
-                         @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+    public String detail(Model model, @PathVariable("id") UUID id, @ModelAttribute("nhanVien") NhanVien nhanVien) {
         List<ChucVu> listChucVu = chucVuService.findAll();
-//        nhanVien.setMatKhau(mk);
-//        nhanVien.setEmail(email);
         model.addAttribute("listChucVu", listChucVu);
-        NhanVien nhanVien = nhanVienService.findById(id);
-        model.addAttribute("nhanVien", nhanVien);
+        model.addAttribute("nhanVien", nhanVienService.findById(id));
         model.addAttribute("contentPage", "../nhanvien/nhan-vien-update.jsp");
         return "/home/layout";
     }
@@ -229,61 +224,39 @@ public class NhanVienController {
 
     @PostMapping("/update/{id}")
     public String update(Model model, @PathVariable("id") UUID id,
-                         @RequestParam("matKhau") String mk,
-                         @RequestParam("email") String email,
-                         @ModelAttribute("nhanVien") @Valid NhanVien nhanVien
-            , BindingResult bindingResult, @RequestParam("images") MultipartFile file) throws IOException {
-
-        long millis = System.currentTimeMillis();
-        Date date = new Date(millis);
-        nhanVien.setId(id);
-        nhanVien.setNgayCapNhat(Date.valueOf(LocalDate.now()));
-        nhanVien.setNgayTao(date);
-        nhanVien.setTinhTrang(0);
-        nhanVien.setMatKhau(mk);
-        nhanVien.setEmail(email);
-        nhanVien.setUrlAnh(file.getOriginalFilename());
-
-
-
+                         @ModelAttribute("nhanVien") @Valid NhanVien nhanVien,
+                         BindingResult bindingResult,
+                         @RequestParam("checkanh1") String checkanh1,
+                         @RequestParam("anh1s") MultipartFile anh1
+    ) throws IOException {
         if (bindingResult.hasErrors()) {
-            NhanVien nhanVien1 = nhanVienService.findById(id);
             List<ChucVu> listChucVu = chucVuService.findAll();
-            List<NhanVien> listNhanVien = nhanVienService.findAll();
-            nhanVien.setTinhTrang(0);
-            nhanVien.setGioiTinh(true);
-
-
             model.addAttribute("listChucVu", listChucVu);
-
             model.addAttribute("contentPage", "../nhanvien/nhan-vien-update.jsp");
-
             return "/home/layout";
 
         }
-        // Xử lý tệp ảnh nếu người dùng đã chọn ảnh mới
-
-
-        if (file.isEmpty()) {
+        NhanVien nv = nhanVienService.findById(id);
+        nhanVien.setId(id);
+        nhanVien.setMa(nv.getMa());
+        nhanVien.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        nhanVien.setNgayTao(nv.getNgayTao());
+        nhanVien.setTinhTrang(0);
+        nhanVien.setTaiKhoan(nv.getTaiKhoan());
+        nhanVien.setLuong(nv.getLuong());
+        nhanVien.setMatKhau(nv.getMatKhau());
+        System.out.println(nv.toString());
+        String fileName1 = StringUtils.cleanPath(anh1.getOriginalFilename());
+        if (checkanh1.equals("cu1")) {
         } else {
-            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-            String uploadDir = "src/main/webapp/uploads/"; // Đổi đường dẫn lưu ảnh tùy ý
-            try {
-                byte[] bytes = file.getBytes();
-                Path path = Paths.get(uploadDir + File.separator + fileName);
-                Files.write(path, bytes);
-                nhanVien.setUrlAnh(fileName);
-            } catch (IOException e) {
-                e.printStackTrace();
-                // Xử lý lỗi nếu cần
+            if (fileName1.equals("")) {
+            } else {
+                String uploadDir = "src/main/webapp/uploads/";
+                FileUploadUtil.saveFile(uploadDir, fileName1, anh1);
             }
+            nhanVien.setUrlAnh(fileName1);
         }
-
-        List<ChucVu> listChucVu = chucVuService.findAll();
-        model.addAttribute("listChucVu", listChucVu);
         nhanVienService.update(id, nhanVien);
-        model.addAttribute("contentPage", "../nhanvien/nhan-vien.jsp");
-
         return "redirect:/nhan-vien/hien-thi";
     }
 
