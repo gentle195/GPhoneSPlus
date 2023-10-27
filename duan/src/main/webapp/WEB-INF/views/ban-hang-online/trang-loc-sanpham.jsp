@@ -11,15 +11,13 @@
 
 </head>
 <style>
-    /*div{*/
-    /*    border: 1px solid red;*/
-    /*}*/
+
 
     .carousel-prev {
-        background-color: white; /* Màu nền nút */
-        color: black; /* Màu chữ trên nút */
-        font-size: 16px; /* Kích cỡ chữ */
-        border: none; /* Loại bỏ viền nút */
+        background-color: white;
+        color: black;
+        font-size: 16px;
+        border: none; 
         transition: background-color 0.3s, color 0.3s;
     }
 
