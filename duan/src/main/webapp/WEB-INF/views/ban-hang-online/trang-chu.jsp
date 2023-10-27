@@ -260,7 +260,7 @@
             </ul>
             <ul class="header-links pull-right">
                 <c:if test="${idkhachhang=='1'}">
-                    <li><a href="/thong-tin-ca-nhan"><i class="fa fa-user-o"></i> Chưa đăng nhập:<input
+                    <li><a href="/login"><i class="fa fa-user-o"></i> Chưa đăng nhập:<input
                             id="tkmkidkhachhang" type="text" style="display: none"
                             value="${idkhachhang}"></a></li>
 
