@@ -16,7 +16,36 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
+<<<<<<< Updated upstream
             <h4 class="card-title">Doanh thu thương hiệu</h4>
+=======
+            <h4 class="card-title">Doanh thu thương hiệu
+                <form action="/thong-ke/loc-thoi-gian" method="post" style="float: right">
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <div>
+                            <label>Ngày bắt đầu
+                            <input type="date" id="ngayTao" name="startDate" class="form-control"
+                                   placeholder="Từ ngày">
+                            </label>
+                        </div>
+                        <div>
+                            <label>Ngày kết thúc
+                            <input type="date" id="ngayTao1" name="endDate" class="form-control"
+                                   placeholder="Kết thúc">
+                            </label>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary mr-2" style="width: 100px; height: 38px;"
+                                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                Lọc
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </h4>
+
+>>>>>>> Stashed changes
             <div class="table-responsive">
                 <table class="table table-striped" style="color: black">
                     <thead>
@@ -33,7 +62,11 @@
                     <i class="mdi mdi-border-color"></i>
                     <c:forEach items="${listDoanhThuHang}" var="DTH" varStatus="index">
                         <tr>
+<<<<<<< Updated upstream
                             <td>${DTH.getTen()}</td>
+=======
+                            <td>${DTH.getTenHang()}</td>
+>>>>>>> Stashed changes
                             <td>${DTH.getSoLuongSP()}</td>
                             <td>${DTH.getDoanhThu()}</td>
                             <td>${DTH.getGiaMuaMin()}</td>
@@ -49,7 +82,15 @@
 </div>
 
 
+<<<<<<< Updated upstream
 <canvas id="myChart"></canvas>
+=======
+<div class="card">
+    <div class="card-body">
+        <canvas id="myChart" ></canvas>
+    </div>
+</div>
+>>>>>>> Stashed changes
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <%--<script src="../../js/thongke/char.js"></script>--%>
@@ -58,8 +99,14 @@
 
     <c:forEach items="${listDoanhThuHang}" var="DTH" varStatus="index">
     data.push({
+<<<<<<< Updated upstream
         tenHang: "${DTH.getTen()}",
         doanhThu: ${DTH.getDoanhThu()}
+=======
+        tenHang: "${DTH.getTenHang()}",
+        doanhThu: ${DTH.getDoanhThu()},
+        soLuong: ${DTH.getSoLuongSP()}
+>>>>>>> Stashed changes
     });
     </c:forEach>
 
@@ -72,14 +119,43 @@
             datasets: [{
                 label: 'Doanh Thu',
                 data: data.map(item => item.doanhThu),
+<<<<<<< Updated upstream
                 borderWidth: 1
+=======
+                borderWidth: 1,
+                yAxisID: 'y'
+            }, {
+                label: 'Số Lượng',
+                data: data.map(item => item.soLuong),
+                borderWidth: 1,
+                yAxisID: 'y1'
+>>>>>>> Stashed changes
             }]
         },
         options: {
             scales: {
                 y: {
+<<<<<<< Updated upstream
                     beginAtZero: true
                 }
+=======
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    id: 'y'
+                },
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    id: 'y1',
+
+                    // grid line settings
+                    grid: {
+                        drawOnChartArea: false, // only want the grid lines for one axis to show up
+                    },
+                },
+>>>>>>> Stashed changes
             }
         }
     });

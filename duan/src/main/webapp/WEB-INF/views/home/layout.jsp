@@ -72,7 +72,11 @@
                 <div class="collapse navbar-collapse justify-content-between">
                     <div class="header-left">
                         <div class="search_bar dropdown">
+<<<<<<< Updated upstream
                         </div>
+=======
+                            </div>
+>>>>>>> Stashed changes
                     </div>
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
@@ -110,12 +114,12 @@
     <div class="quixnav">
         <div class="quixnav-scroll">
             <ul class="metismenu" id="menu">
-                <li class="nav-label first">Main Menu</li>
+                <li class="nav-label first">Wellcome to GPhoneS Store</li>
 
                 <li><a href="/home" aria-expanded="false">
                     <i class="icon icon-single-04"></i>Trang chủ</a>
                 </li>
-                <li class="nav-label">Apps</li>
+                <li class="nav-label">Kinh doanh</li>
                 <li><a href="/ban-hang/hien-thi" aria-expanded="false"><i
                         class="icon icon-app-store"></i>Bán hàng</a>
                 </li>
@@ -168,8 +172,6 @@
                 </li>
             </ul>
         </div>
-
-
     </div>
     <!--**********************************
         Sidebar end

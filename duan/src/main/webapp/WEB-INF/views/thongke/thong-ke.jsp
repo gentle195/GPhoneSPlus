@@ -48,8 +48,11 @@
 <%--    <!-- /# column -->--%>
 <%--</div>--%>
 
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
@@ -98,39 +101,80 @@
         </div>
     </div>
 </div>
+<<<<<<< Updated upstream
 
 
 <canvas id="myChart"></canvas>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <%--<script src="../../js/thongke/char.js"></script>--%>
+=======
+
+
+<div class="card">
+    <div class="card-body">
+        <canvas id="myChart" ></canvas>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+>>>>>>> Stashed changes
 <script>
     const data = [];
 
     <c:forEach items="${listDoanhThu}" var="DT" varStatus="index">
     data.push({
         thang: ${DT.getThang()},
+<<<<<<< Updated upstream
         doanhThu: ${DT.getDoanhThu()}
+=======
+        doanhThu: ${DT.getDoanhThu()},
+        soLuong: ${DT.getSoLuongSP()}
+>>>>>>> Stashed changes
     });
     </c:forEach>
 
     const ctx = document.getElementById('myChart');
 
     new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: data.map(item => item.thang),
             datasets: [{
                 label: 'Doanh Thu',
                 data: data.map(item => item.doanhThu),
+<<<<<<< Updated upstream
                 borderWidth: 1
             }]
+=======
+                borderWidth: 1,
+                yAxisID: 'y'
+            },
+                {
+                    label: 'Số Lượng',
+                    data: data.map(item => item.soLuong),
+                    borderWidth: 1,
+                    yAxisID: 'y1'
+                }
+            ]
+>>>>>>> Stashed changes
         },
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
-                }
+                    beginAtZero: true,
+                    id: 'y'
+                },
+                y1: {
+                    beginAtZero: true,
+                    id: 'y1',
+                    position: 'right',
+
+                    // grid line settings
+                    grid: {
+                        drawOnChartArea: false, // only want the grid lines for one axis to show up
+                    },
+                },
             }
         }
     });

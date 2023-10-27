@@ -13,50 +13,6 @@
 </head>
 
 <body>
-<<<<<<< Updated upstream
-<%--<div class="col-lg-12 grid-margin stretch-card">--%>
-<%--    <div class="card">--%>
-<%--        <div class="card-body">--%>
-<%--            <h4 class="card-title">Doanh thu sản phẩm--%>
-<%--                <form action="/thong-ke/loc-nam" method="post" style="float: right">--%>
-<%--&lt;%&ndash;                    <select name="namSelect">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                        <option value="" disabled selected>Chọn năm</option>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                        <c:forEach items="${listYear}" var="nam">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                            <option value="${nam.getNam()}">${nam.getNam()}</option>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                        </c:forEach>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                    </select>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                    <button type="submit" class="btn btn-primary mr-2"&ndash;%&gt;--%>
-<%--&lt;%&ndash;                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                        Lọc&ndash;%&gt;--%>
-<%--&lt;%&ndash;                    </button>&ndash;%&gt;--%>
-<%--                </form>--%>
-<%--            </h4>--%>
-
-<%--            <div class="table-responsive">--%>
-<%--                <table class="table table-striped" style="color: black">--%>
-<%--                    <thead>--%>
-<%--                    <tr>--%>
-<%--                        <th>Tên</th>--%>
-<%--                        <th>Số lượng sản phẩm</th>--%>
-<%--                    </tr>--%>
-<%--                    </thead>--%>
-<%--                    <tbody>--%>
-<%--                    <i class="mdi mdi-border-color"></i>--%>
-<%--                    <c:forEach items="${listDoanhThuSP}" var="DTSP" varStatus="index">--%>
-<%--                        <tr>--%>
-<%--                            <td>${DTSP.getTen()}</td>--%>
-<%--                            <td>${DTSP.getSoLuongSP()}</td>--%>
-<%--                        </tr>--%>
-<%--                    </c:forEach>--%>
-<%--                    </tbody>--%>
-<%--                </table>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
-<div><h3>Biểu đồ thống kê doanh thu theo sản sản phẩm</h3></div>
-<canvas id="myChart" ></canvas>
-=======
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
@@ -111,7 +67,6 @@
        <canvas id="myChart" ></canvas>
     </div>
 </div>
->>>>>>> Stashed changes
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
@@ -119,60 +74,37 @@
 
     <c:forEach items="${listDoanhThuSP}" var="DTSP" varStatus="index">
     data.push({
-<<<<<<< Updated upstream
-        ten: "${DTSP.getTen()}",
-=======
         ten: "${DTSP.getTenSanPham()}",
->>>>>>> Stashed changes
         doanhThu: ${DTSP.getDoanhThu()},
         soLuong: ${DTSP.getSoLuongSP()}
     });
     </c:forEach>
 
+    // const ctx = document.getElementById('myChart');
+    //
+    // new Chart(ctx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: data.map(item => item.ten),
+    //         datasets: [{
+    //             label: 'Doanh Thu',
+    //             data: data.map(item => item.doanhThu),
+    //             borderWidth: 1,
+    //         }]
+    //     },
+    // });
     const ctx = document.getElementById('myChart');
 
     new Chart(ctx, {
-        type: 'bar',
+        type: 'pie',
         data: {
             labels: data.map(item => item.ten),
             datasets: [{
-                label: 'Doanh Thu',
+                label: '# of Votes',
                 data: data.map(item => item.doanhThu),
-                borderWidth: 1,
-<<<<<<< Updated upstream
+                borderWidth: 1 //khung viền
             }]
         },
-=======
-                yAxisID: 'y'
-            }, {
-                label: 'Số Lượng',
-                data: data.map(item => item.soLuong),
-                borderWidth: 1,
-                yAxisID: 'y1'
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    id: 'y'
-                },
-                y1: {
-                    type: 'linear',
-                    display: true,
-                    position: 'right',
-                    id: 'y1',
-
-                    // grid line settings
-                    grid: {
-                        drawOnChartArea: false, // only want the grid lines for one axis to show up
-                    },
-                },
-            }
-        }
->>>>>>> Stashed changes
     });
 </script>
 </html>
