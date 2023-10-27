@@ -125,5 +125,10 @@ public class KhachHangServiceImpl implements KhachHangService {
         return khachHangRepository.newKhachHang(id);
     }
 
+    @Override
+    public KhachHang quenMatKhau(String username, String email) {
+        return khachHangRepository.quenMatKhau(username, email);
+    }
+
 
 }

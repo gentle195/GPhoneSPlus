@@ -72,29 +72,35 @@
                 <div class="collapse navbar-collapse justify-content-between">
                     <div class="header-left">
                         <div class="search_bar dropdown">
+                                <span class="search_icon p-3 c-pointer" data-toggle="dropdown">
+                                    <i class="mdi mdi-magnify"></i>
+                                </span>
+                            <div class="dropdown-menu p-0 m-0">
+                                <form>
+                                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                                </form>
+                            </div>
                         </div>
                     </div>
-                            <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
 
-                                    <img src="/uploads/${nhanVien.urlAnh}" >
+                    <ul class="navbar-nav header-right">
+                        <li class="nav-item dropdown header-profile">
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
 
+                                <img src="/uploads/${nhanVien.urlAnh}">
+
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="/thong-tin-ca-nhan" class="dropdown-item">
+                                    <i class="icon-user"></i>
+                                    <span class="ml-2">Profile </span>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="/thong-tin-ca-nhan" class="dropdown-item">
-                                        <i class="icon-user"></i>
-                                        <span class="ml-2">Profile </span>
-                                    </a>
-                                    <%--                                <a href="./email-inbox.html" class="dropdown-item">--%>
-                                    <%--                                    <i class="icon-envelope-open"></i>--%>
-                                    <%--                                    <span class="ml-2">Inbox </span>--%>
-                                    <%--                                </a>--%>
-                                    <a href="/logout" class="dropdown-item">
-                                        <i class="icon-key"></i>
-                                        <span class="ml-2">Logout </span>
-                                    </a>
-                                </div>
-                            </li>
+                                <a href="/logout" class="dropdown-item">
+                                    <i class="icon-key"></i>
+                                    <span class="ml-2">Logout </span>
+                                </a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -158,13 +164,8 @@
                 </li>
 
 
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                        class="icon icon-form"></i><span class="nav-text">Thống kê</span></a>
-                    <ul aria-expanded="false">
-                        <li><a href="/thong-ke/hien-thi">Doanh Thu theo tháng</a></li>
-                        <li><a href="/thong-ke/hien-thi-sp">Doanh thu theo sản phẩm</a></li>
-                        <li><a href="/thong-ke/hien-thi-hang">Doanh thu theo hãng</a></li>
-                    </ul>
+                <li><a href="/thong-ke/hien-thi" aria-expanded="false"><i
+                        class="icon icon-form"></i>Thống kê</a>
                 </li>
             </ul>
         </div>
@@ -245,6 +246,7 @@
 <script src="../../../vendor/jqvmap/js/jquery.vmap.min.js"></script>
 <script src="../../../vendor/jqvmap/js/jquery.vmap.usa.js"></script>
 <script src="../../../vendor/jquery.counterup/jquery.counterup.min.js"></script>
+
 <!-- Data table -->
 <script src="../../../vendor/datatables/js/jquery.dataTables.min.js"></script>
 <script src="../../../js/plugins-init/datatables.init.js"></script>
