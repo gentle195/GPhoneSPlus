@@ -226,7 +226,6 @@
                         } else {
                             document.getElementById("matKhau1").innerHTML = "";
                             document.getElementById("btkh").type = "summit";
-                            alert('Đăng ký tài khoản thành công.');
                             return true;
                         }
                     }
