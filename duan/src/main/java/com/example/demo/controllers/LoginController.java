@@ -7,26 +7,37 @@ import com.example.demo.repositories.NhanVienRepository;
 import com.example.demo.services.DataIntermediateService;
 import com.example.demo.services.KhachHangService;
 import com.example.demo.services.MailerService;
+import com.example.demo.services.NhanVienService;
+import com.example.demo.util.FileUploadUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class LoginController {
     @Autowired
     private NhanVienRepository nhanVienRepository;
+    @Autowired
+    private NhanVienService nhanVienService;
 
     @Autowired
     private KhachHangRepository khachHangRepository;
@@ -63,7 +74,7 @@ public class LoginController {
                 service.setDataNhanVienLogin(nhanVien2);
                 System.out.println(nhanVien1.getTaiKhoan());
                 model.addAttribute("nhanVien", service.getSharedDataNhanVien());
-                return  "/home/layout";
+                return "/home/layout";
             }
         }
         KhachHang khachHang = khachHangRepository.getKhachHangByTaiKhoan(username);
@@ -97,9 +108,16 @@ public class LoginController {
     }
 
     @GetMapping("/thong-tin-ca-nhan")
-    public String thongTinND(Model model) {
+    public String thongTinND(Model model, @ModelAttribute("us") NhanVien nhanVien) {
         model.addAttribute("us", service.getSharedDataNhanVien());
         model.addAttribute("contentPage", "../thong-tin/thong-tin-ca-nhan.jsp");
+        return "/home/layout";
+    }
+
+    @GetMapping("/doi-mat-khau")
+    public String doiMatKhau(Model model) {
+        model.addAttribute("us", service.getSharedDataNhanVien());
+        model.addAttribute("contentPage", "../thong-tin/doi-mat-khau.jsp");
         return "/home/layout";
     }
 
@@ -167,5 +185,73 @@ public class LoginController {
         }
 
         return password.toString();
+    }
+
+    @PostMapping("/login/update-thong-tin/{id}")
+    public String updateThongTin(Model model, @ModelAttribute("us") @Valid NhanVien nhanVien,
+                                 BindingResult bindingResult, @PathVariable("id") UUID id
+            , @RequestParam("checkanh1") String checkanh1, @RequestParam("anh1s") MultipartFile anh1) throws IOException {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("contentPage", "../thong-tin/thong-tin-ca-nhan.jsp");
+            return "/home/layout";
+        }
+
+        String fileName1 = StringUtils.cleanPath(anh1.getOriginalFilename());
+        if (checkanh1.equals("cu1")) {
+        } else {
+            if (fileName1.equals("")) {
+            } else {
+                String uploadDir = "src/main/webapp/uploads/";
+                FileUploadUtil.saveFile(uploadDir, fileName1, anh1);
+            }
+            nhanVien.setUrlAnh(fileName1);
+        }
+        NhanVien nv = nhanVienService.findById(id);
+        System.out.println(nv);
+        nhanVien.setChucVu(nv.getChucVu());
+        nhanVien.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        nhanVienService.update(id, nhanVien);
+        return "redirect:/thong-tin-ca-nhan";
+    }
+
+    @PostMapping("/login/doi-mat-khau/{id}")
+    public String doiMatKhau(Model model, @ModelAttribute("us") @Valid NhanVien nhanVien, @PathVariable("id") UUID id,
+                             @RequestParam("mat-khau-cu") String oldp,
+                             @RequestParam("mat-khau-moi") String newp,
+                             @RequestParam("xac-nhan-mat-khau") String conp,
+                             @RequestParam("checkanh1") String checkanh1, @RequestParam("anh1s") MultipartFile anh1) throws IOException {
+        NhanVien nv = nhanVienService.findById(id);
+        boolean matches = BCrypt.checkpw(oldp, nv.getMatKhau());
+        if (matches == false) {
+            model.addAttribute("thongBao1", "Sai mật khẩu");
+            model.addAttribute("contentPage", "../thong-tin/doi-mat-khau.jsp");
+            return "/home/layout";
+        } else {
+            if (!newp.equalsIgnoreCase(conp)) {
+                model.addAttribute("thongBao3", "Mật khẩu mới chưa khớp với mật khẩu xác nhận");
+                model.addAttribute("contentPage", "../thong-tin/doi-mat-khau.jsp");
+                return "/home/layout";
+            } else {
+                String fileName1 = StringUtils.cleanPath(anh1.getOriginalFilename());
+                if (checkanh1.equals("cu1")) {
+                } else {
+                    if (fileName1.equals("")) {
+                    } else {
+                        String uploadDir = "src/main/webapp/uploads/";
+                        FileUploadUtil.saveFile(uploadDir, fileName1, anh1);
+                    }
+                    nhanVien.setUrlAnh(fileName1);
+                }
+                nhanVien.setChucVu(nv.getChucVu());
+                nhanVien.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+                String matKhau = newp;
+                String hashedPassword = BCrypt.hashpw(matKhau, BCrypt.gensalt());
+                nhanVien.setMatKhau(hashedPassword);
+                nhanVienService.update(id, nhanVien);
+                NhanVien newnv = nhanVienService.findById(id);
+                mailer.queue(newnv.getEmail(), "Bạn đã thay đổi mật khẩu thành công", "Tài khoản: " + newnv.getTaiKhoan() + "\nMật khẩu mới: " + matKhau);
+               return "redirect:/login";
+            }
+        }
     }
 }

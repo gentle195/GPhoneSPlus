@@ -50,7 +50,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
 
 
     @Query(value = "SELECT san_pham.ten as tenSanPham,\n" +
-            "COUNT(san_pham.id) AS soLuongSP,\n" +
+            "COUNT(hoa_don_chi_tiet.id_imei) AS soLuongSP,\n" +
             "SUM(don_gia) as DoanhThu,\n" +
             "MIN(don_gia) AS GiaMuaMin, MAX(don_gia) AS GiaMuaMax,\n" +
             "AVG(don_gia) AS DoanhThuTrungBinh\n" +
