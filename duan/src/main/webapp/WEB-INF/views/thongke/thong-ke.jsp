@@ -54,7 +54,7 @@
             <h4 class="card-title">Doanh thu các năm
                 <form action="/thong-ke/loc-nam" method="post" style="float: right">
                     <select name="namSelect">
-                        <option value="" disabled selected>Chọn năm</option>
+                        <option value="" disabled >Chọn năm</option>
                         <c:forEach items="${listYear}" var="nam">
                             <option value="${nam.getNam()}">${nam.getNam()}</option>
                         </c:forEach>
@@ -71,7 +71,7 @@
                     <thead>
                     <tr>
                         <th>Tháng</th>
-                        <th>Số lượng sản phẩm</th>
+                        <th>Số lượng sản phẩm đã bán</th>
                         <th>Doanh thu tháng</th>
                         <th>Giá mua thấp nhất</th>
                         <th>Giá mua cao nhất</th>

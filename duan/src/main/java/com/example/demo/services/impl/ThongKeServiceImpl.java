@@ -1,6 +1,8 @@
 package com.example.demo.services.impl;
 
 import com.example.demo.DTO.DoanhThuHang;
+import com.example.demo.DTO.DoanhThuKhachHang;
+import com.example.demo.DTO.DoanhThuNhanVien;
 import com.example.demo.DTO.DoanhThuSanPham;
 import com.example.demo.DTO.DoanhThuTheoThang;
 import com.example.demo.models.HoaDon;
@@ -67,6 +69,36 @@ public class ThongKeServiceImpl implements ThongKeService {
     @Override
     public List<DoanhThuSanPham> locHang(String ten) {
         return thongKeRepository.locHang(ten);
+    }
+
+    @Override
+    public List<DoanhThuNhanVien> doanhThuNhanVien() {
+        return thongKeRepository.doanhThuNhanVien();
+    }
+
+    @Override
+    public List<DoanhThuNhanVien> locDoanhThuNhanVien(Date startDate, Date endDate) {
+        return thongKeRepository.locDoanhThuNhanVien(startDate, endDate);
+    }
+
+    @Override
+    public List<DoanhThuKhachHang> doanhThuKhachHang() {
+        return thongKeRepository.doanhThuKhachHang();
+    }
+
+    @Override
+    public List<DoanhThuKhachHang> doanhThuKhachHangGioiTinh() {
+        return thongKeRepository.doanhThuKhachHangGioiTinh();
+    }
+
+    @Override
+    public List<DoanhThuKhachHang> locDoanhThuKhachHang(Date startDate, Date endDate) {
+        return thongKeRepository.locDoanhThuKhachHang(startDate,endDate);
+    }
+
+    @Override
+    public List<DoanhThuKhachHang> locDoanhThuKhachHangGioiTinh(Date startDate, Date endDate) {
+        return thongKeRepository.locDoanhThuKhachHangGioiTinh(startDate,endDate);
     }
 
 //    @Override
