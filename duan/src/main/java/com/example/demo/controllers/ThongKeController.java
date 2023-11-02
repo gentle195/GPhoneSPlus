@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
 import com.example.demo.DTO.DoanhThuHang;
+import com.example.demo.DTO.DoanhThuKhachHang;
+import com.example.demo.DTO.DoanhThuNhanVien;
 import com.example.demo.DTO.DoanhThuSanPham;
 import com.example.demo.DTO.DoanhThuTheoThang;
 import com.example.demo.services.ThongKeService;
@@ -43,11 +45,11 @@ public class ThongKeController {
 
     @PostMapping("/loc-nam")
     public String locNam(Model model, @ModelAttribute("namSelect") Integer nam) {
-        List<DoanhThuTheoThang> doanhThuTheoThangs = thongKeService.loctheonam(nam);
-        model.addAttribute("listDoanhThu", doanhThuTheoThangs);
-
         List<DoanhThuTheoThang> selected = thongKeService.selectedYear();
         model.addAttribute("listYear", selected);
+
+        List<DoanhThuTheoThang> doanhThuTheoThangs = thongKeService.loctheonam(nam);
+        model.addAttribute("listDoanhThu", doanhThuTheoThangs);
         model.addAttribute("contentPage", "../thongke/thong-ke.jsp");
         return "/home/layout";
     }
@@ -75,19 +77,53 @@ public class ThongKeController {
 
     @GetMapping("/hien-thi-hang")
     public String hienThiHang(Model model) {
-        List<DoanhThuHang> doanhThuTheoHang = thongKeService.doanhThuHang();
-        model.addAttribute("listDoanhThuHang", doanhThuTheoHang);
         model.addAttribute("contentPage", "../thongke/thong-ke-hang.jsp");
         return "/home/layout";
     }
 
     @PostMapping("/loc-thoi-gian")
     public String locTime(Model model, @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate) {
+        List<DoanhThuHang> doanhThuTheoHang = thongKeService.doanhThuHang();
+        model.addAttribute("listDoanhThuHang", doanhThuTheoHang);
+
         List<DoanhThuHang> locHang = thongKeService.locdoanhThuHang(startDate,endDate);
         model.addAttribute("listDoanhThuHang", locHang);
         model.addAttribute("contentPage", "../thongke/thong-ke-hang.jsp");
         return "/home/layout";
     }
 
+    @GetMapping("/hien-thi-nhan-vien")
+    public String doanhThuNhanVien(Model model) {
+        model.addAttribute("contentPage", "../thongke/thong-ke-nhan-vien.jsp");
+        return "/home/layout";
+    }
 
+    @PostMapping("/loc-thoi-gian-nv")
+    public String locTimeNhanVien(Model model, @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate) {
+        List<DoanhThuNhanVien> locHang = thongKeService.locDoanhThuNhanVien(startDate,endDate);
+        model.addAttribute("listDoanhThuNhanVien", locHang);
+        model.addAttribute("contentPage", "../thongke/thong-ke-nhan-vien.jsp");
+        return "/home/layout";
+    }
+
+    @GetMapping("/hien-thi-khach-hang")
+    public String doanhThuKhachHang(Model model) {
+//        List<DoanhThuKhachHang> doanhThuKhachHangGioiTinhs = thongKeService.doanhThuKhachHangGioiTinh();
+//        model.addAttribute("listDoanhThuKhachHangGioiTinh", doanhThuKhachHangGioiTinhs);
+//
+//        List<DoanhThuKhachHang> doanhThuKhachHangs = thongKeService.doanhThuKhachHang();
+//        model.addAttribute("listDoanhThuKhachHang", doanhThuKhachHangs);
+        model.addAttribute("contentPage", "../thongke/thong-ke-khach-hang.jsp");
+        return "/home/layout";
+    }
+
+    @PostMapping("/loc-thoi-gian-kh")
+    public String locKhachHang(Model model, @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate) {
+        List<DoanhThuKhachHang> locDoanhThuKhachHang = thongKeService.locDoanhThuKhachHang(startDate,endDate);
+        List<DoanhThuKhachHang> locDoanhThuKhachHangGioiTinh = thongKeService.locDoanhThuKhachHangGioiTinh(startDate,endDate);
+        model.addAttribute("listDoanhThuKhachHang", locDoanhThuKhachHang);
+        model.addAttribute("listDoanhThuKhachHangGioiTinh", locDoanhThuKhachHangGioiTinh);
+        model.addAttribute("contentPage", "../thongke/thong-ke-khach-hang.jsp");
+        return "/home/layout";
+    }
 }

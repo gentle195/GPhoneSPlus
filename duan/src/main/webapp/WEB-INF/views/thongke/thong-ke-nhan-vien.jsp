@@ -16,19 +16,19 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Doanh thu thương hiệu
-                <form action="/thong-ke/loc-thoi-gian" method="post" style="float: right">
+            <h4 class="card-title">Doanh thu sản phẩm
+                <form action="/thong-ke/loc-thoi-gian-nv" method="post" style="float: right">
                     <div style="display: flex; justify-content: center; align-items: center;">
                         <div>
                             <label>Ngày bắt đầu
-                            <input type="date" id="ngayTao" name="startDate" class="form-control"
-                                   placeholder="Từ ngày">
+                                <input type="date" id="ngayTao" name="startDate" class="form-control"
+                                       placeholder="Từ ngày">
                             </label>
                         </div>
                         <div>
                             <label>Ngày kết thúc
-                            <input type="date" id="ngayTao1" name="endDate" class="form-control"
-                                   placeholder="Kết thúc">
+                                <input type="date" id="ngayTao1" name="endDate" class="form-control"
+                                       placeholder="Kết thúc">
                             </label>
                         </div>
                         <div>
@@ -39,31 +39,24 @@
                         </div>
                     </div>
                 </form>
-
             </h4>
 
             <div class="table-responsive">
                 <table class="table table-striped" style="color: black">
                     <thead>
                     <tr>
-                        <th>Thương hiệu</th>
-                        <th>Số lượng sản phẩm đã bán</th>
-                        <th>Doanh thu tháng</th>
-                        <th>Giá mua thấp nhất</th>
-                        <th>Giá mua cao nhất</th>
-                        <th>Doanh thu trung bình</th>
+                        <th>Tên nhân viên</th>
+                        <th>Số sản phẩm đã bán</th>
+                        <th>Tiền thu</th>
                     </tr>
                     </thead>
                     <tbody>
                     <i class="mdi mdi-border-color"></i>
-                    <c:forEach items="${listDoanhThuHang}" var="DTH" varStatus="index">
+                    <c:forEach items="${listDoanhThuNhanVien}" var="DTNV" varStatus="index">
                         <tr>
-                            <td>${DTH.getTenHang()}</td>
-                            <td>${DTH.getSoLuongSP()}</td>
-                            <td>${DTH.getDoanhThu()}</td>
-                            <td>${DTH.getGiaMuaMin()}</td>
-                            <td>${DTH.getGiaMuaMax()}</td>
-                            <td>${DTH.getDoanhThuTrungBinh()}</td>
+                            <td>${DTNV.getTenNhanVien()}</td>
+                            <td>${DTNV.getSoLuongSP()}</td>
+                            <td>${DTNV.getDoanhThu()}</td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -72,24 +65,22 @@
         </div>
     </div>
 </div>
-
-
+<div><h3>Biểu đồ thống kê doanh thu theo sản sản phẩm</h3></div>
 <div class="card">
     <div class="card-body">
-        <canvas id="myChart" ></canvas>
+       <canvas id="myChart" ></canvas>
     </div>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<%--<script src="../../js/thongke/char.js"></script>--%>
 <script>
     const data = [];
 
-    <c:forEach items="${listDoanhThuHang}" var="DTH" varStatus="index">
+    <c:forEach items="${listDoanhThuNhanVien}" var="DT" varStatus="index">
     data.push({
-        tenHang: "${DTH.getTenHang()}",
-        doanhThu: ${DTH.getDoanhThu()},
-        soLuong: ${DTH.getSoLuongSP()}
+        tenNhanVien: "${DT.getTenNhanVien()}",
+        doanhThu: ${DT.getDoanhThu()},
+        soLuong: ${DT.getSoLuongSP()}
     });
     </c:forEach>
 
@@ -98,32 +89,31 @@
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: data.map(item => item.tenHang),
+            labels: data.map(item => item.tenNhanVien),
             datasets: [{
                 label: 'Doanh Thu',
                 data: data.map(item => item.doanhThu),
                 borderWidth: 1,
                 yAxisID: 'y'
-            }, {
-                label: 'Số Lượng',
-                data: data.map(item => item.soLuong),
-                borderWidth: 1,
-                yAxisID: 'y1'
-            }]
+            },
+                {
+                    label: 'Số Lượng',
+                    data: data.map(item => item.soLuong),
+                    borderWidth: 1,
+                    yAxisID: 'y1'
+                }
+            ]
         },
         options: {
             scales: {
                 y: {
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
+                    beginAtZero: true,
                     id: 'y'
                 },
                 y1: {
-                    type: 'linear',
-                    display: true,
-                    position: 'right',
+                    beginAtZero: true,
                     id: 'y1',
+                    position: 'right',
 
                     // grid line settings
                     grid: {

@@ -36,7 +36,8 @@
                     <thead>
                     <tr>
                         <th>Tên sản phẩm</th>
-                        <th>Số lượng sản phẩm</th>
+                        <th>Số lượng sản phẩm đã bán</th>
+                        <th>Số lượng tồn</th>
                         <th>Doanh thu tháng</th>
                         <th>Giá mua thấp nhất</th>
                         <th>Giá mua cao nhất</th>
@@ -49,6 +50,7 @@
                         <tr>
                             <td>${DTSP.getTenSanPham()}</td>
                             <td>${DTSP.getSoLuongSP()}</td>
+                            <td>${DTSP.getSoLuongTon()}</td>
                             <td>${DTSP.getDoanhThu()}</td>
                             <td>${DTSP.getGiaMuaMin()}</td>
                             <td>${DTSP.getGiaMuaMax()}</td>
@@ -76,7 +78,8 @@
     data.push({
         ten: "${DTSP.getTenSanPham()}",
         doanhThu: ${DTSP.getDoanhThu()},
-        soLuong: ${DTSP.getSoLuongSP()}
+        soLuongBan: ${DTSP.getSoLuongSP()},
+        soLuongTon: ${DTSP.getSoLuongTon()}
     });
     </c:forEach>
 
@@ -92,8 +95,13 @@
                 borderWidth: 1,
                 yAxisID: 'y'
             }, {
-                label: 'Số Lượng',
-                data: data.map(item => item.soLuong),
+                label: 'Số lượng bán',
+                data: data.map(item => item.soLuongBan),
+                borderWidth: 1,
+                yAxisID: 'y1'
+            },{
+                label: 'Số lượng tồn',
+                data: data.map(item => item.soLuongTon),
                 borderWidth: 1,
                 yAxisID: 'y1'
             }]
