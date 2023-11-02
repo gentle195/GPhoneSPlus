@@ -9,6 +9,7 @@
 
     <%--phan trang--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -94,6 +95,78 @@
             background-color: #007bff;
             color: #fff;
         }
+        .product-info-table {
+            border-collapse: collapse; /* Loại bỏ khoảng cách giữa các ô */
+            width: 100%; /* Đảm bảo bảng rộng 100% */
+        }
+
+        .product-info-table tr {
+            border-bottom: 1px solid #ccc; /* Thêm dòng kẻ dưới mỗi hàng */
+        }
+
+        .product-info-table td {
+            padding: 8px; /* Tùy chỉnh khoảng cách nội dung trong ô */
+        }
+
+        .info-label {
+            font-weight: bold; /* In đậm nhãn */
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            border: 1px solid #000;
+        }
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+        }
+
+        .qty-button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px 10px;
+            margin: 0;
+        }
+
+        .qty-input {
+            width: 40px;
+            text-align: center;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .qty-button.qty-down {
+            border-radius: 3px 0 0 3px;
+        }
+
+        .qty-button.qty-up {
+            border-radius: 0 3px 3px 0;
+        }
+
+        .qty-button:hover {
+            background-color: #2471a3;
+        }
+
     </style>
 
 </head>
@@ -342,9 +415,9 @@
 
 <div id="thanhlocxemchitietsanpham" >
     <p id="vt"></p>
-    <div style="position: absolute;margin-left: 57%;width: 43%;margin-top: 10%;z-index: 2">
+    <div style="position: absolute;margin-left: 55%;width: 43%;margin-top: 8%;z-index: 2">
         <p style="display: none" id="tenspctsp">${motctsp.sanPham.ten}</p>
-        Màu sắc:
+        <label style="font-weight: bold" >Màu sắc</label>
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
 
             <c:if test="${stt1.index==0}">
@@ -376,7 +449,7 @@
         </c:forEach>
         <br>
         <br>
-        Rom:
+        <label style="font-weight: bold">Rom</label>
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
 
             <c:if test="${stt1.index==0}">
@@ -407,7 +480,7 @@
 
         <br>
         <br>
-        Ram:
+        <label style="font-weight: bold">Ram</label>
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
             <c:if test="${stt1.index==0}">
                 <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
@@ -437,7 +510,7 @@
 
         <br>
         <br>
-        Chíp:
+        <label style="font-weight: bold">Chip</label>
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
             <c:if test="${stt1.index==0}">
                 <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
@@ -479,34 +552,26 @@
             <div  style="width: 42%;float: right">
                 <div class="product-details">
                     <h2 class="product-name">${motctsp.sanPham.ten}</h2>
-                    <div>
-                        <div class="product-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                        </div>
-                        <a class="review-link" href="#">10 Review(s) | Add your review</a>
-                    </div>
+
                     <div>
                         <h4 class="product-price"><span style="font-size:15px">₫</span>${motctsp.giaBan-motctsp.giaBan/100*banhangonline.tonggiamgia(motctsp.id)}-<del class="product-old-price">${motctsp.giaBan}<span style="font-size:15px">₫</span></del></h4>
-                        <span class="product-available">In Stock</span>
+
                     </div>
 
 
 
                     <div class="add-to-cart" style="margin-top: 7cm">
-                        Số lượng :<label style="background: white;color: red;border: 1px solid white" id="thongbaosoluong"></label>
+                        <label style="background: white;color: red;border: 1px solid white" id="thongbaosoluong"></label>
                         <br>
                         <c:if test="${idkhachhang=='1'}">
                             <div class="qty-label">
-                                <div class="" style="margin-left: 1cm">
-                                    <BUTTON class="qty-down">-</BUTTON>
-                                    <input type="number" value="1" min="1" max="${banhangonline.soluongcon(motctsp.id)}" id="input2" style="width: 2cm" name="solg">
-                                    <BUTTON class="qty-up">+</BUTTON>
+                                <div class="quantity-control">
+                                    <button class="qty-button qty-down">-</button>
+                                    <input type="number" value="1" min="1" max="0" id="input2" class="qty-input">
+                                    <button class="qty-button qty-up">+</button>
                                 </div>
                             </div>
+
                             <label style="background: white;border: 1px solid white">Số lượng còn :${banhangonline.soluongcon(motctsp.id)}</label>
                             <br><br>
                             <a href="/login">
@@ -520,16 +585,16 @@
                         <c:if test="${idkhachhang!='1'}">
                             <form action="" method="post" id="formctsp">
 
-                                <div class="qty-label">
-                                    <div class="" style="margin-left: 1cm">
-                                        <BUTTON class="qty-down" type="button">-</BUTTON>
-                                        <input type="number" value="0" min="0" max="${banhangonline.soluongcon(motctsp.id)-banhangonline.sl1ctsptronggh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId(),motctsp.id)}" id="input2" style="width: 2cm" name="solg">
-                                        <BUTTON class="qty-up" type="button">+</BUTTON>
+                                <div class="qty-label" style="display: flex; justify-content: flex-end; align-items: center; ">
+                                    <div class="" style="margin-left: 1cm;">
+                                        <BUTTON class="qty-down">-</BUTTON>
+                                        <input type="number" value="1" min="1" max="0" id="input2" style="width: 2cm; margin-right: 10px;">
+                                        <BUTTON class="qty-up">+</BUTTON>
                                     </div>
                                 </div>
 
 
-                                <label style="background: white;border: 1px solid white">Số lượng còn :${banhangonline.soluongcon(motctsp.id)}</label>
+                                <label style="background: white;border: 1px solid white">Số lượng còn :0</label>
                                 <br><br>
 
                                     <%--                            <p>${idkhachhang}----${motctsp.id}</p>--%>
@@ -546,36 +611,56 @@
 
                     </div>
                     <%--<p>${idkhachhang}</p>--%>
-                    <ul class="product-btns">
-                        <li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
-                        <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
-                    </ul>
 
-                    <ul class="product-links">
-                        <li>Category:</li>
-                        <li><a href="#">Headphones</a></li>
-                        <li><a href="#">Accessories</a></li>
-                    </ul>
-
-                    <ul class="product-links">
-                        <li>Share:</li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#"><i class="fa fa-envelope"></i></a></li>
-                    </ul>
                     <br>
                     <p>
-                    <div>
-                        *Hãng sản phẩm:${motctsp.sanPham.hangSanPham.ten}<br>
-                        *Camera:${motctsp.sanPham.camera.thongSo}<br>
-                        *Màn:${motctsp.sanPham.manHinh.thongSo}<br>
-                        *Màu:${motctsp.mauSac.ten}<br>
-                        *Ram:${motctsp.ram.dungLuong}<br>
-                        *Rom:${motctsp.rom.dungLuong}<br>
-                        *Pin:${motctsp.pin.loaiPin}<br>
-                        *Dung lượng pin:${motctsp.pin.dungLuongPin.thongSo}<br>
-                        *Chip:${motctsp.chip.ten}<br>
+                    <div class="product-description">
+                        <h3>Thông tin chi tiết sản phẩm:</h3>
+                        <table class="product-info-table">
+                            <tr>
+                                <td class="info-label">Hãng sản phẩm:</td>
+                                <td>${motctsp.sanPham.hangSanPham.ten}</td>
+                            </tr>
+                            <tr>
+                                <td class="info-label">Camera:</td>
+                                <td>${motctsp.sanPham.camera.thongSo}</td>
+                            </tr>
+                            <tr>
+                                <td class="info-label">Màn:</td>
+                                <td>${motctsp.sanPham.manHinh.thongSo}</td>
+                            </tr>
+                            <tr>
+                                <td class="info-label">Màu:</td>
+                                <td>${motctsp.mauSac.ten}</td>
+                            </tr>
+                            <tr>
+                                <td class="info-label">Ram:</td>
+                                <td>${motctsp.ram.dungLuong}</td>
+                            </tr>
+                            <tr>
+                                <td class="info-label">Rom:</td>
+                                <td>${motctsp.rom.dungLuong}</td>
+                            </tr>
+                            <tr>
+                                <td class="info-label">Pin:</td>
+                                <td>${motctsp.pin.loaiPin}</td>
+                            </tr>
+                            <tr>
+                                <td class="info-label">Dung lượng pin:</td>
+                                <td>${motctsp.pin.dungLuongPin.thongSo}</td>
+                            </tr>
+                            <tr>
+                                <td class="info-label">Chip:</td>
+                                <td>${motctsp.chip.ten}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCTSP
+">
+                            Xem thêm cấu hình chi tiết
+                        </button>
                     </div>
                     </p>
 
