@@ -5,7 +5,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+<%--    table--%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <%--phan trang--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="utf-8">
@@ -98,7 +100,6 @@
 </head>
 
 <body>
-
 <!-- HEADER -->
 <header>
     <!-- TOP HEADER -->
@@ -332,90 +333,229 @@
 </nav>
 <!-- /NAVIGATION -->
 
-<div style="width: 75%;margin-left: 12.5%; " id="content">
-    <div >
-    <c:if test="${listghct.size()>0}">
-    <table class="table table-hover">
+
+<main style="width: 75%;margin-left: 12.5%; " id="content">
+<c:if test="${listhdkh.size()>0}">
+    <table class="table table-borderless">
         <thead>
         <tr>
-            <th><input type="checkbox" name="checktong" onclick="chonhetgiohangtong('${listghct.get(0).gioHang.id}');"  ${tttong==0 ?"checked":""}></th>
-            <th>Ảnh</th>
-            <th>Sản Phẩm</th>
-            <th>Đơn Giá</th>
-            <th>Số lượng</th>
-            <th>Số tiền</th>
-            <th>Thao tác</th>
+            <th>STT</th>
+            <th>Mã đơn hàng</th>
+            <th>Ngày đặt</th>
+            <th>Địa chỉ nhận</th>
+            <th>Trạng thái đơn hàng</th>
+            <th>Hình thức thanh toán</th>
+            <th>Trạng thái giao hàng</th>
+            <th>Chức năng</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${listghct}" var="ht" varStatus="stt">
+        <c:forEach items="${listhdkh}" var="ht" varStatus="stt" >
         <tr>
+            <td>${stt.index}</td>
+            <td>${ht.ma}</td>
+            <td>${ht.ngayTao}</td>
+            <td>Quận:${ht.diaChi.quan},<br>
+                Huyện:${ht.diaChi.huyen},<br>
+                Thành phố:${ht.diaChi.thanhPho}</td>
             <td>
-                <input type="checkbox" name="checkidgh" value="${ht.id}" onclick="chonsanphamgiohang('${stt.index}','${ht.id}','${ht.gioHang.id}');"  ${ht.tinhTrang==0 ?"checked":""}>
+                <c:if test="${ht.tinhTrang==0}">
+                    <p>Chờ xử lý</p>
+                </c:if>
+                <c:if test="${ht.tinhTrang==1}">
+                    <p>Đã xác nhận</p>
+                </c:if>
+                <c:if test="${ht.tinhTrang==2}">
+                    <p>Đã Thanh toán</p>
+                </c:if>
+                <c:if test="${ht.tinhTrang==3}">
+                    <p>Chờ thanh toán</p>
+                </c:if>
+                <c:if test="${ht.tinhTrang==8}">
+                    <p>Đã hủy</p>
+                </c:if>
             </td>
             <td>
-                <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}" width="40" height="40" style="border-radius:50% 50% 50% 50%">
+                <c:if test="${ht.hinhThucThanhToan==2}">
+                    <input type="text" value="Chưa chọn" disabled>
+                </c:if>
+                <c:if test="${ht.hinhThucThanhToan==0}">
+                    <input type="text" value="Tiền mặt" disabled>
+                </c:if>
+                <c:if test="${ht.hinhThucThanhToan==1}">
+                    <input type="text" value="Chuyển khoản" disabled>
+                </c:if>
             </td>
             <td>
-                    ${ht.chiTietSanPham.sanPham.ten},${ht.chiTietSanPham.sanPham.hangSanPham.ten},${ht.chiTietSanPham.sanPham.camera.thongSo},${ht.chiTietSanPham.sanPham.manHinh.thongSo},<br>
-                    ${ht.chiTietSanPham.mauSac.ten},${ht.chiTietSanPham.ram.dungLuong},${ht.chiTietSanPham.rom.dungLuong},<br>
-                    ${ht.chiTietSanPham.pin.loaiPin},${ht.chiTietSanPham.pin.dungLuongPin.thongSo},${ht.chiTietSanPham.chip.ten}.
+                <c:if test="${ht.trangThaiGiaoHang==0}">
+                    <input type="text" value="Chưa giao" disabled>
+                </c:if>
+                <c:if test="${ht.trangThaiGiaoHang!=0}">
+                    <input type="text" value="Chưa tìm hiểu" disabled>
+                </c:if>
             </td>
-            <td>
-                <div name="checkdongiakhigiam">${ht.donGiaKhiGiam}</div>đ-
-                <del class="product-old-price">${ht.donGia}</del>đ
 
-            </td>
             <td>
-<%--                 <input type="text" min="1" max="${banhangonline.soluongcon(ht.chiTietSanPham.id)}" value="${ht.soLuong}" name="checksoluong"  style="height: 1cm">--%>
-    <button type="button" name="checktru1"  onclick="tru1donvi('${stt.index}','${ht.id}')">-</button>
-                <input type="number" value="${ht.soLuong}" min="1"  max="${banhangonline.soluongcon(ht.chiTietSanPham.id)}" name="checksoluong"  oninput="myFunction('${stt.index}','${ht.soLuong}','${ht.id}')">
-    <button type="button" name="checkthem1" onclick="them1donvi('${stt.index}','${ht.id}')">+</button>
+                <c:if test="${ht.tinhTrang==0}">
+                    <a class="btn btn-primary" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">xem</a>|
+<%--                    <a class="btn btn-primary" href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}">HỦy</a>--%>
+                    <a class="btn btn-primary" onclick="huyhoadonkhachhang('${ht.id}')">HỦy</a>
+                </c:if>
+                <c:if test="${ht.tinhTrang==1}">
+                    <a class="btn btn-primary" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">xem</a>|
+                    <a class="btn btn-primary" onclick="huyhoadonkhachhang('${ht.id}')">HỦy</a>
+                </c:if>
+                <c:if test="${ht.tinhTrang==2}">
+                    <a class="btn btn-primary" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">xem</a>|
+                </c:if>
+                <c:if test="${ht.tinhTrang==3}">
+                    <a class="btn btn-primary" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">xem</a>|
+                </c:if>
+                <c:if test="${ht.tinhTrang==8}">
+                    <a class="btn btn-primary" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">xem</a>|
+                </c:if>
             </td>
-            <td>
-                 <div  name="checkthanhtien"></div>    vnd
-            </td>
-            <td>
-                <button onclick="xoamotghct('${ht.id}','${ht.gioHang.id}');">Xoa sản phẩm</button>
-            </td>
-
         </tr>
         </c:forEach>
         </tbody>
     </table>
-<br>
-   <div >
-       <div id="tongsanphamchon" style="float: right">
-       ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongsanphamchon()}
-       </div>
-       <div style="float: right">Bạn đã chọn :</div>
-   </div>
+</c:if>
+</main>
 
 
-<br><br>
 
-        <div >
-            <div style="float: right">VND</div>
-            <div id="tongthanhtien" style="float: right;margin-right: 10px">
-                    ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
+<!-- NEWSLETTER -->
+<div id="newsletter" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="newsletter">
+                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+                    <form>
+                        <input class="input" type="email" placeholder="Enter Your Email">
+                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+                    </form>
+                    <ul class="newsletter-follow">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-
-            <div style="float: right">Tổng tiền :</div>
         </div>
- <br><br>
-
-        <c:if test="${banhangonline.ListghTheoidghvsTT1(listghct.get(0).gioHang.id).size()>0}">
-        <form action="/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-mua-hang" method="post">
-            <input name="idgh" value="${listghct.get(0).gioHang.id}" style="display: none">
-            <button style="float: right" type="submit">Mua hàng</button>
-        </form>
-        </c:if>
-    </c:if>
+        <!-- /row -->
     </div>
+    <!-- /container -->
 </div>
+<!-- /NEWSLETTER -->
 
+<!-- FOOTER -->
+<footer id="footer">
+    <!-- top footer -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">About Us</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+                        <ul class="footer-links">
+                            <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+                            <li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+                        </ul>
+                    </div>
+                </div>
 
-<%--<button id="btloadgd" onclick=" loadgiaodienghctbanhang('/ban-hang-online/single_page_gio_hang_chi_tiet');"></button>--%>
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Categories</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Hot deals</a></li>
+                            <li><a href="#">Laptops</a></li>
+                            <li><a href="#">Smartphones</a></li>
+                            <li><a href="#">Cameras</a></li>
+                            <li><a href="#">Accessories</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="clearfix visible-xs"></div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Information</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Orders and Returns</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Service</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">My Account</a></li>
+                            <li><a href="#">View Cart</a></li>
+                            <li><a href="#">Wishlist</a></li>
+                            <li><a href="#">Track My Order</a></li>
+                            <li><a href="#">Help</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /top footer -->
+
+    <!-- bottom footer -->
+    <div id="bottom-footer" class="section">
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <ul class="footer-payments" >
+                        <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+                        <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+                    </ul  >
+                    <span class="copyright">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</span>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /bottom footer -->
+</footer>
+<!-- /FOOTER -->
+
 <script>
     function chonhetgiohangtongTRANGCHU(idgh) {
         // var  idgh1=encodeURIComponent(idgh)
@@ -433,8 +573,7 @@
             loadgiaodienghctbanhangTrangChu(link);
 
         }
-        loadgiaodienghctbanhang('/ban-hang-online/single_page_gio_hang_chi_tiet');
-        loadgiaodienghctbanhang('/ban-hang-online/single_page_gio_hang_chi_tiet');
+
 
         // alert("vdvdvd")
     };
@@ -460,9 +599,6 @@
 
         }
 
-        loadgiaodienghctbanhang('/ban-hang-online/single_page_gio_hang_chi_tiet');
-        loadgiaodienghctbanhang('/ban-hang-online/single_page_gio_hang_chi_tiet');
-
 
     };
     function loadgiaodienghctbanhangTrangChu(interfaceUrl) {
@@ -485,38 +621,35 @@
     }
 
 
-    function thanhtienbenghct() {
-        var checkdongiakhigiam = document.getElementsByName('checkdongiakhigiam');
-        var checksoluong = document.getElementsByName('checksoluong');
-        var checkthanhtien = document.getElementsByName('checkthanhtien');
-        for (var i = 0; i < checkthanhtien.length; i++){
-
-            checkthanhtien[i].innerHTML= parseInt(checkdongiakhigiam[i].innerHTML) * parseInt(checksoluong[i].value);
-        }
-    };
-    thanhtienbenghct();
-    function loadgiaodienghctbanhang(interfaceUrl) {
+    function loadgiaodienhoadonkhachhang(interfaceUrl) {
         fetch(interfaceUrl)
             .then(response => response.text())
             .then(data => {
                 const content = document.getElementById('content');
                 content.innerHTML = data;
-                thanhtienbenghct();
+
                 loadScripts();
+
+
+
             })
             .catch(error => {
                 console.error('Error loading interface:', error);
             });
+
+
+
     }
+
 
     function loadScripts() {
         const scriptsToLoad = [
-            // '/jsbanhang/jquery.min.js',
-            // '/jsbanhang/bootstrap.min.js',
-            // '/jsbanhang/slick.min.js',
-            // '/jsbanhang/nouislider.min.js',
-            // '/jsbanhang/jquery.zoom.min.js',
-            // '/jsbanhang/main.js'
+            'https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js',
+            'https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js',
+            'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js',
+            'https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js',
+
+
 
         ];
 
@@ -538,8 +671,12 @@
         loadScript(0);
     }
 
-
-
+    function loadSelect2diachi() {
+        $( '#diachids1' ).select2( {
+            theme: 'bootstrap-5'
+        } );
+    }
+    loadSelect2diachi();
 </script>
 <!-- jQuery Plugins -->
 <script src="/jsbanhang/jquery.min.js"></script>
