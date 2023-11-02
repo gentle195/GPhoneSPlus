@@ -5,21 +5,53 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    .carousel-prev {
+        background-color: white;
+        color: black;
+        font-size: 16px;
+        border: none;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .carousel-prev:hover {
+        background-color: #0056b3; /* Màu nền khi di chuột qua */
+        color: #fff; /* Màu chữ khi di chuột qua */
+    }
+
+    .carousel-next {
+        background-color: white; /* Màu nền nút */
+        color: black; /* Màu chữ trên nút */
+        font-size: 16px; /* Kích cỡ chữ */
+        border: none; /* Loại bỏ viền nút */
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .carousel-next:hover {
+        background-color: #0056b3; /* Màu nền khi di chuột qua */
+        color: #fff; /* Màu chữ khi di chuột qua */
+    }
+
+    .form-control {
+        background-color: #f5f5f5; /* Màu nền combobox */
+        color: #333; /* Màu chữ */
+        border: 1px solid #ccc; /* Viền */
+        border-radius: 5px; /* Góc bo tròn */
+        width: 200px; /* Chiều rộng */
+        height: 40px;
+    }
+
+    .form-control:hover {
+        background-color: #007bff; /* Màu nền khi di chuột vào */
+        border-color: #007bff; /* Màu viền khi di chuột vào */
+        color: #fff; /* Màu chữ khi di chuột vào */
+    }
+</style>
 <body>
 
 <div id="demo11" class="carousel slide" data-bs-ride="false" >
     <!-- Indicators/dots -->
-    <div class="carousel">
-        <button class="carousel-prev" type="button" data-bs-target="#demo11" data-bs-slide="prev" >
-            <<
-        </button>
-        <c:forEach begin="1" end="${lamchon1}" varStatus="trang">
-            <button type="button" data-bs-target="#demo11" data-bs-slide-to="${trang.index-1}"  >${trang.index}</button>
-        </c:forEach>
-        <button class="carousel-next" type="button" data-bs-target="#demo11" data-bs-slide="next">
-            >>
-        </button>
-    </div>
+    
     </button>
 
     <!-- The slideshow/carousel -->
@@ -57,20 +89,7 @@
                                             <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
                                             <h4 class="product-price"><span style="font-size:15px">₫</span>${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}-<del class="product-old-price">${ht.giaBan}<span style="font-size:15px">₫</span></del></h4>
                                                 <%--                                            ${ht.tinhTrang} +  ${ht.sanPham.tinhTrang}--%>
-                                            <p class="product-category">Đã bán :${banhangonline.soluongdaban(ht.id)}--Còn :${banhangonline.soluongcon(ht.id)}</p>
-                                            <div  >
-                                                *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>
-                                                *Camera:${ht.sanPham.camera.thongSo}<br>
-                                                *Màn:${ht.sanPham.manHinh.thongSo}<br>
-                                                *Màu:${ht.mauSac.ten}<br>
-                                                *Ram:${ht.ram.dungLuong}<br>
-                                                *Rom:${ht.rom.dungLuong}<br>
-                                                *Pin:${ht.pin.loaiPin}<br>
-                                                *Dung lượng pin:${ht.pin.dungLuongPin.thongSo}<br>
-                                                *Chip:${ht.chip.ten}<br>
 
-
-                                            </div>
                                             <div class="product-rating">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
@@ -110,12 +129,13 @@
         </div>
         <!-- Indicators/dots -->
 
-        <div class="carousel">
-            <button class="carousel-prev" type="button" data-bs-target="#demo11" data-bs-slide="prev" >
+        <div class="carousel text-center">
+            <button class="carousel-prev" type="button" data-bs-target="#demo11" data-bs-slide="prev">
                 <<
             </button>
             <c:forEach begin="1" end="${lamchon1}" varStatus="trang">
-                <button type="button" data-bs-target="#demo11" data-bs-slide-to="${trang.index-1}"  >${trang.index}</button>
+                <button class="carousel-prev" type="button" data-bs-target="#demo11"
+                        data-bs-slide-to="${trang.index-1}">${trang.index}</button>
             </c:forEach>
             <button class="carousel-next" type="button" data-bs-target="#demo11" data-bs-slide="next">
                 >>

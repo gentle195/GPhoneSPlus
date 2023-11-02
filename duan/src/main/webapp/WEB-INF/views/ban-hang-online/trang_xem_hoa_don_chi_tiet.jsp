@@ -6,48 +6,49 @@
 <html lang="en">
 <head>
     <%--    table--%>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <%--phan trang--%>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>Electro - HTML Ecommerce Template</title>
-    <%--căn đều--%>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+        <title>Hóa đơn</title>
+        <%--căn đều--%>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
 
 
-    <!-- Google font -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+        <!-- Google font -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
-    <!-- Bootstrap -->
-    <link type="text/css" rel="stylesheet" href="/cssbanhang/bootstrap.min.css"/>
+        <!-- Bootstrap -->
+        <link type="text/css" rel="stylesheet" href="/cssbanhang/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- Slick -->
-    <link type="text/css" rel="stylesheet" href="/cssbanhang/slick.css"/>
-    <link type="text/css" rel="stylesheet" href="/cssbanhang/slick-theme.css"/>
+        <!-- Google font -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
-    <!-- nouislider -->
-    <link type="text/css" rel="stylesheet" href="/cssbanhang/nouislider.min.css"/>
+        <!-- Slick -->
+        <link type="text/css" rel="stylesheet" href="/cssbanhang/slick.css"/>
+        <link type="text/css" rel="stylesheet" href="/cssbanhang/slick-theme.css"/>
 
-    <!-- Font Awesome Icon -->
-    <link rel="stylesheet" href="/cssbanhang/font-awesome.min.css">
+        <!-- nouislider -->
+        <link type="text/css" rel="stylesheet" href="/cssbanhang/nouislider.min.css"/>
 
-    <!-- Custom stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="/cssbanhang/style.css"/>
+        <!-- Font Awesome Icon -->
+        <link rel="stylesheet" href="/cssbanhang/font-awesome.min.css">
 
-    <%--    select 2--%>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+        <!-- Custom stlylesheet -->
+        <link type="text/css" rel="stylesheet" href="/cssbanhang/style.css"/>
 
-
+        <%--    select 2--%>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 
 
     <style>
@@ -72,6 +73,7 @@
             border-radius: 5px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         }
+
         /*div{*/
         /*    border: 1px solid red;*/
         /*}*/
@@ -95,6 +97,27 @@
             background-color: #007bff;
             color: #fff;
         }
+        .input-with-button {
+            display: flex; /* Sử dụng flexbox để căn chỉnh nút bên trong input */
+            border: 1px solid #ccc; /* Tạo đường viền xung quanh hộp tìm kiếm */
+            border-radius: 25px; /* Đặt bán kính tròn cho hộp tìm kiếm */
+            overflow: hidden; /* Loại bỏ nút nếu nó bị tràn ra ngoài hộp */
+        }
+
+        .input-with-button input {
+            flex: 1; /* Làm cho input mở rộng để lấp đầy hộp */
+            border: none; /* Loại bỏ đường viền của input */
+            padding: 10px; /* Đặt khoảng cách nội dung bên trong input */
+            outline: none; /* Loại bỏ đường viền khi focus vào input */
+        }
+
+        .input-with-button button {
+            background: #007bff; /* Màu nền của nút */
+            color: #fff; /* Màu chữ trắng */
+            border: none; /* Loại bỏ đường viền của nút */
+            padding: 10px 20px; /* Đặt khoảng cách nội dung bên trong nút */
+            cursor: pointer; /* Biến con trỏ thành bàn tay khi trỏ vào nút */
+        }
     </style>
 
 </head>
@@ -106,30 +129,32 @@
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
-                <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-                <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i> gphones@gmail.com</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
                 <c:if test="${idkhachhang=='1'}">
-                    <li><a href="/login"><i class="fa fa-user-o"></i> Chưa đăng nhập:<input id="tkmkidkhachhang" type="text" style="display: none" value="${idkhachhang}"></a></li>
+                    <li><a href="/login"><i class="fa fa-user-o"></i> Chưa đăng nhập:<input id="tkmkidkhachhang"
+                                                                                            type="text"
+                                                                                            style="display: none"
+                                                                                            value="${idkhachhang}"></a>
+                    </li>
 
                 </c:if>
                 <c:if test="${idkhachhang !='1'}">
                     <!-- Cart -->
                     <li>
                         <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" >
+                            <a class="dropdown-toggle" data-toggle="dropdown">
                                     <span>
                                     <i class="fa fa-user-o"></i>
                                             ${khachhangdangnhap.hoTen}
-                                        <input id="tkmkidkhachhang" type="text" style="display: none" value="${idkhachhang}">
+                                        <input id="tkmkidkhachhang" type="text" style="display: none"
+                                               value="${idkhachhang}">
                                     </span>
                             </a>
                             <div class="cart-dropdown" style="border-radius: 10px;width: 3.5cm;margin-top: 10px">
-                                <div >
-                                    <div >
+                                <div>
+                                    <div>
                                         Tài khoản của tôi
                                     </div>
 
@@ -137,7 +162,7 @@
                                         <input name="idkh" value="${idkhachhang}" style="display: none">
                                         <button type="submit">Đơn hàng</button>
                                     </form>
-                                    <div >
+                                    <div>
                                         Đăng xuất
                                     </div>
                                 </div>
@@ -172,13 +197,10 @@
                 <div class="col-md-6">
                     <div class="header-search">
                         <form>
-                            <select class="input-select">
-                                <option value="0">All Categories</option>
-                                <option value="1">Category 01</option>
-                                <option value="1">Category 02</option>
-                            </select>
-                            <input class="input" placeholder="Search here">
-                            <button class="search-btn">Search</button>
+                            <div class="input-with-button">
+                                <input class="input" placeholder="Tìm kiếm sản phẩm...">
+                                <button class="search-btn">Search</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -189,18 +211,14 @@
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <a href="#">
-                                <i class="fa fa-heart-o"></i>
-                                <span>Your Wishlist</span>
-                                <div class="qty">2</div>
-                            </a>
+
                         </div>
                         <!-- /Wishlist -->
 
                         <!-- Cart -->
 
 
-                        <div class="dropdown" id="giohangtrangchu" >
+                        <div class="dropdown" id="giohangtrangchu">
                             <c:if test="${idkhachhang!='1'}">
                                 <c:if test="${listghct.size()>0}">
                                     <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
@@ -208,39 +226,48 @@
                                         <span>Giỏ hàng</span>
                                         <div class="qty">${banhangonline.ListghctTheoidgh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId()).size()}</div>
                                     </a>
-                                    <div class="cart-dropdown" style="width:  13cm" >
+                                    <div class="cart-dropdown" style="width:  13cm">
                                         <div class="cart-list">
 
                                             <c:forEach items="${listghct}" var="ht" varStatus="stt">
                                                 <br>
-                                                <div style="border: 1px solid;height: 2cm"  >
+                                                <div style="border: 1px solid;height: 2cm">
                                                     <div style="width: 80%;float: right">
 
                                                         <a href="#">
-                                                            Sản phẩm:${ht.chiTietSanPham.sanPham.ten},Rom:${ht.chiTietSanPham.rom.dungLuong},Màu:${ht.chiTietSanPham.mauSac.ten}.
+                                                            Sản
+                                                            phẩm:${ht.chiTietSanPham.sanPham.ten},Rom:${ht.chiTietSanPham.rom.dungLuong},Màu:${ht.chiTietSanPham.mauSac.ten}.
                                                         </a>
                                                         <br>
                                                         Số lượng:${ht.soLuong}<br>
-                                                            ${ht.donGiaKhiGiam}đ-<label style="text-decoration: line-through;background-color: white;border: 1px solid white">${ht.donGia}</label>đ
+                                                            ${ht.donGiaKhiGiam}đ-<label
+                                                            style="text-decoration: line-through;background-color: white;border: 1px solid white">${ht.donGia}</label>đ
                                                     </div>
                                                     <div style="width: 18%;">
-                                                        <input type="checkbox" name="checkidghTT" value="${ht.id}" onclick="chonsanphamgiohangTT('${stt.index}','${ht.id}','${ht.gioHang.id}');"  ${ht.tinhTrang==0 ?"checked":""}>
+                                                        <input type="checkbox" name="checkidghTT" value="${ht.id}"
+                                                               onclick="chonsanphamgiohangTT('${stt.index}','${ht.id}','${ht.gioHang.id}');"  ${ht.tinhTrang==0 ?"checked":""}>
 
 
-                                                        <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}" width="50" height="50" style="border-radius:50% 50% 50% 50%;border: 1px solid black">
+                                                        <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}"
+                                                             width="50" height="50"
+                                                             style="border-radius:50% 50% 50% 50%;border: 1px solid black">
                                                     </div>
 
                                                 </div>
                                             </c:forEach>
                                         </div>
                                         <div class="cart-summary">
-                                            <small> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongsanphamchon()} Sản phẩm được chọn</small>
-                                            <h5>Tổng:${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()} đ</h5>
+                                            <small> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongsanphamchon()}
+                                                Sản phẩm được chọn</small>
+                                            <h5>
+                                                Tổng:${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
+                                                đ</h5>
                                         </div>
                                         <div class="cart-btns">
                                             <a href="/ban-hang-online/xem-gio-hang">Xem giỏ hàng</a>
                                             <a href="#">Chọn hết
-                                                <input type="checkbox" name="checktongTT" onclick="chonhetgiohangtongTRANGCHU('${listghct.get(0).gioHang.id}');"  ${tttong==0 ?"checked":""}>
+                                                <input type="checkbox" name="checktongTT"
+                                                       onclick="chonhetgiohangtongTRANGCHU('${listghct.get(0).gioHang.id}');"  ${tttong==0 ?"checked":""}>
                                             </a>
                                         </div>
                                     </div>
@@ -270,7 +297,7 @@
                             </c:if>
                             <c:if test="${idkhachhang=='1'}">
 
-                                <a class="dropdown-toggle"  aria-expanded="true"  href="/login" >
+                                <a class="dropdown-toggle" aria-expanded="true" href="/login">
                                     <i class="fa fa-shopping-cart"></i>
                                     <span>Giỏ hàng</span>
                                     <div class="qty">0</div>
@@ -282,7 +309,6 @@
                         </div>
 
                         <!-- /Cart -->
-
 
 
                         <!-- Menu Toogle -->
@@ -316,14 +342,14 @@
             <ul class=" main-nav nav ">
 
                 <c:if test="${idkhachhang=='1'}">
-                    <li ><a href="/ban-hang-online/hien-thi" >TRANG CHỦ</a></li>
+                    <li><a href="/ban-hang-online/hien-thi">TRANG CHỦ</a></li>
                 </c:if>
                 <c:if test="${idkhachhang !='1'}">
-                    <li ><a href="/ban-hang-online/dang-nhap/hien-thi" >TRANG CHỦ</a></li>
+                    <li><a href="/ban-hang-online/dang-nhap/hien-thi">TRANG CHỦ</a></li>
                 </c:if>
                 <li><a href="#">ƯU ĐÃI HẤP DẪN</a></li>
                 <li><a href="#">LOẠI</a></li>
-                <li><a href="/ban-hang-online/dien-thoai-thong-minh" >ĐIỆN THOẠI THÔNG MINH</a></li>
+                <li><a href="/ban-hang-online/dien-thoai-thong-minh">ĐIỆN THOẠI THÔNG MINH</a></li>
             </ul>
             <!-- /NAV -->
         </div>
@@ -334,23 +360,26 @@
 <!-- /NAVIGATION -->
 
 
-<main style="width: 75%;margin-left: 12.5%;border: 1px solid red " id="contentghct" >
+<main style="width: 75%;margin-left: 12.5%;border: 1px solid red " id="contentghct">
     <div>
         <br>
         <c:if test="${hd.trangThaiGiaoHang==0}">
             <c:if test="${hd.tinhTrang!=8}">
-        <button class="btn btn-primary"  style="float: right" data-bs-toggle="modal" data-bs-target="#modalthaydoithongtinnhanhang" id="capnhatthongtingiaohang">Thay đổi thông tin nhận hàng</button>
+                <button class="btn btn-primary" style="float: right" data-bs-toggle="modal"
+                        data-bs-target="#modalthaydoithongtinnhanhang" id="capnhatthongtingiaohang">Thay đổi thông tin
+                    nhận hàng
+                </button>
             </c:if>
 
         </c:if>
         <br><br>
-        <table class="table table-borderless" >
+        <table class="table table-borderless">
             <tbody>
             <tr>
 
                 <td>
                     <p>Mã đơn hàng:</p>
-                    <input type="text" value="${hd.ma}" disabled style="width: 97%" >
+                    <input type="text" value="${hd.ma}" disabled style="width: 97%">
                 </td>
                 <td>
                     <p>Người mua:</p>
@@ -424,13 +453,11 @@
             </tr>
             <tr>
 
-                <td colspan="3" >
+                <td colspan="3">
                     <p>Địa chỉ nhận hàng:</p>
-                 <textarea type="text"  disabled style="width: 100%;height: 2cm">
+                    <textarea type="text" disabled style="width: 100%;height: 2cm">
                   Quận:${hd.diaChi.quan},Huyện:${hd.diaChi.huyen},Thành phố:${hd.diaChi.thanhPho}
                 </textarea>
-
-
 
 
                 </td>
@@ -461,14 +488,15 @@
         </tr>
         </thead>
         <tbody>
-        <c:set var = "dem" scope = "session" value = "${0}"/>
-        <c:forEach items="${listhdct}" var="ht" varStatus="stt" >
+        <c:set var="dem" scope="session" value="${0}"/>
+        <c:forEach items="${listhdct}" var="ht" varStatus="stt">
             <c:if test="${stt.index==0}">
                 <tr>
                     <td>${dem}</td>
                     <td>${ht.hoaDon.ma}</td>
                     <td>
-                        <img src="../../../uploads/${ht.imei.chiTietSanPham.urlAnh}" width="40" height="40" style="border-radius:50% 50% 50% 50%">
+                        <img src="../../../uploads/${ht.imei.chiTietSanPham.urlAnh}" width="40" height="40"
+                             style="border-radius:50% 50% 50% 50%">
                     </td>
                     <td>
                             ${ht.imei.chiTietSanPham.sanPham.ten},${ht.imei.chiTietSanPham.sanPham.hangSanPham.ten},${ht.imei.chiTietSanPham.sanPham.camera.thongSo},${ht.imei.chiTietSanPham.sanPham.manHinh.thongSo},<br>
@@ -485,7 +513,9 @@
                     <td>
                             ${banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
                     </td>
-                    <td>${ht.donGia*banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()} VND</td>
+                    <td>${ht.donGia*banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
+                        VND
+                    </td>
                     <td>
                         <c:if test="${ht.hoaDon.tinhTrang==0}">
                             <p>Chờ xử lý</p>
@@ -506,8 +536,8 @@
                     <td>
                         <c:if test="${ht.hoaDon.trangThaiGiaoHang==0}">
                             <c:if test="${ht.hoaDon.tinhTrang==0}">
-<%--                                <a href="/ban-hang-online/xem-hoa-don-chi-tiet/xoa-chi-tiet-san-pham/${ht.id}" class="btn btn-primary" >Hủy</a>--%>
-                                <a  onclick="xoahdct('${ht.id}');" class="btn btn-primary" >Hủy</a>
+                                <%--                                <a href="/ban-hang-online/xem-hoa-don-chi-tiet/xoa-chi-tiet-san-pham/${ht.id}" class="btn btn-primary" >Hủy</a>--%>
+                                <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>
                             </c:if>
                         </c:if>
                         <c:if test="${ht.hoaDon.tinhTrang==1}">
@@ -524,21 +554,22 @@
                         </c:if>
                     </td>
                 </tr>
-                <c:set var = "dem" scope = "session" value = "${dem+1}"/>
+                <c:set var="dem" scope="session" value="${dem+1}"/>
             </c:if>
             <c:if test="${stt.index>0}">
-                <c:set var = "checkck" scope = "session" value = "${0}"/>
+                <c:set var="checkck" scope="session" value="${0}"/>
                 <c:forEach items="${listhdct}" var="ht1" varStatus="stt1" begin="0" end="${stt.index-1}">
-                  <c:if test="${ht.imei.chiTietSanPham.id==ht1.imei.chiTietSanPham.id}">
-                      <c:set var = "checkck" scope = "session" value = "${1}"/>
-                  </c:if>
+                    <c:if test="${ht.imei.chiTietSanPham.id==ht1.imei.chiTietSanPham.id}">
+                        <c:set var="checkck" scope="session" value="${1}"/>
+                    </c:if>
                 </c:forEach>
                 <c:if test="${checkck==0}">
                     <tr>
                         <td>${dem}</td>
                         <td>${ht.hoaDon.ma}</td>
                         <td>
-                            <img src="../../../uploads/${ht.imei.chiTietSanPham.urlAnh}" width="40" height="40" style="border-radius:50% 50% 50% 50%">
+                            <img src="../../../uploads/${ht.imei.chiTietSanPham.urlAnh}" width="40" height="40"
+                                 style="border-radius:50% 50% 50% 50%">
                         </td>
                         <td>
                                 ${ht.imei.chiTietSanPham.sanPham.ten},${ht.imei.chiTietSanPham.sanPham.hangSanPham.ten},${ht.imei.chiTietSanPham.sanPham.camera.thongSo},${ht.imei.chiTietSanPham.sanPham.manHinh.thongSo},<br>
@@ -555,7 +586,9 @@
                         <td>
                                 ${banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
                         </td>
-                        <td>${ht.donGia*banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()} VND</td>
+                        <td>${ht.donGia*banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
+                            VND
+                        </td>
                         <td>
                             <c:if test="${ht.hoaDon.tinhTrang==0}">
                                 <p>Chờ xử lý</p>
@@ -575,9 +608,9 @@
                         </td>
                         <td>
                             <c:if test="${ht.hoaDon.trangThaiGiaoHang==0}">
-                            <c:if test="${ht.hoaDon.tinhTrang==0}">
-                                <a  onclick="xoahdct('${ht.id}');" class="btn btn-primary" >Hủy</a>
-                            </c:if>
+                                <c:if test="${ht.hoaDon.tinhTrang==0}">
+                                    <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>
+                                </c:if>
                             </c:if>
                             <c:if test="${ht.hoaDon.tinhTrang==1}">
 
@@ -593,7 +626,7 @@
                             </c:if>
                         </td>
                     </tr>
-                    <c:set var = "dem" scope = "session" value = "${dem+1}"/>
+                    <c:set var="dem" scope="session" value="${dem+1}"/>
                 </c:if>
             </c:if>
 
@@ -601,10 +634,10 @@
         </c:forEach>
         </tbody>
     </table>
-<br><br><br>
+    <br><br><br>
     <div>
         <c:if test="${hd.tinhTrang==1}">
-            <table class="table table-borderless" >
+            <table class="table table-borderless">
                 <tbody>
 
                 <tr>
@@ -616,7 +649,8 @@
                 </tr>
                 <tr>
                     <td>
-                        <a href="/ban-hang-online/xem-hoa-don-chi-tiet/thanh-toan-khi-nhan-hang/${hd.id}">Thanh toán tiền mặt khi nhận hàng</a>
+                        <a href="/ban-hang-online/xem-hoa-don-chi-tiet/thanh-toan-khi-nhan-hang/${hd.id}">Thanh toán
+                            tiền mặt khi nhận hàng</a>
                     </td>
                     <td>
                         <button>Thanh toán MOMO</button>
@@ -631,7 +665,7 @@
     </div>
 
 
-    <div class="modal" id="modalthaydoithongtinnhanhang" >
+    <div class="modal" id="modalthaydoithongtinnhanhang">
 
         <div class="modal-dialog" style="border: 1px solid red;margin-top: 3cm;">
             <div class="modal-content" style="">
@@ -644,23 +678,28 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <input type="text" value="${hd.id}" name="idhd" style="display: none">
-                            <div>Số điện thoại:<label style="background: white;color: red;border: 1px solid white" id="sodienthoai"></label></div>
+                        <div>Số điện thoại:<label style="background: white;color: red;border: 1px solid white"
+                                                  id="sodienthoai"></label></div>
                         <br>
-                            <input type="text" id="b" name="sodienthoai" value="${hd.sdt}" style="width: 100%">
-<br>
-<br>
-                            <div>Địa chỉ nhận hàng:<label style="background: white;color: red;border: 1px solid white" id="c" ></label></div>
-                            <br>
-                            <button type="button" style="float: right" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalthemdiachidathang">Thêm địa chỉ</button>
-                            <select   id="diachids1" name="diachi"  style="width: 70%;height: 1cm">
-                                <c:forEach items="${banhangonline.Listdiachimotkhachang(idkhachhang)}" var="ht">
-                                    <option  value="${ht.id}" ${ht.id==hd.id ?"selected":""} style="height: 1cm">quận:${ht.quan},huyện:${ht.huyen},thành phố:${ht.thanhPho}</option>
-                                </c:forEach>
-                            </select>
+                        <input type="text" id="b" name="sodienthoai" value="${hd.sdt}" style="width: 100%">
+                        <br>
+                        <br>
+                        <div>Địa chỉ nhận hàng:<label style="background: white;color: red;border: 1px solid white"
+                                                      id="c"></label></div>
+                        <br>
+                        <button type="button" style="float: right" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#modalthemdiachidathang">Thêm địa chỉ
+                        </button>
+                        <select id="diachids1" name="diachi" style="width: 70%;height: 1cm">
+                            <c:forEach items="${banhangonline.Listdiachimotkhachang(idkhachhang)}" var="ht">
+                                <option value="${ht.id}" ${ht.id==hd.id ?"selected":""} style="height: 1cm">
+                                    quận:${ht.quan},huyện:${ht.huyen},thành phố:${ht.thanhPho}</option>
+                            </c:forEach>
+                        </select>
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger" onclick="return checksdt();"   >Cập nhật</button>
+                        <button type="submit" class="btn btn-danger" onclick="return checksdt();">Cập nhật</button>
                         <%--                <button type="button" style="display: none" id="btthemdiachidathang" data-bs-dismiss="modal"></button>--%>
                     </div>
 
@@ -670,7 +709,7 @@
         </div>
     </div>
 
-    <div class="modal" id="modalthemdiachidathang" >
+    <div class="modal" id="modalthemdiachidathang">
         <div class="modal-dialog">
             <div class="modal-content" style="">
 
@@ -680,51 +719,58 @@
                 </div>
                 <!-- Modal body -->
                 <form action="/ban-hang-online/hoa-don-chi-tiet/them-dia-chi" method="post">
-                <div class="modal-body">
-                    <div style="margin-left:2.5cm ">
-                        <div>Địa chỉ:<label style="background: white;color: red;border: 1px solid white" id="tb1"></label></div>
-                        <input type="text" id="themdiachidathangdiachi" name="diachi"><br>
-                        <div>Quận:<label style="background: white;color: red;border: 1px solid white" id="tb2" ></label></div>
-                        <input type="text" id="themdiachidathangquan" name="quan"><br>
-                        <div>Huyện:<label style="background: white;color: red;border: 1px solid white" id="tb3"></label></div>
-                        <input type="text" id="themdiachidathanghuyen" name="huyen"><br>
-                        <div>Thành phố:<label style="background: white;color: red;border: 1px solid white" id="tb4"></label></div>
-                        <input type="text" id="themdiachidathangthanhpho" name="thanhpho"><br>
-                        <input type="text" value="${hd.id}" name="idhd" style="display: none">
+                    <div class="modal-body">
+                        <div style="margin-left:2.5cm ">
+                            <div>Địa chỉ:<label style="background: white;color: red;border: 1px solid white"
+                                                id="tb1"></label></div>
+                            <input type="text" id="themdiachidathangdiachi" name="diachi"><br>
+                            <div>Quận:<label style="background: white;color: red;border: 1px solid white"
+                                             id="tb2"></label></div>
+                            <input type="text" id="themdiachidathangquan" name="quan"><br>
+                            <div>Huyện:<label style="background: white;color: red;border: 1px solid white"
+                                              id="tb3"></label></div>
+                            <input type="text" id="themdiachidathanghuyen" name="huyen"><br>
+                            <div>Thành phố:<label style="background: white;color: red;border: 1px solid white"
+                                                  id="tb4"></label></div>
+                            <input type="text" id="themdiachidathangthanhpho" name="thanhpho"><br>
+                            <input type="text" value="${hd.id}" name="idhd" style="display: none">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger" onclick="return themdiachikhachhang();">Thêm</button>
-                </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger" onclick="return themdiachikhachhang();">Thêm
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-<%----%>
+    <%----%>
 
-    <button style="display: none" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal1" id="thongbaotrangthaigiaohangbat">0000000
+    <button style="display: none" type="button" class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#myModal1" id="thongbaotrangthaigiaohangbat">0000000
     </button>
-        <!-- The Modal -->
-        <div class="modal" id="myModal1">
-            <div class="modal-dialog" style="border: 1px solid red;margin-top: 3cm;">
-                <div class="modal-content">
+    <!-- The Modal -->
+    <div class="modal" id="myModal1">
+        <div class="modal-dialog" style="border: 1px solid red;margin-top: 3cm;">
+            <div class="modal-content">
 
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Modal Heading</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" id="thongbaotrangthaigiaohangtat" ></button>
-                    </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        Hàng đang giao không thể thay đổi thông tin giao hàng
-                    </div>
-
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            id="thongbaotrangthaigiaohangtat"></button>
                 </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Hàng đang giao không thể thay đổi thông tin giao hàng
+                </div>
+
             </div>
         </div>
+    </div>
 
 </main>
 
@@ -777,7 +823,8 @@
                 <div class="col-md-3 col-xs-6">
                     <div class="footer">
                         <h3 class="footer-title">About Us</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                            ut.</p>
                         <ul class="footer-links">
                             <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
                             <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
@@ -839,17 +886,19 @@
             <!-- row -->
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <ul class="footer-payments" >
+                    <ul class="footer-payments">
                         <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
                         <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
                         <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
                         <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
                         <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
                         <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
-                    </ul  >
+                    </ul>
                     <span class="copyright">
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i
+                            class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                                                                                target="_blank">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</span>
                 </div>
@@ -865,15 +914,15 @@
 <script>
     function chonhetgiohangtongTRANGCHU(idgh) {
         // var  idgh1=encodeURIComponent(idgh)
-        if(document.getElementsByName('checktongTT')[0].checked==true){
-            var     link='/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/full/0/'+idgh;
+        if (document.getElementsByName('checktongTT')[0].checked == true) {
+            var link = '/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/full/0/' + idgh;
             // document.getElementById("ktlink").innerHTML=link
 
             loadgiaodienghctbanhangTrangChu(link);
 
 
-        }else{
-            var    link='/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/full/1/'+idgh;
+        } else {
+            var link = '/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/full/1/' + idgh;
             // document.getElementById("ktlink").innerHTML=link
 
             loadgiaodienghctbanhangTrangChu(link);
@@ -883,20 +932,21 @@
 
         // alert("vdvdvd")
     };
-    function chonsanphamgiohangTT(vt,idctgh,idgh) {
+
+    function chonsanphamgiohangTT(vt, idctgh, idgh) {
         // var  idgh1=encodeURIComponent(idgh)
-        var vt1=parseInt(vt);
+        var vt1 = parseInt(vt);
         // var id1=encodeURIComponent(id);
-        if(document.getElementsByName('checkidghTT')[vt1].checked==true){
-            var    link='/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/'+idctgh+'/0/'+idgh;
+        if (document.getElementsByName('checkidghTT')[vt1].checked == true) {
+            var link = '/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/' + idctgh + '/0/' + idgh;
             // document.getElementById("ktlink").innerHTML=link
 
             loadgiaodienghctbanhangTrangChu(link);
             // loadgiaodienghctbanhangTrangChu(link);
             // loadgiaodienghctbanhang('/ban-hang-online/single_page_gio_hang_chi_tiet');
 
-        }else{
-            var   link='/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/'+idctgh+'/1/'+idgh;
+        } else {
+            var link = '/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/' + idctgh + '/1/' + idgh;
             // document.getElementById("ktlink").innerHTML=link
 
             loadgiaodienghctbanhangTrangChu(link);
@@ -907,6 +957,7 @@
 
 
     };
+
     function loadgiaodienghctbanhangTrangChu(interfaceUrl) {
         fetch(interfaceUrl)
             .then(response => response.text())
@@ -915,7 +966,6 @@
                 content.innerHTML = data;
 
                 loadScripts();
-
 
 
             })
@@ -927,15 +977,14 @@
     }
 
 
-
-    if(${hienmodal==1}){
+    if (${hienmodal==1}) {
         document.getElementById('capnhatthongtingiaohang').click();
     }
 
 
-<c:if test="${thongbaotinhtranggiaohang==1}">
+    <c:if test="${thongbaotinhtranggiaohang==1}">
     document.getElementById('thongbaotrangthaigiaohangbat').click();
-    setTimeout(function() {
+    setTimeout(function () {
         document.getElementById('thongbaotrangthaigiaohangtat').click();
     }, 2000); // 2000 milliseconds tương đương với 2 giây
 
@@ -959,15 +1008,15 @@
                 loadScripts();
 
 
-
             })
             .catch(error => {
                 console.error('Error loading interface:', error);
             });
 
-        document.getElementById('thanhlocctsp').style.display='none';
+        document.getElementById('thanhlocctsp').style.display = 'none';
 
     }
+
     function loadgiaodiendiacihdct(interfaceUrl) {
         fetch(interfaceUrl)
             .then(response => response.text())
@@ -997,7 +1046,6 @@
             'https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js',
 
 
-
         ];
 
         const head = document.head || document.getElementsByTagName('head')[0];
@@ -1019,15 +1067,15 @@
     }
 
     function loadSelect2diachi() {
-        $( '#diachids1' ).select2( {
+        $('#diachids1').select2({
             theme: 'bootstrap-5',
             dropdownParent: $('#modalthaydoithongtinnhanhang')
 
-        } );
+        });
 
     }
-    loadSelect2diachi();
 
+    loadSelect2diachi();
 
 
 </script>

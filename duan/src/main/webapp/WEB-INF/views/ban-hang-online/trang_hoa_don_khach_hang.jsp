@@ -6,18 +6,15 @@
 <html lang="en">
 <head>
 <%--    table--%>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <%--phan trang--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>Electro - HTML Ecommerce Template</title>
+    <title>Hóa đơn</title>
     <%--căn đều--%>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
 
 
     <!-- Google font -->
@@ -25,6 +22,10 @@
 
     <!-- Bootstrap -->
     <link type="text/css" rel="stylesheet" href="/cssbanhang/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
     <!-- Slick -->
     <link type="text/css" rel="stylesheet" href="/cssbanhang/slick.css"/>
@@ -41,8 +42,10 @@
 
     <%--    select 2--%>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
@@ -95,6 +98,27 @@
             background-color: #007bff;
             color: #fff;
         }
+        .input-with-button {
+            display: flex; /* Sử dụng flexbox để căn chỉnh nút bên trong input */
+            border: 1px solid #ccc; /* Tạo đường viền xung quanh hộp tìm kiếm */
+            border-radius: 25px; /* Đặt bán kính tròn cho hộp tìm kiếm */
+            overflow: hidden; /* Loại bỏ nút nếu nó bị tràn ra ngoài hộp */
+        }
+
+        .input-with-button input {
+            flex: 1; /* Làm cho input mở rộng để lấp đầy hộp */
+            border: none; /* Loại bỏ đường viền của input */
+            padding: 10px; /* Đặt khoảng cách nội dung bên trong input */
+            outline: none; /* Loại bỏ đường viền khi focus vào input */
+        }
+
+        .input-with-button button {
+            background: #007bff; /* Màu nền của nút */
+            color: #fff; /* Màu chữ trắng */
+            border: none; /* Loại bỏ đường viền của nút */
+            padding: 10px 20px; /* Đặt khoảng cách nội dung bên trong nút */
+            cursor: pointer; /* Biến con trỏ thành bàn tay khi trỏ vào nút */
+        }
     </style>
 
 </head>
@@ -106,12 +130,9 @@
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
-                <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-                <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i> gphones@gmail.com</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
                 <c:if test="${idkhachhang=='1'}">
                     <li><a href="/login"><i class="fa fa-user-o"></i> Chưa đăng nhập:<input id="tkmkidkhachhang" type="text" style="display: none" value="${idkhachhang}"></a></li>
 
@@ -172,13 +193,10 @@
                 <div class="col-md-6">
                     <div class="header-search">
                         <form>
-                            <select class="input-select">
-                                <option value="0">All Categories</option>
-                                <option value="1">Category 01</option>
-                                <option value="1">Category 02</option>
-                            </select>
-                            <input class="input" placeholder="Search here">
-                            <button class="search-btn">Search</button>
+                            <div class="input-with-button">
+                                <input class="input" placeholder="Tìm kiếm sản phẩm...">
+                                <button class="search-btn">Search</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -189,11 +207,7 @@
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <a href="#">
-                                <i class="fa fa-heart-o"></i>
-                                <span>Your Wishlist</span>
-                                <div class="qty">2</div>
-                            </a>
+
                         </div>
                         <!-- /Wishlist -->
 
