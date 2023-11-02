@@ -167,6 +167,27 @@
             background-color: #2471a3;
         }
 
+        .input-with-button {
+            display: flex; /* Sử dụng flexbox để căn chỉnh nút bên trong input */
+            border: 1px solid #ccc; /* Tạo đường viền xung quanh hộp tìm kiếm */
+            border-radius: 25px; /* Đặt bán kính tròn cho hộp tìm kiếm */
+            overflow: hidden; /* Loại bỏ nút nếu nó bị tràn ra ngoài hộp */
+        }
+
+        .input-with-button input {
+            flex: 1; /* Làm cho input mở rộng để lấp đầy hộp */
+            border: none; /* Loại bỏ đường viền của input */
+            padding: 10px; /* Đặt khoảng cách nội dung bên trong input */
+            outline: none; /* Loại bỏ đường viền khi focus vào input */
+        }
+
+        .input-with-button button {
+            background: #007bff; /* Màu nền của nút */
+            color: #fff; /* Màu chữ trắng */
+            border: none; /* Loại bỏ đường viền của nút */
+            padding: 10px 20px; /* Đặt khoảng cách nội dung bên trong nút */
+            cursor: pointer; /* Biến con trỏ thành bàn tay khi trỏ vào nút */
+        }
     </style>
 
 </head>
@@ -182,30 +203,32 @@
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
-                <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-                <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i> gphones@gmail.com</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
                 <c:if test="${idkhachhang=='1'}">
-                    <li><a href="/login"><i class="fa fa-user-o"></i> Chưa đăng nhập:<input id="tkmkidkhachhang" type="text" style="display: none" value="${idkhachhang}"></a></li>
+                    <li><a href="/login"><i class="fa fa-user-o"></i> Chưa đăng nhập:<input id="tkmkidkhachhang"
+                                                                                            type="text"
+                                                                                            style="display: none"
+                                                                                            value="${idkhachhang}"></a>
+                    </li>
 
                 </c:if>
                 <c:if test="${idkhachhang !='1'}">
                     <!-- Cart -->
                     <li>
                         <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" >
+                            <a class="dropdown-toggle" data-toggle="dropdown">
                                     <span>
                                     <i class="fa fa-user-o"></i>
                                             ${khachhangdangnhap.hoTen}
-                                        <input id="tkmkidkhachhang" type="text" style="display: none" value="${idkhachhang}">
+                                        <input id="tkmkidkhachhang" type="text" style="display: none"
+                                               value="${idkhachhang}">
                                     </span>
                             </a>
                             <div class="cart-dropdown" style="border-radius: 10px;width: 3.5cm;margin-top: 10px">
-                                <div >
-                                    <div >
+                                <div>
+                                    <div>
                                         Tài khoản của tôi
                                     </div>
 
@@ -213,7 +236,7 @@
                                         <input name="idkh" value="${idkhachhang}" style="display: none">
                                         <button type="submit">Đơn hàng</button>
                                     </form>
-                                    <div >
+                                    <div>
                                         Đăng xuất
                                     </div>
                                 </div>
@@ -248,13 +271,10 @@
                 <div class="col-md-6">
                     <div class="header-search">
                         <form>
-                            <select class="input-select">
-                                <option value="0">All Categories</option>
-                                <option value="1">Category 01</option>
-                                <option value="1">Category 02</option>
-                            </select>
-                            <input class="input" placeholder="Search here">
-                            <button class="search-btn">Search</button>
+                            <div class="input-with-button">
+                                <input class="input" placeholder="Tìm kiếm sản phẩm...">
+                                <button class="search-btn">Search</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -265,18 +285,18 @@
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <a href="#">
-                                <i class="fa fa-heart-o"></i>
-                                <span>Your Wishlist</span>
-                                <div class="qty">2</div>
-                            </a>
+                            <%--                            <a href="#">--%>
+                            <%--                                <i class="fa fa-heart-o"></i>--%>
+                            <%--                                <span>Your Wishlist</span>--%>
+                            <%--                                <div class="qty">2</div>--%>
+                            <%--                            </a>--%>
                         </div>
                         <!-- /Wishlist -->
 
                         <!-- Cart -->
 
 
-                        <div class="dropdown" id="giohangtrangchu" >
+                        <div class="dropdown" id="giohangtrangchu">
                             <c:if test="${idkhachhang!='1'}">
                                 <c:if test="${listghct.size()>0}">
                                     <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
@@ -284,39 +304,48 @@
                                         <span>Giỏ hàng</span>
                                         <div class="qty">${banhangonline.ListghctTheoidgh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId()).size()}</div>
                                     </a>
-                                    <div class="cart-dropdown" style="width:  13cm" >
+                                    <div class="cart-dropdown" style="width:  13cm">
                                         <div class="cart-list">
 
                                             <c:forEach items="${listghct}" var="ht" varStatus="stt">
                                                 <br>
-                                                <div style="border: 1px solid;height: 2cm"  >
+                                                <div style="border: 1px solid;height: 2cm">
                                                     <div style="width: 80%;float: right">
 
                                                         <a href="#">
-                                                            Sản phẩm:${ht.chiTietSanPham.sanPham.ten},Rom:${ht.chiTietSanPham.rom.dungLuong},Màu:${ht.chiTietSanPham.mauSac.ten}.
+                                                            Sản
+                                                            phẩm:${ht.chiTietSanPham.sanPham.ten},Rom:${ht.chiTietSanPham.rom.dungLuong},Màu:${ht.chiTietSanPham.mauSac.ten}.
                                                         </a>
                                                         <br>
                                                         Số lượng:${ht.soLuong}<br>
-                                                            ${ht.donGiaKhiGiam}đ-<label style="text-decoration: line-through;background-color: white;border: 1px solid white">${ht.donGia}</label>đ
+                                                            ${ht.donGiaKhiGiam}đ-<label
+                                                            style="text-decoration: line-through;background-color: white;border: 1px solid white">${ht.donGia}</label>đ
                                                     </div>
                                                     <div style="width: 18%;">
-                                                        <input type="checkbox" name="checkidghTT" value="${ht.id}" onclick="chonsanphamgiohangTT('${stt.index}','${ht.id}','${ht.gioHang.id}');"  ${ht.tinhTrang==0 ?"checked":""}>
+                                                        <input type="checkbox" name="checkidghTT" value="${ht.id}"
+                                                               onclick="chonsanphamgiohangTT('${stt.index}','${ht.id}','${ht.gioHang.id}');"  ${ht.tinhTrang==0 ?"checked":""}>
 
 
-                                                        <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}" width="50" height="50" style="border-radius:50% 50% 50% 50%;border: 1px solid black">
+                                                        <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}"
+                                                             width="50" height="50"
+                                                             style="border-radius:50% 50% 50% 50%;border: 1px solid black">
                                                     </div>
 
                                                 </div>
                                             </c:forEach>
                                         </div>
                                         <div class="cart-summary">
-                                            <small> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongsanphamchon()} Sản phẩm được chọn</small>
-                                            <h5>Tổng:${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()} đ</h5>
+                                            <small> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongsanphamchon()}
+                                                Sản phẩm được chọn</small>
+                                            <h5>
+                                                Tổng:${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
+                                                đ</h5>
                                         </div>
                                         <div class="cart-btns">
                                             <a href="/ban-hang-online/xem-gio-hang">Xem giỏ hàng</a>
                                             <a href="#">Chọn hết
-                                                <input type="checkbox" name="checktongTT" onclick="chonhetgiohangtongTRANGCHU('${listghct.get(0).gioHang.id}');"  ${tttong==0 ?"checked":""}>
+                                                <input type="checkbox" name="checktongTT"
+                                                       onclick="chonhetgiohangtongTRANGCHU('${listghct.get(0).gioHang.id}');"  ${tttong==0 ?"checked":""}>
                                             </a>
                                         </div>
                                     </div>
@@ -346,7 +375,7 @@
                             </c:if>
                             <c:if test="${idkhachhang=='1'}">
 
-                                <a class="dropdown-toggle"  aria-expanded="true"  href="/login" >
+                                <a class="dropdown-toggle" aria-expanded="true" href="/login">
                                     <i class="fa fa-shopping-cart"></i>
                                     <span>Giỏ hàng</span>
                                     <div class="qty">0</div>
@@ -358,7 +387,6 @@
                         </div>
 
                         <!-- /Cart -->
-
 
 
                         <!-- Menu Toogle -->

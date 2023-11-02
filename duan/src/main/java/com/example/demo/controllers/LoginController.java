@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.GioHang;
 import com.example.demo.models.KhachHang;
 import com.example.demo.models.NhanVien;
 import com.example.demo.repositories.KhachHangRepository;
@@ -86,8 +87,8 @@ public class LoginController {
                 System.out.println(khachHang1.getTaiKhoan());
                 khachHang2 = khachHang1;
                 service.setSharedData(khachHang2);
-                model.addAttribute("khachHang000", khachHang2);
-                return "redirect:/ban-hang-online/dang-nhap/hien-thi";
+                model.addAttribute("khachhangdangnhap", khachHang2);
+                return "redirect:/ban-hang-online/hien-thi";
             }
 
         }
@@ -150,6 +151,11 @@ public class LoginController {
         khachHang.setDiem(10);
         khachHangService.add(khachHang);
         KhachHang khachHang1 = khachHangService.findById(khachHang.getId());
+        GioHang gh =new GioHang();
+        gh.setMa("GH" + (String.valueOf(khachHangService.findAll().size()) + 1));
+        gh.setNgayTao(Date.valueOf(LocalDate.now()));
+        gh.setTinhTrang(0);
+        gh.setKhachHang(khachHangService.findById(khachHang.getId()));
         mailer.queue(khachHang1.getEmail(), "Bạn đã đăng kí tài khoản thành công", "TK: " + khachHang1.getTaiKhoan() + "\nMK: " + matKhau);
         return "redirect:/login";
     }
