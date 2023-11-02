@@ -266,6 +266,7 @@ public class BanHangOnlineController {
         model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
         model.addAttribute("banhangonline",banHangOnlineService);
         model.addAttribute("motctsp",chiTietSanPhamService.findById(idctsp));
+        System.out.println(chiTietSanPhamService.findById(idctsp).getSoLuong());
         model.addAttribute("idctsp",idctsp);
 //gio hang
         if(idkhachhang.equals("1")){

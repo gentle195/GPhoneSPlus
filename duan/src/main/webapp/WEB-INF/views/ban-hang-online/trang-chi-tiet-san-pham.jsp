@@ -436,11 +436,6 @@
     <!-- /container -->
 </nav>
 <!-- /NAVIGATION -->
-
-
-
-
-
 <div id="thanhlocxemchitietsanpham" >
     <p id="vt"></p>
     <div style="position: absolute;margin-left: 55%;width: 43%;margin-top: 8%;z-index: 2">
@@ -1038,18 +1033,6 @@
 
 
                                                 </div>
-                                                <div class="product-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                                <div class="product-btns">
-                                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Thêm vào danh sách yêu thích</span></button>
-                                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">Thêm để so sánh</span></button>
-                                                    <button class="quick-view" ><a href="/ban-hang-online/chi-tiet-san-pham/${ht.id}" ><i class="fa fa-exchange"></i></a><span class="tooltipp" >Xem chi tiết</span></button>
-                                                </div>
                                             </div>
                                             <div class="add-to-cart" style="z-index: 1">
                                                 <c:if test="${idkhachhang!='1'}">
@@ -1081,7 +1064,7 @@
                 <<
             </button>
             <c:forEach begin="1" end="${lamchon1}" varStatus="trang">
-                <button type="button" data-bs-target="#demo11" data-bs-slide-to="${trang.index-1}"  >${trang.index}</button>
+                <button type="button" data-bs-target="#demo11" data-bs-sli  de-to="${trang.index-1}"  >${trang.index}</button>
             </c:forEach>
             <button class="carousel-next" type="button" data-bs-target="#demo11" data-bs-slide="next">
                 >>

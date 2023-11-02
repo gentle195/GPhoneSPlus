@@ -6,6 +6,7 @@ import com.example.demo.models.NhanVien;
 import com.example.demo.repositories.KhachHangRepository;
 import com.example.demo.repositories.NhanVienRepository;
 import com.example.demo.services.DataIntermediateService;
+import com.example.demo.services.GioHangService;
 import com.example.demo.services.KhachHangService;
 import com.example.demo.services.MailerService;
 import com.example.demo.services.NhanVienService;
@@ -44,6 +45,8 @@ public class LoginController {
     private KhachHangRepository khachHangRepository;
     @Autowired
     private KhachHangService khachHangService;
+    @Autowired
+    private GioHangService gioHangService;
 
     @Autowired
     DataIntermediateService service;
@@ -88,7 +91,7 @@ public class LoginController {
                 khachHang2 = khachHang1;
                 service.setSharedData(khachHang2);
                 model.addAttribute("khachhangdangnhap", khachHang2);
-                return "redirect:/ban-hang-online/hien-thi";
+                return "redirect:/ban-hang-online/dang-nhap/hien-thi";
             }
 
         }
@@ -151,11 +154,12 @@ public class LoginController {
         khachHang.setDiem(10);
         khachHangService.add(khachHang);
         KhachHang khachHang1 = khachHangService.findById(khachHang.getId());
-        GioHang gh =new GioHang();
+        GioHang gh = new GioHang();
         gh.setMa("GH" + (String.valueOf(khachHangService.findAll().size()) + 1));
         gh.setNgayTao(Date.valueOf(LocalDate.now()));
         gh.setTinhTrang(0);
         gh.setKhachHang(khachHangService.findById(khachHang.getId()));
+        gioHangService.add(gh);
         mailer.queue(khachHang1.getEmail(), "Bạn đã đăng kí tài khoản thành công", "TK: " + khachHang1.getTaiKhoan() + "\nMK: " + matKhau);
         return "redirect:/login";
     }
@@ -256,7 +260,7 @@ public class LoginController {
                 nhanVienService.update(id, nhanVien);
                 NhanVien newnv = nhanVienService.findById(id);
                 mailer.queue(newnv.getEmail(), "Bạn đã thay đổi mật khẩu thành công", "Tài khoản: " + newnv.getTaiKhoan() + "\nMật khẩu mới: " + matKhau);
-               return "redirect:/login";
+                return "redirect:/login";
             }
         }
     }
