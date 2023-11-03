@@ -65,7 +65,7 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
         }
         for (GrantedAuthority grantedAuthority3 : authorities) {
             if (grantedAuthority3.getAuthority().equals("USER")) {
-                return "/ban-hang-online/home";
+                return "/ban-hang-online/taikhoan-matkhau";
             }
         }
 
