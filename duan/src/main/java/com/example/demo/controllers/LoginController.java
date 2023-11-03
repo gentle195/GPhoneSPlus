@@ -119,22 +119,24 @@ public class LoginController {
 
     @GetMapping("/thong-tin-ca-nhan")
     public String thongTinND(Model model, @ModelAttribute("us") NhanVien nhanVien) {
-        UserInfoUserDetails userDetails=SecurityUtil.getId();
-        model.addAttribute("us", userDetails);
+        NhanVien nv = nhanVienService.findById(SecurityUtil.getId().getId());
+        model.addAttribute("us", nv);
 
         model.addAttribute("contentPage", "../thong-tin/thong-tin-ca-nhan.jsp");
         return "home/layout";
     }
-    @GetMapping("/403")
-    private String accessDenied(Model model){
 
-        model.addAttribute("contentPage","../home/error.jsp");
+    @GetMapping("/403")
+    private String accessDenied(Model model) {
+
+        model.addAttribute("contentPage", "../home/error.jsp");
         return "home/layout";
     }
 
     @GetMapping("/doi-mat-khau")
     public String doiMatKhau(Model model) {
-        model.addAttribute("us", service.getSharedDataNhanVien());
+        NhanVien nv = nhanVienService.findById(SecurityUtil.getId().getId());
+        model.addAttribute("us", nv);
         model.addAttribute("contentPage", "../thong-tin/doi-mat-khau.jsp");
         return "home/layout";
     }
@@ -204,14 +206,12 @@ public class LoginController {
 
         return password.toString();
     }
+
     @GetMapping("/infor")
-    public String ggetin(){
+    public String ggetin() {
 
-        UserInfoUserDetails userDetails= SecurityUtil.getId();
-        System.out.println("Ho Ten: "+ userDetails.getHoTen());
-
-
-
+        UserInfoUserDetails userDetails = SecurityUtil.getId();
+        System.out.println("Ho Ten: " + userDetails.getHoTen());
 
 
 //      UUID id=SecurityUtil.getId();
@@ -223,7 +223,6 @@ public class LoginController {
 //        KhachHang khachHang =khachHangRepository.getKhachHangByTaiKhoan(email).get();
 //        System.out.println("Ten khach hang: "+khachHang.getHoTen());
         return null;
-
 
 
     }
@@ -296,19 +295,21 @@ public class LoginController {
             }
         }
     }
+
     @GetMapping("/in4")
-    public String in4(){
-        UserInfoUserDetails userDetails= (UserInfoUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println("id: "+userDetails.getId());
+    public String in4() {
+        UserInfoUserDetails userDetails = (UserInfoUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println("id: " + userDetails.getId());
         return null;
     }
+
     @GetMapping("/oauth2/callback")
     public String handleOAuth2Callback(@AuthenticationPrincipal OAuth2User oauth2User, Principal principal) {
         // Trích xuất thông tin người dùng từ OAuth2
 
         String email = oauth2User.getAttribute("email");
         String name = oauth2User.getAttribute("name");
-        String idToken=oauth2User.getAttribute("id_token");
+        String idToken = oauth2User.getAttribute("id_token");
         System.out.println(principal.getName());
 
         System.out.println(email);
@@ -321,11 +322,11 @@ public class LoginController {
             // Người dùng chưa tồn tại, tạo người dùng mới
 //            GoogleId token= oauth2User.get;
 
-            List<KhachHang> khachHangList= khachHangRepository.findAll();
+            List<KhachHang> khachHangList = khachHangRepository.findAll();
             String email1 = oauth2User.getAttribute("email");
             String name1 = oauth2User.getAttribute("name");
             KhachHang newUser = new KhachHang();
-            newUser.setMa("KH"+khachHangList.size()+1);
+            newUser.setMa("KH" + khachHangList.size() + 1);
             newUser.setEmail(email1);
             newUser.setTaiKhoan(email1);
             newUser.setHoTen(name1);
@@ -339,7 +340,7 @@ public class LoginController {
             String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 
-            String randomPassword=generateRandomPassword(8);
+            String randomPassword = generateRandomPassword(8);
 
             String hashedPassword = BCrypt.hashpw(randomPassword, BCrypt.gensalt());
             newUser.setMatKhau(hashedPassword);

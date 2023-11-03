@@ -728,7 +728,7 @@
                     <div class="row">
                         <button
 
-                            Xem thêm cấu hình chi tiết
+                                Xem thêm cấu hình chi tiết
                         </button>
                     </div>
                     </p>

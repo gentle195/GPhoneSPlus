@@ -299,7 +299,6 @@ CREATE TABLE nhan_vien (
   tai_khoan NVARCHAR(50) NOT NULL,
   mat_khau NVARCHAR(255) NOT NULL,
   luong Decimal(20,1) null,
-  can_cuoc_cong_dan NVARCHAR(30) null,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
   tinh_trang INT DEFAULT 0,
@@ -583,7 +582,7 @@ VALUES
   INSERT INTO chuc_vu (ma, ten, ngay_cap_nhat, mo_ta)
 VALUES 
 ('CV001', N'ADMIN', '2022-01-01', N'Quản lý'),
-('CV002', N'STAFF', '2022-02-15', N'Nhân viên'),
+('CV002', N'STAFF', '2022-02-15', N'Nhân viên')
 
 
 
