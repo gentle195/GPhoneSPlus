@@ -84,9 +84,47 @@
     </div>
 </div>
 </body>
+<div class="modal fade" id="exampleModalDungLuongPin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+     data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabelPin">Add New Dung Lượng Pin</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form:form action="/pin/modal-add" method="post" modelAttribute="dungLuongPin">
+                    <div class="mb-3">
+                        <form:label path="thongSo"><b>Thông số:</b></form:label>
+                        <form:input path="thongSo" class="form-control"></form:input>
+                        <form:errors path="thongSo"></form:errors>
+                    </div>
+                    <div class="mb-3">
+                        <form:label path="moTa"><b>Mô Tả:</b></form:label>
+                        <form:textarea path="moTa" class="form-control"></form:textarea>
+                        <form:errors path="moTa"></form:errors>
+                    </div>
+                    <div class="text-center">
+                            <%--                        <button type="submit" class="btn btn-primary" onclick="validateForm()" >ADD</button>--%>
+                        <button type="submit" class="btn btn-primary mr-2" id="btnPin"
+                                onclick="return validateFormPin()">
+                            ADD
+                        </button>
+                    </div>
+                </form:form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
 <script>
     $(document).ready(function () {
         $('#selectDungLuongPin').select2();
     });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </html>
