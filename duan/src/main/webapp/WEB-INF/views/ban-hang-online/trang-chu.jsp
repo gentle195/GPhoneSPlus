@@ -134,27 +134,76 @@
 
 <!-- HEADER -->
 <header>
+<%--    <!-- TOP HEADER -->--%>
+<%--    <div id="top-header">--%>
+<%--        <div class="container">--%>
+<%--            <ul class="header-links pull-left">--%>
+<%--                <li><a href="#"><i class="fa fa-envelope-o"></i> gphones@gmail.com</a></li>--%>
+<%--            </ul>--%>
+<%--            <ul class="header-links pull-right" style="color:white;">--%>
+<%--                <security:authorize access="isAuthenticated()">--%>
+<%--                    hi, <security:authentication property="principal.email"  />--%>
+<%--                    ||--%>
+<%--                    <a href="/logout">Logout</a>--%>
+<%--                </security:authorize>--%>
+<%--                <security:authorize access="!isAuthenticated()">--%>
+<%--                    <a href="/login" style="color: white">Login</a>--%>
+
+<%--                </security:authorize>--%>
+<%--            </ul>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--    <!-- /TOP HEADER -->--%>
     <!-- TOP HEADER -->
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
                 <li><a href="#"><i class="fa fa-envelope-o"></i> gphones@gmail.com</a></li>
             </ul>
-            <ul class="header-links pull-right" style="color:white;">
-                <security:authorize access="isAuthenticated()">
-                    hi, <security:authentication property="principal.email"  />
-                    ||
-                    <a href="/logout">Logout</a>
-                </security:authorize>
-                <security:authorize access="!isAuthenticated()">
-                    <a href="/login" style="color: white">Login</a>
+            <ul class="header-links pull-right">
+                <c:if test="${idkhachhang=='1'}">
+                    <li><a href="/login"><i class="fa fa-user-o"></i> Chưa đăng nhập:<input id="tkmkidkhachhang"
+                                                                                            type="text"
+                                                                                            style="display: none"
+                                                                                            value="${idkhachhang}"></a>
+                    </li>
 
-                </security:authorize>
+                </c:if>
+                <c:if test="${idkhachhang !='1'}">
+                    <!-- Cart -->
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                    <span>
+                                    <i class="fa fa-user-o"></i>
+                                            ${khachhangdangnhap.hoTen}
+                                        <input id="tkmkidkhachhang" type="text" style="display: none"
+                                               value="${idkhachhang}">
+                                    </span>
+                            </a>
+                            <div class="cart-dropdown" style="border-radius: 10px;width: 3.5cm;margin-top: 10px">
+                                <div>
+                                    <div>
+                                        <a href="#" class="btn btn-primary">Tài khoản của tôi</a>
+                                    </div>
+
+                                    <form action="/ban-hang-online/hoa-don-online" method="post">
+                                        <input name="idkh" value="${idkhachhang}" style="display: none">
+                                        <button type="submit" class="btn btn-primary">Đơn hàng</button>
+                                    </form>
+                                    <div>
+                                        <a href="/logout" class="btn btn-primary" style="">Đăng xuất</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- /Cart -->
+                </c:if>
             </ul>
         </div>
     </div>
     <!-- /TOP HEADER -->
-
     <!-- MAIN HEADER -->
     <div id="header">
         <!-- container -->
@@ -313,6 +362,10 @@
     <!-- /MAIN HEADER -->
 </header>
 <!-- /HEADER -->
+
+
+
+
 
 <!-- NAVIGATION -->
 <nav id="navigation">
