@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>GPhoneS Store </title>
     <!-- Favicon icon -->
 </head>
 <body>
@@ -20,7 +20,12 @@
                    aria-controls="description" aria-selected="true">Thông tin Camera</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/camera/hien-thi-delete" role="tab">Camera đã xoá</a>
+                <a class="nav-link" href="/camera/view-add" role="tab" onclick="return myFunction1()">Thêm thông tin
+                    Camera</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/camera/hien-thi-delete" role="tab" onclick="return myFunction7()">Camera đã
+                    xoá</a>
             </li>
         </ul>
     </div>
@@ -28,32 +33,6 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="description" role="tabpanel"
                  aria-labelledby="description-tab">
-                <form:form action="/camera/add" method="post" modelAttribute="camera">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Thêm Camera</h4>
-                            <form class="forms-sample">
-                                <div class="form-group">
-                                    <form:label path="thongSo"><b>Thông số Camera:</b></form:label>
-                                    <form:input class="form-control" placeholder="" path="thongSo"/>
-                                    <form:errors path="thongSo" cssStyle="color: red"/>
-                                </div>
-                                <div class="form-group">
-                                    <form:label path="moTa"><b>Mô tả:</b></form:label>
-                                    <form:input class="form-control" placeholder="" path="moTa"/>
-                                    <form:errors path="moTa" cssStyle="color: red"/>
-                                </div>
-                                <div style="text-align: center">
-                                    <button type="submit" class="btn btn-primary mr-2"
-                                            onclick="return myFunction1()">
-                                        ADD
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </form:form>
-                <br>
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
@@ -68,7 +47,9 @@
                                             <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                                    aria-label="Bạn tìm gì..." name="search">
                                             <div class="input-group-append">
-                                                <button class="btn btn-sm btn-primary" type="submit" onclick="return myFunction5()">Search</button>
+                                                <button class="btn btn-sm btn-primary" type="submit"
+                                                        onclick="return myFunction5()">Search
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -76,7 +57,7 @@
                             </form>
                             <%--           kết thúc tìm kiếm         --%>
                             <div class="table-responsive">
-                                <table class="table table-striped">
+                                <table class="table table-striped" style="color: black">
                                     <thead>
                                     <tr>
                                         <th>Mã</th>
@@ -105,7 +86,8 @@
                                                onclick="return myFunction2()">
                                                 <i class="ti-file btn-icon-prepend"></i>
                                                 Update</a>
-                                            <a class="btn btn-danger btn-icon-text" href="/camera/update-status/${list.id}"
+                                            <a class="btn btn-danger btn-icon-text"
+                                               href="/camera/update-status/${list.id}"
                                                onclick="return myFunction3()"><i class="ti-reload btn-icon-prepend"></i>
                                                 Status</a>
                                         </td>
@@ -147,7 +129,7 @@
 </body>
 <script>
     function myFunction1() {
-        let text = "Bạn chắc chắn muốn thêm";
+        let text = "Bạn chắc chắn muốn sang trang thêm thông tin";
         let kt = confirm(text);
         if (kt == true) {
             return true
@@ -171,6 +153,16 @@
         let kt = confirm(text);
         if (kt == true) {
             confirm("Thay đổi trạng thái thành công");
+            return true
+        } else {
+            return false;
+        }
+    }
+
+    function myFunction7() {
+        let text = "Bạn chắc chắn muốn sang trang thay đổi trạng thái";
+        let kt = confirm(text);
+        if (kt == true) {
             return true
         } else {
             return false;

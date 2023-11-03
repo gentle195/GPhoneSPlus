@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>GPhoneS Store </title>
     <!-- Favicon icon -->
 </head>
 <body>
@@ -19,50 +19,16 @@
                aria-controls="description" aria-selected="true">Thông tin Chip</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/chip/hien-thi-delete" role="tab">Chip đã xoá</a>
+            <a class="nav-link" href="/chip/view-add" role="tab" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin Chip</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/chip/hien-thi-delete" role="tab" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Chip đã xoá</a>
         </li>
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="description" role="tabpanel"
          aria-labelledby="description-tab">
-        <form:form action="/chip/add" method="post" modelAttribute="chip">
-            <%--    <div class="col-md-6 grid-margin stretch-card" >--%>
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Thêm Chip</h4>
-                    <form class="forms-sample">
-                        <div class="form-group">
-                            <form:label path="ten"><b>Tên:</b></form:label>
-                            <form:input path="ten" class="form-control"/>
-                            <form:errors path="ten" cssStyle="color: red"/>
-                        </div>
-                        <div class="form-group">
-                            <form:label path="loaiChip"><b>Loại Chip:</b></form:label>
-                            <form:input path="loaiChip" class="form-control"/>
-                            <form:errors path="loaiChip" cssStyle="color: red"/>
-                        </div>
-                        <div class="form-group">
-                            <form:label path="soNhan"><b>Số nhân:</b></form:label>
-                            <form:input path="soNhan" class="form-control" type="number"/>
-                            <form:errors path="soNhan" cssStyle="color: red"/>
-                        </div>
-                        <div class="form-group">
-                            <form:label path="moTa"><b>Mô Tả:</b></form:label>
-                            <form:textarea path="moTa" class="form-control"/>
-                            <form:errors path="moTa" cssStyle="color: red"/>
-                        </div>
-                        <div style="text-align: center">
-                            <button type="submit" class="btn btn-primary mr-2"
-                                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                ADD
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <%--    </div>--%>
-        </form:form>
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
@@ -79,7 +45,7 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" style="color: black">
                             <thead>
                             <tr>
                                 <th>Mã</th>
@@ -130,20 +96,19 @@
         </div>
         <%--phân trang--%>
         <div align="center">
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <ul class="pagination justify-content-center pagination-lg">
-                <li class="page-item"><a class="page-link" href="/chip/hien-thi?pageNum=0"><</a></li>
-                <c:forEach begin="1" end="${total}" varStatus="status">
-                    <li class="page-item">
-                        <a href="${pageContext.request.contextPath}/chip/hien-thi?pageNum=${status.index -1}"
-                           class="page-link">${status.index}</a>
-                    </li>
-                </c:forEach>
-                <li class="page-item"><a class="page-link" href="/chip/hien-thi?pageNum=${total-1}">></a></li>
-            </ul>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <ul class="pagination justify-content-center pagination-lg">
+                    <li class="page-item"><a class="page-link" href="/chip/hien-thi?pageNum=0"><</a></li>
+                    <c:forEach begin="1" end="${total}" varStatus="status">
+                        <li class="page-item">
+                            <a href="${pageContext.request.contextPath}/chip/hien-thi?pageNum=${status.index -1}"
+                               class="page-link">${status.index}</a>
+                        </li>
+                    </c:forEach>
+                    <li class="page-item"><a class="page-link" href="/chip/hien-thi?pageNum=${total-1}">></a></li>
+                </ul>
+            </div>
         </div>
-        </div>
-        <%--kết thúc phân trang--%>
     </div>
 </div>
 </body>

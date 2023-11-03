@@ -33,7 +33,7 @@ public class DungLuongPinController {
     @GetMapping("/hien-thi")
     public String hienThi(Model model, @ModelAttribute("dungLuongPin") DungLuongPin dungLuongPin,
                           @RequestParam("pageNum") Optional<Integer> pageNum,
-                          @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+                          @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
 
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
@@ -47,8 +47,8 @@ public class DungLuongPinController {
 
     @GetMapping("/hien-thi-delete")
     public String hienThiDelete(Model model, @ModelAttribute("dungLuongPin") DungLuongPin dungLuongPin,
-                          @RequestParam("pageNum") Optional<Integer> pageNum,
-                          @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+                                @RequestParam("pageNum") Optional<Integer> pageNum,
+                                @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
 
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
@@ -60,37 +60,35 @@ public class DungLuongPinController {
         return "/home/layout";
     }
 
+    @GetMapping("/view-add")
+    public String viewAdd(Model model, @ModelAttribute("dungLuongPin") DungLuongPin dungLuongPin) {
+        model.addAttribute("dungLuongPin", new DungLuongPin());
+        model.addAttribute("contentPage", "../dungluongpin/add.jsp");
+        return "/home/layout";
+    }
+
     @PostMapping("/add")
-    public String addDungLuongPin(Model model, @ModelAttribute("dungLuongPin") @Valid DungLuongPin dungLuongPin, BindingResult bindingResult, @RequestParam("pageNum") Optional<Integer> pageNum,
-                                  @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<DungLuongPin> page = dungLuongPinService.getAll(pageable);
+    public String addDungLuongPin(Model model, @ModelAttribute("dungLuongPin") @Valid DungLuongPin dungLuongPin, BindingResult bindingResult
+    ) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("contentPage", "../dungluongpin/dung-luong-pin.jsp");
-            model.addAttribute("listDungLuongPin", page.getContent());
-            model.addAttribute("page", page.getNumber());
-            model.addAttribute("total", page.getTotalPages());
+            model.addAttribute("contentPage", "../dungluongpin/add.jsp");
             return "/home/layout";
         }
 
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
-        String ma = "DLP" + (dungLuongPinService.findAll().size()+1);
+        String ma = "DLP" + (dungLuongPinService.findAll().size() + 1);
         dungLuongPin.setMa(ma);
         dungLuongPin.setNgayTao(date);
         dungLuongPin.setTinhTrang(0);
 
         dungLuongPinService.add(dungLuongPin);
-        model.addAttribute("listDungLuongPin", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
         return "redirect:/dung-luong-pin/hien-thi";
     }
 
     @PostMapping("/update/{id}")
     public String updateDungLuongPin(Model model, @PathVariable("id") UUID id, @ModelAttribute("dungLuongPin") @Valid DungLuongPin dungLuongPin, BindingResult bindingResult, @RequestParam("pageNum") Optional<Integer> pageNum,
-                                     @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+                                     @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
         if (bindingResult.hasErrors()) {
             return "../dungluongpin/dung-luong-pin-update";
         }
@@ -104,7 +102,7 @@ public class DungLuongPinController {
 
     @GetMapping("/update-tt")
     public String updateTT(Model model, @RequestParam("pageNum") Optional<Integer> pageNum,
-                           @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("dungLuongPin") DungLuongPin dungLuongPin) {
+                           @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize, @ModelAttribute("dungLuongPin") DungLuongPin dungLuongPin) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         long millis = System.currentTimeMillis();
@@ -114,7 +112,7 @@ public class DungLuongPinController {
         dungLuongPinService.updateTT();
         System.out.println("cc: ");
         Page<DungLuongPin> page = dungLuongPinService.getAll1(pageable);
-        model.addAttribute("contentPage","../dungluongpin/dung-luong-pin-delete.jsp");
+        model.addAttribute("contentPage", "../dungluongpin/dung-luong-pin-delete.jsp");
         model.addAttribute("listDungLuongPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
@@ -123,7 +121,7 @@ public class DungLuongPinController {
 
     @GetMapping("/update-status/{id}")
     public String updateStatus(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
-                               @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("dungLuongPin") DungLuongPin dungLuongPin) {
+                               @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize, @ModelAttribute("dungLuongPin") DungLuongPin dungLuongPin) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
 
@@ -132,9 +130,9 @@ public class DungLuongPinController {
         Date date = new Date(millis);
         dungLuongPin1.setNgayCapNhat(date);
         dungLuongPin1.setTinhTrang(1);
-        dungLuongPinService.update(id,dungLuongPin1);
+        dungLuongPinService.update(id, dungLuongPin1);
         Page<DungLuongPin> page = dungLuongPinService.getAll(pageable);
-        model.addAttribute("contentPage","../dungluongpin/dung-luong-pin.jsp");
+        model.addAttribute("contentPage", "../dungluongpin/dung-luong-pin.jsp");
         model.addAttribute("listDungLuongPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
@@ -143,7 +141,7 @@ public class DungLuongPinController {
 
     @GetMapping("/reset-status/{id}")
     public String resetStatus(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
-                              @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("dungLuongPin") DungLuongPin dungLuongPin) {
+                              @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize, @ModelAttribute("dungLuongPin") DungLuongPin dungLuongPin) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         DungLuongPin dungLuongPin1 = dungLuongPinService.findById(id);
@@ -152,9 +150,9 @@ public class DungLuongPinController {
         dungLuongPin1.setNgayCapNhat(date);
 
         dungLuongPin1.setTinhTrang(0);
-        dungLuongPinService.update(id,dungLuongPin1);
+        dungLuongPinService.update(id, dungLuongPin1);
         Page<DungLuongPin> page = dungLuongPinService.getAll1(pageable);
-        model.addAttribute("contentPage","../dungluongpin/dung-luong-pin-delete.jsp");
+        model.addAttribute("contentPage", "../dungluongpin/dung-luong-pin-delete.jsp");
         model.addAttribute("listDungLuongPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
@@ -164,7 +162,7 @@ public class DungLuongPinController {
 
     @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
-                         @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+                         @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
         DungLuongPin sp = dungLuongPinService.findById(id);
         model.addAttribute("dungLuongPin", sp);
         Sort sort = Sort.by("ngayTao").ascending();

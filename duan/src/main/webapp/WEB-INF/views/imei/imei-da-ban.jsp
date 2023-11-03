@@ -8,21 +8,28 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>GPhoneS Store </title>
     <!-- Favicon icon -->
 </head>
 <body>
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/imei/hien-thi" role="tab">Thông tin Imei</a>
+            <a class="nav-link" href="/imei/hien-thi" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin Imei</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
                aria-controls="description" aria-selected="true">Imei đã bán</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/imei/hien-thi-da-xoa" role="tab">Imei đã xoá</a>
+            <a class="nav-link" href="/imei/view-add" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin
+                Imei</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/imei/hien-thi-da-xoa" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Imei đã xoá</a>
         </li>
     </ul>
 </div>

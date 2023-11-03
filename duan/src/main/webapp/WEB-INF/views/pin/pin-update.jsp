@@ -8,18 +8,29 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>GPhoneS Store </title>
     <!-- Favicon icon -->
 </head>
 <body>
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+
         <li class="nav-item">
-            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               aria-controls="description" aria-selected="true">Thông tin dung lượng Pin</a>
+            <a class="nav-link" href="/pin/hien-thi" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin Pin</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/pin/hien-thi-delete" role="tab">Dung lượng Pin đã xoá</a>
+            <a class="nav-link" href="/pin/view-add" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin
+                Pin</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/pin/hien-thi-delete" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Pin đã xoá</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+               aria-controls="description" aria-selected="true">Update thông tin Pin</a>
         </li>
     </ul>
 </div>
@@ -29,7 +40,7 @@
         <form:form action="/pin/update/${pin.id}" method="post" modelAttribute="pin">
             <%--    <div class="col-md-6 grid-margin stretch-card" >--%>
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" style="color: black">
                     <h4 class="card-title">Update Pin</h4>
                     <form class="forms-sample">
                         <div class="form-group" style="display: none">

@@ -8,20 +8,27 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>GPhoneS Store</title>
     <!-- Favicon icon -->
 </head>
 <body>
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/rom/hien-thi" role="tab">Thông tin Rom </a>
+            <a class="nav-link" href="/rom/hien-thi" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin Rom </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/rom/view-add" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin
+                Rom </a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
                aria-controls="description" aria-selected="true">Rom đã xoá</a>
         </li>
-        <a href="/rom/khoi-phuc-het" class="btn btn-outline-danger btn-icon-text" style="float: right; margin-left: 720px"
+        <a href="/rom/khoi-phuc-het" class="btn btn-outline-danger btn-icon-text"
+           style="float: right; margin-left: 720px"
            tabindex="-1"
            role="button"
            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
@@ -49,7 +56,7 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" style="color: black">
                             <thead>
                             <tr>
                                 <th>STT</th>
@@ -58,7 +65,7 @@
                                 <th>Ngày tạo</th>
                                 <th>Ngày cập nhật</th>
                                 <th>Tình trạng</th>
-                                <th>Mô tả </th>
+                                <th>Mô tả</th>
                                 <th colspan="2">Action</th>
                             </tr>
                             </thead>
@@ -74,16 +81,12 @@
                                     <td style="color: green">${chip.tt()}</td>
                                     <td>${chip.moTa}</td>
                                     <td>
-                                            <%--                                            <a href="/detail-chip/${chip.id}" class="btn btn-outline-primary"--%>
-                                            <%--                                               tabindex="-1"--%>
-                                            <%--                                               role="button"--%>
-                                            <%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Detail</a>--%>
-                                                <a href="/rom/khoi-phuc/${chip.id}" class="btn btn-danger btn-icon-text"
-                                                   tabindex="-1"
-                                                   role="button"
-                                                   onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                                    <i class="ti-reload btn-icon-prepend"></i>
-                                                    Status</a>
+                                        <a href="/rom/khoi-phuc/${chip.id}" class="btn btn-danger btn-icon-text"
+                                           tabindex="-1"
+                                           role="button"
+                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                            <i class="ti-reload btn-icon-prepend"></i>
+                                            Status</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -106,7 +109,8 @@
                         </li>
                     </c:forEach>
 
-                    <li class="page-item"><a class="page-link" href="/rom/hien-thi-tung-xoa?num=${total-1}">Last</a></li>
+                    <li class="page-item"><a class="page-link" href="/rom/hien-thi-tung-xoa?num=${total-1}">Last</a>
+                    </li>
                 </ul>
             </div>
         </div>

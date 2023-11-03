@@ -33,7 +33,7 @@ public class MauSacController {
     @GetMapping("/hien-thi")
     public String hienThi(Model model, @ModelAttribute("mauSac") MauSac mauSac,
                           @RequestParam("pageNum") Optional<Integer> pageNum,
-                          @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+                          @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         mauSac.setTinhTrang(0);
@@ -45,18 +45,17 @@ public class MauSacController {
         return "/home/layout";
     }
 
+    @GetMapping("/view-add")
+    public String viewAdd(Model model, @ModelAttribute("mauSac") MauSac mauSac) {
+        model.addAttribute("mauSac", new MauSac());
+        model.addAttribute("contentPage", "../mausac/add.jsp");
+        return "/home/layout";
+    }
+
     @PostMapping("/add-mau-sac")
-    public String addMauSac(Model model, @ModelAttribute("mauSac") @Valid MauSac mauSac, BindingResult bindingResult,
-                            @RequestParam("pageNum") Optional<Integer> pageNum,
-                            @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<MauSac> page = mauSacService.getAll(pageable);
+    public String addMauSac(Model model, @ModelAttribute("mauSac") @Valid MauSac mauSac, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("contentPage", "../mausac/mau-sac.jsp");
-            model.addAttribute("listMauSac", page.getContent());
-            model.addAttribute("page", page.getNumber());
-            model.addAttribute("total", page.getTotalPages());
+            model.addAttribute("contentPage", "../mausac/add.jsp");
             return "/home/layout";
         }
         long millis = System.currentTimeMillis();
@@ -73,17 +72,13 @@ public class MauSacController {
         mauSac.setNgayCapNhat(date);
         mauSac.setTinhTrang(0);
         mauSacService.add(mauSac);
-        model.addAttribute("contentPage", "../mausac/mau-sac.jsp");
-        model.addAttribute("listMauSac", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
         return "redirect:/mau-sac/hien-thi";
     }
 
     @GetMapping("/detail-mau-sac/{id}")
     public String viewUpdate(Model model, @PathVariable("id") UUID id,
                              @RequestParam("pageNum") Optional<Integer> pageNum,
-                             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+                             @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
         Sort sort = Sort.by("ma").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize);
         MauSac mauSac = mauSacService.findById(id);
@@ -98,7 +93,7 @@ public class MauSacController {
 
     @PostMapping("/update-mau-sac/{id}")
     public String updateRam(Model model, @PathVariable("id") UUID id, @ModelAttribute("mauSac") @Valid MauSac mauSac,
-                            BindingResult bindingResult, @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+                            BindingResult bindingResult, @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
         if (bindingResult.hasErrors()) {
             return "../mausac/mau-sac-update.jsp";
         }
@@ -113,7 +108,7 @@ public class MauSacController {
     @GetMapping("/hien-thi-delete")
     public String hienThiDelete(Model model, @ModelAttribute("ram") Ram ram,
                                 @RequestParam("pageNum") Optional<Integer> pageNum,
-                                @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+                                @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
 
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
@@ -127,7 +122,7 @@ public class MauSacController {
 
     @GetMapping("/update-all-status")
     public String updateTT(Model model, @RequestParam("pageNum") Optional<Integer> pageNum,
-                           @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("mauSac") MauSac mauSac) {
+                           @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize, @ModelAttribute("mauSac") MauSac mauSac) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         long millis = System.currentTimeMillis();
@@ -145,7 +140,7 @@ public class MauSacController {
     @GetMapping("/update-status/{id}")
     public String updateStatus(Model model, @PathVariable("id") UUID id,
                                @RequestParam("pageNum") Optional<Integer> pageNum,
-                               @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("mauSac") MauSac mauSac) {
+                               @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize, @ModelAttribute("mauSac") MauSac mauSac) {
         Sort sort = Sort.by("ma").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         MauSac mauSac1 = mauSacService.findById(id);
@@ -165,7 +160,7 @@ public class MauSacController {
     @GetMapping("/reset-status/{id}")
     public String resetStatus(Model model, @PathVariable("id") UUID id,
                               @RequestParam("pageNum") Optional<Integer> pageNum,
-                              @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize,
+                              @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize,
                               @ModelAttribute("mauSac") MauSac mauSac
     ) {
         Sort sort = Sort.by("ngayTao").ascending();

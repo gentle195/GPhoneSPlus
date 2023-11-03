@@ -68,6 +68,15 @@ public class PinController {
         return "/home/layout";
     }
 
+    @GetMapping("/view-add")
+    public String viewAdd(Model model, @ModelAttribute("pin") Pin pin,
+                          @ModelAttribute("dungLuongPin") DungLuongPin dungLuongPin) {
+        model.addAttribute("listDungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("pin", new Pin());
+        model.addAttribute("contentPage", "../pin/add.jsp");
+        return "/home/layout";
+    }
+
     @GetMapping("/hien-thi-delete")
     public String hienThi1(Model model, @ModelAttribute("pin") Pin pin,
                            @RequestParam("pageNum") Optional<Integer> pageNum,
@@ -86,32 +95,22 @@ public class PinController {
 
 
     @PostMapping("/add")
-    public String addPin(Model model, @ModelAttribute("pin") @Valid Pin pin, BindingResult bindingResult, @RequestParam("pageNum") Optional<Integer> pageNum,
-                         @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<Pin> page = pinService.getAll(pageable);
+    public String addPin(Model model, @ModelAttribute("pin") @Valid Pin pin, BindingResult bindingResult,
+                         @ModelAttribute("dungLuongPin") DungLuongPin dungLuongPin) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("contentPage", "../pin/pin.jsp");
-            model.addAttribute("listPin", page.getContent());
-            model.addAttribute("page", page.getNumber());
-            model.addAttribute("total", page.getTotalPages());
+            model.addAttribute("listDungLuongPin", dungLuongPinService.findAll0());
+            model.addAttribute("contentPage", "../pin/add.jsp");
             return "/home/layout";
         }
 
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
-        String ma = "PIN" + pinService.findAll().size();
+        String ma = "PIN" + (pinService.findAll().size() + 1);
         pin.setMa(ma);
-//        pin.setNgayTao(date);
+        pin.setNgayTao(date);
         pin.setTinhTrang(0);
         pinService.add(pin);
-
-        model.addAttribute("list", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
-        model.addAttribute("contentPage", "../pin/pin.jsp");
         return "redirect:/pin/hien-thi";
     }
 
@@ -233,15 +232,6 @@ public class PinController {
         model.addAttribute("total", page.getTotalPages());
         return "/home/layout";
     }
-
-    @GetMapping("/view-add")
-    public String viewAdd(Model model, @ModelAttribute("pin") Pin pin, @RequestParam("pageNum") Optional<Integer> pageNum,
-                          @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
-        model.addAttribute("contentPage", "../pin/pin-add.jsp");
-        return "/home/layout";
-    }
-
     @PostMapping("/search-0")
     public String search0(Model model, @RequestParam("search") String sreach, @ModelAttribute("pin") Pin pin) {
         List<Pin> listPin = pinService.search0(sreach);
@@ -257,6 +247,7 @@ public class PinController {
         model.addAttribute("contentPage", "../pin/pin-delete.jsp");
         return "/home/layout";
     }
+
     @GetMapping("/export-excel")
     public String exportExcel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Lấy dữ liệu từ database
@@ -349,7 +340,6 @@ public class PinController {
 
         return null;
     }
-
 
 
     @GetMapping("/export-pdf")

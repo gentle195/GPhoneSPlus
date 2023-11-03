@@ -9,7 +9,7 @@
 
     <%--phan trang--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +17,7 @@
 
     <title>Electro - HTML Ecommerce Template</title>
     <%--căn đều--%>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
 
 
     <!-- Google font -->
@@ -41,13 +41,13 @@
 
     <%--    select 2--%>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
-
-
 
 
     <style>
@@ -72,6 +72,7 @@
             border-radius: 5px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         }
+
         /*div{*/
         /*    border: 1px solid red;*/
         /*}*/
@@ -95,6 +96,7 @@
             background-color: #007bff;
             color: #fff;
         }
+
         .product-info-table {
             border-collapse: collapse; /* Loại bỏ khoảng cách giữa các ô */
             width: 100%; /* Đảm bảo bảng rộng 100% */
@@ -111,6 +113,7 @@
         .info-label {
             font-weight: bold; /* In đậm nhãn */
         }
+
         .modal {
             display: none;
             position: fixed;
@@ -130,6 +133,7 @@
             padding: 20px;
             border: 1px solid #000;
         }
+
         .quantity-control {
             display: flex;
             align-items: center;
@@ -193,8 +197,6 @@
 </head>
 
 <body>
-
-
 
 
 <!-- HEADER -->
@@ -420,14 +422,14 @@
             <ul class=" main-nav nav ">
 
                 <c:if test="${idkhachhang=='1'}">
-                    <li ><a href="/ban-hang-online/hien-thi" >TRANG CHỦ</a></li>
+                    <li><a href="/ban-hang-online/hien-thi">TRANG CHỦ</a></li>
                 </c:if>
                 <c:if test="${idkhachhang !='1'}">
-                    <li ><a href="/ban-hang-online/dang-nhap/hien-thi" >TRANG CHỦ</a></li>
+                    <li><a href="/ban-hang-online/dang-nhap/hien-thi">TRANG CHỦ</a></li>
                 </c:if>
                 <li><a href="#">ƯU ĐÃI HẤP DẪN</a></li>
                 <li><a href="#">LOẠI</a></li>
-                <li><a href="/ban-hang-online/dien-thoai-thong-minh" >ĐIỆN THOẠI THÔNG MINH</a></li>
+                <li><a href="/ban-hang-online/dien-thoai-thong-minh">ĐIỆN THOẠI THÔNG MINH</a></li>
             </ul>
             <!-- /NAV -->
         </div>
@@ -436,36 +438,43 @@
     <!-- /container -->
 </nav>
 <!-- /NAVIGATION -->
-<div id="thanhlocxemchitietsanpham" >
+
+
+<div id="thanhlocxemchitietsanpham">
     <p id="vt"></p>
     <div style="position: absolute;margin-left: 55%;width: 43%;margin-top: 8%;z-index: 2">
         <p style="display: none" id="tenspctsp">${motctsp.sanPham.ten}</p>
-        <label style="font-weight: bold" >Màu sắc</label>
+        <label style="font-weight: bold">Màu sắc</label>
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
 
             <c:if test="${stt1.index==0}">
                 <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
-                    <input type="radio" id="ms${stt1.index}" name="mauSac1" value="${ht1.mauSac.ten}" ${ht1.mauSac.ten==motctsp.mauSac.ten ?"checked":""} onchange="clickradio2lan();" >
+                    <input type="radio" id="ms${stt1.index}" name="mauSac1"
+                           value="${ht1.mauSac.ten}" ${ht1.mauSac.ten==motctsp.mauSac.ten ?"checked":""}
+                           onchange="clickradio2lan();">
                     <label for="ms${stt1.index}" style="border: 1px solid #00A000">${ht1.mauSac.ten}</label>
                 </c:if>
             </c:if>
 
             <c:if test="${stt1.index>0}">
                 <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
-                    <c:set var = "checkck" scope = "session" value = "${-1}"/>
-                    <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="checkht1" begin="0" end="${stt1.index-1}">
+                    <c:set var="checkck" scope="session" value="${-1}"/>
+                    <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="checkht1" begin="0"
+                               end="${stt1.index-1}">
                         <c:if test="${banhangonline.soluongcon(checkht1.id)>0}">
                             <c:if test="${ht1.mauSac.ten==checkht1.mauSac.ten}">
-                                <c:set var = "checkck" scope = "session" value = "${0}"/>
+                                <c:set var="checkck" scope="session" value="${0}"/>
                             </c:if>
                         </c:if>
                     </c:forEach>
                     <c:if test="${checkck==-1}">
-                        <input type="radio" id="ms${stt1.index}" name="mauSac1" value="${ht1.mauSac.ten}" ${ht1.mauSac.ten==motctsp.mauSac.ten ?"checked":""} onchange="clickradio2lan();">
+                        <input type="radio" id="ms${stt1.index}" name="mauSac1"
+                               value="${ht1.mauSac.ten}" ${ht1.mauSac.ten==motctsp.mauSac.ten ?"checked":""}
+                               onchange="clickradio2lan();">
                         <label for="ms${stt1.index}" style="border: 1px solid #00A000">${ht1.mauSac.ten}</label>
 
                     </c:if>
-                    <c:set var = "checkck" scope = "session" value = "${-1}"/>
+                    <c:set var="checkck" scope="session" value="${-1}"/>
                 </c:if>
             </c:if>
 
@@ -477,26 +486,31 @@
 
             <c:if test="${stt1.index==0}">
                 <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
-                    <input type="radio" id="rom${stt1.index}" name="rom1" value="${ht1.rom.dungLuong}" ${ht1.rom.dungLuong==motctsp.rom.dungLuong ?"checked":""} onchange="clickradio2lan();">
+                    <input type="radio" id="rom${stt1.index}" name="rom1"
+                           value="${ht1.rom.dungLuong}" ${ht1.rom.dungLuong==motctsp.rom.dungLuong ?"checked":""}
+                           onchange="clickradio2lan();">
                     <label for="rom${stt1.index}" style="border: 1px solid #00A000">${ht1.rom.dungLuong}</label>
                 </c:if>
             </c:if>
 
             <c:if test="${stt1.index>0}">
                 <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
-                    <c:set var = "checkck" scope = "session" value = "${-1}"/>
-                    <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="checkht1" begin="0" end="${stt1.index-1}">
+                    <c:set var="checkck" scope="session" value="${-1}"/>
+                    <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="checkht1" begin="0"
+                               end="${stt1.index-1}">
                         <c:if test="${banhangonline.soluongcon(checkht1.id)>0}">
                             <c:if test="${ht1.rom.dungLuong==checkht1.rom.dungLuong}">
-                                <c:set var = "checkck" scope = "session" value = "${0}"/>
+                                <c:set var="checkck" scope="session" value="${0}"/>
                             </c:if>
                         </c:if>
                     </c:forEach>
                     <c:if test="${checkck==-1}">
-                        <input type="radio" id="rom${stt1.index}" name="rom1" value="${ht1.rom.dungLuong}" ${ht1.rom.dungLuong==motctsp.rom.dungLuong ?"checked":""} onchange="clickradio2lan();">
+                        <input type="radio" id="rom${stt1.index}" name="rom1"
+                               value="${ht1.rom.dungLuong}" ${ht1.rom.dungLuong==motctsp.rom.dungLuong ?"checked":""}
+                               onchange="clickradio2lan();">
                         <label for="rom${stt1.index}" style="border: 1px solid #00A000">${ht1.rom.dungLuong}</label>
                     </c:if>
-                    <c:set var = "checkck" scope = "session" value = "${-1}"/>
+                    <c:set var="checkck" scope="session" value="${-1}"/>
                 </c:if>
             </c:if>
         </c:forEach>
@@ -507,25 +521,30 @@
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
             <c:if test="${stt1.index==0}">
                 <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
-                    <input type="radio" id="ram${stt1.index}" name="ram1" value="${ht1.ram.dungLuong}" ${ht1.ram.dungLuong==motctsp.ram.dungLuong ?"checked":""} onchange="clickradio2lan();">
+                    <input type="radio" id="ram${stt1.index}" name="ram1"
+                           value="${ht1.ram.dungLuong}" ${ht1.ram.dungLuong==motctsp.ram.dungLuong ?"checked":""}
+                           onchange="clickradio2lan();">
                     <label for="ram${stt1.index}" style="border: 1px solid #00A000">${ht1.ram.dungLuong}</label>
                 </c:if>
             </c:if>
             <c:if test="${stt1.index>0}">
                 <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
-                    <c:set var = "checkck" scope = "session" value = "${-1}"/>
-                    <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="checkht1" begin="0" end="${stt1.index-1}">
+                    <c:set var="checkck" scope="session" value="${-1}"/>
+                    <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="checkht1" begin="0"
+                               end="${stt1.index-1}">
                         <c:if test="${banhangonline.soluongcon(checkht1.id)>0}">
                             <c:if test="${ht1.ram.dungLuong==checkht1.ram.dungLuong}">
-                                <c:set var = "checkck" scope = "session" value = "${0}"/>
+                                <c:set var="checkck" scope="session" value="${0}"/>
                             </c:if>
                         </c:if>
                     </c:forEach>
                     <c:if test="${checkck==-1}">
-                        <input type="radio" id="ram${stt1.index}" name="ram1" value="${ht1.ram.dungLuong}" ${ht1.ram.dungLuong==motctsp.ram.dungLuong ?"checked":""} onchange="clickradio2lan();">
+                        <input type="radio" id="ram${stt1.index}" name="ram1"
+                               value="${ht1.ram.dungLuong}" ${ht1.ram.dungLuong==motctsp.ram.dungLuong ?"checked":""}
+                               onchange="clickradio2lan();">
                         <label for="ram${stt1.index}" style="border: 1px solid #00A000">${ht1.ram.dungLuong}</label>
                     </c:if>
-                    <c:set var = "checkck" scope = "session" value = "${-1}"/>
+                    <c:set var="checkck" scope="session" value="${-1}"/>
                 </c:if>
             </c:if>
 
@@ -537,25 +556,30 @@
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
             <c:if test="${stt1.index==0}">
                 <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
-                    <input type="radio" id="chip${stt1.index}" name="chip1" value="${ht1.chip.ten}" ${ht1.chip.ten==motctsp.chip.ten ?"checked":""} onchange="clickradio2lan();">
+                    <input type="radio" id="chip${stt1.index}" name="chip1"
+                           value="${ht1.chip.ten}" ${ht1.chip.ten==motctsp.chip.ten ?"checked":""}
+                           onchange="clickradio2lan();">
                     <label for="chip${stt1.index}" style="border: 1px solid #00A000">${ht1.chip.ten}</label>
                 </c:if>
             </c:if>
             <c:if test="${stt1.index>0}">
                 <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
-                    <c:set var = "checkck" scope = "session" value = "${-1}"/>
-                    <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="checkht1" begin="0" end="${stt1.index-1}">
+                    <c:set var="checkck" scope="session" value="${-1}"/>
+                    <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="checkht1" begin="0"
+                               end="${stt1.index-1}">
                         <c:if test="${banhangonline.soluongcon(checkht1.id)>0}">
                             <c:if test="${ht1.chip.ten==checkht1.chip.ten}">
-                                <c:set var = "checkck" scope = "session" value = "${0}"/>
+                                <c:set var="checkck" scope="session" value="${0}"/>
                             </c:if>
                         </c:if>
                     </c:forEach>
                     <c:if test="${checkck==-1}">
-                        <input type="radio" id="chip${stt1.index}" name="chip1" value="${ht1.chip.ten}" ${ht1.chip.ten==motctsp.chip.ten ?"checked":""} onchange="clickradio2lan();">
+                        <input type="radio" id="chip${stt1.index}" name="chip1"
+                               value="${ht1.chip.ten}" ${ht1.chip.ten==motctsp.chip.ten ?"checked":""}
+                               onchange="clickradio2lan();">
                         <label for="chip${stt1.index}" style="border: 1px solid #00A000">${ht1.chip.ten}</label>
                     </c:if>
-                    <c:set var = "checkck" scope = "session" value = "${-1}"/>
+                    <c:set var="checkck" scope="session" value="${-1}"/>
                 </c:if>
             </c:if>
 
@@ -565,64 +589,141 @@
 </div>
 
 <main id="content1">
-<!-- SECTION -->
-<div class="section"  >
-    <!-- container -->
-    <div class="container"  >
-        <!-- row -->
-        <div  style=""  >
-<%--            <!-- Product details -->--%>
-            <div  style="width: 42%;float: right">
-                <div class="product-details">
-                    <h2 class="product-name">${motctsp.sanPham.ten}</h2>
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div style="">
+                <%--            <!-- Product details -->--%>
+                <div style="width: 42%;float: right">
+                    <div class="product-details">
+                        <h2 class="product-name">${motctsp.sanPham.ten}</h2>
 
-                    <div>
-                        <h4 class="product-price"><span style="font-size:15px">₫</span>${motctsp.giaBan-motctsp.giaBan/100*banhangonline.tonggiamgia(motctsp.id)}-<del class="product-old-price">${motctsp.giaBan}<span style="font-size:15px">₫</span></del></h4>
+                        <div>
+                            <h4 class="product-price"><span
+                                    style="font-size:15px">₫</span>${motctsp.giaBan-motctsp.giaBan/100*banhangonline.tonggiamgia(motctsp.id)}-
+                                <del class="product-old-price">${motctsp.giaBan}<span style="font-size:15px">₫</span>
+                                </del>
+                            </h4>
 
-                    </div>
-
-
-
-                    <div class="add-to-cart" style="margin-top: 7cm">
-                        <label style="background: white;color: red;border: 1px solid white" id="thongbaosoluong"></label>
-                        <br>
-                        <c:if test="${idkhachhang=='1'}">
+                        </div>
+                        <div class="add-to-cart" style="margin-top: 7cm">
+                            Số lượng :<label style="background: white;color: red;border: 1px solid white"
+                                             id="thongbaosoluong"></label>
+                            <br>
+                            <c:if test="${idkhachhang=='1'}">
                             <div class="qty-label">
-                                <div class="quantity-control">
-                                    <button class="qty-button qty-down">-</button>
-                                    <input type="number" value="1" min="1" max="0" id="input2" class="qty-input">
-                                    <button class="qty-button qty-up">+</button>
-                                </div>
-                            </div>
+                                <div class="" style="margin-left: 1cm">
+                                    <BUTTON class="qty-down">-</BUTTON>
+                                    <input type="number" value="1" min="1" max="${banhangonline.soluongcon(motctsp.id)}">
+                                    Số lượng :<label style="background: white;color: red;border: 1px solid white"
+                                                     id="thongbaosoluong"></label>
+                                    <br>
+                                    <c:if test="${idkhachhang=='1'}">
+                                        <div class="qty-label">
+                                            <div class="" style="margin-left: 1cm">
+                                                <BUTTON class="qty-down">-</BUTTON>
+                                                <input type="number" value="1" min="1"
+                                                       max="${banhangonline.soluongcon(motctsp.id)}" id="input2"
+                                                       style="width: 2cm" name="solg">
+                                                <BUTTON class="qty-up">+</BUTTON>
+                                            </div>
+                                        </div>
+                                        <label style="background: white;border: 1px solid white">Số lượng còn
+                                            :${banhangonline.soluongcon(motctsp.id)}</label>
+                                        <br><br>
+                                        <a href="/login">
+                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào
+                                                giỏ hàng
+                                            </button>
+                                            <a href="/ban-hang-online/chi-tiet-san-pham/${motctsp.id}"
+                                               id="loadlaictsp"></a>
+                                        </a>
+                                        <a href="/login">
+                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Mua ngay
+                                            </button>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${idkhachhang!='1'}">
+                                        <form action="" method="post" id="formctsp">
 
-                            <label style="background: white;border: 1px solid white">Số lượng còn :${banhangonline.soluongcon(motctsp.id)}</label>
-                            <br><br>
-                            <a href="/login">
-                                <button class="add-to-cart-btn" ><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
-                                <a href="/ban-hang-online/chi-tiet-san-pham/${motctsp.id}" id="loadlaictsp"></a>
-                            </a>
-                            <a href="/login">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Mua ngay</button>
-                            </a>
+                                            <div class="qty-label">
+                                                <div class="" style="margin-left: 1cm">
+                                                    <BUTTON class="qty-down" type="button">-</BUTTON>
+                                                    <input type="number" value="0" min="0"
+                                                           max="${banhangonline.soluongcon(motctsp.id)-banhangonline.sl1ctsptronggh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId(),motctsp.id)}"
+                                                           id="input2" style="width: 2cm" name="solg">
+                                                    <BUTTON class="qty-up" type="button">+</BUTTON>
+                                                </div>
+                                            </div>
+
+
+                                            <label style="background: white;border: 1px solid white">Số lượng còn
+                                                :${banhangonline.soluongcon(motctsp.id)}</label>
+                                            <br><br>
+
+                                                <%--                            <p>${idkhachhang}----${motctsp.id}</p>--%>
+                                            <button class="add-to-cart-btn" type="button"
+                                                    onclick="thongbaothemvaogiohang('${motctsp.id}');"><i
+                                                    class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                            </button>
+                                            <button class="add-to-cart-btn" id="btthanhtoam" type="button"
+                                                    onclick="clickthanhtoanctsp()"><i class="fa fa-shopping-cart"></i>
+                                                Mua ngay
+                                            </button>
+
+
+                                            <input style="display:none;" value="${idkhachhang}" name="idkh">
+                                            <input style="display:none;" value="${motctsp.id}" name="idctsp">
+
+                                        </form>
+                                    </c:if>
+
+
+                                </div>
+                                " style="width: 2cm" name="solg">
+                                <BUTTON class="qty-up">+</BUTTON>
+                            </div>
+                        </div>
+                        <label style="background: white;border: 1px solid white">Số lượng còn
+                            :${banhangonline.soluongcon(motctsp.id)}</label>
+                        <br><br>
+                        <a href="/login">
+                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
+                            </button>
+                            <a href="/ban-hang-online/chi-tiet-san-pham/${motctsp.id}" id="loadlaictsp"></a>
+                        </a>
+                        <a href="/login">
+                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Mua ngay</button>
+                        </a>
                         </c:if>
                         <c:if test="${idkhachhang!='1'}">
                             <form action="" method="post" id="formctsp">
 
-                                <div class="qty-label" style="display: flex; justify-content: flex-end; align-items: center; ">
-                                    <div class="" style="margin-left: 1cm;">
-                                        <BUTTON class="qty-down">-</BUTTON>
-                                        <input type="number" value="1" min="1" max="0" id="input2" style="width: 2cm; margin-right: 10px;">
-                                        <BUTTON class="qty-up">+</BUTTON>
+                                <div class="qty-label">
+                                    <div class="" style="margin-left: 1cm">
+                                        <BUTTON class="qty-down" type="button">-</BUTTON>
+                                        <input type="number" value="0" min="0"
+                                               max="${banhangonline.soluongcon(motctsp.id)-banhangonline.sl1ctsptronggh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId(),motctsp.id)}"
+                                               id="input2" style="width: 2cm" name="solg">
+                                        <BUTTON class="qty-up" type="button">+</BUTTON>
                                     </div>
                                 </div>
 
 
-                                <label style="background: white;border: 1px solid white">Số lượng còn :0</label>
+                                <label style="background: white;border: 1px solid white">Số lượng còn
+                                    :${banhangonline.soluongcon(motctsp.id)}</label>
                                 <br><br>
 
                                     <%--                            <p>${idkhachhang}----${motctsp.id}</p>--%>
-                                <button class="add-to-cart-btn" type="button" onclick="thongbaothemvaogiohang('${motctsp.id}');"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
-                                <button class="add-to-cart-btn" id="btthanhtoam" type="button" onclick="clickthanhtoanctsp()"><i class="fa fa-shopping-cart"></i> Mua ngay</button>
+                                <button class="add-to-cart-btn" type="button"
+                                        onclick="thongbaothemvaogiohang('${motctsp.id}');"><i
+                                        class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                </button>
+                                <button class="add-to-cart-btn" id="btthanhtoam" type="button"
+                                        onclick="clickthanhtoanctsp()"><i class="fa fa-shopping-cart"></i> Mua ngay
+                                </button>
 
 
                                 <input style="display:none;" value="${idkhachhang}" name="idkh">
@@ -633,8 +734,6 @@
 
 
                     </div>
-                    <%--<p>${idkhachhang}</p>--%>
-
                     <br>
                     <p>
                     <div class="product-description">
@@ -692,7 +791,7 @@
             <!-- /Product details -->
             <!-- Product main img -->
             <%--            class="col-md-5 col-md-push-2"--%>
-            <div  style="height: 48%;width: 50%;margin-left: 2%" >
+            <div style="height: 48%;width: 50%;margin-left: 2%">
                 <div id="product-main-img">
                     <div class="product-preview">
                         <img src="../../../uploads/${motctsp.urlAnh}" alt="" style="width: 100%;height: 12cm">
@@ -707,43 +806,45 @@
                     </div>
 
                     <div class="product-preview">
-                        <img src="../../uploads/${motctsp.sanPham.anh.anh3}" alt="" style="width: 100%;height: 12cm; " >
+                        <img src="../../uploads/${motctsp.sanPham.anh.anh3}" alt="" style="width: 100%;height: 12cm; ">
                     </div>
                 </div>
             </div>
             <!-- /Product main img -->
 
 
-
             <!-- Product thumb imgs -->
-<%--            class="col-md-2  col-md-pull-5"--%>
+            <%--            class="col-md-2  col-md-pull-5"--%>
             <div style=" width: 17.2cm; margin-top: 10px; height: 5cm;" align="center">
                 <div id="product-imgs" style=" width: 5cm;height: 16cm;margin-top: -5.5cm; transform: rotate(270deg);">
 
                     <div class="product-preview">
-                        <img src="../../../uploads/${motctsp.urlAnh}" alt="" style="height: 5cm;width:4.9cm;transform: rotate(90deg);">
+                        <img src="../../../uploads/${motctsp.urlAnh}" alt=""
+                             style="height: 5cm;width:4.9cm;transform: rotate(90deg);">
                     </div>
 
                     <div class="product-preview">
-                        <img src="../../uploads/${motctsp.sanPham.anh.anh1}" alt=""  style="height: 5cm;width:4.9cm;transform: rotate(90deg);">
+                        <img src="../../uploads/${motctsp.sanPham.anh.anh1}" alt=""
+                             style="height: 5cm;width:4.9cm;transform: rotate(90deg);">
                     </div>
 
                     <div class="product-preview">
-                        <img src="../../uploads/${motctsp.sanPham.anh.anh2}" alt=""  style="height: 5cm;width:4.9cm;transform: rotate(90deg);">
+                        <img src="../../uploads/${motctsp.sanPham.anh.anh2}" alt=""
+                             style="height: 5cm;width:4.9cm;transform: rotate(90deg);">
                     </div>
 
                     <div class="product-preview">
-                        <img src="../../uploads/${motctsp.sanPham.anh.anh3}" alt="" style="height: 5cm;width:4.9cm;transform: rotate(90deg);" >
+                        <img src="../../uploads/${motctsp.sanPham.anh.anh3}" alt=""
+                             style="height: 5cm;width:4.9cm;transform: rotate(90deg);">
                     </div>
                 </div>
             </div>
 
-<%--            <!-- /Product thumb imgs -->--%>
-
+            <%--            <!-- /Product thumb imgs -->--%>
 
 
             <!-- Product tab -->
-            <div class="col-md-12" >
+            <div class="col-md-12">
                 <div id="product-tab">
                     <!-- product tab nav -->
                     <ul class="tab-nav">
@@ -759,7 +860,12 @@
                         <div id="tab1" class="tab-pane fade in active">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                        culpa qui officia deserunt mollit anim id est laborum.</p>
                                 </div>
                             </div>
                         </div>
@@ -769,7 +875,12 @@
                         <div id="tab2" class="tab-pane fade in">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                        culpa qui officia deserunt mollit anim id est laborum.</p>
                                 </div>
                             </div>
                         </div>
@@ -879,7 +990,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                        eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
                                                 </div>
                                             </li>
                                             <li>
@@ -895,7 +1007,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                        eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
                                                 </div>
                                             </li>
                                             <li>
@@ -911,7 +1024,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                        eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
                                                 </div>
                                             </li>
                                         </ul>
@@ -936,11 +1050,16 @@
                                             <div class="input-rating">
                                                 <span>Your Rating: </span>
                                                 <div class="stars">
-                                                    <input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
-                                                    <input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
-                                                    <input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
-                                                    <input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
-                                                    <input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+                                                    <input id="star5" name="rating" value="5" type="radio"><label
+                                                        for="star5"></label>
+                                                    <input id="star4" name="rating" value="4" type="radio"><label
+                                                        for="star4"></label>
+                                                    <input id="star3" name="rating" value="3" type="radio"><label
+                                                        for="star3"></label>
+                                                    <input id="star2" name="rating" value="2" type="radio"><label
+                                                        for="star2"></label>
+                                                    <input id="star1" name="rating" value="1" type="radio"><label
+                                                        for="star1"></label>
                                                 </div>
                                             </div>
                                             <button class="primary-btn">Submit</button>
@@ -961,114 +1080,137 @@
         <!-- /row -->
     </div>
     <!-- /container -->
-</div>
-<!-- /SECTION -->
+    </div>
+    <!-- /SECTION -->
 
 </main>
-
-
+<br>
+<br>
+<br>
+<h2 style="text-align: center;font-family: 'Times New Roman'; color: red">Sản Phẩm Liên Quan</h2>
+<br>
+<br>
+<br>
 
 <!-- Carousel -->
-<div id="demo11" class="carousel slide" data-bs-ride="false" >
+<div id="demo11" class="carousel slide" data-bs-ride="false">
     <!-- Indicators/dots -->
     <div class="carousel">
-        <button class="carousel-prev" type="button" data-bs-target="#demo11" data-bs-slide="prev" >
-            <<
-        </button>
-        <c:forEach begin="1" end="${lamchon1}" varStatus="trang">
-            <button type="button" data-bs-target="#demo11" data-bs-slide-to="${trang.index-1}"  >${trang.index}</button>
-        </c:forEach>
-        <button class="carousel-next" type="button" data-bs-target="#demo11" data-bs-slide="next">
-            >>
-        </button>
-    </div>
-    </button>
-
-    <!-- The slideshow/carousel -->
-    <div class="carousel-inner" >
-        <c:set var = "vitri" scope = "session" value = "${-1}"/>
-        <c:forEach begin="1" end="${lamchon1}" varStatus="trang">
-        <c:set var = "salary" scope = "session" value = "${1}"/>
-        <c:if test = "${trang.index <2}">
-        <div class="carousel-item active">
-            </c:if>
-            <c:if test = "${trang.index >=2}">
-            <div class="carousel-item ">
+        <div class="carousel-inner">
+            <c:set var="vitri" scope="session" value="${-1}"/>
+            <c:forEach begin="1" end="${lamchon1}" varStatus="trang">
+            <c:set var="salary" scope="session" value="${1}"/>
+            <c:if test="${trang.index <2}">
+            <div class="carousel-item active">
                 </c:if>
+                <c:if test="${trang.index >=2}">
+                <div class="carousel-item ">
+                    </c:if>
+                    <div class="container px-0 px-lg-4 mt-0">
+                        <div class="row gx-0 gx-lg-0 row-cols-0 row-cols-md-0 row-cols-xl-4 justify-content-center"
+                             style="width: 100%">
+                            <c:forEach items="${listsp}" var="ht" varStatus="stt">
+                                <c:if test="${banhangonline.soluongcon(ht.id)>0}">
+                                    <c:if test="${stt.index > vitri }">
+                                        <%--                            phân trang số 9 là 8 dữ liệu--%>
+                                        <c:if test="${salary <9}">
+                                            <!-- product -->
 
-
-                <div class="container px-0 px-lg-4 mt-0">
-                    <div class="row gx-0 gx-lg-0 row-cols-0 row-cols-md-0 row-cols-xl-4 justify-content-center"  style="width: 100%">
-                        <c:forEach items="${listsp}" var="ht" varStatus="stt">
-                            <c:if test="${banhangonline.soluongcon(ht.id)>0}">
-                                <c:if test = "${stt.index > vitri }">
-                                    <%--                            phân trang số 9 là 8 dữ liệu--%>
-                                    <c:if test = "${salary <9}">
-                                        <!-- product -->
-
-                                        <div class="product" style="margin-left: 1%;width: 24%;" >
-                                            <div class="product-img" >
-                                                <img src="../../../uploads/${ht.urlAnh}" style="width: 90%;height: 6cm;margin-left: 5%" alt="">
-                                                <div class="product-label">
-                                                    <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
-                                                    <span class="new">Giảm giá</span>
+                                            <div class="product" style="margin-left: 1%;width: 24%;">
+                                                <div class="product-img">
+                                                    <img src="../../../uploads/${ht.urlAnh}"
+                                                         style="width: 90%;height: 6cm;margin-left: 5%" alt="">
+                                                    <div class="product-label">
+                                                        <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
+                                                        <span class="new">Giảm giá</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="product-body" style="text-align: left;word-wrap: break-word;z-index: 2">
-                                                    <%--                    <p class="product-category">Điện thoại</p>--%>
-                                                <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
-                                                <h4 class="product-price"><span style="font-size:15px">₫</span>${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}-<del class="product-old-price">${ht.giaBan}<span style="font-size:15px">₫</span></del></h4>
-                                                    <%--                                            ${ht.tinhTrang} +  ${ht.sanPham.tinhTrang}--%>
-                                                <p class="product-category">Đã bán :${banhangonline.soluongdaban(ht.id)}--Còn :${banhangonline.soluongcon(ht.id)}</p>
-                                                <div  >
-                                                    *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>
-                                                    *Camera:${ht.sanPham.camera.thongSo}<br>
-                                                    *Màn:${ht.sanPham.manHinh.thongSo}<br>
-                                                    *Màu:${ht.mauSac.ten}<br>
-                                                    *Ram:${ht.ram.dungLuong}<br>
-                                                    *Rom:${ht.rom.dungLuong}<br>
-                                                    *Pin:${ht.pin.loaiPin}<br>
-                                                    *Dung lượng pin:${ht.pin.dungLuongPin.thongSo}<br>
-                                                    *Chip:${ht.chip.ten}<br>
+                                                <div class="product-body"
+                                                     style="text-align: left;word-wrap: break-word;z-index: 2">
+                                                        <%--                    <p class="product-category">Điện thoại</p>--%>
+                                                    <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
+                                                    <h4 class="product-price"><span
+                                                            style="font-size:15px">₫</span>${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}-
+                                                        <del class="product-old-price">${ht.giaBan}<span
+                                                                style="font-size:15px">₫</span></del>
+                                                    </h4>
+                                                        <%--                                            ${ht.tinhTrang} +  ${ht.sanPham.tinhTrang}--%>
+                                                    <p class="product-category">Đã bán :${banhangonline.soluongdaban(ht.id)}--Còn
+                                                        :${banhangonline.soluongcon(ht.id)}</p>
+                                                    <div>
+                                                        *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>
+                                                        *Camera:${ht.sanPham.camera.thongSo}<br>
+                                                        *Màn:${ht.sanPham.manHinh.thongSo}<br>
+                                                        *Màu:${ht.mauSac.ten}<br>
+                                                        *Ram:${ht.ram.dungLuong}<br>
+                                                        *Rom:${ht.rom.dungLuong}<br>
+                                                        *Pin:${ht.pin.loaiPin}<br>
+                                                        *Dung lượng pin:${ht.pin.dungLuongPin.thongSo}<br>
+                                                        *Chip:${ht.chip.ten}<br>
 
 
+                                                    </div>
+                                                    <div class="product-rating">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                    <div class="product-btns">
+                                                        <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                                                                class="tooltipp">Thêm vào danh sách yêu thích</span>
+                                                        </button>
+                                                        <button class="add-to-compare"><i class="fa fa-exchange"></i><span
+                                                                class="tooltipp">Thêm để so sánh</span></button>
+                                                        <button class="quick-view"><a
+                                                                href="/ban-hang-online/chi-tiet-san-pham/${ht.id}"><i
+                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Xem chi tiết</span>
+                                                        </button>
+                                                    </div>
                                                 </div>
+                                                <div class="add-to-cart" style="z-index: 1">
+                                                    <c:if test="${idkhachhang!='1'}">
+                                                        <button class="add-to-cart-btn"
+                                                                onclick="thongbaothemvaogiohang('${ht.id}');"><i
+                                                                class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                                        </button>
+                                                    </c:if>
+                                                    <c:if test="${idkhachhang=='1'}">
+                                                        <a href="/login">
+                                                            <button class="add-to-cart-btn"><i
+                                                                    class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                                            </button>
+                                                        </a>
+                                                    </c:if></div>
                                             </div>
-                                            <div class="add-to-cart" style="z-index: 1">
-                                                <c:if test="${idkhachhang!='1'}">
-                                                    <button class="add-to-cart-btn" onclick="thongbaothemvaogiohang('${ht.id}');"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
-                                                </c:if>
-                                                <c:if test="${idkhachhang=='1'}">
-                                                    <a href="/login">
-                                                        <button class="add-to-cart-btn" ><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
-                                                    </a>
-                                                </c:if>                                       </div>
-                                        </div>
-                                        <!-- /product -->
-                                        <c:set var = "vitri" scope = "session" value = "${stt.index}"/>
-                                        <c:set var = "salary" scope = "session" value = "${salary+1}"/>
+                                            <!-- /product -->
+                                            <c:set var="vitri" scope="session" value="${stt.index}"/>
+                                            <c:set var="salary" scope="session" value="${salary+1}"/>
+                                        </c:if>
                                     </c:if>
                                 </c:if>
-                            </c:if>
-                        </c:forEach>
+                            </c:forEach>
+                        </div>
                     </div>
+                    <br><br><br><br>
                 </div>
-                <br><br><br><br>
+                </c:forEach>
             </div>
-            </c:forEach>
-        </div>
-        <!-- Indicators/dots -->
+            <!-- Indicators/dots -->
 
-        <div class="carousel">
-            <button class="carousel-prev" type="button" data-bs-target="#demo11" data-bs-slide="prev" >
-                <<
-            </button>
-            <c:forEach begin="1" end="${lamchon1}" varStatus="trang">
-                <button type="button" data-bs-target="#demo11" data-bs-sli  de-to="${trang.index-1}"  >${trang.index}</button>
-            </c:forEach>
-            <button class="carousel-next" type="button" data-bs-target="#demo11" data-bs-slide="next">
-                >>
-            </button>
+            <div class="carousel text-center">
+                <button class="carousel-prev" type="button" data-bs-target="#demo11" data-bs-slide="prev">
+                    <<
+                </button>
+                <c:forEach begin="1" end="${lamchon1}" varStatus="trang">
+                    <button type="button" data-bs-target="#demo11"
+                            data-bs-slide-to="${trang.index-1}">${trang.index}</button>
+                </c:forEach>
+                <button class="carousel-next" type="button" data-bs-target="#demo11" data-bs-slide="next">
+                    >>
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -1122,7 +1264,8 @@
                 <div class="col-md-3 col-xs-6">
                     <div class="footer">
                         <h3 class="footer-title">About Us</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                            ut.</p>
                         <ul class="footer-links">
                             <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
                             <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
@@ -1184,17 +1327,19 @@
             <!-- row -->
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <ul class="footer-payments" >
+                    <ul class="footer-payments">
                         <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
                         <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
                         <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
                         <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
                         <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
                         <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
-                    </ul  >
+                    </ul>
                     <span class="copyright">
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i
+                            class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                                                                                target="_blank">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</span>
                 </div>
@@ -1206,13 +1351,13 @@
     <!-- /bottom footer -->
 </footer>
 <!-- /FOOTER -->
-<div style="position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%);z-index: 2;width: 10cm;height: 1cm;background-color: #00FF00;text-align: center;display: none ;border: 5px solid red" id="thongbaothemgiohang">
+<div style="position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%);z-index: 2;width: 10cm;height: 1cm;background-color: #00FF00;text-align: center;display: none ;border: 5px solid red"
+     id="thongbaothemgiohang">
     <h2>Đã Thêm vào Giỏ hàng</h2>
 </div>
 
 
 <script>
-    al
     // /////////////////////////////////////////
     // Lấy thẻ input bằng ID
     var input2 = document.getElementById("input2");
@@ -1256,9 +1401,9 @@
         // Tăng giá trị lên 1 đơn vị nếu không vượt quá max
         if (!isNaN(max) && value < max) {
             input2.value = value + 1;
-            document.getElementById('thongbaosoluong').innerHTML="";
-        }else {
-            document.getElementById('thongbaosoluong').innerHTML="Số lượng sản phẩm này trong giỏ hàng  đã đạt mức tối đa";
+            document.getElementById('thongbaosoluong').innerHTML = "";
+        } else {
+            document.getElementById('thongbaosoluong').innerHTML = "Số lượng sản phẩm này trong giỏ hàng  đã đạt mức tối đa";
         }
     });
 
@@ -1274,9 +1419,9 @@
         // Giảm giá trị xuống 1 đơn vị nếu không vượt quá min
         if (!isNaN(min) && value > min) {
             input2.value = value - 1;
-            document.getElementById('thongbaosoluong').innerHTML="";
-        }else {
-            document.getElementById('thongbaosoluong').innerHTML="Số lượng sản phẩm này  đã đạt mức giới hạn";
+            document.getElementById('thongbaosoluong').innerHTML = "";
+        } else {
+            document.getElementById('thongbaosoluong').innerHTML = "Số lượng sản phẩm này  đã đạt mức giới hạn";
         }
     });
 
@@ -1293,6 +1438,7 @@
             input2.value = min;
         }
     });
+
     // ///////////////////////////////////////////
     function clickradio2lan() {
         clickradio();
@@ -1300,44 +1446,46 @@
 
     function chonhetgiohangtongTRANGCHU(idgh) {
 
-        if(document.getElementsByName('checktongTT')[0].checked==true){
-        var    link='/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/full/0/'+idgh;
-                loadgiaodienghctbanhangTrangChu(link);
+        if (document.getElementsByName('checktongTT')[0].checked == true) {
+            var link = '/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/full/0/' + idgh;
+            loadgiaodienghctbanhangTrangChu(link);
 
 
-        }else{
-       var     link='/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/full/1/'+idgh;
+        } else {
+            var link = '/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/full/1/' + idgh;
 
-                loadgiaodienghctbanhangTrangChu(link);
+            loadgiaodienghctbanhangTrangChu(link);
 
 
         }
         // clickradio();
     };
-    function chonsanphamgiohangTT(vt,idctgh,idgh) {
 
-        var vt1=parseInt(vt);
+    function chonsanphamgiohangTT(vt, idctgh, idgh) {
 
-        if(document.getElementsByName('checkidghTT')[vt1].checked==true){
-        var    link='/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/'+idctgh+'/0/'+idgh;
+        var vt1 = parseInt(vt);
 
-                loadgiaodienghctbanhangTrangChu(link);
+        if (document.getElementsByName('checkidghTT')[vt1].checked == true) {
+            var link = '/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/' + idctgh + '/0/' + idgh;
+
+            loadgiaodienghctbanhangTrangChu(link);
 
 
-        }else{
-          var  link='/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/'+idctgh+'/1/'+idgh;
+        } else {
+            var link = '/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/' + idctgh + '/1/' + idgh;
 
-                loadgiaodienghctbanhangTrangChu(link);
+            loadgiaodienghctbanhangTrangChu(link);
 
         }
         // clickradio();
     };
+
     function thongbaothemvaogiohang(idctsp) {
-            loadgiaodienghctbanhangTrangChu('/ban-hang-online/them-san-pham-vao-gio-hang/'+idctsp);
-            clickradio();
-        document.getElementById('thongbaothemgiohang').style.display='';
-        setTimeout(function() {
-            document.getElementById('thongbaothemgiohang').style.display='none';
+        loadgiaodienghctbanhangTrangChu('/ban-hang-online/them-san-pham-vao-gio-hang/' + idctsp);
+        clickradio();
+        document.getElementById('thongbaothemgiohang').style.display = '';
+        setTimeout(function () {
+            document.getElementById('thongbaothemgiohang').style.display = 'none';
         }, 2000); // 2000 milliseconds tương đương với 2 giây
 
     };
@@ -1356,8 +1504,8 @@
             });
 
 
-
     }
+
     function locbenctsp(interfaceUrl) {
         fetch(interfaceUrl)
             .then(response => response.text())
@@ -1409,9 +1557,9 @@
                     // Tăng giá trị lên 1 đơn vị nếu không vượt quá max
                     if (!isNaN(max) && value < max) {
                         input2.value = value + 1;
-                        document.getElementById('thongbaosoluong').innerHTML="";
-                    }else {
-                        document.getElementById('thongbaosoluong').innerHTML="Số lượng sản phẩm này trong giỏ hàng  đã đạt mức tối đa";
+                        document.getElementById('thongbaosoluong').innerHTML = "";
+                    } else {
+                        document.getElementById('thongbaosoluong').innerHTML = "Số lượng sản phẩm này trong giỏ hàng  đã đạt mức tối đa";
                     }
                 });
 
@@ -1427,9 +1575,9 @@
                     // Giảm giá trị xuống 1 đơn vị nếu không vượt quá min
                     if (!isNaN(min) && value > min) {
                         input2.value = value - 1;
-                        document.getElementById('thongbaosoluong').innerHTML="";
-                    }else {
-                        document.getElementById('thongbaosoluong').innerHTML="Số lượng sản phẩm này  đã đạt mức giới hạn";
+                        document.getElementById('thongbaosoluong').innerHTML = "";
+                    } else {
+                        document.getElementById('thongbaosoluong').innerHTML = "Số lượng sản phẩm này  đã đạt mức giới hạn";
                     }
                 });
 
@@ -1447,8 +1595,8 @@
                     }
                 });
 // ///////////////////////////////////////////
-              loadScripts();
-              loadScripts();
+                loadScripts();
+                loadScripts();
 
             })
             .catch(error => {

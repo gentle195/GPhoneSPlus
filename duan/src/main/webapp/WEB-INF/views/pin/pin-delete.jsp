@@ -8,18 +8,24 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>GPhoneS Store </title>
     <!-- Favicon icon -->
 </head>
 <body>
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/pin/hien-thi" role="tab">Thông tin dung lượng Pin </a>
+            <a class="nav-link" href="/pin/hien-thi" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin Pin </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/pin/view-add" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin
+                Pin </a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               aria-controls="description" aria-selected="true">Chip đã xoá</a>
+               aria-controls="description" aria-selected="true">Pin đã xoá</a>
         </li>
         <a href="/pin/update-tt" class="btn btn-outline-danger btn-icon-text" style="float: right; margin-left: 720px"
            tabindex="-1"
@@ -46,7 +52,7 @@
             </form>
             <%--           kết thúc tìm kiếm         --%>
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped" style="color: black">
                     <thead>
                     <tr>
                         <th>Mã</th>
@@ -90,23 +96,23 @@
                 </table>
             </div>
         </div>
-<%--phân trang--%>
-<div align="center">
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <ul class="pagination justify-content-center pagination-lg">
-            <li class="page-item"><a class="page-link" href="/pin/hien-thi-delete?pageNum=0"><</a></li>
-            <c:forEach begin="1" end="${total}" varStatus="status">
-                <li class="page-item">
-                    <a href="${pageContext.request.contextPath}/pin/hien-thi-delete?pageNum=${status.index -1}"
-                       class="page-link">${status.index}</a>
-                </li>
-            </c:forEach>
-            <li class="page-item"><a class="page-link" href="/pin/hien-thi-delete?pageNum=${total-1}">></a></li>
-        </ul>
+        <%--phân trang--%>
+        <div align="center">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <ul class="pagination justify-content-center pagination-lg">
+                    <li class="page-item"><a class="page-link" href="/pin/hien-thi-delete?pageNum=0"><</a></li>
+                    <c:forEach begin="1" end="${total}" varStatus="status">
+                        <li class="page-item">
+                            <a href="${pageContext.request.contextPath}/pin/hien-thi-delete?pageNum=${status.index -1}"
+                               class="page-link">${status.index}</a>
+                        </li>
+                    </c:forEach>
+                    <li class="page-item"><a class="page-link" href="/pin/hien-thi-delete?pageNum=${total-1}">></a></li>
+                </ul>
+            </div>
+        </div>
+        <%--kết thúc phân trang--%>
     </div>
-</div>
-<%--kết thúc phân trang--%>
-</div>
 </div>
 </body>
 </html>

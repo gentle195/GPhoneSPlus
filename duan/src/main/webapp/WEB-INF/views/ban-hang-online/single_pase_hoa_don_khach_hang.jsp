@@ -58,10 +58,10 @@
                 </c:if>
             </td>
             <td>
-                <c:if test="${ht.trangThaiGiaoHang==0}">
+                <c:if test="${ht.tinhTrangGiaoHang==0}">
                     <input type="text" value="Chưa giao" disabled>
                 </c:if>
-                <c:if test="${ht.trangThaiGiaoHang!=0}">
+                <c:if test="${ht.tinhTrangGiaoHang!=0}">
                     <input type="text" value="Chưa tìm hiểu" disabled>
                 </c:if>
             </td>
