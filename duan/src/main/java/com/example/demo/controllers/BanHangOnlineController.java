@@ -1,7 +1,9 @@
 package com.example.demo.controllers;
 
+import com.example.demo.config.UserInfoUserDetails;
 import com.example.demo.models.*;
 import com.example.demo.services.*;
+import com.example.demo.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -111,7 +113,7 @@ public class BanHangOnlineController {
         return "ban-hang-online/trang-chu";
     }
 
-    @GetMapping("/ban-hang-online/dang-nhap/hien-thi")
+    @GetMapping("/ban-hang-online/home")
     public String hienThitrangchudn(
             Model model
     ) {
@@ -131,10 +133,16 @@ public class BanHangOnlineController {
         model.addAttribute("lamchon",lamchon);
         model.addAttribute("giamgia",banHangOnlineService);
         model.addAttribute("banhangonline",banHangOnlineService);
-        KhachHang khachHang=  dataService.getSharedData();
-//        System.out.println("id:"+khachHang.getId());
-        idkhachhang=String.valueOf(khachHang.getId());
-//        idkhachhang="f33013f5-993b-45d3-9806-dd74f2007522";
+
+//lấy id khách hàng
+//        KhachHang khachHang=  dataService.getSharedData();
+////        System.out.println("id:"+khachHang.getId());
+//        idkhachhang=String.valueOf(khachHang.getId());
+////        idkhachhang="f33013f5-993b-45d3-9806-dd74f2007522";
+// kết thúc lấy id khách hàng
+        UserInfoUserDetails userDetails= SecurityUtil.getId();
+        idkhachhang=String.valueOf(userDetails.getId());
+
         model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
         model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
         model.addAttribute("idkhachhang",idkhachhang);

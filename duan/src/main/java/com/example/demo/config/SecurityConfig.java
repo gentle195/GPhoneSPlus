@@ -49,7 +49,7 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChainGmail(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/WEB-INF/**", "/lgin", "/logout", "ban-hang-online/**", "/css/**", "/cssbanhang/**"
+                .requestMatchers("/","/dang-ky-tai-khoan","/login/dang-ky-tai-khoan", "/WEB-INF/**", "/lgin", "/logout", "ban-hang-online/**", "/css/**", "/cssbanhang/**"
                         , "/documentation/**", "/icons/**", "/images/**", "/inHoaDon/**", "/js/**", "/jsbanhang/**", "/maqr/**", "/scss/**"
                         , "uploads/**", "/vendor/**").permitAll()
                 .requestMatchers("/favicon.ico").permitAll()

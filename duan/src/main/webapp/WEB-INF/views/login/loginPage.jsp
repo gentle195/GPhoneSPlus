@@ -30,7 +30,7 @@
                 <div class="card" style="border-radius: 1rem;">
                     <div class="row g-0">
                         <div class="col-md-6 col-lg-5 d-none d-md-block">
-                            <img src="https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/394580810_718860170125362_1195120911846399491_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=m9GPq-RrupkAX8J8nTW&_nc_ht=scontent.fhan15-2.fna&oh=00_AfAVSW3LP9G54K_bAKV9jHHPwVmafvUvxQiccQRCz-XAhA&oe=653CB061"
+                            <img src="../../uploads/GPhoneS.png"
                                  alt="login form"  style="border-radius: 1rem 0 0 1rem;" />
                         </div>
                         <div class="col-md-6 col-lg-7 d-flex align-items-center">
