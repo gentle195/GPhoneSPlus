@@ -38,7 +38,7 @@ public class HangDienThoaiController {
         model.addAttribute("contentPage", "../hang-dien-thoai/hien-thi.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/hang-dien-thoai/hien-thi-tung-xoa")
@@ -50,14 +50,14 @@ public class HangDienThoaiController {
         model.addAttribute("contentPage", "../hang-dien-thoai/hang-tung-xoa.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/hang-dien-thoai/view-add")
     public String viewAdd(@ModelAttribute("dulieuxem") HangSanPham dulieuxem, Model model) {
         model.addAttribute("dulieuxem", new HangSanPham());
         model.addAttribute("contentPage", "../hang-dien-thoai/add.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/hang-dien-thoai/detail/{id}")
@@ -72,14 +72,14 @@ public class HangDienThoaiController {
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
 
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/hang-dien-thoai/add")
     public String add(Model model, @ModelAttribute("dulieuxem") @Valid HangSanPham dulieuxem, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "../hang-dien-thoai/add.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
 
         dulieuxem.setNgayTao(Date.valueOf(LocalDate.now()));
@@ -131,7 +131,7 @@ public class HangDienThoaiController {
         model.addAttribute("contentPage", "../hang-dien-thoai/hien-thi.jsp");
         model.addAttribute("hsp", list);
 //        model.addAttribute("total", list);
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/hang-dien-thoai/search2")
@@ -143,7 +143,7 @@ public class HangDienThoaiController {
         model.addAttribute("contentPage", "../hang-dien-thoai/hien-thi.jsp");
         model.addAttribute("hsp", list);
 //        model.addAttribute("total", list);
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/hang-dien-thoai/khoi-phuc/{id}")
@@ -165,7 +165,7 @@ public class HangDienThoaiController {
         model.addAttribute("contentPage", "../hang-dien-thoai/hang-tung-xoa.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/hang-dien-thoai/khoi-phuc-het")
@@ -183,6 +183,6 @@ public class HangDienThoaiController {
         model.addAttribute("hsp", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 }

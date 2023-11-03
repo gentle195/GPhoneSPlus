@@ -9,9 +9,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE hang_dien_thoai(
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
-  ten VARCHAR(50) NULL,
-  xuat_su VARCHAR(50) NULL,
+  ma NVARCHAR(30) NULL,
+  ten NVARCHAR(50) NULL,
+  xuat_su NVARCHAR(50) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
   tinh_trang int DEFAULT 0,
@@ -24,8 +24,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE anh(
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
-  ten VARCHAR(50) NULL,
+  ma NVARCHAR(30) NULL,
+  ten NVARCHAR(50) NULL,
   url_anh1 NVARCHAR(MAX) NULL,
   url_anh2 NVARCHAR(MAX) NULL,
   url_anh3 NVARCHAR(MAX) NULL,
@@ -42,9 +42,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE chip(
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
-  ten VARCHAR(50) NULL,
-  loai_cpu VARCHAR(50) NULL,
+  ma NVARCHAR(30) NULL,
+  ten NVARCHAR(50) NULL,
+  loai_cpu NVARCHAR(50) NULL,
   so_nhan int DEFAULT 8,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
@@ -58,8 +58,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE ram(
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
-  dung_luong VARCHAR(30) NULL,
+  ma NVARCHAR(30) NULL,
+  dung_luong NVARCHAR(30) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
   tinh_trang int DEFAULT 0,
@@ -72,8 +72,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE rom(
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
-  dung_luong VARCHAR(30) NULL,
+  ma NVARCHAR(30) NULL,
+  dung_luong NVARCHAR(30) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
   tinh_trang int DEFAULT 0,
@@ -86,13 +86,13 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE man_hinh (
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
+  ma NVARCHAR(30) NULL,
   thong_so NVARCHAR(50) NULL,
   loai_cam_ung NVARCHAR(100) NULL,
-  ti_le_khung_hinh VARCHAR(50) NULL,
-  cong_nghe_man_hinh VARCHAR(100) NULL,
-  do_phan_giai VARCHAR(50) NULL,
-  tan_so_quet VARCHAR(50) NULL,
+  ti_le_khung_hinh NVARCHAR(50) NULL,
+  cong_nghe_man_hinh NVARCHAR(100) NULL,
+  do_phan_giai NVARCHAR(50) NULL,
+  tan_so_quet NVARCHAR(50) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
   tinh_trang int DEFAULT 0,
@@ -105,7 +105,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE camera (
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
+  ma NVARCHAR(30) NULL,
   thong_so NVARCHAR(50) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
@@ -119,7 +119,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE mau_sac(
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
+  ma NVARCHAR(30) NULL,
   ten NVARCHAR(30) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
@@ -133,17 +133,17 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE san_pham (
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
-  ten VARCHAR(50) NULL,
-  he_dieu_hanh VARCHAR(50) NULL,
+  ma NVARCHAR(30) NULL,
+  ten NVARCHAR(50) NULL,
+  he_dieu_hanh NVARCHAR(50) NULL,
   so_sim INT DEFAULT 1,
-  bluetooth VARCHAR(50) NULL,
-  ho_tro_mang VARCHAR(50) NULL,
+  bluetooth NVARCHAR(50) NULL,
+  ho_tro_mang NVARCHAR(50) NULL,
   cong_giao_tiep NVARCHAR(100) NULL,
-  thong_so_wifi VARCHAR(50) NULL,
-  kich_thuoc VARCHAR(50) NULL,
-  trong_luong VARCHAR(50) NULL,
-  chat_lieu VARCHAR(50) NULL,
+  thong_so_wifi NVARCHAR(50) NULL,
+  kich_thuoc NVARCHAR(50) NULL,
+  trong_luong NVARCHAR(50) NULL,
+  chat_lieu NVARCHAR(50) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
   tinh_trang INT DEFAULT 0,
@@ -164,8 +164,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE dung_luong_pin (
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
-  thong_so VARCHAR(50) NULL,
+  ma NVARCHAR(30) NULL,
+  thong_so NVARCHAR(50) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
   tinh_trang int DEFAULT 0,
@@ -178,9 +178,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE pin (
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
-  loai_pin VARCHAR(50) NULL,
-  cong_nghe_pin VARCHAR(50) NULL,
+  ma NVARCHAR(30) NULL,
+  loai_pin NVARCHAR(50) NULL,
+  cong_nghe_pin NVARCHAR(50) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
   tinh_trang INT DEFAULT 0,
@@ -195,14 +195,14 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE khuyen_mai (
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
+  ma NVARCHAR(30) NULL,
   ten NVARCHAR(50) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
   ngay_bat_dau DATE NOT NULL,
   ngay_ket_thuc DATE NOT NULL,
-  loai_giam_gia VARCHAR(20) NULL,
-  hinh_thuc_giam_gia VARCHAR(20) NULL,
+  loai_giam_gia NVARCHAR(20) NULL,
+  hinh_thuc_giam_gia NVARCHAR(20) NULL,
   so_tien_giam  decimal(20, 0) NULL,
   tinh_trang INT DEFAULT 0,
   mo_ta NVARCHAR(MAX) NULL
@@ -220,7 +220,7 @@ CREATE TABLE chi_tiet_san_pham (
   id_ram UNIQUEIDENTIFIER NULL,
   id_rom UNIQUEIDENTIFIER NULL,
   id_pin UNIQUEIDENTIFIER NULL,
-  url_anh VARCHAR(255) NULL,
+  url_anh NVARCHAR(255) NULL,
   gia_ban  decimal(20, 0) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
@@ -257,8 +257,8 @@ GO
 CREATE TABLE imei (
   id UNIQUEIDENTIFIER PRIMARY KEY  DEFAULT NEWID() NOT NULL,
   id_chi_tiet_san_pham UNIQUEIDENTIFIER NULL,
-  ma VARCHAR(30) NULL,
-  so_imei VARCHAR(50) NULL,
+  ma NVARCHAR(30) NULL,
+  so_imei NVARCHAR(50) NULL,
   ma_qr NVARCHAR(MAX) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
@@ -273,7 +273,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE chuc_vu (
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
+  ma NVARCHAR(30) NULL,
   ten NVARCHAR(50) NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
@@ -287,19 +287,19 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE nhan_vien (
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
+  ma NVARCHAR(30) NULL,
   ho_ten NVARCHAR(50) NULL,
   gioi_tinh BIT DEFAULT 1,
-  url_anh VARCHAR(255) NULL,
-  email VARCHAR(255) NULL,
-  sdt VARCHAR(30) null,
+  url_anh NVARCHAR(255) NULL,
+  email NVARCHAR(255) NULL,
+  sdt NVARCHAR(30) null,
   que_quan NVARCHAR(255) NULL,
   ngay_sinh DATE NULL,
-  can_cuoc_con_dan VARCHAR(30) null,
-  tai_khoan VARCHAR(50) NOT NULL,
-  mat_khau VARCHAR(255) NOT NULL,
+  can_cuoc_con_dan NVARCHAR(30) null,
+  tai_khoan NVARCHAR(50) NOT NULL,
+  mat_khau NVARCHAR(255) NOT NULL,
   luong Decimal(20,1) null,
-  can_cuoc_cong_dan VARCHAR(30) null,
+  can_cuoc_cong_dan NVARCHAR(30) null,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
   tinh_trang INT DEFAULT 0,
@@ -317,7 +317,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE hang_khach_hang (
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
+  ma NVARCHAR(30) NULL,
   ten NVARCHAR(50) NULL,
   diem_toi_thieu int DEFAULT 0,
   ngay_tao DATE DEFAULT GETDATE(),
@@ -332,15 +332,15 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE khach_hang (
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
+  ma NVARCHAR(30) NULL,
   ho_ten NVARCHAR(50) NULL,
   anh NVARCHAR(MAX) NULL,
   gioi_tinh BIT DEFAULT 1,
-  email VARCHAR(255) NULL,
-  sdt VARCHAR(30) null,
+  email NVARCHAR(255) NULL,
+  sdt NVARCHAR(30) null,
   ngay_sinh DATE NULL,
-  tai_khoan VARCHAR(50) NOT NULL,
-  mat_khau VARCHAR(255) NOT NULL,
+  tai_khoan NVARCHAR(50) NOT NULL,
+  mat_khau NVARCHAR(255) NOT NULL,
   ngay_tao DATE DEFAULT GETDATE(),
   ngay_cap_nhat DATE NULL,
   tinh_trang INT DEFAULT 0,
@@ -360,7 +360,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE dia_chi (
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
+  ma NVARCHAR(30) NULL,
   dia_chi NVARCHAR(50) NULL,
   quan NVARCHAR(55) NULL,
   huyen NVARCHAR(50) null,
@@ -393,7 +393,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE quy_doi (
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
+  ma NVARCHAR(30) NULL,
   diem_quy_doi int DEFAULT 0,
   so_tien_quy_doi decimal(20, 0) NULL,
   id_khach_hang UNIQUEIDENTIFIER NULL,
@@ -410,12 +410,12 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE hoa_don (
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-  ma VARCHAR(30) NULL,
+  ma NVARCHAR(30) NULL,
   id_khach_hang UNIQUEIDENTIFIER NULL,
   id_nhan_vien UNIQUEIDENTIFIER NULL,
   id_dia_chi UNIQUEIDENTIFIER NULL,
   id_quy_doi UNIQUEIDENTIFIER NULL,
-  sdt VARCHAR(30) null,
+  sdt NVARCHAR(30) null,
   tinh_trang int DEFAULT 0,
   loai int DEFAULT 0,
   hinh_thuc_thanh_toan int DEFAULT 0,
@@ -473,7 +473,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE phieu_bao_hanh(
  id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
- ma VARCHAR(30) NULL,
+ ma NVARCHAR(30) NULL,
  id_khach_hang UNIQUEIDENTIFIER NULL,
  id_imei UNIQUEIDENTIFIER NULL,
  id_nhan_vien UNIQUEIDENTIFIER NULL,
@@ -490,7 +490,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE doi_tra(
  id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
- ma VARCHAR(30) NULL,
+ ma NVARCHAR(30) NULL,
  id_khach_hang UNIQUEIDENTIFIER NULL,
  id_hoa_don UNIQUEIDENTIFIER NULL,
  id_nhan_vien UNIQUEIDENTIFIER NULL,
@@ -510,7 +510,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE gio_hang(
 id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-ma VARCHAR(30) NULL,
+ma NVARCHAR(30) NULL,
 ngay_tao DATE DEFAULT GETDATE(),
 tinh_trang int DEFAULT 0,
 id_khach_hang UNIQUEIDENTIFIER NULL,
@@ -582,11 +582,9 @@ VALUES
 
   INSERT INTO chuc_vu (ma, ten, ngay_cap_nhat, mo_ta)
 VALUES 
-('CV001', N'Nhân viên', '2022-01-01', N'Mô tả chức vụ nhân viên'),
-('CV002', N'Trưởng phòng', '2022-02-15', N'Mô tả chức vụ trưởng phòng'),
-('CV003', N'Giám đốc', '2022-03-10', N'Mô tả chức vụ giám đốc'),
-('CV004', N'Kế toán', '2022-04-20', N'Mô tả chức vụ kế toán'),
-('CV005', N'Quản lý dự án', '2022-05-05', N'Mô tả chức vụ quản lý dự án');
+('CV001', N'ADMIN', '2022-01-01', N'Quản lý'),
+('CV002', N'STAFF', '2022-02-15', N'Nhân viên'),
+
 
 
 INSERT INTO muc_quy_doi (so_diem, so_tien, ghi_chu)

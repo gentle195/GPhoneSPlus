@@ -66,7 +66,7 @@ public class SanPhamController {
         model.addAttribute("contentPage", "../san-pham/hien-thi.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/san-pham/hien-thi-tung-xoa")
@@ -86,7 +86,7 @@ public class SanPhamController {
         model.addAttribute("contentPage", "../san-pham/san-pham-tung-xoa.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/san-pham/view-add")
@@ -101,7 +101,7 @@ public class SanPhamController {
         model.addAttribute("listAnh", anhService.findAll0());
         model.addAttribute("dulieuxem", new SanPham());
         model.addAttribute("contentPage", "../san-pham/add.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/san-pham/detail/{id}")
@@ -123,7 +123,7 @@ public class SanPhamController {
         model.addAttribute("contentPage", "../san-pham/update.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/san-pham/add")
@@ -139,7 +139,7 @@ public class SanPhamController {
             model.addAttribute("listCamera", cameraService.findAll0());
             model.addAttribute("listAnh", anhService.findAll0());
             model.addAttribute("contentPage", "../san-pham/add.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
         dulieuxem.setNgayTao(Date.valueOf(LocalDate.now()));
         dulieuxem.setMa("SP" + String.valueOf(sanPhamService.findAll().size() + 1));
@@ -158,7 +158,7 @@ public class SanPhamController {
                          @ModelAttribute("camera") Camera camera) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "../san-pham/update.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
         SanPham hsp = sanPhamService.findById(id);
         dulieuxem.setMa(hsp.getMa());
@@ -186,7 +186,7 @@ public class SanPhamController {
             model.addAttribute("hsp", list.getContent());
             model.addAttribute("total", list.getTotalPages());
             model.addAttribute("contentPage", "../san-pham/hien-thi.jsp");
-            return "/home/layout";
+            return "home/layout";
         } else {
             Pageable pageable = PageRequest.of(num.orElse(0), size);
             Page<SanPham> list = sanPhamService.getAll0(pageable);
@@ -194,7 +194,7 @@ public class SanPhamController {
             model.addAttribute("total", list.getTotalPages());
             model.addAttribute("thongBao", "Sản phẩm này vẫn còn hàng tồn, không thể đổi trạng thái");
             model.addAttribute("contentPage", "../san-pham/hien-thi.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
     }
 
@@ -211,7 +211,7 @@ public class SanPhamController {
         model.addAttribute("contentPage", "../san-pham/san-pham-tung-xoa.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
 
     }
 
@@ -229,7 +229,7 @@ public class SanPhamController {
         model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("hsp", list);
 //        model.addAttribute("total", list);
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/san-pham/search2")
@@ -247,7 +247,7 @@ public class SanPhamController {
         model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("hsp", list);
 //        model.addAttribute("total", list);
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/san-pham/khoi-phuc-het")
@@ -265,7 +265,7 @@ public class SanPhamController {
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
 
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/san-pham/loc")
@@ -280,7 +280,7 @@ public class SanPhamController {
         model.addAttribute("listManHinh", manHinhService.findAll());
         model.addAttribute("listCamera", cameraService.findAll());
         model.addAttribute("contentPage", "../san-pham/hien-thi.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/san-pham/hien-thi-loc")
@@ -301,6 +301,6 @@ public class SanPhamController {
         model.addAttribute("contentPage", "../san-pham/hien-thi.jsp");
         model.addAttribute("page", chiTietSanPhamPage.getNumber());
         model.addAttribute("hsp", chiTietSanPhamPage.getContent());
-        return "/home/layout";
+        return "home/layout";
     }
 }

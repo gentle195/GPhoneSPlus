@@ -1,8 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!doctype html>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,6 +22,7 @@
 </head>
 
 <body>
+
 <section class="vh-100" style="background-color: #bccff9;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -30,45 +30,40 @@
                 <div class="card" style="border-radius: 1rem;">
                     <div class="row g-0">
                         <div class="col-md-6 col-lg-5 d-none d-md-block">
-                            <img src="../../uploads/GPhoneS.png"
-                                 alt="login form" style="border-radius: 5rem 0 0 5rem;"/>
+                            <img src="https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/394580810_718860170125362_1195120911846399491_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=m9GPq-RrupkAX8J8nTW&_nc_ht=scontent.fhan15-2.fna&oh=00_AfAVSW3LP9G54K_bAKV9jHHPwVmafvUvxQiccQRCz-XAhA&oe=653CB061"
+                                 alt="login form"  style="border-radius: 1rem 0 0 1rem;" />
                         </div>
                         <div class="col-md-6 col-lg-7 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-5 text-black">
 
-                                <form action="/login" method="post">
+                                <form:form action="/security/login" method="post">
 
                                     <div class="d-flex align-items-center mb-3 pb-1">
 
                                         <span class="h1 fw-bold mb-0">Xin chào</span>
                                     </div>
 
-                                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Đăng nhập bằng tài
-                                        khoản của bạn</h5>
+                                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Đăng nhập bằng tài khoản của bạn</h5>
 
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="username" style="font-size: large">Tài
-                                            khoản</label>
-                                        <input type="text" id="username" class="form-control form-control-lg"
-                                               name="username"/>
+                                        <label class="form-label" for="username">Tài khoản</label>
+                                        <input type="text" id="username" class="form-control form-control-lg" name="username" />
 
                                         <span class="text-danger" id="usernameError"></span>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="password" style="font-size: large">Mật
-                                            khẩu</label>
-                                        <input type="password" id="password" class="form-control form-control-lg"
-                                               name="password"/>
+                                        <label class="form-label" for="password">Mật khẩu</label>
+                                        <input type="password" id="password" class="form-control form-control-lg" name="password" />
 
                                         <span class="text-danger" id="passwordError"></span>
                                     </div>
+
                                     <div class="mb-4">
-                                        <button class="btn btn-dark btn-lg btn-block" id="loginBtt"
-                                                onclick="validate()">Đăng nhập
-                                        </button>
+                                        <button class="btn btn-dark btn-lg btn-block" id="loginBtt" onclick="validate()">Đăng nhập</button>
                                         <div style="color: red">${tb}</div>
                                     </div>
+
                                     <a class="small text-muted" href="/quen-mat-khau"
                                        style="font-size: larger;color: #00A2FF">Quên
                                         mật khẩu?</a>
@@ -78,12 +73,15 @@
                                         <a type="button" class="btn btn-info"
                                            style="font-size: larger" href="/dang-ky-tai-khoan">Đăng ký
                                             tài khoản</a>
-                                        <%--                                        <button type="button"--%>
-                                        <%--                                                data-bs-toggle="modal" class="btn btn-info"--%>
-                                        <%--                                                data-bs-target="#dangKy" style="color: #393f81;">Đăng kí tài khoản--%>
-                                        <%--                                        </button>--%>
+                                            <%--                                        <button type="button"--%>
+                                            <%--                                                data-bs-toggle="modal" class="btn btn-info"--%>
+                                            <%--                                                data-bs-target="#dangKy" style="color: #393f81;">Đăng kí tài khoản--%>
+                                            <%--                                        </button>--%>
                                     </p>
-                                </form>
+                                    <a href="/oauth2/authorization/google" class="btn btn-primary">Google</a>
+                                </form:form>
+
+
                             </div>
                         </div>
                     </div>
@@ -92,32 +90,32 @@
         </div>
     </div>
 </section>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-<script>
-    function validate() {
-        var un = document.getElementById("username").value;
-        var pw = document.getElementById("password").value;
-        var bt = document.getElementById("loginBtt");
-        if (un.trim() === "") {
-            document.getElementById("usernameError").innerHTML = "Tài khoản không được để trống";
-            bt.type = "button";
-            return false;
-        } else if (pw.trim() === "") {
-            document.getElementById("usernameError").innerHTML = "";
 
-            document.getElementById("passwordError").innerHTML = "Mật khẩu không được để trống";
-            bt.type = "button";
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script>
+    function validate(){
+        var un=document.getElementById("username").value;
+        var pw=document.getElementById("password").value;
+        var bt=document.getElementById("loginBtt");
+        if (un.trim()===""){
+            document.getElementById("usernameError").innerHTML="Tài khoản không được để trống";
+            bt.type="button";
             return false;
-        } else {
-            document.getElementById("passwordError").innerHTML = "";
-            bt.type = "submit";
+        }else if (pw.trim()===""){
+            document.getElementById("usernameError").innerHTML="";
+
+            document.getElementById("passwordError").innerHTML="Mật khẩu không được để trống";
+            bt.type="button";
+            return false;
+        }
+        else{
+            document.getElementById("passwordError").innerHTML="";
+            bt.type="submit";
             return false;
         }
     }
-
     function checkhkh() {
         var tenhkh = document.getElementById("tenkh").value;
         var sdtkh = document.getElementById("sdtkh").value;
@@ -169,7 +167,9 @@
             }
         }
     }
+
 </script>
+</body>
 <script src="../../../vendor/global/global.min.js"></script>
 <script src="../../../js/quixnav-init.js"></script>
 <script src="../../../js/custom.min.js"></script>

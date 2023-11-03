@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -116,10 +117,12 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
     @Query("select kh from KhachHang kh left join HoaDon hd on kh.id=hd.khachHang.id where hd.id=:id")
     KhachHang newKhachHang(UUID id);
 
-    @Query("select kh from KhachHang  kh where kh.taiKhoan like %:username% or kh.email like %:username%")
-    KhachHang getKhachHangByTaiKhoan(String username);
+
 
     @Query("select kh from KhachHang  kh where kh.tinhTrang=0 and (kh.taiKhoan like %:username% and kh.email like %:email%)")
     KhachHang quenMatKhau(String username, String email);
+    @Query("select kh from KhachHang  kh where kh.tinhTrang=0 and (kh.taiKhoan like %:username% or kh.email like %:username%)")
+    Optional<KhachHang> getKhachHangByTaiKhoan(String username);
+
 
 }

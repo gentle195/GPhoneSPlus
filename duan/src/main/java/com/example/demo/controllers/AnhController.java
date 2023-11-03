@@ -42,7 +42,7 @@ public class AnhController {
         model.addAttribute("listAnh", list.getContent());
         model.addAttribute("total", list.getTotalPages());
         model.addAttribute("contentPage", "../anh/hien-thi.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/hien-thi-delete")
@@ -57,21 +57,21 @@ public class AnhController {
         model.addAttribute("listAnh", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("anh") Anh anh) {
         model.addAttribute("anh", new Anh());
         model.addAttribute("contentPage", "../anh/add.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/detail/{id}")
     public String detail(Model model, @ModelAttribute("anh") Anh anh, @PathVariable("id") UUID id) {
         model.addAttribute("anh", anhService.findById(id));
         model.addAttribute("contentPage", "../anh/update.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/update-tt")
@@ -89,7 +89,7 @@ public class AnhController {
         model.addAttribute("listAnh", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/update-status/{id}")
@@ -109,7 +109,7 @@ public class AnhController {
         model.addAttribute("listAnh", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
@@ -129,7 +129,7 @@ public class AnhController {
         model.addAttribute("listAnh", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/search-0")
@@ -143,12 +143,12 @@ public class AnhController {
             model.addAttribute("listAnh", list.getContent());
             model.addAttribute("total", list.getTotalPages());
             model.addAttribute("contentPage", "../anh/hien-thi.jsp");
-            return "/home/layout";
+            return "home/layout";
         } else {
             List<Anh> list = anhService.search0(search);
             model.addAttribute("listAnh", list);
             model.addAttribute("contentPage", "../anh/hien-thi.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
 
     }
@@ -164,12 +164,12 @@ public class AnhController {
             model.addAttribute("listAnh", list.getContent());
             model.addAttribute("total", list.getTotalPages());
             model.addAttribute("contentPage", "../anh/anh-delete.jsp");
-            return "/home/layout";
+            return "home/layout";
         } else {
             List<Anh> list = anhService.search1(search);
             model.addAttribute("listAnh", list);
             model.addAttribute("contentPage", "../anh/anh-delete.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
 
     }
@@ -188,7 +188,7 @@ public class AnhController {
         Date date = new Date(millis);
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "../anh/add.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
         String mhd = "";
         Integer sl = anhService.findAll().size() + 1;
@@ -252,7 +252,7 @@ public class AnhController {
     ) throws IOException {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "../anh/update.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
         Anh tt = anhService.findById(id);
         long millis = System.currentTimeMillis();

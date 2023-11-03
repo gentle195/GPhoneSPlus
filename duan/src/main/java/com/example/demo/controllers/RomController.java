@@ -39,7 +39,7 @@ public class RomController {
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
 
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/rom/view-add")
@@ -47,7 +47,7 @@ public class RomController {
         model.addAttribute("dulieuxem", new Rom());
         model.addAttribute("contentPage", "../rom/add.jsp");
 
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/rom/hien-thi-tung-xoa")
@@ -59,7 +59,7 @@ public class RomController {
         model.addAttribute("contentPage", "../rom/rom-tung-xoa.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/rom/detail/{id}")
@@ -73,14 +73,14 @@ public class RomController {
         model.addAttribute("contentPage", "../rom/rom-update.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("rom/add")
     public String add(Model model, @ModelAttribute("dulieuxem") @Valid Rom dulieuxem, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "../rom/add.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
 
         dulieuxem.setNgayTao(Date.valueOf(LocalDate.now()));
@@ -94,7 +94,7 @@ public class RomController {
     public String update(@ModelAttribute("dulieuxem") @Valid Rom dulieuxem, BindingResult bindingResult, @PathVariable("id") UUID id, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "../rom/rom-update.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
 
         Rom hsp = romService.findById(id);
@@ -118,7 +118,7 @@ public class RomController {
         model.addAttribute("contentPage", "../rom/rom.jsp");
         model.addAttribute("hsp", list);
 //        model.addAttribute("total", list);
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/rom/search2")
@@ -130,7 +130,7 @@ public class RomController {
         model.addAttribute("contentPage", "../rom/rom-tung-xoa.jsp");
         model.addAttribute("hsp", list);
 //        model.addAttribute("total", list);
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("rom/delete/{id}")
@@ -145,7 +145,7 @@ public class RomController {
         model.addAttribute("contentPage", "../rom/rom.jsp");
         model.addAttribute("hsp", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
 
     }
 
@@ -171,7 +171,7 @@ public class RomController {
         model.addAttribute("total", list.getTotalPages());
 
 
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/rom/khoi-phuc-het")
@@ -192,6 +192,6 @@ public class RomController {
         model.addAttribute("total", list.getTotalPages());
 
 
-        return "/home/layout";
+        return "home/layout";
     }
 }

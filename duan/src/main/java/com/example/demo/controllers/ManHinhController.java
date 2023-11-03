@@ -39,7 +39,7 @@ public class ManHinhController {
         model.addAttribute("listManHinh", list.getContent());
         model.addAttribute("total", list.getTotalPages());
         model.addAttribute("contentPage", "../man-hinh/hien-thi.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/hien-thi-delete")
@@ -54,14 +54,14 @@ public class ManHinhController {
         model.addAttribute("listManHinh", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("manHinh") ManHinh manHinh) {
         model.addAttribute("manHinh", new ManHinh());
         model.addAttribute("contentPage", "../man-hinh/add.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/detail/{id}")
@@ -69,14 +69,14 @@ public class ManHinhController {
         ManHinh hsp = manHinhService.findById(id);
         model.addAttribute("manHinh", hsp);
         model.addAttribute("contentPage", "../man-hinh/update.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/add")
     public String add(Model model, @ModelAttribute("manHinh") @Valid ManHinh manHinh, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "../man-hinh/add.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
         manHinh.setNgayTao(Date.valueOf(LocalDate.now()));
         manHinh.setTinhTrang(0);
@@ -90,7 +90,7 @@ public class ManHinhController {
     public String update(Model model, @ModelAttribute("manHinh") @Valid ManHinh manHinh, BindingResult bindingResult, @PathVariable("id") UUID id) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "../man-hinh/update.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
         ManHinh hsp = manHinhService.findById(id);
         manHinh.setMa(hsp.getMa());
@@ -116,7 +116,7 @@ public class ManHinhController {
         model.addAttribute("listManHinh", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/update-status/{id}")
@@ -136,7 +136,7 @@ public class ManHinhController {
         model.addAttribute("listManHinh", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
@@ -156,7 +156,7 @@ public class ManHinhController {
         model.addAttribute("listManHinh", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/search-0")
@@ -170,12 +170,12 @@ public class ManHinhController {
             model.addAttribute("listManHinh", list.getContent());
             model.addAttribute("total", list.getTotalPages());
             model.addAttribute("contentPage", "../man-hinh/hien-thi.jsp");
-            return "/home/layout";
+            return "home/layout";
         } else {
             List<ManHinh> list = manHinhService.search0(search);
             model.addAttribute("listManHinh", list);
             model.addAttribute("contentPage", "../man-hinh/hien-thi.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
 
     }
@@ -191,12 +191,12 @@ public class ManHinhController {
             model.addAttribute("listManHinh", list.getContent());
             model.addAttribute("total", list.getTotalPages());
             model.addAttribute("contentPage", "../man-hinh/man-hinh-delete.jsp");
-            return "/home/layout";
+            return "home/layout";
         } else {
             List<ManHinh> list = manHinhService.search1(search);
             model.addAttribute("listManHinh", list);
             model.addAttribute("contentPage", "../man-hinh/man-hinh-delete.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
 
     }

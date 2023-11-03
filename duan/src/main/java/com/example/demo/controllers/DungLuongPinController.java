@@ -42,7 +42,7 @@ public class DungLuongPinController {
         model.addAttribute("listDungLuongPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/hien-thi-delete")
@@ -57,14 +57,14 @@ public class DungLuongPinController {
         model.addAttribute("listDungLuongPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("dungLuongPin") DungLuongPin dungLuongPin) {
         model.addAttribute("dungLuongPin", new DungLuongPin());
         model.addAttribute("contentPage", "../dungluongpin/add.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/add")
@@ -72,7 +72,7 @@ public class DungLuongPinController {
     ) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "../dungluongpin/add.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
 
         long millis = System.currentTimeMillis();
@@ -116,7 +116,7 @@ public class DungLuongPinController {
         model.addAttribute("listDungLuongPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/update-status/{id}")
@@ -136,7 +136,7 @@ public class DungLuongPinController {
         model.addAttribute("listDungLuongPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
@@ -156,7 +156,7 @@ public class DungLuongPinController {
         model.addAttribute("listDungLuongPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
 
@@ -172,7 +172,7 @@ public class DungLuongPinController {
         model.addAttribute("listDungLuongPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/search-0")
@@ -180,7 +180,7 @@ public class DungLuongPinController {
         List<DungLuongPin> listDungLuongPin = dungLuongPinService.search0(sreach);
         model.addAttribute("listDungLuongPin", listDungLuongPin);
         model.addAttribute("contentPage", "../dungluongpin/dung-luong-pin.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/search-1")
@@ -188,6 +188,6 @@ public class DungLuongPinController {
         List<DungLuongPin> listDungLuongPin = dungLuongPinService.search1(sreach);
         model.addAttribute("listDungLuongPin", listDungLuongPin);
         model.addAttribute("contentPage", "../dungluongpin/dung-luong-pin-delete.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 }

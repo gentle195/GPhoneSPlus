@@ -615,11 +615,7 @@
                             <c:if test="${idkhachhang=='1'}">
                             <div class="qty-label">
                                 <div class="" style="margin-left: 1cm">
-                                    <BUTTON class="qty-down">-</BUTTON>
-                                    <input type="number" value="1" min="1" max="${banhangonline.soluongcon(motctsp.id)}">
-                                    Số lượng :<label style="background: white;color: red;border: 1px solid white"
-                                                     id="thongbaosoluong"></label>
-                                    <br>
+
                                     <c:if test="${idkhachhang=='1'}">
                                         <div class="qty-label">
                                             <div class="" style="margin-left: 1cm">
@@ -645,58 +641,9 @@
                                             </button>
                                         </a>
                                     </c:if>
-                                    <c:if test="${idkhachhang!='1'}">
-                                        <form action="" method="post" id="formctsp">
-
-                                            <div class="qty-label">
-                                                <div class="" style="margin-left: 1cm">
-                                                    <BUTTON class="qty-down" type="button">-</BUTTON>
-                                                    <input type="number" value="0" min="0"
-                                                           max="${banhangonline.soluongcon(motctsp.id)-banhangonline.sl1ctsptronggh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId(),motctsp.id)}"
-                                                           id="input2" style="width: 2cm" name="solg">
-                                                    <BUTTON class="qty-up" type="button">+</BUTTON>
-                                                </div>
-                                            </div>
-
-
-                                            <label style="background: white;border: 1px solid white">Số lượng còn
-                                                :${banhangonline.soluongcon(motctsp.id)}</label>
-                                            <br><br>
-
-                                                <%--                            <p>${idkhachhang}----${motctsp.id}</p>--%>
-                                            <button class="add-to-cart-btn" type="button"
-                                                    onclick="thongbaothemvaogiohang('${motctsp.id}');"><i
-                                                    class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                                            </button>
-                                            <button class="add-to-cart-btn" id="btthanhtoam" type="button"
-                                                    onclick="clickthanhtoanctsp()"><i class="fa fa-shopping-cart"></i>
-                                                Mua ngay
-                                            </button>
-
-
-                                            <input style="display:none;" value="${idkhachhang}" name="idkh">
-                                            <input style="display:none;" value="${motctsp.id}" name="idctsp">
-
-                                        </form>
-                                    </c:if>
-
-
                                 </div>
-                                " style="width: 2cm" name="solg">
-                                <BUTTON class="qty-up">+</BUTTON>
                             </div>
                         </div>
-                        <label style="background: white;border: 1px solid white">Số lượng còn
-                            :${banhangonline.soluongcon(motctsp.id)}</label>
-                        <br><br>
-                        <a href="/login">
-                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                            </button>
-                            <a href="/ban-hang-online/chi-tiet-san-pham/${motctsp.id}" id="loadlaictsp"></a>
-                        </a>
-                        <a href="/login">
-                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Mua ngay</button>
-                        </a>
                         </c:if>
                         <c:if test="${idkhachhang!='1'}">
                             <form action="" method="post" id="formctsp">
@@ -779,8 +726,8 @@
                     </div>
 
                     <div class="row">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCTSP
-">
+                        <button
+
                             Xem thêm cấu hình chi tiết
                         </button>
                     </div>
@@ -1135,7 +1082,8 @@
                                                                 style="font-size:15px">₫</span></del>
                                                     </h4>
                                                         <%--                                            ${ht.tinhTrang} +  ${ht.sanPham.tinhTrang}--%>
-                                                    <p class="product-category">Đã bán :${banhangonline.soluongdaban(ht.id)}--Còn
+                                                    <p class="product-category">Đã bán
+                                                        :${banhangonline.soluongdaban(ht.id)}--Còn
                                                         :${banhangonline.soluongcon(ht.id)}</p>
                                                     <div>
                                                         *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>
@@ -1158,10 +1106,12 @@
                                                         <i class="fa fa-star"></i>
                                                     </div>
                                                     <div class="product-btns">
-                                                        <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                                                        <button class="add-to-wishlist"><i
+                                                                class="fa fa-heart-o"></i><span
                                                                 class="tooltipp">Thêm vào danh sách yêu thích</span>
                                                         </button>
-                                                        <button class="add-to-compare"><i class="fa fa-exchange"></i><span
+                                                        <button class="add-to-compare"><i
+                                                                class="fa fa-exchange"></i><span
                                                                 class="tooltipp">Thêm để so sánh</span></button>
                                                         <button class="quick-view"><a
                                                                 href="/ban-hang-online/chi-tiet-san-pham/${ht.id}"><i

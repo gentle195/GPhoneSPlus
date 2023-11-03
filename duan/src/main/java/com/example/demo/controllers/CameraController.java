@@ -46,7 +46,7 @@ public class CameraController {
         model.addAttribute("listCamera", list.getContent());
         model.addAttribute("total", list.getTotalPages());
         model.addAttribute("contentPage", "../camera/hien-thi.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/hien-thi-delete")
@@ -59,14 +59,14 @@ public class CameraController {
         model.addAttribute("listCamera", page.getContent());
         model.addAttribute("total", kt(page.getTotalPages()));
         model.addAttribute("contentPage", "../camera/camera-delete.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("camera") Camera camera) {
         model.addAttribute("camera", new Camera());
         model.addAttribute("contentPage", "../camera/add.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/detail/{id}")
@@ -74,14 +74,14 @@ public class CameraController {
         Camera hsp = cameraService.findById(id);
         model.addAttribute("camera", hsp);
         model.addAttribute("contentPage", "../camera/update.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/add")
     public String add(Model model, @Valid @ModelAttribute("camera") Camera camera, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "../camera/add.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
         camera.setNgayTao(Date.valueOf(LocalDate.now()));
         camera.setTinhTrang(0);
@@ -96,7 +96,7 @@ public class CameraController {
                          BindingResult bindingResult, @PathVariable("id") UUID id) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "../camera/update.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
         Camera hsp = cameraService.findById(id);
         Date ngayTao = hsp.getNgayTao();
@@ -124,7 +124,7 @@ public class CameraController {
         model.addAttribute("listCamera", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/update-status/{id}")
@@ -144,7 +144,7 @@ public class CameraController {
         model.addAttribute("listCamera", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
@@ -164,7 +164,7 @@ public class CameraController {
         model.addAttribute("listCamera", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/search-0")
@@ -178,12 +178,12 @@ public class CameraController {
             model.addAttribute("listCamera", list.getContent());
             model.addAttribute("total", list.getTotalPages());
             model.addAttribute("contentPage", "../camera/hien-thi.jsp");
-            return "/home/layout";
+            return "home/layout";
         } else {
             List<Camera> list = cameraService.search0(search);
             model.addAttribute("listCamera", list);
             model.addAttribute("contentPage", "../camera/hien-thi.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
 
     }
@@ -199,12 +199,12 @@ public class CameraController {
             model.addAttribute("listCamera", list.getContent());
             model.addAttribute("total", list.getTotalPages());
             model.addAttribute("contentPage", "../camera/camera-delete.jsp");
-            return "/home/layout";
+            return "home/layout";
         } else {
             List<Camera> list = cameraService.search1(search);
             model.addAttribute("listCamera", list);
             model.addAttribute("contentPage", "../camera/camera-delete.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
 
     }

@@ -43,7 +43,7 @@ public class ChipController {
         model.addAttribute("listChip", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/hien-thi-delete")
@@ -58,14 +58,14 @@ public class ChipController {
         model.addAttribute("listChip", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("chip") Chip chip) {
         model.addAttribute("chip", new Chip());
         model.addAttribute("contentPage", "../chip/add.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
 
@@ -74,7 +74,7 @@ public class ChipController {
                          @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "../chip/add.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
 
         long millis = System.currentTimeMillis();
@@ -116,7 +116,7 @@ public class ChipController {
         model.addAttribute("listChip", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/update-status/{id}")
@@ -136,7 +136,7 @@ public class ChipController {
         model.addAttribute("listChip", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
@@ -156,7 +156,7 @@ public class ChipController {
         model.addAttribute("listChip", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/detail/{id}")
@@ -171,7 +171,7 @@ public class ChipController {
         model.addAttribute("listChip", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/search-0")
@@ -179,7 +179,7 @@ public class ChipController {
         List<Chip> list = chipService.search0(search);
         model.addAttribute("listChip", list);
         model.addAttribute("contentPage", "../chip/chip.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/search-1")
@@ -187,6 +187,6 @@ public class ChipController {
         List<Chip> list = chipService.search1(search);
         model.addAttribute("listChip", list);
         model.addAttribute("contentPage", "../chip/chip-delete.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 }

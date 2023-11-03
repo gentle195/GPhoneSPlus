@@ -110,7 +110,7 @@ public class BanHangTaiQuayController {
 
 
         model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/add-hoa-don")
@@ -135,7 +135,7 @@ public class BanHangTaiQuayController {
             model.addAttribute("listDiaChi", diaChiService.findAll0());
             model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
             model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
         NhanVien nhanVien = dataIntermediateService.getSharedDataNhanVien();
         HoaDon hd = new HoaDon();
@@ -187,7 +187,7 @@ public class BanHangTaiQuayController {
         model.addAttribute("dungds", dungLuongPinService.findAll0());
         model.addAttribute("chipds", chipService.findAll0());
         model.addAttribute("sands", sanPhamService.findAll0());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @ResponseBody
@@ -222,7 +222,7 @@ public class BanHangTaiQuayController {
         model.addAttribute("listDiaChi", diaChiService.findAll0());
         model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
         model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/remove/{id}")
@@ -456,7 +456,7 @@ public class BanHangTaiQuayController {
         model.addAttribute("listNhanVien", nhanVienService.nhanVienThanhToan(id));
         model.addAttribute("listHoaDonChiTiet", hoaDonChiTietService.getHoaDonChiTiet(id));
         model.addAttribute("contentPage", "../ban-hang/thanh-toan.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/thanh-toan/{id}")
@@ -534,7 +534,7 @@ public class BanHangTaiQuayController {
     public String modalKhachHang(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon, @ModelAttribute("modalAddKhachHang") KhachHang khachHang) {
         model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
         model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/add-khach-hang")
@@ -648,7 +648,7 @@ public class BanHangTaiQuayController {
             model.addAttribute("listNhanVien", nhanVienService.nhanVienThanhToan(idHoaDon));
             model.addAttribute("listHoaDonChiTiet", hoaDonChiTietService.getHoaDonChiTiet(idHoaDon));
             model.addAttribute("contentPage", "../ban-hang/thanh-toan.jsp");
-            return "/home/layout";
+            return "home/layout";
         } else {
             List<HoaDonChiTiet> list = hoaDonChiTietService.searchHDCTBanHangTaiQuay(idHoaDon, search);
             model.addAttribute("HoaDon", hoaDonService.findById(idHoaDon));
@@ -657,7 +657,7 @@ public class BanHangTaiQuayController {
             model.addAttribute("listNhanVien", nhanVienService.nhanVienThanhToan(idHoaDon));
             model.addAttribute("listHoaDonChiTiet", list);
             model.addAttribute("contentPage", "../ban-hang/thanh-toan.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
     }
 
@@ -675,7 +675,7 @@ public class BanHangTaiQuayController {
         model.addAttribute("listHoaDonChiTiet", hoaDonChiTietService.getHoaDonChiTiet(idHoaDon));
         model.addAttribute("modalAddDiaChi", new DiaChi());
         model.addAttribute("contentPage", "../ban-hang/thanh-toan.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     private String generateRandomPassword(int length) {
