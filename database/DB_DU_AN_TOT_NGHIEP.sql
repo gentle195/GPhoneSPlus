@@ -295,7 +295,7 @@ CREATE TABLE nhan_vien (
   sdt NVARCHAR(30) null,
   que_quan NVARCHAR(255) NULL,
   ngay_sinh DATE NULL,
-  can_cuoc_con_dan NVARCHAR(30) null,
+  can_cuoc_cong_dan NVARCHAR(30) null,
   tai_khoan NVARCHAR(50) NOT NULL,
   mat_khau NVARCHAR(255) NOT NULL,
   luong Decimal(20,1) null,
@@ -305,11 +305,11 @@ CREATE TABLE nhan_vien (
   id_chuc_vu UNIQUEIDENTIFIER NULL,
   FOREIGN KEY (id_chuc_vu) REFERENCES chuc_vu(id)
 );
+
 insert into nhan_vien (ma,ho_ten,gioi_tinh,email,sdt,que_quan,ngay_sinh,tai_khoan,mat_khau)
 values 
 ('NV01','Hieu','1','tranhieu23tb@gmail.com','012345678','Thai Binh','1-1-1990','abcxyz','$2a$10$Q7SLkSmtpIix/Kr9hykEJubMeEKXgNgHuCiV9PGb8pwPDyczKposu')
 /*mk mTa3qW3m */
-delete from nhan_vien
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
