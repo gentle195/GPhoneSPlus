@@ -46,7 +46,7 @@ public class SanPhamGiamGiaController {
         model.addAttribute("page", sanPhamGG.getNumber());
         model.addAttribute("sanphamgiamgia", new SanPhamGiamGia());
         model.addAttribute("contentPage", "../san-pham-giam-gia/index.jsp");
-        return "/home/layout";
+        return "home/layout";
 
     }
 
@@ -62,7 +62,7 @@ public class SanPhamGiamGiaController {
         model.addAttribute("size", sanPhamGG.getSize());
         model.addAttribute("page", sanPhamGG.getNumber());
         model.addAttribute("contentPage", "../san-pham-giam-gia/san-pham-giam-gia-da-xoa.jsp");
-        return "/home/layout";
+        return "home/layout";
 
     }
 
@@ -86,7 +86,7 @@ public class SanPhamGiamGiaController {
         model.addAttribute("sanphamgiamgia", new SanPhamGiamGia());
 
         model.addAttribute("contentPage", "../san-pham-giam-gia/index.jsp");
-        return "/home/layout";
+        return "home/layout";
 
     }
 
@@ -99,7 +99,7 @@ public class SanPhamGiamGiaController {
         model.addAttribute("listKM", khuyenMaiService.findAll());
 
         model.addAttribute("contentPage", "../san-pham-giam-gia/san-pham-giam-gia-da-xoa.jsp");
-        return "/home/layout";
+        return "home/layout";
 
     }
 
@@ -109,7 +109,7 @@ public class SanPhamGiamGiaController {
         model.addAttribute("listKM", khuyenMaiService.findAll());
         model.addAttribute("sanphamgiamgia", new SanPhamGiamGia());
         model.addAttribute("contentPage", "../san-pham-giam-gia/add-san-pham-giam-gia.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/add")
@@ -126,7 +126,7 @@ public class SanPhamGiamGiaController {
             model.addAttribute("size", sanPhamGG.getSize());
             model.addAttribute("page", sanPhamGG.getNumber());
             model.addAttribute("contentPage", "../san-pham-giam-gia/index.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
         sanPhamGiamGia.setTinhTrang(0);
         sanPhamGiamGiaService.add(sanPhamGiamGia);
@@ -161,7 +161,7 @@ public class SanPhamGiamGiaController {
 
         model.addAttribute("sanphamgiamgiaupdate", sanPhamGiamGia1);
         model.addAttribute("contentPage", "../san-pham-giam-gia/update-san-pham-giam-gia.jsp");
-        return "/home/layout";
+        return "home/layout";
 
     }
 
@@ -173,7 +173,7 @@ public class SanPhamGiamGiaController {
             model.addAttribute("listKM", khuyenMaiService.findAll());
 
             model.addAttribute("contentPage", "../san-pham-giam-gia/update-san-pham-giam-gia.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
 
 

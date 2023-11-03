@@ -98,7 +98,7 @@ public class ChiTietSanPhamController {
         model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
         model.addAttribute("page", chiTietSanPhamPage.getNumber());
         model.addAttribute("listCTSP", chiTietSanPhamPage.getContent());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/hien-thi-da-xoa")
@@ -115,7 +115,7 @@ public class ChiTietSanPhamController {
         model.addAttribute("contentPage", "../chi-tiet-san-pham/san-pham-da-xoa.jsp");
         model.addAttribute("page", chiTietSanPhamPage.getNumber());
         model.addAttribute("listCTSP", chiTietSanPhamPage.getContent());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/view-add")
@@ -140,7 +140,7 @@ public class ChiTietSanPhamController {
         model.addAttribute("contentPage", "../chi-tiet-san-pham/add-chi-tiet-san-pham.jsp");
 
 
-        return "/home/layout";
+        return "home/layout";
 
 
     }
@@ -173,7 +173,7 @@ public class ChiTietSanPhamController {
             model.addAttribute("listCamera", cameraService.findAll0());
             model.addAttribute("contentPage", "../chi-tiet-san-pham/add-chi-tiet-san-pham.jsp");
 
-            return "/home/layout";
+            return "home/layout";
         }
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         String uploadDir = "src/main/webapp/uploads/";
@@ -215,7 +215,7 @@ public class ChiTietSanPhamController {
         model.addAttribute("ctsp", chiTietSanPham1);
         model.addAttribute("contentPage", "../chi-tiet-san-pham/update-chi-tiet-san-pham.jsp");
 
-        return "/home/layout";
+        return "home/layout";
 
 
     }
@@ -255,7 +255,7 @@ public class ChiTietSanPhamController {
 //            model.addAttribute("chitietsanphamupdate",chiTietSanPham1);
             model.addAttribute("contentPage", "../chi-tiet-san-pham/update-chi-tiet-san-pham.jsp");
 
-            return "/home/layout";
+            return "home/layout";
         }
         String fileName1 = StringUtils.cleanPath(anh1.getOriginalFilename());
         if (checkanh1.equals("cu1")) {
@@ -328,7 +328,7 @@ public class ChiTietSanPhamController {
             model.addAttribute("listCamera", cameraService.findAll0());
             model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
             model.addAttribute("page", page.getNumber());
-            return "/home/layout";
+            return "home/layout";
         }
     }
 
@@ -412,7 +412,7 @@ public class ChiTietSanPhamController {
         model.addAttribute("listManHinh", manHinhService.findAll0());
         model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/search-da-xoa")
@@ -437,7 +437,7 @@ public class ChiTietSanPhamController {
         model.addAttribute("listManHinh", manHinhService.findAll0());
         model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/detail/{id}")
@@ -463,7 +463,7 @@ public class ChiTietSanPhamController {
         model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
         model.addAttribute("page", chiTietSanPhamPage.getNumber());
         model.addAttribute("listCTSP", chiTietSanPhamPage.getContent());
-        return "/home/layout";
+        return "home/layout";
 
     }
 
@@ -495,6 +495,6 @@ public class ChiTietSanPhamController {
         model.addAttribute("listManHinh", manHinhService.findAll0());
         model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 }

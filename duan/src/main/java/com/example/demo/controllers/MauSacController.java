@@ -42,21 +42,21 @@ public class MauSacController {
         model.addAttribute("listMauSac", page.getContent());
         model.addAttribute("list", page.getNumber());
         model.addAttribute("contentPage", "../mausac/mau-sac.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("mauSac") MauSac mauSac) {
         model.addAttribute("mauSac", new MauSac());
         model.addAttribute("contentPage", "../mausac/add.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/add-mau-sac")
     public String addMauSac(Model model, @ModelAttribute("mauSac") @Valid MauSac mauSac, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "../mausac/add.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
@@ -88,7 +88,7 @@ public class MauSacController {
         model.addAttribute("listMauSac", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/update-mau-sac/{id}")
@@ -117,7 +117,7 @@ public class MauSacController {
         model.addAttribute("listMauSac", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/update-all-status")
@@ -134,7 +134,7 @@ public class MauSacController {
         model.addAttribute("listMauSac", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/update-status/{id}")
@@ -154,7 +154,7 @@ public class MauSacController {
         model.addAttribute("listMauSac", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
@@ -176,7 +176,7 @@ public class MauSacController {
         model.addAttribute("listMauSac", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/search-0")
@@ -184,7 +184,7 @@ public class MauSacController {
         List<MauSac> list = mauSacService.search0(search);
         model.addAttribute("listMauSac", list);
         model.addAttribute("contentPage", "../mausac/mau-sac.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/search-1")
@@ -192,7 +192,7 @@ public class MauSacController {
         List<MauSac> list = mauSacService.search1(search);
         model.addAttribute("listMauSac", list);
         model.addAttribute("contentPage", "../mausac/mau-sac-delete.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 }
 

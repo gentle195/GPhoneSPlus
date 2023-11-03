@@ -42,7 +42,7 @@ public class ChucVuController {
         model.addAttribute("listChucVu", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("contentPage", "../chucvu/chuc-vu.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/add-chuc-vu")
@@ -57,7 +57,7 @@ public class ChucVuController {
             model.addAttribute("listChucVu", page.getContent());
             model.addAttribute("page", page.getNumber());
             model.addAttribute("total", page.getTotalPages());
-            return "/home/layout";
+            return "home/layout";
         }
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
@@ -94,7 +94,7 @@ public class ChucVuController {
         model.addAttribute("listChucVu", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/update-chuc-vu/{id}")
@@ -123,7 +123,7 @@ public class ChucVuController {
         model.addAttribute("listChucVu", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/update-all-status")
@@ -141,7 +141,7 @@ public class ChucVuController {
         model.addAttribute("listChucVu", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/update-status/{id}")
@@ -162,7 +162,7 @@ public class ChucVuController {
         model.addAttribute("listChucVu", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
@@ -184,7 +184,7 @@ public class ChucVuController {
         model.addAttribute("listChucVu", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/search-0")
@@ -192,7 +192,7 @@ public class ChucVuController {
         List<ChucVu> list = chucVuService.search0(search);
         model.addAttribute("listChucVu", list);
         model.addAttribute("contentPage", "../chucvu/chuc-vu.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/search-1")
@@ -201,7 +201,7 @@ public class ChucVuController {
         List<ChucVu> list = chucVuService.search1(search);
         model.addAttribute("listChucVu", list);
         model.addAttribute("contentPage", "../chucvu/chuc-vu-delete.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
 }

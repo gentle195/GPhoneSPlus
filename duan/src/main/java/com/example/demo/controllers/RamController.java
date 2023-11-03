@@ -42,21 +42,21 @@ public class RamController {
         model.addAttribute("listRam", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("contentPage", "../ram/ram.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("ram") Ram ram) {
         model.addAttribute("ram", new Ram());
         model.addAttribute("contentPage", "../ram/add.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/add-ram")
     public String addMauSac(Model model, @ModelAttribute("ram") @Valid Ram ram, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "../ram/add.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
@@ -88,7 +88,7 @@ public class RamController {
         model.addAttribute("listRam", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/update-ram/{id}")
@@ -116,7 +116,7 @@ public class RamController {
         model.addAttribute("listRam", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/update-all-status")
@@ -133,7 +133,7 @@ public class RamController {
         model.addAttribute("listRam", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/update-status/{id}")
@@ -153,7 +153,7 @@ public class RamController {
         model.addAttribute("listRam", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
@@ -173,7 +173,7 @@ public class RamController {
         model.addAttribute("listRam", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/search-0")
@@ -181,7 +181,7 @@ public class RamController {
         List<Ram> list = ramService.search0(search);
         model.addAttribute("listRam", list);
         model.addAttribute("contentPage", "../ram/ram.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/search-1")
@@ -189,7 +189,7 @@ public class RamController {
         List<Ram> list = ramService.search1(search);
         model.addAttribute("listRam", list);
         model.addAttribute("contentPage", "../ram/ram-delete.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 }
 

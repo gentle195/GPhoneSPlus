@@ -65,7 +65,7 @@ public class PinController {
         model.addAttribute("listPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/view-add")
@@ -74,7 +74,7 @@ public class PinController {
         model.addAttribute("listDungLuongPin", dungLuongPinService.findAll0());
         model.addAttribute("pin", new Pin());
         model.addAttribute("contentPage", "../pin/add.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/hien-thi-delete")
@@ -90,7 +90,7 @@ public class PinController {
         model.addAttribute("listPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
 
@@ -101,7 +101,7 @@ public class PinController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("listDungLuongPin", dungLuongPinService.findAll0());
             model.addAttribute("contentPage", "../pin/add.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
 
         long millis = System.currentTimeMillis();
@@ -125,7 +125,7 @@ public class PinController {
             model.addAttribute("listDungLuongPin", page.getContent());
             model.addAttribute("page", page.getNumber());
             model.addAttribute("total", page.getTotalPages());
-            return "/home/layout";
+            return "home/layout";
         }
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
@@ -173,7 +173,7 @@ public class PinController {
         model.addAttribute("listPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/update-status/{id}")
@@ -193,7 +193,7 @@ public class PinController {
         model.addAttribute("listPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
@@ -213,7 +213,7 @@ public class PinController {
         model.addAttribute("listPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
 
@@ -230,14 +230,14 @@ public class PinController {
         model.addAttribute("listPin", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
     @PostMapping("/search-0")
     public String search0(Model model, @RequestParam("search") String sreach, @ModelAttribute("pin") Pin pin) {
         List<Pin> listPin = pinService.search0(sreach);
         model.addAttribute("listPin", listPin);
         model.addAttribute("contentPage", "../pin/pin.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/search-1")
@@ -245,7 +245,7 @@ public class PinController {
         List<Pin> listPin = pinService.search1(sreach);
         model.addAttribute("listPin", listPin);
         model.addAttribute("contentPage", "../pin/pin-delete.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/export-excel")

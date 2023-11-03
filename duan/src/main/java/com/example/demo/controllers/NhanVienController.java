@@ -62,7 +62,7 @@ public class NhanVienController {
         model.addAttribute("listChucVu", chucVuService.findAll());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
 
@@ -78,7 +78,7 @@ public class NhanVienController {
         model.addAttribute("listNhanVien", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/loc")
@@ -101,7 +101,7 @@ public class NhanVienController {
         model.addAttribute("listNhanVien", filteredNhanViens);
 //        model.addAttribute("page", pageable.getPageNumber());
 //        model.addAttribute("total", pageable.getPageSize());
-        return "/home/layout";
+        return "home/layout";
     }
 
 
@@ -117,7 +117,7 @@ public class NhanVienController {
 //        model.addAttribute("nhanVien", new NhanVien());
         model.addAttribute("contentPage", "../nhanvien/nhan-vien-add.jsp");
 
-        return "/home/layout";
+        return "home/layout";
     }
 
     private String generateRandomPassword(int length) {
@@ -156,7 +156,7 @@ public class NhanVienController {
             model.addAttribute("listChucVu", listChucVu);
             model.addAttribute("contentPage", "../nhanvien/nhan-vien-add.jsp");
 
-            return "/home/layout";
+            return "home/layout";
 //            return "../nhanvien/nhan-vien-add.jsp";
         }
         NhanVien nvien = new NhanVien();
@@ -209,7 +209,7 @@ public class NhanVienController {
 
         model.addAttribute("contentPage", "../nhanvien/nhan-vien.jsp");
         return "redirect:/nhan-vien/hien-thi";
-//        return "/home/layout";
+//        return "home/layout";
     }
 
     @GetMapping("/detail/{id}")
@@ -218,7 +218,7 @@ public class NhanVienController {
         model.addAttribute("listChucVu", listChucVu);
         model.addAttribute("nhanVien", nhanVienService.findById(id));
         model.addAttribute("contentPage", "../nhanvien/nhan-vien-update.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
 
@@ -233,7 +233,7 @@ public class NhanVienController {
             List<ChucVu> listChucVu = chucVuService.findAll();
             model.addAttribute("listChucVu", listChucVu);
             model.addAttribute("contentPage", "../nhanvien/nhan-vien-update.jsp");
-            return "/home/layout";
+            return "home/layout";
 
         }
         NhanVien nv = nhanVienService.findById(id);
@@ -267,7 +267,7 @@ public class NhanVienController {
         List<NhanVien> list = nhanVienService.search0(search);
         model.addAttribute("listNhanVien", list);
         model.addAttribute("contentPage", "../nhanvien/nhan-vien.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/search-1")
@@ -276,7 +276,7 @@ public class NhanVienController {
         List<NhanVien> list = nhanVienService.search1(search);
         model.addAttribute("listNhanVien", list);
         model.addAttribute("contentPage", "../nhanvien/nhan-vien-delete.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/update-all-status")
@@ -295,7 +295,7 @@ public class NhanVienController {
         model.addAttribute("listNhanVien", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/update-status/{id}")
@@ -317,7 +317,7 @@ public class NhanVienController {
         model.addAttribute("listNhanVien", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
@@ -339,7 +339,7 @@ public class NhanVienController {
         model.addAttribute("listNhanVien", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "/home/layout";
+        return "home/layout";
     }
 
 

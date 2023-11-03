@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -79,7 +80,14 @@
                         <li class="nav-item dropdown header-profile">
                             <a class="nav-link" href="#" role="button" data-toggle="dropdown">
 
-                                <img src="/uploads/${nhanVien.urlAnh}">
+                                <security:authorize access="isAuthenticated()">
+                                    hi, <security:authentication property="principal.username" />
+                                </security:authorize>
+                                <security:authorize access="!isAuthenticated()">
+                                    <a href="/login">Login</a>
+
+                                </security:authorize>
+
 
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
@@ -87,7 +95,7 @@
                                     <i class="icon-user"></i>
                                     <span class="ml-2">Profile </span>
                                 </a>
-                                <a href="/logout" class="dropdown-item">
+                                <a href="/logout" class="dropdown-item" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                     <i class="icon-key"></i>
                                     <span class="ml-2">Logout </span>
                                 </a>
@@ -162,8 +170,6 @@
                         <li><a href="/thong-ke/hien-thi">Doanh Thu theo tháng</a></li>
                         <li><a href="/thong-ke/hien-thi-sp">Doanh thu theo sản phẩm</a></li>
                         <li><a href="/thong-ke/hien-thi-hang">Doanh thu theo hãng</a></li>
-                        <li><a href="/thong-ke/hien-thi-nhan-vien">Doanh thu nhân viên</a></li>
-                        <li><a href="/thong-ke/hien-thi-khach-hang">Doanh thu khách hàng</a></li>
                     </ul>
                 </li>
             </ul>

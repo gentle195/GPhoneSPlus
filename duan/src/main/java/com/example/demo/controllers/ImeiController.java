@@ -54,7 +54,7 @@ public class ImeiController {
         String ma = "IMEI" + (imeiService.findAll().size() + 1);
         model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "../imei/index.jsp");
-        return "/home/layout";
+        return "home/layout";
 
     }
 
@@ -67,7 +67,7 @@ public class ImeiController {
         String ma = "IMEI" + imeiService.findAll().size();
         model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "../imei/index.jsp");
-        return "/home/layout";
+        return "home/layout";
 
     }
 
@@ -80,7 +80,7 @@ public class ImeiController {
         String ma = "IMEI" + imeiService.findAll().size();
         model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "../imei/imei-da-ban.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/search-off-2")
@@ -92,7 +92,7 @@ public class ImeiController {
         String ma = "IMEI" + imeiService.findAll().size();
         model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "../imei/imei-da-xoa.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
 
@@ -108,7 +108,7 @@ public class ImeiController {
         String ma = "IMEI" + imeiService.findAll().size();
         model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "../imei/imei-da-ban.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/hien-thi-da-xoa")
@@ -123,7 +123,7 @@ public class ImeiController {
         String ma = "IMEI" + imeiService.findAll().size();
         model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "../imei/imei-da-xoa.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/khoi-phuc/{id}")
@@ -152,7 +152,7 @@ public class ImeiController {
         model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "../imei/add-imei.jsp");
 
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/add")
@@ -165,7 +165,7 @@ public class ImeiController {
             String ma = "IMEI" + imeiService.findAll().size();
             model.addAttribute("ma", ma);
             model.addAttribute("contentPage", "../imei/add-imei.jsp");
-            return "/home/layout";
+            return "home/layout";
 
         }
         String ma = "IMEI" + (imeiService.findAll().size() + 1);
@@ -198,7 +198,7 @@ public class ImeiController {
         model.addAttribute("imeiupdate", imei1);
         model.addAttribute("contentPage", "../imei/update-imei.jsp");
         ngay = Date.valueOf(imei1.getNgayTao().toString());
-        return "/home/layout";
+        return "home/layout";
 
 
     }
@@ -209,7 +209,7 @@ public class ImeiController {
         if (result.hasErrors()) {
             model.addAttribute("listCTSP", chiTietSanPhamService.findAll());
             model.addAttribute("contentPage", "../imei/update-imei.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
         IMEI imei1 = imeiService.findById(id);
         imei1.setMa(imei.getMa());

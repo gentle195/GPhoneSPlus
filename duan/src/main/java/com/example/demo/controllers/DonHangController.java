@@ -80,7 +80,7 @@ public class DonHangController {
         model.addAttribute("listDiaChi", listDiaChi);
         model.addAttribute("contentPage", "../don-hang/hien-thi.jsp");
         model.addAttribute("listHoaDon", page);
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/loc")
@@ -110,7 +110,7 @@ public class DonHangController {
             model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listDiaChi", diaChiService.getALL0());
             model.addAttribute("contentPage", "../don-hang/hien-thi.jsp");
-            return "/home/layout";
+            return "home/layout";
         } else if (receiveStartDate.isEmpty() && shipStartDate.isEmpty() && receiveEndDate.isEmpty() && shipEndDate.isEmpty()) {
             List<HoaDon> listHoaDon = hoaDonService.locDonHang(idKH, idNV, idDC, trangThai,
                     Date.valueOf(startDate), Date.valueOf(endDate), null, null, null, null
@@ -120,7 +120,7 @@ public class DonHangController {
             model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listDiaChi", diaChiService.getALL0());
             model.addAttribute("contentPage", "../don-hang/hien-thi.jsp");
-            return "/home/layout";
+            return "home/layout";
         } else if (shipEndDate.isEmpty() && shipStartDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
             List<HoaDon> listHoaDon = hoaDonService.locDonHang(idKH, idNV, idDC, trangThai,
                     null, null, null, null, Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
@@ -130,7 +130,7 @@ public class DonHangController {
             model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listDiaChi", diaChiService.getALL0());
             model.addAttribute("contentPage", "../don-hang/hien-thi.jsp");
-            return "/home/layout";
+            return "home/layout";
         } else if (receiveEndDate.isEmpty() && receiveStartDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
             List<HoaDon> listHoaDon = hoaDonService.locDonHang(idKH, idNV, idDC, trangThai,
                     null, null, Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), null, null
@@ -140,7 +140,7 @@ public class DonHangController {
             model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listDiaChi", diaChiService.getALL0());
             model.addAttribute("contentPage", "../don-hang/hien-thi.jsp");
-            return "/home/layout";
+            return "home/layout";
         } else if (shipEndDate.isEmpty() && shipStartDate.isEmpty()) {
             List<HoaDon> listHoaDon = hoaDonService.locDonHang(idKH, idNV, idDC, trangThai,
                     Date.valueOf(startDate), Date.valueOf(endDate), null, null, Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
@@ -150,7 +150,7 @@ public class DonHangController {
             model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listDiaChi", diaChiService.getALL0());
             model.addAttribute("contentPage", "../don-hang/hien-thi.jsp");
-            return "/home/layout";
+            return "home/layout";
         } else if (receiveEndDate.isEmpty() && receiveStartDate.isEmpty()) {
             List<HoaDon> listHoaDon = hoaDonService.locDonHang(idKH, idNV, idDC, trangThai,
                     Date.valueOf(startDate), Date.valueOf(endDate), Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), null, null
@@ -160,7 +160,7 @@ public class DonHangController {
             model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listDiaChi", diaChiService.getALL0());
             model.addAttribute("contentPage", "../don-hang/hien-thi.jsp");
-            return "/home/layout";
+            return "home/layout";
         } else if (startDate.isEmpty() && endDate.isEmpty()) {
             List<HoaDon> listHoaDon = hoaDonService.locDonHang(idKH, idNV, idDC, trangThai,
                     null, null, Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
@@ -170,7 +170,7 @@ public class DonHangController {
             model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listDiaChi", diaChiService.getALL0());
             model.addAttribute("contentPage", "../don-hang/hien-thi.jsp");
-            return "/home/layout";
+            return "home/layout";
         } else {
             List<HoaDon> listHoaDon = hoaDonService.locDonHang(idKH, idNV, idDC, trangThai,
                     Date.valueOf(startDate), Date.valueOf(endDate), Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
@@ -180,7 +180,7 @@ public class DonHangController {
             model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listDiaChi", diaChiService.getALL0());
             model.addAttribute("contentPage", "../don-hang/hien-thi.jsp");
-            return "/home/layout";
+            return "home/layout";
         }
     }
 
@@ -196,7 +196,7 @@ public class DonHangController {
         model.addAttribute("listDiaChi", listDiaChi);
         model.addAttribute("listHoaDon", list);
         model.addAttribute("contentPage", "../don-hang/hien-thi.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/detail/{id}")
@@ -207,7 +207,7 @@ public class DonHangController {
         model.addAttribute("donHang", hoaDon);
         model.addAttribute("listHoaDonChiTiet", listHoaDonChiTiet);
         model.addAttribute("contentPage", "../don-hang/don-hang-detail.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/xuat-pdf/{id}")
@@ -237,7 +237,7 @@ public class DonHangController {
         model.addAttribute("donHang", hoaDon);
         model.addAttribute("listHoaDonChiTiet", listHoaDonChiTiet);
         model.addAttribute("contentPage", "../don-hang/don-hang-view-update.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @ResponseBody

@@ -39,7 +39,7 @@ public class ThongKeController {
 //        model.addAttribute("listCount", thongKeService.countHD());
 //        model.addAttribute("listAvg",df.format(thongKeService.avgHD()));
         model.addAttribute("contentPage", "../thongke/thong-ke.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
 
@@ -51,7 +51,7 @@ public class ThongKeController {
         List<DoanhThuTheoThang> doanhThuTheoThangs = thongKeService.loctheonam(nam);
         model.addAttribute("listDoanhThu", doanhThuTheoThangs);
         model.addAttribute("contentPage", "../thongke/thong-ke.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/loc-hang")
@@ -62,7 +62,7 @@ public class ThongKeController {
         List<DoanhThuSanPham> selected = thongKeService.selectedHang();
         model.addAttribute("listHang", selected);
         model.addAttribute("contentPage", "../thongke/thong-ke-sp.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
 
@@ -71,14 +71,14 @@ public class ThongKeController {
         List<DoanhThuSanPham> selected = thongKeService.selectedHang();
         model.addAttribute("listHang", selected);
         model.addAttribute("contentPage", "../thongke/thong-ke-sp.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
 
     @GetMapping("/hien-thi-hang")
     public String hienThiHang(Model model) {
         model.addAttribute("contentPage", "../thongke/thong-ke-hang.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/loc-thoi-gian")
@@ -89,13 +89,13 @@ public class ThongKeController {
         List<DoanhThuHang> locHang = thongKeService.locdoanhThuHang(startDate,endDate);
         model.addAttribute("listDoanhThuHang", locHang);
         model.addAttribute("contentPage", "../thongke/thong-ke-hang.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/hien-thi-nhan-vien")
     public String doanhThuNhanVien(Model model) {
         model.addAttribute("contentPage", "../thongke/thong-ke-nhan-vien.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/loc-thoi-gian-nv")
@@ -103,7 +103,7 @@ public class ThongKeController {
         List<DoanhThuNhanVien> locHang = thongKeService.locDoanhThuNhanVien(startDate,endDate);
         model.addAttribute("listDoanhThuNhanVien", locHang);
         model.addAttribute("contentPage", "../thongke/thong-ke-nhan-vien.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/hien-thi-khach-hang")
@@ -114,7 +114,7 @@ public class ThongKeController {
 //        List<DoanhThuKhachHang> doanhThuKhachHangs = thongKeService.doanhThuKhachHang();
 //        model.addAttribute("listDoanhThuKhachHang", doanhThuKhachHangs);
         model.addAttribute("contentPage", "../thongke/thong-ke-khach-hang.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @PostMapping("/loc-thoi-gian-kh")
@@ -124,6 +124,6 @@ public class ThongKeController {
         model.addAttribute("listDoanhThuKhachHang", locDoanhThuKhachHang);
         model.addAttribute("listDoanhThuKhachHangGioiTinh", locDoanhThuKhachHangGioiTinh);
         model.addAttribute("contentPage", "../thongke/thong-ke-khach-hang.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 }
