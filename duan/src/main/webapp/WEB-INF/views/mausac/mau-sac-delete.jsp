@@ -8,20 +8,27 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>GPhoneS Store </title>
     <!-- Favicon icon -->
 </head>
 <body>
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/mau-sac/hien-thi" role="tab">Thông tin Màu</a>
+            <a class="nav-link" href="/mau-sac/hien-thi" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin Màu</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/mau-sac/view-add" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin màu
+                sắc</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
                aria-controls="description" aria-selected="true">Màu sắc đã xoá</a>
         </li>
-        <a href="/mau-sac/update-all-status" class="btn btn-outline-danger btn-icon-text" style="float: right; margin-left: 720px"
+        <a href="/mau-sac/update-all-status" class="btn btn-outline-danger btn-icon-text"
+           style="float: right; margin-left: 720px"
            tabindex="-1"
            role="button"
            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
@@ -49,7 +56,7 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" style="color: black">
                             <thead>
                             <tr>
                                 <th>STT</th>
@@ -59,7 +66,6 @@
                                 <th>Ngày Cập Nhật</th>
                                 <th>Tình trạng</th>
                                 <th>Mô tả</th>
-
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -75,7 +81,8 @@
                                     <td>${mauSac.trangThai()}</td>
                                     <td>${mauSac.moTa}</td>
                                     <td>
-                                        <a href="/mau-sac/reset-status/${mauSac.id}" class="btn btn-danger btn-icon-text"
+                                        <a href="/mau-sac/reset-status/${mauSac.id}"
+                                           class="btn btn-danger btn-icon-text"
                                            tabindex="-1"
                                            role="button"
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
@@ -101,7 +108,8 @@
                                class="page-link">${status.index}</a>
                         </li>
                     </c:forEach>
-                    <li class="page-item"><a class="page-link" href="/mau-sac/hien-thi-delete?pageNum=${total-1}">></a></li>
+                    <li class="page-item"><a class="page-link" href="/mau-sac/hien-thi-delete?pageNum=${total-1}">></a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>GPhoneS Store</title>
     <!-- Favicon icon -->
 </head>
 <body>
@@ -16,6 +16,11 @@
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
             <a class="nav-link" href="/man-hinh/hien-thi" role="tab" onclick="return myFunction4()">Thông tin màn
+                hình </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/man-hinh/view-add" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin màn
                 hình </a>
         </li>
         <li class="nav-item">
@@ -59,7 +64,7 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" style="color: black;width: 1700px">
                             <thead>
                             <tr>
                                 <th>Mã</th>

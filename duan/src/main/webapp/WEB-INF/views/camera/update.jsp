@@ -8,17 +8,21 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>GPhoneS Store </title>
     <!-- Favicon icon -->
 </head>
 <body>
 <div>
-    <h1 style="text-align: center">Camera</h1>
-    <br>
     <div>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
             <li class="nav-item">
-                <a class="nav-link" href="/camera/hien-thi" role="tab" onclick="myFunction4()">Thông tin Chip </a>
+                <a class="nav-link" href="/camera/hien-thi" role="tab" onclick="return myFunction4()">Thông tin Chip </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/camera/view-add" role="tab" onclick="return myFunction1()">Thêm thông tin Camera</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/camera/hien-thi-delete" role="tab" onclick="return myFunction3()">Camera đã xoá</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
@@ -32,7 +36,7 @@
                 <div>
                     <form:form action="/camera/update/${camera.id}" method="post" modelAttribute="camera">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body" style="color: black">
                                 <h4 class="card-title">Update Camera</h4>
                                 <form class="forms-sample">
                                     <div class="form-group">
@@ -63,7 +67,7 @@
 </body>
 <script>
     function myFunction1() {
-        let text = "Bạn chắc chắn muốn thêm";
+        let text = "Bạn chắc chắn muốn sang trang thêm thông tin";
         let kt = confirm(text);
         if (kt == true) {
             return true
@@ -83,10 +87,9 @@
     }
 
     function myFunction3() {
-        let text = "Bạn chắc chắn muốn xóa";
+        let text = "Bạn chắc chắn muốn sang trang trạng thái";
         let kt = confirm(text);
         if (kt == true) {
-            confirm("Xóa thành công");
             return true
         } else {
             return false;

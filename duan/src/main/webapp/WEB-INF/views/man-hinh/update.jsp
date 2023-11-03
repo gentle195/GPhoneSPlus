@@ -8,16 +8,25 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>GPhoneS Store </title>
     <!-- Favicon icon -->
 </head>
 <body>
 <div>
-    <h1 style="text-align: center">Màn Hình</h1>
     <div>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
             <li class="nav-item">
                 <a class="nav-link" href="/man-hinh/hien-thi" role="tab" onclick="myFunction4()">Thông tin màn hình </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/man-hinh/view-add" role="tab"
+                   onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin
+                    màn hình</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/man-hinh/hien-thi-delete" role="tab"
+                   onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Màn hình đã
+                    xoá</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
@@ -32,13 +41,14 @@
                     <form:form action="/man-hinh/update/${manHinh.id}" method="post" modelAttribute="manHinh">
                         <div class="col-12 grid-margin">
                             <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Thêm màn hình</h4>
+                                <div class="card-body" style="color: black">
+                                    <h4 class="card-title">Update màn hình</h4>
                                     <form class="form-sample">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group row">
-                                                    <form:label class="col-sm-3 col-form-label" path="thongSo"><b>Thông số
+                                                    <form:label class="col-sm-3 col-form-label" path="thongSo"><b>Thông
+                                                        số
                                                         màn hình:</b></form:label>
                                                     <div class="col-sm-9">
                                                         <form:input class="form-control" placeholder="" path="thongSo"/>
@@ -51,8 +61,10 @@
                                                     <form:label class="col-sm-3 col-form-label" path="loaiCamUng"><b>Loại
                                                         cảm ứng màn hình:</b></form:label>
                                                     <div class="col-sm-9">
-                                                        <form:input class="form-control" placeholder="" path="loaiCamUng"/>
-                                                        <form:errors path="loaiCamUng" cssStyle="color: red"></form:errors>
+                                                        <form:input class="form-control" placeholder=""
+                                                                    path="loaiCamUng"/>
+                                                        <form:errors path="loaiCamUng"
+                                                                     cssStyle="color: red"></form:errors>
                                                     </div>
                                                 </div>
                                             </div>
@@ -72,11 +84,14 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group row">
-                                                    <form:label class="col-sm-3 col-form-label" path="doPhanGiai"><b>Độ phân
+                                                    <form:label class="col-sm-3 col-form-label" path="doPhanGiai"><b>Độ
+                                                        phân
                                                         giải:</b></form:label>
                                                     <div class="col-sm-9">
-                                                        <form:input class="form-control" placeholder="" path="doPhanGiai"/>
-                                                        <form:errors path="doPhanGiai" cssStyle="color: red"></form:errors>
+                                                        <form:input class="form-control" placeholder=""
+                                                                    path="doPhanGiai"/>
+                                                        <form:errors path="doPhanGiai"
+                                                                     cssStyle="color: red"></form:errors>
                                                     </div>
                                                 </div>
                                             </div>
@@ -84,21 +99,27 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group row">
-                                                    <form:label class="col-sm-3 col-form-label" path="tanSoQuet"><b>Tần số
+                                                    <form:label class="col-sm-3 col-form-label" path="tanSoQuet"><b>Tần
+                                                        số
                                                         quét:</b></form:label>
                                                     <div class="col-sm-9">
-                                                        <form:input class="form-control" placeholder="" path="tanSoQuet"/>
-                                                        <form:errors path="tanSoQuet" cssStyle="color: red"></form:errors>
+                                                        <form:input class="form-control" placeholder=""
+                                                                    path="tanSoQuet"/>
+                                                        <form:errors path="tanSoQuet"
+                                                                     cssStyle="color: red"></form:errors>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group row">
-                                                    <form:label class="col-sm-3 col-form-label" path="congNghe"><b>Công nghệ
+                                                    <form:label class="col-sm-3 col-form-label" path="congNghe"><b>Công
+                                                        nghệ
                                                         màn hình:</b></form:label>
                                                     <div class="col-sm-9">
-                                                        <form:input class="form-control" placeholder="" path="congNghe"/>
-                                                        <form:errors path="congNghe" cssStyle="color: red"></form:errors>
+                                                        <form:input class="form-control" placeholder=""
+                                                                    path="congNghe"/>
+                                                        <form:errors path="congNghe"
+                                                                     cssStyle="color: red"></form:errors>
                                                     </div>
                                                 </div>
                                             </div>

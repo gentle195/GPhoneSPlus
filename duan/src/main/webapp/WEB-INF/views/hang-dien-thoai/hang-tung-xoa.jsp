@@ -8,20 +8,27 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>GPhoneS Store </title>
     <!-- Favicon icon -->
 </head>
 <body>
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/hang-dien-thoai/hien-thi" role="tab">Thông tin Hãng </a>
+            <a class="nav-link" href="/hang-dien-thoai/hien-thi" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin Hãng </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/hang-dien-thoai/view-add" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin
+                hãng </a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
                aria-controls="description" aria-selected="true">Hãng đã xoá</a>
         </li>
-        <a href="/hang-dien-thoai/khoi-phuc-het" class="btn btn-outline-danger btn-icon-text" style="float: right; margin-left: 720px"
+        <a href="/hang-dien-thoai/khoi-phuc-het" class="btn btn-outline-danger btn-icon-text"
+           style="float: right; margin-left: 720px"
            tabindex="-1"
            role="button"
            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
@@ -49,7 +56,7 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" style="color: black">
                             <thead>
                             <tr>
                                 <th>STT</th>
@@ -59,7 +66,7 @@
                                 <th>Ngày tạo</th>
                                 <th>Ngày cập nhật</th>
                                 <th>Tình trạng</th>
-                                <th>Mô tả </th>
+                                <th>Mô tả</th>
                                 <th colspan="2">Action</th>
                             </tr>
                             </thead>
@@ -83,7 +90,8 @@
                                         <a href="/hang-dien-thoai/khoi-phuc/${chip.id}" class="btn btn-outline-primary"
                                            tabindex="-1"
                                            role="button"
-                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Khôi phục</a>
+                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Khôi
+                                            phục</a>
 
 
                                     </td>
@@ -99,7 +107,8 @@
         <div align="center">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <ul class="pagination justify-content-center pagination-lg">
-                    <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi-tung-xoa?num=0">First</a></li>
+                    <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi-tung-xoa?num=0">First</a>
+                    </li>
 
                     <c:forEach begin="1" end="${total}" varStatus="status">
                         <li class="page-item">
@@ -108,7 +117,8 @@
                         </li>
                     </c:forEach>
 
-                    <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi-tung-xoa?num=${total-1}">Last</a></li>
+                    <li class="page-item"><a class="page-link" href="/hang-dien-thoai/hien-thi-tung-xoa?num=${total-1}">Last</a>
+                    </li>
                 </ul>
             </div>
         </div>

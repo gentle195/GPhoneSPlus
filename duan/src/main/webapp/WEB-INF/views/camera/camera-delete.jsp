@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>GPhoneS Store </title>
     <!-- Favicon icon -->
 </head>
 <body>
@@ -16,6 +16,9 @@
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
             <a class="nav-link" href="/camera/hien-thi" role="tab" onclick="return myFunction4()">Thông tin Camera </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/camera/view-add" role="tab" onclick="return myFunction1()">Thêm thông tin Camera</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
@@ -56,7 +59,7 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" style="color: black">
                             <thead>
                             <tr>
                                 <th>Mã</th>
@@ -117,7 +120,7 @@
 </body>
 <script>
     function myFunction1() {
-        let text = "Bạn chắc chắn muốn thêm";
+        let text = "Bạn chắc chắn muốn sang trang thêm thông tin";
         let kt = confirm(text);
         if (kt == true) {
             return true

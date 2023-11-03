@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>GPhoneS Store </title>
     <!-- Favicon icon -->
 </head>
 <body>
@@ -20,7 +20,14 @@
                    aria-controls="description" aria-selected="true">Thông tin màn hình</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/man-hinh/hien-thi-delete" role="tab">Màn hình đã xoá</a>
+                <a class="nav-link" href="/man-hinh/view-add" role="tab"
+                   onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin
+                    màn hình</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/man-hinh/hien-thi-delete" role="tab"
+                   onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Màn hình đã
+                    xoá</a>
             </li>
         </ul>
     </div>
@@ -28,108 +35,6 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="description" role="tabpanel"
                  aria-labelledby="description-tab">
-                <form:form action="/man-hinh/add" method="post" modelAttribute="manHinh">
-                    <div class="col-12 grid-margin">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Thêm màn hình</h4>
-                                <form class="form-sample">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group row">
-                                                <form:label class="col-sm-3 col-form-label" path="thongSo"><b>Thông số
-                                                    màn hình:</b></form:label>
-                                                <div class="col-sm-9">
-                                                    <form:input class="form-control" placeholder="" path="thongSo"/>
-                                                    <form:errors path="thongSo" cssStyle="color: red"></form:errors>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group row">
-                                                <form:label class="col-sm-3 col-form-label" path="loaiCamUng"><b>Loại
-                                                    cảm ứng màn hình:</b></form:label>
-                                                <div class="col-sm-9">
-                                                    <form:input class="form-control" placeholder="" path="loaiCamUng"/>
-                                                    <form:errors path="loaiCamUng" cssStyle="color: red"></form:errors>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group row">
-                                                <form:label class="col-sm-3 col-form-label" path="tiLeKhungHinh"><b>Tỉ
-                                                    lệ khung hình:</b></form:label>
-                                                <div class="col-sm-9">
-                                                    <form:input class="form-control" placeholder=""
-                                                                path="tiLeKhungHinh"/>
-                                                    <form:errors path="tiLeKhungHinh"
-                                                                 cssStyle="color: red"></form:errors>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group row">
-                                                <form:label class="col-sm-3 col-form-label" path="doPhanGiai"><b>Độ phân
-                                                    giải:</b></form:label>
-                                                <div class="col-sm-9">
-                                                    <form:input class="form-control" placeholder="" path="doPhanGiai"/>
-                                                    <form:errors path="doPhanGiai" cssStyle="color: red"></form:errors>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group row">
-                                                <form:label class="col-sm-3 col-form-label" path="tanSoQuet"><b>Tần số
-                                                    quét:</b></form:label>
-                                                <div class="col-sm-9">
-                                                    <form:input class="form-control" placeholder="" path="tanSoQuet"/>
-                                                    <form:errors path="tanSoQuet" cssStyle="color: red"></form:errors>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group row">
-                                                <form:label class="col-sm-3 col-form-label" path="congNghe"><b>Công nghệ
-                                                    màn hình:</b></form:label>
-                                                <div class="col-sm-9">
-                                                    <form:input class="form-control" placeholder="" path="congNghe"/>
-                                                    <form:errors path="congNghe" cssStyle="color: red"></form:errors>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group row">
-                                                <form:label class="col-sm-3 col-form-label" path="moTa"><b>Mô
-                                                    tả:</b></form:label>
-                                                <div class="col-sm-12">
-                                                    <form:input class="form-control" placeholder="" path="moTa"/>
-                                                    <form:errors path="moTa" cssStyle="color: red"></form:errors>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div style="text-align: center">
-                                                <button type="submit" class="btn btn-primary mr-2"
-                                                        onclick="return myFunction1()">
-                                                    ADD
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </form:form>
-                <br>
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
@@ -154,7 +59,7 @@
                             </form>
                             <%--           kết thúc tìm kiếm         --%>
                             <div class="table-responsive">
-                                <table class="table table-striped">
+                                <table class="table table-striped" style="color: black;width: 1700px">
                                     <thead>
                                     <tr>
                                         <th>Mã</th>

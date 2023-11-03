@@ -35,7 +35,7 @@ public class AnhController {
 
     @GetMapping("hien-thi")
     public String hienThi(@ModelAttribute("anh") Anh anh, Model model, @RequestParam("num") Optional<Integer> num,
-                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+                          @RequestParam(name = "size", defaultValue = "10", required = false) Integer size) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<Anh> list = anhService.getAll(pageable);
@@ -48,7 +48,7 @@ public class AnhController {
     @GetMapping("/hien-thi-delete")
     public String hienThiDelete(Model model, @ModelAttribute("anh") Anh anh,
                                 @RequestParam("pageNum") Optional<Integer> num,
-                                @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer size) {
+                                @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer size) {
 
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
@@ -76,7 +76,7 @@ public class AnhController {
 
     @GetMapping("/update-tt")
     public String updateTT(Model model, @RequestParam("pageNum") Optional<Integer> pageNum,
-                           @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize,
+                           @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize,
                            @ModelAttribute("anh") Anh anh) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
@@ -94,7 +94,7 @@ public class AnhController {
 
     @GetMapping("/update-status/{id}")
     public String updateStatus(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
-                               @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("anh") Anh anh) {
+                               @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize, @ModelAttribute("anh") Anh anh) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
 
@@ -114,7 +114,7 @@ public class AnhController {
 
     @GetMapping("/reset-status/{id}")
     public String resetStatus(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
-                              @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("anh") Anh anh) {
+                              @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize, @ModelAttribute("anh") Anh anh) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Anh anh1 = anhService.findById(id);
@@ -134,7 +134,7 @@ public class AnhController {
 
     @PostMapping("/search-0")
     public String search0(Model model, @ModelAttribute("anh") Anh anh, @RequestParam("search") String search, @RequestParam("num") Optional<Integer> num,
-                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+                          @RequestParam(name = "size", defaultValue = "10", required = false) Integer size) {
         if (search.isEmpty()) {
             model.addAttribute("thongBao", "Không để trống thông tin");
             Sort sort = Sort.by("ngayTao").descending();
@@ -155,7 +155,7 @@ public class AnhController {
 
     @PostMapping("/search-1")
     public String search1(Model model, @ModelAttribute("anh") Anh anh, @RequestParam("search") String search, @RequestParam("num") Optional<Integer> num,
-                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+                          @RequestParam(name = "size", defaultValue = "10", required = false) Integer size) {
         if (search.isEmpty()) {
             model.addAttribute("thongBao", "Không để trống thông tin");
             Sort sort = Sort.by("ngayTao").descending();
@@ -182,7 +182,7 @@ public class AnhController {
                       @RequestParam("anh2s") MultipartFile anh2,
                       @RequestParam("anh3s") MultipartFile anh3,
                       @RequestParam("num") Optional<Integer> num,
-                      @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
+                      @RequestParam(name = "size", defaultValue = "10", required = false) Integer size
     ) throws IOException {
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
@@ -248,7 +248,7 @@ public class AnhController {
                                @RequestParam("anh2s") MultipartFile anh2,
                                @RequestParam("anh3s") MultipartFile anh3,
                                @RequestParam("num") Optional<Integer> num,
-                               @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
+                               @RequestParam(name = "size", defaultValue = "10", required = false) Integer size
     ) throws IOException {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "../anh/update.jsp");

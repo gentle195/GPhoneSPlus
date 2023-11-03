@@ -33,7 +33,7 @@ public class RamController {
     @GetMapping("/hien-thi")
     public String hienThi(Model model, @ModelAttribute("ram") Ram ram,
                           @RequestParam("pageNum") Optional<Integer> pageNum,
-                          @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+                          @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         ram.setTinhTrang(0);
@@ -45,18 +45,17 @@ public class RamController {
         return "/home/layout";
     }
 
+    @GetMapping("/view-add")
+    public String viewAdd(Model model, @ModelAttribute("ram") Ram ram) {
+        model.addAttribute("ram", new Ram());
+        model.addAttribute("contentPage", "../ram/add.jsp");
+        return "/home/layout";
+    }
+
     @PostMapping("/add-ram")
-    public String addMauSac(Model model, @ModelAttribute("ram") @Valid Ram ram, BindingResult bindingResult,
-                            @RequestParam("pageNum") Optional<Integer> pageNum,
-                            @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<Ram> page = ramService.getAll(pageable);
+    public String addMauSac(Model model, @ModelAttribute("ram") @Valid Ram ram, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("contentPage", "../ram/ram.jsp");
-            model.addAttribute("listRam", page.getContent());
-            model.addAttribute("page", page.getNumber());
-            model.addAttribute("total", page.getTotalPages());
+            model.addAttribute("contentPage", "../ram/add.jsp");
             return "/home/layout";
         }
         long millis = System.currentTimeMillis();
@@ -73,17 +72,13 @@ public class RamController {
         ram.setNgayCapNhat(date);
         ram.setTinhTrang(0);
         ramService.add(ram);
-        model.addAttribute("contentPage", "../ram/ram.jsp");
-        model.addAttribute("listRam", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
         return "redirect:/ram/hien-thi";
     }
 
     @GetMapping("/detail-ram/{id}")
     public String viewUpdate(Model model, @PathVariable("id") UUID id,
                              @RequestParam("pageNum") Optional<Integer> pageNum,
-                             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+                             @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
         Sort sort = Sort.by("ma").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize);
         Ram ram = ramService.findById(id);
@@ -98,7 +93,7 @@ public class RamController {
 
     @PostMapping("/update-ram/{id}")
     public String updateRam(Model model, @PathVariable("id") UUID id, @ModelAttribute("ram") @Valid Ram ram,
-                            BindingResult bindingResult, @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+                            BindingResult bindingResult, @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
         if (bindingResult.hasErrors()) {
             return "../ram/ram-update";
         }
@@ -113,7 +108,7 @@ public class RamController {
     @GetMapping("/hien-thi-delete")
     public String hienThiDelete(Model model, @ModelAttribute("ram") Ram ram,
                                 @RequestParam("pageNum") Optional<Integer> pageNum,
-                                @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+                                @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<Ram> page = ramService.getAll1(pageable);
@@ -126,7 +121,7 @@ public class RamController {
 
     @GetMapping("/update-all-status")
     public String updateTT(Model model, @RequestParam("pageNum") Optional<Integer> pageNum,
-                           @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("ram") Ram ram) {
+                           @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize, @ModelAttribute("ram") Ram ram) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         long millis = System.currentTimeMillis();
@@ -144,7 +139,7 @@ public class RamController {
     @GetMapping("/update-status/{id}")
     public String updateStatus(Model model, @PathVariable("id") UUID id,
                                @RequestParam("pageNum") Optional<Integer> pageNum,
-                               @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("ram") Ram ram) {
+                               @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize, @ModelAttribute("ram") Ram ram) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Ram ram1 = ramService.findById(id);
@@ -164,7 +159,7 @@ public class RamController {
     @GetMapping("/reset-status/{id}")
     public String resetStatus(Model model, @PathVariable("id") UUID id,
                               @RequestParam("pageNum") Optional<Integer> pageNum,
-                              @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("ram") Ram ram) {
+                              @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize, @ModelAttribute("ram") Ram ram) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Ram ram1 = ramService.findById(id);

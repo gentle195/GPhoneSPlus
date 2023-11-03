@@ -8,20 +8,27 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>GPhoneS Store </title>
     <!-- Favicon icon -->
 </head>
 <body>
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/ram/hien-thi" role="tab">Thông tin ram</a>
+            <a class="nav-link" href="/ram/hien-thi" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin ram</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/ram/view-add" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin
+                ram</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
                aria-controls="description" aria-selected="true">Ram đã xoá</a>
         </li>
-        <a href="/ram/update-all-status" class="btn btn-outline-danger btn-icon-text" style="float: right; margin-left: 720px"
+        <a href="/ram/update-all-status" class="btn btn-outline-danger btn-icon-text"
+           style="float: right; margin-left: 720px"
            tabindex="-1"
            role="button"
            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
@@ -49,7 +56,7 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" style="color: black">
                             <thead>
                             <tr>
                                 <th>STT</th>
@@ -69,10 +76,6 @@
                                     <td>${ram.ma}</td>
                                     <td>${ram.dungLuong}</td>
                                     <td>${ram.trangThai()}</td>
-<%--                                    <td>--%>
-<%--                                        <c:if test="${chip.tinhTrang == 0}">Còn</c:if>--%>
-<%--                                        <c:if test="${chip.tinhTrang == 1}">Hết</c:if>--%>
-<%--                                    </td>--%>
                                     <td>${ram.ngayTao}</td>
                                     <td>${ram.ngayCapNhat}</td>
                                     <td>${ram.moTa}</td>

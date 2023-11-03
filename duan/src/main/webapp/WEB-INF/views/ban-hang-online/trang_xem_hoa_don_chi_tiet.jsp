@@ -363,7 +363,7 @@
 <main style="width: 75%;margin-left: 12.5%;border: 1px solid red " id="contentghct">
     <div>
         <br>
-        <c:if test="${hd.trangThaiGiaoHang==0}">
+        <c:if test="${hd.tinhTrangGiaoHang==0}">
             <c:if test="${hd.tinhTrang!=8}">
                 <button class="btn btn-primary" style="float: right" data-bs-toggle="modal"
                         data-bs-target="#modalthaydoithongtinnhanhang" id="capnhatthongtingiaohang">Thay đổi thông tin
@@ -441,10 +441,10 @@
                 </td>
                 <td>
                     <p>Trạng thái giao hàng:</p>
-                    <c:if test="${hd.trangThaiGiaoHang==0}">
+                    <c:if test="${hd.tinhTrangGiaoHang==0}">
                         <input type="text" value="Chờ xử lý" disabled style="width: 97%">
                     </c:if>
-                    <c:if test="${hd.trangThaiGiaoHang!=0}">
+                    <c:if test="${hd.tinhTrangGiaoHang!=0}">
                         <input type="text" value="Chưa tìm hiểu" disabled style="width: 97%">
                     </c:if>
 
@@ -534,7 +534,7 @@
                         </c:if>
                     </td>
                     <td>
-                        <c:if test="${ht.hoaDon.trangThaiGiaoHang==0}">
+                        <c:if test="${ht.hoaDon.tinhTrangGiaoHang==0}">
                             <c:if test="${ht.hoaDon.tinhTrang==0}">
                                 <%--                                <a href="/ban-hang-online/xem-hoa-don-chi-tiet/xoa-chi-tiet-san-pham/${ht.id}" class="btn btn-primary" >Hủy</a>--%>
                                 <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>
@@ -607,7 +607,7 @@
                             </c:if>
                         </td>
                         <td>
-                            <c:if test="${ht.hoaDon.trangThaiGiaoHang==0}">
+                            <c:if test="${ht.hoaDon.tinhTrangGiaoHang==0}">
                                 <c:if test="${ht.hoaDon.tinhTrang==0}">
                                     <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>
                                 </c:if>

@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>GPhoneS Store </title>
     <!-- Favicon icon -->
 </head>
 <body>
@@ -19,40 +19,16 @@
                aria-controls="description" aria-selected="true">Thông tin dung lượng Pin</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/dung-luong-pin/hien-thi-delete" role="tab">Dung lượng Pin đã xoá</a>
+            <a class="nav-link" href="/dung-luong-pin/view-add" role="tab"  onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin dung lượng pin</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/dung-luong-pin/hien-thi-delete" role="tab"  onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Dung lượng Pin đã xoá</a>
         </li>
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="description" role="tabpanel"
          aria-labelledby="description-tab">
-        <form:form action="/dung-luong-pin/add" method="post" modelAttribute="dungLuongPin">
-            <%--    <div class="col-md-6 grid-margin stretch-card" >--%>
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Thêm dung lượng pin</h4>
-                    <form class="forms-sample">
-                        <div class="form-group">
-                            <form:label path="thongSo"><b>Thông số:</b></form:label>
-                            <form:input path="thongSo" class="form-control"></form:input>
-                            <form:errors path="thongSo"></form:errors>
-                        </div>
-                        <div class="form-group">
-                            <form:label path="moTa"><b>Mô Tả:</b></form:label>
-                            <form:textarea path="moTa" class="form-control"></form:textarea>
-                            <form:errors path="moTa"></form:errors>
-                        </div>
-                        <div style="text-align: center">
-                            <button type="submit" class="btn btn-primary mr-2"
-                                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                ADD
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <%--    </div>--%>
-        </form:form>
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
@@ -69,7 +45,7 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" style="color: black">
                             <thead>
                             <tr>
                                 <th>Mã</th>
@@ -101,7 +77,8 @@
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                             <i class="ti-file btn-icon-prepend"></i>
                                             Update</a>
-                                        <a href="/dung-luong-pin/update-status/${dlp.id}" class="btn btn-danger btn-icon-text"
+                                        <a href="/dung-luong-pin/update-status/${dlp.id}"
+                                           class="btn btn-danger btn-icon-text"
                                            tabindex="-1"
                                            role="button"
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
@@ -118,18 +95,19 @@
         </div>
         <%--phân trang--%>
         <div align="center">
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <ul class="pagination justify-content-center pagination-lg">
-                <li class="page-item"><a class="page-link" href="/dung-luong-pin/hien-thi?pageNum=0"><</a></li>
-                <c:forEach begin="1" end="${total}" varStatus="status">
-                    <li class="page-item">
-                        <a href="${pageContext.request.contextPath}/dung-luong-pin/hien-thi?pageNum=${status.index -1}"
-                           class="page-link">${status.index}</a>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <ul class="pagination justify-content-center pagination-lg">
+                    <li class="page-item"><a class="page-link" href="/dung-luong-pin/hien-thi?pageNum=0"><</a></li>
+                    <c:forEach begin="1" end="${total}" varStatus="status">
+                        <li class="page-item">
+                            <a href="${pageContext.request.contextPath}/dung-luong-pin/hien-thi?pageNum=${status.index -1}"
+                               class="page-link">${status.index}</a>
+                        </li>
+                    </c:forEach>
+                    <li class="page-item"><a class="page-link" href="/dung-luong-pin/hien-thi?pageNum=${total-1}">></a>
                     </li>
-                </c:forEach>
-                <li class="page-item"><a class="page-link" href="/dung-luong-pin/hien-thi?pageNum=${total-1}">></a></li>
-            </ul>
-        </div>
+                </ul>
+            </div>
         </div>
         <%--kết thúc phân trang--%>
     </div>

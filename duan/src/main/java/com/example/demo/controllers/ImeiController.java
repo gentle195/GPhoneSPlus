@@ -44,7 +44,7 @@ public class ImeiController {
 
     @GetMapping("/hien-thi")
     public String hienThi(Model model, @RequestParam(value = "pageNum", defaultValue = "0", required = false) Integer pageNum) {
-        Pageable pageable = PageRequest.of(pageNum, 5);
+        Pageable pageable = PageRequest.of(pageNum, 15);
         Page<IMEI> imeiPage = imeiService.getImeiOn(pageable);
         model.addAttribute("total", imeiPage.getTotalPages());
         model.addAttribute("listImei", imeiPage.getContent());
@@ -98,7 +98,7 @@ public class ImeiController {
 
     @GetMapping("/hien-thi-da-ban")
     public String hienThiDaBan(Model model, @RequestParam(value = "pageNum", defaultValue = "0", required = false) Integer pageNum) {
-        Pageable pageable = PageRequest.of(pageNum, 5);
+        Pageable pageable = PageRequest.of(pageNum, 15);
         Page<IMEI> imeiPage = imeiService.getImeiOff(pageable);
         model.addAttribute("total", imeiPage.getTotalPages());
         model.addAttribute("listImei", imeiPage.getContent());
@@ -113,7 +113,7 @@ public class ImeiController {
 
     @GetMapping("/hien-thi-da-xoa")
     public String hienThiDaXoa(Model model, @RequestParam(value = "pageNum", defaultValue = "0", required = false) Integer pageNum) {
-        Pageable pageable = PageRequest.of(pageNum, 5);
+        Pageable pageable = PageRequest.of(pageNum, 15);
         Page<IMEI> imeiPage = imeiService.getImeiOff3(pageable);
         model.addAttribute("total", imeiPage.getTotalPages());
         model.addAttribute("listImei", imeiPage.getContent());
@@ -144,7 +144,7 @@ public class ImeiController {
         return "redirect:/imei/hien-thi-da-xoa";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/view-add")
     public String viewAd(Model model, @ModelAttribute("imei") IMEI imei) {
         model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
         model.addAttribute("imei", new IMEI());
@@ -162,27 +162,18 @@ public class ImeiController {
         if (result.hasErrors()) {
 
             model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
-            Pageable pageable = PageRequest.of(pageNum, 5);
-            Page<IMEI> imeiPage = imeiService.getImeiOn(pageable);
-            model.addAttribute("total", imeiPage.getTotalPages());
-            model.addAttribute("listImei", imeiPage.getContent());
-            model.addAttribute("size", imeiPage.getSize());
             String ma = "IMEI" + imeiService.findAll().size();
             model.addAttribute("ma", ma);
-            model.addAttribute("contentPage", "../imei/index.jsp");
+            model.addAttribute("contentPage", "../imei/add-imei.jsp");
             return "/home/layout";
 
         }
-        String ma = "IMEI" + imeiService.findAll().size();
+        String ma = "IMEI" + (imeiService.findAll().size() + 1);
         imei.setMa(ma);
 
         String projectRootPath = System.getProperty("user.dir");
-
-        // Tạo đường dẫn động đến thư mục lưu ảnh
         String outputFolderPath = projectRootPath + "/src/main/webapp/maqr";
         QRCodeGenerator.generatorQRCode(imei, outputFolderPath);
-
-        // Set mã QR cho đối tượng imei
         imei.setMaQr(imei.getSoImei() + ".png");
 
         LocalDate localDate = LocalDate.now();

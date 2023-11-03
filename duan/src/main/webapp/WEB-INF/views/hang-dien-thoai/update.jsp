@@ -8,14 +8,24 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>GPhoneS Store </title>
     <!-- Favicon icon -->
 </head>
 <body>
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/hang-dien-thoai/hien-thi" role="tab">Thông tin Hãng </a>
+            <a class="nav-link" href="/hang-dien-thoai/hien-thi" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin Hãng </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/hang-dien-thoai/view-add" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin
+                hãng </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/hang-dien-thoai/hien-thi-tung-xoa" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hãng từng xóa </a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
@@ -26,7 +36,7 @@
 <form:form action="/hang-dien-thoai/update/${dulieuxem.id}" method="post" modelAttribute="dulieuxem">
     <%--    <div class="col-md-6 grid-margin stretch-card" >--%>
     <div class="card">
-        <div class="card-body">
+        <div class="card-body" style="color: black">
             <h4 class="card-title">Update Hãng</h4>
             <form class="forms-sample">
                 <div class="form-group" style="display: none">
@@ -59,7 +69,6 @@
             </form>
         </div>
     </div>
-    <%--    </div>--%>
 </form:form>
 
 </body>

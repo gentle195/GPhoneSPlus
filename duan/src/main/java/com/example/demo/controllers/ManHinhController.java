@@ -32,7 +32,7 @@ public class ManHinhController {
 
     @GetMapping("hien-thi")
     public String hienThi(@ModelAttribute("manHinh") ManHinh manHinh, Model model, @RequestParam("num") Optional<Integer> num,
-                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+                          @RequestParam(name = "size", defaultValue = "15", required = false) Integer size) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<ManHinh> list = manHinhService.getAll(pageable);
@@ -45,7 +45,7 @@ public class ManHinhController {
     @GetMapping("/hien-thi-delete")
     public String hienThiDelete(Model model, @ModelAttribute("manHinh") ManHinh manHinh,
                                 @RequestParam("num") Optional<Integer> num,
-                                @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer size) {
+                                @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer size) {
 
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
@@ -54,6 +54,13 @@ public class ManHinhController {
         model.addAttribute("listManHinh", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
+        return "/home/layout";
+    }
+
+    @GetMapping("/view-add")
+    public String viewAdd(Model model, @ModelAttribute("manHinh") ManHinh manHinh) {
+        model.addAttribute("manHinh", new ManHinh());
+        model.addAttribute("contentPage", "../man-hinh/add.jsp");
         return "/home/layout";
     }
 
@@ -66,20 +73,14 @@ public class ManHinhController {
     }
 
     @PostMapping("/add")
-    public String add(Model model, @ModelAttribute("manHinh") @Valid ManHinh manHinh, BindingResult bindingResult,
-                      @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+    public String add(Model model, @ModelAttribute("manHinh") @Valid ManHinh manHinh, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            Sort sort = Sort.by("ngayTao").ascending();
-            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-            Page<ManHinh> list = manHinhService.getAll(pageable);
-            model.addAttribute("listManHinh", list.getContent());
-            model.addAttribute("total", list.getTotalPages());
-            model.addAttribute("contentPage", "../man-hinh/hien-thi.jsp");
+            model.addAttribute("contentPage", "../man-hinh/add.jsp");
             return "/home/layout";
         }
         manHinh.setNgayTao(Date.valueOf(LocalDate.now()));
         manHinh.setTinhTrang(0);
-        manHinh.setMa("MH" + String.valueOf(manHinhService.findAll().size() + 1));
+        manHinh.setMa("MH" + (String.valueOf(manHinhService.findAll().size() + 1)));
         manHinhService.add(manHinh);
         return "redirect:/man-hinh/hien-thi";
         // Tiếp tục xử lý và trả về view tương ứng
@@ -102,7 +103,7 @@ public class ManHinhController {
 
     @GetMapping("/update-tt")
     public String updateTT(Model model, @RequestParam("num") Optional<Integer> pageNum,
-                           @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize,
+                           @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize,
                            @ModelAttribute("manHinh") ManHinh manHinh) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
@@ -120,7 +121,7 @@ public class ManHinhController {
 
     @GetMapping("/update-status/{id}")
     public String updateStatus(Model model, @PathVariable("id") UUID id, @RequestParam("num") Optional<Integer> pageNum,
-                               @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("manHinh") ManHinh manHinh) {
+                               @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize, @ModelAttribute("manHinh") ManHinh manHinh) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
 
@@ -140,7 +141,7 @@ public class ManHinhController {
 
     @GetMapping("/reset-status/{id}")
     public String resetStatus(Model model, @PathVariable("id") UUID id, @RequestParam("num") Optional<Integer> pageNum,
-                              @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("manHinh") ManHinh manHinh) {
+                              @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize, @ModelAttribute("manHinh") ManHinh manHinh) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         ManHinh manHinh1 = manHinhService.findById(id);
@@ -160,7 +161,7 @@ public class ManHinhController {
 
     @PostMapping("/search-0")
     public String search0(Model model, @ModelAttribute("manHinh") ManHinh manHinh, @RequestParam("search") String search, @RequestParam("num") Optional<Integer> num,
-                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+                          @RequestParam(name = "size", defaultValue = "15", required = false) Integer size) {
         if (search.isEmpty()) {
             model.addAttribute("thongBao", "Không để trống thông tin");
             Sort sort = Sort.by("ngayTao").descending();
@@ -181,7 +182,7 @@ public class ManHinhController {
 
     @PostMapping("/search-1")
     public String search1(Model model, @ModelAttribute("manHinh") ManHinh manHinh, @RequestParam("search") String search, @RequestParam("num") Optional<Integer> num,
-                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+                          @RequestParam(name = "size", defaultValue = "15", required = false) Integer size) {
         if (search.isEmpty()) {
             model.addAttribute("thongBao", "Không để trống thông tin");
             Sort sort = Sort.by("ngayTao").descending();

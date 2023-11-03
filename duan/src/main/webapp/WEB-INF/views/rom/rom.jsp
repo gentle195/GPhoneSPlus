@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>GPhoneS Store</title>
     <!-- Favicon icon -->
 </head>
 <body>
@@ -19,41 +19,19 @@
                aria-controls="description" aria-selected="true">Thông tin Rom</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/rom/hien-thi-tung-xoa" role="tab">Rom đã xoá</a>
+            <a class="nav-link" href="/rom/view-add" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin
+                Rom</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/rom/hien-thi-tung-xoa" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Rom đã xoá</a>
         </li>
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="description" role="tabpanel"
          aria-labelledby="description-tab">
-        <form:form action="/rom/add" method="post" modelAttribute="dulieuxem">
-            <%--    <div class="col-md-6 grid-margin stretch-card" >--%>
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Thêm Rom</h4>
-                    <form class="forms-sample">
-                        <div class="form-group">
-                            <form:label path="dungLuong"><b>Dung lượng:</b></form:label>
-                            <form:input type="text" class="form-control" id="dungLuong" path="dungLuong" required="true" />
-                            <form:errors path="dungLuong" cssStyle="color: red"></form:errors>
-                        </div>
-
-                        <div class="form-group">
-                            <form:label path="moTa"><b>Mô Tả:</b></form:label>
-                            <form:textarea class="form-control" id="moTa" path="moTa" rows="3"></form:textarea>
-                            <form:errors path="moTa" cssStyle="color: red"></form:errors>
-                        </div>
-                        <div style="text-align: center">
-                            <button type="submit" class="btn btn-primary mr-2"
-                                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                ADD
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <%--    </div>--%>
-        </form:form>
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
@@ -70,7 +48,7 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" style="color: black">
                             <thead>
                             <tr>
                                 <th>STT</th>
@@ -79,7 +57,7 @@
                                 <th>Ngày tạo</th>
                                 <th>Ngày cập nhật</th>
                                 <th>Tình trạng</th>
-                                <th>Mô tả </th>
+                                <th>Mô tả</th>
                                 <th colspan="2">Action</th>
                             </tr>
                             </thead>
