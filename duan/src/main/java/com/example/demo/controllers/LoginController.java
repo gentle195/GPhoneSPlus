@@ -228,7 +228,7 @@ public class LoginController {
         }
     }
 
-    private String generateRandomPassword(int length) {
+    public static String generateRandomPassword(int length) {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
         SecureRandom random = new SecureRandom();
         StringBuilder password = new StringBuilder(length);
@@ -337,52 +337,52 @@ public class LoginController {
         return null;
     }
 
-    @GetMapping("/oauth2/callback")
-    public String handleOAuth2Callback(@AuthenticationPrincipal OAuth2User oauth2User, Principal principal) {
-        // Trích xuất thông tin người dùng từ OAuth2
-
-        String email = oauth2User.getAttribute("email");
-        String name = oauth2User.getAttribute("name");
-        String idToken = oauth2User.getAttribute("id_token");
-        System.out.println(principal.getName());
-
-        System.out.println(email);
-        System.out.println(name);
-
-        // Kiểm tra xem người dùng đã tồn tại trong cơ sở dữ liệu hay chưa
-
-
-        if (khachHangRepository.getKhachHangByTaiKhoan(email).isEmpty()) {
-            // Người dùng chưa tồn tại, tạo người dùng mới
-//            GoogleId token= oauth2User.get;
-
-            List<KhachHang> khachHangList = khachHangRepository.findAll();
-            String email1 = oauth2User.getAttribute("email");
-            String name1 = oauth2User.getAttribute("name");
-            KhachHang newUser = new KhachHang();
-            newUser.setMa("KH" + khachHangList.size() + 1);
-            newUser.setEmail(email1);
-            newUser.setTaiKhoan(email1);
-            newUser.setHoTen(name1);
-            newUser.setSdt(" ");
-            newUser.setDiem(0);
-            newUser.setGioiTinh(true);
-            newUser.setTaiKhoan(" ");
-            newUser.setNgaySinh(Date.valueOf("1999-1-1"));
-            newUser.setTinhTrang(0);
-            newUser.setNgayTao(Date.valueOf(LocalDate.now()));
-            String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-
-            String randomPassword = generateRandomPassword(8);
-
-            String hashedPassword = BCrypt.hashpw(randomPassword, BCrypt.gensalt());
-            newUser.setMatKhau(hashedPassword);
-
-            // Lưu người dùng mới vào cơ sở dữ liệu
-            khachHangRepository.save(newUser);
-        }
-
-        return "redirect:/ban-hang-online/hien-thi"; // Chuyển hướng sau khi đăng nhập thành công
-    }
+//    @GetMapping("/oauth2/callback")
+//    public String handleOAuth2Callback(@AuthenticationPrincipal OAuth2User oauth2User, Principal principal) {
+//        // Trích xuất thông tin người dùng từ OAuth2
+//
+//        String email = oauth2User.getAttribute("email");
+//        String name = oauth2User.getAttribute("name");
+//        String idToken = oauth2User.getAttribute("id_token");
+//        System.out.println(principal.getName());
+//
+//        System.out.println(email);
+//        System.out.println(name);
+//
+//        // Kiểm tra xem người dùng đã tồn tại trong cơ sở dữ liệu hay chưa
+//
+//
+//        if (khachHangRepository.getKhachHangByTaiKhoan(email).isEmpty()) {
+//            // Người dùng chưa tồn tại, tạo người dùng mới
+////            GoogleId token= oauth2User.get;
+//
+//            List<KhachHang> khachHangList = khachHangRepository.findAll();
+//            String email1 = oauth2User.getAttribute("email");
+//            String name1 = oauth2User.getAttribute("name");
+//            KhachHang newUser = new KhachHang();
+//            newUser.setMa("KH" + khachHangList.size() + 1);
+//            newUser.setEmail(email1);
+//            newUser.setTaiKhoan(email1);
+//            newUser.setHoTen(name1);
+//            newUser.setSdt(" ");
+//            newUser.setDiem(0);
+//            newUser.setGioiTinh(true);
+//            newUser.setTaiKhoan(" ");
+//            newUser.setNgaySinh(Date.valueOf("1999-1-1"));
+//            newUser.setTinhTrang(0);
+//            newUser.setNgayTao(Date.valueOf(LocalDate.now()));
+//            String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+//
+//
+//            String randomPassword = generateRandomPassword(8);
+//
+//            String hashedPassword = BCrypt.hashpw(randomPassword, BCrypt.gensalt());
+//            newUser.setMatKhau(hashedPassword);
+//
+//            // Lưu người dùng mới vào cơ sở dữ liệu
+//            khachHangRepository.save(newUser);
+//        }
+//
+//        return "redirect:/ban-hang-online/hien-thi"; // Chuyển hướng sau khi đăng nhập thành công
+//    }
 }

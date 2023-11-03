@@ -121,7 +121,7 @@ public class SecurityConfig {
                 .and()
                 .oauth2Login()
                 .loginPage("/lgin")
-                .defaultSuccessUrl("/oauth2/callback", true)
+                .defaultSuccessUrl("/ban-hang-online/gmail", true)
                 .userInfoEndpoint().userService(customOAuth2UserService);
         return http.build();
     }
