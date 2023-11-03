@@ -71,7 +71,7 @@
                                                                     <form:input class="form-control" placeholder=""
                                                                                 path="email" id="emailkh"/>
                                                                     <label id="email1"
-                                                                           style="color: red"></label>
+                                                                           style="color: red">${thongBaoGmail}</label>
                                                                 </div>
                                                             </div>
                                                         </div>

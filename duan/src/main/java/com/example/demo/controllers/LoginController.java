@@ -1,14 +1,12 @@
 package com.example.demo.controllers;
 
 import com.example.demo.config.UserInfoUserDetails;
+import com.example.demo.models.GioHang;
 import com.example.demo.models.KhachHang;
 import com.example.demo.models.NhanVien;
 import com.example.demo.repositories.KhachHangRepository;
 import com.example.demo.repositories.NhanVienRepository;
-import com.example.demo.services.DataIntermediateService;
-import com.example.demo.services.KhachHangService;
-import com.example.demo.services.MailerService;
-import com.example.demo.services.NhanVienService;
+import com.example.demo.services.*;
 import com.example.demo.util.FileUploadUtil;
 import com.example.demo.util.SecurityUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -55,6 +53,8 @@ public class LoginController {
 
     @Autowired
     private MailerService mailer;
+    @Autowired
+    private GioHangService gioHangService;
 
     private String un;
     private NhanVien nhanVien2;//du lieu khi dang nhap la nhan vien
@@ -159,16 +159,50 @@ public class LoginController {
             if (kh.getTaiKhoan().equalsIgnoreCase(khachHang.getTaiKhoan())) {
                 model.addAttribute("thongBao", "Tài khoản đã có người sử dụng");
                 return "login/dang-ki";
+            }else {
+
+                if (kh.getEmail().equalsIgnoreCase(khachHang.getEmail())) {
+                    model.addAttribute("thongBaoGmail", "Gmail này đã có tài khoản rồi");
+                    return "login/dang-ki";
+                }else {
+
+                }
             }
         }
         String matKhau = khachHang.getMatKhau();
         String hashedPassword = BCrypt.hashpw(khachHang.getMatKhau(), BCrypt.gensalt());
         khachHang.setMatKhau(hashedPassword);
-        khachHang.setMa("KH" + (String.valueOf(khachHangService.findAll().size()) + 1));
+        String mkh="";
+        Integer sl = khachHangService.findAll().size() + 1;
+        if(sl<9){
+            mkh = "MKH0" + sl;
+        }else {
+            mkh = "MKH" + sl;
+        }
+        khachHang.setMa(mkh);
         khachHang.setNgayTao(Date.valueOf(LocalDate.now()));
         khachHang.setTinhTrang(0);
         khachHang.setDiem(10);
         khachHangService.add(khachHang);
+        //      them gh
+        khachHangService.findAll();
+        String mghkh="";
+        Integer slgh = gioHangService.findAll().size();
+        if(slgh<10){
+            mghkh = "MGH0" + slgh;
+        }else {
+            mghkh = "MGH" + slgh;
+        }
+        GioHang ghkh=new GioHang();
+        ghkh.setMa(mghkh);
+        for (KhachHang kh11: khachHangService.findAll()){
+            if(kh11.getMa().equals(mkh)){
+                ghkh.setKhachHang(kh11);
+                break;
+            }
+        }
+        gioHangService.add(ghkh);
+// het them gh
         KhachHang khachHang1 = khachHangService.findById(khachHang.getId());
         mailer.queue(khachHang1.getEmail(), "Bạn đã đăng kí tài khoản thành công", "TK: " + khachHang1.getTaiKhoan() + "\nMK: " + matKhau);
         return "redirect:/login";

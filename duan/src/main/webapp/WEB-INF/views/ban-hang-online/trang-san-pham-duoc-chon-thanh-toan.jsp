@@ -344,7 +344,7 @@
                     <li><a href="/ban-hang-online/hien-thi">TRANG CHỦ</a></li>
                 </c:if>
                 <c:if test="${idkhachhang !='1'}">
-                    <li><a href="/ban-hang-online/dang-nhap/hien-thi">TRANG CHỦ</a></li>
+                    <li><a href="/ban-hang-online/home">TRANG CHỦ</a></li>
                 </c:if>
                 <li><a href="#">ƯU ĐÃI HẤP DẪN</a></li>
                 <li><a href="#">LOẠI</a></li>
