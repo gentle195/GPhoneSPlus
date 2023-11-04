@@ -112,10 +112,10 @@ public class LoginController {
 //        return "redirect:/login";
 //
 //    }
-    @GetMapping("/lgin")
-    public String lgin() {
-        return "login/loginPage";
-    }
+//    @GetMapping("/lgin")
+//    public String lgin() {
+//        return "login/loginPage";
+//    }
 
     @GetMapping("/thong-tin-ca-nhan")
     public String thongTinND(Model model, @ModelAttribute("us") NhanVien nhanVien) {
