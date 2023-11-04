@@ -5,12 +5,15 @@ import com.example.demo.models.*;
 import com.example.demo.repositories.KhachHangRepository;
 import com.example.demo.services.*;
 import com.example.demo.util.SecurityUtil;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -91,9 +94,20 @@ public class BanHangOnlineController {
         return so;
     }
 
-
+//    private String checkGMAILorTK="0";
     private String idkhachhang="1";
 
+//    @GetMapping("/ban-hang-online/dangxuat")
+////    public String lgin11() {
+////        idkhachhang="1";
+////        System.out.println("--------"+idkhachhang);
+////        return "login/loginPage";
+////    }
+@GetMapping("/lgin")
+public String lgin() {
+    idkhachhang="1";
+    return "login/loginPage";
+}
     @GetMapping("/ban-hang-online/hien-thi")
     public String hienThitrangchu(
             Model model
@@ -143,34 +157,45 @@ public class BanHangOnlineController {
 
 
 
-        model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
+
         model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
-        model.addAttribute("idkhachhang",idkhachhang);
+
+
 //        giohang
-        model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
         model.addAttribute("tttong",1);
-        return "ban-hang-online/trang-chu";
+      if(idkhachhang.equals("1")){
+          return "redirect:/";
+      }else {
+          model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+          model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
+          model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
+          return "ban-hang-online/trang-chu";
+      }
+
     }
     @GetMapping("/ban-hang-online/taikhoan-matkhau")
-    public String hienThitrangchudn(
+    public String hienThitrangchudn(@AuthenticationPrincipal Authentication authentication,
             Model model
     ) {
-        double tong=0;
-        Integer lamchon=0;
-        for (ChiTietSanPham ct:banHangOnlineService.ctspbanhang()) {
-            if(banHangOnlineService.soluongcon(String.valueOf(ct.getId()))>0){
-                tong=tong+1;
+        if ( SecurityUtil.getId()!=null){
+//            checkGMAILorTK="1";
+
+            double tong=0;
+            Integer lamchon=0;
+            for (ChiTietSanPham ct:banHangOnlineService.ctspbanhang()) {
+                if(banHangOnlineService.soluongcon(String.valueOf(ct.getId()))>0){
+                    tong=tong+1;
+                    lamchon=lamchon+1;
+                }
+            }
+            double tb=tong/3;
+            lamchon=lamchon/3;
+            if(tb % 1 >0){
                 lamchon=lamchon+1;
             }
-        }
-        double tb=tong/3;
-        lamchon=lamchon/3;
-        if(tb % 1 >0){
-            lamchon=lamchon+1;
-        }
-        model.addAttribute("lamchon",lamchon);
-        model.addAttribute("giamgia",banHangOnlineService);
-        model.addAttribute("banhangonline",banHangOnlineService);
+            model.addAttribute("lamchon",lamchon);
+            model.addAttribute("giamgia",banHangOnlineService);
+            model.addAttribute("banhangonline",banHangOnlineService);
 
 //lấy id khách hàng
 //        KhachHang khachHang=  dataService.getSharedData();
@@ -178,16 +203,22 @@ public class BanHangOnlineController {
 //        idkhachhang=String.valueOf(khachHang.getId());
 ////        idkhachhang="f33013f5-993b-45d3-9806-dd74f2007522";
 // kết thúc lấy id khách hàng
-        UserInfoUserDetails userDetails= SecurityUtil.getId();
-        idkhachhang=String.valueOf(userDetails.getId());
+            UserInfoUserDetails userDetails= SecurityUtil.getId();
+            idkhachhang=String.valueOf(userDetails.getId());
 
-        model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-        model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
-        model.addAttribute("idkhachhang",idkhachhang);
+            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
+            model.addAttribute("idkhachhang",idkhachhang);
 //        giohang
-        model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
-        model.addAttribute("tttong",1);
-        return "ban-hang-online/trang-chu";
+            model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
+            model.addAttribute("tttong",1);
+            return "redirect:/ban-hang-online/home";
+        }
+        else {
+             return "redirect:/";
+        }
+
+
     }
 
     @GetMapping("/ban-hang-online/gmail")
@@ -195,106 +226,114 @@ public class BanHangOnlineController {
                                          Principal principal,
                                          Model model
     ) {
-        double tong=0;
-        Integer lamchon=0;
-        for (ChiTietSanPham ct:banHangOnlineService.ctspbanhang()) {
-            if(banHangOnlineService.soluongcon(String.valueOf(ct.getId()))>0){
-                tong=tong+1;
-                lamchon=lamchon+1;
-            }
-        }
-        double tb=tong/3;
-        lamchon=lamchon/3;
-        if(tb % 1 >0){
-            lamchon=lamchon+1;
-        }
-        model.addAttribute("lamchon",lamchon);
-        model.addAttribute("giamgia",banHangOnlineService);
-        model.addAttribute("banhangonline",banHangOnlineService);
-
-//lay email
-        String email = oauth2User.getAttribute("email");
-        String name = oauth2User.getAttribute("name");
-        String idToken = oauth2User.getAttribute("id_token");
-        System.out.println(principal.getName());
-
-        System.out.println(email);
-        System.out.println(name);
-
-        // Kiểm tra xem người dùng đã tồn tại trong cơ sở dữ liệu hay chưa
-
-
-        if (khachHangRepository.getKhachHangByTaiKhoan(email).isEmpty()) {
-            // Người dùng chưa tồn tại, tạo người dùng mới
-//            GoogleId token= oauth2User.get;
-            String mkh="";
-            Integer sl = khachHangService.findAll().size() + 1;
-            if(sl<9){
-                mkh = "MKH0" + sl;
-            }else {
-                mkh = "MKH" + sl;
-            }
-            List<KhachHang> khachHangList = khachHangRepository.findAll();
-            String email1 = oauth2User.getAttribute("email");
-            String name1 = oauth2User.getAttribute("name");
-            KhachHang newUser = new KhachHang();
-            newUser.setMa(mkh);
-            newUser.setEmail(email1);
-            newUser.setTaiKhoan(email1);
-            newUser.setHoTen(name1);
-            newUser.setSdt("0123456789");
-            newUser.setDiem(1);
-            newUser.setGioiTinh(true);
-            String randomPassword = LoginController.generateRandomPassword(8);
-            newUser.setTaiKhoan(randomPassword);
-            newUser.setNgaySinh(Date.valueOf("1999-1-1"));
-            newUser.setTinhTrang(0);
-            newUser.setNgayTao(Date.valueOf(LocalDate.now()));
-            String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-
-
-
-            String hashedPassword = BCrypt.hashpw(randomPassword, BCrypt.gensalt());
-            newUser.setMatKhau(hashedPassword);
-
-            // Lưu người dùng mới vào cơ sở dữ liệu
-            khachHangRepository.save(newUser);
-            //      them gh
-            khachHangService.findAll();
-            String mghkh="";
-            Integer slgh = gioHangService.findAll().size();
-            if(slgh<10){
-                mghkh = "MGH0" + slgh;
-            }else {
-                mghkh = "MGH" + slgh;
-            }
-            GioHang ghkh=new GioHang();
-            ghkh.setMa(mghkh);
-            for (KhachHang kh11: khachHangService.findAll()){
-                if(kh11.getMa().equals(mkh)){
-                    ghkh.setKhachHang(kh11);
-                    idkhachhang=String.valueOf(kh11.getId());
-                    break;
+        if(oauth2User!=null){
+//            checkGMAILorTK="2";
+            double tong=0;
+            Integer lamchon=0;
+            for (ChiTietSanPham ct:banHangOnlineService.ctspbanhang()) {
+                if(banHangOnlineService.soluongcon(String.valueOf(ct.getId()))>0){
+                    tong=tong+1;
+                    lamchon=lamchon+1;
                 }
             }
-            gioHangService.add(ghkh);
+            double tb=tong/3;
+            lamchon=lamchon/3;
+            if(tb % 1 >0){
+                lamchon=lamchon+1;
+            }
+            model.addAttribute("lamchon",lamchon);
+            model.addAttribute("giamgia",banHangOnlineService);
+            model.addAttribute("banhangonline",banHangOnlineService);
+
+//lay email
+            String email = oauth2User.getAttribute("email");
+            String name = oauth2User.getAttribute("name");
+            String idToken = oauth2User.getAttribute("id_token");
+            System.out.println(principal.getName());
+
+            System.out.println(email);
+            System.out.println(name);
+
+            // Kiểm tra xem người dùng đã tồn tại trong cơ sở dữ liệu hay chưa
+
+
+            if (khachHangRepository.getKhachHangByTaiKhoan(email).isEmpty()) {
+                // Người dùng chưa tồn tại, tạo người dùng mới
+//            GoogleId token= oauth2User.get;
+                String mkh="";
+                Integer sl = khachHangService.findAll().size() + 1;
+                if(sl<9){
+                    mkh = "MKH0" + sl;
+                }else {
+                    mkh = "MKH" + sl;
+                }
+                List<KhachHang> khachHangList = khachHangRepository.findAll();
+                String email1 = oauth2User.getAttribute("email");
+                String name1 = oauth2User.getAttribute("name");
+                KhachHang newUser = new KhachHang();
+                newUser.setMa(mkh);
+                newUser.setEmail(email1);
+                newUser.setTaiKhoan(email1);
+                newUser.setHoTen(name1);
+                newUser.setSdt("0123456789");
+                newUser.setDiem(1);
+                newUser.setGioiTinh(true);
+                String randomPassword = LoginController.generateRandomPassword(8);
+                newUser.setTaiKhoan(randomPassword);
+                newUser.setNgaySinh(Date.valueOf("1999-1-1"));
+                newUser.setTinhTrang(0);
+                newUser.setNgayTao(Date.valueOf(LocalDate.now()));
+                String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+
+
+
+                String hashedPassword = BCrypt.hashpw(randomPassword, BCrypt.gensalt());
+                newUser.setMatKhau(hashedPassword);
+
+                // Lưu người dùng mới vào cơ sở dữ liệu
+                khachHangRepository.save(newUser);
+                //      them gh
+                khachHangService.findAll();
+                String mghkh="";
+                Integer slgh = gioHangService.findAll().size();
+                if(slgh<10){
+                    mghkh = "MGH0" + slgh;
+                }else {
+                    mghkh = "MGH" + slgh;
+                }
+                GioHang ghkh=new GioHang();
+                ghkh.setMa(mghkh);
+                for (KhachHang kh11: khachHangService.findAll()){
+                    if(kh11.getMa().equals(mkh)){
+                        ghkh.setKhachHang(kh11);
+                        idkhachhang=String.valueOf(kh11.getId());
+                        break;
+                    }
+                }
+                gioHangService.add(ghkh);
 // het them gh
 
-        }else {
-            Optional<KhachHang> idkh=khachHangRepository.getKhachHangByTaiKhoan(email);
-            idkhachhang=String.valueOf(idkh.get().getId());
-        }
+            }else {
+                Optional<KhachHang> idkh=khachHangRepository.getKhachHangByTaiKhoan(email);
+                idkhachhang=String.valueOf(idkh.get().getId());
+            }
 
 //    het lay email
 
-        model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-        model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
-        model.addAttribute("idkhachhang",idkhachhang);
+            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
+            model.addAttribute("idkhachhang",idkhachhang);
 //        giohang
-        model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
-        model.addAttribute("tttong",1);
-        return "ban-hang-online/trang-chu";
+            model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
+            model.addAttribute("tttong",1);
+            return "redirect:/ban-hang-online/home";
+
+
+    }else {
+        return "redirect:/";
+    }
+
     }
 
 

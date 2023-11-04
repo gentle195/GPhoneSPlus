@@ -192,7 +192,7 @@
                                         <button type="submit" class="btn btn-primary">Đơn hàng</button>
                                     </form>
                                     <div>
-                                        <a href="/logout" class="btn btn-primary" style="">Đăng xuất</a>
+                                        <a href="/logout" class="btn btn-primary" style="" onclick="">Đăng xuất</a>
                                     </div>
                                 </div>
                             </div>
