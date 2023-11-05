@@ -63,7 +63,6 @@ public class SecurityConfig {
                         "/chi-tiet-san-pham/export-excel-chi-theo-cam/**","/chi-tiet-san-pham/export-excel-chi-theo-ram/**","/chi-tiet-san-pham/export-excel-chi-theo-rom/**",
                         "/chi-tiet-san-pham/export-excel-chi-theo-pin/**","/chi-tiet-san-pham/export-excel-chi-theo-chip/**","/chi-tiet-san-pham/export-excel-chi-theo-man/**",
 
-                        "/chuc-vu/hien-thi","/chuc-vu/hien-thi-delete","/chuc-vu/search-0","/chuc-vu/search-1",
                         "/dia-chi/hien-thi","/dia-chi/dia-chi-tung-xoa","/dia-chi/tim-kiem/**","/dia-chi/tim-kiem-tung-xoa","/dia-chi/view-add","/dia-chi/add",
                         "/don-hang/**",
                         "/dung-luong-pin/hien-thi","/dung-luong-pin/hien-thi-delete","/dung-luong-pin/search-0","/dung-luong-pin/search-1",
