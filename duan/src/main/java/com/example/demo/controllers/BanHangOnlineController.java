@@ -76,126 +76,126 @@ public class BanHangOnlineController {
     @Autowired
     private BanHangOnlineService banHangOnlineService;
     @Autowired
-    private GioHangChiTietService gioHangChiTietService ;
+    private GioHangChiTietService gioHangChiTietService;
     @Autowired
-    private GioHangService gioHangService ;
+    private GioHangService gioHangService;
     @Autowired
     private DataIntermediateService dataService;
     @Autowired
     private KhachHangRepository khachHangRepository;
 
 
-
     // Bắt đầu bán hàng
-    public Integer kt(Integer so){
-        if(so==Integer.valueOf(0)){
+    public Integer kt(Integer so) {
+        if (so == Integer.valueOf(0)) {
             return Integer.valueOf(1);
         }
         return so;
     }
 
-//    private String checkGMAILorTK="0";
-    private String idkhachhang="1";
+    //    private String checkGMAILorTK="0";
+    private String idkhachhang = "1";
 
-//    @GetMapping("/ban-hang-online/dangxuat")
+    //    @GetMapping("/ban-hang-online/dangxuat")
 ////    public String lgin11() {
 ////        idkhachhang="1";
 ////        System.out.println("--------"+idkhachhang);
 ////        return "login/loginPage";
 ////    }
-@GetMapping("/lgin")
-public String lgin() {
-    idkhachhang="1";
-    return "login/loginPage";
-}
+    @GetMapping("/lgin")
+    public String lgin() {
+        idkhachhang = "1";
+        return "login/loginPage";
+    }
+
     @GetMapping("/ban-hang-online/hien-thi")
     public String hienThitrangchu(
             Model model
     ) {
-        double tong=0;
-        Integer lamchon=0;
-        for (ChiTietSanPham ct:banHangOnlineService.ctspbanhang()) {
-            if(banHangOnlineService.soluongcon(String.valueOf(ct.getId()))>0){
-                tong=tong+1;
-                lamchon=lamchon+1;
+        double tong = 0;
+        Integer lamchon = 0;
+        for (ChiTietSanPham ct : banHangOnlineService.ctspbanhang()) {
+            if (banHangOnlineService.soluongcon(String.valueOf(ct.getId())) > 0) {
+                tong = tong + 1;
+                lamchon = lamchon + 1;
             }
         }
 
-        double tb=tong/3;
-        lamchon=lamchon/3;
-        if(tb % 1 >0){
-            lamchon=lamchon+1;
+        double tb = tong / 3;
+        lamchon = lamchon / 3;
+        if (tb % 1 > 0) {
+            lamchon = lamchon + 1;
         }
-        model.addAttribute("lamchon",lamchon);
-        model.addAttribute("giamgia",banHangOnlineService);
-        model.addAttribute("banhangonline",banHangOnlineService);
-        model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
-        idkhachhang="1";
-        model.addAttribute("idkhachhang",idkhachhang);
+        model.addAttribute("lamchon", lamchon);
+        model.addAttribute("giamgia", banHangOnlineService);
+        model.addAttribute("banhangonline", banHangOnlineService);
+        model.addAttribute("listsp", banHangOnlineService.ctspbanhang());
+        idkhachhang = "1";
+        model.addAttribute("idkhachhang", idkhachhang);
         return "ban-hang-online/trang-chu";
     }
+
     @GetMapping("/ban-hang-online/home")
     public String hienThitrangchudnhome(
             Model model
     ) {
-        double tong=0;
-        Integer lamchon=0;
-        for (ChiTietSanPham ct:banHangOnlineService.ctspbanhang()) {
-            if(banHangOnlineService.soluongcon(String.valueOf(ct.getId()))>0){
-                tong=tong+1;
-                lamchon=lamchon+1;
+        double tong = 0;
+        Integer lamchon = 0;
+        for (ChiTietSanPham ct : banHangOnlineService.ctspbanhang()) {
+            if (banHangOnlineService.soluongcon(String.valueOf(ct.getId())) > 0) {
+                tong = tong + 1;
+                lamchon = lamchon + 1;
             }
         }
-        double tb=tong/3;
-        lamchon=lamchon/3;
-        if(tb % 1 >0){
-            lamchon=lamchon+1;
+        double tb = tong / 3;
+        lamchon = lamchon / 3;
+        if (tb % 1 > 0) {
+            lamchon = lamchon + 1;
         }
-        model.addAttribute("lamchon",lamchon);
-        model.addAttribute("giamgia",banHangOnlineService);
-        model.addAttribute("banhangonline",banHangOnlineService);
+        model.addAttribute("lamchon", lamchon);
+        model.addAttribute("giamgia", banHangOnlineService);
+        model.addAttribute("banhangonline", banHangOnlineService);
 
 
-
-
-        model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
+        model.addAttribute("listsp", banHangOnlineService.ctspbanhang());
 
 
 //        giohang
-        model.addAttribute("tttong",1);
-      if(idkhachhang.equals("1")){
-          return "redirect:/";
-      }else {
-          model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
-          model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-          model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
-          return "ban-hang-online/trang-chu";
-      }
+        model.addAttribute("tttong", 1);
+        if (idkhachhang.equals("1")) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
+            return "ban-hang-online/trang-chu";
+        }
 
     }
+
     @GetMapping("/ban-hang-online/taikhoan-matkhau")
     public String hienThitrangchudn(@AuthenticationPrincipal Authentication authentication,
-            Model model
+                                    Model model
     ) {
-        if ( SecurityUtil.getId()!=null){
+        if (SecurityUtil.getId() != null) {
 //            checkGMAILorTK="1";
 
-            double tong=0;
-            Integer lamchon=0;
-            for (ChiTietSanPham ct:banHangOnlineService.ctspbanhang()) {
-                if(banHangOnlineService.soluongcon(String.valueOf(ct.getId()))>0){
-                    tong=tong+1;
-                    lamchon=lamchon+1;
+            double tong = 0;
+            Integer lamchon = 0;
+            for (ChiTietSanPham ct : banHangOnlineService.ctspbanhang()) {
+                if (banHangOnlineService.soluongcon(String.valueOf(ct.getId())) > 0) {
+                    tong = tong + 1;
+                    lamchon = lamchon + 1;
                 }
             }
-            double tb=tong/3;
-            lamchon=lamchon/3;
-            if(tb % 1 >0){
-                lamchon=lamchon+1;
+            double tb = tong / 3;
+            lamchon = lamchon / 3;
+            if (tb % 1 > 0) {
+                lamchon = lamchon + 1;
             }
-            model.addAttribute("lamchon",lamchon);
-            model.addAttribute("giamgia",banHangOnlineService);
-            model.addAttribute("banhangonline",banHangOnlineService);
+            model.addAttribute("lamchon", lamchon);
+            model.addAttribute("giamgia", banHangOnlineService);
+            model.addAttribute("banhangonline", banHangOnlineService);
 
 //lấy id khách hàng
 //        KhachHang khachHang=  dataService.getSharedData();
@@ -203,19 +203,18 @@ public String lgin() {
 //        idkhachhang=String.valueOf(khachHang.getId());
 ////        idkhachhang="f33013f5-993b-45d3-9806-dd74f2007522";
 // kết thúc lấy id khách hàng
-            UserInfoUserDetails userDetails= SecurityUtil.getId();
-            idkhachhang=String.valueOf(userDetails.getId());
+            UserInfoUserDetails userDetails = SecurityUtil.getId();
+            idkhachhang = String.valueOf(userDetails.getId());
 
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
-            model.addAttribute("idkhachhang",idkhachhang);
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("listsp", banHangOnlineService.ctspbanhang());
+            model.addAttribute("idkhachhang", idkhachhang);
 //        giohang
-            model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
-            model.addAttribute("tttong",1);
+            model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
+            model.addAttribute("tttong", 1);
             return "redirect:/ban-hang-online/home";
-        }
-        else {
-             return "redirect:/";
+        } else {
+            return "redirect:/";
         }
 
 
@@ -226,24 +225,24 @@ public String lgin() {
                                          Principal principal,
                                          Model model
     ) {
-        if(oauth2User!=null){
+        if (oauth2User != null) {
 //            checkGMAILorTK="2";
-            double tong=0;
-            Integer lamchon=0;
-            for (ChiTietSanPham ct:banHangOnlineService.ctspbanhang()) {
-                if(banHangOnlineService.soluongcon(String.valueOf(ct.getId()))>0){
-                    tong=tong+1;
-                    lamchon=lamchon+1;
+            double tong = 0;
+            Integer lamchon = 0;
+            for (ChiTietSanPham ct : banHangOnlineService.ctspbanhang()) {
+                if (banHangOnlineService.soluongcon(String.valueOf(ct.getId())) > 0) {
+                    tong = tong + 1;
+                    lamchon = lamchon + 1;
                 }
             }
-            double tb=tong/3;
-            lamchon=lamchon/3;
-            if(tb % 1 >0){
-                lamchon=lamchon+1;
+            double tb = tong / 3;
+            lamchon = lamchon / 3;
+            if (tb % 1 > 0) {
+                lamchon = lamchon + 1;
             }
-            model.addAttribute("lamchon",lamchon);
-            model.addAttribute("giamgia",banHangOnlineService);
-            model.addAttribute("banhangonline",banHangOnlineService);
+            model.addAttribute("lamchon", lamchon);
+            model.addAttribute("giamgia", banHangOnlineService);
+            model.addAttribute("banhangonline", banHangOnlineService);
 
 //lay email
             String email = oauth2User.getAttribute("email");
@@ -260,11 +259,11 @@ public String lgin() {
             if (khachHangRepository.getKhachHangByTaiKhoan(email).isEmpty()) {
                 // Người dùng chưa tồn tại, tạo người dùng mới
 //            GoogleId token= oauth2User.get;
-                String mkh="";
+                String mkh = "";
                 Integer sl = khachHangService.findAll().size() + 1;
-                if(sl<9){
+                if (sl < 9) {
                     mkh = "MKH0" + sl;
-                }else {
+                } else {
                     mkh = "MKH" + sl;
                 }
                 List<KhachHang> khachHangList = khachHangRepository.findAll();
@@ -286,8 +285,6 @@ public String lgin() {
                 String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 
-
-
                 String hashedPassword = BCrypt.hashpw(randomPassword, BCrypt.gensalt());
                 newUser.setMatKhau(hashedPassword);
 
@@ -295,44 +292,44 @@ public String lgin() {
                 khachHangRepository.save(newUser);
                 //      them gh
                 khachHangService.findAll();
-                String mghkh="";
+                String mghkh = "";
                 Integer slgh = gioHangService.findAll().size();
-                if(slgh<10){
+                if (slgh < 10) {
                     mghkh = "MGH0" + slgh;
-                }else {
+                } else {
                     mghkh = "MGH" + slgh;
                 }
-                GioHang ghkh=new GioHang();
+                GioHang ghkh = new GioHang();
                 ghkh.setMa(mghkh);
-                for (KhachHang kh11: khachHangService.findAll()){
-                    if(kh11.getMa().equals(mkh)){
+                for (KhachHang kh11 : khachHangService.findAll()) {
+                    if (kh11.getMa().equals(mkh)) {
                         ghkh.setKhachHang(kh11);
-                        idkhachhang=String.valueOf(kh11.getId());
+                        idkhachhang = String.valueOf(kh11.getId());
                         break;
                     }
                 }
                 gioHangService.add(ghkh);
 // het them gh
 
-            }else {
-                Optional<KhachHang> idkh=khachHangRepository.getKhachHangByTaiKhoan(email);
-                idkhachhang=String.valueOf(idkh.get().getId());
+            } else {
+                Optional<KhachHang> idkh = khachHangRepository.getKhachHangByTaiKhoan(email);
+                idkhachhang = String.valueOf(idkh.get().getId());
             }
 
 //    het lay email
 
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
-            model.addAttribute("idkhachhang",idkhachhang);
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("listsp", banHangOnlineService.ctspbanhang());
+            model.addAttribute("idkhachhang", idkhachhang);
 //        giohang
-            model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
-            model.addAttribute("tttong",1);
+            model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
+            model.addAttribute("tttong", 1);
             return "redirect:/ban-hang-online/home";
 
 
-    }else {
-        return "redirect:/";
-    }
+        } else {
+            return "redirect:/";
+        }
 
     }
 
@@ -342,57 +339,56 @@ public String lgin() {
             Model model
     ) {
 //
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
 //
-        model.addAttribute("hangds",hangSanPhamService.findAll0());
-        model.addAttribute("camds",cameraService.findAll0());
-        model.addAttribute("mands",manHinhService.findAll0());
-        model.addAttribute("mauds",mauSacService.findAll0());
-        model.addAttribute("ramds",ramService.findAll0());
-        model.addAttribute("romds",romService.findAll0());
-        model.addAttribute("pinds",pinService.findAll0());
-        model.addAttribute("dungds",dungLuongPinService.findAll0());
-        model.addAttribute("chipds",chipService.findAll0());
-        model.addAttribute("sands",sanPhamService.findAll0());
-        double tong=0;
-        Integer lamchon=0;
-        for (ChiTietSanPham ct:banHangOnlineService.ctspbanhang()) {
-            if(banHangOnlineService.soluongcon(String.valueOf(ct.getId()))>0){
-                tong=tong+1;
-                lamchon=lamchon+1;
+        model.addAttribute("hangds", hangSanPhamService.findAll0());
+        model.addAttribute("camds", cameraService.findAll0());
+        model.addAttribute("mands", manHinhService.findAll0());
+        model.addAttribute("mauds", mauSacService.findAll0());
+        model.addAttribute("ramds", ramService.findAll0());
+        model.addAttribute("romds", romService.findAll0());
+        model.addAttribute("pinds", pinService.findAll0());
+        model.addAttribute("dungds", dungLuongPinService.findAll0());
+        model.addAttribute("chipds", chipService.findAll0());
+        model.addAttribute("sands", sanPhamService.findAll0());
+        double tong = 0;
+        Integer lamchon = 0;
+        for (ChiTietSanPham ct : banHangOnlineService.ctspbanhang()) {
+            if (banHangOnlineService.soluongcon(String.valueOf(ct.getId())) > 0) {
+                tong = tong + 1;
+                lamchon = lamchon + 1;
             }
         }
-        double tb=tong/8;
-        lamchon=lamchon/8;
-        if(tb % 1 >0){
-            lamchon=lamchon+1;
+        double tb = tong / 8;
+        lamchon = lamchon / 8;
+        if (tb % 1 > 0) {
+            lamchon = lamchon + 1;
         }
-        model.addAttribute("lamchon1",lamchon);
-        model.addAttribute("giamgia",banHangOnlineService);
-        model.addAttribute("banhangonline",banHangOnlineService);
-        model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
+        model.addAttribute("lamchon1", lamchon);
+        model.addAttribute("giamgia", banHangOnlineService);
+        model.addAttribute("banhangonline", banHangOnlineService);
+        model.addAttribute("listsp", banHangOnlineService.ctspbanhang());
         //gio hang
-        if(idkhachhang.equals("1")){
+        if (idkhachhang.equals("1")) {
 
-        }else {
-            model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
+        } else {
+            model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
         }
-        model.addAttribute("tttong",1);
+        model.addAttribute("tttong", 1);
 //        //gia max
-        Integer max=0;
-        for (ChiTietSanPham ct: chiTietSanPhamService.findAll()) {
-            if(Integer.valueOf(String.valueOf(ct.getGiaBan()))>max){
-                max=Integer.valueOf(String.valueOf(ct.getGiaBan()));
+        Integer max = 0;
+        for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
+            if (Integer.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                max = Integer.valueOf(String.valueOf(ct.getGiaBan()));
             }
         }
 //System.out.println("taco---"+max);
-        model.addAttribute("max",String.valueOf(max));
-
+        model.addAttribute("max", String.valueOf(max));
 
 
         return "ban-hang-online/trang-loc-sanpham";
@@ -418,24 +414,24 @@ public String lgin() {
     ) {
 
 
-        double tong=0;
-        Integer lamchon=0;
-        for (ChiTietSanPham ct:banHangOnlineService.locbanhangcoGIATIEN(x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,BigDecimal.valueOf(Double.valueOf(x11)),BigDecimal.valueOf(Double.valueOf(x12)))) {
-            if(banHangOnlineService.soluongcon(String.valueOf(ct.getId()))>0){
-                tong=tong+1;
-                lamchon=lamchon+1;
+        double tong = 0;
+        Integer lamchon = 0;
+        for (ChiTietSanPham ct : banHangOnlineService.locbanhangcoGIATIEN(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, BigDecimal.valueOf(Double.valueOf(x11)), BigDecimal.valueOf(Double.valueOf(x12)))) {
+            if (banHangOnlineService.soluongcon(String.valueOf(ct.getId())) > 0) {
+                tong = tong + 1;
+                lamchon = lamchon + 1;
             }
         }
 
-        double tb=tong/8;
-        lamchon=lamchon/8;
-        if(tb % 1 >0){
-            lamchon=lamchon+1;
+        double tb = tong / 8;
+        lamchon = lamchon / 8;
+        if (tb % 1 > 0) {
+            lamchon = lamchon + 1;
         }
-        model.addAttribute("lamchon1",lamchon);
-        model.addAttribute("giamgia",banHangOnlineService);
-        model.addAttribute("banhangonline",banHangOnlineService);
-        model.addAttribute("listsp",banHangOnlineService.locbanhangcoGIATIEN(x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,BigDecimal.valueOf(Double.valueOf(x11)),BigDecimal.valueOf(Double.valueOf(x12))));
+        model.addAttribute("lamchon1", lamchon);
+        model.addAttribute("giamgia", banHangOnlineService);
+        model.addAttribute("banhangonline", banHangOnlineService);
+        model.addAttribute("listsp", banHangOnlineService.locbanhangcoGIATIEN(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, BigDecimal.valueOf(Double.valueOf(x11)), BigDecimal.valueOf(Double.valueOf(x12))));
 
         return "ban-hang-online/single_pase_giao-dien-loc";
     }
@@ -446,53 +442,51 @@ public String lgin() {
             @PathVariable("idctsp") UUID idctsp
 
     ) {
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
 //        chi tiêt san pham
-        model.addAttribute("ktcokhong",1);
-        model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
-        model.addAttribute("banhangonline",banHangOnlineService);
-        model.addAttribute("motctsp",chiTietSanPhamService.findById(idctsp));
+        model.addAttribute("ktcokhong", 1);
+        model.addAttribute("listsp", banHangOnlineService.ctspbanhang());
+        model.addAttribute("banhangonline", banHangOnlineService);
+        model.addAttribute("motctsp", chiTietSanPhamService.findById(idctsp));
         System.out.println(chiTietSanPhamService.findById(idctsp).getSoLuong());
-        model.addAttribute("idctsp",idctsp);
+        model.addAttribute("idctsp", idctsp);
 //gio hang
-        if(idkhachhang.equals("1")){
+        if (idkhachhang.equals("1")) {
 
-        }else {
-            model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
+        } else {
+            model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
         }
-        model.addAttribute("tttong",1);
+        model.addAttribute("tttong", 1);
 
 //danh sách sản phẩm dưới
 
-        double tong=0;
-        Integer lamchon=0;
-        for (ChiTietSanPham ct:banHangOnlineService.ctspbanhang()) {
-            if(banHangOnlineService.soluongcon(String.valueOf(ct.getId()))>0){
-                tong=tong+1;
-                lamchon=lamchon+1;
+        double tong = 0;
+        Integer lamchon = 0;
+        for (ChiTietSanPham ct : banHangOnlineService.ctspbanhang()) {
+            if (banHangOnlineService.soluongcon(String.valueOf(ct.getId())) > 0) {
+                tong = tong + 1;
+                lamchon = lamchon + 1;
             }
         }
-        double tb=tong/8;
-        lamchon=lamchon/8;
-        if(tb % 1 >0){
-            lamchon=lamchon+1;
+        double tb = tong / 8;
+        lamchon = lamchon / 8;
+        if (tb % 1 > 0) {
+            lamchon = lamchon + 1;
         }
-        model.addAttribute("lamchon1",lamchon);
-        model.addAttribute("giamgia",banHangOnlineService);
+        model.addAttribute("lamchon1", lamchon);
+        model.addAttribute("giamgia", banHangOnlineService);
 
-        model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
+        model.addAttribute("listsp", banHangOnlineService.ctspbanhang());
 
         return "ban-hang-online/trang-chi-tiet-san-pham";
 
 
-
     }
-
 
 
     @GetMapping("/ban-hang-online/loc-chi-tiet-san-pham/{x1}/{x2}/{x3}/{x4}/{x5}")
@@ -507,31 +501,29 @@ public String lgin() {
     ) {
 
 
+        List<ChiTietSanPham> listctsp = banHangOnlineService.locbanhang("null", "null", "null", x1, x3, x2, "null", "null", x4, x5);
 
-
-        List<ChiTietSanPham> listctsp=banHangOnlineService.locbanhang("null", "null", "null", x1, x3, x2, "null", "null", x4, x5);
-
-        ChiTietSanPham motctsp=new ChiTietSanPham();
-        int kt=0;
-        for (ChiTietSanPham ht:listctsp) {
-            if( banHangOnlineService.soluongcon(String.valueOf(ht.getId()))>0){
-                kt=1;
-                motctsp=ht;
+        ChiTietSanPham motctsp = new ChiTietSanPham();
+        int kt = 0;
+        for (ChiTietSanPham ht : listctsp) {
+            if (banHangOnlineService.soluongcon(String.valueOf(ht.getId())) > 0) {
+                kt = 1;
+                motctsp = ht;
                 break;
             }
         }
-        System.out.println("taco-"+listctsp.size());
-        model.addAttribute("tensp",x5);
-        model.addAttribute("ktcokhong",kt);
-        model.addAttribute("motctsp",motctsp);
-        model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
-        model.addAttribute("banhangonline",banHangOnlineService);
+        System.out.println("taco-" + listctsp.size());
+        model.addAttribute("tensp", x5);
+        model.addAttribute("ktcokhong", kt);
+        model.addAttribute("motctsp", motctsp);
+        model.addAttribute("listsp", banHangOnlineService.ctspbanhang());
+        model.addAttribute("banhangonline", banHangOnlineService);
 
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
         return "ban-hang-online/single_page_chi-tiet-san-pham";
     }
@@ -544,33 +536,33 @@ public String lgin() {
             @RequestParam("solg") Integer soluong
     ) {
 
-        if(banHangOnlineService.ListghctTheoIdghvsIdctsp(banHangOnlineService.ListghTheoidkh(idkh).get(0).getId(),idctsp).size()>0){
-            GioHangChiTiet ghctud=banHangOnlineService.ListghctTheoIdghvsIdctsp(banHangOnlineService.ListghTheoidkh(idkh).get(0).getId(),idctsp).get(0);
-            Integer slud=  ghctud.getSoLuong()+soluong;
+        if (banHangOnlineService.ListghctTheoIdghvsIdctsp(banHangOnlineService.ListghTheoidkh(idkh).get(0).getId(), idctsp).size() > 0) {
+            GioHangChiTiet ghctud = banHangOnlineService.ListghctTheoIdghvsIdctsp(banHangOnlineService.ListghTheoidkh(idkh).get(0).getId(), idctsp).get(0);
+            Integer slud = ghctud.getSoLuong() + soluong;
             ghctud.setSoLuong(slud);
             gioHangChiTietService.add(ghctud);
-        }else {
-            GioHangChiTiet ghct=new GioHangChiTiet();
+        } else {
+            GioHangChiTiet ghct = new GioHangChiTiet();
             ghct.setGioHang(banHangOnlineService.ListghTheoidkh(idkh).get(0));
             ghct.setChiTietSanPham(chiTietSanPhamService.findById(idctsp));
             ghct.setSoLuong(soluong);
             ghct.setDonGia(chiTietSanPhamService.findById(idctsp).getGiaBan());
             BigDecimal giaban = chiTietSanPhamService.findById(idctsp).getGiaBan();
-            Integer giaban1=Integer.valueOf(String.valueOf(giaban));
-            Integer phantramgiam =banHangOnlineService.tonggiamgia(String.valueOf(idctsp));
-            Integer dgkg =giaban1- giaban1/100*phantramgiam;
-            BigDecimal dgkg1=BigDecimal.valueOf(Long.valueOf(String.valueOf(dgkg)));
+            Integer giaban1 = Integer.valueOf(String.valueOf(giaban));
+            Integer phantramgiam = banHangOnlineService.tonggiamgia(String.valueOf(idctsp));
+            Integer dgkg = giaban1 - giaban1 / 100 * phantramgiam;
+            BigDecimal dgkg1 = BigDecimal.valueOf(Long.valueOf(String.valueOf(dgkg)));
             ghct.setDonGiaKhiGiam(dgkg1);
             gioHangChiTietService.add(ghct);
         }
-        model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkh).get(0).getId()));
-        model.addAttribute("tttong",1);
-        model.addAttribute("banhangonline",banHangOnlineService);
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkh).get(0).getId()));
+        model.addAttribute("tttong", 1);
+        model.addAttribute("banhangonline", banHangOnlineService);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
         return "ban-hang-online/trang-gio-hang-chi-tiet";
     }
@@ -589,12 +581,12 @@ public String lgin() {
         gioHangChiTietService.add(ghct);
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(ghct.getGioHang().getKhachHang().getId())).get(0).getId()));
         model.addAttribute("banhangonline", banHangOnlineService);
-        model.addAttribute("tttong",1);
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        model.addAttribute("tttong", 1);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
         return "ban-hang-online/single_page_gio_hang_chi_tiet";
     }
@@ -607,20 +599,20 @@ public String lgin() {
             @PathVariable("trangthai") String trangthai,
             @PathVariable("idgh") UUID idgh
     ) {
-        if(idghct.equals("full")){
-            if(trangthai.equals("0")){
-                banHangOnlineService.trangthaighct(0,idgh);
-                model.addAttribute("tttong",0);
-            }else {
-                banHangOnlineService.trangthaighct(1,idgh);
-                model.addAttribute("tttong",1);
+        if (idghct.equals("full")) {
+            if (trangthai.equals("0")) {
+                banHangOnlineService.trangthaighct(0, idgh);
+                model.addAttribute("tttong", 0);
+            } else {
+                banHangOnlineService.trangthaighct(1, idgh);
+                model.addAttribute("tttong", 1);
             }
-        }else {
-            GioHangChiTiet ghct=gioHangChiTietService.findById(UUID.fromString(idghct));
-            if(trangthai.equals("0")){
+        } else {
+            GioHangChiTiet ghct = gioHangChiTietService.findById(UUID.fromString(idghct));
+            if (trangthai.equals("0")) {
                 ghct.setTinhTrang(0);
                 gioHangChiTietService.add(ghct);
-            }else {
+            } else {
                 ghct.setTinhTrang(1);
                 gioHangChiTietService.add(ghct);
             }
@@ -628,11 +620,11 @@ public String lgin() {
 
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(idgh));
         model.addAttribute("banhangonline", banHangOnlineService);
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
         return "ban-hang-online/single_page_gio_hang_chi_tiet";
     }
@@ -644,14 +636,14 @@ public String lgin() {
             @PathVariable("idgh") UUID idgh
     ) {
         gioHangChiTietService.delete(idghct);
-        model.addAttribute("tttong",1);
+        model.addAttribute("tttong", 1);
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(idgh));
         model.addAttribute("banhangonline", banHangOnlineService);
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
         return "ban-hang-online/single_page_gio_hang_chi_tiet";
     }
@@ -664,11 +656,11 @@ public String lgin() {
         model.addAttribute("listghctTT", banHangOnlineService.ListghctTheoidgh(idgh));
         model.addAttribute("listghct", banHangOnlineService.ListghTheoidghvsTT1(idgh));
         model.addAttribute("banhangonline", banHangOnlineService);
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
         return "ban-hang-online/trang-san-pham-duoc-chon-thanh-toan";
     }
@@ -676,18 +668,18 @@ public String lgin() {
     @PostMapping("/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-them-dia-chi")
     public String nutthemdiachi(
             Model model,
-            @RequestParam("diachi") String diachi1,@RequestParam("quan") String quan,
-            @RequestParam("huyen") String huyen,@RequestParam("thanhpho") String thanhpho,
+            @RequestParam("diachi") String diachi1, @RequestParam("quan") String quan,
+            @RequestParam("huyen") String huyen, @RequestParam("thanhpho") String thanhpho,
             @RequestParam("idgh") UUID idgh
     ) {
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
-        DiaChi diaChi=new DiaChi();
+        DiaChi diaChi = new DiaChi();
         Integer sl = diaChiService.findAll().size();
-        String mhd="";
-        if(sl<10){
+        String mhd = "";
+        if (sl < 10) {
             mhd = "MDC0" + sl;
-        }else {
+        } else {
             mhd = "MDC" + sl;
         }
         diaChi.setMa(mhd);
@@ -698,17 +690,17 @@ public String lgin() {
         diaChi.setQuan(quan);
         diaChi.setHuyen(huyen);
         diaChi.setThanhPho(thanhpho);
-        KhachHang kh=khachHangService.findById(gioHangService.findById(idgh).getKhachHang().getId());
+        KhachHang kh = khachHangService.findById(gioHangService.findById(idgh).getKhachHang().getId());
         diaChi.setKhachHang(kh);
         diaChiService.add(diaChi);
 
         model.addAttribute("listghct", banHangOnlineService.ListghTheoidghvsTT1(idgh));
         model.addAttribute("banhangonline", banHangOnlineService);
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
         model.addAttribute("listghctTT", banHangOnlineService.ListghctTheoidgh(idgh));
 
@@ -728,12 +720,12 @@ public String lgin() {
 //        them hd
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
-        HoaDon hd=new HoaDon();
+        HoaDon hd = new HoaDon();
         Integer sl = hoaDonService.findAll().size();
-        String mhd="";
-        if(sl<10){
+        String mhd = "";
+        if (sl < 10) {
             mhd = "MHD0" + sl;
-        }else {
+        } else {
             mhd = "MHD" + sl;
         }
         hd.setMa(mhd);
@@ -746,26 +738,26 @@ public String lgin() {
         hd.setLoai(1);
         hd.setHinhThucThanhToan(2);
         hd.setTinhTrangGiaoHang(0);
-        KhachHang kh=khachHangService.findById(gioHangService.findById(idgh).getKhachHang().getId());
+        KhachHang kh = khachHangService.findById(gioHangService.findById(idgh).getKhachHang().getId());
         hd.setKhachHang(kh);
-        DiaChi dc= diaChiService.findById(iddc);
+        DiaChi dc = diaChiService.findById(iddc);
         hd.setDiaChi(dc);
         hoaDonService.add(hd);
 //    them hdct
-        List<GioHangChiTiet> listghct=banHangOnlineService.ListghTheoidghvsTT1(idgh);
-        for (int a=0;a<listghct.size();a=a+1){
-            for (int b=0;b<listghct.get(a).getSoLuong();b=b+1){
-                HoaDonChiTiet hdct=new HoaDonChiTiet();
+        List<GioHangChiTiet> listghct = banHangOnlineService.ListghTheoidghvsTT1(idgh);
+        for (int a = 0; a < listghct.size(); a = a + 1) {
+            for (int b = 0; b < listghct.get(a).getSoLuong(); b = b + 1) {
+                HoaDonChiTiet hdct = new HoaDonChiTiet();
                 hdct.setSoLuong(1);
                 hdct.setTinhTrang(0);
                 hdct.setDonGia(listghct.get(a).getDonGiaKhiGiam());
-                HoaDon hd1=banHangOnlineService.timhdtheomahd(mhd);
+                HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
                 hdct.setHoaDon(hd1);
-                List<IMEI> listimei=banHangOnlineService.timimeitheoidctspVSttO(listghct.get(a).getChiTietSanPham().getId());
+                List<IMEI> listimei = banHangOnlineService.timimeitheoidctspVSttO(listghct.get(a).getChiTietSanPham().getId());
                 hdct.setImei(listimei.get(0));
                 hoaDonChiTietService.add(hdct);
 // cập nhật trạng thái imei
-                IMEI imei=listimei.get(0);
+                IMEI imei = listimei.get(0);
                 imei.setTinhTrang(3);
                 imei.setNgayCapNhat(date);
                 imeiService.add(imei);
@@ -774,37 +766,36 @@ public String lgin() {
 //xoa ghct TT=0 theo idgh
         banHangOnlineService.xoaghcttheoIDGHvsTTO(idgh);
 //
-        model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(gioHangService.findById(idgh).getKhachHang().getId())).get(0).getId()));
-        model.addAttribute("tttong",1);
-        model.addAttribute("banhangonline",banHangOnlineService);
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(gioHangService.findById(idgh).getKhachHang().getId())).get(0).getId()));
+        model.addAttribute("tttong", 1);
+        model.addAttribute("banhangonline", banHangOnlineService);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
         return "ban-hang-online/single_pase_dat_hang_thanh_cong";
     }
 
 
-    @PostMapping("/ban-hang-online/hoa-don-online")
+    @GetMapping("/ban-hang-online/hoa-don-online/{id}")
     public String hoadononline(
             Model model,
-            @RequestParam("idkh") UUID idkh
+            @PathVariable("id") UUID idkh
     ) {
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
 
         model.addAttribute("listhdkh", banHangOnlineService.timhoadontheoidkh(idkh));
         model.addAttribute("banhangonline", banHangOnlineService);
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
         return "ban-hang-online/trang_hoa_don_khach_hang";
     }
-
 
 
     @GetMapping("/ban-hang-online/xem-hoa-don-chi-tiet/{idhd}")
@@ -814,17 +805,17 @@ public String lgin() {
     ) {
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkhachhang)).get(0).getId()));
 
-        model.addAttribute("hd",hoaDonService.findById(idhd));
+        model.addAttribute("hd", hoaDonService.findById(idhd));
         model.addAttribute("listhdct", banHangOnlineService.timhoadonchitiettheoidhd(idhd));
         model.addAttribute("banhangonline", banHangOnlineService);
-        System.out.println("------"+banHangOnlineService.listIMEItheoIDHDvsIDCTSP(UUID.fromString("C0242A2A-F83C-4347-AD29-FEA374AB7CD9"),UUID.fromString("AF372FA0-7E69-4193-BB0E-4DFF72EECD01")).size());
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        System.out.println("------" + banHangOnlineService.listIMEItheoIDHDvsIDCTSP(UUID.fromString("C0242A2A-F83C-4347-AD29-FEA374AB7CD9"), UUID.fromString("AF372FA0-7E69-4193-BB0E-4DFF72EECD01")).size());
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
-        model.addAttribute("hienmodal",0);
+        model.addAttribute("hienmodal", 0);
         return "ban-hang-online/trang_xem_hoa_don_chi_tiet";
     }
 
@@ -837,11 +828,11 @@ public String lgin() {
 
         model.addAttribute("listhdkh", banHangOnlineService.timhoadontheoidkh(hoaDonService.findById(idhd).getKhachHang().getId()));
         model.addAttribute("banhangonline", banHangOnlineService);
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
 
 //        return "ban-hang-online/trang_hoa_don_khach_hang";
@@ -853,30 +844,30 @@ public String lgin() {
             Model model,
             @PathVariable("idhdct") UUID idhdct
     ) {
-        System.out.println("idhdct==="+idhdct);
-        model.addAttribute("hd",hoaDonChiTietService.findById(idhdct).getHoaDon());
-        UUID idhd=hoaDonChiTietService.findById(idhdct).getHoaDon().getId();
-        UUID idctsp=hoaDonChiTietService.findById(idhdct).getImei().getChiTietSanPham().getId();
-        banHangOnlineService.updateimeiTTveOtheoIDHDvsIDCTSP(idhd,idctsp);
-        banHangOnlineService.XoahdcttheoIDHDvsIDCTSP(idhd,idctsp);
-        Integer tongtien=0;
-        for (HoaDonChiTiet hdct:banHangOnlineService.timhoadonchitiettheoidhd(idhd)) {
-            Integer tien1ctsp=Integer.valueOf(String.valueOf(hdct.getDonGia()));
-            tongtien=tongtien+tien1ctsp;
+        System.out.println("idhdct===" + idhdct);
+        model.addAttribute("hd", hoaDonChiTietService.findById(idhdct).getHoaDon());
+        UUID idhd = hoaDonChiTietService.findById(idhdct).getHoaDon().getId();
+        UUID idctsp = hoaDonChiTietService.findById(idhdct).getImei().getChiTietSanPham().getId();
+        banHangOnlineService.updateimeiTTveOtheoIDHDvsIDCTSP(idhd, idctsp);
+        banHangOnlineService.XoahdcttheoIDHDvsIDCTSP(idhd, idctsp);
+        Integer tongtien = 0;
+        for (HoaDonChiTiet hdct : banHangOnlineService.timhoadonchitiettheoidhd(idhd)) {
+            Integer tien1ctsp = Integer.valueOf(String.valueOf(hdct.getDonGia()));
+            tongtien = tongtien + tien1ctsp;
         }
-        HoaDon hd=hoaDonService.findById(idhd);
+        HoaDon hd = hoaDonService.findById(idhd);
         hd.setTongTien(BigDecimal.valueOf(Long.valueOf(String.valueOf(tongtien))));
         hoaDonService.add(hd);
         model.addAttribute("listhdct", banHangOnlineService.timhoadonchitiettheoidhd(idhd));
         model.addAttribute("banhangonline", banHangOnlineService);
-        System.out.println("------"+banHangOnlineService.listIMEItheoIDHDvsIDCTSP(UUID.fromString("C0242A2A-F83C-4347-AD29-FEA374AB7CD9"),UUID.fromString("AF372FA0-7E69-4193-BB0E-4DFF72EECD01")).size());
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        System.out.println("------" + banHangOnlineService.listIMEItheoIDHDvsIDCTSP(UUID.fromString("C0242A2A-F83C-4347-AD29-FEA374AB7CD9"), UUID.fromString("AF372FA0-7E69-4193-BB0E-4DFF72EECD01")).size());
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
-        model.addAttribute("hienmodal",0);
+        model.addAttribute("hienmodal", 0);
         return "ban-hang-online/single_pase_trang_xem_hoa_don_chi-tiet";
     }
 
@@ -888,17 +879,17 @@ public String lgin() {
     ) {
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkhachhang)).get(0).getId()));
 
-        HoaDon hd1=hoaDonService.findById(idhd);
+        HoaDon hd1 = hoaDonService.findById(idhd);
         hd1.setTinhTrang(3);
         hd1.setHinhThucThanhToan(0);
         hoaDonService.add(hd1);
         model.addAttribute("listhdkh", banHangOnlineService.timhoadontheoidkh(hoaDonService.findById(idhd).getKhachHang().getId()));
         model.addAttribute("banhangonline", banHangOnlineService);
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
         return "ban-hang-online/trang_hoa_don_khach_hang";
 
@@ -908,18 +899,18 @@ public String lgin() {
     @PostMapping("/ban-hang-online/hoa-don-chi-tiet/them-dia-chi")
     public String nutthemdiachihdct(
             Model model,
-            @RequestParam("diachi") String diachi1,@RequestParam("quan") String quan,
-            @RequestParam("huyen") String huyen,@RequestParam("thanhpho") String thanhpho,
+            @RequestParam("diachi") String diachi1, @RequestParam("quan") String quan,
+            @RequestParam("huyen") String huyen, @RequestParam("thanhpho") String thanhpho,
             @RequestParam("idhd") UUID idhd
     ) {
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
-        DiaChi diaChi=new DiaChi();
+        DiaChi diaChi = new DiaChi();
         Integer sl = diaChiService.findAll().size();
-        String mhd="";
-        if(sl<10){
+        String mhd = "";
+        if (sl < 10) {
             mhd = "MDC0" + sl;
-        }else {
+        } else {
             mhd = "MDC" + sl;
         }
         diaChi.setMa(mhd);
@@ -930,21 +921,21 @@ public String lgin() {
         diaChi.setQuan(quan);
         diaChi.setHuyen(huyen);
         diaChi.setThanhPho(thanhpho);
-        KhachHang kh=hoaDonService.findById(idhd).getKhachHang();
+        KhachHang kh = hoaDonService.findById(idhd).getKhachHang();
         diaChi.setKhachHang(kh);
         diaChiService.add(diaChi);
 
-        model.addAttribute("hd",hoaDonService.findById(idhd));
+        model.addAttribute("hd", hoaDonService.findById(idhd));
         model.addAttribute("listhdct", banHangOnlineService.timhoadonchitiettheoidhd(idhd));
         model.addAttribute("banhangonline", banHangOnlineService);
-        System.out.println("------"+banHangOnlineService.listIMEItheoIDHDvsIDCTSP(UUID.fromString("C0242A2A-F83C-4347-AD29-FEA374AB7CD9"),UUID.fromString("AF372FA0-7E69-4193-BB0E-4DFF72EECD01")).size());
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        System.out.println("------" + banHangOnlineService.listIMEItheoIDHDvsIDCTSP(UUID.fromString("C0242A2A-F83C-4347-AD29-FEA374AB7CD9"), UUID.fromString("AF372FA0-7E69-4193-BB0E-4DFF72EECD01")).size());
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
-        model.addAttribute("hienmodal",1);
+        model.addAttribute("hienmodal", 1);
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkhachhang)).get(0).getId()));
 
         return "ban-hang-online/trang_xem_hoa_don_chi_tiet";
@@ -962,44 +953,45 @@ public String lgin() {
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
 
-        HoaDon hd=hoaDonService.findById(idhd);
-        if(hd.getTinhTrangGiaoHang()==0){
+        HoaDon hd = hoaDonService.findById(idhd);
+        if (hd.getTinhTrangGiaoHang() == 0) {
             hd.setSdt(sodienthoai);
             hd.setDiaChi(diaChiService.findById(diachi));
             hoaDonService.add(hd);
-            model.addAttribute("thongbaotinhtranggiaohang",0);
-        }else {
-            model.addAttribute("thongbaotinhtranggiaohang",1);
+            model.addAttribute("thongbaotinhtranggiaohang", 0);
+        } else {
+            model.addAttribute("thongbaotinhtranggiaohang", 1);
         }
 
-        model.addAttribute("hd",hoaDonService.findById(idhd));
+        model.addAttribute("hd", hoaDonService.findById(idhd));
         model.addAttribute("listhdct", banHangOnlineService.timhoadonchitiettheoidhd(idhd));
         model.addAttribute("banhangonline", banHangOnlineService);
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
-        model.addAttribute("hienmodal",0);
+        model.addAttribute("hienmodal", 0);
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkhachhang)).get(0).getId()));
 
         return "ban-hang-online/trang_xem_hoa_don_chi_tiet";
 
     }
+
     @GetMapping("/ban-hang-online/xem-gio-hang")
     public String nutxemgiohang(
             Model model
     ) {
 
-        model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
-        model.addAttribute("tttong",1);
-        model.addAttribute("banhangonline",banHangOnlineService);
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
+        model.addAttribute("tttong", 1);
+        model.addAttribute("banhangonline", banHangOnlineService);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
 
 
@@ -1015,20 +1007,20 @@ public String lgin() {
             @PathVariable("trangthai") String trangthai,
             @PathVariable("idgh") UUID idgh
     ) {
-        if(idghct.equals("full")){
-            if(trangthai.equals("0")){
-                banHangOnlineService.trangthaighct(0,idgh);
-                model.addAttribute("tttong",0);
-            }else {
-                banHangOnlineService.trangthaighct(1,idgh);
-                model.addAttribute("tttong",1);
+        if (idghct.equals("full")) {
+            if (trangthai.equals("0")) {
+                banHangOnlineService.trangthaighct(0, idgh);
+                model.addAttribute("tttong", 0);
+            } else {
+                banHangOnlineService.trangthaighct(1, idgh);
+                model.addAttribute("tttong", 1);
             }
-        }else {
-            GioHangChiTiet ghct=gioHangChiTietService.findById(UUID.fromString(idghct));
-            if(trangthai.equals("0")){
+        } else {
+            GioHangChiTiet ghct = gioHangChiTietService.findById(UUID.fromString(idghct));
+            if (trangthai.equals("0")) {
                 ghct.setTinhTrang(0);
                 gioHangChiTietService.add(ghct);
-            }else {
+            } else {
                 ghct.setTinhTrang(1);
                 gioHangChiTietService.add(ghct);
             }
@@ -1036,11 +1028,11 @@ public String lgin() {
 
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(idgh));
         model.addAttribute("banhangonline", banHangOnlineService);
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
         return "ban-hang-online/single_pase_gio_hang_trang_chu";
     }
@@ -1051,28 +1043,27 @@ public String lgin() {
             Model model,
             @PathVariable("idctsp") UUID idctsp
     ) {
-        if(banHangOnlineService.ListghctTheoIdghvsIdctsp(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId(),idctsp).size()<=0)
-        {
-            GioHangChiTiet ghct=new GioHangChiTiet();
+        if (banHangOnlineService.ListghctTheoIdghvsIdctsp(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId(), idctsp).size() <= 0) {
+            GioHangChiTiet ghct = new GioHangChiTiet();
             ghct.setGioHang(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0));
             ghct.setChiTietSanPham(chiTietSanPhamService.findById(idctsp));
             ghct.setSoLuong(1);
             ghct.setDonGia(chiTietSanPhamService.findById(idctsp).getGiaBan());
             BigDecimal giaban = chiTietSanPhamService.findById(idctsp).getGiaBan();
-            Integer giaban1=Integer.valueOf(String.valueOf(giaban));
-            Integer phantramgiam =banHangOnlineService.tonggiamgia(String.valueOf(idctsp));
-            Integer dgkg =giaban1- giaban1/100*phantramgiam;
-            BigDecimal dgkg1=BigDecimal.valueOf(Long.valueOf(String.valueOf(dgkg)));
+            Integer giaban1 = Integer.valueOf(String.valueOf(giaban));
+            Integer phantramgiam = banHangOnlineService.tonggiamgia(String.valueOf(idctsp));
+            Integer dgkg = giaban1 - giaban1 / 100 * phantramgiam;
+            BigDecimal dgkg1 = BigDecimal.valueOf(Long.valueOf(String.valueOf(dgkg)));
             ghct.setDonGiaKhiGiam(dgkg1);
             gioHangChiTietService.add(ghct);
         }
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
         model.addAttribute("banhangonline", banHangOnlineService);
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
         return "ban-hang-online/single_pase_gio_hang_trang_chu";
 
@@ -1084,14 +1075,14 @@ public String lgin() {
             Model model
     ) {
 
-        model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
-        model.addAttribute("tttong",1);
-        model.addAttribute("banhangonline",banHangOnlineService);
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
+        model.addAttribute("tttong", 1);
+        model.addAttribute("banhangonline", banHangOnlineService);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
 
         System.out.println("**************************");
@@ -1108,14 +1099,15 @@ public String lgin() {
 
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(idgh));
         model.addAttribute("banhangonline", banHangOnlineService);
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
         return "ban-hang-online/single_pase_gio_hang_trang_chu";
     }
+
     @GetMapping("/ban-hang-online/trang-chu/load-gio-hang-trang-chu-idghct/{idghct}")
     public String loadghctTTtuidghct(
             Model model,
@@ -1125,15 +1117,14 @@ public String lgin() {
 
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(gioHangChiTietService.findById(idghct).getGioHang().getId()));
         model.addAttribute("banhangonline", banHangOnlineService);
-        if(idkhachhang.equals("1")){
-            model.addAttribute("idkhachhang",idkhachhang);
-        }else {
-            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang",UUID.fromString(idkhachhang));
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
         return "ban-hang-online/single_pase_gio_hang_trang_chu";
     }
-
 
 
 //@Scheduled(cron = "0 35 18 30 9 *")
@@ -1172,7 +1163,6 @@ public String lgin() {
 //        }
 //
 //    };
-
 
 
 }

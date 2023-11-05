@@ -170,7 +170,17 @@ public class ImeiController {
         }
         String ma = "IMEI" + (imeiService.findAll().size() + 1);
         imei.setMa(ma);
-
+        List<IMEI> listcheck = imeiService.findAll();
+        for (IMEI i : listcheck
+        ) {
+            if (i.getSoImei().equalsIgnoreCase(imei.getSoImei())) {
+                model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+                model.addAttribute("thongBao", "IMEI này đã có trong dữ liệu");
+                model.addAttribute("ma", ma);
+                model.addAttribute("contentPage", "../imei/add-imei.jsp");
+                return "home/layout";
+            }
+        }
         String projectRootPath = System.getProperty("user.dir");
         String outputFolderPath = projectRootPath + "/src/main/webapp/maqr";
         QRCodeGenerator.generatorQRCode(imei, outputFolderPath);

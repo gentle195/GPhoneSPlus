@@ -67,6 +67,7 @@
                                 <form:label class="form-label" path="soImei">Imei:</form:label>
                                 <form:input class="form-control" placeholder="Imei" path="soImei"/>
                                 <form:errors path="soImei" cssStyle="color: red"></form:errors>
+                                <label style="color: red">${thongBao}</label>
                             </div>
                             <div class="form-group">
                                 <form:label path="moTa"><b>Mô Tả:</b></form:label>

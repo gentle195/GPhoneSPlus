@@ -123,6 +123,30 @@
             cursor: pointer; /* Biến con trỏ thành bàn tay khi trỏ vào nút */
         }
 
+        .cart-dropdown {
+            border-radius: 10px;
+            width: 180px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .cart-dropdown a {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            text-decoration: none;
+            text-align: center;
+            color: #fff;
+            background-color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .cart-dropdown a:hover {
+            background-color: #0056b3;
+        }
+
         /*div{*/
         /*    border: 1px solid red;*/
         /*}*/
@@ -134,26 +158,26 @@
 
 <!-- HEADER -->
 <header>
-<%--    <!-- TOP HEADER -->--%>
-<%--    <div id="top-header">--%>
-<%--        <div class="container">--%>
-<%--            <ul class="header-links pull-left">--%>
-<%--                <li><a href="#"><i class="fa fa-envelope-o"></i> gphones@gmail.com</a></li>--%>
-<%--            </ul>--%>
-<%--            <ul class="header-links pull-right" style="color:white;">--%>
-<%--                <security:authorize access="isAuthenticated()">--%>
-<%--                    hi, <security:authentication property="principal.email"  />--%>
-<%--                    ||--%>
-<%--                    <a href="/logout">Logout</a>--%>
-<%--                </security:authorize>--%>
-<%--                <security:authorize access="!isAuthenticated()">--%>
-<%--                    <a href="/login" style="color: white">Login</a>--%>
+    <%--    <!-- TOP HEADER -->--%>
+    <%--    <div id="top-header">--%>
+    <%--        <div class="container">--%>
+    <%--            <ul class="header-links pull-left">--%>
+    <%--                <li><a href="#"><i class="fa fa-envelope-o"></i> gphones@gmail.com</a></li>--%>
+    <%--            </ul>--%>
+    <%--            <ul class="header-links pull-right" style="color:white;">--%>
+    <%--                <security:authorize access="isAuthenticated()">--%>
+    <%--                    hi, <security:authentication property="principal.email"  />--%>
+    <%--                    ||--%>
+    <%--                    <a href="/logout">Logout</a>--%>
+    <%--                </security:authorize>--%>
+    <%--                <security:authorize access="!isAuthenticated()">--%>
+    <%--                    <a href="/login" style="color: white">Login</a>--%>
 
-<%--                </security:authorize>--%>
-<%--            </ul>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    <!-- /TOP HEADER -->--%>
+    <%--                </security:authorize>--%>
+    <%--            </ul>--%>
+    <%--        </div>--%>
+    <%--    </div>--%>
+    <%--    <!-- /TOP HEADER -->--%>
     <!-- TOP HEADER -->
     <div id="top-header">
         <div class="container">
@@ -181,16 +205,16 @@
                                                value="${idkhachhang}">
                                     </span>
                             </a>
-                            <div class="cart-dropdown" style="border-radius: 10px;width: 3.5cm;margin-top: 10px">
+                            <div class="cart-dropdown"
+                                 style="border-radius: 10px;width: 3.5cm;margin-top: 10px;width: 180px">
                                 <div>
                                     <div>
                                         <a href="#" class="btn btn-primary">Tài khoản của tôi</a>
                                     </div>
-
-                                    <form action="/ban-hang-online/hoa-don-online" method="post">
-                                        <input name="idkh" value="${idkhachhang}" style="display: none">
-                                        <button type="submit" class="btn btn-primary">Đơn hàng</button>
-                                    </form>
+                                    <div>
+                                        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}"
+                                           class="btn btn-primary">Đơn hàng</a>
+                                    </div>
                                     <div>
                                         <a href="/logout" class="btn btn-primary" style="" onclick="">Đăng xuất</a>
                                     </div>
@@ -213,10 +237,8 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
-                            <%--							<img src="../../img/logo.png" alt="">--%>
-                            <img src="/img/logo.png" alt="">
-                        </a>
+                        <h2 class="logo" style="margin: 20px;color: white;font-family: 'Times New Roman'">GPhoneS
+                            Store</h2>
                     </div>
                 </div>
                 <!-- /LOGO -->
@@ -239,11 +261,11 @@
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-<%--                            <a href="#">--%>
-<%--                                <i class="fa fa-heart-o"></i>--%>
-<%--                                <span>Your Wishlist</span>--%>
-<%--                                <div class="qty">2</div>--%>
-<%--                            </a>--%>
+                            <%--                            <a href="#">--%>
+                            <%--                                <i class="fa fa-heart-o"></i>--%>
+                            <%--                                <span>Your Wishlist</span>--%>
+                            <%--                                <div class="qty">2</div>--%>
+                            <%--                            </a>--%>
                         </div>
                         <!-- /Wishlist -->
 
@@ -265,15 +287,13 @@
                                                 <br>
                                                 <div style="border: 1px solid;height: 2cm">
                                                     <div style="width: 80%;float: right">
+                                                        <label style="font-weight: bold">Sản
+                                                            phẩm:</label>${ht.chiTietSanPham.sanPham.ten}-
+                                                            ${ht.chiTietSanPham.rom.dungLuong}-${ht.chiTietSanPham.mauSac.ten}.
 
-                                                        <a href="#">
-                                                            Sản
-                                                            phẩm:${ht.chiTietSanPham.sanPham.ten},Rom:${ht.chiTietSanPham.rom.dungLuong},Màu:${ht.chiTietSanPham.mauSac.ten}.
-                                                        </a>
                                                         <br>
-                                                        Số lượng:${ht.soLuong}<br>
-                                                            ${ht.donGiaKhiGiam}đ-<label
-                                                            style="text-decoration: line-through;background-color: white;border: 1px solid white">${ht.donGia}</label>đ
+                                                        <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
+                                                        <label style="tbackground-color: white;border: 1px solid white">${ht.donGiaKhiGiam}đ</label>
                                                     </div>
                                                     <div style="width: 18%;">
                                                         <input type="checkbox" name="checkidghTT" value="${ht.id}"
@@ -310,11 +330,7 @@
                                         <span>Giỏ hàng</span>
                                         <div class="qty">0</div>
                                     </a>
-                                    <div class="cart-dropdown">
-                                        <div class="cart-list">
-
-
-                                        </div>
+                                    <div class="cart-dropdown" style="width: 500px;">
                                         <div class="cart-summary">
                                             <small> 0 Sản phẩm được chọn</small>
                                             <h5>Tổng:0 đ</h5>
@@ -362,9 +378,6 @@
     <!-- /MAIN HEADER -->
 </header>
 <!-- /HEADER -->
-
-
-
 
 
 <!-- NAVIGATION -->
@@ -469,14 +482,14 @@
                 <div class="col-md-12">
                     <div class="section-title">
                         <h3 class="title">Sản phẩm mới ra mắt</h3>
-<%--                        <div class="section-nav">--%>
-<%--                            <ul class="section-tab-nav tab-nav">--%>
-<%--                                <li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>--%>
-<%--                                <li><a data-toggle="tab" href="#tab1">Smartphones</a></li>--%>
-<%--                                <li><a data-toggle="tab" href="#tab1">Cameras</a></li>--%>
-<%--                                <li><a data-toggle="tab" href="#tab1">Accessories</a></li>--%>
-<%--                            </ul>--%>
-<%--                        </div>--%>
+                        <%--                        <div class="section-nav">--%>
+                        <%--                            <ul class="section-tab-nav tab-nav">--%>
+                        <%--                                <li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>--%>
+                        <%--                                <li><a data-toggle="tab" href="#tab1">Smartphones</a></li>--%>
+                        <%--                                <li><a data-toggle="tab" href="#tab1">Cameras</a></li>--%>
+                        <%--                                <li><a data-toggle="tab" href="#tab1">Accessories</a></li>--%>
+                        <%--                            </ul>--%>
+                        <%--                        </div>--%>
                     </div>
                 </div>
                 <!-- /section title -->

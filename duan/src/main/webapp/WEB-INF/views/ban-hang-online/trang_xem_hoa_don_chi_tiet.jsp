@@ -6,49 +6,49 @@
 <html lang="en">
 <head>
     <%--    table--%>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-        <title>Hóa đơn</title>
-        <%--căn đều--%>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
+    <title>Hóa đơn</title>
+    <%--căn đều--%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
 
 
-        <!-- Google font -->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
-        <!-- Bootstrap -->
-        <link type="text/css" rel="stylesheet" href="/cssbanhang/bootstrap.min.css"/>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/cssbanhang/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <!-- Google font -->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
-        <!-- Slick -->
-        <link type="text/css" rel="stylesheet" href="/cssbanhang/slick.css"/>
-        <link type="text/css" rel="stylesheet" href="/cssbanhang/slick-theme.css"/>
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="/cssbanhang/slick.css"/>
+    <link type="text/css" rel="stylesheet" href="/cssbanhang/slick-theme.css"/>
 
-        <!-- nouislider -->
-        <link type="text/css" rel="stylesheet" href="/cssbanhang/nouislider.min.css"/>
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="/cssbanhang/nouislider.min.css"/>
 
-        <!-- Font Awesome Icon -->
-        <link rel="stylesheet" href="/cssbanhang/font-awesome.min.css">
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="/cssbanhang/font-awesome.min.css">
 
-        <!-- Custom stlylesheet -->
-        <link type="text/css" rel="stylesheet" href="/cssbanhang/style.css"/>
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/cssbanhang/style.css"/>
 
-        <%--    select 2--%>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
-        <link rel="stylesheet"
-              href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
-        <link rel="stylesheet"
-              href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+    <%--    select 2--%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 
 
     <style>
@@ -97,6 +97,7 @@
             background-color: #007bff;
             color: #fff;
         }
+
         .input-with-button {
             display: flex; /* Sử dụng flexbox để căn chỉnh nút bên trong input */
             border: 1px solid #ccc; /* Tạo đường viền xung quanh hộp tìm kiếm */
@@ -117,6 +118,30 @@
             border: none; /* Loại bỏ đường viền của nút */
             padding: 10px 20px; /* Đặt khoảng cách nội dung bên trong nút */
             cursor: pointer; /* Biến con trỏ thành bàn tay khi trỏ vào nút */
+        }
+
+        .cart-dropdown {
+            border-radius: 10px;
+            width: 180px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .cart-dropdown a {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            text-decoration: none;
+            text-align: center;
+            color: #fff;
+            background-color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .cart-dropdown a:hover {
+            background-color: #0056b3;
         }
     </style>
 
@@ -152,18 +177,18 @@
                                                value="${idkhachhang}">
                                     </span>
                             </a>
-                            <div class="cart-dropdown" style="border-radius: 10px;width: 3.5cm;margin-top: 10px">
+                            <div class="cart-dropdown"
+                                 style="border-radius: 10px;width: 3.5cm;margin-top: 10px;width: 180px">
                                 <div>
                                     <div>
-                                        Tài khoản của tôi
+                                        <a href="#" class="btn btn-primary">Tài khoản của tôi</a>
                                     </div>
-
-                                    <form action="/ban-hang-online/hoa-don-online" method="post">
-                                        <input name="idkh" value="${idkhachhang}" style="display: none">
-                                        <button type="submit">Đơn hàng</button>
-                                    </form>
                                     <div>
-                                        Đăng xuất
+                                        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}"
+                                           class="btn btn-primary">Đơn hàng</a>
+                                    </div>
+                                    <div>
+                                        <a href="/logout" class="btn btn-primary" style="" onclick="">Đăng xuất</a>
                                     </div>
                                 </div>
                             </div>
@@ -185,10 +210,8 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
-                            <%--							<img src="../../img/logo.png" alt="">--%>
-                            <img src="/img/logo.png" alt="">
-                        </a>
+                        <h2 class="logo" style="margin: 20px;color: white;font-family: 'Times New Roman'">GPhoneS
+                            Store</h2>
                     </div>
                 </div>
                 <!-- /LOGO -->
@@ -278,11 +301,7 @@
                                         <span>Giỏ hàng</span>
                                         <div class="qty">0</div>
                                     </a>
-                                    <div class="cart-dropdown">
-                                        <div class="cart-list">
-
-
-                                        </div>
+                                    <div class="cart-dropdown" style="width: 500px;">
                                         <div class="cart-summary">
                                             <small> 0 Sản phẩm được chọn</small>
                                             <h5>Tổng:0 đ</h5>

@@ -83,7 +83,7 @@
         }
 
         /* Tạo một giao diện tùy chỉnh cho label */
-        label {
+        .lb {
             display: inline-block;
             padding: 5px 10px;
             background-color: #e0e0e0;
@@ -192,6 +192,30 @@
             padding: 10px 20px; /* Đặt khoảng cách nội dung bên trong nút */
             cursor: pointer; /* Biến con trỏ thành bàn tay khi trỏ vào nút */
         }
+
+        .cart-dropdown {
+            border-radius: 10px;
+            width: 180px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .cart-dropdown a {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            text-decoration: none;
+            text-align: center;
+            color: #fff;
+            background-color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .cart-dropdown a:hover {
+            background-color: #0056b3;
+        }
     </style>
 
 </head>
@@ -228,18 +252,18 @@
                                                value="${idkhachhang}">
                                     </span>
                             </a>
-                            <div class="cart-dropdown" style="border-radius: 10px;width: 3.5cm;margin-top: 10px">
+                            <div class="cart-dropdown"
+                                 style="border-radius: 10px;width: 3.5cm;margin-top: 10px;width: 180px">
                                 <div>
                                     <div>
-                                        Tài khoản của tôi
+                                        <a href="#" class="btn btn-primary">Tài khoản của tôi</a>
                                     </div>
-
-                                    <form action="/ban-hang-online/hoa-don-online" method="post">
-                                        <input name="idkh" value="${idkhachhang}" style="display: none">
-                                        <button type="submit">Đơn hàng</button>
-                                    </form>
                                     <div>
-                                        Đăng xuất
+                                        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}"
+                                           class="btn btn-primary">Đơn hàng</a>
+                                    </div>
+                                    <div>
+                                        <a href="/logout" class="btn btn-primary" style="" onclick="">Đăng xuất</a>
                                     </div>
                                 </div>
                             </div>
@@ -261,10 +285,8 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
-                            <%--							<img src="../../img/logo.png" alt="">--%>
-                            <img src="/img/logo.png" alt="">
-                        </a>
+                        <h2 class="logo" style="margin: 20px;color: white;font-family: 'Times New Roman'">GPhoneS
+                            Store</h2>
                     </div>
                 </div>
                 <!-- /LOGO -->
@@ -313,15 +335,12 @@
                                                 <br>
                                                 <div style="border: 1px solid;height: 2cm">
                                                     <div style="width: 80%;float: right">
-
-                                                        <a href="#">
-                                                            Sản
-                                                            phẩm:${ht.chiTietSanPham.sanPham.ten},Rom:${ht.chiTietSanPham.rom.dungLuong},Màu:${ht.chiTietSanPham.mauSac.ten}.
-                                                        </a>
+                                                        <label style="font-weight: bold">Sản
+                                                            phẩm:</label>${ht.chiTietSanPham.sanPham.ten}-
+                                                            ${ht.chiTietSanPham.rom.dungLuong}-${ht.chiTietSanPham.mauSac.ten}.
                                                         <br>
-                                                        Số lượng:${ht.soLuong}<br>
-                                                            ${ht.donGiaKhiGiam}đ-<label
-                                                            style="text-decoration: line-through;background-color: white;border: 1px solid white">${ht.donGia}</label>đ
+                                                        <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
+                                                        <label style="tbackground-color: white;border: 1px solid white">${ht.donGiaKhiGiam}đ</label>
                                                     </div>
                                                     <div style="width: 18%;">
                                                         <input type="checkbox" name="checkidghTT" value="${ht.id}"
@@ -358,11 +377,7 @@
                                         <span>Giỏ hàng</span>
                                         <div class="qty">0</div>
                                     </a>
-                                    <div class="cart-dropdown">
-                                        <div class="cart-list">
-
-
-                                        </div>
+                                    <div class="cart-dropdown" style="width: 500px;">
                                         <div class="cart-summary">
                                             <small> 0 Sản phẩm được chọn</small>
                                             <h5>Tổng:0 đ</h5>
@@ -444,7 +459,7 @@
     <p id="vt"></p>
     <div style="position: absolute;margin-left: 55%;width: 43%;margin-top: 8%;z-index: 2">
         <p style="display: none" id="tenspctsp">${motctsp.sanPham.ten}</p>
-        <label style="font-weight: bold">Màu sắc</label>
+        <label style="font-weight: bold" class="lb">Màu sắc</label>
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
 
             <c:if test="${stt1.index==0}">
@@ -481,7 +496,7 @@
         </c:forEach>
         <br>
         <br>
-        <label style="font-weight: bold">Rom</label>
+        <label style="font-weight: bold" class="lb">Rom</label>
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
 
             <c:if test="${stt1.index==0}">
@@ -514,10 +529,9 @@
                 </c:if>
             </c:if>
         </c:forEach>
-
         <br>
         <br>
-        <label style="font-weight: bold">Ram</label>
+        <label style="font-weight: bold" class="lb">Ram</label>
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
             <c:if test="${stt1.index==0}">
                 <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
@@ -549,10 +563,9 @@
             </c:if>
 
         </c:forEach>
-
         <br>
         <br>
-        <label style="font-weight: bold">Chip</label>
+        <label style="font-weight: bold" class="lb">Chip</label>
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
             <c:if test="${stt1.index==0}">
                 <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
@@ -584,7 +597,6 @@
             </c:if>
 
         </c:forEach>
-
     </div>
 </div>
 
@@ -726,10 +738,7 @@
                     </div>
 
                     <div class="row">
-                        <button
-
-                                Xem thêm cấu hình chi tiết
-                        </button>
+                        <button class=" btn btn-info">Xem thêm cấu hình chi tiết</button>
                     </div>
                     </p>
 
@@ -1027,7 +1036,6 @@
         <!-- /row -->
     </div>
     <!-- /container -->
-    </div>
     <!-- /SECTION -->
 
 </main>

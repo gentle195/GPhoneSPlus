@@ -13,6 +13,6 @@
 <body>
 <h1 style="text-align: center; color: red; font-weight: bold"> <i class="fa fa-times-circle text-danger"></i> Lỗi:</h1>
 
-<h1 style="text-align: center; color: red; font-weight: bold">Bạn không được phân quyền để vào trang !</h1>
+<h1 style="text-align: center; color: red; font-weight: bold">Tài khoản của bạn chưa được cấp quyền vào chức năng này!</h1>
 </body>
 </html>
