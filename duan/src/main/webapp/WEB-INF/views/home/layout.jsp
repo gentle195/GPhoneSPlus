@@ -170,6 +170,8 @@
                         <li><a href="/thong-ke/hien-thi">Doanh Thu theo tháng</a></li>
                         <li><a href="/thong-ke/hien-thi-sp">Doanh thu theo sản phẩm</a></li>
                         <li><a href="/thong-ke/hien-thi-hang">Doanh thu theo hãng</a></li>
+                        <li><a href="/thong-ke/hien-thi-khach-hang">Doanh thu khách hàng</a></li>
+                        <li><a href="/thong-ke/hien-thi-nhan-vien">Doanh thu nhân viên</a></li>
                     </ul>
                 </li>
             </ul>
