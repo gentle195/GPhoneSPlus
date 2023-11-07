@@ -7,7 +7,7 @@
 <html lang="en">
 <body>
 
-<table class="table table-borderless">
+<table class="table table-bordered">
     <thead>
     <tr>
         <th>STT</th>
@@ -21,14 +21,12 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${listhdkh}" var="ht" varStatus="stt" >
+    <c:forEach items="${listhdkh}" var="ht" varStatus="stt">
         <tr>
-            <td>${stt.index}</td>
+            <td>${stt.index+1}</td>
             <td>${ht.ma}</td>
             <td>${ht.ngayTao}</td>
-            <td>Quận:${ht.diaChi.quan},<br>
-                Huyện:${ht.diaChi.huyen},<br>
-                Thành phố:${ht.diaChi.thanhPho}</td>
+            <td>${ht.diaChi.diaChi},${ht.diaChi.quan},${ht.diaChi.huyen},${ht.diaChi.thanhPho}</td>
             <td>
                 <c:if test="${ht.tinhTrang==0}">
                     <p>Chờ xử lý</p>
@@ -68,22 +66,26 @@
 
             <td>
                 <c:if test="${ht.tinhTrang==0}">
-                    <a class="btn btn-primary" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">xem</a>|
-                    <%--                    <a class="btn btn-primary" href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}">HỦy</a>--%>
-                    <a class="btn btn-primary" onclick="huyhoadonkhachhang('${ht.id}')">HỦy</a>
+                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Xem thông
+                        tin chi tiết</a>
+                    <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>
                 </c:if>
                 <c:if test="${ht.tinhTrang==1}">
-                    <a class="btn btn-primary" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">xem</a>|
-                    <a class="btn btn-primary" onclick="huyhoadonkhachhang('${ht.id}')">HỦy</a>
+                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Xem thông
+                        tin chi tiết</a>
+                    <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>
                 </c:if>
                 <c:if test="${ht.tinhTrang==2}">
-                    <a class="btn btn-primary" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">xem</a>|
+                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Xem thông
+                        tin chi tiết</a>
                 </c:if>
                 <c:if test="${ht.tinhTrang==3}">
-                    <a class="btn btn-primary" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">xem</a>|
+                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Xem thông
+                        tin chi tiết</a>
                 </c:if>
                 <c:if test="${ht.tinhTrang==8}">
-                    <a class="btn btn-primary" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">xem</a>|
+                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Xem thông
+                        tin chi tiết</a>
                 </c:if>
             </td>
         </tr>

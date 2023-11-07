@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.*;
 import com.example.demo.services.*;
+import com.example.demo.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -137,9 +138,9 @@ public class BanHangTaiQuayController {
             model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
             return "home/layout";
         }
-        NhanVien nhanVien = dataIntermediateService.getSharedDataNhanVien();
+        NhanVien nhanVien = nhanVienService.findById(SecurityUtil.getId().getId());
         HoaDon hd = new HoaDon();
-        hd.setMa("HD" + String.valueOf(hoaDonService.findAll().size() + 1));
+        hd.setMa("HD" + (String.valueOf(hoaDonService.findAll().size() + 1)));
         hd.setTinhTrang(0);
         hd.setLoai(0);
         hd.setNgayTao(Date.valueOf(LocalDate.now()));
@@ -248,10 +249,12 @@ public class BanHangTaiQuayController {
             }
             hd.setTinhTrang(8);
             hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+            hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
             hoaDonService.update(id, hd);
         } else {
             hd.setTinhTrang(8);
             hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+            hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
             hoaDonService.update(id, hd);
         }
         return "redirect:/ban-hang/hien-thi";
@@ -322,6 +325,7 @@ public class BanHangTaiQuayController {
             ) {
                 total = total.add(hd.getDonGia());
                 hoaDonnn.setTongTien(total);
+                hoaDonnn.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
             }
             hoaDonService.update(hoaDonnn.getId(), hoaDonnn);
             System.out.println(total);
@@ -350,6 +354,7 @@ public class BanHangTaiQuayController {
             ) {
                 total = total.add(hd.getDonGia());
                 hoaDonnn.setTongTien(total);
+                hoaDonnn.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
             }
             hoaDonService.update(hoaDonnn.getId(), hoaDonnn);
             System.out.println(total);
@@ -385,18 +390,18 @@ public class BanHangTaiQuayController {
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         ct.setNgayCapNhat(date);
+        chiTietSanPhamService.update1(ct);
+        imeiService.updatImei1(date, id);
+        hoaDonChiTietService.delete(id);
         if (ct.getSoLuong() > 0) {
             ct.setTinhTrang(0);
         }
-        chiTietSanPhamService.update1(ct);
-        imeiService.updatImei1(date, id);
-        hoaDonChiTietService.updateTinhTrangDelete(id);
         List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId());
         if (list.isEmpty()) {
             hoaDonnn.setTongTien(BigDecimal.ZERO);
             hoaDonnn.setTinhTrang(0);
             hoaDonnn.setMa(hoaDonnn.getMa());
-            hoaDonnn.setNhanVien(dataIntermediateService.getSharedDataNhanVien());
+            hoaDonnn.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
         } else {
             // Tính tổng đơn giá trong list hóa đơn chi tiết còn lại
             BigDecimal subTotal = list.stream()
@@ -406,8 +411,9 @@ public class BanHangTaiQuayController {
             // Set tổng tiền bằng tổng đơn giá trong list hóa đơn chi tiết còn lại
             total = subTotal;
             hoaDonnn.setTongTien(subTotal);
-            hoaDonnn.setNhanVien(dataIntermediateService.getSharedDataNhanVien());
+            hoaDonnn.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
         }
+
         System.out.println(total);
         hoaDonService.update(hoaDonnn.getId(), hoaDonnn);
         model.addAttribute("tong", String.valueOf(total));
@@ -582,6 +588,7 @@ public class BanHangTaiQuayController {
                 ) {
                     total = total.add(hd.getDonGia());
                     hoaDonnn.setTongTien(total);
+                    hoaDonnn.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
                 }
                 hoaDonService.update(hoaDonnn.getId(), hoaDonnn);
                 System.out.println(total);
@@ -611,6 +618,7 @@ public class BanHangTaiQuayController {
                 ) {
                     total = total.add(hd.getDonGia());
                     hoaDonnn.setTongTien(total);
+                    hoaDonnn.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
                 }
                 hoaDonService.update(hoaDonnn.getId(), hoaDonnn);
                 System.out.println(total);
@@ -693,9 +701,9 @@ public class BanHangTaiQuayController {
 
     @ResponseBody
     @GetMapping("/search-hoa-don-chi-tiet")
-    public List<HoaDonChiTiet> searchHoaDonChiTiet(Model model,@RequestParam("search-hoa-don-chi-tiet") String search,
-                                                   @ModelAttribute("HoaDon") HoaDon hoaDon, @ModelAttribute("modalAddKhachHang") KhachHang khachHang){
-        List<HoaDonChiTiet> listHoaDonChiTiets = hoaDonChiTietService.searchHDCTBanHangTaiQuay(idHoaDon,search);
+    public List<HoaDonChiTiet> searchHoaDonChiTiet(Model model, @RequestParam("search-hoa-don-chi-tiet") String search,
+                                                   @ModelAttribute("HoaDon") HoaDon hoaDon, @ModelAttribute("modalAddKhachHang") KhachHang khachHang) {
+        List<HoaDonChiTiet> listHoaDonChiTiets = hoaDonChiTietService.searchHDCTBanHangTaiQuay(idHoaDon, search);
         model.addAttribute("HoaDon", hoaDonnn);
         List<HoaDon> list = hoaDonService.find();
         model.addAttribute("listHoaDon", list);

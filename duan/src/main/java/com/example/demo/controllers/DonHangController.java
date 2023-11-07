@@ -16,6 +16,7 @@ import com.example.demo.services.IMEIService;
 import com.example.demo.services.KhachHangService;
 import com.example.demo.services.NhanVienService;
 import com.example.demo.services.QuyDoiService;
+import com.example.demo.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -278,7 +279,7 @@ public class DonHangController {
     public String Update(Model model, @PathVariable("id") UUID id,
                          @ModelAttribute("donHang") HoaDon hoaDon) {
         if (hoaDon.getTinhTrang() == 2) {
-            hoaDon.setNhanVien(dataIntermediateService.getSharedDataNhanVien());
+            hoaDon.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
             hoaDon.setKhachHang(hoaDonnn.getKhachHang());
             hoaDon.setLoai(hoaDonnn.getLoai());
             hoaDon.setHinhThucThanhToan(hoaDonnn.getHinhThucThanhToan());
@@ -302,7 +303,7 @@ public class DonHangController {
                 hoaDonService.update(id, hoaDon);
             }
         } else {
-            hoaDon.setNhanVien(nhanVienService.nhanVienUpdateHoaDon(id));
+            hoaDon.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
             hoaDon.setKhachHang(hoaDonnn.getKhachHang());
             hoaDon.setId(id);
             hoaDon.setNgayCapNhat(Date.valueOf(LocalDate.now()));
@@ -322,7 +323,7 @@ public class DonHangController {
     public String xacNhan(Model model, @PathVariable("id") UUID id) {
         HoaDon hd = hoaDonService.findById(id);
         hd.setTinhTrang(1);
-        hd.setNhanVien(dataIntermediateService.getSharedDataNhanVien());
+        hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
         hd.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         hoaDonService.update(id, hd);
         idHoaDon = id;

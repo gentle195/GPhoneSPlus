@@ -19,8 +19,9 @@
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="hoa-don/hien-thi" role="tab"
                aria-controls="description" aria-selected="true">Thông tin hóa đơn</a>
         </li>
+
         <li class="nav-item">
-            <a class="nav-link" href="/hoa-don/view-add" role="tab">Thêm hóa đơn chờ</a>
+            <a class="nav-link" href="/hoa-don/add" role="tab">Thêm hóa đơn chờ</a>
         </li>
     </ul>
 </div>
@@ -338,62 +339,62 @@
                     <br>
                     <br>
                     <%--phân trang--%>
-<%--                    <c:if test="${dem==0}">--%>
-<%--                        <div align="center">--%>
-<%--                            <div class="btn-group" role="group" aria-label="Basic example">--%>
-<%--                                <ul class="pagination justify-content-center pagination-lg">--%>
-<%--                                    <li class="page-item"><a class="page-link" href="/hoa-don/hien-thi?pageNum=0"><</a>--%>
-<%--                                    </li>--%>
-<%--                                    <c:forEach begin="1" end="${total}" varStatus="status">--%>
-<%--                                        <li class="page-item">--%>
-<%--                                            <a href="${pageContext.request.contextPath}/hoa-don/hien-thi?pageNum=${status.index -1}"--%>
-<%--                                               class="page-link">${status.index}</a>--%>
-<%--                                        </li>--%>
-<%--                                    </c:forEach>--%>
-<%--                                    <li class="page-item"><a class="page-link"--%>
-<%--                                                             href="/hoa-don/hien-thi?pageNum=${total-1}">></a>--%>
-<%--                                    </li>--%>
-<%--                                </ul>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </c:if>--%>
-<%--                    <c:if test="${dem==1}">--%>
-<%--                        <div align="center">--%>
-<%--                            <div class="btn-group" role="group" aria-label="Basic example">--%>
-<%--                                <ul class="pagination justify-content-center pagination-lg">--%>
-<%--                                    <li class="page-item"><a class="page-link" href="/hoa-don/search?pageNum=0"><</a>--%>
-<%--                                    </li>--%>
-<%--                                    <c:forEach begin="1" end="${total}" varStatus="status">--%>
-<%--                                        <li class="page-item">--%>
-<%--                                            <a href="${pageContext.request.contextPath}/hoa-don/search?pageNum=${status.index -1}"--%>
-<%--                                               class="page-link">${status.index}</a>--%>
-<%--                                        </li>--%>
-<%--                                    </c:forEach>--%>
-<%--                                    <li class="page-item"><a class="page-link"--%>
-<%--                                                             href="/hoa-don/search?pageNum=${total-1}">></a>--%>
-<%--                                    </li>--%>
-<%--                                </ul>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </c:if>--%>
-<%--                    <c:if test="${dem==2}">--%>
-<%--                        <div align="center">--%>
-<%--                            <div class="btn-group" role="group" aria-label="Basic example">--%>
-<%--                                <ul class="pagination justify-content-center pagination-lg">--%>
-<%--                                    <li class="page-item"><a class="page-link" href="/hoa-don/loc?pageNum=0"><</a></li>--%>
-<%--                                    <c:forEach begin="1" end="${total}" varStatus="status">--%>
-<%--                                        <li class="page-item">--%>
-<%--                                            <a href="${pageContext.request.contextPath}/hoa-don/loc?pageNum=${status.index -1}"--%>
-<%--                                               class="page-link">${status.index}</a>--%>
-<%--                                        </li>--%>
-<%--                                    </c:forEach>--%>
-<%--                                    <li class="page-item"><a class="page-link"--%>
-<%--                                                             href="/hoa-don/loc?pageNum=${total-1}">></a>--%>
-<%--                                    </li>--%>
-<%--                                </ul>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </c:if>--%>
+                    <%--                    <c:if test="${dem==0}">--%>
+                    <%--                        <div align="center">--%>
+                    <%--                            <div class="btn-group" role="group" aria-label="Basic example">--%>
+                    <%--                                <ul class="pagination justify-content-center pagination-lg">--%>
+                    <%--                                    <li class="page-item"><a class="page-link" href="/hoa-don/hien-thi?pageNum=0"><</a>--%>
+                    <%--                                    </li>--%>
+                    <%--                                    <c:forEach begin="1" end="${total}" varStatus="status">--%>
+                    <%--                                        <li class="page-item">--%>
+                    <%--                                            <a href="${pageContext.request.contextPath}/hoa-don/hien-thi?pageNum=${status.index -1}"--%>
+                    <%--                                               class="page-link">${status.index}</a>--%>
+                    <%--                                        </li>--%>
+                    <%--                                    </c:forEach>--%>
+                    <%--                                    <li class="page-item"><a class="page-link"--%>
+                    <%--                                                             href="/hoa-don/hien-thi?pageNum=${total-1}">></a>--%>
+                    <%--                                    </li>--%>
+                    <%--                                </ul>--%>
+                    <%--                            </div>--%>
+                    <%--                        </div>--%>
+                    <%--                    </c:if>--%>
+                    <%--                    <c:if test="${dem==1}">--%>
+                    <%--                        <div align="center">--%>
+                    <%--                            <div class="btn-group" role="group" aria-label="Basic example">--%>
+                    <%--                                <ul class="pagination justify-content-center pagination-lg">--%>
+                    <%--                                    <li class="page-item"><a class="page-link" href="/hoa-don/search?pageNum=0"><</a>--%>
+                    <%--                                    </li>--%>
+                    <%--                                    <c:forEach begin="1" end="${total}" varStatus="status">--%>
+                    <%--                                        <li class="page-item">--%>
+                    <%--                                            <a href="${pageContext.request.contextPath}/hoa-don/search?pageNum=${status.index -1}"--%>
+                    <%--                                               class="page-link">${status.index}</a>--%>
+                    <%--                                        </li>--%>
+                    <%--                                    </c:forEach>--%>
+                    <%--                                    <li class="page-item"><a class="page-link"--%>
+                    <%--                                                             href="/hoa-don/search?pageNum=${total-1}">></a>--%>
+                    <%--                                    </li>--%>
+                    <%--                                </ul>--%>
+                    <%--                            </div>--%>
+                    <%--                        </div>--%>
+                    <%--                    </c:if>--%>
+                    <%--                    <c:if test="${dem==2}">--%>
+                    <%--                        <div align="center">--%>
+                    <%--                            <div class="btn-group" role="group" aria-label="Basic example">--%>
+                    <%--                                <ul class="pagination justify-content-center pagination-lg">--%>
+                    <%--                                    <li class="page-item"><a class="page-link" href="/hoa-don/loc?pageNum=0"><</a></li>--%>
+                    <%--                                    <c:forEach begin="1" end="${total}" varStatus="status">--%>
+                    <%--                                        <li class="page-item">--%>
+                    <%--                                            <a href="${pageContext.request.contextPath}/hoa-don/loc?pageNum=${status.index -1}"--%>
+                    <%--                                               class="page-link">${status.index}</a>--%>
+                    <%--                                        </li>--%>
+                    <%--                                    </c:forEach>--%>
+                    <%--                                    <li class="page-item"><a class="page-link"--%>
+                    <%--                                                             href="/hoa-don/loc?pageNum=${total-1}">></a>--%>
+                    <%--                                    </li>--%>
+                    <%--                                </ul>--%>
+                    <%--                            </div>--%>
+                    <%--                        </div>--%>
+                    <%--                    </c:if>--%>
                 </div>
             </div>
         </div>
