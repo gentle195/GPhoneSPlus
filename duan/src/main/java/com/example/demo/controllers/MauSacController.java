@@ -95,7 +95,8 @@ public class MauSacController {
     public String updateRam(Model model, @PathVariable("id") UUID id, @ModelAttribute("mauSac") @Valid MauSac mauSac,
                             BindingResult bindingResult, @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
         if (bindingResult.hasErrors()) {
-            return "../mausac/mau-sac-update.jsp";
+            model.addAttribute("contentPage", "../mausac/mau-sac-update.jsp");
+            return "home/layout";
         }
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
