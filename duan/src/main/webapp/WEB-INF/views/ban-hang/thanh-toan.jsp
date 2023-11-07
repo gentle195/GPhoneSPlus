@@ -128,12 +128,24 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <form:label class="col-sm-1 col-form-label"
+                                                            <form:label class="col-sm-3 col-form-label"
                                                                         path="ghiChu">Ghi Chú:</form:label>
-                                                            <div class="col-sm-11">
+                                                            <div class="col-sm-9">
                                                                 <form:textarea class="form-control" path="ghiChu"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <form:label class="col-sm-3 col-form-label"
+                                                                        path="hinhThucThanhToan">Phương thức thanh toán:</form:label>
+                                                            <div class="col-sm-9">
+                                                                <form:select class="form-control" path="hinhThucThanhToan">
+                                                                    <form:option value="0">Tiền mặt</form:option>
+                                                                    <form:option value="1">Chuyển khoản</form:option>
+                                                                </form:select>
                                                             </div>
                                                         </div>
                                                     </div>

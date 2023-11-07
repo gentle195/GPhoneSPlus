@@ -19,13 +19,17 @@
                aria-controls="description" aria-selected="true">Thông tin Imei</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/imei/view-add" role="tab"  onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin Imei</a>
+            <a class="nav-link" href="/imei/view-add" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin
+                Imei</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/imei/hien-thi-da-ban" role="tab" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Imei đã bán</a>
+            <a class="nav-link" href="/imei/hien-thi-da-ban" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Imei đã bán</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/imei/hien-thi-da-xoa" role="tab" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Imei đã xoá</a>
+            <a class="nav-link" href="/imei/hien-thi-da-xoa" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Imei đã xoá</a>
         </li>
     </ul>
 </div>
@@ -67,7 +71,7 @@
                             <thead>
                             <tr>
                                 <th scope="col">Mã</th>
-                                <th scope="col">Tên sản phẩm</th>
+                                <th scope="col">Sản phẩm</th>
                                 <th scope="col">Số imei</th>
                                 <th scope="col">Mã QR</th>
                                 <th scope="col">Ngày tạo</th>
@@ -82,7 +86,10 @@
                             <c:forEach items="${listImei}" var="imei" varStatus="index">
                                 <tr>
                                     <td>${imei.ma}</td>
-                                    <td>${imei.chiTietSanPham.sanPham.ten}</td>
+                                    <td>${imei.chiTietSanPham.sanPham.ten}-
+                                            ${imei.chiTietSanPham.mauSac.ten}-
+                                            ${imei.chiTietSanPham.ram.dungLuong}-
+                                            ${imei.chiTietSanPham.rom.dungLuong}</td>
                                     <td>${imei.soImei}</td>
                                     <td>
                                         <img src="../maqr/${imei.maQr}" width="70" height="70">

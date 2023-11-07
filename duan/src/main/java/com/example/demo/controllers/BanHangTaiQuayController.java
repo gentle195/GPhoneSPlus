@@ -483,6 +483,7 @@ public class BanHangTaiQuayController {
         hd.setGhiChu(hoaDon.getGhiChu());
         hd.setTinhTrang(2);
         hd.setNgayThanhToan(date);
+        hd.setHinhThucThanhToan(hoaDon.getHinhThucThanhToan());
         List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
         if (!list.isEmpty()) {
             for (HoaDonChiTiet hdct : list
