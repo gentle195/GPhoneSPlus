@@ -519,31 +519,17 @@
                                                      style="text-align: left;word-wrap: break-word;">
                                                     <p class="product-category">Điện thoại</p>
                                                     <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
-                                                    <h4 class="product-price"><span
-                                                            style="font-size:15px">₫</span>${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}-
-                                                        <del class="product-old-price">${ht.giaBan}<span
-                                                                style="font-size:15px">₫</span></del>
+                                                    <h4 class="product-price">${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}<span> ₫</span>
+                                                        <del class="product-old-price" style="float: right">${ht.giaBan}<span>₫</span></del>
                                                     </h4>
-                                                        <%--                                            ${ht.tinhTrang} +  ${ht.sanPham.tinhTrang}--%>
-
-
-                                                    <div class="product-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                    <div class="product-btns">
-                                                        <button class="add-to-wishlist"><i
-                                                                class="fa fa-heart-o"></i><span class="tooltipp">Thêm vào danh sách yêu thích</span>
-                                                        </button>
-                                                        <button class="add-to-compare"><i
-                                                                class="fa fa-exchange"></i><span class="tooltipp">Thêm để so sánh</span>
+                                                    <div class="product-rating"></div>
+                                                    <div class="product-btns" align="center">
+                                                        <button class="add-to-compare"><a href="/homes"><i
+                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Thêm để so sánh</span>
                                                         </button>
                                                         <button class="quick-view"><a
                                                                 href="/ban-hang-online/chi-tiet-san-pham/${ht.id}"><i
-                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Xem chi tiết</span>
+                                                                class="fa fa-eye"></i></a><span class="tooltipp">Xem chi tiết</span>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -625,34 +611,21 @@
                                                      style="text-align: left;word-wrap: break-word;">
                                                     <p class="product-category">Điện thoại</p>
                                                     <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
-                                                    <h4 class="product-price"><span
-                                                            style="font-size:15px">₫</span>${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}-
-                                                        <del class="product-old-price">${ht.giaBan}<span
-                                                                style="font-size:15px">₫</span></del>
+                                                    <h4 class="product-price">${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}<span> ₫</span>
+                                                        <del class="product-old-price" style="float: right">${ht.giaBan}<span>₫</span></del>
                                                     </h4>
-                                                        <%--                                            ${ht.tinhTrang} +  ${ht.sanPham.tinhTrang}--%>
-
-                                                    <div class="product-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                    <div class="product-btns">
-                                                        <button class="add-to-wishlist"><i
-                                                                class="fa fa-heart-o"></i><span class="tooltipp">Thêm vào danh sách yêu thích</span>
-                                                        </button>
-                                                        <button class="add-to-compare"><i
-                                                                class="fa fa-exchange"></i><span class="tooltipp">Thêm để so sánh</span>
+                                                    <div class="product-rating"></div>
+                                                    <div class="product-btns" align="center">
+                                                        <button class="add-to-compare"><a href="/homes"><i
+                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Thêm để so sánh</span>
                                                         </button>
                                                         <button class="quick-view"><a
                                                                 href="/ban-hang-online/chi-tiet-san-pham/${ht.id}"><i
-                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Xem chi tiết</span>
+                                                                class="fa fa-eye"></i></a><span class="tooltipp">Xem chi tiết</span>
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <div class="add-to-cart">
+                                                <div class="add-to-cart" style="border: 5px royalblue">
                                                     <c:if test="${idkhachhang!='1'}">
                                                         <button class="add-to-cart-btn"
                                                                 onclick="thongbaothemvaogiohang('${ht.id}');"><i
@@ -665,7 +638,8 @@
                                                                     class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
                                                             </button>
                                                         </a>
-                                                    </c:if></div>
+                                                    </c:if>
+                                                </div>
                                             </div>
                                             <!-- /product -->
                                         </c:if>
