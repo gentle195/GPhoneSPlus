@@ -38,7 +38,9 @@
     </div>
     <br>
     <div class="row">
-        <h4 style="color: red;margin: 10px;text-align: center">${thongBaoHoaDon}</h4>
+        <div class="col-12">
+            <h4 style="color: red;margin: 10px;text-align: center">${thongBaoHoaDon}</h4>
+        </div>
     </div>
     <br>
     <c:if test="${HoaDon!=null}">

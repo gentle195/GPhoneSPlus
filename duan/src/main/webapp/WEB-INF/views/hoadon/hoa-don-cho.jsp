@@ -15,138 +15,138 @@
 </head>
 <body>
 
-<div class="main" style="border: 2px solid black; border-radius: 1.8% 0% 0% 0%">
+<div class="main">
     <div>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
             <li class="nav-item">
-                <a href="/hoa-don/hien-thi" class="btn btn-danger btn-icon-text"
-                   tabindex="-1"
-                   role="button">
-                    <i class="ti-reload btn-icon-prepend"></i>
-                    Trang Hóa đơn</a>
+                <a class="nav-link" href="/hoa-don/hien-thi" role="tab"> Thông tin hóa đơn</a>
             </li>
-            <li class="nav-item" style="border-radius: 2%">
-                <a class="nav-link" href="/hoa-don/view-add" role="tab">Thêm hóa đơn chờ</a>
+            <li class="nav-item">
+                <a class="nav-link active" id="description-tab" data-toggle="tab" href="hoa-don/hien-thi" role="tab"
+                   aria-controls="description" aria-selected="true">Thêm hóa đơn chờ</a>
             </li>
+
         </ul>
     </div>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="description" role="tabpanel"
+             aria-labelledby="description-tab">
+            <div class="col-12 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <form:form action="/hoa-don/add" method="post" modelAttribute="hoaDon">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
 
-    <div class="container" style="color: black">
-        <div class="col-12 grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <form:form action="/hoa-don/add" method="post" modelAttribute="hoaDon">
-                        <div class="row" >
-                            <div class="col-md-6">
-                                <div class="form-group row" >
-
-                                    <form:label path="khachHang"
-                                                class="col-sm-3 col-form-label">khách hàng:</form:label>
-                                    <div class="col-sm-9">
-                                        <form:select path="khachHang" items="${listKhachHang}"
-                                                     class="form-control select2"
-                                                     itemLabel="hoTen"
-                                                     itemValue="id" id="searchKhachHang">
-                                        </form:select>
+                                        <form:label path="khachHang"
+                                                    class="col-sm-3 col-form-label">khách hàng:</form:label>
+                                        <div class="col-sm-9">
+                                            <form:select path="khachHang" items="${listKhachHang}"
+                                                         class="form-control select2"
+                                                         itemLabel="hoTen"
+                                                         itemValue="id" id="searchKhachHang">
+                                            </form:select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Nhân viên:
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <form:select path="nhanVien" items="${listNhanVien}"
+                                                         class="form-control select2"
+                                                         itemLabel="hoTen"
+                                                         itemValue="id" id="searchNhanVien">
+                                            </form:select>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Nhân viên:
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">SĐT:</label>
+                                        <div class="col-sm-9">
+                                            <form:input class="form-control" placeholder=""
+                                                        path="sdt"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Tổng tiền:
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <form:input class="form-control" placeholder=""
+                                                        path="tongTien"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="display: none">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                    </div>
+                                    <label class="col-sm-3 col-form-label">Quy đổi:
                                     </label>
-                                    <div class="col-sm-9">
-                                        <form:select path="nhanVien" items="${listNhanVien}"
-                                                     class="form-control select2"
-                                                     itemLabel="hoTen"
-                                                     itemValue="id" id="searchNhanVien">
-                                        </form:select>
-                                        </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Ngày tạo:
+                                            <div id="tb" style="color: crimson;float: right"></div>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <form:input class="form-control" type="date"
+                                                        value="${hoaDon.ngayTao}"
+                                                        placeholder=""
+                                                        path="ngayTao"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">SĐT:</label>
-                                    <div class="col-sm-9">
-                                        <form:input class="form-control" placeholder=""
-                                                    path="sdt"></form:input>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Tổng tiền:
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <form:input class="form-control" placeholder=""
-                                                    path="tongTien"></form:input>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<%--                            <div class="row">--%>
+<%--                                <div class="col-md-6">--%>
+<%--                                    <div class="form-group row">--%>
+<%--                                        <label class="col-sm-3 col-form-label">Ngày nhận:--%>
+<%--                                            <div style="color: crimson;float: right"></div>--%>
+<%--                                        </label>--%>
+<%--                                        <div class="col-sm-9">--%>
+<%--                                            <form:input class="form-control" type="date"--%>
+<%--                                                        value="${hoaDon.ngayNhan}"--%>
+<%--                                                        placeholder=""--%>
+<%--                                                        path="ngayNhan"/>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="col-md-6">--%>
+<%--                                    <div class="form-group row">--%>
+<%--                                        <label class="col-sm-3 col-form-label">Ngày ship:--%>
+<%--                                            <div style="color: crimson;float: right"></div>--%>
+<%--                                        </label>--%>
+<%--                                        <div class="col-sm-9">--%>
+<%--                                            <form:input class="form-control" type="date"--%>
+<%--                                                        value="${hoaDon.ngayShip}"--%>
+<%--                                                        placeholder=""--%>
+<%--                                                        path="ngayShip"/>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
 
-                        <div class="row" style="display: none">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                </div>
-                                <label class="col-sm-3 col-form-label">Quy đổi:
-                                </label>
+                            <div align="center">
+                                <BUTTON type="submit" class="btn btn-warning" style="" id="bt"
+                                        onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                    Thêm hóa đơn
+                                </BUTTON>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Ngày tạo:
-                                        <div id="tb" style="color: crimson;float: right"></div>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <form:input class="form-control" type="date"
-                                                    value="${hoaDon.ngayTao}"
-                                                    placeholder=""
-                                                    path="ngayTao"></form:input>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Ngày nhận:
-                                        <div style="color: crimson;float: right"></div>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <form:input class="form-control" type="date"
-                                                    value="${hoaDon.ngayNhan}"
-                                                    placeholder=""
-                                                    path="ngayNhan"></form:input>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Ngày ship:
-                                        <div style="color: crimson;float: right"></div>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <form:input class="form-control" type="date"
-                                                    value="${hoaDon.ngayShip}"
-                                                    placeholder=""
-                                                    path="ngayShip"></form:input>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div align="center">
-                            <BUTTON type="submit" class="btn btn-warning" style="" id="bt"
-                                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                add
-                            </BUTTON>
-                        </div>
-                    </form:form>
+                        </form:form>
+                    </div>
                 </div>
             </div>
         </div>

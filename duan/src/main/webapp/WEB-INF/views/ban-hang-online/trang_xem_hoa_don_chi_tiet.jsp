@@ -46,10 +46,6 @@
           href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
-
 
     <style>
         /* CSS cho modal */
@@ -84,13 +80,7 @@
         }
 
         /* Tạo một giao diện tùy chỉnh cho label */
-        label {
-            display: inline-block;
-            padding: 5px 10px;
-            background-color: #e0e0e0;
-            border: 1px solid #ccc;
-            cursor: pointer;
-        }
+
 
         /* Khi label được nhấp vào, thay đổi màu nền để biểu thị lựa chọn */
         input[type="radio"]:checked + label {
@@ -144,7 +134,6 @@
             background-color: #0056b3;
         }
     </style>
-
 </head>
 
 <body>
@@ -232,15 +221,9 @@
                 <!-- ACCOUNT -->
                 <div class="col-md-3 clearfix">
                     <div class="header-ctn">
-                        <!-- Wishlist -->
                         <div>
 
                         </div>
-                        <!-- /Wishlist -->
-
-                        <!-- Cart -->
-
-
                         <div class="dropdown" id="giohangtrangchu">
                             <c:if test="${idkhachhang!='1'}">
                                 <c:if test="${listghct.size()>0}">
@@ -256,15 +239,13 @@
                                                 <br>
                                                 <div style="border: 1px solid;height: 2cm">
                                                     <div style="width: 80%;float: right">
+                                                        <label style="font-weight: bold">Sản
+                                                            phẩm:</label>${ht.chiTietSanPham.sanPham.ten}-
+                                                            ${ht.chiTietSanPham.rom.dungLuong}-${ht.chiTietSanPham.mauSac.ten}.
 
-                                                        <a href="#">
-                                                            Sản
-                                                            phẩm:${ht.chiTietSanPham.sanPham.ten},Rom:${ht.chiTietSanPham.rom.dungLuong},Màu:${ht.chiTietSanPham.mauSac.ten}.
-                                                        </a>
                                                         <br>
-                                                        Số lượng:${ht.soLuong}<br>
-                                                            ${ht.donGiaKhiGiam}đ-<label
-                                                            style="text-decoration: line-through;background-color: white;border: 1px solid white">${ht.donGia}</label>đ
+                                                        <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
+                                                        <label style="tbackground-color: white;border: 1px solid white">${ht.donGiaKhiGiam}đ</label>
                                                     </div>
                                                     <div style="width: 18%;">
                                                         <input type="checkbox" name="checkidghTT" value="${ht.id}"
@@ -378,132 +359,166 @@
 </nav>
 <!-- /NAVIGATION -->
 
-
-<main style="width: 75%;margin-left: 12.5%;border: 1px solid red " id="contentghct">
+<br>
+<main style="width: 80%;margin-left: 12.5%" id="contentghct" class="shadow p-3 mb-5 bg-body-tertiary rounded">
     <div>
         <br>
         <c:if test="${hd.tinhTrangGiaoHang==0}">
             <c:if test="${hd.tinhTrang!=8}">
-                <button class="btn btn-primary" style="float: right" data-bs-toggle="modal"
+                <button class="btn btn-primary" style="float: right ;margin-right: 65px" data-bs-toggle="modal"
                         data-bs-target="#modalthaydoithongtinnhanhang" id="capnhatthongtingiaohang">Thay đổi thông tin
                     nhận hàng
                 </button>
             </c:if>
-
         </c:if>
         <br><br>
-        <table class="table table-borderless">
-            <tbody>
-            <tr>
-
-                <td>
-                    <p>Mã đơn hàng:</p>
-                    <input type="text" value="${hd.ma}" disabled style="width: 97%">
-                </td>
-                <td>
-                    <p>Người mua:</p>
-                    <input type="text" value="${hd.khachHang.hoTen}" disabled style="width: 97%">
-                </td>
-                <td>
-                    <p>Email:</p>
-                    <input type="text" value="${hd.khachHang.email}" disabled style="width: 97%">
-                </td>
-            </tr>
-
-            <tr>
-
-                <td>
-                    <p>Ngày mua:</p>
-                    <input type="text" value="${hd.ngayTao}" disabled style="width: 97%">
-                </td>
-                <td>
-                    <p>Số điện thoại:</p>
-                    <input type="text" value="${hd.sdt}" disabled style="width: 97%">
-                </td>
-                <td>
-                    <p>Tổng tiền:</p>
-                    <input type="text" value="${hd.tongTien} VNĐ" disabled style="width: 97%">
-                </td>
-            </tr>
-
-            <tr>
-
-                <td>
-                    <p>Phương thức thanh toán:</p>
-                    <c:if test="${hd.hinhThucThanhToan==2}">
-                        <input type="text" value="Chưa chọn" disabled style="width: 97%">
-                    </c:if>
-                    <c:if test="${hd.hinhThucThanhToan==0}">
-                        <input type="text" value="Tiền mặt" disabled style="width: 97%">
-                    </c:if>
-                    <c:if test="${hd.hinhThucThanhToan==1}">
-                        <input type="text" value="Chuyển khoản" disabled style="width: 97%">
-                    </c:if>
-                </td>
-                <td>
-                    <p>Trạng thái:</p>
-                    <c:if test="${hd.tinhTrang==0}">
-                        <input type="text" value="Chờ xử lý" disabled style="width: 97%">
-                    </c:if>
-                    <c:if test="${hd.tinhTrang==1}">
-                        <input type="text" value="Đã xác nhận" disabled style="width: 97%">
-                    </c:if>
-                    <c:if test="${hd.tinhTrang==2}">
-                        <input type="text" value="Đã Thanh toán" disabled style="width: 97%">
-                    </c:if>
-                    <c:if test="${hd.tinhTrang==3}">
-                        <input type="text" value="Chờ thanh toán" disabled style="width: 97%">
-                    </c:if>
-                    <c:if test="${hd.tinhTrang==8}">
-                        <input type="text" value="Đã hủy" disabled style="width: 97%">
-                    </c:if>
-                </td>
-                <td>
-                    <p>Trạng thái giao hàng:</p>
-                    <c:if test="${hd.tinhTrangGiaoHang==0}">
-                        <input type="text" value="Chờ xử lý" disabled style="width: 97%">
-                    </c:if>
-                    <c:if test="${hd.tinhTrangGiaoHang!=0}">
-                        <input type="text" value="Chưa tìm hiểu" disabled style="width: 97%">
-                    </c:if>
-
-                </td>
-
-            </tr>
-            <tr>
-
-                <td colspan="3">
-                    <p>Địa chỉ nhận hàng:</p>
-                    <textarea type="text" disabled style="width: 100%;height: 2cm">
-                  Quận:${hd.diaChi.quan},Huyện:${hd.diaChi.huyen},Thành phố:${hd.diaChi.thanhPho}
-                </textarea>
-
-
-                </td>
-
-
-            </tr>
-
-
-            </tbody>
-        </table>
+        <div class="row" style="margin-left: 5%;width: 90%">
+            <div class="col-6">
+                <div class="row" style="margin: 20px">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-label" style="padding: 5px">Mã đơn hàng:</label>
+                        <div class="col-sm-9">
+                            <input type="text" value="${hd.ma}" disabled style="width: 97%" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-label" style="padding: 5px">Người mua:</label>
+                        <div class="col-sm-9">
+                            <input type="text" value="${hd.khachHang.hoTen}" disabled style="width: 97%"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-label" style="padding: 5px">SĐT giao hàng:</label>
+                        <div class="col-sm-9">
+                            <input type="text" value="${hd.sdt}" disabled style="width: 97%" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row" style="margin: 20px">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-label" style="padding: 5px">Ngày mua:</label>
+                        <div class="col-sm-9">
+                            <input type="text" value="${hd.ngayTao}" disabled style="width: 97%" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-label" style="padding: 5px">Địa chỉ nhận hàng:</label>
+                        <div class="col-sm-9">
+                            <input type="text"
+                                   value="${hd.diaChi.diaChi},${hd.diaChi.quan},${hd.diaChi.huyen},${hd.diaChi.thanhPho}"
+                                   disabled style="width: 97%"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-label" style="padding: 5px">Tổng tiền:</label>
+                        <div class="col-sm-9">
+                            <input type="text" value="${hd.tongTien} VNĐ" disabled style="width: 97%"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-left: 2.5%;width: 95%">
+            <div class="col-4">
+                <div class="row" style="margin: 20px">
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-label" style="padding: 5px">Phương thức thanh toán:</label>
+                        <div class="col-sm-6">
+                            <c:if test="${hd.hinhThucThanhToan==2}">
+                                <input type="text" value="Chưa chọn" disabled style="width: 97%" class="form-control"/>
+                            </c:if>
+                            <c:if test="${hd.hinhThucThanhToan==0}">
+                                <input type="text" value="Tiền mặt" disabled style="width: 97%" class="form-control"/>
+                            </c:if>
+                            <c:if test="${hd.hinhThucThanhToan==1}">
+                                <input type="text" value="Chuyển khoản" disabled style="width: 97%"
+                                       class="form-control"/>
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="row" style="margin: 20px">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-label" style="padding: 5px">Trạng thái:</label>
+                        <div class="col-sm-9">
+                            <c:if test="${hd.tinhTrang==0}">
+                                <input type="text" value="Chờ xử lý" disabled style="width: 97%" class="form-control"/>
+                            </c:if>
+                            <c:if test="${hd.tinhTrang==1}">
+                                <input type="text" value="Đã xác nhận" disabled style="width: 97%"
+                                       class="form-control"/>
+                            </c:if>
+                            <c:if test="${hd.tinhTrang==2}">
+                                <input type="text" value="Đã Thanh toán" disabled style="width: 97%"
+                                       class="form-control"/>
+                            </c:if>
+                            <c:if test="${hd.tinhTrang==3}">
+                                <input type="text" value="Chờ thanh toán" disabled style="width: 97%"
+                                       class="form-control"/>
+                            </c:if>
+                            <c:if test="${hd.tinhTrang==8}">
+                                <input type="text" value="Đã hủy" disabled style="width: 97%" class="form-control"/>
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="row" style="margin: 20px">
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-label" style="padding: 5px">Trạng thái giao hàng:</label>
+                        <div class="col-sm-7">
+                            <c:if test="${hd.tinhTrangGiaoHang==0}">
+                                <input type="text" value="Chờ xử lý" disabled style="width: 97%" class="form-control"/>
+                            </c:if>
+                            <c:if test="${hd.tinhTrangGiaoHang!=0}">
+                                <input type="text" value="Chưa tìm hiểu" disabled style="width: 97%"
+                                       class="form-control"/>
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div>
+        <c:if test="${hd.tinhTrang==1}">
+            <div class="row" style="text-align: center;">
+                <div class="col-6">
+                    <a class="btn btn-info"
+                       href="/ban-hang-online/xem-hoa-don-chi-tiet/thanh-toan-khi-nhan-hang/${hd.id}">Thanh toán
+                        tiền mặt khi nhận hàng</a>
+                </div>
+                <div class="col-6">
+                    <a class="btn btn-info"
+                       href="/ban-hang-online/xem-hoa-don-chi-tiet/thanh-toan-khi-nhan-hang/${hd.id}">Thanh toán
+                        VNPay</a>
+                </div>
+            </div>
+        </c:if>
     </div>
     <br>
     <br>
-
-    <table class="table table-borderless">
+    <table class="table table-striped" style="text-content: center;width: 90%;margin-left: 5%;">
         <thead>
         <tr>
-            <th>STT</th>
             <th>Mã đơn hàng</th>
             <th>Ảnh sản phẩm</th>
             <th>Sản phẩm</th>
-            <th>khuyến mãi (%/SP)</th>
+            <th>Khuyến mãi (%/SP)</th>
             <th>Giá</th>
             <th>Số lượng</th>
             <th>Tổng</th>
             <th>Tình trạng</th>
-            <th>Chức năng</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -511,16 +526,14 @@
         <c:forEach items="${listhdct}" var="ht" varStatus="stt">
             <c:if test="${stt.index==0}">
                 <tr>
-                    <td>${dem}</td>
                     <td>${ht.hoaDon.ma}</td>
                     <td>
                         <img src="../../../uploads/${ht.imei.chiTietSanPham.urlAnh}" width="40" height="40"
                              style="border-radius:50% 50% 50% 50%">
                     </td>
                     <td>
-                            ${ht.imei.chiTietSanPham.sanPham.ten},${ht.imei.chiTietSanPham.sanPham.hangSanPham.ten},${ht.imei.chiTietSanPham.sanPham.camera.thongSo},${ht.imei.chiTietSanPham.sanPham.manHinh.thongSo},<br>
-                            ${ht.imei.chiTietSanPham.mauSac.ten},${ht.imei.chiTietSanPham.ram.dungLuong},${ht.imei.chiTietSanPham.rom.dungLuong},<br>
-                            ${ht.imei.chiTietSanPham.pin.loaiPin},${ht.imei.chiTietSanPham.pin.dungLuongPin.thongSo},${ht.imei.chiTietSanPham.chip.ten}.
+                            ${ht.imei.chiTietSanPham.sanPham.ten} - ${ht.imei.chiTietSanPham.mauSac.ten}
+                        - ${ht.imei.chiTietSanPham.ram.dungLuong} - ${ht.imei.chiTietSanPham.rom.dungLuong}.
                     </td>
                     <td>
                             ${(ht.donGia-ht.imei.chiTietSanPham.giaBan)/ht.imei.chiTietSanPham.giaBan}%
@@ -555,22 +568,21 @@
                     <td>
                         <c:if test="${ht.hoaDon.tinhTrangGiaoHang==0}">
                             <c:if test="${ht.hoaDon.tinhTrang==0}">
-                                <%--                                <a href="/ban-hang-online/xem-hoa-don-chi-tiet/xoa-chi-tiet-san-pham/${ht.id}" class="btn btn-primary" >Hủy</a>--%>
                                 <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>
                             </c:if>
                         </c:if>
-                        <c:if test="${ht.hoaDon.tinhTrang==1}">
+                            <%--                        <c:if test="${ht.hoaDon.tinhTrang==1}">--%>
 
-                        </c:if>
-                        <c:if test="${ht.hoaDon.tinhTrang==2}">
+                            <%--                        </c:if>--%>
+                            <%--                        <c:if test="${ht.hoaDon.tinhTrang==2}">--%>
 
-                        </c:if>
-                        <c:if test="${ht.hoaDon.tinhTrang==3}">
+                            <%--                        </c:if>--%>
+                            <%--                        <c:if test="${ht.hoaDon.tinhTrang==3}">--%>
 
-                        </c:if>
-                        <c:if test="${ht.hoaDon.tinhTrang==8}">
+                            <%--                        </c:if>--%>
+                            <%--                        <c:if test="${ht.hoaDon.tinhTrang==8}">--%>
 
-                        </c:if>
+                            <%--                        </c:if>--%>
                     </td>
                 </tr>
                 <c:set var="dem" scope="session" value="${dem+1}"/>
@@ -584,16 +596,15 @@
                 </c:forEach>
                 <c:if test="${checkck==0}">
                     <tr>
-                        <td>${dem}</td>
                         <td>${ht.hoaDon.ma}</td>
                         <td>
                             <img src="../../../uploads/${ht.imei.chiTietSanPham.urlAnh}" width="40" height="40"
                                  style="border-radius:50% 50% 50% 50%">
                         </td>
                         <td>
-                                ${ht.imei.chiTietSanPham.sanPham.ten},${ht.imei.chiTietSanPham.sanPham.hangSanPham.ten},${ht.imei.chiTietSanPham.sanPham.camera.thongSo},${ht.imei.chiTietSanPham.sanPham.manHinh.thongSo},<br>
-                                ${ht.imei.chiTietSanPham.mauSac.ten},${ht.imei.chiTietSanPham.ram.dungLuong},${ht.imei.chiTietSanPham.rom.dungLuong},<br>
-                                ${ht.imei.chiTietSanPham.pin.loaiPin},${ht.imei.chiTietSanPham.pin.dungLuongPin.thongSo},${ht.imei.chiTietSanPham.chip.ten}.
+                                ${ht.imei.chiTietSanPham.sanPham.ten} -
+                                ${ht.imei.chiTietSanPham.mauSac.ten} - ${ht.imei.chiTietSanPham.ram.dungLuong}
+                            - ${ht.imei.chiTietSanPham.rom.dungLuong}.
                         </td>
                         <td>
                                 ${(ht.donGia-ht.imei.chiTietSanPham.giaBan)/ht.imei.chiTietSanPham.giaBan}%
@@ -648,45 +659,13 @@
                     <c:set var="dem" scope="session" value="${dem+1}"/>
                 </c:if>
             </c:if>
-
-
         </c:forEach>
         </tbody>
     </table>
-    <br><br><br>
-    <div>
-        <c:if test="${hd.tinhTrang==1}">
-            <table class="table table-borderless">
-                <tbody>
-
-                <tr>
-
-                    <td colspan="3">
-                        <p style="font-size: 20px">Chọn phương thức thanh toán:</p>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="/ban-hang-online/xem-hoa-don-chi-tiet/thanh-toan-khi-nhan-hang/${hd.id}">Thanh toán
-                            tiền mặt khi nhận hàng</a>
-                    </td>
-                    <td>
-                        <button>Thanh toán MOMO</button>
-                    </td>
-                    <td>
-                        <button>Thanh toán VNP</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </c:if>
-    </div>
-
 
     <div class="modal" id="modalthaydoithongtinnhanhang">
 
-        <div class="modal-dialog" style="border: 1px solid red;margin-top: 3cm;">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content" style="">
 
                 <!-- Modal Header -->
@@ -712,7 +691,7 @@
                         <select id="diachids1" name="diachi" style="width: 70%;height: 1cm">
                             <c:forEach items="${banhangonline.Listdiachimotkhachang(idkhachhang)}" var="ht">
                                 <option value="${ht.id}" ${ht.id==hd.id ?"selected":""} style="height: 1cm">
-                                    quận:${ht.quan},huyện:${ht.huyen},thành phố:${ht.thanhPho}</option>
+                                        ${ht.diaChi},${ht.quan},${ht.huyen},${ht.thanhPho}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -729,8 +708,8 @@
     </div>
 
     <div class="modal" id="modalthemdiachidathang">
-        <div class="modal-dialog">
-            <div class="modal-content" style="">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content " style="">
 
                 <!-- Modal Header -->
                 <div class="modal-header">
@@ -1099,6 +1078,9 @@
 
 </script>
 <!-- jQuery Plugins -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 <script src="/jsbanhang/jquery.min.js"></script>
 <script src="/jsbanhang/bootstrap.min.js"></script>
 <script src="/jsbanhang/slick.min.js"></script>

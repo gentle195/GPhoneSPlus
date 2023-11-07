@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
 import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
@@ -47,7 +48,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "            GROUP BY MONTH(ngay_thanh_toan)", nativeQuery = true)
     List<DoanhThuTheoThang> loctheonam(Integer Nam);
 
-    @Query(value = "SELECT YEAR(ngay_thanh_toan) AS Nam FROM hoa_don GROUP BY YEAR(ngay_thanh_toan)",nativeQuery = true)
+    @Query(value = "SELECT YEAR(ngay_thanh_toan) AS Nam FROM hoa_don GROUP BY YEAR(ngay_thanh_toan)", nativeQuery = true)
     List<DoanhThuTheoThang> selectedYear();
 
 
@@ -78,7 +79,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "             LEFT JOIN chi_tiet_san_pham ON imei.id_chi_tiet_san_pham = chi_tiet_san_pham.id\n" +
             "             LEFT JOIN san_pham ON chi_tiet_san_pham.id_san_pham = san_pham.id\n" +
             "             LEFT JOIN hang_dien_thoai ON  hang_dien_thoai.id = san_pham.id_hang\n" +
-            "WHERE hang_dien_thoai.ten like %:ten%\n" +
+            "WHERE hang_dien_thoai.ten like %:ten% and hoa_don.tinh_trang = 2\n" +
             "GROUP BY hang_dien_thoai.ten, san_pham.ten,chi_tiet_san_pham.so_luong_ton", nativeQuery = true)
     List<DoanhThuSanPham> locHang(String ten);
 
@@ -118,7 +119,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "WHERE hoa_don.tinh_trang = 2\n" +
             "AND ngay_thanh_toan BETWEEN :startDate AND :endDate\n" +
             "GROUP BY hang_dien_thoai.ten", nativeQuery = true)
-    List<DoanhThuHang> locdoanhThuHang(@Param("startDate") Date startDate,@Param("endDate") Date endDate);
+    List<DoanhThuHang> locdoanhThuHang(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT nhan_vien.ho_ten AS tenNhanVien,\n" +
             "            COUNT(hoa_don_chi_tiet.so_luong) as soLuongSP,\n" +
@@ -141,7 +142,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "            where hoa_don.tinh_trang = 2" +
             "            AND ngay_thanh_toan BETWEEN :startDate AND :endDate\n" +
             "            GROUP BY nhan_vien.ho_ten", nativeQuery = true)
-    List<DoanhThuNhanVien> locDoanhThuNhanVien(@Param("startDate") Date startDate,@Param("endDate") Date endDate);
+    List<DoanhThuNhanVien> locDoanhThuNhanVien(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT \n" +
             "  CASE WHEN YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) < 25 THEN N'Dưới 25'\n" +
@@ -185,7 +186,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "    WHEN YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) >= 45 AND YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) < 55 THEN N'Từ 45 đến 55 tuổi'\n" +
             "    ELSE 'Trên 55 tuổi'\n" +
             "  END", nativeQuery = true)
-    List<DoanhThuKhachHang> locDoanhThuKhachHang(@Param("startDate") Date startDate,@Param("endDate") Date endDate);
+    List<DoanhThuKhachHang> locDoanhThuKhachHang(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
 
     @Query(value = "SELECT khach_hang.gioi_tinh as gioiTinh, SUM(tong_tien) AS DoanhThu\n" +
@@ -194,5 +195,5 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "WHERE hoa_don.tinh_trang = 2\n" +
             "AND ngay_thanh_toan BETWEEN :startDate AND :endDate\n" +
             "Group by khach_hang.gioi_tinh", nativeQuery = true)
-    List<DoanhThuKhachHang> locDoanhThuKhachHangGioiTinh(@Param("startDate") Date startDate,@Param("endDate") Date endDate);
+    List<DoanhThuKhachHang> locDoanhThuKhachHangGioiTinh(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 }
