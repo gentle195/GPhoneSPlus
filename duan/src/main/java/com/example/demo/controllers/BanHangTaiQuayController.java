@@ -4,10 +4,9 @@ import com.example.demo.models.*;
 import com.example.demo.services.*;
 import com.example.demo.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -466,8 +465,8 @@ public class BanHangTaiQuayController {
     }
 
     @PostMapping("/thanh-toan/{id}")
-    public String thanhToan(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon, @PathVariable("id") UUID id,
-                            @ModelAttribute("modalAddDiaChi") DiaChi DiaChi) {
+    public ResponseEntity<byte[]> thanhToan(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon, @PathVariable("id") UUID id,
+                                            @ModelAttribute("modalAddDiaChi") DiaChi DiaChi) {
         HoaDon hd = hoaDonService.findById(id);
         hd.setKhachHang(hoaDon.getKhachHang());
         hd.setDiaChi(hoaDon.getDiaChi());
@@ -494,9 +493,14 @@ public class BanHangTaiQuayController {
             }
         }
         hoaDonService.thanhToan(hd);
-        hoaDonService.generatePdfDonTaiQuay(id);
-        System.out.println(hoaDonService.generatePdfDonTaiQuay(id));
-        return "redirect:/ban-hang/hien-thi";
+        ResponseEntity<byte[]> responseEntity = hoaDonService.generatePdfDonTaiQuay(id);
+        byte[] pdfBytes = responseEntity.getBody();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "hoa_don_"+id+".pdf");
+
+        return ResponseEntity.ok().headers(headers).body(pdfBytes);
     }
 
 
@@ -511,7 +515,7 @@ public class BanHangTaiQuayController {
                       @PathVariable("camera") String moTaCam
     ) {
         List<ChiTietSanPham> list = banHangOnlineService.locbanhang(hang, moTaCam, moTaMan, "null", ram, rom, "null", dungLuongPin, chip, "null");
-        model.addAttribute("listChiTietSanPham", list);
+        model.ad_tribute("listChiTietSanPham", list);
         System.out.println("fjdkjffhkfhsf");
 
         return "ban-hang/bang-loc";

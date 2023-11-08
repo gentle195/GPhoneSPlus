@@ -18,6 +18,9 @@ import com.example.demo.services.NhanVienService;
 import com.example.demo.services.QuyDoiService;
 import com.example.demo.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -212,15 +215,15 @@ public class DonHangController {
     }
 
     @GetMapping("/xuat-pdf/{id}")
-    public String xuatPDF(Model model, @PathVariable("id") UUID id) {
-        List<NhanVien> listNhanVien = nhanVienService.findAll();
-        List<KhachHang> listKhachHang = khachHangService.findAll();
-        List<DiaChi> listDiaChi = diaChiService.findAll();
-        model.addAttribute("listKhachHang", listKhachHang);
-        model.addAttribute("listNhanVien", listNhanVien);
-        model.addAttribute("listDiaChi", listDiaChi);
-        hoaDonService.generatePdfDonTaiQuay(id);
-        return "redirect:/hoa-don/hien-thi";
+    public ResponseEntity<byte[]> xuatPDF(@PathVariable("id") UUID id) {
+        ResponseEntity<byte[]> responseEntity = hoaDonService.generatePdfDonOnline(id);
+        byte[] pdfBytes = responseEntity.getBody();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "hoa_don_"+id+".pdf");
+
+        return ResponseEntity.ok().headers(headers).body(pdfBytes);
     }
 
     @GetMapping("/view-update/{id}")
