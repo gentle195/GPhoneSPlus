@@ -117,7 +117,7 @@ public class BanHangTaiQuayController {
     @PostMapping("/add-hoa-don")
     public String addHoaDon(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon, @ModelAttribute("modalAddKhachHang") KhachHang khachHang) {
         List<HoaDon> list = hoaDonService.find();
-        if (list.size() >= 6) {
+        if (list.size() >= 1) {
             hoaDonnn = null;
             model.addAttribute("HoaDon", hoaDonnn);
             model.addAttribute("thongBaoHoaDon", "Đã quá số lượng hóa đơn chờ");
@@ -495,6 +495,7 @@ public class BanHangTaiQuayController {
         }
         hoaDonService.thanhToan(hd);
         hoaDonService.generatePdfDonTaiQuay(id);
+        System.out.println(hoaDonService.generatePdfDonTaiQuay(id));
         return "redirect:/ban-hang/hien-thi";
     }
 
@@ -513,7 +514,7 @@ public class BanHangTaiQuayController {
         model.addAttribute("listChiTietSanPham", list);
         System.out.println("fjdkjffhkfhsf");
 
-        return "/ban-hang/bang-loc";
+        return "ban-hang/bang-loc";
     }
 
     @GetMapping("/loc/ban-hang-tai-quay/{x1}/{x2}/{x3}/{x4}/{x5}/{x6}/{x7}/{x8}/{x9}/{x10}")
@@ -533,7 +534,7 @@ public class BanHangTaiQuayController {
 
         model.addAttribute("banhangonline", banHangOnlineService);
         model.addAttribute("listChiTietSanPham", banHangOnlineService.locbanhang(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10));
-        return "/ban-hang/bang-loc";
+        return "ban-hang/bang-loc";
     }
 
 

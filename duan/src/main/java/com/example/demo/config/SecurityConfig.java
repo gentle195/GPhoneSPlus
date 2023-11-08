@@ -49,7 +49,7 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChainGmail(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests()
-                .requestMatchers("/","/dang-ky-tai-khoan","/login/dang-ky-tai-khoan", "/WEB-INF/**", "/lgin", "/logout", "ban-hang-online/**", "/css/**", "/cssbanhang/**"
+                .requestMatchers("/","/dang-ky-tai-khoan","/login/dang-ky-tai-khoan","/login/quen-mat-khau","/quen-mat-khau", "/WEB-INF/**", "/lgin", "/logout", "/ban-hang-online/**", "/css/**", "/cssbanhang/**"
                         , "/documentation/**", "/icons/**", "/images/**", "/inHoaDon/**", "/js/**", "/jsbanhang/**", "/maqr/**", "/scss/**"
                         , "uploads/**", "/vendor/**").permitAll()
                 .requestMatchers("/favicon.ico").permitAll()
@@ -83,7 +83,7 @@ public class SecurityConfig {
                         "/san-pham-giam-gia/hien-thi","/san-pham-giam-gia/search-on","/san-pham-giam-gia/search-off","/san-pham-giam-gia/hien-thi-da-xoa"
 
 
-                        ).hasAnyAuthority("STAFF", "ADMIN")
+                ).hasAnyAuthority("STAFF", "ADMIN")
 
                 // chi admin
                 .requestMatchers("/chi-tiet-san-pham/**", "/ban-hang/**", "/anh/**", "/camera/**", "/chip/**",

@@ -20,6 +20,9 @@ public interface IMEIRepository extends JpaRepository<IMEI, UUID> {
     @Query("select i from IMEI i left join ChiTietSanPham ct on i.chiTietSanPham.id=ct.id where ct.id=:id and i.tinhTrang=0")
     List<IMEI> getIMEI(UUID id);
 
+    @Query("select i from IMEI i where i.id=:id")
+    List<IMEI> showIMEI(UUID id);
+
     @Query("select i from IMEI i where i.tinhTrang=1 and (i.soImei like %:imei% or i.ma like %:imei% or i.chiTietSanPham.sanPham.ten like %:imei%)")
     List<IMEI> searchIMEIOff(String imei);
 

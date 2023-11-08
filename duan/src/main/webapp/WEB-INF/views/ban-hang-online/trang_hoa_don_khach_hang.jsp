@@ -35,7 +35,6 @@
     <link type="text/css" rel="stylesheet" href="/cssbanhang/nouislider.min.css"/>
 
     <!-- Font Awesome Icon -->
-    <link rel="stylesheet" href="/cssbanhang/font-awesome.min.css">
 
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="/cssbanhang/style.css"/>
