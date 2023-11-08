@@ -17,15 +17,16 @@ import com.example.demo.services.KhachHangService;
 import com.example.demo.services.NhanVienService;
 import com.example.demo.services.QuyDoiService;
 import com.example.demo.util.SecurityUtil;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -299,19 +300,17 @@ public class HoaDonController {
     }
 
     @GetMapping("/xuat-pdf/{id}")
-    public String xuatPDF(Model model, @PathVariable("id") UUID id) {
-        List<NhanVien> listNhanVien = nhanVienService.findAll();
-        List<KhachHang> listKhachHang = khachHangService.findAll();
-        List<DiaChi> listDiaChi = diaChiService.findAll();
-        List<QuyDoi> listQuyDoi = quyDoiService.findAll();
-        model.addAttribute("listKhachHang", listKhachHang);
-        model.addAttribute("listNhanVien", listNhanVien);
-        model.addAttribute("listDiaChi", listDiaChi);
-        model.addAttribute("listQuyDoi", listQuyDoi);
-        model.addAttribute("dem", dem);
-        hoaDonService.generatePdfDonTaiQuay(id);
-        return "redirect:/hoa-don/hien-thi";
+    public ResponseEntity<byte[]> xuatPDF(@PathVariable("id") UUID id) {
+        ResponseEntity<byte[]> responseEntity = hoaDonService.generatePdfDonTaiQuay(id);
+        byte[] pdfBytes = responseEntity.getBody();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "hoa_don_"+id+".pdf");
+
+        return ResponseEntity.ok().headers(headers).body(pdfBytes);
     }
+
 
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon,

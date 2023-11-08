@@ -235,7 +235,7 @@ public class HoaDonServiceImpl implements HoaDonService {
             StringBuilder htmlContentBuilder = new StringBuilder();
             htmlContentBuilder.append("<html><head>");
             htmlContentBuilder.append("<meta charset=\"UTF-8\">");
-            htmlContentBuilder.append("<title>Hóa đơn</title>");
+            htmlContentBuilder.append("<title>Đơn hàng online</title>");
             htmlContentBuilder.append("<style>");
             htmlContentBuilder.append("body {\n" +
                     "    font-family: Arial, sans-serif;\n" +
@@ -402,22 +402,10 @@ public class HoaDonServiceImpl implements HoaDonService {
             // Gọi phương thức tạo file PDF từ nội dung HTML, sử dụng thư viện iText
             byte[] pdfBytes = createPdfFromHtml(htmlContentBuilder);
 
-            // Lưu file PDF vào thư mục dự án
-            String projectRootPath = System.getProperty("user.dir");
-
-            // Tạo đường dẫn động đến thư mục lưu pdf
-            String filePath = projectRootPath + "/src/main/webapp/inHoaDon/hoa_don_" + hoaDonId + ".pdf";
-            try (FileOutputStream fileOutputStream = new FileOutputStream(filePath)) {
-                fileOutputStream.write(pdfBytes);
-            } catch (IOException e) {
-                e.printStackTrace();
-                // Xử lý lỗi nếu cần thiết
-            }
-
             // Thiết lập thông tin phản hồi
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "hoa_don.pdf");
+            headers.setContentDispositionFormData("attachment", "hoa_don_"+hoaDonId+".pdf");
 
             // Trả về file PDF dưới dạng byte[]
             return ResponseEntity.ok().headers(headers).body(pdfBytes);
@@ -601,22 +589,10 @@ public class HoaDonServiceImpl implements HoaDonService {
             // Gọi phương thức tạo file PDF từ nội dung HTML, sử dụng thư viện iText
             byte[] pdfBytes = createPdfFromHtml(htmlContentBuilder);
 
-            // Lưu file PDF vào thư mục dự án
-            String projectRootPath = System.getProperty("user.dir");
-
-            // Tạo đường dẫn động đến thư mục lưu pdf
-            String filePath = projectRootPath + "/src/main/webapp/inHoaDon/hoa_don_" + hoaDonId + ".pdf";
-            try (FileOutputStream fileOutputStream = new FileOutputStream(filePath)) {
-                fileOutputStream.write(pdfBytes);
-            } catch (IOException e) {
-                e.printStackTrace();
-                // Xử lý lỗi nếu cần thiết
-            }
-
             // Thiết lập thông tin phản hồi
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "hoa_don.pdf");
+            headers.setContentDispositionFormData("attachment", "hoa_don_"+hoaDonId+".pdf");
 
             // Trả về file PDF dưới dạng byte[]
             return ResponseEntity.ok().headers(headers).body(pdfBytes);
