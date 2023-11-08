@@ -123,33 +123,56 @@
             cursor: pointer; /* Biến con trỏ thành bàn tay khi trỏ vào nút */
         }
 
-        .cart-dropdown {
-            border-radius: 10px;
-            width: 180px;
-            background-color: #fff;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        /*tuananh*/
+        .container1 {
+            display: flex;
+            margin-left: 5cm;
+            margin-right: 5cm;
+            /*border: 1px solid red;*/
+        }
+
+        .middle-column1 {
+            flex: 1;
             padding: 10px;
-            margin-top: 10px;
+            /*border: 1px solid #ccc;*/
+            box-sizing: border-box;
+        }
+        .left-column1{
+            width: 6cm;
+            /*border: 1px solid blue;*/
+        }
+        .right-column1 {
+            /*border: 1px solid #8c0615;*/
+            width: 6cm;
+        }
+        .middle-column1 {
+            /*border: 1px solid red;*/
+            width:  calc(100% - 6cm - 6cm); /* Tính toán kích thước cột giữa */
+
         }
 
-        .cart-dropdown a {
-            display: block;
-            width: 100%;
+
+        .tab-container {
+            display: flex;
+            width: 300px; /* Điều chỉnh chiều rộng theo ý muốn */
+        }
+
+        .tab-menu {
+            /*background-color: #333;*/
+            color: black;
+
+            width: 100%; /* Điều chỉnh chiều rộng menu tab */
+        }
+
+        .tab {
             padding: 10px;
-            text-decoration: none;
-            text-align: center;
-            color: #fff;
-            background-color: #007bff;
-            margin-bottom: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
         }
+        td {
+            font-size: 15px; font-weight: bolder}
 
-        .cart-dropdown a:hover {
-            background-color: #0056b3;
-        }
-
-        /*div{*/
-        /*    border: 1px solid red;*/
-        /*}*/
     </style>
 
 </head>
@@ -159,6 +182,7 @@
 <!-- HEADER -->
 <header>
 
+    <!-- TOP HEADER -->
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
@@ -179,29 +203,34 @@
                         <div class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown">
                                     <span>
-                                    <i class="fa fa-user-o"></i>
-                                            ${khachhangdangnhap.hoTen}
-                                        <input id="tkmkidkhachhang" type="text" style="display: none"
-                                               value="${idkhachhang}">
-                                    </span>
+                                   <i class="fa fa-user-o"></i>
+                                           ${khachhangdangnhap.taiKhoan}
+                                      <input id="tkmkidkhachhang" type="text" style="display: none"
+                                             value="${idkhachhang}">
+                                   </span>
+                                    <%--                      <security:authorize access="isAuthenticated()">--%>
+                                    <%--                      hi, <security:authentication property="principal.username" />--%>
+                                    <%--                      </security:authorize>--%>
+                                    <%--                      <security:authorize access="!isAuthenticated()">--%>
+                                    <%--                          <a href="/login">Login</a>--%>
+
+                                    <%--                       </security:authorize>--%>
                             </a>
-                            <div class="cart-dropdown"
-                                 style="border-radius: 10px;width: 3.5cm;margin-top: 10px;width: 180px">
+                            <div class="cart-dropdown" style="border-radius: 10px;width: 3.5cm;margin-top: 10px">
                                 <div>
                                     <div>
                                         <form action="/thong-tin-ca-nhan-khach-hang" method="post">
                                             <input value="${idkhachhang}" name="idKhachHang" style="display: none">
                                             <button class="btn btn-primary" type="submit">Tài khoản của tôi</button>
-                                        </form>
-<%--                                          <a href="" class="btn btn-primary" type="submit" onclick="submitForm1()">Tài khoản của tôi</a>--%>
+                                                <%--                                        </form>--%>
+                                    </div>
 
-                                    </div>
+                                    <form action="/ban-hang-online/hoa-don-online" method="post">
+                                        <input name="idkh" value="${idkhachhang}" style="display: none">
+                                        <button type="submit" class="btn btn-primary">Đơn hàng</button>
+                                    </form>
                                     <div>
-                                        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}"
-                                           class="btn btn-primary">Đơn hàng</a>
-                                    </div>
-                                    <div>
-                                        <a href="/logout" class="btn btn-primary" style="" onclick="">Đăng xuất</a>
+                                        <a href="/logout" class="btn btn-primary" style="">Đăng xuất</a>
                                     </div>
                                 </div>
                             </div>
@@ -222,8 +251,10 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <h2 class="logo" style="margin: 20px;color: white;font-family: 'Times New Roman'">GPhoneS
-                            Store</h2>
+                        <a href="#" class="logo">
+                            <%--							<img src="../../img/logo.png" alt="">--%>
+                            <img src="/img/logo.png" alt="">
+                        </a>
                     </div>
                 </div>
                 <!-- /LOGO -->
@@ -272,13 +303,15 @@
                                                 <br>
                                                 <div style="border: 1px solid;height: 2cm">
                                                     <div style="width: 80%;float: right">
-                                                        <label style="font-weight: bold">Sản
-                                                            phẩm:</label>${ht.chiTietSanPham.sanPham.ten}-
-                                                            ${ht.chiTietSanPham.rom.dungLuong}-${ht.chiTietSanPham.mauSac.ten}.
 
+                                                        <a href="#">
+                                                            Sản
+                                                            phẩm:${ht.chiTietSanPham.sanPham.ten},Rom:${ht.chiTietSanPham.rom.dungLuong},Màu:${ht.chiTietSanPham.mauSac.ten}.
+                                                        </a>
                                                         <br>
-                                                        <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
-                                                        <label style="tbackground-color: white;border: 1px solid white">${ht.donGiaKhiGiam}đ</label>
+                                                        Số lượng:${ht.soLuong}<br>
+                                                            ${ht.donGiaKhiGiam}đ-<label
+                                                            style="text-decoration: line-through;background-color: white;border: 1px solid white">${ht.donGia}</label>đ
                                                     </div>
                                                     <div style="width: 18%;">
                                                         <input type="checkbox" name="checkidghTT" value="${ht.id}"
@@ -315,7 +348,11 @@
                                         <span>Giỏ hàng</span>
                                         <div class="qty">0</div>
                                     </a>
-                                    <div class="cart-dropdown" style="width: 500px;">
+                                    <div class="cart-dropdown">
+                                        <div class="cart-list">
+
+
+                                        </div>
                                         <div class="cart-summary">
                                             <small> 0 Sản phẩm được chọn</small>
                                             <h5>Tổng:0 đ</h5>
@@ -364,7 +401,6 @@
 </header>
 <!-- /HEADER -->
 
-
 <!-- NAVIGATION -->
 <nav id="navigation">
     <!-- container -->
@@ -393,426 +429,183 @@
 </nav>
 <!-- /NAVIGATION -->
 
-<br><br><br><br><br><br>
-<div id="ktlink"></div>
+<br>
+<%--<br><br><br><br><br>--%>
 
-<div id="thanhlocctsp">
-
-</div>
 <!-- The Modal -->
 
-<main id="content">
-    <div class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
+<%--<main id="content" style="height: 10cm">--%>
 
-                <!-- shop -->
-                <div class="col-md-4 col-xs-6">
-                    <div class="shop">
-                        <div class="shop-img">
-                            <img src="/img/shop01.png" alt="">
-                        </div>
-                        <div class="shop-body">
-                            <h3>Laptop<br>Collection</h3>
-                            <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
+
+<%--</main>--%>
+
+<%--<form action="/dia-chi-khach-hang" method="post" id="diaChiForm" style="display: none">--%>
+<%--    <input value="${idKhachHang}" name="idKhachHang" style="display: none">--%>
+<%--    <button class="btn btn-primary" type="submit">Địa chỉ</button>--%>
+<%--</form>--%>
+
+
+<form:form action="/update-mat-khau-khach-hang" method="post" modelAttribute="kh"
+           enctype="multipart/form-data">
+    <div class="container1">
+
+        <div class="left-column1" style="width: 6cm; font-size: 18px">
+            <!-- Nội dung cột trái -->
+            <div class="row" style="margin-top: 6px">
+                <div class="col-md-2">
+                    <img  class="preview-image" src="../../../uploads/${kh.anh}" alt=""
+                          width="40px" height="40px"
+                          style="border-radius:50% 50% 50% 50%;border: 2px solid #999999">
                 </div>
-                <!-- /shop -->
-
-                <!-- shop -->
-                <div class="col-md-4 col-xs-6">
-                    <div class="shop">
-                        <div class="shop-img">
-                            <img src="/img/shop03.png" alt="">
-                        </div>
-                        <div class="shop-body">
-                            <h3>Accessories<br>Collection</h3>
-                            <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- /shop -->
-
-                <!-- shop -->
-                <div class="col-md-4 col-xs-6">
-                    <div class="shop">
-                        <div class="shop-img">
-                            <img src="/img/shop02.png" alt="">
-                        </div>
-                        <div class="shop-body">
-                            <h3>Cameras<br>Collection</h3>
-                            <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- /shop -->
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
-    </div>
-    <!-- /SECTION -->
-
-    <!-- SECTION -->
-    <div class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-
-                <!-- section title -->
-                <div class="col-md-12">
-                    <div class="section-title">
-                        <h3 class="title">Sản phẩm mới ra mắt</h3>
-                        <%--                        <div class="section-nav">--%>
-                        <%--                            <ul class="section-tab-nav tab-nav">--%>
-                        <%--                                <li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>--%>
-                        <%--                                <li><a data-toggle="tab" href="#tab1">Smartphones</a></li>--%>
-                        <%--                                <li><a data-toggle="tab" href="#tab1">Cameras</a></li>--%>
-                        <%--                                <li><a data-toggle="tab" href="#tab1">Accessories</a></li>--%>
-                        <%--                            </ul>--%>
-                        <%--                        </div>--%>
-                    </div>
-                </div>
-                <!-- /section title -->
-
-                <!-- Products tab & slick -->
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="products-tabs">
-                            <!-- tab -->
-                            <div id="tab1" class="tab-pane active">
-                                <div class="products-slick" data-nav="#slick-nav-1">
-
-                                    <c:forEach items="${listsp}" var="ht" varStatus="stt">
-                                        <c:if test="${banhangonline.soluongcon(ht.id)>0}">
-                                            <!-- product -->
-
-                                            <div class="product">
-                                                <div class="product-img">
-                                                    <img src="/uploads/${ht.urlAnh}" style="width: 100%;height: 6cm"
-                                                         alt="">
-                                                    <div class="product-label">
-                                                        <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
-                                                        <span class="new">Giảm giá</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-body"
-                                                     style="text-align: left;word-wrap: break-word;">
-                                                    <p class="product-category">Điện thoại</p>
-                                                    <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
-                                                    <h4 class="product-price">${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}<span> ₫</span>
-                                                        <del class="product-old-price" style="float: right">${ht.giaBan}<span>₫</span></del>
-                                                    </h4>
-                                                    <div class="product-rating"></div>
-                                                    <div class="product-btns" align="center">
-                                                        <button class="add-to-compare"><a href="/homes"><i
-                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Thêm để so sánh</span>
-                                                        </button>
-                                                        <button class="quick-view"><a
-                                                                href="/ban-hang-online/chi-tiet-san-pham/${ht.id}"><i
-                                                                class="fa fa-eye"></i></a><span class="tooltipp">Xem chi tiết</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="add-to-cart" style="border: 5px royalblue">
-                                                    <c:if test="${idkhachhang!='1'}">
-                                                        <button class="add-to-cart-btn"
-                                                                onclick="thongbaothemvaogiohang('${ht.id}');"><i
-                                                                class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                                                        </button>
-                                                    </c:if>
-                                                    <c:if test="${idkhachhang=='1'}">
-                                                        <a href="/login">
-                                                            <button class="add-to-cart-btn"><i
-                                                                    class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                                                            </button>
-                                                        </a>
-                                                    </c:if>
-                                                </div>
-                                            </div>
-                                            <!-- /product -->
-                                        </c:if>
-                                    </c:forEach>
-                                </div>
-                                <div id="slick-nav-1" class="products-slick-nav"></div>
-                            </div>
-                            <!-- /tab -->
-                        </div>
-                    </div>
-                </div>
-                <!-- Products tab & slick -->
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
-    </div>
-    <!-- /SECTION -->
-
-    <!-- HOT DEAL SECTION -->
-
-    <!-- /HOT DEAL SECTION -->
-
-    <!-- SECTION -->
-    <div class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-
-                <!-- section title -->
-                <div class="col-md-12">
-                    <div class="section-title">
-                        <h3 class="title">Top Sản phẩm bán chạy</h3>
-
-                    </div>
-                </div>
-                <!-- /section title -->
-
-                <!-- Products tab & slick -->
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="products-tabs">
-                            <!-- tab -->
-                            <div id="tab2" class="tab-pane fade in active">
-                                <div class="products-slick" data-nav="#slick-nav-2">
-                                    <c:forEach items="${listsp}" var="ht" varStatus="stt">
-                                        <c:if test="${banhangonline.soluongcon(ht.id)>0}">
-                                            <!-- product -->
-
-                                            <div class="product">
-                                                <div class="product-img">
-                                                    <img src="/uploads/${ht.urlAnh}" style="width: 100%;height: 6cm"
-                                                         alt="">
-                                                    <div class="product-label">
-                                                        <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
-                                                        <span class="new">Giảm giá</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-body"
-                                                     style="text-align: left;word-wrap: break-word;">
-                                                    <p class="product-category">Điện thoại</p>
-                                                    <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
-                                                    <h4 class="product-price">${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}<span> ₫</span>
-                                                        <del class="product-old-price" style="float: right">${ht.giaBan}<span>₫</span></del>
-                                                    </h4>
-                                                    <div class="product-rating"></div>
-                                                    <div class="product-btns" align="center">
-                                                        <button class="add-to-compare"><a href="/homes"><i
-                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Thêm để so sánh</span>
-                                                        </button>
-                                                        <button class="quick-view"><a
-                                                                href="/ban-hang-online/chi-tiet-san-pham/${ht.id}"><i
-                                                                class="fa fa-eye"></i></a><span class="tooltipp">Xem chi tiết</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="add-to-cart" style="border: 5px royalblue">
-                                                    <c:if test="${idkhachhang!='1'}">
-                                                        <button class="add-to-cart-btn"
-                                                                onclick="thongbaothemvaogiohang('${ht.id}');"><i
-                                                                class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                                                        </button>
-                                                    </c:if>
-                                                    <c:if test="${idkhachhang=='1'}">
-                                                        <a href="/login">
-                                                            <button class="add-to-cart-btn"><i
-                                                                    class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                                                            </button>
-                                                        </a>
-                                                    </c:if>
-                                                </div>
-                                            </div>
-                                            <!-- /product -->
-                                        </c:if>
-                                    </c:forEach>
-                                </div>
-                                <div id="slick-nav-2" class="products-slick-nav"></div>
-                            </div>
-                            <!-- /tab -->
-                        </div>
-                    </div>
-                </div>
-                <!-- /Products tab & slick -->
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
-    </div>
-    <!-- /SECTION -->
-
-    <!-- SECTION -->
-    <div class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-4 col-xs-6">
-                    <div class="section-title">
-                        <h4 class="title">Top selling</h4>
-                        <div class="section-nav">
-                            <div id="slick-nav-3" class="products-slick-nav"></div>
-                        </div>
-                    </div>
-
-                    <div class="products-widget-slick" data-nav="#slick-nav-3">
-
-
-                        <c:set var="vitri" scope="session" value="${-1}"/>
-                        <c:forEach begin="1" end="${lamchon}" varStatus="trang">
-                            <c:set var="salary" scope="session" value="${1}"/>
-                            <div>
-                                <c:forEach items="${listsp}" var="ht" varStatus="stt">
-                                    <c:if test="${stt.index > vitri }">
-                                        <c:if test="${salary <4}">
-                                            <c:if test="${banhangonline.soluongcon(ht.id)>0}">
-                                                <!-- product widget -->
-                                                <a href="/ban-hang-online/chi-tiet-san-pham/${ht.id}">
-                                                    <div class="product-widget">
-                                                        <div class="product-img">
-                                                            <img src="/uploads/${ht.urlAnh}" alt="">
-                                                        </div>
-                                                        <div class="product-body">
-                                                            <p class="product-category">Điện Thoại</p>
-                                                            <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a>
-                                                            </h3>
-                                                            <h4 class="product-price"><span
-                                                                    style="font-size:10px">₫</span> ${ht.giaBan} - <span
-                                                                    style="font-size:10px">₫</span>
-                                                                <del class="product-old-price">${ht.giaBan}</del>
-                                                            </h4>
-
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <!-- /product widget -->
-                                            </c:if>
-                                            <c:set var="vitri" scope="session" value="${stt.index}"/>
-                                            <c:set var="salary" scope="session" value="${salary+1}"/>
-                                        </c:if>
-                                    </c:if>
-                                </c:forEach>
-
-                            </div>
-                        </c:forEach>
-
-
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-xs-6">
-                    <div class="section-title">
-                        <h4 class="title">Top selling</h4>
-                        <div class="section-nav">
-                            <div id="slick-nav-4" class="products-slick-nav"></div>
-                        </div>
-                    </div>
-
-                    <div class="products-widget-slick" data-nav="#slick-nav-4">
-                        <c:set var="vitri" scope="session" value="${-1}"/>
-                        <c:forEach begin="1" end="${lamchon}" varStatus="trang">
-                            <c:set var="salary" scope="session" value="${1}"/>
-                            <div>
-                                <c:forEach items="${listsp}" var="ht" varStatus="stt">
-                                    <c:if test="${stt.index > vitri }">
-                                        <c:if test="${salary <4}">
-                                            <c:if test="${banhangonline.soluongcon(ht.id)>0}">
-                                                <!-- product widget -->
-                                                <a href="/ban-hang-online/chi-tiet-san-pham/${ht.id}">
-                                                    <div class="product-widget">
-                                                        <div class="product-img">
-                                                            <img src="/uploads/${ht.urlAnh}" alt="">
-                                                        </div>
-                                                        <div class="product-body">
-                                                            <p class="product-category">Điện Thoại</p>
-                                                            <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a>
-                                                            </h3>
-                                                            <h4 class="product-price"><span
-                                                                    style="font-size:10px">₫</span> ${ht.giaBan} - <span
-                                                                    style="font-size:10px">₫</span>
-                                                                <del class="product-old-price">${ht.giaBan}</del>
-                                                            </h4>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <!-- /product widget -->
-                                            </c:if>
-                                            <c:set var="vitri" scope="session" value="${stt.index}"/>
-                                            <c:set var="salary" scope="session" value="${salary+1}"/>
-                                        </c:if>
-                                    </c:if>
-                                </c:forEach>
-
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
-
-                <div class="clearfix visible-sm visible-xs"></div>
-
-                <div class="col-md-4 col-xs-6">
-                    <div class="section-title">
-                        <h4 class="title">Top selling</h4>
-                        <div class="section-nav">
-                            <div id="slick-nav-5" class="products-slick-nav"></div>
-                        </div>
-                    </div>
-
-                    <div class="products-widget-slick" data-nav="#slick-nav-5">
-                        <c:set var="vitri" scope="session" value="${-1}"/>
-                        <c:forEach begin="1" end="${lamchon}" varStatus="trang">
-                            <c:set var="salary" scope="session" value="${1}"/>
-                            <div>
-                                <c:forEach items="${listsp}" var="ht" varStatus="stt">
-                                    <c:if test="${stt.index > vitri }">
-                                        <c:if test="${salary <4}">
-                                            <c:if test="${banhangonline.soluongcon(ht.id)>0}">
-                                                <!-- product widget -->
-                                                <a href="/ban-hang-online/chi-tiet-san-pham/${ht.id}">
-                                                    <div class="product-widget"
-                                                         onclick="loadInterface('/ban-hang-online/chi-tiet-san-pham/${ht.id}')">
-                                                        <div class="product-img">
-                                                            <img src="/uploads/${ht.urlAnh}" alt="">
-                                                        </div>
-                                                        <div class="product-body">
-                                                            <p class="product-category">Điện Thoại</p>
-                                                            <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a>
-                                                            </h3>
-                                                            <h4 class="product-price"><span
-                                                                    style="font-size:10px">₫</span> ${ht.giaBan} - <span
-                                                                    style="font-size:10px">₫</span>
-                                                                <del class="product-old-price">${ht.giaBan}</del>
-                                                            </h4>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <!-- /product widget -->
-                                            </c:if>
-                                            <c:set var="vitri" scope="session" value="${stt.index}"/>
-                                            <c:set var="salary" scope="session" value="${salary+1}"/>
-                                        </c:if>
-                                    </c:if>
-                                </c:forEach>
-
-                            </div>
-                        </c:forEach>
-                    </div>
+                <div class="col-md-10">
+                    <p style="margin-left: 0.5cm"><strong>${kh.taiKhoan}</strong></p>
+                        <%--                <p style="margin-left: 0.5cm">     (Sửa hồ sơ!)</p>--%>
                 </div>
 
             </div>
-            <!-- /row -->
+
+            <div class="row">
+                <div class="tab-container">
+                    <div class="tab-menu" style="margin-top: 10px">
+                        <a href="/thong-tin-ca-nhan-khach-hang"><div class="tab">Hồ sơ</div></a>
+                        <a href="/dia-chi-khach-hang"><div class="tab">Địa chỉ</div></a>
+                        <a href="/pass-khach-hang"><div  style="color: red" class="tab">Đổi mật khẩu</div></a>
+                        <a href=""><div class="tab">Đơn hàng</div></a>
+                    </div>
+                    <div class="tab-content">
+                            <%--                    <div class="tab-pane" id="tab1">Nội dung 1</div>--%>
+                            <%--                    <div class="tab-pane" id="tab2">2</div>--%>
+                            <%--                    <div class="tab-pane" id="tab3">3</div>--%>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- /container -->
+            <%--    <div class="tab-pane" id="tab1">--%>
+        <div class="middle-column1" style="font-size: 15px">
+            <!-- Nội dung cột giữa -->
+            <div class="row">
+                <p style="margin-left: 0.5cm; font-size: 20px"><strong>Đổi mật khẩu </strong></p>
+                <p style="margin-left: 0.5cm">     (Thay đổi mật khẩu để bảo mật tài khoản!)</p>
+
+            </div>
+            <div style="font-size: 18px; color: black">
+                <p style="font-weight:bold"> Tên đăng nhập: ${kh.taiKhoan}</p>
+            </div>
+
+
+            <div style="display:none;">
+                <form:input class="form-control" placeholder="" path="id" readonly="true"/>
+
+                <form:label class="form-label" path="ma">Mã:</form:label>
+                <form:input class="form-control" placeholder="" path="ma" readonly="true"/>
+                <form:label class="form-label" path="taiKhoan">Tài khoản:
+                    <form:errors path="taiKhoan" cssStyle="color: red"></form:errors>
+                </form:label>
+                <form:input class="form-control" placeholder="" path="taiKhoan"/>
+                <form:label class="form-label" path="matKhau">Mật khẩu:
+                    <form:errors path="matKhau" cssStyle="color: red"></form:errors>
+                </form:label>
+                <form:input class="form-control" placeholder="" path="matKhau"/>
+                <form:label class="form-label" path="diem">Điểm:
+                    <form:errors path="diem" cssStyle="color: red"></form:errors>
+                </form:label>
+                <form:input class="form-control" placeholder="" path="diem" type="number"/>
+                <form:input class="form-control" placeholder="" path="hangKhachHang" type="text"/>
+                <form:input path="ngayTao" type="date"></form:input>
+                <form:input class="form-control" placeholder="${kh.hoTen}"  path="hoTen"/>
+                <form:input class="form-control" placeholder="${kh.sdt}"  path="sdt"/>
+                <form:input class="form-control" placeholder="${kh.email}"  path="email"/>
+
+                <form:radiobutton path="gioiTinh" value="true"/>Nam
+                <form:radiobutton path="gioiTinh" value="false" cssStyle="margin-left: 1cm"/> Nữ
+                <form:input class="form-control" placeholder="" path="ngaySinh" type="date"
+                            id="ns"/>
+            </div>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <td style="font-size: 15px; font-weight: bolder">Nhập mật khẩu cũ:</td>
+                    <td>  <input id="oldpassword" name="mat-khau-cu"
+                                 class="form-control" type="password"
+                                 placeholder="*******"/>
+                        <label style="color: red" id="old-error">${thongBao1}</label>
+
+                    </td><td>
+                        <label class="password-toggle" id="old-password-toggle"
+                               onclick="togglePassword1()">
+                            Show
+                        </label>
+                </td>
+
+                </tr>
+                <tr>
+                    <td>Nhập mật khẩu mới:</td>
+                    <td>  <input id="newpassword" name="mat-khau-moi"
+                                 class="form-control" type="password"
+                                 placeholder="*******"/>
+                        <label style="color: red" id="new-error">${thongBao2}</label>
+                    </td><td>
+                        <label class="password-toggle" id="new-password-toggle"
+                               onclick="togglePassword2()">
+                            Show
+                        </label>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>Xác nhận mật khẩu mới:</td>
+                    <td>
+                        <input id="confirmpassword" name="xac-nhan-mat-khau"
+                                class="form-control" type="password"
+                                placeholder="*******"/>
+                        <label style="color: red" id="confirm-error">${thongBao3}</label>
+                    </td>  <td>
+                        <label class="password-toggle" id="confirm-password-toggle"
+                               onclick="togglePassword3()">
+                            Show
+                        </label>
+                    </td>
+                </tr>
+
+
+                </thead>
+
+            </table>
+
+            <div style="text-align: center">
+                <button type="submit" class="btn btn-primary mr-2"
+                        onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                    SAVE
+                </button>
+            </div>
+        </div>
+
+
+
+<%--        <div class="right-column1" style="text-align: center; font-size: 15px; display: none">--%>
+<%--                &lt;%&ndash;                <div class="col-md-2" style="text-align: center; margin-left: 1cm">&ndash;%&gt;--%>
+<%--                &lt;%&ndash;                </div>&ndash;%&gt;--%>
+
+<%--            <!-- Nội dung cột phải -->--%>
+
+<%--            <div align="center">--%>
+<%--                <br>--%>
+<%--                <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;">--%>
+<%--                    <img  class="preview-image" src="../../../uploads/${kh.anh}" alt=""                         width="100%" height="100%"--%>
+<%--                         style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">--%>
+
+<%--                    <br><br>--%>
+<%--                    ẢNH--%>
+<%--                </label>--%>
+<%--                <br>--%>
+<%--            </div>--%>
+
+<%--        </div>--%>
+
+
     </div>
-    <!-- /SECTION -->
-
-    <!-- Modal -->
-
-</main>
-
+</form:form>
 
 <br><br><br><br><br><br>
 <!-- NEWSLETTER -->
@@ -950,18 +743,40 @@
 </footer>
 <!-- /FOOTER -->
 
+<script>
+    function openTab(tabIndex) {
+        var tabPanes = document.querySelectorAll('.tab-pane');
+        for (var i = 0; i < tabPanes.length; i++) {
+            tabPanes[i].classList.remove('active');
+        }
+        document.getElementById('tab' + tabIndex).classList.add('active');
+    }
 
-<div style="position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%);display: none;z-index: 2;width: 10cm;height: 1cm;background-color: #00FF00;text-align: center"
-     id="thongbaothemgiohang">
-    <h2>Đã Thêm vào Giỏ hàng</h2>
-</div>
+
+</script>
+<script>
 
 
-<%--        <div id="myModal">--%>
-<%--            <div  style="width: 20cm;height: 15cm">--%>
-<%--                <img src="https://uploads-ssl.webflow.com/6073fad993ae97919f0b0772/609fa687874b84361fc495db_%C4%91t.jpg" style="width: 100%; height: 100%">--%>
-<%--            </div>--%>
-<%--        </div>--%>
+    const imageInput = document.getElementById('anhmoi');
+
+    const previewImage2 = document.getElementById('preview-image-2');
+
+    imageInput.addEventListener('change', function () {
+
+        const file = imageInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewImage2.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewImage2.src = '';
+        }
+        document.getElementById('cucheck').value = 'moi';
+    });
+</script>
+
 <script>
 
     function chonhetgiohangtongTRANGCHU(idgh) {
@@ -1209,7 +1024,94 @@
 
 
 </script>
+<script>
+    const oldpasswordInput = document.getElementById('oldpassword');
+    const oldpasswordToggle = document.getElementById('old-password-toggle');
 
+    function togglePassword1() {
+        if (oldpasswordInput.type === 'password') {
+            oldpasswordInput.type = 'text';
+            oldpasswordToggle.innerText = 'Hide';
+        } else {
+            oldpasswordInput.type = 'password';
+            oldpasswordToggle.innerText = 'Show';
+        }
+    };
+    const newpasswordInput = document.getElementById('newpassword');
+    const newpasswordToggle = document.getElementById('new-password-toggle');
+
+    function togglePassword2() {
+        if (newpasswordInput.type === 'password') {
+            newpasswordInput.type = 'text';
+            newpasswordToggle.innerText = 'Hide';
+        } else {
+            newpasswordInput.type = 'password';
+            newpasswordToggle.innerText = 'Show';
+        }
+    };
+    const confirmpasswordInput = document.getElementById('confirmpassword');
+    const confirmpasswordToggle = document.getElementById('confirm-password-toggle');
+
+    function togglePassword3() {
+        if (confirmpasswordInput.type === 'password') {
+            confirmpasswordInput.type = 'text';
+            confirmpasswordToggle.innerText = 'Hide';
+        } else {
+            confirmpasswordInput.type = 'password';
+            confirmpasswordToggle.innerText = 'Show';
+        }
+    };
+
+    const imageInput1 = document.getElementById('anhmoi1');
+
+    const previewAnh12 = document.getElementById('preview-anh1-2');
+
+    imageInput1.addEventListener('change', function () {
+        const file = imageInput1.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewAnh12.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewAnh12.src = '';
+        }
+        document.getElementById('cucheck1').value = 'moi1';
+    });
+
+    function checkhkh() {
+        var old = document.getElementById("oldpassword").value;
+        var newp = document.getElementById("newpassword").value;
+        var con = document.getElementById("confirmpassword").value;
+
+        if (
+            old.trim().length < 6 || old == ''
+        ) {
+            document.getElementById("btkh").type = "button";
+            document.getElementById("old-error").innerHTML = "Không để trống ,Mật khẩu ít nhất 6 ký tự";
+            return false;
+        } else {
+            document.getElementById("old-error").innerHTML = "";
+            if (newp.trim().length < 6 || newp == '') {
+                document.getElementById("new-error").innerHTML = "Không để trống ,Mật khẩu ít nhất 6 ký tự";
+                document.getElementById("btkh").type = "button";
+                return false;
+            } else {
+                document.getElementById("new-error").innerHTML = "";
+                if (con.trim().length < 6 || con == '') {
+                    document.getElementById("confirm-error").innerHTML = "Không để trống ,Mật khẩu ít nhất 6 ký tự";
+                    document.getElementById("btkh").type = "button";
+                    return false;
+                } else {
+                    document.getElementById("confirm-error").innerHTML = "";
+                    document.getElementById("btkh").type = "summit";
+                    return true;
+                }
+            }
+        }
+    }
+</script>
 <!-- jQuery Plugins -->
 <script src="/jsbanhang/jquery.min.js"></script>
 <script src="/jsbanhang/bootstrap.min.js"></script>

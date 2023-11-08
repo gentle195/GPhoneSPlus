@@ -16,6 +16,8 @@ import java.util.UUID;
 public interface DiaChiRepository extends JpaRepository<DiaChi, UUID> {
 //    @Query("select dc from DiaChi dc  where dc.tinhTrang=0")
 //    List<DiaChi> getall0();
+    @Query("select hkh from DiaChi hkh  where hkh.tinhTrang=0 and hkh.khachHang.id=:khachHangId")
+    List<DiaChi> findByKhachHangId(UUID khachHangId);
 
     @Query("select hkh from DiaChi hkh  where hkh.tinhTrang=0")
     List<DiaChi> getall0();

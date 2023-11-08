@@ -54,76 +54,15 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 
 
+
+
+
+
+
+
     <style>
-        /* CSS cho modal */
-        #myModal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000; /* Đặt giá trị z-index lớn */
-        }
 
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        #myModal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000; /* Đặt giá trị z-index lớn */
-        }
-
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        /*div{*/
-        /*    border: 1px solid red;*/
-        /*}*/
-        .input-with-button {
-            display: flex; /* Sử dụng flexbox để căn chỉnh nút bên trong input */
-            border: 1px solid #ccc; /* Tạo đường viền xung quanh hộp tìm kiếm */
-            border-radius: 25px; /* Đặt bán kính tròn cho hộp tìm kiếm */
-            overflow: hidden; /* Loại bỏ nút nếu nó bị tràn ra ngoài hộp */
-        }
-
-        .input-with-button input {
-            flex: 1; /* Làm cho input mở rộng để lấp đầy hộp */
-            border: none; /* Loại bỏ đường viền của input */
-            padding: 10px; /* Đặt khoảng cách nội dung bên trong input */
-            outline: none; /* Loại bỏ đường viền khi focus vào input */
-        }
-
-        .input-with-button button {
-            background: #007bff; /* Màu nền của nút */
-            color: #fff; /* Màu chữ trắng */
-            border: none; /* Loại bỏ đường viền của nút */
-            padding: 10px 20px; /* Đặt khoảng cách nội dung bên trong nút */
-            cursor: pointer; /* Biến con trỏ thành bàn tay khi trỏ vào nút */
-        }
-
-/*tuananh*/
+        /*tuananh*/
         .container1 {
             display: flex;
             margin-left: 5cm;
@@ -141,17 +80,12 @@
             width: 6cm;
             /*border: 1px solid blue;*/
         }
-        .right-column1 {
-            /*border: 1px solid #8c0615;*/
-            width: 6cm;
-        }
+
         .middle-column1 {
             /*border: 1px solid red;*/
-            width:  calc(100% - 6cm - 6cm); /* Tính toán kích thước cột giữa */
+            width:  calc(100% - 6cm); /* Tính toán kích thước cột giữa */
 
         }
-
-
 
 
         .tab-container {
@@ -172,7 +106,80 @@
             font-weight: bold;
             font-size: 18px;
         }
+        .add-button {
+            background-color: red; /* Màu đỏ */
+            color: #fff;
+            /*padding: 5px 10px;*/
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
+        .add-button:hover {
+            background-color: darkred; /* Màu đỏ tối khi di chuột qua */
+        }
+
+
+        .close {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+
+        .address-container {
+            /*border: 1px solid #ccc;*/
+            padding: 10px;
+            margin: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-end;
+        }
+        .p{
+            font-size: 15px;
+        }
+        .bold {
+            font-weight: bold; /* Địa chỉ đậm hơn */
+        }
+
+        .update-button {
+            background-color: #008000; /* Màu xanh */
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        .default-button {
+            padding: 5px 10px;
+            border: 1px solid #0000ff; /* Viền xung quanh */
+            border-radius: 5px;
+            margin-top: 5px; /* Khoảng cách 2px từ phía trên */
+        }
+
+
+
+        .tab-content {
+            width: 100%; /* Điều chỉnh chiều rộng nội dung tab */
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
     </style>
 
 </head>
@@ -206,15 +213,15 @@
                                    <i class="fa fa-user-o"></i>
                                            ${khachhangdangnhap.taiKhoan}
                                       <input id="tkmkidkhachhang" type="text" style="display: none"
-                                              value="${idkhachhang}">
+                                             value="${idkhachhang}">
                                    </span>
-<%--                      <security:authorize access="isAuthenticated()">--%>
-<%--                      hi, <security:authentication property="principal.username" />--%>
-<%--                      </security:authorize>--%>
-<%--                      <security:authorize access="!isAuthenticated()">--%>
-<%--                          <a href="/login">Login</a>--%>
+                                    <%--                      <security:authorize access="isAuthenticated()">--%>
+                                    <%--                      hi, <security:authentication property="principal.username" />--%>
+                                    <%--                      </security:authorize>--%>
+                                    <%--                      <security:authorize access="!isAuthenticated()">--%>
+                                    <%--                          <a href="/login">Login</a>--%>
 
-<%--                       </security:authorize>--%>
+                                    <%--                       </security:authorize>--%>
                             </a>
                             <div class="cart-dropdown" style="border-radius: 10px;width: 3.5cm;margin-top: 10px">
                                 <div>
@@ -222,7 +229,7 @@
                                         <form action="/thong-tin-ca-nhan-khach-hang" method="post">
                                             <input value="${idkhachhang}" name="idKhachHang" style="display: none">
                                             <button class="btn btn-primary" type="submit">Tài khoản của tôi</button>
-<%--                                        </form>--%>
+                                                <%--                                        </form>--%>
                                     </div>
 
                                     <form action="/ban-hang-online/hoa-don-online" method="post">
@@ -429,33 +436,17 @@
 </nav>
 <!-- /NAVIGATION -->
 
-<br>
-<%--<br><br><br><br><br>--%>
 
 
-<!-- The Modal -->
-
-<%--<main id="content" style="height: 10cm">--%>
 
 
-<%--</main>--%>
-
-<%--<form action="/dia-chi-khach-hang" method="post" id="diaChiForm" style="display: none">--%>
-<%--    <input value="${idKhachHang}" name="idKhachHang" style="display: none">--%>
-<%--    <button class="btn btn-primary" type="submit">Địa chỉ</button>--%>
-<%--</form>--%>
-
-
-<form:form action="/update-thong-tin-ca-nhan-khach-hang" method="post" modelAttribute="kh"
-           enctype="multipart/form-data">
 <div class="container1">
-
-    <div class="left-column1" style="width: 6cm; font-size: 18px">
+    <div class="left-column1" style="width: 6cm;">
         <!-- Nội dung cột trái -->
-        <div class="row" style="margin-top: 6px">
+        <div class="row">
             <div class="col-md-2">
-                <img  class="preview-image" src="../../../uploads/${kh.anh}" alt=""
-                     width="40px" height="40px"
+                <img id="preview-image-2" class="preview-image" src="../../../uploads/${kh.anh}" alt=""
+                     width="40px" height="40px%"
                      style="border-radius:50% 50% 50% 50%;border: 2px solid #999999">
             </div>
             <div class="col-md-10">
@@ -467,187 +458,116 @@
 
         <div class="row">
             <div class="tab-container">
-                <div class="tab-menu" style="margin-top: 10px">
-                    <a href=""><div style="color: red" class="tab">Hồ sơ</div></a>
-                    <a href="/dia-chi-khach-hang"><div class="tab">Địa chỉ</div></a>
-                    <a href="/pass-khach-hang"><div class="tab">Đổi mật khẩu</div></a>
-                    <a href=""><div class="tab">Đơn hàng</div></a>
-                </div>
-                <div class="tab-content">
-                    <%--                    <div class="tab-pane" id="tab1">Nội dung 1</div>--%>
-                    <%--                    <div class="tab-pane" id="tab2">2</div>--%>
-                    <%--                    <div class="tab-pane" id="tab3">3</div>--%>
-                </div>
+                <div class="tab-menu">
+                    <div class="tab-menu" style="margin-top: 10px">
+                        <a href="/thong-tin-ca-nhan-khach-hang"><div class="tab">Hồ sơ</div></a>
+                        <a href="/dia-chi-khach-hang" style="color: red"><div class="tab">Địa chỉ</div></a>
+                        <a href="/pass-khach-hang"><div class="tab">Đổi mật khẩu</div></a>
+                        <a href=""><div class="tab">Đơn hàng</div></a>
+                    </div>
             </div>
         </div>
+
+
+        <br>
+
     </div>
-    <%--    <div class="tab-pane" id="tab1">--%>
+</div>
+
     <div class="middle-column1" style="font-size: 15px">
         <!-- Nội dung cột giữa -->
-        <div class="row">
-            <p style="margin-left: 0.5cm; font-size: 20px"><strong>Hồ sơ của tôi </strong></p>
-            <p style="margin-left: 0.5cm">     (Quản lý thông tin hồ sơ để bảo mật tài khoản!)</p>
+        <div class="row" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="col1">
+                <div style="display: flex; align-items: center;">
+            <p style="margin-left: 0.5cm; font-size: 20px"><strong>Địa chỉ</strong></p>
+            <button style="margin-left: 16cm; font-size: 18px" id="modalthemdiachi" class="add-button" data-bs-toggle="modal" data-bs-target="#themdiachi">+ Thêm địa chỉ mới</button>
+                </div>
+                <p style="margin-left: 0.5cm">     (Quản lý địa chỉ nhận hàng!)</p>
 
+            </div>
+
+            <!-- Modal -->
+            <P style="display: none">
+                    ${kh.id}
+            </P>
         </div>
+
         <div style="font-size: 18px; color: black">
-            <p style="font-weight:bold"> Tên đăng nhập: ${kh.taiKhoan}</p>
+            <p style="font-weight:bold; margin-left: 10px"> Tên đăng nhập: ${kh.taiKhoan}</p>
         </div>
 
+        <c:forEach var="diaChi" items="${diaChiList}">
 
-<div style="display:none;">
-    <form:input class="form-control" placeholder="" path="id" readonly="true"/>
-
-    <form:label class="form-label" path="ma">Mã:</form:label>
-    <form:input class="form-control" placeholder="" path="ma" readonly="true"/>
-    <form:label class="form-label" path="taiKhoan">Tài khoản:
-        <form:errors path="taiKhoan" cssStyle="color: red"></form:errors>
-    </form:label>
-    <form:input class="form-control" placeholder="" path="taiKhoan"/>
-    <form:label class="form-label" path="matKhau">Mật khẩu:
-        <form:errors path="matKhau" cssStyle="color: red"></form:errors>
-    </form:label>
-    <form:input class="form-control" placeholder="" path="matKhau"/>
-    <form:label class="form-label" path="diem">Điểm:
-        <form:errors path="diem" cssStyle="color: red"></form:errors>
-    </form:label>
-    <form:input class="form-control" placeholder="" path="diem" type="number"/>
-    <form:input class="form-control" placeholder="" path="hangKhachHang" type="text"/>
-    <form:input path="ngayTao" type="date"></form:input>
-
-</div>
-        <table class="table">
-            <thead>
-            <tr>
-                <td>Họ tên</td>
-                <td>
-                    <form:input class="form-control" placeholder="${kh.hoTen}"  path="hoTen"/>
-                </td>
-            </tr>
-            <tr>
-                <td> <form:errors path="hoTen" cssStyle="color: red"></form:errors></td>
-            </tr>
-            <tr>
-                <td>Số điện thoại:</td>
-                <td>
-                    <form:input class="form-control" placeholder="${kh.sdt}"  path="sdt"/>
-                </td>
-            </tr>
-            <tr>
-                <td> <form:errors path="sdt" cssStyle="color: red"></form:errors></td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td>
-                    <form:input class="form-control" placeholder="${kh.email}"  path="email"/>
-                </td>
-            </tr>
-            <tr>
-                <td> <form:errors path="email" cssStyle="color: red"></form:errors></td>
-
-            </tr>
-            <tr>
-                <td>Giới Tính:</td>
-                <td>
-                    <div class="form-control">
-                        <form:radiobutton path="gioiTinh" value="true"/>Nam
-                        <form:radiobutton path="gioiTinh" value="false" cssStyle="margin-left: 1cm"/> Nữ
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Ngày sinh</td>
-                <td>
-                    <form:input class="form-control" placeholder="" path="ngaySinh" type="date"
-                                id="ns"/>
-                </td>
-            </tr>
-
-            </thead>
-
-        </table>
-
-        <div style="text-align: center">
-            <button type="submit" class="btn btn-primary mr-2"
-                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                SAVE
-            </button>
-        </div>
-    </div>
-
-
-
-    <div class="right-column1" style="text-align: center; font-size: 15px">
-        <%--                <div class="col-md-2" style="text-align: center; margin-left: 1cm">--%>
-        <%--                </div>--%>
-
-        <!-- Nội dung cột phải -->
-            <div style="display: none">
-                <input style="" type="text" name="checkanh" value="cu" id="cucheck">
-                <br>
-            </div>
-            <div align="center">
-                <br>
-                <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;"
-                       for="anhmoi">
-                    <img id="preview-image-2" class="preview-image" src="../../../uploads/${kh.anh}" alt=""
-                         width="100%" height="100%"
-                         style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
-
-                    <br><br>
-                    ẢNH
-                </label>
-                <br>
-                <div style="display: none">
-                    <input type="file" name="images" accept="image/jpeg, image/png" id="anhmoi">
+            <div class="address-container">
+                <div class="address-details">
+                    <p style="font-weight: bold; font-size: 15px">${kh.hoTen} | ${kh.sdt}</p>
+                    <p>${diaChi.diaChi}, ${diaChi.quan}, ${diaChi.thanhPho}</p>
+                </div>
+                <div class="buttons">
+                    <button id="update-address-button" class="update-button">Cập nhật</button>
+                    <button class="default-button">Thiết lập mặc định</button>
                 </div>
             </div>
-            <div style="display: none">
-                <form:input path="anh"/>
-            </div>
+            <hr>
+        </c:forEach>
 
     </div>
 
-
 </div>
-</form:form>
+<%--modal thêm đại chỉ--%>
 
-<br><br><br><br><br><br>
-<!-- NEWSLETTER -->
-<div id="newsletter" class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="newsletter">
-                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
-                    <form>
-                        <input class="input" type="email" placeholder="Enter Your Email">
-                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-                    </form>
-                    <ul class="newsletter-follow">
-                        <li>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-</div>
-<!-- /NEWSLETTER -->
 
+<%--<div id="addAddressModal" class="modal">--%>
+<%--    <div class="modal-content">--%>
+<%--        <span class="close" id="closeModal">&times;Trở lại</span>--%>
+<%--        <p style="font-size: 18px; font-weight: bold">Thêm địa chỉ nhận hàng</p>--%>
+
+
+<%--    </div>--%>
+<%--</div>--%>
+
+
+<%--<div id="updateModal" class="modal1">--%>
+<%--    <div class="modal-content">--%>
+<%--        <span class="close" id="closeUpdateModal">&times; Trở lại</span>--%>
+<%--        <p style="font-size: 18px; font-weight: bold">Cập nhật địa chỉ nhận hàng</p>--%>
+<%--        <table class="table" style="height: 100%">--%>
+<%--            <tr>--%>
+<%--                <th>--%>
+<%--                    <label class="form-label">Địa chỉ:</label>--%>
+<%--                    <input id="diaChi1" class="form-control" placeholder="">--%>
+<%--                </th>--%>
+
+<%--                <th>--%>
+<%--                    <label class="form-label">Quận/huyện:</label>--%>
+<%--                    <input id="quan1" class="form-control" placeholder="">--%>
+<%--                </th>--%>
+<%--            </tr>--%>
+<%--            <tr>--%>
+<%--                <th>--%>
+<%--                    <label class="form-label">Tỉnh/Thành phố:</label>--%>
+<%--                    <input id="thanhPho1" class="form-control" placeholder="">--%>
+<%--                </th>--%>
+<%--                <th>--%>
+<%--                    <label class="form-label">Mô tả:</label>--%>
+<%--                    <textarea id="moTa1" class="form-control" placeholder=""></textarea>--%>
+<%--                </th>--%>
+<%--            </tr>--%>
+<%--        </table>--%>
+
+<%--        <div align="center">--%>
+<%--            <button type="submit" class="btn btn-warning" id="1" onclick="return checkCV()"> Save--%>
+<%--            </button>--%>
+<%--        </div>--%>
+<%--        <!-- Modal footer -->--%>
+<%--    </div>--%>
+
+<%--</div>--%>
+
+
+
+
+<br>
 <!-- FOOTER -->
 <footer id="footer">
     <!-- top footer -->
@@ -659,8 +579,7 @@
                 <div class="col-md-3 col-xs-6">
                     <div class="footer">
                         <h3 class="footer-title">About Us</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                            ut.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
                         <ul class="footer-links">
                             <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
                             <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
@@ -722,19 +641,17 @@
             <!-- row -->
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <ul class="footer-payments">
+                    <ul class="footer-payments" >
                         <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
                         <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
                         <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
                         <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
                         <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
                         <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
-                    </ul>
+                    </ul  >
                     <span class="copyright">
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i
-                            class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                                                                                target="_blank">Colorlib</a>
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</span>
                 </div>
@@ -749,13 +666,66 @@
 
 
 
+<!-- The Modal -->
+<div class="modal" id="themdiachi">
+    <div class="modal-dialog" style="margin-top: 5cm">
+        <div class="modal-content">
 
 
-<%--        <div id="myModal">--%>
-<%--            <div  style="width: 20cm;height: 15cm">--%>
-<%--                <img src="https://uploads-ssl.webflow.com/6073fad993ae97919f0b0772/609fa687874b84361fc495db_%C4%91t.jpg" style="width: 100%; height: 100%">--%>
-<%--            </div>--%>
-<%--        </div>--%>
+<p style="text-align: center;font-size: 20px">Thêm địa chỉ</p>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form:form action="/add-dia-chi-kh" method="post" modelAttribute="diaChiKH">
+                    <table class="table" style="height: 100%">
+                        <tr>
+                            <th>
+                                <form:label class="form-label" path="diaChi">Địa chỉ:
+                                    <form:errors path="diaChi" cssStyle="color: red"></form:errors>
+                                </form:label>
+                                <form:input id="tenhkh" class="form-control" placeholder="" path="diaChi" value=""/>
+                            </th>
+                            <th>
+                                <form:label class="form-label" path="quan">Quận/Huyện:
+                                    <form:errors path="quan" cssStyle="color: red"></form:errors></form:label>
+                                <form:input id="quan" class="form-control" placeholder=""  path="quan" onkeyup="setHuyen(this)" />
+                            </th>
+                            <th style="display: none">
+                                <form:label class="form-label" path="huyen">Huyện: <form:errors path="huyen" cssStyle="color: red"></form:errors>
+                                </form:label>
+                                <form:input id="huyen" class="form-control" placeholder=""  path="huyen" />
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>  <form:label class="form-label" path="thanhPho">Thành Phố: <form:errors path="thanhPho" cssStyle="color: red"></form:errors>
+                            </form:label>
+                                <form:input id="tp" class="form-control" placeholder=""  path="thanhPho" />
+
+                            </th>
+                            <th>
+                                <form:label class="form-label" path="moTa">Mô tả:
+                                    <form:errors path="moTa" cssStyle="color: red"></form:errors>
+                                </form:label>
+                                <form:textarea id="motahkh" class="form-control" placeholder="" path="moTa" />
+
+                            </th>
+                        </tr>
+                    </table>
+
+                    <div align="center">
+                        <button type="submit" class="btn btn-warning" id="" onclick="return checkCV()"> Save
+                        </button>
+
+                    </div>
+                </form:form>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
 
 <script>
     function openTab(tabIndex) {
@@ -1055,6 +1025,20 @@
     });
 </script>
 
+
+
+
+<script>
+     <c:if test="${batmodal==1}">
+     document.getElementById("modalthemdiachi").click();
+     </c:if>
+    function setHuyen(input) {
+        const huyenInput = document.getElementById("huyen");
+        huyenInput.value = input.value;
+    }
+</script>
+
+
 <!-- jQuery Plugins -->
 <script src="/jsbanhang/jquery.min.js"></script>
 <script src="/jsbanhang/bootstrap.min.js"></script>
@@ -1063,4 +1047,5 @@
 <script src="/jsbanhang/jquery.zoom.min.js"></script>
 <script src="/jsbanhang/main.js"></script>
 </body>
+
 </html>

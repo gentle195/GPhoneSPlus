@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.models.DiaChi;
 import com.example.demo.models.KhachHang;
 import com.example.demo.viewmodels.KhachHangHoaDon;
 import com.example.demo.viewmodels.KhachHangLSMuaHang;
@@ -47,6 +48,9 @@ public interface KhachHangService {
     public KhachHang newKhachHang(UUID id);
 
     public KhachHang quenMatKhau(String username, String email);
+
+    public List<DiaChi> getAllDiaChiByKhachHangId(UUID khachHangId);
+
 }
 
 
