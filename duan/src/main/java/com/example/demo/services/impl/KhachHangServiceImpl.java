@@ -1,6 +1,8 @@
 package com.example.demo.services.impl;
 
+import com.example.demo.models.DiaChi;
 import com.example.demo.models.KhachHang;
+import com.example.demo.repositories.DiaChiRepository;
 import com.example.demo.repositories.KhachHangRepository;
 import com.example.demo.services.KhachHangService;
 import com.example.demo.viewmodels.KhachHangHoaDon;
@@ -20,7 +22,8 @@ public class KhachHangServiceImpl implements KhachHangService {
 
     @Autowired
     KhachHangRepository khachHangRepository;
-
+    @Autowired
+    DiaChiRepository diaChiRepository;
     @Override
     public Page<KhachHang> getAll(Pageable pageable) {
         return khachHangRepository.findAll(pageable);
@@ -128,6 +131,11 @@ public class KhachHangServiceImpl implements KhachHangService {
     @Override
     public KhachHang quenMatKhau(String username, String email) {
         return khachHangRepository.quenMatKhau(username, email);
+    }
+
+    @Override
+    public List<DiaChi> getAllDiaChiByKhachHangId(UUID khachHangId) {
+       return diaChiRepository.findByKhachHangId(khachHangId);
     }
 
 
