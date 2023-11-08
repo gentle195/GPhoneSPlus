@@ -85,8 +85,8 @@
                                             <select id="selectDiaChi1" name="diaChi" class="form-control select2"
                                                     style="font-weight: bold; width: 100%">
                                                 <option selected disabled>Địa chỉ</option>
-                                                <c:forEach items="${listDiaChi}" var="diaChi">
-                                                    <option value="${diaChi.id}">${diaChi.diaChi}</option>
+                                                <c:forEach items="${listDiaChi}" var="DiaChi">
+                                                    <option value="${DiaChi.id}">${DiaChi.diaChi}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>

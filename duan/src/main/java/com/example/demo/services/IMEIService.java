@@ -23,6 +23,8 @@ public interface IMEIService {
 
     public List<IMEI> findAll0();
 
+    List<IMEI> showIMEI(UUID id);
+
     public IMEI searchSoImei(String imei);
 
     public String searchSoImei2(String imei);

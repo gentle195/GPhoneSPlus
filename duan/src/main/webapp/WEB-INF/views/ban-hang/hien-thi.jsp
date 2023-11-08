@@ -116,9 +116,9 @@
                                     <td>${hdct.donGia}</td>
                                     <td>${hdct.donGia * hdct.soLuong}</td>
                                     <td>
-                                        <button class="btn btn-warning btn-icon-text"><a
+                                        <button class="btn btn-danger btn-icon-text"><a
                                                 href="/ban-hang/delete-hoa-don-chi-tiet/${hdct.id}"
-                                                style="text-decoration: none">Xóa sản phẩm</a>
+                                                style="text-decoration: none;color: black">Xóa sản phẩm</a>
                                         </button>
                                     </td>
                                 </tr>
@@ -126,26 +126,6 @@
                             </tbody>
                         </table>
                     </div>
-                        <%--                    <div class="card-footer">--%>
-                        <%--                        <div align="center">--%>
-                        <%--                            <div class="btn-group" role="group" aria-label="Basic example">--%>
-                        <%--                                <ul class="pagination justify-content-center pagination-lg">--%>
-                        <%--                                    <li class="page-item"><a class="page-link"--%>
-                        <%--                                                             href="/ban-hang/thong-tin-hoa-don/${idHoaDon}?pageNum=0"><</a>--%>
-                        <%--                                    </li>--%>
-                        <%--                                    <c:forEach begin="1" end="${total}" varStatus="status">--%>
-                        <%--                                        <li class="page-item">--%>
-                        <%--                                            <a href="${pageContext.request.contextPath}/ban-hang/thong-tin-hoa-don/${idHoaDon}?pageNum=${status.index -1}"--%>
-                        <%--                                               class="page-link">${status.index}</a>--%>
-                        <%--                                        </li>--%>
-                        <%--                                    </c:forEach>--%>
-                        <%--                                    <li class="page-item"><a class="page-link"--%>
-                        <%--                                                             href="/ban-hang/thong-tin-hoa-don/${idHoaDon}?pageNum=${total-1}">></a>--%>
-                        <%--                                    </li>--%>
-                        <%--                                </ul>--%>
-                        <%--                            </div>--%>
-                        <%--                        </div>--%>
-                        <%--                    </div>--%>
                 </div>
             </div>
         </div>
@@ -429,7 +409,7 @@
                         <form class="forms-sample">
                             <div class="container px-0 px-lg-5 mt-0">
                                 <div class="row gx-0 gx-lg-5 row-cols-0 row-cols-md-0 row-cols-xl-5 justify-content-center"
-                                     style="width: 100%">
+                                     style="width: 100%;color: black">
                                     <div style="height: 1.5cm">
                                         <select class="form-control" id="hangds1" onchange="clickcombobox()">
                                             <option selected value="null">Hãng sản phẩm</option>
@@ -636,24 +616,7 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"--%>
-<%--        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"--%>
-<%--        crossorigin="anonymous"></script>--%>
-<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"--%>
-<%--        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"--%>
-<%--        crossorigin="anonymous"></script>--%>
-<%--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"--%>
-<%--        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"--%>
-<%--        crossorigin="anonymous"></script>--%>
-<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"--%>
-<%--        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"--%>
-<%--        crossorigin="anonymous"></script>--%>
-<%--<script src="../../vendors/js/vendor.bundle.base.js"></script>--%>
-<%--<script src="../../js/off-canvas.js"></script>--%>
-<%--<script src="../../js/hoverable-collapse.js"></script>--%>
-<%--<script src="../../js/template.js"></script>--%>
-<%--<script src="../../js/settings.js"></script>--%>
-<%--<script src="../../js/todolist.js"></script>--%>
+
 <script>
     function myFunction1() {
         let text = "Bạn chắc chắn muốn thêm";
@@ -1049,9 +1012,9 @@
                 <td>` + hdct.donGia + `</td>
                 <td>` + hdct.donGia * hdct.soLuong + `</td>
                 <td>
-                    <button class="btn btn-warning btn-icon-text"><a
+                    <button class="btn btn-danger btn-icon-text"><a
                     href="/ban-hang/delete-hoa-don-chi-tiet/` + hdct.id + `
-                    style="text-decoration: none">Xóa sản phẩm</a>
+                    style="text-decoration: none;color: black">Xóa sản phẩm</a>
                     </button>
                 </td>
             </tr>
