@@ -499,7 +499,7 @@
                 </div>
                 <div class="col-6">
                     <a class="btn btn-info"
-                       href="/ban-hang-online/xem-hoa-don-chi-tiet/thanh-toan-khi-nhan-hang/${hd.id}">Thanh toán
+                       href="/pay/${hd.tongTien}/${hd.id}">Thanh toán
                         VNPay</a>
                 </div>
             </div>

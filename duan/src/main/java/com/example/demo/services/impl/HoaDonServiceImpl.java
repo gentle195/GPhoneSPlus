@@ -384,7 +384,6 @@ public class HoaDonServiceImpl implements HoaDonService {
                         .append(" (").append(hoaDonChiTiet.getImei().getChiTietSanPham().getChip().getTen())
                         .append("/").append(hoaDonChiTiet.getImei().getChiTietSanPham().getMauSac().getTen()).append(")")
                         .append("</td>");
-
                 htmlContentBuilder.append("<td>").append(hoaDonChiTiet.getSoLuong()).append("</td>");
                 htmlContentBuilder.append("<td>").append(fomatTienSanPham).append("</td>");
                 htmlContentBuilder.append("</tr>");

@@ -58,7 +58,7 @@
                             <thead>
                             <tr>
                                 <th scope="col">Mã</th>
-                                <th scope="col">Tên sản phẩm</th>
+                                <th scope="col">Sản phẩm</th>
                                 <th scope="col">Số imei</th>
                                 <th scope="col">Mã QR</th>
                                 <th scope="col">Ngày tạo</th>
@@ -72,7 +72,10 @@
                             <c:forEach items="${listImei}" var="imei" varStatus="index">
                                 <tr>
                                     <td>${imei.ma}</td>
-                                    <td>${imei.chiTietSanPham.sanPham.ten}</td>
+                                    <td>${imei.chiTietSanPham.sanPham.ten}-
+                                            ${imei.chiTietSanPham.mauSac.ten}-
+                                            ${imei.chiTietSanPham.ram.dungLuong}-
+                                            ${imei.chiTietSanPham.rom.dungLuong}</td>
                                     <td>${imei.soImei}</td>
                                     <td>
                                         <img src="../maqr/${imei.maQr}" width="70" height="70">

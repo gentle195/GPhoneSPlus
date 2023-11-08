@@ -23,7 +23,7 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
     @Query("select hd from HoaDon hd where hd.tinhTrang=0 and hd.loai=0")
     List<HoaDon> find();
 
-    @Query("select hd from HoaDon hd where  hd.loai=1 order by hd.ngayTao desc")
+    @Query("select hd from HoaDon hd where  hd.loai=1 order by hd.ngayTao desc ")
     List<HoaDon> donHang();
 
     @Query("select hd from HoaDon hd order by hd.ngayTao desc")
@@ -79,7 +79,7 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
             "LEFT JOIN KhachHang kh ON hd.khachHang.id = kh.id  " +
             "LEFT JOIN NhanVien nv ON hd.nhanVien.id = nv.id " +
             "LEFT JOIN DiaChi dc ON hd.diaChi.id = dc.id " +
-            " where (:idKH IS NULL OR kh.id=:idKH) " +
+            " where hd.loai=1 and (:idKH IS NULL OR kh.id=:idKH) " +
             "and (:idNV IS NULL OR nv.id=:idNV)  " +
             "and (:idDC IS NULL OR dc.id=:idDC) " +
             "AND (:trangThai is null or hd.tinhTrang=:trangThai)" +

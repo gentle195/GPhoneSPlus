@@ -45,9 +45,13 @@
             <h4 class="card-title">Update Imei</h4>
             <form class="forms-sample">
                 <div class="form-group">
-                    <form:select path="chiTietSanPham" class="form-control" cssStyle="font-weight: bold; width: 100%">
+                    <form:select path="chiTietSanPham" class="form-control"
+                                 cssStyle="font-weight: bold; width: 100%" id="selectSanPham">
                         <option selected disabled>Sản phẩm</option>
-                        <form:options items="${listCTSP}" itemLabel="sanPham.ten" itemValue="id"/>
+                        <c:forEach items="${listCTSP}" var="ctsp">
+                            <option value="${ctsp.id}">${ctsp.sanPham.ten} - ${ctsp.mauSac.ten}
+                                - ${ctsp.ram.dungLuong}- ${ctsp.rom.dungLuong}</option>
+                        </c:forEach>
                     </form:select>
                 </div>
                 <div class="form-group">

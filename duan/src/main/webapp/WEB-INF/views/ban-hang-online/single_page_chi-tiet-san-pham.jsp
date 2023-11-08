@@ -456,27 +456,18 @@
                 <div style="width: 42%;float: right">
                     <div class="product-details">
                         <h2 class="product-name">${tensp}</h2>
-                        <div>
-                            <div class="product-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                            <a class="review-link" href="#">10 Review(s) | Add your review</a>
-                        </div>
+
                         <div>
                             <h4 class="product-price"><span style="font-size:15px">₫</span>0-
                                 <del class="product-old-price">0<span style="font-size:15px">₫</span></del>
                             </h4>
-                            <span class="product-available">In Stock</span>
                         </div>
 
 
                         <div class="add-to-cart" style="margin-top: 7cm">
                             Số lượng :<label style="background: white;color: red;border: 1px solid white"
                                              id="thongbaosoluong"></label>
+                            <br>
                             <div class="qty-label">
 
                                 <div class="" style="margin-left: 1cm">
@@ -514,38 +505,48 @@
                             </c:if>
                         </div>
 
-                        <ul class="product-btns">
-                            <li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
-                            <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
-                        </ul>
 
-                        <ul class="product-links">
-                            <li>Category:</li>
-                            <li><a href="#">Headphones</a></li>
-                            <li><a href="#">Accessories</a></li>
-                        </ul>
-
-                        <ul class="product-links">
-                            <li>Share:</li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i></a></li>
-                        </ul>
-                        <br>
-                        <p>
-                        <div>
-                            *Hãng sản phẩm:<br>
-                            *Camera:<br>
-                            *Màn:<br>
-                            *Màu:<br>
-                            *Ram:<br>
-                            *Rom:<br>
-                            *Pin:<br>
-                            *Dung lượng pin:<br>
-                            *Chip:<br>
+                        <div class="product-description">
+                            <h3>Thông tin chi tiết sản phẩm:</h3>
+                            <table class="product-info-table">
+                                <tr>
+                                    <td class="info-label">Hãng sản phẩm:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="info-label">Camera:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="info-label">Màn:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="info-label">Màu:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="info-label">Ram:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="info-label">Rom:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="info-label">Pin:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="info-label">Dung lượng pin:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="info-label">Chip:</td>
+                                    <td></td>
+                                </tr>
+                            </table>
                         </div>
-                        </p>
 
                     </div>
                 </div>

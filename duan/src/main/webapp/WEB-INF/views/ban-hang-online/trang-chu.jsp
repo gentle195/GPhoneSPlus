@@ -38,7 +38,7 @@
     <link type="text/css" rel="stylesheet" href="/cssbanhang/nouislider.min.css"/>
 
     <!-- Font Awesome Icon -->
-    <link rel="stylesheet" href="/cssbanhang/font-awesome.min.css">
+
 
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="/cssbanhang/style.css"/>
@@ -158,27 +158,7 @@
 
 <!-- HEADER -->
 <header>
-    <%--    <!-- TOP HEADER -->--%>
-    <%--    <div id="top-header">--%>
-    <%--        <div class="container">--%>
-    <%--            <ul class="header-links pull-left">--%>
-    <%--                <li><a href="#"><i class="fa fa-envelope-o"></i> gphones@gmail.com</a></li>--%>
-    <%--            </ul>--%>
-    <%--            <ul class="header-links pull-right" style="color:white;">--%>
-    <%--                <security:authorize access="isAuthenticated()">--%>
-    <%--                    hi, <security:authentication property="principal.email"  />--%>
-    <%--                    ||--%>
-    <%--                    <a href="/logout">Logout</a>--%>
-    <%--                </security:authorize>--%>
-    <%--                <security:authorize access="!isAuthenticated()">--%>
-    <%--                    <a href="/login" style="color: white">Login</a>--%>
 
-    <%--                </security:authorize>--%>
-    <%--            </ul>--%>
-    <%--        </div>--%>
-    <%--    </div>--%>
-    <%--    <!-- /TOP HEADER -->--%>
-    <!-- TOP HEADER -->
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
@@ -209,7 +189,12 @@
                                  style="border-radius: 10px;width: 3.5cm;margin-top: 10px;width: 180px">
                                 <div>
                                     <div>
-                                        <a href="#" class="btn btn-primary">Tài khoản của tôi</a>
+                                        <form action="/thong-tin-ca-nhan-khach-hang" method="post">
+                                            <input value="${idkhachhang}" name="idKhachHang" style="display: none">
+                                            <button class="btn btn-primary" type="submit">Tài khoản của tôi</button>
+                                        </form>
+<%--                                          <a href="" class="btn btn-primary" type="submit" onclick="submitForm1()">Tài khoản của tôi</a>--%>
+
                                     </div>
                                     <div>
                                         <a href="/ban-hang-online/hoa-don-online/${idkhachhang}"
