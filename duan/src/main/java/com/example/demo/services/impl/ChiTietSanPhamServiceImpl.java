@@ -105,13 +105,13 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     }
 
     @Override
-    public Page<ChiTietSanPham> finAllTTOn(Pageable pageable) {
-        return chiTietSanPhamRepository.getChiTietSanPhamOn(pageable);
+    public List<ChiTietSanPham> getAllTTOn() {
+        return chiTietSanPhamRepository.getChiTietOn();
     }
 
     @Override
-    public Page<ChiTietSanPham> finAllTTOff(Pageable pageable) {
-        return chiTietSanPhamRepository.getChiTietSanPhamOff(pageable);
+    public List<ChiTietSanPham> getAllTTOff() {
+        return chiTietSanPhamRepository.getChiTietOff();
     }
 
     @Override

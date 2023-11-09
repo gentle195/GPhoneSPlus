@@ -20,10 +20,13 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi" role="tab">Thông tin chi tiết sản phẩm</a>
+            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin chi tiết
+                sản phẩm</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-da-xoa" role="tab">Sản phẩm đã xóa</a>
+            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-da-xoa" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xóa</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
@@ -65,8 +68,8 @@
                             </div>
                         </div>
                         <div class="row" style="color: black">
-                            <div class="col-md-6" >
-                                <div class="form-group" >
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <div class="row">
                                         <div class="col-11">
                                             <form:select path="sanPham" class="form-control" id="selectSanPham"
@@ -174,7 +177,8 @@
                                     <div class="row">
                                         <div class="col-11">
                                             <form:label class="form-label" path="giaBan">Giá bán:</form:label>
-                                            <form:input class="form-control" placeholder="" path="giaBan" type="number"/>
+                                            <form:input class="form-control" placeholder="" path="giaBan"
+                                                        type="number"/>
                                             <form:errors path="giaBan" cssStyle="color: red"/>
                                         </div>
                                     </div>
@@ -183,7 +187,8 @@
                                     <div class="row">
                                         <div class="col-11">
                                             <form:label class="form-label" path="namBaoHanh">Năm bảo hành:</form:label>
-                                            <form:input class="form-control" placeholder="" path="namBaoHanh" type="number"/>
+                                            <form:input class="form-control" placeholder="" path="namBaoHanh"
+                                                        type="number"/>
                                             <form:errors path="namBaoHanh" cssStyle="color: red"/>
                                         </div>
                                     </div>
@@ -194,7 +199,8 @@
                                     <div class="row">
                                         <div class="col-11">
                                             <form:label class="form-label" path="soLuong">Số lượng tồn:</form:label>
-                                            <form:input class="form-control" placeholder="" path="soLuong" type="number"/>
+                                            <form:input class="form-control" placeholder="" path="soLuong"
+                                                        type="number"/>
                                             <form:errors path="soLuong" cssStyle="color: red"/>
                                         </div>
                                     </div>

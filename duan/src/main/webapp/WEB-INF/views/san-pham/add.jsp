@@ -15,17 +15,17 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/san-pham/hien-thi" role="tab">Thông tin sản phẩm</a>
+            <a class="nav-link" href="/san-pham/hien-thi" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin sản
+                phẩm</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/san-pham/hien-thi-tung-xoa" role="tab">Sản phẩm đã xóa</a>
+            <a class="nav-link" href="/san-pham/hien-thi-tung-xoa" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xóa</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
                aria-controls="description" aria-selected="true" role="tab">Thêm mới sản phẩm</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/san-pham/hien-thi-loc" role="tab">Lọc sản phẩm</a>
         </li>
     </ul>
 </div>

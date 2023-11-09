@@ -37,9 +37,9 @@ public interface ChiTietSanPhamService {
 
     public Boolean delete(UUID id);
 
-    Page<ChiTietSanPham> finAllTTOn(Pageable pageable);
+    List<ChiTietSanPham> getAllTTOn();
 
-    Page<ChiTietSanPham> finAllTTOff(Pageable pageable);
+    List<ChiTietSanPham> getAllTTOff();
 
     List<ChiTietSanPham> finAllTTOff();
 
