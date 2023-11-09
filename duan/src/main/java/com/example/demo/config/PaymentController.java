@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
+import com.example.demo.models.ChiTietSanPham;
 import com.example.demo.models.HoaDon;
 import com.example.demo.models.HoaDonChiTiet;
 import com.example.demo.models.IMEI;
@@ -164,6 +165,37 @@ public class PaymentController {
         System.out.println("vnp_ResponseCode----"+vnp_ResponseCode);
         System.out.println("contractId----"+contractId);
         System.out.println("registerServiceId----"+registerServiceId);
+
+//        giao dien
+
+        double tong=0;
+        Integer lamchon=0;
+        for (ChiTietSanPham ct:banHangOnlineService.ctspbanhang()) {
+            if(banHangOnlineService.soluongcon(String.valueOf(ct.getId()))>0){
+                tong=tong+1;
+                lamchon=lamchon+1;
+            }
+        }
+        double tb=tong/3;
+        lamchon=lamchon/3;
+        if(tb % 1 >0){
+            lamchon=lamchon+1;
+        }
+
+        model.addAttribute("lamchon",lamchon);
+        model.addAttribute("giamgia",banHangOnlineService);
+        model.addAttribute("banhangonline",banHangOnlineService);
+
+        model.addAttribute("khachhangdangnhap",hoaDonService.findById(UUID.fromString(idhoadon)).getKhachHang());
+        model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
+        model.addAttribute("idkhachhang",hoaDonService.findById(UUID.fromString(idhoadon)).getKhachHang().getId());
+        model.addAttribute("kh",hoaDonService.findById(UUID.fromString(idhoadon)).getKhachHang());
+        model.addAttribute("hkh", hangKhachHangService.getALL0());
+//        giohan
+        model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(hoaDonService.findById(UUID.fromString(idhoadon)).getKhachHang().getId())).get(0).getId()));
+        model.addAttribute("tttong",1);
+
+//        het giao dien
        // that bai: 24,rỗng, null
         // thành công:00,rỗng,null
         //hết thời gian :15,rỗng,null

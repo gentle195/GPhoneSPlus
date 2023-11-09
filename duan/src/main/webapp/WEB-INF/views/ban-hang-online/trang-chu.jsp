@@ -189,11 +189,11 @@
                                  style="border-radius: 10px;width: 3.5cm;margin-top: 10px;width: 180px">
                                 <div>
                                     <div>
-                                        <form action="/thong-tin-ca-nhan-khach-hang" method="post">
+                                        <form action="/thong-tin-ca-nhan-khach-hang" method="post" style="display: none">
                                             <input value="${idkhachhang}" name="idKhachHang" style="display: none">
-                                            <button class="btn btn-primary" type="submit">Tài khoản của tôi</button>
+                                            <button style="" class="btn btn-primary" type="submit" id="taikhoancuatoi">Tài khoản của tôi</button>
                                         </form>
-<%--                                          <a href="" class="btn btn-primary" type="submit" onclick="submitForm1()">Tài khoản của tôi</a>--%>
+                                          <a  class="btn btn-primary" type="submit" onclick="anbt()">Tài khoản của tôi</a>
 
                                     </div>
                                     <div>
@@ -1209,7 +1209,11 @@
 
 
 </script>
-
+<script>
+    function anbt() {
+        document.getElementById('taikhoancuatoi').click();
+    }
+</script>
 <!-- jQuery Plugins -->
 <script src="/jsbanhang/jquery.min.js"></script>
 <script src="/jsbanhang/bootstrap.min.js"></script>

@@ -52,98 +52,103 @@
         <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 
 
-    <style>
-        /* CSS cho modal */
-        #myModal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000; /* Đặt giá trị z-index lớn */
-        }
+        <style>
+            /* CSS cho modal */
+            #myModal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000; /* Đặt giá trị z-index lớn */
+            }
 
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        }
+            .modal-content {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            }
 
-        /*div{*/
-        /*    border: 1px solid red;*/
-        /*}*/
+            #myModal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000; /* Đặt giá trị z-index lớn */
+            }
 
-        /* Ẩn input radio */
-        input[type="radio"] {
-            display: none;
-        }
+            .modal-content {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            }
 
-        /* Tạo một giao diện tùy chỉnh cho label */
-        label {
-            display: inline-block;
-            padding: 5px 10px;
-            background-color: #e0e0e0;
-            border: 1px solid #ccc;
-            cursor: pointer;
-        }
+            /*div{*/
+            /*    border: 1px solid red;*/
+            /*}*/
+            .input-with-button {
+                display: flex; /* Sử dụng flexbox để căn chỉnh nút bên trong input */
+                border: 1px solid #ccc; /* Tạo đường viền xung quanh hộp tìm kiếm */
+                border-radius: 25px; /* Đặt bán kính tròn cho hộp tìm kiếm */
+                overflow: hidden; /* Loại bỏ nút nếu nó bị tràn ra ngoài hộp */
+            }
 
-        /* Khi label được nhấp vào, thay đổi màu nền để biểu thị lựa chọn */
-        input[type="radio"]:checked + label {
-            background-color: #007bff;
-            color: #fff;
-        }
-        .input-with-button {
-            display: flex; /* Sử dụng flexbox để căn chỉnh nút bên trong input */
-            border: 1px solid #ccc; /* Tạo đường viền xung quanh hộp tìm kiếm */
-            border-radius: 25px; /* Đặt bán kính tròn cho hộp tìm kiếm */
-            overflow: hidden; /* Loại bỏ nút nếu nó bị tràn ra ngoài hộp */
-        }
+            .input-with-button input {
+                flex: 1; /* Làm cho input mở rộng để lấp đầy hộp */
+                border: none; /* Loại bỏ đường viền của input */
+                padding: 10px; /* Đặt khoảng cách nội dung bên trong input */
+                outline: none; /* Loại bỏ đường viền khi focus vào input */
+            }
 
-        .input-with-button input {
-            flex: 1; /* Làm cho input mở rộng để lấp đầy hộp */
-            border: none; /* Loại bỏ đường viền của input */
-            padding: 10px; /* Đặt khoảng cách nội dung bên trong input */
-            outline: none; /* Loại bỏ đường viền khi focus vào input */
-        }
+            .input-with-button button {
+                background: #007bff; /* Màu nền của nút */
+                color: #fff; /* Màu chữ trắng */
+                border: none; /* Loại bỏ đường viền của nút */
+                padding: 10px 20px; /* Đặt khoảng cách nội dung bên trong nút */
+                cursor: pointer; /* Biến con trỏ thành bàn tay khi trỏ vào nút */
+            }
 
-        .input-with-button button {
-            background: #007bff; /* Màu nền của nút */
-            color: #fff; /* Màu chữ trắng */
-            border: none; /* Loại bỏ đường viền của nút */
-            padding: 10px 20px; /* Đặt khoảng cách nội dung bên trong nút */
-            cursor: pointer; /* Biến con trỏ thành bàn tay khi trỏ vào nút */
-        }
+            .cart-dropdown {
+                border-radius: 10px;
+                width: 180px;
+                background-color: #fff;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+                padding: 10px;
+                margin-top: 10px;
+            }
 
-        .cart-dropdown {
-            border-radius: 10px;
-            width: 180px;
-            background-color: #fff;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-            padding: 10px;
-            margin-top: 10px;
-        }
+            .cart-dropdown a {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                text-decoration: none;
+                text-align: center;
+                color: #fff;
+                background-color: #007bff;
+                margin-bottom: 10px;
+            }
 
-        .cart-dropdown a {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            text-decoration: none;
-            text-align: center;
-            color: #fff;
-            background-color: #007bff;
-            margin-bottom: 10px;
-        }
+            .cart-dropdown a:hover {
+                background-color: #0056b3;
+            }
 
-        .cart-dropdown a:hover {
-            background-color: #0056b3;
-        }
-    </style>
+            /*div{*/
+            /*    border: 1px solid red;*/
+            /*}*/
+        </style>
 
 </head>
 
@@ -254,15 +259,13 @@
                                                 <br>
                                                 <div style="border: 1px solid;height: 2cm">
                                                     <div style="width: 80%;float: right">
+                                                        <label style="font-weight: bold">Sản
+                                                            phẩm:</label>${ht.chiTietSanPham.sanPham.ten}-
+                                                            ${ht.chiTietSanPham.rom.dungLuong}-${ht.chiTietSanPham.mauSac.ten}.
 
-                                                        <a href="#">
-                                                            Sản
-                                                            phẩm:${ht.chiTietSanPham.sanPham.ten},Rom:${ht.chiTietSanPham.rom.dungLuong},Màu:${ht.chiTietSanPham.mauSac.ten}.
-                                                        </a>
                                                         <br>
-                                                        Số lượng:${ht.soLuong}<br>
-                                                            ${ht.donGiaKhiGiam}đ-<label
-                                                            style="text-decoration: line-through;background-color: white;border: 1px solid white">${ht.donGia}</label>đ
+                                                        <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
+                                                        <label style="tbackground-color: white;border: 1px solid white">${ht.donGiaKhiGiam}đ</label>
                                                     </div>
                                                     <div style="width: 18%;">
                                                             <%--                                                        <input type="checkbox" name="checkidghTT" value="${ht.id}" onclick="chonsanphamgiohangTT('${stt.index}','${ht.id}','${ht.gioHang.id}');"  ${ht.tinhTrang==0 ?"checked":""}>--%>
@@ -284,7 +287,7 @@
                                                 đ</h5>
                                         </div>
                                         <div class="cart-btns">
-                                            <a href="/ban-hang-online/xem-gio-hang">Xem giỏ hàng</a>
+                                            <a href="/ban-hang-online/xem-gio-hang" style="width: 100%">Xem giỏ hàng</a>
                                                 <%--                                            <a href="#">Chọn hết--%>
                                                 <%--                                                <input type="checkbox" name="checktongTT" onclick="chonhetgiohangtongTRANGCHU('${listghctTT.get(0).gioHang.id}');"  ${tttong==0 ?"checked":""}>--%>
                                                 <%--                                            </a>--%>
@@ -384,7 +387,7 @@
         </p>
         <input type="text" value="${listghct.get(0).gioHang.khachHang.sdt}" style="width: 97%" id="sodienthoai1">
 
-        <P>Địa chỉ:</P>
+        <P>Địa chỉ:</P><label style="background: white;color: red;border: 1px solid white" id="thongbaodiachi"></label>
         <div>
             <button style="float: right" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target="#modalthemdiachidathang">Thêm địa chỉ
@@ -484,8 +487,17 @@
                 <div style="float: right">Tổng tiền :</div>
             </div>
             <br><br>
-            <button style="float: right" type="button" onclick="nutdathang('${listghct.get(0).gioHang.id}')">Đặt Hàng
-            </button>
+            <form action="/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-dat-hang" method="post">
+               <div style="display: none">
+                <input id="idgh1" name="idgh1" >
+                <input id="tongtien1" name="tongtien1" >
+                <input id="iddc1" name="iddc1" >
+                <input id="sdt1" name="sdt1" >
+               </div>
+                <button style="float: right" type="button" id="nutdathangthanhtoan" onclick="nutdathang('${listghct.get(0).gioHang.id}')">Đặt Hàng
+                </button>
+            </form>
+
         </div>
 
 

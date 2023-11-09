@@ -372,9 +372,9 @@
 <!-- /NAVIGATION -->
 
 <br>
-<main style="width: 85%;margin-left: 7.5%; " id="content">
+<main style="width: 95%;margin-left: 2.5%; " id="content">
     <c:if test="${listhdkh.size()>0}">
-        <table class="table table-bordered" style="width: 2000px">
+        <table class="table table-bordered" style="width: 100%">
             <thead>
             <tr>
                 <th>STT</th>
@@ -393,7 +393,7 @@
                     <td>${stt.index+1}</td>
                     <td>${ht.ma}</td>
                     <td>${ht.ngayTao}</td>
-                    <td>${ht.diaChi.diaChi},${ht.diaChi.quan},${ht.diaChi.huyen},${ht.diaChi.thanhPho}</td>
+                    <td > <div style="width: 5cm; overflow: hidden;">${ht.diaChi.diaChi},${ht.diaChi.quan},${ht.diaChi.huyen},${ht.diaChi.thanhPho}</div></td>
                     <td>
                         <c:if test="${ht.tinhTrang==0}">
                             <p>Chờ xử lý</p>
@@ -433,26 +433,21 @@
 
                     <td>
                         <c:if test="${ht.tinhTrang==0}">
-                            <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Xem thông
-                                tin chi tiết</a>
+                            <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
                             <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>
                         </c:if>
                         <c:if test="${ht.tinhTrang==1}">
-                            <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Xem thông
-                                tin chi tiết</a>
+                            <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
                             <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>
                         </c:if>
                         <c:if test="${ht.tinhTrang==2}">
-                            <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Xem thông
-                                tin chi tiết</a>
+                            <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
                         </c:if>
                         <c:if test="${ht.tinhTrang==3}">
-                            <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Xem thông
-                                tin chi tiết</a>
+                            <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
                         </c:if>
                         <c:if test="${ht.tinhTrang==8}">
-                            <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Xem thông
-                                tin chi tiết</a>
+                            <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
                         </c:if>
                     </td>
                 </tr>
