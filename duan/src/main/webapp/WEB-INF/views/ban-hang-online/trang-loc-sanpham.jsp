@@ -404,7 +404,7 @@
 
 
 <%--code--%>
-<div style="width: 75%;margin-left: 12.5%; ">
+<div style="width: 75%;margin-left: 12.5%;">
     <P style="font-size: 16px;font-weight: 700">Bộ lọc tìm kiếm</P>
     <%--loc--%>
     <div>

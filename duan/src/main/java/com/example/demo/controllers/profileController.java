@@ -106,10 +106,7 @@ public class profileController {
             Model model,
             @RequestParam("idKhachHang") UUID idkh,
             @ModelAttribute("kh") KhachHang khachHang
-//            BindingResult bindingResult,
-//            @ModelAttribute("KHHangKhachHang") HangKhachHang hangKhachHang,
-//            @RequestParam("checkanh") String checkanh,
-//            @RequestParam("images") MultipartFile multipartFile
+
     ){
 
 
@@ -165,7 +162,6 @@ public class profileController {
     ) throws IOException{
 
         if (bindingResult.hasErrors()) {
-//            khachHang = khachHangService.findById(khachHang.getId());
             khachHang =khachHangService.findById(UUID.fromString(idkhachhang));
 
             double tong=0;
@@ -270,28 +266,83 @@ public class profileController {
 
     ) throws IOException {
 
-        KhachHang khachHang1 = khachHangService.findById(UUID.fromString(idkhachhang));
+        khachHang =khachHangService.findById(UUID.fromString(idkhachhang));
+        double tong=0;
+        Integer lamchon=0;
+        for (ChiTietSanPham ct:banHangOnlineService.ctspbanhang()) {
+            if(banHangOnlineService.soluongcon(String.valueOf(ct.getId()))>0){
+                tong=tong+1;
+                lamchon=lamchon+1;
+            }
+        }
+        double tb=tong/3;
+        lamchon=lamchon/3;
+        if(tb % 1 >0){
+            lamchon=lamchon+1;
+        }
 
-        model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
-        model.addAttribute("listsp", banHangOnlineService.ctspbanhang());
-        model.addAttribute("idkhachhang", idkhachhang);
+        model.addAttribute("lamchon",lamchon);
+        model.addAttribute("giamgia",banHangOnlineService);
+        model.addAttribute("banhangonline",banHangOnlineService);
 
+        model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
+        model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
+        model.addAttribute("idkhachhang",idkhachhang);
+        model.addAttribute("kh",khachHangService.findById(UUID.fromString(idkhachhang)));
         model.addAttribute("hkh", hangKhachHangService.getALL0());
 
 //        giohang
-        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
-        model.addAttribute("tttong", 1);
+        model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
+        model.addAttribute("tttong",1);
 
-        boolean matches = BCrypt.checkpw(oldp, khachHang1.getMatKhau());
+        boolean matches = BCrypt.checkpw(oldp, khachHang.getMatKhau());
 
         if (!matches || !newp.equalsIgnoreCase(conp)) {
             model.addAttribute("thongBao1", "Bạn chưa nhập mật khẩu hoặc mật bạn nhập không đúng!");
             model.addAttribute("thongBao3", "Bạn chưa nhập mật khẩu mật khẩu mới hoặc chưa khớp với mật khẩu xác nhận");
+
             khachHang =khachHangService.findById(UUID.fromString(idkhachhang));
 
-            khachHang.getAnh();
+            model.addAttribute("lamchon",lamchon);
+            model.addAttribute("giamgia",banHangOnlineService);
+            model.addAttribute("banhangonline",banHangOnlineService);
+
+            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
+            model.addAttribute("idkhachhang",idkhachhang);
+            model.addAttribute("kh",khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("hkh", hangKhachHangService.getALL0());
+
+//        giohang
+            model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
+            model.addAttribute("tttong",1);
+
+
             return "thong-tin/doi-mat-khau-khach-hang";
         } else {
+            if(newp.trim().isEmpty()){
+
+                model.addAttribute("thongBao3", "Không để trống");
+
+                khachHang =khachHangService.findById(UUID.fromString(idkhachhang));
+
+                model.addAttribute("lamchon",lamchon);
+                model.addAttribute("giamgia",banHangOnlineService);
+                model.addAttribute("banhangonline",banHangOnlineService);
+
+                model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
+                model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
+                model.addAttribute("idkhachhang",idkhachhang);
+                model.addAttribute("kh",khachHangService.findById(UUID.fromString(idkhachhang)));
+                model.addAttribute("hkh", hangKhachHangService.getALL0());
+
+//        giohang
+                model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
+                model.addAttribute("tttong",1);
+
+
+                return "thong-tin/doi-mat-khau-khach-hang";
+            }
             // Đổi mật khẩu thành công
 
             long millis = System.currentTimeMillis();
@@ -308,11 +359,13 @@ public class profileController {
             return "redirect:/login";
         }
     }
+
     @GetMapping("/dia-chi-khach-hang")
     public String diaChi(
             Model model,
             @ModelAttribute("kh") KhachHang khachHang,
-            @ModelAttribute("diaChiKH") DiaChi diaChi
+            @ModelAttribute("diaChiKH") DiaChi diaChi,
+            @ModelAttribute("diaChiKHupdate") DiaChi diaChiupdate
 
     ){
 
@@ -350,21 +403,27 @@ public class profileController {
         model.addAttribute("tttong",1);
         return "thong-tin/dia-chi-khach-hang";
     }
+
+
+
     @PostMapping("/add-dia-chi-kh")
  public String addDiaChi(Model model,@ModelAttribute("diaChiKH") @Valid DiaChi diaChi,
-//                         @ModelAttribute("kh") KhachHang khachHang,
-                         BindingResult bindingResult){
+                         BindingResult bindingResult, //chú ý,bindingResult phải ngay dưới Valid thì mới biết check cái nào
+                         @ModelAttribute("diaChiKHupdate") DiaChi diaChiupdate,
+                         @ModelAttribute("kh") KhachHang khachHang
+                         ){
         KhachHang khachHang1 =khachHangService.findById(UUID.fromString(idkhachhang));
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
 
         if (bindingResult.hasErrors()) {
-//            DiaChi =khachHangService.findById(UUID.fromString(idkhachhang));
 
             List<DiaChi> diaChiList = khachHangService.getAllDiaChiByKhachHangId(UUID.fromString(idkhachhang));
             model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
             model.addAttribute("diaChiList", diaChiList); // Danh sách địa chỉ của khách hàng
 
+
+            khachHang =khachHangService.findById(UUID.fromString(idkhachhang));
             double tong=0;
             Integer lamchon=0;
             for (ChiTietSanPham ct:banHangOnlineService.ctspbanhang()) {
@@ -391,6 +450,7 @@ public class profileController {
 //        giohan
             model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
             model.addAttribute("tttong",1);
+
 
             model.addAttribute("batmodal",1);
             return "thong-tin/dia-chi-khach-hang";
@@ -420,18 +480,75 @@ public class profileController {
 
 
 
-    @PostMapping("/update-dia-chi-kh")
-    public String updateDiaChi(Model model,@ModelAttribute("diaChiKH") @Valid DiaChi diaChi,
-                               @ModelAttribute("kh") KhachHang khachHang,
+    @GetMapping("/view-update-dia-chi-khach-hang/{iddc}")
+    public String viewupdatediaChi(
+            Model model,
+            @ModelAttribute("kh") KhachHang khachHang,
+            @ModelAttribute("diaChiKH") DiaChi diaChi,
+            @ModelAttribute("diaChiKHupdate") DiaChi diaChiupdate,
+            @PathVariable("iddc") UUID iddc
 
-                               BindingResult bindingResult){
+    ){
+        model.addAttribute("diaChiKHupdate", diaChiService.findById(iddc)); // Danh sách địa chỉ của khách hàng
+        model.addAttribute("batmodalupdate",1); // Danh sách địa chỉ của khách hàng
+
+        List<DiaChi> diaChiList = khachHangService.getAllDiaChiByKhachHangId(UUID.fromString(idkhachhang));
+        model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
+        model.addAttribute("diaChiList", diaChiList); // Danh sách địa chỉ của khách hàng
+
+
+        khachHang =khachHangService.findById(UUID.fromString(idkhachhang));
+        double tong=0;
+        Integer lamchon=0;
+        for (ChiTietSanPham ct:banHangOnlineService.ctspbanhang()) {
+            if(banHangOnlineService.soluongcon(String.valueOf(ct.getId()))>0){
+                tong=tong+1;
+                lamchon=lamchon+1;
+            }
+        }
+        double tb=tong/3;
+        lamchon=lamchon/3;
+        if(tb % 1 >0){
+            lamchon=lamchon+1;
+        }
+
+        model.addAttribute("lamchon",lamchon);
+        model.addAttribute("giamgia",banHangOnlineService);
+        model.addAttribute("banhangonline",banHangOnlineService);
+
+        model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
+        model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
+        model.addAttribute("idkhachhang",idkhachhang);
+        model.addAttribute("kh",khachHangService.findById(UUID.fromString(idkhachhang)));
+        model.addAttribute("hkh", hangKhachHangService.getALL0());
+//        giohan
+        model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
+        model.addAttribute("tttong",1);
+        return "thong-tin/dia-chi-khach-hang";
+    }
+
+    @PostMapping("/update-dia-chi-kh")
+    public String updateDiaChi(Model model,
+
+                               @ModelAttribute("diaChiKHupdate") @Valid DiaChi diaChiupdate,
+                               BindingResult bindingResult,
+                               @ModelAttribute("kh") KhachHang khachHang,
+                               @ModelAttribute("diaChiKH")  DiaChi diaChi
+                              ){
         KhachHang khachHang1 =khachHangService.findById(UUID.fromString(idkhachhang));
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
 
         if (bindingResult.hasErrors()) {
-            khachHang =khachHangService.findById(UUID.fromString(idkhachhang));
 
+            model.addAttribute("batmodalupdate",1); // Danh sách địa chỉ của khách hàng
+
+            List<DiaChi> diaChiList = khachHangService.getAllDiaChiByKhachHangId(UUID.fromString(idkhachhang));
+            model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("diaChiList", diaChiList); // Danh sách địa chỉ của khách hàng
+
+
+            khachHang =khachHangService.findById(UUID.fromString(idkhachhang));
             double tong=0;
             Integer lamchon=0;
             for (ChiTietSanPham ct:banHangOnlineService.ctspbanhang()) {
@@ -445,6 +562,7 @@ public class profileController {
             if(tb % 1 >0){
                 lamchon=lamchon+1;
             }
+
             model.addAttribute("lamchon",lamchon);
             model.addAttribute("giamgia",banHangOnlineService);
             model.addAttribute("banhangonline",banHangOnlineService);
@@ -452,37 +570,41 @@ public class profileController {
             model.addAttribute("khachhangdangnhap",khachHangService.findById(UUID.fromString(idkhachhang)));
             model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
             model.addAttribute("idkhachhang",idkhachhang);
-
+            model.addAttribute("kh",khachHangService.findById(UUID.fromString(idkhachhang)));
             model.addAttribute("hkh", hangKhachHangService.getALL0());
-
-
-//        giohang
+//        giohan
             model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
             model.addAttribute("tttong",1);
-
+            model.addAttribute("diaChiKH",new DiaChi()); // Danh sách địa chỉ của khách hàng
 
             return "thong-tin/dia-chi-khach-hang";
 
-
-
         }
 
-        Integer sl = diaChiService.findAll().size() + 1;
-        String mhd="";
-        if(sl<9){
-            mhd = "MDC0" + sl;
-        }else {
-            mhd = "MDC" + sl;
-        }
-        diaChi.setMa(mhd);
-        diaChi.setNgayTao(date);
-        diaChi.setNgayCapNhat(date);
-        diaChi.setTinhTrang(0);
-        diaChi.setKhachHang(khachHangService.findById(UUID.fromString(idkhachhang)));
-        diaChiService.add(diaChi);
+
+
+        diaChiupdate.setNgayCapNhat(date);
+        diaChiService.add(diaChiupdate);
 
 
         return "redirect:/dia-chi-khach-hang";
+    }
+
+
+
+    @GetMapping("/xoa-dia-chi-khach-hang/{iddc}")
+    public String xoadiachi(
+            Model model,
+            @ModelAttribute("kh") KhachHang khachHang,
+            @ModelAttribute("diaChiKH") DiaChi diaChi,
+            @ModelAttribute("diaChiKHupdate") DiaChi diaChiupdate,
+            @PathVariable("iddc") UUID iddc
+
+    ){
+        DiaChi dc1=diaChiService.findById(iddc);
+        dc1.setTinhTrang(1);
+      diaChiService.add(dc1);
+      return "redirect:/dia-chi-khach-hang";
     }
 
 }

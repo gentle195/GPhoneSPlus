@@ -457,7 +457,7 @@
 
 <div id="thanhlocxemchitietsanpham">
     <p id="vt"></p>
-    <div style="position: absolute;margin-left: 55%;width: 43%;margin-top: 8%;z-index: 2">
+    <div style="position: absolute;margin-left: 55%;width: 43%;margin-top: 8%;z-index: 2;">
         <p style="display: none" id="tenspctsp">${motctsp.sanPham.ten}</p>
         <label style="font-weight: bold" class="lb">Màu sắc</label>
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">

@@ -182,7 +182,6 @@
 <!-- HEADER -->
 <header>
 
-    <!-- TOP HEADER -->
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
@@ -203,34 +202,29 @@
                         <div class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown">
                                     <span>
-                                   <i class="fa fa-user-o"></i>
-                                           ${khachhangdangnhap.taiKhoan}
-                                      <input id="tkmkidkhachhang" type="text" style="display: none"
-                                              value="${idkhachhang}">
-                                   </span>
-<%--                      <security:authorize access="isAuthenticated()">--%>
-<%--                      hi, <security:authentication property="principal.username" />--%>
-<%--                      </security:authorize>--%>
-<%--                      <security:authorize access="!isAuthenticated()">--%>
-<%--                          <a href="/login">Login</a>--%>
-
-<%--                       </security:authorize>--%>
+                                    <i class="fa fa-user-o"></i>
+                                            ${khachhangdangnhap.hoTen}
+                                        <input id="tkmkidkhachhang" type="text" style="display: none"
+                                               value="${idkhachhang}">
+                                    </span>
                             </a>
-                            <div class="cart-dropdown" style="border-radius: 10px;width: 3.5cm;margin-top: 10px">
+                            <div class="cart-dropdown"
+                                 style="border-radius: 10px;width: 3.5cm;margin-top: 10px;width: 180px">
                                 <div>
                                     <div>
                                         <form action="/thong-tin-ca-nhan-khach-hang" method="post">
                                             <input value="${idkhachhang}" name="idKhachHang" style="display: none">
                                             <button class="btn btn-primary" type="submit">Tài khoản của tôi</button>
-<%--                                        </form>--%>
-                                    </div>
+                                        </form>
+                                            <%--                                          <a href="" class="btn btn-primary" type="submit" onclick="submitForm1()">Tài khoản của tôi</a>--%>
 
-                                    <form action="/ban-hang-online/hoa-don-online" method="post">
-                                        <input name="idkh" value="${idkhachhang}" style="display: none">
-                                        <button type="submit" class="btn btn-primary">Đơn hàng</button>
-                                    </form>
+                                    </div>
                                     <div>
-                                        <a href="/logout" class="btn btn-primary" style="">Đăng xuất</a>
+                                        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}"
+                                           class="btn btn-primary">Đơn hàng</a>
+                                    </div>
+                                    <div>
+                                        <a href="/logout" class="btn btn-primary" style="" onclick="">Đăng xuất</a>
                                     </div>
                                 </div>
                             </div>
@@ -251,10 +245,8 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
-                            <%--							<img src="../../img/logo.png" alt="">--%>
-                            <img src="/img/logo.png" alt="">
-                        </a>
+                        <h2 class="logo" style="margin: 20px;color: white;font-family: 'Times New Roman'">GPhoneS
+                            Store</h2>
                     </div>
                 </div>
                 <!-- /LOGO -->
@@ -303,15 +295,13 @@
                                                 <br>
                                                 <div style="border: 1px solid;height: 2cm">
                                                     <div style="width: 80%;float: right">
+                                                        <label style="font-weight: bold">Sản
+                                                            phẩm:</label>${ht.chiTietSanPham.sanPham.ten}-
+                                                            ${ht.chiTietSanPham.rom.dungLuong}-${ht.chiTietSanPham.mauSac.ten}.
 
-                                                        <a href="#">
-                                                            Sản
-                                                            phẩm:${ht.chiTietSanPham.sanPham.ten},Rom:${ht.chiTietSanPham.rom.dungLuong},Màu:${ht.chiTietSanPham.mauSac.ten}.
-                                                        </a>
                                                         <br>
-                                                        Số lượng:${ht.soLuong}<br>
-                                                            ${ht.donGiaKhiGiam}đ-<label
-                                                            style="text-decoration: line-through;background-color: white;border: 1px solid white">${ht.donGia}</label>đ
+                                                        <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
+                                                        <label style="tbackground-color: white;border: 1px solid white">${ht.donGiaKhiGiam}đ</label>
                                                     </div>
                                                     <div style="width: 18%;">
                                                         <input type="checkbox" name="checkidghTT" value="${ht.id}"
@@ -348,11 +338,7 @@
                                         <span>Giỏ hàng</span>
                                         <div class="qty">0</div>
                                     </a>
-                                    <div class="cart-dropdown">
-                                        <div class="cart-list">
-
-
-                                        </div>
+                                    <div class="cart-dropdown" style="width: 500px;">
                                         <div class="cart-summary">
                                             <small> 0 Sản phẩm được chọn</small>
                                             <h5>Tổng:0 đ</h5>
@@ -401,6 +387,7 @@
 </header>
 <!-- /HEADER -->
 
+
 <!-- NAVIGATION -->
 <nav id="navigation">
     <!-- container -->
@@ -430,20 +417,7 @@
 <!-- /NAVIGATION -->
 
 <br>
-<%--<br><br><br><br><br>--%>
 
-
-<!-- The Modal -->
-
-<%--<main id="content" style="height: 10cm">--%>
-
-
-<%--</main>--%>
-
-<%--<form action="/dia-chi-khach-hang" method="post" id="diaChiForm" style="display: none">--%>
-<%--    <input value="${idKhachHang}" name="idKhachHang" style="display: none">--%>
-<%--    <button class="btn btn-primary" type="submit">Địa chỉ</button>--%>
-<%--</form>--%>
 
 
 <form:form action="/update-thong-tin-ca-nhan-khach-hang" method="post" modelAttribute="kh"
@@ -459,8 +433,8 @@
                      style="border-radius:50% 50% 50% 50%;border: 2px solid #999999">
             </div>
             <div class="col-md-10">
-                <p style="margin-left: 0.5cm"><strong>${kh.taiKhoan}</strong></p>
-                <%--                <p style="margin-left: 0.5cm">     (Sửa hồ sơ!)</p>--%>
+                <p style="margin-left: 0.5cm"><strong>${kh.hoTen}</strong></p>
+
             </div>
 
         </div>
@@ -471,12 +445,9 @@
                     <a href=""><div style="color: red" class="tab">Hồ sơ</div></a>
                     <a href="/dia-chi-khach-hang"><div class="tab">Địa chỉ</div></a>
                     <a href="/pass-khach-hang"><div class="tab">Đổi mật khẩu</div></a>
-                    <a href=""><div class="tab">Đơn hàng</div></a>
                 </div>
                 <div class="tab-content">
-                    <%--                    <div class="tab-pane" id="tab1">Nội dung 1</div>--%>
-                    <%--                    <div class="tab-pane" id="tab2">2</div>--%>
-                    <%--                    <div class="tab-pane" id="tab3">3</div>--%>
+
                 </div>
             </div>
         </div>
@@ -490,7 +461,7 @@
 
         </div>
         <div style="font-size: 18px; color: black">
-            <p style="font-weight:bold"> Tên đăng nhập: ${kh.taiKhoan}</p>
+            <p style="font-weight:bold"> Tên đăng nhập: ${kh.hoTen}</p>
         </div>
 
 

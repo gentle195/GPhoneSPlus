@@ -709,13 +709,14 @@ public class BanHangOnlineController {
     }
 
 
-    @GetMapping("/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-dat-hang/{idgh}/{tongtien}/{iddc}/{sdt}")
+//    @PostMapping("/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-dat-hang/{idgh}/{tongtien}/{iddc}/{sdt}")
+    @PostMapping("/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-dat-hang")
     public String nutdathang(
             Model model,
-            @PathVariable("idgh") UUID idgh,
-            @PathVariable("tongtien") BigDecimal tongtien,
-            @PathVariable("iddc") UUID iddc,
-            @PathVariable("sdt") String sdt
+            @RequestParam("idgh1") UUID idgh,
+            @RequestParam("tongtien1") BigDecimal tongtien,
+            @RequestParam("iddc1") UUID iddc,
+            @RequestParam("sdt1") String sdt
     ) {
 //        them hd
         long millis = System.currentTimeMillis();
@@ -775,7 +776,7 @@ public class BanHangOnlineController {
             model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
             model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
-        return "ban-hang-online/single_pase_dat_hang_thanh_cong";
+        return "ban-hang-online/dat_hang_thanh_cong";
     }
 
 

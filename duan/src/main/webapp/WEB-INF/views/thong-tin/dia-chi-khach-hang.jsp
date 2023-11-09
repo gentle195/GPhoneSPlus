@@ -189,7 +189,6 @@
 <!-- HEADER -->
 <header>
 
-    <!-- TOP HEADER -->
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
@@ -210,34 +209,29 @@
                         <div class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown">
                                     <span>
-                                   <i class="fa fa-user-o"></i>
-                                           ${khachhangdangnhap.taiKhoan}
-                                      <input id="tkmkidkhachhang" type="text" style="display: none"
-                                             value="${idkhachhang}">
-                                   </span>
-                                    <%--                      <security:authorize access="isAuthenticated()">--%>
-                                    <%--                      hi, <security:authentication property="principal.username" />--%>
-                                    <%--                      </security:authorize>--%>
-                                    <%--                      <security:authorize access="!isAuthenticated()">--%>
-                                    <%--                          <a href="/login">Login</a>--%>
-
-                                    <%--                       </security:authorize>--%>
+                                    <i class="fa fa-user-o"></i>
+                                            ${khachhangdangnhap.hoTen}
+                                        <input id="tkmkidkhachhang" type="text" style="display: none"
+                                               value="${idkhachhang}">
+                                    </span>
                             </a>
-                            <div class="cart-dropdown" style="border-radius: 10px;width: 3.5cm;margin-top: 10px">
+                            <div class="cart-dropdown"
+                                 style="border-radius: 10px;width: 3.5cm;margin-top: 10px;width: 180px">
                                 <div>
                                     <div>
                                         <form action="/thong-tin-ca-nhan-khach-hang" method="post">
                                             <input value="${idkhachhang}" name="idKhachHang" style="display: none">
                                             <button class="btn btn-primary" type="submit">Tài khoản của tôi</button>
-                                                <%--                                        </form>--%>
-                                    </div>
+                                        </form>
+                                            <%--                                          <a href="" class="btn btn-primary" type="submit" onclick="submitForm1()">Tài khoản của tôi</a>--%>
 
-                                    <form action="/ban-hang-online/hoa-don-online" method="post">
-                                        <input name="idkh" value="${idkhachhang}" style="display: none">
-                                        <button type="submit" class="btn btn-primary">Đơn hàng</button>
-                                    </form>
+                                    </div>
                                     <div>
-                                        <a href="/logout" class="btn btn-primary" style="">Đăng xuất</a>
+                                        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}"
+                                           class="btn btn-primary">Đơn hàng</a>
+                                    </div>
+                                    <div>
+                                        <a href="/logout" class="btn btn-primary" style="" onclick="">Đăng xuất</a>
                                     </div>
                                 </div>
                             </div>
@@ -258,10 +252,8 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
-                            <%--							<img src="../../img/logo.png" alt="">--%>
-                            <img src="/img/logo.png" alt="">
-                        </a>
+                        <h2 class="logo" style="margin: 20px;color: white;font-family: 'Times New Roman'">GPhoneS
+                            Store</h2>
                     </div>
                 </div>
                 <!-- /LOGO -->
@@ -310,15 +302,13 @@
                                                 <br>
                                                 <div style="border: 1px solid;height: 2cm">
                                                     <div style="width: 80%;float: right">
+                                                        <label style="font-weight: bold">Sản
+                                                            phẩm:</label>${ht.chiTietSanPham.sanPham.ten}-
+                                                            ${ht.chiTietSanPham.rom.dungLuong}-${ht.chiTietSanPham.mauSac.ten}.
 
-                                                        <a href="#">
-                                                            Sản
-                                                            phẩm:${ht.chiTietSanPham.sanPham.ten},Rom:${ht.chiTietSanPham.rom.dungLuong},Màu:${ht.chiTietSanPham.mauSac.ten}.
-                                                        </a>
                                                         <br>
-                                                        Số lượng:${ht.soLuong}<br>
-                                                            ${ht.donGiaKhiGiam}đ-<label
-                                                            style="text-decoration: line-through;background-color: white;border: 1px solid white">${ht.donGia}</label>đ
+                                                        <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
+                                                        <label style="tbackground-color: white;border: 1px solid white">${ht.donGiaKhiGiam}đ</label>
                                                     </div>
                                                     <div style="width: 18%;">
                                                         <input type="checkbox" name="checkidghTT" value="${ht.id}"
@@ -355,11 +345,7 @@
                                         <span>Giỏ hàng</span>
                                         <div class="qty">0</div>
                                     </a>
-                                    <div class="cart-dropdown">
-                                        <div class="cart-list">
-
-
-                                        </div>
+                                    <div class="cart-dropdown" style="width: 500px;">
                                         <div class="cart-summary">
                                             <small> 0 Sản phẩm được chọn</small>
                                             <h5>Tổng:0 đ</h5>
@@ -408,6 +394,7 @@
 </header>
 <!-- /HEADER -->
 
+
 <!-- NAVIGATION -->
 <nav id="navigation">
     <!-- container -->
@@ -436,6 +423,7 @@
 </nav>
 <!-- /NAVIGATION -->
 
+<br>
 
 
 
@@ -450,7 +438,7 @@
                      style="border-radius:50% 50% 50% 50%;border: 2px solid #999999">
             </div>
             <div class="col-md-10">
-                <p style="margin-left: 0.5cm"><strong>${kh.taiKhoan}</strong></p>
+                <p style="margin-left: 0.5cm"><strong>${kh.hoTen}</strong></p>
                 <%--                <p style="margin-left: 0.5cm">     (Sửa hồ sơ!)</p>--%>
             </div>
 
@@ -463,7 +451,7 @@
                         <a href="/thong-tin-ca-nhan-khach-hang"><div class="tab">Hồ sơ</div></a>
                         <a href="/dia-chi-khach-hang" style="color: red"><div class="tab">Địa chỉ</div></a>
                         <a href="/pass-khach-hang"><div class="tab">Đổi mật khẩu</div></a>
-                        <a href=""><div class="tab">Đơn hàng</div></a>
+
                     </div>
             </div>
         </div>
@@ -493,7 +481,7 @@
         </div>
 
         <div style="font-size: 18px; color: black">
-            <p style="font-weight:bold; margin-left: 10px"> Tên đăng nhập: ${kh.taiKhoan}</p>
+            <p style="font-weight:bold; margin-left: 10px"> Tên đăng nhập: ${kh.hoTen}</p>
         </div>
 
         <c:forEach var="diaChi" items="${diaChiList}">
@@ -504,8 +492,9 @@
                     <p>${diaChi.diaChi}, ${diaChi.quan}, ${diaChi.thanhPho}</p>
                 </div>
                 <div class="buttons">
-                    <button id="update-address-button" class="update-button">Cập nhật</button>
-                    <button class="default-button">Thiết lập mặc định</button>
+
+                    <a href="/view-update-dia-chi-khach-hang/${diaChi.id}" id="update-address-button"  class="update-button" >Cập nhật</a>
+                    <a href="/xoa-dia-chi-khach-hang/${diaChi.id}" class="default-button">Xóa</a>
                 </div>
             </div>
             <hr>
@@ -514,56 +503,137 @@
     </div>
 
 </div>
-<%--modal thêm đại chỉ--%>
+
+<!-- The Modal -->
+<div class="modal" id="themdiachi">
+    <div class="modal-dialog" style="margin-top: 5cm">
+        <div class="modal-content">
 
 
-<%--<div id="addAddressModal" class="modal">--%>
-<%--    <div class="modal-content">--%>
-<%--        <span class="close" id="closeModal">&times;Trở lại</span>--%>
-<%--        <p style="font-size: 18px; font-weight: bold">Thêm địa chỉ nhận hàng</p>--%>
+            <p style="text-align: center;font-size: 20px">Thêm địa chỉ</p>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form:form action="/add-dia-chi-kh" method="post" modelAttribute="diaChiKH">
+                    <table class="table" style="height: 100%">
+                        <tr>
+                            <th>
+                                <form:label class="form-label" path="diaChi">Địa chỉ:
+                                    <form:errors path="diaChi" cssStyle="color: red"></form:errors>
+                                </form:label>
+                                <form:input id="tenhkh" class="form-control" placeholder="" path="diaChi" value=""/>
+                            </th>
+                            <th>
+                                <form:label class="form-label" path="quan">Quận/Huyện:
+                                    <form:errors path="quan" cssStyle="color: red"></form:errors></form:label>
+                                <form:input id="quan" class="form-control" placeholder=""  path="quan" onkeyup="setHuyen(this)" />
+                            </th>
+                            <th style="display: none">
+                                <form:label class="form-label" path="huyen">Huyện: <form:errors path="huyen" cssStyle="color: red"></form:errors>
+                                </form:label>
+                                <form:input id="huyen" class="form-control" placeholder=""  path="huyen" />
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>  <form:label class="form-label" path="thanhPho">Thành Phố: <form:errors path="thanhPho" cssStyle="color: red"></form:errors>
+                            </form:label>
+                                <form:input id="tp" class="form-control" placeholder=""  path="thanhPho" />
+
+                            </th>
+                            <th>
+                                <form:label class="form-label" path="moTa">Mô tả:
+                                    <form:errors path="moTa" cssStyle="color: red"></form:errors>
+                                </form:label>
+                                <form:textarea id="motahkh" class="form-control" placeholder="" path="moTa" />
+
+                            </th>
+                        </tr>
+                    </table>
+
+                    <div align="center">
+                        <button type="submit" class="btn btn-warning"  > Thêm
+                        </button>
+
+                    </div>
+                </form:form>
+            </div>
 
 
-<%--    </div>--%>
-<%--</div>--%>
+
+        </div>
+    </div>
+</div>
 
 
-<%--<div id="updateModal" class="modal1">--%>
-<%--    <div class="modal-content">--%>
-<%--        <span class="close" id="closeUpdateModal">&times; Trở lại</span>--%>
-<%--        <p style="font-size: 18px; font-weight: bold">Cập nhật địa chỉ nhận hàng</p>--%>
-<%--        <table class="table" style="height: 100%">--%>
-<%--            <tr>--%>
-<%--                <th>--%>
-<%--                    <label class="form-label">Địa chỉ:</label>--%>
-<%--                    <input id="diaChi1" class="form-control" placeholder="">--%>
-<%--                </th>--%>
+<!-- The Modal -->
+<BUTTON   id="modalupdatediachi" class="update-button" data-bs-toggle="modal" data-bs-target="#suadiachi" style="display: none">Cập nhật</BUTTON>
 
-<%--                <th>--%>
-<%--                    <label class="form-label">Quận/huyện:</label>--%>
-<%--                    <input id="quan1" class="form-control" placeholder="">--%>
-<%--                </th>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <th>--%>
-<%--                    <label class="form-label">Tỉnh/Thành phố:</label>--%>
-<%--                    <input id="thanhPho1" class="form-control" placeholder="">--%>
-<%--                </th>--%>
-<%--                <th>--%>
-<%--                    <label class="form-label">Mô tả:</label>--%>
-<%--                    <textarea id="moTa1" class="form-control" placeholder=""></textarea>--%>
-<%--                </th>--%>
-<%--            </tr>--%>
-<%--        </table>--%>
+<div class="modal" id="suadiachi">
+    <div class="modal-dialog" style="margin-top: 5cm">
+        <div class="modal-content">
 
-<%--        <div align="center">--%>
-<%--            <button type="submit" class="btn btn-warning" id="1" onclick="return checkCV()"> Save--%>
-<%--            </button>--%>
-<%--        </div>--%>
-<%--        <!-- Modal footer -->--%>
-<%--    </div>--%>
 
-<%--</div>--%>
+            <p style="text-align: center;font-size: 20px">Update địa chỉ</p>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form:form action="/update-dia-chi-kh" method="post" modelAttribute="diaChiKHupdate">
+                    <div style="display: none">
+                        <form:input  class="form-control" placeholder="" path="id" value=""/>
+                        <form:input  class="form-control" placeholder="" path="ma" value=""/>
+                        <form:input  class="form-control" placeholder="" path="ngayTao" value=""/>
+                        <form:input  class="form-control" placeholder="" path="tinhTrang" value=""/>
+                        <form:input  class="form-control" placeholder="" path="khachHang" value=""/>
 
+
+
+                    </div>
+                    <table class="table" style="height: 100%">
+                        <tr>
+                            <th>
+                                <form:label class="form-label" path="diaChi">Địa chỉ:
+                                    <form:errors path="diaChi" cssStyle="color: red"></form:errors>
+                                </form:label>
+                                <form:input  class="form-control" placeholder="" path="diaChi" value=""/>
+                            </th>
+                            <th>
+                                <form:label class="form-label" path="quan">Quận/Huyện:
+                                    <form:errors path="quan" cssStyle="color: red"></form:errors></form:label>
+                                <form:input id="quan1" class="form-control" placeholder=""  path="quan" onkeyup="setHuyen1(this)" />
+                            </th>
+                            <th style="display: none" >
+                                <form:label class="form-label" path="huyen">Huyện: <form:errors path="huyen" cssStyle="color: red"></form:errors>
+                                </form:label>
+                                <form:input id="huyen1" class="form-control" placeholder=""  path="huyen" />
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>  <form:label class="form-label" path="thanhPho">Thành Phố: <form:errors path="thanhPho" cssStyle="color: red"></form:errors>
+                            </form:label>
+                                <form:input  class="form-control" placeholder=""  path="thanhPho" />
+
+                            </th>
+                            <th>
+                                <form:label class="form-label" path="moTa">Mô tả:
+                                    <form:errors path="moTa" cssStyle="color: red"></form:errors>
+                                </form:label>
+                                <form:textarea  class="form-control" placeholder="" path="moTa" />
+
+                            </th>
+                        </tr>
+                    </table>
+
+                    <div align="center">
+                        <button type="submit" class="btn btn-warning"  > Sửa
+                        </button>
+
+                    </div>
+                </form:form>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
 
 
 
@@ -666,64 +736,6 @@
 
 
 
-<!-- The Modal -->
-<div class="modal" id="themdiachi">
-    <div class="modal-dialog" style="margin-top: 5cm">
-        <div class="modal-content">
-
-
-<p style="text-align: center;font-size: 20px">Thêm địa chỉ</p>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <form:form action="/add-dia-chi-kh" method="post" modelAttribute="diaChiKH">
-                    <table class="table" style="height: 100%">
-                        <tr>
-                            <th>
-                                <form:label class="form-label" path="diaChi">Địa chỉ:
-                                    <form:errors path="diaChi" cssStyle="color: red"></form:errors>
-                                </form:label>
-                                <form:input id="tenhkh" class="form-control" placeholder="" path="diaChi" value=""/>
-                            </th>
-                            <th>
-                                <form:label class="form-label" path="quan">Quận/Huyện:
-                                    <form:errors path="quan" cssStyle="color: red"></form:errors></form:label>
-                                <form:input id="quan" class="form-control" placeholder=""  path="quan" onkeyup="setHuyen(this)" />
-                            </th>
-                            <th style="display: none">
-                                <form:label class="form-label" path="huyen">Huyện: <form:errors path="huyen" cssStyle="color: red"></form:errors>
-                                </form:label>
-                                <form:input id="huyen" class="form-control" placeholder=""  path="huyen" />
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>  <form:label class="form-label" path="thanhPho">Thành Phố: <form:errors path="thanhPho" cssStyle="color: red"></form:errors>
-                            </form:label>
-                                <form:input id="tp" class="form-control" placeholder=""  path="thanhPho" />
-
-                            </th>
-                            <th>
-                                <form:label class="form-label" path="moTa">Mô tả:
-                                    <form:errors path="moTa" cssStyle="color: red"></form:errors>
-                                </form:label>
-                                <form:textarea id="motahkh" class="form-control" placeholder="" path="moTa" />
-
-                            </th>
-                        </tr>
-                    </table>
-
-                    <div align="center">
-                        <button type="submit" class="btn btn-warning" id="" onclick="return checkCV()"> Save
-                        </button>
-
-                    </div>
-                </form:form>
-            </div>
-
-
-
-        </div>
-    </div>
-</div>
 
 
 
@@ -1032,8 +1044,16 @@
      <c:if test="${batmodal==1}">
      document.getElementById("modalthemdiachi").click();
      </c:if>
+     <c:if test="${batmodalupdate==1}">
+     document.getElementById("modalupdatediachi").click();
+     </c:if>
+
     function setHuyen(input) {
         const huyenInput = document.getElementById("huyen");
+        huyenInput.value = input.value;
+    }
+    function setHuyen1(input) {
+        const huyenInput = document.getElementById("huyen1");
         huyenInput.value = input.value;
     }
 </script>

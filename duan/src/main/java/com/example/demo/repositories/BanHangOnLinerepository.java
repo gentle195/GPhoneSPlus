@@ -77,7 +77,8 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
             "AND (:moTaMan = 'null' OR manHinh.thongSo = :moTaMan) " +
             "AND (:moTaCam = 'null' OR cam.thongSo = :moTaCam) " +
             "AND (:moTaMau = 'null' OR ms.ten = :moTaMau) " +
-            "AND (:tenSP = 'null' OR sp.ten = :tenSP) "
+            "AND (:tenSP = 'null' OR sp.ten = :tenSP) "+
+            "AND (ct.tinhTrang=0) "
     )
     List<ChiTietSanPham> locbanhang(@Param("idHang") String idHang,
                                     @Param("moTaCam") String moTaCam,
@@ -112,7 +113,8 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
             "AND (:moTaCam = 'null' OR cam.thongSo = :moTaCam) " +
             "AND (:moTaMau = 'null' OR ms.ten = :moTaMau) " +
             "AND (:tenSP = 'null' OR sp.ten = :tenSP) " +
-            "AND (ct.giaBan >= :tienMin AND ct.giaBan <= :tienMax)"
+            "AND (ct.giaBan >= :tienMin AND ct.giaBan <= :tienMax)"+
+            "AND (ct.tinhTrang=0) "
     )
     List<ChiTietSanPham> locbanhangcoGIATIEN(@Param("idHang") String idHang,
                                              @Param("moTaCam") String moTaCam,

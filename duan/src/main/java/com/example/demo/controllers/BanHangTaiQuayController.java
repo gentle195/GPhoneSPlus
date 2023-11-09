@@ -515,7 +515,7 @@ public class BanHangTaiQuayController {
                       @PathVariable("camera") String moTaCam
     ) {
         List<ChiTietSanPham> list = banHangOnlineService.locbanhang(hang, moTaCam, moTaMan, "null", ram, rom, "null", dungLuongPin, chip, "null");
-        model.ad_tribute("listChiTietSanPham", list);
+        model.addAttribute("listChiTietSanPham", list);
         System.out.println("fjdkjffhkfhsf");
 
         return "ban-hang/bang-loc";
