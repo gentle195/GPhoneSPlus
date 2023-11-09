@@ -44,16 +44,9 @@ public class ImeiController {
     private Date ngay;
 
     @GetMapping("/hien-thi")
-    public String hienThi(Model model, @RequestParam(value = "pageNum", defaultValue = "0", required = false) Integer pageNum) {
-        Pageable pageable = PageRequest.of(pageNum, 15);
-        Page<IMEI> imeiPage = imeiService.getImeiOn(pageable);
-        model.addAttribute("total", imeiPage.getTotalPages());
-        model.addAttribute("listImei", imeiPage.getContent());
-        model.addAttribute("size", imeiPage.getSize());
-        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
-        model.addAttribute("imei", new IMEI());
-        String ma = "IMEI" + (imeiService.findAll().size() + 1);
-        model.addAttribute("ma", ma);
+    public String hienThi(Model model) {
+        List<IMEI> imeiPage = imeiService.getImeiOn();
+        model.addAttribute("listImei", imeiPage);
         model.addAttribute("contentPage", "../imei/index.jsp");
         return "home/layout";
 
@@ -98,31 +91,17 @@ public class ImeiController {
 
 
     @GetMapping("/hien-thi-da-ban")
-    public String hienThiDaBan(Model model, @RequestParam(value = "pageNum", defaultValue = "0", required = false) Integer pageNum) {
-        Pageable pageable = PageRequest.of(pageNum, 15);
-        Page<IMEI> imeiPage = imeiService.getImeiOff(pageable);
-        model.addAttribute("total", imeiPage.getTotalPages());
-        model.addAttribute("listImei", imeiPage.getContent());
-        model.addAttribute("size", imeiPage.getSize());
-        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
-        model.addAttribute("imei", new IMEI());
-        String ma = "IMEI" + imeiService.findAll().size();
-        model.addAttribute("ma", ma);
+    public String hienThiDaBan(Model model) {
+        List<IMEI> imeiPage = imeiService.getImeiOfff();
+        model.addAttribute("listImei", imeiPage);
         model.addAttribute("contentPage", "../imei/imei-da-ban.jsp");
         return "home/layout";
     }
 
     @GetMapping("/hien-thi-da-xoa")
-    public String hienThiDaXoa(Model model, @RequestParam(value = "pageNum", defaultValue = "0", required = false) Integer pageNum) {
-        Pageable pageable = PageRequest.of(pageNum, 15);
-        Page<IMEI> imeiPage = imeiService.getImeiOff3(pageable);
-        model.addAttribute("total", imeiPage.getTotalPages());
-        model.addAttribute("listImei", imeiPage.getContent());
-        model.addAttribute("size", imeiPage.getSize());
-        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
-        model.addAttribute("imei", new IMEI());
-        String ma = "IMEI" + imeiService.findAll().size();
-        model.addAttribute("ma", ma);
+    public String hienThiDaXoa(Model model) {
+        List<IMEI> imeiPage = imeiService.getImeiOff3();
+        model.addAttribute("listImei", imeiPage);
         model.addAttribute("contentPage", "../imei/imei-da-xoa.jsp");
         return "home/layout";
     }
@@ -158,7 +137,7 @@ public class ImeiController {
 
     @PostMapping("/add")
     public String add(@Valid @ModelAttribute(name = "imei") IMEI imei,
-                      BindingResult result, Model model, @RequestParam(value = "pageNum", defaultValue = "0", required = false) Integer pageNum) throws IOException, WriterException {
+                      BindingResult result, Model model) throws IOException, WriterException {
 
         if (result.hasErrors()) {
 

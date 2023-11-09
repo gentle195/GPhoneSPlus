@@ -45,6 +45,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -230,14 +231,10 @@ public class ModalController {
     @PostMapping("/chi-tiet-san-pham/modal-add-san-pham")
     public String addSanPham(Model model, @ModelAttribute("sanPham") @Valid SanPham sanPham, BindingResult bindingResult, @RequestParam("pageNum") Optional<Integer> pageNum,
                              @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<SanPham> page = sanPhamService.getAll0(pageable);
+        List<SanPham> page = sanPhamService.getAll0();
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("list", page.getContent());
-            model.addAttribute("page", page.getNumber());
-            model.addAttribute("total", page.getTotalPages());
+            model.addAttribute("list", page);
             return "chi-tiet-san-pham/add-chi-tiet-san-pham";
         }
 
@@ -248,9 +245,7 @@ public class ModalController {
         sanPham.setNgayTao(date);
         sanPham.setTinhTrang(0);
         sanPhamService.add(sanPham);
-        model.addAttribute("list", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("list", page);
         return "redirect:/chi-tiet-san-pham/view-add";
     }
 

@@ -19,10 +19,13 @@
                aria-controls="description" aria-selected="true">Thông tin Chi tiết sản phẩm</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-da-xoa" role="tab">Sản phẩm đã xoá</a>
+            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-da-xoa" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xoá</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/chi-tiet-san-pham/view-add" role="tab">Thêm mới chi tiết sản phẩm</a>
+            <a class="nav-link" href="/chi-tiet-san-pham/view-add" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm mới chi tiết
+                sản phẩm</a>
         </li>
     </ul>
 </div>
@@ -235,10 +238,12 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped" style="color: black; width: 2000px">
+                        <table id="example" class="display" style="color: black; width: 2000px">
                             <thead>
                             <tr>
                                 <th>Ảnh</th>
+                                <th>Ngày tạo</th>
+                                <th>Ngày cập nhật</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Màu sắc</th>
                                 <th>Chip</th>
@@ -246,8 +251,6 @@
                                 <th>Rom</th>
                                 <th>Pin</th>
                                 <th>Giá bán</th>
-                                <th>Ngày tạo</th>
-                                <th>Ngày cập nhật</th>
                                 <th>Tình trạng</th>
                                 <th>Năm bảo hành</th>
                                 <th>Số lượng tồn</th>
@@ -262,6 +265,8 @@
                                     <td align="center">
                                         <img src="/uploads/${ctsp.urlAnh}" width="40" height="40">
                                     </td>
+                                    <td>${ctsp.ngayTao}</td>
+                                    <td>${ctsp.ngayCapNhat}</td>
                                     <td>${ctsp.sanPham.ten}</td>
                                     <td>${ctsp.mauSac.ten}</td>
                                     <td>${ctsp.chip.ten}</td>
@@ -269,8 +274,6 @@
                                     <td>${ctsp.rom.dungLuong}</td>
                                     <td>${ctsp.pin.dungLuongPin.thongSo}</td>
                                     <td>${ctsp.giaBan} VND</td>
-                                    <td>${ctsp.ngayTao}</td>
-                                    <td>${ctsp.ngayCapNhat}</td>
                                     <td>${ctsp.tinhTrang==0?"Còn kinh doanh":"Ngừng kinh doanh"}</td>
                                     <td>${ctsp.namBaoHanh}</td>
                                     <td>${ctsp.soLuong}</td>
@@ -299,23 +302,6 @@
                 </div>
             </div>
         </div>
-        <%--phân trang--%>
-        <div align="center">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <ul class="pagination justify-content-center pagination-lg">
-                    <li class="page-item"><a class="page-link" href="/chi-tiet-san-pham/hien-thi?pageNum=0"><</a></li>
-                    <c:forEach begin="1" end="${total}" varStatus="status">
-                        <li class="page-item">
-                            <a href="${pageContext.request.contextPath}/chi-tiet-san-pham/hien-thi?pageNum=${status.index -1}"
-                               class="page-link">${status.index}</a>
-                        </li>
-                    </c:forEach>
-                    <li class="page-item"><a class="page-link"
-                                             href="/chi-tiet-san-pham/hien-thi?pageNum=${total-1}">></a></li>
-                </ul>
-            </div>
-        </div>
-        <%--kết thúc phân trang--%>
     </div>
 </div>
 </body>

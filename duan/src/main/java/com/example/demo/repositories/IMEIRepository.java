@@ -56,21 +56,21 @@ public interface IMEIRepository extends JpaRepository<IMEI, UUID> {
     void updateImei1(Date date, UUID id);
 
     @Query("select imei from  IMEI imei where imei.tinhTrang=1 or imei.tinhTrang=3")
-    Page<IMEI> getImeiOff(Pageable pageable);
+    List<IMEI> getImeiOfff();
 
     @Query("select imei from  IMEI imei where imei.tinhTrang=1 and imei.tinhTrang=3")
     List<IMEI> getImeiOff();
 
 
     @Query("select imei from  IMEI imei where imei.tinhTrang=0 ")
-    Page<IMEI> getImeiOn(Pageable pageable);
+    List<IMEI> getImeiOn();
 
     @Query("select imei from  IMEI imei where imei.tinhTrang=0 ")
     List<IMEI> findAll0();
 
 
     @Query("select imei from  IMEI imei where imei.tinhTrang=2 ")
-    Page<IMEI> getImeiOff3(Pageable pageable);
+    List<IMEI> getImeiOff3();
 
     @Query("select imei from  IMEI imei where imei.tinhTrang=2 ")
     List<IMEI> findAll3();

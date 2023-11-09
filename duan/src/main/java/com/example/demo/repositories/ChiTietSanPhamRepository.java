@@ -77,10 +77,10 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
     ChiTietSanPham getChiTiet2(UUID id);
 
     @Query("select ctsp from  ChiTietSanPham ctsp where ctsp.tinhTrang=0 ")
-    Page<ChiTietSanPham> getChiTietSanPhamOn(Pageable pageable);
+    List<ChiTietSanPham> getChiTietOn();
 
     @Query("select ctsp from  ChiTietSanPham ctsp where ctsp.tinhTrang=1 ")
-    Page<ChiTietSanPham> getChiTietSanPhamOff(Pageable pageable);
+    List<ChiTietSanPham> getChiTietOff();
 
     @Query("select ctsp from  ChiTietSanPham ctsp where ctsp.tinhTrang=1 ")
     List<ChiTietSanPham> getChiTietSanPhamOff();

@@ -27,17 +27,17 @@ public interface SanPhamService {
 
     public Boolean delete(UUID id);
 
-    List<SanPham> search(String dungluong);
+    public List<SanPham> search(String dungluong);
 
-    List<SanPham> search2(String dungluong);
+    public List<SanPham> search2(String dungluong);
 
-    public Page<SanPham> getAll0(Pageable pageable);
+    public List<SanPham> getAll0();
 
-    Page<SanPham> getall1(Pageable pageable);
+    public List<SanPham> getall1();
 
-    void update0();
+    public void update0();
 
-    List<SanPham> loc(UUID idHang, UUID idMan, UUID idCamera);
+    public List<SanPham> loc(UUID idHang, UUID idMan, UUID idCamera);
 }
 
 

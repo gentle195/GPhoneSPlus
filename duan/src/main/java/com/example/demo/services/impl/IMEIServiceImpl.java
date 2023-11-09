@@ -127,13 +127,13 @@ public class IMEIServiceImpl implements IMEIService {
     }
 
     @Override
-    public Page<IMEI> getImeiOn(Pageable pageable) {
-        return imeiRepository.getImeiOn(pageable);
+    public List<IMEI> getImeiOn() {
+        return imeiRepository.getImeiOn();
     }
 
     @Override
-    public Page<IMEI> getImeiOff(Pageable pageable) {
-        return imeiRepository.getImeiOff(pageable);
+    public List<IMEI> getImeiOfff() {
+        return imeiRepository.getImeiOfff();
     }
 
     @Override
@@ -142,8 +142,8 @@ public class IMEIServiceImpl implements IMEIService {
     }
 
     @Override
-    public Page<IMEI> getImeiOff3(Pageable pageable) {
-        return imeiRepository.getImeiOff3(pageable);
+    public List<IMEI> getImeiOff3() {
+        return imeiRepository.getImeiOff3();
     }
 
     @Override

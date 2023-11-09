@@ -23,10 +23,13 @@
                aria-controls="description" aria-selected="true">Thông tin Sản Phẩm</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/san-pham/hien-thi-tung-xoa" role="tab">Sản Phẩm đã xoá</a>
+            <a class="nav-link" href="/san-pham/hien-thi-tung-xoa" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản Phẩm đã xoá</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/san-pham/view-add" role="tab">Thêm mới sản phẩm</a>
+            <a class="nav-link" href="/san-pham/view-add" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm mới sản
+                phẩm</a>
         </li>
     </ul>
 </div>
@@ -41,7 +44,8 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <select name="hang" class="form-control" style="font-weight: bold; width: 100%" id="selectHang">
+                                        <select name="hang" class="form-control" style="font-weight: bold; width: 100%"
+                                                id="selectHang">
                                             <option selected disabled>Hãng</option>
                                             <c:forEach items="${listHangSP}" var="hang" varStatus="i">
                                                 <option value="${hang.id}">${hang.ten}</option>
@@ -51,7 +55,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <select name="camera" class="form-control" style="font-weight: bold; width: 100%" id="selectCamera">
+                                        <select name="camera" class="form-control"
+                                                style="font-weight: bold; width: 100%" id="selectCamera">
                                             <option selected disabled>Camera</option>
                                             <c:forEach items="${listCamera}" var="cam" varStatus="i">
                                                 <option value="${cam.id}">${cam.thongSo}</option>
@@ -61,7 +66,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <select name="manHinh" class="form-control" style="font-weight: bold; width: 100%" id="selectManHinh">
+                                        <select name="manHinh" class="form-control"
+                                                style="font-weight: bold; width: 100%" id="selectManHinh">
                                             <option selected disabled>Màn Hình</option>
                                             <c:forEach items="${listManHinh}" var="man" varStatus="i">
                                                 <option value="${man.id}">${man.thongSo}</option>
@@ -118,10 +124,12 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped" style="color:black; width: 2500px ">
+                        <table id="example" class="display" style="color:black; width: 2600px ">
                             <thead>
                             <tr>
                                 <th>Mã SP</th>
+                                <th>Ngày tạo</th>
+                                <th>Ngày cập nhật</th>
                                 <th>Tên SP</th>
                                 <th>Hãng</th>
                                 <th>Màn hình</th>
@@ -135,18 +143,18 @@
                                 <th>Chất liệu máy</th>
                                 <th>Hệ điều hành</th>
                                 <th>Số khe sim</th>
-                                <th>Ngày tạo</th>
-                                <th>Ngày cập nhật</th>
                                 <th>Tình trạng</th>
                                 <th>Mô tả</th>
-
-                                <th colspan="2">Action</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
+                            <i class="mdi mdi-border-color"></i>
                             <tbody>
                             <c:forEach items="${hsp}" var="list" varStatus="i">
                                 <tr>
                                     <td>${list.ma}</td>
+                                    <td>${list.ngayTao}</td>
+                                    <td>${list.ngayCapNhat}</td>
                                     <td>${list.ten}</td>
                                     <td>${list.hangSanPham.ten}</td>
                                     <td>${list.manHinh.thongSo}</td>
@@ -160,13 +168,12 @@
                                     <td>${list.chatLieu}</td>
                                     <td>${list.heDieuHanh}</td>
                                     <td>${list.soSim}</td>
-                                    <td>${list.ngayTao}</td>
-                                    <td>${list.ngayCapNhat}</td>
+
                                     <td><c:if test="${list.tinhTrang==0}">Hoạt động</c:if>
                                         <c:if test="${list.tinhTrang==1}">Ngừng hoạt động</c:if>
                                     </td>
                                     <td>${list.moTa}</td>
-                                    <td colspan="2">
+                                    <td>
                                         <a href="/san-pham/detail/${list.id}" class="btn btn-warning btn-icon-text"
                                            tabindex="-1"
                                            role="button"
@@ -188,24 +195,6 @@
                 </div>
             </div>
         </div>
-        <%--phân trang--%>
-        <div align="center">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <ul class="pagination justify-content-center pagination-lg">
-                    <li class="page-item"><a class="page-link" href="/rom/hien-thi?num=0">First</a></li>
-
-                    <c:forEach begin="1" end="${total}" varStatus="status">
-                        <li class="page-item">
-                            <a href="${pageContext.request.contextPath}/rom/hien-thi?num=${status.index -1}"
-                               class="page-link">${status.index}</a>
-                        </li>
-                    </c:forEach>
-
-                    <li class="page-item"><a class="page-link" href="/rom/hien-thi?num=${total-1}">Last</a></li>
-                </ul>
-            </div>
-        </div>
-        <%--kết thúc phân trang--%>
     </div>
 </div>
 </body>

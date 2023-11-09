@@ -45,21 +45,21 @@ public interface IMEIService {
 
     public void updatImei1(Date date, UUID id);
 
-    public Page<IMEI> getImeiOn(Pageable pageable);
+    public List<IMEI> getImeiOn();
 
-    public Page<IMEI> getImeiOff(Pageable pageable);
+    public List<IMEI> getImeiOfff();
 
     public List<IMEI> getImeiOff();
 
-    Page<IMEI> getImeiOff3(Pageable pageable);
+    public List<IMEI> getImeiOff3();
 
-    List<IMEI> findAll3();
+    public List<IMEI> findAll3();
 
     public void khoiPhuc(UUID uuid);
 
-    List<IMEI> statusSanPham(UUID id);
+    public List<IMEI> statusSanPham(UUID id);
 
-    List<IMEI> statusCTSP(UUID id);
+    public List<IMEI> statusCTSP(UUID id);
 }
 
 

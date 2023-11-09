@@ -90,13 +90,13 @@ public class SanPhamServiceImpl implements SanPhamService {
     }
 
     @Override
-    public Page<SanPham> getAll0(Pageable pageable) {
-        return sanPhamRepository.getall0(pageable);
+    public List<SanPham> getAll0() {
+        return sanPhamRepository.getall0();
     }
 
     @Override
-    public Page<SanPham> getall1(Pageable pageable) {
-        return sanPhamRepository.getall1(pageable);
+    public List<SanPham> getall1() {
+        return sanPhamRepository.getall1();
     }
 
     @Override

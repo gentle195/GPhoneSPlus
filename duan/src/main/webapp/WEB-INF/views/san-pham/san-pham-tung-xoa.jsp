@@ -15,17 +15,18 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/san-pham/hien-thi" role="tab">Thông tin Sản Phẩm </a>
+            <a class="nav-link" href="/san-pham/hien-thi" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin Sản
+                Phẩm </a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
                aria-controls="description" aria-selected="true">Sản Phẩm đã xoá</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/san-pham/view-add" role="tab">Thêm mới sản phẩm</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/san-pham/hien-thi-loc" role="tab">Lọc</a>
+            <a class="nav-link" href="/san-pham/view-add" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm mới sản
+                phẩm</a>
         </li>
         <a href="/san-pham/khoi-phuc-het" class="btn btn-outline-danger btn-icon-text"
            style="float: right; margin-left: 720px"
@@ -56,10 +57,12 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped" style="color: black">
+                        <table id="example" class="display" style="color: black">
                             <thead>
                             <tr>
                                 <th>Mã SP</th>
+                                <th>Ngày tạo</th>
+                                <th>Ngày cập nhật</th>
                                 <th>Tên SP</th>
                                 <th>Hãng</th>
                                 <th>Màn hình</th>
@@ -73,8 +76,6 @@
                                 <th>Chất liệu máy</th>
                                 <th>Hệ điều hành</th>
                                 <th>Số khe sim</th>
-                                <th>Ngày tạo</th>
-                                <th>Ngày cập nhật</th>
                                 <th>Tình trạng</th>
                                 <th>Mô tả</th>
 
@@ -85,6 +86,8 @@
                             <c:forEach items="${hsp}" var="list" varStatus="i">
                                 <tr>
                                     <td>${list.ma}</td>
+                                    <td>${list.ngayTao}</td>
+                                    <td>${list.ngayCapNhat}</td>
                                     <td>${list.ten}</td>
                                     <td>${list.hangSanPham.ten}</td>
                                     <td>${list.manHinh.thongSo}</td>
@@ -98,8 +101,6 @@
                                     <td>${list.chatLieu}</td>
                                     <td>${list.heDieuHanh}</td>
                                     <td>${list.soSim}</td>
-                                    <td>${list.ngayTao}</td>
-                                    <td>${list.ngayCapNhat}</td>
                                     <td><c:if test="${list.tinhTrang==0}">Hoạt động</c:if>
                                         <c:if test="${list.tinhTrang==1}">Ngừng hoạt động</c:if>
                                     </td>
@@ -120,24 +121,6 @@
                 </div>
             </div>
         </div>
-        <%--phân trang--%>
-        <div align="center">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <ul class="pagination justify-content-center pagination-lg">
-                    <li class="page-item"><a class="page-link" href="/san-pham/hien-thi-tung-xoa?num=0">First</a></li>
-
-                    <c:forEach begin="1" end="${total}" varStatus="status">
-                        <li class="page-item">
-                            <a href="${pageContext.request.contextPath}/san-pham/hien-thi-tung-xoa?num=${status.index -1}"
-                               class="page-link">${status.index}</a>
-                        </li>
-                    </c:forEach>
-
-                    <li class="page-item"><a class="page-link" href="/san-pham/hien-thi-tung-xoa?num=${total-1}">Last</a></li>
-                </ul>
-            </div>
-        </div>
-        <%--kết thúc phân trang--%>
     </div>
 </div>
 </body>

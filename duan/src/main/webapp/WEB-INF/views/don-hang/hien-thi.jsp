@@ -200,6 +200,7 @@
                             <thead>
                             <tr>
                                 <th>Mã hóa đơn</th>
+                                <th>Ngày Tạo</th>
                                 <th>Tên khách hàng</th>
                                 <th>Tên nhân viên</th>
                                 <th>Địa chỉ</th>
@@ -208,7 +209,6 @@
                                 <th>Tổng tiền</th>
                                 <th>Trạng thái</th>
                                 <th>Hình thức thanh toán</th>
-                                <th>Ngày Tạo</th>
                                 <th>Ngày Thanh Toán</th>
                                 <th>Ngày nhận</th>
                                 <th>Ngày ship</th>
@@ -220,6 +220,7 @@
                             <c:forEach items="${listHoaDon}" var="donHang">
                                 <tr>
                                     <td>${donHang.ma}</td>
+                                    <td>${donHang.ngayTao}</td>
                                     <td>${donHang.khachHang.hoTen}</td>
                                     <td>${donHang.nhanVien.hoTen}</td>
                                     <td>${donHang.diaChi.diaChi}</td>
@@ -242,7 +243,6 @@
                                         <c:if test="${donHang.hinhThucThanhToan == 1}">Online</c:if>
                                         <c:if test="${donHang.hinhThucThanhToan == 0}">Tiền mặt</c:if>
                                     </td>
-                                    <td>${donHang.ngayTao}</td>
                                     <td>${donHang.ngayThanhToan}</td>
                                     <td>${donHang.ngayNhan}</td>
                                     <td>${donHang.ngayShip}</td>

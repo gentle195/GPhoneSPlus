@@ -28,10 +28,10 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
     List<SanPham> search2(String dungluong);
 
     @Query("select r from SanPham r  where r.tinhTrang=0")
-    Page<SanPham> getall0(Pageable pageable);
+    List<SanPham> getall0();
 
     @Query("select r from SanPham r  where r.tinhTrang=1")
-    Page<SanPham> getall1(Pageable pageable);
+    List<SanPham> getall1();
 
     @Transactional
     @Modifying
