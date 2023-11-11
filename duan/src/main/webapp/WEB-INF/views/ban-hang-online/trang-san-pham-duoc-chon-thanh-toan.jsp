@@ -7,148 +7,147 @@
 <head>
 
     <%--phan trang--%>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-        <title>Thanh toán</title>
-        <%--căn đều--%>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
-
-
-        <!-- Google font -->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
-
-        <!-- Bootstrap -->
-        <link type="text/css" rel="stylesheet" href="/cssbanhang/bootstrap.min.css"/>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-        <!-- Google font -->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
-
-        <!-- Slick -->
-        <link type="text/css" rel="stylesheet" href="/cssbanhang/slick.css"/>
-        <link type="text/css" rel="stylesheet" href="/cssbanhang/slick-theme.css"/>
-
-        <!-- nouislider -->
-        <link type="text/css" rel="stylesheet" href="/cssbanhang/nouislider.min.css"/>
-
-        <!-- Font Awesome Icon -->
-        <link rel="stylesheet" href="/cssbanhang/font-awesome.min.css">
-
-        <!-- Custom stlylesheet -->
-        <link type="text/css" rel="stylesheet" href="/cssbanhang/style.css"/>
-
-        <%--    select 2--%>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
-        <link rel="stylesheet"
-              href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
-        <link rel="stylesheet"
-              href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+    <title>Thanh toán</title>
+    <%--căn đều--%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
 
 
-        <style>
-            /* CSS cho modal */
-            #myModal {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 1000; /* Đặt giá trị z-index lớn */
-            }
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
-            .modal-content {
-                background-color: #fff;
-                padding: 20px;
-                border-radius: 5px;
-                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            }
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/cssbanhang/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-            #myModal {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 1000; /* Đặt giá trị z-index lớn */
-            }
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
-            .modal-content {
-                background-color: #fff;
-                padding: 20px;
-                border-radius: 5px;
-                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            }
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="/cssbanhang/slick.css"/>
+    <link type="text/css" rel="stylesheet" href="/cssbanhang/slick-theme.css"/>
 
-            /*div{*/
-            /*    border: 1px solid red;*/
-            /*}*/
-            .input-with-button {
-                display: flex; /* Sử dụng flexbox để căn chỉnh nút bên trong input */
-                border: 1px solid #ccc; /* Tạo đường viền xung quanh hộp tìm kiếm */
-                border-radius: 25px; /* Đặt bán kính tròn cho hộp tìm kiếm */
-                overflow: hidden; /* Loại bỏ nút nếu nó bị tràn ra ngoài hộp */
-            }
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="/cssbanhang/nouislider.min.css"/>
 
-            .input-with-button input {
-                flex: 1; /* Làm cho input mở rộng để lấp đầy hộp */
-                border: none; /* Loại bỏ đường viền của input */
-                padding: 10px; /* Đặt khoảng cách nội dung bên trong input */
-                outline: none; /* Loại bỏ đường viền khi focus vào input */
-            }
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="/cssbanhang/font-awesome.min.css">
 
-            .input-with-button button {
-                background: #007bff; /* Màu nền của nút */
-                color: #fff; /* Màu chữ trắng */
-                border: none; /* Loại bỏ đường viền của nút */
-                padding: 10px 20px; /* Đặt khoảng cách nội dung bên trong nút */
-                cursor: pointer; /* Biến con trỏ thành bàn tay khi trỏ vào nút */
-            }
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/cssbanhang/style.css"/>
 
-            .cart-dropdown {
-                border-radius: 10px;
-                width: 180px;
-                background-color: #fff;
-                box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-                padding: 10px;
-                margin-top: 10px;
-            }
+    <%--    select 2--%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 
-            .cart-dropdown a {
-                display: block;
-                width: 100%;
-                padding: 10px;
-                text-decoration: none;
-                text-align: center;
-                color: #fff;
-                background-color: #007bff;
-                margin-bottom: 10px;
-            }
 
-            .cart-dropdown a:hover {
-                background-color: #0056b3;
-            }
+    <style>
+        /* CSS cho modal */
+        #myModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000; /* Đặt giá trị z-index lớn */
+        }
 
-            /*div{*/
-            /*    border: 1px solid red;*/
-            /*}*/
-        </style>
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        #myModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000; /* Đặt giá trị z-index lớn */
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /*div{*/
+        /*    border: 1px solid red;*/
+        /*}*/
+        .input-with-button {
+            display: flex; /* Sử dụng flexbox để căn chỉnh nút bên trong input */
+            border: 1px solid #ccc; /* Tạo đường viền xung quanh hộp tìm kiếm */
+            border-radius: 25px; /* Đặt bán kính tròn cho hộp tìm kiếm */
+            overflow: hidden; /* Loại bỏ nút nếu nó bị tràn ra ngoài hộp */
+        }
+
+        .input-with-button input {
+            flex: 1; /* Làm cho input mở rộng để lấp đầy hộp */
+            border: none; /* Loại bỏ đường viền của input */
+            padding: 10px; /* Đặt khoảng cách nội dung bên trong input */
+            outline: none; /* Loại bỏ đường viền khi focus vào input */
+        }
+
+        .input-with-button button {
+            background: #007bff; /* Màu nền của nút */
+            color: #fff; /* Màu chữ trắng */
+            border: none; /* Loại bỏ đường viền của nút */
+            padding: 10px 20px; /* Đặt khoảng cách nội dung bên trong nút */
+            cursor: pointer; /* Biến con trỏ thành bàn tay khi trỏ vào nút */
+        }
+
+        .cart-dropdown {
+            border-radius: 10px;
+            width: 180px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .cart-dropdown a {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            text-decoration: none;
+            text-align: center;
+            color: #fff;
+            background-color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .cart-dropdown a:hover {
+            background-color: #0056b3;
+        }
+        /*div{*/
+        /*    border: 1px solid red;*/
+        /*}*/
+    </style>
 
 </head>
 
@@ -189,7 +188,8 @@
                                         <a href="#" class="btn btn-primary">Tài khoản của tôi</a>
                                     </div>
                                     <div>
-                                        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}" class="btn btn-primary">Đơn hàng</a>
+                                        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}"
+                                           class="btn btn-primary">Đơn hàng</a>
                                     </div>
                                     <div>
                                         <a href="/logout" class="btn btn-primary" style="" onclick="">Đăng xuất</a>
@@ -214,7 +214,8 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <h2 class="logo" style="margin: 20px;color: white;font-family: 'Times New Roman'">GPhoneS Store</h2>
+                        <h2 class="logo" style="margin: 20px;color: white;font-family: 'Times New Roman'">GPhoneS
+                            Store</h2>
                     </div>
                 </div>
                 <!-- /LOGO -->
@@ -378,183 +379,99 @@
 <!-- /NAVIGATION -->
 
 <main id="content">
-    <div style="width: 75%;margin-left: 12.5%; ">
 
+    <div class="section">
+        <!-- container -->
+        <div class="shadow p-3 mb-5 bg-body-tertiary rounded" style="width: 85%;margin-left: 7.5%;">
+            <!-- row -->
+            <div class="row">
 
-        <P>Địa chỉ nhận hàng</P>
-
-        <p>Số điện thoại:<label style="background: white;color: red;border: 1px solid white" id="sodienthoai"></label>
-        </p>
-        <input type="text" value="${listghct.get(0).gioHang.khachHang.sdt}" style="width: 97%" id="sodienthoai1">
-
-        <P>Địa chỉ:</P><label style="background: white;color: red;border: 1px solid white" id="thongbaodiachi"></label>
-        <div>
-            <button style="float: right" class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#modalthemdiachidathang">Thêm địa chỉ
-            </button>
-            <select class="form-control" id="diachids1" style="width: 85%">
-                <c:forEach items="${banhangonline.Listdiachimotkhachang(listghct.get(0).gioHang.khachHang.id)}"
-                           var="ht">
-                    <option value="${ht.id}">quận:${ht.quan},huyện:${ht.huyen},thành phố:${ht.thanhPho}</option>
-                </c:forEach>
-            </select>
-        </div>
-
-
-        <div style="margin-top: 2cm">
-            <div style="width: 70%;float: right">
-                <P>Danh sách sản phẩm</P><br>
-                <table class="table table-borderless">
-                    <thead>
-                    <tr>
-
-                        <th>Ảnh</th>
-                        <th>Sản Phẩm</th>
-                        <th>Đơn Giá</th>
-                        <th>Số lượng</th>
-                        <th>Số tiền</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${listghct}" var="ht" varStatus="stt">
-                        <tr>
-
-                            <td>
-                                <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}" width="40" height="40"
-                                     style="border-radius:50% 50% 50% 50%">
-                            </td>
-                            <td>
-                                    ${ht.chiTietSanPham.sanPham.ten},${ht.chiTietSanPham.sanPham.hangSanPham.ten},${ht.chiTietSanPham.sanPham.camera.thongSo},${ht.chiTietSanPham.sanPham.manHinh.thongSo},<br>
-                                    ${ht.chiTietSanPham.mauSac.ten},${ht.chiTietSanPham.ram.dungLuong},${ht.chiTietSanPham.rom.dungLuong},<br>
-                                    ${ht.chiTietSanPham.pin.loaiPin},${ht.chiTietSanPham.pin.dungLuongPin.thongSo},${ht.chiTietSanPham.chip.ten}.
-                            </td>
-                            <td>
-                                <div name="checkdongiakhigiam">${ht.donGiaKhiGiam}</div>
-                                đ-
-                                <del class="product-old-price">${ht.donGia}</del>
-                                đ
-
-                            </td>
-                            <td>
-                                    ${ht.soLuong}
-                            </td>
-                            <td>
-                                <div name="checkthanhtien">${ht.donGiaKhiGiam*ht.soLuong}</div>
-                                vnd
-                            </td>
-
-
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-            <div style="width: 25%">
-                <P>Thông tin khách hàng</P>
-                <br><br>
-                <img src="../../../uploads/${listghct.get(0).gioHang.khachHang.anh}" width="100" height="100"
-                     style="border-radius:50% 50% 50% 50%;margin-left: 2cm">
-                <p>Người mua:</p>
-                <input type="text" value="${listghct.get(0).gioHang.khachHang.hoTen}" disabled style="width: 97%">
-                <p>Email:</p>
-                <input type="text" value="${listghct.get(0).gioHang.khachHang.email}" disabled style="width: 97%">
-                <p>Số điện thoại:</p>
-                <input type="text" value="${listghct.get(0).gioHang.khachHang.sdt}" disabled style="width: 97%">
-                <p>Hạng khách hàng:</p>
-                <input type="text" value="${listghct.get(0).gioHang.khachHang.hangKhachHang.ten}" disabled
-                       style="width: 97%">
-            </div>
-        </div>
-        <br><br>
-
-        <div style="width: 40%;float: right">
-            <div>
-                <div id="tongsanphamchon" style="float: right">
-                    ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongsanphamchon()}
-                </div>
-                <div style="float: right">Bạn đã chọn :</div>
-            </div>
-
-            <br><br>
-
-            <div>
-                <div style="float: right">VND</div>
-                <div id="tongthanhtien" style="float: right;margin-right: 10px">
-                    ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
-                </div>
-
-                <div style="float: right">Tổng tiền :</div>
-            </div>
-            <br><br>
-            <form action="/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-dat-hang" method="post">
-               <div style="display: none">
-                <input id="idgh1" name="idgh1" >
-                <input id="tongtien1" name="tongtien1" >
-                <input id="iddc1" name="iddc1" >
-                <input id="sdt1" name="sdt1" >
-               </div>
-                <button style="float: right" type="button" id="nutdathangthanhtoan" onclick="nutdathang('${listghct.get(0).gioHang.id}')">Đặt Hàng
-                </button>
-            </form>
-
-        </div>
-
-
-        <%--    <div style=" width: 50%">--%>
-        <%--        <p style="display: inline-block; margin: 0;">Phương thức thanh toán</p>--%>
-        <%--        <br><br>--%>
-        <%--        <input style="display: inline-block;" type="radio" name="phuongthucthanhtoandathang" value="Thanh toán khi nhận hàng" checked> Thanh toán khi nhận hàng--%>
-        <%--        <br><br>--%>
-        <%--        <input style="display: inline-block;" type="radio" name="phuongthucthanhtoandathang" value="Thanh toán momo"> Thanh toán momo--%>
-        <%--        <br><br>--%>
-        <%--        <input style="display: inline-block;" type="radio" name="phuongthucthanhtoandathang" value="Thanh toán online"> Thanh toán online--%>
-        <%--    </div>--%>
-
-
-    </div>
-
-
-    <%--modal them dia chi dat hang--%>
-    <!-- The Modal -->
-    <div class="modal" id="modalthemdiachidathang">
-        <div class="modal-dialog">
-            <div class="modal-content" style="">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Thêm địa chỉ</h4>
-                </div>
-                <form action="/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-them-dia-chi" method="post">
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <div style="margin-left:2.5cm ">
-                            <div>Địa chỉ:<label style="background: white;color: red;border: 1px solid white"
-                                                id="tb1"></label></div>
-                            <input type="text" id="themdiachidathangdiachi" name="diachi"><br>
-                            <div>Quận:<label style="background: white;color: red;border: 1px solid white"
-                                             id="tb2"></label></div>
-                            <input type="text" id="themdiachidathangquan" name="quan"><br>
-                            <div>Huyện:<label style="background: white;color: red;border: 1px solid white"
-                                              id="tb3"></label></div>
-                            <input type="text" id="themdiachidathanghuyen" name="huyen"><br>
-                            <div>Thành phố:<label style="background: white;color: red;border: 1px solid white"
-                                                  id="tb4"></label></div>
-                            <input type="text" id="themdiachidathangthanhpho" name="thanhpho"><br>
+                <div class="col-md-6">
+                    <!-- Billing Details -->
+                    <div class="billing-details">
+                        <div class="section-title">
+                            <h3 class="title">Thanh toán</h3>
                         </div>
-                        <input type="text" value="${listghct.get(0).gioHang.id}" name="idgh" style="display: none">
+                        <div class="form-group">
+                            <input class="input" type="text" name="first-name"
+                                   value="${listghct.get(0).gioHang.khachHang.hoTen}" placeholder="First Name">
+                        </div>
+
+                        <div class="form-group">
+                            <input class="input" type="email" value="${listghct.get(0).gioHang.khachHang.email}"
+                                   name="email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" id="sodienthoai1" type="tel" name="tel"
+                                   value="${listghct.get(0).gioHang.khachHang.sdt}"
+                                   placeholder="Telephone">
+                        </div>
+                        <select class="form-control" id="diachids1" height="200px">
+                            <c:forEach
+                                    items="${banhangonline.Listdiachimotkhachang(listghct.get(0).gioHang.khachHang.id)}"
+                                    var="ht">
+                                <option value="${ht.id}">${ht.diaChi} - ${ht.quan} - ${ht.huyen}
+                                    - ${ht.thanhPho}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <!-- /Billing Details -->
+
+                    <!-- Shiping Details -->
+
+                    <!-- /Shiping Details -->
+
+                    <!-- Order notes -->
+
+                    <!-- /Order notes -->
+                </div>
+
+                <!-- Order Details -->
+                <div class="col-md-6 order-details">
+                    <div class="section-title text-center">
+                        <h3 class="title">Sản Phẩm</h3>
+                    </div>
+                    <div class="order-summary">
+                        <div class="order-col">
+                            <div><strong>Sản phẩm</strong></div>
+
+                            <div><strong>Thành tiền</strong></div>
+                        </div>
+                        <c:forEach items="${listghct}" var="ht" varStatus="stt">
+                            <div class="order-products">
+                                <div class="order-col">
+                                    <div><img src="/uploads/${ht.chiTietSanPham.urlAnh}" height="50px" width="50px"></div>
+                                    <div> ${ht.chiTietSanPham.sanPham.ten}
+                                        - ${ht.chiTietSanPham.mauSac.ten} - ${ht.chiTietSanPham.ram.dungLuong}
+                                        - ${ht.chiTietSanPham.rom.dungLuong}</div>
+                                    <div>${ht.donGiaKhiGiam*ht.soLuong}</div>
+                                </div>
+
+                            </div>
+                        </c:forEach>
+                        <div class="order-col">
+                            <div><strong>Tổng tiền</strong></div>
+                            <div id="tongthanhtien"><strong
+                                    class="order-total"> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
+                            </strong></div>
+
+                        </div>
                     </div>
 
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger" onclick=" return themdiachikhachhang();">Thêm
-                        </button>
-                        <%--                <button type="button" style="display: none" id="btthemdiachidathang" data-bs-dismiss="modal"></button>--%>
-                    </div>
-                </form>
+
+                    <button type="button" style="width: 100%" class="primary-btn order-submit"
+                            onclick="nutdathang('${listghct.get(0).gioHang.id}')">Đặt hàng
+                    </button>
+                </div>
+
+                <!-- /Order Details -->
             </div>
+            <!-- /row -->
         </div>
+        <!-- /container -->
     </div>
+
+
 </main>
 
 <script>

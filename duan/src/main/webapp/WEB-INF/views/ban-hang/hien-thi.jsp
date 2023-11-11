@@ -63,7 +63,7 @@
         </div>
         <br>
         <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
+            <div class="card shadow p-3 mb-5 bg-body-tertiary rounded" >
                 <div class="card-body">
                     <h4 class="card-title" style="float: left">Danh sách Hóa đơn chi tiết</h4>
                         <%--            Tìm kiếm               --%>
@@ -132,10 +132,10 @@
         <br>
         <c:if test="${not listHoaDonChiTiet.isEmpty()}">
             <div class="row">
-                <div class="col-12 outer-border p-3 border border-secondary">
+                <div class="col-12">
                     <form:form action="/ban-hang/xac-nhan/${HoaDon.id}" modelAttribute="HoaDon" method="post">
-                        <div class="col-12 grid-margin" style="color: black">
-                            <div class="card">
+                        <div class="col-12 grid-margin " style="color: black">
+                            <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
                                 <div class="card-body">
                                     <h4 class="card-title">Thông Tin Hóa Đơn</h4>
                                     <form class="form-sample">
@@ -167,7 +167,6 @@
                                                                 path="khachHang">Khách Hàng:</form:label>
                                                     <div class="col-sm-9">
                                                         <div class="row">
-
                                                             <div class="col-10">
                                                                 <form:select path="khachHang" class="form-control"
                                                                              id="selectKhachHang">
@@ -178,7 +177,7 @@
                                                             </div>
                                                             <div class="col-2">
                                                                 <a href="/ban-hang/modal-khach-hang"
-                                                                   class="btn btn-secondary"
+                                                                   class="btn"
                                                                    data-bs-toggle="modal"
                                                                    data-bs-target="#newKhachHang"><img
                                                                         src="/uploads/plus.png" alt=""></a>
@@ -659,6 +658,15 @@
         }
     }
 
+    const toastTrigger = document.getElementById('liveToastBtn')
+    const toastLiveExample = document.getElementById('liveToast')
+
+    if (toastTrigger) {
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastTrigger.addEventListener('click', () => {
+            toastBootstrap.show()
+        })
+    }
     document.getElementById("tienKhachDua").addEventListener("keyup", function () {
         tinhTienThua();
     });
@@ -883,7 +891,6 @@
         }
     });
 </script>
-
 <script>
     function loadInterface(interfaceUrl) {
         fetch(interfaceUrl)
