@@ -154,7 +154,6 @@
 <body>
 <!-- HEADER -->
 <header>
-    <!-- TOP HEADER -->
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
@@ -185,7 +184,12 @@
                                  style="border-radius: 10px;width: 3.5cm;margin-top: 10px;width: 180px">
                                 <div>
                                     <div>
-                                        <a href="#" class="btn btn-primary">Tài khoản của tôi</a>
+                                        <form action="/thong-tin-ca-nhan-khach-hang" method="post" style="display: none">
+                                            <input value="${idkhachhang}" name="idKhachHang" style="display: none">
+                                            <button style="" class="btn btn-primary" type="submit" id="taikhoancuatoi">Tài khoản của tôi</button>
+                                        </form>
+                                        <a  class="btn btn-primary" type="submit" onclick="anbt()">Tài khoản của tôi</a>
+
                                     </div>
                                     <div>
                                         <a href="/ban-hang-online/hoa-don-online/${idkhachhang}"
@@ -394,36 +398,32 @@
                         </div>
                         <div class="form-group">
                             <input class="input" type="text" name="first-name"
-                                   value="${listghct.get(0).gioHang.khachHang.hoTen}" placeholder="First Name">
+                                   value="${listghct.get(0).gioHang.khachHang.hoTen}" placeholder="First Name" disabled>
                         </div>
 
                         <div class="form-group">
                             <input class="input" type="email" value="${listghct.get(0).gioHang.khachHang.email}"
-                                   name="email" placeholder="Email">
+                                   name="email" placeholder="Email" disabled>
                         </div>
                         <div class="form-group">
                             <input class="input" id="sodienthoai1" type="tel" name="tel"
                                    value="${listghct.get(0).gioHang.khachHang.sdt}"
                                    placeholder="Telephone">
                         </div>
-                        <select class="form-control" id="diachids1" height="200px">
-                            <c:forEach
-                                    items="${banhangonline.Listdiachimotkhachang(listghct.get(0).gioHang.khachHang.id)}"
-                                    var="ht">
+                        <button style="float: right" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#modalthemdiachidathang">Thêm địa chỉ
+                        </button>
+                        <select class="form-control" id="diachids1" style="width: 80%">
+                            <c:forEach items="${banhangonline.Listdiachimotkhachang(listghct.get(0).gioHang.khachHang.id)}"
+                                       var="ht">
                                 <option value="${ht.id}">${ht.diaChi} - ${ht.quan} - ${ht.huyen}
                                     - ${ht.thanhPho}</option>
                             </c:forEach>
                         </select>
+
+
                     </div>
-                    <!-- /Billing Details -->
 
-                    <!-- Shiping Details -->
-
-                    <!-- /Shiping Details -->
-
-                    <!-- Order notes -->
-
-                    <!-- /Order notes -->
                 </div>
 
                 <!-- Order Details -->
@@ -450,18 +450,41 @@
                             </div>
                         </c:forEach>
                         <div class="order-col">
+                            <div><strong>Số lượng sản phẩm chọn</strong></div>
+                            <div id="tongsanphamchon">
+                                <strong
+                                    class="order-total" style="color: black">
+                                    ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongsanphamchon()}
+
+                                </strong>
+                            </div>
+
+                        </div>
+                        <div class="order-col">
                             <div><strong>Tổng tiền</strong></div>
-                            <div id="tongthanhtien"><strong
-                                    class="order-total"> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
-                            </strong></div>
+                            <div id="tongthanhtien">
+                                <strong
+                                        class="order-total"> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
+                                </strong>
+                            </div>
 
                         </div>
                     </div>
 
 
-                    <button type="button" style="width: 100%" class="primary-btn order-submit"
-                            onclick="nutdathang('${listghct.get(0).gioHang.id}')">Đặt hàng
-                    </button>
+<%--                    <button type="button" style="width: 100%" class="primary-btn order-submit"--%>
+<%--                            onclick="nutdathang('${listghct.get(0).gioHang.id}')">Đặt hàng--%>
+<%--                    </button>--%>
+                    <form action="/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-dat-hang" method="post">
+                        <div style="display: none">
+                            <input id="idgh1" name="idgh1" >
+                            <input id="tongtien1" name="tongtien1" >
+                            <input id="iddc1" name="iddc1" >
+                            <input id="sdt1" name="sdt1" >
+                        </div>
+                        <button class="primary-btn order-submit" style="float: right" type="button" id="nutdathangthanhtoan" onclick="nutdathang('${listghct.get(0).gioHang.id}')">Đặt Hàng
+                        </button>
+                    </form>
                 </div>
 
                 <!-- /Order Details -->
@@ -471,8 +494,49 @@
         <!-- /container -->
     </div>
 
+    <%--modal them dia chi dat hang--%>
+    <!-- The Modal -->
+    <div class="modal" id="modalthemdiachidathang">
+        <div class="modal-dialog">
+            <div class="modal-content" style="">
 
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm địa chỉ</h4>
+                </div>
+                <form action="/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-them-dia-chi" method="post">
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div style="margin-left:2.5cm ">
+                            <div>Địa chỉ:<label style="background: white;color: red;border: 1px solid white"
+                                                id="tb1"></label></div>
+                            <input type="text" id="themdiachidathangdiachi" name="diachi"><br>
+                            <div>Quận:<label style="background: white;color: red;border: 1px solid white"
+                                             id="tb2"></label></div>
+                            <input type="text" id="themdiachidathangquan" name="quan"><br>
+                            <div>Huyện:<label style="background: white;color: red;border: 1px solid white"
+                                              id="tb3"></label></div>
+                            <input type="text" id="themdiachidathanghuyen" name="huyen"><br>
+                            <div>Thành phố:<label style="background: white;color: red;border: 1px solid white"
+                                                  id="tb4"></label></div>
+                            <input type="text" id="themdiachidathangthanhpho" name="thanhpho"><br>
+                        </div>
+                        <input type="text" value="${listghct.get(0).gioHang.id}" name="idgh" style="display: none">
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger" onclick=" return themdiachikhachhang();">Thêm
+                        </button>
+                        <%--                <button type="button" style="display: none" id="btthemdiachidathang" data-bs-dismiss="modal"></button>--%>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </main>
+
+
 
 <script>
 
@@ -589,6 +653,11 @@
     }
 
     loadSelect2diachi();
+</script>
+<script>
+    function anbt() {
+        document.getElementById('taikhoancuatoi').click();
+    }
 </script>
 <!-- jQuery Plugins -->
 <script src="/jsbanhang/jquery.min.js"></script>
