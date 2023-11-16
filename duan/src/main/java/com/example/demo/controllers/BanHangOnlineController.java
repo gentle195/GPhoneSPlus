@@ -130,6 +130,7 @@ public class BanHangOnlineController {
         model.addAttribute("giamgia", banHangOnlineService);
         model.addAttribute("banhangonline", banHangOnlineService);
         model.addAttribute("listsp", banHangOnlineService.ctspbanhang());
+        model.addAttribute("listTop10sp", banHangOnlineService.top10SanPhamBanChay());
         idkhachhang = "1";
         model.addAttribute("idkhachhang", idkhachhang);
         return "ban-hang-online/trang-chu";
