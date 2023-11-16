@@ -116,7 +116,7 @@ public class BanHangTaiQuayController {
     @PostMapping("/add-hoa-don")
     public String addHoaDon(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon, @ModelAttribute("modalAddKhachHang") KhachHang khachHang) {
         List<HoaDon> list = hoaDonService.find();
-        if (list.size() >= 1) {
+        if (list.size() >= 6) {
             hoaDonnn = null;
             model.addAttribute("HoaDon", hoaDonnn);
             model.addAttribute("thongBaoHoaDon", "Đã quá số lượng hóa đơn chờ");
@@ -296,6 +296,7 @@ public class BanHangTaiQuayController {
         model.addAttribute("listImei", listIMEI);
         List<HoaDon> list = hoaDonService.find();
         model.addAttribute("listHoaDon", list);
+
         return listIMEI;
     }
 

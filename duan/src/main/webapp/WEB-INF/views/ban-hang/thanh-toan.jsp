@@ -28,7 +28,7 @@
              aria-labelledby="description-tab">
             <div>
                 <div class="col-12 grid-margin">
-                    <div class="card">
+                    <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
                         <div class="card-body">
                             <form:form action="/ban-hang/thanh-toan/${HoaDon.id}" modelAttribute="HoaDon" method="post">
                                 <div class="col-12 grid-margin" style="color: black">
@@ -109,7 +109,7 @@
                                                                         path="sdt">Số điện thoại:</form:label>
                                                             <div class="col-sm-9">
                                                                 <form:input class="form-control" path="sdt"
-                                                                            readonly="true"/>
+                                                                            />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -164,8 +164,8 @@
                     </div>
                 </div>
                 <br>
-                <div class="col-lg-12 grid-margin stretch-card">
-                    <div class="card">
+                <div class="col-lg-12 grid-margin stretch-card ">
+                    <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
                         <div class="card-body">
                             <h4 class="card-title" style="float: left">Danh sách Hóa đơn chi tiết</h4>
                             <%--            Tìm kiếm               --%>

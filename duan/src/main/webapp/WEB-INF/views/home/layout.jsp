@@ -91,13 +91,13 @@
 
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a href="/thong-tin-ca-nhan" class="dropdown-item">
+                                <a href="/thong-tin-ca-nhan" class="dropdown-item" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                     <i class="icon-user"></i>
-                                    <span class="ml-2">Profile </span>
+                                    <span class="ml-2">Thông tin cá nhân </span>
                                 </a>
                                 <a href="/logout" class="dropdown-item" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                     <i class="icon-key"></i>
-                                    <span class="ml-2">Logout </span>
+                                    <span class="ml-2">Đăng xuất </span>
                                 </a>
                             </div>
                         </li>
