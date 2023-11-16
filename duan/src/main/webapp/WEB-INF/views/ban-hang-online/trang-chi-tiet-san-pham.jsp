@@ -464,7 +464,7 @@
     <div style="position: absolute;margin-left: 56%;width: 43%;margin-top: 8%;z-index: 2;">
         <p style="display: none" id="tenspctsp">${motctsp.sanPham.ten}</p>
 
-        <label style="" >Màu sắc:</label>
+        <label style="" >Màu sắc: </label>
 
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
 
@@ -502,7 +502,7 @@
         </c:forEach>
         <br>
         <br>
-        <label >Rom</label>
+        <label >Rom: </label>
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
 
             <c:if test="${stt1.index==0}">
@@ -537,7 +537,7 @@
         </c:forEach>
         <br>
         <br>
-        <label >Ram</label>
+        <label >Ram: </label>
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
             <c:if test="${stt1.index==0}">
                 <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
@@ -571,7 +571,7 @@
         </c:forEach>
         <br>
         <br>
-        <label >Chip</label>
+        <label >Chip: </label>
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
             <c:if test="${stt1.index==0}">
                 <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
