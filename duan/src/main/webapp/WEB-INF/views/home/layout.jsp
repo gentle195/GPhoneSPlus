@@ -19,6 +19,8 @@
     <link href="../../../vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="../../../vendor/jqvmap/css/jqvmap.min.css" rel="stylesheet">
     <link href="../../../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
 </head>
@@ -91,13 +93,13 @@
 
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a href="/thong-tin-ca-nhan" class="dropdown-item" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                <a href="/thong-tin-ca-nhan" class="dropdown-item">
                                     <i class="icon-user"></i>
-                                    <span class="ml-2">Thông tin cá nhân </span>
+                                    <span class="ml-2">Profile </span>
                                 </a>
                                 <a href="/logout" class="dropdown-item" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                     <i class="icon-key"></i>
-                                    <span class="ml-2">Đăng xuất </span>
+                                    <span class="ml-2">Logout </span>
                                 </a>
                             </div>
                         </li>
@@ -193,6 +195,8 @@
                 <!-- top tiles -->
 
                 <jsp:include page="${contentPage}"/>
+
+                <ul class="notifications" style="margin-top: 55px"></ul>
             </div>
         </div>
     </div>
@@ -219,6 +223,8 @@
 
 
 </div>
+<script src="../../../js/app.js"></script>
+
 <!--**********************************
     Main wrapper end
 ***********************************-->
