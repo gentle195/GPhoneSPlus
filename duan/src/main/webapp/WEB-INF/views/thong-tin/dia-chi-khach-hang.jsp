@@ -322,9 +322,13 @@
                                         <a  class="btn btn-primary" type="submit" onclick="anbt()">Tài khoản của tôi</a>
 
                                     </div>
+
                                     <div>
                                         <a href="/ban-hang-online/hoa-don-online/${idkhachhang}"
                                            class="btn btn-primary">Đơn hàng</a>
+                                    </div>
+                                    <div>
+                                        <a href="/doi-tra/chinh-sach-doi-tra" class="btn btn-primary" style="" onclick="">Chính sách đổi trả</a>
                                     </div>
                                     <div>
                                         <a href="/logout" class="btn btn-primary" style="" onclick="">Đăng xuất</a>

@@ -55,52 +55,12 @@
 
 
     <style>
-        /* CSS cho modal */
-        #myModal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000; /* Đặt giá trị z-index lớn */
+        p{
+            color: black;
+            font-size: 15px;
+            margin-top: 7px;
         }
 
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        #myModal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000; /* Đặt giá trị z-index lớn */
-        }
-
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        /*div{*/
-        /*    border: 1px solid red;*/
-        /*}*/
         .input-with-button {
             display: flex; /* Sử dụng flexbox để căn chỉnh nút bên trong input */
             border: 1px solid #ccc; /* Tạo đường viền xung quanh hộp tìm kiếm */
@@ -123,161 +83,39 @@
             cursor: pointer; /* Biến con trỏ thành bàn tay khi trỏ vào nút */
         }
 
-/*tuananh*/
-        .container1 {
-            display: flex;
-            margin-left: 5cm;
-            margin-right: 5cm;
-            /*border: 1px solid red;*/
-        }
-
-        .middle-column1 {
-            flex: 1;
+        .cart-dropdown {
+            border-radius: 10px;
+            width: 180px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
             padding: 10px;
-            /*border: 1px solid #ccc;*/
-            box-sizing: border-box;
-        }
-        .left-column1{
-            width: 6cm;
-            /*border: 1px solid blue;*/
-        }
-        .right-column1 {
-            /*border: 1px solid #8c0615;*/
-            width: 6cm;
-        }
-        .middle-column1 {
-            /*border: 1px solid red;*/
-            width:  calc(100% - 6cm - 6cm); /* Tính toán kích thước cột giữa */
-
+            margin-top: 10px;
         }
 
-
-
-
-        .tab-container {
-            display: flex;
-            width: 300px; /* Điều chỉnh chiều rộng theo ý muốn */
-        }
-
-        .tab-menu {
-            /*background-color: #333;*/
-            color: black;
-
-            width: 100%; /* Điều chỉnh chiều rộng menu tab */
-        }
-
-        .tab {
+        .cart-dropdown a {
+            display: block;
+            width: 100%;
             padding: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 18px;
+            text-decoration: none;
+            text-align: center;
+            color: #fff;
+            background-color: #007bff;
+            margin-bottom: 10px;
         }
 
+        .cart-dropdown a:hover {
+            background-color: #0056b3;
+        }
+        /*div{*/
+        /*    border: 1px solid red;*/
+        /*}*/
     </style>
-        <style>
-            /* CSS cho modal */
-            #myModal {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 1000; /* Đặt giá trị z-index lớn */
-            }
-
-            .modal-content {
-                background-color: #fff;
-                padding: 20px;
-                border-radius: 5px;
-                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            }
-
-            #myModal {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 1000; /* Đặt giá trị z-index lớn */
-            }
-
-            .modal-content {
-                background-color: #fff;
-                padding: 20px;
-                border-radius: 5px;
-                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            }
-
-            /*div{*/
-            /*    border: 1px solid red;*/
-            /*}*/
-            .input-with-button {
-                display: flex; /* Sử dụng flexbox để căn chỉnh nút bên trong input */
-                border: 1px solid #ccc; /* Tạo đường viền xung quanh hộp tìm kiếm */
-                border-radius: 25px; /* Đặt bán kính tròn cho hộp tìm kiếm */
-                overflow: hidden; /* Loại bỏ nút nếu nó bị tràn ra ngoài hộp */
-            }
-
-            .input-with-button input {
-                flex: 1; /* Làm cho input mở rộng để lấp đầy hộp */
-                border: none; /* Loại bỏ đường viền của input */
-                padding: 10px; /* Đặt khoảng cách nội dung bên trong input */
-                outline: none; /* Loại bỏ đường viền khi focus vào input */
-            }
-
-            .input-with-button button {
-                background: #007bff; /* Màu nền của nút */
-                color: #fff; /* Màu chữ trắng */
-                border: none; /* Loại bỏ đường viền của nút */
-                padding: 10px 20px; /* Đặt khoảng cách nội dung bên trong nút */
-                cursor: pointer; /* Biến con trỏ thành bàn tay khi trỏ vào nút */
-            }
-
-            .cart-dropdown {
-                border-radius: 10px;
-                width: 180px;
-                background-color: #fff;
-                box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-                padding: 10px;
-                margin-top: 10px;
-            }
-
-            .cart-dropdown a {
-                display: block;
-                width: 100%;
-                padding: 10px;
-                text-decoration: none;
-                text-align: center;
-                color: #fff;
-                background-color: #007bff;
-                margin-bottom: 10px;
-            }
-
-            .cart-dropdown a:hover {
-                background-color: #0056b3;
-            }
-
-            /*div{*/
-            /*    border: 1px solid red;*/
-            /*}*/
-        </style>
 </head>
 <body>
 
 
 <!-- HEADER -->
 <header>
-
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
@@ -315,7 +153,6 @@
                                         <a  class="btn btn-primary" type="submit" onclick="anbt()">Tài khoản của tôi</a>
 
                                     </div>
-
                                     <div>
                                         <a href="/ban-hang-online/hoa-don-online/${idkhachhang}"
                                            class="btn btn-primary">Đơn hàng</a>
@@ -362,6 +199,7 @@
                         </form>
                     </div>
                 </div>
+                <!-- /SEARCH BAR -->
 
                 <!-- ACCOUNT -->
                 <div class="col-md-3 clearfix">
@@ -506,6 +344,7 @@
                 <li><a href="#">ƯU ĐÃI HẤP DẪN</a></li>
                 <li><a href="#">LOẠI</a></li>
                 <li><a href="/ban-hang-online/dien-thoai-thong-minh">ĐIỆN THOẠI THÔNG MINH</a></li>
+                <li><a href="/doi-tra/chinh-sach-doi-tra" style="color: #00A2FF">/CHÍNH SÁCH ĐỔI TRẢ</a></li>
             </ul>
             <!-- /NAV -->
         </div>
@@ -515,173 +354,142 @@
 </nav>
 <!-- /NAVIGATION -->
 
+<!-- /NAVIGATION -->
+
 <br>
-
-
-
-<form:form action="/update-thong-tin-ca-nhan-khach-hang" method="post" modelAttribute="kh"
-           enctype="multipart/form-data">
-<div class="container1">
-
-    <div class="left-column1" style="width: 6cm; font-size: 18px">
-        <!-- Nội dung cột trái -->
-        <div class="row" style="margin-top: 6px">
-            <div class="col-md-2">
-                <img  class="preview-image" src="../../../uploads/${kh.anh}" alt=""
-                     width="40px" height="40px"
-                     style="border-radius:50% 50% 50% 50%;border: 2px solid #999999">
-            </div>
-            <div class="col-md-10">
-                <p style="margin-left: 0.5cm"><strong>${kh.hoTen}</strong></p>
-
-            </div>
-
-        </div>
-
-        <div class="row">
-            <div class="tab-container">
-                <div class="tab-menu" style="margin-top: 10px">
-                    <a href=""><div style="color: red" class="tab">Hồ sơ</div></a>
-                    <a href="/dia-chi-khach-hang"><div class="tab">Địa chỉ</div></a>
-                    <a href="/pass-khach-hang"><div class="tab">Đổi mật khẩu</div></a>
-                </div>
-                <div class="tab-content">
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <%--    <div class="tab-pane" id="tab1">--%>
-    <div class="middle-column1" style="font-size: 15px">
-        <!-- Nội dung cột giữa -->
-        <div class="row">
-            <p style="margin-left: 0.5cm; font-size: 20px"><strong>Hồ sơ của tôi </strong></p>
-            <p style="margin-left: 0.5cm">     (Quản lý thông tin hồ sơ để bảo mật tài khoản!)</p>
-
-        </div>
-        <div style="font-size: 18px; color: black">
-            <p style="font-weight:bold"> Tên đăng nhập: ${kh.hoTen}</p>
-        </div>
-
-
-<div style="display:none;">
-    <form:input class="form-control" placeholder="" path="id" readonly="true"/>
-
-    <form:label class="form-label" path="ma">Mã:</form:label>
-    <form:input class="form-control" placeholder="" path="ma" readonly="true"/>
-    <form:label class="form-label" path="taiKhoan">Tài khoản:
-        <form:errors path="taiKhoan" cssStyle="color: red"></form:errors>
-    </form:label>
-    <form:input class="form-control" placeholder="" path="taiKhoan"/>
-    <form:label class="form-label" path="matKhau">Mật khẩu:
-        <form:errors path="matKhau" cssStyle="color: red"></form:errors>
-    </form:label>
-    <form:input class="form-control" placeholder="" path="matKhau"/>
-    <form:label class="form-label" path="diem">Điểm:
-        <form:errors path="diem" cssStyle="color: red"></form:errors>
-    </form:label>
-    <form:input class="form-control" placeholder="" path="diem" type="number"/>
-    <form:input class="form-control" placeholder="" path="hangKhachHang" type="text"/>
-    <form:input path="ngayTao" type="date"></form:input>
-
-</div>
-        <table class="table">
+<main style="margin-left: 5cm; margin-right: 5cm">
+    <div class="body">
+<br>
+        <h2>Chính sách đổi trả sản phẩm của GphoneS Store</h2>
+        <br>
+        <p>Để mang đến sự thuận tiện và trải nghiệm tốt nhất cho khách hàng, <strong>GphoneS Store</strong> có những chính sách
+            phù hợp khi khách hàng có nhu cầu đổi trả sản phẩm. Chúng tôi luôn mong muốn mang lại cho khách hàng
+            những sản phẩm và chất lượng phục vụ tốt nhất.</p>
+        <p>Việc đổi trả sản phẩm đi kèm một số điều kiện cụ thể, Quý khách vui lòng tham khảo thông tin chi
+            tiết bên dưới :</p>
+<br>
+        <table>
             <thead>
-            <tr>
-                <td>Họ tên</td>
-                <td>
-                    <form:input class="form-control" placeholder="${kh.hoTen}"  path="hoTen"/>
-                </td>
+            <tr style="">
+                <th style="width: 250px; border: 2px solid black;padding-top: 0.5cm;text-align: center; padding-bottom: 0.5cm; font-size: 18px">Mục</th>
+                <th style="width: 1000px; border: 2px solid black;padding-top: 0.5cm;text-align: center; padding-bottom: 0.5cm; font-size: 18px">Nội dung chính sách</th>
             </tr>
-            <tr>
-                <td> <form:errors path="hoTen" cssStyle="color: red"></form:errors></td>
-            </tr>
-            <tr>
-                <td>Số điện thoại:</td>
-                <td>
-                    <form:input class="form-control" placeholder="${kh.sdt}"  path="sdt"/>
-                </td>
-            </tr>
-            <tr>
-                <td> <form:errors path="sdt" cssStyle="color: red"></form:errors></td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td>
-                    <form:input class="form-control" placeholder="${kh.email}"  path="email"/>
-                </td>
-            </tr>
-            <tr>
-                <td> <form:errors path="email" cssStyle="color: red"></form:errors></td>
-
-            </tr>
-            <tr>
-                <td>Giới Tính:</td>
-                <td>
-                    <div class="form-control">
-                        <form:radiobutton path="gioiTinh" value="true"/>Nam
-                        <form:radiobutton path="gioiTinh" value="false" cssStyle="margin-left: 1cm"/> Nữ
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Ngày sinh</td>
-                <td>
-                    <form:input class="form-control" placeholder="" path="ngaySinh" type="date"
-                                id="ns"/>
-                </td>
-            </tr>
-
             </thead>
+            <tbody>
+            <tr>
+                <td style="border: 2px solid black; font-weight: bold">1) Đối tượng áp dụng</td>
+                <td style="border: 2px solid black;">
+                    <p>Khách hàng</p>
+                    <p>* Áp dụng cho tất cả sản phẩm mua hàng online qua website và trực tiếp tại <strong>GphoneS Store</strong></p>
+                    <p>* Chúng tôi không hỗ trợ cho những đơn hàng mua tại địa điểm khác.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border: 2px solid black;font-weight: bold">2) Điều kiện đổi trả</td>
+                <td style="border: 2px solid black;">
+                    <p>* Sản phẩm không trùng khớp về màu sắc, mẫu mã, size theo đơn hàng.</p>
+                    <p>* Lỗi kỹ thuật do nhà sản xuất.</p>
+                    <p>* Sản phẩm đổi hàng phải còn mới, nguyên vẹn, không bị dính nước, không có dấu hiệu rơi vỡ</p>
+                    <p>* Sản phẩm phải còn đầy đủ tem, nhãn mác, thẻ bảo hành và hoá đơn mua hàng.</p>
+                    <p>* Sản phẩm đổi hàng còn trong thời hạn cho phép đổi trả.</p>
+                    <p>* Khách hàng chỉ có thể trả sản phẩm với điều kiện <strong>GphoneS Store</strong> không có sản phẩm cùng loại khác (màu sắc,
+                        mẫu mã, kích thước) thay thế.</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border: 2px solid black;font-weight: bold">3) Thời hạn đổi trả</td>
+                <td style="border: 2px solid black;">
+                    <p>* <strong> 7 ngày</strong> kể từ ngày khách nhận được hàng</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border: 2px solid black;font-weight: bold">4) Thời hạn thực hiện đổi trả</td>
+                <td style="border: 2px solid black;">
+                    <p>* Đối với khách hàng mua online: Trong vòng 3-5 ngày kể từ ngày nhận được sản phẩm đổi.</p>
+                    <p>* Đối với khách hàng mua trực tiếp tại cửa hàng: Ngay tại cửa hàng</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border: 2px solid black;font-weight: bold">5) Hình thức đổi trả</td>
+                <td style="border: 2px solid black;">
+                    <P>* Sản phẩm chỉ được đổi một lần duy nhất trừ trường hợp sản phẩm được đổi bị lỗi từ nhà sản xuất</P>
+                    <p>* Đối với khách hàng mua online: Đổi trực tiếp tại cửa hàng <strong>GphoneS Store</strong>ghi trên hoá đơn mua hàng.</p>
+                    <p>* Đối với khách hàng mua trực tiếp tại cửa hàng: Gửi sản phẩm về địa chỉ: <strong>Số 3 phố Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội.</strong></p>
+
+                </td>
+            </tr>
+            </tbody>
 
         </table>
-
-        <div style="text-align: center">
-            <button type="submit" class="btn btn-primary mr-2"
-                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                SAVE
-            </button>
-        </div>
-    </div>
-
-
-
-    <div class="right-column1" style="text-align: center; font-size: 15px">
-        <%--                <div class="col-md-2" style="text-align: center; margin-left: 1cm">--%>
-        <%--                </div>--%>
-
-        <!-- Nội dung cột phải -->
-            <div style="display: none">
-                <input style="" type="text" name="checkanh" value="cu" id="cucheck">
-                <br>
-            </div>
-            <div align="center">
-                <br>
-                <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;"
-                       for="anhmoi">
-                    <img id="preview-image-2" class="preview-image" src="../../../uploads/${kh.anh}" alt=""
-                         width="100%" height="100%"
-                         style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
-
-                    <br><br>
-                    ẢNH
-                </label>
-                <br>
-                <div style="display: none">
-                    <input type="file" name="images" accept="image/jpeg, image/png" id="anhmoi">
-                </div>
-            </div>
-            <div style="display: none">
-                <form:input path="anh"/>
-            </div>
+        <br>
+        <p><i class="fa fa-exclamation-triangle" style=" font-weight: bold; color: red"> LƯU Ý:</i>
+            * GPhoneS Store khuyến khích Quý khách hàng nên chụp ảnh sản phẩm trước khi đổi hàng hóa, việc lưu giữ sản phẩm sẽ giúp khách hàng làm bằng chứng nếu có những vấn đề phát sinh trong quá trình đổi trả.</p>
 
     </div>
-
-
-</div>
-</form:form>
-
-<br><br><br><br><br><br>
+<%--    <h2>Chính sách đổi trả điện thoại</h2>--%>
+<%--    <p>--%>
+<%--        Để mang đến sự thuận tiện và trải nghiệm tốt nhất cho khách hàng, GPhonesPlus có những chính sách phù hợp khi khách hàng có nhu cầu đổi trả sản phẩm.--%>
+<%--        Chúng tôi luôn mong muốn mang lại cho khách hàng những sản phẩm và chất lượng phục vụ tốt nhất.--%>
+<%--        Việc đổi trả sản phẩm đi kèm một số điều kiện cụ thể, Quý khách vui lòng tham khảo thông tin chi tiết bên dưới--%>
+<%--    </p>   <br>--%>
+<%--    <h3>1. Điều kiện đổi trả</h3>--%>
+<%--    <p>--%>
+<%--        Khách hàng được phép đổi trả điện thoại trong vòng <strong>7 ngày</strong> kể từ ngày khách nhận hàng đối với những sản phẩm mua tại GPhonesphlus Để đổi trả sản phẩm, khách hàng cần đáp ứng các điều kiện sau:--%>
+<%--    </p>--%>
+<%--    <ul>--%>
+<%--        <li>Sản phẩm lỗi do nhà sản xuất.</li>--%>
+<%--        <li>Sản phẩm còn nguyên vẹn, không bị trầy xước, bể vỡ, móp méo,...</li>--%>
+<%--        <li>Sản phẩm còn đầy đủ phụ kiện đi kèm.</li>--%>
+<%--    </ul>--%>
+<%--    <br>--%>
+<%--    <h3>2. Các trường hợp không được đổi trả</h3>--%>
+<%--    <p>--%>
+<%--        Khách hàng sẽ không được đổi trả điện thoại trong các trường hợp sau:--%>
+<%--    </p>--%>
+<%--    <ul>--%>
+<%--        <li>Sản phẩm đã hết thời hạn đổi trả.</li>--%>
+<%--        <li>Sản phẩm bị trầy xước, bể vỡ, móp méo,... do khách hàng gây ra.</li>--%>
+<%--        <li>Sản phẩm bị mất, thất lạc,...</li>--%>
+<%--        <li>Sản phẩm không phải do nhà sản xuất lỗi.</li>--%>
+<%--    </ul>   <br>--%>
+<%--    <h3>3. Thủ tục đổi trả</h3>--%>
+<%--    <p>--%>
+<%--        Để đổi trả điện thoại, khách hàng cần thực hiện các bước sau:--%>
+<%--    </p>--%>
+<%--    <ul>--%>
+<%--        <li>Bước 1: Tạo phiếu đổi trả trên website.</li>--%>
+<%--        <li>Bước 2: Liên hệ với cửa hàng qua mail: <strong>gphonespluss@gmail.com</strong> để thông báo về việc đổi trả sản phẩm.</li>--%>
+<%--        <li>Bước 3: Mang sản phẩm đến cửa hàng tại địa chỉ: <strong>Cao Đẳng FPT Phố Trịnh Văn Bô, phường Phương Canh, quận Từ Liêm, Hà nội để kiểm tra</strong> </li>--%>
+<%--        <li>Bước 4: Nếu sản phẩm đủ điều kiện đổi trả, cửa hàng sẽ tiến hành đổi trả sản phẩm cho khách hàng.</li>--%>
+<%--    </ul>   <br>--%>
+<%--    <h3>4. Hình thức đổi trả</h3>--%>
+<%--    <p>--%>
+<%--        Cửa hàng sẽ đổi trả sản phẩm cho khách hàng bằng một trong các hình thức sau:--%>
+<%--    </p>--%>
+<%--    <ul>--%>
+<%--        <li>Đổi sản phẩm mới cùng loại.</li>--%>
+<%--        <li>Đổi sản phẩm mới khác loại.</li>--%>
+<%--    </ul>   <br>--%>
+<%--    <h3>5. Lưu ý khi đổi trả</h3>--%>
+<%--    <p>--%>
+<%--        Khi đổi trả điện thoại, khách hàng cần lưu ý một số điều sau:--%>
+<%--    </p>--%>
+<%--    <ul>--%>
+<%--        <li>Nên giữ lại hóa đơn mua hàng để làm căn cứ đổi trả sản phẩm.</li>--%>
+<%--        <li>Nên chụp lại hình ảnh sản phẩm trước khi mang đến cửa hàng để đổi trả, để làm bằng chứng nếu có tranh chấp xảy ra.</li>--%>
+<%--        <li>Nên tìm hiểu kỹ chính sách đổi trả của cửa hàng trước khi mua hàng để tránh gặp phải những rủi ro không đáng có.</li>--%>
+<%--    </ul>   <br>--%>
+<%--    <h3>6. Lý do chỉ đổi không trả</h3>--%>
+<%--    <p>--%>
+<%--        Cửa hàng chỉ áp dụng chính sách đổi trả điện thoại, không áp dụng chính sách trả hàng. Điều này là do:--%>
+<%--    </p>--%>
+<%--    <ul>--%>
+<%--        <li>Điện thoại là một sản phẩm có giá trị cao, việc trả hàng có thể gây ra những rủi ro cho cửa hàng.</li>--%>
+<%--        <li>Cửa hàng mong muốn mang đến cho khách hàng những trải nghiệm mua sắm tốt nhất, đảm bảo quyền lợi của khách hàng.</li>--%>
+<%--    </ul>--%>
+</main>
+<br>
 <!-- NEWSLETTER -->
 <div id="newsletter" class="section">
     <!-- container -->
@@ -816,49 +624,6 @@
     <!-- /bottom footer -->
 </footer>
 <!-- /FOOTER -->
-
-
-
-
-
-<%--        <div id="myModal">--%>
-<%--            <div  style="width: 20cm;height: 15cm">--%>
-<%--                <img src="https://uploads-ssl.webflow.com/6073fad993ae97919f0b0772/609fa687874b84361fc495db_%C4%91t.jpg" style="width: 100%; height: 100%">--%>
-<%--            </div>--%>
-<%--        </div>--%>
-
-<script>
-    function openTab(tabIndex) {
-        var tabPanes = document.querySelectorAll('.tab-pane');
-        for (var i = 0; i < tabPanes.length; i++) {
-            tabPanes[i].classList.remove('active');
-        }
-        document.getElementById('tab' + tabIndex).classList.add('active');
-    }
-
-
-</script>
-<script>
-
-    const imageInput = document.getElementById('anhmoi');
-    const previewImage2 = document.getElementById('preview-image-2');
-
-    imageInput.addEventListener('change', function () {
-
-        const file = imageInput.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                previewImage2.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        } else {
-            previewImage2.src = '';
-        }
-        document.getElementById('cucheck').value = 'moi';
-    });
-</script>
-
 <script>
 
     function chonhetgiohangtongTRANGCHU(idgh) {
@@ -1105,24 +870,6 @@
     }
 
 
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Lấy tham chiếu đến liên kết và biểu mẫu
-        var diaChiLink = document.getElementById("diaChiLink");
-        var diaChiForm = document.getElementById("diaChiForm");
-
-        // Thêm một sự kiện nhấp chuột vào liên kết
-        diaChiLink.addEventListener("click", function (event) {
-            // Ngăn chặn hành vi mặc định của liên kết (chuyển hướng trang)
-            event.preventDefault();
-
-            // Kiểm tra xem biểu mẫu có hợp lệ không và sau đó gửi biểu mẫu
-            if (diaChiForm) {
-                diaChiForm.submit();
-            }
-        });
-    });
 </script>
 <script>
     function anbt() {
