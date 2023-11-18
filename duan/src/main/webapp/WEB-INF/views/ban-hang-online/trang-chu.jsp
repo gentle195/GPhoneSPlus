@@ -214,6 +214,9 @@
                                            class="btn btn-primary">Đơn hàng</a>
                                     </div>
                                     <div>
+                                        <a href="/doi-tra/chinh-sach-doi-tra" class="btn btn-primary" style="" onclick="">Chính sách đổi trả</a>
+                                    </div>
+                                    <div>
                                         <a href="/logout" class="btn btn-primary" style="" onclick="">Đăng xuất</a>
                                     </div>
                                 </div>
@@ -396,6 +399,7 @@
                 </c:if>
                 <li><a href="#">ƯU ĐÃI HẤP DẪN</a></li>
                 <li><a href="#">LOẠI</a></li>
+
                 <li><a href="/ban-hang-online/dien-thoai-thong-minh">ĐIỆN THOẠI THÔNG MINH</a></li>
             </ul>
             <!-- /NAV -->
