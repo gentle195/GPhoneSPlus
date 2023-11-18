@@ -51,7 +51,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/","/dang-ky-tai-khoan","/login/dang-ky-tai-khoan","/login/quen-mat-khau","/quen-mat-khau", "/WEB-INF/**", "/lgin", "/logout", "/ban-hang-online/**", "/css/**", "/cssbanhang/**"
                         , "/documentation/**", "/icons/**", "/images/**", "/inHoaDon/**", "/js/**", "/jsbanhang/**", "/maqr/**", "/scss/**"
-                        , "uploads/**", "/vendor/**").permitAll()
+                        , "uploads/**", "/vendor/**","/ghn").permitAll()
                 .requestMatchers("/favicon.ico").permitAll()
                 //ca admin ca nhan vien
                 .requestMatchers("/chi-tiet-san-pham/hien-thi", "/ban-hang/**", "/anh/hien-thi-delete"
