@@ -178,8 +178,9 @@
                                                                     <option selected disabled value="1">
                                                                         Khách hàng
                                                                     </option>
-                                                                    <form:options items="${listKhachHang}"
-                                                                                  itemLabel="hoTen" itemValue="id"/>
+                                                                    <c:forEach items="${listKhachHang}" var="kh">
+                                                                        <option value="${kh.id}">${kh.hoTen} - ${kh.sdt}</option>
+                                                                    </c:forEach>
                                                                 </form:select>
                                                                 <label id="nullKH1" style="color: red"></label>
                                                             </div>
@@ -934,6 +935,7 @@
         const search = parentModal.find("#imeiSearchInput").val();
         const idCTSPInputElement = $(document).find('#idCTSPham').val();
         const url = "http://localhost:8080/ban-hang/search-imei?search-imei=" + search;
+        console.log(idCTSPInputElement)
         console.log(url)
         if (search === "") {
             let html = `
@@ -1001,6 +1003,7 @@
                 const ctsp = data[i];
                 const tr = `
             <tr>
+                <td style="display:none;">` + ctsp.id + `</td>
                 <td>` + ctsp.sanPham.ma + `</td>
                 <td>` + ctsp.sanPham.ten + `</td>
                 <td align="center"><img src="/uploads/` + ctsp.urlAnh + `" width="40" height="40"></td>
@@ -1019,7 +1022,18 @@
                 html += tr;
             }
             parentModal.find(".san_pham_search").html(html);
+            const aTags = document.querySelectorAll('.btn-warning.btn-icon-text');
 
+            aTags.forEach(aTag => {
+                aTag.addEventListener('click', () => {
+                    // Lấy ID của sản phẩm
+                    const productId = aTag.closest('tr').querySelector('td:first-child').textContent;
+
+                    // Lưu ID của sản phẩm vào input
+                    const input = document.querySelector('#idCTSPham');
+                    input.value = productId;
+                });
+            });
 
         } catch (err) {
             console.error(err)
@@ -1035,6 +1049,18 @@
                 content.innerHTML = data;
 
                 loadScripts();
+                const aTags = document.querySelectorAll('.btn-warning.btn-icon-text');
+
+                aTags.forEach(aTag => {
+                    aTag.addEventListener('click', () => {
+                        // Lấy ID của sản phẩm
+                        const productId = aTag.closest('tr').querySelector('td:first-child').textContent;
+
+                        // Lưu ID của sản phẩm vào input
+                        const input = document.querySelector('#idCTSPham');
+                        input.value = productId;
+                    });
+                });
                 // loadSelect2();
             })
             .catch(error => {

@@ -20,6 +20,7 @@
 <body>
 <c:forEach items="${listChiTietSanPham}" var="ctsp">
     <tr>
+        <td style="display: none">${ctsp.id}</td>
         <td>${ctsp.sanPham.ma}</td>
         <td>${ctsp.sanPham.ten}</td>
         <td align="center">

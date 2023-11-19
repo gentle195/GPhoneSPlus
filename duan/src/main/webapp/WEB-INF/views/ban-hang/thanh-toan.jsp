@@ -149,9 +149,10 @@
                                                 </div>
                                                 <br>
                                                 <div class="row">
+                                                    <div class="col-md-12" style="text-align: center">
                                                     <div class="buttons">
-                                                        <div class="col-md-12" style="text-align: center">
-                                                            <button id="success" type="submit" class="btn">Thanh Toán</button>
+                                                            <button id="success" type="submit"  class="btn btn-primary"
+                                                                    >Thanh Toán</button>
                                                         </div>
                                                     </div>
                                                 </div>

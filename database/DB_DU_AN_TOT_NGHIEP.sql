@@ -431,7 +431,8 @@ CREATE TABLE hoa_don (
   FOREIGN KEY (id_dia_chi) REFERENCES dia_chi(id),
   FOREIGN KEY (id_quy_doi) REFERENCES quy_doi(id)
 );
-
+ALTER TABLE hoa_don add nguoi_nhan nvarchar(100) null
+Alter table hoa_don add phi_ship decimal(20, 0) NULL
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

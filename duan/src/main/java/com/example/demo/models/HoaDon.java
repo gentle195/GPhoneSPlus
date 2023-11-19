@@ -45,6 +45,12 @@ public class HoaDon {
     @Column(name = "tong_tien")
     private BigDecimal tongTien;
 
+    @Column(name = "phi_ship")
+    private BigDecimal phiShip;
+
+    @Column(name = "nguoi_nhan")
+    private String nguoiNhan;
+
     @CreationTimestamp
     @Column(name = "ngay_tao")
     private Date ngayTao;
@@ -69,7 +75,7 @@ public class HoaDon {
 
     @Column(name = "hinh_thuc_thanh_toan")
     private int hinhThucThanhToan;
-    
+
     @Column(name = "tinh_trang_giao_hang")
     private int tinhTrangGiaoHang;
 
