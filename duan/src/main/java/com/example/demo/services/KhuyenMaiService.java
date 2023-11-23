@@ -8,19 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface KhuyenMaiService {
-    public Page<KhuyenMai> getAll(Pageable pageable);
 
-    public List<KhuyenMai> findAll();
-
-    public List<KhuyenMai> getAll0();
-
-    public KhuyenMai findById(UUID id);
-
-    public KhuyenMai add(KhuyenMai khuyenMai);
-
-    public KhuyenMai update(UUID id, KhuyenMai khuyenMai);
-
-    public Boolean delete(UUID id);
 
 
 }

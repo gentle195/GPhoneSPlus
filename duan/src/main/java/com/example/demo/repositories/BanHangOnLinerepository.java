@@ -27,16 +27,23 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
     @PersistenceContext
     EntityManager entityManager = null;
 
-    @Transactional
-    @Query(value = "DECLARE @bienb int; " +
-            "SET @bienb = (SELECT SUM(b.so_tien_giam) AS tonggiamgia FROM san_pham_giam_gia a LEFT JOIN khuyen_mai b ON a.id_khuyen_mai = b.id " +
-            "             WHERE a.id_chi_tiet_san_pham = :idctsp AND a.tinh_trang = 0 AND b.tinh_trang = 0); " +
-            "IF @bienb > 80 " +
-            "BEGIN " +
-            "   SET @bienb = 80; " +
-            "END; " +
-            "SELECT CAST(@bienb AS int);", nativeQuery = true)
-    Integer tonggiamgia(UUID idctsp);
+//    @Transactional
+//    @Query(value = "DECLARE @bienb int; " +
+//            "SET @bienb = (SELECT SUM(b.so_tien_giam) AS tonggiamgia FROM san_pham_giam_gia a LEFT JOIN khuyen_mai b ON a.id_khuyen_mai = b.id " +
+//            "             WHERE a.id_chi_tiet_san_pham = :idctsp AND a.tinh_trang = 0 AND b.tinh_trang = 0); " +
+//            "IF @bienb > 80 " +
+//            "BEGIN " +
+//            "   SET @bienb = 80; " +
+//            "END; " +
+//            "SELECT CAST(@bienb AS int);", nativeQuery = true)
+//    Integer tonggiamgia(UUID idctsp);
+@Transactional
+@Query(value = "DECLARE @bienb int; " +
+        "SET @bienb = (SELECT SUM(b.so_tien_giam) AS tonggiamgia FROM chi_tiet_san_pham a LEFT JOIN khuyen_mai b ON a.id_khuyen_mai = b.id  " +
+        "             WHERE a.id = :idctsp AND a.tinh_trang = 0 AND b.tinh_trang = 0);" +
+
+        "SELECT CAST(@bienb AS int);", nativeQuery = true)
+Integer tonggiamgia(UUID idctsp);
 
     @Query("select ct from SanPham sp left join ChiTietSanPham ct on sp.id=ct.sanPham.id where sp.tinhTrang=0 and ct.tinhTrang=0 order by sp.ngayTao desc")
     List<ChiTietSanPham> ctspbanhang();

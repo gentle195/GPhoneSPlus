@@ -382,10 +382,11 @@ public class BanHangOnlineController {
         }
         model.addAttribute("tttong", 1);
 //        //gia max
-        Integer max = 0;
+        Long max =Long.valueOf('0');
         for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
-            if (Integer.valueOf(String.valueOf(ct.getGiaBan())) > max) {
-                max = Integer.valueOf(String.valueOf(ct.getGiaBan()));
+
+            if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                max = Long.valueOf(String.valueOf(ct.getGiaBan()));
             }
         }
 //System.out.println("taco---"+max);
@@ -1052,9 +1053,9 @@ public class BanHangOnlineController {
             ghct.setSoLuong(1);
             ghct.setDonGia(chiTietSanPhamService.findById(idctsp).getGiaBan());
             BigDecimal giaban = chiTietSanPhamService.findById(idctsp).getGiaBan();
-            Integer giaban1 = Integer.valueOf(String.valueOf(giaban));
-            Integer phantramgiam = banHangOnlineService.tonggiamgia(String.valueOf(idctsp));
-            Integer dgkg = giaban1 - giaban1 / 100 * phantramgiam;
+            Long giaban1 = Long.valueOf(String.valueOf(giaban));
+            Long phantramgiam =Long.valueOf(banHangOnlineService.tonggiamgia(String.valueOf(idctsp))) ;
+            Long dgkg = giaban1 - giaban1 / 100 * phantramgiam;
             BigDecimal dgkg1 = BigDecimal.valueOf(Long.valueOf(String.valueOf(dgkg)));
             ghct.setDonGiaKhiGiam(dgkg1);
             gioHangChiTietService.add(ghct);

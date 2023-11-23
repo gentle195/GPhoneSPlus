@@ -178,7 +178,7 @@
   <P style="color: red"> CHỌN VÀO HÓA ĐƠN ĐỂ XEM CHI TIẾT</P>
     <div class="col-sm-12">
         <div class="card-box table-responsive">
-    <table class="table table-striped" >
+    <table class="table table-striped" id="datatable-responsive">
         <tr>
             <th>STT</th>
             <th>Tên khách hàng</th>

@@ -1,7 +1,7 @@
-﻿CREATE DATABASE DB_DU_AN_TOT_NGHIEP;
-go
-USE DB_DU_AN_TOT_NGHIEP
-go
+﻿--CREATE DATABASE DB_DU_AN_TOT_NGHIEP;
+--go
+--USE DB_DU_AN_TOT_NGHIEP
+--go
 
 SET ANSI_NULLS ON
 GO
@@ -197,12 +197,12 @@ CREATE TABLE khuyen_mai (
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
   ma NVARCHAR(30) NULL,
   ten NVARCHAR(50) NULL,
-  ngay_tao DATE DEFAULT GETDATE(),
-  ngay_cap_nhat DATE NULL,
-  ngay_bat_dau DATE NOT NULL,
-  ngay_ket_thuc DATE NOT NULL,
+  ngay_tao NVARCHAR(Max),
+  ngay_cap_nhat NVARCHAR(Max) NULL,
+  ngay_bat_dau NVARCHAR(Max) NOT NULL,
+  ngay_ket_thuc NVARCHAR(Max) NOT NULL,
   loai_giam_gia NVARCHAR(20) NULL,
-  hinh_thuc_giam_gia NVARCHAR(20) NULL,
+  hinh_thuc_giam_gia NVARCHAR(Max) NULL,
   so_tien_giam  decimal(20, 0) NULL,
   tinh_trang INT DEFAULT 0,
   mo_ta NVARCHAR(MAX) NULL
@@ -228,27 +228,16 @@ CREATE TABLE chi_tiet_san_pham (
   nam_bao_hanh INT NULL,
   so_luong_ton INT NULL,
   mo_ta NVARCHAR(MAX) NULL,
+   id_khuyen_mai UNIQUEIDENTIFIER NULL,
   FOREIGN KEY (id_san_pham) REFERENCES san_pham(id),
   FOREIGN KEY (id_mau_sac) REFERENCES mau_sac(id),
   FOREIGN KEY (id_chip) REFERENCES chip(id),
   FOREIGN KEY (id_ram) REFERENCES ram(id),
   FOREIGN KEY (id_rom) REFERENCES rom(id),
-  FOREIGN KEY (id_pin) REFERENCES pin(id)
+  FOREIGN KEY (id_pin) REFERENCES pin(id),
+     FOREIGN KEY (id_khuyen_mai) REFERENCES khuyen_mai(id)
 );
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE san_pham_giam_gia(
-id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
-id_chi_tiet_san_pham UNIQUEIDENTIFIER null,
-id_khuyen_mai UNIQUEIDENTIFIER null,
-tinh_trang int DEFAULT 0,
-mo_ta NVARCHAR(MAX) NULL,
-FOREIGN KEY (id_chi_tiet_san_pham) REFERENCES chi_tiet_san_pham(id),
-  FOREIGN KEY (id_khuyen_mai) REFERENCES khuyen_mai(id)
-);
 
 SET ANSI_NULLS ON
 GO
@@ -426,6 +415,7 @@ CREATE TABLE hoa_don (
   ngay_ship DATE NULL,
   ngay_thanh_toan Date NULL,
   ghi_chu NVARCHAR(MAX) NULL,
+ 
   FOREIGN KEY (id_khach_hang) REFERENCES khach_hang(id),
   FOREIGN KEY (id_nhan_vien) REFERENCES Nhan_vien(id),
   FOREIGN KEY (id_dia_chi) REFERENCES dia_chi(id),
@@ -632,13 +622,6 @@ VALUES
   ('ROM004', '128GB', '2022-04-04', 1, N'Tôi thấy hoa vàng trên cỏ xanh'),
   ('ROM005', '256GB', '2022-05-05', 0, N'Sherlock Holmes');
 
-INSERT INTO khuyen_mai (ma, ten, ngay_bat_dau, ngay_ket_thuc, loai_giam_gia,hinh_thuc_giam_gia, so_tien_giam, tinh_trang, mo_ta)
-VALUES 
-('KM001', 'Khuyến mãi 1', '2022-01-01', '2022-01-31', 'Phần trăm', N'Giảm giá phần trăm', 10, 0, 'Giảm giá 10% cho tất cả sản phẩm'),
-('KM002', 'Khuyến mãi 2', '2022-02-01', '2022-02-28', 'Số tiền', N'Giảm giá cố định', 50000, 0, 'Giảm giá 50,000 VND cho sản phẩm A'),
-('KM003', 'Khuyến mãi 3', '2022-03-01', '2022-03-31', 'Phần trăm', N'Giảm giá  phần trăm', 20, 0, 'Giảm giá 20% cho sản phẩm B'),
-('KM004', 'Khuyến mãi 4', '2022-04-01', '2022-04-30', 'Số tiền', N'Giảm giá   cố định 1', 100000, 0, 'Giảm giá 100,000 VND cho sản phẩm C'),
-('KM005', 'Khuyến mãi 5', '2022-05-01', '2022-05-31', 'Số tiền', N'Giảm giá cố định', 200000, 0, 'Giảm giá 200,000 VND cho sản phẩm D');
 
 INSERT INTO camera (ma, thong_so, tinh_trang, mo_ta)
 VALUES 

@@ -1,11 +1,13 @@
 package com.example.demo.viewmodels;
 
+import java.math.BigDecimal;
+
 public interface KhachHangHoaDon {
     String getmahd();
     String getsoimei();
     String gettensp();
     String getthongtin();
-    Integer getsoluong();
-    Integer getdongia();
-    Integer gettienquydoi();
+    BigDecimal getsoluong();
+    BigDecimal getdongia();
+    BigDecimal gettienquydoi();
 }

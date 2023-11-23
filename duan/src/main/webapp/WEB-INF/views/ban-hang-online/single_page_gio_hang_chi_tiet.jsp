@@ -145,7 +145,8 @@
 
                     </td>
                     <td>
-                        <div name="checkdongiakhigiam">${ht.donGiaKhiGiam} đ</div>
+                        <div name="checkdongiakhigiam">${ht.donGia-ht.donGia/100*banhangonline.tonggiamgia(ht.chiTietSanPham.id)} đ</div>
+
                         -
                         <del class="product-old-price">${ht.donGia} đ</del>
                     </td>
