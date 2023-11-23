@@ -415,6 +415,7 @@ CREATE TABLE hoa_don (
   ngay_ship DATE NULL,
   ngay_thanh_toan Date NULL,
   ghi_chu NVARCHAR(MAX) NULL,
+  ma_giao_dich NVARCHAR(MAX) NULL,
  
   FOREIGN KEY (id_khach_hang) REFERENCES khach_hang(id),
   FOREIGN KEY (id_nhan_vien) REFERENCES Nhan_vien(id),
