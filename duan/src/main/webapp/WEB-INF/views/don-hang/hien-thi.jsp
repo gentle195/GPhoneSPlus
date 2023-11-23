@@ -207,7 +207,8 @@
                                 <%--                                <th>Điểm quy đổi</th>--%>
                                 <th>SĐT</th>
                                 <th>Tổng tiền</th>
-                                <th>Trạng thái</th>
+                                <th>Trạng thái hóa đơn</th>
+                                <th>Trạng thái giao hàng</th>
                                 <th>Hình thức thanh toán</th>
                                 <th>Ngày Thanh Toán</th>
                                 <th>Ngày nhận</th>
@@ -233,12 +234,17 @@
                                         <c:if test="${donHang.tinhTrang == 1}">Đã xác nhận</c:if>
                                         <c:if test="${donHang.tinhTrang == 2}">Đã thanh toán</c:if>
                                         <c:if test="${donHang.tinhTrang == 3}">Chờ thanh toán</c:if>
-                                        <c:if test="${donHang.tinhTrang == 4}">Chờ vận chuyển</c:if>
-                                        <c:if test="${donHang.tinhTrang == 5}">Đang vận chuyển</c:if>
-                                        <c:if test="${donHang.tinhTrang == 6}">Vận chuyển hoàn tất</c:if>
                                         <c:if test="${donHang.tinhTrang == 7}">Giao trễ</c:if>
-                                        <c:if test="${donHang.tinhTrang == 8}">Đã hủy</c:if>
+
+
                                     </td>
+                                    <td>
+                                        <c:if test="${donHang.tinhTrangGiaoHang == 1}">Chờ giao hàng</c:if>
+                                        <c:if test="${donHang.tinhTrangGiaoHang == 2}">Đang giao hàng</c:if>
+                                        <c:if test="${donHang.tinhTrangGiaoHang == 3}">Giao hàng hoàn tất</c:if>
+                                        <c:if test="${donHang.tinhTrangGiaoHang == 8}">Đã hủy</c:if>
+                                    </td>
+
                                     <td>
                                         <c:if test="${donHang.hinhThucThanhToan == 1}">Online</c:if>
                                         <c:if test="${donHang.hinhThucThanhToan == 0}">Tiền mặt</c:if>
@@ -254,42 +260,74 @@
                                             <i class="ti-file btn-icon-prepend"></i>
                                             Detail</a>
 
-                                        <c:if test="${donHang.tinhTrang == 0}">
-                                            <a href="/don-hang/xac-nhan/${donHang.id}"
+                                            <%--                                        <c:if test="${donHang.tinhTrang == 0}">--%>
+                                            <%--                                            <a href="/don-hang/xac-nhan/${donHang.id}"--%>
+                                            <%--                                               class="btn btn-info btn-icon-text"--%>
+                                            <%--                                               tabindex="-1"--%>
+                                            <%--                                               role="button"--%>
+                                            <%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">--%>
+                                            <%--                                                <i class="fas fa-times-circle"></i>--%>
+                                            <%--                                                Xác nhận đơn hàng</a>--%>
+                                            <%--                                        </c:if>--%>
+                                        <c:if test="${donHang.tinhTrangGiaoHang == 1}">
+                                            <a href="/don-hang/xac-nhan-giao-hang/${donHang.id}"
                                                class="btn btn-info btn-icon-text"
                                                tabindex="-1"
                                                role="button"
                                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                                 <i class="fas fa-times-circle"></i>
-                                                Xác nhận đơn hàng</a>
+                                                Giao hàng</a>
+<%--                                            <a href="/don-hang/view-update/${donHang.id}"--%>
+<%--                                               class="btn btn-info btn-icon-text"--%>
+<%--                                               tabindex="-1"--%>
+<%--                                               role="button"--%>
+<%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">--%>
+<%--                                                <i class="fas fa-times-circle"></i>--%>
+<%--                                                Update thông tin</a>--%>
                                         </c:if>
-                                        <c:if test="${donHang.tinhTrang == 1}">
-                                            <a href="/don-hang/view-update/${donHang.id}"
-                                               class="btn btn-info btn-icon-text"
-                                               tabindex="-1"
-                                               role="button"
-                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                                <i class="fas fa-times-circle"></i>
-                                                Update thông tin</a>
-                                        </c:if>
-                                        <c:if test="${donHang.tinhTrang == 2}">
-                                            <a href="/don-hang/xuat-pdf/${donHang.id}"
+
+                                        <c:if test="${donHang.tinhTrangGiaoHang == 2 && (donHang.tinhTrang==2||donHang.tinhTrang==3)}">
+                                            <%--                                            <a href="/don-hang/xuat-pdf/${donHang.id}"--%>
+                                            <%--                                               class="btn btn-outline-success btn-icon-text"--%>
+                                            <%--                                               tabindex="-1"--%>
+                                            <%--                                               role="button"--%>
+                                            <%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">--%>
+                                            <%--                                                <i class="ti-file btn-icon-prepend"></i>--%>
+                                            <%--                                                Xuất PDF</a>--%>
+                                            <a href="/don-hang/xac-nhan-giao-hang-hoan-tat/${donHang.id}"
                                                class="btn btn-outline-success btn-icon-text"
                                                tabindex="-1"
                                                role="button"
                                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                                 <i class="ti-file btn-icon-prepend"></i>
-                                                Xuất PDF</a>
+                                                Đã giao</a>
+
+
                                         </c:if>
-                                        <c:if test="${donHang.tinhTrang == 3}">
-                                            <a href="/don-hang/view-update/${donHang.id}"
-                                               class="btn btn-info btn-icon-text"
+                                        <c:if test="${donHang.tinhTrangGiaoHang == 2 && donHang.hinhThucThanhToan == 0}">
+
+                                            <a href="/don-hang/xac-nhan-huy/${donHang.id}"
+                                               class="btn btn-outline-danger btn-icon-text"
                                                tabindex="-1"
                                                role="button"
                                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                                <i class="fas fa-times-circle"></i>
-                                                Update thông tin</a>
+                                                <i class="ti-file btn-icon-prepend"></i>
+                                                Hủy</a>
+
                                         </c:if>
+
+
+
+                                    <%--                                        <c:if test="${donHang.tinhTrang == 3}">--%>
+                                            <%--                                            <a href="/don-hang/view-update/${donHang.id}"--%>
+                                            <%--                                               class="btn btn-info btn-icon-text"--%>
+                                            <%--                                               tabindex="-1"--%>
+                                            <%--                                               role="button"--%>
+                                            <%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">--%>
+                                            <%--                                                <i class="fas fa-times-circle"></i>--%>
+                                            <%--                                                Update thông tin</a>--%>
+                                            <%--                                        </c:if>--%>
+
                                     </td>
                                 </tr>
                             </c:forEach>
