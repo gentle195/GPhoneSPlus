@@ -98,4 +98,7 @@ public class HoaDon {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_quy_doi")
     private QuyDoi quyDoi;
+
+    @Column(name = "ma_giao_dich")
+    private String maGiaoDich;
 }

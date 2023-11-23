@@ -340,4 +340,61 @@ public class DonHangController {
         }
         return "redirect:/don-hang/hien-thi";
     }
+    @GetMapping("/xac-nhan-giao-hang/{id}")
+    public String xacNhanGiaoHang(Model model, @PathVariable("id") UUID id) {
+        HoaDon hd = hoaDonService.findById(id);
+        hd.setTinhTrangGiaoHang(2);
+        hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+        hd.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        hoaDonService.update(id, hd);
+        idHoaDon = id;
+        List<HoaDonChiTiet> listHoaDonChiTiet = hoaDonChiTietService.getHoaDonChiTiet(id);
+        if (!listHoaDonChiTiet.isEmpty()) {
+            for (HoaDonChiTiet hdct : listHoaDonChiTiet
+            ) {
+                System.out.println(hdct.getId());
+                imeiService.updatImeiChoXuLy(Date.valueOf(LocalDate.now()), hdct.getImei().getId());
+            }
+        }
+        return "redirect:/don-hang/hien-thi";
+    }
+    @GetMapping("/xac-nhan-giao-hang-hoan-tat/{id}")
+    public String giaoHangHoanTat(Model model, @PathVariable("id") UUID id) {
+        HoaDon hd = hoaDonService.findById(id);
+        hd.setTinhTrangGiaoHang(3);
+        hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+        hd.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        hd.setNgayNhan(Date.valueOf(LocalDate.now()));
+        hoaDonService.update(id, hd);
+        idHoaDon = id;
+        List<HoaDonChiTiet> listHoaDonChiTiet = hoaDonChiTietService.getHoaDonChiTiet(id);
+        if (!listHoaDonChiTiet.isEmpty()) {
+            for (HoaDonChiTiet hdct : listHoaDonChiTiet
+            ) {
+                System.out.println(hdct.getId());
+                imeiService.updatImeiChoXuLy(Date.valueOf(LocalDate.now()), hdct.getImei().getId());
+            }
+        }
+        return "redirect:/don-hang/hien-thi";
+    }
+    @GetMapping("/xac-nhan-huy/{id}")
+    public String huy(Model model, @PathVariable("id") UUID id) {
+        HoaDon hd = hoaDonService.findById(id);
+        hd.setTinhTrang(8);
+        hd.setTinhTrangGiaoHang(8);
+
+        hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+        hd.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        hoaDonService.update(id, hd);
+        idHoaDon = id;
+        List<HoaDonChiTiet> listHoaDonChiTiet = hoaDonChiTietService.getHoaDonChiTiet(id);
+        if (!listHoaDonChiTiet.isEmpty()) {
+            for (HoaDonChiTiet hdct : listHoaDonChiTiet
+            ) {
+                System.out.println(hdct.getId());
+                imeiService.updatImeiChoXuLy(Date.valueOf(LocalDate.now()), hdct.getImei().getId());
+            }
+        }
+        return "redirect:/don-hang/hien-thi";
+    }
 }
