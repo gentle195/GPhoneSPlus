@@ -9,6 +9,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -117,6 +118,32 @@ public class KhachHang {
         this.ngayTao = ngayTao;
         this.ngayCapNhat = ngayCapNhat;
         this.tinhTrang = tinhTrang;
+
+    }
+
+
+    public String dateok()  {
+        // Chuỗi ngày theo định dạng 'yyyy-MM-dd'
+//        return String.valueOf(this.ngaySinh);
+
+        if(ngaySinh==null){
+            return String.valueOf(ngaySinh);
+        }else {
+
+
+            // Đối tượng java.sql.Date
+            Date sqlDate = ngaySinh;
+
+            // Định dạng chuỗi ngày
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+            // Chuyển đổi java.sql.Date thành chuỗi
+            return outputFormat.format(sqlDate);
+
+
+        }
+
+
 
     }
 }

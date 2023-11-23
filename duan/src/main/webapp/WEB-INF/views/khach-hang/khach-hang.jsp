@@ -107,7 +107,7 @@
                                     <td>${ht.goitinh()}</td>
                                     <td>${ht.email}</td>
                                     <td>${ht.sdt}</td>
-                                    <td>${ht.ngaySinh}</td>
+                                    <td > ${ht.dateok()}</td>
                                     <td>${ht.ngayTao}</td>
                                     <td>${ht.ngayCapNhat}</td>
                                     <td style="color: #62c462;font-size: 15px">${ht.tt()}</td>

@@ -107,6 +107,7 @@
                 </div>
             </nav>
         </div>
+        <div class="notifications" ></div>
     </div>
     <!--**********************************
         Header end ti-comment-alt
@@ -138,6 +139,7 @@
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                         class="icon icon-world-2"></i><span class="nav-text">Quản lý sản phẩm</span></a>
                     <ul aria-expanded="false">
+                        <li><a href="/khuyen-mai/hien-thi">Khuyến mãi</a></li>
                         <li><a href="/imei/hien-thi">IMEI Sản Phẩm</a></li>
                         <li><a href="/chi-tiet-san-pham/hien-thi">Chi Tiết Sản Phẩm</a></li>
                         <li><a href="/san-pham/hien-thi">Sản Phẩm</a></li>
