@@ -34,6 +34,10 @@ public class IMEIServiceImpl implements IMEIService {
     public List<IMEI> searchOn(String imei) {
         return imeiRepository.searchIMEIOn(imei);
     }
+    @Override
+    public   Page<IMEI> fill1(Pageable pageable){
+        return imeiRepository.fill1(pageable);
+    };
 
     @Override
     public List<IMEI> searchOnBanHang(String imei, UUID id) {

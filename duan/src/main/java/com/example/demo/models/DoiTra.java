@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -37,26 +38,21 @@ public class DoiTra {
     @Column(name = "ma")
     private String ma;
 
-    @Column(name = "ngay_doi_tra")
-    private Date ngayDoiTra;
 
-    @Column(name = "ngay_hoan_tra")
-    private Date ngayHoanTra;
-
-    @NotBlank(message = "Không để trống thông tin")
-    @Column(name = "ly_do_doi_tra")
-    private String lyDo;
-
-    @NotBlank(message = "Không để trống thông tin")
-    @Column(name = "tien_doi_tra")
-    private BigDecimal tienDoiTra;
 
     @Column(name = "tinh_trang")
     private int tinhTrang;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_khach_hang")
     private KhachHang khachHang;
+
+
+
+    @Column(name = "ngay_doi_tra")
+    private Date ngayDoiTra;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_hoa_don")

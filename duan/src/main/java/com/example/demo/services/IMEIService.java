@@ -22,6 +22,7 @@ public interface IMEIService {
     public List<IMEI> searchOff2(String imei);
 
     public List<IMEI> findAll();
+    public   Page<IMEI> fill1(Pageable pageable);
 
     public List<IMEI> findAll0();
 
