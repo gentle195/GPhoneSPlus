@@ -482,8 +482,20 @@
                             <c:if test="${hd.tinhTrangGiaoHang==0}">
                                 <input type="text" value="Chờ xử lý" disabled style="width: 97%" class="form-control"/>
                             </c:if>
-                            <c:if test="${hd.tinhTrangGiaoHang!=0}">
-                                <input type="text" value="Chưa tìm hiểu" disabled style="width: 97%"
+                            <c:if test="${hd.tinhTrangGiaoHang!=1}">
+                                <input type="text" value="Chuẩn bị giao" disabled style="width: 97%"
+                                       class="form-control"/>
+                            </c:if>
+                            <c:if test="${hd.tinhTrangGiaoHang!=2}">
+                                <input type="text" value="Đang giao" disabled style="width: 97%"
+                                       class="form-control"/>
+                            </c:if>
+                            <c:if test="${hd.tinhTrangGiaoHang!=3}">
+                                <input type="text" value="Giao hàng hoàn tất" disabled style="width: 97%"
+                                       class="form-control"/>
+                            </c:if>
+                            <c:if test="${hd.tinhTrangGiaoHang!=8}">
+                                <input type="text" value="Đã hủy" disabled style="width: 97%"
                                        class="form-control"/>
                             </c:if>
                         </div>
@@ -540,7 +552,8 @@
                         - ${ht.imei.chiTietSanPham.ram.dungLuong} - ${ht.imei.chiTietSanPham.rom.dungLuong}.
                     </td>
                     <td>
-                            ${(ht.donGia-ht.imei.chiTietSanPham.giaBan)/ht.imei.chiTietSanPham.giaBan}%
+
+                            ${ht.phantram()}%
                     </td>
 
                     <td>
@@ -618,7 +631,7 @@
                                 ${ht.donGia}
                         </td>
                         <td>
-                                ${banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
+                                ${ht.phantram()}%
                         </td>
                         <td>${ht.donGia*banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
                             VND

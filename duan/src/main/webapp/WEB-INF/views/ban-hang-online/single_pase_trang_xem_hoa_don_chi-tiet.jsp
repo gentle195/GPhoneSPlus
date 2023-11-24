@@ -181,7 +181,7 @@
                     - ${ht.imei.chiTietSanPham.ram.dungLuong} - ${ht.imei.chiTietSanPham.rom.dungLuong}.
                 </td>
                 <td>
-                        ${(ht.donGia-ht.imei.chiTietSanPham.giaBan)/ht.imei.chiTietSanPham.giaBan}%
+                        ${ht.phantram()}%
                 </td>
 
                 <td>
@@ -252,7 +252,7 @@
                         - ${ht.imei.chiTietSanPham.rom.dungLuong}.
                     </td>
                     <td>
-                            ${(ht.donGia-ht.imei.chiTietSanPham.giaBan)/ht.imei.chiTietSanPham.giaBan}%
+                            ${ht.phantram()}%
                     </td>
 
                     <td>

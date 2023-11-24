@@ -2,6 +2,7 @@ package com.example.demo.config;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
@@ -9,10 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
-import com.example.demo.models.ChiTietSanPham;
-import com.example.demo.models.HoaDon;
-import com.example.demo.models.HoaDonChiTiet;
-import com.example.demo.models.IMEI;
+import com.example.demo.models.*;
 import com.example.demo.repositories.KhachHangRepository;
 import com.example.demo.services.*;
 import jakarta.servlet.http.HttpServletResponse;
@@ -77,14 +75,29 @@ public class PaymentController {
     @Autowired
     private KhachHangRepository khachHangRepository;
 
-    String idhoadon="oo";
-    @GetMapping("/pay/{tienthanhtoan}/{idhd}")
+    //    String idhoadon="oo";
+    Long tienthanhtoan=Long.valueOf(0);
+    UUID iddc=null;
+    String sdt="";
+    UUID idgh=null;
+    String nguoinhan="";
+    @GetMapping("/pay/{idgh}/{tienthanhtoan}/{iddc}/{sdt}/{nguoinhan}")
     public  String getPay(Model model,
-                          @PathVariable("tienthanhtoan") Long tienthanhtoan,
-                          @PathVariable("idhd") UUID idhd
+
+                          @PathVariable("idgh") UUID idgh1,
+                          @PathVariable("tienthanhtoan") Long tienthanhtoan1,
+                          @PathVariable("iddc") UUID iddc1,
+                          @PathVariable("sdt") String sdt1,
+                          @PathVariable("nguoinhan") String nguoinhan1
+//                          @PathVariable("idhd") UUID idhd
 
     ) throws UnsupportedEncodingException {
-        idhoadon=String.valueOf(idhd);
+        idgh=idgh1;
+        tienthanhtoan=tienthanhtoan1;
+        iddc=iddc1;
+        sdt=sdt1;
+        nguoinhan=nguoinhan1;
+//        idhoadon=String.valueOf(idhd);
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "other";
@@ -145,6 +158,7 @@ public class PaymentController {
                 }
             }
         }
+
         String queryUrl = query.toString();
         String vnp_SecureHash = Config.hmacSHA512(Config.secretKey, hashData.toString());
         queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
@@ -165,8 +179,9 @@ public class PaymentController {
         System.out.println("vnp_ResponseCode----"+vnp_ResponseCode);
         System.out.println("contractId----"+contractId);
         System.out.println("registerServiceId----"+registerServiceId);
+        System.out.println("madonhang: "+queryParams.get("vnp_TxnRef"));
 
-//        giao dien
+        // giao dien
 
         double tong=0;
         Integer lamchon=0;
@@ -186,63 +201,113 @@ public class PaymentController {
         model.addAttribute("giamgia",banHangOnlineService);
         model.addAttribute("banhangonline",banHangOnlineService);
 
-        model.addAttribute("khachhangdangnhap",hoaDonService.findById(UUID.fromString(idhoadon)).getKhachHang());
+        UUID idkh=gioHangService.findById(idgh).getKhachHang().getId();
+        model.addAttribute("khachhangdangnhap",khachHangService.findById(idkh));
         model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
-        model.addAttribute("idkhachhang",hoaDonService.findById(UUID.fromString(idhoadon)).getKhachHang().getId());
-        model.addAttribute("kh",hoaDonService.findById(UUID.fromString(idhoadon)).getKhachHang());
+        model.addAttribute("idkhachhang",idkh);
+        model.addAttribute("kh",khachHangService.findById(idkh));
         model.addAttribute("hkh", hangKhachHangService.getALL0());
 //        giohan
-        model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(hoaDonService.findById(UUID.fromString(idhoadon)).getKhachHang().getId())).get(0).getId()));
+        model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(idgh));
         model.addAttribute("tttong",1);
 
 //        het giao dien
-       // that bai: 24,rỗng, null
+        // that bai: 24,rỗng, null
         // thành công:00,rỗng,null
         //hết thời gian :15,rỗng,null
 
-            if ("00".equals(vnp_ResponseCode)) {
-                // Giao dịch thành công
-                // Thực hiện các xử lý cần thiết, ví dụ: cập nhật CSDL
+        if ("00".equals(vnp_ResponseCode)) {
+
+            // Giao dịch thành công
+            // Thực hiện các xử lý cần thiết, ví dụ: cập nhật CSDL
 //hoadon
-                long millis = System.currentTimeMillis();
-                Date date = new Date(millis);
-                HoaDon hd=hoaDonService.findById(UUID.fromString(idhoadon));
-                hd.setNgayThanhToan(date);
-                hd.setNgayCapNhat(date);
-                hd.setTinhTrang(2);
-                hd.setLoai(1);
-                hd.setHinhThucThanhToan(1);
-                hd.setHinhThucThanhToan(1);
-                hd.setTinhTrangGiaoHang(0);
-                hoaDonService.add(hd);
-//hoadonchitiet
-               List<HoaDonChiTiet> hdct=banHangOnlineService.timhoadonchitiettheoidhd(UUID.fromString(idhoadon));
-                for (HoaDonChiTiet hdct1:hdct
-                     ) {
-                    hdct1.setTinhTrang(1);
-                    hoaDonChiTietService.add(hdct1);
-                }
-//imei
-                List<HoaDonChiTiet> hdctchoimei=banHangOnlineService.timhoadonchitiettheoidhd(UUID.fromString(idhoadon));
-
-                for (HoaDonChiTiet hdct2:hdctchoimei
-                ) {
-                 IMEI imei1=hdct2.getImei();
-                 imei1.setTinhTrang(1);
-                    imeiService.add(imei1);
-                }
-                idhoadon="oo";
-
-                model.addAttribute("ketquathanhtoan", 1);
-                return "ban-hang-online/ket_qua_thanh_toan";
+            long millis = System.currentTimeMillis();
+            Date date = new Date(millis);
+            HoaDon hd = new HoaDon();
+            Integer sl = hoaDonService.findAll().size();
+            String mhd = "";
+            if (sl < 10) {
+                mhd = "MHD0" + sl;
             } else {
-                // Giao dịch thất bại
-                // Thực hiện các xử lý cần thiết, ví dụ: không cập nhật CSDL\
-                idhoadon="oo";
-                model.addAttribute("ketquathanhtoan", 0);
-                return "ban-hang-online/ket_qua_thanh_toan";
-
+                mhd = "MHD" + sl;
             }
+            hd.setMa(mhd);
+//        hd.setSdt(gioHangService.findById(idgh).getKhachHang().getSdt());
+            hd.setSdt(sdt);
+            hd.setMaGiaoDich(queryParams.get("vnp_TxnRef"));
+            hd.setTongTien(BigDecimal.valueOf(tienthanhtoan));
+            hd.setNgayTao(date);
+            hd.setNguoiNhan(nguoinhan);
+            hd.setNgayCapNhat(date);
+            hd.setTinhTrang(0);
+            hd.setLoai(1);
+            hd.setHinhThucThanhToan(2);
+            hd.setTinhTrangGiaoHang(0);
+            KhachHang kh = khachHangService.findById(gioHangService.findById(idgh).getKhachHang().getId());
+            hd.setKhachHang(kh);
+            DiaChi dc = diaChiService.findById(iddc);
+            hd.setDiaChi(dc);
+            hoaDonService.add(hd);
+//    them hdct
+            List<GioHangChiTiet> listghct = banHangOnlineService.ListghTheoidghvsTT1(idgh);
+            for (int a = 0; a < listghct.size(); a = a + 1) {
+                for (int b = 0; b < listghct.get(a).getSoLuong(); b = b + 1) {
+                    HoaDonChiTiet hdct = new HoaDonChiTiet();
+                    hdct.setSoLuong(1);
+                    hdct.setTinhTrang(0);
+                    hdct.setDonGia(listghct.get(a).getDonGiaKhiGiam());
+                    HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
+                    hdct.setHoaDon(hd1);
+                    List<IMEI> listimei = banHangOnlineService.timimeitheoidctspVSttO(listghct.get(a).getChiTietSanPham().getId());
+                    hdct.setImei(listimei.get(0));
+                    hoaDonChiTietService.add(hdct);
+// cập nhật trạng thái imei
+                    IMEI imei = listimei.get(0);
+                    imei.setTinhTrang(3);
+                    imei.setNgayCapNhat(date);
+                    imeiService.add(imei);
+                }
+            }
+//xoa ghct TT=0 theo idgh
+            banHangOnlineService.xoaghcttheoIDGHvsTTO(idgh);
+            //cập nhật hóa đơn; thanh toán khi thanh toán online
+            HoaDon hd1=banHangOnlineService.timhdtheomahd(mhd);
+            hd1.setNgayThanhToan(date);
+            hd1.setNgayCapNhat(date);
+            hd1.setTinhTrang(2);
+            hd1.setLoai(1);
+            hd1.setHinhThucThanhToan(1);
+            hd1.setHinhThucThanhToan(1);
+            hd1.setTinhTrangGiaoHang(0);
+            hoaDonService.add(hd1);
+//hoadonchitiet
+            List<HoaDonChiTiet> hdct=banHangOnlineService.timhoadonchitiettheoidhd(hd1.getId());
+            for (HoaDonChiTiet hdct1:hdct
+            ) {
+                hdct1.setTinhTrang(1);
+                hoaDonChiTietService.add(hdct1);
+            }
+//imei
+            List<HoaDonChiTiet> hdctchoimei=banHangOnlineService.timhoadonchitiettheoidhd(hd1.getId());
+
+            for (HoaDonChiTiet hdct2:hdctchoimei
+            ) {
+                IMEI imei1=hdct2.getImei();
+                imei1.setTinhTrang(1);
+                imeiService.add(imei1);
+            }
+
+
+            model.addAttribute("ketquathanhtoan", 1);
+            return "ban-hang-online/ket_qua_thanh_toan";
+        } else {
+            // Giao dịch thất bại
+            // Thực hiện các xử lý cần thiết, ví dụ: không cập nhật CSDL\
+
+            model.addAttribute("ketquathanhtoan", 0);
+            return "ban-hang-online/ket_qua_thanh_toan";
+
+        }
 
 
 

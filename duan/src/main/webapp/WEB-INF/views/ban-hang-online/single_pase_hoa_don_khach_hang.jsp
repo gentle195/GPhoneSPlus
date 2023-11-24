@@ -80,8 +80,17 @@
                         tin chi tiết</a>
                 </c:if>
                 <c:if test="${ht.tinhTrang==3}">
-                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Xem thông
-                        tin chi tiết</a>
+                    <c:if test="${ht.tinhTrangGiaoHang==0 || ht.tinhTrangGiaoHang==1 }">
+
+                        <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
+                        <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>
+
+                    </c:if>
+                    <c:if test="${ht.tinhTrangGiaoHang!=0 && ht.tinhTrangGiaoHang!=1 }">
+
+                        <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
+
+                    </c:if>
                 </c:if>
                 <c:if test="${ht.tinhTrang==8}">
                     <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Xem thông
