@@ -35,40 +35,40 @@ public class KhuyenMaiController {
     @Autowired
     private KhuyenMaiRepository khuyenMaiRepository;
 
-        @Scheduled(fixedRate = 1000)
- public void kiemtrangayhientaiVSkhoangtimegiamgia(){
-            for (KhuyenMai km:khuyenMaiRepository.findAll()) {
-                String batdau = km.getNgayBatDau();
-                String ketthuc = km.getNgayKetThuc();
+    @Scheduled(fixedRate = 1000)
+    public void kiemtrangayhientaiVSkhoangtimegiamgia(){
+        for (KhuyenMai km:khuyenMaiRepository.findAll()) {
+            String batdau = km.getNgayBatDau();
+            String ketthuc = km.getNgayKetThuc();
 
 // Chuyển đổi chuỗi abc thành đối tượng LocalDateTime
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-                LocalDateTime batdauDateTime = LocalDateTime.parse(batdau, formatter);
-                LocalDateTime ketthucDateTime = LocalDateTime.parse(ketthuc, formatter);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            LocalDateTime batdauDateTime = LocalDateTime.parse(batdau, formatter);
+            LocalDateTime ketthucDateTime = LocalDateTime.parse(ketthuc, formatter);
 
 // Lấy thời gian hiện tại và định dạng nó
-                LocalDateTime currentDateTime = LocalDateTime.now();
-                String formattedDateTime = currentDateTime.format(formatter);
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            String formattedDateTime = currentDateTime.format(formatter);
 
 
-                // Kiểm tra xem currentDateTime có nằm trong khoảng [batdauDateTime, ketthucDateTime] không
-                if (currentDateTime.isAfter(batdauDateTime) && currentDateTime.isBefore(ketthucDateTime)) {
-                    km.setTinhTrang(0);
-                    khuyenMaiRepository.save(km);
-                } else  if (currentDateTime.isBefore(batdauDateTime)) {
-                    km.setTinhTrang(2); // hoặc làm gì đó tương ứng với trường hợp này
-                    khuyenMaiRepository.save(km);
-                }
-                else {
-                    km.setTinhTrang(1);
-                    khuyenMaiRepository.save(km);
-                }
+            // Kiểm tra xem currentDateTime có nằm trong khoảng [batdauDateTime, ketthucDateTime] không
+            if (currentDateTime.isAfter(batdauDateTime) && currentDateTime.isBefore(ketthucDateTime)) {
+                km.setTinhTrang(0);
+                khuyenMaiRepository.save(km);
+            } else  if (currentDateTime.isBefore(batdauDateTime)) {
+                km.setTinhTrang(2); // hoặc làm gì đó tương ứng với trường hợp này
+                khuyenMaiRepository.save(km);
             }
-            khuyenMaiRepository.xoalienketKM1();
+            else {
+                km.setTinhTrang(1);
+                khuyenMaiRepository.save(km);
+            }
+        }
+        khuyenMaiRepository.xoalienketKM1();
     };
 
     @Scheduled(fixedRate = 1000)
- public    void loadtiengiamghct(){
+    public    void loadtiengiamghct(){
         for (GioHangChiTiet ghct : gioHangChiTietService.findAll()) {
 
             ChiTietSanPham ctsp = chiTietSanPhamService.findById(ghct.getChiTietSanPham().getId());
@@ -130,12 +130,85 @@ public class KhuyenMaiController {
         LocalDateTime dateTime = LocalDateTime.parse(inputString, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 
         // Định dạng lại theo định dạng mong muốn
-       return dateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+        return dateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
 
 
     }
 
 
+    public boolean isNgayKetThucAfterNgayBatDau(String ngayBatDau,String ngayKetThuc) {
+        // Tạo đối tượng LocalDateTime từ chuỗi
+        LocalDateTime ngayBT = LocalDateTime.parse(ngayBatDau, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        LocalDateTime ngayKT = LocalDateTime.parse(ngayKetThuc, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+
+        // Định dạng lại theo định dạng mong muốn
+        String ngayBT1=ngayBT.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+        String ngayKT1=ngayKT.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
+        // Chuyển đổi chuỗi ngayBatDau và ngayKetThuc thành đối tượng LocalDateTime
+        LocalDateTime batDauDateTime = LocalDateTime.parse(ngayBT1, formatter);
+        LocalDateTime ketThucDateTime = LocalDateTime.parse(ngayKT1, formatter);
+
+        // Kiểm tra xem ngayKetThuc có lớn hơn ngayBatDau không
+        return ketThucDateTime.isAfter(batDauDateTime);
+    }
+
+    public boolean isNgayKetThucAfterNgayBatDauupdate(String ngayBatDau,String ngayKetThuc) {
+
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
+        // Chuyển đổi chuỗi ngayBatDau và ngayKetThuc thành đối tượng LocalDateTime
+        LocalDateTime batDauDateTime = LocalDateTime.parse(ngayBatDau, formatter);
+        LocalDateTime ketThucDateTime = LocalDateTime.parse(ngayKetThuc, formatter);
+
+        // Kiểm tra xem ngayKetThuc có lớn hơn ngayBatDau không
+        return ketThucDateTime.isAfter(batDauDateTime);
+    }
+    public boolean isNgayKetThucAfterNgayHienTai(String ngayKetThuc) {
+        // Tạo đối tượng LocalDateTime từ chuỗi
+
+        LocalDateTime ngayKT = LocalDateTime.parse(ngayKetThuc, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+
+        // Định dạng lại theo định dạng mong muốn
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        String ngayHT1 = currentDateTime.format(formatter);
+        String ngayKT1=ngayKT.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+
+
+
+
+        // Chuyển đổi chuỗi ngayBatDau và ngayKetThuc thành đối tượng LocalDateTime
+        LocalDateTime hienTaiDateTime = LocalDateTime.parse(ngayHT1, formatter);
+        LocalDateTime ketThucDateTime = LocalDateTime.parse(ngayKT1, formatter);
+
+        // Kiểm tra xem ngayKetThuc có lớn hơn ngayBatDau không
+        return ketThucDateTime.isAfter(hienTaiDateTime);
+    }
+
+    public boolean isNgayKetThucAfterNgayHienTaiupdate(String ngayKetThuc) {
+        // Tạo đối tượng LocalDateTime từ chuỗi
+
+
+        // Định dạng lại theo định dạng mong muốn
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        String ngayHT1 = currentDateTime.format(formatter);
+
+
+
+
+        // Chuyển đổi chuỗi ngayBatDau và ngayKetThuc thành đối tượng LocalDateTime
+        LocalDateTime hienTaiDateTime = LocalDateTime.parse(ngayHT1, formatter);
+        LocalDateTime ketThucDateTime = LocalDateTime.parse(ngayKetThuc, formatter);
+
+        // Kiểm tra xem ngayKetThuc có lớn hơn ngayBatDau không
+        return ketThucDateTime.isAfter(hienTaiDateTime);
+    }
 
     @GetMapping("/khuyen-mai/hien-thi")
     public String hienThi(
@@ -198,23 +271,23 @@ public class KhuyenMaiController {
             return "home/layout";
         }
 
-         if(khuyenMai.isNgayKetThucAfterNgayBatDau()==false){
-             model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
-             Sort sort = Sort.by("ma").descending();
-             Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-             Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+        if(isNgayKetThucAfterNgayBatDau(khuyenMai.getNgayBatDau(),khuyenMai.getNgayKetThuc())==false){
+            model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+            Sort sort = Sort.by("ma").descending();
+            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
 
-             model.addAttribute("dulieu", list.getContent());
-             model.addAttribute("total", kt(list.getTotalPages()));
+            model.addAttribute("dulieu", list.getContent());
+            model.addAttribute("total", kt(list.getTotalPages()));
 
-             model.addAttribute("momdalthongbaongayKT","Ngày kết thúc phải sau ngày bắt đầu");
-             model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
-             model.addAttribute("momdalthemkm",0);
-             return "home/layout";
-         }
+            model.addAttribute("momdalthongbaongayKT","Ngày kết thúc phải sau ngày bắt đầu");
+            model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
+            model.addAttribute("momdalthemkm",0);
+            return "home/layout";
+        }
 
 
-        if(khuyenMai.isNgayKetThucAfterNgayHienTai()==false){
+        if(isNgayKetThucAfterNgayHienTai(khuyenMai.getNgayKetThuc())==false){
             model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
             Sort sort = Sort.by("ma").descending();
             Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
@@ -264,7 +337,7 @@ public class KhuyenMaiController {
     @GetMapping("/khuyen-mai/ap-dung-khuyen-mai/{idkm}")
     public String apdungkhuyenmai(
             Model model,
-          @PathVariable("idkm") UUID idkm,
+            @PathVariable("idkm") UUID idkm,
             @ModelAttribute("km") KhuyenMai khuyenMai,
             @ModelAttribute("kmupdate") KhuyenMai khuyenMaiupdate,
             @RequestParam("num") Optional<Integer> num,
@@ -353,9 +426,9 @@ public class KhuyenMaiController {
 //
 //
                            @ModelAttribute("kmupdate") @Valid KhuyenMai khuyenMaiupdate,
-                            BindingResult bindingResult,
-                            @RequestParam("num") Optional<Integer> num,
-                            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size,
+                           BindingResult bindingResult,
+                           @RequestParam("num") Optional<Integer> num,
+                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size,
                            @ModelAttribute("km")  KhuyenMai khuyenMai
 //                           @RequestParam("NBDupdate") String NBDupdate,
 //                           @RequestParam("NKTupdate") String NKTupdate
@@ -375,7 +448,12 @@ public class KhuyenMaiController {
                 model.addAttribute("NKTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayKetThuc()));
             }else  if (khuyenMaiupdate.getNgayBatDau().isEmpty()==false && khuyenMaiupdate.getNgayKetThuc().isEmpty()==true){
                 model.addAttribute("NBTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayBatDau()));
-            }else {}
+            }else  if (khuyenMaiupdate.getNgayBatDau().isEmpty()==false && khuyenMaiupdate.getNgayKetThuc().isEmpty()==false){
+                model.addAttribute("NBTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayBatDau()));
+                model.addAttribute("NKTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayKetThuc()));
+            }
+
+            else {}
             model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
             Sort sort = Sort.by("ma").descending();
             Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
@@ -388,8 +466,8 @@ public class KhuyenMaiController {
             return "home/layout";
         }
 
-        if(khuyenMaiupdate.isNgayKetThucAfterNgayBatDauupdate()==false){
-                        model.addAttribute("NBTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayBatDau()));
+        if(isNgayKetThucAfterNgayBatDauupdate(khuyenMaiupdate.getNgayBatDau(),khuyenMaiupdate.getNgayKetThuc())==false){
+            model.addAttribute("NBTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayBatDau()));
             model.addAttribute("NKTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayKetThuc()));
             model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
             Sort sort = Sort.by("ma").descending();
@@ -406,8 +484,8 @@ public class KhuyenMaiController {
         }
 
 
-        if(khuyenMaiupdate.isNgayKetThucAfterNgayHienTaiupdate()==false){
-                        model.addAttribute("NBTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayBatDau()));
+        if(isNgayKetThucAfterNgayHienTaiupdate(khuyenMaiupdate.getNgayKetThuc())==false){
+            model.addAttribute("NBTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayBatDau()));
             model.addAttribute("NKTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayKetThuc()));
             model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
             Sort sort = Sort.by("ma").descending();

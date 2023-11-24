@@ -51,16 +51,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 
-        <style>
-            /* CSS để thiết lập chiều dài và chiều cao của dropdown select2 */
-            .select2-container--bootstrap-5 .select2-selection--single {
-                /*width: 5cm !important; !* Thiết lập chiều dài là 5cm *!*/
-                height: 1cm !important;
-                font-size: 14px;
-              padding-top: 7px;
-            }
-        </style>
-        <style>
+    <style>
+        /* CSS để thiết lập chiều dài và chiều cao của dropdown select2 */
+        .select2-container--bootstrap-5 .select2-selection--single {
+            /*width: 5cm !important; !* Thiết lập chiều dài là 5cm *!*/
+            height: 1cm !important;
+            font-size: 14px;
+            padding-top: 7px;
+        }
+    </style>
+    <style>
         /* CSS cho modal */
         #myModal {
             display: none;
@@ -409,19 +409,22 @@
                             <h3 class="title">Thanh toán</h3>
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="first-name"
-                                   value="${listghct.get(0).gioHang.khachHang.hoTen}" placeholder="First Name" disabled>
+                            <div style="color: red" id="tbnguoinhan1"></div>
+                            <input class="input" type="text" name="first-name" id="nguoinhan1"
+                                   value="${listghct.get(0).gioHang.khachHang.hoTen}" placeholder="Người nhận" >
                         </div>
 
+                        <%--                        <div class="form-group">--%>
+                        <%--                            <input class="input" type="email" value="${listghct.get(0).gioHang.khachHang.email}"--%>
+                        <%--                                   name="email" placeholder="Email" disabled>--%>
+                        <%--                        </div>--%>
                         <div class="form-group">
-                            <input class="input" type="email" value="${listghct.get(0).gioHang.khachHang.email}"
-                                   name="email" placeholder="Email" disabled>
-                        </div>
-                        <div class="form-group">
+                            <div style="color: red" id="tbsodienthoai1"></div>
                             <input class="input" id="sodienthoai1" type="tel" name="tel"
                                    value="${listghct.get(0).gioHang.khachHang.sdt}"
-                                   placeholder="Telephone">
+                                   placeholder="Số điện thoại">
                         </div>
+                        <div style="color: red" id="tbdiachi1"></div>
                         <button style="float: right" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#modalthemdiachidathang">Thêm địa chỉ
                         </button>
@@ -437,7 +440,9 @@
 
 
                     </div>
-
+                    <div style="color: red"><label>Lưu ý: Chỉ ship quanh hà nội</label><br>
+                        <label style="margin-left: 1.2cm">Phí sip giao động tối đa 100.000 vnđ</label>
+                    </div>
                 </div>
 
                 <!-- Order Details -->
@@ -456,9 +461,11 @@
                                 <div class="order-col">
                                     <div><img src="/uploads/${ht.chiTietSanPham.urlAnh}" height="50px" width="50px">
                                     </div>
-                                    <div> ${ht.chiTietSanPham.sanPham.ten}
-                                        - ${ht.chiTietSanPham.mauSac.ten} - ${ht.chiTietSanPham.ram.dungLuong}
-                                        - ${ht.chiTietSanPham.rom.dungLuong}</div>
+
+                                    <div> ${ht.chiTietSanPham.sanPham.ten},ram:${ht.chiTietSanPham.ram.dungLuong},rom:${ht.chiTietSanPham.rom.dungLuong}<br>
+                                        màu:${ht.chiTietSanPham.mauSac.ten}<label style="margin-left: 40px"></label>Số lượng:${ht.soLuong}
+                                    </div>
+                                    <div></div>
                                     <div>${ht.donGiaKhiGiam*ht.soLuong}</div>
                                 </div>
 
@@ -482,36 +489,56 @@
                                         class="order-total"> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
                                 </strong>
                             </div>
-
                         </div>
+                        <div style="float: right;color: red;margin-top: -10px" id="tbtongtien1"></div>
                     </div>
 
+                    <div id="khungphuongthucthanhtoans" style="display: none">
+                        <div style="width: 68%;float: right">Thanh toán  khi nhận hàng</div>
+                        <LABEL style="">Phương thức thanh toán:</LABEL>
+                        <br><br>
+                        <div>
+                            <input type="radio" checked name="chon1phuongthucthanhtoan" onclick="chonphuongthucthanhtoantienmat()">:Thanh toán khi nhận hàng <br><br>
+                            <input type="radio"  name="chon1phuongthucthanhtoan" onclick="chonphuongthucthanhtoanVNP()">:Thanh toán VNP
+                        </div>
+                        <%--                           <a style="display: none" href="/ban-hang-online/xem-gio-hang" id="phuongthucthanhtoanVNP">Thanh toán VNP </a>--%>
+                    </div><br>
 
                     <%--                    <button type="button" style="width: 100%" class="primary-btn order-submit"--%>
                     <%--                            onclick="nutdathang('${listghct.get(0).gioHang.id}')">Đặt hàng--%>
                     <%--                    </button>--%>
-                    <form action="/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-dat-hang" method="post">
-                        <div style="display: none">
-                            <input id="idgh1" name="idgh1">
-                            <input id="tongtien1" name="tongtien1">
-                            <input id="iddc1" name="iddc1">
-                            <input id="sdt1" name="sdt1">
-                        </div>
+                    <div style="float: right;width: 24%;">
+                        <form action="/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-dat-hang" method="post" >
+                            <div style="display: none">
+                                <input id="idgh1" name="idgh1">
+                                <input id="tongtien1" name="tongtien1">
+                                <input id="iddc1" name="iddc1">
+                                <input id="sdt1" name="sdt1">
+                                <input id="nn1" name="nn1">
+                                <input id="phuongthucthanhtoanform"  name="tienmaORvnp" value="1">
+                            </div>
+
+                            <%--                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalChinhSach">--%>
+                            <%--                            Launch demo modal--%>
+                            <%--                        </button>--%>
+                            <%--                        <a data-bs-toggle="modal"--%>
+                            <%--                           data-bs-target="#modalthemdiachidathang">a</a>--%>
+
+
+                            <button class="primary-btn order-submit" style=" display: none;margin-top: -10px" type="button"
+                                    id="nutdathangthanhtoan" onclick="nutdathang('${listghct.get(0).gioHang.id}')">Đặt hàng
+                            </button>
+                        </form>
+                    </div>
+
+
+                    <div style="width: 75%;">
                         <input type="checkbox" id="checkBox"> Tôi đã đọc và đồng ý với <a style="text-decoration-line: underline"
-                                                                            data-bs-toggle="modal"
-                                                                            data-bs-target="#modalChinhSach">chính sách
+                                                                                          data-bs-toggle="modal"
+                                                                                          data-bs-target="#modalChinhSach">chính sách
                         của cửa hàng</a>
-                        <%--                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalChinhSach">--%>
-                        <%--                            Launch demo modal--%>
-                        <%--                        </button>--%>
-                        <%--                        <a data-bs-toggle="modal"--%>
-                        <%--                           data-bs-target="#modalthemdiachidathang">a</a>--%>
+                    </div>
 
-
-                        <button class="primary-btn order-submit" style="float: right ; display: none" type="button"
-                                id="nutdathangthanhtoan" onclick="nutdathang('${listghct.get(0).gioHang.id}')">Đặt Hàng
-                        </button>
-                    </form>
                 </div>
 
                 <!-- /Order Details -->
@@ -534,18 +561,18 @@
                 <form action="/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-them-dia-chi" method="post">
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <div style="margin-left:2.5cm ">
-                            <div>Địa chỉ:<label style="background: white;color: red;border: 1px solid white"
-                                                id="tb1"></label></div>
+                        <div style="margin-left:2.5cm">
+                            <div>Địa chỉ cụ thể:<label style="background: white;color: red;border: 1px solid white"
+                                                       id="tb1"></label></div>
                             <input type="text" id="themdiachidathangdiachi" name="diachi"><br>
-                            <div>Quận:<label style="background: white;color: red;border: 1px solid white"
-                                             id="tb2"></label></div>
+                            <div>Quận/Huyện:<label style="background: white;color: red;border: 1px solid white"
+                                                   id="tb2"></label></div>
                             <input type="text" id="themdiachidathangquan" name="quan"><br>
-                            <div>Huyện:<label style="background: white;color: red;border: 1px solid white"
-                                              id="tb3"></label></div>
+                            <div>Phường/xã:<label style="background: white;color: red;border: 1px solid white"
+                                                  id="tb3"></label></div>
                             <input type="text" id="themdiachidathanghuyen" name="huyen"><br>
-                            <div>Thành phố:<label style="background: white;color: red;border: 1px solid white"
-                                                  id="tb4"></label></div>
+                            <div>Tỉnh/thành:<label style="background: white;color: red;border: 1px solid white"
+                                                   id="tb4"></label></div>
                             <input type="text" id="themdiachidathangthanhpho" name="thanhpho"><br>
                         </div>
                         <input type="text" value="${listghct.get(0).gioHang.id}" name="idgh" style="display: none">
@@ -647,17 +674,29 @@
 
 
 <div style="color: #0C9A9A;display: none"></div>
+<script>
+    function chonphuongthucthanhtoanVNP() {
+        document.getElementById('phuongthucthanhtoanform').value='2';
 
+    }
+
+    function chonphuongthucthanhtoantienmat() {
+        document.getElementById('phuongthucthanhtoanform').value='1';
+    }
+
+</script>
 <script>
 
     var checkBox = document.getElementById("checkBox");
     var button = document.getElementById("nutdathangthanhtoan");
     checkBox.addEventListener("change",function (){
         if (this.checked) {
+            document.getElementById('khungphuongthucthanhtoans').style.display=''
 
             button.style.display =''; // Enable nút khi checkbox được chọn
 
         } else {
+            document.getElementById('khungphuongthucthanhtoans').style.display='none'
             button.style.display ='none';
         }
     })
@@ -782,7 +821,9 @@
     function loadSelect2diachi() {
         $('#diachids1').select2({
             theme: 'bootstrap-5',
-            height: '5cm'
+
+
+
         });
     }
 

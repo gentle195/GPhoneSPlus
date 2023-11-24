@@ -380,7 +380,7 @@
         <h2 STYLE="margin-left: 5cm">CÁC ĐƠN HÀNG</h2>
         <a style="font-size: 18px">Các trạng thái:</a>
 
-        <a href="/ban-hang-online/hoa-don-online/${id}" style="color: red" onclick="loadTab('tab00'); return false;">Tất cả</a>
+        <a href="/ban-hang-online/hoa-don-online/${id}" style="color: red" >Tất cả</a>
         <a href="/ban-hang-online-0/hoa-don-online/${id}">Đang chờ</a>
         <a href="/ban-hang-online-1/hoa-don-online/${id}">Đã xác nhận</a>
         <a href="/ban-hang-online-3/hoa-don-online/${id}">Chờ thanh toán</a>
@@ -472,19 +472,36 @@
                         </td>
 
                         <td>
+<%--                            <c:if test=""></c:if>--%>
                             <c:if test="${ht.tinhTrang==0}">
                                 <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
-                                <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>
+<%--                                <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>--%>
+                                <a class="btn btn-danger" href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${id}">Hủy hóa đơn</a>
+
                             </c:if>
                             <c:if test="${ht.tinhTrang==1}">
                                 <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
-                                <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>
+<%--                                <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>--%>
+                                <a class="btn btn-danger" href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}">Hủy hóa đơn</a>
+
                             </c:if>
                             <c:if test="${ht.tinhTrang==2}">
                                 <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
                             </c:if>
                             <c:if test="${ht.tinhTrang==3}">
-                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
+
+                                <c:if test="${ht.tinhTrangGiaoHang==0 || ht.tinhTrangGiaoHang==1 }">
+
+                                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
+<%--                                    <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>--%>
+                                    <a class="btn btn-danger" href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}">Hủy hóa đơn</a>
+
+                                </c:if>
+                                <c:if test="${ht.tinhTrangGiaoHang!=0 && ht.tinhTrangGiaoHang!=1 }">
+
+                                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
+
+                                </c:if>
                             </c:if>
                             <c:if test="${ht.tinhTrang==8}">
                                 <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
@@ -742,10 +759,10 @@
 
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Gọi hàm loadTab để chỉ hiển thị nội dung của tab00 khi trang được tải
-        loadTab('tab00');
-    });
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     // Gọi hàm loadTab để chỉ hiển thị nội dung của tab00 khi trang được tải
+    //     loadTab('tab00');
+    // });
     <%--function loadTab(tabId) {--%>
     <%--    // Ẩn tất cả các tab--%>
     <%--    document.querySelectorAll('.tab-content').forEach(function (tab) {--%>

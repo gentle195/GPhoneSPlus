@@ -48,4 +48,9 @@ public class HoaDonChiTiet {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_imei")
     private IMEI imei;
+
+
+    public  double phantram(){
+        return 100-Double.valueOf(String.valueOf(donGia))/Double.valueOf(String.valueOf(imei.getChiTietSanPham().getGiaBan()))*100;
+    }
 }

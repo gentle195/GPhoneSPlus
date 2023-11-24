@@ -712,15 +712,21 @@ public class BanHangOnlineController {
 
 
 //    @PostMapping("/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-dat-hang/{idgh}/{tongtien}/{iddc}/{sdt}")
-    @PostMapping("/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-dat-hang")
-    public String nutdathang(
-            Model model,
-            @RequestParam("idgh1") UUID idgh,
-            @RequestParam("tongtien1") BigDecimal tongtien,
-            @RequestParam("iddc1") UUID iddc,
-            @RequestParam("sdt1") String sdt
-    ) {
-//        them hd
+@PostMapping("/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-dat-hang")
+public String nutdathang(
+        Model model,
+        @RequestParam("idgh1") UUID idgh,
+        @RequestParam("tongtien1") BigDecimal tongtien,
+        @RequestParam("iddc1") UUID iddc,
+        @RequestParam("sdt1") String sdt,
+        @RequestParam("tienmaORvnp") Integer tienmaORvnp,
+        @RequestParam("nn1") String nguoinhan
+) {
+
+
+
+    if(tienmaORvnp==1) {
+        //        them hd
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         HoaDon hd = new HoaDon();
@@ -734,6 +740,7 @@ public class BanHangOnlineController {
         hd.setMa(mhd);
 //        hd.setSdt(gioHangService.findById(idgh).getKhachHang().getSdt());
         hd.setSdt(sdt);
+        hd.setNguoiNhan(nguoinhan);
         hd.setTongTien(tongtien);
         hd.setNgayTao(date);
         hd.setNgayCapNhat(date);
@@ -768,18 +775,33 @@ public class BanHangOnlineController {
         }
 //xoa ghct TT=0 theo idgh
         banHangOnlineService.xoaghcttheoIDGHvsTTO(idgh);
-//
-        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(gioHangService.findById(idgh).getKhachHang().getId())).get(0).getId()));
-        model.addAttribute("tttong", 1);
-        model.addAttribute("banhangonline", banHangOnlineService);
-        if (idkhachhang.equals("1")) {
-            model.addAttribute("idkhachhang", idkhachhang);
-        } else {
-            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
-        }
-        return "ban-hang-online/dat_hang_thanh_cong";
+//cập nhật hóa đơn; thanh toán khi nhận hàng
+        HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
+        hd1.setTinhTrang(3);
+        hd1.setHinhThucThanhToan(0);
+        hoaDonService.add(hd1);
+
+
+
+    }else {
+//  thanh toán online
+
+        return "redirect:/pay/"+idgh+"/"+tongtien+"/"+iddc+"/"+sdt+"/"+nguoinhan;
+
+
     }
+//
+    model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(gioHangService.findById(idgh).getKhachHang().getId())).get(0).getId()));
+    model.addAttribute("tttong", 1);
+    model.addAttribute("banhangonline", banHangOnlineService);
+    if (idkhachhang.equals("1")) {
+        model.addAttribute("idkhachhang", idkhachhang);
+    } else {
+        model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+        model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+    }
+    return "ban-hang-online/dat_hang_thanh_cong";
+}
 
 
     @GetMapping("/ban-hang-online/hoa-don-online/{id}")
@@ -1130,7 +1152,8 @@ public class BanHangOnlineController {
         }
 
 //        return "ban-hang-online/trang_hoa_don_khach_hang";
-        return "ban-hang-online/single_pase_hoa_don_khach_hang";
+return "redirect:/ban-hang-online/hoa-don-online/"+hoaDonService.findById(idhd).getKhachHang().getId();
+//        return "ban-hang-online/single_pase_hoa_don_khach_hang";
     }
 
     @GetMapping("/ban-hang-online/xem-hoa-don-chi-tiet/xoa-chi-tiet-san-pham/{idhdct}")
