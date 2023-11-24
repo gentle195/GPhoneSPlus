@@ -785,11 +785,169 @@ public class BanHangOnlineController {
     @GetMapping("/ban-hang-online/hoa-don-online/{id}")
     public String hoadononline(
             Model model,
-            @PathVariable("id") UUID idkh
+            @PathVariable("id") UUID idkh,   @RequestParam("pageNum") Optional<Integer> pageNum,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize
     ) {
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
+        Sort sort = Sort.by("ma").descending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+        Page<HoaDon> page = banHangOnlineService.cacDonHang(idkh, pageable);
+        model.addAttribute("contentPage", "../ban-hang-online/trang-hoa-don-khach-hang.jsp");
+        model.addAttribute("listhdkh", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+//        model.addAttribute("listhdkh", banHangOnlineService.timhoadontheoidkh(idkh));
+        model.addAttribute("banhangonline", banHangOnlineService);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+        }
 
-        model.addAttribute("listhdkh", banHangOnlineService.timhoadontheoidkh(idkh));
+        return "ban-hang-online/trang_hoa_don_khach_hang";
+    }
+    @GetMapping("/ban-hang-online-8/hoa-don-online/{id}")
+    public String donHang8(
+            Model model,
+            @PathVariable("id") UUID idkh,   @RequestParam("pageNum") Optional<Integer> pageNum,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize
+    ) {
+        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
+        Sort sort = Sort.by("ma").descending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+        Page<HoaDon> page = banHangOnlineService.donHang8(idkh, pageable);
+        model.addAttribute("contentPage", "../ban-hang-online/trang-don-hang-online-8.jsp");
+        model.addAttribute("listhdkh", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+//        model.addAttribute("listhdkh", banHangOnlineService.timhoadontheoidkh(idkh));
+        model.addAttribute("banhangonline", banHangOnlineService);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+        }
+
+        return "ban-hang-online/trang_don_hang_online_8";
+    }
+    @GetMapping("/ban-hang-online-0/hoa-don-online/{id}")
+    public String donHang0(
+            Model model,
+            @PathVariable("id") UUID idkh,   @RequestParam("pageNum") Optional<Integer> pageNum,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize
+    ) {
+        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
+        Sort sort = Sort.by("ma").descending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+        Page<HoaDon> page = banHangOnlineService.donHang0(idkh, pageable);
+        model.addAttribute("contentPage", "../ban-hang-online/trang-don-hang-online-0.jsp");
+        model.addAttribute("listhdkh", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+//        model.addAttribute("listhdkh", banHangOnlineService.timhoadontheoidkh(idkh));
+        model.addAttribute("banhangonline", banHangOnlineService);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+        }
+
+        return "ban-hang-online/trang_don_hang_online_0";
+    }
+    @GetMapping("/ban-hang-online-1/hoa-don-online/{id}")
+    public String donHang1(
+            Model model,
+            @PathVariable("id") UUID idkh,   @RequestParam("pageNum") Optional<Integer> pageNum,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize
+    ) {
+        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
+        Sort sort = Sort.by("ma").descending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+        Page<HoaDon> page = banHangOnlineService.donHang1(idkh, pageable);
+        model.addAttribute("contentPage", "../ban-hang-online/trang-don-hang-online-1.jsp");
+        model.addAttribute("listhdkh", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+//        model.addAttribute("listhdkh", banHangOnlineService.timhoadontheoidkh(idkh));
+        model.addAttribute("banhangonline", banHangOnlineService);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+        }
+
+        return "ban-hang-online/trang_don_hang_online_1";
+    }
+    @GetMapping("/ban-hang-online-2/hoa-don-online/{id}")
+    public String donHang2(
+            Model model,
+            @PathVariable("id") UUID idkh,   @RequestParam("pageNum") Optional<Integer> pageNum,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize
+    ) {
+        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
+        Sort sort = Sort.by("ma").descending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+        Page<HoaDon> page = banHangOnlineService.donHang2(idkh, pageable);
+        model.addAttribute("contentPage", "../ban-hang-online/trang-don-hang-online-2.jsp");
+        model.addAttribute("listhdkh", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+//        model.addAttribute("listhdkh", banHangOnlineService.timhoadontheoidkh(idkh));
+        model.addAttribute("banhangonline", banHangOnlineService);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+        }
+
+        return "ban-hang-online/trang_don_hang_online_2";
+    }
+    @GetMapping("/ban-hang-online-3/hoa-don-online/{id}")
+    public String donHang3(
+            Model model,
+            @PathVariable("id") UUID idkh,   @RequestParam("pageNum") Optional<Integer> pageNum,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize
+    ) {
+        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
+        Sort sort = Sort.by("ma").descending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+        Page<HoaDon> page = banHangOnlineService.donHang3(idkh, pageable);
+        model.addAttribute("contentPage", "../ban-hang-online/trang-don-hang-online-3.jsp");
+        model.addAttribute("listhdkh", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+//        model.addAttribute("listhdkh", banHangOnlineService.timhoadontheoidkh(idkh));
+        model.addAttribute("banhangonline", banHangOnlineService);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+        }
+
+        return "ban-hang-online/trang_don_hang_online_3";
+    }
+    @PostMapping("/ban-hang-online/hoa-don-online/{id}/search")
+    public String search(
+            Model model, @ModelAttribute("donHang") HoaDon hoaDon,
+            @PathVariable("id") UUID idkh,  @RequestParam("pageNum") Optional<Integer> pageNum,
+            @RequestParam("search") String search,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize
+    ) {
+        Sort sort = Sort.by("ma").descending();
+        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
+//
+//        if (!pageNum.isPresent()) {
+//            pageNum = Optional.of(1); // Set pageNum to 1 if it does not have a value
+//        }
+////
+        model.addAttribute("listhdkh", banHangOnlineService.search(idkh, search));
+
         model.addAttribute("banhangonline", banHangOnlineService);
         if (idkhachhang.equals("1")) {
             model.addAttribute("idkhachhang", idkhachhang);
@@ -799,6 +957,139 @@ public class BanHangOnlineController {
         }
         return "ban-hang-online/trang_hoa_don_khach_hang";
     }
+
+    @PostMapping("/ban-hang-online-0/hoa-don-online/{id}/search")
+    public String search0(
+            Model model, @ModelAttribute("donHang") HoaDon hoaDon,
+            @PathVariable("id") UUID idkh,  @RequestParam("pageNum") Optional<Integer> pageNum,
+            @RequestParam("search") String search,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize
+    ) {
+        Sort sort = Sort.by("ma").descending();
+        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
+//
+//        if (!pageNum.isPresent()) {
+//            pageNum = Optional.of(1); // Set pageNum to 1 if it does not have a value
+//        }
+////
+        model.addAttribute("listhdkh", banHangOnlineService.search0(idkh, search));
+
+        model.addAttribute("banhangonline", banHangOnlineService);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+        }
+        return "ban-hang-online/trang_don_hang_online_0";
+    }
+
+
+    @PostMapping("/ban-hang-online-1/hoa-don-online/{id}/search")
+    public String search1(
+            Model model, @ModelAttribute("donHang") HoaDon hoaDon,
+            @PathVariable("id") UUID idkh,  @RequestParam("pageNum") Optional<Integer> pageNum,
+            @RequestParam("search") String search,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize
+    ) {
+        Sort sort = Sort.by("ma").descending();
+        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
+//
+//        if (!pageNum.isPresent()) {
+//            pageNum = Optional.of(1); // Set pageNum to 1 if it does not have a value
+//        }
+////
+        model.addAttribute("listhdkh", banHangOnlineService.search1(idkh, search));
+
+        model.addAttribute("banhangonline", banHangOnlineService);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+        }
+        return "ban-hang-online/trang_don_hang_online_1";
+    }
+
+
+    @PostMapping("/ban-hang-online-2/hoa-don-online/{id}/search")
+    public String search2(
+            Model model, @ModelAttribute("donHang") HoaDon hoaDon,
+            @PathVariable("id") UUID idkh,  @RequestParam("pageNum") Optional<Integer> pageNum,
+            @RequestParam("search") String search,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize
+    ) {
+        Sort sort = Sort.by("ma").descending();
+        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
+//
+//        if (!pageNum.isPresent()) {
+//            pageNum = Optional.of(1); // Set pageNum to 1 if it does not have a value
+//        }
+////
+        model.addAttribute("listhdkh", banHangOnlineService.search2(idkh, search));
+
+        model.addAttribute("banhangonline", banHangOnlineService);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+        }
+        return "ban-hang-online/trang_don_hang_online_2";
+    }
+
+
+    @PostMapping("/ban-hang-online-3/hoa-don-online/{id}/search")
+    public String search3(
+            Model model, @ModelAttribute("donHang") HoaDon hoaDon,
+            @PathVariable("id") UUID idkh,  @RequestParam("pageNum") Optional<Integer> pageNum,
+            @RequestParam("search") String search,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize
+    ) {
+        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
+//
+//        if (!pageNum.isPresent()) {
+//            pageNum = Optional.of(1); // Set pageNum to 1 if it does not have a value
+//        }
+////
+        model.addAttribute("listhdkh", banHangOnlineService.search3(idkh, search));
+
+        model.addAttribute("banhangonline", banHangOnlineService);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+        }
+        return "ban-hang-online/trang_don_hang_online_3";
+    }
+
+
+    @PostMapping("/ban-hang-online-8/hoa-don-online/{id}/search")
+    public String search8(
+            Model model, @ModelAttribute("donHang") HoaDon hoaDon,
+            @PathVariable("id") UUID idkh,  @RequestParam("pageNum") Optional<Integer> pageNum,
+            @RequestParam("search") String search,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize
+    ) {
+        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
+//
+//        if (!pageNum.isPresent()) {
+//            pageNum = Optional.of(1); // Set pageNum to 1 if it does not have a value
+//        }
+////
+        model.addAttribute("listhdkh", banHangOnlineService.search8(idkh, search));
+
+        model.addAttribute("banhangonline", banHangOnlineService);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+        }
+        return "ban-hang-online/trang_don_hang_online_8";
+    }
+
 
 
     @GetMapping("/ban-hang-online/xem-hoa-don-chi-tiet/{idhd}")

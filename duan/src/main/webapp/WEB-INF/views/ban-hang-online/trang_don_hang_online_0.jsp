@@ -380,8 +380,8 @@
         <h2 STYLE="margin-left: 5cm">CÁC ĐƠN HÀNG</h2>
         <a style="font-size: 18px">Các trạng thái:</a>
 
-        <a href="/ban-hang-online/hoa-don-online/${id}" style="color: red" onclick="loadTab('tab00'); return false;">Tất cả</a>
-        <a href="/ban-hang-online-0/hoa-don-online/${id}">Đang chờ</a>
+        <a href="/ban-hang-online/hoa-don-online/${id}" onclick="loadTab('tab00'); return false;">Tất cả</a>
+        <a href="/ban-hang-online-0/hoa-don-online/${id}" style="color: red">Đang chờ</a>
         <a href="/ban-hang-online-1/hoa-don-online/${id}">Đã xác nhận</a>
         <a href="/ban-hang-online-3/hoa-don-online/${id}">Chờ thanh toán</a>
         <a href="/ban-hang-online-2/hoa-don-online/${id}">Đã thanh toán</a>
@@ -389,6 +389,7 @@
         <a href="#">Hoàn thành</a>
         <a href="/ban-hang-online-8/hoa-don-online/${id}">Đã hủy</a>
         <div class="nav-underline"></div> <!-- Thêm dòng này để tạo dòng kẻ đỏ -->
+
     </article>
 
 </div>
@@ -398,9 +399,9 @@
     <c:if test="${listhdkh.size()>0}">
 
         </div>
-        <div id="tab00" class="tab-content" style="display: block; color: red">
+        <div id="tab0" class="tab-content" style="display: block; color: red">
 
-            <form action="/ban-hang-online/hoa-don-online/${id}/search" method="post">
+            <form action="/ban-hang-online-0/hoa-don-online/${id}/search" method="post">
                 <div class="input-group" style="width: 20%; float: right">
                     <input  type="text" class="form-control" placeholder="Nhập mã, tên sp, ngày đặt, sđt..."
                             aria-label="Bạn tìm gì..." name="search">
@@ -414,9 +415,10 @@
                 <thead>
                 <tr>
                     <th>STT</th>
-                    <th>Ngày TT</th>
+
                     <th>Mã đơn hàng</th>
                     <th>Ngày đặt</th>
+                    <th style="display: none;">Ngày tạo</th>
                     <th>SĐT nhận hàng</th>
                     <th>Địa chỉ nhận</th>
                     <th>Trạng thái đơn hàng</th>
@@ -429,8 +431,10 @@
                 <c:forEach items="${listhdkh}" var="ht" varStatus="stt">
                     <tr>
                         <td>${stt.index+1}</td>
-                        <td>${ht.ngayThanhToan}</td>
+
                         <td>${ht.ma}</td>
+                        <th style="display: none;">${ht.ngayTao}</th>
+
                         <td>${ht.ngayTao}</td>
                         <td>${ht.sdt}</td>
                         <td > <div style="width: 5cm; overflow: hidden;">${ht.diaChi.diaChi},${ht.diaChi.quan},${ht.diaChi.huyen},${ht.diaChi.thanhPho}</div></td>
@@ -494,24 +498,29 @@
                 </c:forEach>
                 </tbody>
             </table>
+
         </div>
+
     </c:if>
 
 </main>
 <div align="center">
     <div class="btn-group" role="group" aria-label="Basic example">
         <ul class="pagination justify-content-center pagination-lg">
-            <li class="page-item"><a class="page-link" href="/ban-hang-online/hoa-don-online/${idkhachhang}?pageNum=0"><</a></li>
+            <li class="page-item"><a class="page-link" href="/ban-hang-online-0/hoa-don-online/${idkhachhang}?pageNum=0"><</a></li>
             <c:forEach begin="1" end="${total}" varStatus="status">
                 <li class="page-item">
-                    <a href="${pageContext.request.contextPath}/ban-hang-online/hoa-don-online/${idkhachhang}?pageNum=${status.index -1}"
+                    <a href="${pageContext.request.contextPath}/ban-hang-online-0/hoa-don-online/${idkhachhang}?pageNum=${status.index -1}"
                        class="page-link">${status.index}</a>
                 </li>
             </c:forEach>
-            <li class="page-item"><a class="page-link" href="/ban-hang-online/hoa-don-online/${idkhachhang}?pageNum=${total-1}">></a></li>
+            <li class="page-item"><a class="page-link" href="/ban-hang-online-0/hoa-don-online/${idkhachhang}?pageNum=${total-1}">></a></li>
         </ul>
     </div>
 </div>
+
+
+
 
 
 
@@ -741,39 +750,39 @@
 </script>
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Gọi hàm loadTab để chỉ hiển thị nội dung của tab00 khi trang được tải
-        loadTab('tab00');
-    });
-    <%--function loadTab(tabId) {--%>
-    <%--    // Ẩn tất cả các tab--%>
-    <%--    document.querySelectorAll('.tab-content').forEach(function (tab) {--%>
-    <%--        tab.style.display = 'none';--%>
-    <%--    });--%>
+<%--<script>--%>
+<%--    document.addEventListener("DOMContentLoaded", function() {--%>
+<%--        // Gọi hàm loadTab để chỉ hiển thị nội dung của tab00 khi trang được tải--%>
+<%--        loadTab('tab00');--%>
+<%--    });--%>
+<%--    function loadTab(tabId) {--%>
+<%--        // Ẩn tất cả các tab--%>
+<%--        document.querySelectorAll('.tab-content').forEach(function (tab) {--%>
+<%--            tab.style.display = 'none';--%>
+<%--        });--%>
 
-    <%--    // Hiển thị tab được chọn--%>
-    <%--    document.getElementById(tabId).style.display = 'block';--%>
-    <%--}--%>
-    <%--function loadTab(tabName) {--%>
-    <%--    // loadTab('tab00');--%>
-    <%--    var i;--%>
-    <%--    //  Load ngầm tab00 trước--%>
+<%--        // Hiển thị tab được chọn--%>
+<%--        document.getElementById(tabId).style.display = 'block';--%>
+<%--    }--%>
+<%--    function loadTab(tabName) {--%>
+<%--        // loadTab('tab00');--%>
+<%--        var i;--%>
+<%--        //  Load ngầm tab00 trước--%>
 
-    <%--    var tabContents = document.getElementsByClassName("tab-content");--%>
-    <%--    for (i = 0; i < tabContents.length; i++) {--%>
-    <%--        tabContents[i].style.display = "none";--%>
-    <%--    }--%>
-    <%--    document.getElementById(tabName).style.display = "block";--%>
+<%--        var tabContents = document.getElementsByClassName("tab-content");--%>
+<%--        for (i = 0; i < tabContents.length; i++) {--%>
+<%--            tabContents[i].style.display = "none";--%>
+<%--        }--%>
+<%--        document.getElementById(tabName).style.display = "block";--%>
 
-    <%--    // Cập nhật vị trí và chiều dài của dòng kẻ đỏ--%>
-    <%--    var navUnderline = document.querySelector(".nav-underline");--%>
-    <%--    var selectedTab = document.querySelector(`[onclick="loadTab('${tabName}')"]`);--%>
-    <%--    var selectedTabRect = selectedTab.getBoundingClientRect();--%>
-    <%--    navUnderline.style.width = selectedTabRect.width + "px";--%>
-    <%--    navUnderline.style.transform = "translateX(" + selectedTabRect.left + "px)";--%>
-    <%--}--%>
-</script>
+<%--        // Cập nhật vị trí và chiều dài của dòng kẻ đỏ--%>
+<%--        var navUnderline = document.querySelector(".nav-underline");--%>
+<%--        var selectedTab = document.querySelector(`[onclick="loadTab('${tabName}')"]`);--%>
+<%--        var selectedTabRect = selectedTab.getBoundingClientRect();--%>
+<%--        navUnderline.style.width = selectedTabRect.width + "px";--%>
+<%--        navUnderline.style.transform = "translateX(" + selectedTabRect.left + "px)";--%>
+<%--    }--%>
+<%--</script>--%>
 <script>
     function chonhetgiohangtongTRANGCHU(idgh) {
         // var  idgh1=encodeURIComponent(idgh)

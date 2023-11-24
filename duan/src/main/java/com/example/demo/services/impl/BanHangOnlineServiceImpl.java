@@ -8,6 +8,8 @@ import com.example.demo.services.ChiTietSanPhamService;
 import com.example.demo.services.GioHangChiTietService;
 import com.example.demo.viewmodels.TongtienvsTongspchon;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -192,6 +194,59 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
                 tienMin,
                 tienMax);
     }
+
+    @Override
+    public Page<HoaDon> cacDonHang(UUID idkh, Pageable pageable) {
+        return banHangOnLinerepository.cacDonHang(idkh,pageable);
+    }
+    @Override
+    public Page<HoaDon> donHang8(UUID idkh, Pageable pageable) {
+        return banHangOnLinerepository.donHang8(idkh,pageable);
+    }
+    @Override
+    public Page<HoaDon> donHang0(UUID idkh, Pageable pageable) {
+        return banHangOnLinerepository.donHang0(idkh,pageable);
+    }
+    @Override
+    public Page<HoaDon> donHang1(UUID idkh, Pageable pageable) {
+        return banHangOnLinerepository.donHang1(idkh,pageable);
+    }
+    @Override
+    public Page<HoaDon> donHang2(UUID idkh, Pageable pageable) {
+        return banHangOnLinerepository.donHang2(idkh,pageable);
+    }
+    @Override
+    public Page<HoaDon> donHang3(UUID idkh, Pageable pageable) {
+        return banHangOnLinerepository.donHang3(idkh,pageable);
+    }
+    @Override
+    public List<HoaDon> search(UUID id, String ten) {
+        return banHangOnLinerepository.search(id, ten);
+    }
+
+    @Override
+    public List<HoaDon> search0(UUID id, String ten) {
+        return banHangOnLinerepository.searchDH0(id, ten);
+    }
+
+    @Override
+    public List<HoaDon> search1(UUID id, String ten) {
+        return banHangOnLinerepository.searchDH1(id, ten);
+    }
+
+    @Override
+    public List<HoaDon> search2(UUID id, String ten) {
+        return banHangOnLinerepository.searchDH2(id, ten);
+    }
+    @Override
+    public List<HoaDon> search3(UUID id, String ten) {
+        return banHangOnLinerepository.searchDH3(id, ten);
+    }
+    @Override
+    public List<HoaDon> search8(UUID id, String ten) {
+        return banHangOnLinerepository.searchDH8(id, ten);
+    }
+
 
 //    @Override
 //    public Boolean ThemSPvaoGHCT(String idkh, String idctsp) {

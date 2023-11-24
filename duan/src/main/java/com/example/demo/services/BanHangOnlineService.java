@@ -5,6 +5,8 @@ import com.example.demo.models.*;
 import com.example.demo.repositories.BanHangOnLinerepository;
 import com.example.demo.viewmodels.TongtienvsTongspchon;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
@@ -61,4 +63,19 @@ public interface BanHangOnlineService {
                                              String tenSP,
                                              BigDecimal tienMin,
                                              BigDecimal tienMax);
+
+    Page<HoaDon> cacDonHang(@Param("idkh") UUID idkh, Pageable pageable);
+    Page<HoaDon> donHang8(@Param("idkh") UUID idkh, Pageable pageable);
+    Page<HoaDon> donHang0(@Param("idkh") UUID idkh, Pageable pageable);
+    Page<HoaDon> donHang1(@Param("idkh") UUID idkh, Pageable pageable);
+    Page<HoaDon> donHang2(@Param("idkh") UUID idkh, Pageable pageable);
+    Page<HoaDon> donHang3(@Param("idkh") UUID idkh, Pageable pageable);
+    List<HoaDon> search(UUID id, String ten);
+
+    List<HoaDon> search0(UUID id, String ten);
+
+    List<HoaDon> search1(UUID id, String ten);
+    List<HoaDon> search2(UUID id, String ten);
+    List<HoaDon> search3(UUID id, String ten);
+    List<HoaDon> search8(UUID id, String ten);
 }
