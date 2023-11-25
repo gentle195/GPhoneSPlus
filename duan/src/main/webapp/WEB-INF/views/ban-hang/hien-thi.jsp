@@ -175,11 +175,14 @@
                                                             <div class="col-10">
                                                                 <form:select path="khachHang" class="form-control"
                                                                              id="selectKhachHang">
-                                                                    <option selected disabled value="1">
-                                                                        Khách hàng
-                                                                    </option>
+                                                                    <c:if test="${HoaDon.khachHang== null}">
+                                                                        <option selected disabled value="1">
+                                                                            Khách hàng
+                                                                        </option>
+                                                                    </c:if>
                                                                     <c:forEach items="${listKhachHang}" var="kh">
-                                                                        <option value="${kh.id}">${kh.hoTen} - ${kh.sdt}</option>
+                                                                        <option value="${kh.id}">${kh.hoTen}
+                                                                            - ${kh.sdt}</option>
                                                                     </c:forEach>
                                                                 </form:select>
                                                                 <label id="nullKH1" style="color: red"></label>
@@ -577,7 +580,12 @@
                                                     <td>${ctsp.mauSac.ten}</td>
                                                     <td>${ctsp.ram.dungLuong}</td>
                                                     <td>${ctsp.rom.dungLuong}</td>
-                                                    <td>${ctsp.giaBan}</td>
+                                                    <c:if test="${ctsp.khuyenMai==null}">
+                                                        <td>${ctsp.giaBan}</td>
+                                                    </c:if>
+                                                    <c:if test="${ctsp.khuyenMai!=null}">
+                                                        <td>${ctsp.giaBan-ctsp.giaBan*ctsp.khuyenMai.soTienGiam/100}</td>
+                                                    </c:if>
                                                     <td>${ctsp.soLuong}</td>
                                                     <td>
                                                         <a
@@ -723,16 +731,6 @@
         }
     }
 
-    const toastTrigger = document.getElementById('liveToastBtn')
-    const toastLiveExample = document.getElementById('liveToast')
-
-    if (toastTrigger) {
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-        toastTrigger.addEventListener('click', () => {
-            toastBootstrap.show()
-        })
-    }
-
     function checkhd() {
         var sdthd = document.getElementById("sdthd").value;
         var tien = document.getElementById("tienKhachDua").value;
@@ -854,38 +852,6 @@
             }
         }
     }
-
-    $(document).ready(function () {
-        $("#selectKhachHang").on("click", function () {
-            // Lấy giá trị của form select
-            var khachHangId = $(this).val();
-
-            // Thực hiện lệnh tìm kiếm địa chỉ
-            $.ajax({
-                url: "/ban-hang/tim-kiem-dia-chi/" + khachHangId,
-                method: "GET",
-                dataType: "json",
-                success: function (response) {
-                    // Nếu lệnh tìm kiếm địa chỉ thành công
-                    if (response.status === 200) {
-                        // Cập nhật danh sách địa chỉ
-                        var listDiaChi = response.data;
-                        $("#selectDiaChi").options.length = 0;
-                        for (var i = 0; i < listDiaChi.length; i++) {
-                            var option = document.createElement("option");
-                            option.value = listDiaChi[i].id;
-                            option.text = listDiaChi[i].diaChi;
-                            $("#selectDiaChi").appendChild(option);
-                        }
-                    }
-                },
-                error: function (error) {
-                    // Hiển thị thông báo lỗi
-                    // ...
-                }
-            });
-        });
-    });
 </script>
 <script>
     $('div[id^="nhapImei_"]').on('show.bs.modal', async function (e) {
@@ -1001,6 +967,12 @@
             let html = ``;
             for (let i = 0; i < data.length; i++) {
                 const ctsp = data[i];
+                let productPrice;
+                if (ctsp.khuyenMai) {
+                    productPrice = ctsp.giaBan - ctsp.giaBan * ctsp.khuyenMai.soTienGiam / 100;
+                } else {
+                    productPrice = ctsp.giaBan;
+                }
                 const tr = `
             <tr>
                 <td style="display:none;">` + ctsp.id + `</td>
@@ -1011,7 +983,7 @@
                 <td>` + ctsp.mauSac.ten + `</td>
                 <td>` + ctsp.ram.dungLuong + `</td>
                 <td>` + ctsp.rom.dungLuong + `</td>
-                <td>` + ctsp.giaBan + `</td>
+                <td>` + productPrice + `</td>
                 <td>` + ctsp.soLuong + `</td>
                 <td>
                     <a class="btn btn-warning btn-icon-text"

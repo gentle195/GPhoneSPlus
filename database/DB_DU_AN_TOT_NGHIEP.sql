@@ -422,7 +422,7 @@ CREATE TABLE hoa_don (
   FOREIGN KEY (id_dia_chi) REFERENCES dia_chi(id),
   FOREIGN KEY (id_quy_doi) REFERENCES quy_doi(id)
 );
-ALTER TABLE hoa_don add nguoi_nhan nvarchar(100) null
+ALTER TABLE hoa_don add ma_giao_dich NVARCHAR(MAX) NULL
 Alter table hoa_don add phi_ship decimal(20, 0) NULL
 SET ANSI_NULLS ON
 GO
@@ -479,6 +479,23 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+CREATE TABLE doi_tra(
+ id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
+ ma NVARCHAR(30) NULL,
+ id_khach_hang UNIQUEIDENTIFIER NULL,
+ id_hoa_don UNIQUEIDENTIFIER NULL,
+ id_nhan_vien UNIQUEIDENTIFIER NULL,
+  ngay_doi_tra Date DEFAULT GETDATE(),
+ tinh_trang int DEFAULT 0,
+ FOREIGN KEY (id_khach_hang) REFERENCES khach_hang(id),
+ FOREIGN KEY (id_hoa_don) REFERENCES hoa_don(id),
+ FOREIGN KEY (id_nhan_vien) REFERENCES nhan_vien(id)
+  )
+
+ SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 CREATE TABLE doi_tra_chi_tiet(
 id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
 id_doi_tra  UNIQUEIDENTIFIER NULL,
@@ -495,26 +512,6 @@ FOREIGN KEY (id_imei ) REFERENCES imei(id),
 FOREIGN KEY (id_hoa_don_chi_tiet ) REFERENCES hoa_don_chi_tiet(id)
 
 )
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-
-CREATE TABLE doi_tra(
- id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
- ma NVARCHAR(30) NULL,
- id_khach_hang UNIQUEIDENTIFIER NULL,
- id_hoa_don UNIQUEIDENTIFIER NULL,
- id_nhan_vien UNIQUEIDENTIFIER NULL,
-  ngay_doi_tra Date DEFAULT GETDATE(),
- tinh_trang int DEFAULT 0,
- FOREIGN KEY (id_khach_hang) REFERENCES khach_hang(id),
- FOREIGN KEY (id_hoa_don) REFERENCES hoa_don(id),
- FOREIGN KEY (id_nhan_vien) REFERENCES nhan_vien(id)
- 
-
-  )
 
 SET ANSI_NULLS ON
 GO

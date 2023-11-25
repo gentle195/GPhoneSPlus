@@ -83,7 +83,7 @@
                             <a class="nav-link" href="#" role="button" data-toggle="dropdown">
 
                                 <security:authorize access="isAuthenticated()">
-                                    hi, <security:authentication property="principal.username" />
+                                    hi, <security:authentication property="principal.username"/>
                                 </security:authorize>
                                 <security:authorize access="!isAuthenticated()">
                                     <a href="/login">Login</a>
@@ -97,7 +97,8 @@
                                     <i class="icon-user"></i>
                                     <span class="ml-2">Profile </span>
                                 </a>
-                                <a href="/logout" class="dropdown-item" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                <a href="/logout" class="dropdown-item"
+                                   onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                     <i class="icon-key"></i>
                                     <span class="ml-2">Logout </span>
                                 </a>
@@ -107,7 +108,7 @@
                 </div>
             </nav>
         </div>
-        <div class="notifications" ></div>
+        <div class="notifications"></div>
     </div>
     <!--**********************************
         Header end ti-comment-alt
@@ -133,6 +134,10 @@
                 </li>
                 <li><a href="/don-hang/hien-thi" aria-expanded="false"><i
                         class="icon icon-chart-bar-33"></i>Đơn hàng online</a>
+                </li>
+                <li><a href="/doi-tra/hien-thi" aria-expanded="false">
+                    <i class="icon icon-world-2"></i>
+                    Đổi trả</a>
                 </li>
 
                 <li class="nav-label">Quản lý</li>

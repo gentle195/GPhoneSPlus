@@ -22,6 +22,8 @@ import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -157,7 +159,7 @@ public class BanHangTaiQuayController {
         HoaDon hd = hoaDonService.findById(id);
         idHoaDon = id;
         hoaDonnn = hd;
-        model.addAttribute("HoaDon", hoaDonnn);
+        model.addAttribute("HoaDon", hd);
         List<HoaDon> list = hoaDonService.find();
         model.addAttribute("listHoaDon", list);
         List<HoaDonChiTiet> listHDCT = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
@@ -266,22 +268,6 @@ public class BanHangTaiQuayController {
                                        @ModelAttribute("HoaDon") HoaDon hoaDon, @ModelAttribute("modalAddKhachHang") KhachHang khachHang
     ) {
         List<ChiTietSanPham> listCT = chiTietSanPhamService.search(search);
-        model.addAttribute("listChiTietSanPham", listCT);
-        List<HoaDon> list = hoaDonService.find();
-        model.addAttribute("listHoaDon", list);
-        model.addAttribute("HoaDon", hoaDonnn);
-        model.addAttribute("listHang", hangSanPhamService.findAll0());
-        model.addAttribute("listMauSac", mauSacService.findAll0());
-        model.addAttribute("listChip", chipService.findAll0());
-        model.addAttribute("listRam", ramService.findAll0());
-        model.addAttribute("listRom", romService.findAll0());
-        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
-        model.addAttribute("listManHinh", manHinhService.findAll0());
-        model.addAttribute("listCamera", cameraService.findAll0());
-//        model.addAttribute("listNhanVien", nhanVienService.findAll());
-        model.addAttribute("listKhachHang", khachHangService.findAll0());
-        model.addAttribute("listDiaChi", diaChiService.findAll0());
-        model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
         return listCT;
 
     }
@@ -309,7 +295,16 @@ public class BanHangTaiQuayController {
         hdct.setImei(imei);
         hdct.setHoaDon(hoaDonnn);
         hdct.setTinhTrang(0);
-        hdct.setDonGia(imei.getChiTietSanPham().getGiaBan());
+        if (imei.getChiTietSanPham().getKhuyenMai()==null) {
+            hdct.setDonGia(imei.getChiTietSanPham().getGiaBan());
+        } else {
+            System.out.println(108);
+            BigDecimal giam = BigDecimal.valueOf(imei.getChiTietSanPham().getKhuyenMai().getSoTienGiam()).divide(BigDecimal.valueOf(100));
+
+// Sử dụng phương thức multiply() để nhân giá tiền với tỷ lệ giảm giá
+            hdct.setDonGia(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam)));
+            System.out.println(giam);
+        }
         hdct.setSoLuong(1);
         hoaDonChiTietService.add(hdct);
         ChiTietSanPham ct = chiTietSanPhamService.getChiTiet(id);
@@ -455,8 +450,11 @@ public class BanHangTaiQuayController {
 //        hd.setNgayShip(date);
         hd.setGhiChu(hoaDon.getGhiChu());
         hd.setTinhTrang(1);
+        hd.setTinhTrangGiaoHang(0);
+        hd.setNguoiNhan(hoaDon.getKhachHang().getHoTen());
         hoaDonService.thanhToan(hd);
         idHoaDon = id;
+        hoaDonnn = hd;
         model.addAttribute("HoaDon", hoaDonService.findById(id));
         model.addAttribute("listKhachHang", khachHangService.khachHangThanhToan(id));
         model.addAttribute("listDiaChi", diaChiService.diaChiThanhToan(hoaDonService.findById(id).getKhachHang().getId()));
@@ -476,11 +474,14 @@ public class BanHangTaiQuayController {
         hd.setTongTien(hoaDon.getTongTien());
         hd.setQuyDoi(hoaDon.getQuyDoi());
         hd.setSdt(hoaDon.getSdt());
+        hd.setTinhTrangGiaoHang(3);
+        hd.setPhiShip(BigDecimal.valueOf(0));
+        hd.setNguoiNhan(hoaDon.getNguoiNhan());
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         hd.setNgayCapNhat(date);
-//        hd.setNgayNhan(date);
-//        hd.setNgayShip(date);
+        hd.setNgayNhan(date);
+        hd.setNgayShip(date);
         hd.setGhiChu(hoaDon.getGhiChu());
         hd.setTinhTrang(2);
         hd.setNgayThanhToan(date);
@@ -599,7 +600,16 @@ public class BanHangTaiQuayController {
             hdct.setImei(imei);
             hdct.setHoaDon(hoaDonnn);
             hdct.setTinhTrang(0);
-            hdct.setDonGia(imei.getChiTietSanPham().getGiaBan());
+            if (imei.getChiTietSanPham().getKhuyenMai()==null) {
+                hdct.setDonGia(imei.getChiTietSanPham().getGiaBan());
+            } else {
+                System.out.println(108);
+                BigDecimal giam = BigDecimal.valueOf(imei.getChiTietSanPham().getKhuyenMai().getSoTienGiam()).divide(BigDecimal.valueOf(100));
+
+// Sử dụng phương thức multiply() để nhân giá tiền với tỷ lệ giảm giá
+                hdct.setDonGia(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam)));
+                System.out.println(giam);
+            }
             hdct.setSoLuong(1);
             hoaDonChiTietService.add(hdct);
             ChiTietSanPham ct = chiTietSanPhamService.getChiTiet(imei.getId());

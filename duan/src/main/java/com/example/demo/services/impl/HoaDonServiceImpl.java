@@ -361,9 +361,10 @@ public class HoaDonServiceImpl implements HoaDonService {
 
             htmlContentBuilder.append("<h3>").append("Thông tin đơn hàng").append("</h1>");
             htmlContentBuilder.append("<p>Mã đơn hàng: ").append(hoaDon.getMa()).append("</p>");
-            htmlContentBuilder.append("<p>Ngày mua: ").append(dateFormat.format(hoaDon.getNgayThanhToan())).append("</p>");
-            htmlContentBuilder.append("<p>Khách hàng: ").append(hoaDon.getKhachHang().getHoTen()).append("</p>");
-            htmlContentBuilder.append("<p>Số điện thoại khách hàng: ").append(hoaDon.getSdt()).append("</p>");
+            htmlContentBuilder.append("<p>Ngày mua: ").append(dateFormat.format(hoaDon.getNgayTao())).append("</p>");
+            htmlContentBuilder.append("<p>Khách hàng đặt: ").append(hoaDon.getKhachHang().getHoTen()).append("</p>");
+            htmlContentBuilder.append("<p>Người nhận: ").append(hoaDon.getNguoiNhan()).append("</p>");
+            htmlContentBuilder.append("<p>Số điện thoại người nhận: ").append(hoaDon.getSdt()).append("</p>");
             htmlContentBuilder.append("<p>Loại hóa đơn: ").append(hoaDon.getLoai() == 0 ? "Hóa đơn tại quầy" : "Hóa đơn Online").append("</p>");
             htmlContentBuilder.append("<p>Hình thức thanh toán: ").append(hoaDon.getHinhThucThanhToan() == 0 ? "Tiền mặt" : "Chuyển khoản").append("</p>");
             htmlContentBuilder.append("<p>Trạng thái đơn: Đã thanh toán</p>");
@@ -392,6 +393,7 @@ public class HoaDonServiceImpl implements HoaDonService {
 
             // Thêm tổng tiền và các thông tin khác của hóa đơn nếu cần
             htmlContentBuilder.append("<p>Tổng giá trị đơn hàng: ").append(formattedTongTienDonHang).append("</p>");
+            htmlContentBuilder.append("<p>Phí Ship: ").append(hoaDon.getPhiShip()).append("</p>");
 //            htmlContentBuilder.append("<p>Tiền giảm: ").append(formattedTienGiam).append("</p>");
 //            htmlContentBuilder.append("<p>Tổng tiền thanh toán: ").append(formattedTongTienHoaDon).append("</p>");
 
@@ -547,9 +549,10 @@ public class HoaDonServiceImpl implements HoaDonService {
 
             htmlContentBuilder.append("<h3>").append("Thông tin đơn hàng").append("</h1>");
             htmlContentBuilder.append("<p>Mã đơn hàng: ").append(hoaDon.getMa()).append("</p>");
-            htmlContentBuilder.append("<p>Ngày mua: ").append(dateFormat.format(hoaDon.getNgayThanhToan())).append("</p>");
-            htmlContentBuilder.append("<p>Khách hàng: ").append(hoaDon.getKhachHang().getHoTen()).append("</p>");
-            htmlContentBuilder.append("<p>Số điện thoại khách hàng: ").append(hoaDon.getSdt()).append("</p>");
+            htmlContentBuilder.append("<p>Ngày mua: ").append(dateFormat.format(hoaDon.getNgayTao())).append("</p>");
+            htmlContentBuilder.append("<p>Khách hàng đặt: ").append(hoaDon.getKhachHang().getHoTen()).append("</p>");
+            htmlContentBuilder.append("<p>Người nhận: ").append(hoaDon.getNguoiNhan()).append("</p>");
+            htmlContentBuilder.append("<p>Số điện thoại người nhận: ").append(hoaDon.getSdt()).append("</p>");
             htmlContentBuilder.append("<p>Loại hóa đơn: ").append(hoaDon.getLoai() == 0 ? "Hóa đơn tại quầy" : "Hóa đơn Online").append("</p>");
             htmlContentBuilder.append("<p>Hình thức thanh toán: ").append(hoaDon.getHinhThucThanhToan() == 0 ? "Tiền mặt" : "Chuyển khoản").append("</p>");
             htmlContentBuilder.append("<p>Trạng thái đơn: Đã thanh toán</p>");
@@ -579,6 +582,7 @@ public class HoaDonServiceImpl implements HoaDonService {
 
             // Thêm tổng tiền và các thông tin khác của hóa đơn nếu cần
             htmlContentBuilder.append("<p>Tổng giá trị đơn hàng: ").append(formattedTongTienDonHang).append("</p>");
+            htmlContentBuilder.append("<p>Phí Ship: ").append(hoaDon.getPhiShip()).append("</p>");
 //            htmlContentBuilder.append("<p>Tiền giảm: ").append(formattedTienGiam).append("</p>");
 //            htmlContentBuilder.append("<p>Tổng tiền thanh toán: ").append(formattedTongTienHoaDon).append("</p>");
 

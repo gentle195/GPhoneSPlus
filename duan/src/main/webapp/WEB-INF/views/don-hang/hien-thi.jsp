@@ -52,7 +52,7 @@
                     <div class="loc" style="color:black;">
                         <form:form action="/don-hang/loc" method="post" modelAttribute="donHang">
                             <div class="row" style="margin-top: 10px">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <select id="selectKhachHang1" name="khachHang" class="form-control select2"
@@ -66,7 +66,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <select id="selectNhanVien1" name="nhanVien" class="form-control select2"
@@ -79,20 +79,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="form-group row">
-                                        <div class="col-sm-12">
-                                            <select id="selectDiaChi1" name="diaChi" class="form-control select2"
-                                                    style="font-weight: bold; width: 100%">
-                                                <option selected disabled>Địa chỉ</option>
-                                                <c:forEach items="${listDiaChi}" var="DiaChi">
-                                                    <option value="${DiaChi.id}">${DiaChi.diaChi}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <select id="selectTrangThai1" name="trangThai" class="form-control select2"
@@ -102,10 +89,6 @@
                                                 <option value="1">Hóa đơn đã xác nhận</option>
                                                 <option value="3">Hóa đơn chờ thanh toán</option>
                                                 <option value="2">Hóa đơn đã thanh toán</option>
-                                                    <%--                                                <option value="4">Nhập địa chỉ hoặc chọn</option>--%>
-                                                    <%--                                                <option value="5">Nhập địa chỉ hoặc chọn</option>--%>
-                                                    <%--                                                <option value="6">Nhập địa chỉ hoặc chọn</option>--%>
-                                                    <%--                                                <option value="7">Nhập địa chỉ hoặc chọn</option>--%>
                                                 <option value="8">Hóa đơn đã hủy</option>
                                             </select>
                                         </div>
@@ -196,7 +179,7 @@
                     </div>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table id="example" class="display" style="color: black; width: 2000px">
+                        <table id="example" class="display" style="color: black; width: 2500px">
                             <thead>
                             <tr>
                                 <th>Mã hóa đơn</th>
@@ -204,7 +187,6 @@
                                 <th>Tên khách hàng</th>
                                 <th>Tên nhân viên</th>
                                 <th>Địa chỉ</th>
-                                <%--                                <th>Điểm quy đổi</th>--%>
                                 <th>SĐT</th>
                                 <th>Tổng tiền</th>
                                 <th>Trạng thái hóa đơn</th>
@@ -225,8 +207,6 @@
                                     <td>${donHang.khachHang.hoTen}</td>
                                     <td>${donHang.nhanVien.hoTen}</td>
                                     <td>${donHang.diaChi.diaChi}</td>
-
-                                        <%--                                    <td>${donHang.quyDoi.soTienQuyDoi}</td>--%>
                                     <td>${donHang.sdt}</td>
                                     <td>${donHang.tongTien}</td>
                                     <td>
@@ -234,8 +214,7 @@
                                         <c:if test="${donHang.tinhTrang == 1}">Đã xác nhận</c:if>
                                         <c:if test="${donHang.tinhTrang == 2}">Đã thanh toán</c:if>
                                         <c:if test="${donHang.tinhTrang == 3}">Chờ thanh toán</c:if>
-                                        <c:if test="${donHang.tinhTrang == 7}">Giao trễ</c:if>
-
+                                        <c:if test="${donHang.tinhTrang == 8}">Đã hủy</c:if>
 
                                     </td>
                                     <td>
@@ -259,50 +238,41 @@
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                             <i class="ti-file btn-icon-prepend"></i>
                                             Detail</a>
-
-                                            <%--                                        <c:if test="${donHang.tinhTrang == 0}">--%>
-                                            <%--                                            <a href="/don-hang/xac-nhan/${donHang.id}"--%>
-                                            <%--                                               class="btn btn-info btn-icon-text"--%>
-                                            <%--                                               tabindex="-1"--%>
-                                            <%--                                               role="button"--%>
-                                            <%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">--%>
-                                            <%--                                                <i class="fas fa-times-circle"></i>--%>
-                                            <%--                                                Xác nhận đơn hàng</a>--%>
-                                            <%--                                        </c:if>--%>
+                                        <c:if test="${donHang.nhanVien== null && (donHang.tinhTrang == 2 || donHang.tinhTrang==3)}">
+                                            <a href="/don-hang/xac-nhan/${donHang.id}"
+                                               class="btn btn-info btn-icon-text"
+                                               tabindex="-1"
+                                               role="button"
+                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-check-circle-fill"
+                                                     viewBox="0 0 16 16">
+                                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                                </svg>
+                                                Xác nhận đơn hàng</a>
+                                        </c:if>
                                         <c:if test="${donHang.tinhTrangGiaoHang == 1}">
                                             <a href="/don-hang/xac-nhan-giao-hang/${donHang.id}"
                                                class="btn btn-info btn-icon-text"
                                                tabindex="-1"
                                                role="button"
                                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                                <i class="fas fa-times-circle"></i>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
+                                                    <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456M12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+                                                </svg>
                                                 Giao hàng</a>
-<%--                                            <a href="/don-hang/view-update/${donHang.id}"--%>
-<%--                                               class="btn btn-info btn-icon-text"--%>
-<%--                                               tabindex="-1"--%>
-<%--                                               role="button"--%>
-<%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">--%>
-<%--                                                <i class="fas fa-times-circle"></i>--%>
-<%--                                                Update thông tin</a>--%>
                                         </c:if>
 
                                         <c:if test="${donHang.tinhTrangGiaoHang == 2 && (donHang.tinhTrang==2||donHang.tinhTrang==3)}">
-                                            <%--                                            <a href="/don-hang/xuat-pdf/${donHang.id}"--%>
-                                            <%--                                               class="btn btn-outline-success btn-icon-text"--%>
-                                            <%--                                               tabindex="-1"--%>
-                                            <%--                                               role="button"--%>
-                                            <%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">--%>
-                                            <%--                                                <i class="ti-file btn-icon-prepend"></i>--%>
-                                            <%--                                                Xuất PDF</a>--%>
                                             <a href="/don-hang/xac-nhan-giao-hang-hoan-tat/${donHang.id}"
                                                class="btn btn-outline-success btn-icon-text"
                                                tabindex="-1"
                                                role="button"
                                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                                <i class="ti-file btn-icon-prepend"></i>
-                                                Đã giao</a>
-
-
+                                                <img src="/uploads/shipped.png">
+                                                Giao hàng hoàn tất
+                                            </a>
                                         </c:if>
                                         <c:if test="${donHang.tinhTrangGiaoHang == 2 && donHang.hinhThucThanhToan == 0}">
 
@@ -315,84 +285,37 @@
                                                 Hủy</a>
 
                                         </c:if>
-
-
-
-                                    <%--                                        <c:if test="${donHang.tinhTrang == 3}">--%>
-                                            <%--                                            <a href="/don-hang/view-update/${donHang.id}"--%>
-                                            <%--                                               class="btn btn-info btn-icon-text"--%>
-                                            <%--                                               tabindex="-1"--%>
-                                            <%--                                               role="button"--%>
-                                            <%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">--%>
-                                            <%--                                                <i class="fas fa-times-circle"></i>--%>
-                                            <%--                                                Update thông tin</a>--%>
-                                            <%--                                        </c:if>--%>
-
+                                        <c:if test="${(donHang.tinhTrangGiaoHang==0||donHang.tinhTrangGiaoHang==1)&&(donHang.tinhTrang == 2 || donHang.tinhTrang==3)}">
+                                            <a href="/don-hang/view-update/${donHang.id}"
+                                               class="btn btn-info btn-icon-text"
+                                               tabindex="-1"
+                                               role="button"
+                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                                <i class="ti-reload btn-icon-prepend"></i>
+                                                Update thông tin</a>
+                                            <a href="/don-hang/xuat-pdf/${donHang.id}"
+                                               class="btn btn-outline-success btn-icon-text"
+                                               tabindex="-1"
+                                               role="button"
+                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                                <i class="ti-file btn-icon-prepend"></i>
+                                                Xuất PDF</a>
+                                        </c:if>
+                                        <c:if test="${donHang.tinhTrang == 2 || donHang.tinhTrang==3}">
+                                            <a href="/don-hang/xuat-pdf/${donHang.id}"
+                                               class="btn btn-outline-success btn-icon-text"
+                                               tabindex="-1"
+                                               role="button"
+                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                                <i class="ti-file btn-icon-prepend"></i>
+                                                Xuất PDF</a>
+                                        </c:if>
                                     </td>
                                 </tr>
                             </c:forEach>
                             </tbody>
                         </table>
                     </div>
-                    <br>
-                    <br>
-                    <%--phân trang--%>
-                    <%--                    <c:if test="${dem==0}">--%>
-                    <%--                        <div align="center">--%>
-                    <%--                            <div class="btn-group" role="group" aria-label="Basic example">--%>
-                    <%--                                <ul class="pagination justify-content-center pagination-lg">--%>
-                    <%--                                    <li class="page-item"><a class="page-link" href="/don-hang/hien-thi?pageNum=0"><</a>--%>
-                    <%--                                    </li>--%>
-                    <%--                                    <c:forEach begin="1" end="${total}" varStatus="status">--%>
-                    <%--                                        <li class="page-item">--%>
-                    <%--                                            <a href="${pageContext.request.contextPath}/don-hang/hien-thi?pageNum=${status.index -1}"--%>
-                    <%--                                               class="page-link">${status.index}</a>--%>
-                    <%--                                        </li>--%>
-                    <%--                                    </c:forEach>--%>
-                    <%--                                    <li class="page-item"><a class="page-link"--%>
-                    <%--                                                             href="/don-hang/hien-thi?pageNum=${total-1}">></a>--%>
-                    <%--                                    </li>--%>
-                    <%--                                </ul>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </c:if>--%>
-                    <%--                    <c:if test="${dem==1}">--%>
-                    <%--                        <div align="center">--%>
-                    <%--                            <div class="btn-group" role="group" aria-label="Basic example">--%>
-                    <%--                                <ul class="pagination justify-content-center pagination-lg">--%>
-                    <%--                                    <li class="page-item"><a class="page-link" href="/don-hang/search?pageNum=0"><</a>--%>
-                    <%--                                    </li>--%>
-                    <%--                                    <c:forEach begin="1" end="${total}" varStatus="status">--%>
-                    <%--                                        <li class="page-item">--%>
-                    <%--                                            <a href="${pageContext.request.contextPath}/don-hang/search?pageNum=${status.index -1}"--%>
-                    <%--                                               class="page-link">${status.index}</a>--%>
-                    <%--                                        </li>--%>
-                    <%--                                    </c:forEach>--%>
-                    <%--                                    <li class="page-item"><a class="page-link"--%>
-                    <%--                                                             href="/don-hang/search?pageNum=${total-1}">></a>--%>
-                    <%--                                    </li>--%>
-                    <%--                                </ul>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </c:if>--%>
-                    <%--                    <c:if test="${dem==2}">--%>
-                    <%--                        <div align="center">--%>
-                    <%--                            <div class="btn-group" role="group" aria-label="Basic example">--%>
-                    <%--                                <ul class="pagination justify-content-center pagination-lg">--%>
-                    <%--                                    <li class="page-item"><a class="page-link" href="/don-hang/loc?pageNum=0"><</a></li>--%>
-                    <%--                                    <c:forEach begin="1" end="${total}" varStatus="status">--%>
-                    <%--                                        <li class="page-item">--%>
-                    <%--                                            <a href="${pageContext.request.contextPath}/don-hang/loc?pageNum=${status.index -1}"--%>
-                    <%--                                               class="page-link">${status.index}</a>--%>
-                    <%--                                        </li>--%>
-                    <%--                                    </c:forEach>--%>
-                    <%--                                    <li class="page-item"><a class="page-link"--%>
-                    <%--                                                             href="/don-hang/loc?pageNum=${total-1}">></a>--%>
-                    <%--                                    </li>--%>
-                    <%--                                </ul>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </c:if>--%>
                 </div>
             </div>
         </div>
