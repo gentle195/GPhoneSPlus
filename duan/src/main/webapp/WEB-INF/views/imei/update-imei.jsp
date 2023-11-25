@@ -47,7 +47,9 @@
                 <div class="form-group">
                     <form:select path="chiTietSanPham" class="form-control"
                                  cssStyle="font-weight: bold; width: 100%" id="selectSanPham">
-                        <option selected disabled>Sản phẩm</option>
+                        <c:if test="${imeiupdate.chiTietSanPham==null}">
+                            <option selected disabled>Sản phẩm</option>
+                        </c:if>
                         <c:forEach items="${listCTSP}" var="ctsp">
                             <option value="${ctsp.id}">${ctsp.sanPham.ten} - ${ctsp.mauSac.ten}
                                 - ${ctsp.ram.dungLuong}- ${ctsp.rom.dungLuong}</option>

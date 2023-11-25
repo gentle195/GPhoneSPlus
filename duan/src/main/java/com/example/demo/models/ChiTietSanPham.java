@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -95,7 +96,8 @@ public class ChiTietSanPham {
     @JoinColumn(name = "id_pin")
     private Pin pin;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_khuyen_mai")
     private KhuyenMai khuyenMai;
 

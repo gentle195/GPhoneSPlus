@@ -40,16 +40,6 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
                                                             <form:label class="col-sm-3 col-form-label"
-                                                                        path="ma">Mã Hóa Đơn:</form:label>
-                                                            <div class="col-sm-9">
-                                                                <form:input class="form-control" path="ma"
-                                                                            readonly="true"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group row">
-                                                            <form:label class="col-sm-3 col-form-label"
                                                                         path="nhanVien">Nhân Viên:</form:label>
                                                             <div class="col-sm-9">
                                                                 <form:select path="nhanVien"
@@ -60,8 +50,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
                                                             <form:label class="col-sm-3 col-form-label"
@@ -75,6 +63,18 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <form:label class="col-sm-3 col-form-label"
+                                                                        path="nguoiNhan">Người nhận hàng:</form:label>
+                                                            <div class="col-sm-9">
+                                                                <form:input class="form-control" path="nguoiNhan"
+                                                                           />
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
                                                             <form:label class="col-sm-3 col-form-label"
@@ -85,9 +85,11 @@
                                                                         <form:select path="diaChi"
                                                                                      class="form-control"
                                                                                      id="selectDiaChi">
-                                                                            <form:options items="${listDiaChi}"
-                                                                                          itemLabel="diaChi"
-                                                                                          itemValue="id"/>
+                                                                            <c:forEach items="${listDiaChi}" var="ht">
+                                                                                <option value="${ht.id}">${ht.diaChi} - ${ht.quan}
+                                                                                    - ${ht.huyen}
+                                                                                    - ${ht.thanhPho}</option>
+                                                                            </c:forEach>
                                                                         </form:select>
                                                                     </div>
                                                                     <div class="col-2">
@@ -108,8 +110,7 @@
                                                             <form:label class="col-sm-3 col-form-label"
                                                                         path="sdt">Số điện thoại:</form:label>
                                                             <div class="col-sm-9">
-                                                                <form:input class="form-control" path="sdt"
-                                                                            readonly="true"/>
+                                                                <form:input class="form-control" path="sdt"/>
                                                             </div>
                                                         </div>
                                                     </div>
