@@ -427,7 +427,7 @@
                                    value="${listghct.get(0).gioHang.khachHang.sdt}"
                                    placeholder="Số điện thoại">
                         </div>
-                        <div style="color: red" id="tbdiachi1"></div>
+                        <div style="color: red" id="tbdiachi1">${thongbaodiachiHN}</div>
                         <button style="float: right" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#modalthemdiachidathang">Thêm địa chỉ
                         </button>
