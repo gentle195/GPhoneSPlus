@@ -5,8 +5,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<%--API địa chỉ--%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <%--phan trang--%>
+<%--phan trang--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -494,7 +497,7 @@
                     </div>
 
                     <div id="khungphuongthucthanhtoans" style="display: none">
-                        <div style="width: 68%;float: right">Thanh toán  khi nhận hàng</div>
+                        <div style="width: 68%;float: right" id="tenphuongthucthanhtoan">Thanh toán  khi nhận hàng</div>
                         <LABEL style="">Phương thức thanh toán:</LABEL>
                         <br><br>
                         <div>
@@ -562,18 +565,34 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <div style="margin-left:2.5cm">
-                            <div>Địa chỉ cụ thể:<label style="background: white;color: red;border: 1px solid white"
-                                                       id="tb1"></label></div>
-                            <input type="text" id="themdiachidathangdiachi" name="diachi"><br>
-                            <div>Quận/Huyện:<label style="background: white;color: red;border: 1px solid white"
-                                                   id="tb2"></label></div>
-                            <input type="text" id="themdiachidathangquan" name="quan"><br>
-                            <div>Phường/xã:<label style="background: white;color: red;border: 1px solid white"
-                                                  id="tb3"></label></div>
-                            <input type="text" id="themdiachidathanghuyen" name="huyen"><br>
+
                             <div>Tỉnh/thành:<label style="background: white;color: red;border: 1px solid white"
                                                    id="tb4"></label></div>
-                            <input type="text" id="themdiachidathangthanhpho" name="thanhpho"><br>
+                            <select name="" id="province" style="width: 5cm">
+                                <%--                                    <option  value="null">Tỉnh/thành</option>--%>
+                            </select>
+                            <input type="text" id="themdiachidathangthanhpho" name="thanhpho" style="display: none"><br>
+
+
+                            <div>Quận/Huyện:<label style="background: white;color: red;border: 1px solid white"
+                                                   id="tb2"></label></div>
+                            <select name="" id="district" style="width: 5cm">
+                                <%--                                    <option  value="null">Quận/Huyện</option>--%>
+                            </select>
+                            <input type="text" id="themdiachidathangquan" name="quan" style="display: none"><br>
+
+                            <div>Phường/xã:<label style="background: white;color: red;border: 1px solid white"
+                                                  id="tb3"></label></div>
+                            <select name="" id="ward" style="width: 5cm">
+                                <%--                                    <option   value="null">Phường/xã</option>--%>
+                            </select>
+                            <input type="text" id="themdiachidathanghuyen" name="huyen" style="display: none"><br>
+
+                            <div>Địa chỉ cụ thể:<label style="background: white;color: red;border: 1px solid white"
+                                                       id="tb1"></label></div>
+                            <input type="text" id="themdiachidathangdiachi" name="diachi" style="width: 5cm" ><br>
+
+<%--                            <h2 id="result"></h2>--%>
                         </div>
                         <input type="text" value="${listghct.get(0).gioHang.id}" name="idgh" style="display: none">
                     </div>
@@ -677,11 +696,14 @@
 <script>
     function chonphuongthucthanhtoanVNP() {
         document.getElementById('phuongthucthanhtoanform').value='2';
+        document.getElementById('tenphuongthucthanhtoan').innerHTML='Thanh toán VNP';
 
     }
 
     function chonphuongthucthanhtoantienmat() {
         document.getElementById('phuongthucthanhtoanform').value='1';
+        document.getElementById('tenphuongthucthanhtoan').innerHTML='Thanh toán khi nhận hàng';
+
     }
 
 </script>
@@ -703,6 +725,7 @@
     var btnAgree = document.getElementById("btnAgree");
     btnAgree.addEventListener("click",function (){
         checkBox.checked=true;
+        document.getElementById('khungphuongthucthanhtoans').style.display=''
         button.style.display='';
 
 
@@ -834,6 +857,26 @@
         document.getElementById('taikhoancuatoi').click();
     }
 </script>
+<script>
+    // $('#province').select2({
+    //     theme: 'bootstrap-5',
+    //     dropdownParent: $('#modalthemdiachidathang')
+    //
+    // });
+
+    // $('#district').select2({
+    //     theme: 'bootstrap-5',
+    //     dropdownParent: $('#modalthemdiachidathang')
+    //
+    // });
+    //
+    // $('#ward').select2({
+    //     theme: 'bootstrap-5',
+    //     dropdownParent: $('#modalthemdiachidathang')
+    //
+    // });
+
+</script>
 <!-- jQuery Plugins -->
 <script src="/jsbanhang/jquery.min.js"></script>
 <script src="/jsbanhang/bootstrap.min.js"></script>
@@ -845,6 +888,9 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
 
+
+
+<script src="/jsbanhang/API.js"></script>
 
 </body>
 </html>

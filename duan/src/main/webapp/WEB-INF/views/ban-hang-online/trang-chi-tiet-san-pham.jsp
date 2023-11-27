@@ -606,7 +606,7 @@
     </div>
 </div>
 
-<main id="content1">
+<main id="content1" style=" ">
     <!-- SECTION -->
     <div class="section">
         <!-- container -->
@@ -754,6 +754,7 @@
 
                 </div>
             </div>
+
             <!-- /Product details -->
             <!-- Product main img -->
             <%--            class="col-md-5 col-md-push-2"--%>

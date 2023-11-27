@@ -50,7 +50,9 @@ public class HoaDonChiTiet {
     private IMEI imei;
 
 
-    public  double phantram(){
-        return 100-Double.valueOf(String.valueOf(donGia))/Double.valueOf(String.valueOf(imei.getChiTietSanPham().getGiaBan()))*100;
+    public  Integer phantram(){
+        Double giam=100-Double.valueOf(String.valueOf(donGia))/Double.valueOf(String.valueOf(imei.getChiTietSanPham().getGiaBan()))*100;
+        Integer phanTramGiam = giam.intValue(); // Chuyển đổi giá trị Double thành Integer
+        return phanTramGiam;
     }
 }

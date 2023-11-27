@@ -123,8 +123,20 @@
                         <c:if test="${hd.tinhTrangGiaoHang==0}">
                             <input type="text" value="Chờ xử lý" disabled style="width: 97%" class="form-control"/>
                         </c:if>
-                        <c:if test="${hd.tinhTrangGiaoHang!=0}">
-                            <input type="text" value="Chưa tìm hiểu" disabled style="width: 97%"
+                        <c:if test="${hd.tinhTrangGiaoHang==1}">
+                            <input type="text" value="Chuẩn bị giao" disabled style="width: 97%"
+                                   class="form-control"/>
+                        </c:if>
+                        <c:if test="${hd.tinhTrangGiaoHang==2}">
+                            <input type="text" value="Đang giao" disabled style="width: 97%"
+                                   class="form-control"/>
+                        </c:if>
+                        <c:if test="${hd.tinhTrangGiaoHang==3}">
+                            <input type="text" value="Giao hàng hoàn tất" disabled style="width: 97%"
+                                   class="form-control"/>
+                        </c:if>
+                        <c:if test="${hd.tinhTrangGiaoHang==8}">
+                            <input type="text" value="Đã hủy" disabled style="width: 97%"
                                    class="form-control"/>
                         </c:if>
                     </div>
