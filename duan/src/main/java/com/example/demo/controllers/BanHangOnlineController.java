@@ -723,84 +723,100 @@ public String nutdathang(
         @RequestParam("nn1") String nguoinhan
 ) {
 
-
-
-    if(tienmaORvnp==1) {
-        //        them hd
-        long millis = System.currentTimeMillis();
-        Date date = new Date(millis);
-        HoaDon hd = new HoaDon();
-        Integer sl = hoaDonService.findAll().size();
-        String mhd = "";
-        if (sl < 10) {
-            mhd = "MHD0" + sl;
-        } else {
-            mhd = "MHD" + sl;
-        }
-        hd.setMa(mhd);
+  if(diaChiService.findById(iddc).getThanhPho().equalsIgnoreCase("Thành phố Hà Nội")){
+      if(tienmaORvnp==1) {
+          //        them hd
+          long millis = System.currentTimeMillis();
+          Date date = new Date(millis);
+          HoaDon hd = new HoaDon();
+          Integer sl = hoaDonService.findAll().size();
+          String mhd = "";
+          if (sl < 10) {
+              mhd = "MHD0" + sl;
+          } else {
+              mhd = "MHD" + sl;
+          }
+          hd.setMa(mhd);
 //        hd.setSdt(gioHangService.findById(idgh).getKhachHang().getSdt());
-        hd.setSdt(sdt);
-        hd.setNguoiNhan(nguoinhan);
-        hd.setTongTien(tongtien);
-        hd.setNgayTao(date);
-        hd.setNgayCapNhat(date);
-        hd.setTinhTrang(0);
-        hd.setLoai(1);
-        hd.setHinhThucThanhToan(2);
-        hd.setTinhTrangGiaoHang(0);
-        KhachHang kh = khachHangService.findById(gioHangService.findById(idgh).getKhachHang().getId());
-        hd.setKhachHang(kh);
-        DiaChi dc = diaChiService.findById(iddc);
-        hd.setDiaChi(dc);
-        hoaDonService.add(hd);
+          hd.setSdt(sdt);
+          hd.setNguoiNhan(nguoinhan);
+          hd.setTongTien(tongtien);
+          hd.setNgayTao(date);
+          hd.setNgayCapNhat(date);
+          hd.setTinhTrang(0);
+          hd.setLoai(1);
+          hd.setHinhThucThanhToan(2);
+          hd.setTinhTrangGiaoHang(0);
+          KhachHang kh = khachHangService.findById(gioHangService.findById(idgh).getKhachHang().getId());
+          hd.setKhachHang(kh);
+          DiaChi dc = diaChiService.findById(iddc);
+          hd.setDiaChi(dc);
+          hoaDonService.add(hd);
 //    them hdct
-        List<GioHangChiTiet> listghct = banHangOnlineService.ListghTheoidghvsTT1(idgh);
-        for (int a = 0; a < listghct.size(); a = a + 1) {
-            for (int b = 0; b < listghct.get(a).getSoLuong(); b = b + 1) {
-                HoaDonChiTiet hdct = new HoaDonChiTiet();
-                hdct.setSoLuong(1);
-                hdct.setTinhTrang(0);
-                hdct.setDonGia(listghct.get(a).getDonGiaKhiGiam());
-                HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
-                hdct.setHoaDon(hd1);
-                List<IMEI> listimei = banHangOnlineService.timimeitheoidctspVSttO(listghct.get(a).getChiTietSanPham().getId());
-                hdct.setImei(listimei.get(0));
-                hoaDonChiTietService.add(hdct);
+          List<GioHangChiTiet> listghct = banHangOnlineService.ListghTheoidghvsTT1(idgh);
+          for (int a = 0; a < listghct.size(); a = a + 1) {
+              for (int b = 0; b < listghct.get(a).getSoLuong(); b = b + 1) {
+                  HoaDonChiTiet hdct = new HoaDonChiTiet();
+                  hdct.setSoLuong(1);
+                  hdct.setTinhTrang(0);
+                  hdct.setDonGia(listghct.get(a).getDonGiaKhiGiam());
+                  HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
+                  hdct.setHoaDon(hd1);
+                  List<IMEI> listimei = banHangOnlineService.timimeitheoidctspVSttO(listghct.get(a).getChiTietSanPham().getId());
+                  hdct.setImei(listimei.get(0));
+                  hoaDonChiTietService.add(hdct);
 // cập nhật trạng thái imei
-                IMEI imei = listimei.get(0);
-                imei.setTinhTrang(3);
-                imei.setNgayCapNhat(date);
-                imeiService.add(imei);
-            }
-        }
+                  IMEI imei = listimei.get(0);
+                  imei.setTinhTrang(3);
+                  imei.setNgayCapNhat(date);
+                  imeiService.add(imei);
+              }
+          }
 //xoa ghct TT=0 theo idgh
-        banHangOnlineService.xoaghcttheoIDGHvsTTO(idgh);
+          banHangOnlineService.xoaghcttheoIDGHvsTTO(idgh);
 //cập nhật hóa đơn; thanh toán khi nhận hàng
-        HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
-        hd1.setTinhTrang(3);
-        hd1.setHinhThucThanhToan(0);
-        hoaDonService.add(hd1);
+          HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
+          hd1.setTinhTrang(3);
+          hd1.setHinhThucThanhToan(0);
+          hoaDonService.add(hd1);
+//
+          model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(gioHangService.findById(idgh).getKhachHang().getId())).get(0).getId()));
+          model.addAttribute("tttong", 1);
+          model.addAttribute("banhangonline", banHangOnlineService);
+          if (idkhachhang.equals("1")) {
+              model.addAttribute("idkhachhang", idkhachhang);
+          } else {
+              model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+              model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+          }
+          return "ban-hang-online/dat_hang_thanh_cong";
 
 
-
-    }else {
+      }else {
 //  thanh toán online
 
-        return "redirect:/pay/"+idgh+"/"+tongtien+"/"+iddc+"/"+sdt+"/"+nguoinhan;
+          return "redirect:/pay/"+idgh+"/"+tongtien+"/"+iddc+"/"+sdt+"/"+nguoinhan;
 
 
-    }
-//
-    model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(gioHangService.findById(idgh).getKhachHang().getId())).get(0).getId()));
-    model.addAttribute("tttong", 1);
-    model.addAttribute("banhangonline", banHangOnlineService);
-    if (idkhachhang.equals("1")) {
-        model.addAttribute("idkhachhang", idkhachhang);
-    } else {
-        model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
-        model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
-    }
-    return "ban-hang-online/dat_hang_thanh_cong";
+      }
+
+  }else {
+      model.addAttribute("listghctTT", banHangOnlineService.ListghctTheoidgh(idgh));
+      model.addAttribute("listghct", banHangOnlineService.ListghTheoidghvsTT1(idgh));
+      model.addAttribute("banhangonline", banHangOnlineService);
+      if (idkhachhang.equals("1")) {
+          model.addAttribute("idkhachhang", idkhachhang);
+      } else {
+          model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+          model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+      }
+      model.addAttribute("thongbaodiachiHN","Không giao hàng ngoài Hà Nội");
+      return "ban-hang-online/trang-san-pham-duoc-chon-thanh-toan";
+
+  }
+
+
+
 }
 
 
