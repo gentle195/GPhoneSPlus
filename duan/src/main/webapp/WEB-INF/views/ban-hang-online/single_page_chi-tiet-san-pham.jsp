@@ -103,52 +103,67 @@
 
 
                     </div>
-                    <br>
+
                     <p>
                     <div class="product-description">
-                        <h3>Thông tin chi tiết sản phẩm:</h3>
-                        <table class="product-info-table">
-                            <tr>
-                                <td class="info-label">Hãng sản phẩm:</td>
-                                <td>${motctsp.sanPham.hangSanPham.ten}</td>
-                            </tr>
-                            <tr>
-                                <td class="info-label">Camera:</td>
-                                <td>${motctsp.sanPham.camera.thongSo}</td>
-                            </tr>
-                            <tr>
-                                <td class="info-label">Màn:</td>
-                                <td>${motctsp.sanPham.manHinh.thongSo}</td>
-                            </tr>
-                            <tr>
-                                <td class="info-label">Màu:</td>
-                                <td>${motctsp.mauSac.ten}</td>
-                            </tr>
-                            <tr>
-                                <td class="info-label">Ram:</td>
-                                <td>${motctsp.ram.dungLuong}</td>
-                            </tr>
-                            <tr>
-                                <td class="info-label">Rom:</td>
-                                <td>${motctsp.rom.dungLuong}</td>
-                            </tr>
-                            <tr>
-                                <td class="info-label">Pin:</td>
-                                <td>${motctsp.pin.loaiPin}</td>
-                            </tr>
-                            <tr>
-                                <td class="info-label">Dung lượng pin:</td>
-                                <td>${motctsp.pin.dungLuongPin.thongSo}</td>
-                            </tr>
-                            <tr>
-                                <td class="info-label">Chip:</td>
-                                <td>${motctsp.chip.ten}</td>
-                            </tr>
-                        </table>
+
                     </div>
 
                     <div class="row">
-                        <button class=" btn btn-info">Xem thêm cấu hình chi tiết</button>
+                        <div class="row">
+                            <button type="button" class=" btn btn-info" data-bs-toggle="modal" data-bs-target="#myModalxemctsp">
+                                Xem thêm cấu hình chi tiết
+                            </button>
+
+
+                            <!-- The Modal -->
+                            <div class="modal" id="myModalxemctsp">
+                                <div class="modal-dialog">
+                                    <div class="modal-content" style="margin-top: 6cm">
+
+                                        <h3>Thông tin chi tiết sản phẩm:</h3>
+                                        <table class="product-info-table">
+                                            <tr>
+                                                <td class="info-label">Hãng sản phẩm:</td>
+                                                <td>${motctsp.sanPham.hangSanPham.ten}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="info-label">Camera:</td>
+                                                <td>${motctsp.sanPham.camera.thongSo}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="info-label">Màn:</td>
+                                                <td>${motctsp.sanPham.manHinh.thongSo}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="info-label">Màu:</td>
+                                                <td>${motctsp.mauSac.ten}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="info-label">Ram:</td>
+                                                <td>${motctsp.ram.dungLuong}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="info-label">Rom:</td>
+                                                <td>${motctsp.rom.dungLuong}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="info-label">Pin:</td>
+                                                <td>${motctsp.pin.loaiPin}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="info-label">Dung lượng pin:</td>
+                                                <td>${motctsp.pin.dungLuongPin.thongSo}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="info-label">Chip:</td>
+                                                <td>${motctsp.chip.ten}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     </p>
 
@@ -210,7 +225,7 @@
 
 
             <!-- Product tab -->
-            <div class="col-md-12">
+            <div class="col-md-12" style="margin-top: 4cm">
                 <div id="product-tab">
                     <!-- product tab nav -->
                     <ul class="tab-nav">
@@ -511,47 +526,16 @@
 
 
                         <div class="product-description">
-                            <h3>Thông tin chi tiết sản phẩm:</h3>
-                            <table class="product-info-table">
-                                <tr>
-                                    <td class="info-label">Hãng sản phẩm:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="info-label">Camera:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="info-label">Màn:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="info-label">Màu:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="info-label">Ram:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="info-label">Rom:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="info-label">Pin:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="info-label">Dung lượng pin:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="info-label">Chip:</td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                        </div>
 
+                        </div>
+                        <div class="row">
+                            <button type="button" class=" btn btn-info" onclick="alert('Sản phẩm đã ngừng bán')">
+                                Xem thêm cấu hình chi tiết
+                            </button>
+
+
+
+                        </div>
                     </div>
                 </div>
                 <!-- /Product details -->
@@ -614,7 +598,7 @@
 
 
                 <!-- Product tab -->
-                <div class="col-md-12">
+                <div class="col-md-12" style="margin-top: 4cm">
                     <div id="product-tab">
                         <!-- product tab nav -->
                         <ul class="tab-nav">

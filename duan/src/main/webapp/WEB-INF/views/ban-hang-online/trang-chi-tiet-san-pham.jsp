@@ -703,54 +703,67 @@
 
 
                     </div>
-                    <br>
-                    <p>
+
+
                     <div class="product-description">
-                        <h3>Thông tin chi tiết sản phẩm:</h3>
-                        <table class="product-info-table">
-                            <tr>
-                                <td class="info-label">Hãng sản phẩm:</td>
-                                <td>${motctsp.sanPham.hangSanPham.ten}</td>
-                            </tr>
-                            <tr>
-                                <td class="info-label">Camera:</td>
-                                <td>${motctsp.sanPham.camera.thongSo}</td>
-                            </tr>
-                            <tr>
-                                <td class="info-label">Màn:</td>
-                                <td>${motctsp.sanPham.manHinh.thongSo}</td>
-                            </tr>
-                            <tr>
-                                <td class="info-label">Màu:</td>
-                                <td>${motctsp.mauSac.ten}</td>
-                            </tr>
-                            <tr>
-                                <td class="info-label">Ram:</td>
-                                <td>${motctsp.ram.dungLuong}</td>
-                            </tr>
-                            <tr>
-                                <td class="info-label">Rom:</td>
-                                <td>${motctsp.rom.dungLuong}</td>
-                            </tr>
-                            <tr>
-                                <td class="info-label">Pin:</td>
-                                <td>${motctsp.pin.loaiPin}</td>
-                            </tr>
-                            <tr>
-                                <td class="info-label">Dung lượng pin:</td>
-                                <td>${motctsp.pin.dungLuongPin.thongSo}</td>
-                            </tr>
-                            <tr>
-                                <td class="info-label">Chip:</td>
-                                <td>${motctsp.chip.ten}</td>
-                            </tr>
-                        </table>
+
                     </div>
 
                     <div class="row">
-                        <button class=" btn btn-info">Xem thêm cấu hình chi tiết</button>
+                        <button type="button" class=" btn btn-info" data-bs-toggle="modal" data-bs-target="#myModalxemctsp">
+                            Xem thêm cấu hình chi tiết
+                        </button>
+
+
+                        <!-- The Modal -->
+                        <div class="modal" id="myModalxemctsp">
+                            <div class="modal-dialog">
+                                <div class="modal-content" style="margin-top: 6cm">
+
+                                    <h3>Thông tin chi tiết sản phẩm:</h3>
+                                    <table class="product-info-table">
+                                        <tr>
+                                            <td class="info-label">Hãng sản phẩm:</td>
+                                            <td>${motctsp.sanPham.hangSanPham.ten}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="info-label">Camera:</td>
+                                            <td>${motctsp.sanPham.camera.thongSo}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="info-label">Màn:</td>
+                                            <td>${motctsp.sanPham.manHinh.thongSo}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="info-label">Màu:</td>
+                                            <td>${motctsp.mauSac.ten}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="info-label">Ram:</td>
+                                            <td>${motctsp.ram.dungLuong}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="info-label">Rom:</td>
+                                            <td>${motctsp.rom.dungLuong}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="info-label">Pin:</td>
+                                            <td>${motctsp.pin.loaiPin}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="info-label">Dung lượng pin:</td>
+                                            <td>${motctsp.pin.dungLuongPin.thongSo}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="info-label">Chip:</td>
+                                            <td>${motctsp.chip.ten}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    </p>
+
 
                 </div>
             </div>
@@ -782,7 +795,7 @@
 
             <!-- Product thumb imgs -->
             <%--            class="col-md-2  col-md-pull-5"--%>
-            <div style=" width: 17.2cm; margin-top: 10px; height: 5cm;" align="center">
+            <div style=" width: 17.2cm;  height: 5cm;" align="center">
                 <div id="product-imgs" style=" width: 5cm;height: 16cm;margin-top: -5.5cm; transform: rotate(270deg);">
 
                     <div class="product-preview">
@@ -811,7 +824,7 @@
 
 
             <!-- Product tab -->
-            <div class="col-md-12">
+            <div class="col-md-12" style="margin-top: 4cm">
                 <div id="product-tab">
                     <!-- product tab nav -->
                     <ul class="tab-nav">
@@ -1085,7 +1098,7 @@
                                             <div class="product" style="margin-left: 1%;width: 24%;">
                                                 <div class="product-img">
                                                     <img src="../../../uploads/${ht.urlAnh}"
-                                                         style="width: 90%;height: 6cm;margin-left: 5%" alt="">
+                                                         style="width: 100%;height: 6cm;" alt="">
                                                     <div class="product-label">
                                                         <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
                                                         <span class="new">Giảm giá</span>
@@ -1105,15 +1118,15 @@
                                                         :${banhangonline.soluongdaban(ht.id)}--Còn
                                                         :${banhangonline.soluongcon(ht.id)}</p>
                                                     <div>
-                                                        *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>
-                                                        *Camera:${ht.sanPham.camera.thongSo}<br>
-                                                        *Màn:${ht.sanPham.manHinh.thongSo}<br>
-                                                        *Màu:${ht.mauSac.ten}<br>
-                                                        *Ram:${ht.ram.dungLuong}<br>
-                                                        *Rom:${ht.rom.dungLuong}<br>
-                                                        *Pin:${ht.pin.loaiPin}<br>
-                                                        *Dung lượng pin:${ht.pin.dungLuongPin.thongSo}<br>
-                                                        *Chip:${ht.chip.ten}<br>
+<%--                                                        *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>--%>
+<%--                                                        *Camera:${ht.sanPham.camera.thongSo}<br>--%>
+<%--                                                        *Màn:${ht.sanPham.manHinh.thongSo}<br>--%>
+<%--                                                        *Màu:${ht.mauSac.ten}<br>--%>
+<%--                                                        *Ram:${ht.ram.dungLuong}<br>--%>
+<%--                                                        *Rom:${ht.rom.dungLuong}<br>--%>
+<%--                                                        *Pin:${ht.pin.loaiPin}<br>--%>
+<%--                                                        *Dung lượng pin:${ht.pin.dungLuongPin.thongSo}<br>--%>
+<%--                                                        *Chip:${ht.chip.ten}<br>--%>
 
 
                                                     </div>
@@ -1320,9 +1333,14 @@
     <!-- /bottom footer -->
 </footer>
 <!-- /FOOTER -->
-<div style="position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%);z-index: 2;width: 10cm;height: 1cm;background-color: #00FF00;text-align: center;display: none ;border: 5px solid red"
+<div style="position: fixed;
+top: 50%;left: 50%;transform: translate(-50%,-50%);
+display: none;z-index: 2;width: 7cm;height: 3cm;
+background-color: #0b3564;text-align: center;
+color: white;border-radius: 5% 5% 5% 5%"
      id="thongbaothemgiohang">
-    <h2>Đã Thêm vào Giỏ hàng</h2>
+    <img style="border-radius: 50% 50% 50% 50%;width: 1.2cm;height: 1.2cm;margin-top: 20px" src="data:image/png;base64,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">
+    <h2 style="color: white;font-size: 20px;margin-top: 20px">Đã Thêm vào Giỏ hàng</h2>
 </div>
 
 

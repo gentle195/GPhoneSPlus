@@ -78,7 +78,7 @@
 
                                     <div class="product" style="margin-left: 1%;width: 24%;" >
                                         <div class="product-img" >
-                                            <img src="../../../uploads/${ht.urlAnh}" style="width: 90%;height: 6cm;margin-left: 5%" alt="">
+                                            <img src="../../../uploads/${ht.urlAnh}" style="width: 100%;height: 6cm" alt="">
                                             <div class="product-label">
                                                 <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
                                                 <span class="new">Giảm giá</span>
