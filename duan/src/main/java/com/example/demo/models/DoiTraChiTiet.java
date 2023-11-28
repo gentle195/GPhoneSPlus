@@ -16,15 +16,10 @@ import java.util.UUID;
 @Table(name = "doi_tra_chi_tiet")
 public class DoiTraChiTiet {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private UUID id;
-
-
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_doi_tra")
@@ -34,9 +29,8 @@ public class DoiTraChiTiet {
     @JoinColumn(name = "id_imei")
     private IMEI imei;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_hoa_don_chi_tiet ")
+    @JoinColumn(name = "id_hoa_don_chi_tiet")
     private HoaDonChiTiet hoaDonChiTiet;
 
     @Column(name = "tinh_trang")
@@ -48,12 +42,8 @@ public class DoiTraChiTiet {
     @Column(name = "hinh_thuc_doi_tra")
     private int hinhThucDoiTra;
 
-
-
-
     @Column(name = "ly_do_doi_tra")
     private String lyDo;
-
 
     @Column(name = "tien_doi_tra")
     private BigDecimal tienDoiTra;

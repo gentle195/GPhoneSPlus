@@ -206,7 +206,7 @@
                                     <td>${donHang.ngayTao}</td>
                                     <td>${donHang.khachHang.hoTen}</td>
                                     <td>${donHang.nhanVien.hoTen}</td>
-                                    <td>${donHang.diaChi.diaChi}</td>
+                                    <td>${donHang.diaChi.diaChi}-${donHang.diaChi.quan}-${donHang.diaChi.huyen}-${donHang.diaChi.thanhPho}</td>
                                     <td>${donHang.sdt}</td>
                                     <td>${donHang.tongTien}</td>
                                     <td>
@@ -293,13 +293,6 @@
                                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                                 <i class="ti-reload btn-icon-prepend"></i>
                                                 Update thông tin</a>
-                                            <a href="/don-hang/xuat-pdf/${donHang.id}"
-                                               class="btn btn-outline-success btn-icon-text"
-                                               tabindex="-1"
-                                               role="button"
-                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                                <i class="ti-file btn-icon-prepend"></i>
-                                                Xuất PDF</a>
                                         </c:if>
                                         <c:if test="${donHang.tinhTrang == 2 || donHang.tinhTrang==3}">
                                             <a href="/don-hang/xuat-pdf/${donHang.id}"

@@ -223,7 +223,7 @@
                                     <td>${hoaDon.ngayTao}</td>
                                     <td>${hoaDon.khachHang.hoTen}</td>
                                     <td>${hoaDon.nhanVien.hoTen}</td>
-                                    <td>${hoaDon.diaChi.diaChi}</td>
+                                    <td>${hoaDon.diaChi.diaChi}-${hoaDon.diaChi.quan}-${hoaDon.diaChi.huyen}-${hoaDon.diaChi.thanhPho}</td>
                                     <td>${hoaDon.sdt}</td>
                                     <td>${hoaDon.tongTien}</td>
                                     <td>

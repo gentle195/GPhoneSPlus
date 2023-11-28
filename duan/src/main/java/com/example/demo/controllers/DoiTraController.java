@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.*;
 import com.example.demo.services.*;
+import com.example.demo.util.SecurityUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ import java.util.stream.Collectors;
 @RequestMapping("doi-tra")
 public class DoiTraController {
     @Autowired
-    DoiTraService doiTraService;
+    private DoiTraService doiTraService;
 
     @Autowired
     private HoaDonService hoaDonService;
@@ -74,14 +75,14 @@ public class DoiTraController {
     public String hienthi(@ModelAttribute("sanpham") SanPham sanpham, @ModelAttribute("NhanVien") NhanVien nhanVien,
                           @ModelAttribute("KhachHang") KhachHang khachHang,
                           @ModelAttribute("HoaDon") HoaDon hoaDon,
-                          Model model, @RequestParam("num") Optional<Integer> num,
-                          @RequestParam(name = "size", defaultValue = "10", required = false) Integer size) {
-        Pageable pageable = PageRequest.of(num.orElse(0), size);
-        Page<DoiTra> list = doiTraService.getAll0(pageable);
-        Page<HoaDon> listt = doiTraService.getAllHD(pageable);
-
-        Page<IMEI> imei=imeiService.fill1(pageable);
-
+                          Model model) {
+        List<DoiTra> list = doiTraService.getAll0();
+        List<HoaDon> listt = doiTraService.getAllHD();
+        List<NhanVien> listNhanVien = nhanVienService.findAll();
+        List<KhachHang> listKhachHang = khachHangService.findAll00();
+//        Page<IMEI> imei=imeiService.fill1();
+        model.addAttribute("listKhachHang", listKhachHang);
+        model.addAttribute("listNhanVien", listNhanVien);
         model.addAttribute("hangds", hangSanPhamService.findAll0());
         model.addAttribute("camds", cameraService.findAll0());
         model.addAttribute("mands", manHinhService.findAll0());
@@ -94,20 +95,18 @@ public class DoiTraController {
         model.addAttribute("sands", sanPhamService.findAll0());
         model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
         model.addAttribute("contentPage", "../doi-tra/hien-thi.jsp");
-        model.addAttribute(("list"), list.getContent());
-        model.addAttribute("imeiii",imei.getContent());
-        model.addAttribute("listt", listt.getContent());
-        model.addAttribute("total", listt.getTotalPages());
-        model.addAttribute("total", list.getTotalPages());
-        return "/home/layout";
+        model.addAttribute(("list"), list);
+//        model.addAttribute("imeiii",imei.getContent());
+        model.addAttribute("listt", listt);
+        return "home/layout";
 
     }
 
     @GetMapping("/detail-imei/{imeiId}")
     @ResponseBody
-    public IMEI detail(@PathVariable("imeiId") UUID imeiId,Model model) {
-        IMEI imei=imeiService.findById(imeiId);
-        model.addAttribute("imei",imei);
+    public IMEI detail(@PathVariable("imeiId") UUID imeiId, Model model) {
+        IMEI imei = imeiService.findById(imeiId);
+        model.addAttribute("imei", imei);
         return imei;
 
     }
@@ -116,16 +115,14 @@ public class DoiTraController {
     public String hienthi1(@ModelAttribute("sanpham") SanPham sanpham, @ModelAttribute("NhanVien") NhanVien nhanVien,
                            @ModelAttribute("KhachHang") KhachHang khachHang,
                            @ModelAttribute("HoaDon") HoaDon hoaDon,
-                           Model model, @RequestParam("num") Optional<Integer> num,
-                           @RequestParam(name = "size", defaultValue = "10", required = false) Integer size) {
-        Pageable pageable = PageRequest.of(num.orElse(0), size);
-        Page<DoiTra> list = doiTraService.getAll1(pageable);
-
+                           Model model) {
+        List<DoiTra> list = doiTraService.getAll1();
+        model.addAttribute("listKhachHang", khachHangService.findAll00());
+        model.addAttribute("listNhanVien", nhanVienService.findAll());
         model.addAttribute("contentPage", "../doi-tra/tu-choi-tra-hang.jsp");
-        model.addAttribute(("list"), list.getContent());
-        model.addAttribute("total", list.getTotalPages());
+        model.addAttribute(("list"), list);
 
-        return "/home/layout";
+        return "home/layout";
 
     }
 
@@ -134,16 +131,14 @@ public class DoiTraController {
     public String hienthi2(@ModelAttribute("sanpham") SanPham sanpham, @ModelAttribute("NhanVien") NhanVien nhanVien,
                            @ModelAttribute("KhachHang") KhachHang khachHang,
                            @ModelAttribute("HoaDon") HoaDon hoaDon,
-                           Model model, @RequestParam("num") Optional<Integer> num,
-                           @RequestParam(name = "size", defaultValue = "10", required = false) Integer size) {
-        Pageable pageable = PageRequest.of(num.orElse(0), size);
-        Page<DoiTra> list = doiTraService.getAll2(pageable);
-
+                           Model model) {
+        List<DoiTra> list = doiTraService.getAll2();
+        model.addAttribute("listKhachHang", khachHangService.findAll00());
+        model.addAttribute("listNhanVien", nhanVienService.findAll());
         model.addAttribute("contentPage", "../doi-tra/doi-tra-thanh-cong.jsp");
-        model.addAttribute(("list"), list.getContent());
-        model.addAttribute("total", list.getTotalPages());
+        model.addAttribute(("list"), list);
 
-        return "/home/layout";
+        return "home/layout";
 
     }
 
@@ -158,7 +153,7 @@ public class DoiTraController {
 //        model.addAttribute("contentPage", "../doi-tra/hien-thi.jsp");
 //        model.addAttribute(("listmodal"),listt.getContent());
 //        model.addAttribute("total",listt.getTotalPages());
-//        return "/home/layout";
+//        return "home/layout";
 //
 //    }
 //@GetMapping("/detail/{id}")
@@ -175,33 +170,32 @@ public class DoiTraController {
     }
 
 
-
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable("id") UUID id, Model model, @RequestParam("doitraId") UUID doitraId, @RequestParam("hoadonId") UUID hoadonId, @RequestParam("pageNum") Optional<Integer> pageNum,
                          @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
-        List<UUID> idList=new ArrayList<>();
-        List<DoiTraChiTiet> doiTraChiTietList=doiTraChiTietService.getDoiTraChiTietByDoiTraId(doitraId);
-        for (DoiTraChiTiet doiTraChiTiet:doiTraChiTietList
-        ) {idList.add(doiTraChiTiet.getHoaDonChiTiet().getId());
+        List<UUID> idList = new ArrayList<>();
+        List<DoiTraChiTiet> doiTraChiTietList = doiTraChiTietService.getDoiTraChiTietByDoiTraId(doitraId);
+        for (DoiTraChiTiet doiTraChiTiet : doiTraChiTietList
+        ) {
+            idList.add(doiTraChiTiet.getHoaDonChiTiet().getId());
 
         }
 
 
-        List<HoaDonChiTiet> hdctdt=doiTraChiTietService.getHoaDonChiTietByIdList(idList);
-        List<DoiTraChiTiet> dtctlist=doiTraChiTietService.getDoiTraChiTietByIdList(idList);
-        model.addAttribute("check",dtctlist);
+        List<HoaDonChiTiet> hdctdt = doiTraChiTietService.getHoaDonChiTietByIdList(idList);
+        List<DoiTraChiTiet> dtctlist = doiTraChiTietService.getDoiTraChiTietByIdList(idList);
+        model.addAttribute("check", dtctlist);
 
 
-        model.addAttribute("dtct",dtctlist);
+        model.addAttribute("dtct", dtctlist);
 
         List<DoiTraChiTiet> loc = filterDoiTraChiTietByImeiNotNull(dtctlist);
 
         System.out.println(hdctdt.toString());
-        System.out.println("lisst"+dtctlist);
-        model.addAttribute("dtctlist",loc);
+        System.out.println("lisst" + dtctlist);
+        model.addAttribute("dtctlist", loc);
 
 //        model.addAttribute("dtct",hdctdt);
-
 
 
         List<HoaDonChiTiet> hdct = doiTraService.getHoaDonChiTiet(id);
@@ -229,23 +223,24 @@ public class DoiTraController {
         model.addAttribute("sands", sanPhamService.findAll0());
         model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
         model.addAttribute("contentPage", "../doi-tra/detail.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/detail-thanh-cong/{id}")
     public String detailthanhcong(@PathVariable("id") UUID id, Model model, @RequestParam("doitraId") UUID doitraId, @RequestParam("hoadonId") UUID hoadonId, @RequestParam("pageNum") Optional<Integer> pageNum,
                                   @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
-        List<UUID> idList=new ArrayList<>();
-        List<DoiTraChiTiet> doiTraChiTietList=doiTraChiTietService.getDoiTraChiTietByDoiTraId(doitraId);
-        for (DoiTraChiTiet doiTraChiTiet:doiTraChiTietList
-        ) {idList.add(doiTraChiTiet.getHoaDonChiTiet().getId());
+        List<UUID> idList = new ArrayList<>();
+        List<DoiTraChiTiet> doiTraChiTietList = doiTraChiTietService.getDoiTraChiTietByDoiTraId(doitraId);
+        for (DoiTraChiTiet doiTraChiTiet : doiTraChiTietList
+        ) {
+            idList.add(doiTraChiTiet.getHoaDonChiTiet().getId());
 
         }
 
 //
 //        List<HoaDonChiTiet> hdctdt=doiTraChiTietService.getHoaDonChiTietByIdList(idList);
-        List<DoiTraChiTiet> dtctlist=doiTraChiTietService.getDoiTraChiTietByIdList(idList);
-        model.addAttribute("listdtct",dtctlist);
+        List<DoiTraChiTiet> dtctlist = doiTraChiTietService.getDoiTraChiTietByIdList(idList);
+        model.addAttribute("listdtct", dtctlist);
 //        model.addAttribute("check",dtctlist);
 //
 //
@@ -258,7 +253,6 @@ public class DoiTraController {
 //        model.addAttribute("dtctlist",loc);
 
 //        model.addAttribute("dtct",hdctdt);
-
 
 
         List<HoaDonChiTiet> hdct = doiTraService.getHoaDonChiTiet(id);
@@ -286,7 +280,7 @@ public class DoiTraController {
         model.addAttribute("sands", sanPhamService.findAll0());
         model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
         model.addAttribute("contentPage", "../doi-tra/detail-thanh-cong.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
     @GetMapping("/hien-thi-san-pham")
@@ -305,7 +299,7 @@ public class DoiTraController {
         model.addAttribute("listDiaChi", diaChiService.findAll0());
         model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
         model.addAttribute("contentPage", "../doi-tra/detail.jsp");
-        return "/home/layout";
+        return "home/layout";
     }
 
 
@@ -315,34 +309,25 @@ public class DoiTraController {
         DoiTra hd = new DoiTra();
         hd.setMa("DT" + String.valueOf(doiTraService.findAll().size() + 1));
         hd.setTinhTrang(0);
-
+        hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
         hd.setNgayDoiTra(Date.valueOf(LocalDate.now()));
         HoaDon hoaDon = hoaDonService.findById(hoadonId);
         hd.setHoaDon(hoaDon); // Sử dụng hoadonId ở đây
         hd.setKhachHang(hoaDon.getKhachHang());
-
         doiTraService.add(hd);
-
-
         System.out.println("id này" +
                 hd.getId());
-
-
         model.addAttribute("doitraId", hd.getId());
-
-
         // Trả về dữ liệu nếu cần (không biết cụ thể gì bạn muốn trả về)
-        return   "redirect:/doi-tra/hien-thi/";
+        return "redirect:/doi-tra/hien-thi/";
     }
 
 
     @GetMapping("/them-imei/{imeiId}/{doitraId}/{hdctId}")
-    public String themImei(@PathVariable UUID imeiId, Model model, @PathVariable UUID hdctId,@PathVariable UUID doitraId) {
-
+    public String themImei(@PathVariable UUID imeiId, Model model, @PathVariable UUID hdctId, @PathVariable UUID doitraId) {
         DoiTra doiTra = doiTraService.findById(doitraId);
-        DoiTraChiTiet doiTraChiTiet=doiTraChiTietService.findByHDCT(hdctId);
+        DoiTraChiTiet doiTraChiTiet = doiTraChiTietService.findByHDCT(hdctId);
         IMEI imei = imeiService.findById(imeiId);
-
         doiTraChiTiet.setImei(imei);
         doiTraChiTiet.setTinhTrang(0);
         doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
@@ -350,8 +335,6 @@ public class DoiTraController {
         Date date = new Date(millis);
         imeiService.updatImeiChoXuLy(date, imeiId);
         model.addAttribute("doitraId", doitraId);
-
-
         return "redirect:/doi-tra/detail/" + doiTra.getHoaDon().getId() + "?doitraId=" + doitraId + "&hoadonId=" + doiTra.getHoaDon().getId();
 
     }
@@ -384,71 +367,31 @@ public class DoiTraController {
             @PathVariable("x9") String x9,
             @PathVariable("x10") String x10
     ) {
-
         model.addAttribute("banhangonline", doiTraService);
         model.addAttribute("listChiTietSanPham", doiTraService.locbanhang(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10));
-
         return "/doi-tra/bang-loc";
     }
 
-
-//    @GetMapping("/delete-san-pham/{doitraId}")
-//    public String deleteHDCT(Model model, @ModelAttribute("modalAddKhachHang") KhachHang khachHang, @PathVariable UUID doitraId) {
-//DoiTra doiTra=doiTraService.findById(doitraId);
-//
-//IMEI imei=imeiService.findById(doiTra.getImei().getId());
-//imei.setTinhTrang(0);
-//imeiService.update(doiTra.getImei().getId(),imei);
-//doiTra.setImei(null);
-//doiTraService.update(doitraId,doiTra);
-//        return "redirect:/doi-tra/detail/" + doiTra.getHoaDon().getId() + "?doitraId=" + doitraId + "&hoadonId=" + doiTra.getHoaDon().getId();
-//    }
-
     @PostMapping("/update/{doitraId}")
-    public String update(Model model, @ModelAttribute("dulieuxem")  DoiTra dulieuxem,
+    public String update(Model model, @ModelAttribute("dulieuxem") DoiTra dulieuxem,
                          @PathVariable UUID doitraId, @RequestParam UUID hdctId, HttpServletRequest request
     ) {
-        HoaDonChiTiet hoaDonChiTiet=hoaDonChiTietService.findById(hdctId);
-
+        HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietService.findById(hdctId);
         DoiTra doiTra1 = doiTraService.findById(doitraId);
-
         doiTra1.setTinhTrang(2);
-        System.out.println("id đổi trả nữa là "+doitraId);
+        System.out.println("id đổi trả nữa là " + doitraId);
         doiTraService.update(doitraId, doiTra1);
         return "redirect:/doi-tra/hien-thi";
     }
-    @GetMapping("/chinh-sach")
-    public String chinhsach(Model model){
-        model.addAttribute("contentPage", "../doi-tra/chinh-sach.jsp");
-        return "/home/layout";
-    }
-
-//    @GetMapping("/them-dtct")
-//    public String updatethemhdct(Model model, @ModelAttribute("dulieuxem")  DoiTra dulieuxem,
-//                      @RequestParam UUID doitraId,   @RequestParam UUID hdctId,  HttpServletRequest request
-//    ) {
-//
-//        System.out.println("hdct id đây này ok"+hdctId);
-//        DoiTra doiTra=doiTraService.findById(doitraId);
-//          HoaDonChiTiet hoaDonChiTiet=hoaDonChiTietService.findById(hdctId);
-////        String soimei = request.getParameter("data-soimei");
-////        System.out.println("DoiTra received from form: " + dulieuxem);
-////        IMEI imeii=imeiService.searchSoImei(soimei);
-////        imeii.setTinhTrang(4);
-////        imeiService.update(imeii.getId(),imeii);
-//        DoiTraChiTiet doiTraChiTiet=new DoiTraChiTiet();
-//        doiTraChiTiet.setTinhTrang(0);
-//        doiTraChiTiet.setHoaDonChiTiet(hoaDonChiTiet);
-//        doiTraChiTiet.setDoiTra(doiTra);
-//
-//       doiTraChiTietService.add(doiTraChiTiet);
-//        return "redirect:/doi-tra/detail/" + doiTra.getHoaDon().getId() + "?doitraId=" + doitraId + "&hoadonId=" + doiTra.getHoaDon().getId();
+//    @GetMapping("/chinh-sach")
+//    public String chinhsach(Model model){
+//        model.addAttribute("contentPage", "../doi-tra/chinh-sach.jsp");
+//        return "home/layout";
 //    }
 
-
     @GetMapping("/delete-hdct/{doitraId}/{hdctxoaId}")
-    public String deleteHDCT(Model model, @ModelAttribute("modalAddKhachHang") KhachHang khachHang, @PathVariable UUID doitraId,@PathVariable UUID hdctxoaId) {
-        DoiTra doiTra=doiTraService.findById(doitraId);
+    public String deleteHDCT(Model model, @ModelAttribute("modalAddKhachHang") KhachHang khachHang, @PathVariable UUID doitraId, @PathVariable UUID hdctxoaId) {
+        DoiTra doiTra = doiTraService.findById(doitraId);
         DoiTraChiTiet doiTraChiTiet = doiTraChiTietService.findByHDCT(hdctxoaId);
 
         if (doiTraChiTiet != null && doiTraChiTiet.getImei() != null) {
@@ -458,12 +401,6 @@ public class DoiTraController {
         }
 
         doiTraChiTietService.delete(doiTraChiTiet.getId());
-
-
-
-
-
-
         return "redirect:/doi-tra/detail/" + doiTra.getHoaDon().getId() + "?doitraId=" + doitraId + "&hoadonId=" + doiTra.getHoaDon().getId();
     }
 
@@ -495,52 +432,238 @@ public class DoiTraController {
     }
 
     @PostMapping("/xac-nhan/{doitraId}")
-    public String xacnhan(Model model, @ModelAttribute("dulieuxem")  DoiTra dulieuxem,
+    public String xacnhan(Model model, @ModelAttribute("dulieuxem") DoiTra dulieuxem,
                           @PathVariable UUID doitraId, HttpServletRequest request
     ) {
-        DoiTra doiTra=doiTraService.findById(doitraId);
-        List<DoiTraChiTiet> listCHiTietDoiTra=doiTraChiTietService.getDoiTraChiTietByDoiTraId(doitraId);
-        for (DoiTraChiTiet dtct: listCHiTietDoiTra
+        DoiTra doiTra = doiTraService.findById(doitraId);
+        List<DoiTraChiTiet> listCHiTietDoiTra = doiTraChiTietService.getDoiTraChiTietByDoiTraId(doitraId);
+        for (DoiTraChiTiet dtct : listCHiTietDoiTra
         ) {
-            if (dtct.getHienTrangSanPham()==0){
+            if (dtct.getHienTrangSanPham() == 0) {
 
-                IMEI imei=imeiService.findById(dtct.getHoaDonChiTiet().getImei().getId());
+                IMEI imei = imeiService.findById(dtct.getHoaDonChiTiet().getImei().getId());
                 imei.setTinhTrang(4);
-                imeiService.update(dtct.getHoaDonChiTiet().getImei().getId(),imei);
-                IMEI imei1=imeiService.findById(dtct.getImei().getId());
+                imeiService.update(dtct.getHoaDonChiTiet().getImei().getId(), imei);
+                IMEI imei1 = imeiService.findById(dtct.getImei().getId());
                 imei1.setTinhTrang(1);
-                imeiService.update(dtct.getImei().getId(),imei1);
+                imeiService.update(dtct.getImei().getId(), imei1);
                 dtct.setTinhTrang(2);
-                doiTraChiTietService.update(dtct.getId(),dtct);
-                System.out.println("imei là"+dtct.getHoaDonChiTiet().getImei().getTinhTrang());
-            }else if (dtct.getHienTrangSanPham()==1){
-                IMEI imei=imeiService.findById(dtct.getHoaDonChiTiet().getImei().getId());
+                doiTraChiTietService.update(dtct.getId(), dtct);
+                System.out.println("imei là" + dtct.getHoaDonChiTiet().getImei().getTinhTrang());
+            } else if (dtct.getHienTrangSanPham() == 1) {
+                IMEI imei = imeiService.findById(dtct.getHoaDonChiTiet().getImei().getId());
                 imei.setTinhTrang(0);
-                imeiService.update(dtct.getHoaDonChiTiet().getImei().getId(),imei);
-                IMEI imei1=imeiService.findById(dtct.getImei().getId());
+                imeiService.update(dtct.getHoaDonChiTiet().getImei().getId(), imei);
+                IMEI imei1 = imeiService.findById(dtct.getImei().getId());
                 imei1.setTinhTrang(1);
-                imeiService.update(dtct.getImei().getId(),imei1);
+                imeiService.update(dtct.getImei().getId(), imei1);
                 dtct.setTinhTrang(2);
-                doiTraChiTietService.update(dtct.getId(),dtct);
+                doiTraChiTietService.update(dtct.getId(), dtct);
             }
-
-
-
         }
         doiTra.setTinhTrang(2);
-        doiTraService.update(doitraId,doiTra);
-
-
+        doiTraService.update(doitraId, doiTra);
         return "redirect:/doi-tra/hien-thi";
     }
 
+    @ResponseBody
+    @GetMapping("/search-hoa-don")
+    public List<HoaDon> searchHoaDon(@RequestParam("search-hoa-don") String search) {
+        if (search.isEmpty()) {
+            List<HoaDon> list = doiTraService.getAllHD();
+            return list;
+        } else {
+            List<HoaDon> list = hoaDonService.searchDoiTra(search);
+            return list;
+        }
+    }
 
+    @PostMapping("/loc0")
+    public String locDoiTra0(Model model,
+                             @RequestParam(value = "nhanVien", required = false) UUID idNV,
+                             @RequestParam(value = "khachHang", required = false) UUID idKH,
+                             @RequestParam(value = "startDate", required = false) String startDate,
+                             @RequestParam(value = "endDate", required = false) String endDate,
+                             @RequestParam(value = "ngayTao0", required = false) String ngayTao0,
+                             @RequestParam(value = "ngayTao1", required = false) String ngayTao1,
+                             @ModelAttribute("nhanVien") NhanVien nhanVien,
+                             @ModelAttribute("khachHang") KhachHang khachHang,
+                             @ModelAttribute("doiTra") DoiTra doiTra) {
 
+        if (startDate.isEmpty() && endDate.isEmpty() && ngayTao0.isEmpty() && ngayTao1.isEmpty()) {
+            List<DoiTra> list = doiTraService.locDoiTraTrangThai0(idKH, idNV,
+                    null, null, null, null
+            );
+            model.addAttribute(("list"), list);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("contentPage", "../doi-tra/hien-thi.jsp");
+            return "home/layout";
+        } else if (ngayTao0.isEmpty() && ngayTao1.isEmpty()) {
+            List<DoiTra> list = doiTraService.locDoiTraTrangThai0(idKH, idNV,
+                    Date.valueOf(startDate), Date.valueOf(endDate), null, null
+            );
+            model.addAttribute(("list"), list);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("contentPage", "../doi-tra/hien-thi.jsp");
+            return "home/layout";
+        } else if (endDate.isEmpty() && startDate.isEmpty()) {
+            List<DoiTra> list = doiTraService.locDoiTraTrangThai0(idKH, idNV,
+                    null, null, Date.valueOf(ngayTao0), Date.valueOf(ngayTao1)
+            );
+            model.addAttribute(("list"), list);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("contentPage", "../doi-tra/hien-thi.jsp");
+            return "home/layout";
+        } else {
+            List<DoiTra> list = doiTraService.locDoiTraTrangThai0(idKH, idNV,
+                    Date.valueOf(startDate), Date.valueOf(endDate), Date.valueOf(ngayTao0), Date.valueOf(ngayTao1)
+            );
+            model.addAttribute(("list"), list);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("contentPage", "../doi-tra/hien-thi.jsp");
+            return "home/layout";
+        }
+    }
 
+    @PostMapping("/loc1")
+    public String locDoiTra1(Model model,
+                             @RequestParam(value = "nhanVien", required = false) UUID idNV,
+                             @RequestParam(value = "khachHang", required = false) UUID idKH,
+                             @RequestParam(value = "startDate", required = false) String startDate,
+                             @RequestParam(value = "endDate", required = false) String endDate,
+                             @RequestParam(value = "ngayTao0", required = false) String ngayTao0,
+                             @RequestParam(value = "ngayTao1", required = false) String ngayTao1,
+                             @ModelAttribute("nhanVien") NhanVien nhanVien,
+                             @ModelAttribute("khachHang") KhachHang khachHang,
+                             @ModelAttribute("doiTra") DoiTra doiTra) {
 
+        if (startDate.isEmpty() && endDate.isEmpty() && ngayTao0.isEmpty() && ngayTao1.isEmpty()) {
+            List<DoiTra> list = doiTraService.locDoiTraTrangThai1(idKH, idNV,
+                    null, null, null, null
+            );
+            model.addAttribute(("list"), list);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("contentPage", "../doi-tra/tu-choi-tra-hang.jsp");
+            return "home/layout";
+        } else if (ngayTao0.isEmpty() && ngayTao1.isEmpty()) {
+            List<DoiTra> list = doiTraService.locDoiTraTrangThai1(idKH, idNV,
+                    Date.valueOf(startDate), Date.valueOf(endDate), null, null
+            );
+            model.addAttribute(("list"), list);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("contentPage", "../doi-tra/tu-choi-tra-hang.jsp");
+            return "home/layout";
+        } else if (endDate.isEmpty() && startDate.isEmpty()) {
+            List<DoiTra> list = doiTraService.locDoiTraTrangThai1(idKH, idNV,
+                    null, null, Date.valueOf(ngayTao0), Date.valueOf(ngayTao1)
+            );
+            model.addAttribute(("list"), list);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("contentPage", "../doi-tra/tu-choi-tra-hang.jsp");
+            return "home/layout";
+        } else {
+            List<DoiTra> list = doiTraService.locDoiTraTrangThai1(idKH, idNV,
+                    Date.valueOf(startDate), Date.valueOf(endDate), Date.valueOf(ngayTao0), Date.valueOf(ngayTao1)
+            );
+            model.addAttribute(("list"), list);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("contentPage", "../doi-tra/tu-choi-tra-hang.jsp");
+            return "home/layout";
+        }
+    }
 
+    @PostMapping("/loc2")
+    public String locDoiTra2(Model model,
+                             @RequestParam(value = "nhanVien", required = false) UUID idNV,
+                             @RequestParam(value = "khachHang", required = false) UUID idKH,
+                             @RequestParam(value = "startDate", required = false) String startDate,
+                             @RequestParam(value = "endDate", required = false) String endDate,
+                             @RequestParam(value = "ngayTao0", required = false) String ngayTao0,
+                             @RequestParam(value = "ngayTao1", required = false) String ngayTao1,
+                             @ModelAttribute("nhanVien") NhanVien nhanVien,
+                             @ModelAttribute("khachHang") KhachHang khachHang,
+                             @ModelAttribute("doiTra") DoiTra doiTra) {
 
+        if (startDate.isEmpty() && endDate.isEmpty() && ngayTao0.isEmpty() && ngayTao1.isEmpty()) {
+            List<DoiTra> list = doiTraService.locDoiTraTrangThai2(idKH, idNV,
+                    null, null, null, null
+            );
+            model.addAttribute(("list"), list);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("contentPage", "../doi-tra/doi-tra-thanh-cong.jsp");
+            return "home/layout";
+        } else if (ngayTao0.isEmpty() && ngayTao1.isEmpty()) {
+            List<DoiTra> list = doiTraService.locDoiTraTrangThai2(idKH, idNV,
+                    Date.valueOf(startDate), Date.valueOf(endDate), null, null
+            );
+            model.addAttribute(("list"), list);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("contentPage", "../doi-tra/doi-tra-thanh-cong.jsp");
+            return "home/layout";
+        } else if (endDate.isEmpty() && startDate.isEmpty()) {
+            List<DoiTra> list = doiTraService.locDoiTraTrangThai2(idKH, idNV,
+                    null, null, Date.valueOf(ngayTao0), Date.valueOf(ngayTao1)
+            );
+            model.addAttribute(("list"), list);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("contentPage", "../doi-tra/doi-tra-thanh-cong.jsp");
+            return "home/layout";
+        } else {
+            List<DoiTra> list = doiTraService.locDoiTraTrangThai2(idKH, idNV,
+                    Date.valueOf(startDate), Date.valueOf(endDate), Date.valueOf(ngayTao0), Date.valueOf(ngayTao1)
+            );
+            model.addAttribute(("list"), list);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("contentPage", "../doi-tra/doi-tra-thanh-cong.jsp");
+            return "home/layout";
+        }
+    }
 
+    @PostMapping("/search0")
+    public String search0(Model model, @ModelAttribute("nhanVien") NhanVien nhanVien,
+                          @ModelAttribute("khachHang") KhachHang khachHang,
+                          @ModelAttribute("doiTra") DoiTra doiTra, @RequestParam("search") String search) {
+        List<DoiTra> list = doiTraService.searchDoiTraTrangThai0(search);
+        model.addAttribute("list", list);
+        model.addAttribute("listKhachHang", khachHangService.findAll00());
+        model.addAttribute("listNhanVien", nhanVienService.findAll());
+        model.addAttribute("contentPage", "../doi-tra/hien-thi.jsp");
+        return "home/layout";
+    }
 
+    @PostMapping("/search1")
+    public String search1(Model model, @ModelAttribute("nhanVien") NhanVien nhanVien,
+                          @ModelAttribute("khachHang") KhachHang khachHang,
+                          @ModelAttribute("doiTra") DoiTra doiTra, @RequestParam("search") String search) {
+        List<DoiTra> list = doiTraService.searchDoiTraTrangThai1(search);
+        model.addAttribute("list", list);
+        model.addAttribute("listKhachHang", khachHangService.findAll00());
+        model.addAttribute("listNhanVien", nhanVienService.findAll());
+        model.addAttribute("contentPage", "../doi-tra/tu-choi-tra-hang.jsp");
+        return "home/layout";
+    }
 
+    @PostMapping("/search2")
+    public String search2(Model model, @ModelAttribute("nhanVien") NhanVien nhanVien,
+                          @ModelAttribute("khachHang") KhachHang khachHang,
+                          @ModelAttribute("doiTra") DoiTra doiTra, @RequestParam("search") String search) {
+        List<DoiTra> list = doiTraService.searchDoiTraTrangThai2(search);
+        model.addAttribute("list", list);
+        model.addAttribute("listKhachHang", khachHangService.findAll00());
+        model.addAttribute("listNhanVien", nhanVienService.findAll());
+        model.addAttribute("contentPage", "../doi-tra/doi-tra-thanh-cong.jsp");
+        return "home/layout";
+    }
 }

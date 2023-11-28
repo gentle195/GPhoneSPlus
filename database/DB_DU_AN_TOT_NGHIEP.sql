@@ -485,8 +485,10 @@ CREATE TABLE doi_tra(
  id_khach_hang UNIQUEIDENTIFIER NULL,
  id_hoa_don UNIQUEIDENTIFIER NULL,
  id_nhan_vien UNIQUEIDENTIFIER NULL,
-  ngay_doi_tra Date DEFAULT GETDATE(),
+ ngay_tao Date DEFAULT GETDATE(),
+ ngay_doi_tra Date DEFAULT GETDATE(),
  tinh_trang int DEFAULT 0,
+ noi_dung NVARCHAR(MAX) NULL,
  FOREIGN KEY (id_khach_hang) REFERENCES khach_hang(id),
  FOREIGN KEY (id_hoa_don) REFERENCES hoa_don(id),
  FOREIGN KEY (id_nhan_vien) REFERENCES nhan_vien(id)

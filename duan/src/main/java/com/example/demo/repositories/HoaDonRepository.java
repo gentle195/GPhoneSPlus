@@ -114,4 +114,10 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
 
     @Query("SELECT h FROM HoaDon h WHERE h.ngayShip >= :startDate and h.loai=1")
     List<HoaDon> findDonHangByNgayShip(@Param("startDate") java.util.Date startDate);
+
+    @Query("select hd from HoaDon hd where hd.tinhTrangGiaoHang=3 and hd.tinhTrang=2 and " +
+            "(hd.khachHang.hoTen like %:search% or hd.nguoiNhan like %:search% " +
+            "or hd.nhanVien.hoTen like %:search% or hd.ma like %:search% or hd.maGiaoDich like %:search% " +
+            "or hd.diaChi.diaChi like %:search% or hd.diaChi.quan like %:search% or hd.diaChi.huyen like %:search% or hd.diaChi.thanhPho like %:search%)")
+    List<HoaDon> searchDoiTra(String search);
 }

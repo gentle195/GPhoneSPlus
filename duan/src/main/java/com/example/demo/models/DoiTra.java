@@ -39,7 +39,6 @@ public class DoiTra {
     private String ma;
 
 
-
     @Column(name = "tinh_trang")
     private int tinhTrang;
 
@@ -48,11 +47,11 @@ public class DoiTra {
     @JoinColumn(name = "id_khach_hang")
     private KhachHang khachHang;
 
-
+    @Column(name = "ngay_tao")
+    private Date ngayTao;
 
     @Column(name = "ngay_doi_tra")
     private Date ngayDoiTra;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_hoa_don")

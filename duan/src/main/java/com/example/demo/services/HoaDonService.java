@@ -21,6 +21,8 @@ public interface HoaDonService {
 
     public List<HoaDon> findAll();
 
+    public List<HoaDon> searchDoiTra(String search);
+
     public List<HoaDon> find();
 
     public HoaDon findById(UUID id);

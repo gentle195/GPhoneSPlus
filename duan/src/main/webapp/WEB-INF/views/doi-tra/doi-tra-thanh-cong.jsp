@@ -34,61 +34,95 @@
             <div class="card">
                 <div class="card-body">
                     <div>
-                        <h4 class="card-title" style="float: left">Danh sách hóa đơn chờ đổi trả
+                        <h4 class="card-title" style="float: left">Danh sách hóa đơn đổi trả thành công
                         </h4>
-                        <div class="basic-dropdown" style="float: right">
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                    <i class="ti-export btn-icon-prepend"></i>
-                                    Xuất Excel
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a href="/hoa-don/export-excel" class="dropdown-item" tabindex="-1">Theo ngày thanh
-                                        toán</a>
-                                    <a href="/hoa-don/export-excel-ngay-nhan" class="dropdown-item" tabindex="-1">Theo
-                                        ngày nhận</a>
-                                    <a href="/hoa-don/export-excel-ngay-ship" class="dropdown-item" tabindex="-1">Theo
-                                        ngày ship</a>
-                                </div>
-                            </div>
-                        </div>
+<%--                        <div class="basic-dropdown" style="float: right">--%>
+<%--                            <div class="dropdown">--%>
+<%--                                <div class="dropdown-menu">--%>
+<%--                                    <a href="/hoa-don/export-excel" class="dropdown-item" tabindex="-1">Theo ngày thanh--%>
+<%--                                        toán</a>--%>
+<%--                                    <a href="/hoa-don/export-excel-ngay-nhan" class="dropdown-item" tabindex="-1">Theo--%>
+<%--                                        ngày nhận</a>--%>
+<%--                                    <a href="/hoa-don/export-excel-ngay-ship" class="dropdown-item" tabindex="-1">Theo--%>
+<%--                                        ngày ship</a>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
                     </div>
                     <br>
                     <br>
+
                     <div class="loc" style="color:black;">
-                        <form:form action="/hoa-don/loc" method="post" modelAttribute="hoaDon">
+                        <form:form action="/doi-tra/loc2" method="post" modelAttribute="doiTra">
                             <div class="row" style="margin-top: 10px">
-
-
-
-
-
-                            </div>
-
-                            <div class="row">
-
-
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-5 col-form-label">Từ ngày đổi trả:</label>
-                                        <div class="col-sm-7">
-                                            <input type="date" id="ngayNhan1" name="receiveEndDate" class="form-control"
+                                        <div class="col-sm-12">
+                                            <select id="selectKhachHang1" name="khachHang" class="form-control select2"
+                                                    style="font-weight: bold; width: 100%">
+                                                <option selected disabled>Khách hàng</option>
+                                                <c:forEach items="${listKhachHang}" var="khachHang">
+                                                    <option value="${khachHang.id}">${khachHang.hoTen}</option>
+                                                </c:forEach>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <select id="selectNhanVien1" name="nhanVien" class="form-control select2"
+                                                    style="font-weight: bold; width: 100%">
+                                                <option selected disabled>Nhân viên</option>
+                                                <c:forEach items="${listNhanVien}" var="nhanVien">
+                                                    <option value="${nhanVien.id}">${nhanVien.hoTen}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Từ ngày đổi trả:</label>
+                                        <div class="col-sm-8">
+                                            <input type="date" name="startDate" class="form-control"
+                                                   placeholder="Từ ngày">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Từ ngày tạo:</label>
+                                        <div class="col-sm-8">
+                                            <input type="date" name="ngayTao0" class="form-control"
                                                    placeholder="Đến ngày">
                                         </div>
                                     </div>
                                 </div>
-
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Đến ngày đổi trả:</label>
                                         <div class="col-sm-8">
-                                            <input type="date" id="ngayShip1" name="shipEndDate" class="form-control"
-                                                   placeholder="Đến ngày  ">
+                                            <input type="date" name="endDate" class="form-control"
+                                                   placeholder="Từ ngày">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Đến ngày tạo:</label>
+                                        <div class="col-sm-8">
+                                            <input type="date" name="ngayTao1" class="form-control"
+                                                   placeholder="Đến ngày">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <div align="center">
                                 <BUTTON type="submit" class="btn btn-warning" style="" id="bt">
                                     Lọc hóa đơn
@@ -98,7 +132,7 @@
                     </div>
                     <br>
                     <div class="search">
-                        <form action="/hoa-don/search" method="post">
+                        <form action="/doi-tra/search2" method="post">
                             <div class="input-group" style="width: 30%; float: right">
                                 <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                        aria-label="Bạn tìm gì..." name="search">
@@ -110,11 +144,14 @@
                     </div>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table id="example" class="display" style="color: black; width: 1000px">
+                        <table id="example2" class="display" style="color: black; width: 1000px">
                             <thead>
                             <tr>
+                                <th>Mã đổi trả</th>
+                                <th>Ngày tạo</th>
                                 <th>Mã hóa đơn</th>
                                 <th>Tên khách hàng</th>
+                                <th>Số điện thoại khách hàng</th>
                                 <th>Tên nhân viên</th>
                                 <th>Tình trạng</th>
                                 <th>Action</th>
@@ -124,22 +161,26 @@
                             <i class="mdi mdi-border-color"></i>
                             <c:forEach items="${list}" var="doitra">
                                 <tr>
+                                    <td>${doitra.ma}</td>
+                                    <td>${doitra.ngayTao}</td>
                                     <td>${doitra.hoaDon.ma}</td>
-                                    <td>${doitra.khachHang.hoTen}</td>
+                                    <td>${doitra.hoaDon.khachHang.hoTen}</td>
+                                    <td>${doitra.hoaDon.sdt}</td>
                                     <td>${doitra.nhanVien.hoTen}</td>
                                     <td>
                                         <c:if test="${doitra.tinhTrang == 0}">Đang chờ</c:if>
-                                        <c:if test="${doitra.tinhTrang == 1}">Đã từ chối</c:if>
                                         <c:if test="${doitra.tinhTrang == 2}">Đã xác nhận</c:if>
+                                        <c:if test="${doitra.tinhTrang == 1}">Đã từ chối</c:if>
                                     </td>
                                     <td>
-                                        <a href="/doi-tra/detail-thanh-cong/${doitra.hoaDon.id}?doitraId=${doitra.id}&hoadonId=${doitra.hoaDon.id}" class="btn btn-warning btn-icon-text"
+                                        <a href="/doi-tra/detail/${doitra.hoaDon.id}?doitraId=${doitra.id}&hoadonId=${doitra.hoaDon.id}"
+                                           class="btn btn-warning btn-icon-text"
                                            tabindex="-1"
                                            role="button"
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                             <i class="ti-file btn-icon-prepend"></i>
-                                            Detail</a>
-
+                                            Detail
+                                        </a>
 
                                     </td>
                                 </tr>
@@ -147,65 +188,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <br>
-                    <br>
-                    <%--phân trang--%>
-                    <%--                    <c:if test="${dem==0}">--%>
-                    <%--                        <div align="center">--%>
-                    <%--                            <div class="btn-group" role="group" aria-label="Basic example">--%>
-                    <%--                                <ul class="pagination justify-content-center pagination-lg">--%>
-                    <%--                                    <li class="page-item"><a class="page-link" href="/hoa-don/hien-thi?pageNum=0"><</a>--%>
-                    <%--                                    </li>--%>
-                    <%--                                    <c:forEach begin="1" end="${total}" varStatus="status">--%>
-                    <%--                                        <li class="page-item">--%>
-                    <%--                                            <a href="${pageContext.request.contextPath}/hoa-don/hien-thi?pageNum=${status.index -1}"--%>
-                    <%--                                               class="page-link">${status.index}</a>--%>
-                    <%--                                        </li>--%>
-                    <%--                                    </c:forEach>--%>
-                    <%--                                    <li class="page-item"><a class="page-link"--%>
-                    <%--                                                             href="/hoa-don/hien-thi?pageNum=${total-1}">></a>--%>
-                    <%--                                    </li>--%>
-                    <%--                                </ul>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </c:if>--%>
-                    <%--                    <c:if test="${dem==1}">--%>
-                    <%--                        <div align="center">--%>
-                    <%--                            <div class="btn-group" role="group" aria-label="Basic example">--%>
-                    <%--                                <ul class="pagination justify-content-center pagination-lg">--%>
-                    <%--                                    <li class="page-item"><a class="page-link" href="/hoa-don/search?pageNum=0"><</a>--%>
-                    <%--                                    </li>--%>
-                    <%--                                    <c:forEach begin="1" end="${total}" varStatus="status">--%>
-                    <%--                                        <li class="page-item">--%>
-                    <%--                                            <a href="${pageContext.request.contextPath}/hoa-don/search?pageNum=${status.index -1}"--%>
-                    <%--                                               class="page-link">${status.index}</a>--%>
-                    <%--                                        </li>--%>
-                    <%--                                    </c:forEach>--%>
-                    <%--                                    <li class="page-item"><a class="page-link"--%>
-                    <%--                                                             href="/hoa-don/search?pageNum=${total-1}">></a>--%>
-                    <%--                                    </li>--%>
-                    <%--                                </ul>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </c:if>--%>
-                    <%--                    <c:if test="${dem==2}">--%>
-                    <%--                        <div align="center">--%>
-                    <%--                            <div class="btn-group" role="group" aria-label="Basic example">--%>
-                    <%--                                <ul class="pagination justify-content-center pagination-lg">--%>
-                    <%--                                    <li class="page-item"><a class="page-link" href="/hoa-don/loc?pageNum=0"><</a></li>--%>
-                    <%--                                    <c:forEach begin="1" end="${total}" varStatus="status">--%>
-                    <%--                                        <li class="page-item">--%>
-                    <%--                                            <a href="${pageContext.request.contextPath}/hoa-don/loc?pageNum=${status.index -1}"--%>
-                    <%--                                               class="page-link">${status.index}</a>--%>
-                    <%--                                        </li>--%>
-                    <%--                                    </c:forEach>--%>
-                    <%--                                    <li class="page-item"><a class="page-link"--%>
-                    <%--                                                             href="/hoa-don/loc?pageNum=${total-1}">></a>--%>
-                    <%--                                    </li>--%>
-                    <%--                                </ul>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </c:if>--%>
                 </div>
             </div>
         </div>

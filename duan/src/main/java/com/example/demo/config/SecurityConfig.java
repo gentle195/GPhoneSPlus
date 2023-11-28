@@ -80,7 +80,7 @@ public class SecurityConfig {
                         "/ram/hien-thi","/ram/hien-thi-delete","/ram/search-0","/ram/search-1",
                         "/rom/hien-thi","/rom/hien-thi-tung-xoa","/rom/search","/rom/search2",
                         "/san-pham/hien-thi","/san-pham/hien-thi-tung-xoa","/san-pham/search","/san-pham/search2","/san-pham/loc","/san-pham/hien-thi-loc",
-                        "/san-pham-giam-gia/hien-thi","/san-pham-giam-gia/search-on","/san-pham-giam-gia/search-off","/san-pham-giam-gia/hien-thi-da-xoa"
+                        "/doi-tra/**"
 
 
                 ).hasAnyAuthority("STAFF", "ADMIN")
