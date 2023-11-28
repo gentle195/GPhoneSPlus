@@ -521,8 +521,11 @@
                                                      style="text-align: left;word-wrap: break-word;">
                                                     <p class="product-category">Điện thoại</p>
                                                     <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
-                                                    <h4 class="product-price">${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}<span> ₫</span>
-                                                        <del class="product-old-price" style="float: right">${ht.giaBan}<span>₫</span></del>
+                                                    <h4 class="product-price">
+<%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+                                                        ${banhangonline.sotienkhidagiam(ht.id)}
+                                                        <span> ₫</span>
+                                                    <del class="product-old-price" style="float: right">${ht.basoOchammotlam()}<span>₫</span></del>
                                                     </h4>
                                                     <div class="product-rating"></div>
                                                     <div class="product-btns" align="center">
@@ -613,8 +616,11 @@
                                                      style="text-align: left;word-wrap: break-word;">
                                                     <p class="product-category">Điện thoại</p>
                                                     <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
-                                                    <h4 class="product-price">${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}<span> ₫</span>
-                                                        <del class="product-old-price" style="float: right">${ht.giaBan}<span>₫</span></del>
+                                                    <h4 class="product-price">
+                                                            <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+                                                            ${banhangonline.sotienkhidagiam(ht.id)}
+                                                        <span> ₫</span>
+                                                        <del class="product-old-price" style="float: right">${ht.basoOchammotlam()}<span>₫</span></del>
                                                     </h4>
                                                     <div class="product-rating"></div>
                                                     <div class="product-btns" align="center">
@@ -696,10 +702,10 @@
                                                             <p class="product-category">Điện Thoại</p>
                                                             <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a>
                                                             </h3>
-                                                            <h4 class="product-price"><span
-                                                                    style="font-size:10px">₫</span> ${ht.giaBan} - <span
+                                                              <h4 class="product-price"><span
+                                                                    style="font-size:10px">₫</span> ${banhangonline.sotienkhidagiam(ht.id)} - <span
                                                                     style="font-size:10px">₫</span>
-                                                                <del class="product-old-price">${ht.giaBan}</del>
+                                                                <del class="product-old-price">${ht.basoOchammotlam()}</del>
                                                             </h4>
 
                                                         </div>
@@ -747,10 +753,10 @@
                                                             <p class="product-category">Điện Thoại</p>
                                                             <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a>
                                                             </h3>
-                                                            <h4 class="product-price"><span
-                                                                    style="font-size:10px">₫</span> ${ht.giaBan} - <span
+                                                              <h4 class="product-price"><span
+                                                                    style="font-size:10px">₫</span> ${banhangonline.sotienkhidagiam(ht.id)} - <span
                                                                     style="font-size:10px">₫</span>
-                                                                <del class="product-old-price">${ht.giaBan}</del>
+                                                                <del class="product-old-price">${ht.basoOchammotlam()}</del>
                                                             </h4>
                                                         </div>
                                                     </div>
@@ -799,10 +805,12 @@
                                                             <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a>
                                                             </h3>
                                                             <h4 class="product-price"><span
-                                                                    style="font-size:10px">₫</span> ${ht.giaBan} - <span
+                                                                    style="font-size:10px">₫</span> ${banhangonline.sotienkhidagiam(ht.id)} - <span
                                                                     style="font-size:10px">₫</span>
-                                                                <del class="product-old-price">${ht.giaBan}</del>
+                                                                <del class="product-old-price">${ht.basoOchammotlam()}</del>
                                                             </h4>
+
+
                                                         </div>
                                                     </div>
                                                 </a>

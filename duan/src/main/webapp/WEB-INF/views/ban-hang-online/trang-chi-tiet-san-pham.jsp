@@ -51,20 +51,7 @@
 
 
     <style>
-        /* CSS cho modal */
-        #myModal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000; /* Đặt giá trị z-index lớn */
-        }
+
 
         .modal-content {
             background-color: #fff;
@@ -82,19 +69,12 @@
             display: none;
         }
 
-        /* Tạo một giao diện tùy chỉnh cho label */
-        .lb {
-            display: inline-block;
-            padding: 5px 10px;
-            background-color: #e0e0e0;
-            border: 1px solid #ccc;
-            cursor: pointer;
-        }
+
 
         /* Khi label được nhấp vào, thay đổi màu nền để biểu thị lựa chọn */
         input[type="radio"]:checked + label {
-            background-color: #007bff;
-            color: #fff;
+
+            color: red;
         }
 
         .product-info-table {
@@ -473,7 +453,7 @@
                     <input type="radio" id="ms${stt1.index}" name="mauSac1"
                            value="${ht1.mauSac.ten}" ${ht1.mauSac.ten==motctsp.mauSac.ten ?"checked":""}
                            onchange="clickradio2lan();">
-                    <label for="ms${stt1.index}" style="border: 1px solid #00A000;margin-left:5px">${ht1.mauSac.ten}</label>
+                    <label for="ms${stt1.index}" style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.mauSac.ten}</label>
                 </c:if>
             </c:if>
 
@@ -492,7 +472,7 @@
                         <input type="radio" id="ms${stt1.index}" name="mauSac1"
                                value="${ht1.mauSac.ten}" ${ht1.mauSac.ten==motctsp.mauSac.ten ?"checked":""}
                                onchange="clickradio2lan();">
-                        <label for="ms${stt1.index}" style="border: 1px solid #00A000;margin-left:5px">${ht1.mauSac.ten}</label>
+                        <label for="ms${stt1.index}" style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.mauSac.ten}</label>
 
                     </c:if>
                     <c:set var="checkck" scope="session" value="${-1}"/>
@@ -510,7 +490,7 @@
                     <input type="radio" id="rom${stt1.index}" name="rom1"
                            value="${ht1.rom.dungLuong}" ${ht1.rom.dungLuong==motctsp.rom.dungLuong ?"checked":""}
                            onchange="clickradio2lan();">
-                    <label for="rom${stt1.index}" style="border: 1px solid #00A000;margin-left:5px">${ht1.rom.dungLuong}</label>
+                    <label for="rom${stt1.index}" style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.rom.dungLuong}</label>
                 </c:if>
             </c:if>
 
@@ -529,7 +509,7 @@
                         <input type="radio" id="rom${stt1.index}" name="rom1"
                                value="${ht1.rom.dungLuong}" ${ht1.rom.dungLuong==motctsp.rom.dungLuong ?"checked":""}
                                onchange="clickradio2lan();">
-                        <label for="rom${stt1.index}" style="border: 1px solid #00A000;margin-left:5px">${ht1.rom.dungLuong}</label>
+                        <label for="rom${stt1.index}" style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.rom.dungLuong}</label>
                     </c:if>
                     <c:set var="checkck" scope="session" value="${-1}"/>
                 </c:if>
@@ -544,7 +524,7 @@
                     <input type="radio" id="ram${stt1.index}" name="ram1"
                            value="${ht1.ram.dungLuong}" ${ht1.ram.dungLuong==motctsp.ram.dungLuong ?"checked":""}
                            onchange="clickradio2lan();">
-                    <label for="ram${stt1.index}" style="border: 1px solid #00A000;margin-left:5px">${ht1.ram.dungLuong}</label>
+                    <label for="ram${stt1.index}" style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.ram.dungLuong}</label>
                 </c:if>
             </c:if>
             <c:if test="${stt1.index>0}">
@@ -562,7 +542,7 @@
                         <input type="radio" id="ram${stt1.index}" name="ram1"
                                value="${ht1.ram.dungLuong}" ${ht1.ram.dungLuong==motctsp.ram.dungLuong ?"checked":""}
                                onchange="clickradio2lan();">
-                        <label for="ram${stt1.index}" style="border: 1px solid #00A000;margin-left:5px">${ht1.ram.dungLuong}</label>
+                        <label for="ram${stt1.index}" style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.ram.dungLuong}</label>
                     </c:if>
                     <c:set var="checkck" scope="session" value="${-1}"/>
                 </c:if>
@@ -578,7 +558,7 @@
                     <input type="radio" id="chip${stt1.index}" name="chip1"
                            value="${ht1.chip.ten}" ${ht1.chip.ten==motctsp.chip.ten ?"checked":""}
                            onchange="clickradio2lan();">
-                    <label for="chip${stt1.index}" style="border: 1px solid #00A000;margin-left:5px">${ht1.chip.ten}</label>
+                    <label for="chip${stt1.index}" style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.chip.ten}</label>
                 </c:if>
             </c:if>
             <c:if test="${stt1.index>0}">
@@ -596,7 +576,7 @@
                         <input type="radio" id="chip${stt1.index}" name="chip1"
                                value="${ht1.chip.ten}" ${ht1.chip.ten==motctsp.chip.ten ?"checked":""}
                                onchange="clickradio2lan();">
-                        <label for="chip${stt1.index}" style="border: 1px solid #00A000;margin-left:5px">${ht1.chip.ten}</label>
+                        <label for="chip${stt1.index}" style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.chip.ten}</label>
                     </c:if>
                     <c:set var="checkck" scope="session" value="${-1}"/>
                 </c:if>
@@ -1061,7 +1041,7 @@
     </div>
     <!-- /container -->
     <!-- /SECTION -->
-
+    </div>
 </main>
 <br>
 <br>

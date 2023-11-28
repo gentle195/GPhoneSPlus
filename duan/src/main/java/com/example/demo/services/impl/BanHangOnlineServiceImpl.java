@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.UUID;
 @Service
@@ -245,6 +246,17 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     @Override
     public List<HoaDon> search8(UUID id, String ten) {
         return banHangOnLinerepository.searchDH8(id, ten);
+    }
+
+    @Override
+    public String sotienkhidagiam(UUID idctsp) {
+        Long stbandau=Long.valueOf(String.valueOf(chiTietSanPhamService.findById(idctsp).getGiaBan()));
+        Long phamtramgiam=Long.valueOf(String.valueOf(tonggiamgia(String.valueOf(idctsp))));
+        long number =stbandau- stbandau/100*phamtramgiam;
+        // Create a DecimalFormat instance with the desired pattern
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        // Format the number
+        return decimalFormat.format(number);
     }
 
 
