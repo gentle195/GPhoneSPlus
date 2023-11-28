@@ -78,4 +78,6 @@ public interface BanHangOnlineService {
     List<HoaDon> search2(UUID id, String ten);
     List<HoaDon> search3(UUID id, String ten);
     List<HoaDon> search8(UUID id, String ten);
+
+    String sotienkhidagiam(UUID idctsp);
 }
