@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,18 +25,17 @@ public interface DoiTraService {
 
     public Boolean delete(UUID id);
 
-    public Page<DoiTra> getAll0(Pageable pageable) ;
+    public List<DoiTra> getAll0();
 
-    public Page<DoiTra> getAll1(Pageable pageable) ;
+    public List<DoiTra> getAll1();
 
-    public Page<DoiTra> getAll2(Pageable pageable) ;
+    public List<DoiTra> getAll2();
 
+    public Page<HoaDon> getAllhoadon(Pageable pageable);
 
-    public Page<HoaDon> getAllhoadon(Pageable pageable) ;
-    public Page<HoaDon> getAllHD(Pageable pageable);
+    public List<HoaDon> getAllHD();
 
     public List<HoaDonChiTiet> getHoaDonChiTiet(UUID id);
-
 
 
     List<ChiTietSanPham> locbanhang(String idHang,
@@ -54,6 +54,21 @@ public interface DoiTraService {
     public List<DoiTra> fillAll1();
 
     public List<DoiTra> fillAll2();
+
+    public List<DoiTra> locDoiTraTrangThai0(UUID idKH, UUID idNV,
+                                            Date startDate, Date endDate, Date ngayTao0, Date ngayTao1);
+
+    public List<DoiTra> locDoiTraTrangThai1(UUID idKH, UUID idNV,
+                                            Date startDate, Date endDate, Date ngayTao0, Date ngayTao1);
+
+    public List<DoiTra> locDoiTraTrangThai2(UUID idKH, UUID idNV,
+                                            Date startDate, Date endDate, Date ngayTao0, Date ngayTao1);
+
+    List<DoiTra> searchDoiTraTrangThai0(String search);
+
+    List<DoiTra> searchDoiTraTrangThai1(String search);
+
+    List<DoiTra> searchDoiTraTrangThai2(String search);
 }
 
 

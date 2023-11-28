@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,18 +31,18 @@ public class DoiTraServiceImpl implements DoiTraService {
     }
 
     @Override
-    public Page<DoiTra> getAll0(Pageable pageable) {
-        return doiTraRepository.fillAll0(pageable);
+    public List<DoiTra> getAll0() {
+        return doiTraRepository.fillAll0();
     }
 
     @Override
-    public Page<DoiTra> getAll1(Pageable pageable) {
-        return doiTraRepository.fillAll1(pageable);
+    public List<DoiTra> getAll1() {
+        return doiTraRepository.fillAll1();
     }
 
     @Override
-    public Page<DoiTra> getAll2(Pageable pageable) {
-        return doiTraRepository.fillAll2(pageable);
+    public List<DoiTra> getAll2() {
+        return doiTraRepository.fillAll2();
     }
 
     @Override
@@ -50,9 +51,11 @@ public class DoiTraServiceImpl implements DoiTraService {
     }
 
 
-    public Page<HoaDon> getAllHD(Pageable pageable){
-        return doiTraRepository.getAllHD(pageable);
-    };
+    public List<HoaDon> getAllHD() {
+        return doiTraRepository.getAllHD();
+    }
+
+    ;
 
     @Override
     public List<DoiTra> findAll() {
@@ -60,19 +63,56 @@ public class DoiTraServiceImpl implements DoiTraService {
     }
 
     @Override
-    public List<DoiTra> fillAll0(){return doiTraRepository.getAll0();}
+    public List<DoiTra> fillAll0() {
+        return doiTraRepository.getAll0();
+    }
 
     @Override
-    public List<DoiTra> fillAll1(){return doiTraRepository.getAll1();}
+    public List<DoiTra> fillAll1() {
+        return doiTraRepository.getAll1();
+    }
 
     @Override
-    public List<DoiTra> fillAll2(){return doiTraRepository.getAll2();}
+    public List<DoiTra> fillAll2() {
+        return doiTraRepository.getAll2();
+    }
 
     @Override
-    public List<HoaDonChiTiet> getHoaDonChiTiet(UUID id){
+    public List<DoiTra> locDoiTraTrangThai0(UUID idKH, UUID idNV, Date startDate, Date endDate, Date ngayTao0, Date ngayTao1) {
+        return doiTraRepository.locDoiTraTrangThai0(idKH, idNV, startDate, endDate, ngayTao0, ngayTao1);
+    }
+
+    @Override
+    public List<DoiTra> locDoiTraTrangThai1(UUID idKH, UUID idNV, Date startDate, Date endDate, Date ngayTao0, Date ngayTao1) {
+        return doiTraRepository.locDoiTraTrangThai1(idKH, idNV, startDate, endDate, ngayTao0, ngayTao1);
+    }
+
+    @Override
+    public List<DoiTra> locDoiTraTrangThai2(UUID idKH, UUID idNV, Date startDate, Date endDate, Date ngayTao0, Date ngayTao1) {
+        return doiTraRepository.locDoiTraTrangThai2(idKH, idNV, startDate, endDate, ngayTao0, ngayTao1);
+    }
+
+    @Override
+    public List<DoiTra> searchDoiTraTrangThai0(String search) {
+        return doiTraRepository.searchDoiTraTrangThai0(search);
+    }
+
+    @Override
+    public List<DoiTra> searchDoiTraTrangThai1(String search) {
+        return doiTraRepository.searchDoiTraTrangThai1(search);
+    }
+
+    @Override
+    public List<DoiTra> searchDoiTraTrangThai2(String search) {
+        return doiTraRepository.searchDoiTraTrangThai2(search);
+    }
+
+    @Override
+    public List<HoaDonChiTiet> getHoaDonChiTiet(UUID id) {
         return doiTraRepository.getHoaDonChiTiet(id);
-    };
+    }
 
+    ;
 
 
     @Override
@@ -107,17 +147,17 @@ public class DoiTraServiceImpl implements DoiTraService {
                                            String idPin,
                                            String idDLPin,
                                            String idChip,
-                                           String tenSP)
-    {        return doiTraRepository.locbanhang(idHang,
-            moTaCam,
-            moTaMan,
-            moTaMau,
-            idRam,
-            idRom,
-            idPin,
-            idDLPin,
-            idChip,
-            tenSP);
+                                           String tenSP) {
+        return doiTraRepository.locbanhang(idHang,
+                moTaCam,
+                moTaMan,
+                moTaMau,
+                idRam,
+                idRom,
+                idPin,
+                idDLPin,
+                idChip,
+                tenSP);
     }
 
     @Override

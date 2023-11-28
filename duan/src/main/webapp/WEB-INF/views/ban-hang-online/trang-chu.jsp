@@ -214,7 +214,7 @@
                                            class="btn btn-primary">Đơn hàng</a>
                                     </div>
                                     <div>
-                                        <a href="/doi-tra/chinh-sach-doi-tra" class="btn btn-primary" style="" onclick="">Chính sách đổi trả</a>
+                                        <a href="/ban-hang-online/chinh-sach-doi-tra" class="btn btn-primary" style="" onclick="">Chính sách đổi trả</a>
                                     </div>
                                     <div>
                                         <a href="/logout" class="btn btn-primary" style="" onclick="">Đăng xuất</a>

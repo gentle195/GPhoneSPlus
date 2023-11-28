@@ -71,6 +71,11 @@ public class HoaDonServiceImpl implements HoaDonService {
     }
 
     @Override
+    public List<HoaDon> searchDoiTra(String search) {
+        return hoaDonRepository.searchDoiTra(search);
+    }
+
+    @Override
     public List<HoaDon> find() {
         return hoaDonRepository.find();
     }
@@ -406,7 +411,7 @@ public class HoaDonServiceImpl implements HoaDonService {
             // Thiết lập thông tin phản hồi
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "hoa_don_"+hoaDonId+".pdf");
+            headers.setContentDispositionFormData("attachment", "hoa_don_" + hoaDonId + ".pdf");
 
             // Trả về file PDF dưới dạng byte[]
             return ResponseEntity.ok().headers(headers).body(pdfBytes);
@@ -595,7 +600,7 @@ public class HoaDonServiceImpl implements HoaDonService {
             // Thiết lập thông tin phản hồi
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "hoa_don_"+hoaDonId+".pdf");
+            headers.setContentDispositionFormData("attachment", "hoa_don_" + hoaDonId + ".pdf");
 
             // Trả về file PDF dưới dạng byte[]
             return ResponseEntity.ok().headers(headers).body(pdfBytes);

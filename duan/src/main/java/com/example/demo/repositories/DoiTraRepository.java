@@ -9,30 +9,33 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
 
 @Repository
 public interface DoiTraRepository extends JpaRepository<DoiTra, UUID> {
     @Query("SELECT d from DoiTra d where d.tinhTrang=0")
-    Page<DoiTra> fillAll0(Pageable pageable);
+    List<DoiTra> fillAll0();
 
     @Query("SELECT d from DoiTra d where d.tinhTrang=1")
-    Page<DoiTra> fillAll1(Pageable pageable);
+    List<DoiTra> fillAll1();
 
     @Query("SELECT d from DoiTra d where d.id=:id")
     List<DoiTra> findId(UUID id);
 
     @Query("SELECT d from DoiTra d where d.tinhTrang=2")
-    Page<DoiTra> fillAll2(Pageable pageable);
+    List<DoiTra> fillAll2();
 
     @Query("SELECT d from HoaDon d where d.tinhTrang=2")
     Page<HoaDon> fillAllHoaDon(Pageable pageable);
 
-    @Query("SELECT d FROM HoaDon d WHERE d.tinhTrang = 2 AND NOT EXISTS (SELECT 1 FROM DoiTra dt WHERE dt.hoaDon.id = d.id)")
-    Page<HoaDon> getAllHD(Pageable pageable);
+    @Query("SELECT d FROM HoaDon d WHERE d.tinhTrang = 2 and d.tinhTrangGiaoHang=3 AND NOT EXISTS (SELECT 1 FROM DoiTra dt WHERE dt.hoaDon.id = d.id)")
+    List<HoaDon> getAllHD();
 
     @Query("SELECT d from DoiTra d where d.tinhTrang=0")
     List<DoiTra> getAll0();
@@ -45,11 +48,6 @@ public interface DoiTraRepository extends JpaRepository<DoiTra, UUID> {
 
     @Query("select hdct from HoaDonChiTiet hdct left join HoaDon hd on hdct.hoaDon.id=hd.id where hd.id=:id")
     List<HoaDonChiTiet> getHoaDonChiTiet(UUID id);
-
-
-
-
-
 
 
     @Query("SELECT ct FROM ChiTietSanPham ct LEFT JOIN SanPham sp ON ct.sanPham.id = sp.id " +
@@ -85,7 +83,61 @@ public interface DoiTraRepository extends JpaRepository<DoiTra, UUID> {
                                     @Param("idChip") String idChip,
                                     @Param("tenSP") String tenSP);
 
+    @Query("select hd from DoiTra hd " +
+            " where hd.tinhTrang=0 and (:idKH IS NULL OR hd.khachHang.id=:idKH)and (:idNV IS NULL OR hd.nhanVien.id=:idNV) " +
+            "AND ((:startDate IS NULL OR :endDate IS NULL) OR hd.ngayDoiTra >= COALESCE(:startDate, hd.ngayDoiTra) " +
+            "and hd.ngayDoiTra <= COALESCE(:endDate, hd.ngayDoiTra))" +
+            "AND ((:ngayTao0 IS NULL OR :ngayTao1 IS NULL) OR hd.ngayTao >= COALESCE(:ngayTao0, hd.ngayTao))")
+    List<DoiTra> locDoiTraTrangThai0(
+            UUID idKH, UUID idNV,
+            @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+            @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+            @RequestParam(value = "ngayTao0", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayTao0,
+            @RequestParam(value = "ngayTao1", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayTao1);
+
+    @Query("select hd from DoiTra hd " +
+            " where hd.tinhTrang=1 and (:idKH IS NULL OR hd.khachHang.id=:idKH)and (:idNV IS NULL OR hd.nhanVien.id=:idNV) " +
+            "AND ((:startDate IS NULL OR :endDate IS NULL) OR hd.ngayDoiTra >= COALESCE(:startDate, hd.ngayDoiTra) " +
+            "and hd.ngayDoiTra <= COALESCE(:endDate, hd.ngayDoiTra))" +
+            "AND ((:ngayTao0 IS NULL OR :ngayTao1 IS NULL) OR hd.ngayTao >= COALESCE(:ngayTao0, hd.ngayTao))")
+    List<DoiTra> locDoiTraTrangThai1(
+            UUID idKH, UUID idNV,
+            @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+            @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+            @RequestParam(value = "ngayTao0", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayTao0,
+            @RequestParam(value = "ngayTao1", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayTao1);
+
+    @Query("select hd from DoiTra hd " +
+            " where hd.tinhTrang=2 and (:idKH IS NULL OR hd.khachHang.id=:idKH)and (:idNV IS NULL OR hd.nhanVien.id=:idNV) " +
+            "AND ((:startDate IS NULL OR :endDate IS NULL) OR hd.ngayDoiTra >= COALESCE(:startDate, hd.ngayDoiTra) " +
+            "and hd.ngayDoiTra <= COALESCE(:endDate, hd.ngayDoiTra))" +
+            "AND ((:ngayTao0 IS NULL OR :ngayTao1 IS NULL) OR hd.ngayTao >= COALESCE(:ngayTao0, hd.ngayTao))")
+    List<DoiTra> locDoiTraTrangThai2(
+            UUID idKH, UUID idNV,
+            @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+            @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+            @RequestParam(value = "ngayTao0", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayTao0,
+            @RequestParam(value = "ngayTao1", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayTao1);
 
 
+    @Query("select dt from DoiTra dt where dt.tinhTrang=0 and dt.ma like %:search% " +
+            "or dt.hoaDon.ma like %:search% " +
+            "or dt.khachHang.hoTen like %:search% " +
+            "or dt.nhanVien.hoTen like %:search% " +
+            "or dt.hoaDon.sdt like %:search%")
+    List<DoiTra> searchDoiTraTrangThai0(String search);
 
+    @Query("select dt from DoiTra dt where dt.tinhTrang=1 and dt.ma like %:search% " +
+            "or dt.hoaDon.ma like %:search% " +
+            "or dt.khachHang.hoTen like %:search% " +
+            "or dt.nhanVien.hoTen like %:search% " +
+            "or dt.hoaDon.sdt like %:search%")
+    List<DoiTra> searchDoiTraTrangThai1(String search);
+
+    @Query("select dt from DoiTra dt where dt.tinhTrang=2 and dt.ma like %:search% " +
+            "or dt.hoaDon.ma like %:search% " +
+            "or dt.khachHang.hoTen like %:search% " +
+            "or dt.nhanVien.hoTen like %:search% " +
+            "or dt.hoaDon.sdt like %:search%")
+    List<DoiTra> searchDoiTraTrangThai2(String search);
 }

@@ -204,10 +204,15 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Hình thức thanh toán:</label>
                                                 <div class="col-sm-9">
-                                                    <form:input class="form-control" placeholder="" readonly="true"
-                                                                path="hinhThucThanhToan"
-                                                                value="${donHang.hinhThucThanhToan == 0 ? 'Tiền mặt' : 'Chuyển khoản'}"
-                                                    />
+                                                    <form:select path="hinhThucThanhToan"
+                                                                 class="form-control" id="selectDiaChiDonHang">
+                                                        <c:if test="${donHang.hinhThucThanhToan==0}">
+                                                            <option value="0">Tiền mặt</option>
+                                                        </c:if>
+                                                        <c:if test="${donHang.hinhThucThanhToan==1}">
+                                                            <option value="1">Chuyển khoản</option>
+                                                        </c:if>
+                                                    </form:select>
                                                 </div>
                                             </div>
                                         </div>

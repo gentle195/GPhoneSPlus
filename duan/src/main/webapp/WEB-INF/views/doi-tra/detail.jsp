@@ -114,14 +114,6 @@
 
 <div>
 
-    <!-- Trong trang detail.jsp -->
-<%--    <input type="text" id="doitraIdInput" name="doitraId" readonly />--%>
-
-<%--    <input type="text" id="hoadonIdInput" name="hoadonId" readonly />--%>
-
-
-
-
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
             <a href="/doi-tra/hien-thi" class="nav-link"
@@ -173,17 +165,19 @@
 
 
                                             <td>
-<%--                                                <c:choose>--%>
-<%--&lt;%&ndash;                                                    <c:when test="${not empty dulieu.imei.id}">&ndash;%&gt;--%>
-<%--                                                        <!-- Nếu hdct.imei.id tồn tại, thì nút sẽ không ấn được -->--%>
-<%--                                                        <button class='btn btn-primary chonSanPhamButton' disabled>Chọn sản phẩm</button>--%>
-<%--                                                    </c:when>--%>
-<%--                                                    <c:otherwise>--%>
-                                                        <!-- Nếu hdct.imei.id không tồn tại, thì nút sẽ ấn được -->
-<%--                                                        <button class='btn btn-primary chonSanPhamButton' onclick='showChonSanPhamModalWithDonGia(${hdct.donGia})'  >Chọn sản phẩm</button>--%>
-                                                        <button class='btn btn-primary chonSanPhamButton'  data-idhdct="${hdct.id}"   >Chọn sản phẩm</button>
-<%--                                                    </c:otherwise>--%>
-<%--                                                </c:choose>--%>
+                                                    <%--                                                <c:choose>--%>
+                                                    <%--&lt;%&ndash;                                                    <c:when test="${not empty dulieu.imei.id}">&ndash;%&gt;--%>
+                                                    <%--                                                        <!-- Nếu hdct.imei.id tồn tại, thì nút sẽ không ấn được -->--%>
+                                                    <%--                                                        <button class='btn btn-primary chonSanPhamButton' disabled>Chọn sản phẩm</button>--%>
+                                                    <%--                                                    </c:when>--%>
+                                                    <%--                                                    <c:otherwise>--%>
+                                                <!-- Nếu hdct.imei.id không tồn tại, thì nút sẽ ấn được -->
+                                                    <%--                                                        <button class='btn btn-primary chonSanPhamButton' onclick='showChonSanPhamModalWithDonGia(${hdct.donGia})'  >Chọn sản phẩm</button>--%>
+                                                <button class='btn btn-primary chonSanPhamButton'
+                                                        data-idhdct="${hdct.id}">Chọn sản phẩm
+                                                </button>
+                                                    <%--                                                    </c:otherwise>--%>
+                                                    <%--                                                </c:choose>--%>
                                             </td>
 
                                         </tr>
@@ -218,13 +212,14 @@
                                         <th colspan="2">Action</th>
                                     </tr>
                                     </thead>
-                                    <tbody id="table-search1">
+                                    <tbody id="table-search11">
                                     <tr>
                                         <c:forEach items="${dtct}" var="hdct">
                                     <tr>
                                         <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten}</td>
                                         <td align="center">
-                                            <img src="/uploads/${hdct.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}" width="40" height="40">
+                                            <img src="/uploads/${hdct.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}"
+                                                 width="40" height="40">
                                         </td>
                                         <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
                                         <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
@@ -232,11 +227,21 @@
                                         <td>
                                             <c:choose>
                                                 <c:when test="${hdct.hinhThucDoiTra ==0 }">
-                                                    <button class='btn btn-primary chonSanPhamDoiTraButton' data-idhdctmoi="${hdct.hoaDonChiTiet.id}" onclick='showChonSanPhamModalWithDonGia(${hdct.hoaDonChiTiet.donGia})'>Chọn </button>
-                                                    <button class='btn btn-primary xoaSanPhamDoiTraButton' data-idhdctmoixoa="${hdct.hoaDonChiTiet.id}" onclick="xoaSanPham('${hdct.hoaDonChiTiet.id}')">Xóa</button>
+                                                    <button class='btn btn-primary chonSanPhamDoiTraButton'
+                                                            data-idhdctmoi="${hdct.hoaDonChiTiet.id}"
+                                                            onclick='showChonSanPhamModalWithDonGia(${hdct.hoaDonChiTiet.donGia})'>
+                                                        Chọn
+                                                    </button>
+                                                    <button class='btn btn-primary xoaSanPhamDoiTraButton'
+                                                            data-idhdctmoixoa="${hdct.hoaDonChiTiet.id}"
+                                                            onclick="xoaSanPham('${hdct.hoaDonChiTiet.id}')">Xóa
+                                                    </button>
                                                 </c:when>
                                                 <c:when test="${hdct.hinhThucDoiTra == 1}">
-                                                    <button class='btn btn-primary xoaSanPhamDoiTraButton' data-idhdctmoixoa="${hdct.hoaDonChiTiet.id}" onclick="xoaSanPham('${hdct.hoaDonChiTiet.id}')">Xóa</button>
+                                                    <button class='btn btn-primary xoaSanPhamDoiTraButton'
+                                                            data-idhdctmoixoa="${hdct.hoaDonChiTiet.id}"
+                                                            onclick="xoaSanPham('${hdct.hoaDonChiTiet.id}')">Xóa
+                                                    </button>
                                                 </c:when>
                                             </c:choose>
                                         </td>
@@ -256,14 +261,14 @@
         </div>
 
 
-
         <div class="col-12 grid-margin">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div>
                         <div class="card-body">
                             <br>
-                            <h3 ${not empty dtctlist ? '' : 'style="display: none;"'} style="text-align: center;">Sản phẩm đổi trả</h3>
+                            <h3 ${not empty dtctlist ? '' : 'style="display: none;"'} style="text-align: center;">Sản
+                                phẩm đổi trả</h3>
                             <br>
 
                             <div class="table-responsive custom-table">
@@ -293,11 +298,11 @@
                                         <td>${hdct.imei.soImei}</td>
 
                                         <td>
-                                            <button class='btn btn-primary chonSanPhamDoiTraButton' data-idhdctmoi="${hdct.id}"  >Xóa </button>
+                                            <button class='btn btn-primary chonSanPhamDoiTraButton'
+                                                    data-idhdctmoi="${hdct.id}">Xóa
+                                            </button>
                                         </td>
                                     </tr>
-
-
 
 
                                     </c:forEach>
@@ -314,68 +319,13 @@
                 </div>
             </div>
         </div>
-
-<%--        <div class="col-12 grid-margin">--%>
-<%--            <div class="col-lg-12 grid-margin stretch-card">--%>
-<%--                <div class="card">--%>
-<%--                    <div>--%>
-<%--                        <div class="card-body">--%>
-<%--                            <br>--%>
-<%--                            <h3 style="text-align: center;">Sản phẩm đổi trả</h3>--%>
-<%--                            <br>--%>
-
-<%--                            <div class="table-responsive custom-table">--%>
-<%--                                <table class="display custom-table" ${not empty dulieu.imei ? '' : 'style="display: none;"'}>--%>
-<%--                                    <thead>--%>
-<%--                                    <tr>--%>
-<%--                                        <th>Tên Sản Phẩm</th>--%>
-<%--                                        <th>Ảnh</th>--%>
-<%--                                        <th>Hãng</th>--%>
-<%--                                        <th>Số IMEI</th>--%>
-<%--                                        <th>Đơn Giá</th>--%>
-<%--                                        <th>Action</th>--%>
-<%--                                    </tr>--%>
-<%--                                    </thead>--%>
-<%--                                    <tbody id="table-search1">--%>
-<%--                                    <tr>--%>
-<%--                                        <td>${dulieu.imei.chiTietSanPham.sanPham.ten}</td>--%>
-<%--                                        <td align="center">--%>
-<%--                                            <img src="/uploads/${dulieu.imei.chiTietSanPham.urlAnh}" width="40" height="40">--%>
-<%--                                        </td>--%>
-<%--                                        <td>${dulieu.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>--%>
-<%--                                        <td>${dulieu.imei.soImei}</td>--%>
-<%--                                        <td>${dulieu.imei.chiTietSanPham.giaBan}</td>--%>
-<%--                                        <td>--%>
-<%--                                            <a href="/doi-tra/delete-san-pham/${dulieu.id}" tabindex="-1" role="button"--%>
-<%--                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Xóa</a>--%>
-<%--                                        </td>--%>
-<%--                                    </tr>--%>
-<%--                                    </tbody>--%>
-<%--                                </table>--%>
-
-
-<%--
-
-<%--                            </div>--%>
-
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
         <div class='btn btn-primary' id='xacNhanButton'>Xác nhận</div>
 
 
-
-
-
     </div>
 
-
-    </div>
 
 </div>
-
-
 <%--modal chọn sp--%>
 <div class="modal fade" id="exampleModalChonSanPham" tabindex="-1" aria-labelledby="modal-1-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -386,78 +336,110 @@
                         <form class="forms-sample">
                             <div class="container px-0 px-lg-5 mt-0">
                                 <div class="row gx-0 gx-lg-5 row-cols-0 row-cols-md-0 row-cols-xl-5 justify-content-center"
-                                     style="width: 100%">
-                                    <div style="height: 1.5cm">
-                                        <select class="form-control" id="hangds1" onchange="clickcombobox()">
-                                            <option selected value="null">Hãng sản phẩm</option>
-                                            <c:forEach items="${hangds}" var="ht">
-                                                <option value="${ht.ten}">${ht.ten}</option>
-                                            </c:forEach>
-                                        </select>
+                                     style="width: 100%;color: black">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <div style="border: black solid 0.5px">
+                                                    <select class="form-control" id="hangds1"
+                                                            onchange="clickcombobox()">
+                                                        <option selected value="null">Hãng</option>
+                                                        <c:forEach items="${hangds}" var="ht">
+                                                            <option value="${ht.ten}">${ht.ten}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div style="border: black solid 0.5px">
+                                                    <select class="form-control" id="camds1" onchange="clickcombobox()">
+                                                        <option selected value="null">Camera</option>
+                                                        <c:forEach items="${camds}" var="ht">
+                                                            <option value="${ht.thongSo}">${ht.thongSo}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div style="border: black solid 0.5px">
+                                                    <select class="form-control" id="mands1" onchange="clickcombobox()">
+                                                        <option selected value="null">Màn hình</option>
+                                                        <c:forEach items="${mands}" var="ht">
+                                                            <option value="${ht.thongSo}">${ht.thongSo}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div style="border: black solid 0.5px">
+                                                    <select class="form-control" id="mauds1" onchange="clickcombobox()">
+                                                        <option selected value="null">Màu sắc</option>
+                                                        <c:forEach items="${mauds}" var="ht">
+                                                            <option value="${ht.ten}">${ht.ten}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div style="border: black solid 0.5px">
+                                                    <select class="form-control" id="ramds1" onchange="clickcombobox()">
+                                                        <option selected value="null">Ram</option>
+                                                        <c:forEach items="${ramds}" var="ht">
+                                                            <option value="${ht.dungLuong}">${ht.dungLuong}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
-                                    <div>
-                                        <select class="form-control" id="camds1" onchange="clickcombobox()">
-                                            <option selected value="null">Camera</option>
-                                            <c:forEach items="${camds}" var="ht">
-                                                <option value="${ht.thongSo}">${ht.thongSo}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <select class="form-control" id="mands1" onchange="clickcombobox()">
-                                            <option selected value="null">Màn hình</option>
-                                            <c:forEach items="${mands}" var="ht">
-                                                <option value="${ht.thongSo}">${ht.thongSo}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div style="height: 1.5cm">
-                                        <select class="form-control" id="mauds1" onchange="clickcombobox()">
-                                            <option selected value="null">Màu sắc</option>
-                                            <c:forEach items="${mauds}" var="ht">
-                                                <option value="${ht.ten}">${ht.ten}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <select class="form-control" id="ramds1" onchange="clickcombobox()">
-                                            <option selected value="null">Ram</option>
-                                            <c:forEach items="${ramds}" var="ht">
-                                                <option value="${ht.dungLuong}">${ht.dungLuong}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <select class="form-control" id="romds1" onchange="clickcombobox()">
-                                            <option selected value="null">Rom</option>
-                                            <c:forEach items="${romds}" var="ht">
-                                                <option value="${ht.dungLuong}">${ht.dungLuong}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <select class="form-control" id="dungds1" onchange="clickcombobox()">
-                                            <option selected value="null">Dung lượng pin</option>
-                                            <c:forEach items="${dungds}" var="ht">
-                                                <option value="${ht.thongSo}">${ht.thongSo}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <select class="form-control" id="chipds1" onchange="clickcombobox()">
-                                            <option selected value="null">Chip</option>
-                                            <c:forEach items="${chipds}" var="ht">
-                                                <option value="${ht.ten}">${ht.ten}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <select class="form-control" id="sands1" onchange="clickcombobox()">
-                                            <option selected value="null">Sản phẩm</option>
-                                            <c:forEach items="${sands}" var="ht">
-                                                <option value="${ht.ten}">${ht.ten}</option>
-                                            </c:forEach>
-                                        </select>
+                                    <br>
+                                    <br>
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <div style="border: black solid 0.5px">
+                                                    <select class="form-control" id="romds1" onchange="clickcombobox()">
+                                                        <option selected value="null">Rom</option>
+                                                        <c:forEach items="${romds}" var="ht">
+                                                            <option value="${ht.dungLuong}">${ht.dungLuong}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div style="border: black solid 0.5px">
+                                                    <select class="form-control" id="dungds1"
+                                                            onchange="clickcombobox()">
+                                                        <option selected value="null">Dung lượng pin</option>
+                                                        <c:forEach items="${dungds}" var="ht">
+                                                            <option value="${ht.thongSo}">${ht.thongSo}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div style="border: black solid 0.5px">
+                                                    <select class="form-control" id="chipds1"
+                                                            onchange="clickcombobox()">
+                                                        <option selected value="null">Chip</option>
+                                                        <c:forEach items="${chipds}" var="ht">
+                                                            <option value="${ht.ten}">${ht.ten}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div style="border: black solid 0.5px">
+                                                    <select class="form-control" id="sands1" onchange="clickcombobox()">
+                                                        <option selected value="null">Sản phẩm</option>
+                                                        <c:forEach items="${sands}" var="ht">
+                                                            <option value="${ht.ten}">${ht.ten}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -477,9 +459,10 @@
                                 <%--           kết thúc tìm kiếm         --%>
                                 <div class="table-responsive">
                                     <div>
-                                        <table id="example" class="display" style="min-width: 845px; color: black">
+                                        <table id="example" class="display" style="min-width: 1200px; color: black">
                                             <thead>
                                             <tr>
+                                                <th style="display: none"></th>
                                                 <th>Mã Sản Phẩm</th>
                                                 <th>Tên Sản Phẩm</th>
                                                 <th>Ảnh</th>
@@ -496,6 +479,7 @@
                                                    id="banglocthaydoi">
                                             <c:forEach items="${listChiTietSanPham}" var="ctsp">
                                                 <tr>
+                                                    <td style="display: none">${ctsp.id}</td>
                                                     <td>${ctsp.sanPham.ma}</td>
                                                     <td>${ctsp.sanPham.ten}</td>
                                                     <td align="center">
@@ -505,19 +489,23 @@
                                                     <td>${ctsp.mauSac.ten}</td>
                                                     <td>${ctsp.ram.dungLuong}</td>
                                                     <td>${ctsp.rom.dungLuong}</td>
-                                                    <td>${ctsp.giaBan}</td>
+                                                    <c:if test="${ctsp.khuyenMai==null}">
+                                                        <td>${ctsp.giaBan}</td>
+                                                    </c:if>
+                                                    <c:if test="${ctsp.khuyenMai!=null}">
+                                                        <td>${ctsp.giaBan-ctsp.giaBan*ctsp.khuyenMai.soTienGiam/100}</td>
+                                                    </c:if>
                                                     <td>${ctsp.soLuong}</td>
                                                     <td>
-
-                                                        <a class="btn btn-warning btn-icon-text"
-                                                           data-bs-toggle="modal" data-bs-target="#nhapImei"   data-giaban="${ctsp.giaBan}"  onclick="kiemTraGia()">Nhập
+                                                        <a
+                                                                class="btn btn-warning btn-icon-text"
+                                                                data-bs-toggle="modal" data-bs-target="#nhapImei">Nhập
                                                             IMEI</a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
                                             </tbody>
                                         </table>
-
                                     </div>
                                 </div>
                             </div>
@@ -531,69 +519,69 @@
 
 
 <%--modal xac nhan--%>
-<div class="modal fade" id="doiTra" tabindex="-1"
-     aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-            </div>
-            <div class="modal-body">
-                <div class="col-lg-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title" style="float: left">Danh sách IMEI</h4>
-                            <%--            Tìm kiếm               --%>
-                            <div class="row">
-                                <div class="col-4">
-                                    <label id="thongBaoImei" style="float: right"></label>
-                                </div>
-                                <div class="col-8">
-                                    <div class="input-group" style="width: 50%; float: right">
-                                        <input type="text" class="form-control"
-                                               name="search-imei" id="imeiSearchInput" placeholder="Tìm kiếm IMEI">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-sm btn-primary" type="button" id="searchImei"
-                                            >Tìm kiếm
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+<%--<div class="modal fade" id="doiTra" tabindex="-1"--%>
+<%--     aria-labelledby="exampleModalLabel"--%>
+<%--     aria-hidden="true">--%>
+<%--    <div class="modal-dialog modal-dialog-centered modal-xl">--%>
+<%--        <div class="modal-content">--%>
+<%--            <div class="modal-header">--%>
+<%--            </div>--%>
+<%--            <div class="modal-body">--%>
+<%--                <div class="col-lg-12 grid-margin stretch-card">--%>
+<%--                    <div class="card">--%>
+<%--                        <div class="card-body">--%>
+<%--                            <h4 class="card-title" style="float: left">Danh sách IMEI</h4>--%>
+<%--                            &lt;%&ndash;            Tìm kiếm               &ndash;%&gt;--%>
+<%--                            <div class="row">--%>
+<%--                                <div class="col-4">--%>
+<%--                                    <label id="thongBaoImei" style="float: right"></label>--%>
+<%--                                </div>--%>
+<%--                                <div class="col-8">--%>
+<%--                                    <div class="input-group" style="width: 50%; float: right">--%>
+<%--                                        <input type="text" class="form-control"--%>
+<%--                                               name="search-imei" id="imeiSearchInput" placeholder="Tìm kiếm IMEI">--%>
+<%--                                        <div class="input-group-append">--%>
+<%--                                            <button class="btn btn-sm btn-primary" type="button" id="searchImei"--%>
+<%--                                            >Tìm kiếm--%>
+<%--                                            </button>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
 
-                            <%--           kết thúc tìm kiếm         --%>
-                            <div class="table-responsive">
-                                <table class="table table-striped" style="color: black" id="table_id">
-                                    <thead>
-                                    <tr>
-                                        <th>Tên Sản Phẩm</th>
-                                        <th>Số IMEI</th>
-                                        <th>Trạng Thái</th>
-                                        <th>Chức năng</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="listImei_${ctsp.id}"
-                                           class="imei_search">
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"
-                        data-bs-toggle="modal" data-bs-target="#newSanPham">
-                    Quay về
-                </button>
-                <button type="button" class="btn btn-secondary"
-                        data-bs-dismiss="modal">
-                    Close
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+<%--                            &lt;%&ndash;           kết thúc tìm kiếm         &ndash;%&gt;--%>
+<%--                            <div class="table-responsive">--%>
+<%--                                <table class="table table-striped" style="color: black" id="table_id">--%>
+<%--                                    <thead>--%>
+<%--                                    <tr>--%>
+<%--                                        <th>Tên Sản Phẩm</th>--%>
+<%--                                        <th>Số IMEI</th>--%>
+<%--                                        <th>Trạng Thái</th>--%>
+<%--                                        <th>Chức năng</th>--%>
+<%--                                    </tr>--%>
+<%--                                    </thead>--%>
+<%--                                    <tbody id="listImei_${ctsp.id}"--%>
+<%--                                           class="imei_search">--%>
+<%--                                    </tbody>--%>
+<%--                                </table>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="modal-footer">--%>
+<%--                <button type="button" class="btn btn-secondary"--%>
+<%--                        data-bs-toggle="modal" data-bs-target="#newSanPham">--%>
+<%--                    Quay về--%>
+<%--                </button>--%>
+<%--                <button type="button" class="btn btn-secondary"--%>
+<%--                        data-bs-dismiss="modal">--%>
+<%--                    Close--%>
+<%--                </button>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 <%--nhập imei--%>
 <div class="modal fade" id="nhapImei" tabindex="-1"
      aria-labelledby="exampleModalLabel"
@@ -606,18 +594,30 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title" style="float: left">Danh sách IMEI</h4>
+                            <h4 class="card-title"
+                                style="float: left">Danh sách
+                                IMEI</h4>
                             <%--            Tìm kiếm               --%>
                             <div class="row">
                                 <div class="col-4">
-                                    <label id="thongBaoImei" style="float: right"></label>
+                                    <label id="thongBaoImei"
+                                           style="float: right"></label>
                                 </div>
                                 <div class="col-8">
-                                    <div class="input-group" style="width: 50%; float: right">
-                                        <input type="text" class="form-control"
-                                               name="search-imei" id="imeiSearchInput" placeholder="Tìm kiếm IMEI">
+                                    <div class="input-group"
+                                         style="width: 50%; float: right">
+                                        <input type="hidden"
+                                               id="idCTSPham"
+                                               name="idCTSanPham">
+                                        <input type="text"
+                                               class="form-control"
+                                               name="search-imei"
+                                               id="imeiSearchInput"
+                                               placeholder="Tìm kiếm IMEI">
                                         <div class="input-group-append">
-                                            <button class="btn btn-sm btn-primary" type="button" id="searchImei"
+                                            <button class="btn btn-sm btn-primary"
+                                                    type="button"
+                                                    id="searchImei"
                                             >Tìm kiếm
                                             </button>
                                         </div>
@@ -627,7 +627,9 @@
 
                             <%--           kết thúc tìm kiếm         --%>
                             <div class="table-responsive">
-                                <table class="table table-striped" style="color: black" id="table_id">
+                                <table class="table table-striped"
+                                       style="color: black"
+                                       id="table_id">
                                     <thead>
                                     <tr>
                                         <th>Tên Sản Phẩm</th>
@@ -647,7 +649,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary"
-                        data-bs-toggle="modal" data-bs-target="#newSanPham">
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModalChonSanPham">
                     Quay về
                 </button>
                 <button type="button" class="btn btn-secondary"
@@ -704,7 +707,11 @@
 
 
 </body>
-
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 <script>
     document.getElementById('xacNhanButton').addEventListener('click', function (event) {
         event.preventDefault();
@@ -747,18 +754,16 @@
         $.ajax({
             url: '/doi-tra/delete-hdct/' + doitraId + '/' + hdctId,
             type: 'GET',
-            success: function(data) {
+            success: function (data) {
                 // Load lại trang sau khi xóa thành công
                 location.reload();
             },
-            error: function(error) {
+            error: function (error) {
                 console.error('Lỗi khi xóa', error);
             }
         });
     }
 </script>
-
-
 
 
 <%--//Xóa sp cần đổi trả--%>
@@ -768,7 +773,7 @@
 
     // Lắng nghe sự kiện click trên button
     document.querySelectorAll('.xoaSanPhamDoiTraButton').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             // Lấy giá trị hdct.id từ thuộc tính data
             var hdctId = this.getAttribute('data-idhdctmoixoa');
 
@@ -791,14 +796,13 @@
 </script>
 
 
-
 <%--// chọn sản phẩm--%>
 <script>
     var globalHdctId; // Biến toàn cục để lưu giá trị hdctId
 
     // Lắng nghe sự kiện click trên button
     document.querySelectorAll('.chonSanPhamDoiTraButton').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             // Lấy giá trị hdct.id từ thuộc tính data
             var hdctId = this.getAttribute('data-idhdctmoi');
 
@@ -819,31 +823,9 @@
         // Có thể thực hiện gửi giá trị này trong hàm fetch
     }
 </script>
-
-
-
-<%--<script>--%>
-<%--    // Lắng nghe sự kiện click trên button--%>
-<%--    document.querySelectorAll('.chonSanPhamButton').forEach(button => {--%>
-<%--        button.addEventListener('click', function() {--%>
-<%--            // Lấy giá trị hdct.id từ thuộc tính data--%>
-<%--            var hdctId = this.getAttribute('data-idhdct');--%>
-<%--            console.log(doitraId)--%>
-
-<%--            // Lấy giá trị doitraId từ URL--%>
-<%--            // var doitraId = window.location.pathname.split('/').pop();--%>
-
-<%--            // Chuyển hướng đến controller và truyền hdctId qua RequestParam--%>
-<%--            window.location.href = "/doi-tra/them-dtct?hdctId=" + hdctId + "&doitraId=" + doitraId;--%>
-
-<%--        });--%>
-<%--    });--%>
-
-<%--</script>--%>
-
 <script>
     document.querySelectorAll('.chonSanPhamButton').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             var hdctId = this.getAttribute('data-idhdct');
             var doitraId = window.location.pathname.split('/').pop();
 
@@ -863,14 +845,10 @@
         var hdctId = $('#doiTraForm').data('hdctId');
 
 
-
-
         // Thực hiện thêm thông tin và chuyển hướng đến đường dẫn /doi-tra/them-dtct với các tham số truyền vào
         window.location.href = "/doi-tra/them-dtct?hdctId=" + hdctId + "&doitraId=" + doitraId + "&lyDo=" + lyDo + "&hienTrang=" + hienTrang + "&hinhThuc=" + hinhThuc;
     }
 </script>
-
-
 
 
 <script>
@@ -895,29 +873,6 @@
         }
     }
 </script>
-<%--<script>--%>
-<%--    function kiemTraGia() {--%>
-<%--        var hdctDonGia = selectedDonGia;--%>
-<%--        // Lấy giá trị ctsp.giaBan từ dữ liệu HTML--%>
-<%--        var ctspGiaBan = parseFloat(document.querySelector('[data-bs-target="#nhapImei"]').getAttribute('data-giaban'));--%>
-
-<%--        // In ra console để kiểm tra giá trị--%>
-<%--        console.log("selectedDonGia:", selectedDonGia);--%>
-<%--        console.log("ctspGiaBan:", ctspGiaBan);--%>
-
-<%--        // Kiểm tra điều kiện so sánh giá trị--%>
-<%--        if (selectedDonGia >= ctspGiaBan) {--%>
-<%--            // Thông báo lỗi nếu giá trị không hợp lệ--%>
-<%--            alert("Giá không được lớn hơn hoặc bằng " + ctspGiaBan);--%>
-<%--        } else {--%>
-<%--            // Thực hiện hành động nếu giá trị hợp lệ--%>
-<%--            // Mở modal nhập IMEI--%>
-<%--            $('#nhapImei').modal('show');--%>
-<%--        }--%>
-<%--    }--%>
-<%--</script>--%>
-
-
 <script>
     function showDoiTraModal() {
         // Hiển thị modal đổi trả
@@ -925,15 +880,15 @@
     }
 </script>
 
-<script>
-    $(document).ready(function() {
-        // Sự kiện click vào nút "Chọn sản phẩm"
-        $(".chonSanPhamButton").on("click", function() {
-            // Hiển thị modal mới
-            $('#exampleModalChonSanPham').modal('show');
-        });
-    });
-</script>
+<%--<script>--%>
+<%--    $(document).ready(function () {--%>
+<%--        // Sự kiện click vào nút "Chọn sản phẩm"--%>
+<%--        $(".chonSanPhamButton").on("click", function () {--%>
+<%--            // Hiển thị modal mới--%>
+<%--            $('#exampleModalChonSanPham').modal('show');--%>
+<%--        });--%>
+<%--    });--%>
+<%--</script>--%>
 
 <script>
     // Định nghĩa một biến toàn cục để lưu giá trị hdct.donGia
@@ -956,11 +911,7 @@
     }
 
 </script>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"
-        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+
 
 <script>
 
@@ -976,11 +927,26 @@
 </script>
 
 <script>
+    const aTags = document.querySelectorAll('.btn-warning.btn-icon-text');
+
+    aTags.forEach(aTag => {
+        aTag.addEventListener('click', () => {
+            // Lấy ID của sản phẩm
+            const productId = aTag.closest('tr').querySelector('td:first-child').textContent;
+
+            // Lưu ID của sản phẩm vào input
+            const input = document.querySelector('#idCTSPham');
+            input.value = productId;
+        });
+    });
     $('button[id^="searchImei"]').on('click', async function (e) {
         const btn = $(this);
         const parentModal = btn.closest('.modal'); // Lấy modal cha gần nhất của nút "Tìm kiếm" được nhấn
         const search = parentModal.find("#imeiSearchInput").val();
-        const url = "http://localhost:8080/doi-tra/search-imei?search-imei=" + search;
+        const idCTSPInputElement = $(document).find('#idCTSPham').val();
+        const url = "http://localhost:8080/ban-hang/search-imei?search-imei=" + search;
+        console.log(idCTSPInputElement)
+        console.log(url)
         if (search === "") {
             let html = `
                 <tr>
@@ -1004,16 +970,25 @@
                 let html = ``;
                 for (let i = 0; i < data.length; i++) {
                     const imei = data[i];
-
-                    const tr = `
-            <tr>
-                <td>` + imei.chiTietSanPham.sanPham.ten + `</td>
-                <td>` + imei.soImei + `</td>
-                <td>` + (imei.tinhTrang == 0 ? "Chưa bán" : "Đã bán") + `</td>
-               <td><a href="/doi-tra/them-imei/` + imei.id + `/`+doitraId+`/`+globalHdctId+`">Thêm IMEI</a></td>
-            </tr>
-            `;
-                    html += tr;
+                    const idImei = imei.chiTietSanPham.id;
+                    if (idImei.trim() === idCTSPInputElement.trim()) {
+                        const tr = `
+                        <tr>
+                            <td>` + imei.chiTietSanPham.sanPham.ten + `</td>
+                            <td>` + imei.soImei + `</td>
+                            <td>` + (imei.tinhTrang == 0 ? "Chưa bán" : "Đã bán") + `</td>
+                            <td><a href="/doi-tra/them-imei/` + imei.id + `/`+doitraId+`/`+globalHdctId+ `">Thêm IMEI</a></td>
+                        </tr>
+                        `;
+                        html += tr;
+                    } else {
+                        const tr = `
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: red"><strong>IMEI này không đúng với sản phẩm bạn vừa chọn!</strong></td>
+                    </tr>
+                    `;
+                        html += tr;
+                    }
                 }
                 parentModal.find(".imei_search").html(html);
             }
@@ -1022,14 +997,72 @@
         }
     });
 </script>
+<script>
+    $('button[id^="searchSanPham"]').on('click', async function (e) {
+        const btn = $(this);
+        const parentModal = btn.closest('.modal'); // Lấy modal cha gần nhất của nút "Tìm kiếm" được nhấn
+        const search = parentModal.find("#sanPhamSearchInput").val();
+        const url = "http://localhost:8080/ban-hang/search-san-pham?search-san-pham=" + search;
+        try {
+            const resp = await fetch(url);
+            const data = await resp.json();
+            console.log(data)
+            // Hiển thị dữ liệu tìm kiếm
+            let html = ``;
+            for (let i = 0; i < data.length; i++) {
+                const ctsp = data[i];
+                let productPrice;
+                if (ctsp.khuyenMai) {
+                    productPrice = ctsp.giaBan - ctsp.giaBan * ctsp.khuyenMai.soTienGiam / 100;
+                } else {
+                    productPrice = ctsp.giaBan;
+                }
+                const tr = `
+            <tr>
+                <td style="display:none;">` + ctsp.id + `</td>
+                <td>` + ctsp.sanPham.ma + `</td>
+                <td>` + ctsp.sanPham.ten + `</td>
+                <td align="center"><img src="/uploads/` + ctsp.urlAnh + `" width="40" height="40"></td>
+                <td>` + ctsp.sanPham.hangSanPham.ten + `</td>
+                <td>` + ctsp.mauSac.ten + `</td>
+                <td>` + ctsp.ram.dungLuong + `</td>
+                <td>` + ctsp.rom.dungLuong + `</td>
+                <td>` + productPrice + `</td>
+                <td>` + ctsp.soLuong + `</td>
+                <td>
+                    <a class="btn btn-warning btn-icon-text"
+                    data-bs-toggle="modal" data-bs-target="#nhapImei">Nhập IMEI</a>
+                </td>
+            </tr>
+            `;
+                html += tr;
+            }
+            parentModal.find(".san_pham_search").html(html);
+            const aTags = document.querySelectorAll('.btn-warning.btn-icon-text');
 
+            aTags.forEach(aTag => {
+                aTag.addEventListener('click', () => {
+                    // Lấy ID của sản phẩm
+                    const productId = aTag.closest('tr').querySelector('td:first-child').textContent;
+
+                    // Lưu ID của sản phẩm vào input
+                    const input = document.querySelector('#idCTSPham');
+                    input.value = productId;
+                });
+            });
+
+        } catch (err) {
+            console.error(err)
+        }
+    });
+</script>
 
 <script>
     // Lấy giá trị doitraId từ tham số truyền vào URL
     var doitraId = '${param.doitraId}';
 
     // Thiết lập giá trị vào ô input khi trang được tải
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('doitraIdInput').value = doitraId;
     });
 </script>
@@ -1040,7 +1073,7 @@
 
 
     // Thiết lập giá trị vào ô input khi trang được tải
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('hoadonIdInput').value = hoadonId;
     });
 </script>
@@ -1054,6 +1087,18 @@
                 content.innerHTML = data;
 
                 loadScripts();
+                const aTags = document.querySelectorAll('.btn-warning.btn-icon-text');
+
+                aTags.forEach(aTag => {
+                    aTag.addEventListener('click', () => {
+                        // Lấy ID của sản phẩm
+                        const productId = aTag.closest('tr').querySelector('td:first-child').textContent;
+
+                        // Lưu ID của sản phẩm vào input
+                        const input = document.querySelector('#idCTSPham');
+                        input.value = productId;
+                    });
+                });
                 // loadSelect2();
             })
             .catch(error => {
@@ -1099,7 +1144,7 @@
         var x9 = encodeURIComponent(document.getElementById("chipds1").value);
         var x10 = encodeURIComponent(document.getElementById("sands1").value);
 
-        var link = '/doi-tra/loc/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + 'null' + '/' + x8 + '/' + x9 + '/' + x10;
+        var link = '/ban-hang/loc/ban-hang-tai-quay/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + 'null' + '/' + x8 + '/' + x9 + '/' + x10;
         // document.getElementById("vt").innerHTML=link
         loadInterface(link);
         // document.getElementById("demo").innerHTML = "You selected: " + x;
