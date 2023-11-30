@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.DTO.DTODoiTra;
 import com.example.demo.models.ChiTietSanPham;
 import com.example.demo.models.DoiTra;
 import com.example.demo.models.HoaDon;
@@ -33,7 +34,7 @@ public interface DoiTraService {
 
     public Page<HoaDon> getAllhoadon(Pageable pageable);
 
-    public List<HoaDon> getAllHD();
+    public List<DTODoiTra> getAllHD();
 
     public List<HoaDonChiTiet> getHoaDonChiTiet(UUID id);
 

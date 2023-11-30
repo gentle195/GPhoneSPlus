@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.DTO.DTODoiTra;
 import com.example.demo.models.*;
 import com.example.demo.services.*;
 import com.example.demo.util.SecurityUtil;
@@ -74,10 +75,10 @@ public class DoiTraController {
     @GetMapping("/hien-thi")
     public String hienthi(@ModelAttribute("sanpham") SanPham sanpham, @ModelAttribute("NhanVien") NhanVien nhanVien,
                           @ModelAttribute("KhachHang") KhachHang khachHang,
-                          @ModelAttribute("HoaDon") HoaDon hoaDon,
+                          @ModelAttribute("HoaDon") DTODoiTra hoaDon,
                           Model model) {
         List<DoiTra> list = doiTraService.getAll0();
-        List<HoaDon> listt = doiTraService.getAllHD();
+        List<DTODoiTra> listt = doiTraService.getAllHD();
         List<NhanVien> listNhanVien = nhanVienService.findAll();
         List<KhachHang> listKhachHang = khachHangService.findAll00();
 //        Page<IMEI> imei=imeiService.fill1();
@@ -407,8 +408,7 @@ public class DoiTraController {
     @GetMapping("/them-dtct")
     public String updatethemhdct(Model model, @ModelAttribute("dulieuxem") DoiTraChiTiet dulieuxem,
                                  @RequestParam UUID doitraId, @RequestParam UUID hdctId, @RequestParam String lyDo,
-                                 @RequestParam int hienTrang,
-                                 @RequestParam int hinhThuc, HttpServletRequest request) {
+                                 @RequestParam int hienTrang, HttpServletRequest request) {
 
         System.out.println("hdct id đây này ok" + hdctId);
         DoiTra doiTra = doiTraService.findById(doitraId);
@@ -421,7 +421,7 @@ public class DoiTraController {
             doiTraChiTiet.setHoaDonChiTiet(hoaDonChiTiet);
             doiTraChiTiet.setDoiTra(doiTra);
             doiTraChiTiet.setHienTrangSanPham(hienTrang);
-            doiTraChiTiet.setHinhThucDoiTra(hinhThuc);
+            doiTraChiTiet.setHinhThucDoiTra(0);
             doiTraChiTiet.setLyDo(lyDo);
 
             doiTraChiTietService.add(doiTraChiTiet);
@@ -469,13 +469,8 @@ public class DoiTraController {
     @ResponseBody
     @GetMapping("/search-hoa-don")
     public List<HoaDon> searchHoaDon(@RequestParam("search-hoa-don") String search) {
-        if (search.isEmpty()) {
-            List<HoaDon> list = doiTraService.getAllHD();
-            return list;
-        } else {
             List<HoaDon> list = hoaDonService.searchDoiTra(search);
             return list;
-        }
     }
 
     @PostMapping("/loc0")

@@ -257,21 +257,21 @@
                                 <tbody class="hoa_don_search">
                                 <c:forEach items="${listt}" var="hoaDon">
                                     <tr>
-                                        <td>${hoaDon.ma}</td>
-                                        <td>${hoaDon.ngayThanhToan}</td>
-                                        <td>${hoaDon.ngayTao}</td>
-                                        <td>${hoaDon.khachHang.hoTen}</td>
-                                        <td>${hoaDon.nhanVien.hoTen}</td>
-                                        <td>${hoaDon.diaChi.diaChi}-${hoaDon.diaChi.quan}-${hoaDon.diaChi.huyen}-${hoaDon.diaChi.thanhPho}</td>
-                                        <td>${hoaDon.sdt}</td>
-                                        <td>${hoaDon.tongTien}</td>
+                                        <td>${hoaDon.getMa()}</td>
+                                        <td>${hoaDon.getNgayThanhToan()}</td>
+                                        <td>${hoaDon.getNgayTao()}</td>
+                                        <td>${hoaDon.getHoTenKhachHang()}</td>
+                                        <td>${hoaDon.getHoTenNhanVien()}</td>
+                                        <td>${hoaDon.getDiaChi()}-${hoaDon.getQuan()}-${hoaDon.getHuyen()}-${hoaDon.getThanhPho()}</td>
+                                        <td>${hoaDon.getSDT()}</td>
+                                        <td>${hoaDon.getTongTien()}</td>
                                         <td>
-                                            <c:if test="${hoaDon.hinhThucThanhToan == 1}">Online</c:if>
-                                            <c:if test="${hoaDon.hinhThucThanhToan == 0}">Tiền mặt</c:if>
+                                            <c:if test="${hoaDon.getHinhThuc() == 1}">Online</c:if>
+                                            <c:if test="${hoaDon.getHinhThuc() == 0}">Tiền mặt</c:if>
                                         </td>
                                         <td>
                                             <a class="btn btn-warning btn-icon-text" tabindex="-1" role="button"
-                                               data-hoadonid="${hoaDon.id}" onclick="showChiTietModal(this);">
+                                               data-hoadonid="${hoaDon.getId()}" onclick="showChiTietModal(this);">
                                                 <i class="ti-file btn-icon-prepend"></i>
                                                 Chọn
                                             </a>
