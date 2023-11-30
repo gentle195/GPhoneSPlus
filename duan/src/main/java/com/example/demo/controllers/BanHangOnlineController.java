@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -83,6 +86,12 @@ public class BanHangOnlineController {
     private DataIntermediateService dataService;
     @Autowired
     private KhachHangRepository khachHangRepository;
+
+    @Autowired
+    private DoiTraChiTietService doiTraChiTietService;
+
+    @Autowired
+    DoiTraService doiTraService;
 
 
     // Bắt đầu bán hàng
@@ -723,95 +732,82 @@ public class BanHangOnlineController {
             @RequestParam("nn1") String nguoinhan
     ) {
 
-        if (diaChiService.findById(iddc).getThanhPho().contains("Hà Nội")) {
-            if (tienmaORvnp == 1) {
-                //        them hd
-                long millis = System.currentTimeMillis();
-                Date date = new Date(millis);
-                HoaDon hd = new HoaDon();
-                Integer sl = hoaDonService.findAll().size();
-                String mhd = "";
-                if (sl < 10) {
-                    mhd = "MHD0" + sl;
-                } else {
-                    mhd = "MHD" + sl;
-                }
-                hd.setMa(mhd);
-//        hd.setSdt(gioHangService.findById(idgh).getKhachHang().getSdt());
-                hd.setSdt(sdt);
-                hd.setNguoiNhan(nguoinhan);
-                hd.setTongTien(tongtien);
-                hd.setNgayTao(date);
-                hd.setNgayCapNhat(date);
-                hd.setTinhTrang(0);
-                hd.setLoai(1);
-                hd.setHinhThucThanhToan(2);
-                hd.setTinhTrangGiaoHang(0);
-                KhachHang kh = khachHangService.findById(gioHangService.findById(idgh).getKhachHang().getId());
-                hd.setKhachHang(kh);
-                DiaChi dc = diaChiService.findById(iddc);
-                hd.setDiaChi(dc);
-                hoaDonService.add(hd);
-//    them hdct
-                List<GioHangChiTiet> listghct = banHangOnlineService.ListghTheoidghvsTT1(idgh);
-                for (int a = 0; a < listghct.size(); a = a + 1) {
-                    for (int b = 0; b < listghct.get(a).getSoLuong(); b = b + 1) {
-                        HoaDonChiTiet hdct = new HoaDonChiTiet();
-                        hdct.setSoLuong(1);
-                        hdct.setTinhTrang(0);
-                        hdct.setDonGia(listghct.get(a).getDonGiaKhiGiam());
-                        HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
-                        hdct.setHoaDon(hd1);
-                        List<IMEI> listimei = banHangOnlineService.timimeitheoidctspVSttO(listghct.get(a).getChiTietSanPham().getId());
-                        hdct.setImei(listimei.get(0));
-                        hoaDonChiTietService.add(hdct);
-// cập nhật trạng thái imei
-                        IMEI imei = listimei.get(0);
-                        imei.setTinhTrang(3);
-                        imei.setNgayCapNhat(date);
-                        imeiService.add(imei);
-                    }
-                }
-//xoa ghct TT=0 theo idgh
-                banHangOnlineService.xoaghcttheoIDGHvsTTO(idgh);
-//cập nhật hóa đơn; thanh toán khi nhận hàng
-                HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
-                hd1.setTinhTrang(3);
-                hd1.setHinhThucThanhToan(0);
-                hoaDonService.add(hd1);
-//
-                model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(gioHangService.findById(idgh).getKhachHang().getId())).get(0).getId()));
-                model.addAttribute("tttong", 1);
-                model.addAttribute("banhangonline", banHangOnlineService);
-                if (idkhachhang.equals("1")) {
-                    model.addAttribute("idkhachhang", idkhachhang);
-                } else {
-                    model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
-                    model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
-                }
-                return "ban-hang-online/dat_hang_thanh_cong";
 
-
+        if (tienmaORvnp == 1) {
+            //        them hd
+            long millis = System.currentTimeMillis();
+            Date date = new Date(millis);
+            HoaDon hd = new HoaDon();
+            Integer sl = hoaDonService.findAll().size();
+            String mhd = "";
+            if (sl < 10) {
+                mhd = "MHD0" + sl;
             } else {
-//  thanh toán online
-                return "redirect:/pay/" + idgh + "/" + tongtien + "/" + iddc + "/" + sdt + "/" + nguoinhan;
+                mhd = "MHD" + sl;
             }
+            hd.setMa(mhd);
+//        hd.setSdt(gioHangService.findById(idgh).getKhachHang().getSdt());
+            hd.setSdt(sdt);
+            hd.setNguoiNhan(nguoinhan);
+            hd.setTongTien(tongtien);
+            hd.setNgayTao(date);
+            hd.setNgayCapNhat(date);
+            hd.setTinhTrang(0);
+            hd.setLoai(1);
+            hd.setHinhThucThanhToan(2);
+            hd.setTinhTrangGiaoHang(0);
+            KhachHang kh = khachHangService.findById(gioHangService.findById(idgh).getKhachHang().getId());
+            hd.setKhachHang(kh);
+            DiaChi dc = diaChiService.findById(iddc);
+            hd.setDiaChi(dc);
+            hoaDonService.add(hd);
+//    them hdct
+            List<GioHangChiTiet> listghct = banHangOnlineService.ListghTheoidghvsTT1(idgh);
+            for (int a = 0; a < listghct.size(); a = a + 1) {
+                for (int b = 0; b < listghct.get(a).getSoLuong(); b = b + 1) {
+                    HoaDonChiTiet hdct = new HoaDonChiTiet();
+                    hdct.setSoLuong(1);
+                    hdct.setTinhTrang(0);
+                    hdct.setDonGia(listghct.get(a).getDonGiaKhiGiam());
+                    HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
+                    hdct.setHoaDon(hd1);
+                    List<IMEI> listimei = banHangOnlineService.timimeitheoidctspVSttO(listghct.get(a).getChiTietSanPham().getId());
+                    hdct.setImei(listimei.get(0));
+                    hoaDonChiTietService.add(hdct);
+// cập nhật trạng thái imei
+                    IMEI imei = listimei.get(0);
+                    imei.setTinhTrang(3);
+                    imei.setNgayCapNhat(date);
+                    imeiService.add(imei);
+                }
+            }
+//xoa ghct TT=0 theo idgh
+            banHangOnlineService.xoaghcttheoIDGHvsTTO(idgh);
+//cập nhật hóa đơn; thanh toán khi nhận hàng
+            HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
+            hd1.setTinhTrang(3);
+            hd1.setHinhThucThanhToan(0);
+            hoaDonService.add(hd1);
+
 
         } else {
-            model.addAttribute("listghctTT", banHangOnlineService.ListghctTheoidgh(idgh));
-            model.addAttribute("listghct", banHangOnlineService.ListghTheoidghvsTT1(idgh));
-            model.addAttribute("banhangonline", banHangOnlineService);
-            if (idkhachhang.equals("1")) {
-                model.addAttribute("idkhachhang", idkhachhang);
-            } else {
-                model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
-                model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
-            }
-            model.addAttribute("thongbaodiachiHN", "Cửa hàng chưa có thể giao hàng ngoài Hà Nội, mong quý khách hàng thông cảm vì sự bất tiện này!");
-            return "ban-hang-online/trang-san-pham-duoc-chon-thanh-toan";
+//  thanh toán online
+
+            return "redirect:/pay/" + idgh + "/" + tongtien + "/" + iddc + "/" + sdt + "/" + nguoinhan;
+
 
         }
-
+//
+        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(gioHangService.findById(idgh).getKhachHang().getId())).get(0).getId()));
+        model.addAttribute("tttong", 1);
+        model.addAttribute("banhangonline", banHangOnlineService);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+        }
+        return "ban-hang-online/dat_hang_thanh_cong";
     }
 
 
@@ -821,14 +817,88 @@ public class BanHangOnlineController {
             @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional<Integer> pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize
     ) {
+
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         Page<HoaDon> page = banHangOnlineService.cacDonHang(idkh, pageable);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        model.addAttribute("ngayHienTai", LocalDate.now());
+        System.out.println(LocalDate.now());
+
+        List<String> checkList = new ArrayList<>();
+        List<String> checkList1 = new ArrayList<>();
+        List<String> checkList2 = new ArrayList<>();
+        LocalDate currentDate = LocalDate.now();
+
+        for (HoaDon hd : page.getContent()) {
+            LocalDate ngayNhan = hd.getNgayNhan() != null ? hd.getNgayNhan().toLocalDate() : null;
+
+            if (ngayNhan != null) {
+                if (ngayNhan.isAfter(currentDate.minusDays(7)) || ngayNhan.isEqual(currentDate)) {
+                    checkList.add(hd.getMa());
+                } else {
+                    checkList1.add(hd.getMa());
+                }
+            } else {
+                checkList2.add(hd.getMa());
+            }
+        }
+
+
+
+
+        model.addAttribute("checkList", checkList);
+        model.addAttribute("checkList1", checkList1);
+        model.addAttribute("checkList2", checkList2);
+        System.out.println("ngay<ngayhientai"+checkList1);
+        System.out.println("thoa  man"+checkList);
+
+
+        List<String> checkHDlist0 = new ArrayList<>();
+        List<String> checkHDlist1 = new ArrayList<>();
+        List<String> checkHDlist2 = new ArrayList<>();
+        List<String> checkHDlist3 = new ArrayList<>();
+        List<String> checkHDlist6 = new ArrayList<>();
+        List<HoaDon> listHoaDon = hoaDonService.hoaDonKH(idkh);
+        for (HoaDon hdCheck : listHoaDon) {
+            // Kiểm tra xem có đối trả liên quan đến hóa đơn không
+            DoiTra doiTra = doiTraService.getDoiTraByHoaDon(hdCheck.getId());
+
+
+
+
+            if (doiTra != null && doiTra.getHoaDon() != null && doiTra.getHoaDon().getId().equals(hdCheck.getId())&&doiTra.getTinhTrang()==0) {
+                checkHDlist0.add(hdCheck.getMa()) ; // Hóa đơn có liên quan đến đối trả
+            } else if (doiTra != null && doiTra.getHoaDon() != null && doiTra.getHoaDon().getId().equals(hdCheck.getId())&&doiTra.getTinhTrang()==1){
+                checkHDlist1.add(hdCheck.getMa());  // Hóa đơn không có liên quan đến đối trả
+            }else if (doiTra != null && doiTra.getHoaDon() != null && doiTra.getHoaDon().getId().equals(hdCheck.getId())&&doiTra.getTinhTrang()==2){
+                checkHDlist2.add(hdCheck.getMa());
+            }else if (doiTra==null ){
+                checkHDlist3.add(hdCheck.getMa());
+            }
+
+
+        }
+        System.out.println("lisst0"+checkHDlist0);
+
+        model.addAttribute("checkHDlist0", checkHDlist0);
+        model.addAttribute("checkHDlist1", checkHDlist1);
+        model.addAttribute("checkHDlist2", checkHDlist2);
+        model.addAttribute("checkHDlist3", checkHDlist3);
+        System.out.println(checkHDlist3);
+
+
+
+
+
+        // Truyền giá trị ngày hiện tại tới form JSP
+
         model.addAttribute("contentPage", "../ban-hang-online/trang-hoa-don-khach-hang.jsp");
         model.addAttribute("listhdkh", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
+
 //        model.addAttribute("listhdkh", banHangOnlineService.timhoadontheoidkh(idkh));
         model.addAttribute("banhangonline", banHangOnlineService);
         if (idkhachhang.equals("1")) {
@@ -840,13 +910,12 @@ public class BanHangOnlineController {
 
         return "ban-hang-online/trang_hoa_don_khach_hang";
     }
-
     @GetMapping("/ban-hang-online-8/hoa-don-online/{id}")
-    public String donHang8(
+    public String donHang8 (
             Model model,
-            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional<Integer> pageNum,
+            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional < Integer > pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize
-    ) {
+    ){
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
@@ -866,13 +935,12 @@ public class BanHangOnlineController {
 
         return "ban-hang-online/trang_don_hang_online_8";
     }
-
     @GetMapping("/ban-hang-online-0/hoa-don-online/{id}")
-    public String donHang0(
+    public String donHang0 (
             Model model,
-            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional<Integer> pageNum,
+            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional < Integer > pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize
-    ) {
+    ){
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
@@ -892,13 +960,12 @@ public class BanHangOnlineController {
 
         return "ban-hang-online/trang_don_hang_online_0";
     }
-
     @GetMapping("/ban-hang-online-1/hoa-don-online/{id}")
-    public String donHang1(
+    public String donHang1 (
             Model model,
-            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional<Integer> pageNum,
+            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional < Integer > pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize
-    ) {
+    ){
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
@@ -918,13 +985,12 @@ public class BanHangOnlineController {
 
         return "ban-hang-online/trang_don_hang_online_1";
     }
-
     @GetMapping("/ban-hang-online-2/hoa-don-online/{id}")
-    public String donHang2(
+    public String donHang2 (
             Model model,
-            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional<Integer> pageNum,
+            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional < Integer > pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize
-    ) {
+    ){
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
@@ -944,13 +1010,12 @@ public class BanHangOnlineController {
 
         return "ban-hang-online/trang_don_hang_online_2";
     }
-
     @GetMapping("/ban-hang-online-3/hoa-don-online/{id}")
-    public String donHang3(
+    public String donHang3 (
             Model model,
-            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional<Integer> pageNum,
+            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional < Integer > pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize
-    ) {
+    ){
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
@@ -970,14 +1035,13 @@ public class BanHangOnlineController {
 
         return "ban-hang-online/trang_don_hang_online_3";
     }
-
     @PostMapping("/ban-hang-online/hoa-don-online/{id}/search")
-    public String search(
+    public String search (
             Model model, @ModelAttribute("donHang") HoaDon hoaDon,
-            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional<Integer> pageNum,
+            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional < Integer > pageNum,
             @RequestParam("search") String search,
             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize
-    ) {
+    ){
         Sort sort = Sort.by("ma").descending();
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
 //
@@ -998,12 +1062,12 @@ public class BanHangOnlineController {
     }
 
     @PostMapping("/ban-hang-online-0/hoa-don-online/{id}/search")
-    public String search0(
+    public String search0 (
             Model model, @ModelAttribute("donHang") HoaDon hoaDon,
-            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional<Integer> pageNum,
+            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional < Integer > pageNum,
             @RequestParam("search") String search,
             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize
-    ) {
+    ){
         Sort sort = Sort.by("ma").descending();
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
 //
@@ -1025,12 +1089,12 @@ public class BanHangOnlineController {
 
 
     @PostMapping("/ban-hang-online-1/hoa-don-online/{id}/search")
-    public String search1(
+    public String search1 (
             Model model, @ModelAttribute("donHang") HoaDon hoaDon,
-            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional<Integer> pageNum,
+            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional < Integer > pageNum,
             @RequestParam("search") String search,
             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize
-    ) {
+    ){
         Sort sort = Sort.by("ma").descending();
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
 //
@@ -1052,12 +1116,12 @@ public class BanHangOnlineController {
 
 
     @PostMapping("/ban-hang-online-2/hoa-don-online/{id}/search")
-    public String search2(
+    public String search2 (
             Model model, @ModelAttribute("donHang") HoaDon hoaDon,
-            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional<Integer> pageNum,
+            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional < Integer > pageNum,
             @RequestParam("search") String search,
             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize
-    ) {
+    ){
         Sort sort = Sort.by("ma").descending();
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
 //
@@ -1079,12 +1143,12 @@ public class BanHangOnlineController {
 
 
     @PostMapping("/ban-hang-online-3/hoa-don-online/{id}/search")
-    public String search3(
+    public String search3 (
             Model model, @ModelAttribute("donHang") HoaDon hoaDon,
-            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional<Integer> pageNum,
+            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional < Integer > pageNum,
             @RequestParam("search") String search,
             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize
-    ) {
+    ){
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
 //
 //        if (!pageNum.isPresent()) {
@@ -1105,12 +1169,12 @@ public class BanHangOnlineController {
 
 
     @PostMapping("/ban-hang-online-8/hoa-don-online/{id}/search")
-    public String search8(
+    public String search8 (
             Model model, @ModelAttribute("donHang") HoaDon hoaDon,
-            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional<Integer> pageNum,
+            @PathVariable("id") UUID idkh, @RequestParam("pageNum") Optional < Integer > pageNum,
             @RequestParam("search") String search,
             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize
-    ) {
+    ){
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkh)).get(0).getId()));
 //
 //        if (!pageNum.isPresent()) {
@@ -1131,10 +1195,10 @@ public class BanHangOnlineController {
 
 
     @GetMapping("/ban-hang-online/xem-hoa-don-chi-tiet/{idhd}")
-    public String nutxemchitiethoadon(
+    public String nutxemchitiethoadon (
             Model model,
             @PathVariable("idhd") UUID idhd
-    ) {
+    ){
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkhachhang)).get(0).getId()));
 
         model.addAttribute("hd", hoaDonService.findById(idhd));
@@ -1152,10 +1216,10 @@ public class BanHangOnlineController {
     }
 
     @GetMapping("/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/{idhd}")
-    public String huyhoadon(
+    public String huyhoadon (
             Model model,
             @PathVariable("idhd") UUID idhd
-    ) {
+    ){
         banHangOnlineService.huyhoadon(idhd);
 
         model.addAttribute("listhdkh", banHangOnlineService.timhoadontheoidkh(hoaDonService.findById(idhd).getKhachHang().getId()));
@@ -1173,10 +1237,10 @@ public class BanHangOnlineController {
     }
 
     @GetMapping("/ban-hang-online/xem-hoa-don-chi-tiet/xoa-chi-tiet-san-pham/{idhdct}")
-    public String xoahdct(
+    public String xoahdct (
             Model model,
             @PathVariable("idhdct") UUID idhdct
-    ) {
+    ){
         System.out.println("idhdct===" + idhdct);
         model.addAttribute("hd", hoaDonChiTietService.findById(idhdct).getHoaDon());
         UUID idhd = hoaDonChiTietService.findById(idhdct).getHoaDon().getId();
@@ -1206,10 +1270,10 @@ public class BanHangOnlineController {
 
 
     @GetMapping("/ban-hang-online/xem-hoa-don-chi-tiet/thanh-toan-khi-nhan-hang/{idhd}")
-    public String ttknh(
+    public String ttknh (
             Model model,
             @PathVariable("idhd") UUID idhd
-    ) {
+    ){
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkhachhang)).get(0).getId()));
 
         HoaDon hd1 = hoaDonService.findById(idhd);
@@ -1230,12 +1294,12 @@ public class BanHangOnlineController {
 
 
     @PostMapping("/ban-hang-online/hoa-don-chi-tiet/them-dia-chi")
-    public String nutthemdiachihdct(
+    public String nutthemdiachihdct (
             Model model,
             @RequestParam("diachi") String diachi1, @RequestParam("quan") String quan,
             @RequestParam("huyen") String huyen, @RequestParam("thanhpho") String thanhpho,
             @RequestParam("idhd") UUID idhd
-    ) {
+    ){
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         DiaChi diaChi = new DiaChi();
@@ -1277,12 +1341,12 @@ public class BanHangOnlineController {
 
 
     @PostMapping("/ban-hang-online/hoa-don-chi-tiet/cap-nhat-thong-tin-dat-hang")
-    public String capnhatthongtindathang(
+    public String capnhatthongtindathang (
             Model model,
             @RequestParam("sodienthoai") String sodienthoai,
             @RequestParam("diachi") UUID diachi,
             @RequestParam("idhd") UUID idhd
-    ) {
+    ){
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
 
@@ -1313,9 +1377,9 @@ public class BanHangOnlineController {
     }
 
     @GetMapping("/ban-hang-online/xem-gio-hang")
-    public String nutxemgiohang(
+    public String nutxemgiohang (
             Model model
-    ) {
+    ){
 
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
         model.addAttribute("tttong", 1);
@@ -1333,13 +1397,13 @@ public class BanHangOnlineController {
 
 
     @GetMapping("/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/{idghct}/{trangthai}/{idgh}")
-    public String chonspghctTT(
+    public String chonspghctTT (
             Model model,
 
             @PathVariable("idghct") String idghct,
             @PathVariable("trangthai") String trangthai,
             @PathVariable("idgh") UUID idgh
-    ) {
+    ){
         if (idghct.equals("full")) {
             if (trangthai.equals("0")) {
                 banHangOnlineService.trangthaighct(0, idgh);
@@ -1372,10 +1436,10 @@ public class BanHangOnlineController {
 
 
     @GetMapping("/ban-hang-online/them-san-pham-vao-gio-hang/{idctsp}")
-    public String themvaogiohang(
+    public String themvaogiohang (
             Model model,
             @PathVariable("idctsp") UUID idctsp
-    ) {
+    ){
         if (banHangOnlineService.ListghctTheoIdghvsIdctsp(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId(), idctsp).size() <= 0) {
             GioHangChiTiet ghct = new GioHangChiTiet();
             ghct.setGioHang(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0));
@@ -1404,9 +1468,9 @@ public class BanHangOnlineController {
 
 
     @GetMapping("/ban-hang-online/single_page_gio_hang_chi_tiet")
-    public String nutxemgiohangdongbo(
+    public String nutxemgiohangdongbo (
             Model model
-    ) {
+    ){
 
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
         model.addAttribute("tttong", 1);
@@ -1424,10 +1488,10 @@ public class BanHangOnlineController {
     }
 
     @GetMapping("/ban-hang-online/trang-chu/load-gio-hang-trang-chu/{idgh}")
-    public String loadghctTT(
+    public String loadghctTT (
             Model model,
             @PathVariable("idgh") UUID idgh
-    ) {
+    ){
 
 
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(idgh));
@@ -1442,10 +1506,10 @@ public class BanHangOnlineController {
     }
 
     @GetMapping("/ban-hang-online/trang-chu/load-gio-hang-trang-chu-idghct/{idghct}")
-    public String loadghctTTtuidghct(
+    public String loadghctTTtuidghct (
             Model model,
             @PathVariable("idghct") UUID idghct
-    ) {
+    ){
 
 
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(gioHangChiTietService.findById(idghct).getGioHang().getId()));
@@ -1499,10 +1563,10 @@ public class BanHangOnlineController {
 
 
     //THÔNG TIN VỀ CHÍNH SÁCH ĐỔI TRẢ, LINK NÀY DẪN SANG CHÍNH SÁCH ĐỔI TRẢ
-    @GetMapping("/ban-hang-online/chinh-sach-doi-tra")
-    public String chinhSachDoiTra(
+    @GetMapping("/doi-tra/chinh-sach-doi-tra")
+    public String chinhSachDoiTra (
             Model model
-    ) {
+    ){
         double tong = 0;
         Integer lamchon = 0;
         for (ChiTietSanPham ct : banHangOnlineService.ctspbanhang()) {
@@ -1538,4 +1602,201 @@ public class BanHangOnlineController {
     }
 
 
+    //    @ResponseBody
+//    @GetMapping("/ban-hang-online/chi-tiet/{hoadonId}")
+//    public ResponseEntity<List<HoaDonChiTiet>> chitiest(@PathVariable("hoadonId") UUID hoadonId){
+//        try {
+//            List<HoaDonChiTiet> listdtct = doiTraChiTietService.getHoaDonChiTiet(hoadonId);
+//            System.out.println("Danh sách chi tiết hóa đơn: " + listdtct);
+//
+//            if (listdtct != null && !listdtct.isEmpty()) {
+//                return new ResponseEntity<>(listdtct, HttpStatus.OK);
+//            } else {
+//                System.out.println("Danh sách rỗng hoặc null.");
+//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
+    @GetMapping("/detail-test/{id}")
+    @ResponseBody
+    public List<HoaDonChiTiet> detail (@PathVariable("id") UUID id){
+        List<HoaDonChiTiet> hdct = doiTraService.getHoaDonChiTiet(id);
+
+        List<DoiTra> doiTra1 = doiTraService.findAll();
+
+        boolean found = false;
+
+        for (DoiTra doiTra2 : doiTra1) {
+            if (doiTra2.getHoaDon().getId().equals(id)) {
+                found = true;
+                System.out.println("Khong hop le");
+                break;  // Nếu tìm thấy ít nhất một bản ghi, thoát khỏi vòng lặp
+            }
+        }
+
+// Nếu không tìm thấy DoiTra nào có HoaDon có id giống với id, thêm mới
+        if (!found) {
+            HoaDon hoaDon = hoaDonService.findById(id);
+            DoiTra doiTra = new DoiTra();
+            doiTra.setMa("DT" + String.valueOf(doiTraService.findAll().size() + 1));
+            doiTra.setNgayTao(Date.valueOf(LocalDate.now()));
+            doiTra.setHoaDon(hoaDon);
+            doiTra.setTinhTrang(0);
+            doiTraService.add(doiTra);
+        }
+        System.out.println(hdct + "hdct ne");
+        return hdct;
+
+
+    }
+
+    @GetMapping("/doi-tra-khachhang")
+    public String doitra (Model model, @RequestParam List<UUID> hdctIds, @RequestParam UUID hoadonId){
+        HoaDon hoaDon = hoaDonService.findById(hoadonId);
+
+
+        System.out.println("dữ liệu "+hdctIds);
+        List<DoiTraChiTiet> doiTraChiTiets = new ArrayList<>();
+        List<DoiTraChiTiet> list=doiTraChiTietService.getAll();
+        // Lặp qua danh sách hdctIds để tạo và thiết lập thông tin đối trả chi tiết
+        for (UUID hdctId : hdctIds) {
+            HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietService.findById(hdctId);
+            DoiTraChiTiet doiTraChiTietss=doiTraChiTietService.findByHDCT(hdctId);
+            if (doiTraChiTietss==null){
+                DoiTraChiTiet doiTraChiTiet = new DoiTraChiTiet();
+                doiTraChiTiet.setHoaDonChiTiet(hoaDonChiTiet);
+                doiTraChiTiet.setDoiTra(doiTraService.getDoiTraByHoaDon(hoadonId));
+                doiTraChiTiets.add(doiTraChiTiet);
+            }
+
+
+        }
+
+        // Lưu danh sách đối trả chi tiết vào cơ sở dữ liệu
+        doiTraChiTietService.saveAll(doiTraChiTiets);
+
+        return "ban-hang-online/trang_hoa_don_khach_hang";
+    }
+
+//    @GetMapping("/doi-tra-khachhang")
+//    public String click  (Model model,@RequestParam List<UUID> hdctIds, @RequestParam UUID hoadonId){
+//        HoaDon hoaDon = hoaDonService.findById(hoadonId);
+//
+//
+//
+//        List<DoiTraChiTiet> doiTraChiTiets = new ArrayList<>();
+//
+//        // Lặp qua danh sách hdctIds để tạo và thiết lập thông tin đối trả chi tiết
+//        for (UUID hdctId : hdctIds) {
+//            HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietService.findById(hdctId);
+//            DoiTraChiTiet doiTraChiTiet = new DoiTraChiTiet();
+//            doiTraChiTiet.setHoaDonChiTiet(hoaDonChiTiet);
+//            doiTraChiTiet.setDoiTra(doiTraService.getDoiTraByHoaDon(hoadonId));
+//            doiTraChiTiets.add(doiTraChiTiet);
+//        }
+//
+//        // Lưu danh sách đối trả chi tiết vào cơ sở dữ liệu
+//        doiTraChiTietService.saveAll(doiTraChiTiets);
+//
+//        return "hehe";
+//    }
+//
+
+//@GetMapping("/tao-doi-tra")
+//    public String adddoiTra(Model model,@PathVariable("hoadonId") UUID hoadonId){
+//       List<DoiTra> doiTra1=doiTraService.findAll();
+//
+//    for (DoiTra doiTra2:doiTra1
+//         ) {
+//        if (doiTra2.getHoaDon().getId().equals(hoadonId)){
+//            System.out.println("Khong hop le");
+//        }else {
+//            HoaDon hoaDon=hoaDonService.findById(hoadonId);
+//            DoiTra doiTra=new DoiTra();
+//            doiTra.setNgayTao(Date.valueOf(LocalDate.now()));
+//            doiTra.setHoaDon(hoaDon);
+//            doiTra.setTinhTrang(0);
+//            doiTraService.add(doiTra);
+//        }
+//
+//    }
+//    DoiTra doiTra2=doiTraService.getDoiTraByHoaDon(hoadonId);
+//
+//    DoiTraChiTiet doiTraChiTiet=new DoiTraChiTiet();
+//
+//
+//
+//}
+
+
+
+    @GetMapping("/them-dtctne")
+    public String updatethemhdct(Model model, @ModelAttribute("dulieuxem") DoiTraChiTiet dulieuxem,
+                                 @RequestParam UUID doitraId, @RequestParam UUID hdctId, @RequestParam String lyDo,
+                                 @RequestParam int hienTrang,
+                                 @RequestParam int hinhThuc, HttpServletRequest request) {
+
+        System.out.println("hdct id đây này ok" + hdctId);
+        DoiTra doiTra = doiTraService.findById(doitraId);
+        HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietService.findById(hdctId);
+
+        // Kiểm tra xem HoaDonChiTiet đã tồn tại trong DoiTraChiTiet chưa
+        if (!doiTraChiTietService.existsByDoiTraAndHoaDonChiTiet(doiTra, hoaDonChiTiet)) {
+            DoiTraChiTiet doiTraChiTiet = new DoiTraChiTiet();
+            doiTraChiTiet.setTinhTrang(0);
+            doiTraChiTiet.setHoaDonChiTiet(hoaDonChiTiet);
+            doiTraChiTiet.setDoiTra(doiTra);
+            doiTraChiTiet.setHienTrangSanPham(hienTrang);
+            doiTraChiTiet.setHinhThucDoiTra(hinhThuc);
+            doiTraChiTiet.setLyDo(lyDo);
+
+            doiTraChiTietService.add(doiTraChiTiet);
+        }
+
+        return "ban-hang-online/trang-doi-tra";
+    }
+
+    @GetMapping("/xac-nhan-khachhang")
+    public String xacnhankh(Model model,  @RequestParam("hdctIds[]") List<UUID> hdctIds,
+                            @RequestParam("hoadonId") UUID hoadonId,
+                            @RequestParam("hinhThucList[]") List<String> hinhThucList,
+                            @RequestParam("ghiChuList[]") List<String> ghiChuList) {
+
+        HoaDon hoaDon = hoaDonService.findById(hoadonId);
+        System.out.println("Dữ liệu " + hdctIds);
+
+        List<DoiTraChiTiet> doiTraChiTiets = new ArrayList<>();
+
+        // Lặp qua danh sách hdctIds để tạo và thiết lập thông tin đối trả chi tiết
+        for (int i = 0; i < hdctIds.size(); i++) {
+            UUID hdctId = hdctIds.get(i);
+            HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietService.findById(hdctId);
+            DoiTraChiTiet doiTraChiTietss = doiTraChiTietService.findByHDCT(hdctId);
+
+            // Cập nhật thông tin ghi chú và hình thức đổi trả
+
+            int hinhThuc = Integer.parseInt(hinhThucList.get(i));
+            doiTraChiTietss.setHinhThucDoiTra(hinhThuc);
+            doiTraChiTietss.setLyDo(ghiChuList.get(i));
+
+            doiTraChiTiets.add(doiTraChiTietss);
+        }
+
+        // Lưu danh sách đối trả chi tiết vào cơ sở dữ liệu
+        doiTraChiTietService.saveAll(doiTraChiTiets);
+        DoiTra doiTra=doiTraService.getDoiTraByHoaDon(hoadonId);
+        doiTra.setTinhTrang(0);
+        doiTraService.update(doiTra.getId(),doiTra);
+
+        return "ban-hang-online/trang_hoa_don_khach_hang";
+    }
+
+
+
+
 }
+
+

@@ -59,6 +59,10 @@ public class HoaDonServiceImpl implements HoaDonService {
     public List<HoaDon> donHang() {
         return hoaDonRepository.donHang();
     }
+    @Override
+    public List<HoaDon> hoaDonKH(UUID id){
+        return hoaDonRepository.hoaDonKH(id);
+    };
 
     @Override
     public List<HoaDon> hoaDon() {

@@ -57,6 +57,11 @@ public interface DoiTraRepository extends JpaRepository<DoiTra, UUID> {
     List<HoaDonChiTiet> getHoaDonChiTiet(UUID id);
 
 
+
+
+    @Query("select hdct from DoiTra hdct left join HoaDon hd on hdct.hoaDon.id=hd.id where hd.id=:id")
+    DoiTra getDoiTraByHoaDon(UUID id);
+
     @Query("SELECT ct FROM ChiTietSanPham ct LEFT JOIN SanPham sp ON ct.sanPham.id = sp.id " +
             "LEFT JOIN HangSanPham hang ON sp.hangSanPham.id = hang.id " +
             "LEFT JOIN Ram ram ON ct.ram.id = ram.id " +

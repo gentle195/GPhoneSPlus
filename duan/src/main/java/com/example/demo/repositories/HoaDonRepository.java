@@ -28,6 +28,8 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
 
     @Query("select hd from HoaDon hd order by hd.ngayTao desc")
     List<HoaDon> hoaDon();
+    @Query("select hd from HoaDon hd left join KhachHang kh on hd.khachHang.id=kh.id where kh.id=:id")
+    List<HoaDon> hoaDonKH(UUID id);
 
     @Transactional
     @Modifying

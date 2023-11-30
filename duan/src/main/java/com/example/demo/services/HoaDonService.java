@@ -26,6 +26,7 @@ public interface HoaDonService {
     public List<HoaDon> find();
 
     public HoaDon findById(UUID id);
+    public List<HoaDon> hoaDonKH(UUID id);
 
     public HoaDon add(HoaDon hoaDon);
 
