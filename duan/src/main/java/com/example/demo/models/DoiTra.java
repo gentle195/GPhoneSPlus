@@ -38,10 +38,8 @@ public class DoiTra {
     @Column(name = "ma")
     private String ma;
 
-
     @Column(name = "tinh_trang")
     private int tinhTrang;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_khach_hang")

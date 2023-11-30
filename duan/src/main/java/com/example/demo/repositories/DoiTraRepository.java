@@ -1,5 +1,6 @@
 package com.example.demo.repositories;
 
+import com.example.demo.DTO.DTODoiTra;
 import com.example.demo.models.ChiTietSanPham;
 import com.example.demo.models.DoiTra;
 import com.example.demo.models.HoaDon;
@@ -34,8 +35,14 @@ public interface DoiTraRepository extends JpaRepository<DoiTra, UUID> {
     @Query("SELECT d from HoaDon d where d.tinhTrang=2")
     Page<HoaDon> fillAllHoaDon(Pageable pageable);
 
-    @Query("SELECT d FROM HoaDon d WHERE d.tinhTrang = 2 and d.tinhTrangGiaoHang=3 AND NOT EXISTS (SELECT 1 FROM DoiTra dt WHERE dt.hoaDon.id = d.id)")
-    List<HoaDon> getAllHD();
+    @Query(value = "SELECT d.id as id,d.ma as ma,d.ngay_tao as ngayTao,d.ngay_thanh_toan as ngayThanhToan,d.ngay_nhan as ngayNhan" +
+            ",kh.ho_ten as hoTenKhachHang,nv.ho_ten as hotenNhanVien,dc.dia_chi as diaChi,dc.quan as quan,dc.huyen as huyen,dc.thanh_pho as thanhPho," +
+            "d.sdt as SDT,d.tong_tien as tongTien,d.hinh_thuc_thanh_toan as hinhThuc FROM hoa_don d " +
+            "left join khach_hang kh on d.id_khach_hang = kh.id left join nhan_vien nv on d.id_nhan_vien= nv.id " +
+            "left join dia_chi dc on dc.id=d.id_dia_chi WHERE d.tinh_trang = 2 AND d.tinh_trang_giao_hang = 3 " +
+            "AND NOT EXISTS (SELECT 1 FROM doi_tra dt WHERE dt.id_hoa_don = d.id) " +
+            "AND DATEDIFF(DAY, GETDATE(), d.ngay_nhan) <= 7", nativeQuery = true)
+    List<DTODoiTra> getAllHD();
 
     @Query("SELECT d from DoiTra d where d.tinhTrang=0")
     List<DoiTra> getAll0();

@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+import com.example.demo.DTO.DTODoiTra;
 import com.example.demo.models.ChiTietSanPham;
 import com.example.demo.models.DoiTra;
 import com.example.demo.models.HoaDon;
@@ -51,11 +52,10 @@ public class DoiTraServiceImpl implements DoiTraService {
     }
 
 
-    public List<HoaDon> getAllHD() {
+    public List<DTODoiTra> getAllHD() {
         return doiTraRepository.getAllHD();
     }
 
-    ;
 
     @Override
     public List<DoiTra> findAll() {

@@ -139,7 +139,7 @@
                             <br>
 
                             <div class="table-responsive custom-table">
-                                <table class="display custom-table">
+                                <table class="display custom-table" style="color: black">
                                     <thead>
                                     <tr>
                                         <th>Tên Sản Phẩm</th>
@@ -162,24 +162,11 @@
                                             <td>${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
                                             <td>${hdct.imei.soImei}</td>
                                             <td>${hdct.donGia}</td>
-
-
                                             <td>
-                                                    <%--                                                <c:choose>--%>
-                                                    <%--&lt;%&ndash;                                                    <c:when test="${not empty dulieu.imei.id}">&ndash;%&gt;--%>
-                                                    <%--                                                        <!-- Nếu hdct.imei.id tồn tại, thì nút sẽ không ấn được -->--%>
-                                                    <%--                                                        <button class='btn btn-primary chonSanPhamButton' disabled>Chọn sản phẩm</button>--%>
-                                                    <%--                                                    </c:when>--%>
-                                                    <%--                                                    <c:otherwise>--%>
-                                                <!-- Nếu hdct.imei.id không tồn tại, thì nút sẽ ấn được -->
-                                                    <%--                                                        <button class='btn btn-primary chonSanPhamButton' onclick='showChonSanPhamModalWithDonGia(${hdct.donGia})'  >Chọn sản phẩm</button>--%>
                                                 <button class='btn btn-primary chonSanPhamButton'
                                                         data-idhdct="${hdct.id}">Chọn sản phẩm
                                                 </button>
-                                                    <%--                                                    </c:otherwise>--%>
-                                                    <%--                                                </c:choose>--%>
                                             </td>
-
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -201,9 +188,10 @@
                             <br>
 
                             <div class="table-responsive custom-table">
-                                <table class="display custom-table">
+                                <table class="display custom-table" style="color: black">
                                     <thead>
                                     <tr>
+                                        <th style="display: none"></th>
                                         <th>Tên Sản Phẩm</th>
                                         <th>Ảnh</th>
                                         <th>Hãng</th>
@@ -213,9 +201,9 @@
                                     </tr>
                                     </thead>
                                     <tbody id="table-search11">
-                                    <tr>
-                                        <c:forEach items="${dtct}" var="hdct">
-                                    <tr>
+
+                                    <tr><c:forEach items="${dtct}" var="hdct">
+                                        <td style="display: none">${hdct.hoaDonChiTiet.donGia}</td>
                                         <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten}</td>
                                         <td align="center">
                                             <img src="/uploads/${hdct.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}"
@@ -245,74 +233,12 @@
                                                 </c:when>
                                             </c:choose>
                                         </td>
-                                    </tr>
-                                    </c:forEach>
-                                    </tr>
-
-                                    </tbody>
-                                </table>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-12 grid-margin">
-            <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
-                    <div>
-                        <div class="card-body">
-                            <br>
-                            <h3 ${not empty dtctlist ? '' : 'style="display: none;"'} style="text-align: center;">Sản
-                                phẩm đổi trả</h3>
-                            <br>
-
-                            <div class="table-responsive custom-table">
-                                <table class="display custom-table" ${not empty dtctlist ? '' : 'style="display: none;"'} >
-                                    <thead>
-                                    <tr>
-                                        <th>Sản phẩm cần đổi trả</th>
-                                        <th>Tên Sản Phẩm</th>
-                                        <th>Ảnh</th>
-                                        <th>Hãng</th>
-                                        <th>Số IMEI</th>
-
-                                        <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="table-search1">
-                                    <tr>
-                                        <c:forEach items="${dtctlist}" var="hdct">
-                                    <tr>
-                                        <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten}</td>
-                                        <td>${hdct.imei.chiTietSanPham.sanPham.ten}</td>
-                                        <td align="center">
-                                            <img src="/uploads/${hdct.imei.chiTietSanPham.urlAnh}" width="40"
-                                                 height="40">
-                                        </td>
-                                        <td>${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
-                                        <td>${hdct.imei.soImei}</td>
-
-                                        <td>
-                                            <button class='btn btn-primary chonSanPhamDoiTraButton'
-                                                    data-idhdctmoi="${hdct.id}">Xóa
-                                            </button>
-                                        </td>
-                                    </tr>
-
-
                                     </c:forEach>
                                     </tr>
                                     </tbody>
                                 </table>
 
-
                             </div>
-
 
                         </div>
                     </div>
@@ -320,8 +246,6 @@
             </div>
         </div>
         <div class='btn btn-primary' id='xacNhanButton'>Xác nhận</div>
-
-
     </div>
 
 
@@ -449,6 +373,9 @@
                                 <h4 class="card-title" style="float: left">Danh sách sản phẩm</h4>
                                 <%--            Tìm kiếm               --%>
                                 <div class="input-group" style="width: 30%; float: right">
+                                    <input type="hidden"
+                                           id="giaTienSP"
+                                           name="giaTienCTSP">
                                     <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                            aria-label="Bạn tìm gì..." name="search-san-pham" id="sanPhamSearchInput">
                                     <div class="input-group-append">
@@ -497,10 +424,8 @@
                                                     </c:if>
                                                     <td>${ctsp.soLuong}</td>
                                                     <td>
-                                                        <a
-                                                                class="btn btn-warning btn-icon-text"
-                                                                data-bs-toggle="modal" data-bs-target="#nhapImei">Nhập
-                                                            IMEI</a>
+                                                        <a class="btn btn-warning btn-icon-text"
+                                                           data-bs-toggle="modal" data-bs-target="#nhapImei">Nhập IMEI</a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -517,72 +442,6 @@
     </div>
 </div>
 
-
-<%--modal xac nhan--%>
-<%--<div class="modal fade" id="doiTra" tabindex="-1"--%>
-<%--     aria-labelledby="exampleModalLabel"--%>
-<%--     aria-hidden="true">--%>
-<%--    <div class="modal-dialog modal-dialog-centered modal-xl">--%>
-<%--        <div class="modal-content">--%>
-<%--            <div class="modal-header">--%>
-<%--            </div>--%>
-<%--            <div class="modal-body">--%>
-<%--                <div class="col-lg-12 grid-margin stretch-card">--%>
-<%--                    <div class="card">--%>
-<%--                        <div class="card-body">--%>
-<%--                            <h4 class="card-title" style="float: left">Danh sách IMEI</h4>--%>
-<%--                            &lt;%&ndash;            Tìm kiếm               &ndash;%&gt;--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col-4">--%>
-<%--                                    <label id="thongBaoImei" style="float: right"></label>--%>
-<%--                                </div>--%>
-<%--                                <div class="col-8">--%>
-<%--                                    <div class="input-group" style="width: 50%; float: right">--%>
-<%--                                        <input type="text" class="form-control"--%>
-<%--                                               name="search-imei" id="imeiSearchInput" placeholder="Tìm kiếm IMEI">--%>
-<%--                                        <div class="input-group-append">--%>
-<%--                                            <button class="btn btn-sm btn-primary" type="button" id="searchImei"--%>
-<%--                                            >Tìm kiếm--%>
-<%--                                            </button>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-
-<%--                            &lt;%&ndash;           kết thúc tìm kiếm         &ndash;%&gt;--%>
-<%--                            <div class="table-responsive">--%>
-<%--                                <table class="table table-striped" style="color: black" id="table_id">--%>
-<%--                                    <thead>--%>
-<%--                                    <tr>--%>
-<%--                                        <th>Tên Sản Phẩm</th>--%>
-<%--                                        <th>Số IMEI</th>--%>
-<%--                                        <th>Trạng Thái</th>--%>
-<%--                                        <th>Chức năng</th>--%>
-<%--                                    </tr>--%>
-<%--                                    </thead>--%>
-<%--                                    <tbody id="listImei_${ctsp.id}"--%>
-<%--                                           class="imei_search">--%>
-<%--                                    </tbody>--%>
-<%--                                </table>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="modal-footer">--%>
-<%--                <button type="button" class="btn btn-secondary"--%>
-<%--                        data-bs-toggle="modal" data-bs-target="#newSanPham">--%>
-<%--                    Quay về--%>
-<%--                </button>--%>
-<%--                <button type="button" class="btn btn-secondary"--%>
-<%--                        data-bs-dismiss="modal">--%>
-<%--                    Close--%>
-<%--                </button>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
-<%--nhập imei--%>
 <div class="modal fade" id="nhapImei" tabindex="-1"
      aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -674,7 +533,7 @@
             </div>
             <div class="modal-body">
                 <!-- Form để nhập thông tin đổi trả -->
-                <form id="doiTraForm">
+                <form id="doiTraForm" style="color:black;">
                     <div class="form-group">
                         <label for="lyDo">Lý Do Đổi Trả</label>
                         <input type="text" class="form-control" id="lyDo" placeholder="Lý do đổi trả">
@@ -684,14 +543,6 @@
                         <select class="form-control" id="hienTrangSanPham">
                             <option value="0">Sản phẩm lỗi</option>
                             <option value="1">Sản phẩm đổi trả</option>
-                            <!-- Thêm các option khác nếu cần -->
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="hinhThucDoiTra">Hình Thức Đổi Trả</label>
-                        <select class="form-control" id="hinhThucDoiTra">
-                            <option value="0">Đổi hàng</option>
-                            <option value="1">Trả hàng</option>
                             <!-- Thêm các option khác nếu cần -->
                         </select>
                     </div>
@@ -746,8 +597,6 @@
 
 
 </script>
-
-
 <script>
     function xoaSanPham(hdctId) {
         // Gửi yêu cầu xóa bất đồng bộ
@@ -764,10 +613,6 @@
         });
     }
 </script>
-
-
-<%--//Xóa sp cần đổi trả--%>
-
 <script>
     var xoahdctId; // Biến toàn cục để lưu giá trị hdctId
 
@@ -794,9 +639,6 @@
         // Có thể thực hiện gửi giá trị này trong hàm fetch
     }
 </script>
-
-
-<%--// chọn sản phẩm--%>
 <script>
     var globalHdctId; // Biến toàn cục để lưu giá trị hdctId
 
@@ -849,8 +691,6 @@
         window.location.href = "/doi-tra/them-dtct?hdctId=" + hdctId + "&doitraId=" + doitraId + "&lyDo=" + lyDo + "&hienTrang=" + hienTrang + "&hinhThuc=" + hinhThuc;
     }
 </script>
-
-
 <script>
     function kiemTraGia() {
         // Lấy giá trị hdct.donGia từ biến toàn cục
@@ -879,17 +719,6 @@
         $("#doiTra").modal("show");
     }
 </script>
-
-<%--<script>--%>
-<%--    $(document).ready(function () {--%>
-<%--        // Sự kiện click vào nút "Chọn sản phẩm"--%>
-<%--        $(".chonSanPhamButton").on("click", function () {--%>
-<%--            // Hiển thị modal mới--%>
-<%--            $('#exampleModalChonSanPham').modal('show');--%>
-<%--        });--%>
-<%--    });--%>
-<%--</script>--%>
-
 <script>
     // Định nghĩa một biến toàn cục để lưu giá trị hdct.donGia
     var selectedDonGia;
@@ -903,7 +732,6 @@
     }
 
 </script>
-
 <script>
     function showChonSanPhamModal() {
         // Hiển thị modal chọn sản phẩm
@@ -911,7 +739,6 @@
     }
 
 </script>
-
 
 <script>
 
@@ -925,7 +752,78 @@
         theme: 'bootstrap-5'
     });
 </script>
+<script>
+    const gia = document.querySelectorAll('.btn-primary .chonSanPhamDoiTraButton');
 
+    gia.forEach(aTag => {
+        aTag.addEventListener('click', () => {
+            // Lấy ID của sản phẩm
+            const giaTien = aTag.closest('tr').querySelector('td:first-child').textContent;
+
+            // Lưu ID của sản phẩm vào input
+            const input = document.querySelector('#giaTienSP');
+            input.value = giaTien;
+            console.log(giaTien)
+        });
+    });
+    $('div[id^="exampleModalChonSanPham"]').on('show.bs.modal', async function (e) {
+        const gia = $(document).find('#giaTienSP').val();
+        const url = "http://localhost:8080/ban-hang/search-san-pham?search-san-pham=" + gia;
+        console.log(gia)
+        try {
+            const resp = await fetch(url);
+            const data = await resp.json();
+            console.log(data)
+
+            // Hiển thị dữ liệu tìm kiếm
+            let html = ``;
+            for (let i = 0; i < data.length; i++) {
+                const ctsp = data[i];
+                let productPrice;
+                if (ctsp.khuyenMai) {
+                    productPrice = ctsp.giaBan - ctsp.giaBan * ctsp.khuyenMai.soTienGiam / 100;
+                } else {
+                    productPrice = ctsp.giaBan;
+                }
+                const tr = `
+            <tr>
+                <td style="display:none;">` + ctsp.id + `</td>
+                <td>` + ctsp.sanPham.ma + `</td>
+                <td>` + ctsp.sanPham.ten + `</td>
+                <td align="center"><img src="/uploads/` + ctsp.urlAnh + `" width="40" height="40"></td>
+                <td>` + ctsp.sanPham.hangSanPham.ten + `</td>
+                <td>` + ctsp.mauSac.ten + `</td>
+                <td>` + ctsp.ram.dungLuong + `</td>
+                <td>` + ctsp.rom.dungLuong + `</td>
+                <td>` + productPrice + `</td>
+                <td>` + ctsp.soLuong + `</td>
+                <td>
+                    <a class="btn btn-warning btn-icon-text"
+                    data-bs-toggle="modal" data-bs-target="#nhapImei">Nhập IMEI</a>
+                </td>
+            </tr>
+            `;
+                html += tr;
+            }
+            parentModal.find(".san_pham_search").html(html);
+            const aTags = document.querySelectorAll('.btn-warning.btn-icon-text');
+
+            aTags.forEach(aTag => {
+                aTag.addEventListener('click', () => {
+                    // Lấy ID của sản phẩm
+                    const productId = aTag.closest('tr').querySelector('td:first-child').textContent;
+
+                    // Lưu ID của sản phẩm vào input
+                    const input = document.querySelector('#idCTSPham');
+                    input.value = productId;
+                });
+            });
+
+        } catch (err) {
+            console.error(err)
+        }
+    });
+</script>
 <script>
     const aTags = document.querySelectorAll('.btn-warning.btn-icon-text');
 
@@ -977,7 +875,7 @@
                             <td>` + imei.chiTietSanPham.sanPham.ten + `</td>
                             <td>` + imei.soImei + `</td>
                             <td>` + (imei.tinhTrang == 0 ? "Chưa bán" : "Đã bán") + `</td>
-                            <td><a href="/doi-tra/them-imei/` + imei.id + `/`+doitraId+`/`+globalHdctId+ `">Thêm IMEI</a></td>
+                            <td><a href="/doi-tra/them-imei/` + imei.id + `/` + doitraId + `/` + globalHdctId + `">Thêm IMEI</a></td>
                         </tr>
                         `;
                         html += tr;

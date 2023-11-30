@@ -195,7 +195,7 @@
                     </div>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table id="example" class="display" style="color: black; width: 2500px">
+                        <table id="example" class="display" style="color: black; width: 3000px">
                             <thead>
                             <tr>
                                 <th>Mã hóa đơn</th>
@@ -357,6 +357,12 @@
         theme: 'bootstrap-5'
     });
 
+    function soSanhNgayNhan(ngayNhan) {
+        const ngayHienTai = Date.now();
+        const soNgay = (ngayHienTai - new Date(ngayNhan).getTime()) / (1000 * 60 * 60 * 24);
+
+        return soNgay <= 7;
+    }
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
