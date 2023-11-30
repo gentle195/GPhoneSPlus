@@ -41,6 +41,13 @@ public class DoiTraServiceImpl implements DoiTraService {
         return doiTraRepository.fillAll1();
     }
 
+
+
+@Override
+    public DoiTra getDoiTraByHoaDon(UUID id){
+        return doiTraRepository.getDoiTraByHoaDon(id);
+    };
+
     @Override
     public List<DoiTra> getAll2() {
         return doiTraRepository.fillAll2();

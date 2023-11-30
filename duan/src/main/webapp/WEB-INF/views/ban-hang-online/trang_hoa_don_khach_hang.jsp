@@ -2,9 +2,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <%--    table--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="utf-8">
@@ -13,6 +19,10 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <title>Hóa đơn</title>
+    <!-- Thêm Bootstrap và jQuery -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
     <%--căn đều--%>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
 
@@ -135,7 +145,67 @@
             display: none;
         }
 
+
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .table-responsive {
+            border: 1px solid #ccc;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: sans-serif;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        td {
+            text-align: center;
+        }
+
+        .modal-dialog {
+            max-width: 1000px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            margin-left: 600px;
+            margin-top: 500px;
+        }
+        /*.modal-dialog {*/
+        /*    */
+        /*    top: 0;*/
+        /*    left: 0;*/
+        /*    width: 100vw;*/
+        /*    height: 100vh;*/
+        /*    margin: 0;*/
+        /*    padding: 0;*/
+        /*}*/
+
+        .modal-content {
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
     </style>
+
+
+
 
 </head>
 
@@ -422,10 +492,13 @@
                     <th>Trạng thái đơn hàng</th>
                     <th>Hình thức thanh toán</th>
                     <th>Trạng thái giao hàng</th>
-                    <th>Chức năng</th>
+                    <th>Trạng thái đổi trả</th>
+                    <th colspan="2">Chức năng </th>
                 </tr>
                 </thead>
                 <tbody>
+                <fmt:parseDate var="now" value="${now}" pattern="yyyy-MM-dd" />
+
                 <c:forEach items="${listhdkh}" var="ht" varStatus="stt">
                     <tr>
                         <td>${stt.index+1}</td>
@@ -466,22 +539,42 @@
                             <c:if test="${ht.tinhTrangGiaoHang==0}">
                                 <input type="text" value="Chưa giao" disabled>
                             </c:if>
-                            <c:if test="${ht.tinhTrangGiaoHang!=0}">
-                                <input type="text" value="Chưa tìm hiểu" disabled>
+                            <c:if test="${ht.tinhTrangGiaoHang==3}">
+                                <input type="text" value="Giao hàng thành công" disabled>
                             </c:if>
                         </td>
 
                         <td>
-<%--                            <c:if test=""></c:if>--%>
+                            <c:if test="${  ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist0.contains(ht.ma) }">
+                                <button type="button" class="btn btn-primary doi-tra-btn" data-id="${ht.id}" onclick="showChonSanPhamModal(this)" >
+                                    Chờ đổi trả
+                                </button>
+                            </c:if>
+
+                            <c:if test="${  ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist2.contains(ht.ma) }">
+                                <button type="button" class="btn btn-primary doi-tra-btn" data-id="${ht.id}" onclick="showChonSanPhamModal(this)" >
+                                    Đổi trả thành công
+                                </button>
+                            </c:if>
+
+                            <c:if test="${  ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist3.contains(ht.ma) && checkList.contains(ht.ma) }">
+                                <button type="button" class="btn btn-primary doi-tra-btn" data-id="${ht.id}" onclick="showChonSanPhamModal(this)" >
+                                    Đổi trả
+                                </button>
+                            </c:if>
+                        </td>
+
+                        <td>
+                                <%--                            <c:if test=""></c:if>--%>
                             <c:if test="${ht.tinhTrang==0}">
                                 <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
-<%--                                <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>--%>
+                                <%--                                <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>--%>
                                 <a class="btn btn-danger" href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${id}">Hủy hóa đơn</a>
 
                             </c:if>
                             <c:if test="${ht.tinhTrang==1}">
                                 <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
-<%--                                <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>--%>
+                                <%--                                <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>--%>
                                 <a class="btn btn-danger" href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}">Hủy hóa đơn</a>
 
                             </c:if>
@@ -493,7 +586,7 @@
                                 <c:if test="${ht.tinhTrangGiaoHang==0 || ht.tinhTrangGiaoHang==1 }">
 
                                     <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
-<%--                                    <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>--%>
+                                    <%--                                    <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>--%>
                                     <a class="btn btn-danger" href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}">Hủy hóa đơn</a>
 
                                 </c:if>
@@ -506,15 +599,111 @@
                             <c:if test="${ht.tinhTrang==8}">
                                 <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
                             </c:if>
+
+
+
+
+                                <%--    <c:if test="${checkList[stt.index] == 1 && ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist3.contains(ht.ma) }">--%>
+                                <%--        <button type="button" class="btn btn-primary doi-tra-btn" data-id="${ht.id}" onclick="showChonSanPhamModal(this)" >--%>
+                                <%--            Đổi trả--%>
+                                <%--        </button>--%>
+                                <%--    </c:if>--%>
+
+
+
+
+
                         </td>
                     </tr>
                 </c:forEach>
                 </tbody>
+
+                    <%--                <fmt:parseDate var="now" value="${now}" pattern="yyyy-MM-dd" />--%>
+
+
+
             </table>
         </div>
     </c:if>
 
 </main>
+<!-- Modal Đổi trả -->
+<!-- Modal mới -->
+<!-- Modal -->
+<!-- Đây là modal -->
+<%--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">--%>
+<%--    <div class="modal-dialog" role="document">--%>
+<%--        <div class="modal-content">--%>
+<%--            <div class="modal-header">--%>
+<%--                <h4 class="modal-title" id="myModalLabel">Danh sách sản phẩm</h4>--%>
+<%--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
+<%--                    <span aria-hidden="true">&times;</span>--%>
+<%--                </button>--%>
+<%--            </div>--%>
+<%--            <div class="modal-body">--%>
+<%--                <table class="table">--%>
+<%--                    <thead>--%>
+<%--                    <tr>--%>
+<%--                        <th>Tên sản phẩm</th>--%>
+<%--                        <th>Giá</th>--%>
+<%--                        <!-- Thêm các cột khác nếu cần -->--%>
+<%--                    </tr>--%>
+<%--                    </thead>--%>
+<%--                    <tbody id="modalTableBody">--%>
+<%--                    <!-- Nội dung bảng sẽ được cập nhật ở đây -->--%>
+<%--                    </tbody>--%>
+<%--                </table>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modal-1-label" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content" style="margin-left: -10cm">
+            <div class="modal-body">
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div>
+                            <div class="card-body">
+                                <h4 class="card-title" style="float: left">Danh sách sản phẩm</h4>
+                                <div>
+                                    <!-- Ô chọn tất cả ở đây -->
+                                </div>
+                                <div class="table-responsive">
+                                    <div>
+                                        <table  id="example" class="display" style="min-width: 845px; color: black">
+                                            <thead>
+                                            <tr>
+                                                <th>
+                                                    <input type="checkbox" id="selectAllCheckbox">
+                                                </th>
+                                                <th>Tên Sản Phẩm</th>
+                                                <th>Ảnh</th>
+                                                <th>Hãng</th>
+                                                <th>Giá</th>
+                                                <th>Hình thức</th>
+                                                <th>Ghi chú</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody  class="san_pham_search" style="text-align: center;height: 3cm" id="modalTableBody">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button class="btn btn-primary" id="confirmButton">Xác nhận</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div align="center">
     <div class="btn-group" role="group" aria-label="Basic example">
         <ul class="pagination justify-content-center pagination-lg">
@@ -715,6 +904,7 @@
 <%--        }--%>
 <%--    }--%>
 <%--</script>--%>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         sortTableByInvoiceCode();
@@ -759,6 +949,185 @@
 
 
 <script>
+    function loadScripts(callback) {
+        const scriptsToLoad = [
+            'https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js',
+            'https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js',
+            'https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js',
+        ];
+
+        const head = document.head || document.getElementsByTagName('head')[0];
+
+        function loadScript(index) {
+            if (index < scriptsToLoad.length) {
+                const script = document.createElement('script');
+                script.src = scriptsToLoad[index];
+                script.onload = function () {
+                    loadScript(index + 1);
+                };
+                head.appendChild(script);
+            } else {
+                // Gọi callback khi tất cả script đã được tải
+                if (typeof callback === 'function') {
+                    callback();
+                }
+            }
+        }
+
+        // Bắt đầu quá trình tải script
+        loadScript(0);
+    }
+
+    // Sử dụng hàm loadScripts để tải script và sau đó gọi hàm khác
+    loadScripts(function () {
+
+        function showChonSanPhamModal(button) {
+            var hoadonId = button.getAttribute("data-id");
+            console.log("id hoas ddon " + hoadonId);
+
+            $.ajax({
+                type: "GET",
+                url: "/detail-test/" + hoadonId,
+                success: function (data) {
+                    $("#myModal").modal("show");
+                    console.log(data);
+                    updateModalContent(data, hoadonId);
+                },
+                error: function (error) {
+                    console.log("Lỗi:", error);
+                }
+            });
+        }
+
+        function updateModalContent(data, hoadonId) {
+            // Log để kiểm tra giá trị hoadonId và sự kiện được kích hoạt
+            console.log("HoadonId trong updateModalContent:", hoadonId);
+
+            // Xóa dữ liệu cũ trong bảng
+            $("#modalTableBody").empty();
+
+            // Thêm dữ liệu mới từ AJAX vào bảng
+            data.forEach(function (item, index) {
+                var row = "<tr>" +
+                    "<td><input type='checkbox' class='select-checkbox' data-index='" + index + "' data-id='" + item.id + "'></td>" +
+                    "<td>" + item.imei.chiTietSanPham.sanPham.ten + "</td>" +
+                    "<td>" + item.imei.chiTietSanPham.giaBan + "</td>" +
+                    "<td>" + item.imei.chiTietSanPham.sanPham.hangSanPham.ten + "</td>" +
+                    "<td>" + item.imei.chiTietSanPham.giaBan + "</td>" +
+                    "<td>" +
+                    "<select class='form-control hinhThucSelect'>" +
+                    "<option value='0'>Đổi sản phẩm</option>" +
+                    "<option value='1'>Trả sản phẩm</option>" +
+                    "</select>" +
+                    "<button class='btn btn-success chonSanPhamBtn' style='display:none'>Chọn sản phẩm</button>" +
+                    "</td>" +
+                    "<td class='ghi-chu-td' >" +
+                    "<input type='text' class='form-control ghiChuInput' placeholder='Ghi chú'>" +
+                    "</td>" +
+                    "</tr>";
+                $("#modalTableBody").append(row);
+            });
+
+
+            $("#confirmButton").click(function () {
+                var selectedItems = [];
+
+                // Lặp qua các hàng được chọn để lấy thông tin
+                $(".select-checkbox:checked").each(function () {
+                    var itemId = $(this).data("id");
+                    var hinhThuc = parseInt($(this).closest("tr").find(".hinhThucSelect").val());
+                    var ghiChu = $(this).closest("tr").find(".ghiChuInput").val();
+
+                    selectedItems.push({
+                        hdctId: itemId,
+                        hinhThuc: hinhThuc,
+                        ghiChu: ghiChu
+                    });
+                });
+
+                // Gửi danh sách thông tin đến controller
+                $.ajax({
+                    type: "GET",
+                    url: "/xac-nhan-khachhang",
+                    data: {
+                        hdctIds: selectedItems.map(item => item.hdctId),
+                        hoadonId: hoadonId,
+                        hinhThucList: selectedItems.map(item => parseInt(item.hinhThuc)),
+                        ghiChuList: selectedItems.map(item => item.ghiChu)
+                    },
+                    success: function (response) {
+                        // Xử lý kết quả từ controller nếu cần
+                        location.reload();
+                    },
+                    error: function (error) {
+                        console.error("Error:", error);
+                    }
+                });
+            });
+
+
+            // Xử lý sự kiện khi người dùng chọn ô "Chọn tất cả"
+            $("#selectAllCheckbox").change(function () {
+                var isChecked = $(this).prop("checked");
+                $(".select-checkbox").prop("checked", isChecked).trigger("change");
+            });
+
+            // Xử lý sự kiện khi người dùng chọn ô checkbox trong hàng cụ thể
+            $(".select-checkbox").change(function () {
+                var selectedItems = [];
+
+                $(".select-checkbox:checked").each(function () {
+                    var itemId = $(this).data("id");
+                    selectedItems.push(itemId);
+                });
+
+                console.log("Selected Items:", selectedItems);
+
+                // Gửi danh sách itemId đến controller
+                $.ajax({
+                    type: "GET",
+                    url: "/doi-tra-khachhang",
+                    traditional: true,
+                    data: {
+                        hdctIds: selectedItems,
+                        hoadonId: hoadonId
+                    },
+                    success: function (response) {
+                        // Xử lý kết quả từ controller nếu cần
+                    },
+                    error: function (error) {
+                        console.error("Error:", error);
+                    }
+                });
+            });
+
+            // Xử lý sự kiện khi người dùng chọn giá trị trong combobox
+            $(".hinhThucSelect").change(function () {
+                var index = $(this).closest("tr").index();
+                var chonSanPhamBtn = $(".chonSanPhamBtn").eq(index);
+
+                // Ẩn/hiện button Chọn sản phẩm dựa trên giá trị của combobox
+                if ($(this).val() === 'doiSanPham') {
+                    chonSanPhamBtn.show();
+                } else {
+                    chonSanPhamBtn.hide();
+                }
+            });
+        }
+
+// Gọi hàm showChonSanPhamModal khi các script đã được tải
+        window.showChonSanPhamModal = showChonSanPhamModal;
+    });
+</script>
+
+
+
+
+
+
+
+<script>
+
     // document.addEventListener("DOMContentLoaded", function() {
     //     // Gọi hàm loadTab để chỉ hiển thị nội dung của tab00 khi trang được tải
     //     loadTab('tab00');
@@ -792,6 +1161,7 @@
     <%--}--%>
 </script>
 <script>
+
     function chonhetgiohangtongTRANGCHU(idgh) {
         // var  idgh1=encodeURIComponent(idgh)
         if (document.getElementsByName('checktongTT')[0].checked == true) {
@@ -910,6 +1280,7 @@
         });
     }
 
+
     loadSelect2diachi();
 </script>
 <!-- jQuery Plugins -->
@@ -927,6 +1298,9 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>

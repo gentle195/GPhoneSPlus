@@ -26,6 +26,8 @@ public interface DoiTraChiTietService {
      List<DoiTraChiTiet> getAll();
     public boolean existsByDoiTraAndHoaDonChiTiet(DoiTra doiTra, HoaDonChiTiet hoaDonChiTiet);
 
+    public void saveAll(List<DoiTraChiTiet> doiTraChiTiets);
+
 
     List<DoiTraChiTiet> getDoiTraChiTietByDoiTraId(UUID id);
     public DoiTraChiTiet findById(UUID id);

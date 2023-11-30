@@ -40,6 +40,10 @@ public class DoiTraChiTietServiceImpl implements DoiTraChiTietService {
         return doiTraChiTietRepository.findAll();
     }
 
+    public void saveAll(List<DoiTraChiTiet> doiTraChiTiets) {
+        doiTraChiTietRepository.saveAll(doiTraChiTiets);
+    }
+
     @Override
     public boolean existsByDoiTraAndHoaDonChiTiet(DoiTra doiTra, HoaDonChiTiet hoaDonChiTiet) {
         return doiTraChiTietRepository.existsByDoiTraAndHoaDonChiTiet(doiTra, hoaDonChiTiet);

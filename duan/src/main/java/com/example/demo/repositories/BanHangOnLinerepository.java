@@ -27,7 +27,7 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
     @PersistenceContext
     EntityManager entityManager = null;
 
-//    @Transactional
+    //    @Transactional
 //    @Query(value = "DECLARE @bienb int; " +
 //            "SET @bienb = (SELECT SUM(b.so_tien_giam) AS tonggiamgia FROM san_pham_giam_gia a LEFT JOIN khuyen_mai b ON a.id_khuyen_mai = b.id " +
 //            "             WHERE a.id_chi_tiet_san_pham = :idctsp AND a.tinh_trang = 0 AND b.tinh_trang = 0); " +
@@ -37,13 +37,13 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
 //            "END; " +
 //            "SELECT CAST(@bienb AS int);", nativeQuery = true)
 //    Integer tonggiamgia(UUID idctsp);
-@Transactional
-@Query(value = "DECLARE @bienb int; " +
-        "SET @bienb = (SELECT SUM(b.so_tien_giam) AS tonggiamgia FROM chi_tiet_san_pham a LEFT JOIN khuyen_mai b ON a.id_khuyen_mai = b.id  " +
-        "             WHERE a.id = :idctsp AND a.tinh_trang = 0 AND b.tinh_trang = 0);" +
+    @Transactional
+    @Query(value = "DECLARE @bienb int; " +
+            "SET @bienb = (SELECT SUM(b.so_tien_giam) AS tonggiamgia FROM chi_tiet_san_pham a LEFT JOIN khuyen_mai b ON a.id_khuyen_mai = b.id  " +
+            "             WHERE a.id = :idctsp AND a.tinh_trang = 0 AND b.tinh_trang = 0);" +
 
-        "SELECT CAST(@bienb AS int);", nativeQuery = true)
-Integer tonggiamgia(UUID idctsp);
+            "SELECT CAST(@bienb AS int);", nativeQuery = true)
+    Integer tonggiamgia(UUID idctsp);
 
     @Query("select ct from SanPham sp left join ChiTietSanPham ct on sp.id=ct.sanPham.id where sp.tinhTrang=0 and ct.tinhTrang=0 order by sp.ngayTao desc")
     List<ChiTietSanPham> ctspbanhang();
@@ -65,6 +65,8 @@ Integer tonggiamgia(UUID idctsp);
 //    @Query("select ct from SanPham sp left join ChiTietSanPham ct on sp.id=ct.sanPham.id where sp.tinhTrang=0 and ct.tinhTrang=0 ")
 //    List<ChiTietSanPham> ctspbanhangBanChay();
 
+    @Query("select hdct from HoaDonChiTiet hdct left join HoaDon hd on hdct.hoaDon.id=hd.id where hd.id=:id")
+    List<HoaDonChiTiet> getHoaDonChiTiet(UUID id);
 
     @Transactional
     @Query(value = "DECLARE @bienb int; " +
@@ -194,7 +196,7 @@ Integer tonggiamgia(UUID idctsp);
     List<GioHangChiTiet> ListghTheoidghvsTT1(@Param("idgh") UUID idgh);
 
     @Query("select dc from  DiaChi dc where dc.khachHang.id=:idkh and  dc.tinhTrang=0")
-    List<DiaChi> Listdiachimotkhachang(@Param("idkh") UUID idkh);
+    List<DiaChi> Listdiachimotkhachang(@Param("idkh") UUID idkh);hoa
 
     @Query("select hd from  HoaDon hd where hd.ma=:mahd")
     HoaDon timhdtheomahd(@Param("mahd") String mahd);
