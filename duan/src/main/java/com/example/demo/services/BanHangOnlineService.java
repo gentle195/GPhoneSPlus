@@ -70,8 +70,12 @@ public interface BanHangOnlineService {
     Page<HoaDon> donHang1(@Param("idkh") UUID idkh, Pageable pageable);
     Page<HoaDon> donHang2(@Param("idkh") UUID idkh, Pageable pageable);
     Page<HoaDon> donHang3(@Param("idkh") UUID idkh, Pageable pageable);
-    List<HoaDon> search(UUID id, String ten);
 
+    Page<HoaDon> donHangDangChoXuLy(@Param("idkh") UUID idkh, Pageable pageable);
+    Page<HoaDon> donHangDangGiao(@Param("idkh") UUID idkh, Pageable pageable);
+    Page<HoaDon> donHangGiaoThanhCong(@Param("idkh") UUID idkh, Pageable pageable);
+
+    List<HoaDon> search(UUID id, String ten);
     List<HoaDon> search0(UUID id, String ten);
 
     List<HoaDon> search1(UUID id, String ten);
@@ -79,5 +83,8 @@ public interface BanHangOnlineService {
     List<HoaDon> search3(UUID id, String ten);
     List<HoaDon> search8(UUID id, String ten);
 
+    List<HoaDon> searchDangChoXuLy(UUID id, String ten);
+    List<HoaDon> searchDangGiao(UUID id, String ten);
+    List<HoaDon> searchGiaoThanhCong(UUID id, String ten);
     String sotienkhidagiam(UUID idctsp);
 }

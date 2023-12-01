@@ -220,6 +220,22 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     public Page<HoaDon> donHang3(UUID idkh, Pageable pageable) {
         return banHangOnLinerepository.donHang3(idkh,pageable);
     }
+
+    @Override
+    public Page<HoaDon> donHangDangChoXuLy(UUID idkh, Pageable pageable) {
+        return banHangOnLinerepository.donHangDangChoXuLy(idkh,pageable);
+    }
+
+    @Override
+    public Page<HoaDon> donHangDangGiao(UUID idkh, Pageable pageable) {
+        return banHangOnLinerepository.donHangDangGiao(idkh, pageable);
+    }
+
+    @Override
+    public Page<HoaDon> donHangGiaoThanhCong(UUID idkh, Pageable pageable) {
+        return banHangOnLinerepository.donHangThanhCong(idkh, pageable);
+    }
+
     @Override
     public List<HoaDon> search(UUID id, String ten) {
         return banHangOnLinerepository.search(id, ten);
@@ -246,6 +262,21 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     @Override
     public List<HoaDon> search8(UUID id, String ten) {
         return banHangOnLinerepository.searchDH8(id, ten);
+    }
+
+    @Override
+    public List<HoaDon> searchDangChoXuLy(UUID id, String ten) {
+        return banHangOnLinerepository.searchChoXuLy(id, ten);
+    }
+
+    @Override
+    public List<HoaDon> searchDangGiao(UUID id, String ten) {
+        return banHangOnLinerepository.searchDangGiao(id, ten);
+    }
+
+    @Override
+    public List<HoaDon> searchGiaoThanhCong(UUID id, String ten) {
+        return banHangOnLinerepository.searchDHThanhCong(id,ten);
     }
 
     @Override
