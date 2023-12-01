@@ -1,3 +1,6 @@
+<%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
+<%@ page import="com.example.demo.repositories.ChiTietSanPhamRepository" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -5,6 +8,10 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
+<%--<%--%>
+<%--    // Get the total number of products--%>
+<%--    int tongSoSanPham = (int) request.getAttribute("tongSoSanPham");--%>
+<%--%>--%>
 
 <head>
     <meta charset="utf-8">
@@ -23,8 +30,61 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
+    <style>
+        container {
+            width: 100%;
+        }
+
+        .row-1 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            text-align: center;
+        }
+        .row-2 {
+            margin-top: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        .col-0, .col-1, .col-2, .col-3 {
+            color: black;
+            background-color:#8fe3f2;
+            width: 25%;
+            padding: 10px;
+            margin-right: 1cm; /* Khoảng cách 1cm giữa các cột */
+        }
+        .col-4, .col-5, .col-6{
+            color: black;
+            background-color:#8fe3f2;
+            width: 33.33%;
+            padding: 10px;
+            margin-right: 1cm; /* Khoảng cách 1cm giữa các cột */
+        }
+
+        .col-sm:hover {
+            transform: scale(1.1); /* Phóng to cột khi hover */
+            transition: transform 0.2s ease-in-out; /* Chuyển đổi kích thước cột một cách mượt mà khi hover */
+
+        }
+        .col-sm:last-child {
+            margin-right: 0; /* Xóa khoảng cách bên phải của cột cuối cùng */
+
+        }
+        table {
+
+            border-collapse: collapse;
+        }
+        #example{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
 
 </head>
+
 
 <body>
 
@@ -200,7 +260,75 @@
         <!-- row -->
         <div class="container-fluid">
             <div class="right_col" role="main">
-                <!-- top tiles -->
+                <div class="main" style="margin: -10px 10px 10px 10px">
+                    <div class="banner" style="margin-left: -40px; margin-top: -30px">
+                        <img src="../uploads/banner3.png" alt="Banner của trang web" width="1452px" height="250px">
+
+                    </div>
+                    <div  class="container" style="margin-top: 20px">
+                        <div class="row row-1">
+                            <div class="col-sm col-0" style="text-align: center" onclick="redirectToChiTietSanPham()">
+                                <p style="font-size: 20px; font-weight: bold"> Số sản phẩm trong Store</p>
+                                <p>Số mặt hàng:<strong> ${tongSoLuong-tongSPDaBan}</strong></p>
+<%--                                <a href="/chi-tiet-san-pham/hien-thi">--%>
+                                <img src="../uploads/icondienthoai.jpg" height="50%" width="50%">
+<%--                                </a>--%>
+                            </div>
+                            <div class="col-sm col-1"  onclick="redirectToDonHang()">
+                                <p style="font-size: 20px; font-weight: bold">  Đơn hàng</p>
+                                <p>Số đơn hàng: ${tongDonHang}</p>
+                                <img src="../uploads/donhang.png" height="50%" width="50%">
+
+                            </div>
+                            <div class="col-sm col-2"  onclick="redirectToKH()">
+                                <p style="font-size: 20px; font-weight: bold">  Khách hàng</p>
+                                <p>Số khách hàng: ${tongKH}</p>
+                                <img src="../uploads/iconkh.png" height="50%" width="50%">
+
+                            </div>
+                            <div class="col-sm col-3"  onclick="redirectToNV()">
+                                <p style="font-size: 20px; font-weight: bold"> Nhân viên</p>
+                                <p>Số nhân viên: ${tongNV}</p>
+                                <img src="../uploads/iconnhanvien1.png" height="50%" width="50%">
+                            </div>
+                        </div>
+
+                        <div class="row row-2">
+                            <div class="col-sm col-4" style="text-align: center"  onclick="redirectToDonHang()">
+                                <p style="font-size: 20px; font-weight: bold; border-bottom: 2px solid blue"> Đơn hàng mới</p>
+                                <img src="../uploads/icontop10do.png" height="50%" width="50%">
+
+<%--                                <div class="table-active" style="margin-top: 20px">--%>
+<%--                                    <table id="example">--%>
+<%--                                        <tr><th>STT</th>--%>
+<%--                                            <th>Đơn hàng</th>--%>
+<%--                                            <th>Mô tả</th>--%>
+<%--                                        </tr>--%>
+<%--                                        <thead>--%>
+<%--                                        </thead>--%>
+<%--                                        <tbody>--%>
+
+<%--                                        </tbody>--%>
+<%--                                    </table>--%>
+<%--                                </div>--%>
+                            </div>
+
+                            <div class="col-sm col-5" style="text-align: center" onclick="redirectToTop10SP()">
+                                <p style="font-size: 20px; font-weight: bold; border-bottom: 2px solid blue"> Sản phẩm bán chạy</p>
+                                <img src="../uploads/icontop10.png" height="50%" width="50%">
+                            </div>
+                            <div class="col-sm col-6" style="text-align: center" onclick="redirectToDonHang()">
+                                <p style="font-size: 20px; font-weight: bold; border-bottom: 2px solid blue"> Đơn hàng chưa sử lý</p>
+                                <div style="width: 130px;margin-left: 3cm; margin-bottom: 5px; height: 130px; border-radius: 50%; background-color: #d3edc5;">
+                                    <p style="text-align: center;padding-top: 35px;font-size: 20px; font-weight: bold"> ${tongDHCho}</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
                 <jsp:include page="${contentPage}"/>
                 <ul class="notifications" style="margin-top: 55px"></ul>
             </div>
@@ -275,4 +403,19 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="../../../js/select-2.js"></script>
+<script>
+    function redirectToChiTietSanPham() {
+        window.location.href = "/chi-tiet-san-pham/hien-thi";
+    } function redirectToDonHang(){
+        window.location.href = "/don-hang/hien-thi";
+    } function redirectToKH() {
+        window.location.href = "/khach-hang/hien-thi";
+    } function redirectToNV() {
+        window.location.href = "/nhan-vien/hien-thi";
+    }
+    function redirectToTop10SP() {
+        window.location.href = "/thong-ke/hien-thi-sp";
+    }
+
+</script>
 </html>

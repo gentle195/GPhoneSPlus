@@ -2,20 +2,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <%--phan trang--%>
+    <%--    table--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>Trang chủ</title>
+    <title>Hóa đơn</title>
     <%--căn đều--%>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
 
@@ -38,7 +35,6 @@
     <link type="text/css" rel="stylesheet" href="/cssbanhang/nouislider.min.css"/>
 
     <!-- Font Awesome Icon -->
-    <link rel="stylesheet" href="/cssbanhang/font-awesome.min.css">
 
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="/cssbanhang/style.css"/>
@@ -49,58 +45,14 @@
           href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
-
-
     <style>
         /* CSS cho modal */
-        #myModal {
+
+        input[type="radio"] {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000; /* Đặt giá trị z-index lớn */
         }
 
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        }
 
-        #myModal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000; /* Đặt giá trị z-index lớn */
-        }
-
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        /*div{*/
-        /*    border: 1px solid red;*/
-        /*}*/
         .input-with-button {
             display: flex; /* Sử dụng flexbox để căn chỉnh nút bên trong input */
             border: 1px solid #ccc; /* Tạo đường viền xung quanh hộp tìm kiếm */
@@ -123,158 +75,71 @@
             cursor: pointer; /* Biến con trỏ thành bàn tay khi trỏ vào nút */
         }
 
-        /*tuananh*/
-        .container1 {
-            display: flex;
+        .cart-dropdown {
+            border-radius: 10px;
+            width: 180px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .cart-dropdown a {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            text-decoration: none;
+            text-align: center;
+            color: #fff;
+            background-color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .cart-dropdown a:hover {
+            background-color: #0056b3;
+        }
+
+
+        .tabtab{
             margin-left: 5cm;
-            margin-right: 5cm;
-            /*border: 1px solid red;*/
+        }
+        article {
+
+            overflow: hidden;
+            position: relative;
+            /* Thêm dòng này để các phần tử con có thể sử dụng vị trí tuyệt đối */
         }
 
-        .middle-column1 {
-            flex: 1;
-            padding: 10px;
-            /*border: 1px solid #ccc;*/
-            box-sizing: border-box;
-        }
-        .left-column1{
-            width: 6cm;
-            /*border: 1px solid blue;*/
-        }
-        .right-column1 {
-            /*border: 1px solid #8c0615;*/
-            width: 6cm;
-        }
-        .middle-column1 {
-            /*border: 1px solid red;*/
-            width:  calc(100% - 6cm - 6cm); /* Tính toán kích thước cột giữa */
-
+        article a {
+            float: left;
+            display: block;
+            color:black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
         }
 
-
-        .tab-container {
-            display: flex;
-            width: 300px; /* Điều chỉnh chiều rộng theo ý muốn */
+        .nav-underline {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            background-color: red;
+            transition: width 0.3s ease;
         }
 
-        .tab-menu {
-            /*background-color: #333;*/
-            color: black;
-
-            width: 100%; /* Điều chỉnh chiều rộng menu tab */
+        .tab-content {
+            display: none;
         }
-
-        .tab {
-            padding: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 18px;
+        #tab00 {
+            display: none;
         }
-        td {
-            font-size: 15px; font-weight: bolder}
 
     </style>
-        <style>
-            /* CSS cho modal */
-            #myModal {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 1000; /* Đặt giá trị z-index lớn */
-            }
 
-            .modal-content {
-                background-color: #fff;
-                padding: 20px;
-                border-radius: 5px;
-                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            }
-
-            #myModal {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 1000; /* Đặt giá trị z-index lớn */
-            }
-
-            .modal-content {
-                background-color: #fff;
-                padding: 20px;
-                border-radius: 5px;
-                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            }
-
-            /*div{*/
-            /*    border: 1px solid red;*/
-            /*}*/
-            .input-with-button {
-                display: flex; /* Sử dụng flexbox để căn chỉnh nút bên trong input */
-                border: 1px solid #ccc; /* Tạo đường viền xung quanh hộp tìm kiếm */
-                border-radius: 25px; /* Đặt bán kính tròn cho hộp tìm kiếm */
-                overflow: hidden; /* Loại bỏ nút nếu nó bị tràn ra ngoài hộp */
-            }
-
-            .input-with-button input {
-                flex: 1; /* Làm cho input mở rộng để lấp đầy hộp */
-                border: none; /* Loại bỏ đường viền của input */
-                padding: 10px; /* Đặt khoảng cách nội dung bên trong input */
-                outline: none; /* Loại bỏ đường viền khi focus vào input */
-            }
-
-            .input-with-button button {
-                background: #007bff; /* Màu nền của nút */
-                color: #fff; /* Màu chữ trắng */
-                border: none; /* Loại bỏ đường viền của nút */
-                padding: 10px 20px; /* Đặt khoảng cách nội dung bên trong nút */
-                cursor: pointer; /* Biến con trỏ thành bàn tay khi trỏ vào nút */
-            }
-
-            .cart-dropdown {
-                border-radius: 10px;
-                width: 180px;
-                background-color: #fff;
-                box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-                padding: 10px;
-                margin-top: 10px;
-            }
-
-            .cart-dropdown a {
-                display: block;
-                width: 100%;
-                padding: 10px;
-                text-decoration: none;
-                text-align: center;
-                color: #fff;
-                background-color: #007bff;
-                margin-bottom: 10px;
-            }
-
-            .cart-dropdown a:hover {
-                background-color: #0056b3;
-            }
-
-            /*div{*/
-            /*    border: 1px solid red;*/
-            /*}*/
-        </style>
 </head>
+
 <body>
-
-
 <!-- HEADER -->
 <header>
     <div id="top-header">
@@ -334,6 +199,7 @@
         </div>
     </div>
     <!-- /TOP HEADER -->
+
     <!-- MAIN HEADER -->
     <div id="header">
         <!-- container -->
@@ -367,11 +233,7 @@
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <%--                            <a href="#">--%>
-                            <%--                                <i class="fa fa-heart-o"></i>--%>
-                            <%--                                <span>Your Wishlist</span>--%>
-                            <%--                                <div class="qty">2</div>--%>
-                            <%--                            </a>--%>
+
                         </div>
                         <!-- /Wishlist -->
 
@@ -485,7 +347,6 @@
 </header>
 <!-- /HEADER -->
 
-
 <!-- NAVIGATION -->
 <nav id="navigation">
     <!-- container -->
@@ -505,6 +366,8 @@
                 <li><a href="#">ƯU ĐÃI HẤP DẪN</a></li>
                 <li><a href="#">LOẠI</a></li>
                 <li><a href="/ban-hang-online/dien-thoai-thong-minh">ĐIỆN THOẠI THÔNG MINH</a></li>
+                <li><a style="color: red" href="">/CÁC ĐƠN HÀNG</a></li>
+
             </ul>
             <!-- /NAV -->
         </div>
@@ -513,155 +376,183 @@
     <!-- /container -->
 </nav>
 <!-- /NAVIGATION -->
-<br>
-
-<%--</form>--%>
 
 
-<form:form action="/update-mat-khau-khach-hang" method="post" modelAttribute="kh"
-           enctype="multipart/form-data">
-    <div class="container1">
+<div class="tabtab">
+    <article>
+        <h2 STYLE="margin-left: 5cm">CÁC ĐƠN HÀNG</h2>
+        <a style="font-size: 18px">Các trạng thái:</a>
 
-        <div class="left-column1" style="width: 6cm; font-size: 18px">
-            <!-- Nội dung cột trái -->
-            <div class="row" style="margin-top: 6px">
-                <div class="col-md-2">
-                    <img  class="preview-image" src="../../../uploads/${kh.anh}" alt=""
-                          width="40px" height="40px"
-                          style="border-radius:50% 50% 50% 50%;border: 2px solid #999999">
-                </div>
-                <div class="col-md-10">
-                    <p style="margin-left: 0.5cm"><strong>${kh.hoTen}</strong></p>
-                        <%--                <p style="margin-left: 0.5cm">     (Sửa hồ sơ!)</p>--%>
-                </div>
+        <a href="/ban-hang-online/hoa-don-online/${id}" onclick="loadTab('tab00'); return false;">Tất cả</a>
+        <a href="/ban-hang-online-0/hoa-don-online/${id}">Đang chờ</a>
+        <a href="/ban-hang-online-1/hoa-don-online/${id}">Đã xác nhận</a>
+        <a href="/ban-hang-online-3/hoa-don-online/${id}">Chờ thanh toán</a>
+        <a href="/ban-hang-online-2/hoa-don-online/${id}">Đã thanh toán</a>
+        <a href="/ban-hang-online-dang-giao/hoa-don-online/${id}">Đang giao hàng</a>
+        <a href="/ban-hang-online-thanh-cong/hoa-don-online/${id}" style="color: red">Hoàn thành</a>
+        <a href="/ban-hang-online-8/hoa-don-online/${id}">Đã hủy</a>
+        <div class="nav-underline"></div> <!-- Thêm dòng này để tạo dòng kẻ đỏ -->
 
-            </div>
+    </article>
 
-            <div class="row">
-                <div class="tab-container">
-                    <div class="tab-menu" style="margin-top: 10px">
-                        <a href="/thong-tin-ca-nhan-khach-hang"><div class="tab">Hồ sơ</div></a>
-                        <a href="/dia-chi-khach-hang"><div class="tab">Địa chỉ</div></a>
-                        <a href="/pass-khach-hang"><div  style="color: red" class="tab">Đổi mật khẩu</div></a>
+</div>
 
-                    </div>
-                    <div class="tab-content">
-                            <%--                    <div class="tab-pane" id="tab1">Nội dung 1</div>--%>
-                            <%--                    <div class="tab-pane" id="tab2">2</div>--%>
-                            <%--                    <div class="tab-pane" id="tab3">3</div>--%>
-                    </div>
-                </div>
-            </div>
+
+<main style="width: 95%;margin-left: 2.5%; " id="content">
+    <c:if test="${listhdkh.size()>0}">
+
         </div>
-            <%--    <div class="tab-pane" id="tab1">--%>
-        <div class="middle-column1" style="font-size: 15px">
-            <!-- Nội dung cột giữa -->
-            <div class="row">
-                <p style="margin-left: 0.5cm; font-size: 20px"><strong>Đổi mật khẩu </strong></p>
-                <p style="margin-left: 0.5cm">     (Thay đổi mật khẩu để bảo mật tài khoản!)</p>
+        <div id="tab8" class="tab-content" style="display: block; color: red">
 
-            </div>
-            <div style="font-size: 18px; color: black">
-                <p style="font-weight:bold"> Tên đăng nhập: ${kh.hoTen}</p>
-            </div>
+            <form action="/ban-hang-online-8/hoa-don-online/${id}/search" method="post">
+                <div class="input-group" style="width: 20%; float: right">
+                    <input  type="text" class="form-control" placeholder="Nhập mã, tên sp, ngày đặt, sđt..."
+                            aria-label="Bạn tìm gì..." name="search">
+                </div>
+                <div class="input-group-append" style="width: 4%; float: right">
+                    <button style="height: 0.9cm" class="btn btn-sm btn-primary" type="submit">Search</button>
+                </div>
+            </form>
 
-
-            <div style="display:none;">
-                <form:input class="form-control" placeholder="" path="id" readonly="true"/>
-
-                <form:label class="form-label" path="ma">Mã:</form:label>
-                <form:input class="form-control" placeholder="" path="ma" readonly="true"/>
-                <form:label class="form-label" path="taiKhoan">Tài khoản:
-                    <form:errors path="taiKhoan" cssStyle="color: red"></form:errors>
-                </form:label>
-                <form:input class="form-control" placeholder="" path="taiKhoan"/>
-                <form:label class="form-label" path="matKhau">Mật khẩu:
-                    <form:errors path="matKhau" cssStyle="color: red"></form:errors>
-                </form:label>
-                <form:input class="form-control" placeholder="" path="matKhau"/>
-                <form:label class="form-label" path="diem">Điểm:
-                    <form:errors path="diem" cssStyle="color: red"></form:errors>
-                </form:label>
-                <form:input class="form-control" placeholder="" path="diem" type="number"/>
-                <form:input class="form-control" placeholder="" path="hangKhachHang" type="text"/>
-                <form:input path="ngayTao" type="date"></form:input>
-                <form:input class="form-control" placeholder="${kh.hoTen}"  path="hoTen"/>
-                <form:input class="form-control" placeholder="${kh.sdt}"  path="sdt"/>
-                <form:input class="form-control" placeholder="${kh.email}"  path="email"/>
-
-                <form:radiobutton path="gioiTinh" value="true"/>Nam
-                <form:radiobutton path="gioiTinh" value="false" cssStyle="margin-left: 1cm"/> Nữ
-                <form:input class="form-control" placeholder="" path="ngaySinh" type="date"
-                            id="ns"/>
-            </div>
-
-            <table class="table">
+            <table class="table table-bordered" style="width: 100%">
                 <thead>
                 <tr>
-                    <td style="font-size: 15px; font-weight: bolder">Nhập mật khẩu cũ:</td>
-                    <td>  <input id="oldpassword" name="mat-khau-cu"
-                                 class="form-control" type="password"
-                                 placeholder="*******"/>
-                        <label style="color: red" id="old-error">${thongBao1}</label>
+                    <th>STT</th>
 
-                    </td><td>
-                        <label class="password-toggle" id="old-password-toggle"
-                               onclick="togglePassword1()">
-                            Show
-                        </label>
-                </td>
-
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày đặt</th>
+                    <th style="display: none;">Ngày tạo</th>
+                    <th>SĐT nhận hàng</th>
+                    <th>Địa chỉ nhận</th>
+                    <th>Trạng thái đơn hàng</th>
+                    <th>Hình thức thanh toán</th>
+                    <th>Trạng thái giao hàng</th>
+                    <th>Chức năng</th>
                 </tr>
-                <tr>
-                    <td>Nhập mật khẩu mới:</td>
-                    <td>  <input id="newpassword" name="mat-khau-moi"
-                                 class="form-control" type="password"
-                                 placeholder="*******"/>
-                        <label style="color: red" id="new-error">${thongBao2}</label>
-                    </td><td>
-                        <label class="password-toggle" id="new-password-toggle"
-                               onclick="togglePassword2()">
-                            Show
-                        </label>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td>Xác nhận mật khẩu mới:</td>
-                    <td>
-                        <input id="confirmpassword" name="xac-nhan-mat-khau"
-                                class="form-control" type="password"
-                                placeholder="*******"/>
-                        <label style="color: red" id="confirm-error">${thongBao3}</label>
-                    </td>  <td>
-                        <label class="password-toggle" id="confirm-password-toggle"
-                               onclick="togglePassword3()">
-                            Show
-                        </label>
-                    </td>
-                </tr>
-
-
                 </thead>
+                <tbody>
+                <c:forEach items="${listhdkh}" var="ht" varStatus="stt">
+                    <tr>
+                        <td>${stt.index+1}</td>
 
+                        <td>${ht.ma}</td>
+                        <th style="display: none;">${ht.ngayTao}</th>
+
+                        <td>${ht.ngayTao}</td>
+                        <td>${ht.sdt}</td>
+                        <td > <div style="width: 5cm; overflow: hidden;">${ht.diaChi.diaChi},${ht.diaChi.quan},${ht.diaChi.huyen},${ht.diaChi.thanhPho}</div></td>
+                        <td>
+                            <c:if test="${ht.tinhTrang==0}">
+                                <p>Chờ xử lý</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrang==1}">
+                                <p>Đã xác nhận</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrang==2}">
+                                <p>Đã Thanh toán</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrang==3}">
+                                <p>Chờ thanh toán</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrang==8}">
+                                <p>Đã hủy</p>
+                            </c:if>
+                        </td>
+                        <td>
+                            <c:if test="${ht.hinhThucThanhToan==2}">
+                                <input type="text" value="Chưa chọn" disabled>
+                            </c:if>
+                            <c:if test="${ht.hinhThucThanhToan==0}">
+                                <input type="text" value="Tiền mặt" disabled>
+                            </c:if>
+                            <c:if test="${ht.hinhThucThanhToan==1}">
+                                <input type="text" value="Chuyển khoản" disabled>
+                            </c:if>
+                        </td>
+                        <td>
+                            <c:if test="${ht.tinhTrangGiaoHang==0}">
+                                <input type="text" value="Chưa giao" disabled>
+                            </c:if>
+                            <c:if test="${ht.tinhTrangGiaoHang==1}">
+                                <input type="text" value="Chờ xử lý" disabled>
+                            </c:if>
+                            <c:if test="${ht.tinhTrangGiaoHang==2}">
+                                <input type="text" value="Đang giao" disabled>
+                            </c:if>
+                            <c:if test="${ht.tinhTrangGiaoHang==3}">
+                                <input type="text" value="Giao hàng thành công" disabled>
+                            </c:if>
+                            <c:if test="${ht.tinhTrangGiaoHang==8}">
+                                <input type="text" value="Hủy" disabled>
+                            </c:if>
+                        </td>
+
+                        <td>
+                                <%--                            <c:if test=""></c:if>--%>
+                            <c:if test="${ht.tinhTrang==0}">
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
+                                <%--                                <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>--%>
+                                <a class="btn btn-danger" href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${id}">Hủy hóa đơn</a>
+
+                            </c:if>
+                            <c:if test="${ht.tinhTrang==1}">
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
+                                <%--                                <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>--%>
+                                <a class="btn btn-danger" href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}">Hủy hóa đơn</a>
+
+                            </c:if>
+                            <c:if test="${ht.tinhTrang==2}">
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
+                            </c:if>
+                            <c:if test="${ht.tinhTrang==3}">
+
+                                <c:if test="${ht.tinhTrangGiaoHang==0 || ht.tinhTrangGiaoHang==1 }">
+
+                                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
+                                    <%--                                    <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>--%>
+                                    <a class="btn btn-danger" href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}">Hủy hóa đơn</a>
+
+                                </c:if>
+                                <c:if test="${ht.tinhTrangGiaoHang!=0 && ht.tinhTrangGiaoHang!=1 }">
+
+                                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
+
+                                </c:if>
+                            </c:if>
+                            <c:if test="${ht.tinhTrang==8}">
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
+                            </c:if>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
             </table>
 
-            <div style="text-align: center">
-                <button type="submit" class="btn btn-primary mr-2"
-                        onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                    Sửa
-                </button>
-            </div>
         </div>
 
+    </c:if>
 
-
-
-
+</main>
+<div align="center">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <ul class="pagination justify-content-center pagination-lg">
+            <li class="page-item"><a class="page-link" href="/ban-hang-online-8/hoa-don-online/${idkhachhang}?pageNum=0"><</a></li>
+            <c:forEach begin="1" end="${total}" varStatus="status">
+                <li class="page-item">
+                    <a href="${pageContext.request.contextPath}/ban-hang-online-8/hoa-don-online/${idkhachhang}?pageNum=${status.index -1}"
+                       class="page-link">${status.index}</a>
+                </li>
+            </c:forEach>
+            <li class="page-item"><a class="page-link" href="/ban-hang-online-8/hoa-don-online/${idkhachhang}?pageNum=${total-1}">></a></li>
+        </ul>
     </div>
-</form:form>
+</div>
 
-<br><br><br><br><br><br>
+
+
+
+
+
 <!-- NEWSLETTER -->
 <div id="newsletter" class="section">
     <!-- container -->
@@ -796,56 +687,72 @@
     <!-- /bottom footer -->
 </footer>
 <!-- /FOOTER -->
+<%--load page--%>
+<%--sắp xếp theo đơn hàng--%>
+
 
 <script>
-    function openTab(tabIndex) {
-        var tabPanes = document.querySelectorAll('.tab-pane');
-        for (var i = 0; i < tabPanes.length; i++) {
-            tabPanes[i].classList.remove('active');
-        }
-        document.getElementById('tab' + tabIndex).classList.add('active');
+    document.addEventListener("DOMContentLoaded", function () {
+        sortTableByInvoiceCode();
+    });
+
+    function sortTableByInvoiceCode() {
+        var tables = document.getElementsByClassName("table table-bordered");
+
+        // Duyệt qua từng bảng có class "sortable-table"
+        Array.from(tables).forEach(function (table) {
+            var rows = Array.from(table.rows).slice(1); // Bỏ qua dòng đầu tiên vì đó là tiêu đề
+
+            rows.sort(function (a, b) {
+                var codeA = extractNumberFromCode(a.cells[2].textContent);
+                var codeB = extractNumberFromCode(b.cells[2].textContent);
+
+                // Sắp xếp theo số đằng sau "MHD" từ lớn tới bé
+                return codeB - codeA;
+            });
+
+            // Xóa tất cả các dòng từ bảng
+            while (table.rows.length > 1) {
+                table.deleteRow(1);
+            }
+
+            // Thêm lại các dòng đã sắp xếp và cập nhật số thứ tự
+            rows.forEach(function (row, index) {
+                var newRow = table.insertRow(index + 1); // Chèn dòng mới
+                newRow.innerHTML = row.innerHTML; // Copy nội dung từ dòng đã sắp xếp
+
+                // Cập nhật số thứ tự
+                newRow.cells[0].textContent = index + 1;
+            });
+        });
     }
 
-
-</script>
-<script>
-
-
-    const imageInput = document.getElementById('anhmoi');
-
-    const previewImage2 = document.getElementById('preview-image-2');
-
-    imageInput.addEventListener('change', function () {
-
-        const file = imageInput.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                previewImage2.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        } else {
-            previewImage2.src = '';
-        }
-        document.getElementById('cucheck').value = 'moi';
-    });
+    // Hàm để lấy số từ chuỗi "MHD18" và "MHD19"
+    function extractNumberFromCode(code) {
+        return parseInt(code.replace("MHD", ""));
+    }
 </script>
 
 <script>
-
     function chonhetgiohangtongTRANGCHU(idgh) {
         // var  idgh1=encodeURIComponent(idgh)
         if (document.getElementsByName('checktongTT')[0].checked == true) {
             var link = '/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/full/0/' + idgh;
             // document.getElementById("ktlink").innerHTML=link
+
             loadgiaodienghctbanhangTrangChu(link);
-            loadgiaodienghctbanhangTrangChu(link);
+
+
         } else {
             var link = '/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/full/1/' + idgh;
             // document.getElementById("ktlink").innerHTML=link
+
             loadgiaodienghctbanhangTrangChu(link);
-            loadgiaodienghctbanhangTrangChu(link);
+
         }
+
+
+        // alert("vdvdvd")
     };
 
     function chonsanphamgiohangTT(vt, idctgh, idgh) {
@@ -855,27 +762,23 @@
         if (document.getElementsByName('checkidghTT')[vt1].checked == true) {
             var link = '/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/' + idctgh + '/0/' + idgh;
             // document.getElementById("ktlink").innerHTML=link
+
             loadgiaodienghctbanhangTrangChu(link);
-            loadgiaodienghctbanhangTrangChu(link);
+            // loadgiaodienghctbanhangTrangChu(link);
+            // loadgiaodienghctbanhang('/ban-hang-online/single_page_gio_hang_chi_tiet');
+
         } else {
             var link = '/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/' + idctgh + '/1/' + idgh;
             // document.getElementById("ktlink").innerHTML=link
+
             loadgiaodienghctbanhangTrangChu(link);
-            loadgiaodienghctbanhangTrangChu(link);
+            // loadgiaodienghctbanhangTrangChu(link);
+            // loadgiaodienghctbanhang('/ban-hang-online/single_page_gio_hang_chi_tiet');
+
         }
-    };
 
-    function thongbaothemvaogiohang(idctsp) {
-        //chạy 2 lần mới ấn dc
-        loadgiaodienghctbanhangTrangChu('/ban-hang-online/them-san-pham-vao-gio-hang/' + idctsp);
-        loadgiaodienghctbanhangTrangChu('/ban-hang-online/them-san-pham-vao-gio-hang/' + idctsp);
-        document.getElementById('thongbaothemgiohang').style.display = '';
-        setTimeout(function () {
-            document.getElementById('thongbaothemgiohang').style.display = 'none';
-        }, 2000); // 2000 milliseconds tương đương với 2 giây
 
     };
-
 
     function loadgiaodienghctbanhangTrangChu(interfaceUrl) {
         fetch(interfaceUrl)
@@ -883,61 +786,6 @@
             .then(data => {
                 const content = document.getElementById('giohangtrangchu');
                 content.innerHTML = data;
-                thanhtienbenghct();
-                loadScripts();
-
-
-            })
-            .catch(error => {
-                console.error('Error loading interface:', error);
-            });
-
-        document.getElementById('thanhlocctsp').style.display = 'none';
-
-    }
-
-    function loadgiaodienghctbanhang(interfaceUrl) {
-        fetch(interfaceUrl)
-            .then(response => response.text())
-            .then(data => {
-                const content = document.getElementById('content');
-                content.innerHTML = data;
-                thanhtienbenghct();
-                loadScripts();
-                loadSelect2();
-
-
-            })
-            .catch(error => {
-                console.error('Error loading interface:', error);
-            });
-
-        document.getElementById('thanhlocctsp').style.display = 'none';
-
-    }
-
-
-    function loadbenloc(interfaceUrl) {
-        fetch(interfaceUrl)
-            .then(response => response.text())
-            .then(data => {
-                const content = document.getElementById('dssanphamloc');
-                content.innerHTML = data;
-                loadScripts();
-            })
-            .catch(error => {
-                console.error('Error loading interface:', error);
-            });
-        document.getElementById('thanhlocctsp').style.display = 'none';
-    }
-
-    function thanhlocctsp(interfaceUrl) {
-        fetch(interfaceUrl)
-            .then(response => response.text())
-            .then(data => {
-
-                const content = document.getElementById('thanhlocctsp');
-                content.innerHTML = data;
 
                 loadScripts();
 
@@ -946,10 +794,12 @@
             .catch(error => {
                 console.error('Error loading interface:', error);
             });
-        document.getElementById('thanhlocctsp').style.display = 'none';
+
+
     }
 
-    function locbenctsp(interfaceUrl) {
+
+    function loadgiaodienhoadonkhachhang(interfaceUrl) {
         fetch(interfaceUrl)
             .then(response => response.text())
             .then(data => {
@@ -957,25 +807,6 @@
                 content.innerHTML = data;
 
                 loadScripts();
-                loadSelect2();
-
-
-            })
-            .catch(error => {
-                console.error('Error loading interface:', error);
-            });
-        document.getElementById('thanhlocctsp').style.display = 'block';
-    }
-
-    function loadInterface(interfaceUrl) {
-        fetch(interfaceUrl)
-            .then(response => response.text())
-            .then(data => {
-                const content = document.getElementById('content');
-                content.innerHTML = data;
-
-                loadScripts();
-                loadSelect2();
 
 
             })
@@ -983,20 +814,9 @@
                 console.error('Error loading interface:', error);
             });
 
-        document.getElementById('thanhlocctsp').style.display = 'none';
 
-
-        if (interfaceUrl.includes('/ban-hang-online/chi-tiet-san-pham/')) {
-            <c:forEach  items="${listsp}" var="ht" varStatus="stt">
-            var kt = '/ban-hang-online/chi-tiet-san-pham/' + '${ht.id}';
-            if (kt == interfaceUrl) {
-                thanhlocctsp('/ban-hang-online/thanh-loc-ctsp/' + '${ht.id}');
-                document.getElementById('thanhlocctsp').style.display = 'block';
-            }
-            </c:forEach>
-
-        }
     }
+
 
     function loadScripts() {
         const scriptsToLoad = [
@@ -1005,12 +825,6 @@
             'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js',
             'https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js',
 
-            '/jsbanhang/jquery.min.js',
-            '/jsbanhang/bootstrap.min.js',
-            '/jsbanhang/slick.min.js',
-            '/jsbanhang/nouislider.min.js',
-            '/jsbanhang/jquery.zoom.min.js',
-            '/jsbanhang/main.js'
 
         ];
 
@@ -1024,7 +838,7 @@
                     loadScript(index + 1);
                 };
                 head.appendChild(script);
-                loadSelect2();
+
             }
         }
 
@@ -1032,151 +846,29 @@
         loadScript(0);
     }
 
-
-    function loadSelect2() {
-        // Gọi .select2() cho các phần tử sau khi tất cả các tệp script đã được nạp
-        $('#hangds1').select2({
-            theme: 'bootstrap-5'
-        });
-        $('#camds1').select2({
-            theme: 'bootstrap-5'
-        });
-        $('#mands1').select2({
-            theme: 'bootstrap-5'
-        });
-        $('#mauds1').select2({
-            theme: 'bootstrap-5'
-        });
-        $('#ramds1').select2({
-            theme: 'bootstrap-5'
-        });
-        $('#romds1').select2({
-            theme: 'bootstrap-5'
-        });
-
-        $('#pinds1').select2({
-            theme: 'bootstrap-5'
-        });
-        $('#dungds1').select2({
-            theme: 'bootstrap-5'
-        });
-
-        $('#chipds1').select2({
-            theme: 'bootstrap-5'
-        });
-
-        $('#sands1').select2({
-            theme: 'bootstrap-5'
-        });
-
+    function loadSelect2diachi() {
         $('#diachids1').select2({
             theme: 'bootstrap-5'
         });
-
-        // Gọi .select2() cho các phần tử khác ở đây (tương tự)
     }
 
-
+    loadSelect2diachi();
 </script>
-<script>
-    const oldpasswordInput = document.getElementById('oldpassword');
-    const oldpasswordToggle = document.getElementById('old-password-toggle');
-
-    function togglePassword1() {
-        if (oldpasswordInput.type === 'password') {
-            oldpasswordInput.type = 'text';
-            oldpasswordToggle.innerText = 'Hide';
-        } else {
-            oldpasswordInput.type = 'password';
-            oldpasswordToggle.innerText = 'Show';
-        }
-    };
-    const newpasswordInput = document.getElementById('newpassword');
-    const newpasswordToggle = document.getElementById('new-password-toggle');
-
-    function togglePassword2() {
-        if (newpasswordInput.type === 'password') {
-            newpasswordInput.type = 'text';
-            newpasswordToggle.innerText = 'Hide';
-        } else {
-            newpasswordInput.type = 'password';
-            newpasswordToggle.innerText = 'Show';
-        }
-    };
-    const confirmpasswordInput = document.getElementById('confirmpassword');
-    const confirmpasswordToggle = document.getElementById('confirm-password-toggle');
-
-    function togglePassword3() {
-        if (confirmpasswordInput.type === 'password') {
-            confirmpasswordInput.type = 'text';
-            confirmpasswordToggle.innerText = 'Hide';
-        } else {
-            confirmpasswordInput.type = 'password';
-            confirmpasswordToggle.innerText = 'Show';
-        }
-    };
-
-    const imageInput1 = document.getElementById('anhmoi1');
-
-    const previewAnh12 = document.getElementById('preview-anh1-2');
-
-    imageInput1.addEventListener('change', function () {
-        const file = imageInput1.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                previewAnh12.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        } else {
-            previewAnh12.src = '';
-        }
-        document.getElementById('cucheck1').value = 'moi1';
-    });
-
-    function checkhkh() {
-        var old = document.getElementById("oldpassword").value;
-        var newp = document.getElementById("newpassword").value;
-        var con = document.getElementById("confirmpassword").value;
-
-        if (
-            old.trim().length < 6 || old == ''
-        ) {
-            document.getElementById("btkh").type = "button";
-            document.getElementById("old-error").innerHTML = "Không để trống ,Mật khẩu ít nhất 6 ký tự";
-            return false;
-        } else {
-            document.getElementById("old-error").innerHTML = "";
-            if (newp.trim().length < 6 || newp == '') {
-                document.getElementById("new-error").innerHTML = "Không để trống ,Mật khẩu ít nhất 6 ký tự";
-                document.getElementById("btkh").type = "button";
-                return false;
-            } else {
-                document.getElementById("new-error").innerHTML = "";
-                if (con.trim().length < 6 || con == '') {
-                    document.getElementById("confirm-error").innerHTML = "Không để trống ,Mật khẩu ít nhất 6 ký tự";
-                    document.getElementById("btkh").type = "button";
-                    return false;
-                } else {
-                    document.getElementById("confirm-error").innerHTML = "";
-                    document.getElementById("btkh").type = "summit";
-                    return true;
-                }
-            }
-        }
-    }
-</script>
+<!-- jQuery Plugins -->
 <script>
     function anbt() {
         document.getElementById('taikhoancuatoi').click();
     }
 </script>
-<!-- jQuery Plugins -->
 <script src="/jsbanhang/jquery.min.js"></script>
 <script src="/jsbanhang/bootstrap.min.js"></script>
 <script src="/jsbanhang/slick.min.js"></script>
 <script src="/jsbanhang/nouislider.min.js"></script>
 <script src="/jsbanhang/jquery.zoom.min.js"></script>
 <script src="/jsbanhang/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 </body>
+
 </html>

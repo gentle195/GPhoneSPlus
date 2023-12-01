@@ -108,4 +108,24 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
 
     @Query("select ctsp from  ChiTietSanPham ctsp where ctsp.tinhTrang=0 and ctsp.sanPham.camera.id=:id")
     List<ChiTietSanPham> findAllCam(UUID id);
+
+
+    @Query("SELECT SUM(ctsp.soLuong) FROM ChiTietSanPham ctsp")
+    Integer tongSanPham();
+
+
+    @Query("SELECT COUNT(imei) FROM IMEI imei where imei.tinhTrang=1")
+    Integer tongSPDaBan();
+
+    @Query("SELECT COUNT(hd) FROM HoaDon hd")
+    Integer cacDonHang();
+
+    @Query("SELECT COUNT(hd) FROM HoaDon hd where hd.tinhTrangGiaoHang=0")
+    Integer cacDonHangChoXuLy();
+
+    @Query("SELECT COUNT(kh) FROM KhachHang kh WHERE kh.taiKhoan IS NOT NULL and kh.tinhTrang=0")
+    Integer soKhachHang();
+
+    @Query("SELECT COUNT(nv) FROM NhanVien nv WHERE nv.taiKhoan IS NOT NULL and nv.tinhTrang=0")
+    Integer soNV();
 }
