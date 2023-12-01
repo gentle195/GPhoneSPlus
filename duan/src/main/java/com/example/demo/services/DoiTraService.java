@@ -35,6 +35,7 @@ public interface DoiTraService {
     public Page<HoaDon> getAllhoadon(Pageable pageable);
 
     public List<DTODoiTra> getAllHD();
+
     public DoiTra getDoiTraByHoaDon(UUID id);
 
     public List<HoaDonChiTiet> getHoaDonChiTiet(UUID id);

@@ -170,7 +170,7 @@
                     </div>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table id="example2" class="display" style="color: black; width: 1000px">
+                        <table id="example2" class="display" style="color: black; width: 1500px;text-align: center">
                             <thead>
                             <tr>
                                 <th>Mã đổi trả</th>
@@ -190,7 +190,7 @@
                                     <td>${doitra.ma}</td>
                                     <td>${doitra.ngayTao}</td>
                                     <td>${doitra.hoaDon.ma}</td>
-                                    <td>${doitra.hoaDon.khachHang.hoTen}</td>
+                                    <td>${doitra.khachHang.hoTen}</td>
                                     <td>${doitra.hoaDon.sdt}</td>
                                     <td>${doitra.nhanVien.hoTen}</td>
                                     <td>

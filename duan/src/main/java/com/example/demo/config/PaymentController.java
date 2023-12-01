@@ -241,7 +241,7 @@ public class PaymentController {
             hd.setNgayCapNhat(date);
             hd.setTinhTrang(0);
             hd.setLoai(1);
-            hd.setHinhThucThanhToan(2);
+            hd.setHinhThucThanhToan(1);
             hd.setTinhTrangGiaoHang(0);
             KhachHang kh = khachHangService.findById(gioHangService.findById(idgh).getKhachHang().getId());
             hd.setKhachHang(kh);

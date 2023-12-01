@@ -100,9 +100,10 @@
         }
 
 
-        .tabtab{
+        .tabtab {
             margin-left: 5cm;
         }
+
         article {
 
             overflow: hidden;
@@ -113,7 +114,7 @@
         article a {
             float: left;
             display: block;
-            color:black;
+            color: black;
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
@@ -131,6 +132,7 @@
         .tab-content {
             display: none;
         }
+
         #tab00 {
             display: none;
         }
@@ -172,11 +174,14 @@
                                  style="border-radius: 10px;width: 3.5cm;margin-top: 10px;width: 180px">
                                 <div>
                                     <div>
-                                        <form action="/thong-tin-ca-nhan-khach-hang" method="post" style="display: none">
+                                        <form action="/thong-tin-ca-nhan-khach-hang" method="post"
+                                              style="display: none">
                                             <input value="${idkhachhang}" name="idKhachHang" style="display: none">
-                                            <button style="" class="btn btn-primary" type="submit" id="taikhoancuatoi">Tài khoản của tôi</button>
+                                            <button style="" class="btn btn-primary" type="submit" id="taikhoancuatoi">
+                                                Tài khoản của tôi
+                                            </button>
                                         </form>
-                                        <a  class="btn btn-primary" type="submit" onclick="anbt()">Tài khoản của tôi</a>
+                                        <a class="btn btn-primary" type="submit" onclick="anbt()">Tài khoản của tôi</a>
 
                                     </div>
                                     <div>
@@ -374,12 +379,9 @@
 </nav>
 <!-- /NAVIGATION -->
 
-
+<br>
 <div class="tabtab">
-    <article>
-        <h2 STYLE="margin-left: 5cm">CÁC ĐƠN HÀNG</h2>
-        <a style="font-size: 18px">Các trạng thái:</a>
-
+    <article style="margin-left: 5%;max-width: 1000px" class="shadow p-3 mb-5 bg-body-tertiary rounded">
         <a href="/ban-hang-online/hoa-don-online/${id}" onclick="loadTab('tab00'); return false;">Tất cả</a>
         <a href="/ban-hang-online-0/hoa-don-online/${id}">Đang chờ</a>
         <a href="/ban-hang-online-1/hoa-don-online/${id}">Đã xác nhận</a>
@@ -403,8 +405,8 @@
 
             <form action="/ban-hang-online-8/hoa-don-online/${id}/search" method="post">
                 <div class="input-group" style="width: 20%; float: right">
-                    <input  type="text" class="form-control" placeholder="Nhập mã, tên sp, ngày đặt, sđt..."
-                            aria-label="Bạn tìm gì..." name="search">
+                    <input type="text" class="form-control" placeholder="Nhập mã, tên sp, ngày đặt, sđt..."
+                           aria-label="Bạn tìm gì..." name="search">
                 </div>
                 <div class="input-group-append" style="width: 4%; float: right">
                     <button style="height: 0.9cm" class="btn btn-sm btn-primary" type="submit">Search</button>
@@ -415,10 +417,9 @@
                 <thead>
                 <tr>
                     <th>STT</th>
-
                     <th>Mã đơn hàng</th>
                     <th>Ngày đặt</th>
-                    <th style="display: none;">Ngày tạo</th>
+                    <th>Ngày TT</th>
                     <th>SĐT nhận hàng</th>
                     <th>Địa chỉ nhận</th>
                     <th>Trạng thái đơn hàng</th>
@@ -431,13 +432,13 @@
                 <c:forEach items="${listhdkh}" var="ht" varStatus="stt">
                     <tr>
                         <td>${stt.index+1}</td>
-
                         <td>${ht.ma}</td>
-                        <th style="display: none;">${ht.ngayTao}</th>
-
                         <td>${ht.ngayTao}</td>
+                        <td>${ht.ngayThanhToan}</td>
                         <td>${ht.sdt}</td>
-                        <td > <div style="width: 5cm; overflow: hidden;">${ht.diaChi.diaChi},${ht.diaChi.quan},${ht.diaChi.huyen},${ht.diaChi.thanhPho}</div></td>
+                        <td>
+                            <div style="width: 5cm; overflow: hidden;">${ht.diaChi.diaChi},${ht.diaChi.quan},${ht.diaChi.huyen},${ht.diaChi.thanhPho}</div>
+                        </td>
                         <td>
                             <c:if test="${ht.tinhTrang==0}">
                                 <p>Chờ xử lý</p>
@@ -456,42 +457,53 @@
                             </c:if>
                         </td>
                         <td>
-                            <c:if test="${ht.hinhThucThanhToan==2}">
-                                <input type="text" value="Chưa chọn" disabled>
-                            </c:if>
                             <c:if test="${ht.hinhThucThanhToan==0}">
-                                <input type="text" value="Tiền mặt" disabled>
+                                <p>Thanh toán khi nhận hàng</p>
                             </c:if>
                             <c:if test="${ht.hinhThucThanhToan==1}">
-                                <input type="text" value="Chuyển khoản" disabled>
+                                <p>Thanh toán online</p>
                             </c:if>
                         </td>
                         <td>
                             <c:if test="${ht.tinhTrangGiaoHang==0}">
-                                <input type="text" value="Chưa giao" disabled>
+                                <p>Chờ xử lý</p>
                             </c:if>
-                            <c:if test="${ht.tinhTrangGiaoHang!=0}">
-                                <input type="text" value="Chưa tìm hiểu" disabled>
+                            <c:if test="${ht.tinhTrangGiaoHang==1}">
+                                <p>Chuẩn bị đơn hàng</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrangGiaoHang==2}">
+                                <p>Đang giao hàng</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrangGiaoHang==3}">
+                                <p>Giao hàng thành công</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrangGiaoHang==8}">
+                                <p>Đơn hàng đã hủy</p>
                             </c:if>
                         </td>
 
                         <td>
                             <c:if test="${ht.tinhTrang==0}">
-                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết
+                                    đơn hàng</a>
                                 <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>
                             </c:if>
                             <c:if test="${ht.tinhTrang==1}">
-                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết
+                                    đơn hàng</a>
                                 <a class="btn btn-danger" onclick="huyhoadonkhachhang('${ht.id}')">Hủy hóa đơn</a>
                             </c:if>
                             <c:if test="${ht.tinhTrang==2}">
-                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết
+                                    đơn hàng</a>
                             </c:if>
                             <c:if test="${ht.tinhTrang==3}">
-                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết
+                                    đơn hàng</a>
                             </c:if>
                             <c:if test="${ht.tinhTrang==8}">
-                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết đơn hàng</a>
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết
+                                    đơn hàng</a>
                             </c:if>
                         </td>
                     </tr>
@@ -507,57 +519,21 @@
 <div align="center">
     <div class="btn-group" role="group" aria-label="Basic example">
         <ul class="pagination justify-content-center pagination-lg">
-            <li class="page-item"><a class="page-link" href="/ban-hang-online-8/hoa-don-online/${idkhachhang}?pageNum=0"><</a></li>
+            <li class="page-item"><a class="page-link"
+                                     href="/ban-hang-online-8/hoa-don-online/${idkhachhang}?pageNum=0"><</a></li>
             <c:forEach begin="1" end="${total}" varStatus="status">
                 <li class="page-item">
                     <a href="${pageContext.request.contextPath}/ban-hang-online-8/hoa-don-online/${idkhachhang}?pageNum=${status.index -1}"
                        class="page-link">${status.index}</a>
                 </li>
             </c:forEach>
-            <li class="page-item"><a class="page-link" href="/ban-hang-online-8/hoa-don-online/${idkhachhang}?pageNum=${total-1}">></a></li>
+            <li class="page-item"><a class="page-link"
+                                     href="/ban-hang-online-8/hoa-don-online/${idkhachhang}?pageNum=${total-1}">></a>
+            </li>
         </ul>
     </div>
 </div>
 
-
-
-
-
-
-<!-- NEWSLETTER -->
-<div id="newsletter" class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="newsletter">
-                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
-                    <form>
-                        <input class="input" type="email" placeholder="Enter Your Email">
-                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-                    </form>
-                    <ul class="newsletter-follow">
-                        <li>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-</div>
 <!-- /NEWSLETTER -->
 
 <!-- FOOTER -->
