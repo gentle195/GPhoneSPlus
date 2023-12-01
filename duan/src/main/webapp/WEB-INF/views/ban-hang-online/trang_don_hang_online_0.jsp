@@ -376,14 +376,14 @@
 
 <br>
 <div class="tabtab " >
-    <article style="margin-left: 5%;max-width: 1000px" class="shadow p-3 mb-5 bg-body-tertiary rounded">
-        <a href="/ban-hang-online/hoa-don-online/${id}" style="color: red">Tất cả</a>
-        <a href="/ban-hang-online-0/hoa-don-online/${id}">Đang chờ</a>
+    <article style="margin-left: 5%;max-width: 1200px" class="shadow p-3 mb-5 bg-body-tertiary rounded">
+        <a href="/ban-hang-online/hoa-don-online/${id}">Tất cả</a>
+        <a href="/ban-hang-online-0/hoa-don-online/${id}" style="color: red">Chờ xử lý(TT giao hàng)</a>
         <a href="/ban-hang-online-1/hoa-don-online/${id}">Đã xác nhận</a>
         <a href="/ban-hang-online-3/hoa-don-online/${id}">Chờ thanh toán</a>
         <a href="/ban-hang-online-2/hoa-don-online/${id}">Đã thanh toán</a>
-        <a href="#">Đang giao hàng</a>
-        <a href="#">Hoàn thành</a>
+        <a href="/ban-hang-online-dang-giao/hoa-don-online/${id}">Đang giao hàng</a>
+        <a href="/ban-hang-online-thanh-cong/hoa-don-online/${id}">Hoàn thành</a>
         <a href="/ban-hang-online-8/hoa-don-online/${id}">Đã hủy</a>
     </article>
 </div>

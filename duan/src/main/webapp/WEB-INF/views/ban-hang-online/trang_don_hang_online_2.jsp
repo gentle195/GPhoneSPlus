@@ -376,14 +376,14 @@
 
 <br>
 <div class="tabtab">
-    <article style="margin-left: 5%;max-width: 1000px" class="shadow p-3 mb-5 bg-body-tertiary rounded">
-        <a href="/ban-hang-online/hoa-don-online/${id}" onclick="loadTab('tab00'); return false;">Tất cả</a>
-        <a href="/ban-hang-online-0/hoa-don-online/${id}">Đang chờ</a>
+    <article style="margin-left: 5%;max-width: 1200px" class="shadow p-3 mb-5 bg-body-tertiary rounded">
+        <a href="/ban-hang-online/hoa-don-online/${id}">Tất cả</a>
+        <a href="/ban-hang-online-0/hoa-don-online/${id}">Chờ xử lý(TT giao hàng)</a>
         <a href="/ban-hang-online-1/hoa-don-online/${id}">Đã xác nhận</a>
         <a href="/ban-hang-online-3/hoa-don-online/${id}">Chờ thanh toán</a>
         <a href="/ban-hang-online-2/hoa-don-online/${id}"  style="color: red">Đã thanh toán</a>
-        <a href="#">Đang giao hàng</a>
-        <a href="#">Hoàn thành</a>
+        <a href="/ban-hang-online-dang-giao/hoa-don-online/${id}">Đang giao hàng</a>
+        <a href="/ban-hang-online-thanh-cong/hoa-don-online/${id}">Hoàn thành</a>
         <a href="/ban-hang-online-8/hoa-don-online/${id}">Đã hủy</a>
         <div class="nav-underline"></div> <!-- Thêm dòng này để tạo dòng kẻ đỏ -->
 
@@ -430,7 +430,6 @@
                         <td>${ht.ma}</td>
                         <td>${ht.ngayTao}</td>
                         <td>${ht.ngayThanhToan}</td>
-                        <td>${ht.ngayTao}</td>
                         <td>${ht.sdt}</td>
                         <td > <div style="width: 5cm; overflow: hidden;">${ht.diaChi.diaChi},${ht.diaChi.quan},${ht.diaChi.huyen},${ht.diaChi.thanhPho}</div></td>
                         <td>

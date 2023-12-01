@@ -212,7 +212,7 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
     @Query("select hd from  HoaDon hd where hd.khachHang.id=:idkh")
     List<HoaDon> timhoadontheoidkh(@Param("idkh") UUID idkh);
 
-    @Query("select hd from  HoaDon hd where hd.khachHang.id=:idkh")
+    @Query("SELECT hd FROM HoaDon hd WHERE hd.khachHang.id = :idkh")
     Page<HoaDon> cacDonHang(@Param("idkh") UUID idkh, Pageable pageable);
 
     @Query("select hd from  HoaDon hd where hd.tinhTrang=8 and hd.khachHang.id=:idkh")
@@ -230,31 +230,41 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
     @Query("select hd from  HoaDon hd where hd.tinhTrang=3 and hd.khachHang.id=:idkh")
     Page<HoaDon> donHang3(@Param("idkh") UUID idkh, Pageable pageable);
 
-    @Query("select hd from  HoaDon hd where hd.tinhTrangGiaoHang=1 and hd.khachHang.id=:idkh")
-    List<HoaDon> donHangDangGiao(@Param("idkh") UUID idkh, Pageable pageable);
+    @Query("select hd from  HoaDon hd where hd.tinhTrangGiaoHang=0 and hd.khachHang.id=:idkh")
+    Page<HoaDon> donHangDangChoXuLy(@Param("idkh") UUID idkh, Pageable pageable);
 
     @Query("select hd from  HoaDon hd where hd.tinhTrangGiaoHang=2 and hd.khachHang.id=:idkh")
-    List<HoaDon> donHangThanhCong(@Param("idkh") UUID idkh, Pageable pageable);
+    Page<HoaDon> donHangDangGiao(@Param("idkh") UUID idkh, Pageable pageable);
 
-    @Query("select hd from  HoaDon hd LEFT JOIN HoaDonChiTiet hdct on hd.id=hdct.hoaDon.id where hd.tinhTrang=0 and hd.khachHang.id=:idkh and hd.ma LIKE %:ten% or hd.sdt like %:ten%  or hdct.imei.chiTietSanPham.sanPham.ten like  %:ten% or hd.ngayTao like %:ten%")
+    @Query("select hd from  HoaDon hd where hd.tinhTrangGiaoHang=3 and hd.khachHang.id=:idkh")
+    Page<HoaDon> donHangThanhCong(@Param("idkh") UUID idkh, Pageable pageable);
+
+    @Query("select hd from  HoaDon hd LEFT JOIN HoaDonChiTiet hdct on hd.id=hdct.hoaDon.id where hd.tinhTrang=0 and hd.khachHang.id=:idkh and (hd.ma LIKE %:ten% or hd.sdt like %:ten%  or hdct.imei.chiTietSanPham.sanPham.ten like  %:ten% or hd.ngayTao like %:ten%) order by hd.ma DESC")
     List<HoaDon> searchDH0(@Param("idkh") UUID idkh, String ten);
 
-    @Query("select hd from  HoaDon hd LEFT JOIN HoaDonChiTiet hdct on hd.id=hdct.hoaDon.id where hd.tinhTrang=1 and hd.khachHang.id=:idkh and hd.ma LIKE %:ten% or hd.sdt like %:ten%  or hdct.imei.chiTietSanPham.sanPham.ten like  %:ten% or hd.ngayTao like %:ten%")
+    @Query("select hd from  HoaDon hd LEFT JOIN HoaDonChiTiet hdct on hd.id=hdct.hoaDon.id where hd.tinhTrang=1 and hd.khachHang.id=:idkh and (hd.ma LIKE %:ten% or hd.sdt like %:ten%  or hdct.imei.chiTietSanPham.sanPham.ten like  %:ten% or hd.ngayTao like %:ten%) order by hd.ma DESC")
     List<HoaDon> searchDH1(@Param("idkh") UUID idkh, String ten);
 
-    @Query("select hd from  HoaDon hd LEFT JOIN HoaDonChiTiet hdct on hd.id=hdct.hoaDon.id where hd.tinhTrang=2 and hd.khachHang.id=:idkh and hd.ma LIKE %:ten% or hd.sdt like %:ten%  or hdct.imei.chiTietSanPham.sanPham.ten like  %:ten% or hd.ngayTao like %:ten% or hd.ngayThanhToan like %:ten%")
+    @Query("select hd from  HoaDon hd LEFT JOIN HoaDonChiTiet hdct on hd.id=hdct.hoaDon.id where hd.tinhTrang=2 and hd.khachHang.id=:idkh and (hd.ma LIKE %:ten% or hd.sdt like %:ten%  or hdct.imei.chiTietSanPham.sanPham.ten like  %:ten% or hd.ngayTao like %:ten%) or hd.ngayThanhToan like %:ten% order by hd.ma DESC")
     List<HoaDon> searchDH2(@Param("idkh") UUID idkh, String ten);
 
-    @Query("select hd from  HoaDon hd LEFT JOIN HoaDonChiTiet hdct on hd.id=hdct.hoaDon.id where hd.tinhTrang=8 and hd.khachHang.id=:idkh  and hd.ma LIKE %:ten% or hd.sdt like %:ten%  or hdct.imei.chiTietSanPham.sanPham.ten like  %:ten% or hd.ngayTao like %:ten% ")
+    @Query("select hd from  HoaDon hd LEFT JOIN HoaDonChiTiet hdct on hd.id=hdct.hoaDon.id where hd.tinhTrang=8 and hd.khachHang.id=:idkh  and (hd.ma LIKE %:ten% or hd.sdt like %:ten%  or hdct.imei.chiTietSanPham.sanPham.ten like  %:ten% or hd.ngayTao like %:ten%) order by hd.ma DESC")
     List<HoaDon> searchDH8(@Param("idkh") UUID idkh, String ten);
 
-    @Query("select hd from  HoaDon hd LEFT JOIN HoaDonChiTiet hdct on hd.id=hdct.hoaDon.id where hd.tinhTrang=3 and hd.khachHang.id=:idkh and hd.ma LIKE %:ten% or hd.sdt like %:ten%  or hdct.imei.chiTietSanPham.sanPham.ten like  %:ten% or hd.ngayTao like %:ten%")
+    @Query("select hd from  HoaDon hd LEFT JOIN HoaDonChiTiet hdct on hd.id=hdct.hoaDon.id where hd.tinhTrang=3 and hd.khachHang.id=:idkh and (hd.ma LIKE %:ten% or hd.sdt like %:ten%  or hdct.imei.chiTietSanPham.sanPham.ten like  %:ten% or hd.ngayTao like %:ten%) order by hd.ma DESC")
     List<HoaDon> searchDH3(@Param("idkh") UUID idkh, String ten);
 
-    @Query("select hd from  HoaDon hd LEFT JOIN HoaDonChiTiet hdct on hd.id=hdct.hoaDon.id where hd.khachHang.id=:idkh and hd.ma LIKE %:ten% or hd.sdt like %:ten% or hdct.imei.chiTietSanPham.sanPham.ten like  %:ten% or hd.ngayTao like %:ten% or hd.ngayThanhToan like %:ten%")
+    @Query("select hd from  HoaDon hd LEFT JOIN HoaDonChiTiet hdct on hd.id=hdct.hoaDon.id where hd.khachHang.id=:idkh and (hd.ma LIKE %:ten% or hd.sdt like %:ten% or hdct.imei.chiTietSanPham.sanPham.ten like  %:ten% or hd.ngayTao like %:ten% or hd.ngayThanhToan like %:ten%) order by hd.ma DESC")
     List<HoaDon> search(@Param("idkh") UUID idkh, String ten);
 
+    @Query("select hd from  HoaDon hd LEFT JOIN HoaDonChiTiet hdct on hd.id=hdct.hoaDon.id where hd.tinhTrangGiaoHang=0 and hd.khachHang.id=:idkh and (hd.ma LIKE %:ten% or hd.sdt like %:ten%  or hdct.imei.chiTietSanPham.sanPham.ten like  %:ten% or hd.ngayTao like %:ten%) order by hd.ma DESC")
+    List<HoaDon> searchChoXuLy(@Param("idkh") UUID idkh, String ten);
 
+    @Query("select hd from  HoaDon hd LEFT JOIN HoaDonChiTiet hdct on hd.id=hdct.hoaDon.id where hd.tinhTrangGiaoHang=2 and hd.khachHang.id=:idkh and (hd.ma LIKE %:ten% or hd.sdt like %:ten%  or hdct.imei.chiTietSanPham.sanPham.ten like  %:ten% or hd.ngayTao like %:ten%) order by hd.ma DESC")
+    List<HoaDon> searchDangGiao(@Param("idkh") UUID idkh, String ten);
+
+    @Query("select hd from  HoaDon hd LEFT JOIN HoaDonChiTiet hdct on hd.id=hdct.hoaDon.id where hd.tinhTrang=3 and hd.khachHang.id=:idkh and (hd.ma LIKE %:ten% or hd.sdt like %:ten%  or hdct.imei.chiTietSanPham.sanPham.ten like  %:ten% or hd.ngayTao like %:ten%) order by hd.ma DESC")
+    List<HoaDon> searchDHThanhCong(@Param("idkh") UUID idkh, String ten);
 
     @Query("select hdct from  HoaDonChiTiet hdct where hdct.hoaDon.id=:idhd   ")
     List<HoaDonChiTiet> timhoadonchitiettheoidhd(@Param("idhd") UUID idhd);
