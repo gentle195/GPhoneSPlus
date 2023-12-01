@@ -447,7 +447,7 @@
 <!-- /NAVIGATION -->
 <br>
 <div class="tabtab ">
-    <article style="margin-left: 5%;max-width: 1200px" class="shadow p-3 mb-5 bg-body-tertiary rounded">
+    <article style="margin-left: 5%;max-width: 1050px" class="shadow p-3 mb-5 bg-body-tertiary rounded">
         <a href="/ban-hang-online/hoa-don-online/${id}">Tất cả</a>
         <a href="/ban-hang-online-0/hoa-don-online/${id}">Chờ xử lý(TT giao hàng)</a>
         <a href="/ban-hang-online-1/hoa-don-online/${id}">Đã xác nhận</a>
