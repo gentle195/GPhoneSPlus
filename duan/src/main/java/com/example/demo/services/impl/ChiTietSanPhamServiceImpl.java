@@ -154,5 +154,36 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
         return chiTietSanPhamRepository.findAllCam(id);
     }
 
+    @Override
+    public Integer getCountTongSP() {
+        return chiTietSanPhamRepository.tongSanPham();
+    }
+
+    @Override
+    public Integer cacDonHang() {
+        return chiTietSanPhamRepository.cacDonHang();
+    }
+
+    @Override
+    public Integer tongSPDaBan() {
+        return chiTietSanPhamRepository.tongSPDaBan();
+    }
+
+    @Override
+    public Integer cacDonHangChoXuLy() {
+        return chiTietSanPhamRepository.cacDonHangChoXuLy();
+    }
+
+    @Override
+    public Integer soKhachHang() {
+       return chiTietSanPhamRepository.soKhachHang();
+
+    }
+
+    @Override
+    public Integer soNV() {
+        return chiTietSanPhamRepository.soNV();
+    }
+
 
 }

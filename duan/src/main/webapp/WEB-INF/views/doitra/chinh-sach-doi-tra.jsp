@@ -158,7 +158,7 @@
                                            class="btn btn-primary">Đơn hàng</a>
                                     </div>
                                     <div>
-                                        <a href="/doi-tra/chinh-sach-doi-tra" class="btn btn-primary" style="" onclick="">Chính sách đổi trả</a>
+                                        <a href="/ban-hang-online/chinh-sach-doi-tra" class="btn btn-primary" style="" onclick="">Chính sách đổi trả</a>
                                     </div>
                                     <div>
                                         <a href="/logout" class="btn btn-primary" style="" onclick="">Đăng xuất</a>
@@ -344,7 +344,7 @@
                 <li><a href="#">ƯU ĐÃI HẤP DẪN</a></li>
                 <li><a href="#">LOẠI</a></li>
                 <li><a href="/ban-hang-online/dien-thoai-thong-minh">ĐIỆN THOẠI THÔNG MINH</a></li>
-                <li><a href="/doi-tra/chinh-sach-doi-tra" style="color: #00A2FF">/CHÍNH SÁCH ĐỔI TRẢ</a></li>
+                <li><a href="/ban-hang-online/chinh-sach-doi-tra" style="color: #00A2FF">/CHÍNH SÁCH ĐỔI TRẢ</a></li>
             </ul>
             <!-- /NAV -->
         </div>

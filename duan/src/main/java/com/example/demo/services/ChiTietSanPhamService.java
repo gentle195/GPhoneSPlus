@@ -56,7 +56,12 @@ public interface ChiTietSanPhamService {
     List<ChiTietSanPham> findAllPin(UUID id);
 
     List<ChiTietSanPham> findAllCam(UUID id);
-
+    Integer getCountTongSP();
+    Integer cacDonHang();
+    Integer tongSPDaBan();
+    Integer cacDonHangChoXuLy();
+    Integer soKhachHang();
+    Integer soNV();
 }
 
 
