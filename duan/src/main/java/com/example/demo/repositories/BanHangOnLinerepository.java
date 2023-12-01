@@ -196,7 +196,7 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
     List<GioHangChiTiet> ListghTheoidghvsTT1(@Param("idgh") UUID idgh);
 
     @Query("select dc from  DiaChi dc where dc.khachHang.id=:idkh and  dc.tinhTrang=0")
-    List<DiaChi> Listdiachimotkhachang(@Param("idkh") UUID idkh);hoa
+    List<DiaChi> Listdiachimotkhachang(@Param("idkh") UUID idkh);
 
     @Query("select hd from  HoaDon hd where hd.ma=:mahd")
     HoaDon timhdtheomahd(@Param("mahd") String mahd);

@@ -374,12 +374,9 @@
 </nav>
 <!-- /NAVIGATION -->
 
-
+<br>
 <div class="tabtab">
-    <article>
-        <h2 STYLE="margin-left: 5cm">CÁC ĐƠN HÀNG</h2>
-        <a style="font-size: 18px">Các trạng thái:</a>
-
+    <article style="margin-left: 5%;max-width: 1000px" class="shadow p-3 mb-5 bg-body-tertiary rounded">
         <a href="/ban-hang-online/hoa-don-online/${id}" onclick="loadTab('tab00'); return false;">Tất cả</a>
         <a href="/ban-hang-online-0/hoa-don-online/${id}">Đang chờ</a>
         <a href="/ban-hang-online-1/hoa-don-online/${id}">Đã xác nhận</a>
@@ -415,10 +412,9 @@
                 <thead>
                 <tr>
                     <th>STT</th>
-                    <th>Ngày TT</th>
                     <th>Mã đơn hàng</th>
                     <th>Ngày đặt</th>
-                    <th style="display: none;">Ngày tạo</th>
+                    <th>Ngày TT</th>
                     <th>SĐT nhận hàng</th>
                     <th>Địa chỉ nhận</th>
                     <th>Trạng thái đơn hàng</th>
@@ -431,10 +427,9 @@
                 <c:forEach items="${listhdkh}" var="ht" varStatus="stt">
                     <tr>
                         <td>${stt.index+1}</td>
-                        <td>${ht.ngayThanhToan}</td>
                         <td>${ht.ma}</td>
-                        <th style="display: none;">${ht.ngayTao}</th>
-
+                        <td>${ht.ngayTao}</td>
+                        <td>${ht.ngayThanhToan}</td>
                         <td>${ht.ngayTao}</td>
                         <td>${ht.sdt}</td>
                         <td > <div style="width: 5cm; overflow: hidden;">${ht.diaChi.diaChi},${ht.diaChi.quan},${ht.diaChi.huyen},${ht.diaChi.thanhPho}</div></td>
@@ -456,22 +451,28 @@
                             </c:if>
                         </td>
                         <td>
-                            <c:if test="${ht.hinhThucThanhToan==2}">
-                                <input type="text" value="Chưa chọn" disabled>
-                            </c:if>
                             <c:if test="${ht.hinhThucThanhToan==0}">
-                                <input type="text" value="Tiền mặt" disabled>
+                                <p>Thanh toán khi nhận hàng</p>
                             </c:if>
                             <c:if test="${ht.hinhThucThanhToan==1}">
-                                <input type="text" value="Chuyển khoản" disabled>
+                                <p>Thanh toán online</p>
                             </c:if>
                         </td>
                         <td>
                             <c:if test="${ht.tinhTrangGiaoHang==0}">
-                                <input type="text" value="Chưa giao" disabled>
+                                <p>Chờ xử lý</p>
                             </c:if>
-                            <c:if test="${ht.tinhTrangGiaoHang!=0}">
-                                <input type="text" value="Chưa tìm hiểu" disabled>
+                            <c:if test="${ht.tinhTrangGiaoHang==1}">
+                                <p>Chuẩn bị đơn hàng</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrangGiaoHang==2}">
+                                <p>Đang giao hàng</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrangGiaoHang==3}">
+                                <p>Giao hàng thành công</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrangGiaoHang==8}">
+                                <p>Đơn hàng đã hủy</p>
                             </c:if>
                         </td>
 
@@ -519,45 +520,6 @@
     </div>
 </div>
 
-
-
-
-
-
-<!-- NEWSLETTER -->
-<div id="newsletter" class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="newsletter">
-                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
-                    <form>
-                        <input class="input" type="email" placeholder="Enter Your Email">
-                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-                    </form>
-                    <ul class="newsletter-follow">
-                        <li>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-</div>
 <!-- /NEWSLETTER -->
 
 <!-- FOOTER -->
@@ -657,56 +619,6 @@
     </div>
     <!-- /bottom footer -->
 </footer>
-<!-- /FOOTER -->
-<%--load page--%>
-<%--sắp xếp theo đơn hàng--%>
-
-<%--<script>--%>
-<%--    document.addEventListener("DOMContentLoaded", function () {--%>
-<%--        showPage(1);--%>
-<%--    });--%>
-
-<%--    function showPage(pageNumber) {--%>
-<%--        var rows = document.getElementsByClassName("paging-row");--%>
-<%--        var rowsPerPage = 10;--%>
-<%--        var totalPages = Math.ceil(rows.length / rowsPerPage);--%>
-
-<%--        document.getElementById("pageNumbers").innerHTML = "";--%>
-
-<%--        for (var i = 1; i <= totalPages; i++) {--%>
-<%--            var button = document.createElement("button");--%>
-<%--            button.textContent = i;--%>
-<%--            button.onclick = function () {--%>
-<%--                showPage(parseInt(this.textContent));--%>
-<%--            };--%>
-
-<%--            if (i === pageNumber) {--%>
-<%--                button.classList.add("active");--%>
-<%--            }--%>
-
-<%--            document.getElementById("pageNumbers").appendChild(button);--%>
-<%--        }--%>
-
-<%--        for (var i = 0; i < rows.length; i++) {--%>
-<%--            if (i >= (pageNumber - 1) * rowsPerPage && i < pageNumber * rowsPerPage) {--%>
-<%--                rows[i].style.display = "";--%>
-<%--            } else {--%>
-<%--                rows[i].style.display = "none";--%>
-<%--            }--%>
-<%--        }--%>
-<%--    }--%>
-
-<%--    function changePage(change) {--%>
-<%--        var currentPage = parseInt(document.getElementById("pageNumbers").querySelector(".active").textContent);--%>
-<%--        var totalPages = parseInt(document.getElementById("pageNumbers").lastChild.textContent);--%>
-
-<%--        var newPage = currentPage + change;--%>
-
-<%--        if (newPage >= 1 && newPage <= totalPages) {--%>
-<%--            showPage(newPage);--%>
-<%--        }--%>
-<%--    }--%>
-<%--</script>--%>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         sortTableByInvoiceCode();

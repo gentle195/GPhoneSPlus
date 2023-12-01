@@ -143,27 +143,6 @@ public class DoiTraController {
 
     }
 
-//    @GetMapping("/modal")
-//    public String hienthi2(@ModelAttribute("sanpham")SanPham sanpham, @ModelAttribute("NhanVien")NhanVien nhanVien,
-//                           @ModelAttribute("KhachHang")KhachHang khachHang,
-//                           @ModelAttribute("HoaDon")HoaDon hoaDon,
-//                           Model model,@RequestParam("num") Optional<Integer> num,
-//                           @RequestParam(name = "size", defaultValue = "10", required = false) Integer size){
-//        Pageable pageable= PageRequest.of(num.orElse(0),size );
-//        Page<HoaDon> listt=doiTraService.getAllhoadon(pageable);
-//        model.addAttribute("contentPage", "../doi-tra/hien-thi.jsp");
-//        model.addAttribute(("listmodal"),listt.getContent());
-//        model.addAttribute("total",listt.getTotalPages());
-//        return "home/layout";
-//
-//    }
-//@GetMapping("/detail/{id}")
-//@ResponseBody
-//public List<HoaDonChiTiet> detail(@PathVariable("id") UUID id) {
-//    List<HoaDonChiTiet> hdct = doiTraService.getHoaDonChiTiet(id);
-//    return hdct;
-//}
-
     public List<DoiTraChiTiet> filterDoiTraChiTietByImeiNotNull(List<DoiTraChiTiet> dtctList) {
         return dtctList.stream()
                 .filter(dtct -> dtct.getImei() != null)
