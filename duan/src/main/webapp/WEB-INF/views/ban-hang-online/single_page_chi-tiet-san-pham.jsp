@@ -20,8 +20,8 @@
 
                         <div>
                             <h4 class="product-price"><span
-                                    style="font-size:15px">₫</span>${motctsp.giaBan-motctsp.giaBan/100*banhangonline.tonggiamgia(motctsp.id)}-
-                                <del class="product-old-price">${motctsp.giaBan}<span style="font-size:15px">₫</span>
+                                    style="font-size:15px">₫</span>${banhangonline.sotienkhidagiam(motctsp.id)}-
+                                <del class="product-old-price">${motctsp.basoOchammotlam()}<span style="font-size:15px">₫</span>
                                 </del>
                             </h4>
 
@@ -34,31 +34,31 @@
                                 <div class="" style="margin-left: 0cm">
                                     <label >Số lượng :</label>
 
-                                        <div class="qty-label">
-                                            <div class="" style="margin-left: 0cm">
-                                                <BUTTON class="qty-down">-</BUTTON>
-                                                <input type="number" value="1" min="1"
-                                                       max="${banhangonline.soluongcon(motctsp.id)}" id="input2"
-                                                       style="width: 2cm" name="solg">
-                                                <BUTTON class="qty-up">+</BUTTON>
-                                            </div>
+                                    <div class="qty-label">
+                                        <div class="" style="margin-left: 0cm">
+                                            <BUTTON class="qty-down">-</BUTTON>
+                                            <input type="number" value="1" min="1"
+                                                   max="${banhangonline.soluongcon(motctsp.id)}" id="input2"
+                                                   style="width: 2cm" name="solg">
+                                            <BUTTON class="qty-up">+</BUTTON>
                                         </div>
-                                        <label style="background: white;border: 1px solid white">Số lượng còn
-                                            :${banhangonline.soluongcon(motctsp.id)}</label>
-                                        <br>
+                                    </div>
+                                    <label style="background: white;border: 1px solid white">Số lượng còn
+                                        :${banhangonline.soluongcon(motctsp.id)}</label>
+                                    <br>
                                     <label style="background: white;color: red;border: 1px solid white"
                                            id="thongbaosoluong"></label><br>
-                                        <a href="/login">
-                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào
-                                                giỏ hàng
-                                            </button>
-                                            <a href="/ban-hang-online/chi-tiet-san-pham/${motctsp.id}"
-                                               id="loadlaictsp"></a>
-                                        </a>
-                                        <a href="/login">
-                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Mua ngay
-                                            </button>
-                                        </a>
+                                    <a href="/login">
+                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào
+                                            giỏ hàng
+                                        </button>
+                                        <a href="/ban-hang-online/chi-tiet-san-pham/${motctsp.id}"
+                                           id="loadlaictsp"></a>
+                                    </a>
+                                    <a href="/login">
+                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Mua ngay
+                                        </button>
+                                    </a>
 
                                 </div>
                             </div>

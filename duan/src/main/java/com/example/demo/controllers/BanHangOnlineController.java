@@ -1514,20 +1514,44 @@ public class BanHangOnlineController {
             Model model,
             @RequestParam("sodienthoai") String sodienthoai,
             @RequestParam("diachi") UUID diachi,
+            @RequestParam("nguoinhan") String nguoinhan,
             @RequestParam("idhd") UUID idhd
     ) {
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
 
         HoaDon hd = hoaDonService.findById(idhd);
-        if (hd.getTinhTrangGiaoHang() == 0) {
-            hd.setSdt(sodienthoai);
-            hd.setDiaChi(diaChiService.findById(diachi));
-            hoaDonService.add(hd);
-            model.addAttribute("thongbaotinhtranggiaohang", 0);
-        } else {
-            model.addAttribute("thongbaotinhtranggiaohang", 1);
+        if(diaChiService.findById(diachi).getThanhPho().equals("Thành phố Hà Nội")){
+            if (hd.getTinhTrangGiaoHang() == 0) {
+                hd.setSdt(sodienthoai);
+                hd.setNguoiNhan(nguoinhan);
+                hd.setDiaChi(diaChiService.findById(diachi));
+                hoaDonService.add(hd);
+                model.addAttribute("thongbaotinhtranggiaohang", 0);
+            } else {
+//            bat
+                model.addAttribute("thongbaotinhtranggiaohang", 1);
+            }
+        }else {
+            model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkhachhang)).get(0).getId()));
+
+            model.addAttribute("hd", hoaDonService.findById(idhd));
+            model.addAttribute("listhdct", banHangOnlineService.timhoadonchitiettheoidhd(idhd));
+            model.addAttribute("banhangonline", banHangOnlineService);
+            System.out.println("------" + banHangOnlineService.listIMEItheoIDHDvsIDCTSP(UUID.fromString("C0242A2A-F83C-4347-AD29-FEA374AB7CD9"), UUID.fromString("AF372FA0-7E69-4193-BB0E-4DFF72EECD01")).size());
+            if (idkhachhang.equals("1")) {
+                model.addAttribute("idkhachhang", idkhachhang);
+            } else {
+                model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+                model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+            }
+            model.addAttribute("hienmodal", 0);
+            model.addAttribute("batmodalcapnhathdctkh", 0);
+            model.addAttribute("tbdiachihanoi", "Chỉ ship ở :Thành Phố Hà Nội");
+            return "ban-hang-online/trang_xem_hoa_don_chi_tiet";
+
         }
+
 
         model.addAttribute("hd", hoaDonService.findById(idhd));
         model.addAttribute("listhdct", banHangOnlineService.timhoadonchitiettheoidhd(idhd));

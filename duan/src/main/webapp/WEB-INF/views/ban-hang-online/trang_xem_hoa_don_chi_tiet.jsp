@@ -5,6 +5,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <%--API địa chỉ--%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <%--    table--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="utf-8">
@@ -46,6 +50,9 @@
           href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 
     <style>
         /* CSS cho modal */
@@ -249,7 +256,7 @@
 
                                                         <br>
                                                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
-                                                        <label style="tbackground-color: white;border: 1px solid white">${ht.donGiaKhiGiam}đ</label>
+                                                        <label style="font-weight: bold">Đơn giá:</label>${ht.basoOchammotlamGHDGKG()}đ
                                                     </div>
                                                     <div style="width: 18%;">
                                                         <input type="checkbox" name="checkidghTT" value="${ht.id}"
@@ -267,9 +274,9 @@
                                         <div class="cart-summary">
                                             <small> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongsanphamchon()}
                                                 Sản phẩm được chọn</small>
-                                            <h5>
-                                                Tổng:${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
-                                                đ</h5>
+                                            <br>
+                                            <label>Tổng:</label><label id="tongtienghtt">${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}</label><label>đ</label>
+
                                         </div>
                                         <div class="cart-btns">
                                             <a href="/ban-hang-online/xem-gio-hang">Xem giỏ hàng</a>
@@ -393,6 +400,15 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-sm-3 col-label" style="padding: 5px">Người nhận:</label>
+                        <div class="col-sm-9">
+                            <input type="text"
+                                   value="${hd.nguoiNhan}"
+                                   disabled style="width: 97%"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-3 col-label" style="padding: 5px">SĐT giao hàng:</label>
                         <div class="col-sm-9">
                             <input type="text" value="${hd.sdt}" disabled style="width: 97%" class="form-control"/>
@@ -420,10 +436,12 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-label" style="padding: 5px">Tổng tiền:</label>
                         <div class="col-sm-9">
-                            <input type="text" value="${hd.tongTien} VNĐ" disabled style="width: 97%"
+                            <input type="text" value="${hd.convertTongtien()} VNĐ" disabled style="width: 97%"
                                    class="form-control"/>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>
@@ -557,12 +575,12 @@
                     </td>
 
                     <td>
-                            ${ht.donGia}
+                            ${ht.convertDongiaHDCT()}  VND
                     </td>
                     <td>
                             ${banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
                     </td>
-                    <td>${ht.donGia*banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
+                    <td>${banhangonline.dongiaVSsoluongXemHDCT(ht.hoaDon.id,ht.imei.chiTietSanPham.id)}
                         VND
                     </td>
                     <td>
@@ -623,17 +641,19 @@
                                 ${ht.imei.chiTietSanPham.mauSac.ten} - ${ht.imei.chiTietSanPham.ram.dungLuong}
                             - ${ht.imei.chiTietSanPham.rom.dungLuong}.
                         </td>
-                        <td>
-                                ${(ht.donGia-ht.imei.chiTietSanPham.giaBan)/ht.imei.chiTietSanPham.giaBan}%
-                        </td>
+
 
                         <td>
-                                ${ht.donGia}
+                                ${ht.phantram()}%
+
                         </td>
                         <td>
-                                ${ht.phantram()}%
+                                ${ht.convertDongiaHDCT()}  VND
                         </td>
-                        <td>${ht.donGia*banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
+                        <td>
+                                ${banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
+                        </td>
+                        <td>${banhangonline.dongiaVSsoluongXemHDCT(ht.hoaDon.id,ht.imei.chiTietSanPham.id)}
                             VND
                         </td>
                         <td>
@@ -693,6 +713,12 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <input type="text" value="${hd.id}" name="idhd" style="display: none">
+                        <br>
+                        <div>Người nhận:<label style="background: white;color: red;border: 1px solid white"
+                                               id="tbnguoinhan" ></label></div>
+                        <br>
+                        <input type="text" id="ktnguoinhan" name="nguoinhan" value="${hd.nguoiNhan}" style="width: 100%">
+                        <br><br>
                         <div>Số điện thoại:<label style="background: white;color: red;border: 1px solid white"
                                                   id="sodienthoai"></label></div>
                         <br>
@@ -700,12 +726,12 @@
                         <br>
                         <br>
                         <div>Địa chỉ nhận hàng:<label style="background: white;color: red;border: 1px solid white"
-                                                      id="c"></label></div>
+                                                      id="c">${tbdiachihanoi}</label></div>
                         <br>
                         <button type="button" style="float: right" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#modalthemdiachidathang">Thêm địa chỉ
                         </button>
-                        <select id="diachids1" name="diachi" style="width: 70%;height: 1cm">
+                        <select id="diachids11" name="diachi" style="width: 70%;height: 1cm">
                             <c:forEach items="${banhangonline.Listdiachimotkhachang(idkhachhang)}" var="ht">
                                 <option value="${ht.id}" ${ht.id==hd.id ?"selected":""} style="height: 1cm">
                                         ${ht.diaChi},${ht.quan},${ht.huyen},${ht.thanhPho}</option>
@@ -735,21 +761,39 @@
                 <!-- Modal body -->
                 <form action="/ban-hang-online/hoa-don-chi-tiet/them-dia-chi" method="post">
                     <div class="modal-body">
-                        <div style="margin-left:2.5cm ">
-                            <div>Địa chỉ:<label style="background: white;color: red;border: 1px solid white"
-                                                id="tb1"></label></div>
-                            <input type="text" id="themdiachidathangdiachi" name="diachi"><br>
-                            <div>Quận:<label style="background: white;color: red;border: 1px solid white"
-                                             id="tb2"></label></div>
-                            <input type="text" id="themdiachidathangquan" name="quan"><br>
-                            <div>Huyện:<label style="background: white;color: red;border: 1px solid white"
-                                              id="tb3"></label></div>
-                            <input type="text" id="themdiachidathanghuyen" name="huyen"><br>
-                            <div>Thành phố:<label style="background: white;color: red;border: 1px solid white"
-                                                  id="tb4"></label></div>
-                            <input type="text" id="themdiachidathangthanhpho" name="thanhpho"><br>
-                            <input type="text" value="${hd.id}" name="idhd" style="display: none">
+
+                        <div style="margin-left:2.5cm">
+
+                            <div>Tỉnh/thành:<label style="background: white;color: red;border: 1px solid white"
+                                                   id="tb4"></label></div>
+                            <select name="" id="province" style="width: 5cm">
+                                <%--                                    <option  value="null">Tỉnh/thành</option>--%>
+                            </select>
+                            <input type="text" id="themdiachidathangthanhpho" name="thanhpho" style="display: none"><br>
+
+
+                            <div>Quận/Huyện:<label style="background: white;color: red;border: 1px solid white"
+                                                   id="tb2"></label></div>
+                            <select name="" id="district" style="width: 5cm">
+                                <%--                                    <option  value="null">Quận/Huyện</option>--%>
+                            </select>
+                            <input type="text" id="themdiachidathangquan" name="quan" style="display: none"><br>
+
+                            <div>Phường/xã:<label style="background: white;color: red;border: 1px solid white"
+                                                  id="tb3"></label></div>
+                            <select name="" id="ward" style="width: 5cm">
+                                <%--                                    <option   value="null">Phường/xã</option>--%>
+                            </select>
+                            <input type="text" id="themdiachidathanghuyen" name="huyen" style="display: none"><br>
+
+                            <div>Địa chỉ cụ thể:<label style="background: white;color: red;border: 1px solid white"
+                                                       id="tb1"></label></div>
+                            <input type="text" id="themdiachidathangdiachi" name="diachi" style="width: 5cm" ><br>
+
+                            <%--                            <h2 id="result"></h2>--%>
                         </div>
+                        <input type="text" value="${hd.id}" name="idhd" style="display: none">
+
                     </div>
 
                     <!-- Modal footer -->
@@ -789,6 +833,42 @@
 
 </main>
 
+
+<br>
+<!-- NEWSLETTER -->
+<div id="newsletter" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="newsletter">
+                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+                    <form>
+                        <input class="input" type="email" placeholder="Enter Your Email">
+                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+                    </form>
+                    <ul class="newsletter-follow">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
 <!-- /NEWSLETTER -->
 
 <!-- FOOTER -->
@@ -943,8 +1023,8 @@
             .then(data => {
                 const content = document.getElementById('giohangtrangchu');
                 content.innerHTML = data;
-
-                loadScripts();
+                formatAndDisplayValue("tongtienghtt");
+                // loadScripts();
 
 
             })
@@ -1046,7 +1126,7 @@
     }
 
     function loadSelect2diachi() {
-        $('#diachids1').select2({
+        $('#diachids11').select2({
             theme: 'bootstrap-5',
             dropdownParent: $('#modalthaydoithongtinnhanhang')
 
@@ -1062,6 +1142,20 @@
     function anbt() {
         document.getElementById('taikhoancuatoi').click();
     }
+    function formatAndDisplayValue(elementId) {
+        // Lấy giá trị từ thẻ div
+        var originalValue = document.getElementById(elementId).textContent;
+
+        // Chuyển đổi giá trị sang dạng có dấu chấm phân cách hàng nghìn
+        var formattedValue = Number(originalValue).toLocaleString('en-US');
+
+        // Gán giá trị đã định dạng lại vào thẻ div
+        document.getElementById(elementId).textContent = formattedValue;
+    }
+    formatAndDisplayValue("tongtienghtt");
+    <c:if test="${batmodalcapnhathdctkh==0}">
+    document.getElementById('capnhatthongtingiaohang').click();
+    </c:if>
 </script>
 <!-- jQuery Plugins -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
@@ -1073,6 +1167,6 @@
 <script src="/jsbanhang/nouislider.min.js"></script>
 <script src="/jsbanhang/jquery.zoom.min.js"></script>
 <script src="/jsbanhang/main.js"></script>
-
+<script src="/jsbanhang/API.js"></script>
 </body>
 </html>

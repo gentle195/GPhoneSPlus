@@ -26,7 +26,7 @@
 
                         <br>
                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
-                        <label style="tbackground-color: white;border: 1px solid white">${ht.donGiaKhiGiam}đ</label>
+                        <label style="font-weight: bold">Đơn giá:</label>${ht.basoOchammotlamGHDGKG()}đ
                     </div>
                     <div style="width: 18%;">
                         <input type="checkbox" name="checkidghTT" value="${ht.id}" onclick="chonsanphamgiohangTT('${stt.index}','${ht.id}','${ht.gioHang.id}');"  ${ht.tinhTrang==0 ?"checked":""}>
@@ -40,7 +40,9 @@
         </div>
         <div class="cart-summary">
             <small> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongsanphamchon()} Sản phẩm được chọn</small>
-            <h5>Tổng:${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()} đ</h5>
+            <br>
+            <label>Tổng:</label><label id="tongtienghtt">${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}</label><label>đ</label>
+
         </div>
         <div class="cart-btns">
             <a href="/ban-hang-online/xem-gio-hang">Xem giỏ hàng</a>

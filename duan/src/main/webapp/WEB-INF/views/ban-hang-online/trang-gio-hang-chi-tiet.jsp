@@ -273,7 +273,7 @@
 
                                                         <br>
                                                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
-                                                        <label style="tbackground-color: white;border: 1px solid white">${ht.donGiaKhiGiam}đ</label>
+                                                        <label style="font-weight: bold">Đơn giá:</label>${ht.basoOchammotlamGHDGKG()}đ
                                                     </div>
                                                     <div style="width: 18%;">
                                                         <input type="checkbox" name="checkidghTT" value="${ht.id}"
@@ -291,9 +291,9 @@
                                         <div class="cart-summary">
                                             <small> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongsanphamchon()}
                                                 Sản phẩm được chọn</small>
-                                            <h5>
-                                                Tổng:${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
-                                                đ</h5>
+                                            <br>
+                                            <label>Tổng:</label><label id="tongtienghtt">${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}</label><label>đ</label>
+
                                         </div>
                                         <div class="cart-btns">
                                             <a href="/ban-hang-online/xem-gio-hang">Xem giỏ hàng</a>
@@ -409,8 +409,8 @@
             <div>
 
                 <div id="tongthanhtien" style="float:right;">
-                        ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
-                    VND
+                    <label id="tongthanhtien1">${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}</label>
+                    <label>VND</label>
                 </div>
                 <div style="float:left;">Tổng tiền</div>
                 <br>
@@ -457,9 +457,9 @@
 
                         </td>
                         <td>
-                            <div name="checkdongiakhigiam">${ht.donGia-ht.donGia/100*banhangonline.tonggiamgia(ht.chiTietSanPham.id)} đ</div>
+                            <div name="checkdongiakhigiam">${ht.basoOchammotlamGHDGKG()} đ</div>
                             -
-                            <del class="product-old-price">${ht.donGia} đ</del>
+                            <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
 
 
                         </td>
@@ -476,7 +476,7 @@
                             </button>
                         </td>
                         <td>
-                            <div name="checkthanhtien"></div>
+                            <div name="checkthanhtien">${ht.tichDONGIAvsSL()}</div>
 
                         </td>
                         <td>
@@ -652,7 +652,7 @@
             .then(data => {
                 const content = document.getElementById('giohangtrangchu');
                 content.innerHTML = data;
-
+                formatAndDisplayValue("tongtienghtt");
                 loadScripts();
 
 
@@ -666,13 +666,13 @@
 
 
     function thanhtienbenghct() {
-        var checkdongiakhigiam = document.getElementsByName('checkdongiakhigiam');
-        var checksoluong = document.getElementsByName('checksoluong');
-        var checkthanhtien = document.getElementsByName('checkthanhtien');
-        for (var i = 0; i < checkthanhtien.length; i++) {
-
-            checkthanhtien[i].innerHTML = parseInt(checkdongiakhigiam[i].innerHTML) * parseInt(checksoluong[i].value);
-        }
+        //     var checkdongiakhigiam = document.getElementsByName('checkdongiakhigiam');
+        //     var checksoluong = document.getElementsByName('checksoluong');
+        //     var checkthanhtien = document.getElementsByName('checkthanhtien');
+        //     for (var i = 0; i < checkthanhtien.length; i++) {
+        //
+        //         checkthanhtien[i].innerHTML = parseInt(checkdongiakhigiam[i].innerHTML) * parseInt(checksoluong[i].value);
+        //     }
     };
     thanhtienbenghct();
 
@@ -682,8 +682,12 @@
             .then(data => {
                 const content = document.getElementById('content');
                 content.innerHTML = data;
-                thanhtienbenghct();
+
+
+                // Gọi hàm với ID của thẻ div cần định dạng
+                formatAndDisplayValue('tongthanhtien1');
                 loadScripts();
+
             })
             .catch(error => {
                 console.error('Error loading interface:', error);
@@ -725,6 +729,22 @@
     function anbt() {
         document.getElementById('taikhoancuatoi').click();
     }
+
+
+    function formatAndDisplayValue(elementId) {
+        // Lấy giá trị từ thẻ div
+        var originalValue = document.getElementById(elementId).textContent;
+
+        // Chuyển đổi giá trị sang dạng có dấu chấm phân cách hàng nghìn
+        var formattedValue = Number(originalValue).toLocaleString('en-US');
+
+        // Gán giá trị đã định dạng lại vào thẻ div
+        document.getElementById(elementId).textContent = formattedValue;
+    }
+
+    // Gọi hàm với ID của thẻ div cần định dạng
+    formatAndDisplayValue('tongthanhtien1');
+    formatAndDisplayValue("tongtienghtt");
 </script>
 <!-- jQuery Plugins -->
 <script src="/jsbanhang/jquery.min.js"></script>
