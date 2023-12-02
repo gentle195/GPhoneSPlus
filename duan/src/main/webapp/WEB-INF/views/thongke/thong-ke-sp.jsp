@@ -39,9 +39,6 @@
                         <th>Số lượng sản phẩm đã bán</th>
                         <th>Số lượng tồn</th>
                         <th>Doanh thu tháng</th>
-                        <th>Giá mua thấp nhất</th>
-                        <th>Giá mua cao nhất</th>
-                        <th>Doanh thu trung bình</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -52,9 +49,6 @@
                             <td>${DTSP.getSoLuongSP()}</td>
                             <td>${DTSP.getSoLuongTon()}</td>
                             <td>${DTSP.getDoanhThu()}</td>
-                            <td>${DTSP.getGiaMuaMin()}</td>
-                            <td>${DTSP.getGiaMuaMax()}</td>
-                            <td>${DTSP.getDoanhThuTrungBinh()}</td>
                         </tr>
                     </c:forEach>
                     </tbody>

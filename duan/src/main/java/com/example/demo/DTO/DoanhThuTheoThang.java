@@ -8,9 +8,8 @@ public interface DoanhThuTheoThang {
     Integer getNam();
     Integer getSoLuongSP();
     BigDecimal getDoanhThu();
-    BigDecimal getGiaMuaMin();
-    BigDecimal getGiaMuaMax();
-    BigDecimal getDoanhThuTrungBinh();
+    BigDecimal getTienDoiTra();
+    BigDecimal getDoanhThuCu();
     String getTen();
 
 }

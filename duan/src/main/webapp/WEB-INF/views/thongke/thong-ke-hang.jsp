@@ -49,9 +49,6 @@
                         <th>Thương hiệu</th>
                         <th>Số lượng sản phẩm đã bán</th>
                         <th>Doanh thu tháng</th>
-                        <th>Giá mua thấp nhất</th>
-                        <th>Giá mua cao nhất</th>
-                        <th>Doanh thu trung bình</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -61,9 +58,6 @@
                             <td>${DTH.getTenHang()}</td>
                             <td>${DTH.getSoLuongSP()}</td>
                             <td>${DTH.getDoanhThu()}</td>
-                            <td>${DTH.getGiaMuaMin()}</td>
-                            <td>${DTH.getGiaMuaMax()}</td>
-                            <td>${DTH.getDoanhThuTrungBinh()}</td>
                         </tr>
                     </c:forEach>
                     </tbody>
