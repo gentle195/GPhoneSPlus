@@ -289,6 +289,16 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
         // Format the number
         return decimalFormat.format(number);
     }
+    @Override
+    public String dongiaVSsoluongXemHDCT(UUID idhd, UUID idctsp) {
+        Long sl=Long.valueOf(String.valueOf(banHangOnLinerepository.listIMEItheoIDHDvsIDCTSP(idhd,idctsp).size())) ;
+        Long dongia=Long.valueOf(String.valueOf(banHangOnLinerepository.listIMEItheoIDHDvsIDCTSP(idhd,idctsp).get(0).getDonGia()));
+        long number =sl*dongia;
+        // Create a DecimalFormat instance with the desired pattern
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        // Format the number
+        return decimalFormat.format(number);
+    }
 
 
 //    @Override

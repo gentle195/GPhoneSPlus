@@ -98,8 +98,10 @@
         <div>
 
             <div id="tongthanhtien" style="float:right;">
-                    ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
-                VND
+                    <%--                    ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}--%>
+                    <%--                VND--%>
+                <label id="tongthanhtien1">${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}</label>
+                <label>VND</label>
             </div>
             <div style="float:left;">Tổng tiền</div>
             <br>
@@ -145,10 +147,10 @@
 
                     </td>
                     <td>
-                        <div name="checkdongiakhigiam">${ht.donGia-ht.donGia/100*banhangonline.tonggiamgia(ht.chiTietSanPham.id)} đ</div>
-
+                        <div name="checkdongiakhigiam">${ht.basoOchammotlamGHDGKG()} đ</div>
                         -
-                        <del class="product-old-price">${ht.donGia} đ</del>
+                        <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
+
                     </td>
                     <td>
                             <%--                 <input type="text" min="1" max="${banhangonline.soluongcon(ht.chiTietSanPham.id)}" value="${ht.soLuong}" name="checksoluong"  style="height: 1cm">--%>
@@ -163,7 +165,7 @@
                         </button>
                     </td>
                     <td>
-                        <div name="checkthanhtien"></div>
+                        <div name="checkthanhtien">${ht.tichDONGIAvsSL()}</div>
 
                     </td>
                     <td>

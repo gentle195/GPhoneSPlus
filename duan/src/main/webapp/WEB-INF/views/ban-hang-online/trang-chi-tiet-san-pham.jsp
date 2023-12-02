@@ -324,7 +324,7 @@
                                                             ${ht.chiTietSanPham.rom.dungLuong}-${ht.chiTietSanPham.mauSac.ten}.
                                                         <br>
                                                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
-                                                        <label style="tbackground-color: white;border: 1px solid white">${ht.donGiaKhiGiam}đ</label>
+                                                        <label style="font-weight: bold">Đơn giá:</label>${ht.basoOchammotlamGHDGKG()}đ
                                                     </div>
                                                     <div style="width: 18%;">
                                                         <input type="checkbox" name="checkidghTT" value="${ht.id}"
@@ -342,9 +342,9 @@
                                         <div class="cart-summary">
                                             <small> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongsanphamchon()}
                                                 Sản phẩm được chọn</small>
-                                            <h5>
-                                                Tổng:${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
-                                                đ</h5>
+                                            <br>
+                                            <label>Tổng:</label><label id="tongtienghtt">${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}</label><label>đ</label>
+
                                         </div>
                                         <div class="cart-btns">
                                             <a href="/ban-hang-online/xem-gio-hang">Xem giỏ hàng</a>
@@ -600,8 +600,8 @@
 
                         <div>
                             <h4 class="product-price"><span
-                                    style="font-size:15px">₫</span>${motctsp.giaBan-motctsp.giaBan/100*banhangonline.tonggiamgia(motctsp.id)}-
-                                <del class="product-old-price">${motctsp.giaBan}<span style="font-size:15px">₫</span>
+                                    style="font-size:15px">₫</span>${banhangonline.sotienkhidagiam(motctsp.id)}-
+                                <del class="product-old-price">${motctsp.basoOchammotlam()}<span style="font-size:15px">₫</span>
                                 </del>
                             </h4>
 
@@ -609,8 +609,8 @@
                         <div class="add-to-cart" style="margin-top: 5cm">
 
                             <c:if test="${idkhachhang=='1'}">
-                            <div class="qty-label">
-                                <div class="" style="margin-left: 0cm">
+                                <div class="qty-label">
+                                    <div class="" style="margin-left: 0cm">
 
 
                                         <label>Số lượng :</label>
@@ -626,8 +626,8 @@
                                         <label style="background: white;border: 1px solid white">Số lượng còn
                                             :${banhangonline.soluongcon(motctsp.id)}</label>
                                         <br>
-                                    <label style="background: white;color: red;border: 1px solid white"
-                                           id="thongbaosoluong"></label><br>
+                                        <label style="background: white;color: red;border: 1px solid white"
+                                               id="thongbaosoluong"></label><br>
                                         <a href="/login">
                                             <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào
                                                 giỏ hàng
@@ -640,407 +640,407 @@
                                             </button>
                                         </a>
 
-                                </div>
-                            </div>
-                         </c:if>
-                         <c:if test="${idkhachhang!='1'}">
-
-                            <form action="" method="post" id="formctsp">
-                                <label>Số lượng :</label>
-                                <div class="qty-label">
-                                    <div class="" style="margin-left: 0cm">
-                                        <BUTTON class="qty-down" type="button">-</BUTTON>
-                                        <input type="number" value="0" min="0"
-                                               max="${banhangonline.soluongcon(motctsp.id)-banhangonline.sl1ctsptronggh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId(),motctsp.id)}"
-                                               id="input2" style="width: 2cm" name="solg">
-                                        <BUTTON class="qty-up" type="button">+</BUTTON>
                                     </div>
                                 </div>
+                            </c:if>
+                            <c:if test="${idkhachhang!='1'}">
 
-
-                                <label style="background: white;border: 1px solid white">Số lượng còn
-                                    :${banhangonline.soluongcon(motctsp.id)}</label>
-                                <br>
-                                <label style="background: white;color: red;border: 1px solid white"
-                                       id="thongbaosoluong"></label><br>
-                                    <%--                            <p>${idkhachhang}----${motctsp.id}</p>--%>
-                                <button class="add-to-cart-btn" type="button"
-                                        onclick="thongbaothemvaogiohang('${motctsp.id}');"><i
-                                        class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                                </button>
-                                <button class="add-to-cart-btn" id="btthanhtoam" type="button"
-                                        onclick="clickthanhtoanctsp()"><i class="fa fa-shopping-cart"></i> Mua ngay
-                                </button>
-
-
-                                <input style="display:none;" value="${idkhachhang}" name="idkh">
-                                <input style="display:none;" value="${motctsp.id}" name="idctsp">
-
-                            </form>
-                        </c:if>
-
-
-
-
-                    </div>
-
-
-                    <div class="product-description">
-
-                    </div>
-
-                    <div class="row">
-                        <button type="button" class=" btn btn-info" data-bs-toggle="modal" data-bs-target="#myModalxemctsp">
-                            Xem thêm cấu hình chi tiết
-                        </button>
-
-
-                        <!-- The Modal -->
-                        <div class="modal" id="myModalxemctsp">
-                            <div class="modal-dialog">
-                                <div class="modal-content" style="margin-top: 6cm">
-
-                                    <h3>Thông tin chi tiết sản phẩm:</h3>
-                                    <table class="product-info-table">
-                                        <tr>
-                                            <td class="info-label">Hãng sản phẩm:</td>
-                                            <td>${motctsp.sanPham.hangSanPham.ten}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="info-label">Camera:</td>
-                                            <td>${motctsp.sanPham.camera.thongSo}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="info-label">Màn:</td>
-                                            <td>${motctsp.sanPham.manHinh.thongSo}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="info-label">Màu:</td>
-                                            <td>${motctsp.mauSac.ten}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="info-label">Ram:</td>
-                                            <td>${motctsp.ram.dungLuong}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="info-label">Rom:</td>
-                                            <td>${motctsp.rom.dungLuong}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="info-label">Pin:</td>
-                                            <td>${motctsp.pin.loaiPin}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="info-label">Dung lượng pin:</td>
-                                            <td>${motctsp.pin.dungLuongPin.thongSo}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="info-label">Chip:</td>
-                                            <td>${motctsp.chip.ten}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-
-            <!-- /Product details -->
-            <!-- Product main img -->
-            <%--            class="col-md-5 col-md-push-2"--%>
-            <div style="height: 48%;width: 50%;margin-left: 2%">
-                <div id="product-main-img">
-                    <div class="product-preview">
-                        <img src="../../../uploads/${motctsp.urlAnh}" alt="" style="width: 100%;height: 12cm">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="../../uploads/${motctsp.sanPham.anh.anh1}" alt="" style="width: 100%;height: 12cm; ">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="../../uploads/${motctsp.sanPham.anh.anh2}" alt="" style="width: 100%;height: 12cm; ">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="../../uploads/${motctsp.sanPham.anh.anh3}" alt="" style="width: 100%;height: 12cm; ">
-                    </div>
-                </div>
-            </div>
-            <!-- /Product main img -->
-
-
-            <!-- Product thumb imgs -->
-            <%--            class="col-md-2  col-md-pull-5"--%>
-            <div style=" width: 17.2cm;  height: 5cm;" align="center">
-                <div id="product-imgs" style=" width: 5cm;height: 16cm;margin-top: -5.5cm; transform: rotate(270deg);">
-
-                    <div class="product-preview">
-                        <img src="../../../uploads/${motctsp.urlAnh}" alt=""
-                             style="height: 5cm;width:4.9cm;transform: rotate(90deg);">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="../../uploads/${motctsp.sanPham.anh.anh1}" alt=""
-                             style="height: 5cm;width:4.9cm;transform: rotate(90deg);">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="../../uploads/${motctsp.sanPham.anh.anh2}" alt=""
-                             style="height: 5cm;width:4.9cm;transform: rotate(90deg);">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="../../uploads/${motctsp.sanPham.anh.anh3}" alt=""
-                             style="height: 5cm;width:4.9cm;transform: rotate(90deg);">
-                    </div>
-                </div>
-            </div>
-
-            <%--            <!-- /Product thumb imgs -->--%>
-
-
-            <!-- Product tab -->
-            <div class="col-md-12" style="margin-top: 4cm">
-                <div id="product-tab">
-                    <!-- product tab nav -->
-                    <ul class="tab-nav">
-                        <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-                        <li><a data-toggle="tab" href="#tab2">Details</a></li>
-                        <li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
-                    </ul>
-                    <!-- /product tab nav -->
-
-                    <!-- product tab content -->
-                    <div class="tab-content">
-                        <!-- tab1  -->
-                        <div id="tab1" class="tab-pane fade in active">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                        culpa qui officia deserunt mollit anim id est laborum.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /tab1  -->
-
-                        <!-- tab2  -->
-                        <div id="tab2" class="tab-pane fade in">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                        culpa qui officia deserunt mollit anim id est laborum.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /tab2  -->
-
-                        <!-- tab3  -->
-                        <div id="tab3" class="tab-pane fade in">
-                            <div class="row">
-                                <!-- Rating -->
-                                <div class="col-md-3">
-                                    <div id="rating">
-                                        <div class="rating-avg">
-                                            <span>4.5</span>
-                                            <div class="rating-stars">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-o"></i>
-                                            </div>
+                                <form action="" method="post" id="formctsp">
+                                    <label>Số lượng :</label>
+                                    <div class="qty-label">
+                                        <div class="" style="margin-left: 0cm">
+                                            <BUTTON class="qty-down" type="button">-</BUTTON>
+                                            <input type="number" value="0" min="0"
+                                                   max="${banhangonline.soluongcon(motctsp.id)-banhangonline.sl1ctsptronggh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId(),motctsp.id)}"
+                                                   id="input2" style="width: 2cm" name="solg">
+                                            <BUTTON class="qty-up" type="button">+</BUTTON>
                                         </div>
-                                        <ul class="rating">
-                                            <li>
-                                                <div class="rating-stars">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                                <div class="rating-progress">
-                                                    <div style="width: 80%;"></div>
-                                                </div>
-                                                <span class="sum">3</span>
-                                            </li>
-                                            <li>
-                                                <div class="rating-stars">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </div>
-                                                <div class="rating-progress">
-                                                    <div style="width: 60%;"></div>
-                                                </div>
-                                                <span class="sum">2</span>
-                                            </li>
-                                            <li>
-                                                <div class="rating-stars">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </div>
-                                                <div class="rating-progress">
-                                                    <div></div>
-                                                </div>
-                                                <span class="sum">0</span>
-                                            </li>
-                                            <li>
-                                                <div class="rating-stars">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </div>
-                                                <div class="rating-progress">
-                                                    <div></div>
-                                                </div>
-                                                <span class="sum">0</span>
-                                            </li>
-                                            <li>
-                                                <div class="rating-stars">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </div>
-                                                <div class="rating-progress">
-                                                    <div></div>
-                                                </div>
-                                                <span class="sum">0</span>
-                                            </li>
-                                        </ul>
                                     </div>
-                                </div>
-                                <!-- /Rating -->
 
-                                <!-- Reviews -->
-                                <div class="col-md-6">
-                                    <div id="reviews">
-                                        <ul class="reviews">
-                                            <li>
-                                                <div class="review-heading">
-                                                    <h5 class="name">John</h5>
-                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o empty"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                        eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="review-heading">
-                                                    <h5 class="name">John</h5>
-                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o empty"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                        eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="review-heading">
-                                                    <h5 class="name">John</h5>
-                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o empty"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                        eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <ul class="reviews-pagination">
-                                            <li class="active">1</li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- /Reviews -->
 
-                                <!-- Review Form -->
-                                <div class="col-md-3">
-                                    <div id="review-form">
-                                        <form class="review-form">
-                                            <input class="input" type="text" placeholder="Your Name">
-                                            <input class="input" type="email" placeholder="Your Email">
-                                            <textarea class="input" placeholder="Your Review"></textarea>
-                                            <div class="input-rating">
-                                                <span>Your Rating: </span>
-                                                <div class="stars">
-                                                    <input id="star5" name="rating" value="5" type="radio"><label
-                                                        for="star5"></label>
-                                                    <input id="star4" name="rating" value="4" type="radio"><label
-                                                        for="star4"></label>
-                                                    <input id="star3" name="rating" value="3" type="radio"><label
-                                                        for="star3"></label>
-                                                    <input id="star2" name="rating" value="2" type="radio"><label
-                                                        for="star2"></label>
-                                                    <input id="star1" name="rating" value="1" type="radio"><label
-                                                        for="star1"></label>
-                                                </div>
-                                            </div>
-                                            <button class="primary-btn">Submit</button>
-                                        </form>
+                                    <label style="background: white;border: 1px solid white">Số lượng còn
+                                        :${banhangonline.soluongcon(motctsp.id)}</label>
+                                    <br>
+                                    <label style="background: white;color: red;border: 1px solid white"
+                                           id="thongbaosoluong"></label><br>
+                                        <%--                            <p>${idkhachhang}----${motctsp.id}</p>--%>
+                                    <button class="add-to-cart-btn" type="button"
+                                            onclick="thongbaothemvaogiohang('${motctsp.id}');"><i
+                                            class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                    </button>
+                                    <button class="add-to-cart-btn" id="btthanhtoam" type="button"
+                                            onclick="clickthanhtoanctsp()"><i class="fa fa-shopping-cart"></i> Mua ngay
+                                    </button>
+
+
+                                    <input style="display:none;" value="${idkhachhang}" name="idkh">
+                                    <input style="display:none;" value="${motctsp.id}" name="idctsp">
+
+                                </form>
+                            </c:if>
+
+
+
+
+                        </div>
+
+
+                        <div class="product-description">
+
+                        </div>
+
+                        <div class="row">
+                            <button type="button" class=" btn btn-info" data-bs-toggle="modal" data-bs-target="#myModalxemctsp">
+                                Xem thêm cấu hình chi tiết
+                            </button>
+
+
+                            <!-- The Modal -->
+                            <div class="modal" id="myModalxemctsp">
+                                <div class="modal-dialog">
+                                    <div class="modal-content" style="margin-top: 6cm">
+
+                                        <h3>Thông tin chi tiết sản phẩm:</h3>
+                                        <table class="product-info-table">
+                                            <tr>
+                                                <td class="info-label">Hãng sản phẩm:</td>
+                                                <td>${motctsp.sanPham.hangSanPham.ten}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="info-label">Camera:</td>
+                                                <td>${motctsp.sanPham.camera.thongSo}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="info-label">Màn:</td>
+                                                <td>${motctsp.sanPham.manHinh.thongSo}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="info-label">Màu:</td>
+                                                <td>${motctsp.mauSac.ten}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="info-label">Ram:</td>
+                                                <td>${motctsp.ram.dungLuong}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="info-label">Rom:</td>
+                                                <td>${motctsp.rom.dungLuong}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="info-label">Pin:</td>
+                                                <td>${motctsp.pin.loaiPin}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="info-label">Dung lượng pin:</td>
+                                                <td>${motctsp.pin.dungLuongPin.thongSo}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="info-label">Chip:</td>
+                                                <td>${motctsp.chip.ten}</td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
-                                <!-- /Review Form -->
                             </div>
                         </div>
-                        <!-- /tab3  -->
-                    </div>
-                    <!-- /product tab content  -->
-                </div>
-            </div>
-            <!-- /product tab -->
 
+
+                    </div>
+                </div>
+
+                <!-- /Product details -->
+                <!-- Product main img -->
+                <%--            class="col-md-5 col-md-push-2"--%>
+                <div style="height: 48%;width: 50%;margin-left: 2%">
+                    <div id="product-main-img">
+                        <div class="product-preview">
+                            <img src="../../../uploads/${motctsp.urlAnh}" alt="" style="width: 100%;height: 12cm">
+                        </div>
+
+                        <div class="product-preview">
+                            <img src="../../uploads/${motctsp.sanPham.anh.anh1}" alt="" style="width: 100%;height: 12cm; ">
+                        </div>
+
+                        <div class="product-preview">
+                            <img src="../../uploads/${motctsp.sanPham.anh.anh2}" alt="" style="width: 100%;height: 12cm; ">
+                        </div>
+
+                        <div class="product-preview">
+                            <img src="../../uploads/${motctsp.sanPham.anh.anh3}" alt="" style="width: 100%;height: 12cm; ">
+                        </div>
+                    </div>
+                </div>
+                <!-- /Product main img -->
+
+
+                <!-- Product thumb imgs -->
+                <%--            class="col-md-2  col-md-pull-5"--%>
+                <div style=" width: 17.2cm;  height: 5cm;" align="center">
+                    <div id="product-imgs" style=" width: 5cm;height: 16cm;margin-top: -5.5cm; transform: rotate(270deg);">
+
+                        <div class="product-preview">
+                            <img src="../../../uploads/${motctsp.urlAnh}" alt=""
+                                 style="height: 5cm;width:4.9cm;transform: rotate(90deg);">
+                        </div>
+
+                        <div class="product-preview">
+                            <img src="../../uploads/${motctsp.sanPham.anh.anh1}" alt=""
+                                 style="height: 5cm;width:4.9cm;transform: rotate(90deg);">
+                        </div>
+
+                        <div class="product-preview">
+                            <img src="../../uploads/${motctsp.sanPham.anh.anh2}" alt=""
+                                 style="height: 5cm;width:4.9cm;transform: rotate(90deg);">
+                        </div>
+
+                        <div class="product-preview">
+                            <img src="../../uploads/${motctsp.sanPham.anh.anh3}" alt=""
+                                 style="height: 5cm;width:4.9cm;transform: rotate(90deg);">
+                        </div>
+                    </div>
+                </div>
+
+                <%--            <!-- /Product thumb imgs -->--%>
+
+
+                <!-- Product tab -->
+                <div class="col-md-12" style="margin-top: 4cm">
+                    <div id="product-tab">
+                        <!-- product tab nav -->
+                        <ul class="tab-nav">
+                            <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
+                            <li><a data-toggle="tab" href="#tab2">Details</a></li>
+                            <li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+                        </ul>
+                        <!-- /product tab nav -->
+
+                        <!-- product tab content -->
+                        <div class="tab-content">
+                            <!-- tab1  -->
+                            <div id="tab1" class="tab-pane fade in active">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                            culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /tab1  -->
+
+                            <!-- tab2  -->
+                            <div id="tab2" class="tab-pane fade in">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                            culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /tab2  -->
+
+                            <!-- tab3  -->
+                            <div id="tab3" class="tab-pane fade in">
+                                <div class="row">
+                                    <!-- Rating -->
+                                    <div class="col-md-3">
+                                        <div id="rating">
+                                            <div class="rating-avg">
+                                                <span>4.5</span>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                            </div>
+                                            <ul class="rating">
+                                                <li>
+                                                    <div class="rating-stars">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                    <div class="rating-progress">
+                                                        <div style="width: 80%;"></div>
+                                                    </div>
+                                                    <span class="sum">3</span>
+                                                </li>
+                                                <li>
+                                                    <div class="rating-stars">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                    </div>
+                                                    <div class="rating-progress">
+                                                        <div style="width: 60%;"></div>
+                                                    </div>
+                                                    <span class="sum">2</span>
+                                                </li>
+                                                <li>
+                                                    <div class="rating-stars">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                    </div>
+                                                    <div class="rating-progress">
+                                                        <div></div>
+                                                    </div>
+                                                    <span class="sum">0</span>
+                                                </li>
+                                                <li>
+                                                    <div class="rating-stars">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                    </div>
+                                                    <div class="rating-progress">
+                                                        <div></div>
+                                                    </div>
+                                                    <span class="sum">0</span>
+                                                </li>
+                                                <li>
+                                                    <div class="rating-stars">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                    </div>
+                                                    <div class="rating-progress">
+                                                        <div></div>
+                                                    </div>
+                                                    <span class="sum">0</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /Rating -->
+
+                                    <!-- Reviews -->
+                                    <div class="col-md-6">
+                                        <div id="reviews">
+                                            <ul class="reviews">
+                                                <li>
+                                                    <div class="review-heading">
+                                                        <h5 class="name">John</h5>
+                                                        <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                        <div class="review-rating">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-o empty"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="review-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="review-heading">
+                                                        <h5 class="name">John</h5>
+                                                        <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                        <div class="review-rating">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-o empty"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="review-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="review-heading">
+                                                        <h5 class="name">John</h5>
+                                                        <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                        <div class="review-rating">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-o empty"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="review-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <ul class="reviews-pagination">
+                                                <li class="active">1</li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /Reviews -->
+
+                                    <!-- Review Form -->
+                                    <div class="col-md-3">
+                                        <div id="review-form">
+                                            <form class="review-form">
+                                                <input class="input" type="text" placeholder="Your Name">
+                                                <input class="input" type="email" placeholder="Your Email">
+                                                <textarea class="input" placeholder="Your Review"></textarea>
+                                                <div class="input-rating">
+                                                    <span>Your Rating: </span>
+                                                    <div class="stars">
+                                                        <input id="star5" name="rating" value="5" type="radio"><label
+                                                            for="star5"></label>
+                                                        <input id="star4" name="rating" value="4" type="radio"><label
+                                                            for="star4"></label>
+                                                        <input id="star3" name="rating" value="3" type="radio"><label
+                                                            for="star3"></label>
+                                                        <input id="star2" name="rating" value="2" type="radio"><label
+                                                            for="star2"></label>
+                                                        <input id="star1" name="rating" value="1" type="radio"><label
+                                                            for="star1"></label>
+                                                    </div>
+                                                </div>
+                                                <button class="primary-btn">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- /Review Form -->
+                                </div>
+                            </div>
+                            <!-- /tab3  -->
+                        </div>
+                        <!-- /product tab content  -->
+                    </div>
+                </div>
+                <!-- /product tab -->
+
+            </div>
+            <!-- /row -->
         </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-    <!-- /SECTION -->
+        <!-- /container -->
+        <!-- /SECTION -->
     </div>
 </main>
 <br>
@@ -1088,48 +1088,40 @@
                                                      style="text-align: left;word-wrap: break-word;z-index: 2">
                                                         <%--                    <p class="product-category">Điện thoại</p>--%>
                                                     <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
-                                                    <h4 class="product-price"><span
-                                                            style="font-size:15px">₫</span>${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}-
-                                                        <del class="product-old-price">${ht.giaBan}<span
-                                                                style="font-size:15px">₫</span></del>
+                                                    <h4 class="product-price">
+                                                            <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+                                                            ${banhangonline.sotienkhidagiam(ht.id)}
+                                                        <span> ₫</span>
+                                                        <del class="product-old-price" style="float: right">${ht.basoOchammotlam()}<span>₫</span></del>
                                                     </h4>
                                                         <%--                                            ${ht.tinhTrang} +  ${ht.sanPham.tinhTrang}--%>
-                                                    <p class="product-category">Đã bán
-                                                        :${banhangonline.soluongdaban(ht.id)}--Còn
-                                                        :${banhangonline.soluongcon(ht.id)}</p>
+                                                        <%--                                                    <p class="product-category">Đã bán--%>
+                                                        <%--                                                        :${banhangonline.soluongdaban(ht.id)}--Còn--%>
+                                                        <%--                                                        :${banhangonline.soluongcon(ht.id)}</p>--%>
                                                     <div>
-<%--                                                        *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>--%>
-<%--                                                        *Camera:${ht.sanPham.camera.thongSo}<br>--%>
-<%--                                                        *Màn:${ht.sanPham.manHinh.thongSo}<br>--%>
-<%--                                                        *Màu:${ht.mauSac.ten}<br>--%>
-<%--                                                        *Ram:${ht.ram.dungLuong}<br>--%>
-<%--                                                        *Rom:${ht.rom.dungLuong}<br>--%>
-<%--                                                        *Pin:${ht.pin.loaiPin}<br>--%>
-<%--                                                        *Dung lượng pin:${ht.pin.dungLuongPin.thongSo}<br>--%>
-<%--                                                        *Chip:${ht.chip.ten}<br>--%>
+                                                            <%--                                                        *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>--%>
+                                                            <%--                                                        *Camera:${ht.sanPham.camera.thongSo}<br>--%>
+                                                            <%--                                                        *Màn:${ht.sanPham.manHinh.thongSo}<br>--%>
+                                                            <%--                                                        *Màu:${ht.mauSac.ten}<br>--%>
+                                                            <%--                                                        *Ram:${ht.ram.dungLuong}<br>--%>
+                                                            <%--                                                        *Rom:${ht.rom.dungLuong}<br>--%>
+                                                            <%--                                                        *Pin:${ht.pin.loaiPin}<br>--%>
+                                                            <%--                                                        *Dung lượng pin:${ht.pin.dungLuongPin.thongSo}<br>--%>
+                                                            <%--                                                        *Chip:${ht.chip.ten}<br>--%>
 
 
                                                     </div>
-                                                    <div class="product-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                    <div class="product-btns">
-                                                        <button class="add-to-wishlist"><i
-                                                                class="fa fa-heart-o"></i><span
-                                                                class="tooltipp">Thêm vào danh sách yêu thích</span>
+                                                    <div class="product-rating"></div>
+                                                    <div class="product-btns" align="center">
+                                                        <button class="add-to-compare"><a href="/homes"><i
+                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Thêm để so sánh</span>
                                                         </button>
-                                                        <button class="add-to-compare"><i
-                                                                class="fa fa-exchange"></i><span
-                                                                class="tooltipp">Thêm để so sánh</span></button>
                                                         <button class="quick-view"><a
                                                                 href="/ban-hang-online/chi-tiet-san-pham/${ht.id}"><i
-                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Xem chi tiết</span>
+                                                                class="fa fa-eye"></i></a><span class="tooltipp">Xem chi tiết</span>
                                                         </button>
                                                     </div>
+
                                                 </div>
                                                 <div class="add-to-cart" style="z-index: 1">
                                                     <c:if test="${idkhachhang!='1'}">
@@ -1178,6 +1170,41 @@
 </div>
 <!-- Carousel -->
 
+
+<!-- NEWSLETTER -->
+<div id="newsletter" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="newsletter">
+                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+                    <form>
+                        <input class="input" type="email" placeholder="Enter Your Email">
+                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+                    </form>
+                    <ul class="newsletter-follow">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
 <!-- /NEWSLETTER -->
 
 <!-- FOOTER -->
@@ -1429,6 +1456,7 @@ color: white;border-radius: 5% 5% 5% 5%"
             .then(data => {
                 const content = document.getElementById('giohangtrangchu');
                 content.innerHTML = data;
+                formatAndDisplayValue("tongtienghtt");
                 loadScripts1();
             })
             .catch(error => {
@@ -1602,6 +1630,17 @@ color: white;border-radius: 5% 5% 5% 5%"
     function anbt() {
         document.getElementById('taikhoancuatoi').click();
     }
+    function formatAndDisplayValue(elementId) {
+        // Lấy giá trị từ thẻ div
+        var originalValue = document.getElementById(elementId).textContent;
+
+        // Chuyển đổi giá trị sang dạng có dấu chấm phân cách hàng nghìn
+        var formattedValue = Number(originalValue).toLocaleString('en-US');
+
+        // Gán giá trị đã định dạng lại vào thẻ div
+        document.getElementById(elementId).textContent = formattedValue;
+    }
+    formatAndDisplayValue("tongtienghtt");
 </script>
 <!-- jQuery Plugins -->
 <!-- jQuery Plugins -->

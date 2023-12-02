@@ -18,6 +18,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -101,4 +102,15 @@ public class HoaDon {
 
     @Column(name = "ma_giao_dich")
     private String maGiaoDich;
+
+    public String convertTongtien() {
+        // Input number
+        long number = Long.valueOf(String.valueOf(tongTien));
+
+        // Create a DecimalFormat instance with the desired pattern
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+        // Format the number
+        return decimalFormat.format(number);
+    }
 }

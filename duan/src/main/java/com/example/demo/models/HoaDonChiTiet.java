@@ -18,6 +18,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -54,5 +55,16 @@ public class HoaDonChiTiet {
         Double giam=100-Double.valueOf(String.valueOf(donGia))/Double.valueOf(String.valueOf(imei.getChiTietSanPham().getGiaBan()))*100;
         Integer phanTramGiam = giam.intValue(); // Chuyển đổi giá trị Double thành Integer
         return phanTramGiam;
+    }
+
+    public String convertDongiaHDCT() {
+        // Input number
+        long number = Long.valueOf(String.valueOf(donGia));
+
+        // Create a DecimalFormat instance with the desired pattern
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+        // Format the number
+        return decimalFormat.format(number);
     }
 }

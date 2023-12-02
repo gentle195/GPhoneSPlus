@@ -206,7 +206,7 @@
                                             <input value="${idkhachhang}" name="idKhachHang" style="display: none">
                                             <button style="" class="btn btn-primary" type="submit" id="taikhoancuatoi">Tài khoản của tôi</button>
                                         </form>
-                                          <a  class="btn btn-primary" type="submit" onclick="anbt()">Tài khoản của tôi</a>
+                                        <a  class="btn btn-primary" type="submit" onclick="anbt()">Tài khoản của tôi</a>
 
                                     </div>
                                     <div>
@@ -294,7 +294,7 @@
 
                                                         <br>
                                                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
-                                                        <label style="tbackground-color: white;border: 1px solid white">${ht.donGiaKhiGiam}đ</label>
+                                                        <label style="font-weight: bold">Đơn giá:</label>${ht.basoOchammotlamGHDGKG()}đ
                                                     </div>
                                                     <div style="width: 18%;">
                                                         <input type="checkbox" name="checkidghTT" value="${ht.id}"
@@ -312,9 +312,8 @@
                                         <div class="cart-summary">
                                             <small> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongsanphamchon()}
                                                 Sản phẩm được chọn</small>
-                                            <h5>
-                                                Tổng:${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
-                                                đ</h5>
+                                            <br>
+                                            <label>Tổng:</label><label id="tongtienghtt">${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}</label><label>đ</label>
                                         </div>
                                         <div class="cart-btns">
                                             <a href="/ban-hang-online/xem-gio-hang">Xem giỏ hàng</a>
@@ -522,10 +521,10 @@
                                                     <p class="product-category">Điện thoại</p>
                                                     <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
                                                     <h4 class="product-price">
-<%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-                                                        ${banhangonline.sotienkhidagiam(ht.id)}
+                                                            <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+                                                            ${banhangonline.sotienkhidagiam(ht.id)}
                                                         <span> ₫</span>
-                                                    <del class="product-old-price" style="float: right">${ht.basoOchammotlam()}<span>₫</span></del>
+                                                        <del class="product-old-price" style="float: right">${ht.basoOchammotlam()}<span>₫</span></del>
                                                     </h4>
                                                     <div class="product-rating"></div>
                                                     <div class="product-btns" align="center">
@@ -702,7 +701,7 @@
                                                             <p class="product-category">Điện Thoại</p>
                                                             <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a>
                                                             </h3>
-                                                              <h4 class="product-price"><span
+                                                            <h4 class="product-price"><span
                                                                     style="font-size:10px">₫</span> ${banhangonline.sotienkhidagiam(ht.id)} - <span
                                                                     style="font-size:10px">₫</span>
                                                                 <del class="product-old-price">${ht.basoOchammotlam()}</del>
@@ -753,7 +752,7 @@
                                                             <p class="product-category">Điện Thoại</p>
                                                             <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a>
                                                             </h3>
-                                                              <h4 class="product-price"><span
+                                                            <h4 class="product-price"><span
                                                                     style="font-size:10px">₫</span> ${banhangonline.sotienkhidagiam(ht.id)} - <span
                                                                     style="font-size:10px">₫</span>
                                                                 <del class="product-old-price">${ht.basoOchammotlam()}</del>
@@ -837,6 +836,45 @@
     <!-- Modal -->
 
 </main>
+
+
+<br><br><br><br><br><br>
+<!-- NEWSLETTER -->
+<div id="newsletter" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="newsletter">
+                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+                    <form>
+                        <input class="input" type="email" placeholder="Enter Your Email">
+                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+                    </form>
+                    <ul class="newsletter-follow">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /NEWSLETTER -->
+
 <!-- FOOTER -->
 <footer id="footer">
     <!-- top footer -->
@@ -1006,6 +1044,7 @@ color: white;border-radius: 5% 5% 5% 5%"
                 const content = document.getElementById('giohangtrangchu');
                 content.innerHTML = data;
                 thanhtienbenghct();
+                formatAndDisplayValue("tongtienghtt");
                 loadScripts();
 
 
@@ -1204,6 +1243,17 @@ color: white;border-radius: 5% 5% 5% 5%"
     function anbt() {
         document.getElementById('taikhoancuatoi').click();
     }
+    function formatAndDisplayValue(elementId) {
+        // Lấy giá trị từ thẻ div
+        var originalValue = document.getElementById(elementId).textContent;
+
+        // Chuyển đổi giá trị sang dạng có dấu chấm phân cách hàng nghìn
+        var formattedValue = Number(originalValue).toLocaleString('en-US');
+
+        // Gán giá trị đã định dạng lại vào thẻ div
+        document.getElementById(elementId).textContent = formattedValue;
+    }
+    formatAndDisplayValue("tongtienghtt");
 </script>
 <!-- jQuery Plugins -->
 <script src="/jsbanhang/jquery.min.js"></script>

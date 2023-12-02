@@ -17,6 +17,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -54,4 +55,38 @@ public class GioHangChiTiet {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_chi_tiet_san_pham")
     private ChiTietSanPham chiTietSanPham;
+
+
+    public String basoOchammotlamGHDG() {
+        // Input number
+        long number = Long.valueOf(String.valueOf(donGia));
+
+        // Create a DecimalFormat instance with the desired pattern
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+        // Format the number
+        return decimalFormat.format(number);
+    }
+
+    public String basoOchammotlamGHDGKG() {
+        // Input number
+        long number = Long.valueOf(String.valueOf(donGiaKhiGiam));
+
+        // Create a DecimalFormat instance with the desired pattern
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+        // Format the number
+        return decimalFormat.format(number);
+    }
+    public String tichDONGIAvsSL() {
+        // Input number
+
+        long number = Long.valueOf(String.valueOf(donGiaKhiGiam))*Long.valueOf(String.valueOf(soLuong));
+
+        // Create a DecimalFormat instance with the desired pattern
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+        // Format the number
+        return decimalFormat.format(number);
+    }
 }

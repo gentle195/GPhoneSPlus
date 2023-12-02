@@ -197,12 +197,12 @@
                 </td>
 
                 <td>
-                        ${ht.donGia}
+                        ${ht.convertDongiaHDCT()}  VND
                 </td>
                 <td>
                         ${banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
                 </td>
-                <td>${ht.donGia*banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
+                <td>${banhangonline.dongiaVSsoluongXemHDCT(ht.hoaDon.id,ht.imei.chiTietSanPham.id)}
                     VND
                 </td>
                 <td>
@@ -268,12 +268,12 @@
                     </td>
 
                     <td>
-                            ${ht.donGia}
+                            ${ht.convertDongiaHDCT()}  VND
                     </td>
                     <td>
                             ${banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
                     </td>
-                    <td>${ht.donGia*banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
+                    <td>${banhangonline.dongiaVSsoluongXemHDCT(ht.hoaDon.id,ht.imei.chiTietSanPham.id)}
                         VND
                     </td>
                     <td>
