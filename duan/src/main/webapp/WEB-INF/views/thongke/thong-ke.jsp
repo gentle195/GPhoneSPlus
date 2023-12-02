@@ -72,10 +72,9 @@
                     <tr>
                         <th>Tháng</th>
                         <th>Số lượng sản phẩm đã bán</th>
-                        <th>Doanh thu tháng</th>
-                        <th>Giá mua thấp nhất</th>
-                        <th>Giá mua cao nhất</th>
-                        <th>Doanh thu trung bình</th>
+                        <th>Doanh thu chưa đổi trả</th>
+                        <th>Tiền đổi trả</th>
+                        <th>Doanh thu thực tế</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -84,10 +83,9 @@
                         <tr>
                             <td>${DT.getThang()}</td>
                             <td>${DT.getSoLuongSP()}</td>
+                            <td>${DT.getDoanhThuCu()}</td>
+                            <td>${DT.getTienDoiTra()}</td>
                             <td>${DT.getDoanhThu()}</td>
-                            <td>${DT.getGiaMuaMin()}</td>
-                            <td>${DT.getGiaMuaMax()}</td>
-                            <td>${DT.getDoanhThuTrungBinh()}</td>
                         </tr>
                     </c:forEach>
                     </tbody>

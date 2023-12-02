@@ -9,9 +9,5 @@ public interface DoanhThuSanPham {
     Integer getSoLuongSP();
     Integer getSoLuongTon();
     BigDecimal getDoanhThu();
-    BigDecimal getGiaMuaMin();
-    BigDecimal getGiaMuaMax();
-    BigDecimal getDoanhThuTrungBinh();
-
 }
 

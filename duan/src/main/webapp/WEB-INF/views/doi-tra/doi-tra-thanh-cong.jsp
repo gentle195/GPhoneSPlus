@@ -173,7 +173,7 @@
                                         <c:if test="${doitra.tinhTrang == 1}">Đã từ chối</c:if>
                                     </td>
                                     <td>
-                                        <a href="/doi-tra/detail/${doitra.hoaDon.id}?doitraId=${doitra.id}&hoadonId=${doitra.hoaDon.id}"
+                                        <a href="/doi-tra/detail-thanh-cong/${doitra.hoaDon.id}?doitraId=${doitra.id}&hoadonId=${doitra.hoaDon.id}"
                                            class="btn btn-warning btn-icon-text"
                                            tabindex="-1"
                                            role="button"
