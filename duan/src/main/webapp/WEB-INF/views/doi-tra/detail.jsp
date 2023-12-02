@@ -239,6 +239,16 @@
                                 </table>
 
                             </div>
+                            <div class="mt-4">
+                                <form>
+                                    <!-- Thêm các trường và nút submit cho form tiền đổi trả -->
+                                    <div class="form-group">
+                                        <label for="tienDoiTra">Tiền đổi trả:</label>
+                                        <input type="text" value="${tongTien}" class="form-control" id="tienDoiTra" name="tienDoiTra" readonly>
+                                    </div>
+                                    <!-- Thêm các trường và nút submit cho form tiền đổi trả -->
+                                </form>
+                            </div>
 
                         </div>
                     </div>
