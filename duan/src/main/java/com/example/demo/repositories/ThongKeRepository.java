@@ -42,10 +42,12 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
 
     @Query(value = "SELECT MONTH(ngay_thanh_toan) AS thang,\n" +
             "            COUNT(hoa_don_chi_tiet.so_luong) as soLuongSP,\n" +
-            "            SUM(tong_tien) AS DoanhThu,\n" +
-            "            MIN(tong_tien) AS GiaMuaMin, MAX(tong_tien) AS GiaMuaMax,\n" +
-            "            AVG(tong_tien) AS DoanhThuTrungBinh\n" +
+            "            SUM(tong_tien) - SUM(doi_tra_chi_tiet.tien_doi_tra) AS DoanhThu,\n" +
+            "            SUM(doi_tra_chi_tiet.tien_doi_tra) AS TienDoiTra,\n" +
+            "            SUM(tong_tien) AS DoanhThuCu\n" +
             "            FROM hoa_don left join hoa_don_chi_tiet on hoa_don.id = hoa_don_chi_tiet.id_hoa_don\n" +
+            "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
+            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id" +
             "            where YEAR(ngay_thanh_toan) = ?1\n" +
             "            GROUP BY MONTH(ngay_thanh_toan)", nativeQuery = true)
     List<DoanhThuTheoThang> loctheonam(Integer Nam);
