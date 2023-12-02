@@ -61,19 +61,19 @@
                     <div>
                         <h4 class="card-title" style="float: left">Danh sách hóa đơn chờ đổi trả
                         </h4>
-<%--                        <div class="basic-dropdown" style="float: right">--%>
-<%--                            <div class="dropdown">--%>
+                        <%--                        <div class="basic-dropdown" style="float: right">--%>
+                        <%--                            <div class="dropdown">--%>
 
-<%--                                <div class="dropdown-menu">--%>
-<%--                                    <a href="/hoa-don/export-excel" class="dropdown-item" tabindex="-1">Theo ngày thanh--%>
-<%--                                        toán</a>--%>
-<%--                                    <a href="/hoa-don/export-excel-ngay-nhan" class="dropdown-item" tabindex="-1">Theo--%>
-<%--                                        ngày nhận</a>--%>
-<%--                                    <a href="/hoa-don/export-excel-ngay-ship" class="dropdown-item" tabindex="-1">Theo--%>
-<%--                                        ngày ship</a>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
+                        <%--                                <div class="dropdown-menu">--%>
+                        <%--                                    <a href="/hoa-don/export-excel" class="dropdown-item" tabindex="-1">Theo ngày thanh--%>
+                        <%--                                        toán</a>--%>
+                        <%--                                    <a href="/hoa-don/export-excel-ngay-nhan" class="dropdown-item" tabindex="-1">Theo--%>
+                        <%--                                        ngày nhận</a>--%>
+                        <%--                                    <a href="/hoa-don/export-excel-ngay-ship" class="dropdown-item" tabindex="-1">Theo--%>
+                        <%--                                        ngày ship</a>--%>
+                        <%--                                </div>--%>
+                        <%--                            </div>--%>
+                        <%--                        </div>--%>
                     </div>
                     <br>
                     <br>
@@ -207,6 +207,16 @@
                                             <i class="ti-file btn-icon-prepend"></i>
                                             Detail
                                         </a>
+
+                                        <a href="/doi-tra/huy/${doitra.id}"
+                                           class="btn btn-success btn-icon-text"
+                                           tabindex="-1"
+                                           role="button"
+                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                            <i class="ti-file btn-icon-prepend"></i>
+                                            Hủy
+                                        </a>
+
 
                                     </td>
                                 </tr>

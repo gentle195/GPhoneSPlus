@@ -885,6 +885,8 @@ public class BanHangOnlineController {
         System.out.println(checkHDlist3);
 
 
+
+
         // Truyền giá trị ngày hiện tại tới form JSP
 
         model.addAttribute("contentPage", "../ban-hang-online/trang-hoa-don-khach-hang.jsp");
