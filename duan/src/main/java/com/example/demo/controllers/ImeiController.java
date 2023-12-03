@@ -105,6 +105,41 @@ public class ImeiController {
         model.addAttribute("contentPage", "../imei/imei-da-xoa.jsp");
         return "home/layout";
     }
+    @GetMapping("/hien-thi-imei-loi")
+    public String hienThiImeiLoi(Model model) {
+        List<IMEI> imeiPage = imeiService.findImeiLoi();
+        model.addAttribute("listImei", imeiPage);
+        model.addAttribute("contentPage", "../imei/imei-loi.jsp");
+        return "home/layout";
+    }
+    @PostMapping("/search-imei-loi")
+    public String searchImeiLoi(Model model, @RequestParam("search") String search) {
+        List<IMEI> lissearch = imeiService.searchImeiLoi(search);
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+        model.addAttribute("listImei", lissearch);
+        model.addAttribute("imei", new IMEI());
+        String ma = "IMEI" + imeiService.findAll().size();
+        model.addAttribute("ma", ma);
+        model.addAttribute("contentPage", "../imei/imei-loi.jsp");
+        return "home/layout";
+    }
+    @GetMapping("/khoi-phuc-imei-loi/{id}")
+    public String khoiPhucImeiLoi(@PathVariable("id") UUID id) {
+        IMEI imei = imeiService.findById(id);
+        imei.setTinhTrang(0);
+        imeiService.add(imei);
+        return "redirect:/imei/hien-thi-imei-loi";
+    }
+    @GetMapping("/khoi-phuc-tat-ca-imei-loi")
+    public String khoiPhucAllImeiLoi() {
+        List<IMEI> list = imeiService.findImeiLoi();
+        for (IMEI imei : list) {
+            imei.setTinhTrang(0);
+            imeiService.add(imei);
+        }
+        return "redirect:/imei/hien-thi-imei-loi";
+    }
+
 
     @GetMapping("/khoi-phuc/{id}")
     public String khoiPhuc(@PathVariable("id") UUID id) {

@@ -16,7 +16,7 @@
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
             <a class="nav-link" href="/imei/hien-thi" role="tab"
-               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin Imei</a>
+              >Thông tin Imei</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
@@ -24,12 +24,16 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/imei/view-add" role="tab"
-               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin
+              >Thêm thông tin
                 Imei</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/imei/hien-thi-da-xoa" role="tab"
-               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Imei đã xoá</a>
+              >Imei đã xoá</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/imei/hien-thi-imei-loi" role="tab"
+            >Imei lỗi</a>
         </li>
     </ul>
 </div>

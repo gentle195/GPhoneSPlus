@@ -63,6 +63,8 @@ public interface IMEIService {
     public List<IMEI> statusSanPham(UUID id);
 
     public List<IMEI> statusCTSP(UUID id);
+    public List<IMEI> findImeiLoi();
+    public List<IMEI> searchImeiLoi(String imei);
 }
 
 
