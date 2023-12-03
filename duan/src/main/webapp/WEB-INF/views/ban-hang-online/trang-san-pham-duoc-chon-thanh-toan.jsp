@@ -423,7 +423,7 @@
                         <%--                        </div>--%>
                         <div class="form-group">
                             <div style="color: red" id="tbsodienthoai1"></div>
-                            <input class="input" id="sodienthoai1" type="tel" name="tel"
+                                <input class="input" id="sodienthoai1" type="tel" name="tel"
                                    value="${listghct.get(0).gioHang.khachHang.sdt}"
                                    placeholder="Số điện thoại">
                         </div>

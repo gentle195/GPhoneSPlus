@@ -186,7 +186,6 @@
                             <br>
                             <h3 style="text-align: center;">Sản phẩm cần đổi trả</h3>
                             <br>
-
                             <div class="table-responsive custom-table">
                                 <table class="display custom-table" style="color: black">
                                     <thead>
@@ -201,67 +200,101 @@
                                     </tr>
                                     </thead>
                                     <tbody id="table-search11">
+                                    <c:forEach items="${dtct}" var="hdct">
+                                        <tr>
+                                            <td style="display: none">${hdct.hoaDonChiTiet.donGia}</td>
+                                            <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten}</td>
+                                            <td align="center">
+                                                <img src="/uploads/${hdct.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}"
+                                                     width="40" height="40">
+                                            </td>
+                                            <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
+                                            <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
+                                            <td>${hdct.hoaDonChiTiet.donGia}</td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${hdct.hinhThucDoiTra ==0 }">
+                                                        <button class='btn btn-primary chonSanPhamDoiTraButton'
+                                                                data-idhdctmoi="${hdct.hoaDonChiTiet.id}"
+                                                                onclick='showChonSanPhamModalWithDonGia(${hdct.hoaDonChiTiet.donGia})'>
+                                                            Chọn
+                                                        </button>
+                                                        <button class='btn btn-primary xoaSanPhamDoiTraButton'
+                                                                data-idhdctmoixoa="${hdct.hoaDonChiTiet.id}"
+                                                                onclick="xoaSanPham('${hdct.hoaDonChiTiet.id}')">Xóa
+                                                        </button>
+                                                    </c:when>
+                                                    <c:when test="${hdct.hinhThucDoiTra == 1}">
+                                                        <button class='btn btn-primary xoaSanPhamDoiTraButton'
+                                                                data-idhdctmoixoa="${hdct.hoaDonChiTiet.id}"
+                                                                onclick="xoaSanPham('${hdct.hoaDonChiTiet.id}')">Xóa
+                                                        </button>
+                                                    </c:when>
+                                                </c:choose>
+                                            </td>
 
-                                    <tr><c:forEach items="${dtct}" var="hdct">
-                                        <td style="display: none">${hdct.hoaDonChiTiet.donGia}</td>
-                                        <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten}</td>
-                                        <td align="center">
-                                            <img src="/uploads/${hdct.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}"
-                                                 width="40" height="40">
-                                        </td>
-                                        <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
-                                        <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
-                                        <td>${hdct.hoaDonChiTiet.donGia}</td>
-                                        <td>
-                                            <c:choose>
-                                                <c:when test="${hdct.hinhThucDoiTra ==0 }">
-                                                    <button class='btn btn-primary chonSanPhamDoiTraButton'
-                                                            data-idhdctmoi="${hdct.hoaDonChiTiet.id}"
-                                                            onclick='showChonSanPhamModalWithDonGia(${hdct.hoaDonChiTiet.donGia})'>
-                                                        Chọn
-                                                    </button>
-                                                    <button class='btn btn-primary xoaSanPhamDoiTraButton'
-                                                            data-idhdctmoixoa="${hdct.hoaDonChiTiet.id}"
-                                                            onclick="xoaSanPham('${hdct.hoaDonChiTiet.id}')">Xóa
-                                                    </button>
-                                                </c:when>
-                                                <c:when test="${hdct.hinhThucDoiTra == 1}">
-                                                    <button class='btn btn-primary xoaSanPhamDoiTraButton'
-                                                            data-idhdctmoixoa="${hdct.hoaDonChiTiet.id}"
-                                                            onclick="xoaSanPham('${hdct.hoaDonChiTiet.id}')">Xóa
-                                                    </button>
-                                                </c:when>
-                                            </c:choose>
-                                        </td>
+                                        </tr>
                                     </c:forEach>
-                                    </tr>
                                     </tbody>
                                 </table>
 
                             </div>
-                            <div class="mt-4">
-                                <form>
-                                    <!-- Thêm các trường và nút submit cho form tiền đổi trả -->
-                                    <div class="form-group">
-                                        <label for="tienDoiTra">Tiền đổi trả:</label>
-                                        <input type="text" value="${tongTien}" class="form-control" id="tienDoiTra" name="tienDoiTra" readonly>
-                                    </div>
-                                    <!-- Thêm các trường và nút submit cho form tiền đổi trả -->
-                                </form>
+                            <br>
+                            <h3 ${not empty dtctlist ? '' : 'style="display: none;"'} style="text-align: center;">Sản
+                                phẩm đổi trả</h3>
+                            <br>
+                            <div class="table-responsive custom-table">
+                                <table class="display custom-table" ${not empty dtctlist ? '' : 'style="display: none;"'}
+                                       style="color: black">
+                                    <thead>
+                                    <tr>
+                                        <th>Sản phẩm cần đổi trả</th>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Ảnh</th>
+                                        <th>Hãng</th>
+                                        <th>Số IMEI</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="table-search1">
+                                    <c:forEach items="${dtctlist}" var="hdct">
+                                        <tr>
+                                            <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten}</td>
+                                            <td>${hdct.imei.chiTietSanPham.sanPham.ten}</td>
+                                            <td align="center">
+                                                <img src="/uploads/${hdct.imei.chiTietSanPham.urlAnh}" width="40"
+                                                     height="40">
+                                            </td>
+                                            <td>${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
+                                            <td>${hdct.imei.soImei}</td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                                <div class="mt-4">
+                                    <form>
+                                        <!-- Thêm các trường và nút submit cho form tiền đổi trả -->
+                                        <div class="form-group">
+                                            <label for="tienDoiTra">Tiền đổi trả:</label>
+                                            <input type="text" value="${tongTien}" class="form-control" id="tienDoiTra"
+                                                   name="tienDoiTra" readonly>
+                                        </div>
+                                        <!-- Thêm các trường và nút submit cho form tiền đổi trả -->
+                                    </form>
+                                </div>
+                                <div style="text-align: center">
+                                    <div class='btn btn-primary' id='xacNhanButton' >Xác nhận</div>
+                                </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class='btn btn-primary' id='xacNhanButton'>Xác nhận</div>
     </div>
-
-
 </div>
 <%--modal chọn sp--%>
-<div class="modal fade" id="exampleModalChonSanPham" tabindex="-1" aria-labelledby="modal-1-label" aria-hidden="true">
+<div class="modal fade" id="exampleModalChonSanPham" tabindex="-1" aria-labelledby="modal-1-label"
+     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-body">
@@ -286,7 +319,8 @@
                                             </div>
                                             <div class="col-3">
                                                 <div style="border: black solid 0.5px">
-                                                    <select class="form-control" id="camds1" onchange="clickcombobox()">
+                                                    <select class="form-control" id="camds1"
+                                                            onchange="clickcombobox()">
                                                         <option selected value="null">Camera</option>
                                                         <c:forEach items="${camds}" var="ht">
                                                             <option value="${ht.thongSo}">${ht.thongSo}</option>
@@ -296,7 +330,8 @@
                                             </div>
                                             <div class="col-3">
                                                 <div style="border: black solid 0.5px">
-                                                    <select class="form-control" id="mands1" onchange="clickcombobox()">
+                                                    <select class="form-control" id="mands1"
+                                                            onchange="clickcombobox()">
                                                         <option selected value="null">Màn hình</option>
                                                         <c:forEach items="${mands}" var="ht">
                                                             <option value="${ht.thongSo}">${ht.thongSo}</option>
@@ -306,7 +341,8 @@
                                             </div>
                                             <div class="col-2">
                                                 <div style="border: black solid 0.5px">
-                                                    <select class="form-control" id="mauds1" onchange="clickcombobox()">
+                                                    <select class="form-control" id="mauds1"
+                                                            onchange="clickcombobox()">
                                                         <option selected value="null">Màu sắc</option>
                                                         <c:forEach items="${mauds}" var="ht">
                                                             <option value="${ht.ten}">${ht.ten}</option>
@@ -316,7 +352,8 @@
                                             </div>
                                             <div class="col-2">
                                                 <div style="border: black solid 0.5px">
-                                                    <select class="form-control" id="ramds1" onchange="clickcombobox()">
+                                                    <select class="form-control" id="ramds1"
+                                                            onchange="clickcombobox()">
                                                         <option selected value="null">Ram</option>
                                                         <c:forEach items="${ramds}" var="ht">
                                                             <option value="${ht.dungLuong}">${ht.dungLuong}</option>
@@ -333,7 +370,8 @@
                                         <div class="row">
                                             <div class="col-3">
                                                 <div style="border: black solid 0.5px">
-                                                    <select class="form-control" id="romds1" onchange="clickcombobox()">
+                                                    <select class="form-control" id="romds1"
+                                                            onchange="clickcombobox()">
                                                         <option selected value="null">Rom</option>
                                                         <c:forEach items="${romds}" var="ht">
                                                             <option value="${ht.dungLuong}">${ht.dungLuong}</option>
@@ -365,7 +403,8 @@
                                             </div>
                                             <div class="col-3">
                                                 <div style="border: black solid 0.5px">
-                                                    <select class="form-control" id="sands1" onchange="clickcombobox()">
+                                                    <select class="form-control" id="sands1"
+                                                            onchange="clickcombobox()">
                                                         <option selected value="null">Sản phẩm</option>
                                                         <c:forEach items="${sands}" var="ht">
                                                             <option value="${ht.ten}">${ht.ten}</option>
@@ -387,9 +426,11 @@
                                            id="giaTienSP"
                                            name="giaTienCTSP">
                                     <input type="text" class="form-control" placeholder="Bạn tìm gì..."
-                                           aria-label="Bạn tìm gì..." name="search-san-pham" id="sanPhamSearchInput">
+                                           aria-label="Bạn tìm gì..." name="search-san-pham"
+                                           id="sanPhamSearchInput">
                                     <div class="input-group-append">
-                                        <button class="btn btn-sm btn-primary" type="button" id="searchSanPham">Search
+                                        <button class="btn btn-sm btn-primary" type="button" id="searchSanPham">
+                                            Search
                                         </button>
                                     </div>
                                 </div>
@@ -435,7 +476,8 @@
                                                     <td>${ctsp.soLuong}</td>
                                                     <td>
                                                         <a class="btn btn-warning btn-icon-text"
-                                                           data-bs-toggle="modal" data-bs-target="#nhapImei">Nhập IMEI</a>
+                                                           data-bs-toggle="modal" data-bs-target="#nhapImei">Nhập
+                                                            IMEI</a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -531,7 +573,6 @@
     </div>
 </div>
 
-<!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

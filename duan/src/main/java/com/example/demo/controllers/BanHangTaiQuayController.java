@@ -98,7 +98,6 @@ public class BanHangTaiQuayController {
         model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
         model.addAttribute("HoaDon", hoaDonnn);
 
-
         model.addAttribute("hangds", hangSanPhamService.findAll0());
         model.addAttribute("camds", cameraService.findAll0());
         model.addAttribute("mands", manHinhService.findAll0());
@@ -136,18 +135,57 @@ public class BanHangTaiQuayController {
             model.addAttribute("listKhachHang", khachHangService.findAll0());
             model.addAttribute("listDiaChi", diaChiService.findAll0());
             model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
+            model.addAttribute("hangds", hangSanPhamService.findAll0());
+            model.addAttribute("camds", cameraService.findAll0());
+            model.addAttribute("mands", manHinhService.findAll0());
+            model.addAttribute("mauds", mauSacService.findAll0());
+            model.addAttribute("ramds", ramService.findAll0());
+            model.addAttribute("romds", romService.findAll0());
+            model.addAttribute("pinds", pinService.findAll0());
+            model.addAttribute("dungds", dungLuongPinService.findAll0());
+            model.addAttribute("chipds", chipService.findAll0());
+            model.addAttribute("sands", sanPhamService.findAll0());
+            model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
+            return "home/layout";
+        }else{
+            NhanVien nhanVien = nhanVienService.findById(SecurityUtil.getId().getId());
+            HoaDon hd = new HoaDon();
+            hd.setMa("HD" + (String.valueOf(hoaDonService.findAll().size() + 1)));
+            hd.setTinhTrang(0);
+            hd.setLoai(0);
+            hd.setNgayTao(Date.valueOf(LocalDate.now()));
+            hd.setNhanVien(nhanVien);
+            hoaDonService.add(hd);
+            List<HoaDon> listt = hoaDonService.find();
+            model.addAttribute("listHoaDon", listt);
+            model.addAttribute("thongBaoHoaDon1", "Thêm hóa đơn chờ thành công");
+            model.addAttribute("listHang", hangSanPhamService.findAll0());
+            model.addAttribute("listMauSac", mauSacService.findAll0());
+            model.addAttribute("listChip", chipService.findAll0());
+            model.addAttribute("listRam", ramService.findAll0());
+            model.addAttribute("listRom", romService.findAll0());
+            model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+            model.addAttribute("listManHinh", manHinhService.findAll0());
+            model.addAttribute("listCamera", cameraService.findAll0());
+            model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
+            model.addAttribute("listKhachHang", khachHangService.findAll0());
+            model.addAttribute("listDiaChi", diaChiService.findAll0());
+            model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
+            model.addAttribute("HoaDon", hoaDonnn);
+
+            model.addAttribute("hangds", hangSanPhamService.findAll0());
+            model.addAttribute("camds", cameraService.findAll0());
+            model.addAttribute("mands", manHinhService.findAll0());
+            model.addAttribute("mauds", mauSacService.findAll0());
+            model.addAttribute("ramds", ramService.findAll0());
+            model.addAttribute("romds", romService.findAll0());
+            model.addAttribute("pinds", pinService.findAll0());
+            model.addAttribute("dungds", dungLuongPinService.findAll0());
+            model.addAttribute("chipds", chipService.findAll0());
+            model.addAttribute("sands", sanPhamService.findAll0());
             model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
             return "home/layout";
         }
-        NhanVien nhanVien = nhanVienService.findById(SecurityUtil.getId().getId());
-        HoaDon hd = new HoaDon();
-        hd.setMa("HD" + (String.valueOf(hoaDonService.findAll().size() + 1)));
-        hd.setTinhTrang(0);
-        hd.setLoai(0);
-        hd.setNgayTao(Date.valueOf(LocalDate.now()));
-        hd.setNhanVien(nhanVien);
-        hoaDonService.add(hd);
-        return "redirect:/ban-hang/hien-thi";
     }
 
     @GetMapping("/thong-tin-hoa-don/{id}")
@@ -648,7 +686,7 @@ public class BanHangTaiQuayController {
                 model.addAttribute("listKhachHang", khachHangService.findAll0());
                 model.addAttribute("listDiaChi", diaChiService.findAll0());
                 model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
-                model.addAttribute("thongBaoHoaDon", "Sản phẩm đã thêm vào hóa đơn");
+                model.addAttribute("thongBaoHoaDon1", "Sản phẩm đã thêm vào hóa đơn");
                 model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
                 return "home/layout";
             } else {
@@ -680,7 +718,7 @@ public class BanHangTaiQuayController {
                 model.addAttribute("listKhachHang", khachHangService.findAll0());
                 model.addAttribute("listDiaChi", diaChiService.findAll0());
                 model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
-                model.addAttribute("thongBaoHoaDon", "Sản phẩm đã thêm vào hóa đơn");
+                model.addAttribute("thongBaoHoaDon1", "Sản phẩm đã thêm vào hóa đơn");
                 model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
                 return "home/layout";
             }

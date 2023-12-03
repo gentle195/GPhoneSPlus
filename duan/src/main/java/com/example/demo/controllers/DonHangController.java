@@ -350,9 +350,13 @@ public class DonHangController {
     public String giaoHangHoanTat(Model model, @PathVariable("id") UUID id) {
         HoaDon hd = hoaDonService.findById(id);
         hd.setTinhTrangGiaoHang(3);
+        hd.setTinhTrang(2);
         hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
         hd.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         hd.setNgayNhan(Date.valueOf(LocalDate.now()));
+        if(hd.getLoai()==0){
+            hd.setNgayThanhToan(Date.valueOf(LocalDate.now()));
+        }
         hoaDonService.update(id, hd);
         idHoaDon = id;
         List<HoaDonChiTiet> listHoaDonChiTiet = hoaDonChiTietService.getHoaDonChiTiet(id);

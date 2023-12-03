@@ -234,8 +234,7 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Hình thức thanh toán:</label>
                                                 <div class="col-sm-9">
-                                                    <form:input class="form-control" placeholder="" readonly="true"
-                                                                path="hinhThucThanhToan"
+                                                    <input class="form-control" placeholder="" readonly="true"
                                                                 value="${hoaDon.hinhThucThanhToan == 0 ? 'Tiền mặt' : 'Chuyển khoản'}"
                                                     />
                                                 </div>
@@ -696,6 +695,26 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script>
+    document.getElementById("phiShipDonHang").addEventListener("keyup", function () {
+        tinhTienThua();
+    });
+
+    function tinhTienThua() {
+        var tongTien = parseFloat(document.getElementById("tongTienDonHang").value);
+        var tienKhachDua = parseFloat(document.getElementById("phiShipDonHang").value);
+        var check = document.getElementById("phiShipDonHang").value;
+        var tien = tienKhachDua + tongTien;
+
+        var ketQuaElement = document.getElementById("tongTienShip");
+        if (check.trim() == '') {
+            ketQuaElement.value = tongTien.toFixed(2);
+        } else {
+            ketQuaElement.value = tien.toFixed(2);
+        }
+
+    }
+</script>
 <script>
 
     $('#selectKhachHang1').select2({

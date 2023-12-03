@@ -169,7 +169,7 @@
                                     <td>${doitra.nhanVien.hoTen}</td>
                                     <td>
                                         <c:if test="${doitra.tinhTrang == 0}">Đang chờ</c:if>
-                                        <c:if test="${doitra.tinhTrang == 2}">Đã xác nhận</c:if>
+                                        <c:if test="${doitra.tinhTrang == 2}">Đã xác nhận đổi trả</c:if>
                                         <c:if test="${doitra.tinhTrang == 1}">Đã từ chối</c:if>
                                     </td>
                                     <td>
