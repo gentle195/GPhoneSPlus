@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../../vendor/owl-carousel/css/owl.carousel.min.css">
     <link rel="stylesheet" href="../../../vendor/owl-carousel/css/owl.theme.default.min.css">
     <link href="../../../vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -69,16 +70,16 @@
                                         mật khẩu?</a>
                                     <hr>
                                     <br>
-                                    <p class="mb-5 pb-lg-2" >
-                                        <a type="button" class="btn btn-info"
-                                           style="font-size: larger" href="/dang-ky-tai-khoan">Đăng ký
+                                    <p>
+                                        <a type="button" class="btn btn-outline-dark btn-lg btn-block"
+                                           style="font-size: larger; font-weight: bold" href="/dang-ky-tai-khoan">Đăng ký
                                             tài khoản</a>
                                             <%--                                        <button type="button"--%>
                                             <%--                                                data-bs-toggle="modal" class="btn btn-info"--%>
                                             <%--                                                data-bs-target="#dangKy" style="color: #393f81;">Đăng kí tài khoản--%>
                                             <%--                                        </button>--%>
                                     </p>
-                                    <a href="/oauth2/authorization/google" class="btn btn-primary">Google</a>
+                                    <a href="/oauth2/authorization/google" class="btn btn-outline-dark btn-lg btn-block" style="font-weight: bold;"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 488 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>   Google</a>
                                 </form:form>
 
 

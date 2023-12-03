@@ -177,4 +177,14 @@ public class IMEIServiceImpl implements IMEIService {
     public List<IMEI> statusCTSP(UUID id) {
         return imeiRepository.statusCTSP(id);
     }
+
+    @Override
+    public List<IMEI> findImeiLoi() {
+        return imeiRepository.getImeiLoi();
+    }
+
+    @Override
+    public List<IMEI> searchImeiLoi(String imei) {
+        return imeiRepository.searchImeiLoi(imei);
+    }
 }

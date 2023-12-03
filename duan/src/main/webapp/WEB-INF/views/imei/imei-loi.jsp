@@ -9,15 +9,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>GPhoneS Store </title>
-
     <!-- Favicon icon -->
 </head>
 <body>
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               aria-controls="description" aria-selected="true">Thông tin Imei</a>
+            <a class="nav-link" href="/imei/hien-thi" role="tab"
+               >Thông tin Imei</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/imei/view-add" role="tab"
@@ -33,35 +32,22 @@
                >Imei đã xoá</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/imei/hien-thi-imei-loi" role="tab"
-            >Imei lỗi</a>
+            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+               aria-controls="description" aria-selected="true">Imei lỗi</a>
         </li>
+
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="description" role="tabpanel"
          aria-labelledby="description-tab">
+
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title" style="float: left">Danh sách IMEI
-                        <div class="basic-dropdown">
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-primary dropdown-toggle"
-                                        data-toggle="dropdown">
-                                    <i class="ti-export btn-icon-prepend"></i>
-                                    Xuất Excel
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a href="/imei/export-excel" class="dropdown-item" tabindex="-1">IMEI chưa bán</a>
-                                    <a href="/imei/export-excel-imei-da-ban" class="dropdown-item" tabindex="-1">IMEI đã
-                                        bán</a>
-                                </div>
-                            </div>
-                        </div>
-                    </h4>
+                    <h4 class="card-title" style="float: left">Danh sách Imei lỗi</h4>
                     <%--            Tìm kiếm               --%>
-                    <form action="/imei/search-on" method="post">
+                    <form action="/imei/search-imei-loi" method="post">
                         <div class="input-group" style="width: 30%; float: right">
                             <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                    aria-label="Bạn tìm gì..." name="search">
@@ -69,10 +55,20 @@
                                 <button class="btn btn-sm btn-primary" type="submit">Search</button>
                             </div>
                         </div>
+                        <div style="float: right">
+                            <a href="/imei/khoi-phuc-tat-ca-imei-loi" class="btn btn-danger btn-icon-text"
+                               tabindex="-1"
+                               role="button"
+                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                <i class="ti-reload btn-icon-prepend"></i>
+                                Khôi phục tất cả</a>
+                        </div>
+
+
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table id="example" class="display" style="color: black; width: 1400px;">
+                        <table style="color: black;width: 1400px;" id="example" class="display">
                             <thead>
                             <tr>
                                 <th scope="col">Mã</th>
@@ -103,8 +99,17 @@
                                         <c:if test="${imei.tinhTrang == 2}">Đã hủy</c:if>
                                         <c:if test="${imei.tinhTrang == 3}">Chờ xử lý</c:if>
                                     </td>
+
                                     <td>${imei.moTa}</td>
                                     <td>
+
+                                        <a href="/imei/khoi-phuc-imei-loi/${imei.id}"
+                                           class="btn btn-danger btn-icon-text"
+                                           tabindex="-1"
+                                           role="button"
+                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                            <i class="ti-reload btn-icon-prepend"></i>
+                                            Khôi phục</a>
                                         <a href="/imei/show-qr/${imei.id}"
                                            class="btn btn-info btn-icon-text"
                                            data-bs-toggle="modal"
@@ -141,21 +146,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <a href="/imei/view-update/${imei.id}"
-                                           class="btn btn-warning btn-icon-text"
-                                           tabindex="-1"
-                                           role="button"
-                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                            <i class="ti-file btn-icon-prepend"></i>
-                                            Update</a>
-                                        <a href="/imei/delete/${imei.id}"
-                                           class="btn btn-danger btn-icon-text"
-                                           tabindex="-1"
-                                           role="button"
-                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                            <i class="ti-reload btn-icon-prepend"></i>
-                                            Status</a>
-
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -167,7 +157,6 @@
         </div>
     </div>
 </div>
-
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
