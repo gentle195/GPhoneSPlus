@@ -21,10 +21,18 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
     @Query("SELECT r FROM SanPham r WHERE r.tinhTrang=1")
     List<SanPham> findAll1();
 
-    @Query("SELECT r FROM SanPham r WHERE r.ten LIKE %:dungluong% or r.heDieuHanh LIKE %:dungluong% and r.tinhTrang=0")
+    @Query("SELECT r FROM SanPham r left join HangSanPham hang on hang.id=r.hangSanPham.id " +
+            "left join ManHinh man on man.id=r.manHinh.id left join Camera cam on cam.id=r.camera.id " +
+            "WHERE (r.ten LIKE %:dungluong% or r.heDieuHanh LIKE %:dungluong% or hang.ten LIKE %:dungluong% " +
+            "or man.thongSo LIKE %:dungluong% or man.doPhanGiai LIKE %:dungluong% or man.tiLeKhungHinh LIKE %:dungluong% " +
+            "or man.loaiCamUng LIKE %:dungluong% or cam.thongSo LIKE %:dungluong%) and r.tinhTrang=0")
     List<SanPham> search(String dungluong);
 
-    @Query("SELECT r FROM SanPham r WHERE r.ten LIKE %:dungluong% or r.heDieuHanh LIKE %:dungluong% and r.tinhTrang=1")
+    @Query("SELECT r FROM SanPham r left join HangSanPham hang on hang.id=r.hangSanPham.id " +
+            "left join ManHinh man on man.id=r.manHinh.id left join Camera cam on cam.id=r.camera.id " +
+            "WHERE (r.ten LIKE %:dungluong% or r.heDieuHanh LIKE %:dungluong% or hang.ten LIKE %:dungluong% " +
+            "or man.thongSo LIKE %:dungluong% or man.doPhanGiai LIKE %:dungluong% or man.tiLeKhungHinh LIKE %:dungluong% " +
+            "or man.loaiCamUng LIKE %:dungluong% or cam.thongSo LIKE %:dungluong%) and r.tinhTrang=1")
     List<SanPham> search2(String dungluong);
 
     @Query("select r from SanPham r  where r.tinhTrang=0")

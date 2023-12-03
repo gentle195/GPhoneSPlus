@@ -109,8 +109,6 @@
         }
 
 
-
-
         .close {
             color: #aaaaaa;
             float: right;
@@ -136,6 +134,7 @@
             border: 1px solid black;
             padding: 10px;
         }
+
         .modal {
             border-collapse: collapse;
             width: 100%;
@@ -153,6 +152,7 @@
             font-weight: bold;
             text-align: center;
         }
+
         #yourModalId {
             display: none;
             position: fixed;
@@ -196,16 +196,11 @@
         }
 
 
-
     </style>
 </head>
 <body>
 
 <div>
-
-
-
-
 
 
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
@@ -256,8 +251,6 @@
                                             <td>${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
                                             <td>${hdct.imei.soImei}</td>
                                             <td>${hdct.donGia}</td>
-
-
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -296,7 +289,8 @@
                                         <tr class="table-row" data-imei-id="${hdct.imei.id}" onclick="openModal(this)">
                                             <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten}</td>
                                             <td align="center">
-                                                <img src="/uploads/${hdct.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}" width="40" height="40">
+                                                <img src="/uploads/${hdct.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}"
+                                                     width="40" height="40">
                                             </td>
                                             <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
                                             <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
@@ -308,22 +302,17 @@
                                 </table>
 
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-
-
         <div class="col-12 grid-margin">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div>
                         <div class="card-body">
-
-
                             <div class="table-responsive custom-table">
                                 <table class="display custom-table" ${not empty dtctlist ? '' : 'style="display: none;"'} >
                                     <thead>
@@ -348,13 +337,7 @@
                                         </td>
                                         <td>${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
                                         <td>${hdct.imei.soImei}</td>
-
-
                                     </tr>
-
-
-
-
                                     </c:forEach>
                                     </tr>
                                     </tbody>
@@ -369,17 +352,7 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
     </div>
-
-
-</div>
-
 </div>
 
 
@@ -517,7 +490,8 @@
                                                     <td>
 
                                                         <a class="btn btn-warning btn-icon-text"
-                                                           data-bs-toggle="modal" data-bs-target="#nhapImei"   data-giaban="${ctsp.giaBan}"  onclick="kiemTraGia()">Nhập
+                                                           data-bs-toggle="modal" data-bs-target="#nhapImei"
+                                                           data-giaban="${ctsp.giaBan}" onclick="kiemTraGia()">Nhập
                                                             IMEI</a>
                                                     </td>
                                                 </tr>
@@ -536,7 +510,8 @@
     </div>
 </div>
 
-<div id="yourModalId" class="modal" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 1000px; height: 300px;">
+<div id="yourModalId" class="modal"
+     style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 1000px; height: 300px;">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <h5 class="modal-title">Sản phẩm đổi trả</h5>
@@ -560,17 +535,6 @@
         </table>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
 </body>
@@ -645,18 +609,16 @@
         $.ajax({
             url: '/doi-tra/delete-hdct/' + doitraId + '/' + hdctId,
             type: 'GET',
-            success: function(data) {
+            success: function (data) {
                 // Load lại trang sau khi xóa thành công
                 location.reload();
             },
-            error: function(error) {
+            error: function (error) {
                 console.error('Lỗi khi xóa', error);
             }
         });
     }
 </script>
-
-
 
 
 <%--//Xóa sp cần đổi trả--%>
@@ -666,7 +628,7 @@
 
     // Lắng nghe sự kiện click trên button
     document.querySelectorAll('.xoaSanPhamDoiTraButton').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             // Lấy giá trị hdct.id từ thuộc tính data
             var hdctId = this.getAttribute('data-idhdctmoixoa');
 
@@ -689,14 +651,13 @@
 </script>
 
 
-
 <%--// chọn sản phẩm--%>
 <script>
     var globalHdctId; // Biến toàn cục để lưu giá trị hdctId
 
     // Lắng nghe sự kiện click trên button
     document.querySelectorAll('.chonSanPhamDoiTraButton').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             // Lấy giá trị hdct.id từ thuộc tính data
             var hdctId = this.getAttribute('data-idhdctmoi');
 
@@ -717,7 +678,6 @@
         // Có thể thực hiện gửi giá trị này trong hàm fetch
     }
 </script>
-
 
 
 <%--<script>--%>
@@ -741,7 +701,7 @@
 
 <script>
     document.querySelectorAll('.chonSanPhamButton').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             var hdctId = this.getAttribute('data-idhdct');
             var doitraId = window.location.pathname.split('/').pop();
 
@@ -761,14 +721,10 @@
         var hdctId = $('#doiTraForm').data('hdctId');
 
 
-
-
         // Thực hiện thêm thông tin và chuyển hướng đến đường dẫn /doi-tra/them-dtct với các tham số truyền vào
         window.location.href = "/doi-tra/them-dtct?hdctId=" + hdctId + "&doitraId=" + doitraId + "&lyDo=" + lyDo + "&hienTrang=" + hienTrang + "&hinhThuc=" + hinhThuc;
     }
 </script>
-
-
 
 
 <script>
@@ -824,9 +780,9 @@
 </script>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Sự kiện click vào nút "Chọn sản phẩm"
-        $(".chonSanPhamButton").on("click", function() {
+        $(".chonSanPhamButton").on("click", function () {
             // Hiển thị modal mới
             $('#exampleModalChonSanPham').modal('show');
         });
@@ -908,7 +864,7 @@
                 <td>` + imei.chiTietSanPham.sanPham.ten + `</td>
                 <td>` + imei.soImei + `</td>
                 <td>` + (imei.tinhTrang == 0 ? "Chưa bán" : "Đã bán") + `</td>
-               <td><a href="/doi-tra/them-imei/` + imei.id + `/`+doitraId+`/`+globalHdctId+`">Thêm IMEI</a></td>
+               <td><a href="/doi-tra/them-imei/` + imei.id + `/` + doitraId + `/` + globalHdctId + `">Thêm IMEI</a></td>
             </tr>
             `;
                     html += tr;
@@ -927,7 +883,7 @@
     var doitraId = '${param.doitraId}';
 
     // Thiết lập giá trị vào ô input khi trang được tải
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('doitraIdInput').value = doitraId;
     });
 </script>
@@ -938,7 +894,7 @@
 
 
     // Thiết lập giá trị vào ô input khi trang được tải
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('hoadonIdInput').value = hoadonId;
     });
 </script>
