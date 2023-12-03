@@ -48,6 +48,9 @@ public class DoiTraChiTiet {
     @Column(name = "tien_doi_tra")
     private BigDecimal tienDoiTra;
 
+    @Column(name = "don_gia")
+    private BigDecimal donGia;
+
 
 
 
