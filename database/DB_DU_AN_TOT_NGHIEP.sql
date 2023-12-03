@@ -416,14 +416,14 @@ CREATE TABLE hoa_don (
   ngay_thanh_toan Date NULL,
   ghi_chu NVARCHAR(MAX) NULL,
   ma_giao_dich NVARCHAR(MAX) NULL,
- 
+ phi_ship decimal(20, 0) NULL,
+ nguoi_nhan NVARCHAR(MAX) NULL
   FOREIGN KEY (id_khach_hang) REFERENCES khach_hang(id),
   FOREIGN KEY (id_nhan_vien) REFERENCES Nhan_vien(id),
   FOREIGN KEY (id_dia_chi) REFERENCES dia_chi(id),
   FOREIGN KEY (id_quy_doi) REFERENCES quy_doi(id)
 );
-ALTER TABLE hoa_don add ma_giao_dich NVARCHAR(MAX) NULL
-Alter table hoa_don add phi_ship decimal(20, 0) NULL
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
