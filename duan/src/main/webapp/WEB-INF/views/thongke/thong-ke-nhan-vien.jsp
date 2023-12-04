@@ -47,7 +47,10 @@
                     <tr>
                         <th>Tên nhân viên</th>
                         <th>Số sản phẩm đã bán</th>
-                        <th>Tiền thu</th>
+                        <th>Doanh thu chưa đổi trả</th>
+                        <th>Tiền đổi trả</th>
+                        <th>Phí ship</th>
+                        <th>Doanh thu thực tế thu về</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -56,6 +59,9 @@
                         <tr>
                             <td>${DTNV.getTenNhanVien()}</td>
                             <td>${DTNV.getSoLuongSP()}</td>
+                            <td>${DTNV.getDoanhThuCu()}</td>
+                            <td>${DTNV.getTienDoiTra()}</td>
+                            <td>${DTNV.getPhiShip()}</td>
                             <td>${DTNV.getDoanhThu()}</td>
                         </tr>
                     </c:forEach>

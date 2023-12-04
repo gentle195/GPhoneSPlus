@@ -74,6 +74,7 @@
                         <th>Số lượng sản phẩm đã bán</th>
                         <th>Doanh thu chưa đổi trả</th>
                         <th>Tiền đổi trả</th>
+                        <th>Phí ship</th>
                         <th>Doanh thu thực tế</th>
                     </tr>
                     </thead>
@@ -85,6 +86,7 @@
                             <td>${DT.getSoLuongSP()}</td>
                             <td>${DT.getDoanhThuCu()}</td>
                             <td>${DT.getTienDoiTra()}</td>
+                            <td>${DT.getPhiShip()}</td>
                             <td>${DT.getDoanhThu()}</td>
                         </tr>
                     </c:forEach>

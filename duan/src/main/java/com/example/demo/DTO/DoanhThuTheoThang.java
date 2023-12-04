@@ -10,6 +10,7 @@ public interface DoanhThuTheoThang {
     BigDecimal getDoanhThu();
     BigDecimal getTienDoiTra();
     BigDecimal getDoanhThuCu();
+    BigDecimal getPhiShip();
     String getTen();
 
 }

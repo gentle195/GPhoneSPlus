@@ -7,9 +7,9 @@ public interface DoanhThuNhanVien {
     String getTenNhanVien();
     Integer getSoLuongSP();
     BigDecimal getDoanhThu();
-    BigDecimal getGiaMuaMin();
-    BigDecimal getGiaMuaMax();
-    BigDecimal getDoanhThuTrungBinh();
+    BigDecimal getTienDoiTra();
+    BigDecimal getDoanhThuCu();
+    BigDecimal getPhiShip();
     String getTen();
 
 }
