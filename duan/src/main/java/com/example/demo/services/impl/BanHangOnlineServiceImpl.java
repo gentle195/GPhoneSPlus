@@ -300,7 +300,10 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
         return decimalFormat.format(number);
     }
 
-
+    @Override
+    public List<ChiTietSanPham> timkiemTrangChu(String ten) {
+        return banHangOnLinerepository.timkiemTrangChu(ten);
+    }
 //    @Override
 //    public Boolean ThemSPvaoGHCT(String idkh, String idctsp) {
 //System.out.println("-------"+idkh+"------"+idctsp);
