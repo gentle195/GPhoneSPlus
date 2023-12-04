@@ -270,7 +270,7 @@
                             <div style="text-align: center">
                                 <button type="submit" class="btn btn-primary mr-2"
                                         onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                    ADD
+                                    Thêm Thông Tin
                                 </button>
                             </div>
                         </form>
@@ -293,7 +293,6 @@
                     <div class="col-12 grid-margin">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Thêm màn hình</h4>
                                 <form class="form-sample">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -421,29 +420,27 @@
                 <form:form action="/san-pham/modal-add-hang-sp" method="post" modelAttribute="hangSP">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Thêm Hãng</h4>
                             <form class="forms-sample">
                                 <div class="form-group">
                                     <form:label path="ten"><b>Tên:</b></form:label>
-                                    <form:input path="ten" class="form-control"></form:input>
-                                    <form:errors path="ten"></form:errors>
+                                    <form:input path="ten" class="form-control" id="nhapTen"/>
+                                    <span class="text-danger" id="nhapTen1"></span>
                                 </div>
 
                                 <div class="form-group">
                                     <form:label path="xuatSu"><b>Xuất sứ:</b></form:label>
-                                    <form:input path="xuatSu" class="form-control"></form:input>
-                                    <form:errors path="xuatSu"></form:errors>
+                                    <form:input path="xuatSu" class="form-control" id="nhapXuatSu"/>
+                                    <span class="text-danger" id="nhapXuatSu1"></span>
                                 </div>
 
                                 <div class="form-group">
                                     <form:label path="moTa"><b>Mô Tả:</b></form:label>
                                     <form:textarea class="form-control" id="moTa" path="moTa"
-                                                   rows="3"></form:textarea>
-                                    <form:errors path="moTa" cssStyle="color: red"></form:errors>
+                                                   rows="3"/>
                                 </div>
                                 <div style="text-align: center">
                                     <button type="submit" class="btn btn-primary mr-2"
-                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                            onclick="return validateFormHang()" id="btnHang">
                                         ADD
                                     </button>
                                 </div>
@@ -470,7 +467,6 @@
                 <form:form action="/san-pham/modal-add-camera" method="post" modelAttribute="camera">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Thêm Camera</h4>
                             <form class="forms-sample">
                                 <div class="form-group">
                                     <form:label path="thongSo"><b>Thông số Camera:</b></form:label>
@@ -512,7 +508,6 @@
                            enctype="multipart/form-data">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Thêm Ảnh</h4>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-4">
@@ -608,132 +603,32 @@
 
 </body>
 <script>
-    function validateFormSanPham() {
-        var tenSanPham = document.getElementById("tenSanPham").value;
-        var kichThuoc = document.getElementById("kichThuoc").value;
-        var trongLuong = document.getElementById("trongLuong").value;
-        var chatLieu = document.getElementById("chatLieu").value;
-        var isValid = true;
-        if (tenSanPham.trim() === "" || tenSanPham.trim().length < 6) {
-            document.getElementById("tenSanPhamError").innerHTML = "Tên sản phẩm không được để trống và phải có tối thiểu 6 kí tự";
-            isValid = false;
-        } else {
-            document.getElementById("tenSanPhamError").innerHTML = ""; // Xóa thông báo lỗi
-            if (kichThuoc.trim() === "") {
-                document.getElementById("kichThuocError").innerHTML = "Kích thước không được để trống";
-                isValid = false;
-            } else {
-                document.getElementById("kichThuocError").innerHTML = ""; // Xóa thông báo lỗi
-                if (trongLuong.trim() === "") {
-                    document.getElementById("trongLuongError").innerHTML = "Trọng lượng không được để trống";
-                    isValid = false;
-                } else {
-                    document.getElementById("trongLuongError").innerHTML = ""; // Xóa thông báo lỗi
-                    if (chatLieu.trim() === "") {
-                        document.getElementById("chatLieuError").innerHTML = "Chất liệu không được để trống";
-                        isValid = false;
-                    } else {
-                        document.getElementById("chatLieuError").innerHTML = ""; // Xóa thông báo lỗi
-                    }
-                }
-            }
-
-
-        }
-        if (!isValid) {
-            return false;
-        }
-
-    }
-
-    function validateFormPin() {
+    function validateFormHang() {
         // Lấy giá trị từ các ô input
-        var loaiPin = document.getElementById("loaiPin").value;
-        var congNghePin = document.getElementById("congNghePin").value;
-        var moTa = document.getElementById("moTa").value;
+        var ten = document.getElementById("nhapTen").value;
+        var xuatSu = document.getElementById("nhapXuatSu").value;
 
         // Khai báo biến để theo dõi việc xác thực
         var isValid = true;
+        var btnPin = document.getElementById("btnHang");
 
         // Kiểm tra từng ô input và hiển thị thông báo lỗi nếu cần
-        if (loaiPin.trim() === "") {
-            document.getElementById("loaiPinError").innerHTML = "Loại Pin không được để trống";
-            isValid = false;
-        } else {
-            document.getElementById("loaiPinError").innerHTML = ""; // Xóa thông báo lỗi
-        }
-
-        if (congNghePin.trim() === "") {
-            document.getElementById("congNghePinError").innerHTML = "Công nghệ Pin không được để trống";
-            isValid = false;
-        } else {
-            document.getElementById("congNghePinError").innerHTML = "";
-
-
-        }
-
-        if (loaiPin.trim() === "" || congNghePin.trim() === "") {
-            alert("Hãy điền đủ thông tin!");
-            isValid = false;
-        }
-        // Nếu có lỗi, ngăn form được gửi đi
-        if (!isValid) {
+        if (ten.trim() === "") {
+            document.getElementById("nhapTen1").innerHTML = "Tên hãng không được để trống";
+            btnPin.type = "button";
             return false;
-        }
-    }
-
-    function validateFormChip() {
-        // Lấy giá trị từ các ô input
-        var tenChip = document.getElementById("tenChip").value;
-        var loaiChip = document.getElementById("loaiChip").value;
-        var soNhan = parseInt(document.getElementById("soNhan").value);
-
-        // Khai báo biến để theo dõi việc xác thực
-        var isValid = true;
-
-        // Kiểm tra từng ô input và hiển thị thông báo lỗi nếu cần
-        if (tenChip.trim() === "" || tenChip.trim().length <= 6) {
-            document.getElementById("tenChipError").innerHTML = "Tên chip không được để trống và tối thiểu có 6 kí tự";
-            isValid = false;
         } else {
-            document.getElementById("tenChipError").innerHTML = ""; // Xóa thông báo lỗi
-            if (loaiChip.trim() === "" || loaiChip.trim().length <= 2) {
-                document.getElementById("loaiChipError").innerHTML = "Loại chip không được để trống";
-                isValid = false;
+            document.getElementById("nhapTen1").innerHTML = ""; // Xóa thông báo lỗi
+            if (xuatSu.trim() === "") {
+                document.getElementById("nhapXuatSu1").innerHTML = "Xuất sứ không được để trống";
+                btnPin.type = "button";
+                return false;
             } else {
-                document.getElementById("loaiChipError").innerHTML = "";
-                if (soNhan <= 0) {
-                    document.getElementById("soNhanError").innerHTML = "Số nhân phải lớn hơn 0";
-                    isValid = false;
-                } else {
-                    document.getElementById("soNhanError").innerHTML = "";
-                }
+                document.getElementById("nhapXuatSu1").innerHTML = "";
+                btnPin.type = "summit";
+                return true;
             }
-
         }
-        if (tenChip.trim() === "" || loaiChip.trim() === "") {
-            alert("Hãy điền đủ thông tin!");
-            isValid = false;
-        }
-        // Nếu có lỗi, ngăn form được gửi đi
-        if (!isValid) {
-            return false;
-        }
-    }
-
-    function validateFormMauSac() {
-        var tenMauSac = document.getElementById("tenMauSac").value;
-        var isValid = true;
-        if (tenMauSac.trim() === 0 || tenMauSac.trim().length < 6) {
-            document.getElementById("tenMauSacError").innerHTML = "Tên màu sắc không được để trống và phải lớn hơn 6 kí tự";
-            isValid = false;
-        } else {
-            document.getElementById("tenMauSacError").innerHTML = "";
-        }
-        if (!isValid) {
-            return false;
-        }
-
     }
 
     const imageInput = document.getElementById('anhmoi');

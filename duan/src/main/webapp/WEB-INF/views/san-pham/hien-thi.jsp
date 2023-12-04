@@ -79,7 +79,7 @@
                             <div style="text-align: center">
                                 <button type="submit" class="btn btn-primary mr-2"
                                         onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                    Lọc
+                                    Lọc Thông Tin
                                 </button>
                             </div>
 
@@ -124,7 +124,7 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table id="example" class="display" style="color:black; width: 2600px ">
+                        <table id="example" class="display" style="color:black; width: 2900px ">
                             <thead>
                             <tr>
                                 <th>Mã SP</th>

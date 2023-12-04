@@ -138,7 +138,7 @@ public class ChiTietSanPhamController {
     public String add(@Valid @ModelAttribute(name = "chitietsanpham") ChiTietSanPham chiTietSanPham,
                       BindingResult result, Model model, @RequestParam("images") MultipartFile multipartFile) throws IOException {
 
-        if (result.hasErrors()||chiTietSanPham.getSanPham()==null) {
+        if (result.hasErrors() ||chiTietSanPham.getSanPham()==null) {
 
 
             model.addAttribute("Pin", new Pin());
@@ -386,11 +386,12 @@ public class ChiTietSanPhamController {
             }
             chiTietSanPham.setUrlAnh(fileName1);
         }
-
+        ChiTietSanPham ct =chiTietSanPhamService.findById(id);
         LocalDate localDate = LocalDate.now();
         chiTietSanPham.setNgayCapNhat(Date.valueOf(localDate));
         chiTietSanPham.setNgayTao(ngay);
         chiTietSanPham.setTinhTrang(0);
+        chiTietSanPham.setKhuyenMai(ct.getKhuyenMai());
 
 
         chiTietSanPhamService.update(id, chiTietSanPham);

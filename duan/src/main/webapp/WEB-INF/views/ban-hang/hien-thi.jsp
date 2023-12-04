@@ -292,6 +292,7 @@
                                                         Thừa:</label>
                                                     <div class="col-sm-9">
                                                         <input class="form-control" type="text" id="ketQua" readonly/>
+                                                        <label id="ketQua1" style="color: red"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -795,7 +796,22 @@
             return false;
         }
     }
+    document.getElementById("tienKhachDua").addEventListener("keyup", function () {
+        tinhTienThua();
+    });
 
+    function tinhTienThua() {
+        var tongTien = parseFloat(document.getElementById("tienCanThanhToan").value);
+        var tienKhachDua = parseFloat(document.getElementById("tienKhachDua").value);
+        var tienThua = tienKhachDua - tongTien;
+
+        var ketQuaElement = document.getElementById("ketQua");
+        if (tienThua >= 0) {
+            ketQuaElement.value = tienThua.toFixed(2);
+        } else {
+            ketQuaElement.value = "Khách đưa không đủ tiền.";
+        }
+    }
     function checkhd() {
         var sdthd = document.getElementById("sdthd").value;
         var tien = document.getElementById("tienKhachDua").value;
@@ -820,7 +836,7 @@
                     return false;
                 } else {
                     document.getElementById('tienKhachDua1').innerHTML = '';
-                    if (ketQua % 1 !== 0 && ketQua < 0) {
+                    if (ketQua % 1 !== 0 && ketQua < 0 || ketQua=='Khách đưa không đủ tiền.') {
                         document.getElementById('bthd').type = 'button';
                         return false;
                     } else {
@@ -842,22 +858,7 @@
     }
 
 
-    document.getElementById("tienKhachDua").addEventListener("keyup", function () {
-        tinhTienThua();
-    });
 
-    function tinhTienThua() {
-        var tongTien = parseFloat(document.getElementById("tienCanThanhToan").value);
-        var tienKhachDua = parseFloat(document.getElementById("tienKhachDua").value);
-        var tienThua = tienKhachDua - tongTien;
-
-        var ketQuaElement = document.getElementById("ketQua");
-        if (tienThua >= 0) {
-            ketQuaElement.value = tienThua.toFixed(2);
-        } else {
-            ketQuaElement.value = "Khách đưa không đủ tiền.";
-        }
-    }
 
     document.getElementById("emailkh").addEventListener("keyup", function () {
         taiKhoan();
