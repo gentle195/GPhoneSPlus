@@ -2096,6 +2096,81 @@ public class BanHangOnlineController {
 
         return "ban-hang-online/trang_hoa_don_khach_hang";
     }
+    @PostMapping("/ban-hang-online/trang-chu/tim-kiem")
+    public String trangchutimkiem(
+            Model model,
+            @RequestParam("trangchutimkiem") String trangchutimkiem
+    ) {
+        System.out.println("-----"+banHangOnlineService.timkiemTrangChu(trangchutimkiem).size());
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+        }
+//
+        model.addAttribute("hangds", hangSanPhamService.findAll0());
+        model.addAttribute("camds", cameraService.findAll0());
+        model.addAttribute("mands", manHinhService.findAll0());
+        model.addAttribute("mauds", mauSacService.findAll0());
+        model.addAttribute("ramds", ramService.findAll0());
+        model.addAttribute("romds", romService.findAll0());
+        model.addAttribute("pinds", pinService.findAll0());
+        model.addAttribute("dungds", dungLuongPinService.findAll0());
+        model.addAttribute("chipds", chipService.findAll0());
+        model.addAttribute("sands", sanPhamService.findAll0());
+        double tong = 0;
+        Integer lamchon = 0;
+        for (ChiTietSanPham ct : banHangOnlineService.timkiemTrangChu(trangchutimkiem)) {
+            if (banHangOnlineService.soluongcon(String.valueOf(ct.getId())) > 0) {
+                tong = tong + 1;
+                lamchon = lamchon + 1;
+            }
+        }
+        double tb = tong / 8;
+        lamchon = lamchon / 8;
+        if (tb % 1 > 0) {
+            lamchon = lamchon + 1;
+        }
+        model.addAttribute("lamchon1", lamchon);
+        model.addAttribute("giamgia", banHangOnlineService);
+        model.addAttribute("banhangonline", banHangOnlineService);
+        model.addAttribute("listsp", banHangOnlineService.timkiemTrangChu(trangchutimkiem));
+        //gio hang
+        if (idkhachhang.equals("1")) {
+
+        } else {
+            model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId()));
+        }
+        model.addAttribute("tttong", 1);
+//        //gia max
+        Long max = Long.valueOf('0');
+        for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
+
+            if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                max = Long.valueOf(String.valueOf(ct.getGiaBan()));
+            }
+        }
+//System.out.println("taco---"+max);
+        model.addAttribute("max", String.valueOf(max));
+
+
+        return "ban-hang-online/trang-loc-sanpham";
+
+
+    }
+
+    @GetMapping("/ban-hang-online/trang-chu/tim-kiem-loc/{trangchutimkiem}")
+    public String loctrangchutimkiem(
+            Model model,
+            @PathVariable("trangchutimkiem") String trangchutimkiem
+    ) {
+        System.out.println("-------"+trangchutimkiem);
+        model.addAttribute("listsp", banHangOnlineService.timkiemTrangChu(trangchutimkiem));
+
+
+        return "ban-hang-online/singfle_pase_tim_kiem_trang_chu";
+    }
 
 }
 

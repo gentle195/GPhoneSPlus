@@ -4,6 +4,7 @@ import com.example.demo.models.ChiTietSanPham;
 import com.example.demo.models.GioHangChiTiet;
 import com.example.demo.models.KhuyenMai;
 import com.example.demo.repositories.KhuyenMaiRepository;
+import com.example.demo.services.BanHangOnlineService;
 import com.example.demo.services.ChiTietSanPhamService;
 import com.example.demo.services.GioHangChiTietService;
 import jakarta.validation.Valid;
@@ -34,7 +35,16 @@ public class KhuyenMaiController {
     private ChiTietSanPhamService chiTietSanPhamService;
     @Autowired
     private KhuyenMaiRepository khuyenMaiRepository;
-
+    @Autowired
+    private BanHangOnlineService banHangOnlineService;
+    @Scheduled(fixedRate = 1000)
+    public void soCTSPbangsoIMEI(){
+        for (ChiTietSanPham km:chiTietSanPhamService.findAll()) {
+            km.setSoLuong(banHangOnlineService.soluongcon(String.valueOf(km.getId())));
+            chiTietSanPhamService.add(km);
+        }
+        khuyenMaiRepository.xoalienketKM1();
+    };
     @Scheduled(fixedRate = 1000)
     public void kiemtrangayhientaiVSkhoangtimegiamgia(){
         for (KhuyenMai km:khuyenMaiRepository.findAll()) {

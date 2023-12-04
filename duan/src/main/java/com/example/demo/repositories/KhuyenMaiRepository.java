@@ -31,7 +31,7 @@ public interface KhuyenMaiRepository extends JpaRepository<KhuyenMai, UUID> {
             "SELECT CAST(@bienb AS int);", nativeQuery = true)
     Integer tonggiamgia(UUID idctsp);
 
-    @Query("select hkh from DiaChi hkh  where hkh.tinhTrang=0")
+    @Query("select hkh from KhuyenMai hkh  where hkh.tinhTrang=0")
     List<KhuyenMai> getall0();
 
     @Query("select hkh from KhuyenMai hkh  where hkh.tinhTrang=0")

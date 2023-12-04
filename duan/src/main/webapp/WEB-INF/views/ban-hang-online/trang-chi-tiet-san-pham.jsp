@@ -201,7 +201,11 @@
 </head>
 
 <body>
-
+<%--style="position: fixed;--%>
+<%--top: 50%;left: 50%;transform: translate(-50%,-50%);--%>
+<%--display: none;z-index: 2;width: 7cm;height: 3cm;--%>
+<%--background-color: #0b3564;text-align: center;--%>
+<%--color: white;border-radius: 5% 5% 5% 5%"--%>
 
 <!-- HEADER -->
 <header>
@@ -283,6 +287,8 @@
                                 <input class="input" placeholder="Tìm kiếm sản phẩm...">
                                 <button class="search-btn">Search</button>
                             </div>
+
+
                         </form>
                     </div>
                 </div>
@@ -1642,6 +1648,8 @@ color: white;border-radius: 5% 5% 5% 5%"
     }
     formatAndDisplayValue("tongtienghtt");
 </script>
+
+
 <!-- jQuery Plugins -->
 <!-- jQuery Plugins -->
 <script src="/jsbanhang/jquery.min.js"></script>

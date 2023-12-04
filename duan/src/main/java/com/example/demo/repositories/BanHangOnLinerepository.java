@@ -298,5 +298,12 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
     @Query(value = "delete from  HoaDonChiTiet hdct where hdct.id in (select hdct.id from  HoaDonChiTiet hdct where hdct.hoaDon.id=:idhd and hdct.imei.chiTietSanPham.id=:idctsp)")
     void XoahdcttheoIDHDvsIDCTSP(@Param("idhd") UUID idhd, @Param("idctsp") UUID idctsp);
 
+    @Query("select ct from ChiTietSanPham ct left join SanPham sp on ct.sanPham.id=sp.id " +
+            "left join HangSanPham hang on sp.hangSanPham.id=hang.id left join Ram ram on ct.ram.id=ram.id" +
+            " left join Rom rom on ct.rom.id=rom.id left join Pin pin on ct.pin.id=pin.id left join MauSac ms on ct.mauSac.id=ms.id " +
+            "left join Chip chip on ct.chip.id=chip.id where ct.tinhTrang=0 and  ct.soLuong>0 and" +
+            " (sp.ten like %:ten% or hang.ten like %:ten% or ram.dungLuong like %:ten% or rom.dungLuong like %:ten% " +
+            "or pin.loaiPin like %:ten% or ms.ten like %:ten% or chip.ten like %:ten%)")
+    List<ChiTietSanPham> timkiemTrangChu(String ten);
 
 }
