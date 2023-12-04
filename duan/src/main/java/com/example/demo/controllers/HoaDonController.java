@@ -868,7 +868,7 @@ public class HoaDonController {
             for (HoaDonChiTiet hdct : listHoaDonChiTiet
             ) {
                 System.out.println(hdct.getId());
-                imeiService.updatImeiChoXuLy(Date.valueOf(LocalDate.now()), hdct.getImei().getId());
+                imeiService.updatImei(Date.valueOf(LocalDate.now()), hdct.getImei().getId());
             }
         }
         return "redirect:/hoa-don/hien-thi";
@@ -889,7 +889,7 @@ public class HoaDonController {
             for (HoaDonChiTiet hdct : listHoaDonChiTiet
             ) {
                 System.out.println(hdct.getId());
-                imeiService.updatImeiChoXuLy(Date.valueOf(LocalDate.now()), hdct.getImei().getId());
+                imeiService.updatImei1(Date.valueOf(LocalDate.now()), hdct.getImei().getId());
             }
         }
         return "redirect:/hoa-don/hien-thi";

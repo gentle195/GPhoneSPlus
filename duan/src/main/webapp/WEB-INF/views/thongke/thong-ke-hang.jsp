@@ -47,8 +47,9 @@
                     <thead>
                     <tr>
                         <th>Thương hiệu</th>
-                        <th>Số lượng sản phẩm đã bán</th>
-                        <th>Doanh thu tháng</th>
+                        <th>Doanh thu cũ</th>
+                        <th>Tiền đổi trả</th>
+                        <th>Doanh thu thực tế</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -56,8 +57,9 @@
                     <c:forEach items="${listDoanhThuHang}" var="DTH" varStatus="index">
                         <tr>
                             <td>${DTH.getTenHang()}</td>
-                            <td>${DTH.getSoLuongSP()}</td>
-                            <td>${DTH.getDoanhThu()}</td>
+                            <td>${DTH.getDoanhThuCu()}</td>
+                            <td>${DTH.getTienDoiTra()}</td>
+                            <td>${DTH.getDoanhThuThucTe()}</td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -82,8 +84,7 @@
     <c:forEach items="${listDoanhThuHang}" var="DTH" varStatus="index">
     data.push({
         tenHang: "${DTH.getTenHang()}",
-        doanhThu: ${DTH.getDoanhThu()},
-        soLuong: ${DTH.getSoLuongSP()}
+        doanhThu: ${DTH.getDoanhThuThucTe()},
     });
     </c:forEach>
 

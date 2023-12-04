@@ -4,13 +4,10 @@ import java.math.BigDecimal;
 
 public interface DoanhThuHang {
 
-    String getTenSanPham();
     String getTenHang();
-    Integer getSoLuongSP();
-    BigDecimal getDoanhThu();
-    BigDecimal getGiaMuaMin();
-    BigDecimal getGiaMuaMax();
-    BigDecimal getDoanhThuTrungBinh();
+    BigDecimal getTienDoiTra();
+    BigDecimal getDoanhThuThucTe();
+    BigDecimal getDoanhThuCu();
 
 }
 
