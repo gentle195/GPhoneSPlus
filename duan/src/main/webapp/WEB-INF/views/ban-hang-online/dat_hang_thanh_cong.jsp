@@ -292,12 +292,26 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form>
+                        <form action="/ban-hang-online/trang-chu/tim-kiem" method="post">
                             <div class="input-with-button">
-                                <input class="input" placeholder="Tìm kiếm sản phẩm...">
-                                <button class="search-btn">Search</button>
+
+                                <input type="text" id="searchInput" name="trangchutimkiem" placeholder="Tìm kiếm sản phẩm...">
+                                <%--                                    <button class="search-btn" type="submit">Search</button>--%>
+
+
+
                             </div>
                         </form>
+
+                        <div  style="  position: absolute;
+                        background-color: white;margin-top: 5px;
+                        width: 95%; overflow: hidden;z-index: 11;
+                        box-shadow: 0 1px 4px 0 rgba(0,0,0,.26);" id="searchResults" class="list-group">
+                            <div id="saochep"></div>
+                            <div id="danhsachloctimkiemTT" style="">
+
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- /SEARCH BAR -->
@@ -335,7 +349,8 @@
 
                                                         <br>
                                                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
-                                                        <label style="tbackground-color: white;border: 1px solid white">${ht.donGiaKhiGiam}đ</label>
+                                                        <label style="font-weight: bold">Đơn giá:</label>${ht.basoOchammotlamGHDGKG()}đ
+
                                                     </div>
                                                     <div style="width: 18%;">
                                                         <input type="checkbox" name="checkidghTT" value="${ht.id}"
@@ -353,9 +368,9 @@
                                         <div class="cart-summary">
                                             <small> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongsanphamchon()}
                                                 Sản phẩm được chọn</small>
-                                            <h5>
-                                                Tổng:${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
-                                                đ</h5>
+                                            <br>
+                                            <label>Tổng:</label><label id="tongtienghtt">${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}</label><label>đ</label>
+
                                         </div>
                                         <div class="cart-btns">
                                             <a href="/ban-hang-online/xem-gio-hang">Xem giỏ hàng</a>
@@ -707,6 +722,44 @@
 <script>
     function anbt() {
         document.getElementById('taikhoancuatoi').click();
+    }
+</script>
+<script>
+    var searchResultsContainer = document.getElementById("searchResults");
+
+    document.getElementById("searchInput").addEventListener("input", function() {
+        var searchValue = this.value.trim().toLowerCase();
+        showSearchResults(searchValue);
+    });
+
+    function showSearchResults(searchValue) {
+        if (searchValue.length > 0) {
+            // document.getElementById('saochep').innerHTML=   document.getElementById('searchInput').value
+            loadgiaodientimkiemTrangchu("/ban-hang-online/trang-chu/tim-kiem-loc/"+document.getElementById('searchInput').value);
+            searchResultsContainer.style.display = "";
+        } else {
+            // Nếu không có ký tự nào, ẩn kết quả
+            searchResultsContainer.style.display = "none";
+        }
+    }
+
+
+</script>
+<script>
+    function loadgiaodientimkiemTrangchu(interfaceUrl) {
+        fetch(interfaceUrl)
+            .then(response => response.text())
+            .then(data => {
+                const content = document.getElementById('danhsachloctimkiemTT');
+                content.innerHTML = data;
+
+            })
+            .catch(error => {
+                console.error('Error loading interface:', error);
+            });
+
+
+
     }
 </script>
 <script src="/jsbanhang/jquery.min.js"></script>
