@@ -215,7 +215,8 @@
                                                 <c:choose>
                                                     <c:when test="${hdct.hinhThucDoiTra ==0 }">
                                                         <button class='btn btn-primary chonSanPhamDoiTraButton'
-                                                                data-idhdctmoi="${hdct.hoaDonChiTiet.id}"
+                                                                data-idhdctmoi="${hdct.hoaDonChiTiet.donGia}"
+                                                                data-idhdctmoi1="${hdct.hoaDonChiTiet.id}"
                                                                 onclick='showChonSanPhamModalWithDonGia(${hdct.hoaDonChiTiet.donGia})'>
                                                             Chọn
                                                         </button>
@@ -274,7 +275,7 @@
                                     <form>
                                         <!-- Thêm các trường và nút submit cho form tiền đổi trả -->
                                         <div class="form-group">
-                                            <label for="tienDoiTra">Tiền đổi trả:</label>
+                                            <label for="tienDoiTra" style="color: black">Tiền đổi trả:</label>
                                             <input type="text" value="${tongTien}" class="form-control" id="tienDoiTra"
                                                    name="tienDoiTra" readonly>
                                         </div>
@@ -282,7 +283,10 @@
                                     </form>
                                 </div>
                                 <div style="text-align: center">
-                                    <div class='btn btn-primary' id='xacNhanButton' >Xác nhận</div>
+                                    <div class='btn btn-primary' id='xacNhanButton'
+                                         onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                        Xác nhận
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -690,32 +694,32 @@
         // Có thể thực hiện gửi giá trị này trong hàm fetch
     }
 </script>
-<script>
-    var globalHdctId; // Biến toàn cục để lưu giá trị hdctId
+<%--<script>--%>
+<%--    var globalHdctId; // Biến toàn cục để lưu giá trị hdctId--%>
 
-    // Lắng nghe sự kiện click trên button
-    document.querySelectorAll('.chonSanPhamDoiTraButton').forEach(button => {
-        button.addEventListener('click', function () {
-            // Lấy giá trị hdct.id từ thuộc tính data
-            var hdctId = this.getAttribute('data-idhdctmoi');
+<%--    // Lắng nghe sự kiện click trên button--%>
+<%--    document.querySelectorAll('.chonSanPhamDoiTraButton').forEach(button => {--%>
+<%--        button.addEventListener('click', function () {--%>
+<%--            // Lấy giá trị hdct.id từ thuộc tính data--%>
+<%--            var hdctId = this.getAttribute('data-idhdctmoi');--%>
 
-            // Lưu giá trị hdctId vào biến toàn cục
-            globalHdctId = hdctId;
+<%--            // Lưu giá trị hdctId vào biến toàn cục--%>
+<%--            globalHdctId = hdctId;--%>
 
-            // Gọi hàm để xử lý với giá trị hdct.id
-            chonSanPham();
-        });
-    });
+<%--            // Gọi hàm để xử lý với giá trị hdct.id--%>
+<%--            chonSanPham();--%>
+<%--        });--%>
+<%--    });--%>
 
-    // Hàm xử lý khi click
-    function chonSanPham() {
-        // Sử dụng giá trị hdct.id từ biến toàn cục
-        console.log('Selected hdct.id:', globalHdctId);
+<%--    // Hàm xử lý khi click--%>
+<%--    function chonSanPham() {--%>
+<%--        // Sử dụng giá trị hdct.id từ biến toàn cục--%>
+<%--        console.log('Selected hdct.id:', globalHdctId);--%>
 
-        // Gửi giá trị hdct.id đến trang khác thông qua Ajax
-        // Có thể thực hiện gửi giá trị này trong hàm fetch
-    }
-</script>
+<%--        // Gửi giá trị hdct.id đến trang khác thông qua Ajax--%>
+<%--        // Có thể thực hiện gửi giá trị này trong hàm fetch--%>
+<%--    }--%>
+<%--</script>--%>
 <script>
     document.querySelectorAll('.chonSanPhamButton').forEach(button => {
         button.addEventListener('click', function () {
@@ -790,7 +794,6 @@
     }
 
 </script>
-
 <script>
 
     $('#selectKhachHang1').select2({
@@ -804,78 +807,34 @@
     });
 </script>
 <script>
-    const gia = document.querySelectorAll('.btn-primary .chonSanPhamDoiTraButton');
+    var globalHdctId;
+    var globalHdctId1; // Biến toàn cục để lưu giá trị hdctId
 
-    gia.forEach(aTag => {
-        aTag.addEventListener('click', () => {
-            // Lấy ID của sản phẩm
-            const giaTien = aTag.closest('tr').querySelector('td:first-child').textContent;
+    // Lắng nghe sự kiện click trên button
+    document.querySelectorAll('.chonSanPhamDoiTraButton').forEach(button => {
+        button.addEventListener('click', function () {
+            // Lấy giá trị hdct.id từ thuộc tính data
+            var hdctId = this.getAttribute('data-idhdctmoi');
+            var hdctId1 = this.getAttribute('data-idhdctmoi1');
 
-            // Lưu ID của sản phẩm vào input
-            const input = document.querySelector('#giaTienSP');
-            input.value = giaTien;
-            console.log(giaTien)
+            // Lưu giá trị hdctId vào biến toàn cục
+            globalHdctId = hdctId;
+            globalHdctId1 = hdctId1;
+
+            // Gọi hàm để xử lý với giá trị hdct.id
+            chonSanPham();
         });
     });
-    $('div[id^="exampleModalChonSanPham"]').on('show.bs.modal', async function (e) {
-        const gia = $(document).find('#giaTienSP').val();
-        const url = "http://localhost:8080/ban-hang/search-san-pham?search-san-pham=" + gia;
-        console.log(gia)
-        try {
-            const resp = await fetch(url);
-            const data = await resp.json();
-            console.log(data)
 
-            // Hiển thị dữ liệu tìm kiếm
-            let html = ``;
-            for (let i = 0; i < data.length; i++) {
-                const ctsp = data[i];
-                let productPrice;
-                if (ctsp.khuyenMai) {
-                    productPrice = ctsp.giaBan - ctsp.giaBan * ctsp.khuyenMai.soTienGiam / 100;
-                } else {
-                    productPrice = ctsp.giaBan;
-                }
-                const tr = `
-            <tr>
-                <td style="display:none;">` + ctsp.id + `</td>
-                <td>` + ctsp.sanPham.ma + `</td>
-                <td>` + ctsp.sanPham.ten + `</td>
-                <td align="center"><img src="/uploads/` + ctsp.urlAnh + `" width="40" height="40"></td>
-                <td>` + ctsp.sanPham.hangSanPham.ten + `</td>
-                <td>` + ctsp.mauSac.ten + `</td>
-                <td>` + ctsp.ram.dungLuong + `</td>
-                <td>` + ctsp.rom.dungLuong + `</td>
-                <td>` + productPrice + `</td>
-                <td>` + ctsp.soLuong + `</td>
-                <td>
-                    <a class="btn btn-warning btn-icon-text"
-                    data-bs-toggle="modal" data-bs-target="#nhapImei">Nhập IMEI</a>
-                </td>
-            </tr>
-            `;
-                html += tr;
-            }
-            parentModal.find(".san_pham_search").html(html);
-            const aTags = document.querySelectorAll('.btn-warning.btn-icon-text');
+    // Hàm xử lý khi click
+    function chonSanPham() {
+        // Sử dụng giá trị hdct.id từ biến toàn cục
+        console.log('Selected hdct.id:', globalHdctId);
 
-            aTags.forEach(aTag => {
-                aTag.addEventListener('click', () => {
-                    // Lấy ID của sản phẩm
-                    const productId = aTag.closest('tr').querySelector('td:first-child').textContent;
+        // Gửi giá trị hdct.id đến trang khác thông qua Ajax
+        // Có thể thực hiện gửi giá trị này trong hàm fetch
+    }
 
-                    // Lưu ID của sản phẩm vào input
-                    const input = document.querySelector('#idCTSPham');
-                    input.value = productId;
-                });
-            });
-
-        } catch (err) {
-            console.error(err)
-        }
-    });
-</script>
-<script>
     const aTags = document.querySelectorAll('.btn-warning.btn-icon-text');
 
     aTags.forEach(aTag => {
@@ -893,6 +852,8 @@
         const parentModal = btn.closest('.modal'); // Lấy modal cha gần nhất của nút "Tìm kiếm" được nhấn
         const search = parentModal.find("#imeiSearchInput").val();
         const idCTSPInputElement = $(document).find('#idCTSPham').val();
+        const donGia = globalHdctId;
+        console.log(donGia)
         const url = "http://localhost:8080/ban-hang/search-imei?search-imei=" + search;
         console.log(idCTSPInputElement)
         console.log(url)
@@ -920,15 +881,23 @@
                 for (let i = 0; i < data.length; i++) {
                     const imei = data[i];
                     const idImei = imei.chiTietSanPham.id;
-                    if (idImei.trim() === idCTSPInputElement.trim()) {
+                    const giaBann = imei.chiTietSanPham.giaBan;
+                    if (idImei.trim() === idCTSPInputElement.trim() && giaBann <= donGia) {
                         const tr = `
                         <tr>
                             <td>` + imei.chiTietSanPham.sanPham.ten + `</td>
                             <td>` + imei.soImei + `</td>
                             <td>` + (imei.tinhTrang == 0 ? "Chưa bán" : "Đã bán") + `</td>
-                            <td><a href="/doi-tra/them-imei/` + imei.id + `/` + doitraId + `/` + globalHdctId + `">Thêm IMEI</a></td>
+                            <td><a href="/doi-tra/them-imei/` + imei.id + `/` + doitraId + `/` + globalHdctId1 + `">Thêm IMEI</a></td>
                         </tr>
                         `;
+                        html += tr;
+                    } else if (idImei.trim() === idCTSPInputElement.trim() && giaBann >= donGia) {
+                        const tr = `
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: red"><strong>Sản phẩm này hơn giá so với sản phẩm cũ của bạn!</strong></td>
+                    </tr>
+                    `;
                         html += tr;
                     } else {
                         const tr = `

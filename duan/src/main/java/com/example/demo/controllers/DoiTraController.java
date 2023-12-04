@@ -180,8 +180,6 @@ public class DoiTraController {
 
         List<DoiTraChiTiet> loc = filterDoiTraChiTietByImeiNotNull(dtctlist);
 
-        System.out.println(hdctdt.toString());
-        System.out.println("lisst" + dtctlist);
         model.addAttribute("dtctlist", loc);
 
 //        model.addAttribute("dtct",hdctdt);
@@ -196,11 +194,6 @@ public class DoiTraController {
 
         model.addAttribute("hangds", hangSanPhamService.findAll0());
         model.addAttribute("dulieu", doiTraService.findById(doitraId));
-        System.out.println(doitraId + "id doi tra day ne hoho hi h ih");
-        System.out.println("dữ liệu " + doiTraService.findById(doitraId).toString()
-        );
-
-
         model.addAttribute("camds", cameraService.findAll0());
         model.addAttribute("mands", manHinhService.findAll0());
         model.addAttribute("mauds", mauSacService.findAll0());
@@ -225,24 +218,8 @@ public class DoiTraController {
             idList.add(doiTraChiTiet.getHoaDonChiTiet().getId());
 
         }
-
-//
-//        List<HoaDonChiTiet> hdctdt=doiTraChiTietService.getHoaDonChiTietByIdList(idList);
         List<DoiTraChiTiet> dtctlist = doiTraChiTietService.getDoiTraChiTietByIdList(idList);
         model.addAttribute("listdtct", dtctlist);
-//        model.addAttribute("check",dtctlist);
-//
-//
-//        model.addAttribute("dtct",dtctlist);
-//
-//        List<DoiTraChiTiet> loc = filterDoiTraChiTietByImeiNotNull(dtctlist);
-//
-//        System.out.println(hdctdt.toString());
-//        System.out.println("lisst"+dtctlist);
-//        model.addAttribute("dtctlist",loc);
-
-//        model.addAttribute("dtct",hdctdt);
-
 
         List<HoaDonChiTiet> hdct = doiTraService.getHoaDonChiTiet(id);
 
@@ -253,9 +230,6 @@ public class DoiTraController {
 
         model.addAttribute("hangds", hangSanPhamService.findAll0());
         model.addAttribute("dulieu", doiTraService.findById(doitraId));
-
-        System.out.println("dữ liệu " + doiTraService.findById(doitraId).toString()
-        );
 
 
         model.addAttribute("camds", cameraService.findAll0());
@@ -299,43 +273,38 @@ public class DoiTraController {
         hd.setMa("DT" + String.valueOf(doiTraService.findAll().size() + 1));
         hd.setTinhTrang(0);
         hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
-        hd.setNgayDoiTra(Date.valueOf(LocalDate.now()));
+        hd.setNgayTao(Date.valueOf(LocalDate.now()));
         HoaDon hoaDon = hoaDonService.findById(hoadonId);
         hd.setHoaDon(hoaDon); // Sử dụng hoadonId ở đây
         hd.setKhachHang(hoaDon.getKhachHang());
         doiTraService.add(hd);
-        System.out.println("id này" +
-                hd.getId());
         model.addAttribute("doitraId", hd.getId());
         // Trả về dữ liệu nếu cần (không biết cụ thể gì bạn muốn trả về)
         return "redirect:/doi-tra/hien-thi/";
     }
 
 
-
     @GetMapping("/them-imei/{imeiId}/{doitraId}/{hdctId}")
-    public String themImei(@PathVariable UUID imeiId, Model model, @PathVariable UUID hdctId,@PathVariable UUID doitraId) {
+    public String themImei(@PathVariable UUID imeiId, Model model, @PathVariable UUID hdctId, @PathVariable UUID doitraId) {
 
-        HoaDonChiTiet hdct=hoaDonChiTietService.findById(hdctId);
+        HoaDonChiTiet hdct = hoaDonChiTietService.findById(hdctId);
 
         DoiTra doiTra = doiTraService.findById(doitraId);
-        DoiTraChiTiet doiTraChiTiet=doiTraChiTietService.findByHDCT(hdctId);
+        DoiTraChiTiet doiTraChiTiet = doiTraChiTietService.findByHDCT(hdctId);
         IMEI imei = imeiService.findById(imeiId);
-        if (doiTraChiTiet.getImei()!=null){
+        if (doiTraChiTiet.getImei() != null) {
             long millis = System.currentTimeMillis();
             Date date = new Date(millis);
-            UUID imeiIdne=doiTraChiTiet.getImei().getId();
-            System.out.println("Id imei"+doiTraChiTiet.getImei().getId());
-            IMEI imei0=imeiService.findById(doiTraChiTiet.getImei().getId());
+            UUID imeiIdne = doiTraChiTiet.getImei().getId();
+            IMEI imei0 = imeiService.findById(doiTraChiTiet.getImei().getId());
             imei0.setTinhTrang(0);
             imei0.setNgayCapNhat(Date.valueOf(LocalDate.now()));
 
-            imeiService.update(doiTraChiTiet.getImei().getId(),imei0);
-            System.out.println("Thanh cong");
+            imeiService.update(doiTraChiTiet.getImei().getId(), imei0);
             doiTraChiTiet.setImei(imei);
             doiTraChiTiet.setTinhTrang(0);
 
-            if (imei.getChiTietSanPham().getKhuyenMai()==null) {
+            if (imei.getChiTietSanPham().getKhuyenMai() == null) {
                 doiTraChiTiet.setTienDoiTra(hdct.getImei().getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan()));
                 doiTraChiTiet.setDonGia(imei.getChiTietSanPham().getGiaBan());
             } else {
@@ -350,7 +319,7 @@ public class DoiTraController {
             doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
 
             imeiService.updatImeiChoXuLy(date, imeiId);
-        }else{
+        } else {
 
             doiTraChiTiet.setImei(imei);
             doiTraChiTiet.setTinhTrang(0);
@@ -372,7 +341,6 @@ public class DoiTraController {
         }
 
 
-
         model.addAttribute("doitraId", doitraId);
 
 
@@ -386,8 +354,6 @@ public class DoiTraController {
     public List<IMEI> searchIMEI(Model model, @RequestParam("search-imei") String search,
                                  @ModelAttribute("HoaDon") HoaDon hoaDon, @ModelAttribute("modalAddKhachHang") KhachHang khachHang) {
         List<IMEI> listIMEI = imeiService.searchOn(search);
-        System.out.println(listIMEI);
-//        model.addAttribute("HoaDon", hoaDonnn);
         model.addAttribute("listImei", listIMEI);
         List<HoaDon> list = hoaDonService.find();
         model.addAttribute("listHoaDon", list);
@@ -420,7 +386,6 @@ public class DoiTraController {
         HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietService.findById(hdctId);
         DoiTra doiTra1 = doiTraService.findById(doitraId);
         doiTra1.setTinhTrang(2);
-        System.out.println("id đổi trả nữa là " + doitraId);
         doiTraService.update(doitraId, doiTra1);
         return "redirect:/doi-tra/hien-thi";
     }
@@ -450,7 +415,6 @@ public class DoiTraController {
                                  @RequestParam UUID doitraId, @RequestParam UUID hdctId, @RequestParam String lyDo,
                                  @RequestParam int hienTrang, HttpServletRequest request) {
 
-        System.out.println("hdct id đây này ok" + hdctId);
         DoiTra doiTra = doiTraService.findById(doitraId);
         HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietService.findById(hdctId);
 
@@ -484,38 +448,42 @@ public class DoiTraController {
 
                 IMEI imei = imeiService.findById(dtct.getHoaDonChiTiet().getImei().getId());
                 imei.setTinhTrang(4);
+                imei.setNgayCapNhat(Date.valueOf(LocalDate.now()));
                 imeiService.update(dtct.getHoaDonChiTiet().getImei().getId(), imei);
-                if (dtct.getImei()!=null){
-                    IMEI imei1=imeiService.findById(dtct.getImei().getId());
+                if (dtct.getImei() != null) {
+                    IMEI imei1 = imeiService.findById(dtct.getImei().getId());
 
                     imei1.setTinhTrang(1);
-                    imeiService.update(dtct.getImei().getId(),imei1);
+                    imei1.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+                    imeiService.update(dtct.getImei().getId(), imei1);
                 }
                 dtct.setTinhTrang(2);
                 doiTraChiTietService.update(dtct.getId(), dtct);
-                ChiTietSanPham chiTietSanPham=chiTietSanPhamService.getChiTiet(dtct.getImei().getId());
-                chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong()-1);
-                chiTietSanPhamService.update(chiTietSanPham.getId(),chiTietSanPham);
+                ChiTietSanPham chiTietSanPham = chiTietSanPhamService.getChiTiet(dtct.getImei().getId());
+                chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong() - 1);
+                chiTietSanPhamService.update(chiTietSanPham.getId(), chiTietSanPham);
 
-                System.out.println("imei là" + dtct.getHoaDonChiTiet().getImei().getTinhTrang());
             } else if (dtct.getHienTrangSanPham() == 1) {
                 IMEI imei = imeiService.findById(dtct.getHoaDonChiTiet().getImei().getId());
                 imei.setTinhTrang(0);
+                imei.setNgayCapNhat(Date.valueOf(LocalDate.now()));
                 imeiService.update(dtct.getHoaDonChiTiet().getImei().getId(), imei);
-                if (dtct.getImei()!=null){
-                    IMEI imei1=imeiService.findById(dtct.getImei().getId());
+                if (dtct.getImei() != null) {
+                    IMEI imei1 = imeiService.findById(dtct.getImei().getId());
                     imei1.setTinhTrang(1);
-                    imeiService.update(dtct.getImei().getId(),imei1);
+                    imei1.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+                    imeiService.update(dtct.getImei().getId(), imei1);
                 }
                 dtct.setTinhTrang(2);
                 doiTraChiTietService.update(dtct.getId(), dtct);
-                ChiTietSanPham chiTietSanPham=chiTietSanPhamService.getChiTiet(dtct.getImei().getId());
-                chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong()-1);
-                chiTietSanPhamService.update(chiTietSanPham.getId(),chiTietSanPham);
+                ChiTietSanPham chiTietSanPham = chiTietSanPhamService.getChiTiet(dtct.getImei().getId());
+                chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong() - 1);
+                chiTietSanPhamService.update(chiTietSanPham.getId(), chiTietSanPham);
             }
         }
         doiTra.setTinhTrang(2);
         doiTra.setNgayDoiTra(Date.valueOf(LocalDate.now()));
+        doiTra.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
         doiTraService.update(doitraId, doiTra);
         return "redirect:/doi-tra/hien-thi";
     }
@@ -721,7 +689,6 @@ public class DoiTraController {
                       @PathVariable UUID doitraId, HttpServletRequest request
     ) {
         DoiTra doiTra = doiTraService.findById(doitraId);
-        System.out.println("Doi tra" + doiTra);
         List<DoiTraChiTiet> listCHiTietDoiTra = doiTraChiTietService.getDoiTraChiTietByDoiTraId(doitraId);
         for (DoiTraChiTiet dtct : listCHiTietDoiTra
         ) {
@@ -753,4 +720,12 @@ public class DoiTraController {
         return "redirect:/doi-tra/hien-thi";
     }
 
+    @ResponseBody
+    @GetMapping("/loc-theo-gia/{id}")
+    public List<ChiTietSanPham> themSanPham(Model model,
+                                            @PathVariable("id") UUID id) {
+        List<ChiTietSanPham> list = chiTietSanPhamService.searchGia(id);
+        System.out.println(list);
+        return list;
+    }
 }

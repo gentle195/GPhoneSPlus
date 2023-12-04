@@ -176,13 +176,18 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
 
     @Override
     public Integer soKhachHang() {
-       return chiTietSanPhamRepository.soKhachHang();
+        return chiTietSanPhamRepository.soKhachHang();
 
     }
 
     @Override
     public Integer soNV() {
         return chiTietSanPhamRepository.soNV();
+    }
+
+    @Override
+    public List<ChiTietSanPham> searchGia(UUID id) {
+        return chiTietSanPhamRepository.searchGia(id);
     }
 
 
