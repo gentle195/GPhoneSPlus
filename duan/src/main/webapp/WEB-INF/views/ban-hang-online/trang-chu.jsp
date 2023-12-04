@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <%--phan trang--%>
     <link href="https://cdn.jsdelivr.net/<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -1505,7 +1505,29 @@ npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <%--    <p>More content...</p>--%>
 <%--    <p>More content...</p>--%>
 <%--</div>--%>
+<<<<<<< Updated upstream
 <!-- HEADER -->
+=======
+
+
+
+
+<%--    <div class="input-group mb-3">--%>
+<%--        <input type="text" class="form-control" id="searchInput" placeholder="Tìm kiếm">--%>
+<%--    </div>--%>
+
+<%--    <div style="border: 1px solid red" id="searchResults" class="list-group">--%>
+<%--<div id="saochep"></div>--%>
+<%--        <div id="danhsachloctimkiemTT" style="border: 2px solid">--%>
+
+<%--        </div>--%>
+<%--    </div>--%>
+
+
+
+<!-- HEADER -->
+
+>>>>>>> Stashed changes
 <header>
 
     <div id="top-header">
@@ -1583,12 +1605,35 @@ npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
+<<<<<<< Updated upstream
                         <form>
                             <div class="input-with-button">
                                 <input class="input" placeholder="Tìm kiếm sản phẩm...">
                                 <button class="search-btn">Search</button>
                             </div>
                         </form>
+=======
+                        <form action="/ban-hang-online/trang-chu/tim-kiem" method="post">
+                            <div class="input-with-button">
+
+                                <input type="text" id="searchInput" name="trangchutimkiem" placeholder="Tìm kiếm sản phẩm...">
+                                <%--                                    <button class="search-btn" type="submit">Search</button>--%>
+
+
+
+                            </div>
+                        </form>
+
+                        <div  style="  position: absolute;
+                        background-color: white;margin-top: 5px;
+                        width: 95%; overflow: hidden;z-index: 11;
+                        box-shadow: 0 1px 4px 0 rgba(0,0,0,.26);" id="searchResults" class="list-group">
+                            <div id="saochep"></div>
+                            <div id="danhsachloctimkiemTT" style="">
+
+                            </div>
+                        </div>
+>>>>>>> Stashed changes
                     </div>
                 </div>
                 <!-- /SEARCH BAR -->
@@ -2591,6 +2636,47 @@ color: white;border-radius: 5% 5% 5% 5%"
     }
     formatAndDisplayValue("tongtienghtt");
 </script>
+<<<<<<< Updated upstream
+=======
+<script>
+    var searchResultsContainer = document.getElementById("searchResults");
+
+    document.getElementById("searchInput").addEventListener("input", function() {
+        var searchValue = this.value.trim().toLowerCase();
+        showSearchResults(searchValue);
+    });
+
+    function showSearchResults(searchValue) {
+        if (searchValue.length > 0) {
+            // document.getElementById('saochep').innerHTML=   document.getElementById('searchInput').value
+            loadgiaodientimkiemTrangchu("/ban-hang-online/trang-chu/tim-kiem-loc/"+document.getElementById('searchInput').value);
+            searchResultsContainer.style.display = "";
+        } else {
+            // Nếu không có ký tự nào, ẩn kết quả
+            searchResultsContainer.style.display = "none";
+        }
+    }
+
+
+</script>
+<script>
+    function loadgiaodientimkiemTrangchu(interfaceUrl) {
+        fetch(interfaceUrl)
+            .then(response => response.text())
+            .then(data => {
+                const content = document.getElementById('danhsachloctimkiemTT');
+                content.innerHTML = data;
+
+            })
+            .catch(error => {
+                console.error('Error loading interface:', error);
+            });
+
+
+
+    }
+</script>
+>>>>>>> Stashed changes
 <!-- jQuery Plugins -->
 <script src="/jsbanhang/jquery.min.js"></script>
 <script src="/jsbanhang/bootstrap.min.js"></script>
