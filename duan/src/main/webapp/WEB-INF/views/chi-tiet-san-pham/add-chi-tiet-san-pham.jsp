@@ -229,7 +229,7 @@
                         <div style="text-align: center">
                             <button type="submit" class="btn btn-primary mr-2"
                                     onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                ADD
+                                Thêm Thông Tin
                             </button>
                         </div>
                     </form>
@@ -276,7 +276,7 @@
                             <%--                        <button type="submit" class="btn btn-primary" onclick="validateForm()" >ADD</button>--%>
                         <button type="submit" class="btn btn-primary mr-2" id="btnPin"
                                 onclick="return validateFormPin()">
-                            ADD
+                            Thêm Thông Tin
                         </button>
                     </div>
                 </form:form>
@@ -327,7 +327,7 @@
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary" id="btnChip"
-                                onclick="return validateFormChip()">ADD
+                                onclick="return validateFormChip()">Thêm Thông Tin
                         </button>
                     </div>
                 </form:form>
@@ -363,7 +363,7 @@
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary"
-                                onclick="return validateFormMauSac()">ADD
+                                onclick="return validateFormMauSac()">Thêm Thông Tin
                         </button>
                     </div>
                 </form:form>
@@ -405,7 +405,7 @@
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary"
-                        >ADD
+                        >Thêm Thông Tin
                         </button>
                     </div>
                 </form:form>
@@ -448,7 +448,7 @@
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary"
-                        >ADD
+                        >Thêm Thông Tin
                         </button>
                     </div>
                 </form:form>
@@ -576,7 +576,7 @@
 
                     <div class="text-center">
                         <button type="submit" class="btn btn-success" id="btt" onclick="return validateFormSanPham()">
-                            ADD
+                            Thêm Thông Tin
                         </button>
                     </div>
                 </form:form>

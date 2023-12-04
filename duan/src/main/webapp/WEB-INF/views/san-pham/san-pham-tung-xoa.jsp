@@ -57,7 +57,7 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table id="example" class="display" style="color: black">
+                        <table id="example" class="display" style="color: black; width: 2900px">
                             <thead>
                             <tr>
                                 <th>Mã SP</th>
@@ -78,8 +78,7 @@
                                 <th>Số khe sim</th>
                                 <th>Tình trạng</th>
                                 <th>Mô tả</th>
-
-                                <th colspan="2">Action</th>
+                                <th >Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -124,5 +123,4 @@
     </div>
 </div>
 </body>
-
 </html>

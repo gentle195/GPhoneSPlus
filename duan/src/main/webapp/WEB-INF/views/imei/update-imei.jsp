@@ -78,7 +78,7 @@
                 </div>
                 <div style="text-align: center">
                     <button type="submit" class="btn btn-primary mr-2"
-                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">SAVE
+                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Cập Nhật Thông Tin
                     </button>
                 </div>
             </form>

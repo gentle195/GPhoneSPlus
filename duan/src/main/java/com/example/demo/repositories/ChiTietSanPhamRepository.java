@@ -18,7 +18,7 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             "left join HangSanPham hang on sp.hangSanPham.id=hang.id left join Ram ram on ct.ram.id=ram.id" +
             " left join Rom rom on ct.rom.id=rom.id left join Pin pin on ct.pin.id=pin.id left join MauSac ms on ct.mauSac.id=ms.id " +
             "left join Chip chip on ct.chip.id=chip.id where ct.tinhTrang=0 and ( sp.ten like %:ten% or hang.ten like %:ten% or ram.dungLuong like %:ten% or rom.dungLuong like %:ten% " +
-            "or pin.loaiPin like %:ten% or ms.ten like %:ten% or chip.ten like %:ten% or ct.giaBan <=CAST(:ten AS BIGDECIMAL))")
+            "or pin.loaiPin like %:ten% or ms.ten like %:ten% or chip.ten like %:ten%)")
     List<ChiTietSanPham> search(String ten);
 
     @Query("select ct from ChiTietSanPham  ct where ct.tinhTrang=0 and ct.giaBan <= " +

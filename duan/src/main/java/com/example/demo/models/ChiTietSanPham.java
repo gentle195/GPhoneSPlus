@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -44,6 +45,7 @@ public class ChiTietSanPham {
     private String urlAnh;
 
     @DecimalMin(value = "0.01", message = "Giá bán phải là số và lớn hơn 0")
+    @DecimalMax(value = "100000000", message = "Giá bán tối đa mà sản phẩm cửa hàng bán là 100 triệu")
     @NotNull(message = "Không để trống thông tin")
     @Column(name = "gia_ban")
     private BigDecimal giaBan;
@@ -59,12 +61,14 @@ public class ChiTietSanPham {
     private int tinhTrang;
 
     @DecimalMin(value = "1", message = "Năm bảo hành phải lớn hơn 0")
+    @DecimalMax(value = "3", message = "Năm bảo hành tối đa là 3 năm")
     @NotNull(message = "Không để trống thông tin")
     @Column(name = "nam_bao_hanh")
     private int namBaoHanh;
 
-//    @DecimalMin(value = "1", message = "Số lượng tồn phải lớn hơn 0")
-//    @NotNull(message = "Không để trống thông tin")
+    @DecimalMin(value = "1", message = "Số lượng tồn phải lớn hơn 0")
+    @DecimalMax(value = "500", message = "Số lượng tồn tối đa cửa hàng tiếp nhận là 500 chiếc")
+    @NotNull(message = "Không để trống thông tin")
     @Column(name = "so_luong_ton")
     private int soLuong;
 
