@@ -40,8 +40,8 @@ public class KhuyenMaiController {
     @Scheduled(fixedRate = 1000)
     public void soCTSPbangsoIMEI(){
         for (ChiTietSanPham km:chiTietSanPhamService.findAll()) {
-            km.setSoLuong(banHangOnlineService.soluongcon(String.valueOf(km.getId())));
-            chiTietSanPhamService.add(km);
+//            km.setSoLuong(banHangOnlineService.soluongcon(String.valueOf(km.getId())));
+//            chiTietSanPhamService.add(km);
         }
         khuyenMaiRepository.xoalienketKM1();
     };
