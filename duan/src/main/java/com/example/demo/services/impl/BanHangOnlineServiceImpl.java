@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 @Service
@@ -302,7 +303,14 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     public List<ChiTietSanPham> timkiemTrangChu(String ten) {
-        return banHangOnLinerepository.timkiemTrangChu(ten);
+        List<ChiTietSanPham> list=banHangOnLinerepository.timkiemTrangChu(ten);
+        List<ChiTietSanPham> list1=new ArrayList<>();
+        for (ChiTietSanPham ct:list) {
+            if(banHangOnLinerepository.soluongcon(ct.getId())>0){
+                list1.add(ct);
+            }
+        }
+        return list1;
     }
 //    @Override
 //    public Boolean ThemSPvaoGHCT(String idkh, String idctsp) {
