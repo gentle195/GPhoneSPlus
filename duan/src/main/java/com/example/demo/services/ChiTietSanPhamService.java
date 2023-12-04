@@ -37,31 +37,39 @@ public interface ChiTietSanPhamService {
 
     public Boolean delete(UUID id);
 
-    List<ChiTietSanPham> getAllTTOn();
+    public List<ChiTietSanPham> getAllTTOn();
 
-    List<ChiTietSanPham> getAllTTOff();
+    public List<ChiTietSanPham> getAllTTOff();
 
-    List<ChiTietSanPham> finAllTTOff();
+    public List<ChiTietSanPham> finAllTTOff();
 
-    List<ChiTietSanPham> findAllHang(UUID id);
+    public List<ChiTietSanPham> findAllHang(UUID id);
 
-    List<ChiTietSanPham> findAllMan(UUID id);
+    public List<ChiTietSanPham> findAllMan(UUID id);
 
-    List<ChiTietSanPham> findAllChip(UUID id);
+    public List<ChiTietSanPham> findAllChip(UUID id);
 
-    List<ChiTietSanPham> findAllRam(UUID id);
+    public List<ChiTietSanPham> findAllRam(UUID id);
 
-    List<ChiTietSanPham> findAllRom(UUID id);
+    public List<ChiTietSanPham> findAllRom(UUID id);
 
-    List<ChiTietSanPham> findAllPin(UUID id);
+    public List<ChiTietSanPham> findAllPin(UUID id);
 
-    List<ChiTietSanPham> findAllCam(UUID id);
+    public List<ChiTietSanPham> findAllCam(UUID id);
+
     Integer getCountTongSP();
+
     Integer cacDonHang();
+
     Integer tongSPDaBan();
+
     Integer cacDonHangChoXuLy();
+
     Integer soKhachHang();
+
     Integer soNV();
+
+    public List<ChiTietSanPham> searchGia(UUID id);
 }
 
 

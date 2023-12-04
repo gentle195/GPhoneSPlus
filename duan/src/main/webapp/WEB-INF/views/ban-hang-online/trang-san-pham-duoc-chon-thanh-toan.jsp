@@ -465,8 +465,8 @@
                                     <div><img src="/uploads/${ht.chiTietSanPham.urlAnh}" height="50px" width="50px">
                                     </div>
 
-                                    <div> ${ht.chiTietSanPham.sanPham.ten},ram:${ht.chiTietSanPham.ram.dungLuong},rom:${ht.chiTietSanPham.rom.dungLuong}<br>
-                                        màu:${ht.chiTietSanPham.mauSac.ten}<label style="margin-left: 40px"></label>Số lượng:${ht.soLuong}
+                                    <div> ${ht.chiTietSanPham.sanPham.ten}, ram: ${ht.chiTietSanPham.ram.dungLuong}, rom: ${ht.chiTietSanPham.rom.dungLuong}<br>
+                                        màu sắc: ${ht.chiTietSanPham.mauSac.ten}<label style="margin-left: 40px"></label>Số lượng: ${ht.soLuong}
                                     </div>
                                     <div></div>
                                     <div>${ht.tichDONGIAvsSL()}</div>

@@ -19,24 +19,23 @@ public interface DoiTraChiTietService {
 
     public Boolean delete(UUID id);
 
-    List<HoaDonChiTiet> getHoaDonChiTiet(UUID id);
+    public List<HoaDonChiTiet> getHoaDonChiTiet(UUID id);
 
-    List<HoaDonChiTiet> getHoaDonChiTietByIdList(@Param("idList") List<UUID> idList);
+    public List<HoaDonChiTiet> getHoaDonChiTietByIdList(@Param("idList") List<UUID> idList);
 
     public List<DoiTraChiTiet> getDoiTraChiTietByIdList(@Param("idList") List<UUID> idList);
 
-    List<DoiTraChiTiet> getAll();
+    public List<DoiTraChiTiet> getAll();
 
     public boolean existsByDoiTraAndHoaDonChiTiet(DoiTra doiTra, HoaDonChiTiet hoaDonChiTiet);
 
     public void saveAll(List<DoiTraChiTiet> doiTraChiTiets);
 
-
-    List<DoiTraChiTiet> getDoiTraChiTietByDoiTraId(UUID id);
+    public List<DoiTraChiTiet> getDoiTraChiTietByDoiTraId(UUID id);
 
     public DoiTraChiTiet findById(UUID id);
 
-    DoiTraChiTiet findByHDCT(UUID id);
+    public DoiTraChiTiet findByHDCT(UUID id);
 
-
+    public DoiTraChiTiet findByDTCT(UUID id);
 }

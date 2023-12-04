@@ -20,15 +20,19 @@ public class DoiTraChiTietServiceImpl implements DoiTraChiTietService {
     @Autowired
     DoiTraChiTietRepository doiTraChiTietRepository;
 
-    public Page<DoiTraChiTiet> getAll(Pageable pageable){
+    public Page<DoiTraChiTiet> getAll(Pageable pageable) {
         return doiTraChiTietRepository.fillAll0(pageable);
-    };
+    }
+
+    ;
 
 
     @Override
-   public List<HoaDonChiTiet> getHoaDonChiTiet(UUID id){
+    public List<HoaDonChiTiet> getHoaDonChiTiet(UUID id) {
         return doiTraChiTietRepository.getHoaDonChiTiet(id);
-    };
+    }
+
+    ;
 
     @Override
     public DoiTraChiTiet add(DoiTraChiTiet doiTraChiTiet) {
@@ -50,9 +54,11 @@ public class DoiTraChiTietServiceImpl implements DoiTraChiTietService {
     }
 
     @Override
-   public List<DoiTraChiTiet> getDoiTraChiTietByDoiTraId(UUID id){
+    public List<DoiTraChiTiet> getDoiTraChiTietByDoiTraId(UUID id) {
         return doiTraChiTietRepository.getDoiTraChiTietByDoiTraId(id);
-    };
+    }
+
+    ;
 
     @Override
     public DoiTraChiTiet findById(UUID id) {
@@ -60,14 +66,18 @@ public class DoiTraChiTietServiceImpl implements DoiTraChiTietService {
     }
 
     @Override
-    public List<HoaDonChiTiet> getHoaDonChiTietByIdList(@Param("idList") List<UUID> idList){
+    public List<HoaDonChiTiet> getHoaDonChiTietByIdList(@Param("idList") List<UUID> idList) {
         return doiTraChiTietRepository.getHoaDonChiTietByIdList(idList);
-    };
+    }
+
+    ;
 
     @Override
-    public List<DoiTraChiTiet> getDoiTraChiTietByIdList(@Param("idList") List<UUID> idList){
+    public List<DoiTraChiTiet> getDoiTraChiTietByIdList(@Param("idList") List<UUID> idList) {
         return doiTraChiTietRepository.getDoiTraChiTietByIdList(idList);
-    };
+    }
+
+    ;
 
 
     @Override
@@ -81,6 +91,7 @@ public class DoiTraChiTietServiceImpl implements DoiTraChiTietService {
         }
         return null;
     }
+
     @Override
     public Boolean delete(UUID id) {
         if (id != null) {
@@ -94,8 +105,15 @@ public class DoiTraChiTietServiceImpl implements DoiTraChiTietService {
     }
 
 
-   public DoiTraChiTiet findByHDCT(UUID id){
+    public DoiTraChiTiet findByHDCT(UUID id) {
         return doiTraChiTietRepository.findByHDCT(id);
-    };
+    }
+
+    @Override
+    public DoiTraChiTiet findByDTCT(UUID id) {
+        return doiTraChiTietRepository.findByDTCT(id);
+    }
+
+
 
 }

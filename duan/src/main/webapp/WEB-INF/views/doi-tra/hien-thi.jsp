@@ -209,11 +209,11 @@
                                         </a>
 
                                         <a href="/doi-tra/huy/${doitra.id}"
-                                           class="btn btn-success btn-icon-text"
+                                           class="btn btn-danger btn-icon-text"
                                            tabindex="-1"
                                            role="button"
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                            <i class="ti-file btn-icon-prepend"></i>
+                                            <i class="fas fa-times-circle"></i>
                                             Hủy
                                         </a>
 

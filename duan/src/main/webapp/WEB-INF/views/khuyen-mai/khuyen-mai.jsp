@@ -9,18 +9,18 @@
 
     <title>Focus - Bootstrap Admin Dashboard </title>
     <!-- Favicon icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
     <style>
 
 
-
-        .notifications{
+        .notifications {
             position: absolute;
             top: 30px;
             right: 20px;
         }
-        .toast1{
+
+        .toast1 {
             position: relative;
             padding: 10px;
             color: #fff;
@@ -30,42 +30,46 @@
             grid-template-columns: 70px 1fr 70px;
             border-radius: 5px;
             --color: #0abf30;
-            background-image:
-                    linear-gradient(
-                            to right, #0abf3055, #22242f 30%
-                    );
+            background-image: linear-gradient(
+                    to right, #0abf3055, #22242f 30%
+            );
             animation: show 0.3s ease 1 forwards
         }
-        .toast1 i{
+
+        .toast1 i {
             color: var(--color);
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: x-large;
         }
-        .toast1 .title{
+
+        .toast1 .title {
             font-size: x-large;
             font-weight: bold;
         }
-        .toast1 span, .toast i:nth-child(3){
+
+        .toast1 span, .toast i:nth-child(3) {
             color: #fff;
             opacity: 0.6;
         }
-        @keyframes show{
-            0%{
+
+        @keyframes show {
+            0% {
                 transform: translateX(100%);
             }
-            40%{
+            40% {
                 transform: translateX(-5%);
             }
-            80%{
+            80% {
                 transform: translateX(0%);
             }
-            100%{
+            100% {
                 transform: translateX(-10%);
             }
         }
-        .toast1::before{
+
+        .toast1::before {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -76,35 +80,36 @@
             box-shadow: 0 0 10px var(--color);
             animation: timeOut 5s linear 1 forwards
         }
-        @keyframes timeOut{
-            to{
+
+        @keyframes timeOut {
+            to {
                 width: 0;
             }
         }
-        .toast1.error{
+
+        .toast1.error {
             --color: #f24d4c;
-            background-image:
-                    linear-gradient(
-                            to right, #f24d4c55, #22242F 30%
-                    );
+            background-image: linear-gradient(
+                    to right, #f24d4c55, #22242F 30%
+            );
         }
-        .toast1.warning{
+
+        .toast1.warning {
             --color: #e9bd0c;
-            background-image:
-                    linear-gradient(
-                            to right, #e9bd0c55, #22242F 30%
-                    );
+            background-image: linear-gradient(
+                    to right, #e9bd0c55, #22242F 30%
+            );
         }
-        .toast1.info{
+
+        .toast1.info {
             --color: #3498db;
-            background-image:
-                    linear-gradient(
-                            to right, #3498db55, #22242F 30%
-                    );
+            background-image: linear-gradient(
+                    to right, #3498db55, #22242F 30%
+            );
         }
     </style>
 </head>
-<body >
+<body>
 
 <%--<div style="width: 5cm;height: 5cm; overflow: auto;border: 1px solid #ccc;">--%>
 
@@ -169,14 +174,13 @@
 <%--</div>--%>
 
 
-
 <!-- The Modal -->
 <div class="modal" id="myModalthemkm">
     <div class="modal-dialog">
         <div class="modal-content">
-<br>
+            <br>
             <!-- Modal Header -->
-            <div >
+            <div>
                 <h4 style="text-align: center">Thêm khuyến mãi</h4>
             </div>
 
@@ -185,39 +189,43 @@
                 <form:form action="/khuyen-mai/add" method="post" modelAttribute="km" id="formlink">
 
 
-<br>
+                    <br>
 
-                                 Tên khuyến mãi: <form:errors path="ten" cssStyle="color: red"></form:errors>
-                                <form:input  class="form-control" placeholder="" path="ten" value=""/>
-
-
-<br>
-
-                                Ngày bắt đầu:<form:errors path="ngayBatDau" cssStyle="color: red"></form:errors>
-                                <form:input class="form-control" placeholder="" path="ngayBatDau" type="datetime-local" />
+                    Tên khuyến mãi: <form:errors path="ten" cssStyle="color: red"></form:errors>
+                    <form:input class="form-control" placeholder="" path="ten" value=""/>
 
 
-<br>
+                    <br>
+
+                    Ngày bắt đầu:<form:errors path="ngayBatDau" cssStyle="color: red"></form:errors>
+                    <form:input class="form-control" placeholder="" path="ngayBatDau" type="datetime-local"/>
 
 
-                                 Ngày kết thúc:<label style="color: red">${momdalthongbaongayKT}</label><form:errors path="ngayKetThuc" cssStyle="color: red"></form:errors>
-                                 <form:input class="form-control" placeholder="" path="ngayKetThuc" type="datetime-local" />
+                    <br>
 
 
-<br>
-
-                               % giảm(0->50):<form:errors path="soTienGiam" cssStyle="color: red"></form:errors>
-                               <form:input   class="form-control" placeholder=""  path="soTienGiam" type="number" oninput="validateInput(this)" />
-
-<br>
+                    Ngày kết thúc:<label style="color: red">${momdalthongbaongayKT}</label><form:errors
+                        path="ngayKetThuc" cssStyle="color: red"></form:errors>
+                    <form:input class="form-control" placeholder="" path="ngayKetThuc" type="datetime-local"/>
 
 
-                                Mô tả:<form:errors path="moTa" cssStyle="color: red"></form:errors>
-                                <form:textarea id="motahkh" class="form-control" placeholder="" path="moTa" />
+                    <br>
 
-<br>
+                    % giảm(0->50):<form:errors path="soTienGiam" cssStyle="color: red"></form:errors>
+                    <form:input class="form-control" placeholder="" path="soTienGiam" type="number"
+                                oninput="validateInput(this)"/>
 
-                    <div align="center"> <button type="submit" class="btn btn-warning" id="bthkh" >ADD</button></div>
+                    <br>
+
+
+                    Mô tả:<form:errors path="moTa" cssStyle="color: red"></form:errors>
+                    <form:textarea id="motahkh" class="form-control" placeholder="" path="moTa"/>
+
+                    <br>
+
+                    <div align="center">
+                        <button type="submit" class="btn btn-warning" id="bthkh">ADD</button>
+                    </div>
 
 
                 </form:form>
@@ -230,20 +238,12 @@
 </div>
 
 
-
-
-
-
-
-
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="description" role="tabpanel"
          aria-labelledby="description-tab">
 
         <div class="card">
             <div class="card-body">
-
-
 
 
                 <form action="/khuyen-mai/tim-kiem" method="post" style="margin-left: 1cm;">
@@ -258,7 +258,8 @@
                         </div>
                     </div>
                 </form>
-                <button type="button" id="modalthemkm" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModalthemkm">
+                <button type="button" id="modalthemkm" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#myModalthemkm">
                     Thêm khuyến mãi
                 </button>
                 <br>
@@ -292,7 +293,7 @@
                                     <td>${ht.ngayKetThuc}</td>
                                     <td>${ht.ngayTao}</td>
                                     <td>${ht.ngayCapNhat}</td>
-                                    <td >
+                                    <td>
                                         <c:if test="${ht.tinhTrang==0}">
                                             Khuyến mãi đang áp dụng
                                         </c:if>
@@ -303,14 +304,14 @@
                                             Khuyến mãi chưa bắt đầu
                                         </c:if>
 
-                                           </td>
+                                    </td>
                                     <td>${ht.moTa}</td>
 
                                     <td>
-                                    <c:if test="${ht.tinhTrang==1}">
-                                        <a href="/khuyen-mai/detail-khuyen-mai/${ht.id}" class="btn btn-success"
-                                           onclick="return tbxd()">Xem khuyến mãi</a>
-                                    </c:if>
+                                        <c:if test="${ht.tinhTrang==1}">
+                                            <a href="/khuyen-mai/detail-khuyen-mai/${ht.id}" class="btn btn-success"
+                                               onclick="return tbxd()">Xem khuyến mãi</a>
+                                        </c:if>
 
                                         <c:if test="${ht.tinhTrang!=1}">
                                             <a href="/khuyen-mai/ap-dung-khuyen-mai/${ht.id}" class="btn btn-success"
@@ -356,111 +357,99 @@
 </div>
 
 
-
-
-
-
-
-
-<button style="display: none" id="modalapdung1khuyenmai" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModalapdungkhuyemmai">
+<button style="display: none" id="modalapdung1khuyenmai" type="button" class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#myModalapdungkhuyemmai">
     Bat modal ap dung 1 khuyeen mai
 </button>
 </div>
 
 <!-- The Modal -->
-<div class="modal" id="myModalapdungkhuyemmai" >
+<div class="modal" id="myModalapdungkhuyemmai">
     <div class="modal-dialog modal-xl">
-        <div class="modal-content" >
+        <div class="modal-content">
 
             <!-- Modal Header -->
             <div class="apdungthanhcong" style="margin-left: 85%;width:10%;z-index: 88;position: absolute"></div>
             <div style="margin-top: 0.5cm;">
-
                 <h4 align="center">Áp dụng khuyến mãi</h4>
-                <h4 align="center">${kmchon.ma}    </h4>
-
-
+                <h4 align="center">${kmchon.ma} </h4>
             </div>
-
             <!-- Modal body -->
             <div class="modal-body">
-                <table class="table" style="color: black">
-                    <thead>
-                    <tr style="background-color: #70c0b1">
-                        <th>
-                            STT
-                        </th>
-                        <th>
-                            Ảnh
-                        </th>
-                        <th>Sản Phẩm</th>
-                        <th>Đơn Giá</th>
-                        <th>% giảm</th>
-                        <th>Đơn giá khi giảm</th>
-                        <th>Chức năng</th>
+                <div class="table-responsive">
+                    <div>
+                        <table id="example" class="display" style="color: black;min-width:1200px">
+                            <thead>
+                            <tr style="background-color: #70c0b1">
+                                <th>
+                                    Ảnh
+                                </th>
+                                <th>Sản Phẩm</th>
+                                <th>Đơn Giá</th>
+                                <th>% giảm</th>
+                                <th>Đơn giá khi giảm</th>
+                                <th>Chức năng</th>
 
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${khuyenMaiRepository.getall0CTSP()}" var="ht" varStatus="stt">
-                        <tr>
-                            <td>
-                                ${stt.index}
-                            </td>
-                            <td>
-                                <img src="../../../uploads/${ht.urlAnh}" width="40" height="40"
-                                     style="border-radius:50% 50% 50% 50%">
-                            </td>
-                            <td>
-                                    sản phẩm:${ht.sanPham.ten},màu:${ht.mauSac.ten}<br>
-                                    dung lượng:${ht.ram.dungLuong},rom:${ht.rom.dungLuong}<br>
-                            </td>
-                            <td>
-                               ${ht.giaBan} VND
-                            </td>
-                            <td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${khuyenMaiRepository.getall0CTSP()}" var="ht" varStatus="stt">
+                                <tr>
+                                    <td>
+                                        <img src="../../../uploads/${ht.urlAnh}" width="40" height="40"
+                                             style="border-radius:50% 50% 50% 50%">
+                                    </td>
+                                    <td>
+                                        sản phẩm:${ht.sanPham.ten},màu:${ht.mauSac.ten}<br>
+                                        dung lượng:${ht.ram.dungLuong},rom:${ht.rom.dungLuong}<br>
+                                    </td>
+                                    <td>
+                                            ${ht.giaBan} VND
+                                    </td>
+                                    <td>
 
-                                ${ht.khuyenMai.soTienGiam}% <br>
-                                Mã khuyến mãi:${ht.khuyenMai.ma}<br>
-                                Tên khuyến mãi:${ht.khuyenMai.ten}<br>
-                                Bắt đầu:${ht.khuyenMai.ngayBatDau}<br>
-                                Kết thúc:${ht.khuyenMai.ngayKetThuc}
-                            </td>
-                            <td>
-                                    ${ht.giaBan-ht.giaBan/100*khuyenMaiRepository.tonggiamgia(ht.id)} VND
-                            </td>
-                            <td>
-                                <c:if test="${ht.khuyenMai==null}">
-                                    <a href="/khuyen-mai/chi-tiet-san-pham-ap-dung-khuyen-mai/${ht.id}/${kmchon.id}" class="btn btn-success"
-                                    >Áp dụng</a>
-                                </c:if>
-                                <c:if test="${ht.khuyenMai!=null}">
-                                    <c:if test="${ht.khuyenMai.tinhTrang!=0}">
-                                        <c:if test="${ht.khuyenMai.id==kmchon.id}">
-                                            Khuyến mãi này đang áp dụng sản phẩm này
-                                        </c:if>
-                                        <c:if test="${ht.khuyenMai.id!=kmchon.id}">
-                                            <a href="/khuyen-mai/chi-tiet-san-pham-ap-dung-khuyen-mai/${ht.id}/${kmchon.id}" class="btn btn-success"
+                                            ${ht.khuyenMai.soTienGiam}% <br>
+                                        Mã khuyến mãi:${ht.khuyenMai.ma}<br>
+                                        Tên khuyến mãi:${ht.khuyenMai.ten}<br>
+                                        Bắt đầu:${ht.khuyenMai.ngayBatDau}<br>
+                                        Kết thúc:${ht.khuyenMai.ngayKetThuc}
+                                    </td>
+                                    <td>
+                                            ${ht.giaBan-ht.giaBan/100*khuyenMaiRepository.tonggiamgia(ht.id)} VND
+                                    </td>
+                                    <td>
+                                        <c:if test="${ht.khuyenMai==null}">
+                                            <a href="/khuyen-mai/chi-tiet-san-pham-ap-dung-khuyen-mai/${ht.id}/${kmchon.id}"
+                                               class="btn btn-success"
                                             >Áp dụng</a>
                                         </c:if>
+                                        <c:if test="${ht.khuyenMai!=null}">
+                                            <c:if test="${ht.khuyenMai.tinhTrang!=0}">
+                                                <c:if test="${ht.khuyenMai.id==kmchon.id}">
+                                                    Khuyến mãi này đang áp dụng sản phẩm này
+                                                </c:if>
+                                                <c:if test="${ht.khuyenMai.id!=kmchon.id}">
+                                                    <a href="/khuyen-mai/chi-tiet-san-pham-ap-dung-khuyen-mai/${ht.id}/${kmchon.id}"
+                                                       class="btn btn-success"
+                                                    >Áp dụng</a>
+                                                </c:if>
 
-                                    </c:if>
-                                    <c:if test="${ht.khuyenMai.tinhTrang==0}">
-                                       Khuyến mãi đang được diễn ra
-                                    </c:if>
-                                </c:if>
+                                            </c:if>
+                                            <c:if test="${ht.khuyenMai.tinhTrang==0}">
+                                                Khuyến mãi đang được diễn ra
+                                            </c:if>
+                                        </c:if>
 
-                            </td>
+                                    </td>
 
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-
-
             <br>
-
         </div>
     </div>
 </div>
@@ -471,13 +460,8 @@
 </div>
 
 
-
-
-
-
-
-
-<button style="display: none" type="button" id="modaldetailupdatekm" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModalsuaKM">
+<button style="display: none" type="button" id="modaldetailupdatekm" class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#myModalsuaKM">
     Open modal
 </button>
 </div>
@@ -490,7 +474,7 @@
             <!-- Modal Header -->
             <div class="apdungthanhcongupdate" style="margin-left: 85%;width:10%;z-index: 88;position: absolute"></div>
 
-            <div >
+            <div>
                 <h4 style="text-align: center">UPDATE khuyến mãi</h4>
                 <h4 style="text-align: center">Mã khuyến mãi:${kmchon.ma}</h4>
             </div>
@@ -498,51 +482,57 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <form:form action="/khuyen-mai/update" method="post" modelAttribute="kmupdate" id="formlink">
-                 <div style="display: none">
-                     <form:input  class="form-control" placeholder="" path="id" value=""/>
-                     <form:input  class="form-control" placeholder="" path="ma" value=""/>
-                     <form:input  class="form-control" placeholder="" path="ngayTao" value=""/>
-                     <form:input  class="form-control" placeholder="" path="ngayCapNhat" value=""/>
-                     <form:input  class="form-control" placeholder="" path="loaiGiamGia" value=""/>
-                     <form:input  class="form-control" placeholder="" path="hinhThucGiamGia" value=""/>
-                     <form:input  placeholder="" path="ngayBatDau" type="text" id="input2"/>
-                     <form:input  placeholder="" path="ngayKetThuc" type="text"  id="input4"/>
-                 </div>
+                    <div style="display: none">
+                        <form:input class="form-control" placeholder="" path="id" value=""/>
+                        <form:input class="form-control" placeholder="" path="ma" value=""/>
+                        <form:input class="form-control" placeholder="" path="ngayTao" value=""/>
+                        <form:input class="form-control" placeholder="" path="ngayCapNhat" value=""/>
+                        <form:input class="form-control" placeholder="" path="loaiGiamGia" value=""/>
+                        <form:input class="form-control" placeholder="" path="hinhThucGiamGia" value=""/>
+                        <form:input placeholder="" path="ngayBatDau" type="text" id="input2"/>
+                        <form:input placeholder="" path="ngayKetThuc" type="text" id="input4"/>
+                    </div>
 
 
                     <br>
 
                     Tên khuyến mãi: <form:errors path="ten" cssStyle="color: red"></form:errors>
-                    <form:input  class="form-control" placeholder="" path="ten" value=""/>
+                    <form:input class="form-control" placeholder="" path="ten" value=""/>
 
 
                     <br>
 
                     Ngày bắt đầu:<form:errors path="ngayBatDau" cssStyle="color: red"></form:errors>
-                    <input value="${NBTCC}" name="NBDupdate" type="datetime-local" style="width: 100%" id="input1" oninput="updateInput2(this.value)">
+                    <input value="${NBTCC}" name="NBDupdate" type="datetime-local" style="width: 100%" id="input1"
+                           oninput="updateInput2(this.value)">
 
 
                     <br><br>
 
 
-                    Ngày kết thúc:<label style="color: red">${momdalthongbaongayKT1}</label><form:errors path="ngayKetThuc" cssStyle="color: red"></form:errors><br>
-                    <input value="${NKTCC}" name="NKTupdate" type="datetime-local" style="width: 100%" id="input3" oninput="updateInput4(this.value)">
+                    Ngày kết thúc:<label style="color: red">${momdalthongbaongayKT1}</label><form:errors
+                        path="ngayKetThuc" cssStyle="color: red"></form:errors><br>
+                    <input value="${NKTCC}" name="NKTupdate" type="datetime-local" style="width: 100%" id="input3"
+                           oninput="updateInput4(this.value)">
 
 
                     <br><br>
 
                     % giảm(0->50):<form:errors path="soTienGiam" cssStyle="color: red"></form:errors>
-                    <form:input   class="form-control" placeholder=""  path="soTienGiam" type="number" oninput="validateInput(this)" />
+                    <form:input class="form-control" placeholder="" path="soTienGiam" type="number"
+                                oninput="validateInput(this)"/>
 
                     <br>
 
 
                     Mô tả:<form:errors path="moTa" cssStyle="color: red"></form:errors>
-                    <form:textarea id="motahkh" class="form-control" placeholder="" path="moTa" />
+                    <form:textarea id="motahkh" class="form-control" placeholder="" path="moTa"/>
 
                     <br>
 
-                    <div align="center"> <button type="submit" class="btn btn-warning" id="" >UPDATE</button></div>
+                    <div align="center">
+                        <button type="submit" class="btn btn-warning" id="">UPDATE</button>
+                    </div>
 
 
                 </form:form>
@@ -558,13 +548,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 
-
-
-
-<div class="buttons" style="display: none" >
+<div class="buttons" style="display: none">
     <button id="btapdungthanhcong">btapdungthanhcong</button>
 </div>
-<div class="buttons" style="display: none" >
+<div class="buttons" style="display: none">
     <button id="btapdungthanhcongupdate">btapdungthanhcong</button>
 </div>
 <script>
@@ -612,8 +599,10 @@
     function updateInput4(value) {
 
 
-        document.getElementById('input4').value = convertDateFormat(value);;
+        document.getElementById('input4').value = convertDateFormat(value);
+        ;
     }
+
     // Hàm được gọi khi giá trị của input1 thay đổi
     function updateInput2(value) {
         // Lấy thẻ input thứ hai và cập nhật giá trị của nó
@@ -625,7 +614,7 @@
     let apdungthanhcong = document.querySelector('.apdungthanhcong');
     let btapdungthanhcong = document.getElementById('btapdungthanhcong');
 
-    function createToast1(){
+    function createToast1() {
         let newToast1 = document.createElement('div');
         newToast1.innerHTML = `
             <div class="toast1">
@@ -638,19 +627,20 @@
             </div>`;
         apdungthanhcong.appendChild(newToast1);
         newToast1.timeOut = setTimeout(
-            ()=>newToast1.remove(), 5000
+            () => newToast1.remove(), 5000
         )
     }
-    btapdungthanhcong.onclick = function(){
+
+    btapdungthanhcong.onclick = function () {
 
 
-        createToast1( );
+        createToast1();
     }
 
 </script>
 <script>
 
-        function validateInput(input) {
+    function validateInput(input) {
         // Xóa mọi ký tự không phải số và giới hạn tối đa 2 ký tự
         input.value = input.value.replace(/[^0-9]/g, '').substring(0, 2);
 
@@ -670,7 +660,7 @@
     let success = document.getElementById('success');
 
 
-    function createToast(){
+    function createToast() {
         let newToast = document.createElement('div');
         newToast.innerHTML = `
             <div class="toast1">
@@ -683,20 +673,21 @@
             </div>`;
         notifications.appendChild(newToast);
         newToast.timeOut = setTimeout(
-            ()=>newToast.remove(), 5000
+            () => newToast.remove(), 5000
         )
     }
-    success.onclick = function(){
+
+    success.onclick = function () {
 
 
-        createToast( );
+        createToast();
     }
 
 </script>
 <script>
     let btapdungthanhcongupdate = document.getElementById('btapdungthanhcongupdate');
 
-    function createToast2(){
+    function createToast2() {
         let newToast2 = document.createElement('div');
         newToast2.innerHTML = `
             <div class="toast1">
@@ -709,13 +700,14 @@
             </div>`;
         notifications.appendChild(newToast2);
         newToast2.timeOut = setTimeout(
-            ()=>newToast2.remove(), 5000
+            () => newToast2.remove(), 5000
         )
     }
-    btapdungthanhcongupdate.onclick = function(){
+
+    btapdungthanhcongupdate.onclick = function () {
 
 
-        createToast2( );
+        createToast2();
     }
 
 </script>

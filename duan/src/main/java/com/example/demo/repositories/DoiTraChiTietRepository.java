@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.UUID;
+
 @Repository
 public interface DoiTraChiTietRepository extends JpaRepository<DoiTraChiTiet, UUID> {
     @Query("SELECT d from DoiTraChiTiet d where d.tinhTrang=0")
@@ -33,9 +34,11 @@ public interface DoiTraChiTietRepository extends JpaRepository<DoiTraChiTiet, UU
     @Query("SELECT dtct FROM DoiTraChiTiet dtct WHERE dtct.hoaDonChiTiet.id = :id")
     DoiTraChiTiet findByHDCT(UUID id);
 
+    @Query("SELECT dtct FROM DoiTraChiTiet dtct WHERE dtct.id = :id")
+    DoiTraChiTiet findByDTCT(UUID id);
+
     @Query("SELECT CASE WHEN COUNT(dtct) > 0 THEN true ELSE false END FROM DoiTraChiTiet dtct WHERE dtct.doiTra = :doiTra AND dtct.hoaDonChiTiet = :hoaDonChiTiet")
     public boolean existsByDoiTraAndHoaDonChiTiet(@Param("doiTra") DoiTra doiTra, @Param("hoaDonChiTiet") HoaDonChiTiet hoaDonChiTiet);
-
 
 
 }
