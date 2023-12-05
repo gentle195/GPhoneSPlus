@@ -333,6 +333,9 @@ public class DonHangController {
         hd.setTinhTrangGiaoHang(2);
         hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
         hd.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        if(String.valueOf(hd.getNgayShip())==null){
+            hd.setNgayShip(Date.valueOf(LocalDate.now()));
+        }
         hoaDonService.update(id, hd);
         idHoaDon = id;
         List<HoaDonChiTiet> listHoaDonChiTiet = hoaDonChiTietService.getHoaDonChiTiet(id);
@@ -349,6 +352,11 @@ public class DonHangController {
     @GetMapping("/xac-nhan-giao-hang-hoan-tat/{id}")
     public String giaoHangHoanTat(Model model, @PathVariable("id") UUID id) {
         HoaDon hd = hoaDonService.findById(id);
+        KhachHang kh= khachHangService.findById(hd.getKhachHang().getId());
+        BigDecimal d=hd.getTongTien().divide(BigDecimal.valueOf(10000));
+        Integer themDiem= Integer.valueOf(d.intValue());
+        kh.setDiem(kh.getDiem()+themDiem);
+        khachHangService.update(kh.getId(),kh);
         hd.setTinhTrangGiaoHang(3);
         hd.setTinhTrang(2);
         hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));

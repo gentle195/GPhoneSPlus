@@ -163,7 +163,7 @@
 
 </head>
 
-<body>
+<body style="background-color: #fdfff2">
 <!-- HEADER -->
 <header>
     <div id="top-header">

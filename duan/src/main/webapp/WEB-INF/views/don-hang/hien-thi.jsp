@@ -218,6 +218,7 @@
 
                                     </td>
                                     <td>
+                                        <c:if test="${donHang.tinhTrangGiaoHang == 0}">Chờ xử lý</c:if>
                                         <c:if test="${donHang.tinhTrangGiaoHang == 1}">Chờ giao hàng</c:if>
                                         <c:if test="${donHang.tinhTrangGiaoHang == 2}">Đang giao hàng</c:if>
                                         <c:if test="${donHang.tinhTrangGiaoHang == 3}">Giao hàng hoàn tất</c:if>
@@ -251,7 +252,7 @@
                                                 </svg>
                                                 Xác nhận đơn hàng</a>
                                         </c:if>
-                                        <c:if test="${donHang.tinhTrangGiaoHang == 1}">
+                                        <c:if test="${donHang.tinhTrangGiaoHang == 1 || donHang.tinhTrangGiaoHang == 0}">
                                             <a href="/don-hang/xac-nhan-giao-hang/${donHang.id}"
                                                class="btn btn-info btn-icon-text"
                                                tabindex="-1"
