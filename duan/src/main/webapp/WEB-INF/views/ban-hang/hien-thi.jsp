@@ -796,6 +796,7 @@
             return false;
         }
     }
+
     document.getElementById("tienKhachDua").addEventListener("keyup", function () {
         tinhTienThua();
     });
@@ -812,11 +813,13 @@
             ketQuaElement.value = "Khách đưa không đủ tiền.";
         }
     }
+
     function checkhd() {
         var sdthd = document.getElementById("sdthd").value;
         var tien = document.getElementById("tienKhachDua").value;
         var ketQua = document.getElementById("ketQua").value;
         var nullKH = document.getElementById("selectKhachHang").value;
+        var tongTien = document.getElementById("tienCanThanhToan").value;
         var regex = /^0\d{9}$/;
 
         if (!regex.test(sdthd)) {
@@ -834,9 +837,13 @@
                     document.getElementById('tienKhachDua1').innerHTML = 'Tiền khách đưa phải là số nguyên dương';
                     document.getElementById('bthd').type = 'button';
                     return false;
+                } else if ((parseFloat(tien) - parseFloat(tongTien)) >=10000000) {
+                    document.getElementById('tienKhachDua1').innerHTML = 'Tiền khách đưa đang quá lớn';
+                    document.getElementById('bthd').type = 'button';
+                    return false;
                 } else {
                     document.getElementById('tienKhachDua1').innerHTML = '';
-                    if (ketQua % 1 !== 0 && ketQua < 0 || ketQua=='Khách đưa không đủ tiền.') {
+                    if (ketQua % 1 !== 0 && ketQua < 0 || ketQua == 'Khách đưa không đủ tiền.') {
                         document.getElementById('bthd').type = 'button';
                         return false;
                     } else {
@@ -856,8 +863,6 @@
         }
 
     }
-
-
 
 
     document.getElementById("emailkh").addEventListener("keyup", function () {

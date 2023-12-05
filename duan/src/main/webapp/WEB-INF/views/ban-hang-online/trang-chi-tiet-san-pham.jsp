@@ -70,7 +70,6 @@
         }
 
 
-
         /* Khi label được nhấp vào, thay đổi màu nền để biểu thị lựa chọn */
         input[type="radio"]:checked + label {
 
@@ -200,7 +199,7 @@
 
 </head>
 
-<body>
+<body style="background-color: #fdfff2">
 <%--style="position: fixed;--%>
 <%--top: 50%;left: 50%;transform: translate(-50%,-50%);--%>
 <%--display: none;z-index: 2;width: 7cm;height: 3cm;--%>
@@ -239,11 +238,14 @@
                                  style="border-radius: 10px;width: 3.5cm;margin-top: 10px;width: 180px">
                                 <div>
                                     <div>
-                                        <form action="/thong-tin-ca-nhan-khach-hang" method="post" style="display: none">
+                                        <form action="/thong-tin-ca-nhan-khach-hang" method="post"
+                                              style="display: none">
                                             <input value="${idkhachhang}" name="idKhachHang" style="display: none">
-                                            <button style="" class="btn btn-primary" type="submit" id="taikhoancuatoi">Tài khoản của tôi</button>
+                                            <button style="" class="btn btn-primary" type="submit" id="taikhoancuatoi">
+                                                Tài khoản của tôi
+                                            </button>
                                         </form>
-                                        <a  class="btn btn-primary" type="submit" onclick="anbt()">Tài khoản của tôi</a>
+                                        <a class="btn btn-primary" type="submit" onclick="anbt()">Tài khoản của tôi</a>
 
                                     </div>
                                     <div>
@@ -285,15 +287,15 @@
                         <form action="/ban-hang-online/trang-chu/tim-kiem" method="post">
                             <div class="input-with-button">
 
-                                <input type="text" id="searchInput" name="trangchutimkiem" placeholder="Tìm kiếm sản phẩm...">
+                                <input type="text" id="searchInput" name="trangchutimkiem"
+                                       placeholder="Tìm kiếm sản phẩm...">
                                 <%--                                    <button class="search-btn" type="submit">Search</button>--%>
-
 
 
                             </div>
                         </form>
 
-                        <div  style="  position: absolute;
+                        <div style="  position: absolute;
                         background-color: white;margin-top: 5px;
                         width: 95%; overflow: hidden;z-index: 11;
                         box-shadow: 0 1px 4px 0 rgba(0,0,0,.26);" id="searchResults" class="list-group">
@@ -342,7 +344,8 @@
                                                             ${ht.chiTietSanPham.rom.dungLuong}-${ht.chiTietSanPham.mauSac.ten}.
                                                         <br>
                                                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
-                                                        <label style="font-weight: bold">Đơn giá:</label>${ht.basoOchammotlamGHDGKG()}đ
+                                                        <label style="font-weight: bold">Đơn
+                                                            giá:</label>${ht.basoOchammotlamGHDGKG()}đ
                                                     </div>
                                                     <div style="width: 18%;">
                                                         <input type="checkbox" name="checkidghTT" value="${ht.id}"
@@ -361,7 +364,8 @@
                                             <small> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongsanphamchon()}
                                                 Sản phẩm được chọn</small>
                                             <br>
-                                            <label>Tổng:</label><label id="tongtienghtt">${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}</label><label>đ</label>
+                                            <label>Tổng:</label><label
+                                                id="tongtienghtt">${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}</label><label>đ</label>
 
                                         </div>
                                         <div class="cart-btns">
@@ -462,7 +466,7 @@
     <div style="position: absolute;margin-left: 56%;width: 43%;margin-top: 8%;z-index: 2;">
         <p style="display: none" id="tenspctsp">${motctsp.sanPham.ten}</p>
 
-        <label style="" >Màu sắc: </label>
+        <label style="">Màu sắc: </label>
 
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
 
@@ -471,7 +475,8 @@
                     <input type="radio" id="ms${stt1.index}" name="mauSac1"
                            value="${ht1.mauSac.ten}" ${ht1.mauSac.ten==motctsp.mauSac.ten ?"checked":""}
                            onchange="clickradio2lan();">
-                    <label for="ms${stt1.index}" style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.mauSac.ten}</label>
+                    <label for="ms${stt1.index}"
+                           style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.mauSac.ten}</label>
                 </c:if>
             </c:if>
 
@@ -490,7 +495,8 @@
                         <input type="radio" id="ms${stt1.index}" name="mauSac1"
                                value="${ht1.mauSac.ten}" ${ht1.mauSac.ten==motctsp.mauSac.ten ?"checked":""}
                                onchange="clickradio2lan();">
-                        <label for="ms${stt1.index}" style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.mauSac.ten}</label>
+                        <label for="ms${stt1.index}"
+                               style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.mauSac.ten}</label>
 
                     </c:if>
                     <c:set var="checkck" scope="session" value="${-1}"/>
@@ -500,7 +506,7 @@
         </c:forEach>
         <br>
         <br>
-        <label >Rom: </label>
+        <label>Rom: </label>
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
 
             <c:if test="${stt1.index==0}">
@@ -508,7 +514,8 @@
                     <input type="radio" id="rom${stt1.index}" name="rom1"
                            value="${ht1.rom.dungLuong}" ${ht1.rom.dungLuong==motctsp.rom.dungLuong ?"checked":""}
                            onchange="clickradio2lan();">
-                    <label for="rom${stt1.index}" style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.rom.dungLuong}</label>
+                    <label for="rom${stt1.index}"
+                           style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.rom.dungLuong}</label>
                 </c:if>
             </c:if>
 
@@ -527,7 +534,8 @@
                         <input type="radio" id="rom${stt1.index}" name="rom1"
                                value="${ht1.rom.dungLuong}" ${ht1.rom.dungLuong==motctsp.rom.dungLuong ?"checked":""}
                                onchange="clickradio2lan();">
-                        <label for="rom${stt1.index}" style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.rom.dungLuong}</label>
+                        <label for="rom${stt1.index}"
+                               style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.rom.dungLuong}</label>
                     </c:if>
                     <c:set var="checkck" scope="session" value="${-1}"/>
                 </c:if>
@@ -535,14 +543,15 @@
         </c:forEach>
         <br>
         <br>
-        <label >Ram: </label>
+        <label>Ram: </label>
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
             <c:if test="${stt1.index==0}">
                 <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
                     <input type="radio" id="ram${stt1.index}" name="ram1"
                            value="${ht1.ram.dungLuong}" ${ht1.ram.dungLuong==motctsp.ram.dungLuong ?"checked":""}
                            onchange="clickradio2lan();">
-                    <label for="ram${stt1.index}" style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.ram.dungLuong}</label>
+                    <label for="ram${stt1.index}"
+                           style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.ram.dungLuong}</label>
                 </c:if>
             </c:if>
             <c:if test="${stt1.index>0}">
@@ -560,7 +569,8 @@
                         <input type="radio" id="ram${stt1.index}" name="ram1"
                                value="${ht1.ram.dungLuong}" ${ht1.ram.dungLuong==motctsp.ram.dungLuong ?"checked":""}
                                onchange="clickradio2lan();">
-                        <label for="ram${stt1.index}" style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.ram.dungLuong}</label>
+                        <label for="ram${stt1.index}"
+                               style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.ram.dungLuong}</label>
                     </c:if>
                     <c:set var="checkck" scope="session" value="${-1}"/>
                 </c:if>
@@ -569,14 +579,15 @@
         </c:forEach>
         <br>
         <br>
-        <label >Chip: </label>
+        <label>Chip: </label>
         <c:forEach items="${banhangonline.ListctspTheoidsp(motctsp.sanPham.id)}" var="ht1" varStatus="stt1">
             <c:if test="${stt1.index==0}">
                 <c:if test="${banhangonline.soluongcon(ht1.id)>0}">
                     <input type="radio" id="chip${stt1.index}" name="chip1"
                            value="${ht1.chip.ten}" ${ht1.chip.ten==motctsp.chip.ten ?"checked":""}
                            onchange="clickradio2lan();">
-                    <label for="chip${stt1.index}" style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.chip.ten}</label>
+                    <label for="chip${stt1.index}"
+                           style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.chip.ten}</label>
                 </c:if>
             </c:if>
             <c:if test="${stt1.index>0}">
@@ -594,7 +605,8 @@
                         <input type="radio" id="chip${stt1.index}" name="chip1"
                                value="${ht1.chip.ten}" ${ht1.chip.ten==motctsp.chip.ten ?"checked":""}
                                onchange="clickradio2lan();">
-                        <label for="chip${stt1.index}" style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.chip.ten}</label>
+                        <label for="chip${stt1.index}"
+                               style="border: 1px solid #e0e0e0;heightfont-size:13px;margin-left:5px">${ht1.chip.ten}</label>
                     </c:if>
                     <c:set var="checkck" scope="session" value="${-1}"/>
                 </c:if>
@@ -698,8 +710,6 @@
                             </c:if>
 
 
-
-
                         </div>
 
 
@@ -708,7 +718,8 @@
                         </div>
 
                         <div class="row">
-                            <button type="button" class=" btn btn-info" data-bs-toggle="modal" data-bs-target="#myModalxemctsp">
+                            <button type="button" class=" btn btn-info" data-bs-toggle="modal"
+                                    data-bs-target="#myModalxemctsp">
                                 Xem thêm cấu hình chi tiết
                             </button>
 
@@ -776,15 +787,18 @@
                         </div>
 
                         <div class="product-preview">
-                            <img src="../../uploads/${motctsp.sanPham.anh.anh1}" alt="" style="width: 100%;height: 12cm; ">
+                            <img src="../../uploads/${motctsp.sanPham.anh.anh1}" alt=""
+                                 style="width: 100%;height: 12cm; ">
                         </div>
 
                         <div class="product-preview">
-                            <img src="../../uploads/${motctsp.sanPham.anh.anh2}" alt="" style="width: 100%;height: 12cm; ">
+                            <img src="../../uploads/${motctsp.sanPham.anh.anh2}" alt=""
+                                 style="width: 100%;height: 12cm; ">
                         </div>
 
                         <div class="product-preview">
-                            <img src="../../uploads/${motctsp.sanPham.anh.anh3}" alt="" style="width: 100%;height: 12cm; ">
+                            <img src="../../uploads/${motctsp.sanPham.anh.anh3}" alt=""
+                                 style="width: 100%;height: 12cm; ">
                         </div>
                     </div>
                 </div>
@@ -794,7 +808,8 @@
                 <!-- Product thumb imgs -->
                 <%--            class="col-md-2  col-md-pull-5"--%>
                 <div style=" width: 17.2cm;  height: 5cm;" align="center">
-                    <div id="product-imgs" style=" width: 5cm;height: 16cm;margin-top: -5.5cm; transform: rotate(270deg);">
+                    <div id="product-imgs"
+                         style=" width: 5cm;height: 16cm;margin-top: -5.5cm; transform: rotate(270deg);">
 
                         <div class="product-preview">
                             <img src="../../../uploads/${motctsp.urlAnh}" alt=""
@@ -817,11 +832,6 @@
                         </div>
                     </div>
                 </div>
-
-                <%--            <!-- /Product thumb imgs -->--%>
-
-
-                <!-- Product tab -->
                 <div class="col-md-12" style="margin-top: 4cm">
                     <div id="product-tab">
                         <!-- product tab nav -->
@@ -838,11 +848,15 @@
                             <div id="tab1" class="tab-pane fade in active">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                            tempor
                                             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                            consequat.
+                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                                            eu
+                                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                                            in
                                             culpa qui officia deserunt mollit anim id est laborum.</p>
                                     </div>
                                 </div>
@@ -853,11 +867,15 @@
                             <div id="tab2" class="tab-pane fade in">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                            tempor
                                             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                            consequat.
+                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                                            eu
+                                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                                            in
                                             culpa qui officia deserunt mollit anim id est laborum.</p>
                                     </div>
                                 </div>
@@ -968,8 +986,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="review-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                                                            do
+                                                            eiusmod tempor incididunt ut labore et dolore magna
+                                                            aliqua</p>
                                                     </div>
                                                 </li>
                                                 <li>
@@ -985,8 +1005,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="review-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                                                            do
+                                                            eiusmod tempor incididunt ut labore et dolore magna
+                                                            aliqua</p>
                                                     </div>
                                                 </li>
                                                 <li>
@@ -1002,8 +1024,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="review-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                                                            do
+                                                            eiusmod tempor incididunt ut labore et dolore magna
+                                                            aliqua</p>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -1052,24 +1076,15 @@
                         <!-- /product tab content  -->
                     </div>
                 </div>
-                <!-- /product tab -->
-
             </div>
-            <!-- /row -->
         </div>
-        <!-- /container -->
-        <!-- /SECTION -->
     </div>
 </main>
-<br>
 <br>
 <br>
 <h2 style="text-align: center;font-family: 'Times New Roman'; color: red">Sản Phẩm Liên Quan</h2>
 <br>
 <br>
-<br>
-
-<!-- Carousel -->
 <div id="demo11" class="carousel slide" data-bs-ride="false">
     <!-- Indicators/dots -->
     <div class="carousel">
@@ -1110,25 +1125,10 @@
                                                             <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
                                                             ${banhangonline.sotienkhidagiam(ht.id)}
                                                         <span> ₫</span>
-                                                        <del class="product-old-price" style="float: right">${ht.basoOchammotlam()}<span>₫</span></del>
+                                                        <del class="product-old-price"
+                                                             style="float: right">${ht.basoOchammotlam()}<span>₫</span>
+                                                        </del>
                                                     </h4>
-                                                        <%--                                            ${ht.tinhTrang} +  ${ht.sanPham.tinhTrang}--%>
-                                                        <%--                                                    <p class="product-category">Đã bán--%>
-                                                        <%--                                                        :${banhangonline.soluongdaban(ht.id)}--Còn--%>
-                                                        <%--                                                        :${banhangonline.soluongcon(ht.id)}</p>--%>
-                                                    <div>
-                                                            <%--                                                        *Hãng sản phẩm:${ht.sanPham.hangSanPham.ten}<br>--%>
-                                                            <%--                                                        *Camera:${ht.sanPham.camera.thongSo}<br>--%>
-                                                            <%--                                                        *Màn:${ht.sanPham.manHinh.thongSo}<br>--%>
-                                                            <%--                                                        *Màu:${ht.mauSac.ten}<br>--%>
-                                                            <%--                                                        *Ram:${ht.ram.dungLuong}<br>--%>
-                                                            <%--                                                        *Rom:${ht.rom.dungLuong}<br>--%>
-                                                            <%--                                                        *Pin:${ht.pin.loaiPin}<br>--%>
-                                                            <%--                                                        *Dung lượng pin:${ht.pin.dungLuongPin.thongSo}<br>--%>
-                                                            <%--                                                        *Chip:${ht.chip.ten}<br>--%>
-
-
-                                                    </div>
                                                     <div class="product-rating"></div>
                                                     <div class="product-btns" align="center">
                                                         <button class="add-to-compare"><a href="/homes"><i
@@ -1165,7 +1165,7 @@
                             </c:forEach>
                         </div>
                     </div>
-                    <br><br><br><br>
+                    <br>
                 </div>
                 </c:forEach>
             </div>
@@ -1186,46 +1186,8 @@
         </div>
     </div>
 </div>
-<!-- Carousel -->
 
-
-<!-- NEWSLETTER -->
-<div id="newsletter" class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="newsletter">
-                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
-                    <form>
-                        <input class="input" type="email" placeholder="Enter Your Email">
-                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-                    </form>
-                    <ul class="newsletter-follow">
-                        <li>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-</div>
-<!-- /NEWSLETTER -->
-
-<!-- FOOTER -->
+<br>
 <footer id="footer">
     <!-- top footer -->
     <div class="section">
@@ -1329,7 +1291,8 @@ display: none;z-index: 2;width: 7cm;height: 3cm;
 background-color: #0b3564;text-align: center;
 color: white;border-radius: 5% 5% 5% 5%"
      id="thongbaothemgiohang">
-    <img style="border-radius: 50% 50% 50% 50%;width: 1.2cm;height: 1.2cm;margin-top: 20px" src="data:image/png;base64,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">
+    <img style="border-radius: 50% 50% 50% 50%;width: 1.2cm;height: 1.2cm;margin-top: 20px"
+         src="data:image/png;base64,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">
     <h2 style="color: white;font-size: 20px;margin-top: 20px">Đã Thêm vào Giỏ hàng</h2>
 </div>
 
@@ -1648,6 +1611,7 @@ color: white;border-radius: 5% 5% 5% 5%"
     function anbt() {
         document.getElementById('taikhoancuatoi').click();
     }
+
     function formatAndDisplayValue(elementId) {
         // Lấy giá trị từ thẻ div
         var originalValue = document.getElementById(elementId).textContent;
@@ -1658,13 +1622,14 @@ color: white;border-radius: 5% 5% 5% 5%"
         // Gán giá trị đã định dạng lại vào thẻ div
         document.getElementById(elementId).textContent = formattedValue;
     }
+
     formatAndDisplayValue("tongtienghtt");
 </script>
 
 <script>
     var searchResultsContainer = document.getElementById("searchResults");
 
-    document.getElementById("searchInput").addEventListener("input", function() {
+    document.getElementById("searchInput").addEventListener("input", function () {
         var searchValue = this.value.trim().toLowerCase();
         showSearchResults(searchValue);
     });
@@ -1672,7 +1637,7 @@ color: white;border-radius: 5% 5% 5% 5%"
     function showSearchResults(searchValue) {
         if (searchValue.length > 0) {
             // document.getElementById('saochep').innerHTML=   document.getElementById('searchInput').value
-            loadgiaodientimkiemTrangchu("/ban-hang-online/trang-chu/tim-kiem-loc/"+document.getElementById('searchInput').value);
+            loadgiaodientimkiemTrangchu("/ban-hang-online/trang-chu/tim-kiem-loc/" + document.getElementById('searchInput').value);
             searchResultsContainer.style.display = "";
         } else {
             // Nếu không có ký tự nào, ẩn kết quả
@@ -1694,7 +1659,6 @@ color: white;border-radius: 5% 5% 5% 5%"
             .catch(error => {
                 console.error('Error loading interface:', error);
             });
-
 
 
     }

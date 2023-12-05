@@ -853,6 +853,11 @@ public class HoaDonController {
     @GetMapping("/xac-nhan-giao-hang-hoan-tat/{id}")
     public String giaoHangHoanTat(Model model, @PathVariable("id") UUID id) {
         HoaDon hd = hoaDonService.findById(id);
+        KhachHang kh = khachHangService.findById(hd.getKhachHang().getId());
+        BigDecimal d = hd.getTongTien().divide(BigDecimal.valueOf(100000));
+        Integer themDiem = Integer.valueOf(d.intValue());
+        kh.setDiem(kh.getDiem() + themDiem);
+        khachHangService.update(kh.getId(), kh);
         hd.setTinhTrangGiaoHang(3);
         hd.setTinhTrang(2);
         if (hd.getLoai() == 0) {

@@ -293,7 +293,37 @@ public class BanHangTaiQuayController {
             hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
             hoaDonService.update(id, hd);
         }
-        return "redirect:/ban-hang/hien-thi";
+        List<HoaDon> listHD = hoaDonService.find();
+        model.addAttribute("listHoaDon", listHD);
+        List<HoaDonChiTiet> listHDCT = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
+        model.addAttribute("listHoaDonChiTiet", listHDCT);
+        model.addAttribute("idHoaDon", String.valueOf(id));
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
+        model.addAttribute("listKhachHang", khachHangService.findAll0());
+        model.addAttribute("listDiaChi", diaChiService.findAll0());
+        model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
+        model.addAttribute("thongBaoHoaDon1", "Xóa hóa đơn chờ thành công!");
+        model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
+
+        model.addAttribute("hangds", hangSanPhamService.findAll0());
+        model.addAttribute("camds", cameraService.findAll0());
+        model.addAttribute("mands", manHinhService.findAll0());
+        model.addAttribute("mauds", mauSacService.findAll0());
+        model.addAttribute("ramds", ramService.findAll0());
+        model.addAttribute("romds", romService.findAll0());
+        model.addAttribute("pinds", pinService.findAll0());
+        model.addAttribute("dungds", dungLuongPinService.findAll0());
+        model.addAttribute("chipds", chipService.findAll0());
+        model.addAttribute("sands", sanPhamService.findAll0());
+        return "home/layout";
     }
 
     @ResponseBody
@@ -527,6 +557,11 @@ public class BanHangTaiQuayController {
     public ResponseEntity<byte[]> thanhToan(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon, @PathVariable("id") UUID id,
                                             @ModelAttribute("modalAddDiaChi") DiaChi DiaChi) {
         HoaDon hd = hoaDonService.findById(id);
+        KhachHang kh= khachHangService.findById(hd.getKhachHang().getId());
+        BigDecimal d=hd.getTongTien().divide(BigDecimal.valueOf(10000));
+        Integer themDiem= Integer.valueOf(d.intValue());
+        kh.setDiem(kh.getDiem()+themDiem);
+        khachHangService.update(kh.getId(),kh);
         hd.setKhachHang(hoaDon.getKhachHang());
         hd.setDiaChi(hoaDon.getDiaChi());
         hd.setNhanVien(hoaDon.getNhanVien());

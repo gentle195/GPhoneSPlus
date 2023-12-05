@@ -168,7 +168,7 @@
     </style>
 
 </head>
-<body>
+<body style="background-color: #fdfff2">
 
 
 <!-- HEADER -->
@@ -421,9 +421,8 @@
 
 
 <%--code--%>
-<div style="width: 75%;margin-left: 12.5%;">
-    <P style="font-size: 16px;font-weight: 700">Bộ lọc tìm kiếm</P>
-    <%--loc--%>
+<br>
+<div class="container shadow p-3 mb-5 bg-body-tertiary rounded">
     <div>
         <div class="container px-0 px-lg-5 mt-0">
             <div class="row gx-0 gx-lg-5 row-cols-0 row-cols-md-0 row-cols-xl-5 justify-content-center"
