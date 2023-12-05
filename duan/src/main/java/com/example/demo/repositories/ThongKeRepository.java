@@ -5,6 +5,7 @@ import com.example.demo.DTO.DoanhThuKhachHang;
 import com.example.demo.DTO.DoanhThuNhanVien;
 import com.example.demo.DTO.DoanhThuSanPham;
 import com.example.demo.DTO.DoanhThuTheoThang;
+import com.example.demo.DTO.SoLuongDoiTraHang;
 import com.example.demo.models.HoaDon;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -46,7 +47,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "            COUNT(hoa_don_chi_tiet.so_luong) as soLuongSP,\n" +
             "            SUM(phi_ship) as PhiShip,\n" +
             "            SUM(tong_tien) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - SUM(phi_ship) AS DoanhThu,\n" +
-            "            COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0),\n" +
+            "            COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) as TienDoiTra,\n" +
             "            SUM(tong_tien) AS DoanhThuCu\n" +
             "            FROM hoa_don left join hoa_don_chi_tiet on hoa_don.id = hoa_don_chi_tiet.id_hoa_don\n" +
             "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
@@ -215,7 +216,6 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "                END", nativeQuery = true)
     List<DoanhThuKhachHang> locDoanhThuKhachHang(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
-
     @Query(value = "SELECT khach_hang.gioi_tinh as gioiTinh," +
             "SUM(tong_tien) - SUM(doi_tra_chi_tiet.tien_doi_tra) - SUM(phi_ship) as DoanhThu\n" +
             "FROM hoa_don\n" +
@@ -226,4 +226,49 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "AND ngay_thanh_toan BETWEEN :startDate AND :endDate\n" +
             "Group by khach_hang.gioi_tinh", nativeQuery = true)
     List<DoanhThuKhachHang> locDoanhThuKhachHangGioiTinh(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
+    @Query(value = "select hang_dien_thoai.ten AS tenHang,\n" +
+            "            COUNT(hoa_don_chi_tiet.id_imei) as soLuong\n" +
+            "            from hoa_don \n" +
+            "            left join hoa_don_chi_tiet on hoa_don_chi_tiet.id_hoa_don = hoa_don.id\n" +
+            "            left join imei on imei.id = hoa_don_chi_tiet.id_imei\n" +
+            "            left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
+            "            left join san_pham on san_pham.id = chi_tiet_san_pham.id_san_pham\n" +
+            "            left join hang_dien_thoai on hang_dien_thoai.id = san_pham.id_hang\n" +
+            "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
+            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n" +
+            "            where doi_tra_chi_tiet.hien_trang_san_pham = 1" +
+            "            GROUP BY hang_dien_thoai.ten", nativeQuery = true)
+    List<SoLuongDoiTraHang> SoLuongDoiTraHang();
+
+    @Query(value = "select hang_dien_thoai.ten AS tenHang,\n" +
+            "            COUNT(hoa_don_chi_tiet.id_imei) as soLuong\n" +
+            "            from hoa_don \n" +
+            "            left join hoa_don_chi_tiet on hoa_don_chi_tiet.id_hoa_don = hoa_don.id\n" +
+            "            left join imei on imei.id = hoa_don_chi_tiet.id_imei\n" +
+            "            left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
+            "            left join san_pham on san_pham.id = chi_tiet_san_pham.id_san_pham\n" +
+            "            left join hang_dien_thoai on hang_dien_thoai.id = san_pham.id_hang\n" +
+            "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
+            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n" +
+            "            where doi_tra_chi_tiet.hien_trang_san_pham = 1" +
+            "            and ngay_doi_tra BETWEEN :startDate AND :endDate\n" +
+            "            GROUP BY hang_dien_thoai.ten", nativeQuery = true)
+    List<SoLuongDoiTraHang> locSoLuongDoiTraHang(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
+    @Query(value = "select hang_dien_thoai.ten AS tenHang,\n" +
+            "            COUNT(hoa_don_chi_tiet.id_imei) as soLuong\n" +
+            "            from hoa_don \n" +
+            "            left join hoa_don_chi_tiet on hoa_don_chi_tiet.id_hoa_don = hoa_don.id\n" +
+            "            left join imei on imei.id = hoa_don_chi_tiet.id_imei\n" +
+            "            left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
+            "            left join san_pham on san_pham.id = chi_tiet_san_pham.id_san_pham\n" +
+            "            left join hang_dien_thoai on hang_dien_thoai.id = san_pham.id_hang\n" +
+            "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
+            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n" +
+            "            where doi_tra_chi_tiet.hien_trang_san_pham = 0" +
+            "            and ngay_doi_tra BETWEEN :startDate AND :endDate\n" +
+            "            GROUP BY hang_dien_thoai.ten", nativeQuery = true)
+    List<SoLuongDoiTraHang> locSoLuongSanPhamLoi(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
 }

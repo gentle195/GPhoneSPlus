@@ -16,19 +16,18 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Doanh thu thương hiệu
-                <form action="/thong-ke/loc-thoi-gian" method="post" style="float: right">
+                <form action="/thong-ke/loc-thoi-gian-sl-doi-tra" method="post" style="float: right">
                     <div style="display: flex; justify-content: center; align-items: center;">
                         <div>
                             <label>Ngày bắt đầu
-                            <input type="date" id="ngayTao" name="startDate" class="form-control"
-                                   placeholder="Từ ngày">
+                                <input type="date" id="ngayTao" name="startDate" class="form-control"
+                                       placeholder="Từ ngày">
                             </label>
                         </div>
                         <div>
                             <label>Ngày kết thúc
-                            <input type="date" id="ngayTao1" name="endDate" class="form-control"
-                                   placeholder="Kết thúc">
+                                <input type="date" id="ngayTao1" name="endDate" class="form-control"
+                                       placeholder="Kết thúc">
                             </label>
                         </div>
                         <div>
@@ -39,69 +38,76 @@
                         </div>
                     </div>
                 </form>
-
             </h4>
-
-            <div class="table-responsive">
-                <table class="table table-striped" style="color: black">
-                    <thead>
-                    <tr>
-                        <th>Thương hiệu</th>
-                        <th>Doanh thu cũ</th>
-                        <th>Tiền đổi trả</th>
-                        <th>Doanh thu thực tế</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <i class="mdi mdi-border-color"></i>
-                    <c:forEach items="${listDoanhThuHang}" var="DTH" varStatus="index">
-                        <tr>
-                            <td>${DTH.getTenHang()}</td>
-                            <td>${DTH.getDoanhThuCu()}</td>
-                            <td>${DTH.getTienDoiTra()}</td>
-                            <td>${DTH.getDoanhThuThucTe()}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 </div>
 
-
-<div class="card" style="width: 50%; margin-left: 300px">
-    <div class="card-body">
-        <canvas id="myChart" ></canvas>
+<div class="row">
+<div class="col-6"><h3>Biểu đồ thống kê số sản phẩm đổi trả</h3>
+    <div class="card">
+        <div class="card-body">
+            <canvas id="myChart" ></canvas>
+        </div>
     </div>
+</div>
+<div class="col-6"><h3>Biểu đồ thống kê số sản phẩm lỗi</h3>
+    <div class="card">
+        <div class="card-body">
+            <canvas id="myChart2" ></canvas>
+        </div>
+    </div>
+</div>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <%--<script src="../../js/thongke/char.js"></script>--%>
 <script>
+    const ctx = document.getElementById('myChart');
     const data = [];
 
-    <c:forEach items="${listDoanhThuHang}" var="DTH" varStatus="index">
+    <c:forEach items="${listSoLuongDoiTraHang}" var="SLDTH" varStatus="index">
     data.push({
-        tenHang: "${DTH.getTenHang()}",
-        doanhThu: ${DTH.getDoanhThuThucTe()},
+        tenHang: "${SLDTH.getTenHang()}",
+        soLuong:  ${SLDTH.getSoLuong()}
     });
     </c:forEach>
-
-    const ctx = document.getElementById('myChart');
 
     new Chart(ctx, {
         type: 'pie',
         data: {
             labels: data.map(item => item.tenHang),
             datasets: [{
-                label: 'Doanh Thu',
-                data: data.map(item => item.doanhThu),
+                label: 'Số lượng sản phẩm đổi trả',
+                data: data.map(item => item.soLuong),
                 borderWidth: 1,
                 percentage: true, // Thêm thuộc tính này để hiển thị phần trăm
             }],
         },
     });
 
+
+    const ctx2 = document.getElementById('myChart2');
+    const data2 = [];
+
+    <c:forEach items="${listlocSoLuongSanPhamLoi}" var="SLDTH" >
+    data2.push({
+        tenHang: "${SLDTH.getTenHang()}",
+        soLuong:  ${SLDTH.getSoLuong()}
+    });
+    </c:forEach>
+
+    new Chart(ctx2, {
+        type: 'pie',
+        data: {
+            labels: data2.map(item => item.tenHang),
+            datasets: [{
+                label: 'Số lượng sản phẩm trả',
+                data: data2.map(item => item.soLuong),
+                borderWidth: 1,
+                percentage: true, // Thêm thuộc tính này để hiển thị phần trăm
+            }],
+        },
+    });
 </script>
 </html>
