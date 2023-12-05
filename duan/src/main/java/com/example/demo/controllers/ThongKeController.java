@@ -5,6 +5,7 @@ import com.example.demo.DTO.DoanhThuKhachHang;
 import com.example.demo.DTO.DoanhThuNhanVien;
 import com.example.demo.DTO.DoanhThuSanPham;
 import com.example.demo.DTO.DoanhThuTheoThang;
+import com.example.demo.DTO.SoLuongDoiTraHang;
 import com.example.demo.services.ThongKeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -124,6 +125,23 @@ public class ThongKeController {
         model.addAttribute("listDoanhThuKhachHang", locDoanhThuKhachHang);
         model.addAttribute("listDoanhThuKhachHangGioiTinh", locDoanhThuKhachHangGioiTinh);
         model.addAttribute("contentPage", "../thongke/thong-ke-khach-hang.jsp");
+        return "home/layout";
+    }
+
+    @GetMapping("/hien-thi-sl-doi-tra")
+    public String SLDoiTra(Model model) {
+//      List<SoLuongDoiTraHang> SoLuongDoiTraHang = thongKeService.SoLuongDoiTraHang();
+        model.addAttribute("contentPage", "../thongke/thong-ke-so-luong-doi-tra.jsp");
+        return "home/layout";
+    }
+
+    @PostMapping("/loc-thoi-gian-sl-doi-tra")
+    public String locSLDoiTra(Model model, @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate) {
+        List<SoLuongDoiTraHang> locSoLuongDoiTraHang = thongKeService.locSoLuongDoiTraHang(startDate,endDate);
+        List<SoLuongDoiTraHang> locSoLuongSanPhamLoi = thongKeService.locSoLuongSanPhamLoi(startDate,endDate);
+        model.addAttribute("listSoLuongDoiTraHang", locSoLuongDoiTraHang);
+        model.addAttribute("listlocSoLuongSanPhamLoi", locSoLuongSanPhamLoi);
+        model.addAttribute("contentPage", "../thongke/thong-ke-so-luong-doi-tra.jsp");
         return "home/layout";
     }
 }
