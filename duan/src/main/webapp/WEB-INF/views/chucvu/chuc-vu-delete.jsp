@@ -21,7 +21,8 @@
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
                aria-controls="description" aria-selected="true">Chức vụ đã xoá</a>
         </li>
-        <a href="/chuc-vu/update-all-status" class="btn btn-outline-danger btn-icon-text" style="float: right; margin-left: 720px"
+        <a href="/chuc-vu/update-all-status" class="btn btn-outline-danger btn-icon-text"
+           style="float: right; margin-left: 720px"
            tabindex="-1"
            role="button"
            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
@@ -49,12 +50,12 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table id="example" class="display" style="color: black">
                             <thead>
-                            <tr><th>STT</th>
+                            <tr>
                                 <th>Mã</th>
-                                <th>Tên</th>
                                 <th>Ngày Tạo</th>
+                                <th>Tên</th>
                                 <th>Ngày Cập Nhật</th>
                                 <th>Tình Trạng</th>
                                 <th>Mô tả</th>
@@ -65,15 +66,15 @@
                             <i class="mdi mdi-border-color"></i>
                             <c:forEach items="${listChucVu}" var="chucVu" varStatus="i">
                                 <tr>
-                                    <th scope="row">${i.index+1}</th>
                                     <td>${chucVu.ma}</td>
-                                    <td>${chucVu.ten}</td>
                                     <td>${chucVu.ngayTao}</td>
+                                    <td>${chucVu.ten}</td>
                                     <td>${chucVu.ngayCapNhat}</td>
                                     <td>${chucVu.trangThai()}</td>
                                     <td>${chucVu.moTa}</td>
                                     <td>
-                                        <a href="/chuc-vu/reset-status/${chucVu.id}" class="btn btn-danger btn-icon-text"
+                                        <a href="/chuc-vu/reset-status/${chucVu.id}"
+                                           class="btn btn-danger btn-icon-text"
                                            tabindex="-1"
                                            role="button"
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
@@ -88,22 +89,6 @@
                 </div>
             </div>
         </div>
-        <%--phân trang--%>
-        <div align="center">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <ul class="pagination justify-content-center pagination-lg">
-                    <li class="page-item"><a class="page-link" href="/chuc-vu/hien-thi-delete?pageNum=0"><</a></li>
-                    <c:forEach begin="1" end="${total}" varStatus="status">
-                        <li class="page-item">
-                            <a href="${pageContext.request.contextPath}/chuc-vu/hien-thi-delete?pageNum=${status.index -1}"
-                               class="page-link">${status.index}</a>
-                        </li>
-                    </c:forEach>
-                    <li class="page-item"><a class="page-link" href="/chuc-vu/hien-thi-delete?pageNum=${total-1}">></a></li>
-                </ul>
-            </div>
-        </div>
-        <%--kết thúc phân trang--%>
     </div>
 </div>
 </body>

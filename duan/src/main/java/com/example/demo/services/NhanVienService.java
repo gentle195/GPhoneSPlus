@@ -10,9 +10,9 @@ import java.util.UUID;
 public interface NhanVienService {
 
 
-    public Page<NhanVien> getAll(Pageable pageable);
+    public List<NhanVien> getAll();
 
-    public Page<NhanVien> getAll1(Pageable pageable);
+    public List<NhanVien> getAll1();
 
 
     public List<NhanVien> findAll();
@@ -33,7 +33,7 @@ public interface NhanVienService {
 
     public List<NhanVien> search1(String ten);
 
-    List<NhanVien> searchByChucVuAndGioiTinh(String tenChucVu, String gioiTinh, Pageable pageable);
+    List<NhanVien> searchByChucVuAndGioiTinh(String tenChucVu, String gioiTinh);
 
     List<NhanVien> nhanVienThanhToan(UUID id);
 

@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface RamService {
-    public Page<Ram> getAll(Pageable pageable);
+    public List<Ram> getAll();
 
-    public Page<Ram> getAll1(Pageable pageable);
+    public List<Ram> getAll1();
 
     public List<Ram> findAll();
 

@@ -78,11 +78,9 @@ public class KhachHangController {
         khachHang.setGioiTinh(true);
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<KhachHang> list = khachHangService.getALL0(pageable);
+        List<KhachHang> list = khachHangService.findAll00();
 
-        model.addAttribute("dulieu", list.getContent());
-        model.addAttribute("total", kt(list.getTotalPages()));
-
+        model.addAttribute("dulieu", list);
         model.addAttribute("hkh", hangKhachHangService.getALL0());
         model.addAttribute("tong", khachHangService.findAll00().size());
         model.addAttribute("contentPage","../khach-hang/khach-hang.jsp");
@@ -97,11 +95,7 @@ public class KhachHangController {
                           @RequestParam("num") Optional<Integer> num,
                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
     ) {
-        Sort sort = Sort.by("ma").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<KhachHang> list = khachHangService.getALL0(pageable);
         model.addAttribute("dulieu", khachHangService.timkiem(matk));
-        model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("hkh", hangKhachHangService.getALL0());
         model.addAttribute("tong", khachHangService.findAll00().size());
         model.addAttribute("contentPage","../khach-hang/khach-hang.jsp");
@@ -120,11 +114,7 @@ public class KhachHangController {
 
 
     ) {
-        Sort sort = Sort.by("ma").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<KhachHang> list = khachHangService.getALL1(pageable);
         model.addAttribute("dulieu", khachHangService.timkiem1(matk));
-        model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("hkh", hangKhachHangService.getall1());
         model.addAttribute("tong", khachHangService.findAll11().size());
         model.addAttribute("contentPage","../khach-hang/khach-hang-tungxoa.jsp");
@@ -143,9 +133,8 @@ public class KhachHangController {
         khachHang.setGioiTinh(true);
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<KhachHang> list = khachHangService.getALL1(pageable);
-        model.addAttribute("dulieu", list.getContent());
-        model.addAttribute("total",kt(list.getTotalPages()));
+        List<KhachHang> list = khachHangService.findAll11();
+        model.addAttribute("dulieu", list);
 
         model.addAttribute("hkh", hangKhachHangService.getALL0());
         model.addAttribute("tong", khachHangService.findAll11().size());
@@ -171,9 +160,8 @@ public class KhachHangController {
         khachHangService.add(khachHang1);
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<KhachHang> list = khachHangService.getALL0(pageable);
-        model.addAttribute("dulieu", list.getContent());
-        model.addAttribute("total", kt(list.getTotalPages()));
+        List<KhachHang> list = khachHangService.findAll00();
+        model.addAttribute("dulieu", list);
         model.addAttribute("hkh", hangKhachHangService.getALL0());
         model.addAttribute("tong", khachHangService.findAll00().size());
         model.addAttribute("contentPage","../khach-hang/khach-hang.jsp");
@@ -198,9 +186,8 @@ public class KhachHangController {
         khachHangService.add(khachHang1);
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<KhachHang> list = khachHangService.getALL1(pageable);
-        model.addAttribute("dulieu", list.getContent());
-        model.addAttribute("total", kt(list.getTotalPages()));
+        List<KhachHang> list = khachHangService.findAll11();
+        model.addAttribute("dulieu", list);
         model.addAttribute("hkh", hangKhachHangService.getALL0());
         model.addAttribute("tong", khachHangService.findAll11().size());
         model.addAttribute("contentPage","../khach-hang/khach-hang-tungxoa.jsp");
@@ -226,9 +213,8 @@ public class KhachHangController {
         }
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<KhachHang> list = khachHangService.getALL1(pageable);
-        model.addAttribute("dulieu", list.getContent());
-        model.addAttribute("total",kt( list.getTotalPages()));
+        List<KhachHang> list = khachHangService.findAll11();
+        model.addAttribute("dulieu", list);
         model.addAttribute("hkh", hangKhachHangService.getALL0());
         model.addAttribute("tong", khachHangService.findAll11().size());
         model.addAttribute("contentPage","../khach-hang/khach-hang-tungxoa.jsp");

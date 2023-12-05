@@ -34,29 +34,19 @@ public class AnhController {
     private AnhService anhService;
 
     @GetMapping("hien-thi")
-    public String hienThi(@ModelAttribute("anh") Anh anh, Model model, @RequestParam("num") Optional<Integer> num,
-                          @RequestParam(name = "size", defaultValue = "10", required = false) Integer size) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<Anh> list = anhService.getAll(pageable);
-        model.addAttribute("listAnh", list.getContent());
-        model.addAttribute("total", list.getTotalPages());
+    public String hienThi(@ModelAttribute("anh") Anh anh, Model model) {
+        List<Anh> list = anhService.getAll();
+        model.addAttribute("listAnh", list);
         model.addAttribute("contentPage", "../anh/hien-thi.jsp");
         return "home/layout";
     }
 
     @GetMapping("/hien-thi-delete")
-    public String hienThiDelete(Model model, @ModelAttribute("anh") Anh anh,
-                                @RequestParam("pageNum") Optional<Integer> num,
-                                @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer size) {
+    public String hienThiDelete(Model model, @ModelAttribute("anh") Anh anh) {
 
-        Sort sort = Sort.by("ngayTao").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<Anh> page = anhService.getAll1(pageable);
+        List<Anh> page = anhService.getAll1();
         model.addAttribute("contentPage", "../anh/anh-delete.jsp");
-        model.addAttribute("listAnh", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("listAnh", page);
         return "home/layout";
     }
 
@@ -75,28 +65,20 @@ public class AnhController {
     }
 
     @GetMapping("/update-tt")
-    public String updateTT(Model model, @RequestParam("pageNum") Optional<Integer> pageNum,
-                           @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize,
+    public String updateTT(Model model,
                            @ModelAttribute("anh") Anh anh) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         anh.setNgayCapNhat(date);
         anhService.updateTT();
-        Page<Anh> page = anhService.getAll1(pageable);
+        List<Anh> page = anhService.getAll1();
         model.addAttribute("contentPage", "../anh/anh-delete.jsp");
-        model.addAttribute("listAnh", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("listAnh", page);
         return "home/layout";
     }
 
     @GetMapping("/update-status/{id}")
-    public String updateStatus(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
-                               @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize, @ModelAttribute("anh") Anh anh) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+    public String updateStatus(Model model, @PathVariable("id") UUID id, @ModelAttribute("anh") Anh anh) {
 
         Anh anh1 = anhService.findById(id);
         long millis = System.currentTimeMillis();
@@ -104,19 +86,14 @@ public class AnhController {
         anh1.setNgayCapNhat(date);
         anh1.setTinhTrang(1);
         anhService.update(id, anh1);
-        Page<Anh> page = anhService.getAll(pageable);
+        List<Anh> page = anhService.getAll();
         model.addAttribute("contentPage", "../anh/hien-thi.jsp");
-        model.addAttribute("listAnh", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("listAnh", page);
         return "home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
-    public String resetStatus(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
-                              @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize, @ModelAttribute("anh") Anh anh) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+    public String resetStatus(Model model, @PathVariable("id") UUID id, @ModelAttribute("anh") Anh anh) {
         Anh anh1 = anhService.findById(id);
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
@@ -124,24 +101,18 @@ public class AnhController {
 
         anh1.setTinhTrang(0);
         anhService.update(id, anh1);
-        Page<Anh> page = anhService.getAll1(pageable);
+        List<Anh> page = anhService.getAll1();
         model.addAttribute("contentPage", "../anh/anh-delete.jsp");
-        model.addAttribute("listAnh", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("listAnh", page);
         return "home/layout";
     }
 
     @PostMapping("/search-0")
-    public String search0(Model model, @ModelAttribute("anh") Anh anh, @RequestParam("search") String search, @RequestParam("num") Optional<Integer> num,
-                          @RequestParam(name = "size", defaultValue = "10", required = false) Integer size) {
+    public String search0(Model model, @ModelAttribute("anh") Anh anh, @RequestParam("search") String search) {
         if (search.isEmpty()) {
             model.addAttribute("thongBao", "Không để trống thông tin");
-            Sort sort = Sort.by("ngayTao").descending();
-            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-            Page<Anh> list = anhService.getAll(pageable);
-            model.addAttribute("listAnh", list.getContent());
-            model.addAttribute("total", list.getTotalPages());
+            List<Anh> list = anhService.getAll();
+            model.addAttribute("listAnh", list);
             model.addAttribute("contentPage", "../anh/hien-thi.jsp");
             return "home/layout";
         } else {
@@ -154,15 +125,11 @@ public class AnhController {
     }
 
     @PostMapping("/search-1")
-    public String search1(Model model, @ModelAttribute("anh") Anh anh, @RequestParam("search") String search, @RequestParam("num") Optional<Integer> num,
-                          @RequestParam(name = "size", defaultValue = "10", required = false) Integer size) {
+    public String search1(Model model, @ModelAttribute("anh") Anh anh, @RequestParam("search") String search) {
         if (search.isEmpty()) {
             model.addAttribute("thongBao", "Không để trống thông tin");
-            Sort sort = Sort.by("ngayTao").descending();
-            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-            Page<Anh> list = anhService.getAll1(pageable);
-            model.addAttribute("listAnh", list.getContent());
-            model.addAttribute("total", list.getTotalPages());
+            List<Anh> list = anhService.getAll1();
+            model.addAttribute("listAnh", list);
             model.addAttribute("contentPage", "../anh/anh-delete.jsp");
             return "home/layout";
         } else {
@@ -180,9 +147,7 @@ public class AnhController {
                       BindingResult bindingResult,
                       @RequestParam("anh1s") MultipartFile anh1,
                       @RequestParam("anh2s") MultipartFile anh2,
-                      @RequestParam("anh3s") MultipartFile anh3,
-                      @RequestParam("num") Optional<Integer> num,
-                      @RequestParam(name = "size", defaultValue = "10", required = false) Integer size
+                      @RequestParam("anh3s") MultipartFile anh3
     ) throws IOException {
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
@@ -246,9 +211,7 @@ public class AnhController {
                                @RequestParam("checkanh3") String checkanh3,
                                @RequestParam("anh1s") MultipartFile anh1,
                                @RequestParam("anh2s") MultipartFile anh2,
-                               @RequestParam("anh3s") MultipartFile anh3,
-                               @RequestParam("num") Optional<Integer> num,
-                               @RequestParam(name = "size", defaultValue = "10", required = false) Integer size
+                               @RequestParam("anh3s") MultipartFile anh3
     ) throws IOException {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "../anh/update.jsp");

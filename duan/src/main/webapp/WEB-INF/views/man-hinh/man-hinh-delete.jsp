@@ -64,34 +64,34 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped" style="color: black;width: 1700px">
+                        <table id="example" class="display" style="color: black;width: 2400px">
                             <thead>
                             <tr>
                                 <th>Mã</th>
+                                <th>Ngày tạo</th>
                                 <th>Thông số</th>
                                 <th>Loại cảm ứng</th>
                                 <th>Tỉ lệ khung hình</th>
                                 <th>Công nghệ màn hình</th>
                                 <th>Độ phân giải màn hình</th>
                                 <th>Tần số quét</th>
-                                <th>Ngày tạo</th>
                                 <th>Ngày cập nhật</th>
                                 <th>Tình trạng</th>
                                 <th>Mô tả</th>
-                                <th colspan="2">Action</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach var="list" varStatus="i" items="${listManHinh}">
                                 <tr>
                                     <td>${list.ma}</td>
+                                    <td>${list.ngayTao}</td>
                                     <td>${list.thongSo}</td>
                                     <td>${list.loaiCamUng}</td>
                                     <td>${list.tiLeKhungHinh}</td>
                                     <td>${list.congNghe}</td>
                                     <td>${list.doPhanGiai}</td>
                                     <td>${list.tanSoQuet}</td>
-                                    <td>${list.ngayTao}</td>
                                     <td>${list.ngayCapNhat}</td>
                                     <td>
                                         <c:if test="${list.tinhTrang==0}">Hoạt động</c:if>
@@ -114,30 +114,6 @@
                 </div>
             </div>
         </div>
-        <div align="center">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <c:if test="${total!= 0}">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center pagination-lg">
-                            <li class="page-item"><a class="page-link" href="/man-hinh/hien-thi-delete?num=0"><</a>
-                            </li>
-
-                            <c:forEach begin="1" end="${total}" varStatus="status">
-                                <li class="page-item">
-                                    <a href="${pageContext.request.contextPath}/man-hinh/hien-thi-delete?num=${status.index -1}"
-                                       class="page-link">${status.index}</a>
-                                </li>
-                            </c:forEach>
-
-                            <li class="page-item"><a class="page-link"
-                                                     href="/man-hinh/hien-thi-delete?num=${total-1}">></a>
-                            </li>
-                        </ul>
-                    </nav>
-                </c:if>
-            </div>
-        </div>
-        <%--kết thúc phân trang--%>
     </div>
 </div>
 </body>

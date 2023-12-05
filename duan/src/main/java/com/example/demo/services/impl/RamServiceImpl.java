@@ -21,13 +21,13 @@ public class RamServiceImpl implements RamService {
 
 
     @Override
-    public Page<Ram> getAll(Pageable pageable) {
-        return ramRepository.getAll(pageable);
+    public List<Ram> getAll() {
+        return ramRepository.getAll();
     }
 
     @Override
-    public Page<Ram> getAll1(Pageable pageable) {
-        return ramRepository.getAll1(pageable);
+    public List<Ram> getAll1() {
+        return ramRepository.getAll1();
     }
 
     @Override

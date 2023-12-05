@@ -68,47 +68,45 @@
                 <br>
                 <div class="col-sm-12">
                     <div class="card-box table-responsive">
-                        <table class="table table-striped" style="width: 2500px; color: black">
+                        <table id="example" class="display" style="width: 2500px;color: black">
+                            <thead>
                             <tr>
-                                <th>STT</th>
                                 <th>Ảnh</th>
+                                <th>Ngày tạo</th>
                                 <th>Mã</th>
                                 <th>Tên</th>
                                 <th>Giới tính</th>
                                 <th>Email</th>
                                 <th>Sdt</th>
                                 <th>Ngày sinh</th>
-                                <th>Ngày tạo</th>
                                 <th>Ngày cập nhật</th>
                                 <th>Tình trạng</th>
                                 <th>Điểm</th>
                                 <th>Hãng khách hàng</th>
-                                <th>Cập nhật</th>
+                                <th>Chức năng</th>
                             </tr>
-
-
+                            </thead>
+                            <tbody>
                             <c:forEach items="${dulieu}" var="ht" varStatus="stt">
                                 <tr>
-                                    <td>${stt.index+1}</td>
 
                                     <td align="center">
-
                                         <img src="../../../uploads/${ht.anh}" width="40" height="40"
                                              style="border-radius:50% 50% 50% 50%">
 
-
                                     </td>
+                                    <td>${ht.ngayTao}</td>
                                     <td>${ht.ma}</td>
                                     <td>${ht.hoTen} </td>
                                     <td>${ht.goitinh()}</td>
                                     <td>${ht.email}</td>
                                     <td>${ht.sdt}</td>
-                                    <td>${ht.ngaySinh}</td>
-                                    <td>${ht.ngayTao}</td>
+                                    <td> ${ht.dateok()}</td>
                                     <td>${ht.ngayCapNhat}</td>
-                                    <td style="color: red;font-size: 15px">${ht.tt()}</td>
+                                    <td>${ht.tt()}</td>
                                     <td>${ht.diem}</td>
                                     <td>${ht.hangKhachHang.ten}</td>
+
                                     <td>
                                         <a href="/khach-hang/khoi-phuc/${ht.id}" class="btn btn-success"
                                            onclick="return tbxd()">Khôi phục
@@ -117,27 +115,10 @@
 
                                 </tr>
                             </c:forEach>
+                            </tbody>
                         </table>
                     </div>
                 </div>
-                <br>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center pagination-lg">
-                        <li class="page-item"><a class="page-link" href="/khach-hang/khach-hang-tung-xoa?num=0"> <</a>
-                        </li>
-
-                        <c:forEach begin="1" end="${total}" varStatus="status">
-                            <li class="page-item">
-                                <a href="/khach-hang/khach-hang-tung-xoa?num=${status.index -1}"
-                                   class="page-link">${status.index}</a>
-                            </li>
-                        </c:forEach>
-
-                        <li class="page-item"><a class="page-link"
-                                                 href="/khach-hang/khach-hang-tung-xoa?num=${total-1}"> ></a></li>
-                    </ul>
-                </nav>
-                <P id="bc" style="color: crimson"></P>
             </div>
         </div>
     </div>

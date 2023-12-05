@@ -228,7 +228,7 @@
                             <br>
 
                             <div class="table-responsive custom-table">
-                                <table class="display custom-table">
+                                <table class="display custom-table" style="color: black">
                                     <thead>
                                     <tr>
                                         <th>Tên Sản Phẩm</th>
@@ -268,12 +268,12 @@
                     <div>
                         <div class="card-body">
                             <br>
-                            <h3 style="text-align: center;">Sản phẩm cần đổi trả</h3>
+                            <h3 style="text-align: center;">Sản phẩm cần đổi mới</h3>
                             <br>
 
                             <div class="table-responsive custom-table">
 
-                                <table class="display custom-table">
+                                <table class="display custom-table" style="color: black">
                                     <thead>
                                     <tr>
                                         <th>Tên Sản Phẩm</th>
@@ -307,215 +307,16 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-12 grid-margin">
-            <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
-                    <div>
-                        <div class="card-body">
-                            <div class="table-responsive custom-table">
-                                <table class="display custom-table" ${not empty dtctlist ? '' : 'style="display: none;"'} >
-                                    <thead>
-                                    <tr>
-                                        <th>Sản phẩm cần đổi trả</th>
-                                        <th>Tên Sản Phẩm</th>
-                                        <th>Ảnh</th>
-                                        <th>Hãng</th>
-                                        <th>Số IMEI</th>
-
-                                    </tr>
-                                    </thead>
-                                    <tbody id="table-search1">
-                                    <tr>
-                                        <c:forEach items="${dtctlist}" var="hdct">
-                                    <tr>
-                                        <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten}</td>
-                                        <td>${hdct.imei.chiTietSanPham.sanPham.ten}</td>
-                                        <td align="center">
-                                            <img src="/uploads/${hdct.imei.chiTietSanPham.urlAnh}" width="40"
-                                                 height="40">
-                                        </td>
-                                        <td>${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
-                                        <td>${hdct.imei.soImei}</td>
-                                    </tr>
-                                    </c:forEach>
-                                    </tr>
-                                    </tbody>
-                                </table>
-
-
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
-
-<%--modal chọn sp--%>
-<div class="modal fade" id="exampleModalChonSanPham" tabindex="-1" aria-labelledby="modal-1-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="col-lg-12 grid-margin stretch-card">
-                    <div class="card">
-                        <form class="forms-sample">
-                            <div class="container px-0 px-lg-5 mt-0">
-                                <div class="row gx-0 gx-lg-5 row-cols-0 row-cols-md-0 row-cols-xl-5 justify-content-center"
-                                     style="width: 100%">
-                                    <div style="height: 1.5cm">
-                                        <select class="form-control" id="hangds1" onchange="clickcombobox()">
-                                            <option selected value="null">Hãng sản phẩm</option>
-                                            <c:forEach items="${hangds}" var="ht">
-                                                <option value="${ht.ten}">${ht.ten}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <select class="form-control" id="camds1" onchange="clickcombobox()">
-                                            <option selected value="null">Camera</option>
-                                            <c:forEach items="${camds}" var="ht">
-                                                <option value="${ht.thongSo}">${ht.thongSo}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <select class="form-control" id="mands1" onchange="clickcombobox()">
-                                            <option selected value="null">Màn hình</option>
-                                            <c:forEach items="${mands}" var="ht">
-                                                <option value="${ht.thongSo}">${ht.thongSo}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div style="height: 1.5cm">
-                                        <select class="form-control" id="mauds1" onchange="clickcombobox()">
-                                            <option selected value="null">Màu sắc</option>
-                                            <c:forEach items="${mauds}" var="ht">
-                                                <option value="${ht.ten}">${ht.ten}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <select class="form-control" id="ramds1" onchange="clickcombobox()">
-                                            <option selected value="null">Ram</option>
-                                            <c:forEach items="${ramds}" var="ht">
-                                                <option value="${ht.dungLuong}">${ht.dungLuong}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <select class="form-control" id="romds1" onchange="clickcombobox()">
-                                            <option selected value="null">Rom</option>
-                                            <c:forEach items="${romds}" var="ht">
-                                                <option value="${ht.dungLuong}">${ht.dungLuong}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <select class="form-control" id="dungds1" onchange="clickcombobox()">
-                                            <option selected value="null">Dung lượng pin</option>
-                                            <c:forEach items="${dungds}" var="ht">
-                                                <option value="${ht.thongSo}">${ht.thongSo}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <select class="form-control" id="chipds1" onchange="clickcombobox()">
-                                            <option selected value="null">Chip</option>
-                                            <c:forEach items="${chipds}" var="ht">
-                                                <option value="${ht.ten}">${ht.ten}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <select class="form-control" id="sands1" onchange="clickcombobox()">
-                                            <option selected value="null">Sản phẩm</option>
-                                            <c:forEach items="${sands}" var="ht">
-                                                <option value="${ht.ten}">${ht.ten}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <div>
-                            <div class="card-body">
-                                <h4 class="card-title" style="float: left">Danh sách sản phẩm</h4>
-                                <%--            Tìm kiếm               --%>
-                                <div class="input-group" style="width: 30%; float: right">
-                                    <input type="text" class="form-control" placeholder="Bạn tìm gì..."
-                                           aria-label="Bạn tìm gì..." name="search-san-pham" id="sanPhamSearchInput">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-sm btn-primary" type="button" id="searchSanPham">Search
-                                        </button>
-                                    </div>
-                                </div>
-                                <%--           kết thúc tìm kiếm         --%>
-                                <div class="table-responsive">
-                                    <div>
-                                        <table id="example" class="display" style="min-width: 845px; color: black">
-                                            <thead>
-                                            <tr>
-                                                <th>Mã Sản Phẩm</th>
-                                                <th>Tên Sản Phẩm</th>
-                                                <th>Ảnh</th>
-                                                <th>Hãng</th>
-                                                <th>Màu Sắc</th>
-                                                <th>Ram</th>
-                                                <th>Bộ Nhớ</th>
-                                                <th>Đơn Giá</th>
-                                                <th>Số Lượng</th>
-                                                <th></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody class="san_pham_search" style="text-align: center"
-                                                   id="banglocthaydoi">
-                                            <c:forEach items="${listChiTietSanPham}" var="ctsp">
-                                                <tr>
-                                                    <td>${ctsp.sanPham.ma}</td>
-                                                    <td>${ctsp.sanPham.ten}</td>
-                                                    <td align="center">
-                                                        <img src="/uploads/${ctsp.urlAnh}" width="40" height="40">
-                                                    </td>
-                                                    <td>${ctsp.sanPham.hangSanPham.ten}</td>
-                                                    <td>${ctsp.mauSac.ten}</td>
-                                                    <td>${ctsp.ram.dungLuong}</td>
-                                                    <td>${ctsp.rom.dungLuong}</td>
-                                                    <td>${ctsp.giaBan}</td>
-                                                    <td>${ctsp.soLuong}</td>
-                                                    <td>
-
-                                                        <a class="btn btn-warning btn-icon-text"
-                                                           data-bs-toggle="modal" data-bs-target="#nhapImei"
-                                                           data-giaban="${ctsp.giaBan}" onclick="kiemTraGia()">Nhập
-                                                            IMEI</a>
-                                                    </td>
-                                                </tr>
-                                            </c:forEach>
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div id="yourModalId" class="modal"
      style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 1000px; height: 300px;">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <h5 class="modal-title">Sản phẩm đổi trả</h5>
-        <table class="modal-table">
+        <h5 class="modal-title">Sản phẩm đổi mới</h5>
+        <table class="modal-table" style="color: black">
             <thead>
             <tr>
                 <th>Tên Sản Phẩm</th>

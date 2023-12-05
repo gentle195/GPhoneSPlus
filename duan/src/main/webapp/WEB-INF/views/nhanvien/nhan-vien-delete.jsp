@@ -55,19 +55,22 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped" style="color: black">
+                        <table id="example" class="display" style="color: black;width: 2000px">
                             <thead>
                             <tr>
                                 <th>STT</th>
+                                <th>Ngày tạo</th>
                                 <th>Mã</th>
                                 <th>Ảnh</th>
                                 <th>Họ tên</th>
                                 <th>Giới tính</th>
                                 <th>SĐT</th>
+                                <th>Tài khoản</th>
                                 <th>Chức vụ</th>
                                 <th>Lương</th>
                                 <th>Quê quán</th>
-                                <th>Trạng thái</th>
+                                <th>Ngày cập nhật</th>
+                                <th>Tình trạng</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -76,21 +79,31 @@
                             <c:forEach items="${listNhanVien}" var="nhanVien" varStatus="i">
                                 <tr>
                                     <th scope="row">${i.index+1}</th>
+                                    <td>${nhanVien.ngayTao}</td>
                                     <td>${nhanVien.ma}</td>
                                     <td align="center">
-                                        <img src="/uploads/${nhanVien.urlAnh}" width="40" height="40"></td>
+                                        <img src="/../../uploads/${nhanVien.urlAnh}" width="40" height="40"></td>
                                     <td>${nhanVien.hoTen}</td>
                                     <td>
                                         <c:if test="${nhanVien.gioiTinh == true}">Nam</c:if>
                                         <c:if test="${nhanVien.gioiTinh == false}">Nữ</c:if>
                                     </td>
                                     <td>${nhanVien.sdt}</td>
+                                    <td>${nhanVien.taiKhoan}</td>
                                     <td>${nhanVien.chucVu.ten}</td>
                                     <td>${nhanVien.luong}</td>
                                     <td>${nhanVien.queQuan}</td>
+                                    <td>${nhanVien.ngayCapNhat}</td>
                                     <td>${nhanVien.trangThai()}</td>
                                     <td>
-                                        <a href="/nhan-vien/reset-status/${nhanVien.id}"
+                                        <a href="/nhan-vien/detail/${nhanVien.id}"
+                                           class="btn btn-warning btn-icon-text"
+                                           tabindex="-1"
+                                           role="button"
+                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                            <i class="ti-file btn-icon-prepend"></i>
+                                            Update</a>
+                                        <a href="/nhan-vien/update-status/${nhanVien.id}"
                                            class="btn btn-danger btn-icon-text"
                                            tabindex="-1"
                                            role="button"
@@ -106,22 +119,6 @@
                 </div>
             </div>
         </div>
-        <%--phân trang--%>
-        <div align="center">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <ul class="pagination justify-content-center pagination-lg">
-                    <li class="page-item"><a class="page-link" href="/nhan-vien/hien-thi-delete?pageNum=0"><</a></li>
-                    <c:forEach begin="1" end="${total}" varStatus="status">
-                        <li class="page-item">
-                            <a href="${pageContext.request.contextPath}/nhan-vien/hien-thi-delete?pageNum=${status.index -1}"
-                               class="page-link">${status.index}</a>
-                        </li>
-                    </c:forEach>
-                    <li class="page-item"><a class="page-link" href="/nhan-vien/hien-thi-delete?pageNum=${total-1}">></a></li>
-                </ul>
-            </div>
-        </div>
-        <%--kết thúc phân trang--%>
     </div>
 </div>
 </body>

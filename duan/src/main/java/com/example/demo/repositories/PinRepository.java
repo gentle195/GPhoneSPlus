@@ -18,13 +18,13 @@ import java.util.UUID;
 public interface PinRepository extends JpaRepository<Pin, UUID> {
 
     @Query("select p from Pin p  where p.tinhTrang= 0")
-    Page<Pin> getAll(Pageable pageable);
+    List<Pin> getAll();
 
     @Query("select p from Pin p  where p.tinhTrang= 0")
     List<Pin> findAll0();
 
     @Query("select p from Pin p  where p.tinhTrang= 1")
-    Page<Pin> getAll1(Pageable pageable);
+    List<Pin> getAll1();
 
     @Query("select p from Pin p  where  p.tinhTrang = 0 and (p.ma like %:ten% or p.congNghePin like %:ten% or p.loaiPin like %:ten%)")
     List<Pin> sreach0(String ten);

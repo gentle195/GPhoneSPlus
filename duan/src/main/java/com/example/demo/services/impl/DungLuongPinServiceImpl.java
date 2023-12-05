@@ -21,13 +21,13 @@ public class DungLuongPinServiceImpl implements DungLuongPinService {
 
 
     @Override
-    public Page<DungLuongPin> getAll(Pageable pageable) {
-        return dungLuongPinRepository.getAll(pageable);
+    public List<DungLuongPin> getAll() {
+        return dungLuongPinRepository.getAll();
     }
 
     @Override
-    public Page<DungLuongPin> getAll1(Pageable pageable) {
-        return dungLuongPinRepository.getAll1(pageable);
+    public List<DungLuongPin> getAll1() {
+        return dungLuongPinRepository.getAll1();
     }
 
     @Override

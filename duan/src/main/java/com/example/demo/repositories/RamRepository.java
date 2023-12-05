@@ -15,13 +15,13 @@ import java.util.UUID;
 @Repository
 public interface RamRepository extends JpaRepository<Ram, UUID> {
     @Query("select r from Ram r where r.tinhTrang= 0")
-    Page<Ram> getAll(Pageable pageable);
+    List<Ram> getAll();
 
     @Query("select r from Ram r where r.tinhTrang= 0")
     List<Ram> findAll0();
 
     @Query("select r from Ram r where r.tinhTrang= 1")
-    Page<Ram> getAll1(Pageable pageable);
+    List<Ram> getAll1();
 
     @Query("select r from Ram r where r.tinhTrang= 0 and (r.ma like %:ten% or r.dungLuong like %:ten%)")
     List<Ram> search0(String ten);

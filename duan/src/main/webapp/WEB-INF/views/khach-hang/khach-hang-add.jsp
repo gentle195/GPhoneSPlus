@@ -179,7 +179,7 @@
                             <div class="col-md-12">
                                 <div style="text-align: center">
                                     <BUTTON type="submit" class="btn btn-warning" style="" id="bt"
-                                            onclick="return thongbao()">ADD
+                                            onclick="return thongbao()">Thêm Thông Tin
                                     </BUTTON>
                                 </div>
                             </div>

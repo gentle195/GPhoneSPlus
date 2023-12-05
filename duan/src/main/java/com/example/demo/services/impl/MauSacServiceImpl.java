@@ -20,13 +20,13 @@ public class MauSacServiceImpl implements MauSacService {
 
 
     @Override
-    public Page<MauSac> getAll(Pageable pageable) {
-        return mauSacRepository.getAll(pageable);
+    public List<MauSac> getAll() {
+        return mauSacRepository.getAll();
     }
 
     @Override
-    public Page<MauSac> getAll1(Pageable pageable) {
-        return mauSacRepository.getAll1(pageable);
+    public List<MauSac> getAll1() {
+        return mauSacRepository.getAll1();
     }
 
     @Override

@@ -20,7 +20,8 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/chip/view-add" role="tab"
-               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin Chip </a>
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm thông tin
+                Chip </a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
@@ -54,14 +55,14 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped" style="color: black">
+                        <table id="example" class="display" style="color: black;width: 1400px">
                             <thead>
                             <tr>
                                 <th>Mã</th>
+                                <th>Tình Trạng</th>
                                 <th>Tên</th>
                                 <th>Loại Chip</th>
                                 <th>Số Nhân</th>
-                                <th>Tình Trạng</th>
                                 <th>Ngày Tạo</th>
                                 <th>Ngày Cập Nhật</th>
                                 <th>Action</th>
@@ -72,6 +73,7 @@
                             <c:forEach items="${listChip}" var="chip">
                                 <tr>
                                     <td>${chip.ma}</td>
+                                    <td>${chip.ngayTao}</td>
                                     <td>${chip.ten}</td>
                                     <td>${chip.loaiChip}</td>
                                     <td>${chip.soNhan}</td>
@@ -79,7 +81,6 @@
                                         <c:if test="${chip.tinhTrang == 0}">Còn</c:if>
                                         <c:if test="${chip.tinhTrang == 1}">Hết</c:if>
                                     </td>
-                                    <td>${chip.ngayTao}</td>
                                     <td>${chip.ngayCapNhat}</td>
                                     <td>
                                         <a href="/chip/reset-status/${chip.id}" class="btn btn-danger btn-icon-text"
@@ -97,23 +98,6 @@
                 </div>
             </div>
         </div>
-        <%--phân trang--%>
-        <div align="center">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <ul class="pagination justify-content-center pagination-lg">
-                    <li class="page-item"><a class="page-link" href="/chip/hien-thi-delete?pageNum=0"><</a></li>
-                    <c:forEach begin="1" end="${total}" varStatus="status">
-                        <li class="page-item">
-                            <a href="${pageContext.request.contextPath}/chip/hien-thi-delete?pageNum=${status.index -1}"
-                               class="page-link">${status.index}</a>
-                        </li>
-                    </c:forEach>
-                    <li class="page-item"><a class="page-link" href="/chip/hien-thi-delete?pageNum=${total-1}">></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <%--kết thúc phân trang--%>
     </div>
 </div>
 </body>

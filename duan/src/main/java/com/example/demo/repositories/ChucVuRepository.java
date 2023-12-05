@@ -16,14 +16,14 @@ import java.util.UUID;
 public interface ChucVuRepository extends JpaRepository<ChucVu, UUID> {
 
     @Query("select cv from ChucVu cv  where cv.tinhTrang=0")
-    Page<ChucVu> getAll(Pageable pageable);
+    List<ChucVu> getAll();
 
 
     @Query("select cv from ChucVu cv  where cv.tinhTrang=0")
     List<ChucVu> findAll();
 
     @Query("select cv from ChucVu cv  where cv.tinhTrang=1")
-    Page<ChucVu> getAll1(Pageable pageable);
+    List<ChucVu> getAll1();
 
     @Query("select cv from ChucVu cv  where cv.tinhTrang=0 ")
     List<ChucVu> findAll0();

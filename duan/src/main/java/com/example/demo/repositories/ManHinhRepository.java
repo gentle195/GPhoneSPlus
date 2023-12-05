@@ -18,13 +18,13 @@ public interface ManHinhRepository extends JpaRepository<ManHinh, UUID> {
 
 
     @Query("select c from ManHinh c  where c.tinhTrang=0")
-    Page<ManHinh> getAll(Pageable pageable);
+    List<ManHinh> getAll();
 
     @Query("select c from ManHinh c  where c.tinhTrang=0")
     List<ManHinh> findAll0();
 
     @Query("select c from ManHinh c  where c.tinhTrang=1")
-    Page<ManHinh> getAll1(Pageable pageable);
+    List<ManHinh> getAll1();
 
     @Query("select c from ManHinh c where c.tinhTrang = 0 and (c.ma like %:search% or c.thongSo " +
             "like %:search% or c.congNghe like %:search% or c.loaiCamUng like %:search% or c.tiLeKhungHinh like %:search% or c.doPhanGiai like %:search%)")

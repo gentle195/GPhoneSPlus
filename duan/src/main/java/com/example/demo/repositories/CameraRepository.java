@@ -15,10 +15,10 @@ import java.util.UUID;
 @Repository
 public interface CameraRepository extends JpaRepository<Camera, UUID> {
     @Query("select c from Camera c  where c.tinhTrang=0")
-    Page<Camera> getAll(Pageable pageable);
+    List<Camera> getAll();
 
     @Query("select c from Camera c  where c.tinhTrang=1")
-    Page<Camera> getAll1(Pageable pageable);
+    List<Camera> getAll1();
 
     @Query("select c from Camera c  where  c.tinhTrang = 0 ")
     List<Camera> findAll0();

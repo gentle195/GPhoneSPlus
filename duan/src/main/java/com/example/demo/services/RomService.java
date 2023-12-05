@@ -16,19 +16,19 @@ public interface RomService {
 
     public Rom add(Rom rom);
 
-    List<Rom> search(String dungluong);
+    public List<Rom> search(String dungluong);
 
-    List<Rom> search2(String dungluong);
+    public List<Rom> search2(String dungluong);
 
     public Rom update(UUID id, Rom rom);
 
     public Boolean delete(UUID id);
 
-    public Page<Rom> getAll0(Pageable pageable);
+    public List<Rom> getAll0();
 
-    Page<Rom> getall1(Pageable pageable);
+    public List<Rom> getall1();
 
-    void update0();
+    public void update0();
 }
 
 
