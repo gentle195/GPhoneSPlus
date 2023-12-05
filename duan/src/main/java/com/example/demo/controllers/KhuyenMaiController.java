@@ -3,10 +3,9 @@ package com.example.demo.controllers;
 import com.example.demo.models.ChiTietSanPham;
 import com.example.demo.models.GioHangChiTiet;
 import com.example.demo.models.KhuyenMai;
+import com.example.demo.repositories.KhachHangRepository;
 import com.example.demo.repositories.KhuyenMaiRepository;
-import com.example.demo.services.BanHangOnlineService;
-import com.example.demo.services.ChiTietSanPhamService;
-import com.example.demo.services.GioHangChiTietService;
+import com.example.demo.services.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,13 +29,61 @@ import java.util.UUID;
 @Controller
 public class KhuyenMaiController {
     @Autowired
-    private GioHangChiTietService gioHangChiTietService;
+    private HoaDonService hoaDonService;
     @Autowired
     private ChiTietSanPhamService chiTietSanPhamService;
     @Autowired
-    private KhuyenMaiRepository khuyenMaiRepository;
+    private NhanVienService nhanVienService;
+    @Autowired
+    private KhachHangService khachHangService;
+    @Autowired
+    private HoaDonChiTietService hoaDonChiTietService;
+    @Autowired
+    private DiaChiService diaChiService;
+    @Autowired
+    private IMEIService imeiService;
+    @Autowired
+    private SanPhamService sanPhamService;
+    @Autowired
+    private MauSacService mauSacService;
+    @Autowired
+    private ChipService chipService;
+    @Autowired
+    private RamService ramService;
+    @Autowired
+    private RomService romService;
+    @Autowired
+    private PinService pinService;
+    @Autowired
+    private HangSanPhamService hangSanPhamService;
+    @Autowired
+    private HangKhachHangService hangKhachHangService;
+    @Autowired
+    private DungLuongPinService dungLuongPinService;
+    @Autowired
+    private ManHinhService manHinhService;
+    @Autowired
+    private CameraService cameraService;
     @Autowired
     private BanHangOnlineService banHangOnlineService;
+    @Autowired
+    private GioHangChiTietService gioHangChiTietService;
+    @Autowired
+    private GioHangService gioHangService;
+    @Autowired
+    private DataIntermediateService dataService;
+    @Autowired
+    private KhachHangRepository khachHangRepository;
+
+    @Autowired
+    private DoiTraChiTietService doiTraChiTietService;
+
+    @Autowired
+    DoiTraService doiTraService;
+
+    @Autowired
+    private KhuyenMaiRepository khuyenMaiRepository;
+
     @Scheduled(fixedRate = 1000)
     public void soCTSPbangsoIMEI(){
         for (ChiTietSanPham km:chiTietSanPhamService.findAll()) {
@@ -238,6 +285,27 @@ public class KhuyenMaiController {
         model.addAttribute("dulieu", list.getContent());
         model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
+
+        model.addAttribute("hangds", hangSanPhamService.findAll0());
+        model.addAttribute("camds", cameraService.findAll0());
+        model.addAttribute("mands", manHinhService.findAll0());
+        model.addAttribute("mauds", mauSacService.findAll0());
+        model.addAttribute("ramds", ramService.findAll0());
+        model.addAttribute("romds", romService.findAll0());
+        model.addAttribute("pinds", pinService.findAll0());
+        model.addAttribute("dungds", dungLuongPinService.findAll0());
+        model.addAttribute("chipds", chipService.findAll0());
+        model.addAttribute("sands", sanPhamService.findAll0());
+        //        //gia max
+        Long max = Long.valueOf('0');
+        for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
+
+            if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                max = Long.valueOf(String.valueOf(ct.getGiaBan()));
+            }
+        }
+//System.out.println("taco---"+max);
+        model.addAttribute("max", String.valueOf(max));
         return "home/layout";
     }
 
@@ -293,6 +361,27 @@ public class KhuyenMaiController {
             model.addAttribute("momdalthongbaongayKT","Ngày kết thúc phải sau ngày bắt đầu");
             model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
             model.addAttribute("momdalthemkm",0);
+
+            model.addAttribute("hangds", hangSanPhamService.findAll0());
+            model.addAttribute("camds", cameraService.findAll0());
+            model.addAttribute("mands", manHinhService.findAll0());
+            model.addAttribute("mauds", mauSacService.findAll0());
+            model.addAttribute("ramds", ramService.findAll0());
+            model.addAttribute("romds", romService.findAll0());
+            model.addAttribute("pinds", pinService.findAll0());
+            model.addAttribute("dungds", dungLuongPinService.findAll0());
+            model.addAttribute("chipds", chipService.findAll0());
+            model.addAttribute("sands", sanPhamService.findAll0());
+            //        //gia max
+            Long max = Long.valueOf('0');
+            for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
+
+                if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                    max = Long.valueOf(String.valueOf(ct.getGiaBan()));
+                }
+            }
+//System.out.println("taco---"+max);
+            model.addAttribute("max", String.valueOf(max));
             return "home/layout";
         }
 
@@ -309,6 +398,27 @@ public class KhuyenMaiController {
             model.addAttribute("momdalthongbaongayKT","Ngày kết thúc phải sau ngày hiện tại");
             model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
             model.addAttribute("momdalthemkm",0);
+
+            model.addAttribute("hangds", hangSanPhamService.findAll0());
+            model.addAttribute("camds", cameraService.findAll0());
+            model.addAttribute("mands", manHinhService.findAll0());
+            model.addAttribute("mauds", mauSacService.findAll0());
+            model.addAttribute("ramds", ramService.findAll0());
+            model.addAttribute("romds", romService.findAll0());
+            model.addAttribute("pinds", pinService.findAll0());
+            model.addAttribute("dungds", dungLuongPinService.findAll0());
+            model.addAttribute("chipds", chipService.findAll0());
+            model.addAttribute("sands", sanPhamService.findAll0());
+            //        //gia max
+            Long max = Long.valueOf('0');
+            for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
+
+                if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                    max = Long.valueOf(String.valueOf(ct.getGiaBan()));
+                }
+            }
+//System.out.println("taco---"+max);
+            model.addAttribute("max", String.valueOf(max));
             return "home/layout";
         }
 
@@ -340,10 +450,31 @@ public class KhuyenMaiController {
         model.addAttribute("km",new KhuyenMai());
         model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
         model.addAttribute("tbThemKMOK", 0);
+
+        model.addAttribute("hangds", hangSanPhamService.findAll0());
+        model.addAttribute("camds", cameraService.findAll0());
+        model.addAttribute("mands", manHinhService.findAll0());
+        model.addAttribute("mauds", mauSacService.findAll0());
+        model.addAttribute("ramds", ramService.findAll0());
+        model.addAttribute("romds", romService.findAll0());
+        model.addAttribute("pinds", pinService.findAll0());
+        model.addAttribute("dungds", dungLuongPinService.findAll0());
+        model.addAttribute("chipds", chipService.findAll0());
+        model.addAttribute("sands", sanPhamService.findAll0());
+        //        //gia max
+        Long max = Long.valueOf('0');
+        for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
+
+            if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                max = Long.valueOf(String.valueOf(ct.getGiaBan()));
+            }
+        }
+//System.out.println("taco---"+max);
+        model.addAttribute("max", String.valueOf(max));
         return "home/layout";
     }
 
-
+UUID idkmdangchon=null;
     @GetMapping("/khuyen-mai/ap-dung-khuyen-mai/{idkm}")
     public String apdungkhuyenmai(
             Model model,
@@ -356,6 +487,7 @@ public class KhuyenMaiController {
     ) {
         KhuyenMai kmchon=khuyenMaiRepository.findById(idkm).orElse(null);
         model.addAttribute("kmchon",kmchon);
+        idkmdangchon=idkm;
         model.addAttribute("batmodalapdungkm",0);
         model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
         Sort sort = Sort.by("ma").descending();
@@ -364,10 +496,60 @@ public class KhuyenMaiController {
         model.addAttribute("dulieu", list.getContent());
         model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
+
+        model.addAttribute("hangds", hangSanPhamService.findAll0());
+        model.addAttribute("camds", cameraService.findAll0());
+        model.addAttribute("mands", manHinhService.findAll0());
+        model.addAttribute("mauds", mauSacService.findAll0());
+        model.addAttribute("ramds", ramService.findAll0());
+        model.addAttribute("romds", romService.findAll0());
+        model.addAttribute("pinds", pinService.findAll0());
+        model.addAttribute("dungds", dungLuongPinService.findAll0());
+        model.addAttribute("chipds", chipService.findAll0());
+        model.addAttribute("sands", sanPhamService.findAll0());
+        //        //gia max
+        Long max = Long.valueOf('0');
+        for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
+
+            if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                max = Long.valueOf(String.valueOf(ct.getGiaBan()));
+            }
+        }
+//System.out.println("taco---"+max);
+        model.addAttribute("max", String.valueOf(max));
         return "home/layout";
     }
 
-    @GetMapping("/khuyen-mai/chi-tiet-san-pham-ap-dung-khuyen-mai/{idctsp}/{idkm}")
+
+    @GetMapping("/khuyen-mai/huy-ap-dung-vao-1-ctsp/{idctsp}/{x1}/{x2}/{x3}/{x4}/{x5}/{x6}/{x7}/{x8}/{x9}/{x10}/{x11}/{x12}")
+    public String huyapdungkmvao1CTSP(
+            Model model,
+            @PathVariable("idctsp") UUID idctsp,
+            @PathVariable("x1") String x1,
+            @PathVariable("x2") String x2,
+            @PathVariable("x3") String x3,
+            @PathVariable("x4") String x4,
+            @PathVariable("x5") String x5,
+            @PathVariable("x6") String x6,
+            @PathVariable("x7") String x7,
+            @PathVariable("x8") String x8,
+            @PathVariable("x9") String x9,
+            @PathVariable("x10") String x10,
+            @PathVariable("x11") String x11,
+            @PathVariable("x12") String x12
+
+
+    ) {
+           khuyenMaiRepository.HuyApDungKMvs1ctsp(idctsp);
+        model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+        model.addAttribute("kmchon",khuyenMaiRepository.findById(idkmdangchon).orElse(null));
+        model.addAttribute("listctsp", banHangOnlineService.locbanhangcoGIATIEN(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, BigDecimal.valueOf(Double.valueOf(x11)), BigDecimal.valueOf(Double.valueOf(x12))));
+
+
+        return "khuyen-mai/single_pase_giao-dien-loc-khuyen-mai";
+    }
+
+    @GetMapping("/khuyen-mai/chi-tiet-san-pham-ap-dung-khuyen-mai/{idctsp}/{idkm}/{x1}/{x2}/{x3}/{x4}/{x5}/{x6}/{x7}/{x8}/{x9}/{x10}/{x11}/{x12}")
     public String apdungkmVSctsp(
             Model model,
             @PathVariable("idctsp") UUID idctsp,
@@ -375,27 +557,61 @@ public class KhuyenMaiController {
             @ModelAttribute("km") KhuyenMai khuyenMai,
             @ModelAttribute("kmupdate") KhuyenMai khuyenMaiupdate,
             @RequestParam("num") Optional<Integer> num,
-            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
+            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size,
+            @PathVariable("x1") String x1,
+            @PathVariable("x2") String x2,
+            @PathVariable("x3") String x3,
+            @PathVariable("x4") String x4,
+            @PathVariable("x5") String x5,
+            @PathVariable("x6") String x6,
+            @PathVariable("x7") String x7,
+            @PathVariable("x8") String x8,
+            @PathVariable("x9") String x9,
+            @PathVariable("x10") String x10,
+            @PathVariable("x11") String x11,
+            @PathVariable("x12") String x12
 
     ) {
         ChiTietSanPham ctsp=chiTietSanPhamService.findById(idctsp);
         ctsp.setKhuyenMai(khuyenMaiRepository.findById(idkm).orElse(null));
         chiTietSanPhamService.add(ctsp);
-        model.addAttribute("tbapdungKMvsCTSP",0);
+//        model.addAttribute("tbapdungKMvsCTSP",0);
         model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
 
+        model.addAttribute("listctsp", banHangOnlineService.locbanhangcoGIATIEN(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, BigDecimal.valueOf(Double.valueOf(x11)), BigDecimal.valueOf(Double.valueOf(x12))));
 
         KhuyenMai kmchon=khuyenMaiRepository.findById(idkm).orElse(null);
         model.addAttribute("kmchon",kmchon);
-        model.addAttribute("batmodalapdungkm",0);
+//        model.addAttribute("batmodalapdungkm",0);
         model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
-        Sort sort = Sort.by("ma").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
-        model.addAttribute("dulieu", list.getContent());
-        model.addAttribute("total", kt(list.getTotalPages()));
-        model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
-        return "home/layout";
+//        Sort sort = Sort.by("ma").descending();
+//        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+//        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+//        model.addAttribute("dulieu", list.getContent());
+//        model.addAttribute("total", kt(list.getTotalPages()));
+//        model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
+
+        model.addAttribute("hangds", hangSanPhamService.findAll0());
+        model.addAttribute("camds", cameraService.findAll0());
+        model.addAttribute("mands", manHinhService.findAll0());
+        model.addAttribute("mauds", mauSacService.findAll0());
+        model.addAttribute("ramds", ramService.findAll0());
+        model.addAttribute("romds", romService.findAll0());
+        model.addAttribute("pinds", pinService.findAll0());
+        model.addAttribute("dungds", dungLuongPinService.findAll0());
+        model.addAttribute("chipds", chipService.findAll0());
+        model.addAttribute("sands", sanPhamService.findAll0());
+        //        //gia max
+        Long max = Long.valueOf('0');
+        for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
+
+            if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                max = Long.valueOf(String.valueOf(ct.getGiaBan()));
+            }
+        }
+//System.out.println("taco---"+max);
+        model.addAttribute("max", String.valueOf(max));
+        return "khuyen-mai/single_pase_giao-dien-loc-khuyen-mai";
     }
 
 
@@ -427,6 +643,27 @@ public class KhuyenMaiController {
         model.addAttribute("dulieu", list.getContent());
         model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
+
+        model.addAttribute("hangds", hangSanPhamService.findAll0());
+        model.addAttribute("camds", cameraService.findAll0());
+        model.addAttribute("mands", manHinhService.findAll0());
+        model.addAttribute("mauds", mauSacService.findAll0());
+        model.addAttribute("ramds", ramService.findAll0());
+        model.addAttribute("romds", romService.findAll0());
+        model.addAttribute("pinds", pinService.findAll0());
+        model.addAttribute("dungds", dungLuongPinService.findAll0());
+        model.addAttribute("chipds", chipService.findAll0());
+        model.addAttribute("sands", sanPhamService.findAll0());
+        //        //gia max
+        Long max = Long.valueOf('0');
+        for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
+
+            if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                max = Long.valueOf(String.valueOf(ct.getGiaBan()));
+            }
+        }
+//System.out.println("taco---"+max);
+        model.addAttribute("max", String.valueOf(max));
         return "home/layout";
     }
 
@@ -473,6 +710,27 @@ public class KhuyenMaiController {
 
             model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
             model.addAttribute("batmodaldetailupdatekm",0);
+
+            model.addAttribute("hangds", hangSanPhamService.findAll0());
+            model.addAttribute("camds", cameraService.findAll0());
+            model.addAttribute("mands", manHinhService.findAll0());
+            model.addAttribute("mauds", mauSacService.findAll0());
+            model.addAttribute("ramds", ramService.findAll0());
+            model.addAttribute("romds", romService.findAll0());
+            model.addAttribute("pinds", pinService.findAll0());
+            model.addAttribute("dungds", dungLuongPinService.findAll0());
+            model.addAttribute("chipds", chipService.findAll0());
+            model.addAttribute("sands", sanPhamService.findAll0());
+            //        //gia max
+            Long max = Long.valueOf('0');
+            for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
+
+                if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                    max = Long.valueOf(String.valueOf(ct.getGiaBan()));
+                }
+            }
+//System.out.println("taco---"+max);
+            model.addAttribute("max", String.valueOf(max));
             return "home/layout";
         }
 
@@ -490,6 +748,27 @@ public class KhuyenMaiController {
             model.addAttribute("momdalthongbaongayKT1","Ngày kết thúc phải sau ngày bắt đầu");
             model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
             model.addAttribute("batmodaldetailupdatekm",0);
+
+            model.addAttribute("hangds", hangSanPhamService.findAll0());
+            model.addAttribute("camds", cameraService.findAll0());
+            model.addAttribute("mands", manHinhService.findAll0());
+            model.addAttribute("mauds", mauSacService.findAll0());
+            model.addAttribute("ramds", ramService.findAll0());
+            model.addAttribute("romds", romService.findAll0());
+            model.addAttribute("pinds", pinService.findAll0());
+            model.addAttribute("dungds", dungLuongPinService.findAll0());
+            model.addAttribute("chipds", chipService.findAll0());
+            model.addAttribute("sands", sanPhamService.findAll0());
+            //        //gia max
+            Long max = Long.valueOf('0');
+            for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
+
+                if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                    max = Long.valueOf(String.valueOf(ct.getGiaBan()));
+                }
+            }
+//System.out.println("taco---"+max);
+            model.addAttribute("max", String.valueOf(max));
             return "home/layout";
         }
 
@@ -508,6 +787,28 @@ public class KhuyenMaiController {
             model.addAttribute("momdalthongbaongayKT1","Ngày kết thúc phải sau ngày hiện tại");
             model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
             model.addAttribute("batmodaldetailupdatekm",0);
+
+            model.addAttribute("hangds", hangSanPhamService.findAll0());
+            model.addAttribute("camds", cameraService.findAll0());
+            model.addAttribute("mands", manHinhService.findAll0());
+            model.addAttribute("mauds", mauSacService.findAll0());
+            model.addAttribute("ramds", ramService.findAll0());
+            model.addAttribute("romds", romService.findAll0());
+            model.addAttribute("pinds", pinService.findAll0());
+            model.addAttribute("dungds", dungLuongPinService.findAll0());
+            model.addAttribute("chipds", chipService.findAll0());
+            model.addAttribute("sands", sanPhamService.findAll0());
+            //        //gia max
+            Long max = Long.valueOf('0');
+            for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
+
+                if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                    max = Long.valueOf(String.valueOf(ct.getGiaBan()));
+                }
+            }
+//System.out.println("taco---"+max);
+//System.out.println("taco---"+max);
+            model.addAttribute("max", String.valueOf(max));
             return "home/layout";
         }
 
@@ -525,6 +826,27 @@ public class KhuyenMaiController {
         model.addAttribute("km",new KhuyenMai());
         model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
         model.addAttribute("tbUPDATEkmOK", 0);
+
+        model.addAttribute("hangds", hangSanPhamService.findAll0());
+        model.addAttribute("camds", cameraService.findAll0());
+        model.addAttribute("mands", manHinhService.findAll0());
+        model.addAttribute("mauds", mauSacService.findAll0());
+        model.addAttribute("ramds", ramService.findAll0());
+        model.addAttribute("romds", romService.findAll0());
+        model.addAttribute("pinds", pinService.findAll0());
+        model.addAttribute("dungds", dungLuongPinService.findAll0());
+        model.addAttribute("chipds", chipService.findAll0());
+        model.addAttribute("sands", sanPhamService.findAll0());
+        //        //gia max
+        Long max = Long.valueOf('0');
+        for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
+
+            if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                max = Long.valueOf(String.valueOf(ct.getGiaBan()));
+            }
+        }
+//System.out.println("taco---"+max);
+        model.addAttribute("max", String.valueOf(max));
         return "home/layout";
     }
 
@@ -552,6 +874,103 @@ public class KhuyenMaiController {
 
 
         model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
+
+        model.addAttribute("hangds", hangSanPhamService.findAll0());
+        model.addAttribute("camds", cameraService.findAll0());
+        model.addAttribute("mands", manHinhService.findAll0());
+        model.addAttribute("mauds", mauSacService.findAll0());
+        model.addAttribute("ramds", ramService.findAll0());
+        model.addAttribute("romds", romService.findAll0());
+        model.addAttribute("pinds", pinService.findAll0());
+        model.addAttribute("dungds", dungLuongPinService.findAll0());
+        model.addAttribute("chipds", chipService.findAll0());
+        model.addAttribute("sands", sanPhamService.findAll0());
+        //        //gia max
+        Long max = Long.valueOf('0');
+        for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
+
+            if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                max = Long.valueOf(String.valueOf(ct.getGiaBan()));
+            }
+        }
+//System.out.println("taco---"+max);
+        model.addAttribute("max", String.valueOf(max));
+        return "home/layout";
+    }
+
+
+    @GetMapping("/khuyen-mai/loc-ban-hang/{x1}/{x2}/{x3}/{x4}/{x5}/{x6}/{x7}/{x8}/{x9}/{x10}/{x11}/{x12}")
+    public String locbanhang(
+            Model model,
+            @PathVariable("x1") String x1,
+            @PathVariable("x2") String x2,
+            @PathVariable("x3") String x3,
+            @PathVariable("x4") String x4,
+            @PathVariable("x5") String x5,
+            @PathVariable("x6") String x6,
+            @PathVariable("x7") String x7,
+            @PathVariable("x8") String x8,
+            @PathVariable("x9") String x9,
+            @PathVariable("x10") String x10,
+            @PathVariable("x11") String x11,
+            @PathVariable("x12") String x12
+    ) {
+
+        KhuyenMai kmchon=khuyenMaiRepository.findById(idkmdangchon).orElse(null);
+        model.addAttribute("kmchon",kmchon);
+
+        model.addAttribute("banhangonline", banHangOnlineService);
+        model.addAttribute("listctsp", banHangOnlineService.locbanhangcoGIATIEN(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, BigDecimal.valueOf(Double.valueOf(x11)), BigDecimal.valueOf(Double.valueOf(x12))));
+
+        return "khuyen-mai/single_pase_giao-dien-loc-khuyen-mai";
+    }
+
+
+
+    @GetMapping("/khuyen-mai/huy-khuyen-mai/{idkm}")
+    public String xoakhuyenmai(
+            Model model,
+@PathVariable("idkm") UUID idkm,
+            @ModelAttribute("km") KhuyenMai khuyenMai,
+            @ModelAttribute("kmupdate") KhuyenMai khuyenMaiupdate,
+            @RequestParam("num") Optional<Integer> num,
+            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
+//            @ModelAttribute("khmodal") KhachHang khachHang1
+    ) {
+      khuyenMaiRepository.XoaKhuyenMai(idkm);
+
+        model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+
+        Sort sort = Sort.by("ma").descending();
+        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+        model.addAttribute("dulieu", list.getContent());
+        model.addAttribute("total", kt(list.getTotalPages()));
+        model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
+
+        model.addAttribute("hangds", hangSanPhamService.findAll0());
+        model.addAttribute("camds", cameraService.findAll0());
+        model.addAttribute("mands", manHinhService.findAll0());
+        model.addAttribute("mauds", mauSacService.findAll0());
+        model.addAttribute("ramds", ramService.findAll0());
+        model.addAttribute("romds", romService.findAll0());
+        model.addAttribute("pinds", pinService.findAll0());
+        model.addAttribute("dungds", dungLuongPinService.findAll0());
+        model.addAttribute("chipds", chipService.findAll0());
+        model.addAttribute("sands", sanPhamService.findAll0());
+        //        //gia max
+        Long max = Long.valueOf('0');
+        for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
+
+            if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                max = Long.valueOf(String.valueOf(ct.getGiaBan()));
+            }
+        }
+//System.out.println("taco---"+max);
+        model.addAttribute("max", String.valueOf(max));
+
+
+        model.addAttribute("tbhuyKM",0);
         return "home/layout";
     }
 }

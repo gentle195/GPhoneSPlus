@@ -304,7 +304,11 @@
         var thanhtien = 0;
         <c:forEach items="${tthdkh}" var="ht"  >
 
-        if ("${ht.getmahd()}" === value1.trim()) {
+
+
+
+        if("${ht.getmahd()}"==value1.trim()) {
+
 
             gan = gan +
                 '<tr>' +

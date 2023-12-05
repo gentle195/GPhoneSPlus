@@ -57,4 +57,17 @@ public interface KhuyenMaiRepository extends JpaRepository<KhuyenMai, UUID> {
     @Query("select kh from KhuyenMai kh  where kh.ma like %:timkiem%  or kh.ten like %:timkiem% ")
     List<KhuyenMai> timkiemKM(String timkiem);
 
+
+    @Transactional
+    @Modifying
+    @Query(value = " update chi_tiet_san_pham set id_khuyen_mai=null where id_khuyen_mai=:idkm\n" +
+            "    delete from khuyen_mai where id=:idkm", nativeQuery = true)
+    void XoaKhuyenMai(@Param("idkm") UUID idkm);
+
+
+    @Transactional
+    @Modifying
+    @Query(value = "update chi_tiet_san_pham set id_khuyen_mai=null where id=:idctsp", nativeQuery = true)
+    void HuyApDungKMvs1ctsp(@Param("idctsp") UUID idctsp);
+
 }
