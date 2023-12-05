@@ -713,6 +713,86 @@
         </c:forEach>
         </tbody>
     </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <c:if test="${not empty listdtct}">
+        <table class="table table-striped" style="text-content: center;width: 90%;margin-left: 5%;margin-bottom: 100px" >
+
+            <h3 style="text-align: center">Thông tin đổi trả</h3>
+            <thead>
+            <tr>
+                <th>Ảnh sản phẩm</th>
+                <th>Sản phẩm</th>
+                <th>Ảnh sản phẩm đổi trả</th>
+                <th>Sản phẩm đổi trả</th>
+                <th>Tình trạng</th>
+
+            </tr>
+            </thead>
+            <c:forEach items="${listdtct}" var="ht" varStatus="stt">
+                <tbody>
+
+
+                <c:if test="${stt.index==0}">
+                    <tr>
+
+                        <td>
+                            <img src="../../../uploads/${ht.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}" width="40" height="40"
+                                 style="border-radius:50% 50% 50% 50%">
+                        </td>
+                        <td>
+                                ${ht.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten} - ${ht.hoaDonChiTiet.imei.chiTietSanPham.mauSac.ten}
+                            - ${ht.hoaDonChiTiet.imei.chiTietSanPham.ram.dungLuong} - ${ht.hoaDonChiTiet.imei.chiTietSanPham.rom.dungLuong}.
+                        </td>
+                        <td>
+
+                            <img src="../../../uploads/${ht.imei.chiTietSanPham.urlAnh}" width="40" height="40"
+                                 style="border-radius:50% 50% 50% 50%">
+                        </td>
+
+                        <td>
+
+                                ${ht.imei.chiTietSanPham.sanPham.ten} - ${ht.imei.chiTietSanPham.mauSac.ten}
+                            - ${ht.imei.chiTietSanPham.ram.dungLuong} - ${ht.imei.chiTietSanPham.rom.dungLuong}.
+                        </td>
+
+
+                        <td>
+                            <c:if test="${ht.doiTra.tinhTrang==0}">
+                                <p>Chờ đổi trả</p>
+                            </c:if>
+                            <c:if test="${ht.doiTra.tinhTrang==1}">
+                                <p>Từ chối</p>
+                            </c:if>
+                            <c:if test="${ht.doiTra.tinhTrang==2}">
+                                <p>Đã đổi trả</p>
+                            </c:if>
+
+                        </td>
+
+                    </tr>
+
+                </c:if>
+
+
+
+                </tbody>
+
+                <c:if test="${ht.doiTra.tinhTrang==0}">
+                    <a class="btn btn-primary" style="background-color: #ff0000;margin-bottom: -300px;margin-left: 95%" href="/ban-hang-online/huy/${ht.doiTra.id}" type="button">Hủy</a>
+                </c:if>
+            </c:forEach>
+                <%--        <a href="/ban-hang-online/huy/${ht.doiTra.id}" type="button">Hủy</a>--%>
+
+
+        </table>
+    </c:if>
 
     <div class="modal" id="modalthaydoithongtinnhanhang">
 
