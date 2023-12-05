@@ -1601,6 +1601,20 @@ public class BanHangOnlineController {
 
         model.addAttribute("hd", hoaDonService.findById(idhd));
         model.addAttribute("listhdct", banHangOnlineService.timhoadonchitiettheoidhd(idhd));
+        List<HoaDonChiTiet> hoaDonChiTiet=banHangOnlineService.timhoadonchitiettheoidhd(idhd);
+        DoiTra doiTra = doiTraService.getDoiTraByHoaDon(idhd);
+        if (doiTra != null) {
+            // Thực hiện các thao tác với doiTra
+            List<DoiTraChiTiet> doiTraChiTiet = doiTraChiTietService.getDoiTraChiTietByDoiTraId(doiTra.getId());
+            model.addAttribute("listdtct", doiTraChiTiet);
+            System.out.println("doi tra: " + doiTra);
+        } else {
+            // Xử lý khi doiTra là null
+            System.out.println("Không tìm thấy đối tượng DoiTra cho idhd: " + idhd);
+        }
+
+
+
         model.addAttribute("banhangonline", banHangOnlineService);
         System.out.println("------" + banHangOnlineService.listIMEItheoIDHDvsIDCTSP(UUID.fromString("C0242A2A-F83C-4347-AD29-FEA374AB7CD9"), UUID.fromString("AF372FA0-7E69-4193-BB0E-4DFF72EECD01")).size());
         if (idkhachhang.equals("1")) {
@@ -2081,8 +2095,8 @@ public class BanHangOnlineController {
 
             // Cập nhật thông tin ghi chú và hình thức đổi trả
 
-            int hinhThuc = Integer.parseInt(hinhThucList.get(i));
-            doiTraChiTietss.setHinhThucDoiTra(hinhThuc);
+
+            doiTraChiTietss.setHinhThucDoiTra(0);
             doiTraChiTietss.setLyDo(ghiChuList.get(i));
 
             doiTraChiTiets.add(doiTraChiTietss);
@@ -2170,6 +2184,43 @@ public class BanHangOnlineController {
 
 
         return "ban-hang-online/singfle_pase_tim_kiem_trang_chu";
+    }
+
+    @GetMapping("/ban-hang-online/huy/{doitraId}")
+    public String huy(Model model, @ModelAttribute("dulieuxem") DoiTra dulieuxem,
+                      @PathVariable UUID doitraId, HttpServletRequest request
+    ) {
+        DoiTra doiTra = doiTraService.findById(doitraId);
+        System.out.println("Doi tra" + doiTra);
+        List<DoiTraChiTiet> listCHiTietDoiTra = doiTraChiTietService.getDoiTraChiTietByDoiTraId(doitraId);
+        for (DoiTraChiTiet dtct : listCHiTietDoiTra
+        ) {
+            if (dtct.getHienTrangSanPham() == 0) {
+                if (dtct.getImei() != null) {
+                    IMEI imei1 = imeiService.findById(dtct.getImei().getId());
+                    imei1.setTinhTrang(0);
+                    imeiService.update(dtct.getImei().getId(), imei1);
+                }
+                dtct.setTinhTrang(1);
+                doiTraChiTietService.update(dtct.getId(), dtct);
+
+            } else if (dtct.getHienTrangSanPham() == 1) {
+
+                if (dtct.getImei() != null) {
+                    IMEI imei1 = imeiService.findById(dtct.getImei().getId());
+                    imei1.setTinhTrang(0);
+                    imeiService.update(dtct.getImei().getId(), imei1);
+                }
+                dtct.setTinhTrang(1);
+                doiTraChiTietService.update(dtct.getId(), dtct);
+            }
+        }
+        doiTra.setTinhTrang(1);
+        doiTra.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+        doiTraService.update(doitraId, doiTra);
+
+
+        return "redirect:/ban-hang-online/hoa-don-online/" +doiTra.getHoaDon().getKhachHang().getId();
     }
 
 }

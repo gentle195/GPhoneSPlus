@@ -856,7 +856,7 @@
                     "<td>" +
                     "<select class='form-control hinhThucSelect'>" +
                     "<option value='0'>Đổi sản phẩm</option>" +
-                    "<option value='1'>Trả sản phẩm</option>" +
+
                     "</select>" +
                     "<button class='btn btn-success chonSanPhamBtn' style='display:none'>Chọn sản phẩm</button>" +
                     "</td>" +
