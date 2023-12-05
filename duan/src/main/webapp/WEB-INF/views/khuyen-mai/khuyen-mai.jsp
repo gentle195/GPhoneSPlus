@@ -8,6 +8,21 @@
 <head>
 
     <title>Focus - Bootstrap Admin Dashboard </title>
+    <%--    select 2--%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+<%--    loc theo gia--%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.1/nouislider.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.1/nouislider.min.js"></script>
+<%--    can deu--%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
+
     <!-- Favicon icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
@@ -19,7 +34,39 @@
             top: 30px;
             right: 20px;
         }
+        .toast2 {
+            position: relative;
+            padding: 10px;
+            color: #fff;
+            margin-bottom: 10px;
+            width: 400px;
+            display: grid;
+            grid-template-columns: 70px 1fr 70px;
+            border-radius: 5px;
+            --color: #0abf30;
+            background-image: linear-gradient(
+                    to right, #0abf3055, #22242f 30%
+            );
+            animation: show 0.3s ease 1 forwards
+        }
 
+        .toast2 i {
+            color: var(--color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: x-large;
+        }
+
+        .toast2 .title {
+            font-size: x-large;
+            font-weight: bold;
+        }
+
+        .toast2 span, .toast i:nth-child(3) {
+            color: #fff;
+            opacity: 0.6;
+        }
         .toast1 {
             position: relative;
             padding: 10px;
@@ -74,6 +121,17 @@
             bottom: 0;
             left: 0;
             background-color: var(--color);
+            width: 100%;
+            height: 3px;
+            content: '';
+            box-shadow: 0 0 10px var(--color);
+            animation: timeOut 5s linear 1 forwards
+        }
+        .toast2::before {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: red;
             width: 100%;
             height: 3px;
             content: '';
@@ -310,15 +368,17 @@
                                     <td>
                                         <c:if test="${ht.tinhTrang==1}">
                                             <a href="/khuyen-mai/detail-khuyen-mai/${ht.id}" class="btn btn-success"
-                                               onclick="return tbxd()">Xem khuyến mãi</a>
+                                               onclick="return confirm('Bạn muốn xem khuyến mãi')">Xem khuyến mãi</a>
                                         </c:if>
 
                                         <c:if test="${ht.tinhTrang!=1}">
                                             <a href="/khuyen-mai/ap-dung-khuyen-mai/${ht.id}" class="btn btn-success"
-                                               onclick="return tbxd()">Áp dụng</a>
+                                               onclick="return confirm('Bạn muốn áp dụng khuyến mãi')">Áp dụng</a>
                                             <a href="/khuyen-mai/detail-khuyen-mai/${ht.id}" class="btn btn-success"
-                                               onclick="return tbxd()">Xem khuyến mãi</a>
+                                               onclick="return confirm('Bạn muốn xem khuyến mãi')">Xem khuyến mãi</a>
                                         </c:if>
+                                        <a href="/khuyen-mai/huy-khuyen-mai/${ht.id}" class="btn btn-success"
+                                           onclick="return confirm('Các chi tiết sản phẩm đang ap dụng khuyến mãi mày sẽ không áp dụng khuyến mãi này nữa')">Hủy </a>
 
                                     </td>
 
@@ -366,19 +426,128 @@
 <!-- The Modal -->
 <div class="modal" id="myModalapdungkhuyemmai">
     <div class="modal-dialog modal-xl">
-        <div class="modal-content">
+        <div class="modal-content" style="width: 37cm;margin-left: -3cm">
 
             <!-- Modal Header -->
-            <div class="apdungthanhcong" style="margin-left: 85%;width:10%;z-index: 88;position: absolute"></div>
-            <div style="margin-top: 0.5cm;">
-                <h4 align="center">Áp dụng khuyến mãi</h4>
-                <h4 align="center">${kmchon.ma} </h4>
+            <div class="apdungthanhcong" style="position: fixed;
+top: 8%;left: 80%;transform: translate(-50%,-50%);
+display: block;z-index: 2;width: 7cm;height: 1cm;
+"></div>
+            <div style="margin-top: 0.5cm;z-index: 22">
+                <h4 align="center">Áp dụng khuyến mãi: ${kmchon.ma}</h4>
+
             </div>
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="table-responsive">
                     <div>
-                        <table id="example" class="display" style="color: black;min-width:1200px">
+                        <%--loc--%>
+                            <div style="width: 6cm;float: right;margin-right: 1cm;margin-top: 0cm">
+                                <label class="range-label">Khoảng tiền:</label>
+                                <div id="slider" class="slider"></div>
+
+                                <label id="thongbaokhoang" style="color: red"></label>
+                                <div>
+                                    Từ: <input id="value1" value="0" style="width: 2cm">
+                                    đến <input id="value2" value="${max}" style="width: 2cm">
+                                </div>
+                                <div id="max" style="display: none">${max}</div>
+                            </div>
+                        <div style="width: 83%">
+                            <div class="container px-0 px-lg-5 mt-0">
+                                <div class="row gx-0 gx-lg-5 row-cols-0 row-cols-md-0 row-cols-xl-5 justify-content-center"
+                                     style="width: 100%">
+                                    <div style="">
+                                        <select class="form-control" id="hangds1" onchange="clickcombobox()">
+                                            <option selected value="null">Hãng sản phẩm</option>
+                                            <c:forEach items="${hangds}" var="ht">
+                                                <option value="${ht.ten}">${ht.ten}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <select class="form-control" id="camds1" onchange="clickcombobox()">
+                                            <option selected value="null">Camera</option>
+                                            <c:forEach items="${camds}" var="ht">
+                                                <option value="${ht.thongSo}">${ht.thongSo}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <select class="form-control" id="mands1" onchange="clickcombobox()">
+                                            <option selected value="null">Màn hình</option>
+                                            <c:forEach items="${mands}" var="ht">
+                                                <option value="${ht.thongSo}">${ht.thongSo}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div style="height: 1.5cm">
+                                        <select class="form-control" id="mauds1" onchange="clickcombobox()">
+                                            <option selected value="null">Màu sắc</option>
+                                            <c:forEach items="${mauds}" var="ht">
+                                                <option value="${ht.ten}">${ht.ten}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <select class="form-control" id="ramds1" onchange="clickcombobox()">
+                                            <option selected value="null">Ram</option>
+                                            <c:forEach items="${ramds}" var="ht">
+                                                <option value="${ht.dungLuong}">${ht.dungLuong}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <select class="form-control" id="romds1" onchange="clickcombobox()">
+                                            <option selected value="null">Rom</option>
+                                            <c:forEach items="${romds}" var="ht">
+                                                <option value="${ht.dungLuong}">${ht.dungLuong}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div style="height: 1.5cm">
+                                        <select class="form-control" id="pinds1" onchange="clickcombobox()">
+                                            <option selected value="null">Pin</option>
+                                            <c:forEach items="${pinds}" var="ht">
+                                                <option value="${ht.loaiPin}">${ht.loaiPin}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <select class="form-control" id="dungds1" onchange="clickcombobox()">
+                                            <option selected value="null">Dung lượng pin</option>
+                                            <c:forEach items="${dungds}" var="ht">
+                                                <option value="${ht.thongSo}">${ht.thongSo}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <select class="form-control" id="chipds1" onchange="clickcombobox()">
+                                            <option selected value="null">Chíp</option>
+                                            <c:forEach items="${chipds}" var="ht">
+                                                <option value="${ht.ten}">${ht.ten}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <select class="form-control" id="sands1" onchange="clickcombobox()">
+                                            <option selected value="null">Sản phẩm</option>
+                                            <c:forEach items="${sands}" var="ht">
+                                                <option value="${ht.ten}">${ht.ten}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="vt"></div>
+
+                        </div>
+
+                        <%--loc kết thúc--%>
+
+                        <table id="example" class="display" style="color: black;">
                             <thead>
                             <tr style="background-color: #70c0b1">
                                 <th>
@@ -392,7 +561,7 @@
 
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="dssanphamloc">
                             <c:forEach items="${khuyenMaiRepository.getall0CTSP()}" var="ht" varStatus="stt">
                                 <tr>
                                     <td>
@@ -419,24 +588,35 @@
                                     </td>
                                     <td>
                                         <c:if test="${ht.khuyenMai==null}">
-                                            <a href="/khuyen-mai/chi-tiet-san-pham-ap-dung-khuyen-mai/${ht.id}/${kmchon.id}"
+                                            <a
+                                               onclick="apdungKMvsCTSP('${ht.id}','${kmchon.id}')"
                                                class="btn btn-success"
                                             >Áp dụng</a>
                                         </c:if>
                                         <c:if test="${ht.khuyenMai!=null}">
                                             <c:if test="${ht.khuyenMai.tinhTrang!=0}">
                                                 <c:if test="${ht.khuyenMai.id==kmchon.id}">
-                                                    Khuyến mãi này đang áp dụng sản phẩm này
+                                                    <a   onclick="HuyapdungkmVS1ctsp('${ht.id}')"
+                                                         class="btn btn-success"
+                                                    >Hủy áp dụng</a>
                                                 </c:if>
                                                 <c:if test="${ht.khuyenMai.id!=kmchon.id}">
-                                                    <a href="/khuyen-mai/chi-tiet-san-pham-ap-dung-khuyen-mai/${ht.id}/${kmchon.id}"
+                                                    <a   onclick="apdungKMvsCTSP('${ht.id}','${kmchon.id}')"
                                                        class="btn btn-success"
                                                     >Áp dụng</a>
+                                                    <a   onclick="HuyapdungkmVS1ctsp('${ht.id}')"
+                                                         class="btn btn-success"
+                                                    >Hủy áp dụng</a>
                                                 </c:if>
 
                                             </c:if>
                                             <c:if test="${ht.khuyenMai.tinhTrang==0}">
-                                                Khuyến mãi đang được diễn ra
+                                                <a   onclick="apdungKMvsCTSP('${ht.id}','${kmchon.id}')"
+                                                     class="btn btn-success"
+                                                >Áp dụng</a>
+                                                <a   onclick="HuyapdungkmVS1ctsp('${ht.id}')"
+                                                     class="btn btn-success"
+                                                >Hủy áp dụng</a>
                                             </c:if>
                                         </c:if>
 
@@ -543,6 +723,10 @@
         </div>
     </div>
 </div>
+
+
+
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
@@ -617,7 +801,7 @@
     function createToast1() {
         let newToast1 = document.createElement('div');
         newToast1.innerHTML = `
-            <div class="toast1">
+            <div class="toast1" style="background-color:red">
                 <i class="fa-solid fa-circle-check"></i>
                 <div class="content">
                     <div class="title">Thành công</div>
@@ -638,6 +822,37 @@
     }
 
 </script>
+<button style="display: none" id="error1"></button>
+<script>
+    let error1 = document.getElementById('error1');
+
+    function createToast4() {
+        let newToast = document.createElement('div');
+        newToast.innerHTML =   `
+            <div class="toast2" style=" background-image:
+                    linear-gradient(
+                            to right, #f24d4c55, #22242F 30%
+                    );" >
+                <i style="color: red" class="fa-solid fa-circle-exclamation"></i>
+                <div class="content">
+                    <div class="title">Thành công</div>
+                    <span>Hủy Áp dụng khuyến mãi thành công</span>
+                </div>
+                <i style="color: red" class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
+            </div>`;
+        apdungthanhcong.appendChild(newToast);
+        newToast.timeOut = setTimeout(
+            () => newToast.remove(), 5000
+        )
+
+
+
+    }
+    error1.onclick = function () {
+        createToast4();
+        // createToast();
+    }
+</script>
 <script>
 
     function validateInput(input) {
@@ -654,6 +869,7 @@
     </c:if>
 </script>
 
+<button id="error" style="display: none">Error</button>
 
 <script>
     let notifications = document.querySelector('.notifications');
@@ -683,6 +899,36 @@
         createToast();
     }
 
+</script>
+<script>
+    let error = document.getElementById('error');
+
+    function createToast3() {
+        let newToast = document.createElement('div');
+        newToast.innerHTML =   `
+            <div class="toast2" style=" background-image:
+                    linear-gradient(
+                            to right, #f24d4c55, #22242F 30%
+                    );" >
+                <i style="color: red" class="fa-solid fa-circle-exclamation"></i>
+                <div class="content">
+                    <div class="title">Thành công</div>
+                    <span>Hủy khuyến mãi thành công</span>
+                </div>
+                <i style="color: red" class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
+            </div>`;
+        notifications.appendChild(newToast);
+        newToast.timeOut = setTimeout(
+            () => newToast.remove(), 5000
+        )
+
+
+
+    }
+    error.onclick = function () {
+        createToast3();
+        // createToast();
+    }
 </script>
 <script>
     let btapdungthanhcongupdate = document.getElementById('btapdungthanhcongupdate');
@@ -731,6 +977,268 @@
     </c:if>
     <c:if test="${batmodaldetailupdatekm==0}">
     document.getElementById('modaldetailupdatekm').click();
+    </c:if>
+</script>
+<script>
+    var slider = document.getElementById('slider');
+    var value1 = document.getElementById('value1');
+    var value2 = document.getElementById('value2');
+    var max = parseFloat(document.getElementById('max').innerHTML);
+    var isSliding = false;
+
+    noUiSlider.create(slider, {
+        start: [0, max], // Giá trị mặc định cho hai chấm chòn
+        connect: true,    // Kết nối giữa hai chấm chòn
+        range: {
+            'min': 0,
+            'max': max
+        }
+    });
+
+
+    value1.addEventListener('input', function () {
+
+        this.value = this.value.replace(/[^0-9]/g, '');
+        isSliding = true;
+        slider.noUiSlider.set([parseInt(value1.value), null]);
+        isSliding = false;
+        if (
+            this.value.trim() === '' || parseFloat(this.value) > parseFloat(value2.value)
+        ) {
+
+            document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
+
+        } else {
+            document.getElementById("thongbaokhoang").innerHTML = "";
+            clickcombobox();
+        }
+    });
+
+    value2.addEventListener('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+        isSliding = true;
+        slider.noUiSlider.set([null, parseInt(value2.value)]);
+        isSliding = false;
+        if (
+            this.value.trim() === '' || parseFloat(this.value) < parseFloat(value1.value)
+        ) {
+
+            document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
+
+        } else {
+            document.getElementById("thongbaokhoang").innerHTML = " ";
+            clickcombobox();
+        }
+    });
+
+
+    slider.noUiSlider.on('update', function (values, handle) {
+        if (!isSliding) {
+            if (handle === 0) {
+                value1.value = Math.round(values[0]); // Làm tròn giá trị xuống số nguyên
+
+            } else {
+                value2.value = Math.round(values[1]); // Làm tròn giá trị xuống số nguyên
+
+            }
+            clickcombobox();
+
+        }
+    });
+</script>
+<script>
+
+    loadSelect3();
+    function loadSelect3() {
+        // Gọi .select2() cho các phần tử sau khi tất cả các tệp script đã được nạp
+
+
+        $('#hangds1').select2({
+            theme: 'bootstrap-5',
+            dropdownParent: $('#myModalapdungkhuyemmai')
+        });
+        $('#camds1').select2({
+            theme: 'bootstrap-5'
+            ,
+            dropdownParent: $('#myModalapdungkhuyemmai')
+        });
+        $('#mands1').select2({
+            theme: 'bootstrap-5'
+            ,
+            dropdownParent: $('#myModalapdungkhuyemmai')
+        });
+        $('#mauds1').select2({
+            theme: 'bootstrap-5'
+            ,
+            dropdownParent: $('#myModalapdungkhuyemmai')
+        });
+        $('#ramds1').select2({
+            theme: 'bootstrap-5'
+            ,
+            dropdownParent: $('#myModalapdungkhuyemmai')
+        });
+        $('#romds1').select2({
+            theme: 'bootstrap-5'
+            ,
+            dropdownParent: $('#myModalapdungkhuyemmai')
+        });
+
+        $('#pinds1').select2({
+            theme: 'bootstrap-5'
+            ,
+            dropdownParent: $('#myModalapdungkhuyemmai')
+        });
+        $('#dungds1').select2({
+            theme: 'bootstrap-5'
+            ,
+            dropdownParent: $('#myModalapdungkhuyemmai')
+        });
+
+        $('#chipds1').select2({
+            theme: 'bootstrap-5'
+            ,
+            dropdownParent: $('#myModalapdungkhuyemmai')
+        });
+
+        $('#sands1').select2({
+            theme: 'bootstrap-5'
+            ,
+            dropdownParent: $('#myModalapdungkhuyemmai')
+        });
+
+        $('#diachids1').select2({
+            theme: 'bootstrap-5'
+            ,
+            dropdownParent: $('#myModalapdungkhuyemmai')
+        });
+
+        // Gọi .select2() cho các phần tử khác ở đây (tương tự)
+    }
+
+
+
+
+    function clickcombobox() {
+        var x1 = encodeURIComponent(document.getElementById("hangds1").value);
+        var x2 = encodeURIComponent(document.getElementById("camds1").value);
+        var x3 = encodeURIComponent(document.getElementById("mands1").value);
+        var x4 = encodeURIComponent(document.getElementById("mauds1").value);
+        var x5 = encodeURIComponent(document.getElementById("ramds1").value);
+        var x6 = encodeURIComponent(document.getElementById("romds1").value);
+        var x7 = encodeURIComponent(document.getElementById("pinds1").value);
+        var x8 = encodeURIComponent(document.getElementById("dungds1").value);
+        var x9 = encodeURIComponent(document.getElementById("chipds1").value);
+        var x10 = encodeURIComponent(document.getElementById("sands1").value);
+        var x11 = encodeURIComponent(document.getElementById("value1").value);
+        var x12 = encodeURIComponent(document.getElementById("value2").value);
+        if(document.getElementById("value1").value.trim()==='' || document.getElementById("value2").value.trim()===''){
+            document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
+        }else {
+            if (parseFloat(x11) > parseFloat(x12)) {
+                document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
+
+            } else {
+                document.getElementById("thongbaokhoang").innerHTML = "";
+
+                var link = '/khuyen-mai/loc-ban-hang/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;
+                // document.getElementById("vt").innerHTML=link
+                loadbenloc(link);
+                // document.getElementById("demo").innerHTML = "You selected: " + x;
+            }
+        }
+    }
+    function HuyapdungkmVS1ctsp(idctsp) {
+        var x1 = encodeURIComponent(document.getElementById("hangds1").value);
+        var x2 = encodeURIComponent(document.getElementById("camds1").value);
+        var x3 = encodeURIComponent(document.getElementById("mands1").value);
+        var x4 = encodeURIComponent(document.getElementById("mauds1").value);
+        var x5 = encodeURIComponent(document.getElementById("ramds1").value);
+        var x6 = encodeURIComponent(document.getElementById("romds1").value);
+        var x7 = encodeURIComponent(document.getElementById("pinds1").value);
+        var x8 = encodeURIComponent(document.getElementById("dungds1").value);
+        var x9 = encodeURIComponent(document.getElementById("chipds1").value);
+        var x10 = encodeURIComponent(document.getElementById("sands1").value);
+        var x11 = encodeURIComponent(document.getElementById("value1").value);
+        var x12 = encodeURIComponent(document.getElementById("value2").value);
+        if(document.getElementById("value1").value.trim()==='' || document.getElementById("value2").value.trim()===''){
+            document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
+        }else {
+            if (parseFloat(x11) > parseFloat(x12)) {
+                document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
+
+            } else {
+                document.getElementById("thongbaokhoang").innerHTML = "";
+
+                var link = '/khuyen-mai/huy-ap-dung-vao-1-ctsp/'+idctsp+ '/' +x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;;
+                // document.getElementById("vt").innerHTML=link
+                loadbenloc(link);
+                // document.getElementById("demo").innerHTML = "You selected: " + x;
+                document.getElementById('error1').click();
+
+              // var  link1 = '/khuyen-mai/loc-ban-hang/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;
+              //   // document.getElementById("vt").innerHTML=link
+              //   loadbenloc(link1);
+            }
+        }
+    }
+    function apdungKMvsCTSP(idctsp,idkm) {
+        var x1 = encodeURIComponent(document.getElementById("hangds1").value);
+        var x2 = encodeURIComponent(document.getElementById("camds1").value);
+        var x3 = encodeURIComponent(document.getElementById("mands1").value);
+        var x4 = encodeURIComponent(document.getElementById("mauds1").value);
+        var x5 = encodeURIComponent(document.getElementById("ramds1").value);
+        var x6 = encodeURIComponent(document.getElementById("romds1").value);
+        var x7 = encodeURIComponent(document.getElementById("pinds1").value);
+        var x8 = encodeURIComponent(document.getElementById("dungds1").value);
+        var x9 = encodeURIComponent(document.getElementById("chipds1").value);
+        var x10 = encodeURIComponent(document.getElementById("sands1").value);
+        var x11 = encodeURIComponent(document.getElementById("value1").value);
+        var x12 = encodeURIComponent(document.getElementById("value2").value);
+        if(document.getElementById("value1").value.trim()==='' || document.getElementById("value2").value.trim()===''){
+            document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
+        }else {
+            if (parseFloat(x11) > parseFloat(x12)) {
+                document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
+
+            } else {
+                document.getElementById("thongbaokhoang").innerHTML = "";
+
+                var link = '/khuyen-mai/chi-tiet-san-pham-ap-dung-khuyen-mai/' + idctsp + '/' + idkm + '/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;
+                // document.getElementById("vt").innerHTML=link
+                loadbenloc(link);
+                // document.getElementById("demo").innerHTML = "You selected: " + x;
+                document.getElementById('btapdungthanhcong').click();
+
+                //  link = '/khuyen-mai/loc-ban-hang/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;
+                // // document.getElementById("vt").innerHTML=link
+                // loadbenloc(link);
+            }
+        }
+    }
+    function loadbenloc(interfaceUrl) {
+        fetch(interfaceUrl)
+            .then(response => response.text())
+            .then(data => {
+                const content = document.getElementById('dssanphamloc');
+                content.innerHTML = data;
+
+
+
+
+            })
+            .catch(error => {
+                console.error('Error loading interface:', error);
+            });
+        // document.getElementById('thanhlocctsp').style.display='none';
+    }
+</script>
+<script>
+    <c:if test="${tbhuyKM==0}">
+    document.getElementById('error').click();
+    </c:if>
+
+    <c:if test="${tbhuyapdungKM==0}">
+    document.getElementById('error1').click();
     </c:if>
 </script>
 </html>
