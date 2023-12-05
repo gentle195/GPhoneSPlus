@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ManHinhService {
-    public Page<ManHinh> getAll(Pageable pageable);
+    public List<ManHinh> getAll();
 
-    public Page<ManHinh> getAll1(Pageable pageable);
+    public List<ManHinh> getAll1();
 
     public List<ManHinh> findAll();
 

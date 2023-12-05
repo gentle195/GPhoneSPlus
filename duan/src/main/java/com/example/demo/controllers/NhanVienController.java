@@ -50,57 +50,34 @@ public class NhanVienController {
 //    private SMSService smsService;
 
     @GetMapping("/hien-thi")
-    public String hienThi(Model model, @ModelAttribute("nhanVien") NhanVien nhanVien,
-                          @RequestParam("pageNum") Optional<Integer> pageNum,
-                          @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-
-        Sort sort = Sort.by("ngayTao").descending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<NhanVien> page = nhanVienService.getAll(pageable);
+    public String hienThi(Model model, @ModelAttribute("nhanVien") NhanVien nhanVien) {
+        List<NhanVien> page = nhanVienService.getAll();
         model.addAttribute("contentPage", "../nhanvien/nhan-vien.jsp");
-        model.addAttribute("listNhanVien", page.getContent());
+        model.addAttribute("listNhanVien", page);
         model.addAttribute("listChucVu", chucVuService.findAll());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
         return "home/layout";
     }
 
 
     @GetMapping("/hien-thi-delete")
-    public String hienThiDelete(Model model, @ModelAttribute("nhanVien") NhanVien nhanVien,
-                                @RequestParam("pageNum") Optional<Integer> pageNum,
-                                @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-
-        Sort sort = Sort.by("ngayTao").descending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<NhanVien> page = nhanVienService.getAll1(pageable);
+    public String hienThiDelete(Model model, @ModelAttribute("nhanVien") NhanVien nhanVien) {
+        List<NhanVien> page = nhanVienService.getAll1();
         model.addAttribute("contentPage", "../nhanvien/nhan-vien-delete.jsp");
-        model.addAttribute("listNhanVien", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("listNhanVien", page);
         return "home/layout";
     }
 
     @GetMapping("/loc")
     public String hienThiLoc(Model model,
                              @RequestParam("ten1") String tenChucVu,
-                             @RequestParam("gioiTinh1") String gioiTinh,
-                             @RequestParam("pageNum") Optional<Integer> pageNum,
-                             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-
-        Sort sort = Sort.by("ngayTao").descending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-
-        // Gọi phương thức mới để lọc theo chức vụ và giới tính
-        List<NhanVien> filteredNhanViens = nhanVienService.searchByChucVuAndGioiTinh(tenChucVu, gioiTinh, pageable);
+                             @RequestParam("gioiTinh1") String gioiTinh) {
+        List<NhanVien> filteredNhanViens = nhanVienService.searchByChucVuAndGioiTinh(tenChucVu, gioiTinh);
         List<ChucVu> listChucVu = chucVuService.findAll();
 
         // Đặt danh sách chức vụ vào mô hình
         model.addAttribute("listChucVu", listChucVu);
         model.addAttribute("contentPage", "../nhanvien/nhan-vien.jsp");
         model.addAttribute("listNhanVien", filteredNhanViens);
-//        model.addAttribute("page", pageable.getPageNumber());
-//        model.addAttribute("total", pageable.getPageSize());
         return "home/layout";
     }
 
@@ -137,11 +114,7 @@ public class NhanVienController {
     public String addNhanVien(Model model, @ModelAttribute("nhanVien") @Valid NhanVien nhanVien,
                               BindingResult bindingResult,
                               @ModelAttribute("chucVu") ChucVu chucVu,
-                              @RequestParam("pageNum") Optional<Integer> pageNum,
-//                              @RequestParam("urlAnh") String anh,
-
                               @RequestParam("email") String email,
-                              @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize,
                               @RequestParam("images") MultipartFile multipartFile) throws IOException {
 
 
@@ -195,7 +168,7 @@ public class NhanVienController {
         nhanVienService.add(nhanVien);
         List<ChucVu> listChucVu = chucVuService.findAll();
 
-        Page<NhanVien> page = nhanVienService.getAll(Pageable.unpaged());
+        List<NhanVien> page = nhanVienService.getAll();
         NhanVien nvv = nhanVienService.findById(nhanVien.getId());
         String phone = nvv.getSdt();
         String message = "Chào mừng bạn đã đăng ký tài khoản. Mật khẩu của bạn là: " + nvien.getMatKhau();
@@ -203,9 +176,7 @@ public class NhanVienController {
         mailer.queue(nvv.getEmail(), "Bạn đã đăng kí tài khoản thành công", "TK: " + nvv.getTaiKhoan() + "\nMK: " + nvien.getMatKhau());
         model.addAttribute("listChucVu", listChucVu);
         model.addAttribute("nhanVien", new NhanVien());
-        model.addAttribute("listNhanVien", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("listNhanVien", page);
 
         model.addAttribute("contentPage", "../nhanvien/nhan-vien.jsp");
         return "redirect:/nhan-vien/hien-thi";
@@ -280,31 +251,22 @@ public class NhanVienController {
     }
 
     @GetMapping("/update-all-status")
-    public String updateTT(Model model, @RequestParam("pageNum") Optional<Integer> pageNum,
-                           @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize,
+    public String updateTT(Model model,
                            @ModelAttribute("nhanVien") NhanVien nhanVien) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         nhanVien.setNgayCapNhat(date);
 
         nhanVienService.updateTT();
-        Page<NhanVien> page = nhanVienService.getAll1(pageable);
+        List<NhanVien> page = nhanVienService.getAll1();
         model.addAttribute("contentPage", "../nhanvien/nhan-vien-delete.jsp");
-        model.addAttribute("listNhanVien", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("listNhanVien", page);
         return "home/layout";
     }
 
     @GetMapping("/update-status/{id}")
     public String updateStatus(Model model, @PathVariable("id") UUID id,
-                               @RequestParam("pageNum") Optional<Integer> pageNum,
-                               @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer
-                                       pageSize, @ModelAttribute("nhanVien") NhanVien nhanVien) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+                                       @ModelAttribute("nhanVien") NhanVien nhanVien) {
 
         NhanVien nhanVien1 = nhanVienService.findById(id);
         long millis = System.currentTimeMillis();
@@ -312,21 +274,15 @@ public class NhanVienController {
         nhanVien1.setNgayCapNhat(date);
         nhanVien1.setTinhTrang(1);
         nhanVienService.update(id, nhanVien1);
-        Page<NhanVien> page = nhanVienService.getAll(pageable);
+        List<NhanVien> page = nhanVienService.getAll();
         model.addAttribute("contentPage", "../nhanvien/nhan-vien.jsp");
-        model.addAttribute("listNhanVien", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("listNhanVien", page);
         return "home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
     public String resetStatus(Model model, @PathVariable("id") UUID
-            id, @RequestParam("pageNum") Optional<Integer> pageNum,
-                              @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer
-                                      pageSize, @ModelAttribute("nhanVien") NhanVien nhanVien) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+            id, @ModelAttribute("nhanVien") NhanVien nhanVien) {
         NhanVien nhanVien1 = nhanVienService.findById(id);
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
@@ -334,11 +290,9 @@ public class NhanVienController {
 
         nhanVien1.setTinhTrang(0);
         nhanVienService.update(id, nhanVien1);
-        Page<NhanVien> page = nhanVienService.getAll1(pageable);
+        List<NhanVien> page = nhanVienService.getAll1();
         model.addAttribute("contentPage", "../nhanvien/nhan-vien-delete.jsp");
-        model.addAttribute("listNhanVien", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("listNhanVien", page);
         return "home/layout";
     }
 

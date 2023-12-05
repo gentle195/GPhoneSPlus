@@ -18,7 +18,8 @@
             <a class="nav-link" href="/camera/hien-thi" role="tab" onclick="return myFunction4()">Thông tin Camera </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/camera/view-add" role="tab" onclick="return myFunction1()">Thêm thông tin Camera</a>
+            <a class="nav-link" href="/camera/view-add" role="tab" onclick="return myFunction1()">Thêm thông tin
+                Camera</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
@@ -44,14 +45,16 @@
                     <%--            Tìm kiếm               --%>
                     <form action="/camera/search-1" method="post">
                         <div class="row">
-                            <div class="col-8" >
+                            <div class="col-8">
                                 <h6 style="float: right; margin: 14px;color: red">${thongBao}</h6></div>
                             <div class="col-4">
                                 <div class="input-group" style="width: 100%; float: left">
                                     <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                            aria-label="Bạn tìm gì..." name="search">
                                     <div class="input-group-append">
-                                        <button class="btn btn-sm btn-primary" type="submit" onclick="return myFunction5()">Search</button>
+                                        <button class="btn btn-sm btn-primary" type="submit"
+                                                onclick="return myFunction5()">Search
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -59,12 +62,12 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped" style="color: black">
+                        <table id="example" class="display" style="color: black;width: 1400px">
                             <thead>
                             <tr>
                                 <th>Mã</th>
-                                <th>Thông số</th>
                                 <th>Ngày tạo</th>
+                                <th>Thông số</th>
                                 <th>Ngày cập nhật</th>
                                 <th>Tình trạng</th>
                                 <th>Mô tả</th>
@@ -75,8 +78,8 @@
                             <c:forEach var="list" varStatus="i" items="${listCamera}">
                             <tr>
                                 <td>${list.ma}</td>
-                                <td>${list.thongSo}</td>
                                 <td>${list.ngayTao}</td>
+                                <td>${list.thongSo}</td>
                                 <td>${list.ngayCapNhat}</td>
                                 <td>
                                     <c:if test="${list.tinhTrang==0}">Hoạt động</c:if>
@@ -99,22 +102,6 @@
                 </div>
             </div>
         </div>
-        <%--phân trang--%>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center pagination-lg">
-                <li class="page-item"><a class="page-link" href="/camera/hien-thi-delete?pageNum=0">  < </a></li>
-
-                <c:forEach begin="1" end="${total}" varStatus="status">
-                    <li class="page-item">
-                        <a href="/camera/hien-thi-delete?pageNum=${status.index-1}"
-                           class="page-link">${status.index}</a>
-                    </li>
-                </c:forEach>
-
-                <li class="page-item"><a class="page-link" href="/camera/hien-thi-delete?pageNum=${total-1}"> > </a></li>
-            </ul>
-        </nav>
-        <%--kết thúc phân trang--%>
     </div>
 </div>
 </body>

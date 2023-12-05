@@ -45,15 +45,15 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped" style="color: black">
+                        <table id="example" class="display" style="color: black;width: 1400px">
                             <thead>
                             <tr>
-                                <th>Mã</th>
+                                <th>Mã</th
+                                <th>Ngày Tạo</th>>
                                 <th>Tên</th>
                                 <th>Loại Chip</th>
                                 <th>Số Nhân</th>
                                 <th>Tình Trạng</th>
-                                <th>Ngày Tạo</th>
                                 <th>Ngày Cập Nhật</th>
                                 <th>Action</th>
                             </tr>
@@ -63,6 +63,7 @@
                             <c:forEach items="${listChip}" var="chip">
                                 <tr>
                                     <td>${chip.ma}</td>
+                                    <td>${chip.ngayTao}</td>
                                     <td>${chip.ten}</td>
                                     <td>${chip.loaiChip}</td>
                                     <td>${chip.soNhan}</td>
@@ -70,7 +71,6 @@
                                         <c:if test="${chip.tinhTrang == 0}">Còn</c:if>
                                         <c:if test="${chip.tinhTrang == 1}">Hết</c:if>
                                     </td>
-                                    <td>${chip.ngayTao}</td>
                                     <td>${chip.ngayCapNhat}</td>
                                     <td>
                                         <a href="/chip/detail/${chip.id}" class="btn btn-warning btn-icon-text"
@@ -92,21 +92,6 @@
                         </table>
                     </div>
                 </div>
-            </div>
-        </div>
-        <%--phân trang--%>
-        <div align="center">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <ul class="pagination justify-content-center pagination-lg">
-                    <li class="page-item"><a class="page-link" href="/chip/hien-thi?pageNum=0"><</a></li>
-                    <c:forEach begin="1" end="${total}" varStatus="status">
-                        <li class="page-item">
-                            <a href="${pageContext.request.contextPath}/chip/hien-thi?pageNum=${status.index -1}"
-                               class="page-link">${status.index}</a>
-                        </li>
-                    </c:forEach>
-                    <li class="page-item"><a class="page-link" href="/chip/hien-thi?pageNum=${total-1}">></a></li>
-                </ul>
             </div>
         </div>
     </div>

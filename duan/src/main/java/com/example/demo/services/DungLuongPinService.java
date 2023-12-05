@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface DungLuongPinService {
-    public Page<DungLuongPin> getAll(Pageable pageable);
+    public List<DungLuongPin> getAll();
 
-    public Page<DungLuongPin> getAll1(Pageable pageable);
+    public List<DungLuongPin> getAll1();
 
     public List<DungLuongPin> findAll();
 

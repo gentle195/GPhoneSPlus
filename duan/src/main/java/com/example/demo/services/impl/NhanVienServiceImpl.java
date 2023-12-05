@@ -22,13 +22,13 @@ public class NhanVienServiceImpl implements NhanVienService {
 
 
     @Override
-    public Page<NhanVien> getAll(Pageable pageable) {
-        return nhanVienRepository.getAll(pageable);
+    public List<NhanVien> getAll() {
+        return nhanVienRepository.getAll();
     }
 
     @Override
-    public Page<NhanVien> getAll1(Pageable pageable) {
-        return nhanVienRepository.getAll1(pageable);
+    public List<NhanVien> getAll1() {
+        return nhanVienRepository.getAll1();
     }
 
     @Override
@@ -92,7 +92,7 @@ public class NhanVienServiceImpl implements NhanVienService {
     }
 
     @Override
-    public List<NhanVien> searchByChucVuAndGioiTinh(String tenChucVu, String gioiTinh, Pageable pageable) {
+    public List<NhanVien> searchByChucVuAndGioiTinh(String tenChucVu, String gioiTinh) {
         return nhanVienRepository.searchByTenChucVuAndGioiTinh(tenChucVu, Boolean.valueOf(gioiTinh));
 
     }

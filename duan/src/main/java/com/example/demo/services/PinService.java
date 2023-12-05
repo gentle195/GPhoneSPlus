@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PinService {
-    public Page<Pin> getAll(Pageable pageable);
+    public List<Pin> getAll();
 
-    public Page<Pin> getAll1(Pageable pageable);
+    public List<Pin> getAll1();
 
     public List<Pin> findAll();
 

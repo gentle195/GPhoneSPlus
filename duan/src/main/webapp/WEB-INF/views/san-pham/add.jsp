@@ -391,7 +391,7 @@
                                             <div style="text-align: center">
                                                 <button type="submit" class="btn btn-primary mr-2"
                                                         onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                                    ADD
+                                                    Thêm Thông Tin
                                                 </button>
                                             </div>
                                         </div>
@@ -441,7 +441,7 @@
                                 <div style="text-align: center">
                                     <button type="submit" class="btn btn-primary mr-2"
                                             onclick="return validateFormHang()" id="btnHang">
-                                        ADD
+                                        Thêm Thông Tin
                                     </button>
                                 </div>
                             </form>
@@ -481,7 +481,7 @@
                                 <div style="text-align: center">
                                     <button type="submit" class="btn btn-primary mr-2"
                                             onclick="return myFunction1()">
-                                        ADD
+                                        Thêm Thông Tin
                                     </button>
                                 </div>
                             </form>
@@ -588,7 +588,7 @@
                         </div>
                         <div style="text-align: center">
                             <button type="submit" class="btn btn-primary mr-2" onclick="return myFunction1()">
-                                ADD
+                                Thêm Thông Tin
                             </button>
                         </div>
                     </div>

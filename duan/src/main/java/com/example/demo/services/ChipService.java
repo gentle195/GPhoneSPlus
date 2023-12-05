@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ChipService {
-    public Page<Chip> getAll(Pageable pageable);
+    public List<Chip> getAll();
 
-    public Page<Chip> getAll1(Pageable pageable);
+    public List<Chip> getAll1();
 
     public List<Chip> findAll();
 

@@ -74,7 +74,7 @@
                         <div style="text-align: center">
                             <button type="submit" class="btn btn-primary mr-2"
                                     onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                ADD
+                                Thêm Thông Tin
                             </button>
                         </div>
                     </form>
@@ -105,10 +105,10 @@
                         <form:errors path="moTa"></form:errors>
                     </div>
                     <div class="text-center">
-                            <%--                        <button type="submit" class="btn btn-primary" onclick="validateForm()" >ADD</button>--%>
+                            <%--                        <button type="submit" class="btn btn-primary" onclick="validateForm()" >Thêm Thông Tin</button>--%>
                         <button type="submit" class="btn btn-primary mr-2" id="btnPin"
                                 onclick="return validateFormPin()">
-                            ADD
+                            Thêm Thông Tin
                         </button>
                     </div>
                 </form:form>

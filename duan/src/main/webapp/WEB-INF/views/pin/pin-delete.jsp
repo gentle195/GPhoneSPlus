@@ -52,13 +52,13 @@
             </form>
             <%--           kết thúc tìm kiếm         --%>
             <div class="table-responsive">
-                <table class="table table-striped" style="color: black">
+                <table id="example" class="display" style="color: black;width: 1500px">
                     <thead>
                     <tr>
                         <th>Mã</th>
+                        <th>Ngày Tạo</th>
                         <th>Loại Pin</th>
                         <th>Công nghệ Pin</th>
-                        <th>Ngày Tạo</th>
                         <th>Ngày Cập Nhật</th>
                         <th>Tình Trạng</th>
                         <th>Mô Tả</th>
@@ -71,9 +71,9 @@
                     <c:forEach items="${listPin}" var="p">
                         <tr>
                             <td>${p.ma}</td>
+                            <td>${p.ngayTao}</td>
                             <td>${p.loaiPin}</td>
                             <td>${p.congNghePin}</td>
-                            <td>${p.ngayTao}</td>
                             <td>${p.ngayCapNhat}</td>
                             <td>
                                 <c:if test="${p.tinhTrang == 0}">Còn</c:if>
@@ -96,22 +96,6 @@
                 </table>
             </div>
         </div>
-        <%--phân trang--%>
-        <div align="center">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <ul class="pagination justify-content-center pagination-lg">
-                    <li class="page-item"><a class="page-link" href="/pin/hien-thi-delete?pageNum=0"><</a></li>
-                    <c:forEach begin="1" end="${total}" varStatus="status">
-                        <li class="page-item">
-                            <a href="${pageContext.request.contextPath}/pin/hien-thi-delete?pageNum=${status.index -1}"
-                               class="page-link">${status.index}</a>
-                        </li>
-                    </c:forEach>
-                    <li class="page-item"><a class="page-link" href="/pin/hien-thi-delete?pageNum=${total-1}">></a></li>
-                </ul>
-            </div>
-        </div>
-        <%--kết thúc phân trang--%>
     </div>
 </div>
 </body>

@@ -85,12 +85,12 @@ public class HangSanPhamServiceImpl implements HangSanPhamService {
     }
 
     @Override
-    public Page<HangSanPham> getAll0(Pageable pageable) {
-        return hangSanPhamRepository.getall0(pageable);
+    public List<HangSanPham> getAll0() {
+        return hangSanPhamRepository.getall0();
     }
 
     @Override
-    public Page<HangSanPham> getall1(Pageable pageable) {
-        return hangSanPhamRepository.getall1(pageable);
+    public List<HangSanPham> getall1() {
+        return hangSanPhamRepository.getall1();
     }
 }

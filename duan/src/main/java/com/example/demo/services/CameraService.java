@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CameraService {
-    public Page<Camera> getAll(Pageable pageable);
+    public List<Camera> getAll();
 
-    public Page<Camera> getAll1(Pageable pageable);
+    public List<Camera> getAll1();
 
     public List<Camera> findAll();
 

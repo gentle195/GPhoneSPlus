@@ -31,7 +31,6 @@ public class RomServiceImpl implements RomService {
 //    }
 
 
-
     @Override
     public List<Rom> findAll() {
         return romRepository.findAll();
@@ -53,7 +52,7 @@ public class RomServiceImpl implements RomService {
     }
 
     @Override
-    public List<Rom>search(String dungluong){
+    public List<Rom> search(String dungluong) {
         return romRepository.search(dungluong);
     }
 
@@ -87,14 +86,15 @@ public class RomServiceImpl implements RomService {
     }
 
     @Override
-    public Page<Rom> getAll0(Pageable pageable) {
-        return romRepository.getall0(pageable);
+    public List<Rom> getAll0() {
+        return romRepository.getall0();
     }
 
     @Override
-    public Page<Rom> getall1(Pageable pageable) {
-        return romRepository.getall1(pageable);
+    public List<Rom> getall1() {
+        return romRepository.getall1();
     }
+
     @Override
     public void update0() {
         romRepository.update0();

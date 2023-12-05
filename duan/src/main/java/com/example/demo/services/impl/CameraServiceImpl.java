@@ -19,13 +19,13 @@ public class CameraServiceImpl implements CameraService {
     private CameraRepository cameraRepository;
 
     @Override
-    public Page<Camera> getAll(Pageable pageable) {
-        return cameraRepository.getAll(pageable);
+    public List<Camera> getAll() {
+        return cameraRepository.getAll();
     }
 
     @Override
-    public Page<Camera> getAll1(Pageable pageable) {
-        return cameraRepository.getAll1(pageable);
+    public List<Camera> getAll1() {
+        return cameraRepository.getAll1();
     }
 
     @Override

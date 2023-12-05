@@ -22,15 +22,15 @@ public interface HangSanPhamService {
 
     public Boolean delete(UUID id);
 
-    List<HangSanPham> search(String dungluong);
+    public List<HangSanPham> search(String dungluong);
 
-    List<HangSanPham> search2(String dungluong);
+    public List<HangSanPham> search2(String dungluong);
 
     public void updateTT();
 
-    public Page<HangSanPham> getAll0(Pageable pageable);
+    public List<HangSanPham> getAll0();
 
-    Page<HangSanPham> getall1(Pageable pageable);
+    public List<HangSanPham> getall1();
 }
 
 

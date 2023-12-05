@@ -17,10 +17,10 @@ import java.util.UUID;
 public interface DungLuongPinRepository extends JpaRepository<DungLuongPin, UUID> {
 
     @Query("select d from DungLuongPin d  where d.tinhTrang= 0")
-    Page<DungLuongPin> getAll(Pageable pageable);
+    List<DungLuongPin> getAll();
 
     @Query("select d from DungLuongPin d  where d.tinhTrang= 1")
-    Page<DungLuongPin> getAll1(Pageable pageable);
+    List<DungLuongPin> getAll1();
 
     @Query("select d from DungLuongPin d  where  d.tinhTrang = 0 ")
     List<DungLuongPin> findAll0();

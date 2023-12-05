@@ -20,13 +20,13 @@ public class ManHinhServiceImpl implements ManHinhService {
     private ManHinhRepository manHinhRepository;
 
     @Override
-    public Page<ManHinh> getAll(Pageable pageable) {
-        return manHinhRepository.getAll(pageable);
+    public List<ManHinh> getAll() {
+        return manHinhRepository.getAll();
     }
 
     @Override
-    public Page<ManHinh> getAll1(Pageable pageable) {
-        return manHinhRepository.getAll1(pageable);
+    public List<ManHinh> getAll1() {
+        return manHinhRepository.getAll1();
     }
 
     @Override

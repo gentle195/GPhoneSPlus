@@ -56,27 +56,25 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped" style="color: black">
+                        <table id="example" class="display" style="color: black;width: 1200px">
                             <thead>
                             <tr>
-                                <th>STT</th>
                                 <th>Mã</th>
-                                <th>Dung lượng</th>
                                 <th>Ngày tạo</th>
+                                <th>Dung lượng</th>
                                 <th>Ngày cập nhật</th>
                                 <th>Tình trạng</th>
                                 <th>Mô tả</th>
-                                <th colspan="2">Action</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <i class="mdi mdi-border-color"></i>
                             <c:forEach items="${hsp}" var="chip" varStatus="i">
                                 <tr>
-                                    <td>${i.index+1}</td>
                                     <td>${chip.ma}</td>
-                                    <td>${chip.dungLuong}</td>
                                     <td>${chip.ngayTao}</td>
+                                    <td>${chip.dungLuong}</td>
                                     <td>${chip.ngayCapNhat}</td>
                                     <td style="color: green">${chip.tt()}</td>
                                     <td>${chip.moTa}</td>
@@ -96,25 +94,6 @@
                 </div>
             </div>
         </div>
-        <%--phân trang--%>
-        <div align="center">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <ul class="pagination justify-content-center pagination-lg">
-                    <li class="page-item"><a class="page-link" href="/rom/hien-thi-tung-xoa?num=0">First</a></li>
-
-                    <c:forEach begin="1" end="${total}" varStatus="status">
-                        <li class="page-item">
-                            <a href="${pageContext.request.contextPath}/rom/hien-thi-tung-xoa?num=${status.index -1}"
-                               class="page-link">${status.index}</a>
-                        </li>
-                    </c:forEach>
-
-                    <li class="page-item"><a class="page-link" href="/rom/hien-thi-tung-xoa?num=${total-1}">Last</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <%--kết thúc phân trang--%>
     </div>
 </div>
 </body>

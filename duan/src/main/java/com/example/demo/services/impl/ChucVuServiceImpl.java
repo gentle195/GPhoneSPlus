@@ -20,13 +20,13 @@ public class ChucVuServiceImpl implements ChucVuService {
 
 
     @Override
-    public Page<ChucVu> getAll(Pageable pageable) {
-        return chucVuRepository.getAll(pageable);
+    public List<ChucVu> getAll() {
+        return chucVuRepository.getAll();
     }
 
     @Override
-    public Page<ChucVu> getAll1(Pageable pageable) {
-        return chucVuRepository.getAll1(pageable);
+    public List<ChucVu> getAll1() {
+        return chucVuRepository.getAll1();
     }
 
     @Override

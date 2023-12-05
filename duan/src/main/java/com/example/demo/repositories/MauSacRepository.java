@@ -15,13 +15,13 @@ import java.util.UUID;
 @Repository
 public interface MauSacRepository extends JpaRepository<MauSac, UUID> {
     @Query("select ms from MauSac ms  where ms.tinhTrang=0")
-    Page<MauSac> getAll(Pageable pageable);
+    List<MauSac> getAll();
 
     @Query("select ms from MauSac ms  where ms.tinhTrang=0")
     List<MauSac> findAll0();
 
     @Query("select ms from MauSac ms  where ms.tinhTrang=1")
-    Page<MauSac> getAll1(Pageable pageable);
+    List<MauSac> getAll1();
 
     @Query("select ms from MauSac ms  where ms.tinhTrang=0 and (ms.ma like %:ten% or ms.ten like %:ten%)")
     List<MauSac> search0(String ten);

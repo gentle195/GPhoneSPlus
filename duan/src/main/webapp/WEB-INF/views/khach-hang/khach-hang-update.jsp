@@ -60,8 +60,6 @@
 
             <div class="card">
                 <div class="card-body">
-
-
                     <form:form action="/khach-hang/update" method="post" modelAttribute="kh"
                                enctype="multipart/form-data">
                         <P style="display: none">
@@ -89,126 +87,119 @@
                         </div>
                         <div style="display: none">
                             <form:input path="anh"/>
+                            <form:input path="ngayTao" type="date"/>
+                            <form:input class="form-control" placeholder="" path="matKhau"/>
+                            <form:input class="form-control" placeholder="" path="taiKhoan"/>
                         </div>
-
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>
-                                    <form:label class="form-label" path="ma">Mã:</form:label>
-                                    <form:input class="form-control" placeholder="" path="ma" readonly="true"/>
-                                </th>
-                                <th>
-                                    <form:label class="form-label" path="hoTen">Họ tên:
-                                        <form:errors path="hoTen" cssStyle="color: red"></form:errors>
-                                    </form:label>
-                                    <form:input class="form-control" placeholder="" path="hoTen"/>
-                                </th>
-
-                            </tr>
-                            </thead>
-
-                            <thead>
-                            <tr>
-                                <th>
-                                    <form:label class="form-label" path="gioiTinh">Giới Tính:</form:label>
-                                    <div class="form-control">
-                                        <form:radiobutton path="gioiTinh" value="true"/>Nam
-                                        <form:radiobutton path="gioiTinh" value="false" cssStyle="margin-left: 1cm"/> Nữ
+                        <form class="form-sample">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <form:label class="col-sm-3 col-form-label" path="hoTen">Họ tên:
+                                            <form:errors path="hoTen" cssStyle="color: red"></form:errors>
+                                        </form:label>
+                                        <div class="col-sm-9">
+                                            <form:input class="form-control" placeholder="" path="hoTen"/>
+                                        </div>
                                     </div>
-
-
-                                </th>
-                                <th>
-                                    <form:label class="form-label" path="email">Email:
-                                        <form:errors path="email" cssStyle="color: red"></form:errors>
-                                    </form:label>
-                                    <form:input class="form-control" placeholder="" path="email"/>
-
-                                </th>
-                            </tr>
-                            </thead>
-
-
-                            <thead>
-                            <tr>
-                                <th>
-
-                                    <form:label class="form-label" path="sdt">Sdt:
-                                        <form:errors path="sdt" cssStyle="color: red"></form:errors>
-                                    </form:label>
-                                    <form:input class="form-control" placeholder="" path="sdt"/>
-
-                                </th>
-                                <th>
-
-                                    <form:label class="form-label" path="ngaySinh">
-                                        Ngày sinh:
-                                        <div id="tb" style="color: crimson;float: right"></div>
-                                    </form:label>
-                                    <form:input class="form-control" placeholder="" path="ngaySinh" type="date"
-                                                id="ns"/>
-                                </th>
-                            </tr>
-                            </thead>
-                            <thead hidden>
-                            <tr>
-                                <th>
-                                    <form:label class="form-label" path="taiKhoan">Tài khoản:
-                                        <form:errors path="taiKhoan" cssStyle="color: red"></form:errors>
-                                    </form:label>
-                                    <form:input class="form-control" placeholder="" path="taiKhoan"/>
-                                </th>
-                                <th>
-                                    <form:label class="form-label" path="matKhau">Mật khẩu:
-                                        <form:errors path="matKhau" cssStyle="color: red"></form:errors>
-                                    </form:label>
-                                    <form:input class="form-control" placeholder="" path="matKhau"/>
-                                </th>
-                            </tr>
-                            </thead>
-                            <thead>
-                            <tr>
-                                <th>
-                                    <form:label class="form-label" path="diem">Điểm:
-                                        <form:errors path="diem" cssStyle="color: red"></form:errors>
-                                    </form:label>
-                                    <form:input class="form-control" placeholder="" path="diem" type="number"/>
-                                </th>
-                                <th>
-                                    <div style="float: right;width: 15%;height: 50px;margin-right: 40px;margin-top: 23px">
-                                        <button type="button"
-                                                style="height: 100%"
-                                                class="btn btn-primary"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#myModal">
-                                            Thêm nhanh
-                                        </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <form:label class="col-sm-3 col-form-label"
+                                                    path="gioiTinh">Giới Tính:</form:label>
+                                        <div class="col-sm-9">
+                                            <div class="form-control">
+                                                <form:radiobutton path="gioiTinh" value="true"/>Nam
+                                                <form:radiobutton path="gioiTinh" value="false"
+                                                                  cssStyle="margin-left: 1cm"/> Nữ
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div style="width: 75%;height: 60px;margin-bottom: 15px">
-                                        <form:label class="form-label" path="hangKhachHang">Hãng khách hàng:
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <form:label class="col-sm-3 col-form-label" path="email">Email:
+                                            <form:errors path="email" cssStyle="color: red"></form:errors>
+                                        </form:label>
+                                        <div class="col-sm-9">
+                                            <form:input class="form-control" placeholder="" path="email"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <form:label class="col-sm-3 col-form-label" path="sdt">Sdt:
+                                            <form:errors path="sdt" cssStyle="color: red"></form:errors>
+                                        </form:label>
+                                        <div class="col-sm-9">
+                                            <form:input class="form-control" placeholder="" path="sdt"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <form:label class="col-sm-3 col-form-label" path="ngaySinh">
+                                            Ngày sinh:
+                                            <div id="tb" style="color: crimson;float: right"></div>
+                                        </form:label>
+                                        <div class="col-sm-9">
+                                            <form:input class="form-control" placeholder="" path="ngaySinh" type="date"
+                                                        id="ns"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <form:label class="col-sm-3 col-form-label" path="taiKhoan">Tài khoản:
+                                            <form:errors path="taiKhoan" cssStyle="color: red"></form:errors>
+                                        </form:label>
+                                        <div class="col-sm-9">
+                                            <form:input class="form-control" placeholder="" path="taiKhoan"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <form:label class="col-sm-3 col-form-label" path="diem">Điểm:
+                                            <form:errors path="diem" cssStyle="color: red"></form:errors>
+                                        </form:label>
+                                        <div class="col-sm-9">
+                                            <form:input class="form-control" placeholder="" path="diem" type="number"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <form:label class="col-sm-3 col-form-label"
+                                                    path="hangKhachHang">Hãng khách hàng:
                                             <form:errors path="hangKhachHang" cssStyle="color: red"/>
                                         </form:label>
-                                        <form:select class="form-control"
-                                                     path="hangKhachHang"
-                                                     items="${hkh}"
-                                                     itemValue="id"
-                                                     itemLabel="ten"/>
-
+                                        <div class="col-sm-9">
+                                            <form:select class="form-control"
+                                                         path="hangKhachHang"
+                                                         items="${hkh}"
+                                                         itemValue="id"
+                                                         itemLabel="ten"/>
+                                        </div>
                                     </div>
-                                </th>
-                            </tr>
-                            </thead>
-                            <th style="display: none">
-                                <form:input path="ngayTao" type="date"></form:input>
-                            </th>
-                        </table>
-                        <br>
-                        <div align="center">
-                            <BUTTON type="submit" class="btn btn-warning" style="" id="bt" onclick="return thongbao()">
-                                update
-                            </BUTTON>
-                        </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div style="text-align: center">
+                                        <BUTTON type="submit" class="btn btn-warning" style="" id="bt"
+                                                onclick="return thongbao()">Thêm Thông Tin
+                                        </BUTTON>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </form:form>
                 </div>
             </div>

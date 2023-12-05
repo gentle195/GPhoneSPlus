@@ -15,10 +15,10 @@ import java.util.UUID;
 @Repository
 public interface ChipRepository extends JpaRepository<Chip, UUID> {
     @Query("select c from Chip c  where c.tinhTrang=0")
-    Page<Chip> getAll(Pageable pageable);
+    List<Chip> getAll();
 
     @Query("select c from Chip c  where c.tinhTrang=1")
-    Page<Chip> getAll1(Pageable pageable);
+    List<Chip> getAll1();
 
     @Query("select c from Chip c  where  c.tinhTrang = 0")
     List<Chip> findAll0();

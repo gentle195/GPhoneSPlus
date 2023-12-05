@@ -21,13 +21,13 @@ public class PinServiceImpl implements PinService {
 
 
     @Override
-    public Page<Pin> getAll(Pageable pageable) {
-        return pinRepository.getAll(pageable);
+    public List<Pin> getAll() {
+        return pinRepository.getAll();
     }
 
     @Override
-    public Page<Pin> getAll1(Pageable pageable) {
-        return pinRepository.getAll1(pageable);
+    public List<Pin> getAll1() {
+        return pinRepository.getAll1();
     }
 
     @Override
