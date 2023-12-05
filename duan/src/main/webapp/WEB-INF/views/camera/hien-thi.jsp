@@ -57,12 +57,12 @@
                             </form>
                             <%--           kết thúc tìm kiếm         --%>
                             <div class="table-responsive">
-                                <table class="table table-striped" style="color: black">
+                                <table id="example" class="display" style="color: black;width: 1400px">
                                     <thead>
                                     <tr>
                                         <th>Mã</th>
-                                        <th>Thông số</th>
                                         <th>Ngày tạo</th>
+                                        <th>Thông số</th>
                                         <th>Ngày cập nhật</th>
                                         <th>Tình trạng</th>
                                         <th>Mô tả</th>
@@ -73,8 +73,8 @@
                                     <c:forEach var="list" varStatus="i" items="${listCamera}">
                                     <tr>
                                         <td>${list.ma}</td>
-                                        <td>${list.thongSo}</td>
                                         <td>${list.ngayTao}</td>
+                                        <td>${list.thongSo}</td>
                                         <td>${list.ngayCapNhat}</td>
                                         <td>
                                             <c:if test="${list.tinhTrang==0}">Hoạt động</c:if>
@@ -96,30 +96,6 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <%--phân trang--%>
-                <div align="center">
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <c:if test="${total!= 0}">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center pagination-lg">
-                                    <li class="page-item"><a class="page-link" href="/camera/hien-thi?num=0"><</a>
-                                    </li>
-
-                                    <c:forEach begin="1" end="${total}" varStatus="status">
-                                        <li class="page-item">
-                                            <a href="${pageContext.request.contextPath}/camera/hien-thi?num=${status.index -1}"
-                                               class="page-link">${status.index}</a>
-                                        </li>
-                                    </c:forEach>
-
-                                    <li class="page-item"><a class="page-link"
-                                                             href="/camera/hien-thi?num=${total-1}">></a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </c:if>
                     </div>
                 </div>
             </div>

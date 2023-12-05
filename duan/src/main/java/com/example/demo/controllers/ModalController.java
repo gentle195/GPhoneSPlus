@@ -82,16 +82,12 @@ public class ModalController {
 
 
     @PostMapping("/chi-tiet-san-pham/modal-add-pin")
-    public String addPin(Model model, @ModelAttribute("Pin") @Valid Pin pin, BindingResult bindingResult, @RequestParam("pageNum") Optional<Integer> pageNum,
-                         @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<Pin> page = pinService.getAll(pageable);
+    public String addPin(Model model, @ModelAttribute("Pin") @Valid Pin pin, BindingResult bindingResult) {
+
+        List<Pin> page = pinService.getAll();
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("list", page.getContent());
-            model.addAttribute("page", page.getNumber());
-            model.addAttribute("total", page.getTotalPages());
+            model.addAttribute("list", page);
             model.addAttribute("dungLuongPin", dungLuongPinService.findAll());
             model.addAttribute("chitietsanpham", new ChiTietSanPham());
             model.addAttribute("sanPham", new SanPham());
@@ -112,23 +108,16 @@ public class ModalController {
         pin.setNgayTao(date);
         pin.setTinhTrang(0);
         pinService.add(pin);
-        model.addAttribute("list", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("list", page);
         return "redirect:/chi-tiet-san-pham/view-add";
     }
 
     @PostMapping("/chi-tiet-san-pham/modal-add-mau-sac")
-    public String addMauSac(Model model, @ModelAttribute("mauSac") @Valid MauSac mauSac, BindingResult bindingResult, @RequestParam("pageNum") Optional<Integer> pageNum,
-                            @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<MauSac> page = mauSacService.getAll(pageable);
+    public String addMauSac(Model model, @ModelAttribute("mauSac") @Valid MauSac mauSac, BindingResult bindingResult) {
+        List<MauSac> page = mauSacService.getAll();
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("list", page.getContent());
-            model.addAttribute("page", page.getNumber());
-            model.addAttribute("total", page.getTotalPages());
+            model.addAttribute("list", page);
             model.addAttribute("chitietsanpham", new ChiTietSanPham());
             return "chi-tiet-san-pham/add-chi-tiet-san-pham";
         }
@@ -141,9 +130,7 @@ public class ModalController {
         mauSac.setTinhTrang(0);
         mauSacService.add(mauSac);
 
-        model.addAttribute("list", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("list", page);
         return "redirect:/chi-tiet-san-pham/view-add";
     }
 
@@ -152,7 +139,7 @@ public class ModalController {
                          @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<Chip> page = chipService.getAll(pageable);
+        List<Chip> page = chipService.getAll();
 
 //        if (bindingResult.hasErrors()) {
 //            model.addAttribute("list", page.getContent());
@@ -168,9 +155,7 @@ public class ModalController {
         chip.setNgayTao(date);
         chip.setTinhTrang(0);
         chipService.add(chip);
-        model.addAttribute("list", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("list", page);
         return "redirect:/chi-tiet-san-pham/view-add";
     }
 
@@ -179,12 +164,10 @@ public class ModalController {
                          @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<Rom> page = romService.getAll0(pageable);
+        List<Rom> page = romService.getAll0();
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("list", page.getContent());
-            model.addAttribute("page", page.getNumber());
-            model.addAttribute("total", page.getTotalPages());
+            model.addAttribute("list", page);
             return "chi-tiet-san-pham/add-chi-tiet-san-pham";
         }
 
@@ -195,9 +178,7 @@ public class ModalController {
         rom.setNgayTao(date);
         rom.setTinhTrang(0);
         romService.add(rom);
-        model.addAttribute("list", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("list", page);
         return "redirect:/chi-tiet-san-pham/view-add";
     }
 
@@ -206,12 +187,10 @@ public class ModalController {
                          @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<Ram> page = ramService.getAll(pageable);
+        List<Ram> page = ramService.getAll();
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("list", page.getContent());
-            model.addAttribute("page", page.getNumber());
-            model.addAttribute("total", page.getTotalPages());
+            model.addAttribute("list", page);
             return "chi-tiet-san-pham/add-chi-tiet-san-pham";
         }
 
@@ -222,9 +201,7 @@ public class ModalController {
         ram.setNgayTao(date);
         ram.setTinhTrang(0);
         ramService.add(ram);
-        model.addAttribute("list", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("list", page);
         return "redirect:/chi-tiet-san-pham/view-add";
     }
 
@@ -281,16 +258,14 @@ public class ModalController {
         manHinhService.add(manHinh);
         Sort sort = Sort.by("ngayTao").ascending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<ManHinh> list = manHinhService.getAll(pageable);
-        model.addAttribute("listManHinh", list.getContent());
-        model.addAttribute("total", list.getTotalPages());
+        List<ManHinh> list = manHinhService.getAll();
+        model.addAttribute("listManHinh", list);
         return "redirect:/san-pham/view-add";
         // Tiếp tục xử lý và trả về view tương ứng
     }
 
     @PostMapping("/san-pham/modal-add-camera")
-    public String addCamera(Model model, @ModelAttribute("camera") @Valid Camera camera, BindingResult bindingResult,
-                            @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+    public String addCamera(Model model, @ModelAttribute("camera") @Valid Camera camera, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "san-pham/add.jsp");
             model.addAttribute("listCamera", cameraService.findAll0());
@@ -299,11 +274,8 @@ public class ModalController {
         camera.setNgayTao(Date.valueOf(LocalDate.now()));
         camera.setMa("MH" + String.valueOf(cameraService.findAll().size() + 1));
         cameraService.add(camera);
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<Camera> list = cameraService.getAll(pageable);
-        model.addAttribute("listCamera", list.getContent());
-        model.addAttribute("total", list.getTotalPages());
+        List<Camera> list = cameraService.getAll();
+        model.addAttribute("listCamera", list);
         return "redirect:/san-pham/view-add";
         // Tiếp tục xử lý và trả về view tương ứng
     }

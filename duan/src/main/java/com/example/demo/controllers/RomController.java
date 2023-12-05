@@ -30,14 +30,10 @@ public class RomController {
     RomService romService;
 
     @GetMapping("/rom/hien-thi")
-    public String hienthi(@ModelAttribute("dulieuxem") Rom dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
-                          @RequestParam(name = "size", defaultValue = "15", required = false) Integer size) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<Rom> list = romService.getAll0(pageable);
+    public String hienthi(@ModelAttribute("dulieuxem") Rom dulieuxem, Model model) {
+        List<Rom> list = romService.getAll0();
         model.addAttribute("contentPage", "../rom/rom.jsp");
-        model.addAttribute("hsp", list.getContent());
-        model.addAttribute("total", list.getTotalPages());
+        model.addAttribute("hsp", list);
 
         return "home/layout";
     }
@@ -51,28 +47,20 @@ public class RomController {
     }
 
     @GetMapping("/rom/hien-thi-tung-xoa")
-    public String hienthixoa(@ModelAttribute("dulieuxem") Rom dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
-                             @RequestParam(name = "size", defaultValue = "15", required = false) Integer size) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<Rom> list = romService.getall1(pageable);
+    public String hienthixoa(@ModelAttribute("dulieuxem") Rom dulieuxem, Model model) {
+        List<Rom> list = romService.getall1();
         model.addAttribute("contentPage", "../rom/rom-tung-xoa.jsp");
-        model.addAttribute("hsp", list.getContent());
-        model.addAttribute("total", list.getTotalPages());
+        model.addAttribute("hsp", list);
         return "home/layout";
     }
 
     @GetMapping("/rom/detail/{id}")
-    public String viewupdate(@PathVariable("id") UUID id, @ModelAttribute("dulieuxem") Rom dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
-                             @RequestParam(name = "size", defaultValue = "15", required = false) Integer size) {
+    public String viewupdate(@PathVariable("id") UUID id, @ModelAttribute("dulieuxem") Rom dulieuxem, Model model) {
         Rom hsp = romService.findById(id);
         model.addAttribute("dulieuxem", hsp);
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<Rom> list = romService.getAll0(pageable);
+        List<Rom> list = romService.getAll0();
         model.addAttribute("contentPage", "../rom/rom-update.jsp");
-        model.addAttribute("hsp", list.getContent());
-        model.addAttribute("total", list.getTotalPages());
+        model.addAttribute("hsp", list);
         return "home/layout";
     }
 
@@ -110,8 +98,7 @@ public class RomController {
     }
 
     @PostMapping("/rom/search")
-    public String search(@RequestParam("search") String search, @ModelAttribute("dulieuxem") Rom dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
-                         @RequestParam(name = "size", defaultValue = "15", required = false) Integer size) {
+    public String search(@RequestParam("search") String search, @ModelAttribute("dulieuxem") Rom dulieuxem, Model model) {
         List<Rom> list = romService.search(search);
 
 
@@ -122,8 +109,7 @@ public class RomController {
     }
 
     @PostMapping("/rom/search2")
-    public String search2(@RequestParam("search") String search, @ModelAttribute("dulieuxem") Rom dulieuxem, Model model, @RequestParam("num") Optional<Integer> num,
-                          @RequestParam(name = "size", defaultValue = "15", required = false) Integer size) {
+    public String search2(@RequestParam("search") String search, @ModelAttribute("dulieuxem") Rom dulieuxem, Model model) {
         List<Rom> list = romService.search2(search);
 
 
@@ -134,17 +120,14 @@ public class RomController {
     }
 
     @GetMapping("rom/delete/{id}")
-    public String delete(Model model, @ModelAttribute("dulieuxem") Rom dulieuxem, @PathVariable("id") UUID id, @RequestParam("num") Optional<Integer> num,
-                         @RequestParam(name = "size", defaultValue = "15", required = false) Integer size) {
+    public String delete(Model model, @ModelAttribute("dulieuxem") Rom dulieuxem, @PathVariable("id") UUID id) {
         Rom rom = romService.findById(id);
 
         rom.setTinhTrang(1);
         romService.add(rom);
-        Pageable pageable = PageRequest.of(num.orElse(0), size);
-        Page<Rom> list = romService.getAll0(pageable);
+        List<Rom> list = romService.getAll0();
         model.addAttribute("contentPage", "../rom/rom.jsp");
-        model.addAttribute("hsp", list.getContent());
-        model.addAttribute("total", list.getTotalPages());
+        model.addAttribute("hsp", list);
         return "home/layout";
 
     }
@@ -152,23 +135,16 @@ public class RomController {
     @GetMapping("/rom/khoi-phuc/{id}")
     public String khoiphuc(
             Model model,
-            @PathVariable("id") UUID id,
-            @RequestParam("num") Optional<Integer> num,
-            @RequestParam(name = "size", defaultValue = "15", required = false) Integer size
-
-
+            @PathVariable("id") UUID id
     ) {
 
         Rom rom1 = romService.findById(id);
         rom1.setTinhTrang(0);
         romService.add(rom1);
-        Sort sort = Sort.by("ma").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<Rom> list = romService.getall1(pageable);
+        List<Rom> list = romService.getall1();
 
         model.addAttribute("contentPage", "../rom/rom-tung-xoa.jsp");
-        model.addAttribute("hsp", list.getContent());
-        model.addAttribute("total", list.getTotalPages());
+        model.addAttribute("hsp", list);
 
 
         return "home/layout";
@@ -176,20 +152,13 @@ public class RomController {
 
     @GetMapping("/rom/khoi-phuc-het")
     public String khoiphuchet(
-            Model model,
-            @RequestParam("num") Optional<Integer> num,
-            @RequestParam(name = "size", defaultValue = "15", required = false) Integer size
-
-
+            Model model
     ) {
         romService.update0();
-        Sort sort = Sort.by("ma").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<Rom> list = romService.getall1(pageable);
+        List<Rom> list = romService.getall1();
 
         model.addAttribute("contentPage", "../rom/rom-tung-xoa.jsp");
-        model.addAttribute("hsp", list.getContent());
-        model.addAttribute("total", list.getTotalPages());
+        model.addAttribute("hsp", list);
 
 
         return "home/layout";

@@ -25,10 +25,10 @@ public interface HangSanPhamRepository extends JpaRepository<HangSanPham, UUID> 
     List<HangSanPham> search2(String dungluong);
 
     @Query("select r from HangSanPham r  where r.tinhTrang=0")
-    Page<HangSanPham> getall0(Pageable pageable);
+    List<HangSanPham> getall0();
 
     @Query("select r from HangSanPham r  where r.tinhTrang=1")
-    Page<HangSanPham> getall1(Pageable pageable);
+    List<HangSanPham> getall1();
 
     @Transactional
     @Modifying

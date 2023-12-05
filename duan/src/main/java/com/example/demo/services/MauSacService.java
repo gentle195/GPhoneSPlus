@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface MauSacService {
-    public Page<MauSac> getAll(Pageable pageable);
+    public List<MauSac> getAll();
 
-    public Page<MauSac> getAll1(Pageable pageable);
+    public List<MauSac> getAll1();
 
 
     public List<MauSac> findAll();

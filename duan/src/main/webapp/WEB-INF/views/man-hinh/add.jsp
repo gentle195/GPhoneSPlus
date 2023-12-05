@@ -128,7 +128,7 @@
                                             <div style="text-align: center">
                                                 <button type="submit" class="btn btn-primary mr-2"
                                                         onclick="return myFunction1()">
-                                                    ADD
+                                                    Thêm Thông Tin
                                                 </button>
                                             </div>
                                         </div>

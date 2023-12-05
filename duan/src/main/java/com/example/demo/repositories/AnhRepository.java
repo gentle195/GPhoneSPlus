@@ -15,10 +15,10 @@ import java.util.UUID;
 @Repository
 public interface AnhRepository extends JpaRepository<Anh, UUID> {
     @Query("select c from Anh c  where c.tinhTrang=0")
-    Page<Anh> getAll(Pageable pageable);
+    List<Anh> getAll();
 
     @Query("select c from Anh c  where c.tinhTrang=1")
-    Page<Anh> getAll1(Pageable pageable);
+    List<Anh> getAll1();
 
     @Query("select c from Anh c  where  c.tinhTrang = 0")
     List<Anh> findAll0();

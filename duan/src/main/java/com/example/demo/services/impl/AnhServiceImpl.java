@@ -20,13 +20,13 @@ public class AnhServiceImpl implements AnhService {
     AnhRepository anhRepository;
 
     @Override
-    public Page<Anh> getAll(Pageable pageable) {
-        return anhRepository.getAll(pageable);
+    public List<Anh> getAll() {
+        return anhRepository.getAll();
     }
 
     @Override
-    public Page<Anh> getAll1(Pageable pageable) {
-        return anhRepository.getAll1(pageable);
+    public List<Anh> getAll1() {
+        return anhRepository.getAll1();
     }
 
     @Override

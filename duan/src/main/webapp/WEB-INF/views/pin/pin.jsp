@@ -41,13 +41,13 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" class="display" style="min-width: 845px; color: black">
+                            <table id="example" class="display" style="width: 1500px; color: black">
                                 <thead>
                                 <tr>
                                     <th>Mã</th>
+                                    <th>Ngày Tạo</th>
                                     <th>Loại Pin</th>
                                     <th>Công nghệ Pin</th>
-                                    <th>Ngày Tạo</th>
                                     <th>Ngày Cập Nhật</th>
                                     <th>Tình Trạng</th>
                                     <th>Mô Tả</th>
@@ -59,9 +59,9 @@
                                 <c:forEach items="${listPin}" var="p">
                                     <tr>
                                         <td>${p.ma}</td>
+                                        <td>${p.ngayTao}</td>
                                         <td>${p.loaiPin}</td>
                                         <td>${p.congNghePin}</td>
-                                        <td>${p.ngayTao}</td>
                                         <td>${p.ngayCapNhat}</td>
                                         <td>
                                             <c:if test="${p.tinhTrang == 0}">Còn</c:if>

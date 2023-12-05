@@ -48,14 +48,13 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped" style="color: black">
+                        <table id="example" class="display" style="color: black;width: 1200px">
                             <thead>
                             <tr>
-                                <th>STT</th>
                                 <th>Mã</th>
+                                <th>Ngày Tạo</th>
                                 <th>Dung lượng</th>
                                 <th>Tình Trạng</th>
-                                <th>Ngày Tạo</th>
                                 <th>Ngày Cập Nhật</th>
                                 <th>Mô tả</th>
                                 <th>Action</th>
@@ -65,11 +64,10 @@
                             <i class="mdi mdi-border-color"></i>
                             <c:forEach items="${listRam}" var="ram" varStatus="i">
                                 <tr>
-                                    <th scope="row">${i.index+1}</th>
                                     <td>${ram.ma}</td>
+                                    <td>${ram.ngayTao}</td>
                                     <td>${ram.dungLuong}</td>
                                     <td>${ram.trangThai()}</td>
-                                    <td>${ram.ngayTao}</td>
                                     <td>${ram.ngayCapNhat}</td>
                                     <td>${ram.moTa}</td>
                                     <td>
@@ -94,22 +92,6 @@
                 </div>
             </div>
         </div>
-        <%--phân trang--%>
-        <div align="center">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <ul class="pagination justify-content-center pagination-lg">
-                    <li class="page-item"><a class="page-link" href="/ram/hien-thi?pageNum=0"><</a></li>
-                    <c:forEach begin="1" end="${total}" varStatus="status">
-                        <li class="page-item">
-                            <a href="${pageContext.request.contextPath}/ram/hien-thi?pageNum=${status.index -1}"
-                               class="page-link">${status.index}</a>
-                        </li>
-                    </c:forEach>
-                    <li class="page-item"><a class="page-link" href="/ram/hien-thi?pageNum=${total-1}">></a></li>
-                </ul>
-            </div>
-        </div>
-        <%--kết thúc phân trang--%>
     </div>
 </div>
 </body>

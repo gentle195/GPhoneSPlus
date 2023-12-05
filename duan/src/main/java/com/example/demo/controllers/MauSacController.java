@@ -31,16 +31,9 @@ public class MauSacController {
     private MauSacService mauSacService;
 
     @GetMapping("/hien-thi")
-    public String hienThi(Model model, @ModelAttribute("mauSac") MauSac mauSac,
-                          @RequestParam("pageNum") Optional<Integer> pageNum,
-                          @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        mauSac.setTinhTrang(0);
-        Page<MauSac> page = mauSacService.getAll(pageable);
-        model.addAttribute("total", page.getTotalPages());
-        model.addAttribute("listMauSac", page.getContent());
-        model.addAttribute("list", page.getNumber());
+    public String hienThi(Model model, @ModelAttribute("mauSac") MauSac mauSac) {
+        List<MauSac> page = mauSacService.getAll();
+        model.addAttribute("listMauSac", page);
         model.addAttribute("contentPage", "../mausac/mau-sac.jsp");
         return "home/layout";
     }
@@ -76,24 +69,18 @@ public class MauSacController {
     }
 
     @GetMapping("/detail-mau-sac/{id}")
-    public String viewUpdate(Model model, @PathVariable("id") UUID id,
-                             @RequestParam("pageNum") Optional<Integer> pageNum,
-                             @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
-        Sort sort = Sort.by("ma").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize);
+    public String viewUpdate(Model model, @PathVariable("id") UUID id) {
         MauSac mauSac = mauSacService.findById(id);
         model.addAttribute("mauSac", mauSac);
-        Page<MauSac> page = mauSacService.getAll(pageable);
+        List<MauSac> page = mauSacService.getAll();
         model.addAttribute("contentPage", "../mausac/mau-sac-update.jsp");
-        model.addAttribute("listMauSac", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("listMauSac", page);
         return "home/layout";
     }
 
     @PostMapping("/update-mau-sac/{id}")
     public String updateRam(Model model, @PathVariable("id") UUID id, @ModelAttribute("mauSac") @Valid MauSac mauSac,
-                            BindingResult bindingResult, @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
+                            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "../mausac/mau-sac-update.jsp");
             return "home/layout";
@@ -107,76 +94,53 @@ public class MauSacController {
     }
 
     @GetMapping("/hien-thi-delete")
-    public String hienThiDelete(Model model, @ModelAttribute("ram") Ram ram,
-                                @RequestParam("pageNum") Optional<Integer> pageNum,
-                                @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize) {
+    public String hienThiDelete(Model model, @ModelAttribute("ram") Ram ram) {
 
-        Sort sort = Sort.by("ngayTao").descending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        Page<MauSac> page = mauSacService.getAll1(pageable);
+        List<MauSac> page = mauSacService.getAll1();
         model.addAttribute("contentPage", "../mausac/mau-sac-delete.jsp");
-        model.addAttribute("listMauSac", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("listMauSac", page);
         return "home/layout";
     }
 
     @GetMapping("/update-all-status")
-    public String updateTT(Model model, @RequestParam("pageNum") Optional<Integer> pageNum,
-                           @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize, @ModelAttribute("mauSac") MauSac mauSac) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+    public String updateTT(Model model, @ModelAttribute("mauSac") MauSac mauSac) {
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         mauSac.setNgayCapNhat(date);
         mauSacService.updateTT();
-        Page<MauSac> page = mauSacService.getAll1(pageable);
+        List<MauSac> page = mauSacService.getAll1();
         model.addAttribute("contentPage", "../mausac/mau-sac-delete.jsp");
-        model.addAttribute("listMauSac", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("listMauSac", page);
         return "home/layout";
     }
 
     @GetMapping("/update-status/{id}")
-    public String updateStatus(Model model, @PathVariable("id") UUID id,
-                               @RequestParam("pageNum") Optional<Integer> pageNum,
-                               @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize, @ModelAttribute("mauSac") MauSac mauSac) {
-        Sort sort = Sort.by("ma").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+    public String updateStatus(Model model, @PathVariable("id") UUID id, @ModelAttribute("mauSac") MauSac mauSac) {
         MauSac mauSac1 = mauSacService.findById(id);
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         mauSac1.setNgayCapNhat(date);
         mauSac1.setTinhTrang(1);
         mauSacService.update(id, mauSac1);
-        Page<MauSac> page = mauSacService.getAll(pageable);
+        List<MauSac> page = mauSacService.getAll();
         model.addAttribute("contentPage", "../mausac/mau-sac.jsp");
-        model.addAttribute("listMauSac", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("listMauSac", page);
         return "home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
     public String resetStatus(Model model, @PathVariable("id") UUID id,
-                              @RequestParam("pageNum") Optional<Integer> pageNum,
-                              @RequestParam(name = "pageSize", required = false, defaultValue = "15") Integer pageSize,
                               @ModelAttribute("mauSac") MauSac mauSac
     ) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
         MauSac mauSac1 = mauSacService.findById(id);
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         mauSac1.setNgayCapNhat(date);
         mauSac1.setTinhTrang(0);
         mauSacService.update(id, mauSac1);
-        Page<MauSac> page = mauSacService.getAll1(pageable);
+        List<MauSac> page = mauSacService.getAll1();
         model.addAttribute("contentPage", "../mausac/mau-sac-delete.jsp");
-        model.addAttribute("listMauSac", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
+        model.addAttribute("listMauSac", page);
         return "home/layout";
     }
 

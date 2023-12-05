@@ -24,10 +24,10 @@ public interface RomRepository extends JpaRepository<Rom, UUID> {
     List<Rom> search2(String dungluong);
 
     @Query("select r from Rom r  where r.tinhTrang=0")
-    Page<Rom> getall0(Pageable pageable);
+    List<Rom> getall0();
 
     @Query("select r from Rom r  where r.tinhTrang=1")
-    Page<Rom> getall1(Pageable pageable);
+    List<Rom> getall1();
 
     @Transactional
     @Modifying

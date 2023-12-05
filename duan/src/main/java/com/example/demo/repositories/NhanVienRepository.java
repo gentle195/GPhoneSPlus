@@ -21,10 +21,10 @@ public interface NhanVienRepository extends JpaRepository<NhanVien, UUID> {
     List<NhanVien> findAll();
 
     @Query("select nv from NhanVien nv  where nv.tinhTrang=0")
-    Page<NhanVien> getAll(Pageable pageable);
+    List<NhanVien> getAll();
 
     @Query("select nv from NhanVien nv  where nv.tinhTrang=1")
-    Page<NhanVien> getAll1(Pageable pageable);
+    List<NhanVien> getAll1();
 
     @Query("select nv from NhanVien nv INNER JOIN nv.chucVu cv  where nv.tinhTrang=0 and (cv.ten like %:ten% or nv.ma like %:ten% or nv.hoTen like %:ten% or nv.queQuan like %:ten% or nv.taiKhoan like %:ten% " +
             "or nv.sdt like %:ten% or nv.canCuoc like %:ten% or nv.email like %:ten%)")

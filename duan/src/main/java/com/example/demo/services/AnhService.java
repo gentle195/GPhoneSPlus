@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface AnhService {
-    public Page<Anh> getAll(Pageable pageable);
+    public List<Anh> getAll();
 
-    public Page<Anh> getAll1(Pageable pageable);
+    public List<Anh> getAll1();
 
     public List<Anh> findAll();
 

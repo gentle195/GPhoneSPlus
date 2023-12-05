@@ -43,7 +43,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title" style="float: left">Danh sách Rom</h4>
+                    <h4 class="card-title" style="float: left">Danh sách Hãng</h4>
                     <%--            Tìm kiếm               --%>
                     <form action="/hang-dien-thoai/search2" method="post">
                         <div class="input-group" style="width: 30%; float: right">
@@ -56,29 +56,27 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table class="table table-striped" style="color: black">
+                        <table id="example" class="display" style="color: black;width: 1400px">
                             <thead>
                             <tr>
-                                <th>STT</th>
                                 <th>Mã</th>
+                                <th>Ngày tạo</th>
                                 <th>Tên hãng</th>
                                 <th>Xuất sứ</th>
-                                <th>Ngày tạo</th>
                                 <th>Ngày cập nhật</th>
                                 <th>Tình trạng</th>
                                 <th>Mô tả</th>
-                                <th colspan="2">Action</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <i class="mdi mdi-border-color"></i>
                             <c:forEach items="${hsp}" var="chip" varStatus="i">
                                 <tr>
-                                    <td>${i.index+1}</td>
                                     <td>${chip.ma}</td>
+                                    <td>${chip.ngayTao}</td>
                                     <td>${chip.ten}</td>
                                     <td>${chip.xuatSu}</td>
-                                    <td>${chip.ngayTao}</td>
                                     <td>${chip.ngayCapNhat}</td>
                                     <td>${chip.tt()}</td>
                                     <td>${chip.moTa}</td>

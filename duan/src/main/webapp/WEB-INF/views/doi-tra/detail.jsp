@@ -184,7 +184,7 @@
                     <div>
                         <div class="card-body">
                             <br>
-                            <h3 style="text-align: center;">Sản phẩm cần đổi trả</h3>
+                            <h3 style="text-align: center;">Sản phẩm cần đổi mới</h3>
                             <br>
                             <div class="table-responsive custom-table">
                                 <table class="display custom-table" style="color: black">
@@ -242,31 +242,45 @@
                             </div>
                             <br>
                             <h3 ${not empty dtctlist ? '' : 'style="display: none;"'} style="text-align: center;">Sản
-                                phẩm đổi trả</h3>
+                                phẩm đổi mới</h3>
                             <br>
                             <div class="table-responsive custom-table">
                                 <table class="display custom-table" ${not empty dtctlist ? '' : 'style="display: none;"'}
                                        style="color: black">
                                     <thead>
                                     <tr>
-                                        <th>Sản phẩm cần đổi trả</th>
-                                        <th>Tên Sản Phẩm</th>
-                                        <th>Ảnh</th>
-                                        <th>Hãng</th>
-                                        <th>Số IMEI</th>
+                                        <th>Sản phẩm cần đổi</th>
+                                        <th>IMEI cần đổi</th>
+                                        <th>Đơn giá cũ</th>
+                                        <th>Sản phẩm đổi sang</th>
+                                        <th>Số IMEI đổi mới</th>
+                                        <th>Đơn giá mới</th>
                                     </tr>
                                     </thead>
                                     <tbody id="table-search1">
                                     <c:forEach items="${dtctlist}" var="hdct">
                                         <tr>
-                                            <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten}</td>
-                                            <td>${hdct.imei.chiTietSanPham.sanPham.ten}</td>
+                                            <td>
+                                                <img src="/uploads/${hdct.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}" width="40"
+                                                     height="40"> -
+                                                    ${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten}
+                                                    - ${hdct.hoaDonChiTiet.imei.chiTietSanPham.mauSac.ten} -
+                                                    ${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.hangSanPham.ten} -
+                                                    ${hdct.hoaDonChiTiet.imei.chiTietSanPham.ram.dungLuong} -
+                                                    ${hdct.hoaDonChiTiet.imei.chiTietSanPham.rom.dungLuong}</td>
+                                            <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
+                                            <td>${hdct.hoaDonChiTiet.donGia}</td>
                                             <td align="center">
                                                 <img src="/uploads/${hdct.imei.chiTietSanPham.urlAnh}" width="40"
-                                                     height="40">
+                                                     height="40"> -
+                                                    ${hdct.imei.chiTietSanPham.sanPham.ten}
+                                                - ${hdct.imei.chiTietSanPham.mauSac.ten} -
+                                                    ${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten} -
+                                                    ${hdct.imei.chiTietSanPham.ram.dungLuong} -
+                                                    ${hdct.imei.chiTietSanPham.rom.dungLuong}
                                             </td>
-                                            <td>${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
                                             <td>${hdct.imei.soImei}</td>
+                                            <td>${hdct.donGia}</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -275,7 +289,7 @@
                                     <form>
                                         <!-- Thêm các trường và nút submit cho form tiền đổi trả -->
                                         <div class="form-group">
-                                            <label for="tienDoiTra" style="color: black">Tiền đổi trả:</label>
+                                            <label for="tienDoiTra" style="color: black">Tổng tiền chêch lệch:</label>
                                             <input type="text" value="${tongTien}" class="form-control" id="tienDoiTra"
                                                    name="tienDoiTra" readonly>
                                         </div>
