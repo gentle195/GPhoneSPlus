@@ -7,6 +7,7 @@
 <html lang="en">
 <head>
 
+
     <title>Focus - Bootstrap Admin Dashboard </title>
     <%--    select 2--%>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
@@ -25,6 +26,8 @@
 
     <!-- Favicon icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
+
 
     <style>
 
@@ -165,7 +168,19 @@
                     to right, #3498db55, #22242F 30%
             );
         }
+
+
+
     </style>
+<%--    <style>--%>
+<%--        .dataTables_filter {--%>
+<%--            display: block;--%>
+<%--        }--%>
+
+<%--        .dataTables_info {--%>
+<%--            display: block;--%>
+<%--        }--%>
+<%--    </style>--%>
 </head>
 <body>
 
@@ -316,6 +331,17 @@
                         </div>
                     </div>
                 </form>
+
+
+                <select  style="float: right;margin-right: 8cm;height: 1cm" id="selectOption" onchange="choncomboboxtinhtrangkm()">
+                    <option style=" font-weight: bold;"><a>Trạng thái khuyến mãi</a></option>
+                    <option value="all" data-link="/khuyen-mai/tinh-trang/all"><a>Tất cả</a></option>
+                    <option value="2" data-link="/khuyen-mai/tinh-trang/2"><a>Chưa diễn ra</a></option>
+                    <option value="0" data-link="/khuyen-mai/tinh-trang/0"><a>Đang diễn ra</a></option>
+                    <option value="1" data-link="/khuyen-mai/tinh-trang/1"><a>Đã kết thúc</a></option>
+                </select>
+
+
                 <button type="button" id="modalthemkm" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#myModalthemkm">
                     Thêm khuyến mãi
@@ -323,10 +349,12 @@
                 <br>
                 <br>
                 <div class="col-sm-12">
-                    <div class="card-box table-responsive">
-                        <table class="table table-striped" style="width: 2500px;color: black">
+                    <div  class="card-box table-responsive">
+
+                        <table id="phantrangkieumoi" class="display"  style="width: 100%;color: black">
+                            <thead>
                             <tr>
-                                <th>STT</th>
+
                                 <th>Mã</th>
                                 <th>Tên</th>
                                 <th>% giảm</th>
@@ -339,11 +367,11 @@
                                 <th>Chức năng</th>
 
                             </tr>
-
-
+                            </thead>
+                            <tbody>
                             <c:forEach items="${dulieu}" var="ht" varStatus="stt">
                                 <tr>
-                                    <td>${stt.index+1}</td>
+
                                     <td>${ht.ma}</td>
                                     <td>${ht.ten} </td>
                                     <td>${ht.soTienGiam}</td>
@@ -384,6 +412,7 @@
 
                                 </tr>
                             </c:forEach>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -392,21 +421,21 @@
                 <br>
 
 
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center pagination-lg">
-                        <li class="page-item"><a class="page-link" href="/khuyen-mai/hien-thi?num=0"> <</a></li>
+<%--                <nav aria-label="Page navigation example">--%>
+<%--                    <ul class="pagination justify-content-center pagination-lg">--%>
+<%--                        <li class="page-item"><a class="page-link" href="/khuyen-mai/hien-thi?num=0"> <</a></li>--%>
 
-                        <c:forEach begin="1" end="${total}" varStatus="status">
-                            <li class="page-item">
-                                <a href="/khuyen-mai/hien-thi?num=${status.index-1}"
-                                   class="page-link">${status.index}</a>
-                            </li>
-                        </c:forEach>
+<%--                        <c:forEach begin="1" end="${total}" varStatus="status">--%>
+<%--                            <li class="page-item">--%>
+<%--                                <a href="/khuyen-mai/hien-thi?num=${status.index-1}"--%>
+<%--                                   class="page-link">${status.index}</a>--%>
+<%--                            </li>--%>
+<%--                        </c:forEach>--%>
 
-                        <li class="page-item"><a class="page-link" href="/khuyen-mai/hien-thi?num=${total-1}"> ></a>
-                        </li>
-                    </ul>
-                </nav>
+<%--                        <li class="page-item"><a class="page-link" href="/khuyen-mai/hien-thi?num=${total-1}"> ></a>--%>
+<%--                        </li>--%>
+<%--                    </ul>--%>
+<%--                </nav>--%>
 
 
                 <P id="bc" style="color: crimson"></P>
@@ -547,7 +576,10 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
 
                         <%--loc kết thúc--%>
 
+                     
+
                         <table id="example" class="display" style="color: black;min-width: 1700px">
+
                             <thead>
                             <tr style="background-color: #70c0b1">
                                 <th>
@@ -738,6 +770,18 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
 <div class="buttons" style="display: none">
     <button id="btapdungthanhcongupdate">btapdungthanhcong</button>
 </div>
+<script>
+    function choncomboboxtinhtrangkm() {
+        var selectElement = document.getElementById("selectOption");
+        // Get the selected option value and its associated link
+        var selectedOption = selectElement.value;
+        var selectedLink = selectElement.options[selectElement.selectedIndex].getAttribute("data-link");
+
+        // Navigate to the selected link
+        window.location.href = selectedLink;
+
+    }
+</script>
 <script>
     // Hàm chuyển đổi định dạng thời gian
     function convertDateFormat(inputDateTime1) {
@@ -1241,4 +1285,17 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
     document.getElementById('error1').click();
     </c:if>
 </script>
+
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

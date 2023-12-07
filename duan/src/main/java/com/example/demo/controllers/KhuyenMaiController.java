@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -272,18 +274,18 @@ public class KhuyenMaiController {
             Model model,
 
             @ModelAttribute("km") KhuyenMai khuyenMai,
-            @ModelAttribute("kmupdate") KhuyenMai khuyenMaiupdate,
-            @RequestParam("num") Optional<Integer> num,
-            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
+            @ModelAttribute("kmupdate") KhuyenMai khuyenMaiupdate
+//            @RequestParam("num") Optional<Integer> num,
+//            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
 //            @ModelAttribute("khmodal") KhachHang khachHang1
     ) {
         model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
 
-        Sort sort = Sort.by("ma").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
-        model.addAttribute("dulieu", list.getContent());
-        model.addAttribute("total", kt(list.getTotalPages()));
+//        Sort sort = Sort.by("ma").descending();
+//        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+//        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+        model.addAttribute("dulieu", khuyenMaiRepository.findAll());
+//        model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
 
         model.addAttribute("hangds", hangSanPhamService.findAll0());
@@ -328,8 +330,8 @@ public class KhuyenMaiController {
 //
                             @ModelAttribute("km") @Valid KhuyenMai khuyenMai,
                             BindingResult bindingResult,
-                            @RequestParam("num") Optional<Integer> num,
-                            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size,
+//                            @RequestParam("num") Optional<Integer> num,
+//                            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size,
                             @ModelAttribute("kmupdate") KhuyenMai khuyenMaiupdate
 //
     ) {
@@ -338,11 +340,11 @@ public class KhuyenMaiController {
         String formattedDateTime = currentDateTime.format(formatter);
         if (bindingResult.hasErrors()) {
             model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
-            Sort sort = Sort.by("ma").descending();
-            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
-            model.addAttribute("dulieu", list.getContent());
-            model.addAttribute("total", kt(list.getTotalPages()));
+//            Sort sort = Sort.by("ma").descending();
+//            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+//            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+            model.addAttribute("dulieu",khuyenMaiRepository.findAll());
+//            model.addAttribute("total", kt(list.getTotalPages()));
 
             model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
             model.addAttribute("momdalthemkm",0);
@@ -352,11 +354,11 @@ public class KhuyenMaiController {
         if(isNgayKetThucAfterNgayBatDau(khuyenMai.getNgayBatDau(),khuyenMai.getNgayKetThuc())==false){
             model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
             Sort sort = Sort.by("ma").descending();
-            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+//            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+//            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
 
-            model.addAttribute("dulieu", list.getContent());
-            model.addAttribute("total", kt(list.getTotalPages()));
+            model.addAttribute("dulieu",khuyenMaiRepository.findAll());
+//            model.addAttribute("total", kt(list.getTotalPages()));
 
             model.addAttribute("momdalthongbaongayKT","Ngày kết thúc phải sau ngày bắt đầu");
             model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
@@ -387,13 +389,13 @@ public class KhuyenMaiController {
 
 
         if(isNgayKetThucAfterNgayHienTai(khuyenMai.getNgayKetThuc())==false){
-            model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
-            Sort sort = Sort.by("ma").descending();
-            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+//            model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+//            Sort sort = Sort.by("ma").descending();
+//            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+//            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
 
-            model.addAttribute("dulieu", list.getContent());
-            model.addAttribute("total", kt(list.getTotalPages()));
+            model.addAttribute("dulieu", khuyenMaiRepository.findAll());
+//            model.addAttribute("total", kt(list.getTotalPages()));
 
             model.addAttribute("momdalthongbaongayKT","Ngày kết thúc phải sau ngày hiện tại");
             model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
@@ -421,9 +423,18 @@ public class KhuyenMaiController {
             model.addAttribute("max", String.valueOf(max));
             return "home/layout";
         }
+        Sort sort = Sort.by("ma").descending();
+        Pageable pageable = PageRequest.of(0, 1, sort);
+        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+        List<KhuyenMai> litskm1=list.toList();
+        String inputString = litskm1.get(0).getMa();
+
+        // Sử dụng phương thức substring để tách chuỗi
+        String prefix = inputString.substring(0, 3); // Lấy 3 ký tự đầu tiên
+        String suffix = inputString.substring(3);
 
 
-        Integer sl = khuyenMaiRepository.findAll().size();
+        Integer sl =Integer.valueOf(suffix)+1;
         String mhd="";
         if(sl<10){
             mhd = "MKM0" + sl;
@@ -442,11 +453,11 @@ public class KhuyenMaiController {
 
 
         model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
-        Sort sort = Sort.by("ma").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
-        model.addAttribute("dulieu", list.getContent());
-        model.addAttribute("total", kt(list.getTotalPages()));
+//        Sort sort = Sort.by("ma").descending();
+//        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+//        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+        model.addAttribute("dulieu", khuyenMaiRepository.findAll());
+//        model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("km",new KhuyenMai());
         model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
         model.addAttribute("tbThemKMOK", 0);
@@ -480,9 +491,9 @@ UUID idkmdangchon=null;
             Model model,
             @PathVariable("idkm") UUID idkm,
             @ModelAttribute("km") KhuyenMai khuyenMai,
-            @ModelAttribute("kmupdate") KhuyenMai khuyenMaiupdate,
-            @RequestParam("num") Optional<Integer> num,
-            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
+            @ModelAttribute("kmupdate") KhuyenMai khuyenMaiupdate
+//            @RequestParam("num") Optional<Integer> num,
+//            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
 
     ) {
         KhuyenMai kmchon=khuyenMaiRepository.findById(idkm).orElse(null);
@@ -490,11 +501,11 @@ UUID idkmdangchon=null;
         idkmdangchon=idkm;
         model.addAttribute("batmodalapdungkm",0);
         model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
-        Sort sort = Sort.by("ma").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
-        model.addAttribute("dulieu", list.getContent());
-        model.addAttribute("total", kt(list.getTotalPages()));
+//        Sort sort = Sort.by("ma").descending();
+//        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+//        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+        model.addAttribute("dulieu",khuyenMaiRepository.findAll());
+//        model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
 
         model.addAttribute("hangds", hangSanPhamService.findAll0());
@@ -556,8 +567,8 @@ UUID idkmdangchon=null;
             @PathVariable("idkm") UUID idkm,
             @ModelAttribute("km") KhuyenMai khuyenMai,
             @ModelAttribute("kmupdate") KhuyenMai khuyenMaiupdate,
-            @RequestParam("num") Optional<Integer> num,
-            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size,
+//            @RequestParam("num") Optional<Integer> num,
+//            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size,
             @PathVariable("x1") String x1,
             @PathVariable("x2") String x2,
             @PathVariable("x3") String x3,
@@ -620,9 +631,9 @@ UUID idkmdangchon=null;
             Model model,
             @PathVariable("idkm") UUID idkm,
             @ModelAttribute("km") KhuyenMai khuyenMai,
-            @ModelAttribute("kmupdate") KhuyenMai khuyenMaiupdate,
-            @RequestParam("num") Optional<Integer> num,
-            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
+            @ModelAttribute("kmupdate") KhuyenMai khuyenMaiupdate
+//            @RequestParam("num") Optional<Integer> num,
+//            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
 
     ) {
         khuyenMaiupdate=khuyenMaiRepository.findById(idkm).orElse(null);
@@ -637,11 +648,11 @@ UUID idkmdangchon=null;
         model.addAttribute("kmchon",khuyenMaiupdate);
         model.addAttribute("batmodaldetailupdatekm",0);
         model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
-        Sort sort = Sort.by("ma").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
-        model.addAttribute("dulieu", list.getContent());
-        model.addAttribute("total", kt(list.getTotalPages()));
+//        Sort sort = Sort.by("ma").descending();
+//        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+//        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+        model.addAttribute("dulieu",khuyenMaiRepository.findAll());
+//        model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
 
         model.addAttribute("hangds", hangSanPhamService.findAll0());
@@ -674,8 +685,8 @@ UUID idkmdangchon=null;
 //
                            @ModelAttribute("kmupdate") @Valid KhuyenMai khuyenMaiupdate,
                            BindingResult bindingResult,
-                           @RequestParam("num") Optional<Integer> num,
-                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size,
+//                           @RequestParam("num") Optional<Integer> num,
+//                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size,
                            @ModelAttribute("km")  KhuyenMai khuyenMai
 //                           @RequestParam("NBDupdate") String NBDupdate,
 //                           @RequestParam("NKTupdate") String NKTupdate
@@ -702,11 +713,11 @@ UUID idkmdangchon=null;
 
             else {}
             model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
-            Sort sort = Sort.by("ma").descending();
-            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
-            model.addAttribute("dulieu", list.getContent());
-            model.addAttribute("total", kt(list.getTotalPages()));
+//            Sort sort = Sort.by("ma").descending();
+//            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+//            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+            model.addAttribute("dulieu", khuyenMaiRepository.findAll());
+//            model.addAttribute("total", kt(list.getTotalPages()));
 
             model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
             model.addAttribute("batmodaldetailupdatekm",0);
@@ -738,12 +749,12 @@ UUID idkmdangchon=null;
             model.addAttribute("NBTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayBatDau()));
             model.addAttribute("NKTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayKetThuc()));
             model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
-            Sort sort = Sort.by("ma").descending();
-            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+//            Sort sort = Sort.by("ma").descending();
+//            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+//            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
 
-            model.addAttribute("dulieu", list.getContent());
-            model.addAttribute("total", kt(list.getTotalPages()));
+            model.addAttribute("dulieu", khuyenMaiRepository.findAll());
+//            model.addAttribute("total", kt(list.getTotalPages()));
 
             model.addAttribute("momdalthongbaongayKT1","Ngày kết thúc phải sau ngày bắt đầu");
             model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
@@ -777,12 +788,12 @@ UUID idkmdangchon=null;
             model.addAttribute("NBTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayBatDau()));
             model.addAttribute("NKTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayKetThuc()));
             model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
-            Sort sort = Sort.by("ma").descending();
-            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+//            Sort sort = Sort.by("ma").descending();
+//            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+//            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
 
-            model.addAttribute("dulieu", list.getContent());
-            model.addAttribute("total", kt(list.getTotalPages()));
+            model.addAttribute("dulieu", khuyenMaiRepository.findAll());
+//            model.addAttribute("total", kt(list.getTotalPages()));
 
             model.addAttribute("momdalthongbaongayKT1","Ngày kết thúc phải sau ngày hiện tại");
             model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
@@ -818,11 +829,11 @@ UUID idkmdangchon=null;
 
 
         model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
-        Sort sort = Sort.by("ma").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
-        model.addAttribute("dulieu", list.getContent());
-        model.addAttribute("total", kt(list.getTotalPages()));
+//        Sort sort = Sort.by("ma").descending();
+//        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+//        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+        model.addAttribute("dulieu",khuyenMaiRepository.findAll());
+//        model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("km",new KhuyenMai());
         model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
         model.addAttribute("tbUPDATEkmOK", 0);
@@ -857,19 +868,19 @@ UUID idkmdangchon=null;
     public String timmt(
             Model model,
             @ModelAttribute("kmupdate")  KhuyenMai khuyenMaiupdate,
-            @RequestParam("num") Optional<Integer> num,
-            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size,
+//            @RequestParam("num") Optional<Integer> num,
+//            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size,
             @ModelAttribute("km")  KhuyenMai khuyenMai,
             @RequestParam("matk") String mt
 
     ) {
 
         Sort sort = Sort.by("ma").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+//        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+//        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
 
         model.addAttribute("dulieu",khuyenMaiRepository.timkiemKM(mt));
-        model.addAttribute("total", kt(list.getTotalPages()));
+//        model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
 
 
@@ -932,20 +943,20 @@ UUID idkmdangchon=null;
             Model model,
 @PathVariable("idkm") UUID idkm,
             @ModelAttribute("km") KhuyenMai khuyenMai,
-            @ModelAttribute("kmupdate") KhuyenMai khuyenMaiupdate,
-            @RequestParam("num") Optional<Integer> num,
-            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
+            @ModelAttribute("kmupdate") KhuyenMai khuyenMaiupdate
+//            @RequestParam("num") Optional<Integer> num,
+//            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
 //            @ModelAttribute("khmodal") KhachHang khachHang1
     ) {
       khuyenMaiRepository.XoaKhuyenMai(idkm);
 
         model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
 
-        Sort sort = Sort.by("ma").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
-        model.addAttribute("dulieu", list.getContent());
-        model.addAttribute("total", kt(list.getTotalPages()));
+//        Sort sort = Sort.by("ma").descending();
+//        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+//        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+        model.addAttribute("dulieu", khuyenMaiRepository.findAll());
+//        model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
 
         model.addAttribute("hangds", hangSanPhamService.findAll0());
@@ -973,4 +984,70 @@ UUID idkmdangchon=null;
         model.addAttribute("tbhuyKM",0);
         return "home/layout";
     }
+
+
+
+    @GetMapping("khuyen-mai/tinh-trang/{tinhtrang}")
+    public String loctinhtrang(
+            Model model,
+
+            @ModelAttribute("km") KhuyenMai khuyenMai,
+            @ModelAttribute("kmupdate") KhuyenMai khuyenMaiupdate,
+//            @RequestParam("num") Optional<Integer> num,
+//            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
+//            @ModelAttribute("khmodal") KhachHang khachHang1
+            @PathVariable("tinhtrang") String tinhtrang
+    ) {
+        model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+
+//        Sort sort = Sort.by("ma").descending();
+//        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+//        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+        if(tinhtrang.equals("all")){
+            model.addAttribute("dulieu", khuyenMaiRepository.findAll());
+        }
+        else if(tinhtrang.equals("2")){
+            model.addAttribute("dulieu", khuyenMaiRepository.TimTrangThaiKM(2));
+        }else if(tinhtrang.equals("0")){
+            model.addAttribute("dulieu", khuyenMaiRepository.TimTrangThaiKM(0));
+        }else if(tinhtrang.equals("1")){
+            model.addAttribute("dulieu", khuyenMaiRepository.TimTrangThaiKM(1));
+        }else {
+            model.addAttribute("dulieu", khuyenMaiRepository.findAll());
+        }
+
+//        model.addAttribute("total", kt(list.getTotalPages()));
+        model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
+
+        model.addAttribute("hangds", hangSanPhamService.findAll0());
+        model.addAttribute("camds", cameraService.findAll0());
+        model.addAttribute("mands", manHinhService.findAll0());
+        model.addAttribute("mauds", mauSacService.findAll0());
+        model.addAttribute("ramds", ramService.findAll0());
+        model.addAttribute("romds", romService.findAll0());
+        model.addAttribute("pinds", pinService.findAll0());
+        model.addAttribute("dungds", dungLuongPinService.findAll0());
+        model.addAttribute("chipds", chipService.findAll0());
+        model.addAttribute("sands", sanPhamService.findAll0());
+        //        //gia max
+        Long max = Long.valueOf('0');
+        for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
+
+            if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                max = Long.valueOf(String.valueOf(ct.getGiaBan()));
+            }
+        }
+//System.out.println("taco---"+max);
+        model.addAttribute("max", String.valueOf(max));
+        return "home/layout";
+    }
+
+    @GetMapping("/vi-du")
+    public String xoakhuyenmai(
+            Model model
+    ){
+        model.addAttribute("dulieu", khuyenMaiRepository.findAll());
+        return "khuyen-mai/vidu";
+    }
+
 }

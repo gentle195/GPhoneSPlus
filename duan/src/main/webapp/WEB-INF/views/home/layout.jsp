@@ -277,3 +277,24 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="../../../js/select-2.js"></script>
 </html>
+
+
+<%--phần thắng thêm ở đây mới chạy--%>
+<%--phantrang kieu moi--%>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#phantrangkieumoi').DataTable({
+            "pagingType": "full_numbers", // Add this line for full pagination
+            "searching": true // Add this line to enable searching
+        });
+
+        // $('#example').DataTable({
+        //     "pagingType": "full_numbers", // Add this line for full pagination
+        //     "searching": false // Add this line to enable searching
+        // });
+    });
+</script>
+<%--phần thắng kết thúc--%>
