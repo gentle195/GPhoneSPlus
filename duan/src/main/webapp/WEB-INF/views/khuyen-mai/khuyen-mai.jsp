@@ -576,7 +576,10 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
 
                         <%--loc kết thúc--%>
 
-                        <table id="example"  style="color: black;">
+                     
+
+                        <table id="example" class="display" style="color: black;min-width: 1700px">
+
                             <thead>
                             <tr style="background-color: #70c0b1">
                                 <th>

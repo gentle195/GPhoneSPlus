@@ -56,7 +56,7 @@
                         </c:if>
                         <c:forEach items="${listCTSP}" var="ctsp">
                             <option value="${ctsp.id}">${ctsp.sanPham.ten} - ${ctsp.mauSac.ten}
-                                - ${ctsp.ram.dungLuong}- ${ctsp.rom.dungLuong}</option>
+                                - ${ctsp.ram.dungLuong} - ${ctsp.rom.dungLuong} - ${ctsp.chip.ten} - ${ctsp.pin.dungLuongPin.thongSo}</option>
                         </c:forEach>
                     </form:select>
                 </div>
