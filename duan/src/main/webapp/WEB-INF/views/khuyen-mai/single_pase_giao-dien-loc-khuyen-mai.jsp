@@ -45,6 +45,7 @@
                         <a   onclick="HuyapdungkmVS1ctsp('${ht.id}')"
                              class="btn btn-success"
                         >Hủy áp dụng</a>
+
                     </c:if>
                     <c:if test="${ht.khuyenMai.id!=kmchon.id}">
                         <a   onclick="apdungKMvsCTSP('${ht.id}','${kmchon.id}')"
@@ -57,12 +58,21 @@
 
                 </c:if>
                 <c:if test="${ht.khuyenMai.tinhTrang==0}">
-                    <a   onclick="apdungKMvsCTSP('${ht.id}','${kmchon.id}')"
-                         class="btn btn-success"
-                    >Áp dụng</a>
-                    <a   onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                         class="btn btn-success"
-                    >Hủy áp dụng</a>
+                    <c:if test="${ht.khuyenMai.id==kmchon.id}">
+                        <a   onclick="HuyapdungkmVS1ctsp('${ht.id}')"
+                             class="btn btn-success"
+                        >Hủy áp dụng</a>
+
+                    </c:if>
+                    <c:if test="${ht.khuyenMai.id!=kmchon.id}">
+                        <a   onclick="apdungKMvsCTSP('${ht.id}','${kmchon.id}')"
+                             class="btn btn-success"
+                        >Áp dụng</a>
+                        <a   onclick="HuyapdungkmVS1ctsp('${ht.id}')"
+                             class="btn btn-success"
+                        >Hủy áp dụng</a>
+                    </c:if>
+
                 </c:if>
             </c:if>
 
