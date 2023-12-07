@@ -70,4 +70,8 @@ public interface KhuyenMaiRepository extends JpaRepository<KhuyenMai, UUID> {
     @Query(value = "update chi_tiet_san_pham set id_khuyen_mai=null where id=:idctsp", nativeQuery = true)
     void HuyApDungKMvs1ctsp(@Param("idctsp") UUID idctsp);
 
+
+    @Query("select kh from KhuyenMai kh  where kh.tinhTrang=:tinhtrang ")
+    List<KhuyenMai> TimTrangThaiKM(@Param("tinhtrang") Integer tinhtrang );
+
 }
