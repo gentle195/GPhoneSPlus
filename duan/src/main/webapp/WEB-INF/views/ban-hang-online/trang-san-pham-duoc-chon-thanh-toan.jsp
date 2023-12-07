@@ -458,7 +458,7 @@
 
                     </div>
                     <div style="color: red"><label>Lưu ý: Chỉ ship quanh hà nội</label><br>
-                        <label style="margin-left: 1.2cm">Phí sip giao động tối đa 100.000 vnđ</label>
+                        <label style="margin-left: 1.2cm">Phí ship giao động tối đa 300.000 vnđ</label>
                     </div>
                 </div>
 

@@ -671,7 +671,7 @@
 
                         <div>
                             <h4 class="product-price"><span
-                                    style="font-size:15px">₫</span>${banhangonline.sotienkhidagiam(motctsp.id)}-
+                                    style="font-size:15px"></span>${banhangonline.sotienkhidagiam(motctsp.id)}₫ -
                                 <del class="product-old-price">${motctsp.basoOchammotlam()}<span style="font-size:15px">₫</span>
                                 </del>
                             </h4>
@@ -770,7 +770,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content" style="margin-top: 6cm">
 
-                                        <h3>Thông tin chi tiết sản phẩm:</h3>
+                                        <h4>Thông số kỹ thuật ${motctsp.sanPham.ten} ${motctsp.ram.dungLuong} ${motctsp.rom.dungLuong}</h4>
                                         <table class="product-info-table">
                                             <tr>
                                                 <td class="info-label">Hãng sản phẩm:</td>

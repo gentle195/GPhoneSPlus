@@ -1,9 +1,11 @@
 package com.example.demo.services.impl;
 
 import com.example.demo.models.ChiTietSanPham;
+import com.example.demo.models.DoiTraChiTiet;
 import com.example.demo.models.HoaDon;
 import com.example.demo.models.HoaDonChiTiet;
 import com.example.demo.repositories.ChiTietSanPhamRepository;
+import com.example.demo.repositories.DoiTraChiTietRepository;
 import com.example.demo.repositories.HoaDonChiTietRepository;
 import com.example.demo.repositories.HoaDonRepository;
 import com.example.demo.repositories.IMEIRepository;
@@ -47,8 +49,8 @@ public class HoaDonServiceImpl implements HoaDonService {
     IMEIRepository imeiRepository;
     @Autowired
     ChiTietSanPhamRepository chiTietSanPhamRepository;
-
-    private HoaDon hoaDon;
+    @Autowired
+    DoiTraChiTietRepository doiTraChiTietRepository;
 
     @Override
     public Page<HoaDon> getAll(Pageable pageable) {
@@ -59,10 +61,13 @@ public class HoaDonServiceImpl implements HoaDonService {
     public List<HoaDon> donHang() {
         return hoaDonRepository.donHang();
     }
+
     @Override
-    public List<HoaDon> hoaDonKH(UUID id){
+    public List<HoaDon> hoaDonKH(UUID id) {
         return hoaDonRepository.hoaDonKH(id);
-    };
+    }
+
+    ;
 
     @Override
     public List<HoaDon> hoaDon() {
@@ -173,7 +178,7 @@ public class HoaDonServiceImpl implements HoaDonService {
         List<HoaDon> resultList = new ArrayList<>();
         for (HoaDon hd : list
         ) {
-            if (hd.getTinhTrang() == 0) {
+            if ((hd.getTinhTrang() == 0 || hd.getTinhTrang() == 1) && hd.getLoai() == 0) {
                 resultList.add(hd);
             }
         }
@@ -186,10 +191,10 @@ public class HoaDonServiceImpl implements HoaDonService {
     }
 
     @Override
-    public List<HoaDon> loc1(UUID idKH, UUID idNV, UUID idDC, Integer trangThai, Integer loai,
+    public List<HoaDon> loc1(UUID idKH, UUID idNV, UUID idDC, Integer trangThai, Integer trangThaiGiaoHang, Integer loai,
                              Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate
     ) {
-        return hoaDonRepository.loc1(idKH, idNV, idDC, trangThai, loai,
+        return hoaDonRepository.loc1(idKH, idNV, idDC, trangThai, trangThaiGiaoHang, loai,
                 startDate, endDate, shipStartDate, shipEndDate, receiveStartDate, receiveEndDate
         );
     }
@@ -251,6 +256,7 @@ public class HoaDonServiceImpl implements HoaDonService {
                     "    line-height: 1.6;\n" +
                     "    background-color: #f9f9f9;\n" +
                     "    padding: 20px;\n" +
+                    "    width: 1000px;\n" +
                     "}\n" +
                     "\n" +
                     "h1 {\n" +
@@ -302,7 +308,7 @@ public class HoaDonServiceImpl implements HoaDonService {
                     "}\n" +
                     "\n" +
                     ".container {\n" +
-                    "    max-width: 600px;\n" +
+                    "    min-width: 1300px;\n" +
                     "    margin: 0 auto;\n" +
                     "}\n" +
                     "\n" +
@@ -345,26 +351,6 @@ public class HoaDonServiceImpl implements HoaDonService {
 
             NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
             // Thêm thông tin đơn hàng
-            java.util.Date ngayTao = hoaDon.getNgayTao();
-//            String formattedTienGiam;
-//            KhuyenMai km = hoaDon.getKhuyenMai();
-//
-//            // Kiểm tra nếu khuyến mãi là null hoặc không có id
-//            if (km == null || km.getId() == null) {
-//                formattedTienGiam = "0 VNĐ";
-//            } else {
-//                BigDecimal tienGiamToiDa = BigDecimal.valueOf(km.getGiaTriToiThieu());
-//
-//                BigDecimal tienGiamHoaDon = hoaDon.getTien_giam();
-//
-//                if (tienGiamHoaDon == null) {
-//                    formattedTienGiam = "0 VNĐ";
-//                } else if (tienGiamHoaDon.compareTo(tienGiamToiDa) >= 0) {
-//                    formattedTienGiam = numberFormat.format(tienGiamHoaDon);
-//                } else {
-//                    formattedTienGiam = tienGiamHoaDon + "%";
-//                }
-//            }
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -381,9 +367,7 @@ public class HoaDonServiceImpl implements HoaDonService {
 
 
             String formattedTongTienDonHang = numberFormat.format(hoaDon.getTongTien());
-//            String formattedTongTienHoaDon = numberFormat.format(hoaDon.getTongTienHoaDon());
-            // Thêm chi tiết đơn hàng
-            htmlContentBuilder.append("<h3>").append("Chi tiết đơn hàng").append("</h1>");
+            htmlContentBuilder.append("<h3>").append("Chi tiết đơn hàng").append("</h3>");
             htmlContentBuilder.append("<table>");
             htmlContentBuilder.append("<tr><th>Sản phẩm</th><th>Số lượng</th><th>Thành tiền</th></tr>");
             for (HoaDonChiTiet hoaDonChiTiet : hoaDonChiTietRepository.getHoaDonChiTiet(hoaDonId)) {
@@ -392,7 +376,11 @@ public class HoaDonServiceImpl implements HoaDonService {
                 htmlContentBuilder.append("<tr>");
                 htmlContentBuilder.append("<td>").append(hoaDonChiTiet.getImei().getChiTietSanPham().getSanPham().getTen())
                         .append(" (").append(hoaDonChiTiet.getImei().getChiTietSanPham().getChip().getTen())
-                        .append("/").append(hoaDonChiTiet.getImei().getChiTietSanPham().getMauSac().getTen()).append(")")
+                        .append("/").append(hoaDonChiTiet.getImei().getChiTietSanPham().getMauSac().getTen())
+                        .append("/").append(hoaDonChiTiet.getImei().getChiTietSanPham().getRam().getDungLuong())
+                        .append("/").append(hoaDonChiTiet.getImei().getChiTietSanPham().getRom().getDungLuong())
+                        .append("/").append(hoaDonChiTiet.getImei().getSoImei())
+                        .append(")")
                         .append("</td>");
                 htmlContentBuilder.append("<td>").append(hoaDonChiTiet.getSoLuong()).append("</td>");
                 htmlContentBuilder.append("<td>").append(fomatTienSanPham).append("</td>");
@@ -403,9 +391,40 @@ public class HoaDonServiceImpl implements HoaDonService {
             // Thêm tổng tiền và các thông tin khác của hóa đơn nếu cần
             htmlContentBuilder.append("<p>Tổng giá trị đơn hàng: ").append(formattedTongTienDonHang).append("</p>");
             htmlContentBuilder.append("<p>Phí Ship: ").append(hoaDon.getPhiShip()).append("</p>");
-//            htmlContentBuilder.append("<p>Tiền giảm: ").append(formattedTienGiam).append("</p>");
-//            htmlContentBuilder.append("<p>Tổng tiền thanh toán: ").append(formattedTongTienHoaDon).append("</p>");
 
+            List<DoiTraChiTiet> list = doiTraChiTietRepository.doiTraChiTiet(hoaDonId);
+            if (list.size() != 0) {
+                htmlContentBuilder.append("<h3>").append("Danh sách sản phẩm đổi hàng").append("</h3>");
+                htmlContentBuilder.append("<table>");
+                htmlContentBuilder.append("<tr><th>Sản phẩm cần đổi</th><th>Đơn giá cần đổi</th><th>Sản phẩm đổi mới</th><th>Đơn giá mới</th></tr>");
+                for (DoiTraChiTiet doiTraChiTiet : list) {
+                    NumberFormat fomatTien = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+                    String fomatTienSanPham = fomatTien.format(doiTraChiTiet.getDonGia());
+                    String fomatTienSanPhamCu = fomatTien.format(doiTraChiTiet.getHoaDonChiTiet().getDonGia());
+                    htmlContentBuilder.append("<tr>");
+                    htmlContentBuilder.append("<td>").append(doiTraChiTiet.getHoaDonChiTiet().getImei().getChiTietSanPham().getSanPham().getTen())
+                            .append(" (").append(doiTraChiTiet.getHoaDonChiTiet().getImei().getChiTietSanPham().getChip().getTen())
+                            .append("/").append(doiTraChiTiet.getHoaDonChiTiet().getImei().getChiTietSanPham().getMauSac().getTen())
+                            .append("/").append(doiTraChiTiet.getHoaDonChiTiet().getImei().getChiTietSanPham().getRam().getDungLuong())
+                            .append("/").append(doiTraChiTiet.getHoaDonChiTiet().getImei().getChiTietSanPham().getRom().getDungLuong())
+                            .append("/").append("<br>")
+                            .append(doiTraChiTiet.getHoaDonChiTiet().getImei().getSoImei())
+                            .append(")")
+                            .append("</td>");
+                    htmlContentBuilder.append("<td>").append(fomatTienSanPhamCu).append("</td>");
+                    htmlContentBuilder.append("<td>").append(doiTraChiTiet.getImei().getChiTietSanPham().getSanPham().getTen())
+                            .append(" (").append(doiTraChiTiet.getImei().getChiTietSanPham().getChip().getTen())
+                            .append("/").append(doiTraChiTiet.getImei().getChiTietSanPham().getMauSac().getTen())
+                            .append("/").append(doiTraChiTiet.getImei().getChiTietSanPham().getRam().getDungLuong())
+                            .append("/").append(doiTraChiTiet.getImei().getChiTietSanPham().getRom().getDungLuong())
+                            .append("/").append("<br>")
+                            .append(doiTraChiTiet.getImei().getSoImei())
+                            .append(")").append("</td>");
+                    htmlContentBuilder.append("<td>").append(fomatTienSanPham).append("</td>");
+                    htmlContentBuilder.append("</tr>");
+                }
+                htmlContentBuilder.append("</table>");
+            }
             htmlContentBuilder.append("<h3>Xin chân thành cảm ơn sự ủng hộ của bạn dành cho GPhoneS Store!</h3>");
             htmlContentBuilder.append("</body></html>");
 

@@ -38,4 +38,6 @@ public interface DoiTraChiTietService {
     public DoiTraChiTiet findByHDCT(UUID id);
 
     public DoiTraChiTiet findByDTCT(UUID id);
+
+    public List<DoiTraChiTiet> doiTraChiTiet(UUID id);
 }

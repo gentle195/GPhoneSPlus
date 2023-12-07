@@ -39,7 +39,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
             "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id" +
             "            left join imei on imei.id = hoa_don_chi_tiet.id_imei" +
-            "            where YEAR(ngay_thanh_toan) = 2023" +
+            "            where YEAR(ngay_thanh_toan) = 2023 and tinh_trang_giao_hang = 3" +
             "            GROUP BY MONTH(ngay_thanh_toan)", nativeQuery = true)
     List<DoanhThuTheoThang> doanhThu();
 
@@ -52,7 +52,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "            FROM hoa_don left join hoa_don_chi_tiet on hoa_don.id = hoa_don_chi_tiet.id_hoa_don\n" +
             "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
             "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id" +
-            "            where YEAR(ngay_thanh_toan) = ?1\n" +
+            "            where YEAR(ngay_thanh_toan) = ?1\n and tinh_trang_giao_hang = 3" +
             "            GROUP BY MONTH(ngay_thanh_toan)", nativeQuery = true)
     List<DoanhThuTheoThang> loctheonam(Integer Nam);
 
@@ -140,7 +140,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "            left join hoa_don_chi_tiet on hoa_don.id = hoa_don_chi_tiet.id_hoa_don\n" +
             "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
             "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id" +
-            "            where hoa_don.tinh_trang = 2" +
+            "            where hoa_don.tinh_trang = 2 and hoa_don.tinh_trang_giao_hang = 3" +
             "            GROUP BY nhan_vien.ho_ten", nativeQuery = true)
     List<DoanhThuNhanVien> doanhThuNhanVien();
 
@@ -154,7 +154,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "            left join hoa_don_chi_tiet on hoa_don.id = hoa_don_chi_tiet.id_hoa_don\n" +
             "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
             "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id" +
-            "            where hoa_don.tinh_trang = 2" +
+            "            where hoa_don.tinh_trang = 2 and hoa_don.tinh_trang_giao_hang = 3" +
             "            AND ngay_thanh_toan BETWEEN :startDate AND :endDate\n" +
             "            GROUP BY nhan_vien.ho_ten", nativeQuery = true)
     List<DoanhThuNhanVien> locDoanhThuNhanVien(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
@@ -188,7 +188,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "LEFT JOIN khach_hang ON hoa_don.id_khach_hang = khach_hang.id\n" +
             "left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
             "left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n"+
-            "WHERE hoa_don.tinh_trang = 2\n" +
+            "WHERE hoa_don.tinh_trang = 2 and hoa_don.tinh_trang_giao_hang = 3\n" +
             "Group by khach_hang.gioi_tinh", nativeQuery = true)
     List<DoanhThuKhachHang> doanhThuKhachHangGioiTinh();
 
@@ -222,7 +222,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "LEFT JOIN khach_hang ON hoa_don.id_khach_hang = khach_hang.id\n" +
             "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
             "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n"+
-            "WHERE hoa_don.tinh_trang = 2\n" +
+            "WHERE hoa_don.tinh_trang = 2 and hoa_don.tinh_trang_giao_hang = 3\n" +
             "AND ngay_thanh_toan BETWEEN :startDate AND :endDate\n" +
             "Group by khach_hang.gioi_tinh", nativeQuery = true)
     List<DoanhThuKhachHang> locDoanhThuKhachHangGioiTinh(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
@@ -242,31 +242,29 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
     List<SoLuongDoiTraHang> SoLuongDoiTraHang();
 
     @Query(value = "select hang_dien_thoai.ten AS tenHang,\n" +
-            "            COUNT(hoa_don_chi_tiet.id_imei) as soLuong\n" +
-            "            from hoa_don \n" +
-            "            left join hoa_don_chi_tiet on hoa_don_chi_tiet.id_hoa_don = hoa_don.id\n" +
-            "            left join imei on imei.id = hoa_don_chi_tiet.id_imei\n" +
+            "            COUNT(imei.id) as soLuong\n" +
+            "            from imei \n" +
+            "            left join hoa_don_chi_tiet on imei.id = hoa_don_chi_tiet.id_imei \n" +
+            "            left join hoa_don on hoa_don_chi_tiet.id_hoa_don = hoa_don.id\n" +
             "            left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
             "            left join san_pham on san_pham.id = chi_tiet_san_pham.id_san_pham\n" +
             "            left join hang_dien_thoai on hang_dien_thoai.id = san_pham.id_hang\n" +
             "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
-            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n" +
-            "            where doi_tra_chi_tiet.hien_trang_san_pham = 1" +
+            "            where imei.tinh_trang = 0" +
             "            and ngay_doi_tra BETWEEN :startDate AND :endDate\n" +
             "            GROUP BY hang_dien_thoai.ten", nativeQuery = true)
     List<SoLuongDoiTraHang> locSoLuongDoiTraHang(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "select hang_dien_thoai.ten AS tenHang,\n" +
-            "            COUNT(hoa_don_chi_tiet.id_imei) as soLuong\n" +
-            "            from hoa_don \n" +
-            "            left join hoa_don_chi_tiet on hoa_don_chi_tiet.id_hoa_don = hoa_don.id\n" +
-            "            left join imei on imei.id = hoa_don_chi_tiet.id_imei\n" +
+            "            COUNT(imei.id) as soLuong\n" +
+            "            from imei \n" +
+            "            left join hoa_don_chi_tiet on imei.id = hoa_don_chi_tiet.id_imei \n" +
+            "            left join hoa_don on hoa_don_chi_tiet.id_hoa_don = hoa_don.id\n" +
             "            left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
             "            left join san_pham on san_pham.id = chi_tiet_san_pham.id_san_pham\n" +
             "            left join hang_dien_thoai on hang_dien_thoai.id = san_pham.id_hang\n" +
             "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
-            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n" +
-            "            where doi_tra_chi_tiet.hien_trang_san_pham = 0" +
+            "            where imei.tinh_trang = 4" +
             "            and ngay_doi_tra BETWEEN :startDate AND :endDate\n" +
             "            GROUP BY hang_dien_thoai.ten", nativeQuery = true)
     List<SoLuongDoiTraHang> locSoLuongSanPhamLoi(@Param("startDate") Date startDate, @Param("endDate") Date endDate);

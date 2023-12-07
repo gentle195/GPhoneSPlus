@@ -28,6 +28,7 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
 
     @Query("select hd from HoaDon hd order by hd.ngayTao desc")
     List<HoaDon> hoaDon();
+
     @Query("select hd from HoaDon hd left join KhachHang kh on hd.khachHang.id=kh.id where kh.id=:id")
     List<HoaDon> hoaDonKH(UUID id);
 
@@ -52,6 +53,7 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
             "and (:idNV IS NULL OR nv.id=:idNV)  " +
             "and (:idDC IS NULL OR dc.id=:idDC) " +
             "AND (:trangThai is null or hd.tinhTrang=:trangThai)" +
+            "AND (:trangThaiGiaoHang is null or hd.tinhTrangGiaoHang=:trangThaiGiaoHang)" +
             "and(:loai is null or hd.loai=:loai) AND " +
             "((:startDate IS NULL OR :endDate IS NULL) OR hd.ngayThanhToan >= COALESCE(:startDate, hd.ngayThanhToan) " +
             "and hd.ngayThanhToan <= COALESCE(:endDate, hd.ngayThanhToan))  " +
@@ -60,7 +62,7 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
             "AND ((:receiveStartDate IS NULL OR :receiveEndDate IS NULL) OR hd.ngayNhan >= COALESCE(:receiveStartDate, hd.ngayNhan) " +
             "and hd.ngayNhan <= COALESCE(:receiveEndDate, hd.ngayNhan)) ")
     List<HoaDon> loc1(
-            UUID idKH, UUID idNV, UUID idDC, Integer trangThai, Integer loai,
+            UUID idKH, UUID idNV, UUID idDC, Integer trangThai, Integer trangThaiGiaoHang, Integer loai,
             @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
             @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
             @RequestParam(value = "shipStartDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date shipStartDate,

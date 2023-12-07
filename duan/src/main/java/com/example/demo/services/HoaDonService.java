@@ -15,9 +15,9 @@ import java.util.UUID;
 public interface HoaDonService {
     public Page<HoaDon> getAll(Pageable pageable);
 
-    List<HoaDon> donHang();
+    public List<HoaDon> donHang();
 
-    List<HoaDon> hoaDon();
+    public List<HoaDon> hoaDon();
 
     public List<HoaDon> findAll();
 
@@ -26,6 +26,7 @@ public interface HoaDonService {
     public List<HoaDon> find();
 
     public HoaDon findById(UUID id);
+
     public List<HoaDon> hoaDonKH(UUID id);
 
     public HoaDon add(HoaDon hoaDon);
@@ -42,7 +43,7 @@ public interface HoaDonService {
 
     public List<HoaDon> search(String ten, BigDecimal soTienQuyDoi);
 
-    public List<HoaDon> loc1(UUID idKH, UUID idNV, UUID idDC, Integer trangThai, Integer loai,
+    public List<HoaDon> loc1(UUID idKH, UUID idNV, UUID idDC, Integer trangThai, Integer trangThaiGiaoHang, Integer loai,
                              Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate
     );
 
@@ -50,7 +51,7 @@ public interface HoaDonService {
                                    Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate
     );
 
-    List<HoaDon> searchDonHang(String ten);
+    public List<HoaDon> searchDonHang(String ten);
 
     public List<HoaDon> findAllByCreatedAtAfter(java.util.Date startDate);
 
@@ -58,15 +59,15 @@ public interface HoaDonService {
 
     public List<HoaDon> findAllByNgayShip(java.util.Date startDate);
 
-    List<HoaDon> findDonHangByCreatedAtAfter(@Param("startDate") java.util.Date startDate);
+    public List<HoaDon> findDonHangByCreatedAtAfter(@Param("startDate") java.util.Date startDate);
 
-    List<HoaDon> findDonHangByNgayNhan(@Param("startDate") java.util.Date startDate);
+    public List<HoaDon> findDonHangByNgayNhan(@Param("startDate") java.util.Date startDate);
 
-    List<HoaDon> findDonHangByNgayShip(@Param("startDate") java.util.Date startDate);
+    public List<HoaDon> findDonHangByNgayShip(@Param("startDate") java.util.Date startDate);
 
-    ResponseEntity<byte[]> generatePdfDonTaiQuay(UUID hoaDonId);
+    public ResponseEntity<byte[]> generatePdfDonTaiQuay(UUID hoaDonId);
 
-    ResponseEntity<byte[]> generatePdfDonOnline(UUID hoaDonId);
+    public ResponseEntity<byte[]> generatePdfDonOnline(UUID hoaDonId);
 }
 
 

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +33,6 @@ import java.util.stream.Collectors;
 public class DoiTraController {
     @Autowired
     private DoiTraService doiTraService;
-
     @Autowired
     private HoaDonService hoaDonService;
     @Autowired
@@ -81,23 +82,10 @@ public class DoiTraController {
         List<DTODoiTra> listt = doiTraService.getAllHD();
         List<NhanVien> listNhanVien = nhanVienService.findAll();
         List<KhachHang> listKhachHang = khachHangService.findAll00();
-//        Page<IMEI> imei=imeiService.fill1();
         model.addAttribute("listKhachHang", listKhachHang);
         model.addAttribute("listNhanVien", listNhanVien);
-        model.addAttribute("hangds", hangSanPhamService.findAll0());
-        model.addAttribute("camds", cameraService.findAll0());
-        model.addAttribute("mands", manHinhService.findAll0());
-        model.addAttribute("mauds", mauSacService.findAll0());
-        model.addAttribute("ramds", ramService.findAll0());
-        model.addAttribute("romds", romService.findAll0());
-        model.addAttribute("pinds", pinService.findAll0());
-        model.addAttribute("dungds", dungLuongPinService.findAll0());
-        model.addAttribute("chipds", chipService.findAll0());
-        model.addAttribute("sands", sanPhamService.findAll0());
-        model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
         model.addAttribute("contentPage", "../doi-tra/hien-thi.jsp");
         model.addAttribute(("list"), list);
-//        model.addAttribute("imeiii",imei.getContent());
         model.addAttribute("listt", listt);
         return "home/layout";
 
@@ -311,10 +299,10 @@ public class DoiTraController {
                 BigDecimal giam = BigDecimal.valueOf(imei.getChiTietSanPham().getKhuyenMai().getSoTienGiam()).divide(BigDecimal.valueOf(100));
 
                 doiTraChiTiet.setTienDoiTra(hdct.getImei().getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam))));
-                doiTraChiTiet.setDonGia(imei.getChiTietSanPham().getGiaBan());
+                doiTraChiTiet.setDonGia(hdct.getImei().getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam))));
             }
 
-            doiTraChiTiet.setTienDoiTra(hdct.getImei().getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan()));
+            doiTraChiTiet.setTienDoiTra(hdct.getDonGia().subtract(doiTraChiTiet.getDonGia()));
 
             doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
 
@@ -684,12 +672,12 @@ public class DoiTraController {
         return "home/layout";
     }
 
-    @GetMapping("/huy/{doitraId}")
+    @GetMapping("/huy/{id}")
     public String huy(Model model, @ModelAttribute("dulieuxem") DoiTra dulieuxem,
-                      @PathVariable UUID doitraId, HttpServletRequest request
+                      @PathVariable("id") UUID id, HttpServletRequest request
     ) {
-        DoiTra doiTra = doiTraService.findById(doitraId);
-        List<DoiTraChiTiet> listCHiTietDoiTra = doiTraChiTietService.getDoiTraChiTietByDoiTraId(doitraId);
+        DoiTra doiTra = doiTraService.findById(id);
+        List<DoiTraChiTiet> listCHiTietDoiTra = doiTraChiTietService.getDoiTraChiTietByDoiTraId(id);
         for (DoiTraChiTiet dtct : listCHiTietDoiTra
         ) {
             if (dtct.getHienTrangSanPham() == 0) {
@@ -714,10 +702,18 @@ public class DoiTraController {
         }
         doiTra.setTinhTrang(1);
         doiTra.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
-        doiTraService.update(doitraId, doiTra);
-
-
-        return "redirect:/doi-tra/hien-thi";
+        doiTraService.update(id, doiTra);
+        List<DoiTra> list = doiTraService.getAll0();
+        List<DTODoiTra> listt = doiTraService.getAllHD();
+        List<NhanVien> listNhanVien = nhanVienService.findAll();
+        List<KhachHang> listKhachHang = khachHangService.findAll00();
+        model.addAttribute("listKhachHang", listKhachHang);
+        model.addAttribute("listNhanVien", listNhanVien);
+        model.addAttribute("thongBao", "Từ chối phiếu đổi hàng thành công");
+        model.addAttribute("contentPage", "../doi-tra/hien-thi.jsp");
+        model.addAttribute(("list"), list);
+        model.addAttribute("listt", listt);
+        return "home/layout";
     }
 
     @ResponseBody
@@ -727,5 +723,34 @@ public class DoiTraController {
         List<ChiTietSanPham> list = chiTietSanPhamService.searchGia(id);
         System.out.println(list);
         return list;
+    }
+
+    @GetMapping("/tai-doi-tra/{id}")
+    public String taiDoiTra(Model model,@PathVariable("id") UUID id) {
+        DoiTra dt = doiTraService.findById(id);
+        dt.setTinhTrang(0);
+        dt.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+        doiTraService.update(id, dt);
+        List<DoiTra> list = doiTraService.getAll1();
+        model.addAttribute("listKhachHang", khachHangService.findAll00());
+        model.addAttribute("listNhanVien", nhanVienService.findAll());
+        model.addAttribute("thongBao", "Tái đổi hàng thành công");
+        model.addAttribute("contentPage", "../doi-tra/tu-choi-tra-hang.jsp");
+        model.addAttribute(("list"), list);
+
+        return "home/layout";
+    }
+
+    @GetMapping("/xuat-pdf/{id}")
+    public ResponseEntity<byte[]> xuatPDF(@PathVariable("id") UUID id) {
+        DoiTra dt = doiTraService.findById(id);
+        ResponseEntity<byte[]> responseEntity = hoaDonService.generatePdfDonTaiQuay(dt.getHoaDon().getId());
+        byte[] pdfBytes = responseEntity.getBody();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "hoa_don_" + dt.getHoaDon().getId() + ".pdf");
+
+        return ResponseEntity.ok().headers(headers).body(pdfBytes);
     }
 }

@@ -24,15 +24,10 @@ public class DoiTraChiTietServiceImpl implements DoiTraChiTietService {
         return doiTraChiTietRepository.fillAll0(pageable);
     }
 
-    ;
-
-
     @Override
     public List<HoaDonChiTiet> getHoaDonChiTiet(UUID id) {
         return doiTraChiTietRepository.getHoaDonChiTiet(id);
     }
-
-    ;
 
     @Override
     public DoiTraChiTiet add(DoiTraChiTiet doiTraChiTiet) {
@@ -58,8 +53,6 @@ public class DoiTraChiTietServiceImpl implements DoiTraChiTietService {
         return doiTraChiTietRepository.getDoiTraChiTietByDoiTraId(id);
     }
 
-    ;
-
     @Override
     public DoiTraChiTiet findById(UUID id) {
         return doiTraChiTietRepository.findById(id).orElse(null);
@@ -70,15 +63,10 @@ public class DoiTraChiTietServiceImpl implements DoiTraChiTietService {
         return doiTraChiTietRepository.getHoaDonChiTietByIdList(idList);
     }
 
-    ;
-
     @Override
     public List<DoiTraChiTiet> getDoiTraChiTietByIdList(@Param("idList") List<UUID> idList) {
         return doiTraChiTietRepository.getDoiTraChiTietByIdList(idList);
     }
-
-    ;
-
 
     @Override
     public DoiTraChiTiet update(UUID id, DoiTraChiTiet doiTraChiTiet) {
@@ -114,6 +102,10 @@ public class DoiTraChiTietServiceImpl implements DoiTraChiTietService {
         return doiTraChiTietRepository.findByDTCT(id);
     }
 
+    @Override
+    public List<DoiTraChiTiet> doiTraChiTiet(UUID id) {
+        return doiTraChiTietRepository.doiTraChiTiet(id);
+    }
 
 
 }

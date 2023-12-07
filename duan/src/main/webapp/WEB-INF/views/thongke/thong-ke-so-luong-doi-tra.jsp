@@ -44,7 +44,7 @@
 </div>
 
 <div class="row">
-<div class="col-6"><h3>Biểu đồ thống kê số sản phẩm đổi trả</h3>
+<div class="col-6"><h3>Biểu đồ thống kê số sản phẩm đổi hàng</h3>
     <div class="card">
         <div class="card-body">
             <canvas id="myChart" ></canvas>
