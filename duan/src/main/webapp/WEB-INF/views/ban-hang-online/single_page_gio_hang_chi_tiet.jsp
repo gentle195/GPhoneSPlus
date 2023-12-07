@@ -110,7 +110,8 @@
         <c:if test="${banhangonline.ListghTheoidghvsTT1(listghct.get(0).gioHang.id).size()>0}">
             <form action="/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-mua-hang" method="post">
                 <input name="idgh" value="${listghct.get(0).gioHang.id}" style="display: none">
-                <button type="submit" class="btn btn-success" style="text-align: center; width:100%">Mua hàng</button>
+                <button type="submit" onclick="return check75tieu('${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}');" class="btn btn-success" style="text-align: center; width:100%">Mua hàng
+                </button>
             </form>
         </c:if>
     </div>

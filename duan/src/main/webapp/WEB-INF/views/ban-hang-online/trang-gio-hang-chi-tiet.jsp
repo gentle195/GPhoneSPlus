@@ -433,7 +433,7 @@
             <c:if test="${banhangonline.ListghTheoidghvsTT1(listghct.get(0).gioHang.id).size()>0}">
                 <form action="/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-mua-hang" method="post">
                     <input name="idgh" value="${listghct.get(0).gioHang.id}" style="display: none">
-                    <button type="submit" class="btn btn-success" style="text-align: center; width:100%">Mua hàng
+                    <button type="submit" onclick="return check75tieu('${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}');" class="btn btn-success" style="text-align: center; width:100%">Mua hàng
                     </button>
                 </form>
             </c:if>
@@ -796,6 +796,18 @@
 
 
 
+    }
+</script>
+<script>
+    function check75tieu(tongtien) {
+        var chuoiSoNguyen = tongtien;
+        var soNguyen = parseInt(chuoiSoNguyen, 10);
+     if(soNguyen>75000000){
+         alert(" Chỉ thanh toán với đơn hàng tối đa 75.000.000 vnd")
+         return false;
+     }else {
+        return true;
+     }
     }
 </script>
 <!-- jQuery Plugins -->
