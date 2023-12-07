@@ -459,11 +459,11 @@
     <!-- /container -->
 </nav>
 <!-- /NAVIGATION -->
-
-
+<br><br>
+<div class="section shadow mb-5 bg-body-tertiary rounded" style="width:80%;margin-left: 10%" >
 <div id="thanhlocxemchitietsanpham">
     <p id="vt"></p>
-    <div style="position: absolute;margin-left: 56%;width: 43%;margin-top: 8%;z-index: 2;">
+    <div style="position: absolute;margin-left: 46%;width: 43%;margin-top: 8%;z-index: 2;">
         <p style="display: none" id="tenspctsp">${motctsp.sanPham.ten}</p>
 
         <label style="">Màu sắc: </label>
@@ -1080,8 +1080,10 @@
         </div>
     </div>
 </main>
+</div>
 <br>
 <br>
+<div class="section shadow mb-5 bg-body-tertiary rounded" style="width:80%;margin-left: 10%" >
 <h2 style="text-align: center;font-family: 'Times New Roman'; color: red">Sản Phẩm Liên Quan</h2>
 <br>
 <br>
@@ -1096,11 +1098,11 @@
             <div class="carousel-item active">
                 </c:if>
                 <c:if test="${trang.index >=2}">
-                <div class="carousel-item ">
+                <div class="carousel-item " >
                     </c:if>
-                    <div class="container px-0 px-lg-4 mt-0">
+                    <div class="container px-0 px-lg-4 mt-0" >
                         <div class="row gx-0 gx-lg-0 row-cols-0 row-cols-md-0 row-cols-xl-4 justify-content-center"
-                             style="width: 100%">
+                             style="width: 100%;">
                             <c:forEach items="${listsp}" var="ht" varStatus="stt">
                                 <c:if test="${banhangonline.soluongcon(ht.id)>0}">
                                     <c:if test="${stt.index > vitri }">
@@ -1165,28 +1167,29 @@
                             </c:forEach>
                         </div>
                     </div>
-                    <br>
+                    <br> <br> <br>
                 </div>
                 </c:forEach>
             </div>
             <!-- Indicators/dots -->
-
+<br><br>
+            <br><br>
             <div class="carousel text-center">
-                <button class="carousel-prev" type="button" data-bs-target="#demo11" data-bs-slide="prev">
+                <button class="carousel-prev" type="button" data-bs-target="#demo11" data-bs-slide="prev" style="background-color: white">
                     <<
                 </button>
                 <c:forEach begin="1" end="${lamchon1}" varStatus="trang">
-                    <button type="button" data-bs-target="#demo11"
+                    <button type="button" data-bs-target="#demo11" style="background-color: white"
                             data-bs-slide-to="${trang.index-1}">${trang.index}</button>
                 </c:forEach>
-                <button class="carousel-next" type="button" data-bs-target="#demo11" data-bs-slide="next">
+                <button class="carousel-next" type="button" data-bs-target="#demo11" data-bs-slide="next" style="background-color: white">
                     >>
                 </button>
             </div>
         </div>
     </div>
 </div>
-
+</div>
 <br>
 <footer id="footer">
     <!-- top footer -->
