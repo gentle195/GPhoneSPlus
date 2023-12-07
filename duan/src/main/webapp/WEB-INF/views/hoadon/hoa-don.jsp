@@ -56,7 +56,7 @@
                     <div class="loc" style="color:black;">
                         <form:form action="/hoa-don/loc" method="post" modelAttribute="hoaDon">
                             <div class="row" style="margin-top: 10px">
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <select id="selectKhachHang1" name="khachHang" class="form-control select2"
@@ -70,7 +70,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <select id="selectNhanVien1" name="nhanVien" class="form-control select2"
@@ -94,11 +94,28 @@
                                                 <option value="3">Hóa đơn chờ thanh toán</option>
                                                 <option value="2">Hóa đơn đã thanh toán</option>
                                                 <option value="8">Hóa đơn đã hủy</option>
+                                                <option value="9">Hóa đơn đã hủy và hoàn tiền</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <select id="selectTrangThai2" name="trangThaiGiaoHang"
+                                                    class="form-control select2"
+                                                    style="font-weight: bold; width: 100%">
+                                                <option selected disabled>Trạng thái giao hàng</option>
+                                                <option value="0">Chờ xử lý</option>
+                                                <option value="1">Chờ giao hàng</option>
+                                                <option value="2">Đang giao hàng</option>
+                                                <option value="3">Giao hàng hoàn tất</option>
+                                                <option value="8">Hóa đơn đã hủy</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <select name="loaiHoaDon" class="form-control select2"
@@ -195,7 +212,7 @@
                     </div>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table id="example" class="display" style="color: black; width: 3000px">
+                        <table id="example" class="display" style="color: black; width: 3500px">
                             <thead>
                             <tr>
                                 <th>Mã hóa đơn</th>
@@ -232,8 +249,10 @@
                                         <c:if test="${hoaDon.tinhTrang == 2}">Đã thanh toán</c:if>
                                         <c:if test="${hoaDon.tinhTrang == 3}">Chờ thanh toán</c:if>
                                         <c:if test="${hoaDon.tinhTrang == 8}">Đã hủy</c:if>
+                                        <c:if test="${hoaDon.tinhTrang == 9}">Đã hủy và hoàn tiền</c:if>
                                     </td>
                                     <td>
+                                        <c:if test="${hoaDon.tinhTrangGiaoHang == 0}">Chờ xử lý</c:if>
                                         <c:if test="${hoaDon.tinhTrangGiaoHang == 1}">Chờ giao hàng</c:if>
                                         <c:if test="${hoaDon.tinhTrangGiaoHang == 2}">Đang giao hàng</c:if>
                                         <c:if test="${hoaDon.tinhTrangGiaoHang == 3}">Giao hàng hoàn tất</c:if>
@@ -257,7 +276,7 @@
                                             <i class="ti-file btn-icon-prepend"></i>
                                             Detail</a>
                                         <c:if test="${hoaDon.loai== 1 && hoaDon.nhanVien== null && (hoaDon.tinhTrang == 2 || hoaDon.tinhTrang==3)}">
-                                            <a href="/don-hang/xac-nhan/${hoaDon.id}"
+                                            <a href="/hoa-don/xac-nhan/${hoaDon.id}"
                                                class="btn btn-info btn-icon-text"
                                                tabindex="-1"
                                                role="button"
@@ -270,7 +289,7 @@
                                                 Xác nhận đơn hàng</a>
                                         </c:if>
                                         <c:if test="${hoaDon.loai== 1 && hoaDon.tinhTrangGiaoHang == 1}">
-                                            <a href="/don-hang/xac-nhan-giao-hang/${hoaDon.id}"
+                                            <a href="/hoa-don/xac-nhan-giao-hang/${hoaDon.id}"
                                                class="btn btn-info btn-icon-text"
                                                tabindex="-1"
                                                role="button"
@@ -282,7 +301,7 @@
                                                 Giao hàng</a>
                                         </c:if>
                                         <c:if test="${hoaDon.loai== 1 && hoaDon.tinhTrangGiaoHang == 2 && (hoaDon.tinhTrang==2||hoaDon.tinhTrang==3)}">
-                                            <a href="/don-hang/xac-nhan-giao-hang-hoan-tat/${hoaDon.id}"
+                                            <a href="/hoa-don/xac-nhan-giao-hang-hoan-tat/${hoaDon.id}"
                                                class="btn btn-outline-success btn-icon-text"
                                                tabindex="-1"
                                                role="button"
@@ -291,15 +310,26 @@
                                                 Giao hàng hoàn tất
                                             </a>
                                         </c:if>
-                                        <c:if test="${hoaDon.loai== 1 && hoaDon.tinhTrangGiaoHang == 2 && hoaDon.hinhThucThanhToan == 0}">
+                                        <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 1||hoaDon.tinhTrangGiaoHang == 2) && hoaDon.hinhThucThanhToan == 0}">
 
-                                            <a href="/don-hang/xac-nhan-huy/${hoaDon.id}"
+                                            <a href="/hoa-don/xac-nhan-huy/${hoaDon.id}"
                                                class="btn btn-danger btn-icon-text"
                                                tabindex="-1"
                                                role="button"
                                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                                 <i class="fas fa-times-circle"></i>
-                                                Hủy đơn online</a>
+                                                Hủy đơn online thanh toán khi nhận hàng</a>
+
+                                        </c:if>
+                                        <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 1||hoaDon.tinhTrangGiaoHang == 2) && hoaDon.hinhThucThanhToan == 1}">
+
+                                            <a href="/hoa-don/xac-nhan-huy-hoan-tien/${hoaDon.id}"
+                                               class="btn btn-danger btn-icon-text"
+                                               tabindex="-1"
+                                               role="button"
+                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                                <i class="fas fa-times-circle"></i>
+                                                Hủy đơn online thanh toán VNPay</a>
 
                                         </c:if>
                                         <c:if test="${hoaDon.loai== 0 && (hoaDon.tinhTrang == 0|| hoaDon.tinhTrang == 1|| hoaDon.tinhTrang == 3)}">
@@ -354,6 +384,15 @@
         theme: 'bootstrap-5'
     });
     $('#selectDiaChi1').select2({
+        theme: 'bootstrap-5'
+    });
+    $('#selectTrangThai1').select2({
+        theme: 'bootstrap-5'
+    });
+    $('#selectTrangThai2').select2({
+        theme: 'bootstrap-5'
+    });
+    $('#selectLoai1').select2({
         theme: 'bootstrap-5'
     });
 

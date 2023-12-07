@@ -11,6 +11,10 @@
     <title>Focus - Bootstrap Admin Dashboard </title>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 </head>
 <body>
 <div>
@@ -37,19 +41,6 @@
                     <div>
                         <h4 class="card-title" style="float: left">Danh sách hóa đơn ttừ chối đổi trả
                         </h4>
-                        <%--                        <div class="basic-dropdown" style="float: right">--%>
-                        <%--                            <div class="dropdown">--%>
-
-                        <%--                                <div class="dropdown-menu">--%>
-                        <%--                                    <a href="/hoa-don/export-excel" class="dropdown-item" tabindex="-1">Theo ngày thanh--%>
-                        <%--                                        toán</a>--%>
-                        <%--                                    <a href="/hoa-don/export-excel-ngay-nhan" class="dropdown-item" tabindex="-1">Theo--%>
-                        <%--                                        ngày nhận</a>--%>
-                        <%--                                    <a href="/hoa-don/export-excel-ngay-ship" class="dropdown-item" tabindex="-1">Theo--%>
-                        <%--                                        ngày ship</a>--%>
-                        <%--                                </div>--%>
-                        <%--                            </div>--%>
-                        <%--                        </div>--%>
                     </div>
                     <br>
                     <br>
@@ -146,7 +137,7 @@
                     </div>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table id="example2" class="display" style="color: black; width: 1000px">
+                        <table id="example" class="display" style="color: black; width: 1500px">
                             <thead>
                             <tr>
                                 <th>Mã đổi trả</th>
@@ -175,13 +166,13 @@
                                         <c:if test="${doitra.tinhTrang == 1}">Đã từ chối</c:if>
                                     </td>
                                     <td>
-                                        <a href="/doi-tra/detail/${doitra.hoaDon.id}?doitraId=${doitra.id}&hoadonId=${doitra.hoaDon.id}"
-                                           class="btn btn-warning btn-icon-text"
+                                        <a href="/doi-tra/tai-doi-tra/${doitra.id}"
+                                           class="btn btn-success btn-icon-text"
                                            tabindex="-1"
                                            role="button"
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                            <i class="ti-file btn-icon-prepend"></i>
-                                            Detail
+                                            <i class="ti-reload btn-icon-prepend"></i>
+                                            Tái đổi trả
                                         </a>
 
                                     </td>
@@ -195,11 +186,46 @@
         </div>
     </div>
 </div>
-
+<c:if test="${thongBao != null}">
+    <div id="modalSuccess" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="swal2-icon swal2-success swal2-animate-success-icon"
+                                 style="display: block;">
+                                <div class="swal2-success-circular-line-left"
+                                     style="background: rgb(255, 255, 255);"></div>
+                                <span class="swal2-success-line-tip swal2-animate-success-line-tip"></span> <span
+                                    class="swal2-success-line-long swal2-animate-success-line-long"></span>
+                                <div class="swal2-success-ring"></div>
+                                <div class="swal2-success-fix" style="background: rgb(255, 255, 255);"></div>
+                                <div class="swal2-success-circular-line-right"
+                                     style="background: rgb(255, 255, 255);"></div>
+                            </div>
+                            <h4 style="color: #10ae05;margin: 10px;text-align: center">${thongBao}</h4>
+                        </div>
+                        <div class="col-12" style="text-align: center;margin-top: 20px">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                                Xác nhận
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</c:if>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#modalSuccess').modal('show');
+    });
+</script>
 <script>
 
     $('#selectKhachHang1').select2({

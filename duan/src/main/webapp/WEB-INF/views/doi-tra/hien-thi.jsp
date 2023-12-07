@@ -12,6 +12,10 @@
     <title>Focus - Bootstrap Admin Dashboard </title>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 </head>
 <style>
     #detailTable {
@@ -59,21 +63,8 @@
             <div class="card">
                 <div class="card-body">
                     <div>
-                        <h4 class="card-title" style="float: left">Danh sách hóa đơn chờ đổi trả
+                        <h4 class="card-title" style="float: left">Danh sách hóa đơn chờ đổi hàng
                         </h4>
-                        <%--                        <div class="basic-dropdown" style="float: right">--%>
-                        <%--                            <div class="dropdown">--%>
-
-                        <%--                                <div class="dropdown-menu">--%>
-                        <%--                                    <a href="/hoa-don/export-excel" class="dropdown-item" tabindex="-1">Theo ngày thanh--%>
-                        <%--                                        toán</a>--%>
-                        <%--                                    <a href="/hoa-don/export-excel-ngay-nhan" class="dropdown-item" tabindex="-1">Theo--%>
-                        <%--                                        ngày nhận</a>--%>
-                        <%--                                    <a href="/hoa-don/export-excel-ngay-ship" class="dropdown-item" tabindex="-1">Theo--%>
-                        <%--                                        ngày ship</a>--%>
-                        <%--                                </div>--%>
-                        <%--                            </div>--%>
-                        <%--                        </div>--%>
                     </div>
                     <br>
                     <br>
@@ -112,7 +103,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Từ ngày đổi trả:</label>
+                                        <label class="col-sm-4 col-form-label">Từ ngày đổi hàng:</label>
                                         <div class="col-sm-8">
                                             <input type="date" name="startDate" class="form-control"
                                                    placeholder="Từ ngày">
@@ -132,7 +123,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Đến ngày đổi trả:</label>
+                                        <label class="col-sm-4 col-form-label">Đến ngày đổi hàng:</label>
                                         <div class="col-sm-8">
                                             <input type="date" name="endDate" class="form-control"
                                                    placeholder="Từ ngày">
@@ -170,10 +161,10 @@
                     </div>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table id="example2" class="display" style="color: black; width: 1500px;text-align: center">
+                        <table id="example3" class="display" style="color: black; width: 1500px;text-align: center">
                             <thead>
                             <tr>
-                                <th>Mã đổi trả</th>
+                                <th>Mã phiếu đổi hàng</th>
                                 <th>Ngày tạo</th>
                                 <th>Mã hóa đơn</th>
                                 <th>Tên khách hàng</th>
@@ -214,7 +205,7 @@
                                            role="button"
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                             <i class="fas fa-times-circle"></i>
-                                            Hủy
+                                            Từ chối phiếu đổi hàng
                                         </a>
 
 
@@ -234,7 +225,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered"> <!-- Sử dụng lớp 'modal-lg' để làm cho modal lớn hơn -->
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabelAnh">Chọn hóa đơn đổi trả</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabelAnh">Chọn hóa đơn đổi hàng</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -297,12 +288,48 @@
         </div>
     </div>
 </div>
+<c:if test="${thongBao != null}">
+    <div id="modalSuccess" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="swal2-icon swal2-success swal2-animate-success-icon"
+                                 style="display: block;">
+                                <div class="swal2-success-circular-line-left"
+                                     style="background: rgb(255, 255, 255);"></div>
+                                <span class="swal2-success-line-tip swal2-animate-success-line-tip"></span> <span
+                                    class="swal2-success-line-long swal2-animate-success-line-long"></span>
+                                <div class="swal2-success-ring"></div>
+                                <div class="swal2-success-fix" style="background: rgb(255, 255, 255);"></div>
+                                <div class="swal2-success-circular-line-right"
+                                     style="background: rgb(255, 255, 255);"></div>
+                            </div>
+                            <h4 style="color: #10ae05;margin: 10px;text-align: center">${thongBao}</h4>
+                        </div>
+                        <div class="col-12" style="text-align: center;margin-top: 20px">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                                Xác nhận
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</c:if>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        $('#modalSuccess').modal('show');
+    });
+</script>
 <script>
 
     $('#selectKhachHang1').select2({
@@ -359,7 +386,7 @@
 </script>
 <script>
     function createDoiTra(hoadonId) {
-        // Gọi Controller để tạo đổi trả mới và truyền hoadonId
+        // Gọi Controller để tạo đổi hàng mới và truyền hoadonId
         $.ajax({
             url: "/doi-tra/add-doi-tra?hoadonId=" + hoadonId,
             type: "POST",
@@ -367,7 +394,7 @@
                 // Xử lý kết quả nếu cần
             },
             error: function (error) {
-                console.log("Lỗi khi tạo đổi trả mới: " + error);
+                console.log("Lỗi khi tạo đổi hàng mới: " + error);
             }
         });
     }
@@ -377,7 +404,7 @@
         var hoadonId = $(button).data("hoadonid");
         console.log("hoadonId: " + hoadonId);
 
-        // Tạo đổi trả mới và truyền hoadonId
+        // Tạo đổi hàng mới và truyền hoadonId
         createDoiTra(hoadonId);
 
         // Đóng modal cũ

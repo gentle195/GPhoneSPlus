@@ -148,7 +148,14 @@ public class BanHangTaiQuayController {
         }else{
             NhanVien nhanVien = nhanVienService.findById(SecurityUtil.getId().getId());
             HoaDon hd = new HoaDon();
-            hd.setMa("HD" + (String.valueOf(hoaDonService.findAll().size() + 1)));
+            String mhd = "";
+            Integer sl = diaChiService.findAll().size();
+            if (sl < 10) {
+                mhd = "MDC0" + sl;
+            } else {
+                mhd = "MDC" + sl;
+            }
+            hd.setMa(mhd);
             hd.setTinhTrang(0);
             hd.setLoai(0);
             hd.setNgayTao(Date.valueOf(LocalDate.now()));

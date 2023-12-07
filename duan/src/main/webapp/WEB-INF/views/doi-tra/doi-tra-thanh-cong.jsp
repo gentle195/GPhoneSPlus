@@ -16,14 +16,14 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a  class="nav-link" href="/doi-tra/hien-thi" role="tab"
+            <a class="nav-link" href="/doi-tra/hien-thi" role="tab"
             >Chờ xác nhận trả hàng</a>
         </li>
         <li class="nav-item">
-            <a  href="/doi-tra/hien-thi-tu-choi-tra" class="nav-link" role="tab" >Từ chối trả hàng </a>
+            <a href="/doi-tra/hien-thi-tu-choi-tra" class="nav-link" role="tab">Từ chối trả hàng </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" id="description-tab" data-toggle="tab"role="tab">Đổi trả thành công </a>
+            <a class="nav-link active" id="description-tab" data-toggle="tab" role="tab">Đổi trả thành công </a>
         </li>
     </ul>
 </div>
@@ -36,22 +36,9 @@
                     <div>
                         <h4 class="card-title" style="float: left">Danh sách hóa đơn đổi trả thành công
                         </h4>
-<%--                        <div class="basic-dropdown" style="float: right">--%>
-<%--                            <div class="dropdown">--%>
-<%--                                <div class="dropdown-menu">--%>
-<%--                                    <a href="/hoa-don/export-excel" class="dropdown-item" tabindex="-1">Theo ngày thanh--%>
-<%--                                        toán</a>--%>
-<%--                                    <a href="/hoa-don/export-excel-ngay-nhan" class="dropdown-item" tabindex="-1">Theo--%>
-<%--                                        ngày nhận</a>--%>
-<%--                                    <a href="/hoa-don/export-excel-ngay-ship" class="dropdown-item" tabindex="-1">Theo--%>
-<%--                                        ngày ship</a>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
                     </div>
                     <br>
                     <br>
-
                     <div class="loc" style="color:black;">
                         <form:form action="/doi-tra/loc2" method="post" modelAttribute="doiTra">
                             <div class="row" style="margin-top: 10px">
@@ -144,7 +131,7 @@
                     </div>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table id="example2" class="display" style="color: black; width: 1000px">
+                        <table id="example" class="display" style="color: black; width: 1500px">
                             <thead>
                             <tr>
                                 <th>Mã đổi trả</th>
@@ -181,7 +168,13 @@
                                             <i class="ti-file btn-icon-prepend"></i>
                                             Detail
                                         </a>
-
+                                        <a href="/doi-tra/xuat-pdf/${doitra.id}"
+                                           class="btn btn-outline-success btn-icon-text"
+                                           tabindex="-1"
+                                           role="button"
+                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                            <i class="ti-file btn-icon-prepend"></i>
+                                            Xuất PDF</a>
                                     </td>
                                 </tr>
                             </c:forEach>

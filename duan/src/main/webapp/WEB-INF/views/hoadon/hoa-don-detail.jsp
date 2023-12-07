@@ -320,22 +320,22 @@
                                 </form>
                             </form:form>
                         </div>
-
                         <br>
                         <h3 style="text-align: center;">Hóa đơn chi tiết</h3>
                         <br>
-                        <div class="search">
-                            <div class="input-group" style="width: 30%; float: right">
-                                <input type="text" class="form-control" placeholder="Bạn tìm gì..."
-                                       aria-label="Bạn tìm gì..." name="search" id="search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-sm btn-primary" type="button" id="button-search">Search
-                                    </button>
+
+                        <div class="table-responsive">
+                            <div class="search">
+                                <div class="input-group" style="width: 30%; float: right">
+                                    <input type="text" class="form-control" placeholder="Bạn tìm gì..."
+                                           aria-label="Bạn tìm gì..." name="search" id="search">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-sm btn-primary" type="button" id="button-search">Search
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="example" class="display">
+                            <table id="example" class="display" style="color: black">
                                 <thead>
                                 <tr>
                                     <th>Tên Sản Phẩm</th>
@@ -370,6 +370,54 @@
                                 </tbody>
                             </table>
                         </div>
+                        <br>
+                        <br>
+                        <c:if test="${listDoiTraChiTiet.size() != 0}">
+                            <h3 style="text-align: center;">Danh sách đổi trả</h3>
+                            <div class="table-responsive">
+                                <table class="display" id="example2" style="color: black;width: 2000px;text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th>Thông tin sản phẩm cần đổi</th>
+                                        <th>Đơn giá cũ</th>
+                                        <th>Thông tin sản phẩm đổi sang</th>
+                                        <th>Số IMEI đổi mới</th>
+                                        <th>Đơn giá mới</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="table-search1">
+                                    <c:forEach items="${listDoiTraChiTiet}" var="hdct">
+                                        <tr>
+                                            <td>
+                                                <img src="/uploads/${hdct.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}"
+                                                     width="40"
+                                                     height="40"> -
+                                                    ${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten} -
+                                                    ${hdct.hoaDonChiTiet.imei.chiTietSanPham.mauSac.ten} -
+                                                    ${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.hangSanPham.ten} -
+                                                    ${hdct.hoaDonChiTiet.imei.chiTietSanPham.ram.dungLuong} -
+                                                    ${hdct.hoaDonChiTiet.imei.chiTietSanPham.rom.dungLuong} -
+                                                    ${hdct.hoaDonChiTiet.imei.soImei}
+                                            </td>
+                                            <td>${hdct.hoaDonChiTiet.donGia}</td>
+                                            <td align="center">
+                                                <img src="/uploads/${hdct.imei.chiTietSanPham.urlAnh}" width="40"
+                                                     height="40"> -
+                                                    ${hdct.imei.chiTietSanPham.sanPham.ten}
+                                                - ${hdct.imei.chiTietSanPham.mauSac.ten} -
+                                                    ${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten} -
+                                                    ${hdct.imei.chiTietSanPham.ram.dungLuong} -
+                                                    ${hdct.imei.chiTietSanPham.rom.dungLuong}
+                                            </td>
+                                            <td>${hdct.imei.soImei}</td>
+                                            <td>${hdct.donGia}</td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br>
+                        </c:if>
                     </div>
                 </div>
             </div>

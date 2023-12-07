@@ -183,126 +183,134 @@
                 <div class="card">
                     <div>
                         <div class="card-body">
-                            <br>
-                            <h3 style="text-align: center;">Sản phẩm cần đổi mới</h3>
-                            <br>
-                            <div class="table-responsive custom-table">
-                                <table class="display custom-table" style="color: black">
-                                    <thead>
-                                    <tr>
-                                        <th style="display: none"></th>
-                                        <th>Tên Sản Phẩm</th>
-                                        <th>Ảnh</th>
-                                        <th>Hãng</th>
-                                        <th>Số IMEI</th>
-                                        <th>Đơn Giá</th>
-                                        <th colspan="2">Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="table-search11">
-                                    <c:forEach items="${dtct}" var="hdct">
+                            <c:if test="${dtct.size()!=0}">
+                                <h3 style="text-align: center;">Sản phẩm cần đổi mới</h3>
+                                <br>
+                                <div class="table-responsive custom-table">
+                                    <table class="display custom-table" style="color: black">
+                                        <thead>
                                         <tr>
-                                            <td style="display: none">${hdct.hoaDonChiTiet.donGia}</td>
-                                            <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten}</td>
-                                            <td align="center">
-                                                <img src="/uploads/${hdct.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}"
-                                                     width="40" height="40">
-                                            </td>
-                                            <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
-                                            <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
-                                            <td>${hdct.hoaDonChiTiet.donGia}</td>
-                                            <td>
-                                                <c:choose>
-                                                    <c:when test="${hdct.hinhThucDoiTra ==0 }">
-                                                        <button class='btn btn-primary chonSanPhamDoiTraButton'
-                                                                data-idhdctmoi="${hdct.hoaDonChiTiet.donGia}"
-                                                                data-idhdctmoi1="${hdct.hoaDonChiTiet.id}"
-                                                                onclick='showChonSanPhamModalWithDonGia(${hdct.hoaDonChiTiet.donGia})'>
-                                                            Chọn
-                                                        </button>
-                                                        <button class='btn btn-primary xoaSanPhamDoiTraButton'
-                                                                data-idhdctmoixoa="${hdct.hoaDonChiTiet.id}"
-                                                                onclick="xoaSanPham('${hdct.hoaDonChiTiet.id}')">Xóa
-                                                        </button>
-                                                    </c:when>
-                                                    <c:when test="${hdct.hinhThucDoiTra == 1}">
-                                                        <button class='btn btn-primary xoaSanPhamDoiTraButton'
-                                                                data-idhdctmoixoa="${hdct.hoaDonChiTiet.id}"
-                                                                onclick="xoaSanPham('${hdct.hoaDonChiTiet.id}')">Xóa
-                                                        </button>
-                                                    </c:when>
-                                                </c:choose>
-                                            </td>
-
+                                            <th style="display: none"></th>
+                                            <th>Tên Sản Phẩm</th>
+                                            <th>Ảnh</th>
+                                            <th>Hãng</th>
+                                            <th>Số IMEI</th>
+                                            <th>Đơn Giá</th>
+                                            <th colspan="2">Action</th>
                                         </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody id="table-search11">
+                                        <c:forEach items="${dtct}" var="hdct">
+                                            <tr>
+                                                <td style="display: none">${hdct.hoaDonChiTiet.donGia}</td>
+                                                <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten}</td>
+                                                <td align="center">
+                                                    <img src="/uploads/${hdct.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}"
+                                                         width="40" height="40">
+                                                </td>
+                                                <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
+                                                <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
+                                                <td>${hdct.hoaDonChiTiet.donGia}</td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${hdct.hinhThucDoiTra ==0 }">
+                                                            <button class='btn btn-primary chonSanPhamDoiTraButton'
+                                                                    data-idhdctmoi="${hdct.hoaDonChiTiet.donGia}"
+                                                                    data-idhdctmoi1="${hdct.hoaDonChiTiet.id}"
+                                                                    onclick='showChonSanPhamModalWithDonGia(${hdct.hoaDonChiTiet.donGia})'>
+                                                                Chọn
+                                                            </button>
+                                                            <button class='btn btn-primary xoaSanPhamDoiTraButton'
+                                                                    data-idhdctmoixoa="${hdct.hoaDonChiTiet.id}"
+                                                                    onclick="xoaSanPham('${hdct.hoaDonChiTiet.id}')">Xóa
+                                                            </button>
+                                                        </c:when>
+                                                        <c:when test="${hdct.hinhThucDoiTra == 1}">
+                                                            <button class='btn btn-primary xoaSanPhamDoiTraButton'
+                                                                    data-idhdctmoixoa="${hdct.hoaDonChiTiet.id}"
+                                                                    onclick="xoaSanPham('${hdct.hoaDonChiTiet.id}')">Xóa
+                                                            </button>
+                                                        </c:when>
+                                                    </c:choose>
+                                                </td>
 
-                            </div>
-                            <br>
-                            <h3 ${not empty dtctlist ? '' : 'style="display: none;"'} style="text-align: center;">Sản
-                                phẩm đổi mới</h3>
-                            <br>
-                            <div class="table-responsive custom-table">
-                                <table class="display custom-table" ${not empty dtctlist ? '' : 'style="display: none;"'}
-                                       style="color: black">
-                                    <thead>
-                                    <tr>
-                                        <th>Sản phẩm cần đổi</th>
-                                        <th>IMEI cần đổi</th>
-                                        <th>Đơn giá cũ</th>
-                                        <th>Sản phẩm đổi sang</th>
-                                        <th>Số IMEI đổi mới</th>
-                                        <th>Đơn giá mới</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="table-search1">
-                                    <c:forEach items="${dtctlist}" var="hdct">
-                                        <tr>
-                                            <td>
-                                                <img src="/uploads/${hdct.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}" width="40"
-                                                     height="40"> -
-                                                    ${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten}
-                                                    - ${hdct.hoaDonChiTiet.imei.chiTietSanPham.mauSac.ten} -
-                                                    ${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.hangSanPham.ten} -
-                                                    ${hdct.hoaDonChiTiet.imei.chiTietSanPham.ram.dungLuong} -
-                                                    ${hdct.hoaDonChiTiet.imei.chiTietSanPham.rom.dungLuong}</td>
-                                            <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
-                                            <td>${hdct.hoaDonChiTiet.donGia}</td>
-                                            <td align="center">
-                                                <img src="/uploads/${hdct.imei.chiTietSanPham.urlAnh}" width="40"
-                                                     height="40"> -
-                                                    ${hdct.imei.chiTietSanPham.sanPham.ten}
-                                                - ${hdct.imei.chiTietSanPham.mauSac.ten} -
-                                                    ${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten} -
-                                                    ${hdct.imei.chiTietSanPham.ram.dungLuong} -
-                                                    ${hdct.imei.chiTietSanPham.rom.dungLuong}
-                                            </td>
-                                            <td>${hdct.imei.soImei}</td>
-                                            <td>${hdct.donGia}</td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                                <div class="mt-4">
-                                    <form>
-                                        <!-- Thêm các trường và nút submit cho form tiền đổi trả -->
-                                        <div class="form-group">
-                                            <label for="tienDoiTra" style="color: black">Tổng tiền chêch lệch:</label>
-                                            <input type="text" value="${tongTien}" class="form-control" id="tienDoiTra"
-                                                   name="tienDoiTra" readonly>
-                                        </div>
-                                        <!-- Thêm các trường và nút submit cho form tiền đổi trả -->
-                                    </form>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div style="text-align: center">
-                                    <div class='btn btn-primary' id='xacNhanButton'
-                                         onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                        Xác nhận
+                                <br>
+                            </c:if>
+                            <c:if test="${dtctlist.size()!=0}">
+                                <h3 ${not empty dtctlist ? '' : 'style="display: none;"'} style="text-align: center;">
+                                    Sản
+                                    phẩm đổi mới</h3>
+                                <br>
+                                <div class="table-responsive custom-table">
+                                    <table class="display custom-table" ${not empty dtctlist ? '' : 'style="display: none;"'}
+                                           style="color: black">
+                                        <thead>
+                                        <tr>
+                                            <th>Sản phẩm cần đổi</th>
+                                            <th>IMEI cần đổi</th>
+                                            <th>Đơn giá cũ</th>
+                                            <th>Sản phẩm đổi sang</th>
+                                            <th>Số IMEI đổi mới</th>
+                                            <th>Đơn giá mới</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="table-search1">
+                                        <c:forEach items="${dtctlist}" var="hdct">
+                                            <tr>
+                                                <td>
+                                                    <img src="/uploads/${hdct.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}"
+                                                         width="40"
+                                                         height="40"> -
+                                                        ${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten}
+                                                    - ${hdct.hoaDonChiTiet.imei.chiTietSanPham.mauSac.ten} -
+                                                        ${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.hangSanPham.ten}
+                                                    -
+                                                        ${hdct.hoaDonChiTiet.imei.chiTietSanPham.ram.dungLuong} -
+                                                        ${hdct.hoaDonChiTiet.imei.chiTietSanPham.rom.dungLuong}</td>
+                                                <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
+                                                <td>${hdct.hoaDonChiTiet.donGia}</td>
+                                                <td align="center">
+                                                    <img src="/uploads/${hdct.imei.chiTietSanPham.urlAnh}" width="40"
+                                                         height="40"> -
+                                                        ${hdct.imei.chiTietSanPham.sanPham.ten}
+                                                    - ${hdct.imei.chiTietSanPham.mauSac.ten} -
+                                                        ${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten} -
+                                                        ${hdct.imei.chiTietSanPham.ram.dungLuong} -
+                                                        ${hdct.imei.chiTietSanPham.rom.dungLuong}
+                                                </td>
+                                                <td>${hdct.imei.soImei}</td>
+                                                <td>${hdct.donGia}</td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                    <div class="mt-4">
+                                        <form>
+                                            <!-- Thêm các trường và nút submit cho form tiền đổi trả -->
+                                            <div class="form-group">
+                                                <label for="tienDoiTra" style="color: black">Tổng tiền chêch
+                                                    lệch:</label>
+                                                <input type="text" value="${tongTien}" class="form-control"
+                                                       id="tienDoiTra"
+                                                       name="tienDoiTra" readonly>
+                                            </div>
+                                            <!-- Thêm các trường và nút submit cho form tiền đổi trả -->
+                                        </form>
+                                    </div>
+                                    <div style="text-align: center">
+                                        <button class='btn btn-primary' id='xacNhanButton'
+                                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                            Xác nhận
+                                        </button>
                                     </div>
                                 </div>
-                            </div>
+                            </c:if>
+
                         </div>
                     </div>
                 </div>

@@ -40,5 +40,8 @@ public interface DoiTraChiTietRepository extends JpaRepository<DoiTraChiTiet, UU
     @Query("SELECT CASE WHEN COUNT(dtct) > 0 THEN true ELSE false END FROM DoiTraChiTiet dtct WHERE dtct.doiTra = :doiTra AND dtct.hoaDonChiTiet = :hoaDonChiTiet")
     public boolean existsByDoiTraAndHoaDonChiTiet(@Param("doiTra") DoiTra doiTra, @Param("hoaDonChiTiet") HoaDonChiTiet hoaDonChiTiet);
 
+    @Query("select dtct from DoiTraChiTiet dtct left join DoiTra dt on dt.id=dtct.doiTra.id " +
+            "left join HoaDon hd on dt.hoaDon.id=hd.id where hd.id=:id")
+    List<DoiTraChiTiet> doiTraChiTiet(UUID id);
 
 }

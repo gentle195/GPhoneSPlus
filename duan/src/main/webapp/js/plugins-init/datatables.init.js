@@ -60,6 +60,25 @@ let dataSet = [
     table.rows().every(function () {
         this.nodes().to$().removeClass('selected')
     });
+    var table3 = $('#example3').DataTable({
+        createdRow: function (row, data, index) {
+            $(row).addClass('selected')
+        }
+    });
+
+    table3.on('click', 'tbody tr', function () {
+        var $row = table3.row(this).nodes().to$();
+        var hasClass = $row.hasClass('selected');
+        if (hasClass) {
+            $row.removeClass('selected')
+        } else {
+            $row.addClass('selected')
+        }
+    })
+
+    table3.rows().every(function () {
+        this.nodes().to$().removeClass('selected')
+    });
 
 
     //example 2
