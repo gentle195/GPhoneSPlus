@@ -9,7 +9,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+<%--thong bao--%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     <%--    table--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="utf-8">
@@ -95,7 +101,7 @@
             text-decoration: none;
             text-align: center;
             color: #fff;
-            background-color: #007bff;
+            background-color: #fff;
             margin-bottom: 10px;
         }
 
@@ -183,21 +189,26 @@
             margin-top: 500px;
         }
 
-        /*.modal-dialog {*/
-        /*    */
-        /*    top: 0;*/
-        /*    left: 0;*/
-        /*    width: 100vw;*/
-        /*    height: 100vh;*/
-        /*    margin: 0;*/
-        /*    padding: 0;*/
-        /*}*/
+        .modal-dialog {
+
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
 
         .modal-content {
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
-
+        a:not([href]):not([tabindex]) {
+            color: white;
+        }
+        a:not([href]):not([tabindex]):hover {
+            color: white;
+        }
     </style>
 
 
@@ -247,7 +258,7 @@
 
                                     </div>
                                     <div>
-                                        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}"
+                                        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/full/xem"
                                            class="btn btn-primary">Đơn hàng</a>
                                     </div>
                                     <div>
@@ -308,12 +319,12 @@
                         <!-- Cart -->
 
 
-                        <div class="dropdown" id="giohangtrangchu">
+                        <div class="dropdown" id="giohangtrangchu" >
                             <c:if test="${idkhachhang!='1'}">
                                 <c:if test="${listghct.size()>0}">
                                     <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"
-                                       style="color: white">
-                                        <i class="fa fa-shopping-cart"></i>
+                                       >
+                                        <i  class="fa fa-shopping-cart"></i>
                                         <span>Giỏ hàng</span>
                                         <div class="qty">${banhangonline.ListghctTheoidgh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId()).size()}</div>
                                     </a>
@@ -330,7 +341,8 @@
 
                                                         <br>
                                                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
-                                                        <label style="tbackground-color: white;border: 1px solid white">${ht.donGiaKhiGiam}đ</label>
+                                                        <label style="font-weight: bold">Đơn
+                                                            giá:</label>${ht.basoOchammotlamGHDGKG()}đ
                                                     </div>
                                                     <div style="width: 18%;">
                                                         <input type="checkbox" name="checkidghTT" value="${ht.id}"
@@ -348,9 +360,9 @@
                                         <div class="cart-summary">
                                             <small> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongsanphamchon()}
                                                 Sản phẩm được chọn</small>
-                                            <h5>
-                                                Tổng:${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
-                                                đ</h5>
+                                            <br>
+                                            <label>Tổng:</label><label
+                                                id="tongtienghtt">${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}</label><label>đ</label>
                                         </div>
                                         <div class="cart-btns">
                                             <a href="/ban-hang-online/xem-gio-hang">Xem giỏ hàng</a>
@@ -435,7 +447,7 @@
                 <li><a href="#">ƯU ĐÃI HẤP DẪN</a></li>
                 <li><a href="#">LOẠI</a></li>
                 <li><a href="/ban-hang-online/dien-thoai-thong-minh">ĐIỆN THOẠI THÔNG MINH</a></li>
-                <li><a style="color: red" href="/ban-hang-online/hoa-don-online/${id}">CÁC ĐƠN HÀNG</a></li>
+<%--                <li><a style="color: red" href="/ban-hang-online/hoa-don-online/${id}">CÁC ĐƠN HÀNG</a></li>--%>
 
             </ul>
             <!-- /NAV -->
@@ -446,36 +458,44 @@
 </nav>
 <!-- /NAVIGATION -->
 <br>
-<div class="tabtab ">
-    <article style="margin-left: 5%;max-width: 1050px" class="shadow p-3 mb-5 bg-body-tertiary rounded">
-        <a href="/ban-hang-online/hoa-don-online/${id}" style="color: red">Tất cả</a>
-        <a href="/ban-hang-online-0/hoa-don-online/${id}">Chờ xử lý(TT giao hàng)</a>
-        <a href="/ban-hang-online-1/hoa-don-online/${id}">Đã xác nhận</a>
-        <a href="/ban-hang-online-3/hoa-don-online/${id}">Chờ thanh toán</a>
-        <a href="/ban-hang-online-2/hoa-don-online/${id}">Đã thanh toán</a>
-        <a href="/ban-hang-online-dang-giao/hoa-don-online/${id}">Đang giao hàng</a>
-        <a href="/ban-hang-online-thanh-cong/hoa-don-online/${id}">Hoàn thành</a>
-        <a href="/ban-hang-online-8/hoa-don-online/${id}">Đã hủy</a>
+
+    <article style="margin-left: 15%;width: 70%" class="shadow p-3 mb-5 bg-body-tertiary rounded">
+
+        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/full/xem"
+                <c:if test="${mau=='full'}">style="color: red" </c:if>
+        >Tất cả</a>
+
+        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/0/xem"
+           <c:if test="${mau=='0'}">style="color: red" </c:if>
+        >Chờ xử lý(TT giao hàng)</a>
+        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/1/xem"
+           <c:if test="${mau=='1'}">style="color: red" </c:if>
+        >Đã xác nhận</a>
+        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/3/xem"
+           <c:if test="${mau=='3'}">style="color: red" </c:if>
+        >Chờ thanh toán</a>
+        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/2/xem"
+           <c:if test="${mau=='2'}">style="color: red" </c:if>
+        >Đã thanh toán</a>
+        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/danggiao/xem"
+           <c:if test="${mau=='danggiao'}">style="color: red" </c:if>
+        >Đang giao hàng</a>
+        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/thanhcong/xem"
+           <c:if test="${mau=='thanhcong'}">style="color: red" </c:if>
+        >Hoàn thành</a>
+        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/8/xem"
+           <c:if test="${mau=='8'}">style="color: red" </c:if>
+        >Đã hủy</a>
     </article>
-</div>
+
 <main style="width: 95%;margin-left: 2.5%; " id="content" class="shadow p-3 mb-5 bg-body-tertiary rounded">
-    <c:if test="${listhdkh.size()>0}">
+<%--    <c:if test="${listhdkh.size()>0}">--%>
         <div id="tab00" class="tab-content" style="display: block; color: red">
 
-            <form action="/ban-hang-online/hoa-don-online/${id}/search" method="post">
-                <div class="input-group" style="width: 20%; float: right">
-                    <input type="text" class="form-control" placeholder="Nhập mã, tên sp, ngày đặt, sđt..."
-                           aria-label="Bạn tìm gì..." name="search">
-                </div>
-                <div class="input-group-append" style="width: 4%; float: right">
-                    <button style="height: 0.9cm" class="btn btn-sm btn-primary" type="submit">Search</button>
-                </div>
-            </form>
-            <br>
-            <br>
-            <br>
+
+
             <div>
-                <table class="table table-bordered" style="width: 100%;text-align: center">
+                <table id="tentable" class="table table-bordered" style="width: 100%;text-align: center">
                     <thead>
                     <tr>
                         <th>Mã đơn hàng</th>
@@ -487,7 +507,7 @@
                         <th>HTTT</th>
                         <th>Giao hàng</th>
                         <th>Đổi trả</th>
-                        <th colspan="4">Chức năng</th>
+                        <th >Chức năng</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -568,7 +588,7 @@
                                         tiết
                                         </a>
                                     <a class="btn btn-danger"
-                                       href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${id}">Hủy</a>
+                                       href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy</a>
 
                                 </c:if>
                                 <c:if test="${ht.tinhTrang==1}">
@@ -576,7 +596,7 @@
                                         tiết
                                         </a>
                                     <a class="btn btn-danger"
-                                       href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}">Hủy</a>
+                                       href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy</a>
 
                                 </c:if>
                                 <c:if test="${ht.tinhTrang==2}">
@@ -591,7 +611,7 @@
                                         <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
                                             tiết </a>
                                         <a class="btn btn-danger"
-                                           href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}">Hủy</a>
+                                           href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy</a>
 
                                     </c:if>
                                     <c:if test="${ht.tinhTrangGiaoHang!=0 && ht.tinhTrangGiaoHang!=1 }">
@@ -615,25 +635,10 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                <div align="center">
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <ul class="pagination justify-content-center pagination-lg">
-                            <li class="page-item"><a class="page-link"
-                                                     href="/ban-hang-online/hoa-don-online/${idkhachhang}?pageNum=0"><</a></li>
-                            <c:forEach begin="1" end="${total}" varStatus="status">
-                                <li class="page-item">
-                                    <a href="${pageContext.request.contextPath}/ban-hang-online/hoa-don-online/${idkhachhang}?pageNum=${status.index -1}"
-                                       class="page-link">${status.index}</a>
-                                </li>
-                            </c:forEach>
-                            <li class="page-item"><a class="page-link"
-                                                     href="/ban-hang-online/hoa-don-online/${idkhachhang}?pageNum=${total-1}">></a></li>
-                        </ul>
-                    </div>
-                </div>
+
             </div>
         </div>
-    </c:if>
+
 
 </main>
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modal-1-label" aria-hidden="true">
@@ -781,14 +786,13 @@
 </footer>
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>--%>
-<script src="../../../vendor/datatables/js/jquery.dataTables.min.js"></script>
-<script src="../../../js/plugins-init/datatables.init.js"></script>
+<%--<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>--%>
+<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>--%>
+<%--<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>--%>
+<%--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>--%>
+<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>--%>
+
+
 <script>
     function loadScripts(callback) {
         const scriptsToLoad = [
@@ -958,12 +962,26 @@
         window.showChonSanPhamModal = showChonSanPhamModal;
     });
 </script>
-<script src="/jsbanhang/jquery.min.js"></script>
+
+
 <script src="/jsbanhang/bootstrap.min.js"></script>
-<script src="/jsbanhang/slick.min.js"></script>
-<script src="/jsbanhang/nouislider.min.js"></script>
-<script src="/jsbanhang/jquery.zoom.min.js"></script>
-<script src="/jsbanhang/main.js"></script>
+
+<!-- Include DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include DataTables JS -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#tentable').DataTable({
+            "pagingType": "full_numbers",
+            "searching": true
+        });
+    });
+</script>
 <script>
 
     function chonhetgiohangtongTRANGCHU(idgh) {
@@ -1018,27 +1036,8 @@
             .then(data => {
                 const content = document.getElementById('giohangtrangchu');
                 content.innerHTML = data;
-
-                loadScripts();
-
-
-            })
-            .catch(error => {
-                console.error('Error loading interface:', error);
-            });
-
-
-    }
-
-
-    function loadgiaodienhoadonkhachhang(interfaceUrl) {
-        fetch(interfaceUrl)
-            .then(response => response.text())
-            .then(data => {
-                const content = document.getElementById('content');
-                content.innerHTML = data;
-
-                loadScripts();
+                formatAndDisplayValue("tongtienghtt");
+                // loadScripts();
 
 
             })
@@ -1050,39 +1049,11 @@
     }
 
 
-    function loadScripts() {
-        const scriptsToLoad = [
-            'https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js',
-            'https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js',
-            'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js',
-            'https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js',
 
 
-        ];
 
-        const head = document.head || document.getElementsByTagName('head')[0];
 
-        function loadScript(index) {
-            if (index < scriptsToLoad.length) {
-                const script = document.createElement('script');
-                script.src = scriptsToLoad[index];
-                script.onload = function () {
-                    loadScript(index + 1);
-                };
-                head.appendChild(script);
 
-            }
-        }
-
-        // Bắt đầu quá trình tải script
-        loadScript(0);
-    }
-
-    function loadSelect2diachi() {
-        $('#diachids1').select2({
-            theme: 'bootstrap-5'
-        });
-    }
 
 
     loadSelect2diachi();
@@ -1091,5 +1062,58 @@
     function anbt() {
         document.getElementById('taikhoancuatoi').click();
     }
+    function formatAndDisplayValue(elementId) {
+        // Lấy giá trị từ thẻ div
+        var originalValue = document.getElementById(elementId).textContent;
+
+        // Chuyển đổi giá trị sang dạng có dấu chấm phân cách hàng nghìn
+        var formattedValue = Number(originalValue).toLocaleString('en-US');
+
+        // Gán giá trị đã định dạng lại vào thẻ div
+        document.getElementById(elementId).textContent = formattedValue;
+    }
+
+    formatAndDisplayValue("tongtienghtt");
+</script>
+
+
+
+
+
+<button data-bs-toggle="modal" data-bs-target="#modalSuccess"  id="thongbaohuyhoadon" style="display: block">
+    Click
+</button>
+<div id="modalSuccess" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="width: 10cm;height: 7cm;margin-left: 17cm;margin-top: 7cm">
+            <div class="modal-body" >
+                <div class="row">
+                    <div class="col-12">
+                        <div class="swal2-icon swal2-success swal2-animate-success-icon"
+                             style="display: block;">
+                            <div class="swal2-success-circular-line-left"
+                                 style="background: rgb(255, 255, 255);"></div>
+                            <span class="swal2-success-line-tip swal2-animate-success-line-tip"></span> <span
+                                class="swal2-success-line-long swal2-animate-success-line-long"></span>
+                            <div class="swal2-success-ring"></div>
+                            <div class="swal2-success-fix" style="background: rgb(255, 255, 255);"></div>
+                            <div class="swal2-success-circular-line-right"
+                                 style="background: rgb(255, 255, 255);"></div>
+                        </div>
+                        <h4 style="color: #10ae05;margin: 10px;text-align: center">${ndtb}</h4>
+                    </div>
+                    <div class="col-12" style="align-items: center;margin-top: 20px">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    <c:if test="${hientbhuy==0}">
+    document.getElementById("thongbaohuyhoadon").click();
+    </c:if>
+
 </script>
 </html>

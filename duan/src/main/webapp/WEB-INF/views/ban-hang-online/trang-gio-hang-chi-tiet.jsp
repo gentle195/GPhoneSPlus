@@ -193,7 +193,7 @@
 
                                     </div>
                                     <div>
-                                        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}"
+                                        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/full/xem"
                                            class="btn btn-primary">Đơn hàng</a>
                                     </div>
                                     <div>

@@ -65,15 +65,10 @@ public interface BanHangOnlineService {
                                              BigDecimal tienMax);
 
     Page<HoaDon> cacDonHang(@Param("idkh") UUID idkh, Pageable pageable);
-    Page<HoaDon> donHang8(@Param("idkh") UUID idkh, Pageable pageable);
-    Page<HoaDon> donHang0(@Param("idkh") UUID idkh, Pageable pageable);
-    Page<HoaDon> donHang1(@Param("idkh") UUID idkh, Pageable pageable);
-    Page<HoaDon> donHang2(@Param("idkh") UUID idkh, Pageable pageable);
-    Page<HoaDon> donHang3(@Param("idkh") UUID idkh, Pageable pageable);
 
-    Page<HoaDon> donHangDangChoXuLy(@Param("idkh") UUID idkh, Pageable pageable);
-    Page<HoaDon> donHangDangGiao(@Param("idkh") UUID idkh, Pageable pageable);
-    Page<HoaDon> donHangGiaoThanhCong(@Param("idkh") UUID idkh, Pageable pageable);
+
+
+
 
     List<HoaDon> search(UUID id, String ten);
     List<HoaDon> search0(UUID id, String ten);

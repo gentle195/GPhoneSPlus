@@ -201,41 +201,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     public Page<HoaDon> cacDonHang(UUID idkh, Pageable pageable) {
         return banHangOnLinerepository.cacDonHang(idkh,pageable);
     }
-    @Override
-    public Page<HoaDon> donHang8(UUID idkh, Pageable pageable) {
-        return banHangOnLinerepository.donHang8(idkh,pageable);
-    }
-    @Override
-    public Page<HoaDon> donHang0(UUID idkh, Pageable pageable) {
-        return banHangOnLinerepository.donHang0(idkh,pageable);
-    }
-    @Override
-    public Page<HoaDon> donHang1(UUID idkh, Pageable pageable) {
-        return banHangOnLinerepository.donHang1(idkh,pageable);
-    }
-    @Override
-    public Page<HoaDon> donHang2(UUID idkh, Pageable pageable) {
-        return banHangOnLinerepository.donHang2(idkh,pageable);
-    }
-    @Override
-    public Page<HoaDon> donHang3(UUID idkh, Pageable pageable) {
-        return banHangOnLinerepository.donHang3(idkh,pageable);
-    }
 
-    @Override
-    public Page<HoaDon> donHangDangChoXuLy(UUID idkh, Pageable pageable) {
-        return banHangOnLinerepository.donHangDangChoXuLy(idkh,pageable);
-    }
-
-    @Override
-    public Page<HoaDon> donHangDangGiao(UUID idkh, Pageable pageable) {
-        return banHangOnLinerepository.donHangDangGiao(idkh, pageable);
-    }
-
-    @Override
-    public Page<HoaDon> donHangGiaoThanhCong(UUID idkh, Pageable pageable) {
-        return banHangOnLinerepository.donHangThanhCong(idkh, pageable);
-    }
 
     @Override
     public List<HoaDon> search(UUID id, String ten) {
