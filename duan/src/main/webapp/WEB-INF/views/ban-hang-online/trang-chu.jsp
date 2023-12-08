@@ -518,15 +518,19 @@
                                                 <div class="product-img">
                                                     <img src="/uploads/${ht.urlAnh}" style="width: 100%;height: 6cm"
                                                          alt="">
-                                                    <div class="product-label">
-                                                        <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
-                                                        <span class="new">Giảm giá</span>
-                                                    </div>
+                                                    <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
+                                                        <div class="product-label">
+                                                            <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
+                                                            <span class="new">Giảm giá</span>
+                                                        </div>
+                                                    </c:if>
+
                                                 </div>
                                                 <div class="product-body"
                                                      style="text-align: left;word-wrap: break-word;">
                                                     <p class="product-category">Điện thoại</p>
                                                     <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
+                                                    <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
                                                     <h4 class="product-price">
                                                             <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
                                                             ${banhangonline.sotienkhidagiam(ht.id)}
@@ -535,6 +539,14 @@
                                                              style="float: right">${ht.basoOchammotlam()}<span>₫</span>
                                                         </del>
                                                     </h4>
+                                                    </c:if>
+                                                    <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
+                                                        <h4 class="product-price">
+                                                                <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+                                                                        ${ht.basoOchammotlam()}
+                                                            <span> ₫</span>
+                                                        </h4>
+                                                    </c:if>
                                                     <div class="product-rating"></div>
                                                     <div class="product-btns" align="center">
                                                         <button class="add-to-compare"><a href="/homes"><i
