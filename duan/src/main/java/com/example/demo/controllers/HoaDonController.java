@@ -452,6 +452,7 @@ public class HoaDonController {
             } else if (check < 0) {
                 hoaDon.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
                 hoaDon.setKhachHang(hoaDonnn.getKhachHang());
+                hoaDon.setMaGiaoDich(hoaDonnn.getMaGiaoDich());
                 hoaDon.setLoai(hoaDonnn.getLoai());
                 hoaDon.setHinhThucThanhToan(hoaDonnn.getHinhThucThanhToan());
                 hoaDon.setTinhTrangGiaoHang(1);
@@ -477,6 +478,7 @@ public class HoaDonController {
                     }
                 } else if (hoaDonnn.getTinhTrang() == 3) {
                     hoaDon.setTinhTrang(hoaDonnn.getTinhTrang());
+                    hoaDon.setMaGiaoDich(hoaDonnn.getMaGiaoDich());
                     LocalDate ngayCapNhat = LocalDate.now();
                     List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDon.getId());
                     if (!list.isEmpty()) {
@@ -498,6 +500,7 @@ public class HoaDonController {
                     hoaDon.setId(id);
                     hoaDon.setNgayCapNhat(Date.valueOf(LocalDate.now()));
                     hoaDon.setNgayTao(hoaDonnn.getNgayTao());
+                    hoaDon.setMaGiaoDich(hoaDonnn.getMaGiaoDich());
                     hoaDonService.update(id, hoaDon);
                 }
                 hoaDonnn = hoaDon;
@@ -509,6 +512,7 @@ public class HoaDonController {
                 hoaDon.setHinhThucThanhToan(hoaDonnn.getHinhThucThanhToan());
                 hoaDon.setTinhTrangGiaoHang(2);
                 hoaDon.setNgayTao(hoaDonnn.getNgayTao());
+                hoaDon.setMaGiaoDich(hoaDonnn.getMaGiaoDich());
                 if (hoaDonnn.getTinhTrang() == 2) {
                     hoaDon.setTinhTrang(hoaDonnn.getTinhTrang());
                     LocalDate ngayCapNhat = LocalDate.now();
@@ -628,18 +632,15 @@ public class HoaDonController {
                 hoaDon.setNgayShip(Date.valueOf(LocalDate.now()));
                 hoaDon.setNgayNhan(Date.valueOf(LocalDate.now()));
                 hoaDon.setPhiShip(BigDecimal.ZERO);
+                hoaDon.setMaGiaoDich(hoaDonnn.getMaGiaoDich());
                 hoaDonService.update(id, hoaDon);
             }
-//            model.addAttribute("listKhachHang", khachHangService.khachHangThanhToan(hoaDonnn.getId()));
-//            model.addAttribute("listDiaChi", diaChiService.diaChiThanhToan(khachHangService.findById(hoaDonnn.getId()).getId()));
-//            model.addAttribute("listHoaDonChiTiet", hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId()));
-//            model.addAttribute("contentPage", "../hoadon/hoa-don-view-update.jsp");
-//            return "home/layout";
             hoaDonnn = hoaDon;
             return "redirect:/hoa-don/hien-thi";
         }
 
     }
+
 
     @ResponseBody
     @GetMapping("/search-hdct")
@@ -836,10 +837,10 @@ public class HoaDonController {
         hd.setTinhTrangGiaoHang(2);
         hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
         hd.setNgayCapNhat(Date.valueOf(LocalDate.now()));
-        if(hd.getNgayShip()==null){
+        if (hd.getNgayShip() == null) {
             hd.setNgayShip(Date.valueOf(LocalDate.now()));
         }
-        if(hd.getPhiShip()==null){
+        if (hd.getPhiShip() == null) {
             hd.setPhiShip(BigDecimal.ZERO);
         }
         hoaDonService.update(id, hd);

@@ -226,6 +226,7 @@
                                 <th>Trạng thái giao hàng</th>
                                 <th>Loại HĐ</th>
                                 <th>Hình thức thanh toán</th>
+                                <th>Mã giao dịch</th>
                                 <th>Ngày Thanh Toán</th>
                                 <th>Ngày nhận</th>
                                 <th>Ngày ship</th>
@@ -265,6 +266,7 @@
                                         <c:if test="${hoaDon.hinhThucThanhToan == 1}">Online</c:if>
                                         <c:if test="${hoaDon.hinhThucThanhToan == 0}">Tiền mặt</c:if>
                                     </td>
+                                    <td>${hoaDon.maGiaoDich}</td>
                                     <td>${hoaDon.ngayThanhToan}</td>
                                     <td>${hoaDon.ngayNhan}</td>
                                     <td>${hoaDon.ngayShip}</td>
@@ -288,7 +290,7 @@
                                                 </svg>
                                                 Xác nhận đơn hàng</a>
                                         </c:if>
-                                        <c:if test="${hoaDon.loai== 1 && hoaDon.tinhTrangGiaoHang == 1}">
+                                        <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 1 || hoaDon.tinhTrangGiaoHang == 0) && hoaDon.nhanVien!= null}">
                                             <a href="/hoa-don/xac-nhan-giao-hang/${hoaDon.id}"
                                                class="btn btn-info btn-icon-text"
                                                tabindex="-1"
@@ -300,6 +302,7 @@
                                                 </svg>
                                                 Giao hàng</a>
                                         </c:if>
+
                                         <c:if test="${hoaDon.loai== 1 && hoaDon.tinhTrangGiaoHang == 2 && (hoaDon.tinhTrang==2||hoaDon.tinhTrang==3)}">
                                             <a href="/hoa-don/xac-nhan-giao-hang-hoan-tat/${hoaDon.id}"
                                                class="btn btn-outline-success btn-icon-text"
@@ -341,7 +344,7 @@
                                                 <i class="fas fa-times-circle"></i>
                                                 Hủy đơn tại quầy</a>
                                         </c:if>
-                                        <c:if test="${hoaDon.tinhTrang == 0|| hoaDon.tinhTrang == 1|| hoaDon.tinhTrang == 3}">
+                                        <c:if test="${hoaDon.tinhTrang == 0|| hoaDon.tinhTrang == 1|| hoaDon.tinhTrang == 3||(hoaDon.tinhTrang == 2 && hoaDon.loai==1)}">
                                             <a href="/hoa-don/view-update/${hoaDon.id}"
                                                class="btn btn-info btn-icon-text"
                                                tabindex="-1"
@@ -350,7 +353,7 @@
                                                 <i class="ti-reload btn-icon-prepend"></i>
                                                 Update thông tin</a>
                                         </c:if>
-                                        <c:if test="${hoaDon.tinhTrang == 2||hoaDon.tinhTrang == 3}">
+                                        <c:if test="${(hoaDon.tinhTrang == 2||hoaDon.tinhTrang == 3) && hoaDon.nhanVien!= null}">
                                             <a href="/hoa-don/xuat-pdf/${hoaDon.id}"
                                                class="btn btn-outline-success btn-icon-text"
                                                tabindex="-1"
