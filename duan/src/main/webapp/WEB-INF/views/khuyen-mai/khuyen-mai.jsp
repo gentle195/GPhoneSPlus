@@ -26,7 +26,6 @@
     <!-- Favicon icon -->
 
 
-
     <style>
 
 
@@ -35,6 +34,7 @@
             top: 30px;
             right: 20px;
         }
+
         .toast2 {
             position: relative;
             padding: 10px;
@@ -68,6 +68,7 @@
             color: #fff;
             opacity: 0.6;
         }
+
         .toast1 {
             position: relative;
             padding: 10px;
@@ -128,6 +129,7 @@
             box-shadow: 0 0 10px var(--color);
             animation: timeOut 5s linear 1 forwards
         }
+
         .toast2::before {
             position: absolute;
             bottom: 0;
@@ -168,83 +170,9 @@
         }
 
 
-
     </style>
-    <%--    <style>--%>
-    <%--        .dataTables_filter {--%>
-    <%--            display: block;--%>
-    <%--        }--%>
-
-    <%--        .dataTables_info {--%>
-    <%--            display: block;--%>
-    <%--        }--%>
-    <%--    </style>--%>
 </head>
 <body>
-
-<%--<div style="width: 5cm;height: 5cm; overflow: auto;border: 1px solid #ccc;">--%>
-
-<%--    <p>Mffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p><p>More content...</p>--%>
-<%--    <p>More content...</p><p>More content...</p>--%>
-<%--    <p>More content...</p><p>More content...</p>--%>
-<%--    <p>More content...</p><p>More content...</p>--%>
-<%--    <p>More content...</p><p>More content...</p>--%>
-<%--    <p>More content...</p><p>More content...</p>--%>
-<%--   vodanh--%>
-<%--</div>--%>
-
-<%--<input id="giatri" type="datetime-local" value="2023-11-29T17:09"  onchange="chya()">--%>
-
-<%--<input id="hienthi">--%>
-<%--<script>--%>
-<%--    function chya() {--%>
-<%--        document.getElementById('hienthi').value=document.getElementById('giatri').value;--%>
-<%--    }--%>
-<%--</script>--%>
-<br>
-
-
-<%--<div>--%>
-<%--    <ul class="nav nav-tabs border-top"--%>
-<%--        id="setting-panel" role="tablist">--%>
-<%--        <li class="nav-item">--%>
-<%--            <a class="nav-link active"--%>
-<%--               id="description-tab"--%>
-<%--            &lt;%&ndash;                   data-toggle="tab"&ndash;%&gt;--%>
-<%--               href="/khuyen-mai/hien-thi" role="tab"--%>
-<%--               aria-controls="description"--%>
-<%--               aria-selected="true">--%>
-<%--                Thông tin khách hàng--%>
-<%--            </a>--%>
-<%--        </li>--%>
-<%--        <li class="nav-item">--%>
-<%--            <a href="/khuyen-mai/view-add"--%>
-<%--               role="tab"--%>
-<%--               class="nav-link">--%>
-<%--                Thêm khách hàng--%>
-<%--            </a>--%>
-<%--        </li>--%>
-<%--        <li class="nav-item">--%>
-<%--            <a href="/khuyen-mai/khuyen-mai-tung-xoa"--%>
-<%--               role="tab"--%>
-<%--               class="nav-link">--%>
-<%--                Khách hàng từng xóa--%>
-<%--            </a>--%>
-<%--        </li>--%>
-<%--    </ul>--%>
-<%--</div>--%>
-
-
 <!-- The Modal -->
 <div class="modal" id="myModalthemkm">
     <div class="modal-dialog">
@@ -331,7 +259,8 @@
                 </form>
 
 
-                <select  style="float: right;margin-right: 8cm;height: 1cm" id="selectOption" onchange="choncomboboxtinhtrangkm()">
+                <select style="float: right;margin-right: 8cm;height: 1cm" id="selectOption"
+                        onchange="choncomboboxtinhtrangkm()">
                     <option style=" font-weight: bold;"><a>Trạng thái khuyến mãi</a></option>
                     <option value="all" data-link="/khuyen-mai/tinh-trang/all"><a>Tất cả</a></option>
                     <option value="2" data-link="/khuyen-mai/tinh-trang/2"><a>Chưa diễn ra</a></option>
@@ -347,18 +276,18 @@
                 <br>
                 <br>
                 <div class="col-sm-12">
-                    <div  class="card-box table-responsive">
+                    <div class="card-box table-responsive">
 
-                        <table id="example3" class="display"  style="width: 100%;color: black">
+                        <table id="example3" class="display" style="width: 1800px;color: black">
                             <thead>
                             <tr>
 
                                 <th>Mã</th>
+                                <th>Ngày tạo</th>
                                 <th>Tên</th>
                                 <th>% giảm</th>
                                 <th>Ngày bắt đầu</th>
                                 <th>Ngày kết thúc</th>
-                                <th>Ngày tạo</th>
                                 <th>Ngày cập nhật</th>
                                 <th>Tình trạng</th>
                                 <th>Mô tả</th>
@@ -371,11 +300,11 @@
                                 <tr>
 
                                     <td>${ht.ma}</td>
+                                    <td>${ht.ngayTao}</td>
                                     <td>${ht.ten} </td>
                                     <td>${ht.soTienGiam}</td>
                                     <td>${ht.ngayBatDau}</td>
                                     <td>${ht.ngayKetThuc}</td>
-                                    <td>${ht.ngayTao}</td>
                                     <td>${ht.ngayCapNhat}</td>
                                     <td>
                                         <c:if test="${ht.tinhTrang==0}">
@@ -414,30 +343,6 @@
                         </table>
                     </div>
                 </div>
-
-
-                <br>
-
-
-                <%--                <nav aria-label="Page navigation example">--%>
-                <%--                    <ul class="pagination justify-content-center pagination-lg">--%>
-                <%--                        <li class="page-item"><a class="page-link" href="/khuyen-mai/hien-thi?num=0"> <</a></li>--%>
-
-                <%--                        <c:forEach begin="1" end="${total}" varStatus="status">--%>
-                <%--                            <li class="page-item">--%>
-                <%--                                <a href="/khuyen-mai/hien-thi?num=${status.index-1}"--%>
-                <%--                                   class="page-link">${status.index}</a>--%>
-                <%--                            </li>--%>
-                <%--                        </c:forEach>--%>
-
-                <%--                        <li class="page-item"><a class="page-link" href="/khuyen-mai/hien-thi?num=${total-1}"> ></a>--%>
-                <%--                        </li>--%>
-                <%--                    </ul>--%>
-                <%--                </nav>--%>
-
-
-                <P id="bc" style="color: crimson"></P>
-
             </div>
         </div>
     </div>
@@ -575,7 +480,6 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                         <%--loc kết thúc--%>
 
 
-
                         <table id="example" class="display" style="color: black;min-width: 1700px">
 
                             <thead>
@@ -626,34 +530,34 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                                         <c:if test="${ht.khuyenMai!=null}">
                                             <c:if test="${ht.khuyenMai.tinhTrang!=0}">
                                                 <c:if test="${ht.khuyenMai.id==kmchon.id}">
-                                                    <a   onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                                                         class="btn btn-success"
+                                                    <a onclick="HuyapdungkmVS1ctsp('${ht.id}')"
+                                                       class="btn btn-success"
                                                     >Hủy áp dụng</a>
 
                                                 </c:if>
                                                 <c:if test="${ht.khuyenMai.id!=kmchon.id}">
-                                                    <a   onclick="apdungKMvsCTSP('${ht.id}','${kmchon.id}')"
-                                                         class="btn btn-success"
+                                                    <a onclick="apdungKMvsCTSP('${ht.id}','${kmchon.id}')"
+                                                       class="btn btn-success"
                                                     >Áp dụng</a>
-                                                    <a   onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                                                         class="btn btn-success"
+                                                    <a onclick="HuyapdungkmVS1ctsp('${ht.id}')"
+                                                       class="btn btn-success"
                                                     >Hủy áp dụng</a>
                                                 </c:if>
 
                                             </c:if>
                                             <c:if test="${ht.khuyenMai.tinhTrang==0}">
                                                 <c:if test="${ht.khuyenMai.id==kmchon.id}">
-                                                    <a   onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                                                         class="btn btn-success"
+                                                    <a onclick="HuyapdungkmVS1ctsp('${ht.id}')"
+                                                       class="btn btn-success"
                                                     >Hủy áp dụng</a>
 
                                                 </c:if>
                                                 <c:if test="${ht.khuyenMai.id!=kmchon.id}">
-                                                    <a   onclick="apdungKMvsCTSP('${ht.id}','${kmchon.id}')"
-                                                         class="btn btn-success"
+                                                    <a onclick="apdungKMvsCTSP('${ht.id}','${kmchon.id}')"
+                                                       class="btn btn-success"
                                                     >Áp dụng</a>
-                                                    <a   onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                                                         class="btn btn-success"
+                                                    <a onclick="HuyapdungkmVS1ctsp('${ht.id}')"
+                                                       class="btn btn-success"
                                                     >Hủy áp dụng</a>
                                                 </c:if>
 
@@ -763,8 +667,6 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
         </div>
     </div>
 </div>
-
-
 
 
 </body>
@@ -880,7 +782,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
 
     function createToast4() {
         let newToast = document.createElement('div');
-        newToast.innerHTML =   `
+        newToast.innerHTML = `
             <div class="toast2" style=" background-image:
                     linear-gradient(
                             to right, #f24d4c55, #22242F 30%
@@ -898,8 +800,8 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
         )
 
 
-
     }
+
     error1.onclick = function () {
         createToast4();
         // createToast();
@@ -957,7 +859,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
 
     function createToast3() {
         let newToast = document.createElement('div');
-        newToast.innerHTML =   `
+        newToast.innerHTML = `
             <div class="toast2" style=" background-image:
                     linear-gradient(
                             to right, #f24d4c55, #22242F 30%
@@ -975,8 +877,8 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
         )
 
 
-
     }
+
     error.onclick = function () {
         createToast3();
         // createToast();
@@ -1101,6 +1003,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
 <script>
 
     loadSelect3();
+
     function loadSelect3() {
         // Gọi .select2() cho các phần tử sau khi tất cả các tệp script đã được nạp
 
@@ -1168,8 +1071,6 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
     }
 
 
-
-
     function clickcombobox() {
         var x1 = encodeURIComponent(document.getElementById("hangds1").value);
         var x2 = encodeURIComponent(document.getElementById("camds1").value);
@@ -1183,9 +1084,9 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
         var x10 = encodeURIComponent(document.getElementById("sands1").value);
         var x11 = encodeURIComponent(document.getElementById("value1").value);
         var x12 = encodeURIComponent(document.getElementById("value2").value);
-        if(document.getElementById("value1").value.trim()==='' || document.getElementById("value2").value.trim()===''){
+        if (document.getElementById("value1").value.trim() === '' || document.getElementById("value2").value.trim() === '') {
             document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
-        }else {
+        } else {
             if (parseFloat(x11) > parseFloat(x12)) {
                 document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
 
@@ -1199,6 +1100,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
             }
         }
     }
+
     function HuyapdungkmVS1ctsp(idctsp) {
         var x1 = encodeURIComponent(document.getElementById("hangds1").value);
         var x2 = encodeURIComponent(document.getElementById("camds1").value);
@@ -1212,16 +1114,17 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
         var x10 = encodeURIComponent(document.getElementById("sands1").value);
         var x11 = encodeURIComponent(document.getElementById("value1").value);
         var x12 = encodeURIComponent(document.getElementById("value2").value);
-        if(document.getElementById("value1").value.trim()==='' || document.getElementById("value2").value.trim()===''){
+        if (document.getElementById("value1").value.trim() === '' || document.getElementById("value2").value.trim() === '') {
             document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
-        }else {
+        } else {
             if (parseFloat(x11) > parseFloat(x12)) {
                 document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
 
             } else {
                 document.getElementById("thongbaokhoang").innerHTML = "";
 
-                var link = '/khuyen-mai/huy-ap-dung-vao-1-ctsp/'+idctsp+ '/' +x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;;
+                var link = '/khuyen-mai/huy-ap-dung-vao-1-ctsp/' + idctsp + '/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;
+                ;
                 // document.getElementById("vt").innerHTML=link
                 loadbenloc(link);
                 // document.getElementById("demo").innerHTML = "You selected: " + x;
@@ -1233,7 +1136,8 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
             }
         }
     }
-    function apdungKMvsCTSP(idctsp,idkm) {
+
+    function apdungKMvsCTSP(idctsp, idkm) {
         var x1 = encodeURIComponent(document.getElementById("hangds1").value);
         var x2 = encodeURIComponent(document.getElementById("camds1").value);
         var x3 = encodeURIComponent(document.getElementById("mands1").value);
@@ -1246,9 +1150,9 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
         var x10 = encodeURIComponent(document.getElementById("sands1").value);
         var x11 = encodeURIComponent(document.getElementById("value1").value);
         var x12 = encodeURIComponent(document.getElementById("value2").value);
-        if(document.getElementById("value1").value.trim()==='' || document.getElementById("value2").value.trim()===''){
+        if (document.getElementById("value1").value.trim() === '' || document.getElementById("value2").value.trim() === '') {
             document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
-        }else {
+        } else {
             if (parseFloat(x11) > parseFloat(x12)) {
                 document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
 
@@ -1267,14 +1171,13 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
             }
         }
     }
+
     function loadbenloc(interfaceUrl) {
         fetch(interfaceUrl)
             .then(response => response.text())
             .then(data => {
                 const content = document.getElementById('dssanphamloc');
                 content.innerHTML = data;
-
-
 
 
             })
