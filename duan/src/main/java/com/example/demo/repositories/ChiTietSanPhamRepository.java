@@ -1,6 +1,12 @@
 package com.example.demo.repositories;
 
 import com.example.demo.models.ChiTietSanPham;
+import com.example.demo.models.Chip;
+import com.example.demo.models.MauSac;
+import com.example.demo.models.Pin;
+import com.example.demo.models.Ram;
+import com.example.demo.models.Rom;
+import com.example.demo.models.SanPham;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -132,4 +138,5 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
 
     @Query("SELECT COUNT(nv) FROM NhanVien nv WHERE nv.taiKhoan IS NOT NULL and nv.tinhTrang=0")
     Integer soNV();
+    boolean existsBySanPhamAndChipAndRomAndRamAndPinAndMauSac(SanPham sanPham, Chip chip, Rom rom, Ram ram, Pin pin, MauSac mauSac);
 }

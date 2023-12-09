@@ -1,6 +1,12 @@
 package com.example.demo.services;
 
 import com.example.demo.models.ChiTietSanPham;
+import com.example.demo.models.Chip;
+import com.example.demo.models.MauSac;
+import com.example.demo.models.Pin;
+import com.example.demo.models.Ram;
+import com.example.demo.models.Rom;
+import com.example.demo.models.SanPham;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -70,6 +76,7 @@ public interface ChiTietSanPhamService {
     Integer soNV();
 
     public List<ChiTietSanPham> searchGia(UUID id);
+    public boolean existsDuplicate(SanPham sanPham, Chip chip, Rom rom, Ram ram, Pin pin, MauSac mauSac);
 }
 
 
