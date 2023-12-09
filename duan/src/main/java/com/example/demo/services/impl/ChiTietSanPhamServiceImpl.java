@@ -1,6 +1,12 @@
 package com.example.demo.services.impl;
 
 import com.example.demo.models.ChiTietSanPham;
+import com.example.demo.models.Chip;
+import com.example.demo.models.MauSac;
+import com.example.demo.models.Pin;
+import com.example.demo.models.Ram;
+import com.example.demo.models.Rom;
+import com.example.demo.models.SanPham;
 import com.example.demo.repositories.ChiTietSanPhamRepository;
 import com.example.demo.services.ChiTietSanPhamService;
 import org.springframework.beans.BeanUtils;
@@ -188,6 +194,11 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     @Override
     public List<ChiTietSanPham> searchGia(UUID id) {
         return chiTietSanPhamRepository.searchGia(id);
+    }
+
+    @Override
+    public boolean existsDuplicate(SanPham sanPham, Chip chip, Rom rom, Ram ram, Pin pin, MauSac mauSac) {
+        return chiTietSanPhamRepository.existsBySanPhamAndChipAndRomAndRamAndPinAndMauSac(sanPham, chip, rom, ram, pin,mauSac);
     }
 
 
