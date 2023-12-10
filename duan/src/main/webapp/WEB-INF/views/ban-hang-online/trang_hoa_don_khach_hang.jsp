@@ -19,7 +19,7 @@
     <%--    table--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" contentĐổib="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
@@ -641,50 +641,50 @@
 
 
 </main>
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modal-1-label" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="margin-left: -10cm">
-            <div class="modal-body">
-                <div class="col-lg-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div>
-                            <div class="card-body">
-                                <h4 class="card-title" style="float: left">Danh sách sản phẩm</h4>
-                                <div>
-                                    <!-- Ô chọn tất cả ở đây -->
-                                </div>
-                                <div class="table-responsive">
-                                    <div>
-                                        <table class="table table-bordered" style="min-width: 845px; color: black">
-                                            <thead>
-                                            <tr>
-                                                <th>
-                                                    <input type="checkbox" id="selectAllCheckbox">
-                                                </th>
-                                                <th>Tên Sản Phẩm</th>
-                                                <th>Ảnh</th>
-                                                <th>Hãng</th>
-                                                <th>Giá</th>
-                                                <th>Hình thức</th>
-                                                <th>Ghi chú</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody class="san_pham_search" style="text-align: center;height: 3cm"
-                                                   id="modalTableBody">
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+<%--<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modal-1-label" aria-hidden="true">--%>
+<%--    <div class="modal-dialog">--%>
+<%--        <div class="modal-content" style="margin-top: 500px;margin-left: -10px">--%>
+<%--            <div class="modal-body">--%>
+<%--                <div class="col-lg-12 grid-margin stretch-card">--%>
+<%--                    <div class="card">--%>
+<%--                        <div>--%>
+<%--                            <div class="card-body">--%>
+<%--                                <h4 class="card-title" style="float: left">Danh sách sản phẩm</h4>--%>
+<%--                                <div>--%>
+<%--                                    <!-- Ô chọn tất cả ở đây -->--%>
+<%--                                </div>--%>
+<%--                                <div class="table-responsive">--%>
+<%--                                    <div>--%>
+<%--                                        <table class="table table-bordered" style="min-width: 845px; color: black">--%>
+<%--                                            <thead>--%>
+<%--                                            <tr>--%>
+<%--                                                <th>--%>
+<%--                                                    <input type="checkbox" id="selectAllCheckbox">--%>
+<%--                                                </th>--%>
+<%--                                                <th>Tên Sản Phẩm</th>--%>
+<%--                                                <th>Ảnh</th>--%>
+<%--                                                <th>Hãng</th>--%>
+<%--                                                <th>Giá</th>--%>
+<%--                                                <th>Hình thức</th>--%>
+<%--                                                <th>Ghi chú</th>--%>
+<%--                                            </tr>--%>
+<%--                                            </thead>--%>
+<%--                                            <tbody class="san_pham_search" style="text-align: center;height: 3cm"--%>
+<%--                                                   id="modalTableBody">--%>
+<%--                                            </tbody>--%>
+<%--                                        </table>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
 
-                            </div>
-                            <button class="btn btn-primary" id="confirmButton">Xác nhận</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<%--                            </div>--%>
+<%--                            <button class="btn btn-primary" id="confirmButton">Xác nhận</button>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 <!-- /NEWSLETTER -->
 
 <!-- FOOTER -->
@@ -785,6 +785,51 @@
     <!-- /bottom footer -->
 </footer>
 </body>
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modal-1-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top: 500px;margin-left: 10cm">
+            <div class="modal-body">
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div>
+                            <div class="card-body">
+                                <h4 class="card-title" style="float: left">Danh sách sản phẩm</h4>
+                                <div>
+                                    <!-- Ô chọn tất cả ở đây -->
+                                </div>
+                                <div class="table-responsive">
+                                    <div>
+                                        <table class="table table-bordered" style="min-width: 845px; color: black">
+                                            <thead>
+                                            <tr>
+                                                <th>
+                                                    <input type="checkbox" id="selectAllCheckbox">
+                                                </th>
+                                                <th>Tên Sản Phẩm</th>
+                                                <th>Ảnh</th>
+                                                <th>Hãng</th>
+                                                <th>Giá</th>
+                                                <th>Hình thức</th>
+                                                <th>Ghi chú</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="san_pham_search" style="text-align: center;height: 3cm"
+                                                   id="modalTableBody">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button class="btn btn-primary" id="confirmButton">Xác nhận</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <%--<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>--%>
 <%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>--%>
