@@ -2,9 +2,14 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.Anh;
 import com.example.demo.models.Camera;
+import com.example.demo.models.Chip;
 import com.example.demo.models.HangSanPham;
 import com.example.demo.models.IMEI;
 import com.example.demo.models.ManHinh;
+import com.example.demo.models.MauSac;
+import com.example.demo.models.Pin;
+import com.example.demo.models.Ram;
+import com.example.demo.models.Rom;
 import com.example.demo.models.SanPham;
 import com.example.demo.services.AnhService;
 import com.example.demo.services.CameraService;
@@ -166,6 +171,22 @@ public class SanPhamController {
             model.addAttribute("contentPage", "../san-pham/add.jsp");
             return "home/layout";
         }
+        if (sanPhamService.trungDuLieu(dulieuxem.getTen(), dulieuxem.getHangSanPham(), dulieuxem.getManHinh(), dulieuxem.getCamera(), dulieuxem.getAnh())){
+           model.addAttribute("hangSP", new HangSanPham());
+            model.addAttribute("ManHinh", new ManHinh());
+            model.addAttribute("camera", new Camera());
+            model.addAttribute("anh", new Anh());
+            model.addAttribute("listManHinh", manHinhService.findAll0());
+            model.addAttribute("listHangSP", hangSanPhamService.findAll0());
+            model.addAttribute("listCamera", cameraService.findAll0());
+            model.addAttribute("listAnh", anhService.findAll0());
+
+            model.addAttribute("thongBaoSP", "Sản phẩm đã tồn tại!");
+            model.addAttribute("contentPage", "../san-pham/add.jsp");
+
+            return "home/layout";
+        }
+
         dulieuxem.setNgayTao(Date.valueOf(LocalDate.now()));
         dulieuxem.setMa("SP" + String.valueOf(sanPhamService.findAll().size() + 1));
         dulieuxem.setTinhTrang(0);

@@ -1,5 +1,9 @@
 package com.example.demo.services;
 
+import com.example.demo.models.Anh;
+import com.example.demo.models.Camera;
+import com.example.demo.models.HangSanPham;
+import com.example.demo.models.ManHinh;
 import com.example.demo.models.Rom;
 import com.example.demo.models.SanPham;
 import org.springframework.data.domain.Page;
@@ -38,6 +42,9 @@ public interface SanPhamService {
     public void update0();
 
     public List<SanPham> loc(UUID idHang, UUID idMan, UUID idCamera);
+
+    public boolean trungDuLieu(String ten, HangSanPham hangSanPham, ManHinh manHinh, Camera camera, Anh anh);
+
 }
 
 

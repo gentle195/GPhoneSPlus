@@ -138,5 +138,6 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
 
     @Query("SELECT COUNT(nv) FROM NhanVien nv WHERE nv.taiKhoan IS NOT NULL and nv.tinhTrang=0")
     Integer soNV();
+
     boolean existsBySanPhamAndChipAndRomAndRamAndPinAndMauSac(SanPham sanPham, Chip chip, Rom rom, Ram ram, Pin pin, MauSac mauSac);
 }

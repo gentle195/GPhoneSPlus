@@ -1,5 +1,13 @@
 package com.example.demo.repositories;
 
+import com.example.demo.models.Anh;
+import com.example.demo.models.Camera;
+import com.example.demo.models.Chip;
+import com.example.demo.models.HangSanPham;
+import com.example.demo.models.ManHinh;
+import com.example.demo.models.MauSac;
+import com.example.demo.models.Pin;
+import com.example.demo.models.Ram;
 import com.example.demo.models.Rom;
 import com.example.demo.models.SanPham;
 import jakarta.transaction.Transactional;
@@ -57,4 +65,7 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
 //            +"and (:giaBanMin is null and :giaBanMax is null or ct.giaBan between :giaBanMin and :giaBanMax)"
     )
     List<SanPham> loc(UUID idHang, UUID idMan, UUID idCamera);
+
+    boolean existsByTenAndHangSanPhamAndCameraAndManHinhAndAnh(String ten, HangSanPham hangSanPham, ManHinh manHinh, Camera camera, Anh anh);
+
 }

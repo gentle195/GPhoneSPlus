@@ -1,5 +1,9 @@
 package com.example.demo.services.impl;
 
+import com.example.demo.models.Anh;
+import com.example.demo.models.Camera;
+import com.example.demo.models.HangSanPham;
+import com.example.demo.models.ManHinh;
 import com.example.demo.models.SanPham;
 import com.example.demo.repositories.SanPhamRepository;
 import com.example.demo.services.SanPhamService;
@@ -107,5 +111,10 @@ public class SanPhamServiceImpl implements SanPhamService {
     @Override
     public List<SanPham> loc(UUID idHang, UUID idMan, UUID idCamera) {
         return sanPhamRepository.loc(idHang, idMan, idCamera);
+    }
+
+    @Override
+    public boolean trungDuLieu(String ten, HangSanPham hangSanPham, ManHinh manHinh, Camera camera, Anh anh) {
+        return sanPhamRepository.existsByTenAndHangSanPhamAndCameraAndManHinhAndAnh(ten, hangSanPham, manHinh, camera, anh);
     }
 }

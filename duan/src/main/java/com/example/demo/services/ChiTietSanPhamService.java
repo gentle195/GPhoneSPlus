@@ -76,6 +76,7 @@ public interface ChiTietSanPhamService {
     Integer soNV();
 
     public List<ChiTietSanPham> searchGia(UUID id);
+
     public boolean existsDuplicate(SanPham sanPham, Chip chip, Rom rom, Ram ram, Pin pin, MauSac mauSac);
 }
 
