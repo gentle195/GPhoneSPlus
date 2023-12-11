@@ -290,7 +290,7 @@
                                                 </svg>
                                                 Xác nhận đơn hàng</a>
                                         </c:if>
-                                        <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 1 || hoaDon.tinhTrangGiaoHang == 0) && hoaDon.nhanVien!= null}">
+                                        <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 1 || hoaDon.tinhTrangGiaoHang == 0) && hoaDon.nhanVien!= null && hoaDon.tinhTrang != 9}">
                                             <a href="/hoa-don/xac-nhan-giao-hang/${hoaDon.id}"
                                                class="btn btn-info btn-icon-text"
                                                tabindex="-1"
@@ -303,7 +303,7 @@
                                                 Giao hàng</a>
                                         </c:if>
 
-                                        <c:if test="${hoaDon.loai== 1 && hoaDon.tinhTrangGiaoHang == 2 && (hoaDon.tinhTrang==2||hoaDon.tinhTrang==3)}">
+                                        <c:if test="${hoaDon.loai== 1 && hoaDon.tinhTrangGiaoHang == 2 && (hoaDon.tinhTrang==2||hoaDon.tinhTrang==3) && hoaDon.nhanVien!= null}">
                                             <a href="/hoa-don/xac-nhan-giao-hang-hoan-tat/${hoaDon.id}"
                                                class="btn btn-outline-success btn-icon-text"
                                                tabindex="-1"
@@ -333,7 +333,6 @@
                                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                                 <i class="fas fa-times-circle"></i>
                                                 Hủy đơn online thanh toán VNPay</a>
-
                                         </c:if>
                                         <c:if test="${hoaDon.loai== 0 && (hoaDon.tinhTrang == 0|| hoaDon.tinhTrang == 1|| hoaDon.tinhTrang == 3)}">
                                             <a href="/hoa-don/huy/${hoaDon.id}"
@@ -344,7 +343,7 @@
                                                 <i class="fas fa-times-circle"></i>
                                                 Hủy đơn tại quầy</a>
                                         </c:if>
-                                        <c:if test="${hoaDon.tinhTrang == 0|| hoaDon.tinhTrang == 1|| hoaDon.tinhTrang == 3||(hoaDon.tinhTrang == 2 && hoaDon.loai==1)}">
+                                        <c:if test="${hoaDon.tinhTrang == 0|| hoaDon.tinhTrang == 1|| hoaDon.tinhTrang == 3 && hoaDon.tinhTrangGiaoHang != 2 && hoaDon.tinhTrangGiaoHang != 3 && (hoaDon.tinhTrang == 2 && hoaDon.loai==1) && hoaDon.tinhTrang != 9 }">
                                             <a href="/hoa-don/view-update/${hoaDon.id}"
                                                class="btn btn-info btn-icon-text"
                                                tabindex="-1"

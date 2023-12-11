@@ -72,6 +72,7 @@ public class DoiTraController {
     @Autowired
     private DoiTraChiTietService doiTraChiTietService;
 
+    private UUID idDT;
 
     @GetMapping("/hien-thi")
     public String hienthi(@ModelAttribute("sanpham") SanPham sanpham, @ModelAttribute("NhanVien") NhanVien nhanVien,
@@ -141,6 +142,7 @@ public class DoiTraController {
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable("id") UUID id, Model model, @RequestParam("doitraId") UUID doitraId, @RequestParam("hoadonId") UUID hoadonId, @RequestParam("pageNum") Optional<Integer> pageNum,
                          @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
+        idDT = doitraId;
         List<UUID> idList = new ArrayList<>();
         List<DoiTraChiTiet> doiTraChiTietList = doiTraChiTietService.getDoiTraChiTietByDoiTraId(doitraId);
         for (DoiTraChiTiet doiTraChiTiet : doiTraChiTietList
@@ -424,12 +426,13 @@ public class DoiTraController {
     }
 
 
-    @PostMapping("/xac-nhan/{doitraId}")
-    public String xacnhan(Model model, @ModelAttribute("dulieuxem") DoiTra dulieuxem,
-                          @PathVariable UUID doitraId, HttpServletRequest request
+    @PostMapping("/xac-nhan")
+    public  ResponseEntity<byte[]> xacnhan(Model model, @ModelAttribute("dulieuxem") DoiTra dulieuxem,
+                           HttpServletRequest request
     ) {
-        DoiTra doiTra = doiTraService.findById(doitraId);
-        List<DoiTraChiTiet> listCHiTietDoiTra = doiTraChiTietService.getDoiTraChiTietByDoiTraId(doitraId);
+
+        DoiTra doiTra = doiTraService.findById(idDT);
+        List<DoiTraChiTiet> listCHiTietDoiTra = doiTraChiTietService.getDoiTraChiTietByDoiTraId(idDT);
         for (DoiTraChiTiet dtct : listCHiTietDoiTra
         ) {
             if (dtct.getHienTrangSanPham() == 0) {
@@ -472,8 +475,17 @@ public class DoiTraController {
         doiTra.setTinhTrang(2);
         doiTra.setNgayDoiTra(Date.valueOf(LocalDate.now()));
         doiTra.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
-        doiTraService.update(doitraId, doiTra);
-        return "redirect:/doi-tra/hien-thi";
+        doiTraService.update(idDT, doiTra);
+        // in hoá đơn pdf
+        ResponseEntity<byte[]> responseEntity = hoaDonService.generatePdfDonTaiQuay(doiTra.getHoaDon().getId());
+        byte[] pdfBytes = responseEntity.getBody();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "hoa_don_" + doiTra.getHoaDon().getId() + ".pdf");
+        System.out.println("cc: "+ ResponseEntity.ok().headers(headers).body(pdfBytes));
+        return ResponseEntity.ok().headers(headers).body(pdfBytes);
+
     }
 
     @ResponseBody

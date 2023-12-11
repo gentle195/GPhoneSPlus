@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Focus - Bootstrap Admin Dashboard </title>
+    <link rel="stylesheet" href="../../../vendor/toastr/css/toastr.min.css">
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"/>
     <style>
@@ -302,11 +303,16 @@
                                             <!-- Thêm các trường và nút submit cho form tiền đổi trả -->
                                         </form>
                                     </div>
-                                    <div style="text-align: center">
-                                        <button class='btn btn-primary' id='xacNhanButton'
-                                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                            Xác nhận
-                                        </button>
+                                    <div>
+                                        <form action="/doi-tra/xac-nhan" method="post">
+                                            <div class="row">
+                                                <div style="margin-left: 500px">
+                                                <button type="submit" class="btn btn-dark mb-2 " id="toastr-success-top-center-doi-tra">
+                                                    Xác nhận
+                                                </button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </c:if>
@@ -640,40 +646,6 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
-<script>
-    document.getElementById('xacNhanButton').addEventListener('click', function (event) {
-        event.preventDefault();
-
-        // Lấy giá trị doitraId từ thuộc tính data-doitraid
-
-
-        // Gửi yêu cầu POST đến đường dẫn cụ thể với doitraId
-        fetch("/doi-tra/xac-nhan/" + doitraId, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                // Các dữ liệu khác nếu cần
-            }),
-        }).then(response => {
-            if (response.ok) {
-                // Xử lý khi yêu cầu thành công
-                console.log('Xác nhận thành công');
-
-                // Chuyển hướng trình duyệt web sau khi xác nhận thành công
-                window.location.href = "/doi-tra/hien-thi";
-            } else {
-                // Xử lý khi yêu cầu không thành công
-                console.error('Xác nhận không thành công');
-            }
-        }).catch(error => {
-            console.error('Lỗi:', error);
-        });
-    });
-
-
-</script>
 <script>
     function xoaSanPham(hdctId) {
         // Gửi yêu cầu xóa bất đồng bộ
@@ -1129,7 +1101,14 @@
 
         // Gọi .select2() cho các phần tử khác ở đây (tương tự)
     }
-
     loadSelect2();
 </script>
+<script src="../../../vendor/global/global.min.js"></script>
+<script src="../../../js/quixnav-init.js"></script>
+
+<!-- Toastr -->
+<script src="../../../vendor/toastr/js/toastr.min.js"></script>
+
+<!-- All init script -->
+<script src="../../../js/plugins-init/toastr-init.js"></script>
 </html>

@@ -171,7 +171,7 @@ public class SanPhamController {
             model.addAttribute("contentPage", "../san-pham/add.jsp");
             return "home/layout";
         }
-        if (sanPhamService.trungDuLieu(dulieuxem.getTen(), dulieuxem.getHangSanPham(), dulieuxem.getManHinh(), dulieuxem.getCamera(), dulieuxem.getAnh())){
+        if (sanPhamService.trungDuLieu(dulieuxem.getTen(), dulieuxem.getHangSanPham(),dulieuxem.getCamera(), dulieuxem.getManHinh(),  dulieuxem.getAnh())){
            model.addAttribute("hangSP", new HangSanPham());
             model.addAttribute("ManHinh", new ManHinh());
             model.addAttribute("camera", new Camera());

@@ -114,7 +114,7 @@ public class SanPhamServiceImpl implements SanPhamService {
     }
 
     @Override
-    public boolean trungDuLieu(String ten, HangSanPham hangSanPham, ManHinh manHinh, Camera camera, Anh anh) {
-        return sanPhamRepository.existsByTenAndHangSanPhamAndCameraAndManHinhAndAnh(ten, hangSanPham, manHinh, camera, anh);
+    public boolean trungDuLieu(String ten, HangSanPham hangSanPham, Camera camera,ManHinh manHinh,  Anh anh) {
+        return sanPhamRepository.existsByTenAndHangSanPhamAndCameraAndManHinhAndAnh(ten, hangSanPham, camera,manHinh,  anh);
     }
 }
