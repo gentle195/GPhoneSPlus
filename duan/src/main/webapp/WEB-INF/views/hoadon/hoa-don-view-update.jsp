@@ -94,7 +94,7 @@
         </li>
     </ul>
 </div>
-<div class="tab-content" id="myTabContent">
+<div class="tab-content" id="myTabContent" style="color: black">
     <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
         <div class="col-12 grid-margin">
             <div class="col-lg-12 grid-margin stretch-card">
@@ -324,7 +324,7 @@
                                     <div style="text-align: center">
                                         <button type="submit" class="btn btn-primary mr-2"
                                                 onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                            SAVE
+                                            Cập nhật thông tin
                                         </button>
                                     </div>
 

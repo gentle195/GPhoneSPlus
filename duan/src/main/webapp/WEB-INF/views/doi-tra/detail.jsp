@@ -197,6 +197,7 @@
                                             <th>Hãng</th>
                                             <th>Số IMEI</th>
                                             <th>Đơn Giá</th>
+                                            <th>Hiện trạng sản phẩm</th>
                                             <th colspan="2">Action</th>
                                         </tr>
                                         </thead>
@@ -212,6 +213,8 @@
                                                 <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
                                                 <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
                                                 <td>${hdct.hoaDonChiTiet.donGia}</td>
+                                                <td>${hdct.hienTrangSanPham == 0?"Sản phẩm lỗi" :"Sản phẩm đổi trả"}
+                                                </td>
                                                 <td>
                                                     <c:choose>
                                                         <c:when test="${hdct.hinhThucDoiTra ==0 }">
@@ -632,7 +635,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                 <button type="button" class="btn btn-primary" onclick="themThongTinDoiTra()">Thêm Thông Tin</button>
             </div>
         </div>
