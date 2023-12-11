@@ -8,7 +8,7 @@ Toastr
 
     $("#toastr-success-top-right").on("click", function () {
                 toastr.success("This Is Success Message", "Top Right", {
-                    timeOut: 500000000,
+                    timeOut: 1500,
                     closeButton: !0,
                     debug: !1,
                     newestOnTop: !0,
@@ -27,6 +27,58 @@ Toastr
                 })
             }
 
+        ),
+        // thanh toán
+        $("#toastr-success-top-center-thanh-toan").on("click", function () {
+                toastr.success("Thanh toán thành công", "Thông báo", {
+                    timeOut: 1500,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+
+                })
+               setTimeout(function () {
+                window.location.href = "/ban-hang/hien-thi";
+            }, 1500);
+            }
+        ),
+
+        $("#toastr-success-top-center-doi-tra").on("click", function () {
+                toastr.success("Đổi hàng thành công", "Thông báo", {
+                    timeOut: 1500,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+
+                })
+                setTimeout(function () {
+                    window.location.href = "/doi-tra/hien-thi";
+                }, 1500);
+            }
         ),
         $("#toastr-success-bottom-right").on("click", function () {
                 toastr.success("This Is Success Message", "Bottom Right", {

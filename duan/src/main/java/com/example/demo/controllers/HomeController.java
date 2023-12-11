@@ -77,7 +77,7 @@ public class HomeController {
 
     @GetMapping("/homes")
     private String showHomes(Model model){
-        return  "ban-hang-online/so-sanh-san-pham";
+        return  "ban-hang/uc-toastr";
 //                "chip/basic-table";
     }
 }

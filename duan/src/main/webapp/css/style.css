@@ -6072,49 +6072,49 @@ a.close.disabled {
     pointer-events: none;
 }
 
-/*.toast {*/
-/*    max-width: 350px;*/
-/*    overflow: hidden;*/
-/*    font-size: 0.875rem;*/
-/*    background-color: rgba(255, 255, 255, 0.85);*/
-/*    background-clip: padding-box;*/
-/*    border: 1px solid rgba(0, 0, 0, 0.1);*/
-/*    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);*/
-/*    backdrop-filter: blur(10px);*/
-/*    opacity: 0;*/
-/*    border-radius: 0.25rem;*/
-/*}*/
+.toast {
+    max-width: 350px;
+    overflow: hidden;
+    font-size: 0.875rem;
+    background-color: rgba(255, 255, 255, 0.85);
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    border-radius: 0.25rem;
+}
 
-/*.toast:not(:last-child) {*/
-/*    margin-bottom: 0.75rem;*/
-/*}*/
+.toast:not(:last-child) {
+    margin-bottom: 0.75rem;
+}
 
-/*.toast.showing {*/
-/*    opacity: 1;*/
-/*}*/
+.toast.showing {
+    opacity: 1;
+}
 
-/*.toast.show {*/
-/*    display: block;*/
-/*    opacity: 1;*/
-/*}*/
+.toast.show {
+    display: block;
+    opacity: 1;
+}
 
-/*.toast.hide {*/
-/*    display: none;*/
-/*}*/
+.toast.hide {
+    display: none;
+}
 
-/*.toast-header {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    padding: 0.25rem 0.75rem;*/
-/*    color: #6c757d;*/
-/*    background-color: rgba(255, 255, 255, 0.85);*/
-/*    background-clip: padding-box;*/
-/*    border-bottom: 1px solid rgba(0, 0, 0, 0.05);*/
-/*}*/
+.toast-header {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    color: #6c757d;
+    background-color: rgba(255, 255, 255, 0.85);
+    background-clip: padding-box;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
 
-/*.toast-body {*/
-/*    padding: 0.75rem;*/
-/*}*/
+.toast-body {
+    padding: 0.75rem;
+}
 
 .modal-open {
     overflow: hidden;
@@ -21377,60 +21377,60 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     }
 }
 
-/*.toast-success {*/
-/*    background-color: #593bdb;*/
-/*}*/
+.toast-success {
+    background-color: #593bdb;
+}
 
-/*.toast-info {*/
-/*    background-color: #50E3C2;*/
-/*}*/
+.toast-info {
+    background-color: #50E3C2;
+}
 
-/*.toast-warning {*/
-/*    background-color: #FFAA16;*/
-/*}*/
+.toast-warning {
+    background-color: #FFAA16;
+}
 
-/*.toast-error {*/
-/*    background-color: #FF1616;*/
-/*}*/
+.toast-error {
+    background-color: #FF1616;
+}
 
-/*#toast-container > div {*/
-/*    box-shadow: none;*/
-/*    border-radius: 0;*/
-/*    width: auto;*/
-/*    max-width: 250px;*/
-/*    opacity: 1;*/
-/*}*/
+#toast-container > div {
+    box-shadow: none;
+    border-radius: 0;
+    width: auto;
+    max-width: 250px;
+    opacity: 1;
+}
 
-/*[direction="rtl"] #toast-container > div {*/
-/*    padding: 15px 50px 15px 15px;*/
-/*    background-position: calc(100% - 15px);*/
-/*    text-align: right;*/
-/*}*/
+[direction="rtl"] #toast-container > div {
+    padding: 15px 50px 15px 15px;
+    background-position: calc(100% - 15px);
+    text-align: right;
+}
 
-/*#toast-container > div:hover {*/
-/*    box-shadow: none;*/
-/*}*/
+#toast-container > div:hover {
+    box-shadow: none;
+}
 
-/*#toast-container .toast-title {*/
-/*    margin-bottom: 5px;*/
-/*    font-weight: 600;*/
-/*}*/
+#toast-container .toast-title {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
 
-/*#toast-container .toast-message {*/
-/*    font-size: 12px;*/
-/*}*/
+#toast-container .toast-message {
+    font-size: 12px;
+}
 
-/*#toast-container .toast-close-button {*/
-/*    opacity: 1;*/
-/*    font-size: 8px;*/
-/*    font-weight: normal;*/
-/*    text-shadow: none;*/
-/*}*/
+#toast-container .toast-close-button {
+    opacity: 1;
+    font-size: 8px;
+    font-weight: normal;
+    text-shadow: none;
+}
 
-/*[direction="rtl"] .toast-top-right.demo_rtl_class {*/
-/*    left: 12px;*/
-/*    right: auto;*/
-/*}*/
+[direction="rtl"] .toast-top-right.demo_rtl_class {
+    left: 12px;
+    right: auto;
+}
 
 .jqvmap-zoomin,
 .jqvmap-zoomout {
@@ -34496,49 +34496,49 @@ a.close.disabled {
     pointer-events: none;
 }
 
-/*.toast {*/
-/*    max-width: 350px;*/
-/*    overflow: hidden;*/
-/*    font-size: 0.875rem;*/
-/*    background-color: rgba(255, 255, 255, 0.85);*/
-/*    background-clip: padding-box;*/
-/*    border: 1px solid rgba(0, 0, 0, 0.1);*/
-/*    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);*/
-/*    backdrop-filter: blur(10px);*/
-/*    opacity: 0;*/
-/*    border-radius: 0.25rem;*/
-/*}*/
+.toast {
+    max-width: 350px;
+    overflow: hidden;
+    font-size: 0.875rem;
+    background-color: rgba(255, 255, 255, 0.85);
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    border-radius: 0.25rem;
+}
 
-/*.toast:not(:last-child) {*/
-/*    margin-bottom: 0.75rem;*/
-/*}*/
+.toast:not(:last-child) {
+    margin-bottom: 0.75rem;
+}
 
-/*.toast.showing {*/
-/*    opacity: 1;*/
-/*}*/
+.toast.showing {
+    opacity: 1;
+}
 
-/*.toast.show {*/
-/*    display: block;*/
-/*    opacity: 1;*/
-/*}*/
+.toast.show {
+    display: block;
+    opacity: 1;
+}
 
-/*.toast.hide {*/
-/*    display: none;*/
-/*}*/
+.toast.hide {
+    display: none;
+}
 
-/*.toast-header {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    padding: 0.25rem 0.75rem;*/
-/*    color: #6c757d;*/
-/*    background-color: rgba(255, 255, 255, 0.85);*/
-/*    background-clip: padding-box;*/
-/*    border-bottom: 1px solid rgba(0, 0, 0, 0.05);*/
-/*}*/
+.toast-header {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    color: #6c757d;
+    background-color: rgba(255, 255, 255, 0.85);
+    background-clip: padding-box;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
 
-/*.toast-body {*/
-/*    padding: 0.75rem;*/
-/*}*/
+.toast-body {
+    padding: 0.75rem;
+}
 
 .modal-open {
     overflow: hidden;
@@ -49801,60 +49801,60 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     }
 }
 
-/*.toast-success {*/
-/*    background-color: #593bdb;*/
-/*}*/
+.toast-success {
+    background-color: #593bdb;
+}
 
-/*.toast-info {*/
-/*    background-color: #50E3C2;*/
-/*}*/
+.toast-info {
+    background-color: #50E3C2;
+}
 
-/*.toast-warning {*/
-/*    background-color: #FFAA16;*/
-/*}*/
+.toast-warning {
+    background-color: #FFAA16;
+}
 
-/*.toast-error {*/
-/*    background-color: #FF1616;*/
-/*}*/
+.toast-error {
+    background-color: #FF1616;
+}
 
-/*#toast-container > div {*/
-/*    box-shadow: none;*/
-/*    border-radius: 0;*/
-/*    width: auto;*/
-/*    max-width: 250px;*/
-/*    opacity: 1;*/
-/*}*/
+#toast-container > div {
+    box-shadow: none;
+    border-radius: 0;
+    width: auto;
+    max-width: 250px;
+    opacity: 1;
+}
 
-/*[direction="rtl"] #toast-container > div {*/
-/*    padding: 15px 50px 15px 15px;*/
-/*    background-position: calc(100% - 15px);*/
-/*    text-align: right;*/
-/*}*/
+[direction="rtl"] #toast-container > div {
+    padding: 15px 50px 15px 15px;
+    background-position: calc(100% - 15px);
+    text-align: right;
+}
 
-/*#toast-container > div:hover {*/
-/*    box-shadow: none;*/
-/*}*/
+#toast-container > div:hover {
+    box-shadow: none;
+}
 
-/*#toast-container .toast-title {*/
-/*    margin-bottom: 5px;*/
-/*    font-weight: 600;*/
-/*}*/
+#toast-container .toast-title {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
 
-/*#toast-container .toast-message {*/
-/*    font-size: 12px;*/
-/*}*/
+#toast-container .toast-message {
+    font-size: 12px;
+}
 
-/*#toast-container .toast-close-button {*/
-/*    opacity: 1;*/
-/*    font-size: 8px;*/
-/*    font-weight: normal;*/
-/*    text-shadow: none;*/
-/*}*/
+#toast-container .toast-close-button {
+    opacity: 1;
+    font-size: 8px;
+    font-weight: normal;
+    text-shadow: none;
+}
 
-/*[direction="rtl"] .toast-top-right.demo_rtl_class {*/
-/*    left: 12px;*/
-/*    right: auto;*/
-/*}*/
+[direction="rtl"] .toast-top-right.demo_rtl_class {
+    left: 12px;
+    right: auto;
+}
 
 .jqvmap-zoomin,
 .jqvmap-zoomout {

@@ -9,6 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>GPhoneS Store</title>
+    <link rel="stylesheet" href="../../../vendor/toastr/css/toastr.min.css">
 </head>
 <body>
 <div>
@@ -150,12 +151,9 @@
                                                 </div>
                                                 <br>
                                                 <div class="row">
-                                                    <div class="col-md-12" style="text-align: center">
-                                                    <div class="buttons">
-                                                            <button id="success" type="submit"  class="btn btn-primary"
-                                                                    >Thanh Toán</button>
-                                                        </div>
-                                                    </div>
+                                                    <button type="submit" class="btn btn-dark mb-2 " id="toastr-success-top-center-thanh-toan">
+                                                        Thanh Toán
+                                                    </button>
                                                 </div>
                                             </form>
                                         </div>
@@ -408,4 +406,12 @@
         }
     }
 </script>
+<script src="../../../vendor/global/global.min.js"></script>
+<script src="../../../js/quixnav-init.js"></script>
+
+<!-- Toastr -->
+<script src="../../../vendor/toastr/js/toastr.min.js"></script>
+
+<!-- All init script -->
+<script src="../../../js/plugins-init/toastr-init.js"></script>
 </html>

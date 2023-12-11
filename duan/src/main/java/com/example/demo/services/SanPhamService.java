@@ -43,7 +43,7 @@ public interface SanPhamService {
 
     public List<SanPham> loc(UUID idHang, UUID idMan, UUID idCamera);
 
-    public boolean trungDuLieu(String ten, HangSanPham hangSanPham, ManHinh manHinh, Camera camera, Anh anh);
+    public boolean trungDuLieu(String ten, HangSanPham hangSanPham, Camera camera, ManHinh manHinh, Anh anh);
 
 }
 
