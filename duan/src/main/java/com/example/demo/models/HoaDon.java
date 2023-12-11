@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,6 +48,8 @@ public class HoaDon {
     @Column(name = "tong_tien")
     private BigDecimal tongTien;
 
+    @DecimalMin(value = "0", message = "Phí ship phải là số và lớn hơn hoặc bằng 0")
+    @DecimalMax(value = "300000", message = "Phí ship tối đa là 300.000")
     @Column(name = "phi_ship")
     private BigDecimal phiShip;
 

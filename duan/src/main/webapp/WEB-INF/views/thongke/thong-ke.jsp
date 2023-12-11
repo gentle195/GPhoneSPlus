@@ -14,91 +14,22 @@
 
 <body>
 
-<%--<div class="row">--%>
-<%--    <div class="col-lg-4 col-sm-6">--%>
-<%--        <div class="card">--%>
-<%--            <div class="stat-widget-two card-body">--%>
-<%--                <div class="stat-content">--%>
-<%--                    <div class="stat-text">Tổng đơn hàng đã bán </div>--%>
-<%--                    <div class="stat-digit">${listCount}</div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    <div class="col-lg-4 col-sm-6">--%>
-<%--        <div class="card">--%>
-<%--            <div class="stat-widget-two card-body">--%>
-<%--                <div class="stat-content">--%>
-<%--                    <div class="stat-text">Tổng thu nhập</div>--%>
-<%--                    <div class="stat-digit">${listAvg}<a>VNĐ</a></div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    <div class="col-lg-4 col-sm-6">--%>
-<%--        <div class="card">--%>
-<%--            <div class="stat-widget-two card-body">--%>
-<%--                <div class="stat-content">--%>
-<%--                    <div class="stat-text">Tổng(..)</div>--%>
-<%--                    <div class="stat-digit">500</div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    <!-- /# column -->--%>
-<%--</div>--%>
-
-<div class="col-lg-12 grid-margin stretch-card">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Doanh thu các năm
-                <form action="/thong-ke/loc-nam" method="post" style="float: right">
-                    <select name="namSelect">
-                        <option value="" disabled >Chọn năm</option>
-                        <c:forEach items="${listYear}" var="nam">
-                            <option value="${nam.getNam()}">${nam.getNam()}</option>
-                        </c:forEach>
-                    </select>
-                    <button type="submit" class="btn btn-primary mr-2"
-                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                        Lọc
-                    </button>
-                </form>
-            </h4>
-
-            <div class="table-responsive">
-                <table class="table table-striped" style="color: black">
-                    <thead>
-                    <tr>
-                        <th>Tháng</th>
-                        <th>Số lượng sản phẩm đã bán</th>
-                        <th>Doanh thu chưa đổi trả</th>
-                        <th>Tiền đổi trả</th>
-                        <th>Phí ship</th>
-                        <th>Doanh thu thực tế</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <i class="mdi mdi-border-color"></i>
-                    <c:forEach items="${listDoanhThu}" var="DT" varStatus="index">
-                        <tr>
-                            <td>${DT.getThang()}</td>
-                            <td>${DT.getSoLuongSP()}</td>
-                            <td>${DT.getDoanhThuCu()}</td>
-                            <td>${DT.getTienDoiTra()}</td>
-                            <td>${DT.getPhiShip()}</td>
-                            <td>${DT.getDoanhThu()}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <div class="card">
+    <h4 class="card-title">Biểu đồ doanh thu các tháng trong năm </h4>
+    <form action="/thong-ke/loc-nam" method="post" style="text-align: right">
+        <select name="namSelect">
+            <option value="" disabled >Chọn năm</option>
+            <c:forEach items="${listYear}" var="nam">
+                <option value="${nam.getNam()}">${nam.getNam()}</option>
+            </c:forEach>
+        </select>
+        <button type="submit" class="btn btn-primary mr-2"
+                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+            Lọc
+        </button>
+    </form>
     <div class="card-body">
         <canvas id="myChart" ></canvas>
     </div>
@@ -129,7 +60,7 @@
                 yAxisID: 'y'
             },
                 {
-                    label: 'Số Lượng',
+                    label: 'Số lượng sản phẩm đã bán',
                     data: data.map(item => item.soLuong),
                     borderWidth: 1,
                     yAxisID: 'y1'

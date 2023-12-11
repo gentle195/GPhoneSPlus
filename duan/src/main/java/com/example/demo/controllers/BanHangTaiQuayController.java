@@ -149,11 +149,11 @@ public class BanHangTaiQuayController {
             NhanVien nhanVien = nhanVienService.findById(SecurityUtil.getId().getId());
             HoaDon hd = new HoaDon();
             String mhd = "";
-            Integer sl = diaChiService.findAll().size();
+            Integer sl = hoaDonService.findAll().size();
             if (sl < 10) {
-                mhd = "MDC0" + sl;
+                mhd = "MHD0" + sl;
             } else {
-                mhd = "MDC" + sl;
+                mhd = "MHD" + sl;
             }
             hd.setMa(mhd);
             hd.setTinhTrang(0);

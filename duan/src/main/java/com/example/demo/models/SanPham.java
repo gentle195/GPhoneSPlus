@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -47,7 +49,10 @@ public class SanPham {
     @Column(name = "he_dieu_hanh")
     private String heDieuHanh;
 
+
     @NotNull(message = "Không để trống thông tin")
+    @DecimalMin(value = "1", message = "Số khe sim tối thiếu lớn hơn hoặc bằng 1")
+    @DecimalMax(value = "2", message = "Số khe sim tối đa là 2")
     @Column(name = "so_sim")
     private int soSim;
 

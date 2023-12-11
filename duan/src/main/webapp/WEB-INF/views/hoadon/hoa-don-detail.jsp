@@ -94,7 +94,7 @@
         </li>
     </ul>
 </div>
-<div class="tab-content" id="myTabContent">
+<div class="tab-content" id="myTabContent" >
     <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
         <div class="col-12 grid-margin">
             <div class="col-lg-12 grid-margin stretch-card">
