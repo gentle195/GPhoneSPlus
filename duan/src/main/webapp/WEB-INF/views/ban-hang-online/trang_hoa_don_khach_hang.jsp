@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<%--thong bao--%>
+    <%--thong bao--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -323,7 +323,7 @@
                             <c:if test="${idkhachhang!='1'}">
                                 <c:if test="${listghct.size()>0}">
                                     <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"
-                                       >
+                                    >
                                         <i  class="fa fa-shopping-cart"></i>
                                         <span>Giỏ hàng</span>
                                         <div class="qty">${banhangonline.ListghctTheoidgh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId()).size()}</div>
@@ -447,7 +447,7 @@
                 <li><a href="#">ƯU ĐÃI HẤP DẪN</a></li>
                 <li><a href="#">LOẠI</a></li>
                 <li><a href="/ban-hang-online/dien-thoai-thong-minh">ĐIỆN THOẠI THÔNG MINH</a></li>
-<%--                <li><a style="color: red" href="/ban-hang-online/hoa-don-online/${id}">CÁC ĐƠN HÀNG</a></li>--%>
+                <%--                <li><a style="color: red" href="/ban-hang-online/hoa-don-online/${id}">CÁC ĐƠN HÀNG</a></li>--%>
 
             </ul>
             <!-- /NAV -->
@@ -459,185 +459,188 @@
 <!-- /NAVIGATION -->
 <br>
 
-    <article style="margin-left: 15%;width: 70%" class="shadow p-3 mb-5 bg-body-tertiary rounded">
+<article style="margin-left: 15%;width: 70%" class="shadow p-3 mb-5 bg-body-tertiary rounded">
 
-        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/full/xem"
-                <c:if test="${mau=='full'}">style="color: red" </c:if>
-        >Tất cả</a>
+    <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/full/xem"
+       <c:if test="${mau=='full'}">style="color: red" </c:if>
+    >Tất cả</a>
 
-        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/0/xem"
-           <c:if test="${mau=='0'}">style="color: red" </c:if>
-        >Chờ xử lý(TT giao hàng)</a>
-        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/1/xem"
-           <c:if test="${mau=='1'}">style="color: red" </c:if>
-        >Đã xác nhận</a>
-        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/3/xem"
-           <c:if test="${mau=='3'}">style="color: red" </c:if>
-        >Chờ thanh toán</a>
-        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/2/xem"
-           <c:if test="${mau=='2'}">style="color: red" </c:if>
-        >Đã thanh toán</a>
-        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/danggiao/xem"
-           <c:if test="${mau=='danggiao'}">style="color: red" </c:if>
-        >Đang giao hàng</a>
-        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/thanhcong/xem"
-           <c:if test="${mau=='thanhcong'}">style="color: red" </c:if>
-        >Hoàn thành</a>
-        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/8/xem"
-           <c:if test="${mau=='8'}">style="color: red" </c:if>
-        >Đã hủy</a>
-    </article>
+    <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/0/xem"
+       <c:if test="${mau=='0'}">style="color: red" </c:if>
+    >Chờ xử lý(TT giao hàng)</a>
+    <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/1/xem"
+       <c:if test="${mau=='1'}">style="color: red" </c:if>
+    >Đã xác nhận</a>
+    <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/3/xem"
+       <c:if test="${mau=='3'}">style="color: red" </c:if>
+    >Chờ thanh toán</a>
+    <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/2/xem"
+       <c:if test="${mau=='2'}">style="color: red" </c:if>
+    >Đã thanh toán</a>
+    <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/danggiao/xem"
+       <c:if test="${mau=='danggiao'}">style="color: red" </c:if>
+    >Đang giao hàng</a>
+    <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/thanhcong/xem"
+       <c:if test="${mau=='thanhcong'}">style="color: red" </c:if>
+    >Hoàn thành</a>
+    <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/8/xem"
+       <c:if test="${mau=='8'}">style="color: red" </c:if>
+    >Đã hủy</a>
+</article>
 
 <main style="width: 95%;margin-left: 2.5%; " id="content" class="shadow p-3 mb-5 bg-body-tertiary rounded">
-<%--    <c:if test="${listhdkh.size()>0}">--%>
-        <div id="tab00" class="tab-content" style="display: block; color: red">
+    <%--    <c:if test="${listhdkh.size()>0}">--%>
+    <div id="tab00" class="tab-content" style="display: block; color: red">
 
 
 
-            <div>
-                <table id="tentable" class="table table-bordered" style="width: 100%;text-align: center">
-                    <thead>
+        <div>
+            <table id="tentable" class="table table-bordered" style="width: 100%;text-align: center">
+                <thead>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày đặt</th>
+                    <th>Ngày TT</th>
+                    <th>SĐT</th>
+                    <th>Địa chỉ nhận</th>
+                    <th>Trạng thái</th>
+                    <th>HTTT</th>
+                    <th>Giao hàng</th>
+                    <th>Đổi trả</th>
+                    <th >Chức năng</th>
+                </tr>
+                </thead>
+                <tbody>
+                <fmt:parseDate var="now" value="${now}" pattern="yyyy-MM-dd"/>
+
+                <c:forEach items="${listhdkh}" var="ht" varStatus="stt">
                     <tr>
-                        <th>Mã đơn hàng</th>
-                        <th>Ngày đặt</th>
-                        <th>Ngày TT</th>
-                        <th>SĐT</th>
-                        <th>Địa chỉ nhận</th>
-                        <th>Trạng thái</th>
-                        <th>HTTT</th>
-                        <th>Giao hàng</th>
-                        <th>Đổi trả</th>
-                        <th >Chức năng</th>
+                        <td>${ht.ma}</td>
+                        <td>${ht.ngayTao}</td>
+                        <td>${ht.ngayThanhToan}</td>
+                        <td>${ht.sdt}</td>
+                        <td>
+                            <div style="width: 5cm; overflow: hidden;">${ht.diaChi.diaChi},${ht.diaChi.quan},${ht.diaChi.huyen},${ht.diaChi.thanhPho}</div>
+                        </td>
+                        <td>
+                            <c:if test="${ht.tinhTrang==0}">
+                                <p>Chờ xử lý</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrang==1}">
+                                <p>Đã xác nhận</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrang==2}">
+                                <p>Đã Thanh toán</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrang==3}">
+                                <p>Chờ thanh toán</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrang==8}">
+                                <p>Đã hủy</p>
+                            </c:if>
+                        </td>
+                        <td>
+                            <c:if test="${ht.hinhThucThanhToan==0}">
+                                <p>Thanh toán khi nhận hàng</p>
+                            </c:if>
+                            <c:if test="${ht.hinhThucThanhToan==1}">
+                                <p>Thanh toán online</p>
+                            </c:if>
+                        </td>
+                        <td>
+                            <c:if test="${ht.tinhTrangGiaoHang==0}">
+                                <p>Chờ xử lý</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrangGiaoHang==1}">
+                                <p>Chuẩn bị đơn hàng</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrangGiaoHang==2}">
+                                <p>Đang giao hàng</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrangGiaoHang==3}">
+                                <p>Giao hàng thành công</p>
+                            </c:if>
+                            <c:if test="${ht.tinhTrangGiaoHang==8}">
+                                <p>Đơn hàng đã hủy</p>
+                            </c:if>
+                        </td>
+
+                        <td>
+                            <c:if test="${  ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist0.contains(ht.ma) }">
+                                <p>Chờ xử lý</p>
+                            </c:if>
+
+                            <c:if test="${  ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist2.contains(ht.ma) }">
+                                <p>
+                                    Đổi trả thành công
+                                </p>
+                            </c:if>
+                            <c:if test="${  ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist1.contains(ht.ma) }">
+                                <p>
+                                    Từ chối đổi trả
+                                </p>
+                            </c:if>
+                        </td>
+
+                        <td colspan="4">
+                            <c:if test="${ht.tinhTrang==0}">
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
+                                    tiết
+                                </a>
+                                <a class="btn btn-danger"
+                                   href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy</a>
+
+                            </c:if>
+                            <c:if test="${ht.tinhTrang==1}">
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
+                                    tiết
+                                </a>
+                                <a class="btn btn-danger"
+                                   href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy</a>
+
+                            </c:if>
+                            <c:if test="${ht.tinhTrang==2}">
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
+                                    tiết
+                                </a>
+                            </c:if>
+                            <c:if test="${ht.tinhTrang==3}">
+
+                                <c:if test="${ht.tinhTrangGiaoHang==0 || ht.tinhTrangGiaoHang==1 }">
+
+                                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
+                                        tiết </a>
+                                    <a class="btn btn-danger"
+                                       href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy</a>
+
+                                </c:if>
+                                <c:if test="${ht.tinhTrangGiaoHang!=0 && ht.tinhTrangGiaoHang!=1 }">
+                                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
+                                        tiết </a>
+                                </c:if>
+                            </c:if>
+                            <c:if test="${ht.tinhTrang==8}">
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
+                                    tiết
+                                </a>
+                            </c:if>
+                            <c:if test="${  ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist3.contains(ht.ma) && checkList.contains(ht.ma) }">
+                                <button type="button" class="btn btn-primary doi-tra-btn" data-id="${ht.id}"
+                                        onclick="showChonSanPhamModal(this)">
+                                    Đổi trả
+                                </button>
+                            </c:if>
+                            <c:if test="${ checkHDlist0.contains(ht.ma) }">
+                                <a class="btn btn-primary" style="background-color: #ff0000" href="/ban-hang-online/huy/${ht.id}" type="button">Hủy</a>
+                            </c:if>
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <fmt:parseDate var="now" value="${now}" pattern="yyyy-MM-dd"/>
+                </c:forEach>
+                </tbody>
+            </table>
 
-                    <c:forEach items="${listhdkh}" var="ht" varStatus="stt">
-                        <tr>
-                            <td>${ht.ma}</td>
-                            <td>${ht.ngayTao}</td>
-                            <td>${ht.ngayThanhToan}</td>
-                            <td>${ht.sdt}</td>
-                            <td>
-                                <div style="width: 5cm; overflow: hidden;">${ht.diaChi.diaChi},${ht.diaChi.quan},${ht.diaChi.huyen},${ht.diaChi.thanhPho}</div>
-                            </td>
-                            <td>
-                                <c:if test="${ht.tinhTrang==0}">
-                                    <p>Chờ xử lý</p>
-                                </c:if>
-                                <c:if test="${ht.tinhTrang==1}">
-                                    <p>Đã xác nhận</p>
-                                </c:if>
-                                <c:if test="${ht.tinhTrang==2}">
-                                    <p>Đã Thanh toán</p>
-                                </c:if>
-                                <c:if test="${ht.tinhTrang==3}">
-                                    <p>Chờ thanh toán</p>
-                                </c:if>
-                                <c:if test="${ht.tinhTrang==8}">
-                                    <p>Đã hủy</p>
-                                </c:if>
-                            </td>
-                            <td>
-                                <c:if test="${ht.hinhThucThanhToan==0}">
-                                    <p>Thanh toán khi nhận hàng</p>
-                                </c:if>
-                                <c:if test="${ht.hinhThucThanhToan==1}">
-                                    <p>Thanh toán online</p>
-                                </c:if>
-                            </td>
-                            <td>
-                                <c:if test="${ht.tinhTrangGiaoHang==0}">
-                                    <p>Chờ xử lý</p>
-                                </c:if>
-                                <c:if test="${ht.tinhTrangGiaoHang==1}">
-                                    <p>Chuẩn bị đơn hàng</p>
-                                </c:if>
-                                <c:if test="${ht.tinhTrangGiaoHang==2}">
-                                    <p>Đang giao hàng</p>
-                                </c:if>
-                                <c:if test="${ht.tinhTrangGiaoHang==3}">
-                                    <p>Giao hàng thành công</p>
-                                </c:if>
-                                <c:if test="${ht.tinhTrangGiaoHang==8}">
-                                    <p>Đơn hàng đã hủy</p>
-                                </c:if>
-                            </td>
-
-                            <td>
-                                <c:if test="${  ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist0.contains(ht.ma) }">
-                                    <p>Chờ xử lý</p>
-                                </c:if>
-
-                                <c:if test="${  ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist2.contains(ht.ma) }">
-                                    <p>
-                                        Đổi trả thành công
-                                    </p>
-                                </c:if>
-                                <c:if test="${  ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist1.contains(ht.ma) }">
-                                    <p>
-                                        Từ chối đổi trả
-                                    </p>
-                                </c:if>
-                            </td>
-
-                            <td colspan="4">
-                                <c:if test="${ht.tinhTrang==0}">
-                                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
-                                        tiết
-                                        </a>
-                                    <a class="btn btn-danger"
-                                       href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy</a>
-
-                                </c:if>
-                                <c:if test="${ht.tinhTrang==1}">
-                                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
-                                        tiết
-                                        </a>
-                                    <a class="btn btn-danger"
-                                       href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy</a>
-
-                                </c:if>
-                                <c:if test="${ht.tinhTrang==2}">
-                                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
-                                        tiết
-                                        </a>
-                                </c:if>
-                                <c:if test="${ht.tinhTrang==3}">
-
-                                    <c:if test="${ht.tinhTrangGiaoHang==0 || ht.tinhTrangGiaoHang==1 }">
-
-                                        <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
-                                            tiết </a>
-                                        <a class="btn btn-danger"
-                                           href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy</a>
-
-                                    </c:if>
-                                    <c:if test="${ht.tinhTrangGiaoHang!=0 && ht.tinhTrangGiaoHang!=1 }">
-                                        <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
-                                            tiết </a>
-                                    </c:if>
-                                </c:if>
-                                <c:if test="${ht.tinhTrang==8}">
-                                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
-                                        tiết
-                                        </a>
-                                </c:if>
-                                <c:if test="${  ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist3.contains(ht.ma) && checkList.contains(ht.ma) }">
-                                    <button type="button" class="btn btn-primary doi-tra-btn" data-id="${ht.id}"
-                                            onclick="showChonSanPhamModal(this)">
-                                        Đổi trả
-                                    </button>
-                                </c:if>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-
-            </div>
         </div>
+    </div>
 
 
 </main>
@@ -903,11 +906,11 @@
                     "<td>" + item.imei.chiTietSanPham.sanPham.hangSanPham.ten + "</td>" +
                     "<td>" + item.imei.chiTietSanPham.giaBan + "</td>" +
                     "<td>" +
-                    "<select class='form-control hinhThucSelect'>" +
-                    "<option value='0'>Đổi sản phẩm</option>" +
 
-                    "</select>" +
-                    "<button class='btn btn-success chonSanPhamBtn' style='display:none'>Chọn sản phẩm</button>" +
+                    "Đổi hàng" +
+
+
+
                     "</td>" +
                     "<td class='ghi-chu-td' >" +
                     "<input type='text' class='form-control ghiChuInput' placeholder='Ghi chú'>" +
@@ -923,12 +926,12 @@
                 // Lặp qua các hàng được chọn để lấy thông tin
                 $(".select-checkbox:checked").each(function () {
                     var itemId = $(this).data("id");
-                    var hinhThuc = parseInt($(this).closest("tr").find(".hinhThucSelect").val());
+                    // var hinhThuc = parseInt($(this).closest("tr").find(".hinhThucSelect").val());
                     var ghiChu = $(this).closest("tr").find(".ghiChuInput").val();
 
                     selectedItems.push({
                         hdctId: itemId,
-                        hinhThuc: hinhThuc,
+                        // hinhThuc: hinhThuc,
                         ghiChu: ghiChu
                     });
                 });
@@ -940,7 +943,7 @@
                     data: {
                         hdctIds: selectedItems.map(item => item.hdctId),
                         hoadonId: hoadonId,
-                        hinhThucList: selectedItems.map(item => parseInt(item.hinhThuc)),
+                        // hinhThucList: selectedItems.map(item => parseInt(item.hinhThuc)),
                         ghiChuList: selectedItems.map(item => item.ghiChu)
                     },
                     success: function (response) {
