@@ -931,6 +931,8 @@ UUID idkmdangchon=null;
         model.addAttribute("kmchon",kmchon);
 
         model.addAttribute("banhangonline", banHangOnlineService);
+        model.addAttribute("banhangonline", banHangOnlineService);
+        model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
         model.addAttribute("listctsp", banHangOnlineService.locbanhangcoGIATIEN(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, BigDecimal.valueOf(Double.valueOf(x11)), BigDecimal.valueOf(Double.valueOf(x12))));
 
         return "khuyen-mai/single_pase_giao-dien-loc-khuyen-mai";
