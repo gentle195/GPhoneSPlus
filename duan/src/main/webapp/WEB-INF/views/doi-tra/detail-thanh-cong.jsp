@@ -12,67 +12,6 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"/>
     <style>
-        .stepwizard-step p {
-            margin-top: 10px;
-
-        }
-
-        .stepwizard-row {
-            display: table-row;
-
-        }
-
-        .stepwizard {
-            display: table;
-            width: 100%;
-            position: relative;
-
-        }
-
-        .stepwizard-step button[disabled] {
-            opacity: 1 !important;
-            filter: alpha(opacity=100) !important;
-        }
-
-        .stepwizard-row:before {
-            top: 14px;
-            bottom: 0;
-            position: absolute;
-            content: " ";
-            width: 100%;
-            height: 7px;
-            background-color: red;
-            z-order: 0;
-
-
-        }
-
-        .stepwizard-step-linear a:active .btn-circle {
-            background-color: red;
-        }
-
-        .stepwizard-step {
-            display: table-cell;
-            text-align: center;
-            position: relative;
-        }
-
-        .btn-circle {
-            width: 30px;
-            height: 30px;
-            text-align: center;
-            padding: 6px 0;
-            font-size: 12px;
-            line-height: 1.428571429;
-            border-radius: 15px;
-            background-color: #999999;
-        }
-
-        .stepwizard-step-linear {
-
-            font-size: 20px;
-            color: black;
-        }
 
         .custom-table {
             width: 100%;
@@ -295,7 +234,7 @@
                                             <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
                                             <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
                                             <td>${hdct.hoaDonChiTiet.donGia}</td>
-                                            <td>${hdct.hinhThucDoiTra == 0 ? 'Đổi trả' : (hdct.hinhThucDoiTra == 1 ? 'Hoàn trả' : '')} </td>
+                                            <td>${hdct.hinhThucDoiTra == 0 ? 'Đổi mới   ' : (hdct.hinhThucDoiTra == 1 ? 'Hoàn trả' : '')} </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -321,6 +260,7 @@
             <tr>
                 <th>Tên Sản Phẩm</th>
                 <th>Hãng</th>
+                <th>Số IMEI</th>
                 <th>Giá Bán</th>
                 <th>Hình ảnh</th>
             </tr>
@@ -329,6 +269,7 @@
             <tr>
                 <td id="tenSanPhamModal"></td>
                 <td id="hangSanPhamModal"></td>
+                <td id="imeiModal"></td>
                 <td id="giaBanModal"></td>
                 <td id="imageModal"></td>
             </tr>
@@ -351,6 +292,7 @@
                 // Xử lý dữ liệu trả về và hiển thị trong modal
                 $("#tenSanPhamModal").text(data.chiTietSanPham.sanPham.ten);
                 $("#hangSanPhamModal").text(data.chiTietSanPham.sanPham.hangSanPham.ten);
+                $("#imeiModal").text(data.soImei);
                 $("#giaBanModal").text(data.chiTietSanPham.giaBan);
                 $("#imageModal").html('<img src="/uploads/' + data.chiTietSanPham.urlAnh + '" width="80" height="80">');
 

@@ -476,7 +476,6 @@
                                             <thead>
                                             <tr>
                                                 <th style="display: none"></th>
-                                                <th>Mã Sản Phẩm</th>
                                                 <th>Tên Sản Phẩm</th>
                                                 <th>Ảnh</th>
                                                 <th>Hãng</th>
@@ -493,7 +492,6 @@
                                             <c:forEach items="${listChiTietSanPham}" var="ctsp">
                                                 <tr>
                                                     <td style="display: none">${ctsp.id}</td>
-                                                    <td>${ctsp.sanPham.ma}</td>
                                                     <td>${ctsp.sanPham.ten}</td>
                                                     <td align="center">
                                                         <img src="/uploads/${ctsp.urlAnh}" width="40" height="40">
@@ -935,7 +933,6 @@
                 const tr = `
             <tr>
                 <td style="display:none;">` + ctsp.id + `</td>
-                <td>` + ctsp.sanPham.ma + `</td>
                 <td>` + ctsp.sanPham.ten + `</td>
                 <td align="center"><img src="/uploads/` + ctsp.urlAnh + `" width="40" height="40"></td>
                 <td>` + ctsp.sanPham.hangSanPham.ten + `</td>
