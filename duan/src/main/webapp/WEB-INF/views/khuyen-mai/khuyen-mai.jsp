@@ -374,7 +374,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                 <div class="table-responsive">
                     <div>
                         <%--loc--%>
-                        <div style="width: 6cm;float: right;margin-right: 1cm;margin-top: 0cm">
+                        <div style="width: 6cm;float: right;margin-right: 6cm;margin-top: 0cm">
                             <label class="range-label">Khoảng tiền:</label>
                             <div id="slider" class="slider"></div>
 
@@ -385,93 +385,93 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                             </div>
                             <div id="max" style="display: none">${max}</div>
                         </div>
-                        <div style="width: 83%">
-                            <div class="container px-0 px-lg-5 mt-0">
-                                <div class="row gx-0 gx-lg-5 row-cols-0 row-cols-md-0 row-cols-xl-5 justify-content-center"
-                                     style="width: 100%">
-                                    <div style="">
+                        <div style="width: 75%;padding-left: 1cm" >
+
+
+                                    <label style="width: 4cm" >
                                         <select class="form-control" id="hangds1" onchange="clickcombobox()">
                                             <option selected value="null">Hãng sản phẩm</option>
                                             <c:forEach items="${hangds}" var="ht">
                                                 <option value="${ht.ten}">${ht.ten}</option>
                                             </c:forEach>
                                         </select>
-                                    </div>
-                                    <div>
+                                    </label >
+                                    <label style="width: 4cm">
                                         <select class="form-control" id="camds1" onchange="clickcombobox()">
                                             <option selected value="null">Camera</option>
                                             <c:forEach items="${camds}" var="ht">
                                                 <option value="${ht.thongSo}">${ht.thongSo}</option>
                                             </c:forEach>
                                         </select>
-                                    </div>
-
-                                    <div>
+                                    </label >
+                                    <label style="width: 4cm">
                                         <select class="form-control" id="mands1" onchange="clickcombobox()">
                                             <option selected value="null">Màn hình</option>
                                             <c:forEach items="${mands}" var="ht">
                                                 <option value="${ht.thongSo}">${ht.thongSo}</option>
                                             </c:forEach>
                                         </select>
-                                    </div>
-                                    <div style="height: 1.5cm">
+                                    </label>
+
+                                    <label style="width: 4cm">
                                         <select class="form-control" id="mauds1" onchange="clickcombobox()">
                                             <option selected value="null">Màu sắc</option>
                                             <c:forEach items="${mauds}" var="ht">
                                                 <option value="${ht.ten}">${ht.ten}</option>
                                             </c:forEach>
                                         </select>
-                                    </div>
-                                    <div>
+                                    </label>
+                                    <label style="width: 4cm">
                                         <select class="form-control" id="ramds1" onchange="clickcombobox()">
                                             <option selected value="null">Ram</option>
                                             <c:forEach items="${ramds}" var="ht">
                                                 <option value="${ht.dungLuong}">${ht.dungLuong}</option>
                                             </c:forEach>
                                         </select>
-                                    </div>
-                                    <div>
+                                    </label>
+                            <br>
+                                    <label style="width: 4cm">
                                         <select class="form-control" id="romds1" onchange="clickcombobox()">
                                             <option selected value="null">Rom</option>
                                             <c:forEach items="${romds}" var="ht">
                                                 <option value="${ht.dungLuong}">${ht.dungLuong}</option>
                                             </c:forEach>
                                         </select>
-                                    </div>
-                                    <div style="height: 1.5cm">
+                                    </label>
+                                    <label style="width: 4cm">
                                         <select class="form-control" id="pinds1" onchange="clickcombobox()">
                                             <option selected value="null">Pin</option>
                                             <c:forEach items="${pinds}" var="ht">
                                                 <option value="${ht.loaiPin}">${ht.loaiPin}</option>
                                             </c:forEach>
                                         </select>
-                                    </div>
-                                    <div>
+                                    </label>
+                                    <label style="width: 4cm">
                                         <select class="form-control" id="dungds1" onchange="clickcombobox()">
                                             <option selected value="null">Dung lượng pin</option>
                                             <c:forEach items="${dungds}" var="ht">
                                                 <option value="${ht.thongSo}">${ht.thongSo}</option>
                                             </c:forEach>
                                         </select>
-                                    </div>
-                                    <div>
+                                    </label>
+                                    <label style="width: 4cm">
                                         <select class="form-control" id="chipds1" onchange="clickcombobox()">
                                             <option selected value="null">Chíp</option>
                                             <c:forEach items="${chipds}" var="ht">
                                                 <option value="${ht.ten}">${ht.ten}</option>
                                             </c:forEach>
                                         </select>
-                                    </div>
-                                    <div>
+                                    </label>
+                                    <label style="width: 4cm">
                                         <select class="form-control" id="sands1" onchange="clickcombobox()">
                                             <option selected value="null">Sản phẩm</option>
                                             <c:forEach items="${sands}" var="ht">
                                                 <option value="${ht.ten}">${ht.ten}</option>
                                             </c:forEach>
                                         </select>
-                                    </div>
-                                </div>
-                            </div>
+                                    </label>
+
+
 
                             <div id="vt"></div>
 

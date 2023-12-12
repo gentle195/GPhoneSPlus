@@ -31,6 +31,7 @@
         </td>
         <td>
                 ${ht.giaBan-ht.giaBan/100*khuyenMaiRepository.tonggiamgia(ht.id)} VND
+
         </td>
         <td>
             <c:if test="${ht.khuyenMai==null}">
