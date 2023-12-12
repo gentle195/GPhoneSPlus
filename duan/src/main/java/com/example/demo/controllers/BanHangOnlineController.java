@@ -1654,7 +1654,7 @@ public class BanHangOnlineController {
     @GetMapping("/xac-nhan-khachhang")
     public String xacnhankh(Model model, @RequestParam("hdctIds[]") List<UUID> hdctIds,
                             @RequestParam("hoadonId") UUID hoadonId,
-                            @RequestParam("hinhThucList[]") List<String> hinhThucList,
+//                            @RequestParam("hinhThucList[]") List<String> hinhThucList,
                             @RequestParam("ghiChuList[]") List<String> ghiChuList) {
         // Check if any data is selected
         if (hdctIds.isEmpty()) {
@@ -1762,13 +1762,15 @@ public class BanHangOnlineController {
         return "ban-hang-online/singfle_pase_tim_kiem_trang_chu";
     }
 
-    @GetMapping("/ban-hang-online/huy/{doitraId}")
+    @GetMapping("/ban-hang-online/huy/{hoadonId}")
     public String huy(Model model, @ModelAttribute("dulieuxem") DoiTra dulieuxem,
-                      @PathVariable UUID doitraId, HttpServletRequest request
+                      @PathVariable UUID hoadonId, HttpServletRequest request
     ) {
-        DoiTra doiTra = doiTraService.findById(doitraId);
+
+
+        DoiTra doiTra = doiTraService.getDoiTraByHoaDon(hoadonId);
         System.out.println("Doi tra" + doiTra);
-        List<DoiTraChiTiet> listCHiTietDoiTra = doiTraChiTietService.getDoiTraChiTietByDoiTraId(doitraId);
+        List<DoiTraChiTiet> listCHiTietDoiTra = doiTraChiTietService.getDoiTraChiTietByDoiTraId(doiTra.getId());
         for (DoiTraChiTiet dtct : listCHiTietDoiTra
         ) {
             if (dtct.getHienTrangSanPham() == 0) {
@@ -1793,7 +1795,7 @@ public class BanHangOnlineController {
         }
         doiTra.setTinhTrang(1);
         doiTra.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
-        doiTraService.update(doitraId, doiTra);
+        doiTraService.update(doiTra.getId(), doiTra);
 
 
         return "redirect:/ban-hang-online/hoa-don-online/" +doiTra.getHoaDon().getKhachHang().getId()+"/full/"+"huydoitra";

@@ -419,6 +419,15 @@ public class DoiTraController {
             doiTraChiTiet.setLyDo(lyDo);
 
             doiTraChiTietService.add(doiTraChiTiet);
+        }else{
+            DoiTraChiTiet doiTraChiTiet=doiTraChiTietService.getDoiTraByHDCT(hdctId);
+            doiTraChiTiet.setTinhTrang(0);
+            doiTraChiTiet.setHoaDonChiTiet(hoaDonChiTiet);
+            doiTraChiTiet.setDoiTra(doiTra);
+            doiTraChiTiet.setHienTrangSanPham(hienTrang);
+            doiTraChiTiet.setHinhThucDoiTra(0);
+            doiTraChiTiet.setLyDo(lyDo);
+            doiTraChiTietService.update(doiTraChiTiet.getId(),doiTraChiTiet);
         }
 
         return "redirect:/doi-tra/detail/" + doiTra.getHoaDon().getId() + "?doitraId=" + doitraId + "&hoadonId="
@@ -428,7 +437,7 @@ public class DoiTraController {
 
     @PostMapping("/xac-nhan")
     public  ResponseEntity<byte[]> xacnhan(Model model, @ModelAttribute("dulieuxem") DoiTra dulieuxem,
-                           HttpServletRequest request
+                                           HttpServletRequest request
     ) {
 
         DoiTra doiTra = doiTraService.findById(idDT);

@@ -24,6 +24,9 @@ public interface DoiTraChiTietRepository extends JpaRepository<DoiTraChiTiet, UU
     @Query("SELECT hdct FROM HoaDonChiTiet hdct WHERE hdct.id IN :idList")
     List<HoaDonChiTiet> getHoaDonChiTietByIdList(@Param("idList") List<UUID> idList);
 
+    @Query("select hdct from DoiTraChiTiet hdct left join HoaDonChiTiet hd on hdct.hoaDonChiTiet.id=hd.id where hd.id=:id")
+    DoiTraChiTiet getDoiTraByHDCT(UUID id);
+
     @Query("SELECT hdct FROM DoiTraChiTiet hdct WHERE hdct.hoaDonChiTiet.id IN :idList")
     List<DoiTraChiTiet> getDoiTraChiTietByIdList(@Param("idList") List<UUID> idList);
 
