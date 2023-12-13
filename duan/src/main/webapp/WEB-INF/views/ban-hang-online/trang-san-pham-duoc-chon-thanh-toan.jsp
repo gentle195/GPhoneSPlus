@@ -476,10 +476,11 @@
                     </div>
                     <div class="order-summary">
                         <div class="order-col">
-                            <div><strong>Sản phẩm</strong></div>
+                            <div style="width: 10cm"><strong>Sản phẩm</strong></div>
 
-                            <div><strong>Thành tiền</strong></div>
+                            <div ><strong>Thành tiền</strong></div>
                         </div>
+                        <div style="height: 5cm; overflow: auto;padding-right: 1cm">
                         <c:forEach items="${listghct}" var="ht" varStatus="stt">
                             <hr>
                             <div class="order-products">
@@ -496,8 +497,10 @@
 
                             </div>
                         </c:forEach>
+                        </div>
+                        <br>
                         <div class="order-col">
-                            <div><strong>Số lượng sản phẩm chọn</strong></div>
+                            <div ><strong>Số lượng sản phẩm chọn</strong></div>
                             <div id="tongsanphamchon">
                                 <strong
                                         class="order-total" style="color: black">
