@@ -387,7 +387,7 @@
                                                             path="ngaySinh">Ngày Sinh Khách Hàng:</form:label>
                                                 <div class="col-sm-9">
                                                     <form:input class="form-control" placeholder=""
-                                                                path="ngaySinh" type="date"/>
+                                                                path="ngaySinh" type="date" required="true"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -835,7 +835,7 @@
                     document.getElementById('tienKhachDua1').innerHTML = 'Tiền khách đưa phải là số nguyên dương';
                     document.getElementById('bthd').type = 'button';
                     return false;
-                } else if ((parseFloat(tien) - parseFloat(tongTien)) >=10000000) {
+                } else if ((parseFloat(tien) - parseFloat(tongTien)) >= 10000000) {
                     document.getElementById('tienKhachDua1').innerHTML = 'Tiền khách đưa đang quá lớn';
                     document.getElementById('bthd').type = 'button';
                     return false;
@@ -894,20 +894,24 @@
         } else {
             document.getElementById("tenkh1").innerHTML = "";
             var regex = /^0\d{9}$/;
-            var regexemail = /^.{8,}@gmail\\.com$/
+            var regexemail = /^([a-z0-9_.-]+)@([\da-z.-]+).([a-z.]{2,6})$/
 
-            if (regex.test(sdtkh)) {
-                document.getElementById("sdtkh1").innerHTML = "";
-                document.getElementById("btkh").type = "submit";
-                return true;
-            } else {
+            if (!regex.test(sdtkh)) {
                 document.getElementById("sdtkh1").innerHTML = "SDT phải 10 số và bắt đầu là số 0";
-                if (regexemail.test(email)) {
-                    document.getElementById("email1").innerHTML = "";
-                    document.getElementById("btkh").type = "submit";
-                    return true;
-                } else {
+                document.getElementById("btkh").type = "button";
+                return false;
+            } else {
+                document.getElementById("sdtkh1").innerHTML = "";
+                if (email=='') {
+                    document.getElementById("email1").innerHTML = "email không để trống";
+                    document.getElementById("btkh").type = "button";
+                    return false;
+                }else if(!regexemail.test(email)){
                     document.getElementById("email1").innerHTML = "email chưa đúng";
+                    document.getElementById("btkh").type = "button";
+                    return false;
+                } else {
+                    document.getElementById("email1").innerHTML = "";
                     if (diem == '') {
                         document.getElementById("btkh").type = "button";
                         document.getElementById("diem1").innerHTML = "Điểm ít nhất là 1";
