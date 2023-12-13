@@ -93,4 +93,5 @@ public interface IMEIRepository extends JpaRepository<IMEI, UUID> {
 
     @Query("select imei from  IMEI imei where imei.tinhTrang=0 and imei.chiTietSanPham.id=:id ")
     List<IMEI> statusCTSP(UUID id);
+    boolean existsBySoImei(String imei);
 }

@@ -9,6 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Focus - Bootstrap Admin Dashboard </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
     <!-- Favicon icon -->
 </head>
 <body>
@@ -81,7 +84,7 @@
                                                 <option selected disabled>Sản phẩm</option>
                                                 <form:options items="${listSanPham}" itemLabel="ten" itemValue="id"/>
                                             </form:select>
-                                            <form:errors path="sanPham"/>
+                                            <span class="text-danger">${errorSanPham}</span>
                                         </div>
                                         <div class="col-1">
                                             <a type="button" data-bs-toggle="modal"
@@ -99,6 +102,8 @@
                                                 <option selected disabled>Chip</option>
                                                 <form:options items="${listChip}" itemLabel="ten" itemValue="id"/>
                                             </form:select>
+                                            <span class="text-danger">${errorChip}</span>
+
                                         </div>
                                         <div class="col-1">
                                             <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalChip">
@@ -115,6 +120,8 @@
                                                 <option selected disabled>Dung lượng lưu trữ</option>
                                                 <form:options items="${listRom}" itemLabel="dungLuong" itemValue="id"/>
                                             </form:select>
+                                            <span class="text-danger">${errorRom}</span>
+
                                         </div>
                                         <div class="col-1">
                                             <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalRom">
@@ -133,6 +140,8 @@
                                                 <option selected disabled>Màu sắc</option>
                                                 <form:options items="${listMauSac}" itemLabel="ten" itemValue="id"/>
                                             </form:select>
+                                            <span class="text-danger">${errorMauSac}</span>
+
                                         </div>
                                         <div class="col-1">
                                             <a type="button" data-bs-toggle="modal"
@@ -150,6 +159,8 @@
                                                 <option selected disabled>Dung lượng bộ nhớ</option>
                                                 <form:options items="${listRam}" itemLabel="dungLuong" itemValue="id"/>
                                             </form:select>
+                                            <span class="text-danger">${errorRam}</span>
+
                                         </div>
                                         <div class="col-1">
                                             <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalRam">
@@ -167,6 +178,8 @@
                                                 <form:options items="${listPin}" itemLabel="dungLuongPin.thongSo"
                                                               itemValue="id"/>
                                             </form:select>
+                                            <span class="text-danger">${errorPin}</span>
+
                                         </div>
                                         <div class="col-1">
                                             <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalPin">
@@ -581,6 +594,61 @@
         </div>
     </div>
 </div>
+<c:if test="${thongBaoCTSP1 != null}">
+    <div id="modalError" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="swal2-icon swal2-error swal2-animate-error-icon" style="display: block;">
+                                    <span class="swal2-x-mark swal2-animate-x-mark"><span
+                                            class="swal2-x-mark-line-left"></span><span
+                                            class="swal2-x-mark-line-right"></span></span></div>
+                            <h4 style="color: red;margin: 10px;text-align: center">${thongBaoCTSP1}</h4>
+                        </div>
+                        <div class="col-12" style="text-align: center;margin-top: 20px">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                                Xác nhận
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</c:if>
+<c:if test="${thongBaoCTSP != null}">
+    <div id="modalSuccess" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="swal2-icon swal2-success swal2-animate-success-icon"
+                                 style="display: block;">
+                                <div class="swal2-success-circular-line-left"
+                                     style="background: rgb(255, 255, 255);"></div>
+                                <span class="swal2-success-line-tip swal2-animate-success-line-tip"></span> <span
+                                    class="swal2-success-line-long swal2-animate-success-line-long"></span>
+                                <div class="swal2-success-ring"></div>
+                                <div class="swal2-success-fix" style="background: rgb(255, 255, 255);"></div>
+                                <div class="swal2-success-circular-line-right"
+                                     style="background: rgb(255, 255, 255);"></div>
+                            </div>
+                            <h4 style="color: #10ae05;margin: 10px;text-align: center">${thongBaoCTSP}</h4>
+                        </div>
+                        <div class="col-12" style="text-align: center;margin-top: 20px">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                                Xác nhận
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</c:if>
 </body>
 <script>
     function validateFormSanPham() {
@@ -739,6 +807,16 @@
             previewAnh12.src = '';
         }
         document.getElementById('cucheck1').value = 'moi1';
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#modalSuccess').modal('show');
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#modalError').modal('show');
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

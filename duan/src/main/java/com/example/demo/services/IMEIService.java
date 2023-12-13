@@ -65,6 +65,7 @@ public interface IMEIService {
     public List<IMEI> statusCTSP(UUID id);
     public List<IMEI> findImeiLoi();
     public List<IMEI> searchImeiLoi(String imei);
+    boolean existImei(String imei);
 }
 
 

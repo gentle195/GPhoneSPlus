@@ -187,4 +187,9 @@ public class IMEIServiceImpl implements IMEIService {
     public List<IMEI> searchImeiLoi(String imei) {
         return imeiRepository.searchImeiLoi(imei);
     }
+
+    @Override
+    public boolean existImei(String imei) {
+        return imeiRepository.existsBySoImei(imei);
+    }
 }
