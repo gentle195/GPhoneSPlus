@@ -32,13 +32,9 @@ public class ThongKeController {
 
         List<DoanhThuTheoThang> doanhThuTheoThangs = thongKeService.doanhThu();
         List<DoanhThuTheoThang> selected = thongKeService.selectedYear();
-
         model.addAttribute("listDoanhThu", doanhThuTheoThangs);
         model.addAttribute("listYear", selected);
-
         DecimalFormat df = new DecimalFormat("#,###");
-//        model.addAttribute("listCount", thongKeService.countHD());
-//        model.addAttribute("listAvg",df.format(thongKeService.avgHD()));
         model.addAttribute("contentPage", "../thongke/thong-ke.jsp");
         return "home/layout";
     }
@@ -48,7 +44,6 @@ public class ThongKeController {
     public String locNam(Model model, @ModelAttribute("namSelect") Integer nam) {
         List<DoanhThuTheoThang> selected = thongKeService.selectedYear();
         model.addAttribute("listYear", selected);
-
         List<DoanhThuTheoThang> doanhThuTheoThangs = thongKeService.loctheonam(nam);
         model.addAttribute("listDoanhThu", doanhThuTheoThangs);
         model.addAttribute("contentPage", "../thongke/thong-ke.jsp");

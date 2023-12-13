@@ -43,7 +43,10 @@
     data.push({
         thang: ${DT.getThang()},
         doanhThu: ${DT.getDoanhThu()},
-        soLuong: ${DT.getSoLuongSP()}
+        soLuong: ${DT.getSoLuongSP()},
+        phiShip: ${DT.getPhiShip()},
+        tienDoiTra: ${DT.getTienDoiTra()},
+        doanhThuChuaKhuyenMai: ${DT.getDoanhThuChuaKhuyenMai()}
     });
     </c:forEach>
 
@@ -54,17 +57,45 @@
         data: {
             labels: data.map(item => item.thang),
             datasets: [{
-                label: 'Doanh Thu',
+                label: 'Doanh thu thực tế',
                 data: data.map(item => item.doanhThu),
                 borderWidth: 1,
-                yAxisID: 'y'
+                yAxisID: 'y',
+                borderColor: '#ff6384',
+                backgroundColor: '#ff6384',
             },
                 {
                     label: 'Số lượng sản phẩm đã bán',
                     data: data.map(item => item.soLuong),
                     borderWidth: 1,
-                    yAxisID: 'y1'
-                }
+                    yAxisID: 'y1',
+                    borderColor: '#36a2eb',
+                    backgroundColor: '#36a2eb',
+                },
+                {
+                    label: 'Phí ship',
+                    data: data.map(item => item.phiShip),
+                    borderWidth: 1,
+                    yAxisID: 'y',
+                    borderColor: '#cc65fe',
+                    backgroundColor: '#cc65fe',
+                },
+                {
+                    label: 'Tiền đổi hàng',
+                    data: data.map(item => item.tienDoiTra),
+                    borderWidth: 1,
+                    yAxisID: 'y',
+                    borderColor: '#ffce56',
+                    backgroundColor: '#ffce56',
+                },
+                {
+                    label: 'Doanh thu chưa khuyến mãi',
+                    data: data.map(item => item.doanhThuChuaKhuyenMai),
+                    borderWidth: 1,
+                    yAxisID: 'y',
+                    borderColor: '#5CF142',
+                    backgroundColor: '#5CF142',
+                },
             ]
         },
         options: {

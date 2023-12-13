@@ -34,11 +34,13 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "            COALESCE(SUM(phi_ship), 0) as PhiShip,\n" +
             "            SUM(tong_tien) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - COALESCE(SUM(phi_ship), 0) AS DoanhThu,\n" +
             "            COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) AS TienDoiTra,\n" +
-            "            SUM(tong_tien) AS DoanhThuCu\n" +
+            "            SUM(tong_tien) AS DoanhThuCu,\n" +
+            "            SUM(chi_tiet_san_pham.gia_ban) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - COALESCE(SUM(phi_ship), 0) AS DoanhThuChuaKhuyenMai\n" +
             "            FROM hoa_don left join hoa_don_chi_tiet on hoa_don.id = hoa_don_chi_tiet.id_hoa_don\n" +
             "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
             "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id" +
             "            left join imei on imei.id = hoa_don_chi_tiet.id_imei" +
+            "            left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham" +
             "            where YEAR(ngay_thanh_toan) = 2023 and tinh_trang_giao_hang = 3" +
             "            GROUP BY MONTH(ngay_thanh_toan)", nativeQuery = true)
     List<DoanhThuTheoThang> doanhThu();
@@ -48,10 +50,13 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "            COALESCE(SUM(phi_ship), 0) as PhiShip,\n" +
             "            SUM(tong_tien) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - COALESCE(SUM(phi_ship), 0) AS DoanhThu,\n" +
             "            COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) as TienDoiTra,\n" +
-            "            SUM(tong_tien) AS DoanhThuCu\n" +
+            "            SUM(tong_tien) AS DoanhThuCu,\n" +
+            "            SUM(chi_tiet_san_pham.gia_ban) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - COALESCE(SUM(phi_ship), 0) AS DoanhThuChuaKhuyenMai\n" +
             "            FROM hoa_don left join hoa_don_chi_tiet on hoa_don.id = hoa_don_chi_tiet.id_hoa_don\n" +
             "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
             "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id" +
+            "            left join imei on imei.id = hoa_don_chi_tiet.id_imei" +
+            "            left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham" +
             "            where YEAR(ngay_thanh_toan) = ?1\n and tinh_trang_giao_hang = 3" +
             "            GROUP BY MONTH(ngay_thanh_toan)", nativeQuery = true)
     List<DoanhThuTheoThang> loctheonam(Integer Nam);
