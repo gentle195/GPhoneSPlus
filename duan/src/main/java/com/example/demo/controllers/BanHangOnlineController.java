@@ -1755,6 +1755,7 @@ public class BanHangOnlineController {
             Model model,
             @PathVariable("trangchutimkiem") String trangchutimkiem
     ) {
+        model.addAttribute("banhangonline", banHangOnlineService);
         System.out.println("-------"+trangchutimkiem);
         model.addAttribute("listsp", banHangOnlineService.timkiemTrangChu(trangchutimkiem));
 
