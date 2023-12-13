@@ -79,19 +79,42 @@
                                         <div class="product" style="margin-left: 1%;width: 24%;" >
                                             <div class="product-img" >
                                                 <img src="../../../uploads/${ht.urlAnh}" style="width: 100%;height: 6cm" alt="">
-                                                <div class="product-label">
-                                                    <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
-                                                    <span class="new">Giảm giá</span>
-                                                </div>
+<%--                                                <div class="product-label">--%>
+<%--                                                    <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>--%>
+<%--                                                    <span class="new">Giảm giá</span>--%>
+<%--                                                </div>--%>
+                                                <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
+                                                    <div class="product-label">
+                                                        <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
+                                                        <span class="new">Giảm giá</span>
+                                                    </div>
+                                                </c:if>
                                             </div>
                                             <div class="product-body" style="text-align: left;word-wrap: break-word;z-index: 2">
                                                     <%--                    <p class="product-category">Điện thoại</p>--%>
                                                 <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
-                                                <h4 class="product-price"><span
-                                                        style="font-size:15px">₫</span>${banhangonline.sotienkhidagiam(ht.id)}-
-                                                    <del class="product-old-price">${ht.basoOchammotlam()}<span
-                                                            style="font-size:15px">₫</span></del>
-                                                </h4>
+<%--                                                <h4 class="product-price"><span--%>
+<%--                                                        style="font-size:15px">₫</span>${banhangonline.sotienkhidagiam(ht.id)}---%>
+<%--                                                    <del class="product-old-price">${ht.basoOchammotlam()}<span--%>
+<%--                                                            style="font-size:15px">₫</span></del>--%>
+<%--                                                </h4>--%>
+                                                        <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
+                                                            <h4 class="product-price">
+                                                                    <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+                                                                    ${banhangonline.sotienkhidagiam(ht.id)}
+                                                                <span> ₫</span>
+                                                                <del class="product-old-price"
+                                                                     style="float: right">${ht.basoOchammotlam()}<span>₫</span>
+                                                                </del>
+                                                            </h4>
+                                                        </c:if>
+                                                        <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
+                                                            <h4 class="product-price">
+                                                                    <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+                                                                    ${ht.basoOchammotlam()}
+                                                                <span> ₫</span>
+                                                            </h4>
+                                                        </c:if>
                                                     <%--                                            ${ht.tinhTrang} +  ${ht.sanPham.tinhTrang}--%>
 
                                                 <div class="product-rating"></div>

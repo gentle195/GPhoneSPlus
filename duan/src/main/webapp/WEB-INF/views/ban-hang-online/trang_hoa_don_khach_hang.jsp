@@ -254,19 +254,19 @@
                                                 Tài khoản của tôi
                                             </button>
                                         </form>
-                                        <a class="btn btn-primary" type="submit" onclick="anbt()">Tài khoản của tôi</a>
+                                        <a class="btn btn-primary" type="submit" onclick="anbt()" style="background-color:#00aff0">Tài khoản của tôi</a>
 
                                     </div>
                                     <div>
                                         <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/full/xem"
-                                           class="btn btn-primary">Đơn hàng</a>
+                                           class="btn btn-primary" style="background-color:#00aff0">Đơn hàng</a>
                                     </div>
                                     <div>
                                         <a href="/ban-hang-online/chinh-sach-doi-tra"
-                                           class="btn btn-primary">Chính sách đổi trả</a>
+                                           class="btn btn-primary" style="background-color:#00aff0">Chính sách đổi trả</a>
                                     </div>
                                     <div>
-                                        <a href="/logout" class="btn btn-primary" style="" onclick="">Đăng xuất</a>
+                                        <a href="/logout" class="btn btn-primary"  onclick="" style="background-color:#00aff0">Đăng xuất</a>
                                     </div>
                                 </div>
                             </div>
@@ -332,8 +332,8 @@
                                         <div class="cart-list">
 
                                             <c:forEach items="${listghct}" var="ht" varStatus="stt">
-                                                <br>
-                                                <div style="border: 1px solid;height: 2cm">
+                                                <br><hr>
+                                                <div style="border: 1px ;height: 2cm">
                                                     <div style="width: 80%;float: right">
                                                         <label style="font-weight: bold">Sản
                                                             phẩm:</label>${ht.chiTietSanPham.sanPham.ten}-
@@ -341,8 +341,16 @@
 
                                                         <br>
                                                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
-                                                        <label style="font-weight: bold">Đơn
-                                                            giá:</label>${ht.basoOchammotlamGHDGKG()}đ
+                                                        <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
+                                                            <label style="font-weight: bold">Đơn
+                                                                giá:</label>${ht.basoOchammotlamGHDGKG()}đ -
+                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
+                                                        </c:if>
+                                                        <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
+                                                            <label style="font-weight: bold">Đơn
+                                                                giá:</label>
+                                                            ${ht.basoOchammotlamGHDG()} đ
+                                                        </c:if>
                                                     </div>
                                                     <div style="width: 18%;">
                                                         <input type="checkbox" name="checkidghTT" value="${ht.id}"
@@ -444,8 +452,7 @@
                 <c:if test="${idkhachhang !='1'}">
                     <li><a href="/ban-hang-online/home">TRANG CHỦ</a></li>
                 </c:if>
-                <li><a href="#">ƯU ĐÃI HẤP DẪN</a></li>
-                <li><a href="#">LOẠI</a></li>
+
                 <li><a href="/ban-hang-online/dien-thoai-thong-minh">ĐIỆN THOẠI THÔNG MINH</a></li>
                 <%--                <li><a style="color: red" href="/ban-hang-online/hoa-don-online/${id}">CÁC ĐƠN HÀNG</a></li>--%>
 
