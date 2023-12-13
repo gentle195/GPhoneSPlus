@@ -148,10 +148,14 @@
 
                     </td>
                     <td>
-                        <div name="checkdongiakhigiam">${ht.basoOchammotlamGHDGKG()} đ</div>
-                        -
-                        <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
-
+                        <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
+                            <div name="checkdongiakhigiam">${ht.basoOchammotlamGHDGKG()} đ</div>
+                            -
+                            <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
+                        </c:if>
+                        <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
+                            <div name="checkdongiakhigiam">${ht.basoOchammotlamGHDG()} đ</div>
+                        </c:if>
                     </td>
                     <td>
                             <%--                 <input type="text" min="1" max="${banhangonline.soluongcon(ht.chiTietSanPham.id)}" value="${ht.soLuong}" name="checksoluong"  style="height: 1cm">--%>

@@ -17,8 +17,8 @@
         <div class="cart-list">
 
             <c:forEach items="${listghct}" var="ht" varStatus="stt">
-                <br>
-                <div style="border: 1px solid;height: 2cm">
+                <br><hr>
+                <div style="border: 1px ;height: 2cm">
                     <div style="width: 80%;float: right">
                         <label style="font-weight: bold">Sản
                             phẩm:</label>${ht.chiTietSanPham.sanPham.ten}-
@@ -26,7 +26,16 @@
 
                         <br>
                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
-                        <label style="font-weight: bold">Đơn giá:</label>${ht.basoOchammotlamGHDGKG()}đ
+                        <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
+                            <label style="font-weight: bold">Đơn
+                                giá:</label>${ht.basoOchammotlamGHDGKG()}đ -
+                            <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
+                        </c:if>
+                        <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
+                            <label style="font-weight: bold">Đơn
+                                giá:</label>
+                            ${ht.basoOchammotlamGHDG()} đ
+                        </c:if>
                     </div>
                     <div style="width: 18%;">
                         <input type="checkbox" name="checkidghTT" value="${ht.id}" onclick="chonsanphamgiohangTT('${stt.index}','${ht.id}','${ht.gioHang.id}');"  ${ht.tinhTrang==0 ?"checked":""}>

@@ -19,11 +19,30 @@
                         <h2 class="product-name">${motctsp.sanPham.ten}</h2>
 
                         <div>
-                            <h4 class="product-price"><span
-                                    style="font-size:15px">₫</span>${banhangonline.sotienkhidagiam(motctsp.id)}-
-                                <del class="product-old-price">${motctsp.basoOchammotlam()}<span style="font-size:15px">₫</span>
-                                </del>
-                            </h4>
+<%--                            <h4 class="product-price"><span--%>
+<%--                                    style="font-size:15px">₫</span>${banhangonline.sotienkhidagiam(motctsp.id)}---%>
+<%--                                <del class="product-old-price">${motctsp.basoOchammotlam()}<span style="font-size:15px">₫</span>--%>
+<%--                                </del>--%>
+<%--                            </h4>--%>
+
+    <c:if test="${banhangonline.tonggiamgia(motctsp.id)>0}">
+        <h4 class="product-price" ><span
+                style="font-size:15px"></span>${banhangonline.sotienkhidagiam(motctsp.id)}₫ -
+            <del class="product-old-price">${motctsp.basoOchammotlam()}<span style="font-size:15px">₫</span>
+            </del>
+        </h4>
+    </c:if>
+    <c:if test="${banhangonline.tonggiamgia(motctsp.id)<=0}">
+        <%--                                <h4 class="product-price">--%>
+        <%--                                        &lt;%&ndash;                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}&ndash;%&gt;--%>
+        <%--                                        ${ht.basoOchammotlam()}--%>
+        <%--                                    <span> ₫</span>--%>
+        <%--                                </h4>--%>
+        <h4 class="product-price" ><span
+                style="font-size:15px"></span> ${motctsp.basoOchammotlam()}₫
+        </h4>
+    </c:if>
+
 
                         </div>
                         <div class="add-to-cart" style="margin-top: 5cm">
