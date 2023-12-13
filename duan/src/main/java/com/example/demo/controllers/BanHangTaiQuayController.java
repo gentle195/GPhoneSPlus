@@ -145,7 +145,7 @@ public class BanHangTaiQuayController {
             model.addAttribute("sands", sanPhamService.findAll0());
             model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
             return "home/layout";
-        }else{
+        } else {
             NhanVien nhanVien = nhanVienService.findById(SecurityUtil.getId().getId());
             HoaDon hd = new HoaDon();
             String mhd = "";
@@ -362,83 +362,118 @@ public class BanHangTaiQuayController {
                           @ModelAttribute("HoaDon") HoaDon hoaDon, @ModelAttribute("modalAddKhachHang") KhachHang khachHang) {
         BigDecimal total = BigDecimal.ZERO;
         IMEI imei = imeiService.findById(id);
-        HoaDonChiTiet hdct = new HoaDonChiTiet();
-        hdct.setImei(imei);
-        hdct.setHoaDon(hoaDonnn);
-        hdct.setTinhTrang(0);
-        if (imei.getChiTietSanPham().getKhuyenMai()==null) {
-            hdct.setDonGia(imei.getChiTietSanPham().getGiaBan());
-        } else {
-            System.out.println(108);
-            BigDecimal giam = BigDecimal.valueOf(imei.getChiTietSanPham().getKhuyenMai().getSoTienGiam()).divide(BigDecimal.valueOf(100));
+        if (imei.getTinhTrang() == 0) {
+            HoaDonChiTiet hdct = new HoaDonChiTiet();
+            hdct.setImei(imei);
+            hdct.setHoaDon(hoaDonnn);
+            hdct.setTinhTrang(0);
+            if (imei.getChiTietSanPham().getKhuyenMai() == null) {
+                hdct.setDonGia(imei.getChiTietSanPham().getGiaBan());
+            } else {
+                System.out.println(108);
+                BigDecimal giam = BigDecimal.valueOf(imei.getChiTietSanPham().getKhuyenMai().getSoTienGiam()).divide(BigDecimal.valueOf(100));
 
 // Sử dụng phương thức multiply() để nhân giá tiền với tỷ lệ giảm giá
-            hdct.setDonGia(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam)));
-            System.out.println(giam);
-        }
-        hdct.setSoLuong(1);
-        hoaDonChiTietService.add(hdct);
-        ChiTietSanPham ct = chiTietSanPhamService.getChiTiet(id);
-        ct.setSoLuong(ct.getSoLuong() - 1);
-        long millis = System.currentTimeMillis();
-        Date date = new Date(millis);
-        ct.setNgayCapNhat(date);
-        imeiService.updatImeiChoXuLy(date, id);
-        if (ct.getSoLuong() == 0) {
-            ct.setTinhTrang(1);
-            chiTietSanPhamService.update1(ct);
-            List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId());
-            for (HoaDonChiTiet hd : list
-            ) {
-                total = total.add(hd.getDonGia());
-                hoaDonnn.setTongTien(total);
-                hoaDonnn.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+                hdct.setDonGia(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam)));
+                System.out.println(giam);
             }
-            hoaDonService.update(hoaDonnn.getId(), hoaDonnn);
-            System.out.println(total);
-            model.addAttribute("tong", String.valueOf(total));
-            model.addAttribute("listHoaDonChiTiet", list);
-            List<HoaDon> listHD = hoaDonService.find();
-            model.addAttribute("listHoaDon", listHD);
-            model.addAttribute("HoaDon", hoaDonnn);
-            model.addAttribute("listHang", hangSanPhamService.findAll0());
-            model.addAttribute("listMauSac", mauSacService.findAll0());
-            model.addAttribute("listChip", chipService.findAll0());
-            model.addAttribute("listRam", ramService.findAll0());
-            model.addAttribute("listRom", romService.findAll0());
-            model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
-            model.addAttribute("listManHinh", manHinhService.findAll0());
-            model.addAttribute("listCamera", cameraService.findAll0());
-            model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
-            model.addAttribute("listKhachHang", khachHangService.findAll0());
-            model.addAttribute("listDiaChi", diaChiService.findAll0());
-            model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
+            hdct.setSoLuong(1);
+            hoaDonChiTietService.add(hdct);
+            ChiTietSanPham ct = chiTietSanPhamService.getChiTiet(id);
+            ct.setSoLuong(ct.getSoLuong() - 1);
+            long millis = System.currentTimeMillis();
+            Date date = new Date(millis);
+            ct.setNgayCapNhat(date);
+            imeiService.updatImeiChoXuLy(date, id);
+            if (ct.getSoLuong() == 0) {
+                ct.setTinhTrang(1);
+                chiTietSanPhamService.update1(ct);
+                List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId());
+                for (HoaDonChiTiet hd : list
+                ) {
+                    total = total.add(hd.getDonGia());
+                    hoaDonnn.setTongTien(total);
+                    hoaDonnn.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+                }
+                hoaDonService.update(hoaDonnn.getId(), hoaDonnn);
+                System.out.println(total);
+                model.addAttribute("tong", String.valueOf(total));
+                model.addAttribute("listHoaDonChiTiet", list);
+                List<HoaDon> listHD = hoaDonService.find();
+                model.addAttribute("listHoaDon", listHD);
+                model.addAttribute("HoaDon", hoaDonnn);
+                model.addAttribute("listHang", hangSanPhamService.findAll0());
+                model.addAttribute("listMauSac", mauSacService.findAll0());
+                model.addAttribute("listChip", chipService.findAll0());
+                model.addAttribute("listRam", ramService.findAll0());
+                model.addAttribute("listRom", romService.findAll0());
+                model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+                model.addAttribute("listManHinh", manHinhService.findAll0());
+                model.addAttribute("listCamera", cameraService.findAll0());
+                model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
+                model.addAttribute("listKhachHang", khachHangService.findAll0());
+                model.addAttribute("listDiaChi", diaChiService.findAll0());
+                model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
 
-            model.addAttribute("hangds", hangSanPhamService.findAll0());
-            model.addAttribute("camds", cameraService.findAll0());
-            model.addAttribute("mands", manHinhService.findAll0());
-            model.addAttribute("mauds", mauSacService.findAll0());
-            model.addAttribute("ramds", ramService.findAll0());
-            model.addAttribute("romds", romService.findAll0());
-            model.addAttribute("pinds", pinService.findAll0());
-            model.addAttribute("dungds", dungLuongPinService.findAll0());
-            model.addAttribute("chipds", chipService.findAll0());
-            model.addAttribute("sands", sanPhamService.findAll0());
-            model.addAttribute("thongBaoHoaDon1", "Sản phẩm đã thêm vào hóa đơn");
-            model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
-            return "home/layout";
+                model.addAttribute("hangds", hangSanPhamService.findAll0());
+                model.addAttribute("camds", cameraService.findAll0());
+                model.addAttribute("mands", manHinhService.findAll0());
+                model.addAttribute("mauds", mauSacService.findAll0());
+                model.addAttribute("ramds", ramService.findAll0());
+                model.addAttribute("romds", romService.findAll0());
+                model.addAttribute("pinds", pinService.findAll0());
+                model.addAttribute("dungds", dungLuongPinService.findAll0());
+                model.addAttribute("chipds", chipService.findAll0());
+                model.addAttribute("sands", sanPhamService.findAll0());
+                model.addAttribute("thongBaoHoaDon1", "Sản phẩm đã thêm vào hóa đơn");
+                model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
+                return "home/layout";
+            } else {
+                chiTietSanPhamService.update1(ct);
+                List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId());
+                for (HoaDonChiTiet hd : list
+                ) {
+                    total = total.add(hd.getDonGia());
+                    hoaDonnn.setTongTien(total);
+                    hoaDonnn.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+                }
+                hoaDonService.update(hoaDonnn.getId(), hoaDonnn);
+                System.out.println(total);
+                model.addAttribute("tong", String.valueOf(total));
+                model.addAttribute("listHoaDonChiTiet", list);
+                List<HoaDon> listHD = hoaDonService.find();
+                model.addAttribute("listHoaDon", listHD);
+                model.addAttribute("HoaDon", hoaDonnn);
+                model.addAttribute("listHang", hangSanPhamService.findAll0());
+                model.addAttribute("listMauSac", mauSacService.findAll0());
+                model.addAttribute("listChip", chipService.findAll0());
+                model.addAttribute("listRam", ramService.findAll0());
+                model.addAttribute("listRom", romService.findAll0());
+                model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+                model.addAttribute("listManHinh", manHinhService.findAll0());
+                model.addAttribute("listCamera", cameraService.findAll0());
+                model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
+                model.addAttribute("listKhachHang", khachHangService.findAll0());
+                model.addAttribute("listDiaChi", diaChiService.findAll0());
+                model.addAttribute("listHangKhachHang", hangKhachHangService.findAll0());
+
+                model.addAttribute("hangds", hangSanPhamService.findAll0());
+                model.addAttribute("camds", cameraService.findAll0());
+                model.addAttribute("mands", manHinhService.findAll0());
+                model.addAttribute("mauds", mauSacService.findAll0());
+                model.addAttribute("ramds", ramService.findAll0());
+                model.addAttribute("romds", romService.findAll0());
+                model.addAttribute("pinds", pinService.findAll0());
+                model.addAttribute("dungds", dungLuongPinService.findAll0());
+                model.addAttribute("chipds", chipService.findAll0());
+                model.addAttribute("sands", sanPhamService.findAll0());
+                model.addAttribute("thongBaoHoaDon1", "Sản phẩm đã thêm vào hóa đơn");
+                model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
+                return "home/layout";
+            }
         } else {
-            chiTietSanPhamService.update1(ct);
+            model.addAttribute("tong", String.valueOf(hoaDonnn.getTongTien()));
             List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId());
-            for (HoaDonChiTiet hd : list
-            ) {
-                total = total.add(hd.getDonGia());
-                hoaDonnn.setTongTien(total);
-                hoaDonnn.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
-            }
-            hoaDonService.update(hoaDonnn.getId(), hoaDonnn);
-            System.out.println(total);
-            model.addAttribute("tong", String.valueOf(total));
             model.addAttribute("listHoaDonChiTiet", list);
             List<HoaDon> listHD = hoaDonService.find();
             model.addAttribute("listHoaDon", listHD);
@@ -466,10 +501,11 @@ public class BanHangTaiQuayController {
             model.addAttribute("dungds", dungLuongPinService.findAll0());
             model.addAttribute("chipds", chipService.findAll0());
             model.addAttribute("sands", sanPhamService.findAll0());
-            model.addAttribute("thongBaoHoaDon1", "Sản phẩm đã thêm vào hóa đơn");
+            model.addAttribute("thongBaoHoaDon", "Sản phẩm đã bán hoặc đang chờ xử lý");
             model.addAttribute("contentPage", "../ban-hang/hien-thi.jsp");
             return "home/layout";
         }
+
     }
 
 
@@ -564,11 +600,11 @@ public class BanHangTaiQuayController {
     public ResponseEntity<byte[]> thanhToan(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon, @PathVariable("id") UUID id,
                                             @ModelAttribute("modalAddDiaChi") DiaChi DiaChi) {
         HoaDon hd = hoaDonService.findById(id);
-        KhachHang kh= khachHangService.findById(hd.getKhachHang().getId());
-        BigDecimal d=hd.getTongTien().divide(BigDecimal.valueOf(10000));
-        Integer themDiem= Integer.valueOf(d.intValue());
-        kh.setDiem(kh.getDiem()+themDiem);
-        khachHangService.update(kh.getId(),kh);
+        KhachHang kh = khachHangService.findById(hd.getKhachHang().getId());
+        BigDecimal d = hd.getTongTien().divide(BigDecimal.valueOf(10000));
+        Integer themDiem = Integer.valueOf(d.intValue());
+        kh.setDiem(kh.getDiem() + themDiem);
+        khachHangService.update(kh.getId(), kh);
         hd.setKhachHang(hoaDon.getKhachHang());
         hd.setDiaChi(hoaDon.getDiaChi());
         hd.setNhanVien(hoaDon.getNhanVien());
@@ -577,7 +613,7 @@ public class BanHangTaiQuayController {
         hd.setSdt(hoaDon.getSdt());
         hd.setTinhTrangGiaoHang(3);
         hd.setPhiShip(BigDecimal.valueOf(0));
-        hd.setNguoiNhan(hoaDon.getNguoiNhan());
+
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         hd.setNgayCapNhat(date);
@@ -596,15 +632,30 @@ public class BanHangTaiQuayController {
                 imeiService.updatImei(date, hdct.getId());
             }
         }
-        hoaDonService.thanhToan(hd);
-        ResponseEntity<byte[]> responseEntity = hoaDonService.generatePdfDonTaiQuay(id);
-        byte[] pdfBytes = responseEntity.getBody();
+        if (hoaDon.getNguoiNhan().isEmpty()) {
+            hd.setNguoiNhan(hoaDon.getKhachHang().getHoTen());
+            hoaDonService.thanhToan(hd);
+            ResponseEntity<byte[]> responseEntity = hoaDonService.generatePdfDonTaiQuay(id);
+            byte[] pdfBytes = responseEntity.getBody();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_PDF);
-        headers.setContentDispositionFormData("attachment", "hoa_don_" + id + ".pdf");
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "hoa_don_" + id + ".pdf");
 
-        return ResponseEntity.ok().headers(headers).body(pdfBytes);
+            return ResponseEntity.ok().headers(headers).body(pdfBytes);
+        } else {
+            hd.setNguoiNhan(hoaDon.getNguoiNhan());
+            hoaDonService.thanhToan(hd);
+            ResponseEntity<byte[]> responseEntity = hoaDonService.generatePdfDonTaiQuay(id);
+            byte[] pdfBytes = responseEntity.getBody();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "hoa_don_" + id + ".pdf");
+
+            return ResponseEntity.ok().headers(headers).body(pdfBytes);
+        }
+
     }
 
 
@@ -711,7 +762,7 @@ public class BanHangTaiQuayController {
             hdct.setImei(imei);
             hdct.setHoaDon(hoaDonnn);
             hdct.setTinhTrang(0);
-            if (imei.getChiTietSanPham().getKhuyenMai()==null) {
+            if (imei.getChiTietSanPham().getKhuyenMai() == null) {
                 hdct.setDonGia(imei.getChiTietSanPham().getGiaBan());
             } else {
                 System.out.println(108);
