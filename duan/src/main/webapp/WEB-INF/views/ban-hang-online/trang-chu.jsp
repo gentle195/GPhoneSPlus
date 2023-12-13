@@ -280,7 +280,7 @@
 
                         <div style="  position: absolute;
                         background-color: white;margin-top: 5px;
-                        width: 95%; overflow: hidden;z-index: 11;
+                        width: 100%; overflow: hidden;z-index: 11;
                         box-shadow: 0 1px 4px 0 rgba(0,0,0,.26);" id="searchResults" class="list-group">
                             <div id="saochep"></div>
                             <div id="danhsachloctimkiemTT" style="">
