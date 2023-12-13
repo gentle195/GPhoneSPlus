@@ -105,6 +105,7 @@ public class ImeiController {
         model.addAttribute("contentPage", "../imei/imei-da-xoa.jsp");
         return "home/layout";
     }
+
     @GetMapping("/hien-thi-imei-loi")
     public String hienThiImeiLoi(Model model) {
         List<IMEI> imeiPage = imeiService.findImeiLoi();
@@ -112,6 +113,7 @@ public class ImeiController {
         model.addAttribute("contentPage", "../imei/imei-loi.jsp");
         return "home/layout";
     }
+
     @PostMapping("/search-imei-loi")
     public String searchImeiLoi(Model model, @RequestParam("search") String search) {
         List<IMEI> lissearch = imeiService.searchImeiLoi(search);
@@ -123,6 +125,7 @@ public class ImeiController {
         model.addAttribute("contentPage", "../imei/imei-loi.jsp");
         return "home/layout";
     }
+
     @GetMapping("/khoi-phuc-imei-loi/{id}")
     public String khoiPhucImeiLoi(@PathVariable("id") UUID id) {
         IMEI imei = imeiService.findById(id);
@@ -130,6 +133,7 @@ public class ImeiController {
         imeiService.add(imei);
         return "redirect:/imei/hien-thi-imei-loi";
     }
+
     @GetMapping("/khoi-phuc-tat-ca-imei-loi")
     public String khoiPhucAllImeiLoi() {
         List<IMEI> list = imeiService.findImeiLoi();
@@ -174,7 +178,7 @@ public class ImeiController {
     public String add(@Valid @ModelAttribute(name = "imei") IMEI imei,
                       BindingResult result, Model model) throws IOException, WriterException {
 
-        if (result.hasErrors()||imei.getChiTietSanPham()==null) {
+        if (result.hasErrors() || imei.getChiTietSanPham() == null) {
 
             model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
             String ma = "IMEI" + imeiService.findAll().size();
@@ -186,17 +190,30 @@ public class ImeiController {
         }
         String ma = "IMEI" + (imeiService.findAll().size() + 1);
         imei.setMa(ma);
-        List<IMEI> listcheck = imeiService.findAll();
-        for (IMEI i : listcheck
-        ) {
-            if (i.getSoImei().equalsIgnoreCase(imei.getSoImei())) {
-                model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
-                model.addAttribute("thongBao", "IMEI này đã có trong dữ liệu");
-                model.addAttribute("ma", ma);
-                model.addAttribute("contentPage", "../imei/add-imei.jsp");
-                return "home/layout";
-            }
+//        List<IMEI> listcheck = imeiService.findAll();
+//        for (IMEI i : listcheck
+//        ) {
+//            if (i.getSoImei().equalsIgnoreCase(imei.getSoImei())) {
+//                model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+////                model.addAttribute("thongBao", "IMEI này đã có trong dữ liệu");
+//                model.addAttribute("thongBaoCTSP1", "Imei đã tồn tại!");
+//
+//                model.addAttribute("ma", ma);
+//                model.addAttribute("contentPage", "../imei/add-imei.jsp");
+//                return "home/layout";
+//            }
+//        }
+        if (imeiService.existImei(imei.getSoImei())) {
+            model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+
+
+            model.addAttribute("ma", ma);
+            model.addAttribute("thongBao", "IMEI này đã có trong dữ liệu");
+            model.addAttribute("thongBaoCTSP1", "Imei đã tồn tại!");
+            model.addAttribute("contentPage", "../imei/add-imei.jsp");
+            return "home/layout";
         }
+
         String projectRootPath = System.getProperty("user.dir");
         String outputFolderPath = projectRootPath + "/src/main/webapp/maqr";
         QRCodeGenerator.generatorQRCode(imei, outputFolderPath);
@@ -204,9 +221,14 @@ public class ImeiController {
 
         LocalDate localDate = LocalDate.now();
         imei.setNgayTao(Date.valueOf(localDate));
-
         imeiService.add(imei);
-        return "redirect:/imei/hien-thi";
+        List<IMEI> imeiPage = imeiService.getImeiOn();
+        model.addAttribute("listImei", imeiPage);
+        model.addAttribute("thongBaoCTSP", "Thêm imei thành công!");
+
+
+        model.addAttribute("contentPage", "../imei/index.jsp");
+        return "home/layout";
 
 
     }

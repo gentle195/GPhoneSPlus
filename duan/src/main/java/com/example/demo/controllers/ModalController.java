@@ -109,7 +109,29 @@ public class ModalController {
         pin.setTinhTrang(0);
         pinService.add(pin);
         model.addAttribute("list", page);
-        return "redirect:/chi-tiet-san-pham/view-add";
+        model.addAttribute("Pin", new Pin());
+        model.addAttribute("chip", new Chip());
+        model.addAttribute("ram", new Ram());
+        model.addAttribute("rom", new Rom());
+        model.addAttribute("sanPham", new SanPham());
+        model.addAttribute("mauSac", new MauSac());
+        model.addAttribute("chitietsanpham", new ChiTietSanPham());
+
+
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("tbHien",1);
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/add-chi-tiet-san-pham.jsp");
+
+        return "home/layout";
     }
 
     @PostMapping("/chi-tiet-san-pham/modal-add-mau-sac")
@@ -131,7 +153,29 @@ public class ModalController {
         mauSacService.add(mauSac);
 
         model.addAttribute("list", page);
-        return "redirect:/chi-tiet-san-pham/view-add";
+        model.addAttribute("Pin", new Pin());
+        model.addAttribute("chip", new Chip());
+        model.addAttribute("ram", new Ram());
+        model.addAttribute("rom", new Rom());
+        model.addAttribute("sanPham", new SanPham());
+        model.addAttribute("mauSac", new MauSac());
+        model.addAttribute("chitietsanpham", new ChiTietSanPham());
+
+
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("tbHien",1);
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/add-chi-tiet-san-pham.jsp");
+
+        return "home/layout";
     }
 
     @PostMapping("/chi-tiet-san-pham/modal-add-chip")
@@ -156,7 +200,29 @@ public class ModalController {
         chip.setTinhTrang(0);
         chipService.add(chip);
         model.addAttribute("list", page);
-        return "redirect:/chi-tiet-san-pham/view-add";
+        model.addAttribute("Pin", new Pin());
+        model.addAttribute("chip", new Chip());
+        model.addAttribute("ram", new Ram());
+        model.addAttribute("rom", new Rom());
+        model.addAttribute("sanPham", new SanPham());
+        model.addAttribute("mauSac", new MauSac());
+        model.addAttribute("chitietsanpham", new ChiTietSanPham());
+
+
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("tbHien",1);
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/add-chi-tiet-san-pham.jsp");
+
+        return "home/layout";
     }
 
     @PostMapping("/chi-tiet-san-pham/modal-add-rom")
@@ -179,7 +245,29 @@ public class ModalController {
         rom.setTinhTrang(0);
         romService.add(rom);
         model.addAttribute("list", page);
-        return "redirect:/chi-tiet-san-pham/view-add";
+        model.addAttribute("Pin", new Pin());
+        model.addAttribute("chip", new Chip());
+        model.addAttribute("ram", new Ram());
+        model.addAttribute("rom", new Rom());
+        model.addAttribute("sanPham", new SanPham());
+        model.addAttribute("mauSac", new MauSac());
+        model.addAttribute("chitietsanpham", new ChiTietSanPham());
+
+
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("tbHien",1);
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/add-chi-tiet-san-pham.jsp");
+
+        return "home/layout";
     }
 
     @PostMapping("/chi-tiet-san-pham/modal-add-ram")
@@ -202,7 +290,29 @@ public class ModalController {
         ram.setTinhTrang(0);
         ramService.add(ram);
         model.addAttribute("list", page);
-        return "redirect:/chi-tiet-san-pham/view-add";
+        model.addAttribute("Pin", new Pin());
+        model.addAttribute("chip", new Chip());
+        model.addAttribute("ram", new Ram());
+        model.addAttribute("rom", new Rom());
+        model.addAttribute("sanPham", new SanPham());
+        model.addAttribute("mauSac", new MauSac());
+        model.addAttribute("chitietsanpham", new ChiTietSanPham());
+
+
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("tbHien",1);
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/add-chi-tiet-san-pham.jsp");
+
+        return "home/layout";
     }
 
     @PostMapping("/chi-tiet-san-pham/modal-add-san-pham")
@@ -223,7 +333,30 @@ public class ModalController {
         sanPham.setTinhTrang(0);
         sanPhamService.add(sanPham);
         model.addAttribute("list", page);
-        return "redirect:/chi-tiet-san-pham/view-add";
+        model.addAttribute("Pin", new Pin());
+        model.addAttribute("chip", new Chip());
+        model.addAttribute("ram", new Ram());
+        model.addAttribute("rom", new Rom());
+        model.addAttribute("sanPham", new SanPham());
+        model.addAttribute("mauSac", new MauSac());
+        model.addAttribute("chitietsanpham", new ChiTietSanPham());
+
+
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("tbHien",1);
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/add-chi-tiet-san-pham.jsp");
+
+        return "home/layout";
+//        return "redirect:/chi-tiet-san-pham/view-add";
     }
 
     @PostMapping("/khach-hang/modal-add-hang-khach-hang")

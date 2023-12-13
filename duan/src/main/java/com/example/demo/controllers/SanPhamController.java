@@ -191,7 +191,16 @@ public class SanPhamController {
         dulieuxem.setMa("SP" + String.valueOf(sanPhamService.findAll().size() + 1));
         dulieuxem.setTinhTrang(0);
         sanPhamService.add(dulieuxem);
-        return "redirect:/san-pham/hien-thi";
+        List<SanPham> list = sanPhamService.getAll0();
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listHangSP", hangSanPhamService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("listAnh", anhService.findAll0());
+        model.addAttribute("hsp", list);
+        model.addAttribute("thongBaoCTSP", "Thêm sản phẩm thành công!");
+
+        model.addAttribute("contentPage", "../san-pham/hien-thi.jsp");
+        return "home/layout";
         // Tiếp tục xử lý và trả về view tương ứng
     }
 
@@ -225,12 +234,15 @@ public class SanPhamController {
             sanPhamService.add(sp1);
             List<SanPham> list = sanPhamService.getAll0();
             model.addAttribute("hsp", list);
+            model.addAttribute("thongBaoCTSP", "Thành công");
+
             model.addAttribute("contentPage", "../san-pham/hien-thi.jsp");
             return "home/layout";
         } else {
             List<SanPham> list = sanPhamService.getAll0();
             model.addAttribute("hsp", list);
-            model.addAttribute("thongBao", "Sản phẩm này vẫn còn hàng tồn, không thể đổi trạng thái");
+            model.addAttribute("thongBaoCTSP1", "Sản phẩm này còn hàng tồn, không thể đổi trạng thái");
+
             model.addAttribute("contentPage", "../san-pham/hien-thi.jsp");
             return "home/layout";
         }
