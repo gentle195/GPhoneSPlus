@@ -11,6 +11,7 @@ public interface DoanhThuTheoThang {
     BigDecimal getTienDoiTra();
     BigDecimal getDoanhThuCu();
     BigDecimal getPhiShip();
+    BigDecimal getDoanhThuChuaKhuyenMai();
     String getTen();
 
 }
