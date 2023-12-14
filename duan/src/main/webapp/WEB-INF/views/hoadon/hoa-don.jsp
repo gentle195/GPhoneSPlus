@@ -343,9 +343,9 @@
                                                 <i class="fas fa-times-circle"></i>
                                                 Hủy đơn tại quầy</a>
                                         </c:if>
-                                        <c:if test="${hoaDon.tinhTrang == 0|| hoaDon.tinhTrang == 1|| hoaDon.tinhTrang == 3 &&
-                                         hoaDon.tinhTrangGiaoHang != 2 && hoaDon.tinhTrangGiaoHang != 3 ||
-                                         (hoaDon.tinhTrang == 2 && hoaDon.loai==1  && hoaDon.tinhTrangGiaoHang != 2 && hoaDon.tinhTrangGiaoHang != 3) && hoaDon.tinhTrang != 9 }">
+                                        <c:if test="${(hoaDon.tinhTrang == 0|| hoaDon.tinhTrang == 1|| hoaDon.tinhTrang == 3 &&
+                                         hoaDon.tinhTrangGiaoHang != 2 && hoaDon.tinhTrangGiaoHang != 3 || (hoaDon.tinhTrang == 2 && hoaDon.loai==1  && hoaDon.tinhTrangGiaoHang != 2 && hoaDon.tinhTrangGiaoHang != 3))
+                                          && hoaDon.tinhTrang != 9 && hoaDon.khachHang!= null }">
                                             <a href="/hoa-don/view-update/${hoaDon.id}"
                                                class="btn btn-warning btn-icon-text"
                                                tabindex="-1"
