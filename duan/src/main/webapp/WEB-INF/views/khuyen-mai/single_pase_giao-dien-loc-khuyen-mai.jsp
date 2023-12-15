@@ -44,7 +44,7 @@
                 <c:if test="${ht.khuyenMai.tinhTrang!=0}">
                     <c:if test="${ht.khuyenMai.id==kmchon.id}">
                         <a   onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                             class="btn btn-success"
+                             class="btn btn-success" style="background-color: red"
                         >Hủy áp dụng</a>
 
                     </c:if>
@@ -53,7 +53,7 @@
                              class="btn btn-success"
                         >Áp dụng</a>
                         <a   onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                             class="btn btn-success"
+                             class="btn btn-success" style="background-color: red"
                         >Hủy áp dụng</a>
                     </c:if>
 
