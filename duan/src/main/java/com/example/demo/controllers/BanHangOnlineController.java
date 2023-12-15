@@ -963,6 +963,7 @@ public class BanHangOnlineController {
             hd.setNgayTao(date);
             hd.setNguoiNhan(nguoinhan1);
             hd.setNgayCapNhat(date);
+            hd.setNgayThanhToan(date);
             hd.setTinhTrang(0);
             hd.setLoai(1);
             hd.setHinhThucThanhToan(1);
@@ -1767,8 +1768,6 @@ public class BanHangOnlineController {
     public String huy(Model model, @ModelAttribute("dulieuxem") DoiTra dulieuxem,
                       @PathVariable UUID hoadonId, HttpServletRequest request
     ) {
-
-
         DoiTra doiTra = doiTraService.getDoiTraByHoaDon(hoadonId);
         System.out.println("Doi tra" + doiTra);
         List<DoiTraChiTiet> listCHiTietDoiTra = doiTraChiTietService.getDoiTraChiTietByDoiTraId(doiTra.getId());
@@ -1795,7 +1794,7 @@ public class BanHangOnlineController {
             }
         }
         doiTra.setTinhTrang(1);
-        doiTra.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+        doiTra.setKhachHang(khachHangService.findById(UUID.fromString(idkhachhang)));
         doiTraService.update(doiTra.getId(), doiTra);
 
 

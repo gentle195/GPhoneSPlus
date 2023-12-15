@@ -151,9 +151,11 @@
                                                 </div>
                                                 <br>
                                                 <div class="row">
+                                                    <div class="col-12" style="text-align: center">
                                                     <button type="submit" class="btn btn-dark mb-2 " id="toastr-success-top-center-thanh-toan">
                                                         Thanh Toán
                                                     </button>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>

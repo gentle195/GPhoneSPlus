@@ -16,7 +16,6 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Doanh thu thương hiệu
                 <form action="/thong-ke/loc-thoi-gian" method="post" style="float: right">
                     <div style="display: flex; justify-content: center; align-items: center;">
                         <div>
@@ -39,38 +38,13 @@
                         </div>
                     </div>
                 </form>
-
-            </h4>
-
-            <div class="table-responsive">
-                <table class="table table-striped" style="color: black">
-                    <thead>
-                    <tr>
-                        <th>Thương hiệu</th>
-                        <th>Doanh thu cũ</th>
-                        <th>Tiền đổi trả</th>
-                        <th>Doanh thu thực tế</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <i class="mdi mdi-border-color"></i>
-                    <c:forEach items="${listDoanhThuHang}" var="DTH" varStatus="index">
-                        <tr>
-                            <td>${DTH.getTenHang()}</td>
-                            <td>${DTH.getDoanhThuCu()}</td>
-                            <td>${DTH.getTienDoiTra()}</td>
-                            <td>${DTH.getDoanhThuThucTe()}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 </div>
 
 
 <div class="card" style="width: 50%; margin-left: 300px">
+    <h4 class="card-title">Biểu đồ doanh thu hãng</h4>
     <div class="card-body">
         <canvas id="myChart" ></canvas>
     </div>

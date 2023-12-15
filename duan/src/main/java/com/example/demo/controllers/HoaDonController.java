@@ -457,9 +457,11 @@ public class HoaDonController {
                 hoaDon.setHinhThucThanhToan(hoaDonnn.getHinhThucThanhToan());
                 hoaDon.setTinhTrangGiaoHang(1);
                 hoaDon.setNgayTao(hoaDonnn.getNgayTao());
+
                 if (hoaDonnn.getTinhTrang() == 2) {
                     hoaDon.setTinhTrang(hoaDonnn.getTinhTrang());
                     LocalDate ngayCapNhat = LocalDate.now();
+
                     List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDon.getId());
                     if (!list.isEmpty()) {
                         for (HoaDonChiTiet hdct : list
@@ -471,9 +473,11 @@ public class HoaDonController {
                             hoaDonChiTietService.update(hdct.getId(), hdct);
                         }
                         hoaDon.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                        hoaDon.setNgayThanhToan(hoaDonnn.getNgayThanhToan());
                         hoaDonService.update(id, hoaDon);
                     } else {
                         hoaDon.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                        hoaDon.setNgayThanhToan(hoaDonnn.getNgayThanhToan());
                         hoaDonService.update(id, hoaDon);
                     }
                 } else if (hoaDonnn.getTinhTrang() == 3) {
@@ -527,9 +531,11 @@ public class HoaDonController {
                             hoaDonChiTietService.update(hdct.getId(), hdct);
                         }
                         hoaDon.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                        hoaDon.setNgayThanhToan(hoaDonnn.getNgayThanhToan());
                         hoaDonService.update(id, hoaDon);
                     } else {
                         hoaDon.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                        hoaDon.setNgayThanhToan(hoaDonnn.getNgayThanhToan());
                         hoaDonService.update(id, hoaDon);
                     }
                 } else if (hoaDonnn.getTinhTrang() == 3) {

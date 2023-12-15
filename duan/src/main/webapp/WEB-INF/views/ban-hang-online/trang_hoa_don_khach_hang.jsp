@@ -263,7 +263,7 @@
                                     </div>
                                     <div>
                                         <a href="/ban-hang-online/chinh-sach-doi-tra"
-                                           class="btn btn-primary" style="background-color:#00aff0">Chính sách đổi trả</a>
+                                           class="btn btn-primary" style="background-color:#00aff0">Chính sách đổi hàng</a>
                                     </div>
                                     <div>
                                         <a href="/logout" class="btn btn-primary"  onclick="" style="background-color:#00aff0">Đăng xuất</a>
@@ -513,7 +513,7 @@
                     <th>Trạng thái</th>
                     <th>HTTT</th>
                     <th>Giao hàng</th>
-                    <th>Đổi trả</th>
+                    <th>Đổi hàng</th>
                     <th >Chức năng</th>
                 </tr>
                 </thead>
@@ -579,12 +579,12 @@
 
                             <c:if test="${  ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist2.contains(ht.ma) }">
                                 <p>
-                                    Đổi trả thành công
+                                    Đổi hàng thành công
                                 </p>
                             </c:if>
                             <c:if test="${  ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist1.contains(ht.ma) }">
                                 <p>
-                                    Từ chối đổi trả
+                                    Từ chối đổi hàng
                                 </p>
                             </c:if>
                         </td>
@@ -595,7 +595,7 @@
                                     tiết
                                 </a>
                                 <a class="btn btn-danger"
-                                   href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy</a>
+                                   href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy hoá đơn</a>
 
                             </c:if>
                             <c:if test="${ht.tinhTrang==1}">
@@ -603,7 +603,7 @@
                                     tiết
                                 </a>
                                 <a class="btn btn-danger"
-                                   href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy</a>
+                                   href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy hoá đơn</a>
 
                             </c:if>
                             <c:if test="${ht.tinhTrang==2}">
@@ -618,7 +618,7 @@
                                     <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
                                         tiết </a>
                                     <a class="btn btn-danger"
-                                       href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy</a>
+                                       href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy hoá đơn</a>
 
                                 </c:if>
                                 <c:if test="${ht.tinhTrangGiaoHang!=0 && ht.tinhTrangGiaoHang!=1 }">
@@ -634,11 +634,11 @@
                             <c:if test="${  ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist3.contains(ht.ma) && checkList.contains(ht.ma) }">
                                 <button type="button" class="btn btn-primary doi-tra-btn" data-id="${ht.id}"
                                         onclick="showChonSanPhamModal(this)">
-                                    Đổi trả
+                                    Đổi hàng
                                 </button>
                             </c:if>
                             <c:if test="${ checkHDlist0.contains(ht.ma) }">
-                                <a class="btn btn-primary" style="background-color: #ff0000" href="/ban-hang-online/huy/${ht.id}" type="button">Hủy</a>
+                                <a class="btn btn-primary" style="background-color: #ff0000" href="/ban-hang-online/huy/${ht.id}" type="button">Hủy đổi hàng</a>
                             </c:if>
                         </td>
                     </tr>

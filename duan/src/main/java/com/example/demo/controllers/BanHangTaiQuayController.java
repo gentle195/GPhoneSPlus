@@ -270,7 +270,7 @@ public class BanHangTaiQuayController {
     }
 
     @GetMapping("/remove/{id}")
-    public String updateTrangThai(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon, @PathVariable("id") UUID id) {
+    public String updateTrangThai(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon,@ModelAttribute("modalAddKhachHang") KhachHang khachHang, @PathVariable("id") UUID id) {
         HoaDon hd = hoaDonService.findById(id);
         LocalDate ngayCapNhat = LocalDate.now();
         List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
@@ -301,9 +301,8 @@ public class BanHangTaiQuayController {
             hoaDonService.update(id, hd);
         }
         List<HoaDon> listHD = hoaDonService.find();
+        model.addAttribute("HoaDon",null);
         model.addAttribute("listHoaDon", listHD);
-        List<HoaDonChiTiet> listHDCT = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
-        model.addAttribute("listHoaDonChiTiet", listHDCT);
         model.addAttribute("idHoaDon", String.valueOf(id));
         model.addAttribute("listHang", hangSanPhamService.findAll0());
         model.addAttribute("listMauSac", mauSacService.findAll0());
