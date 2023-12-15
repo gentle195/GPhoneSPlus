@@ -42,17 +42,17 @@
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="/doi-tra/hien-thi" role="tab"
-               aria-controls="description" aria-selected="true">Chờ xác nhận trả hàng</a>
+               aria-controls="description" aria-selected="true">Chờ xác nhận đổi hàng</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/doi-tra/hien-thi-tu-choi-tra" role="tab">Từ chối trả hàng </a>
+            <a class="nav-link" href="/doi-tra/hien-thi-tu-choi-tra" role="tab">Từ chối đổi hàng </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/doi-tra/thanh-cong" role="tab">Đổi trả thành công </a>
+            <a class="nav-link" href="/doi-tra/thanh-cong" role="tab">Đổi hàng thành công </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalTaoMoi" role="tab">Tạo mới phiếu đổi
-                trả</a>
+                hàng</a>
         </li>
     </ul>
 </div>

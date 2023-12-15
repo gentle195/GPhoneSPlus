@@ -2782,18 +2782,20 @@ public class ExcelController {
         cell = row.createCell(5);
         cell.setCellValue("Pin");
         cell = row.createCell(6);
-        cell.setCellValue("Giá bán");
+        cell.setCellValue("Màn hình");
         cell = row.createCell(7);
-        cell.setCellValue("Ngày tạo");
+        cell.setCellValue("Giá bán");
         cell = row.createCell(8);
-        cell.setCellValue("Ngày cập nhập");
+        cell.setCellValue("Ngày tạo");
         cell = row.createCell(9);
-        cell.setCellValue("Tình trạng");
+        cell.setCellValue("Ngày cập nhập");
         cell = row.createCell(10);
-        cell.setCellValue("Năm bảo hành");
+        cell.setCellValue("Tình trạng");
         cell = row.createCell(11);
-        cell.setCellValue("Số lượng tồn");
+        cell.setCellValue("Năm bảo hành");
         cell = row.createCell(12);
+        cell.setCellValue("Số lượng tồn");
+        cell = row.createCell(13);
         cell.setCellValue("Mô tả");
 
         // Tạo kiểu font đậm
@@ -2837,27 +2839,30 @@ public class ExcelController {
             cell.setCellValue(chiTietSanPham.getPin().getDungLuongPin().getThongSo());
 
             cell = row.createCell(6);
-            cell.setCellValue(String.valueOf(chiTietSanPham.getGiaBan()));
+            cell.setCellValue(chiTietSanPham.getSanPham().getManHinh().getThongSo());
 
             cell = row.createCell(7);
+            cell.setCellValue(String.valueOf(chiTietSanPham.getGiaBan()));
+
+            cell = row.createCell(8);
             cell.setCellValue(chiTietSanPham.getNgayTao());
             cell.setCellStyle(dateStyle);
 
-            cell = row.createCell(8);
+            cell = row.createCell(9);
             cell.setCellValue(chiTietSanPham.getNgayCapNhat());
             cell.setCellStyle(dateStyle);
 
-            cell = row.createCell(9);
+            cell = row.createCell(10);
             cell.setCellValue(chiTietSanPham.getTinhTrang() == 0 ? "Còn kinh doanh" : "Ngừng kinh doanh");
 
-            cell = row.createCell(10);
+            cell = row.createCell(11);
             cell.setCellValue(chiTietSanPham.getNamBaoHanh());
 
 
-            cell = row.createCell(11);
+            cell = row.createCell(12);
             cell.setCellValue(chiTietSanPham.getSoLuong());
 
-            cell = row.createCell(12);
+            cell = row.createCell(13);
             cell.setCellValue(chiTietSanPham.getMoTa());
 
             rowNum++;

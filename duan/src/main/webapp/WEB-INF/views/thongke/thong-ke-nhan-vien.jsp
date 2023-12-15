@@ -16,7 +16,6 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Doanh thu sản phẩm
                 <form action="/thong-ke/loc-thoi-gian-nv" method="post" style="float: right">
                     <div style="display: flex; justify-content: center; align-items: center;">
                         <div>
@@ -39,39 +38,10 @@
                         </div>
                     </div>
                 </form>
-            </h4>
-
-            <div class="table-responsive">
-                <table class="table table-striped" style="color: black">
-                    <thead>
-                    <tr>
-                        <th>Tên nhân viên</th>
-                        <th>Số sản phẩm đã bán</th>
-                        <th>Doanh thu chưa đổi trả</th>
-                        <th>Tiền đổi trả</th>
-                        <th>Phí ship</th>
-                        <th>Doanh thu thực tế thu về</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <i class="mdi mdi-border-color"></i>
-                    <c:forEach items="${listDoanhThuNhanVien}" var="DTNV" varStatus="index">
-                        <tr>
-                            <td>${DTNV.getTenNhanVien()}</td>
-                            <td>${DTNV.getSoLuongSP()}</td>
-                            <td>${DTNV.getDoanhThuCu()}</td>
-                            <td>${DTNV.getTienDoiTra()}</td>
-                            <td>${DTNV.getPhiShip()}</td>
-                            <td>${DTNV.getDoanhThu()}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 </div>
-<div><h3>Biểu đồ thống kê doanh thu theo sản sản phẩm</h3></div>
+<div><h3>Biểu đồ thống kê doanh thu nhân viên</h3></div>
 <div class="card">
     <div class="card-body">
        <canvas id="myChart" ></canvas>

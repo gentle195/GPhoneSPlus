@@ -32,8 +32,8 @@ public class ThongKeController {
 
         List<DoanhThuTheoThang> doanhThuTheoThangs = thongKeService.doanhThu();
         List<DoanhThuTheoThang> selected = thongKeService.selectedYear();
-        model.addAttribute("listDoanhThu", doanhThuTheoThangs);
         model.addAttribute("listYear", selected);
+        model.addAttribute("listDoanhThu", doanhThuTheoThangs);
         DecimalFormat df = new DecimalFormat("#,###");
         model.addAttribute("contentPage", "../thongke/thong-ke.jsp");
         return "home/layout";
