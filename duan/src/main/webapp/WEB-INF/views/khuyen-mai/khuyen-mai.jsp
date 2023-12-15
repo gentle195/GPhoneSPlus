@@ -278,7 +278,7 @@
                 <div class="col-sm-12">
                     <div class="card-box table-responsive">
 
-                        <table id="example3" class="display" style="width: 1800px;color: black">
+                        <table id="example3" class="display" style="color: black">
                             <thead>
                             <tr>
 
@@ -308,13 +308,20 @@
                                     <td>${ht.ngayCapNhat}</td>
                                     <td>
                                         <c:if test="${ht.tinhTrang==0}">
+                                            <p style="color: blue">
                                             Khuyến mãi đang áp dụng
+                                            </p>
+
                                         </c:if>
                                         <c:if test="${ht.tinhTrang==1}">
+                                            <p style="color: red">
                                             Khuyến mãi đã hết hạn
+                                            </p>
                                         </c:if>
                                         <c:if test="${ht.tinhTrang==2}">
+                                            <p style="color: #00FF00">
                                             Khuyến mãi chưa bắt đầu
+                                            </p>
                                         </c:if>
 
                                     </td>
@@ -323,16 +330,16 @@
                                     <td>
                                         <c:if test="${ht.tinhTrang==1}">
                                             <a href="/khuyen-mai/detail-khuyen-mai/${ht.id}" class="btn btn-success"
-                                               onclick="return confirm('Bạn muốn xem khuyến mãi')">Xem khuyến mãi</a>
+                                               onclick="return confirm('Bạn muốn xem khuyến mãi')"  style="background-color: yellow">Xem khuyến mãi</a>
                                         </c:if>
 
                                         <c:if test="${ht.tinhTrang!=1}">
                                             <a href="/khuyen-mai/ap-dung-khuyen-mai/${ht.id}" class="btn btn-success"
                                                onclick="return confirm('Bạn muốn áp dụng khuyến mãi')">Áp dụng</a>
                                             <a href="/khuyen-mai/detail-khuyen-mai/${ht.id}" class="btn btn-success"
-                                               onclick="return confirm('Bạn muốn xem khuyến mãi')">Xem khuyến mãi</a>
+                                               onclick="return confirm('Bạn muốn xem khuyến mãi')" style="background-color: yellow">Xem khuyến mãi</a>
                                         </c:if>
-                                        <a href="/khuyen-mai/huy-khuyen-mai/${ht.id}" class="btn btn-success"
+                                        <a href="/khuyen-mai/huy-khuyen-mai/${ht.id}" class="btn btn-success" style="background-color: red"
                                            onclick="return confirm('Các chi tiết sản phẩm đang ap dụng khuyến mãi mày sẽ không áp dụng khuyến mãi này nữa')">Hủy </a>
 
                                     </td>
@@ -480,7 +487,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                         <%--loc kết thúc--%>
 
 
-                        <table id="example" class="display" style="color: black;min-width: 1700px">
+                        <table id="example" class="display" style="color: black;">
 
                             <thead>
                             <tr style="background-color: #70c0b1">
@@ -531,7 +538,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                                             <c:if test="${ht.khuyenMai.tinhTrang!=0}">
                                                 <c:if test="${ht.khuyenMai.id==kmchon.id}">
                                                     <a onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                                                       class="btn btn-success"
+                                                       class="btn btn-success" style="background-color: red"
                                                     >Hủy áp dụng</a>
 
                                                 </c:if>
@@ -540,7 +547,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                                                        class="btn btn-success"
                                                     >Áp dụng</a>
                                                     <a onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                                                       class="btn btn-success"
+                                                       class="btn btn-success" style="background-color: red"
                                                     >Hủy áp dụng</a>
                                                 </c:if>
 
@@ -548,7 +555,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                                             <c:if test="${ht.khuyenMai.tinhTrang==0}">
                                                 <c:if test="${ht.khuyenMai.id==kmchon.id}">
                                                     <a onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                                                       class="btn btn-success"
+                                                       class="btn btn-success" style="background-color: red"
                                                     >Hủy áp dụng</a>
 
                                                 </c:if>
@@ -557,7 +564,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                                                        class="btn btn-success"
                                                     >Áp dụng</a>
                                                     <a onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                                                       class="btn btn-success"
+                                                       class="btn btn-success" style="background-color: red"
                                                     >Hủy áp dụng</a>
                                                 </c:if>
 

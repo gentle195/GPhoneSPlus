@@ -399,8 +399,8 @@
                                         <div class="cart-list">
 
                                             <c:forEach items="${listghct}" var="ht" varStatus="stt">
-                                                <br>
-                                                <div style="border: 1px solid;height: 2cm">
+                                                <br><hr>
+                                                <div style="height: 2cm">
                                                     <div style="width: 80%;float: right">
                                                         <label style="font-weight: bold">Sản
                                                             phẩm:</label>${ht.chiTietSanPham.sanPham.ten}-
@@ -511,8 +511,7 @@
                 <c:if test="${idkhachhang !='1'}">
                     <li><a href="/ban-hang-online/home">TRANG CHỦ</a></li>
                 </c:if>
-                <li><a href="#">ƯU ĐÃI HẤP DẪN</a></li>
-                <li><a href="#">LOẠI</a></li>
+
                 <li><a href="/ban-hang-online/dien-thoai-thong-minh">ĐIỆN THOẠI THÔNG MINH</a></li>
             </ul>
             <!-- /NAV -->
