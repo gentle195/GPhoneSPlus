@@ -307,12 +307,12 @@
                                         </form>
                                     </div>
                                     <div>
-                                        <form action="/doi-tra/xac-nhan" method="post">
+                                        <form id="xacNhanForm" action="/doi-tra/xac-nhan" method="post">
                                             <div class="row">
                                                 <div style="margin-left: 500px">
-                                                <button type="submit" class="btn btn-dark mb-2 " id="toastr-success-top-center-doi-tra">
-                                                    Xác nhận
-                                                </button>
+                                                    <button type="button" class="btn btn-dark mb-2" id="toastr-success-top-center-doi-tra1" onclick="kiemTraTruocXacNhan()">
+                                                        Xác nhận
+                                                    </button>
                                                 </div>
                                             </div>
                                         </form>
@@ -662,6 +662,46 @@
             }
         });
     }
+</script>
+<script>
+    $("#toastr-success-top-center-doi-tra1").on("click", function () {
+
+
+
+
+        $.ajax({
+            type: "GET",
+            url: "/doi-tra/check/" + doitraId,
+            success: function (data) {
+
+                if (data.hasNullImei) {
+
+                    toastr.error("Vui lòng chọn sản phẩm đổi trả  ", "Lỗi", {
+                        timeOut: 3000,
+                        closeButton: true,
+                        progressBar: true,
+                        positionClass: "toast-top-right"
+                    });
+                } else {
+
+                    toastr.success("Đổi hàng thành công", "Thông báo", {
+                        timeOut: 1500,
+                        closeButton: true,
+                        progressBar: true,
+                        positionClass: "toast-top-right"
+                    });
+                    document.getElementById("xacNhanForm").submit();
+
+                    setTimeout(function () {
+                        window.location.href = "/doi-tra/hien-thi";
+                    }, 1500);
+                }
+            },
+            error: function (error) {
+                console.log("Lỗi:", error);
+            }
+        });
+    });
 </script>
 <script>
     var xoahdctId; // Biến toàn cục để lưu giá trị hdctId
