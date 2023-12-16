@@ -496,12 +496,12 @@ public class DoiTraController {
         doiTra.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
         doiTraService.update(idDT, doiTra);
         // in hoá đơn pdf
-        ResponseEntity<byte[]> responseEntity = hoaDonService.generatePdfDonTaiQuay(doiTra.getHoaDon().getId());
+        ResponseEntity<byte[]> responseEntity = hoaDonService.generatePdfPhieu(doiTra.getHoaDon().getId());
         byte[] pdfBytes = responseEntity.getBody();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
-        headers.setContentDispositionFormData("attachment", "hoa_don_" + doiTra.getHoaDon().getId() + ".pdf");
+        headers.setContentDispositionFormData("attachment", "phieu_doi_hang" + doiTra.getHoaDon().getId() + ".pdf");
         System.out.println("cc: "+ ResponseEntity.ok().headers(headers).body(pdfBytes));
         return ResponseEntity.ok().headers(headers).body(pdfBytes);
 
@@ -780,7 +780,7 @@ public class DoiTraController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
-        headers.setContentDispositionFormData("attachment", "hoa_don_" + dt.getHoaDon().getId() + ".pdf");
+        headers.setContentDispositionFormData("attachment", "phieu_doi_hang" + dt.getHoaDon().getId() + ".pdf");
 
         return ResponseEntity.ok().headers(headers).body(pdfBytes);
     }

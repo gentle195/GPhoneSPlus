@@ -78,7 +78,7 @@
         data: {
             labels: data.map(item => item.tenHang),
             datasets: [{
-                label: 'Số lượng sản phẩm đổi trả',
+                label: 'Số lượng sản phẩm đổi hàng',
                 data: data.map(item => item.soLuong),
                 borderWidth: 1,
                 percentage: true, // Thêm thuộc tính này để hiển thị phần trăm
@@ -102,7 +102,7 @@
         data: {
             labels: data2.map(item => item.tenHang),
             datasets: [{
-                label: 'Số lượng sản phẩm trả',
+                label: 'Số lượng sản phẩm hàng',
                 data: data2.map(item => item.soLuong),
                 borderWidth: 1,
                 percentage: true, // Thêm thuộc tính này để hiển thị phần trăm
