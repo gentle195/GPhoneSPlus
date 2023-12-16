@@ -154,7 +154,7 @@
                                 <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                        aria-label="Bạn tìm gì..." name="search">
                                 <div class="input-group-append">
-                                    <button class="btn btn-sm btn-primary" type="submit">Search</button>
+                                    <button class="btn btn-sm btn-primary" type="submit">Tìm kiếm</button>
                                 </div>
                             </div>
                         </form>

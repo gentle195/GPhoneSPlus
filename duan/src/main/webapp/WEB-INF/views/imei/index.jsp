@@ -26,16 +26,16 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/imei/view-add" role="tab"
-               >Thêm thông tin
+            >Thêm thông tin
                 Imei</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/imei/hien-thi-da-ban" role="tab"
-               >Imei đã bán</a>
+            >Imei đã bán</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/imei/hien-thi-da-xoa" role="tab"
-               >Imei đã xoá</a>
+            >Imei đã xoá</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/imei/hien-thi-imei-loi" role="tab"
@@ -60,7 +60,9 @@
                                 <div class="dropdown-menu">
                                     <a href="/imei/export-excel" class="dropdown-item" tabindex="-1">IMEI chưa bán</a>
                                     <a href="/imei/export-excel-imei-da-ban" class="dropdown-item" tabindex="-1">IMEI đã
-                                        bán</a>
+                                        bán - chờ xử lý</a>
+                                    <a href="/imei/export-excel-imei-loi" class="dropdown-item"
+                                       tabindex="-1">IMEI lỗi</a>
                                 </div>
                             </div>
                         </div>

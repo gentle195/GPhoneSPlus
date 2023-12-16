@@ -223,7 +223,7 @@
                     <br>
 
                     <div align="center">
-                        <button type="submit" class="btn btn-warning" id="bthkh">ADD</button>
+                        <button type="submit" class="btn btn-warning" id="bthkh">Thêm khuyến mãi</button>
                     </div>
 
 
@@ -278,7 +278,7 @@
                 <div class="col-sm-12">
                     <div class="card-box table-responsive">
 
-                        <table id="example3" class="display" style="color: black">
+                        <table id="example3" class="display" style="color: black;width: 1600px">
                             <thead>
                             <tr>
 
@@ -772,7 +772,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
             </div>`;
         apdungthanhcong.appendChild(newToast1);
         newToast1.timeOut = setTimeout(
-            () => newToast1.remove(), 5000
+            () => newToast1.remove(), 1500
         )
     }
 
@@ -803,7 +803,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
             </div>`;
         apdungthanhcong.appendChild(newToast);
         newToast.timeOut = setTimeout(
-            () => newToast.remove(), 5000
+            () => newToast.remove(), 1500
         )
 
 
@@ -850,7 +850,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
             </div>`;
         notifications.appendChild(newToast);
         newToast.timeOut = setTimeout(
-            () => newToast.remove(), 5000
+            () => newToast.remove(), 1500
         )
     }
 
@@ -880,7 +880,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
             </div>`;
         notifications.appendChild(newToast);
         newToast.timeOut = setTimeout(
-            () => newToast.remove(), 5000
+            () => newToast.remove(), 1500
         )
 
 
@@ -907,7 +907,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
             </div>`;
         notifications.appendChild(newToast2);
         newToast2.timeOut = setTimeout(
-            () => newToast2.remove(), 5000
+            () => newToast2.remove(), 1500
         )
     }
 

@@ -67,6 +67,8 @@ public interface HoaDonService {
 
     public ResponseEntity<byte[]> generatePdfDonTaiQuay(UUID hoaDonId);
 
+    public ResponseEntity<byte[]> generatePdfPhieu(UUID hoaDonId);
+
     public ResponseEntity<byte[]> generatePdfDonOnline(UUID hoaDonId);
 }
 

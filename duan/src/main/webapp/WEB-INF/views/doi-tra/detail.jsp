@@ -465,7 +465,7 @@
                                            id="sanPhamSearchInput">
                                     <div class="input-group-append">
                                         <button class="btn btn-sm btn-primary" type="button" id="searchSanPham">
-                                            Search
+                                            Tìm kiếm
                                         </button>
                                     </div>
                                 </div>
@@ -610,7 +610,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thông Tin Đổi Trả</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Thông Tin Đổi Hàng</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -619,14 +619,14 @@
                 <!-- Form để nhập thông tin đổi trả -->
                 <form id="doiTraForm" style="color:black;">
                     <div class="form-group">
-                        <label for="lyDo">Lý Do Đổi Trả</label>
-                        <input type="text" class="form-control" id="lyDo" placeholder="Lý do đổi trả">
+                        <label for="lyDo">Lý Do Đổi Hàng</label>
+                        <input type="text" class="form-control" id="lyDo" placeholder="Lý do đổi hàng">
                     </div>
                     <div class="form-group">
                         <label for="hienTrangSanPham">Hiện Trạng Sản Phẩm</label>
                         <select class="form-control" id="hienTrangSanPham">
                             <option value="0">Sản phẩm lỗi</option>
-                            <option value="1">Sản phẩm đổi trả</option>
+                            <option value="1">Sản phẩm đổi hàng</option>
                             <!-- Thêm các option khác nếu cần -->
                         </select>
                     </div>
@@ -765,7 +765,7 @@
 </script>
 <script>
     function showDoiTraModal() {
-        // Hiển thị modal đổi trả
+        // Hiển thị modal đổi hàng
         $("#doiTra").modal("show");
     }
 </script>

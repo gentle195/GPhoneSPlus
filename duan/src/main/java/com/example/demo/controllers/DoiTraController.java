@@ -765,7 +765,7 @@ public class DoiTraController {
     @GetMapping("/xuat-pdf/{id}")
     public ResponseEntity<byte[]> xuatPDF(@PathVariable("id") UUID id) {
         DoiTra dt = doiTraService.findById(id);
-        ResponseEntity<byte[]> responseEntity = hoaDonService.generatePdfDonTaiQuay(dt.getHoaDon().getId());
+        ResponseEntity<byte[]> responseEntity = hoaDonService.generatePdfPhieu(dt.getHoaDon().getId());
         byte[] pdfBytes = responseEntity.getBody();
 
         HttpHeaders headers = new HttpHeaders();
