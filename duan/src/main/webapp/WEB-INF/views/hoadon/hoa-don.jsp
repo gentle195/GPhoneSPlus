@@ -345,7 +345,7 @@
                                         </c:if>
                                         <c:if test="${(hoaDon.tinhTrang == 0|| hoaDon.tinhTrang == 1|| hoaDon.tinhTrang == 3 &&
                                          hoaDon.tinhTrangGiaoHang != 2 && hoaDon.tinhTrangGiaoHang != 3 || (hoaDon.tinhTrang == 2 && hoaDon.loai==1  && hoaDon.tinhTrangGiaoHang != 2 && hoaDon.tinhTrangGiaoHang != 3))
-                                          && hoaDon.tinhTrang != 9 && hoaDon.khachHang!= null }">
+                                          && hoaDon.tinhTrang != 9 && hoaDon.khachHang!= null && hoaDon.nhanVien!= null }">
                                             <a href="/hoa-don/view-update/${hoaDon.id}"
                                                class="btn btn-warning btn-icon-text"
                                                tabindex="-1"

@@ -213,7 +213,7 @@
                                                 <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
                                                 <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
                                                 <td>${hdct.hoaDonChiTiet.donGia}</td>
-                                                <td>${hdct.hienTrangSanPham == 0?"Sản phẩm lỗi" :"Sản phẩm đổi trả"}
+                                                <td>${hdct.hienTrangSanPham == 0?"Sản phẩm lỗi" :"Sản phẩm đổi hàng"}
                                                 </td>
                                                 <td>
                                                     <c:choose>
@@ -295,7 +295,7 @@
                                     </table>
                                     <div class="mt-4">
                                         <form>
-                                            <!-- Thêm các trường và nút submit cho form tiền đổi trả -->
+                                            <!-- Thêm các trường và nút submit cho form tiền đổi hàng -->
                                             <div class="form-group">
                                                 <label for="tienDoiTra" style="color: black">Tổng tiền chêch
                                                     lệch:</label>
@@ -303,7 +303,7 @@
                                                        id="tienDoiTra"
                                                        name="tienDoiTra" readonly>
                                             </div>
-                                            <!-- Thêm các trường và nút submit cho form tiền đổi trả -->
+                                            <!-- Thêm các trường và nút submit cho form tiền đổi hàng -->
                                         </form>
                                     </div>
                                     <div>
@@ -616,7 +616,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Form để nhập thông tin đổi trả -->
+                <!-- Form để nhập thông tin đổi hàng -->
                 <form id="doiTraForm" style="color:black;">
                     <div class="form-group">
                         <label for="lyDo">Lý Do Đổi Hàng</label>
@@ -676,7 +676,7 @@
 
                 if (data.hasNullImei) {
 
-                    toastr.error("Vui lòng chọn sản phẩm đổi trả  ", "Lỗi", {
+                    toastr.error("Vui lòng chọn sản phẩm đổi hàng  ", "Lỗi", {
                         timeOut: 3000,
                         closeButton: true,
                         progressBar: true,
@@ -693,7 +693,7 @@
                     document.getElementById("xacNhanForm").submit();
 
                     setTimeout(function () {
-                        window.location.href = "/doi-tra/hien-thi";
+                        window.location.href = "/doi-tra/thanh-cong";
                     }, 1500);
                 }
             },

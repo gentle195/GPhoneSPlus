@@ -234,7 +234,7 @@
                                             <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
                                             <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
                                             <td>${hdct.hoaDonChiTiet.donGia}</td>
-                                            <td>${hdct.hinhThucDoiTra == 0 ? 'Đổi mới   ' : (hdct.hinhThucDoiTra == 1 ? 'Hoàn trả' : '')} </td>
+                                            <td>${hdct.hinhThucDoiTra == 0 ? 'Đổi mới   ' : (hdct.hinhThucDoiTra == 1 ? 'Hoàn hàng' : '')} </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -289,7 +289,7 @@
             type: "GET",
             url: "/doi-tra/detail-imei/" + imeiId,
             success: function (data) {
-                // Xử lý dữ liệu trả về và hiển thị trong modal
+                // Xử lý dữ liệu hàng về và hiển thị trong modal
                 $("#tenSanPhamModal").text(data.chiTietSanPham.sanPham.ten);
                 $("#hangSanPhamModal").text(data.chiTietSanPham.sanPham.hangSanPham.ten);
                 $("#imeiModal").text(data.soImei);
@@ -364,7 +364,7 @@
 </script>
 
 
-<%--//Xóa sp cần đổi trả--%>
+<%--//Xóa sp cần đổi hàng--%>
 
 <script>
     var xoahdctId; // Biến toàn cục để lưu giá trị hdctId
@@ -517,7 +517,7 @@
 
 <script>
     function showDoiTraModal() {
-        // Hiển thị modal đổi trả
+        // Hiển thị modal đổi hàng
         $("#doiTra").modal("show");
     }
 </script>
