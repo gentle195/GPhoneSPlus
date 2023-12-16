@@ -1577,31 +1577,32 @@ public class BanHangOnlineController {
     @ResponseBody
     public List<HoaDonChiTiet> detail(@PathVariable("id") UUID id) {
         List<HoaDonChiTiet> hdct = doiTraService.getHoaDonChiTiet(id);
-        List<DoiTra> doiTra1 = doiTraService.findAll();
-
-        boolean found = false;
-
-        for (DoiTra doiTra2 : doiTra1) {
-            if (doiTra2.getHoaDon().getId().equals(id)) {
-                found = true;
-                System.out.println("Khong hop le");
-                break;  // Nếu tìm thấy ít nhất một bản ghi, thoát khỏi vòng lặp
-            }
-        }
-
-// Nếu không tìm thấy DoiTra nào có HoaDon có id giống với id, thêm mới
-        if (!found) {
-            HoaDon hoaDon = hoaDonService.findById(id);
-            DoiTra doiTra = new DoiTra();
-            doiTra.setMa("DT" + String.valueOf(doiTraService.findAll().size() + 1));
-            doiTra.setNgayTao(Date.valueOf(LocalDate.now()));
-            doiTra.setHoaDon(hoaDon);
-            doiTra.setKhachHang(hoaDon.getKhachHang());
-            doiTra.setTinhTrang(0);
-            doiTraService.add(doiTra);
-        }
+//        List<DoiTra> doiTra1 = doiTraService.findAll();
+//
+//        boolean found = false;
+//
+//        for (DoiTra doiTra2 : doiTra1) {
+//            if (doiTra2.getHoaDon().getId().equals(id)) {
+//                found = true;
+//                System.out.println("Khong hop le");hu
+//                break;  // Nếu tìm thấy ít nhất một bản ghi, thoát khỏi vòng lặp
+//            }
+//        }
+//
+//// Nếu không tìm thấy DoiTra nào có HoaDon có id giống với id, thêm mới
+//        if (!found) {
+//            HoaDon hoaDon = hoaDonService.findById(id);
+//            DoiTra doiTra = new DoiTra();
+//            doiTra.setMa("DT" + String.valueOf(doiTraService.findAll().size() + 1));
+//            doiTra.setNgayTao(Date.valueOf(LocalDate.now()));
+//            doiTra.setHoaDon(hoaDon);
+//            doiTra.setKhachHang(hoaDon.getKhachHang());
+//            doiTra.setTinhTrang(0);
+//            doiTraService.add(doiTra);
+//        }
         return hdct;
     }
+
 
     @GetMapping("/doi-tra-khachhang")
     public String doitra(Model model, @RequestParam List<UUID> hdctIds, @RequestParam UUID hoadonId) {
@@ -1664,6 +1665,14 @@ public class BanHangOnlineController {
 
 
         }
+        HoaDon hoaDon = hoaDonService.findById(hoadonId);
+        DoiTra doiTra = new DoiTra();
+        doiTra.setMa("DT" + String.valueOf(doiTraService.findAll().size() + 1));
+        doiTra.setNgayTao(Date.valueOf(LocalDate.now()));
+        doiTra.setHoaDon(hoaDon);
+        doiTra.setKhachHang(hoaDon.getKhachHang());
+        doiTra.setTinhTrang(0);
+        doiTraService.add(doiTra);
         List<DoiTraChiTiet> doiTraChiTiets = new ArrayList<>();
         for (int i = 0; i < hdctIds.size(); i++) {
             UUID hdctId = hdctIds.get(i);
@@ -1675,13 +1684,13 @@ public class BanHangOnlineController {
 
             doiTraChiTietss.setHinhThucDoiTra(0);
             doiTraChiTietss.setLyDo(ghiChuList.get(i));
-
+            doiTraChiTietss.setDoiTra(doiTra);
             doiTraChiTiets.add(doiTraChiTietss);
         }
 
         // Lưu danh sách đối trả chi tiết vào cơ sở dữ liệu
         doiTraChiTietService.saveAll(doiTraChiTiets);
-        DoiTra doiTra=doiTraService.getDoiTraByHoaDon(hoadonId);
+//        DoiTra doiTra=doiTraService.getDoiTraByHoaDon(hoadonId);
         doiTra.setTinhTrang(0);
         doiTraService.update(doiTra.getId(),doiTra);
 

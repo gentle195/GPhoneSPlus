@@ -929,19 +929,33 @@
 
             $("#confirmButton").click(function () {
                 var selectedItems = [];
+                var isValid = true; // Flag to track if all inputs are valid
 
                 // Lặp qua các hàng được chọn để lấy thông tin
                 $(".select-checkbox:checked").each(function () {
                     var itemId = $(this).data("id");
-                    // var hinhThuc = parseInt($(this).closest("tr").find(".hinhThucSelect").val());
-                    var ghiChu = $(this).closest("tr").find(".ghiChuInput").val();
+                    var ghiChuInput = $(this).closest("tr").find(".ghiChuInput");
+                    var ghiChu = ghiChuInput.val();
+
+                    // Kiểm tra nếu input rỗng
+                    if (!ghiChu.trim()) {
+                        isValid = false;
+                        // Hiển thị thông báo lỗi
+                        alert("Vui lòng nhập giá trị cho tất cả các ô Ghi chú.");
+                        // Dừng vòng lặp
+                        return false;
+                    }
 
                     selectedItems.push({
                         hdctId: itemId,
-                        // hinhThuc: hinhThuc,
                         ghiChu: ghiChu
                     });
                 });
+
+                // Nếu có ít nhất một input không hợp lệ, không thực hiện Ajax request
+                if (!isValid) {
+                    return;
+                }
 
                 // Gửi danh sách thông tin đến controller
                 $.ajax({
@@ -950,7 +964,6 @@
                     data: {
                         hdctIds: selectedItems.map(item => item.hdctId),
                         hoadonId: hoadonId,
-                        // hinhThucList: selectedItems.map(item => parseInt(item.hinhThuc)),
                         ghiChuList: selectedItems.map(item => item.ghiChu)
                     },
                     success: function (response) {
@@ -962,6 +975,7 @@
                     }
                 });
             });
+
 
 
             // Xử lý sự kiện khi người dùng chọn ô "Chọn tất cả"

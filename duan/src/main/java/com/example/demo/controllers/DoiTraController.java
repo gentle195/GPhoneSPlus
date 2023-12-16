@@ -22,10 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -398,6 +395,19 @@ public class DoiTraController {
 
         doiTraChiTietService.delete(doiTraChiTiet.getId());
         return "redirect:/doi-tra/detail/" + doiTra.getHoaDon().getId() + "?doitraId=" + doitraId + "&hoadonId=" + doiTra.getHoaDon().getId();
+    }
+    @GetMapping("/check/{doiTraID}")
+    @ResponseBody
+    public Map<String, Object> check(Model model, @PathVariable UUID doiTraID) {
+        Map<String, Object> result = new HashMap<>();
+
+        List<DoiTraChiTiet> listDTCT = doiTraChiTietService.getDoiTraChiTietByDoiTraId(doiTraID);
+
+        boolean hasNullImei = listDTCT.stream().anyMatch(dtct -> dtct.getImei() == null);
+
+        result.put("hasNullImei", hasNullImei);
+
+        return result;
     }
 
     @GetMapping("/them-dtct")
