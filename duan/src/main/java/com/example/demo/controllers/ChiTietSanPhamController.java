@@ -552,33 +552,7 @@ public class ChiTietSanPhamController {
 
             return "home/layout";
         }
-        if (chiTietSanPhamService.existsDuplicate(chiTietSanPham.getSanPham(), chiTietSanPham.getChip(), chiTietSanPham.getRom(), chiTietSanPham.getRam(), chiTietSanPham.getPin(), chiTietSanPham.getMauSac())){
-            model.addAttribute("tbTrung", "Chi tiết sản phẩm đã tồn tại!");
 
-            model.addAttribute("Pin", new Pin());
-            model.addAttribute("chip", new Chip());
-            model.addAttribute("ram", new Ram());
-            model.addAttribute("rom", new Rom());
-            model.addAttribute("sanPham", new SanPham());
-            model.addAttribute("mauSac", new MauSac());
-
-
-            model.addAttribute("listSanPham", sanPhamService.findAll0());
-            model.addAttribute("listMauSac", mauSacService.findAll0());
-            model.addAttribute("listChip", chipService.findAll0());
-            model.addAttribute("listRam", ramService.findAll0());
-            model.addAttribute("listRom", romService.findAll0());
-            model.addAttribute("listHang", hangSanPhamService.findAll0());
-            model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
-            model.addAttribute("listPin", pinService.findAll0());
-            model.addAttribute("listManHinh", manHinhService.findAll0());
-            model.addAttribute("listCamera", cameraService.findAll0());
-
-            model.addAttribute("thongBaoCTSP1", "Chi tiết sản phẩm đã tồn tại!");
-            model.addAttribute("contentPage", "../chi-tiet-san-pham/update-chi-tiet-san-pham.jsp");
-
-            return "home/layout";
-        }
         String fileName1 = StringUtils.cleanPath(anh1.getOriginalFilename());
         if (checkanh1.equals("cu1")) {
         } else {

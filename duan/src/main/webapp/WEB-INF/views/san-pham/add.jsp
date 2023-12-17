@@ -15,6 +15,147 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     <!-- Favicon icon -->
 </head>
+<style>
+    .notifications {
+        position: absolute;
+        top: 30px;
+        right: 20px;
+    }
+
+    .toast2 {
+        position: relative;
+        padding: 10px;
+        color: #fff;
+        margin-bottom: 10px;
+        width: 400px;
+        display: grid;
+        grid-template-columns: 70px 1fr 70px;
+        border-radius: 5px;
+        --color: #0abf30;
+        background-image: linear-gradient(
+                to right, #0abf3055, #22242f 30%
+        );
+        animation: show 0.3s ease 1 forwards
+    }
+
+    .toast2 i {
+        color: var(--color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: x-large;
+    }
+
+    .toast2 .title {
+        font-size: x-large;
+        font-weight: bold;
+    }
+
+    .toast2 span, .toast i:nth-child(3) {
+        color: #fff;
+        opacity: 0.6;
+    }
+
+    .toast1 {
+        position: relative;
+        padding: 10px;
+        color: #fff;
+        margin-bottom: 10px;
+        width: 400px;
+        display: grid;
+        grid-template-columns: 70px 1fr 70px;
+        border-radius: 5px;
+        --color: #0abf30;
+        background-image: linear-gradient(
+                to right, #0abf3055, #22242f 30%
+        );
+        animation: show 0.3s ease 1 forwards
+    }
+
+    .toast1 i {
+        color: var(--color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: x-large;
+    }
+
+    .toast1 .title {
+        font-size: x-large;
+        font-weight: bold;
+    }
+
+    .toast1 span, .toast i:nth-child(3) {
+        color: #fff;
+        opacity: 0.6;
+    }
+
+    @keyframes show {
+        0% {
+            transform: translateX(100%);
+        }
+        40% {
+            transform: translateX(-5%);
+        }
+        80% {
+            transform: translateX(0%);
+        }
+        100% {
+            transform: translateX(-10%);
+        }
+    }
+
+    .toast1::before {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: var(--color);
+        width: 100%;
+        height: 3px;
+        content: '';
+        box-shadow: 0 0 10px var(--color);
+        animation: timeOut 5s linear 1 forwards
+    }
+
+    .toast2::before {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: red;
+        width: 100%;
+        height: 3px;
+        content: '';
+        box-shadow: 0 0 10px var(--color);
+        animation: timeOut 5s linear 1 forwards
+    }
+
+    @keyframes timeOut {
+        to {
+            width: 0;
+        }
+    }
+
+    .toast1.error {
+        --color: #f24d4c;
+        background-image: linear-gradient(
+                to right, #f24d4c55, #22242F 30%
+        );
+    }
+
+    .toast1.warning {
+        --color: #e9bd0c;
+        background-image: linear-gradient(
+                to right, #e9bd0c55, #22242F 30%
+        );
+    }
+
+    .toast1.info {
+        --color: #3498db;
+        background-image: linear-gradient(
+                to right, #3498db55, #22242F 30%
+        );
+    }
+</style>
 <body>
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
@@ -628,8 +769,38 @@
         </div>
     </div>
 </c:if>
+<div class="buttons" style="display: none" >
+    <button id="btapdungthanhcong">btapdungthanhcong</button>
+</div>
 </body>
 <script>
+    let apdungthanhcong = document.querySelector('.notifications');
+    // let btt = document.getElementById('btt');
+
+    // var btt = document.getElementById("btt");
+    let btapdungthanhcong =document.getElementById('btapdungthanhcong');
+    function createToast1() {
+
+        let newToast1 = document.createElement('div');
+        newToast1.innerHTML = `
+            <div class="toast1" >
+                <i class="fa-solid fa-circle-check"></i>
+                <div class="content">
+                    <div class="title">Thành công</div>
+                    <span>Thêm thành công!</span>
+                </div>
+                <i class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
+            </div>`;
+        apdungthanhcong.appendChild(newToast1);
+        newToast1.timeOut = setTimeout(
+            () => newToast1.remove(), 5000
+        )
+    }
+    btapdungthanhcong.onclick=function () {
+        createToast1();
+    }
+
+    <c:if test="${tbHien==1}">btapdungthanhcong.click();</c:if>
     function validateFormHang() {
         // Lấy giá trị từ các ô input
         var ten = document.getElementById("nhapTen").value;

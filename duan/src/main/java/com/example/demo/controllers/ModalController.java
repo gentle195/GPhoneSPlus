@@ -393,7 +393,20 @@ public class ModalController {
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         List<ManHinh> list = manHinhService.getAll();
         model.addAttribute("listManHinh", list);
-        return "redirect:/san-pham/view-add";
+        model.addAttribute("hangSP", new HangSanPham());
+        model.addAttribute("dulieuxem", new SanPham());
+        model.addAttribute("ManHinh", new ManHinh());
+        model.addAttribute("camera", new Camera());
+        model.addAttribute("anh", new Anh());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listHangSP", hangSanPhamService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("listAnh", anhService.findAll0());
+        model.addAttribute("tbHien",1);
+        model.addAttribute("contentPage", "../san-pham/add.jsp");
+
+        return "home/layout";
+
         // Tiếp tục xử lý và trả về view tương ứng
     }
 
@@ -409,7 +422,19 @@ public class ModalController {
         cameraService.add(camera);
         List<Camera> list = cameraService.getAll();
         model.addAttribute("listCamera", list);
-        return "redirect:/san-pham/view-add";
+        model.addAttribute("hangSP", new HangSanPham());
+        model.addAttribute("dulieuxem", new SanPham());
+        model.addAttribute("ManHinh", new ManHinh());
+        model.addAttribute("camera", new Camera());
+        model.addAttribute("anh", new Anh());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listHangSP", hangSanPhamService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("listAnh", anhService.findAll0());
+        model.addAttribute("tbHien",1);
+        model.addAttribute("contentPage", "../san-pham/add.jsp");
+
+        return "home/layout";
         // Tiếp tục xử lý và trả về view tương ứng
     }
 
@@ -424,7 +449,19 @@ public class ModalController {
         dulieuxem.setNgayTao(Date.valueOf(LocalDate.now()));
         dulieuxem.setMa("H" + String.valueOf(hangSanPhamService.findAll().size() + 1));
         hangSanPhamService.add(dulieuxem);
-        return "redirect:/san-pham/view-add";
+        model.addAttribute("hangSP", new HangSanPham());
+        model.addAttribute("dulieuxem", new SanPham());
+        model.addAttribute("ManHinh", new ManHinh());
+        model.addAttribute("camera", new Camera());
+        model.addAttribute("anh", new Anh());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listHangSP", hangSanPhamService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("listAnh", anhService.findAll0());
+        model.addAttribute("tbHien",1);
+        model.addAttribute("contentPage", "../san-pham/add.jsp");
+
+        return "home/layout";
         // Tiếp tục xử lý và trả về view tương ứng
     }
 
@@ -484,6 +521,18 @@ public class ModalController {
             anh.setAnh3(fileName3);
         }
         anhService.add(anh);
-        return "redirect:/san-pham/view-add";
+        model.addAttribute("hangSP", new HangSanPham());
+        model.addAttribute("dulieuxem", new SanPham());
+        model.addAttribute("ManHinh", new ManHinh());
+        model.addAttribute("camera", new Camera());
+        model.addAttribute("anh", new Anh());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listHangSP", hangSanPhamService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("listAnh", anhService.findAll0());
+        model.addAttribute("tbHien",1);
+        model.addAttribute("contentPage", "../san-pham/add.jsp");
+
+        return "home/layout";
     }
 }
