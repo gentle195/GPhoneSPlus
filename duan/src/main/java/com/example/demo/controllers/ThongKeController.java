@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.DecimalFormat;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @RequestMapping("/thong-ke")
@@ -79,13 +80,23 @@ public class ThongKeController {
 
     @PostMapping("/loc-thoi-gian")
     public String locTime(Model model, @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate) {
-        List<DoanhThuHang> doanhThuTheoHang = thongKeService.doanhThuHang();
-        model.addAttribute("listDoanhThuHang", doanhThuTheoHang);
+        LocalDate start = startDate.toLocalDate();
+        LocalDate end = endDate.toLocalDate();
+        int check = end.compareTo(start);
+        if (check < 0) {
+            model.addAttribute("thongBao", "Ngày bắt đầu phải nhỏ hơn ngày kết thúc");
+            model.addAttribute("contentPage", "../thongke/thong-ke-hang.jsp");
+            return "home/layout";
+        } else {
+            List<DoanhThuHang> doanhThuTheoHang = thongKeService.doanhThuHang();
+            model.addAttribute("listDoanhThuHang", doanhThuTheoHang);
 
-        List<DoanhThuHang> locHang = thongKeService.locdoanhThuHang(startDate,endDate);
-        model.addAttribute("listDoanhThuHang", locHang);
-        model.addAttribute("contentPage", "../thongke/thong-ke-hang.jsp");
-        return "home/layout";
+            List<DoanhThuHang> locHang = thongKeService.locdoanhThuHang(startDate, endDate);
+            model.addAttribute("listDoanhThuHang", locHang);
+            model.addAttribute("contentPage", "../thongke/thong-ke-hang.jsp");
+            return "home/layout";
+        }
+
     }
 
     @GetMapping("/hien-thi-nhan-vien")
@@ -96,10 +107,20 @@ public class ThongKeController {
 
     @PostMapping("/loc-thoi-gian-nv")
     public String locTimeNhanVien(Model model, @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate) {
-        List<DoanhThuNhanVien> locHang = thongKeService.locDoanhThuNhanVien(startDate,endDate);
-        model.addAttribute("listDoanhThuNhanVien", locHang);
-        model.addAttribute("contentPage", "../thongke/thong-ke-nhan-vien.jsp");
-        return "home/layout";
+        LocalDate start = startDate.toLocalDate();
+        LocalDate end = endDate.toLocalDate();
+        int check = end.compareTo(start);
+        if (check < 0) {
+            model.addAttribute("thongBao", "Ngày bắt đầu phải nhỏ hơn ngày kết thúc");
+            model.addAttribute("contentPage", "../thongke/thong-ke-nhan-vien.jsp");
+            return "home/layout";
+        } else {
+            List<DoanhThuNhanVien> locHang = thongKeService.locDoanhThuNhanVien(startDate, endDate);
+            model.addAttribute("listDoanhThuNhanVien", locHang);
+            model.addAttribute("contentPage", "../thongke/thong-ke-nhan-vien.jsp");
+            return "home/layout";
+        }
+
     }
 
     @GetMapping("/hien-thi-khach-hang")
@@ -115,12 +136,22 @@ public class ThongKeController {
 
     @PostMapping("/loc-thoi-gian-kh")
     public String locKhachHang(Model model, @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate) {
-        List<DoanhThuKhachHang> locDoanhThuKhachHang = thongKeService.locDoanhThuKhachHang(startDate,endDate);
-        List<DoanhThuKhachHang> locDoanhThuKhachHangGioiTinh = thongKeService.locDoanhThuKhachHangGioiTinh(startDate,endDate);
-        model.addAttribute("listDoanhThuKhachHang", locDoanhThuKhachHang);
-        model.addAttribute("listDoanhThuKhachHangGioiTinh", locDoanhThuKhachHangGioiTinh);
-        model.addAttribute("contentPage", "../thongke/thong-ke-khach-hang.jsp");
-        return "home/layout";
+        LocalDate start = startDate.toLocalDate();
+        LocalDate end = endDate.toLocalDate();
+        int check = end.compareTo(start);
+        if (check < 0) {
+            model.addAttribute("thongBao", "Ngày bắt đầu phải nhỏ hơn ngày kết thúc");
+            model.addAttribute("contentPage", "../thongke/thong-ke-khach-hang.jsp");
+            return "home/layout";
+        } else {
+            List<DoanhThuKhachHang> locDoanhThuKhachHang = thongKeService.locDoanhThuKhachHang(startDate, endDate);
+            List<DoanhThuKhachHang> locDoanhThuKhachHangGioiTinh = thongKeService.locDoanhThuKhachHangGioiTinh(startDate, endDate);
+            model.addAttribute("listDoanhThuKhachHang", locDoanhThuKhachHang);
+            model.addAttribute("listDoanhThuKhachHangGioiTinh", locDoanhThuKhachHangGioiTinh);
+            model.addAttribute("contentPage", "../thongke/thong-ke-khach-hang.jsp");
+            return "home/layout";
+        }
+
     }
 
     @GetMapping("/hien-thi-sl-doi-tra")
@@ -132,11 +163,21 @@ public class ThongKeController {
 
     @PostMapping("/loc-thoi-gian-sl-doi-tra")
     public String locSLDoiTra(Model model, @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate) {
-        List<SoLuongDoiTraHang> locSoLuongDoiTraHang = thongKeService.locSoLuongDoiTraHang(startDate,endDate);
-        List<SoLuongDoiTraHang> locSoLuongSanPhamLoi = thongKeService.locSoLuongSanPhamLoi(startDate,endDate);
-        model.addAttribute("listSoLuongDoiTraHang", locSoLuongDoiTraHang);
-        model.addAttribute("listlocSoLuongSanPhamLoi", locSoLuongSanPhamLoi);
-        model.addAttribute("contentPage", "../thongke/thong-ke-so-luong-doi-tra.jsp");
-        return "home/layout";
+        LocalDate start = startDate.toLocalDate();
+        LocalDate end = endDate.toLocalDate();
+        int check = end.compareTo(start);
+        if (check < 0) {
+            model.addAttribute("thongBao", "Ngày bắt đầu phải nhỏ hơn ngày kết thúc");
+            model.addAttribute("contentPage", "../thongke/thong-ke-so-luong-doi-tra.jsp");
+            return "home/layout";
+        } else {
+            List<SoLuongDoiTraHang> locSoLuongDoiTraHang = thongKeService.locSoLuongDoiTraHang(startDate, endDate);
+            List<SoLuongDoiTraHang> locSoLuongSanPhamLoi = thongKeService.locSoLuongSanPhamLoi(startDate, endDate);
+            model.addAttribute("listSoLuongDoiTraHang", locSoLuongDoiTraHang);
+            model.addAttribute("listlocSoLuongSanPhamLoi", locSoLuongSanPhamLoi);
+            model.addAttribute("contentPage", "../thongke/thong-ke-so-luong-doi-tra.jsp");
+            return "home/layout";
+        }
+
     }
 }
