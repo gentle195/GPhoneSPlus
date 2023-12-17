@@ -700,12 +700,13 @@
                     <br>
                     Sản phẩm chỉ được đổi một lần duy nhất
                     <br>
-                    Quý khách vui lòng đến trực tiếp cửa hàng GPhoneS Store ghi trên hoá đơn mua hàng (đối với khách hàng ở Hồ
-                    Chí Minh)
+                    Quý khách vui lòng đến trực tiếp cửa hàng GPhoneS Store ghi trên hoá đơn mua hàng (đối với khách hàng ở Hà Nội)
                     <br>
                     Đối với khách hàng ở khu vực khác, vui lòng gọi điện trực tiếp đến số điện thoại 098123456 hoặc gửi yêu cầu qua  mail gphonespluss@gmail.com Sau khi nhận được mail phản hồi xác nhận đồng ý từ
                     GPhoneS, Quý khách đóng gói sản phẩm kèm đầy đủ phụ kiện, hoá đơn, phiếu bảo hành, …và gửi về địa chỉ
                     số 3 phố Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội.
+                    <br>
+                    Chúng tôi chỉ xác nhận đổi hàng sang những sản phẩm giá nhỏ hơn hoặc bằng giá của sản phẩm cần đổi
                     <br>
 
                     <b> Lưu ý: GPhoneS Store khuyến khích Quý khách hàng nên chụp ảnh sản phẩm trước khi đổi hàng hóa, việc lưu

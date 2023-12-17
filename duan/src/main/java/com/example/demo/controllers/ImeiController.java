@@ -227,7 +227,7 @@ public class ImeiController {
         model.addAttribute("thongBaoCTSP", "Thêm imei thành công!");
 
         model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
-        model.addAttribute("contentPage", "../imei/add-imei.jsp");
+        model.addAttribute("contentPage", "../imei/index.jsp");
         return "home/layout";
 
 
