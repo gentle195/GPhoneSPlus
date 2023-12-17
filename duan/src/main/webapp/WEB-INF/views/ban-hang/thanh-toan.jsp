@@ -5,6 +5,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+
+
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -246,12 +250,13 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group row">
+
                                             <form:label
                                                     class="col-sm-3 col-form-label"
                                                     path="diaChi">Địa Chỉ:<label id="diachi1" style="color: red"></label>
                                             </form:label>
                                             <div class="col-sm-9">
-                                                <form:input
+                                                <form:input cssStyle="width: 10cm"
                                                         class="form-control"
                                                         placeholder=""
                                                         path="diaChi"
@@ -260,6 +265,9 @@
                                                         path="diaChi"
                                                         cssStyle="color: red"/>
                                             </div>
+
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -268,17 +276,22 @@
                                         <div class="form-group row">
                                             <form:label
                                                     class="col-sm-3 col-form-label"
-                                                    path="quan">Quận:<label id="quann1" style="color: red"></label>
+                                                    path="thanhPho">Tỉnh/thành:<label id="thanhPhoo1" style="color: red"></label>
                                             </form:label>
                                             <div class="col-sm-9">
-                                                <form:input
+                                                <select name="" id="province" style="width: 10cm">
+                                                </select>
+                                                <form:input cssStyle="display: none"
                                                         class="form-control"
                                                         placeholder=""
-                                                        path="quan"
-                                                        id="quann"/>
+                                                        path="thanhPho"
+                                                        id="themdiachidathangthanhpho"
+                                                />
+
                                                 <form:errors
-                                                        path="quan"
+                                                        path="thanhPho"
                                                         cssStyle="color: red"/>
+
                                             </div>
                                         </div>
 
@@ -289,14 +302,18 @@
                                         <div class="form-group row">
                                             <form:label
                                                     class="col-sm-3 col-form-label"
-                                                    path="huyen">Huyện:<label id="huyenn1" style="color: red"></label>
+                                                    path="huyen">Quận/Huyện:<label id="huyenn1" style="color: red"></label>
                                             </form:label>
                                             <div class="col-sm-9">
-                                                <form:input
+                                                <select name="" id="district" style="width: 10cm">
+                                                </select>
+                                                <form:input cssStyle="display: none"
                                                         class="form-control"
                                                         placeholder=""
                                                         path="huyen"
-                                                        id="huyenn"/>
+                                                        id="themdiachidathangquan"
+                                                />
+
                                                 <form:errors
                                                         path="huyen"
                                                         cssStyle="color: red"/>
@@ -307,21 +324,32 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group row">
+
                                             <form:label
                                                     class="col-sm-3 col-form-label"
-                                                    path="thanhPho">Thành Phố:<label id="thanhPhoo1" style="color: red"></label>
+                                                    path="quan">Phường/xã:<label id="quann1" style="color: red"></label>
                                             </form:label>
                                             <div class="col-sm-9">
-                                                <form:input
+                                                <select name="" id="ward" style="width: 10cm">
+                                                </select>
+                                                <form:input cssStyle="display: none"
                                                         class="form-control"
                                                         placeholder=""
-                                                        path="thanhPho"
-                                                        id="thanhPhoo"/>
+                                                        path="quan"
+                                                        id="themdiachidathanghuyen"
+                                                />
+                                                    <%--                                                id="quann" id="themdiachidathanghuyen"--%>
+                                                    <%--                                                id="huyenn themdiachidathangquan"--%>
+                                                    <%--                                                id="thanhPhoo themdiachidathangthanhpho"--%>
+
                                                 <form:errors
-                                                        path="thanhPho"
+                                                        path="quan"
                                                         cssStyle="color: red"/>
+
+
+
+</div>
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -342,7 +370,15 @@
                         </div>
                     </div>
                 </form:form>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="/jsbanhang/API.js"></script>
             </div>
+
+
             <div class="modal-footer">
                 <button type="button"
                         class="btn btn-secondary"
@@ -369,10 +405,13 @@
     }
 
     function checkhkh() {
+        <%--                                                id="quann" id="themdiachidathanghuyen"--%>
+        <%--                                                id="huyenn themdiachidathangquan"--%>
+        <%--                                                id="thanhPhoo themdiachidathangthanhpho"--%>
         var diaChi = document.getElementById("diachi").value;
-        var quann = document.getElementById("quann").value;
-        var huyenn = document.getElementById("huyenn").value;
-        var thanhPhoo = document.getElementById("thanhPhoo").value;
+        var quann = document.getElementById("themdiachidathanghuyen").value;
+        var huyenn = document.getElementById("themdiachidathangquan").value;
+        var thanhPhoo = document.getElementById("themdiachidathangthanhpho").value;
 
         if (
             diaChi == ''
@@ -416,4 +455,11 @@
 
 <!-- All init script -->
 <script src="../../../js/plugins-init/toastr-init.js"></script>
+<%--API--%>
+
 </html>
+
+
+
+
+

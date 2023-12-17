@@ -589,10 +589,9 @@
                             </c:if>
                         </td>
 
-                        <td colspan="4">
+                        <td>
                             <c:if test="${ht.tinhTrang==0}">
-                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
-                                    tiết
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết
                                 </a>
                                 <a class="btn btn-danger"
                                    href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy hoá đơn</a>
@@ -631,7 +630,7 @@
                                     tiết
                                 </a>
                             </c:if>
-                            <c:if test="${  ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist3.contains(ht.ma) && checkList.contains(ht.ma) }">
+                            <c:if test="${ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist3.contains(ht.ma) && checkList.contains(ht.ma) }">
                                 <button type="button" class="btn btn-primary doi-tra-btn" data-id="${ht.id}"
                                         onclick="showChonSanPhamModal(this)">
                                     Đổi hàng
