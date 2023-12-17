@@ -872,7 +872,7 @@ public class HoaDonController {
         khachHangService.update(kh.getId(), kh);
         hd.setTinhTrangGiaoHang(3);
         hd.setTinhTrang(2);
-        if (hd.getLoai() == 0) {
+        if (hd.getHinhThucThanhToan() == 0) {
             hd.setNgayThanhToan(Date.valueOf(LocalDate.now()));
         }
         hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));

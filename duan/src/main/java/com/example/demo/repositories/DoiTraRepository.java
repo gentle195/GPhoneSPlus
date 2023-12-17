@@ -41,7 +41,7 @@ public interface DoiTraRepository extends JpaRepository<DoiTra, UUID> {
             "left join khach_hang kh on d.id_khach_hang = kh.id left join nhan_vien nv on d.id_nhan_vien= nv.id " +
             "left join dia_chi dc on dc.id=d.id_dia_chi WHERE d.tinh_trang = 2 AND d.tinh_trang_giao_hang = 3 " +
             "AND NOT EXISTS (SELECT 1 FROM doi_tra dt WHERE dt.id_hoa_don = d.id) " +
-            "AND DATEDIFF(DAY, GETDATE(), d.ngay_nhan) <= 7", nativeQuery = true)
+            "AND DATEDIFF(DAYOFYEAR,ngay_nhan ,GETDATE() ) <= 7", nativeQuery = true)
     List<DTODoiTra> getAllHD();
 
     @Query("SELECT d from DoiTra d where d.tinhTrang=0")

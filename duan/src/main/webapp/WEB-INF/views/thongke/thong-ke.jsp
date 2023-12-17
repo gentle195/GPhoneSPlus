@@ -19,8 +19,8 @@
 <div class="card">
     <h4 class="card-title">Biểu đồ doanh thu các tháng trong năm </h4>
     <form action="/thong-ke/loc-nam" method="post" style="text-align: right">
-        <select name="namSelect">
-            <option value="" disabled >Chọn năm</option>
+        <select name="namSelect" style="height: 34.78px">
+            <option value="" disabled selected>Chọn năm</option>
             <c:forEach items="${listYear}" var="nam">
                 <option value="${nam.getNam()}">${nam.getNam()}</option>
             </c:forEach>
@@ -43,7 +43,6 @@
     data.push({
         thang: ${DT.getThang()},
         soLuong: ${DT.getSoLuongSP()},
-        phiShip: ${DT.getPhiShip()},
         tienDoiTra: ${DT.getTienDoiTra()},
         doanhThuThucTe: ${DT.getDoanhThuThucTe()},
         doanhThuChuaKhuyenMai: ${DT.getDoanhThuChuaKhuyenMai()}
@@ -71,14 +70,6 @@
                     yAxisID: 'y1',
                     borderColor: '#36a2eb',
                     backgroundColor: '#36a2eb',
-                },
-                {
-                    label: 'Phí ship',
-                    data: data.map(item => item.phiShip),
-                    borderWidth: 1,
-                    yAxisID: 'y',
-                    borderColor: '#cc65fe',
-                    backgroundColor: '#cc65fe',
                 },
                 {
                     label: 'Tiền đổi hàng',
