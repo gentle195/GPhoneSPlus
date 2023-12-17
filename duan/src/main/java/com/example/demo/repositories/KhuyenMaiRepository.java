@@ -74,4 +74,7 @@ public interface KhuyenMaiRepository extends JpaRepository<KhuyenMai, UUID> {
     @Query("select kh from KhuyenMai kh  where kh.tinhTrang=:tinhtrang ")
     List<KhuyenMai> TimTrangThaiKM(@Param("tinhtrang") Integer tinhtrang );
 
+    @Query("select hkh from KhuyenMai hkh order by hkh.ma desc ")
+    List<KhuyenMai> danhsachgiamdan();
+
 }
