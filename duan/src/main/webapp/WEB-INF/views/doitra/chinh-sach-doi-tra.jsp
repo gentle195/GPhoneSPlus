@@ -55,7 +55,7 @@
 
 
     <style>
-        p{
+        p {
             color: black;
             font-size: 15px;
             margin-top: 7px;
@@ -106,6 +106,7 @@
         .cart-dropdown a:hover {
             background-color: #0056b3;
         }
+
         /*div{*/
         /*    border: 1px solid red;*/
         /*}*/
@@ -146,11 +147,14 @@
                                  style="border-radius: 10px;width: 3.5cm;margin-top: 10px;width: 180px">
                                 <div>
                                     <div>
-                                        <form action="/thong-tin-ca-nhan-khach-hang" method="post" style="display: none">
+                                        <form action="/thong-tin-ca-nhan-khach-hang" method="post"
+                                              style="display: none">
                                             <input value="${idkhachhang}" name="idKhachHang" style="display: none">
-                                            <button style="" class="btn btn-primary" type="submit" id="taikhoancuatoi">Tài khoản của tôi</button>
+                                            <button style="" class="btn btn-primary" type="submit" id="taikhoancuatoi">
+                                                Tài khoản của tôi
+                                            </button>
                                         </form>
-                                        <a  class="btn btn-primary" type="submit" onclick="anbt()">Tài khoản của tôi</a>
+                                        <a class="btn btn-primary" type="submit" onclick="anbt()">Tài khoản của tôi</a>
 
                                     </div>
                                     <div>
@@ -158,7 +162,8 @@
                                            class="btn btn-primary">Đơn hàng</a>
                                     </div>
                                     <div>
-                                        <a href="/ban-hang-online/chinh-sach-doi-tra" class="btn btn-primary" style="" onclick="">Chính sách đổi trả</a>
+                                        <a href="/ban-hang-online/chinh-sach-doi-tra" class="btn btn-primary" style=""
+                                           onclick="">Chính sách đổi hàng</a>
                                     </div>
                                     <div>
                                         <a href="/logout" class="btn btn-primary" style="" onclick="">Đăng xuất</a>
@@ -359,20 +364,25 @@
 <br>
 <main style="margin-left: 5cm; margin-right: 5cm">
     <div class="body">
-<br>
-        <h2>Chính sách đổi trả sản phẩm của GphoneS Store</h2>
         <br>
-        <p>Để mang đến sự thuận tiện và trải nghiệm tốt nhất cho khách hàng, <strong>GphoneS Store</strong> có những chính sách
-            phù hợp khi khách hàng có nhu cầu đổi trả sản phẩm. Chúng tôi luôn mong muốn mang lại cho khách hàng
+        <h2>Chính sách đổi hàng sản phẩm của GphoneS Store</h2>
+        <br>
+        <p>Để mang đến sự thuận tiện và trải nghiệm tốt nhất cho khách hàng, <strong>GphoneS Store</strong> có những
+            chính sách
+            phù hợp khi khách hàng có nhu cầu đổi hàng sản phẩm. Chúng tôi luôn mong muốn mang lại cho khách hàng
             những sản phẩm và chất lượng phục vụ tốt nhất.</p>
-        <p>Việc đổi trả sản phẩm đi kèm một số điều kiện cụ thể, Quý khách vui lòng tham khảo thông tin chi
+        <p>Việc đổi hàng sản phẩm đi kèm một số điều kiện cụ thể, Quý khách vui lòng tham khảo thông tin chi
             tiết bên dưới :</p>
-<br>
+        <br>
         <table>
             <thead>
             <tr style="">
-                <th style="width: 250px; border: 2px solid black;padding-top: 0.5cm;text-align: center; padding-bottom: 0.5cm; font-size: 18px">Mục</th>
-                <th style="width: 1000px; border: 2px solid black;padding-top: 0.5cm;text-align: center; padding-bottom: 0.5cm; font-size: 18px">Nội dung chính sách</th>
+                <th style="width: 250px; border: 2px solid black;padding-top: 0.5cm;text-align: center; padding-bottom: 0.5cm; font-size: 18px">
+                    Mục
+                </th>
+                <th style="width: 1000px; border: 2px solid black;padding-top: 0.5cm;text-align: center; padding-bottom: 0.5cm; font-size: 18px">
+                    Nội dung chính sách
+                </th>
             </tr>
             </thead>
             <tbody>
@@ -380,43 +390,55 @@
                 <td style="border: 2px solid black; font-weight: bold">1) Đối tượng áp dụng</td>
                 <td style="border: 2px solid black;">
                     <p>Khách hàng</p>
-                    <p>* Áp dụng cho tất cả sản phẩm mua hàng online qua website và trực tiếp tại <strong>GphoneS Store</strong></p>
+                    <p>* Áp dụng cho tất cả sản phẩm mua hàng online qua website và trực tiếp tại <strong>GphoneS
+                        Store</strong></p>
                     <p>* Chúng tôi không hỗ trợ cho những đơn hàng mua tại địa điểm khác.
                     </p>
                 </td>
             </tr>
             <tr>
-                <td style="border: 2px solid black;font-weight: bold">2) Điều kiện đổi trả</td>
+                <td style="border: 2px solid black;font-weight: bold">2) Điều kiện đổi hàng</td>
                 <td style="border: 2px solid black;">
                     <p>* Sản phẩm không trùng khớp về màu sắc, mẫu mã, size theo đơn hàng.</p>
                     <p>* Lỗi kỹ thuật do nhà sản xuất.</p>
                     <p>* Sản phẩm đổi hàng phải còn mới, nguyên vẹn, không bị dính nước, không có dấu hiệu rơi vỡ</p>
                     <p>* Sản phẩm phải còn đầy đủ tem, nhãn mác, thẻ bảo hành và hoá đơn mua hàng.</p>
-                    <p>* Sản phẩm đổi hàng còn trong thời hạn cho phép đổi trả.</p>
-                    <p>* Khách hàng chỉ có thể trả sản phẩm với điều kiện <strong>GphoneS Store</strong> không có sản phẩm cùng loại khác (màu sắc,
+                    <p>* Sản phẩm đổi hàng còn trong thời hạn cho phép đổi hàng.</p>
+                    <p>* Khách hàng chỉ có thể hàng sản phẩm với điều kiện <strong>GphoneS Store</strong> không có sản
+                        phẩm cùng loại khác (màu sắc,
                         mẫu mã, kích thước) thay thế.</p>
                 </td>
             </tr>
             <tr>
-                <td style="border: 2px solid black;font-weight: bold">3) Thời hạn đổi trả</td>
+                <td style="border: 2px solid black;font-weight: bold">3) Thời hạn đổi hàng</td>
                 <td style="border: 2px solid black;">
                     <p>* <strong> 7 ngày</strong> kể từ ngày khách nhận được hàng</p>
                 </td>
             </tr>
             <tr>
-                <td style="border: 2px solid black;font-weight: bold">4) Thời hạn thực hiện đổi trả</td>
+                <td style="border: 2px solid black;font-weight: bold">4) Thời hạn thực hiện đổi hàng</td>
                 <td style="border: 2px solid black;">
-                    <p>* Đối với khách hàng mua online: Trong vòng 3-5 ngày kể từ ngày nhận được sản phẩm đổi.</p>
-                    <p>* Đối với khách hàng mua trực tiếp tại cửa hàng: Ngay tại cửa hàng</p>
+                    <p>Thời hạn đổi sản phẩm: 7 ngày đối với khách hàng mua online và 7 ngày đối với khách hàng mua trực
+                        tiếp tại cửa hàng kể từ ngày khách nhận được hàng.</p>
                 </td>
             </tr>
             <tr>
-                <td style="border: 2px solid black;font-weight: bold">5) Hình thức đổi trả</td>
+                <td style="border: 2px solid black;font-weight: bold">5) Hình thức đổi hàng</td>
                 <td style="border: 2px solid black;">
-                    <P>* Sản phẩm chỉ được đổi một lần duy nhất trừ trường hợp sản phẩm được đổi bị lỗi từ nhà sản xuất</P>
-                    <p>* Đối với khách hàng mua online: Đổi trực tiếp tại cửa hàng <strong>GphoneS Store</strong>ghi trên hoá đơn mua hàng.</p>
-                    <p>* Đối với khách hàng mua trực tiếp tại cửa hàng: Gửi sản phẩm về địa chỉ: <strong>Số 3 phố Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội.</strong></p>
-
+                    <P>* Sản phẩm chỉ được đổi một lần duy nhất
+                        <br>
+                        Quý khách vui lòng đến trực tiếp cửa hàng GPhoneS Store ghi trên hoá đơn mua hàng (đối với khách
+                        hàng ở Hà Nội)
+                        <br>
+                        Đối với khách hàng ở khu vực khác, vui lòng gọi điện trực tiếp đến số điện thoại 098123456 hoặc
+                        gửi yêu cầu qua mail gphonespluss@gmail.com Sau khi nhận được mail phản hồi xác nhận đồng ý từ
+                        GPhoneS, Quý khách đóng gói sản phẩm kèm đầy đủ phụ kiện, hoá đơn, phiếu bảo hành, …và gửi về
+                        địa chỉ
+                        số 3 phố Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội.
+                        <br>
+                        Chúng tôi chỉ xác nhận đổi hàng sang những sản phẩm giá nhỏ hơn hoặc bằng giá của sản phẩm cần
+                        đổi
+                    </P>
                 </td>
             </tr>
             </tbody>
@@ -424,70 +446,10 @@
         </table>
         <br>
         <p><i class="fa fa-exclamation-triangle" style=" font-weight: bold; color: red"> LƯU Ý:</i>
-            * GPhoneS Store khuyến khích Quý khách hàng nên chụp ảnh sản phẩm trước khi đổi hàng hóa, việc lưu giữ sản phẩm sẽ giúp khách hàng làm bằng chứng nếu có những vấn đề phát sinh trong quá trình đổi trả.</p>
+            * GPhoneS Store khuyến khích Quý khách hàng nên chụp ảnh sản phẩm trước khi đổi hàng hóa, việc lưu giữ sản
+            phẩm sẽ giúp khách hàng làm bằng chứng nếu có những vấn đề phát sinh trong quá trình đổi hàng.</p>
 
     </div>
-<%--    <h2>Chính sách đổi trả điện thoại</h2>--%>
-<%--    <p>--%>
-<%--        Để mang đến sự thuận tiện và trải nghiệm tốt nhất cho khách hàng, GPhonesPlus có những chính sách phù hợp khi khách hàng có nhu cầu đổi trả sản phẩm.--%>
-<%--        Chúng tôi luôn mong muốn mang lại cho khách hàng những sản phẩm và chất lượng phục vụ tốt nhất.--%>
-<%--        Việc đổi trả sản phẩm đi kèm một số điều kiện cụ thể, Quý khách vui lòng tham khảo thông tin chi tiết bên dưới--%>
-<%--    </p>   <br>--%>
-<%--    <h3>1. Điều kiện đổi trả</h3>--%>
-<%--    <p>--%>
-<%--        Khách hàng được phép đổi trả điện thoại trong vòng <strong>7 ngày</strong> kể từ ngày khách nhận hàng đối với những sản phẩm mua tại GPhonesphlus Để đổi trả sản phẩm, khách hàng cần đáp ứng các điều kiện sau:--%>
-<%--    </p>--%>
-<%--    <ul>--%>
-<%--        <li>Sản phẩm lỗi do nhà sản xuất.</li>--%>
-<%--        <li>Sản phẩm còn nguyên vẹn, không bị trầy xước, bể vỡ, móp méo,...</li>--%>
-<%--        <li>Sản phẩm còn đầy đủ phụ kiện đi kèm.</li>--%>
-<%--    </ul>--%>
-<%--    <br>--%>
-<%--    <h3>2. Các trường hợp không được đổi trả</h3>--%>
-<%--    <p>--%>
-<%--        Khách hàng sẽ không được đổi trả điện thoại trong các trường hợp sau:--%>
-<%--    </p>--%>
-<%--    <ul>--%>
-<%--        <li>Sản phẩm đã hết thời hạn đổi trả.</li>--%>
-<%--        <li>Sản phẩm bị trầy xước, bể vỡ, móp méo,... do khách hàng gây ra.</li>--%>
-<%--        <li>Sản phẩm bị mất, thất lạc,...</li>--%>
-<%--        <li>Sản phẩm không phải do nhà sản xuất lỗi.</li>--%>
-<%--    </ul>   <br>--%>
-<%--    <h3>3. Thủ tục đổi trả</h3>--%>
-<%--    <p>--%>
-<%--        Để đổi trả điện thoại, khách hàng cần thực hiện các bước sau:--%>
-<%--    </p>--%>
-<%--    <ul>--%>
-<%--        <li>Bước 1: Tạo phiếu đổi trả trên website.</li>--%>
-<%--        <li>Bước 2: Liên hệ với cửa hàng qua mail: <strong>gphonespluss@gmail.com</strong> để thông báo về việc đổi trả sản phẩm.</li>--%>
-<%--        <li>Bước 3: Mang sản phẩm đến cửa hàng tại địa chỉ: <strong>Cao Đẳng FPT Phố Trịnh Văn Bô, phường Phương Canh, quận Từ Liêm, Hà nội để kiểm tra</strong> </li>--%>
-<%--        <li>Bước 4: Nếu sản phẩm đủ điều kiện đổi trả, cửa hàng sẽ tiến hành đổi trả sản phẩm cho khách hàng.</li>--%>
-<%--    </ul>   <br>--%>
-<%--    <h3>4. Hình thức đổi trả</h3>--%>
-<%--    <p>--%>
-<%--        Cửa hàng sẽ đổi trả sản phẩm cho khách hàng bằng một trong các hình thức sau:--%>
-<%--    </p>--%>
-<%--    <ul>--%>
-<%--        <li>Đổi sản phẩm mới cùng loại.</li>--%>
-<%--        <li>Đổi sản phẩm mới khác loại.</li>--%>
-<%--    </ul>   <br>--%>
-<%--    <h3>5. Lưu ý khi đổi trả</h3>--%>
-<%--    <p>--%>
-<%--        Khi đổi trả điện thoại, khách hàng cần lưu ý một số điều sau:--%>
-<%--    </p>--%>
-<%--    <ul>--%>
-<%--        <li>Nên giữ lại hóa đơn mua hàng để làm căn cứ đổi trả sản phẩm.</li>--%>
-<%--        <li>Nên chụp lại hình ảnh sản phẩm trước khi mang đến cửa hàng để đổi trả, để làm bằng chứng nếu có tranh chấp xảy ra.</li>--%>
-<%--        <li>Nên tìm hiểu kỹ chính sách đổi trả của cửa hàng trước khi mua hàng để tránh gặp phải những rủi ro không đáng có.</li>--%>
-<%--    </ul>   <br>--%>
-<%--    <h3>6. Lý do chỉ đổi không trả</h3>--%>
-<%--    <p>--%>
-<%--        Cửa hàng chỉ áp dụng chính sách đổi trả điện thoại, không áp dụng chính sách trả hàng. Điều này là do:--%>
-<%--    </p>--%>
-<%--    <ul>--%>
-<%--        <li>Điện thoại là một sản phẩm có giá trị cao, việc trả hàng có thể gây ra những rủi ro cho cửa hàng.</li>--%>
-<%--        <li>Cửa hàng mong muốn mang đến cho khách hàng những trải nghiệm mua sắm tốt nhất, đảm bảo quyền lợi của khách hàng.</li>--%>
-<%--    </ul>--%>
 </main>
 <br>
 <!-- NEWSLETTER -->
