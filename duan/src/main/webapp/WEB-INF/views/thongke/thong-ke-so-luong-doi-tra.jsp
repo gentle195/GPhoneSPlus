@@ -20,13 +20,13 @@
                     <div style="display: flex; justify-content: center; align-items: center;">
                         <div>
                             <label>Ngày bắt đầu
-                                <input type="date" id="ngayTao" name="startDate" class="form-control"
+                                <input type="date" id="ngayTao" name="startDate" class="form-control" Required ="true"
                                        placeholder="Từ ngày">
                             </label>
                         </div>
                         <div>
                             <label>Ngày kết thúc
-                                <input type="date" id="ngayTao1" name="endDate" class="form-control"
+                                <input type="date" id="ngayTao1" name="endDate" class="form-control" Required ="true"
                                        placeholder="Kết thúc">
                             </label>
                         </div>
