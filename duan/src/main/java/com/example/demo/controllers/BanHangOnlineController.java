@@ -788,6 +788,10 @@ public class BanHangOnlineController {
                     imei.setTinhTrang(3);
                     imei.setNgayCapNhat(date);
                     imeiService.add(imei);
+// cập nhật lại số lượng ctsp của imei đó
+                    ChiTietSanPham motctsp=imei.getChiTietSanPham();
+                    motctsp.setSoLuong(motctsp.getSoLuong()-1);
+                    chiTietSanPhamService.add(motctsp);
                 }
             }
 //xoa ghct TT=0 theo idgh
@@ -991,11 +995,15 @@ public class BanHangOnlineController {
                     imei.setTinhTrang(3);
                     imei.setNgayCapNhat(date);
                     imeiService.add(imei);
+// cập nhật lại số lượng ctsp của imei đó
+                    ChiTietSanPham motctsp=imei.getChiTietSanPham();
+                    motctsp.setSoLuong(motctsp.getSoLuong()-1);
+                    chiTietSanPhamService.add(motctsp);
                 }
             }
 //xoa ghct TT=0 theo idgh
             banHangOnlineService.xoaghcttheoIDGHvsTTO(idgh1);
-            //cập nhật hóa đơn; thanh toán khi thanh toán online
+//cập nhật hóa đơn; thanh toán khi thanh toán online
             HoaDon hd1=banHangOnlineService.timhdtheomahd(mhd);
             hd1.setNgayThanhToan(date);
             hd1.setNgayCapNhat(date);
@@ -1216,7 +1224,13 @@ public class BanHangOnlineController {
             @PathVariable("thongbao") String thongbao
 
     ) {
-        banHangOnLinerepository.huyhoadon(idhd);
+        banHangOnlineService.huyhoadon(idhd);
+
+        for (HoaDonChiTiet hdct:banHangOnLinerepository.timhoadonchitiettheoidhd(idhd)) {
+            ChiTietSanPham motctsp=hdct.getImei().getChiTietSanPham();
+            motctsp.setSoLuong(motctsp.getSoLuong()+1);
+            chiTietSanPhamService.add(motctsp);
+        }
 
 
         return "redirect:/ban-hang-online/hoa-don-online/" +idkhachhang+"/"+tinhtrang+"/"+thongbao;
