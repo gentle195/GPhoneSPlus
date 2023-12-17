@@ -68,12 +68,14 @@ public interface IMEIRepository extends JpaRepository<IMEI, UUID> {
     List<IMEI> getImeiOff();
 
 
-
     @Query("select imei from  IMEI imei where imei.tinhTrang=0 ")
     List<IMEI> getImeiOn();
 
     @Query("select imei from  IMEI imei where imei.tinhTrang=4 ")
     List<IMEI> getImeiLoi();
+
+    @Query("select imei from  IMEI imei where imei.tinhTrang=0 and imei.chiTietSanPham.id=:id ")
+    List<IMEI> fct(UUID id);
 
     @Query("select i from IMEI i where i.tinhTrang=4 and (i.soImei like %:imei% or i.ma like %:imei% or i.chiTietSanPham.sanPham.ten like %:imei%)")
     List<IMEI> searchImeiLoi(String imei);
@@ -93,5 +95,6 @@ public interface IMEIRepository extends JpaRepository<IMEI, UUID> {
 
     @Query("select imei from  IMEI imei where imei.tinhTrang=0 and imei.chiTietSanPham.id=:id ")
     List<IMEI> statusCTSP(UUID id);
+
     boolean existsBySoImei(String imei);
 }

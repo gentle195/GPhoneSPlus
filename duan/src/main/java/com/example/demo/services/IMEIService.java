@@ -15,14 +15,15 @@ public interface IMEIService {
 
     public List<IMEI> searchOn(String imei);
 
-    public List<IMEI> searchOnBanHang(String imei,UUID id);
+    public List<IMEI> searchOnBanHang(String imei, UUID id);
 
     public List<IMEI> searchOff(String imei);
 
     public List<IMEI> searchOff2(String imei);
 
     public List<IMEI> findAll();
-    public   Page<IMEI> fill1(Pageable pageable);
+
+    public Page<IMEI> fill1(Pageable pageable);
 
     public List<IMEI> findAll0();
 
@@ -63,9 +64,14 @@ public interface IMEIService {
     public List<IMEI> statusSanPham(UUID id);
 
     public List<IMEI> statusCTSP(UUID id);
+
     public List<IMEI> findImeiLoi();
+
     public List<IMEI> searchImeiLoi(String imei);
+
     boolean existImei(String imei);
+
+    List<IMEI> fct(UUID id);
 }
 
 

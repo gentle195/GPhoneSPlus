@@ -192,4 +192,9 @@ public class IMEIServiceImpl implements IMEIService {
     public boolean existImei(String imei) {
         return imeiRepository.existsBySoImei(imei);
     }
+
+    @Override
+    public List<IMEI> fct(UUID id) {
+        return imeiRepository.fct(id);
+    }
 }
