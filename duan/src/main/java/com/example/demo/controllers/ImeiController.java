@@ -190,19 +190,7 @@ public class ImeiController {
         }
         String ma = "IMEI" + (imeiService.findAll().size() + 1);
         imei.setMa(ma);
-//        List<IMEI> listcheck = imeiService.findAll();
-//        for (IMEI i : listcheck
-//        ) {
-//            if (i.getSoImei().equalsIgnoreCase(imei.getSoImei())) {
-//                model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
-////                model.addAttribute("thongBao", "IMEI này đã có trong dữ liệu");
-//                model.addAttribute("thongBaoCTSP1", "Imei đã tồn tại!");
-//
-//                model.addAttribute("ma", ma);
-//                model.addAttribute("contentPage", "../imei/add-imei.jsp");
-//                return "home/layout";
-//            }
-//        }
+
         if (imeiService.existImei(imei.getSoImei())) {
             model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
 
@@ -211,6 +199,16 @@ public class ImeiController {
             model.addAttribute("thongBao", "IMEI này đã có trong dữ liệu");
             model.addAttribute("thongBaoCTSP1", "Imei đã tồn tại!");
             model.addAttribute("contentPage", "../imei/add-imei.jsp");
+            return "home/layout";
+        }
+        List<IMEI> i = imeiService.fct(imei.getChiTietSanPham().getId());
+        if (imei.getChiTietSanPham().getSoLuong() < i.size()) {
+            model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+
+
+            model.addAttribute("ma", ma);
+            model.addAttribute("thongBao", "Quá số lượng tồn");
+            model.addAttribute("contentPage", "../imei/index.jsp");
             return "home/layout";
         }
 
@@ -227,7 +225,7 @@ public class ImeiController {
         model.addAttribute("thongBaoCTSP", "Thêm imei thành công!");
 
         model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
-        model.addAttribute("contentPage", "../imei/index.jsp");
+        model.addAttribute("contentPage", "../imei/add-imei.jsp");
         return "home/layout";
 
 
