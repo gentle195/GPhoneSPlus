@@ -270,7 +270,7 @@ public class BanHangTaiQuayController {
     }
 
     @GetMapping("/remove/{id}")
-    public String updateTrangThai(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon,@ModelAttribute("modalAddKhachHang") KhachHang khachHang, @PathVariable("id") UUID id) {
+    public String updateTrangThai(Model model, @ModelAttribute("HoaDon") HoaDon hoaDon, @ModelAttribute("modalAddKhachHang") KhachHang khachHang, @PathVariable("id") UUID id) {
         HoaDon hd = hoaDonService.findById(id);
         LocalDate ngayCapNhat = LocalDate.now();
         List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
@@ -301,7 +301,7 @@ public class BanHangTaiQuayController {
             hoaDonService.update(id, hd);
         }
         List<HoaDon> listHD = hoaDonService.find();
-        model.addAttribute("HoaDon",null);
+        model.addAttribute("HoaDon", null);
         model.addAttribute("listHoaDon", listHD);
         model.addAttribute("idHoaDon", String.valueOf(id));
         model.addAttribute("listHang", hangSanPhamService.findAll0());
@@ -371,9 +371,9 @@ public class BanHangTaiQuayController {
             } else {
                 System.out.println(108);
                 BigDecimal giam = BigDecimal.valueOf(imei.getChiTietSanPham().getKhuyenMai().getSoTienGiam()).divide(BigDecimal.valueOf(100));
+                int giaMoi= (int) Math.floor(Double.valueOf(String.valueOf(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam)))));
 
-// Sử dụng phương thức multiply() để nhân giá tiền với tỷ lệ giảm giá
-                hdct.setDonGia(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam)));
+                hdct.setDonGia(BigDecimal.valueOf(giaMoi));
                 System.out.println(giam);
             }
             hdct.setSoLuong(1);
@@ -766,9 +766,9 @@ public class BanHangTaiQuayController {
             } else {
                 System.out.println(108);
                 BigDecimal giam = BigDecimal.valueOf(imei.getChiTietSanPham().getKhuyenMai().getSoTienGiam()).divide(BigDecimal.valueOf(100));
+                int giaMoi= (int) Math.floor(Double.valueOf(String.valueOf(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam)))));
 
-// Sử dụng phương thức multiply() để nhân giá tiền với tỷ lệ giảm giá
-                hdct.setDonGia(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam)));
+                hdct.setDonGia(BigDecimal.valueOf(giaMoi));
                 System.out.println(giam);
             }
             hdct.setSoLuong(1);

@@ -296,9 +296,10 @@ public class DoiTraController {
                 doiTraChiTiet.setDonGia(imei.getChiTietSanPham().getGiaBan());
             } else {
                 BigDecimal giam = BigDecimal.valueOf(imei.getChiTietSanPham().getKhuyenMai().getSoTienGiam()).divide(BigDecimal.valueOf(100));
+                int giaMoi = (int) Math.floor(Double.valueOf(String.valueOf(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam)))));
 
+                doiTraChiTiet.setDonGia(BigDecimal.valueOf(giaMoi));
                 doiTraChiTiet.setTienDoiTra(hdct.getDonGia().subtract(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam))));
-                doiTraChiTiet.setDonGia(hdct.getImei().getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam))));
             }
 
             doiTraChiTiet.setTienDoiTra(hdct.getDonGia().subtract(doiTraChiTiet.getDonGia()));
@@ -315,9 +316,10 @@ public class DoiTraController {
                 doiTraChiTiet.setDonGia(imei.getChiTietSanPham().getGiaBan());
             } else {
                 BigDecimal giam = BigDecimal.valueOf(imei.getChiTietSanPham().getKhuyenMai().getSoTienGiam()).divide(BigDecimal.valueOf(100));
+                int giaMoi = (int) Math.floor(Double.valueOf(String.valueOf(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam)))));
 
+                doiTraChiTiet.setDonGia(BigDecimal.valueOf(giaMoi));
                 doiTraChiTiet.setTienDoiTra(hdct.getDonGia().subtract(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam))));
-                doiTraChiTiet.setDonGia(imei.getChiTietSanPham().getGiaBan());
             }
 
             doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
@@ -376,11 +378,6 @@ public class DoiTraController {
         doiTraService.update(doitraId, doiTra1);
         return "redirect:/doi-tra/hien-thi";
     }
-//    @GetMapping("/chinh-sach")
-//    public String chinhsach(Model model){
-//        model.addAttribute("contentPage", "../doi-tra/chinh-sach.jsp");
-//        return "home/layout";
-//    }
 
     @GetMapping("/delete-hdct/{doitraId}/{hdctxoaId}")
     public String deleteHDCT(Model model, @ModelAttribute("modalAddKhachHang") KhachHang khachHang, @PathVariable UUID doitraId, @PathVariable UUID hdctxoaId) {
@@ -396,6 +393,7 @@ public class DoiTraController {
         doiTraChiTietService.delete(doiTraChiTiet.getId());
         return "redirect:/doi-tra/detail/" + doiTra.getHoaDon().getId() + "?doitraId=" + doitraId + "&hoadonId=" + doiTra.getHoaDon().getId();
     }
+
     @GetMapping("/check/{doiTraID}")
     @ResponseBody
     public Map<String, Object> check(Model model, @PathVariable UUID doiTraID) {
@@ -429,15 +427,15 @@ public class DoiTraController {
             doiTraChiTiet.setLyDo(lyDo);
 
             doiTraChiTietService.add(doiTraChiTiet);
-        }else{
-            DoiTraChiTiet doiTraChiTiet=doiTraChiTietService.getDoiTraByHDCT(hdctId);
+        } else {
+            DoiTraChiTiet doiTraChiTiet = doiTraChiTietService.getDoiTraByHDCT(hdctId);
             doiTraChiTiet.setTinhTrang(0);
             doiTraChiTiet.setHoaDonChiTiet(hoaDonChiTiet);
             doiTraChiTiet.setDoiTra(doiTra);
             doiTraChiTiet.setHienTrangSanPham(hienTrang);
             doiTraChiTiet.setHinhThucDoiTra(0);
             doiTraChiTiet.setLyDo(lyDo);
-            doiTraChiTietService.update(doiTraChiTiet.getId(),doiTraChiTiet);
+            doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
         }
 
         return "redirect:/doi-tra/detail/" + doiTra.getHoaDon().getId() + "?doitraId=" + doitraId + "&hoadonId="
@@ -446,8 +444,8 @@ public class DoiTraController {
 
 
     @PostMapping("/xac-nhan")
-    public  ResponseEntity<byte[]> xacnhan(Model model, @ModelAttribute("dulieuxem") DoiTra dulieuxem,
-                                           HttpServletRequest request
+    public ResponseEntity<byte[]> xacnhan(Model model, @ModelAttribute("dulieuxem") DoiTra dulieuxem,
+                                          HttpServletRequest request
     ) {
 
         DoiTra doiTra = doiTraService.findById(idDT);
@@ -502,7 +500,7 @@ public class DoiTraController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
         headers.setContentDispositionFormData("attachment", "phieu_doi_hang" + doiTra.getHoaDon().getId() + ".pdf");
-        System.out.println("cc: "+ ResponseEntity.ok().headers(headers).body(pdfBytes));
+        System.out.println("cc: " + ResponseEntity.ok().headers(headers).body(pdfBytes));
         return ResponseEntity.ok().headers(headers).body(pdfBytes);
 
     }
@@ -757,7 +755,7 @@ public class DoiTraController {
     }
 
     @GetMapping("/tai-doi-tra/{id}")
-    public String taiDoiTra(Model model,@PathVariable("id") UUID id) {
+    public String taiDoiTra(Model model, @PathVariable("id") UUID id) {
         DoiTra dt = doiTraService.findById(id);
         dt.setTinhTrang(0);
         dt.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));

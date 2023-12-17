@@ -89,8 +89,7 @@
                                 <form:errors path="moTa" cssStyle="color: red"></form:errors>
                             </div>
                             <div style="text-align: center">
-                                <button type="submit" class="btn btn-primary mr-2"
-                                        onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                <button type="submit" class="btn btn-primary mr-2">
                                     Thêm Thông Tin
                                 </button>
                             </div>
