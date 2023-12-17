@@ -425,22 +425,27 @@ public class KhuyenMaiController {
         }
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(0, 1, sort);
-        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
-        List<KhuyenMai> litskm1=list.toList();
-        String inputString = litskm1.get(0).getMa();
-
-        // Sử dụng phương thức substring để tách chuỗi
-        String prefix = inputString.substring(0, 3); // Lấy 3 ký tự đầu tiên
-        String suffix = inputString.substring(3);
-
-
-        Integer sl =Integer.valueOf(suffix)+1;
+        List<KhuyenMai> litskm1 = khuyenMaiRepository.danhsachgiamdan();
         String mhd="";
-        if(sl<10){
-            mhd = "MKM0" + sl;
+        if(litskm1.size()<=0){
+             mhd="MKM00";
         }else {
-            mhd = "MKM" + sl;
+            String inputString = litskm1.get(0).getMa();
+
+            // Sử dụng phương thức substring để tách chuỗi
+            String prefix = inputString.substring(0, 3); // Lấy 3 ký tự đầu tiên
+            String suffix = inputString.substring(3);
+
+
+            Integer sl =Integer.valueOf(suffix)+1;
+
+            if(sl<10){
+                mhd = "MKM0" + sl;
+            }else {
+                mhd = "MKM" + sl;
+            }
         }
+
         khuyenMai.setMa(mhd);
         khuyenMai.setLoaiGiamGia("%");
         khuyenMai.setHinhThucGiamGia("%");
