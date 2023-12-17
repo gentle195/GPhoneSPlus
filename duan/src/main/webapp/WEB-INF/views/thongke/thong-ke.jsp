@@ -42,10 +42,10 @@
     <c:forEach items="${listDoanhThu}" var="DT" varStatus="index">
     data.push({
         thang: ${DT.getThang()},
-        doanhThu: ${DT.getDoanhThu()},
         soLuong: ${DT.getSoLuongSP()},
         phiShip: ${DT.getPhiShip()},
         tienDoiTra: ${DT.getTienDoiTra()},
+        doanhThuThucTe: ${DT.getDoanhThuThucTe()},
         doanhThuChuaKhuyenMai: ${DT.getDoanhThuChuaKhuyenMai()}
     });
     </c:forEach>
@@ -58,7 +58,7 @@
             labels: data.map(item => item.thang),
             datasets: [{
                 label: 'Doanh thu thực tế',
-                data: data.map(item => item.doanhThu),
+                data: data.map(item => item.doanhThuThucTe),
                 borderWidth: 1,
                 yAxisID: 'y',
                 borderColor: '#ff6384',

@@ -7,9 +7,8 @@ public interface DoanhThuTheoThang {
     Integer getThang();
     Integer getNam();
     Integer getSoLuongSP();
-    BigDecimal getDoanhThu();
+    BigDecimal getDoanhThuThucTe();
     BigDecimal getTienDoiTra();
-    BigDecimal getDoanhThuCu();
     BigDecimal getPhiShip();
     BigDecimal getDoanhThuChuaKhuyenMai();
     String getTen();

@@ -1,4 +1,4 @@
-﻿--CREATE DATABASE DB_DU_AN_TOT_NGHIEP;
+﻿--CREATE DATABASE DB_DU_AN_TOT_NGHIEP
 --go
 --USE DB_DU_AN_TOT_NGHIEP
 --go
@@ -503,6 +503,7 @@ id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
 id_doi_tra  UNIQUEIDENTIFIER NULL,
 id_imei UNIQUEIDENTIFIER NULL,
 id_hoa_don_chi_tiet UNIQUEIDENTIFIER null,
+don_gia decimal(20, 0) null,
 tinh_trang int DEFAULT 0,
  ly_do_doi_tra NVARCHAR(MAX) NULL,
  hien_trang_san_pham int  ,
@@ -514,7 +515,6 @@ FOREIGN KEY (id_imei ) REFERENCES imei(id),
 FOREIGN KEY (id_hoa_don_chi_tiet ) REFERENCES hoa_don_chi_tiet(id)
 
 )
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -566,27 +566,27 @@ VALUES
 
   INSERT INTO hang_dien_thoai (ma, ten, ngay_cap_nhat, tinh_trang, mo_ta)
 VALUES 
-  ('HD001', 'Samsung', '2022-01-01', 1, N'Hãng điện thoại Samsung'),
-  ('HD002', 'Apple', '2022-01-02', 1, N'Hãng điện thoại Apple'),
-  ('HD003', 'Xiaomi', '2022-01-03', 1, N'Hãng điện thoại Xiaomi'),
-  ('HD004', 'OPPO', '2022-01-04', 1, N'Hãng điện thoại OPPO'),
-  ('HD005', 'Huawei', '2022-01-05', 1, N'Hãng điện thoại Huawei');
+  ('HD001', 'Samsung', '2022-01-01', 0, N'Hãng điện thoại Samsung'),
+  ('HD002', 'Apple', '2022-01-02', 0, N'Hãng điện thoại Apple'),
+  ('HD003', 'Xiaomi', '2022-01-03', 0, N'Hãng điện thoại Xiaomi'),
+  ('HD004', 'OPPO', '2022-01-04',0, N'Hãng điện thoại OPPO'),
+  ('HD005', 'Huawei', '2022-01-05', , N'Hãng điện thoại Huawei');
 
 
 
   INSERT INTO mau_sac (ma, ten, ngay_cap_nhat, tinh_trang, mo_ta)
 VALUES 
-  ('M001', 'Đen', '2022-01-01', 1, N'Màu đen'),
-  ('M002', 'Trắng', '2022-01-02', 1, N'Màu trắng'),
-  ('M003', 'Xanh', '2022-01-03', 1, N'Màu xanh'),
+  ('M001', 'Đen', '2022-01-01', 0, N'Màu đen'),
+  ('M002', 'Trắng', '2022-01-02', 0, N'Màu trắng'),
+  ('M003', 'Xanh', '2022-01-03', 0, N'Màu xanh'),
   ('M004', 'Đỏ', '2022-01-04', 1, N'Màu đỏ'),
   ('M005', 'Vàng', '2022-01-05', 1, N'Màu vàng');
 
   INSERT INTO hang_khach_hang (ma, ten, diem_toi_thieu, ngay_cap_nhat, tinh_trang, mo_ta)
 VALUES 
-  ('KH001', 'Khách hàng A', 100, '2022-01-01', 1, N'Khách hàng loại A'),
-  ('KH002', 'Khách hàng B', 200, '2022-01-02', 1, N'Khách hàng loại B'),
-  ('KH003', 'Khách hàng C', 300, '2022-01-03', 1, N'Khách hàng loại C'),
+  ('KH001', 'Khách hàng A', 100, '2022-01-01', 0, N'Khách hàng loại A'),
+  ('KH002', 'Khách hàng B', 200, '2022-01-02', 0, N'Khách hàng loại B'),
+  ('KH003', 'Khách hàng C', 300, '2022-01-03', 0, N'Khách hàng loại C'),
   ('KH004', 'Khách hàng D', 400, '2022-01-04', 1, N'Khách hàng loại D'),
   ('KH005', 'Khách hàng E', 500, '2022-01-05', 1, N'Khách hàng loại E');
 
@@ -609,8 +609,8 @@ VALUES
 
 INSERT INTO ram (ma, dung_luong, ngay_cap_nhat, tinh_trang, mo_ta)
 VALUES
-('RAM001', '8GB', '2021-10-10', 1, N'Ram 8GB'),
-('RAM002', '16GB', '2021-10-12', 1, N'Ram 16GB'),
+('RAM001', '8GB', '2021-10-10', 0, N'Ram 8GB'),
+('RAM002', '16GB', '2021-10-12', 0, N'Ram 16GB'),
 ('RAM003', '32GB', NULL, 0, N'Ram 32GB không có ngày cập nhật'),
 ('RAM004', '8GB', '2021-10-15', 1, NULL),
 ('RAM005', '64GB', '2021-10-20', 1, N'Ram 64GB');
@@ -619,8 +619,8 @@ VALUES
 
 INSERT INTO dung_luong_pin (ma, thong_so, ngay_cap_nhat, tinh_trang, mo_ta)
 VALUES
-('DL001', '5000mAh', '2021-10-10', 1, N'Dung lượng pin 5000mAh'),
-('DL002', '4000mAh', '2021-10-12', 1, N'Dung lượng pin 4000mAh'),
+('DL001', '5000mAh', '2021-10-10', 0, N'Dung lượng pin 5000mAh'),
+('DL002', '4000mAh', '2021-10-12', 0, N'Dung lượng pin 4000mAh'),
 ('DL003', '6000mAh', NULL, 0, N'Dung lượng pin 6000mAh không có ngày cập nhật'),
 ('DL004', '4500mAh', '2021-10-15', 1, NULL),
 ('DL005', '5500mAh', '2021-10-20', 1, N'Dung lượng pin 5500mAh');
