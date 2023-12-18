@@ -292,7 +292,7 @@ public class DoiTraController {
             doiTraChiTiet.setTinhTrang(0);
 
             if (imei.getChiTietSanPham().getKhuyenMai() == null) {
-                doiTraChiTiet.setTienDoiTra(hdct.getImei().getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan()));
+                doiTraChiTiet.setTienDoiTra(hdct.getDonGia().subtract(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam))));
                 doiTraChiTiet.setDonGia(imei.getChiTietSanPham().getGiaBan());
             } else {
                 BigDecimal giam = BigDecimal.valueOf(imei.getChiTietSanPham().getKhuyenMai().getSoTienGiam()).divide(BigDecimal.valueOf(100));

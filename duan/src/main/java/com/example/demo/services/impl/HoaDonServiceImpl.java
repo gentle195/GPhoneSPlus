@@ -626,6 +626,7 @@ public class HoaDonServiceImpl implements HoaDonService {
                     htmlContentBuilder.append("</tr>");
                 }
                 htmlContentBuilder.append("</table>");
+                htmlContentBuilder.append("<p>Tổng tiền : ").append(formattedTongTienDonHang).append("</p>");
             }
             htmlContentBuilder.append("<h3>Xin chân thành cảm ơn sự ủng hộ của bạn dành cho GPhoneS Store!</h3>");
             htmlContentBuilder.append("</body></html>");
