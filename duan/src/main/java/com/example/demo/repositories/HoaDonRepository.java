@@ -122,6 +122,6 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
     @Query("select hd from HoaDon hd where hd.tinhTrangGiaoHang=3 and hd.tinhTrang=2 and " +
             "(hd.khachHang.hoTen like %:search% or hd.nguoiNhan like %:search% " +
             "or hd.nhanVien.hoTen like %:search% or hd.ma like %:search% or hd.maGiaoDich like %:search% " +
-            "or hd.diaChi.diaChi like %:search% or hd.diaChi.quan like %:search% or hd.diaChi.huyen like %:search% or hd.diaChi.thanhPho like %:search%)")
+            "or hd.diaChi.diaChi like %:search% or hd.diaChi.quan like %:search% or hd.diaChi.huyen like %:search% or hd.diaChi.thanhPho like %:search%) AND NOT EXISTS (SELECT 1 FROM DoiTra dt WHERE dt.hoaDon.id = hd.id)")
     List<HoaDon> searchDoiTra(String search);
 }
