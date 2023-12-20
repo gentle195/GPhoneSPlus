@@ -461,6 +461,13 @@
                                    class="form-control"/>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-label" style="padding: 5px">Mã giao dịch:</label>
+                        <div class="col-sm-9">
+                            <input type="text" value="${hd.maGiaoDich} " disabled style="width: 97%"
+                                   class="form-control"/>
+                        </div>
+                    </div>
 
 
                 </div>

@@ -87,4 +87,6 @@ public interface BanHangOnlineService {
     String dongiaVSsoluongXemHDCT(UUID idhd, UUID idctsp);
 
     List<ChiTietSanPham> timkiemTrangChu(String ten);
+
+    String convertgiatien(BigDecimal giatien);
 }

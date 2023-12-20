@@ -523,7 +523,8 @@
                                         <c:if test="${banhangonline.soluongcon(ht.id)>0}">
                                             <!-- product -->
 
-                                            <div class="product">
+                                            <div class="product" >
+                                                <a href="/ban-hang-online/chi-tiet-san-pham/${ht.id}">
                                                 <div class="product-img">
                                                     <img src="/uploads/${ht.urlAnh}" style="width: 100%;height: 6cm"
                                                          alt="">
@@ -556,34 +557,19 @@
                                                             <span> ₫</span>
                                                         </h4>
                                                     </c:if>
-                                                    <div class="product-rating"></div>
-                                                    <div class="product-btns" align="center">
-                                                        <button class="add-to-compare"><a href="/homes"><i
-                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Thêm để so sánh</span>
-                                                        </button>
-                                                        <button class="quick-view"><a
-                                                                href="/ban-hang-online/chi-tiet-san-pham/${ht.id}"><i
-                                                                class="fa fa-eye"></i></a><span class="tooltipp">Xem chi tiết</span>
-                                                        </button>
-                                                    </div>
+<%--                                                    <div class="product-rating"></div>--%>
+<%--                                                    <div class="product-btns" align="center">--%>
+<%--                                                        <button class="add-to-compare"><a href="/homes"><i--%>
+<%--                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Thêm để so sánh</span>--%>
+<%--                                                        </button>--%>
+<%--                                                        <button class="quick-view"><a--%>
+<%--                                                                href="/ban-hang-online/chi-tiet-san-pham/${ht.id}"><i--%>
+<%--                                                                class="fa fa-eye"></i></a><span class="tooltipp">Xem chi tiết</span>--%>
+<%--                                                        </button>--%>
+<%--                                                    </div>--%>
                                                 </div>
-                                                <div class="add-to-cart" style="border: 5px royalblue">
-                                                    <c:if test="${idkhachhang!='1'}">
-                                                        <button class="add-to-cart-btn"
-                                                                onclick="thongbaothemvaogiohang('${ht.id}');"><i
-                                                                class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                                                        </button>
-                                                    </c:if>
-                                                    <c:if test="${idkhachhang=='1'}">
-                                                        <a href="/login">
-                                                            <button class="add-to-cart-btn"><i
-                                                                    class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                                                            </button>
-                                                        </a>
-                                                    </c:if>
-                                                </div>
+                                                </a>
                                             </div>
-                                            <!-- /product -->
                                         </c:if>
                                     </c:forEach>
                                 </div>
@@ -627,77 +613,53 @@
                                             <c:if test="${banhangonline.tonggiamgia(ht.id)>0}">
                                             <!-- product -->
 
-                                            <div class="product">
-                                                <div class="product-img">
-                                                    <img src="/uploads/${ht.urlAnh}" style="width: 100%;height: 6cm"
-                                                         alt="">
-<%--                                                    <div class="product-label">--%>
-<%--                                                        <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>--%>
-<%--                                                        <span class="new">Giảm giá</span>--%>
-<%--                                                    </div>--%>
-                                                    <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
-                                                        <div class="product-label">
-                                                            <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
-                                                            <span class="new">Giảm giá</span>
+                                                <div class="product" >
+                                                    <a href="/ban-hang-online/chi-tiet-san-pham/${ht.id}">
+                                                        <div class="product-img">
+                                                            <img src="/uploads/${ht.urlAnh}" style="width: 100%;height: 6cm"
+                                                                 alt="">
+                                                            <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
+                                                                <div class="product-label">
+                                                                    <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
+                                                                    <span class="new">Giảm giá</span>
+                                                                </div>
+                                                            </c:if>
+
                                                         </div>
-                                                    </c:if>
+                                                        <div class="product-body"
+                                                             style="text-align: left;word-wrap: break-word;">
+                                                            <p class="product-category">Điện thoại</p>
+                                                            <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
+                                                            <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
+                                                                <h4 class="product-price">
+                                                                        <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+                                                                        ${banhangonline.sotienkhidagiam(ht.id)}
+                                                                    <span> ₫</span>
+                                                                    <del class="product-old-price"
+                                                                         style="float: right">${ht.basoOchammotlam()}<span>₫</span>
+                                                                    </del>
+                                                                </h4>
+                                                            </c:if>
+                                                            <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
+                                                                <h4 class="product-price">
+                                                                        <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+                                                                        ${ht.basoOchammotlam()}
+                                                                    <span> ₫</span>
+                                                                </h4>
+                                                            </c:if>
+                                                                <%--                                                    <div class="product-rating"></div>--%>
+                                                                <%--                                                    <div class="product-btns" align="center">--%>
+                                                                <%--                                                        <button class="add-to-compare"><a href="/homes"><i--%>
+                                                                <%--                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Thêm để so sánh</span>--%>
+                                                                <%--                                                        </button>--%>
+                                                                <%--                                                        <button class="quick-view"><a--%>
+                                                                <%--                                                                href="/ban-hang-online/chi-tiet-san-pham/${ht.id}"><i--%>
+                                                                <%--                                                                class="fa fa-eye"></i></a><span class="tooltipp">Xem chi tiết</span>--%>
+                                                                <%--                                                        </button>--%>
+                                                                <%--                                                    </div>--%>
+                                                        </div>
+                                                    </a>
                                                 </div>
-                                                <div class="product-body"
-                                                     style="text-align: left;word-wrap: break-word;">
-                                                    <p class="product-category">Điện thoại</p>
-                                                    <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
-<%--                                                    <h4 class="product-price">--%>
-<%--                                                            &lt;%&ndash;                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}&ndash;%&gt;--%>
-<%--                                                            ${banhangonline.sotienkhidagiam(ht.id)}--%>
-<%--                                                        <span> ₫</span>--%>
-<%--                                                        <del class="product-old-price"--%>
-<%--                                                             style="float: right">${ht.basoOchammotlam()}<span>₫</span>--%>
-<%--                                                        </del>--%>
-<%--                                                    </h4>--%>
-                                                    <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
-                                                        <h4 class="product-price">
-                                                                <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-                                                                ${banhangonline.sotienkhidagiam(ht.id)}
-                                                            <span> ₫</span>
-                                                            <del class="product-old-price"
-                                                                 style="float: right">${ht.basoOchammotlam()}<span>₫</span>
-                                                            </del>
-                                                        </h4>
-                                                    </c:if>
-                                                    <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
-                                                        <h4 class="product-price">
-                                                                <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-                                                                ${ht.basoOchammotlam()}
-                                                            <span> ₫</span>
-                                                        </h4>
-                                                    </c:if>
-                                                    <div class="product-rating"></div>
-                                                    <div class="product-btns" align="center">
-                                                        <button class="add-to-compare"><a href="/homes"><i
-                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Thêm để so sánh</span>
-                                                        </button>
-                                                        <button class="quick-view"><a
-                                                                href="/ban-hang-online/chi-tiet-san-pham/${ht.id}"><i
-                                                                class="fa fa-eye"></i></a><span class="tooltipp">Xem chi tiết</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="add-to-cart" style="border: 5px royalblue">
-                                                    <c:if test="${idkhachhang!='1'}">
-                                                        <button class="add-to-cart-btn"
-                                                                onclick="thongbaothemvaogiohang('${ht.id}');"><i
-                                                                class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                                                        </button>
-                                                    </c:if>
-                                                    <c:if test="${idkhachhang=='1'}">
-                                                        <a href="/login">
-                                                            <button class="add-to-cart-btn"><i
-                                                                    class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                                                            </button>
-                                                        </a>
-                                                    </c:if>
-                                                </div>
-                                            </div>
                                             <!-- /product -->
                                             </c:if>
                                         </c:if>
@@ -716,15 +678,15 @@
         <!-- /container -->
     </div>
 <%--    TOP SẢN PHẨM BÁN CHẠY--%>
-    <c:set var="kiemtra" scope="session" value="${0}"/>
+    <c:set var="kiemtra1" scope="session" value="${0}"/>
 <c:forEach items="${listsp}" var="ht" varStatus="stt">
     <c:if test="${banhangonline.soluongcon(ht.id)>0}">
         <c:if test="${banhangonline.soluongdaban(ht.id)>0}">
-            <c:set var="kiemtra" scope="session" value="${1}"/>
+            <c:set var="kiemtra1" scope="session" value="${1}"/>
         </c:if>
     </c:if>
 </c:forEach>
-    <c:if test="${kiemtra!=0}">
+    <c:if test="${kiemtra1==1}">
         <div class="section shadow mb-5 bg-body-tertiary rounded" style="width: 1175px">
             <!-- container -->
             <div class="container">
@@ -753,77 +715,55 @@
                                                 <c:if test="${banhangonline.soluongdaban(ht.id)>0}">
                                                     <!-- product -->
 
-                                                    <div class="product">
-                                                        <div class="product-img">
-                                                            <img src="/uploads/${ht.urlAnh}" style="width: 100%;height: 6cm"
-                                                                 alt="">
-                                                                <%--                                                    <div class="product-label">--%>
-                                                                <%--                                                        <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>--%>
-                                                                <%--                                                        <span class="new">Giảm giá</span>--%>
-                                                                <%--                                                    </div>--%>
-                                                            <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
-                                                                <div class="product-label">
-                                                                    <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
-                                                                    <span class="new">Giảm giá</span>
-                                                                </div>
-                                                            </c:if>
-                                                        </div>
-                                                        <div class="product-body"
-                                                             style="text-align: left;word-wrap: break-word;">
-                                                            <p class="product-category">Điện thoại</p>
-                                                            <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
-                                                                <%--                                                    <h4 class="product-price">--%>
-                                                                <%--                                                            &lt;%&ndash;                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}&ndash;%&gt;--%>
-                                                                <%--                                                            ${banhangonline.sotienkhidagiam(ht.id)}--%>
-                                                                <%--                                                        <span> ₫</span>--%>
-                                                                <%--                                                        <del class="product-old-price"--%>
-                                                                <%--                                                             style="float: right">${ht.basoOchammotlam()}<span>₫</span>--%>
-                                                                <%--                                                        </del>--%>
-                                                                <%--                                                    </h4>--%>
-                                                            <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
-                                                                <h4 class="product-price">
-                                                                        <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-                                                                        ${banhangonline.sotienkhidagiam(ht.id)}
-                                                                    <span> ₫</span>
-                                                                    <del class="product-old-price"
-                                                                         style="float: right">${ht.basoOchammotlam()}<span>₫</span>
-                                                                    </del>
-                                                                </h4>
-                                                            </c:if>
-                                                            <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
-                                                                <h4 class="product-price">
-                                                                        <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-                                                                        ${ht.basoOchammotlam()}
-                                                                    <span> ₫</span>
-                                                                </h4>
-                                                            </c:if>
-                                                            <div>Đã bán :${banhangonline.soluongdaban(ht.id)}</div>
-                                                            <div class="product-rating"></div>
-                                                            <div class="product-btns" align="center">
-                                                                <button class="add-to-compare"><a href="/homes"><i
-                                                                        class="fa fa-exchange"></i></a><span class="tooltipp">Thêm để so sánh</span>
-                                                                </button>
-                                                                <button class="quick-view"><a
-                                                                        href="/ban-hang-online/chi-tiet-san-pham/${ht.id}"><i
-                                                                        class="fa fa-eye"></i></a><span class="tooltipp">Xem chi tiết</span>
-                                                                </button>
+
+                                                    <div class="product" >
+                                                        <a href="/ban-hang-online/chi-tiet-san-pham/${ht.id}">
+                                                            <div class="product-img">
+                                                                <img src="/uploads/${ht.urlAnh}" style="width: 100%;height: 6cm"
+                                                                     alt="">
+                                                                <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
+                                                                    <div class="product-label">
+                                                                        <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
+                                                                        <span class="new">Giảm giá</span>
+                                                                    </div>
+                                                                </c:if>
+
                                                             </div>
-                                                        </div>
-                                                        <div class="add-to-cart" style="border: 5px royalblue">
-                                                            <c:if test="${idkhachhang!='1'}">
-                                                                <button class="add-to-cart-btn"
-                                                                        onclick="thongbaothemvaogiohang('${ht.id}');"><i
-                                                                        class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                                                                </button>
-                                                            </c:if>
-                                                            <c:if test="${idkhachhang=='1'}">
-                                                                <a href="/login">
-                                                                    <button class="add-to-cart-btn"><i
-                                                                            class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                                                                    </button>
-                                                                </a>
-                                                            </c:if>
-                                                        </div>
+                                                            <div class="product-body"
+                                                                 style="text-align: left;word-wrap: break-word;">
+                                                                <p class="product-category">Điện thoại</p>
+                                                                <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
+
+                                                                <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
+                                                                    <h4 class="product-price">
+                                                                            <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+                                                                            ${banhangonline.sotienkhidagiam(ht.id)}
+                                                                        <span> ₫</span>
+                                                                        <del class="product-old-price"
+                                                                             style="float: right">${ht.basoOchammotlam()}<span>₫</span>
+                                                                        </del>
+                                                                    </h4>
+                                                                </c:if>
+                                                                <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
+                                                                    <h4 class="product-price">
+                                                                            <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+                                                                            ${ht.basoOchammotlam()}
+                                                                        <span> ₫</span>
+                                                                    </h4>
+                                                                </c:if>
+                                                                <div>Đã bán :${banhangonline.soluongdaban(ht.id)}</div>
+                                                                    <%--                                                    <div class="product-rating"></div>--%>
+                                                                    <%--                                                    <div class="product-btns" align="center">--%>
+                                                                    <%--                                                        <button class="add-to-compare"><a href="/homes"><i--%>
+                                                                    <%--                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Thêm để so sánh</span>--%>
+                                                                    <%--                                                        </button>--%>
+                                                                    <%--                                                        <button class="quick-view"><a--%>
+                                                                    <%--                                                                href="/ban-hang-online/chi-tiet-san-pham/${ht.id}"><i--%>
+                                                                    <%--                                                                class="fa fa-eye"></i></a><span class="tooltipp">Xem chi tiết</span>--%>
+                                                                    <%--                                                        </button>--%>
+                                                                    <%--                                                    </div>--%>
+                                                            </div>
+                                                        </a>
                                                     </div>
                                                     <!-- /product -->
                                                 </c:if>
@@ -845,6 +785,7 @@
 
 
     </c:if>
+
     <%--    DANH SÁCH SẢN PHẨM--%>
     <div class="section shadow mb-5 bg-body-tertiary rounded" style="width: 1175px">
         <!-- container -->
@@ -872,76 +813,53 @@
                                         <c:if test="${banhangonline.soluongcon(ht.id)>0}">
                                             <!-- product -->
 
-                                            <div class="product">
-                                                <div class="product-img">
-                                                    <img src="/uploads/${ht.urlAnh}" style="width: 100%;height: 6cm"
-                                                         alt="">
-                                                        <%--                                                    <div class="product-label">--%>
-                                                        <%--                                                        <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>--%>
-                                                        <%--                                                        <span class="new">Giảm giá</span>--%>
-                                                        <%--                                                    </div>--%>
-                                                    <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
-                                                        <div class="product-label">
-                                                            <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
-                                                            <span class="new">Giảm giá</span>
-                                                        </div>
-                                                    </c:if>
-                                                </div>
-                                                <div class="product-body"
-                                                     style="text-align: left;word-wrap: break-word;">
-                                                    <p class="product-category">Điện thoại</p>
-                                                    <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
-                                                        <%--                                                    <h4 class="product-price">--%>
-                                                        <%--                                                            &lt;%&ndash;                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}&ndash;%&gt;--%>
-                                                        <%--                                                            ${banhangonline.sotienkhidagiam(ht.id)}--%>
-                                                        <%--                                                        <span> ₫</span>--%>
-                                                        <%--                                                        <del class="product-old-price"--%>
-                                                        <%--                                                             style="float: right">${ht.basoOchammotlam()}<span>₫</span>--%>
-                                                        <%--                                                        </del>--%>
-                                                        <%--                                                    </h4>--%>
-                                                    <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
-                                                        <h4 class="product-price">
-                                                                <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-                                                                ${banhangonline.sotienkhidagiam(ht.id)}
-                                                            <span> ₫</span>
-                                                            <del class="product-old-price"
-                                                                 style="float: right">${ht.basoOchammotlam()}<span>₫</span>
-                                                            </del>
-                                                        </h4>
-                                                    </c:if>
-                                                    <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
-                                                        <h4 class="product-price">
-                                                                <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-                                                                ${ht.basoOchammotlam()}
-                                                            <span> ₫</span>
-                                                        </h4>
-                                                    </c:if>
-                                                    <div class="product-rating"></div>
-                                                    <div class="product-btns" align="center">
-                                                        <button class="add-to-compare"><a href="/homes"><i
-                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Thêm để so sánh</span>
-                                                        </button>
-                                                        <button class="quick-view"><a
-                                                                href="/ban-hang-online/chi-tiet-san-pham/${ht.id}"><i
-                                                                class="fa fa-eye"></i></a><span class="tooltipp">Xem chi tiết</span>
-                                                        </button>
+                                            <div class="product" >
+                                                <a href="/ban-hang-online/chi-tiet-san-pham/${ht.id}">
+                                                    <div class="product-img">
+                                                        <img src="/uploads/${ht.urlAnh}" style="width: 100%;height: 6cm"
+                                                             alt="">
+                                                        <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
+                                                            <div class="product-label">
+                                                                <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
+                                                                <span class="new">Giảm giá</span>
+                                                            </div>
+                                                        </c:if>
+
                                                     </div>
-                                                </div>
-                                                <div class="add-to-cart" style="border: 5px royalblue">
-                                                    <c:if test="${idkhachhang!='1'}">
-                                                        <button class="add-to-cart-btn"
-                                                                onclick="thongbaothemvaogiohang('${ht.id}');"><i
-                                                                class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                                                        </button>
-                                                    </c:if>
-                                                    <c:if test="${idkhachhang=='1'}">
-                                                        <a href="/login">
-                                                            <button class="add-to-cart-btn"><i
-                                                                    class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                                                            </button>
-                                                        </a>
-                                                    </c:if>
-                                                </div>
+                                                    <div class="product-body"
+                                                         style="text-align: left;word-wrap: break-word;">
+                                                        <p class="product-category">Điện thoại</p>
+                                                        <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
+<%--                                                        <div>Đã bán :${banhangonline.soluongdaban(ht.id)}</div>--%>
+                                                        <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
+                                                            <h4 class="product-price">
+                                                                    <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+                                                                    ${banhangonline.sotienkhidagiam(ht.id)}
+                                                                <span> ₫</span>
+                                                                <del class="product-old-price"
+                                                                     style="float: right">${ht.basoOchammotlam()}<span>₫</span>
+                                                                </del>
+                                                            </h4>
+                                                        </c:if>
+                                                        <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
+                                                            <h4 class="product-price">
+                                                                    <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+                                                                    ${ht.basoOchammotlam()}
+                                                                <span> ₫</span>
+                                                            </h4>
+                                                        </c:if>
+                                                            <%--                                                    <div class="product-rating"></div>--%>
+                                                            <%--                                                    <div class="product-btns" align="center">--%>
+                                                            <%--                                                        <button class="add-to-compare"><a href="/homes"><i--%>
+                                                            <%--                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Thêm để so sánh</span>--%>
+                                                            <%--                                                        </button>--%>
+                                                            <%--                                                        <button class="quick-view"><a--%>
+                                                            <%--                                                                href="/ban-hang-online/chi-tiet-san-pham/${ht.id}"><i--%>
+                                                            <%--                                                                class="fa fa-eye"></i></a><span class="tooltipp">Xem chi tiết</span>--%>
+                                                            <%--                                                        </button>--%>
+                                                            <%--                                                    </div>--%>
+                                                    </div>
+                                                </a>
                                             </div>
                                             <!-- /product -->
                                         </c:if>

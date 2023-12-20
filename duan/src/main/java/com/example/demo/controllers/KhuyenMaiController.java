@@ -152,6 +152,10 @@ public class KhuyenMaiController {
                     gioHangChiTietService.add(ghct);
                 }
             }
+
+            GioHangChiTiet ghctdg=ghct;
+            ghctdg.setDonGia(ctsp.getGiaBan());
+            gioHangChiTietService.add(ghctdg);
         }
     };
 
@@ -287,7 +291,7 @@ public class KhuyenMaiController {
         model.addAttribute("dulieu", khuyenMaiRepository.findAll());
 //        model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
-
+        model.addAttribute("banhangonline", banHangOnlineService);
         model.addAttribute("hangds", hangSanPhamService.findAll0());
         model.addAttribute("camds", cameraService.findAll0());
         model.addAttribute("mands", manHinhService.findAll0());
@@ -335,6 +339,7 @@ public class KhuyenMaiController {
                             @ModelAttribute("kmupdate") KhuyenMai khuyenMaiupdate
 //
     ) {
+        model.addAttribute("banhangonline", banHangOnlineService);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         LocalDateTime currentDateTime = LocalDateTime.now();
         String formattedDateTime = currentDateTime.format(formatter);
@@ -466,6 +471,7 @@ public class KhuyenMaiController {
         model.addAttribute("km",new KhuyenMai());
         model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
         model.addAttribute("tbThemKMOK", 0);
+        model.addAttribute("NDTB", "Thêm khuyến mãi thành công");
 
         model.addAttribute("hangds", hangSanPhamService.findAll0());
         model.addAttribute("camds", cameraService.findAll0());
@@ -501,6 +507,7 @@ UUID idkmdangchon=null;
 //            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
 
     ) {
+        model.addAttribute("banhangonline", banHangOnlineService);
         KhuyenMai kmchon=khuyenMaiRepository.findById(idkm).orElse(null);
         model.addAttribute("kmchon",kmchon);
         idkmdangchon=idkm;
@@ -556,6 +563,7 @@ UUID idkmdangchon=null;
 
 
     ) {
+        model.addAttribute("banhangonline", banHangOnlineService);
            khuyenMaiRepository.HuyApDungKMvs1ctsp(idctsp);
         model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
         model.addAttribute("kmchon",khuyenMaiRepository.findById(idkmdangchon).orElse(null));
@@ -588,6 +596,7 @@ UUID idkmdangchon=null;
             @PathVariable("x12") String x12
 
     ) {
+        model.addAttribute("banhangonline", banHangOnlineService);
         ChiTietSanPham ctsp=chiTietSanPhamService.findById(idctsp);
         ctsp.setKhuyenMai(khuyenMaiRepository.findById(idkm).orElse(null));
         chiTietSanPhamService.add(ctsp);
@@ -641,6 +650,7 @@ UUID idkmdangchon=null;
 //            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
 
     ) {
+        model.addAttribute("banhangonline", banHangOnlineService);
         khuyenMaiupdate=khuyenMaiRepository.findById(idkm).orElse(null);
         String NBTCC=khuyenMaiupdate.getNgayBatDau();
         String NKTCC=khuyenMaiupdate.getNgayKetThuc();
@@ -700,7 +710,7 @@ UUID idkmdangchon=null;
 //        khuyenMaiupdate.setNgayBatDau(NBDupdate);
 //        khuyenMaiupdate.setNgayKetThuc(NKTupdate);
 
-
+        model.addAttribute("banhangonline", banHangOnlineService);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         LocalDateTime currentDateTime = LocalDateTime.now();
         String formattedDateTime = currentDateTime.format(formatter);
@@ -879,7 +889,7 @@ UUID idkmdangchon=null;
             @RequestParam("matk") String mt
 
     ) {
-
+        model.addAttribute("banhangonline", banHangOnlineService);
         Sort sort = Sort.by("ma").descending();
 //        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
 //        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
@@ -911,6 +921,8 @@ UUID idkmdangchon=null;
         }
 //System.out.println("taco---"+max);
         model.addAttribute("max", String.valueOf(max));
+        model.addAttribute("tbThemKMOK", 0);
+        model.addAttribute("NDTB", "Tìm kiếm thành công");
         return "home/layout";
     }
 
@@ -955,6 +967,7 @@ UUID idkmdangchon=null;
 //            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
 //            @ModelAttribute("khmodal") KhachHang khachHang1
     ) {
+        model.addAttribute("banhangonline", banHangOnlineService);
       khuyenMaiRepository.XoaKhuyenMai(idkm);
 
         model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
@@ -1005,6 +1018,7 @@ UUID idkmdangchon=null;
 //            @ModelAttribute("khmodal") KhachHang khachHang1
             @PathVariable("tinhtrang") String tinhtrang
     ) {
+        model.addAttribute("banhangonline", banHangOnlineService);
         model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
 
 //        Sort sort = Sort.by("ma").descending();
@@ -1012,15 +1026,23 @@ UUID idkmdangchon=null;
 //        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
         if(tinhtrang.equals("all")){
             model.addAttribute("dulieu", khuyenMaiRepository.findAll());
+            model.addAttribute("dongbo","all");
         }
         else if(tinhtrang.equals("2")){
             model.addAttribute("dulieu", khuyenMaiRepository.TimTrangThaiKM(2));
+            model.addAttribute("dongbo","2");
+
         }else if(tinhtrang.equals("0")){
             model.addAttribute("dulieu", khuyenMaiRepository.TimTrangThaiKM(0));
+            model.addAttribute("dongbo","0");
+
         }else if(tinhtrang.equals("1")){
             model.addAttribute("dulieu", khuyenMaiRepository.TimTrangThaiKM(1));
+            model.addAttribute("dongbo","1");
+
         }else {
             model.addAttribute("dulieu", khuyenMaiRepository.findAll());
+            model.addAttribute("dongbo","all");
         }
 
 //        model.addAttribute("total", kt(list.getTotalPages()));
@@ -1046,6 +1068,8 @@ UUID idkmdangchon=null;
         }
 //System.out.println("taco---"+max);
         model.addAttribute("max", String.valueOf(max));
+        model.addAttribute("tbThemKMOK", 0);
+        model.addAttribute("NDTB", "Lọc thành công");
         return "home/layout";
     }
 
@@ -1053,6 +1077,7 @@ UUID idkmdangchon=null;
     public String xoakhuyenmai(
             Model model
     ){
+        model.addAttribute("banhangonline", banHangOnlineService);
         model.addAttribute("dulieu", khuyenMaiRepository.findAll());
         return "khuyen-mai/vidu";
     }

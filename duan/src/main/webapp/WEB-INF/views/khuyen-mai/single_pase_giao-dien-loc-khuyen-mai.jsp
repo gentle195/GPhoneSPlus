@@ -19,7 +19,7 @@
             dung lượng:${ht.ram.dungLuong},rom:${ht.rom.dungLuong}<br>
         </td>
         <td>
-                ${ht.giaBan} VND
+                ${ht.basoOchammotlam()} VND
         </td>
         <td>
 
@@ -30,30 +30,30 @@
             Kết thúc:${ht.khuyenMai.ngayKetThuc}
         </td>
         <td>
-                ${ht.giaBan-ht.giaBan/100*khuyenMaiRepository.tonggiamgia(ht.id)} VND
+                ${banhangonline.convertgiatien(ht.giaBan-ht.giaBan/100*khuyenMaiRepository.tonggiamgia(ht.id))}  VND
 
         </td>
         <td>
             <c:if test="${ht.khuyenMai==null}">
                 <a
                         onclick="apdungKMvsCTSP('${ht.id}','${kmchon.id}')"
-                        class="btn btn-success"
+                        class="btn btn-success" style="width: 3cm"
                 >Áp dụng</a>
             </c:if>
             <c:if test="${ht.khuyenMai!=null}">
                 <c:if test="${ht.khuyenMai.tinhTrang!=0}">
                     <c:if test="${ht.khuyenMai.id==kmchon.id}">
                         <a   onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                             class="btn btn-success" style="background-color: red"
+                             class="btn btn-success" style="background-color: red;width: 3cm"
                         >Hủy áp dụng</a>
 
                     </c:if>
                     <c:if test="${ht.khuyenMai.id!=kmchon.id}">
                         <a   onclick="apdungKMvsCTSP('${ht.id}','${kmchon.id}')"
-                             class="btn btn-success"
+                             class="btn btn-success" style="width: 3cm"
                         >Áp dụng</a>
                         <a   onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                             class="btn btn-success" style="background-color: red"
+                             class="btn btn-success" style="background-color: red;width: 3cm"
                         >Hủy áp dụng</a>
                     </c:if>
 
@@ -61,16 +61,16 @@
                 <c:if test="${ht.khuyenMai.tinhTrang==0}">
                     <c:if test="${ht.khuyenMai.id==kmchon.id}">
                         <a   onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                             class="btn btn-success"  style="background-color: red"
+                             class="btn btn-success"  style="background-color: red;width: 3cm"
                         >Hủy áp dụng</a>
 
                     </c:if>
                     <c:if test="${ht.khuyenMai.id!=kmchon.id}">
-                        <a   onclick="apdungKMvsCTSP('${ht.id}','${kmchon.id}')"
+                        <a   onclick="apdungKMvsCTSP('${ht.id}','${kmchon.id}')" style="width: 3cm"
                              class="btn btn-success"
                         >Áp dụng</a>
                         <a   onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                             class="btn btn-success" style="background-color: red"
+                             class="btn btn-success" style="background-color: red;width: 3cm"
                         >Hủy áp dụng</a>
                     </c:if>
 

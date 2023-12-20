@@ -66,8 +66,8 @@ public class ChiTietSanPham {
     @Column(name = "nam_bao_hanh")
     private int namBaoHanh;
 
-    @DecimalMin(value = "1", message = "Số lượng tồn phải lớn hơn 0")
-    @DecimalMax(value = "500", message = "Số lượng tồn tối đa cửa hàng tiếp nhận là 500 chiếc")
+//    @DecimalMin(value = "1", message = "Số lượng tồn phải lớn hơn 0")
+//    @DecimalMax(value = "500", message = "Số lượng tồn tối đa cửa hàng tiếp nhận là 500 chiếc")
     @NotNull(message = "Không để trống thông tin")
     @Column(name = "so_luong_ton")
     private int soLuong;
