@@ -474,8 +474,10 @@
                                  style="border-radius:50% 50% 50% 50%">
                         </td>
                         <td style="text-align: center">
+                            <a href="/ban-hang-online/chi-tiet-san-pham/${ht.chiTietSanPham.id}">
                                 ${ht.chiTietSanPham.sanPham.ten}-${ht.chiTietSanPham.mauSac.ten}<br>
                                 ${ht.chiTietSanPham.ram.dungLuong}-${ht.chiTietSanPham.rom.dungLuong}<br>
+                            </a>
 
                         </td>
                         <td>

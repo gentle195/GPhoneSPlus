@@ -592,7 +592,7 @@
                         <td>
                             <c:if test="${ht.tinhTrang==0}">
                                 <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết
-                                </a>
+                                </a><br>
                                 <a class="btn btn-danger"
                                    href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy hoá đơn</a>
 
@@ -600,7 +600,7 @@
                             <c:if test="${ht.tinhTrang==1}">
                                 <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
                                     tiết
-                                </a>
+                                </a><br>
                                 <a class="btn btn-danger"
                                    href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy hoá đơn</a>
 
@@ -608,36 +608,36 @@
                             <c:if test="${ht.tinhTrang==2}">
                                 <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
                                     tiết
-                                </a>
+                                </a><br>
                             </c:if>
                             <c:if test="${ht.tinhTrang==3}">
 
                                 <c:if test="${ht.tinhTrangGiaoHang==0 || ht.tinhTrangGiaoHang==1 }">
 
                                     <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
-                                        tiết </a>
+                                        tiết </a><br>
                                     <a class="btn btn-danger"
                                        href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy hoá đơn</a>
 
                                 </c:if>
                                 <c:if test="${ht.tinhTrangGiaoHang!=0 && ht.tinhTrangGiaoHang!=1 }">
                                     <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
-                                        tiết </a>
+                                        tiết </a><br>
                                 </c:if>
                             </c:if>
                             <c:if test="${ht.tinhTrang==8}">
                                 <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
                                     tiết
-                                </a>
+                                </a><br>
                             </c:if>
                             <c:if test="${ht.tinhTrang == 2 && ht.tinhTrangGiaoHang == 3 && checkHDlist3.contains(ht.ma) && checkList.contains(ht.ma) }">
                                 <button type="button" class="btn btn-primary doi-tra-btn" data-id="${ht.id}"
                                         onclick="showChonSanPhamModal(this)">
                                     Đổi hàng
-                                </button>
+                                </button><br>
                             </c:if>
                             <c:if test="${ checkHDlist0.contains(ht.ma) }">
-                                <a class="btn btn-primary" style="background-color: #ff0000" href="/ban-hang-online/huy/${ht.id}" type="button">Hủy đổi hàng</a>
+                                <a class="btn btn-primary" style="background-color: #ff0000" href="/ban-hang-online/huy/${ht.id}" type="button">Hủy đổi hàng</a><br>
                             </c:if>
                         </td>
                     </tr>

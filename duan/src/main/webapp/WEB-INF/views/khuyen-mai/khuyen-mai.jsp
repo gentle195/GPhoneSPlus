@@ -223,7 +223,7 @@
                     <br>
 
                     <div align="center">
-                        <button type="submit" class="btn btn-warning" id="bthkh">Thêm khuyến mãi</button>
+                        <button type="submit" class="btn btn-warning" id="bthkh" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"  >Thêm khuyến mãi</button>
                     </div>
 
 
@@ -262,15 +262,15 @@
                 <select style="float: right;margin-right: 8cm;height: 1cm" id="selectOption"
                         onchange="choncomboboxtinhtrangkm()">
                     <option style=" font-weight: bold;"><a>Trạng thái khuyến mãi</a></option>
-                    <option value="all" data-link="/khuyen-mai/tinh-trang/all"><a>Tất cả</a></option>
-                    <option value="2" data-link="/khuyen-mai/tinh-trang/2"><a>Chưa diễn ra</a></option>
-                    <option value="0" data-link="/khuyen-mai/tinh-trang/0"><a>Đang diễn ra</a></option>
-                    <option value="1" data-link="/khuyen-mai/tinh-trang/1"><a>Đã kết thúc</a></option>
+                    <option value="all" data-link="/khuyen-mai/tinh-trang/all" <c:if test="${dongbo=='all'}">selected</c:if>><a>Tất cả</a></option>
+                    <option value="2" data-link="/khuyen-mai/tinh-trang/2" <c:if test="${dongbo=='2'}">selected</c:if>><a>Chưa diễn ra</a></option>
+                    <option value="0" data-link="/khuyen-mai/tinh-trang/0" <c:if test="${dongbo=='0'}">selected</c:if>><a>Đang diễn ra</a></option>
+                    <option value="1" data-link="/khuyen-mai/tinh-trang/1" <c:if test="${dongbo=='1'}">selected</c:if>><a>Đã kết thúc</a></option>
                 </select>
 
 
                 <button type="button" id="modalthemkm" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#myModalthemkm">
+                        data-bs-target="#myModalthemkm"   >
                     Thêm khuyến mãi
                 </button>
                 <br>
@@ -278,7 +278,7 @@
                 <div class="col-sm-12">
                     <div class="card-box table-responsive">
 
-                        <table id="example3" class="display" style="color: black;width: 1600px">
+                        <table id="example3" class="display" style="color: black">
                             <thead>
                             <tr>
 
@@ -330,16 +330,16 @@
                                     <td>
                                         <c:if test="${ht.tinhTrang==1}">
                                             <a href="/khuyen-mai/detail-khuyen-mai/${ht.id}" class="btn btn-success"
-                                               onclick="return confirm('Bạn muốn xem khuyến mãi')"  style="background-color: yellow">Xem khuyến mãi</a>
+                                               onclick="return confirm('Bạn muốn xem khuyến mãi')"  style="background-color: yellow;width: 4cm">Xem khuyến mãi</a>
                                         </c:if>
 
                                         <c:if test="${ht.tinhTrang!=1}">
-                                            <a href="/khuyen-mai/ap-dung-khuyen-mai/${ht.id}" class="btn btn-success"
+                                            <a href="/khuyen-mai/ap-dung-khuyen-mai/${ht.id}" class="btn btn-success" style="width: 4cm"
                                                onclick="return confirm('Bạn muốn áp dụng khuyến mãi')">Áp dụng</a>
                                             <a href="/khuyen-mai/detail-khuyen-mai/${ht.id}" class="btn btn-success"
-                                               onclick="return confirm('Bạn muốn xem khuyến mãi')" style="background-color: yellow">Xem khuyến mãi</a>
+                                               onclick="return confirm('Bạn muốn xem khuyến mãi')" style="background-color: yellow;width: 4cm">Xem khuyến mãi</a>
                                         </c:if>
-                                        <a href="/khuyen-mai/huy-khuyen-mai/${ht.id}" class="btn btn-success" style="background-color: red"
+                                        <a href="/khuyen-mai/huy-khuyen-mai/${ht.id}" class="btn btn-success" style="background-color: red;width: 4cm"
                                            onclick="return confirm('Các chi tiết sản phẩm đang ap dụng khuyến mãi mày sẽ không áp dụng khuyến mãi này nữa')">Hủy </a>
 
                                     </td>
@@ -514,7 +514,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                                         dung lượng:${ht.ram.dungLuong},rom:${ht.rom.dungLuong}<br>
                                     </td>
                                     <td>
-                                            ${ht.giaBan} VND
+                                            ${ht.basoOchammotlam()} VND
                                     </td>
                                     <td>
 
@@ -525,7 +525,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                                         Kết thúc:${ht.khuyenMai.ngayKetThuc}
                                     </td>
                                     <td>
-                                            ${ht.giaBan-ht.giaBan/100*khuyenMaiRepository.tonggiamgia(ht.id)} VND
+                                         ${banhangonline.convertgiatien(ht.giaBan-ht.giaBan/100*khuyenMaiRepository.tonggiamgia(ht.id))}  VND
                                     </td>
                                     <td>
                                         <c:if test="${ht.khuyenMai==null}">
@@ -538,16 +538,16 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                                             <c:if test="${ht.khuyenMai.tinhTrang!=0}">
                                                 <c:if test="${ht.khuyenMai.id==kmchon.id}">
                                                     <a onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                                                       class="btn btn-success" style="background-color: red"
+                                                       class="btn btn-success" style="background-color: red;width: 3cm"
                                                     >Hủy áp dụng</a>
 
                                                 </c:if>
                                                 <c:if test="${ht.khuyenMai.id!=kmchon.id}">
                                                     <a onclick="apdungKMvsCTSP('${ht.id}','${kmchon.id}')"
-                                                       class="btn btn-success"
+                                                       class="btn btn-success" style="width: 3cm"
                                                     >Áp dụng</a>
                                                     <a onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                                                       class="btn btn-success" style="background-color: red"
+                                                       class="btn btn-success" style="background-color: red;width: 3cm"
                                                     >Hủy áp dụng</a>
                                                 </c:if>
 
@@ -555,16 +555,17 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                                             <c:if test="${ht.khuyenMai.tinhTrang==0}">
                                                 <c:if test="${ht.khuyenMai.id==kmchon.id}">
                                                     <a onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                                                       class="btn btn-success" style="background-color: red"
+                                                       class="btn btn-success" style="background-color: red;width: 3cm"
+
                                                     >Hủy áp dụng</a>
 
                                                 </c:if>
                                                 <c:if test="${ht.khuyenMai.id!=kmchon.id}">
                                                     <a onclick="apdungKMvsCTSP('${ht.id}','${kmchon.id}')"
-                                                       class="btn btn-success"
+                                                       class="btn btn-success" style="width: 3cm"
                                                     >Áp dụng</a>
                                                     <a onclick="HuyapdungkmVS1ctsp('${ht.id}')"
-                                                       class="btn btn-success" style="background-color: red"
+                                                       class="btn btn-success" style="background-color: red;width: 3cm"
                                                     >Hủy áp dụng</a>
                                                 </c:if>
 
@@ -662,7 +663,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                     <br>
 
                     <div align="center">
-                        <button type="submit" class="btn btn-warning" id="">UPDATE</button>
+                        <button type="submit" class="btn btn-warning" id="" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">UPDATE</button>
                     </div>
 
 
@@ -689,14 +690,17 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
 </div>
 <script>
     function choncomboboxtinhtrangkm() {
-        var selectElement = document.getElementById("selectOption");
-        // Get the selected option value and its associated link
-        var selectedOption = selectElement.value;
-        var selectedLink = selectElement.options[selectElement.selectedIndex].getAttribute("data-link");
+        if(confirm('Bạn có muốn thực hiện thao tác này không ? ')) {
+            var selectElement = document.getElementById("selectOption");
+            // Get the selected option value and its associated link
+            var selectedOption = selectElement.value;
+            var selectedLink = selectElement.options[selectElement.selectedIndex].getAttribute("data-link");
 
-        // Navigate to the selected link
-        window.location.href = selectedLink;
-
+            // Navigate to the selected link
+            window.location.href = selectedLink;
+        }else {
+            return false
+        }
     }
 </script>
 <script>
@@ -844,7 +848,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                 <i class="fa-solid fa-circle-check"></i>
                 <div class="content">
                     <div class="title">Thành công</div>
-                    <span>Thêm khuyến mãi thành công</span>
+                    <span>${NDTB}</span>
                 </div>
                 <i class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
             </div>`;
@@ -1121,27 +1125,34 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
         var x10 = encodeURIComponent(document.getElementById("sands1").value);
         var x11 = encodeURIComponent(document.getElementById("value1").value);
         var x12 = encodeURIComponent(document.getElementById("value2").value);
-        if (document.getElementById("value1").value.trim() === '' || document.getElementById("value2").value.trim() === '') {
-            document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
-        } else {
-            if (parseFloat(x11) > parseFloat(x12)) {
-                document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
 
-            } else {
-                document.getElementById("thongbaokhoang").innerHTML = "";
+       if(confirm('Bạn có muốn thực hiện thao tác này không ? ')){
+           if (document.getElementById("value1").value.trim() === '' || document.getElementById("value2").value.trim() === '') {
+               document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
+           } else {
+               if (parseFloat(x11) > parseFloat(x12)) {
+                   document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
 
-                var link = '/khuyen-mai/huy-ap-dung-vao-1-ctsp/' + idctsp + '/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;
-                ;
-                // document.getElementById("vt").innerHTML=link
-                loadbenloc(link);
-                // document.getElementById("demo").innerHTML = "You selected: " + x;
-                document.getElementById('error1').click();
+               } else {
+                   document.getElementById("thongbaokhoang").innerHTML = "";
 
-                // var  link1 = '/khuyen-mai/loc-ban-hang/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;
-                //   // document.getElementById("vt").innerHTML=link
-                //   loadbenloc(link1);
-            }
-        }
+                   var link = '/khuyen-mai/huy-ap-dung-vao-1-ctsp/' + idctsp + '/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;
+                   ;
+                   // document.getElementById("vt").innerHTML=link
+                   loadbenloc(link);
+                   // document.getElementById("demo").innerHTML = "You selected: " + x;
+                   document.getElementById('error1').click();
+
+                   // var  link1 = '/khuyen-mai/loc-ban-hang/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;
+                   //   // document.getElementById("vt").innerHTML=link
+                   //   loadbenloc(link1);
+               }
+           }
+       }else {
+           return false;
+       }
+
+
     }
 
     function apdungKMvsCTSP(idctsp, idkm) {
@@ -1157,25 +1168,29 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
         var x10 = encodeURIComponent(document.getElementById("sands1").value);
         var x11 = encodeURIComponent(document.getElementById("value1").value);
         var x12 = encodeURIComponent(document.getElementById("value2").value);
-        if (document.getElementById("value1").value.trim() === '' || document.getElementById("value2").value.trim() === '') {
-            document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
-        } else {
-            if (parseFloat(x11) > parseFloat(x12)) {
+        if(confirm('Bạn có muốn thực hiện thao tác này không ? ')) {
+            if (document.getElementById("value1").value.trim() === '' || document.getElementById("value2").value.trim() === '') {
                 document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
-
             } else {
-                document.getElementById("thongbaokhoang").innerHTML = "";
+                if (parseFloat(x11) > parseFloat(x12)) {
+                    document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
 
-                var link = '/khuyen-mai/chi-tiet-san-pham-ap-dung-khuyen-mai/' + idctsp + '/' + idkm + '/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;
-                // document.getElementById("vt").innerHTML=link
-                loadbenloc(link);
-                // document.getElementById("demo").innerHTML = "You selected: " + x;
-                document.getElementById('btapdungthanhcong').click();
+                } else {
+                    document.getElementById("thongbaokhoang").innerHTML = "";
 
-                //  link = '/khuyen-mai/loc-ban-hang/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;
-                // // document.getElementById("vt").innerHTML=link
-                // loadbenloc(link);
+                    var link = '/khuyen-mai/chi-tiet-san-pham-ap-dung-khuyen-mai/' + idctsp + '/' + idkm + '/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;
+                    // document.getElementById("vt").innerHTML=link
+                    loadbenloc(link);
+                    // document.getElementById("demo").innerHTML = "You selected: " + x;
+                    document.getElementById('btapdungthanhcong').click();
+
+                    //  link = '/khuyen-mai/loc-ban-hang/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;
+                    // // document.getElementById("vt").innerHTML=link
+                    // loadbenloc(link);
+                }
             }
+        }else {
+            return false;
         }
     }
 

@@ -278,6 +278,19 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
         }
         return list1;
     }
+
+    @Override
+    public String convertgiatien(BigDecimal giatien) {
+        // Input number
+        long number = Long.valueOf(String.valueOf(giatien));
+
+        // Create a DecimalFormat instance with the desired pattern
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+        // Format the number
+        return decimalFormat.format(number);
+
+    }
 //    @Override
 //    public Boolean ThemSPvaoGHCT(String idkh, String idctsp) {
 //System.out.println("-------"+idkh+"------"+idctsp);
