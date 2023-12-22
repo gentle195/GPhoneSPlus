@@ -290,11 +290,14 @@ public class DoiTraController {
             doiTraChiTiet.setImei(imei);
             doiTraChiTiet.setTinhTrang(0);
             doiTraChiTiet.setDonGia(imei.getChiTietSanPham().getGiaBan());
+            doiTraChiTiet.setTienDoiTra(BigDecimal.ZERO);
             doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
             imeiService.updatImeiChoXuLy(date, imeiId);
         } else {
             doiTraChiTiet.setImei(imei);
             doiTraChiTiet.setTinhTrang(0);
+            doiTraChiTiet.setDonGia(imei.getChiTietSanPham().getGiaBan());
+            doiTraChiTiet.setTienDoiTra(BigDecimal.ZERO);
             doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
             long millis = System.currentTimeMillis();
             Date date = new Date(millis);
