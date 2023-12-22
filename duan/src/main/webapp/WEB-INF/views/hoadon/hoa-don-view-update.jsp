@@ -382,7 +382,7 @@
                                         <th>Số IMEI</th>
                                         <th>Đơn Giá</th>
                                         <th>Thành tiền</th>
-                                        <c:if test="${(hoaDon.tinhTrang==0 || hoaDon.tinhTrang==1 || hoaDon.tinhTrang==3) && (hoaDon.tinhTrangGiaoHang==1 || hoaDon.tinhTrangGiaoHang==0)}">
+                                        <c:if test="${(hoaDon.tinhTrang==0 || hoaDon.tinhTrang==1 || hoaDon.tinhTrang==3) && (hoaDon.tinhTrangGiaoHang==1 || hoaDon.tinhTrangGiaoHang==0) && listHoaDonChiTiet.size()>1}">
                                             <th></th>
                                         </c:if>
 
@@ -404,7 +404,7 @@
                                             <td>${hdct.imei.soImei}</td>
                                             <td>${hdct.donGia}</td>
                                             <td>${hdct.donGia * hdct.soLuong}</td>
-                                            <c:if test="${(hoaDon.tinhTrang==0 || hoaDon.tinhTrang==1 || hoaDon.tinhTrang==3) && (hoaDon.tinhTrangGiaoHang==1 || hoaDon.tinhTrangGiaoHang==0)}">
+                                            <c:if test="${(hoaDon.tinhTrang==0 || hoaDon.tinhTrang==1 || hoaDon.tinhTrang==3) && (hoaDon.tinhTrangGiaoHang==1 || hoaDon.tinhTrangGiaoHang==0)&& listHoaDonChiTiet.size()>1}">
                                                 <td>
                                                     <button class="btn  btn-icon-text"><a
                                                             href="/hoa-don/delete-hoa-don-chi-tiet/${hdct.id}"
@@ -533,7 +533,7 @@
                 let html = ``;
                 for (let i = 0; i < data.length; i++) {
                     const hdct = data[i];
-                    if ((hdct.hoaDon.tinhTrang == 0 || hdct.hoaDon.tinhTrang == 1 || hdct.hoaDon.tinhTrang == 3) && (hdct.hoaDon.tinhTrangGiaoHang == 1 || hdct.hoaDon.tinhTrangGiaoHang == 0)) {
+                    if ((hdct.hoaDon.tinhTrang == 0 || hdct.hoaDon.tinhTrang == 1 || hdct.hoaDon.tinhTrang == 3) && (hdct.hoaDon.tinhTrangGiaoHang == 1 || hdct.hoaDon.tinhTrangGiaoHang == 0) && data.length>1) {
                         const tr = `
                         <tr>
                             <td>` + hdct.imei.chiTietSanPham.sanPham.ten + `</td>

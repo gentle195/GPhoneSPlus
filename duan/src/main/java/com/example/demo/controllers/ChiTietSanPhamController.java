@@ -581,7 +581,6 @@ public class ChiTietSanPhamController {
             chiTietSanPhamService.add(chiTietSanPham1);
         }
 
-
         model.addAttribute("listSanPham", sanPhamService.findAll0());
         model.addAttribute("listMauSac", mauSacService.findAll0());
         model.addAttribute("listChip", chipService.findAll0());
