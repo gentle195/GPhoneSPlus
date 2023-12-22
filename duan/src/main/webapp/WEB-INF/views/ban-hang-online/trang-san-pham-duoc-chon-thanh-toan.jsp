@@ -448,11 +448,9 @@
                                    value="${listghct.get(0).gioHang.khachHang.sdt}"
                                    placeholder="Số điện thoại">
                         </div>
-                        <div style="color: red" id="tbdiachi1">${thongbaodiachiHN}</div>
                         <button style="float: right" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#modalthemdiachidathang">Thêm địa chỉ
                         </button>
-
                         <select class="form-control" id="diachids1" style="width: 80%; height: 30cm;">
                             <c:forEach
                                     items="${banhangonline.Listdiachimotkhachang(listghct.get(0).gioHang.khachHang.id)}"
@@ -461,11 +459,12 @@
                                     - ${ht.thanhPho}</option>
                             </c:forEach>
                         </select>
-
-
+                        <div style="color: red" id="tbdiachi1">${thongbaodiachiHN}</div>
                     </div>
-                    <div style="color: red"><label>Lưu ý: Chỉ ship quanh hà nội</label><br>
-                        <label style="margin-left: 1.2cm">Phí ship giao động tối đa 300.000 vnđ</label>
+                    <div style="color: red"><label>Lưu ý:
+                        <br>- Cửa hàng chỉ có thể giao hàng cho các đơn hàng trong khu vực thành phố Hà Nội,
+                        rất mong khách hàng chiếu cố cho sự bất tiện này
+                        <br>- Phí ship khách hàng sẽ trao đổi với người giao hàng</label>
                     </div>
                 </div>
 
@@ -631,7 +630,6 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-danger" onclick=" return themdiachikhachhang();">Thêm
                         </button>
-                        <%--                <button type="button" style="display: none" id="btthemdiachidathang" data-bs-dismiss="modal"></button>--%>
                     </div>
                 </form>
             </div>
@@ -646,72 +644,74 @@
                 </div>
                 <div class="modal-body">
                     Để mang đến sự thuận tiện và trải nghiệm tốt nhất cho khách hàng, GphoneS Store có những chính sách
-                    phù hợp khi khách hàng có nhu cầu đổi trả sản phẩm. Chúng tôi luôn mong muốn mang lại cho khách hàng
-                    những sản phẩm và chất lượng phục vụ tốt nhất.
+                    phù hợp khi khách hàng có nhu cầu đổi hàng sản phẩm(hiện tại cửa hàng chúng tôi chỉ cho đổi hàng, và chưa thể trả hàng).
+                    Chúng tôi luôn mong muốn mang lại cho khách hàng những sản phẩm và chất lượng phục vụ tốt nhất.
                     <br>
-
-                    Việc đổi trả sản phẩm đi kèm một số điều kiện cụ thể, Quý khách vui lòng tham khảo thông tin chi
+                    Việc đổi hàng sản phẩm đi kèm một số điều kiện cụ thể, Quý khách vui lòng tham khảo thông tin chi
                     tiết bên dưới :
                     <br>
-
                     <b> 1. Điều kiện đổi sản phẩm:</b>
                     <br>
-
-                    Sản phẩm không trùng khớp về màu sắc, mẫu mã, size theo đơn hàng.
                     <br>
-                    Lỗi kỹ thuật do nhà sản xuất.
+                    - Sản phẩm không trùng khớp về màu sắc, mẫu mã, size theo đơn hàng.
                     <br>
-                    Sản phẩm đổi hàng phải còn mới, nguyên vẹn, không bị dính nước, không có dấu hiệu rơi vỡ
+                    - Lỗi kỹ thuật do nhà sản xuất.
                     <br>
-                    Sản phẩm phải còn đầy đủ tem, nhãn mác, thẻ bảo hành và hoá đơn mua hàng.
+                    - Sản phẩm đổi hàng phải còn mới, nguyên vẹn, không bị dính nước, không có dấu hiệu rơi vỡ
                     <br>
-                    Sản phẩm đổi hàng còn trong thời hạn cho phép đổi trả.
+                    - Sản phẩm phải còn đầy đủ tem, nhãn mác, thẻ bảo hành và hoá đơn mua hàng.
                     <br>
-                    Áp dụng đối với sản phẩm mua hàng online qua website và trực tiếp tại GPhoneS Store,
-                    chúng tôi không hỗ trợ cho những đơn hàng mua tại địa điểm khác.
-
+                    - Sản phẩm đổi hàng còn trong thời hạn cho phép đổi hàng.
                     <br>
-                    Khách hàng chỉ có thể trả sản phẩm với điều kiện GPhoneS Store không có sản phẩm cùng loại khác (màu sắc,
-                    mẫu mã, kích thước) thay thế.
+                    <b>Áp dụng đối với sản phẩm mua hàng online qua website và trực tiếp tại GPhoneS Store,
+                        chúng tôi không hỗ trợ cho những đơn hàng mua tại địa điểm khác.</b>
+                    <br>
                     <br>
                     <b>2. Thời hạn đổi sản phẩm:</b>
                     <br>
-                    Thời hạn đổi sản phẩm: 7 ngày đối với khách hàng mua online và 7 ngày đối với khách hàng mua trực
+                    <br>
+                    - Thời hạn đổi sản phẩm: 7 ngày đối với khách hàng mua online và 7 ngày đối với khách hàng mua trực
                     tiếp tại cửa hàng kể từ ngày khách nhận được hàng.
                     <br>
-                    Nếu vượt quá thời gian quy định trên thì chúng tôi sẽ không nhận đổi sản phẩm với bất kì lý do
+                    - Nếu vượt quá thời gian quy định trên thì chúng tôi sẽ không nhận đổi sản phẩm với bất kì lý do
                     nào.
+                    <br>
                     <br>
                     <b>3. Thời hạn thực hiện đổi lại sản phẩm cho khách hàng</b>
                     <br>
-                    Đối với khách hàng mua online:
                     <br>
-                    Ngay sau khi nhận được sản phẩm đổi của Quý khách hàng, chúng tôi sẽ tiến hành đánh giá sản phẩm và
-                    thông báo kết quả và phương án giải quyết đổi đến khách hàng trong vòng 3 đến 5 ngày
+                    - Đối với khách hàng tạo phiếu đổi hàng online trên website cửa hàng:
                     <br>
-                    Đối với khách hàng mua trực tiếp tại cửa hàng:
+                        Ngay sau khi nhận được phiếu đổi hàng của Quý khách hàng, chúng tôi sẽ liên lạc với quý khách hàng và
+                        sẽ hẹn khách có thể mang máy đến trực tiếp tại cửa hàng để nhân viên quán có thể kiểm tra và đưa ra hướng giải quyết tốt nhất
                     <br>
-                    Khách hàng đem sản phẩm cần đổi đến trực tiếp tại cửa hàng trên hóa đơn, nhân viên cửa hàng sẽ kiểm
-                    tra tình trạng sản phẩm và đưa ra hướng giải quyết ngay tại của hàng. Nhân viên tại cửa hàng sẽ tư
-                    vấn cụ thể để khách hàng chọn lựa phương án tốt nhất.
+                    - Đối với khách hàng đến đổi hàng trực tiếp tại cửa hàng:
+                    <br>
+                        Khách hàng đem sản phẩm cần đổi đến trực tiếp tại cửa hàng trên hóa đơn, nhân viên cửa hàng sẽ kiểm
+                        tra tình trạng sản phẩm và đưa ra hướng giải quyết ngay tại của hàng. Nhân viên tại cửa hàng sẽ tư
+                        vấn cụ thể để khách hàng chọn lựa phương án tốt nhất.
+                    <br>
                     <br>
                     <b> 4. Hình thức đổi sản phẩm:</b>
-
                     <br>
-                    Sản phẩm chỉ được đổi một lần duy nhất
                     <br>
-                    Quý khách vui lòng đến trực tiếp cửa hàng GPhoneS Store ghi trên hoá đơn mua hàng (đối với khách hàng ở Hà Nội)
+                    - Sản phẩm chỉ được đổi một lần duy nhất và
+                    quý khách vui lòng đến trực tiếp cửa hàng GPhoneS Store ghi trên hoá đơn mua hàng.
+                    Khi đi khách hàng vui lòng mang đủ hộp và phụ kiện của sản phẩm cùng với hóa đơn mua hàng của sản phẩm đó.
                     <br>
-                    Đối với khách hàng ở khu vực khác, vui lòng gọi điện trực tiếp đến số điện thoại 098123456 hoặc gửi yêu cầu qua  mail gphonespluss@gmail.com Sau khi nhận được mail phản hồi xác nhận đồng ý từ
-                    GPhoneS, Quý khách đóng gói sản phẩm kèm đầy đủ phụ kiện, hoá đơn, phiếu bảo hành, …và gửi về địa chỉ
-                    số 3 phố Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội.
+                    - Chúng tôi chỉ xác nhận đổi hàng sang những sản phẩm có cùng model máy như cùng dòng máy,
+                    dung lượng bố nhớ, dung lượng ram, cùng 1 dòng chip đối với những máy chạy hệ điều hành android và có thể khác màu máy so với sản phẩm cần đổi
                     <br>
-                    Chúng tôi chỉ xác nhận đổi hàng sang những sản phẩm giá nhỏ hơn hoặc bằng giá của sản phẩm cần đổi
                     <br>
-
-                    <b> Lưu ý: GPhoneS Store khuyến khích Quý khách hàng nên chụp ảnh sản phẩm trước khi đổi hàng hóa, việc lưu
+                    <b>Ví dụ: Iphone 15 pro max có dung lượng ram là 16GB, dung lượng bộ nhớ 1TB,
+                        màu trắng có thể đổi sang 1 chiếc Iphone 15 pro max có ram 16GB, dung lượng bộ nhớ 1TB và có thể sang màu khác như đen, vàng nếu khách hàng muốn đổi,
+                        hoặc nếu màu tương tự hết chúng tôi xin phép khách hàng có thể đổi sang màu đang có sẵn trong của hàng</b>
+                    <br>
+                    <br>
+                    <hr>
+                    <b style="color: red"> Lưu ý: GPhoneS Store khuyến khích Quý khách hàng nên chụp ảnh sản phẩm trước khi đổi hàng hóa, việc lưu
                         giữ sản phẩm sẽ giúp khách hàng làm bằng chứng nếu có những vấn đề phát sinh trong quá trình đổi
-                        trả.
+                        hàng.
                     </b>
                 </div>
                 <div class="modal-footer">

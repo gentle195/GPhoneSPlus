@@ -74,7 +74,7 @@ public class ChiTietSanPhamController {
     CameraService cameraService;
     @Autowired
     IMEIService imeiService;
-
+    private int ton=0;
     private Date ngay;
 
     @GetMapping("/hien-thi")
@@ -569,9 +569,6 @@ public class ChiTietSanPhamController {
         chiTietSanPham.setNgayTao(ngay);
         chiTietSanPham.setTinhTrang(0);
         chiTietSanPham.setKhuyenMai(ct.getKhuyenMai());
-
-
-
 
         chiTietSanPhamService.update(id, chiTietSanPham);
         List<ChiTietSanPham> chiTietSanPhamPage = chiTietSanPhamService.getAllTTOn();

@@ -62,7 +62,7 @@ public class Pin {
     @Column(name = "mo_ta")
     private String moTa;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_dung_luong")
     private DungLuongPin dungLuongPin;
 

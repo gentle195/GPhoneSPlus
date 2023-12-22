@@ -724,11 +724,12 @@ public class BanHangOnlineController {
 
     }
 
-    Long tienthanhtoan1=Long.valueOf(0);
-    UUID iddc1=null;
-    String sdt1="";
-    UUID idgh1=null;
-    String nguoinhan1="";
+    Long tienthanhtoan1 = Long.valueOf(0);
+    UUID iddc1 = null;
+    String sdt1 = "";
+    UUID idgh1 = null;
+    String nguoinhan1 = "";
+
     //    @PostMapping("/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-dat-hang/{idgh}/{tongtien}/{iddc}/{sdt}")
     @PostMapping("/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-dat-hang")
     public String nutdathang(
@@ -741,203 +742,213 @@ public class BanHangOnlineController {
             @RequestParam("nn1") String nguoinhan
     ) throws UnsupportedEncodingException {
 
-
-        if (tienmaORvnp == 1) {
-            //        them hd
-            long millis = System.currentTimeMillis();
-            Date date = new Date(millis);
-            HoaDon hd = new HoaDon();
-            Integer sl = hoaDonService.findAll().size();
-            String mhd = "";
-            if (sl < 10) {
-                mhd = "MHD0" + sl;
-            } else {
-                mhd = "MHD" + sl;
-            }
-            hd.setMa(mhd);
-//        hd.setSdt(gioHangService.findById(idgh).getKhachHang().getSdt());
-            hd.setSdt(sdt);
-            hd.setNguoiNhan(nguoinhan);
-            hd.setTongTien(tongtien);
-            hd.setNgayTao(date);
-            hd.setNgayCapNhat(date);
-            hd.setTinhTrang(0);
-            hd.setLoai(1);
-            hd.setHinhThucThanhToan(2);
-            hd.setTinhTrangGiaoHang(0);
-            KhachHang kh = khachHangService.findById(gioHangService.findById(idgh).getKhachHang().getId());
-            hd.setKhachHang(kh);
-            DiaChi dc = diaChiService.findById(iddc);
-            hd.setDiaChi(dc);
-            hoaDonService.add(hd);
-//    them hdct
-            List<GioHangChiTiet> listghct = banHangOnlineService.ListghTheoidghvsTT1(idgh);
-            for (int a = 0; a < listghct.size(); a = a + 1) {
-                for (int b = 0; b < listghct.get(a).getSoLuong(); b = b + 1) {
-                    HoaDonChiTiet hdct = new HoaDonChiTiet();
-                    hdct.setSoLuong(1);
-                    hdct.setTinhTrang(0);
-                    hdct.setDonGia(listghct.get(a).getDonGiaKhiGiam());
-                    HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
-                    hdct.setHoaDon(hd1);
-                    List<IMEI> listimei = banHangOnlineService.timimeitheoidctspVSttO(listghct.get(a).getChiTietSanPham().getId());
-                    hdct.setImei(listimei.get(0));
-                    hoaDonChiTietService.add(hdct);
-// cập nhật trạng thái imei
-                    IMEI imei = listimei.get(0);
-                    imei.setTinhTrang(3);
-                    imei.setNgayCapNhat(date);
-                    imeiService.add(imei);
-// cập nhật lại số lượng ctsp của imei đó
-                    ChiTietSanPham motctsp=imei.getChiTietSanPham();
-                    motctsp.setSoLuong(motctsp.getSoLuong()-1);
-                    chiTietSanPhamService.add(motctsp);
+        if (diaChiService.findById(iddc).getThanhPho().contains("Hà Nội")) {
+            if (tienmaORvnp == 1) {
+                //        them hd
+                long millis = System.currentTimeMillis();
+                Date date = new Date(millis);
+                HoaDon hd = new HoaDon();
+                Integer sl = hoaDonService.findAll().size();
+                String mhd = "";
+                if (sl < 10) {
+                    mhd = "MHD0" + sl;
+                } else {
+                    mhd = "MHD" + sl;
                 }
-            }
-//xoa ghct TT=0 theo idgh
-            banHangOnlineService.xoaghcttheoIDGHvsTTO(idgh);
-//cập nhật hóa đơn; thanh toán khi nhận hàng
-            HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
-            hd1.setTinhTrang(3);
-            hd1.setHinhThucThanhToan(0);
-            hoaDonService.add(hd1);
-
-
-        } else {
-//  thanh toán online
-
-//            return "redirect:/pay/"+idgh+"/"+tongtien+"/"+iddc+"/"+sdt;
-
-            idgh1=idgh;
-            tienthanhtoan1=Long.valueOf(String.valueOf(tongtien));
-            iddc1=iddc;
-            sdt1=sdt;
-            nguoinhan1=nguoinhan;
-            System.out.println("--idgh:"+idgh+"--tien:"+tienthanhtoan1+"--sdt:"+sdt1+"---nn:"+nguoinhan1);
-            String vnp_Version = "2.1.0";
-            String vnp_Command = "pay";
-            String orderType = "other";
-            long amount = tienthanhtoan1*100;
-            String bankCode = "NCB";
-
-            String vnp_TxnRef = Config.getRandomNumber(8);
-            String vnp_IpAddr = "127.0.0.1";
-
-            String vnp_TmnCode = Config.vnp_TmnCode;
-
-            Map<String, String> vnp_Params = new HashMap<>();
-            vnp_Params.put("vnp_Version", vnp_Version);
-            vnp_Params.put("vnp_Command", vnp_Command);
-            vnp_Params.put("vnp_TmnCode", vnp_TmnCode);
-            vnp_Params.put("vnp_Amount", String.valueOf(amount));
-            vnp_Params.put("vnp_CurrCode", "VND");
-
-            vnp_Params.put("vnp_BankCode", bankCode);
-            vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
-            vnp_Params.put("vnp_OrderInfo", "Thanh toan don hang:" + vnp_TxnRef);
-            vnp_Params.put("vnp_OrderType", orderType);
-
-            vnp_Params.put("vnp_Locale", "vn");
-//        vnp_Params.put("vnp_ReturnUrl", Config.vnp_ReturnUrl+"?contractId="+contractId);
-            vnp_Params.put("vnp_ReturnUrl", Config.vnp_ReturnUrl+"?contractId=");
-            vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
-
-            Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-            String vnp_CreateDate = formatter.format(cld.getTime());
-            vnp_Params.put("vnp_CreateDate", vnp_CreateDate);
-
-            cld.add(Calendar.MINUTE, 15);
-            String vnp_ExpireDate = formatter.format(cld.getTime());
-            vnp_Params.put("vnp_ExpireDate", vnp_ExpireDate);
-
-            List fieldNames = new ArrayList(vnp_Params.keySet());
-            Collections.sort(fieldNames);
-            StringBuilder hashData = new StringBuilder();
-            StringBuilder query = new StringBuilder();
-            Iterator itr = fieldNames.iterator();
-            while (itr.hasNext()) {
-                String fieldName = (String) itr.next();
-                String fieldValue = (String) vnp_Params.get(fieldName);
-                if ((fieldValue != null) && (fieldValue.length() > 0)) {
-                    //Build hash data
-                    hashData.append(fieldName);
-                    hashData.append('=');
-                    hashData.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
-                    //Build query
-                    query.append(URLEncoder.encode(fieldName, StandardCharsets.US_ASCII.toString()));
-                    query.append('=');
-                    query.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
-                    if (itr.hasNext()) {
-                        query.append('&');
-                        hashData.append('&');
+                hd.setMa(mhd);
+                hd.setSdt(sdt);
+                hd.setNguoiNhan(nguoinhan);
+                hd.setTongTien(tongtien);
+                hd.setNgayTao(date);
+                hd.setNgayCapNhat(date);
+                hd.setTinhTrang(0);
+                hd.setLoai(1);
+                hd.setHinhThucThanhToan(2);
+                hd.setTinhTrangGiaoHang(0);
+                KhachHang kh = khachHangService.findById(gioHangService.findById(idgh).getKhachHang().getId());
+                hd.setKhachHang(kh);
+                DiaChi dc = diaChiService.findById(iddc);
+                hd.setDiaChi(dc);
+                hoaDonService.add(hd);
+//    them hdct
+                List<GioHangChiTiet> listghct = banHangOnlineService.ListghTheoidghvsTT1(idgh);
+                for (int a = 0; a < listghct.size(); a = a + 1) {
+                    for (int b = 0; b < listghct.get(a).getSoLuong(); b = b + 1) {
+                        HoaDonChiTiet hdct = new HoaDonChiTiet();
+                        hdct.setSoLuong(1);
+                        hdct.setTinhTrang(0);
+                        hdct.setDonGia(listghct.get(a).getDonGiaKhiGiam());
+                        HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
+                        hdct.setHoaDon(hd1);
+                        List<IMEI> listimei = banHangOnlineService.timimeitheoidctspVSttO(listghct.get(a).getChiTietSanPham().getId());
+                        hdct.setImei(listimei.get(0));
+                        hoaDonChiTietService.add(hdct);
+// cập nhật trạng thái imei
+                        IMEI imei = listimei.get(0);
+                        imei.setTinhTrang(3);
+                        imei.setNgayCapNhat(date);
+                        imeiService.add(imei);
+// cập nhật lại số lượng ctsp của imei đó
+                        ChiTietSanPham motctsp = imei.getChiTietSanPham();
+                        motctsp.setSoLuong(motctsp.getSoLuong() - 1);
+                        chiTietSanPhamService.add(motctsp);
                     }
                 }
+//xoa ghct TT=0 theo idgh
+                banHangOnlineService.xoaghcttheoIDGHvsTTO(idgh);
+//cập nhật hóa đơn; thanh toán khi nhận hàng
+                HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
+                hd1.setTinhTrang(3);
+                hd1.setHinhThucThanhToan(0);
+                hoaDonService.add(hd1);
+                model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(gioHangService.findById(idgh).getKhachHang().getId())).get(0).getId()));
+                model.addAttribute("tttong", 1);
+                model.addAttribute("banhangonline", banHangOnlineService);
+                if (idkhachhang.equals("1")) {
+                    model.addAttribute("idkhachhang", idkhachhang);
+                } else {
+                    model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+                    model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+                }
+                return "ban-hang-online/dat_hang_thanh_cong";
+
+            } else {
+//  thanh toán online
+
+                idgh1 = idgh;
+                tienthanhtoan1 = Long.valueOf(String.valueOf(tongtien));
+                iddc1 = iddc;
+                sdt1 = sdt;
+                nguoinhan1 = nguoinhan;
+                System.out.println("--idgh:" + idgh + "--tien:" + tienthanhtoan1 + "--sdt:" + sdt1 + "---nn:" + nguoinhan1);
+                String vnp_Version = "2.1.0";
+                String vnp_Command = "pay";
+                String orderType = "other";
+                long amount = tienthanhtoan1 * 100;
+                String bankCode = "NCB";
+
+                String vnp_TxnRef = Config.getRandomNumber(8);
+                String vnp_IpAddr = "127.0.0.1";
+
+                String vnp_TmnCode = Config.vnp_TmnCode;
+
+                Map<String, String> vnp_Params = new HashMap<>();
+                vnp_Params.put("vnp_Version", vnp_Version);
+                vnp_Params.put("vnp_Command", vnp_Command);
+                vnp_Params.put("vnp_TmnCode", vnp_TmnCode);
+                vnp_Params.put("vnp_Amount", String.valueOf(amount));
+                vnp_Params.put("vnp_CurrCode", "VND");
+
+                vnp_Params.put("vnp_BankCode", bankCode);
+                vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
+                vnp_Params.put("vnp_OrderInfo", "Thanh toan don hang:" + vnp_TxnRef);
+                vnp_Params.put("vnp_OrderType", orderType);
+
+                vnp_Params.put("vnp_Locale", "vn");
+//        vnp_Params.put("vnp_ReturnUrl", Config.vnp_ReturnUrl+"?contractId="+contractId);
+                vnp_Params.put("vnp_ReturnUrl", Config.vnp_ReturnUrl + "?contractId=");
+                vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
+
+                Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+                String vnp_CreateDate = formatter.format(cld.getTime());
+                vnp_Params.put("vnp_CreateDate", vnp_CreateDate);
+
+                cld.add(Calendar.MINUTE, 15);
+                String vnp_ExpireDate = formatter.format(cld.getTime());
+                vnp_Params.put("vnp_ExpireDate", vnp_ExpireDate);
+
+                List fieldNames = new ArrayList(vnp_Params.keySet());
+                Collections.sort(fieldNames);
+                StringBuilder hashData = new StringBuilder();
+                StringBuilder query = new StringBuilder();
+                Iterator itr = fieldNames.iterator();
+                while (itr.hasNext()) {
+                    String fieldName = (String) itr.next();
+                    String fieldValue = (String) vnp_Params.get(fieldName);
+                    if ((fieldValue != null) && (fieldValue.length() > 0)) {
+                        //Build hash data
+                        hashData.append(fieldName);
+                        hashData.append('=');
+                        hashData.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
+                        //Build query
+                        query.append(URLEncoder.encode(fieldName, StandardCharsets.US_ASCII.toString()));
+                        query.append('=');
+                        query.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
+                        if (itr.hasNext()) {
+                            query.append('&');
+                            hashData.append('&');
+                        }
+                    }
+                }
+
+                String queryUrl = query.toString();
+                String vnp_SecureHash = Config.hmacSHA512(Config.secretKey, hashData.toString());
+                queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
+                String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
+
+                return "redirect:" + paymentUrl;
+
+
             }
-
-            String queryUrl = query.toString();
-            String vnp_SecureHash = Config.hmacSHA512(Config.secretKey, hashData.toString());
-            queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
-            String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
-
-            return "redirect:"+paymentUrl;
-
-
-        }
-//
-        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(gioHangService.findById(idgh).getKhachHang().getId())).get(0).getId()));
-        model.addAttribute("tttong", 1);
-        model.addAttribute("banhangonline", banHangOnlineService);
-        if (idkhachhang.equals("1")) {
-            model.addAttribute("idkhachhang", idkhachhang);
         } else {
-            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
-            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+            model.addAttribute("listghctTT", banHangOnlineService.ListghctTheoidgh(idgh));
+            model.addAttribute("listghct", banHangOnlineService.ListghTheoidghvsTT1(idgh));
+            model.addAttribute("banhangonline", banHangOnlineService);
+            if (idkhachhang.equals("1")) {
+                model.addAttribute("idkhachhang", idkhachhang);
+            } else {
+                model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+                model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+            }
+            model.addAttribute("thongbaodiachiHN", "Cửa hàng chưa có thể giao hàng ngoài Hà Nội, mong quý khách hàng thông cảm vì sự bất tiện này!");
+            return "ban-hang-online/trang-san-pham-duoc-chon-thanh-toan";
+
         }
-        return "ban-hang-online/dat_hang_thanh_cong";
+
     }
 
     @GetMapping("ban-hang-online/ketquathanhtoan")
     public String paymentCallback(
             Model model,
-            @RequestParam Map<String, String> queryParams,HttpServletResponse response) throws IOException {
+            @RequestParam Map<String, String> queryParams, HttpServletResponse response) throws IOException {
         String vnp_ResponseCode = queryParams.get("vnp_ResponseCode");
         String contractId = queryParams.get("contractId");
         String registerServiceId = queryParams.get("registerServiceId");
-        System.out.println("vnp_ResponseCode----"+vnp_ResponseCode);
-        System.out.println("contractId----"+contractId);
-        System.out.println("registerServiceId----"+registerServiceId);
-        System.out.println("madonhang: "+queryParams.get("vnp_TxnRef"));
+        System.out.println("vnp_ResponseCode----" + vnp_ResponseCode);
+        System.out.println("contractId----" + contractId);
+        System.out.println("registerServiceId----" + registerServiceId);
+        System.out.println("madonhang: " + queryParams.get("vnp_TxnRef"));
 
         // giao dien
 
-        double tong=0;
-        Integer lamchon=0;
-        for (ChiTietSanPham ct:banHangOnlineService.ctspbanhang()) {
-            if(banHangOnlineService.soluongcon(String.valueOf(ct.getId()))>0){
-                tong=tong+1;
-                lamchon=lamchon+1;
+        double tong = 0;
+        Integer lamchon = 0;
+        for (ChiTietSanPham ct : banHangOnlineService.ctspbanhang()) {
+            if (banHangOnlineService.soluongcon(String.valueOf(ct.getId())) > 0) {
+                tong = tong + 1;
+                lamchon = lamchon + 1;
             }
         }
-        double tb=tong/3;
-        lamchon=lamchon/3;
-        if(tb % 1 >0){
-            lamchon=lamchon+1;
+        double tb = tong / 3;
+        lamchon = lamchon / 3;
+        if (tb % 1 > 0) {
+            lamchon = lamchon + 1;
         }
 
-        model.addAttribute("lamchon",lamchon);
-        model.addAttribute("giamgia",banHangOnlineService);
-        model.addAttribute("banhangonline",banHangOnlineService);
+        model.addAttribute("lamchon", lamchon);
+        model.addAttribute("giamgia", banHangOnlineService);
+        model.addAttribute("banhangonline", banHangOnlineService);
 
-        UUID idkh=gioHangService.findById(idgh1).getKhachHang().getId();
-        model.addAttribute("khachhangdangnhap",khachHangService.findById(idkh));
-        model.addAttribute("listsp",banHangOnlineService.ctspbanhang());
-        model.addAttribute("idkhachhang",idkh);
-        model.addAttribute("kh",khachHangService.findById(idkh));
+        UUID idkh = gioHangService.findById(idgh1).getKhachHang().getId();
+        model.addAttribute("khachhangdangnhap", khachHangService.findById(idkh));
+        model.addAttribute("listsp", banHangOnlineService.ctspbanhang());
+        model.addAttribute("idkhachhang", idkh);
+        model.addAttribute("kh", khachHangService.findById(idkh));
         model.addAttribute("hkh", hangKhachHangService.getALL0());
 //        giohan
-        model.addAttribute("listghct",banHangOnlineService.ListghctTheoidgh(idgh1));
-        model.addAttribute("tttong",1);
+        model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(idgh1));
+        model.addAttribute("tttong", 1);
 
 //        het giao dien
         // that bai: 24,rỗng, null
@@ -996,15 +1007,15 @@ public class BanHangOnlineController {
                     imei.setNgayCapNhat(date);
                     imeiService.add(imei);
 // cập nhật lại số lượng ctsp của imei đó
-                    ChiTietSanPham motctsp=imei.getChiTietSanPham();
-                    motctsp.setSoLuong(motctsp.getSoLuong()-1);
+                    ChiTietSanPham motctsp = imei.getChiTietSanPham();
+                    motctsp.setSoLuong(motctsp.getSoLuong() - 1);
                     chiTietSanPhamService.add(motctsp);
                 }
             }
 //xoa ghct TT=0 theo idgh
             banHangOnlineService.xoaghcttheoIDGHvsTTO(idgh1);
 //cập nhật hóa đơn; thanh toán khi thanh toán online
-            HoaDon hd1=banHangOnlineService.timhdtheomahd(mhd);
+            HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
             hd1.setNgayThanhToan(date);
             hd1.setNgayCapNhat(date);
             hd1.setTinhTrang(2);
@@ -1014,18 +1025,18 @@ public class BanHangOnlineController {
             hd1.setTinhTrangGiaoHang(0);
             hoaDonService.add(hd1);
 //hoadonchitiet
-            List<HoaDonChiTiet> hdct=banHangOnlineService.timhoadonchitiettheoidhd(hd1.getId());
-            for (HoaDonChiTiet hdct1:hdct
+            List<HoaDonChiTiet> hdct = banHangOnlineService.timhoadonchitiettheoidhd(hd1.getId());
+            for (HoaDonChiTiet hdct1 : hdct
             ) {
                 hdct1.setTinhTrang(1);
                 hoaDonChiTietService.add(hdct1);
             }
 //imei
-            List<HoaDonChiTiet> hdctchoimei=banHangOnlineService.timhoadonchitiettheoidhd(hd1.getId());
+            List<HoaDonChiTiet> hdctchoimei = banHangOnlineService.timhoadonchitiettheoidhd(hd1.getId());
 
-            for (HoaDonChiTiet hdct2:hdctchoimei
+            for (HoaDonChiTiet hdct2 : hdctchoimei
             ) {
-                IMEI imei1=hdct2.getImei();
+                IMEI imei1 = hdct2.getImei();
                 imei1.setTinhTrang(1);
                 imeiService.add(imei1);
             }
@@ -1043,11 +1054,7 @@ public class BanHangOnlineController {
         }
 
 
-
-
-
     }
-
 
 
     @GetMapping("/ban-hang-online/hoa-don-online/{id}/{tinhtrang}/{thongbao}")
@@ -1123,46 +1130,44 @@ public class BanHangOnlineController {
         System.out.println(checkHDlist3);
 
 
-
-
         // Truyền giá trị ngày hiện tại tới form JSP
 
         model.addAttribute("contentPage", "../ban-hang-online/trang-hoa-don-khach-hang.jsp");
 
-        if(tinhtrang.equals("full")){
-            model.addAttribute("listhdkh",banHangOnlineService.timhoadontheoidkh(idkh));
-            model.addAttribute("mau","full");
-        }else if (tinhtrang.equals("0")){
-            model.addAttribute("listhdkh",banHangOnLinerepository.donHang0(idkh));
-            model.addAttribute("mau","0");
-        }else if (tinhtrang.equals("1")){
-            model.addAttribute("listhdkh",banHangOnLinerepository.donHang1(idkh));
-            model.addAttribute("mau","1");
-        }else if (tinhtrang.equals("3")){
-            model.addAttribute("listhdkh",banHangOnLinerepository.donHang3(idkh));
-            model.addAttribute("mau","3");
-        }else if (tinhtrang.equals("2")){
-            model.addAttribute("listhdkh",banHangOnLinerepository.donHang2(idkh));
-            model.addAttribute("mau","2");
-        }else if (tinhtrang.equals("danggiao")){
-            model.addAttribute("listhdkh",banHangOnLinerepository.donHangDangGiao(idkh));
-            model.addAttribute("mau","danggiao");
-        }else if (tinhtrang.equals("thanhcong")){
-            model.addAttribute("listhdkh",banHangOnLinerepository.donHangThanhCong(idkh));
-            model.addAttribute("mau","thanhcong");
-        }else if (tinhtrang.equals("8")){
-            model.addAttribute("listhdkh",banHangOnLinerepository.donHang8(idkh));
-            model.addAttribute("mau","8");
+        if (tinhtrang.equals("full")) {
+            model.addAttribute("listhdkh", banHangOnlineService.timhoadontheoidkh(idkh));
+            model.addAttribute("mau", "full");
+        } else if (tinhtrang.equals("0")) {
+            model.addAttribute("listhdkh", banHangOnLinerepository.donHang0(idkh));
+            model.addAttribute("mau", "0");
+        } else if (tinhtrang.equals("1")) {
+            model.addAttribute("listhdkh", banHangOnLinerepository.donHang1(idkh));
+            model.addAttribute("mau", "1");
+        } else if (tinhtrang.equals("3")) {
+            model.addAttribute("listhdkh", banHangOnLinerepository.donHang3(idkh));
+            model.addAttribute("mau", "3");
+        } else if (tinhtrang.equals("2")) {
+            model.addAttribute("listhdkh", banHangOnLinerepository.donHang2(idkh));
+            model.addAttribute("mau", "2");
+        } else if (tinhtrang.equals("danggiao")) {
+            model.addAttribute("listhdkh", banHangOnLinerepository.donHangDangGiao(idkh));
+            model.addAttribute("mau", "danggiao");
+        } else if (tinhtrang.equals("thanhcong")) {
+            model.addAttribute("listhdkh", banHangOnLinerepository.donHangThanhCong(idkh));
+            model.addAttribute("mau", "thanhcong");
+        } else if (tinhtrang.equals("8")) {
+            model.addAttribute("listhdkh", banHangOnLinerepository.donHang8(idkh));
+            model.addAttribute("mau", "8");
         }
 
 
-        if(thongbao.equals("huy")){
-            model.addAttribute("hientbhuy",0);
-            model.addAttribute("ndtb","Hủy hóa đơn thành công");
-        }else  if (thongbao.equals("huydoitra")) { model.addAttribute("hientbhuy",0);
-        model.addAttribute("ndtb","Hủy đổi trả thành công");}
-
-
+        if (thongbao.equals("huy")) {
+            model.addAttribute("hientbhuy", 0);
+            model.addAttribute("ndtb", "Hủy hóa đơn thành công");
+        } else if (thongbao.equals("huydoitra")) {
+            model.addAttribute("hientbhuy", 0);
+            model.addAttribute("ndtb", "Hủy đổi trả thành công");
+        }
 
 
 //        model.addAttribute("listhdkh", banHangOnlineService.timhoadontheoidkh(idkh));
@@ -1178,9 +1183,6 @@ public class BanHangOnlineController {
     }
 
 
-
-
-
     @GetMapping("/ban-hang-online/xem-hoa-don-chi-tiet/{idhd}")
     public String nutxemchitiethoadon(
             Model model,
@@ -1190,7 +1192,7 @@ public class BanHangOnlineController {
 
         model.addAttribute("hd", hoaDonService.findById(idhd));
         model.addAttribute("listhdct", banHangOnlineService.timhoadonchitiettheoidhd(idhd));
-        List<HoaDonChiTiet> hoaDonChiTiet=banHangOnlineService.timhoadonchitiettheoidhd(idhd);
+        List<HoaDonChiTiet> hoaDonChiTiet = banHangOnlineService.timhoadonchitiettheoidhd(idhd);
         DoiTra doiTra = doiTraService.getDoiTraByHoaDon(idhd);
         if (doiTra != null) {
             // Thực hiện các thao tác với doiTra
@@ -1201,7 +1203,6 @@ public class BanHangOnlineController {
             // Xử lý khi doiTra là null
             System.out.println("Không tìm thấy đối tượng DoiTra cho idhd: " + idhd);
         }
-
 
 
         model.addAttribute("banhangonline", banHangOnlineService);
@@ -1226,14 +1227,14 @@ public class BanHangOnlineController {
     ) {
         banHangOnlineService.huyhoadon(idhd);
 
-        for (HoaDonChiTiet hdct:banHangOnLinerepository.timhoadonchitiettheoidhd(idhd)) {
-            ChiTietSanPham motctsp=hdct.getImei().getChiTietSanPham();
-            motctsp.setSoLuong(motctsp.getSoLuong()+1);
+        for (HoaDonChiTiet hdct : banHangOnLinerepository.timhoadonchitiettheoidhd(idhd)) {
+            ChiTietSanPham motctsp = hdct.getImei().getChiTietSanPham();
+            motctsp.setSoLuong(motctsp.getSoLuong() + 1);
             chiTietSanPhamService.add(motctsp);
         }
 
 
-        return "redirect:/ban-hang-online/hoa-don-online/" +idkhachhang+"/"+tinhtrang+"/"+thongbao;
+        return "redirect:/ban-hang-online/hoa-don-online/" + idkhachhang + "/" + tinhtrang + "/" + thongbao;
 
     }
 
@@ -1353,7 +1354,7 @@ public class BanHangOnlineController {
         Date date = new Date(millis);
 
         HoaDon hd = hoaDonService.findById(idhd);
-        if(diaChiService.findById(diachi).getThanhPho().equals("Thành phố Hà Nội")){
+        if (diaChiService.findById(diachi).getThanhPho().equals("Thành phố Hà Nội")) {
             if (hd.getTinhTrangGiaoHang() == 0) {
                 hd.setSdt(sodienthoai);
                 hd.setNguoiNhan(nguoinhan);
@@ -1364,7 +1365,7 @@ public class BanHangOnlineController {
 //            bat
                 model.addAttribute("thongbaotinhtranggiaohang", 1);
             }
-        }else {
+        } else {
             model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(idkhachhang)).get(0).getId()));
 
             model.addAttribute("hd", hoaDonService.findById(idhd));
@@ -1587,6 +1588,7 @@ public class BanHangOnlineController {
         }
 
     }
+
     @GetMapping("/detail-test/{id}")
     @ResponseBody
     public List<HoaDonChiTiet> detail(@PathVariable("id") UUID id) {
@@ -1623,12 +1625,12 @@ public class BanHangOnlineController {
         HoaDon hoaDon = hoaDonService.findById(hoadonId);
 
         List<DoiTraChiTiet> doiTraChiTiets = new ArrayList<>();
-        List<DoiTraChiTiet> list=doiTraChiTietService.getAll();
+        List<DoiTraChiTiet> list = doiTraChiTietService.getAll();
         // Lặp qua danh sách hdctIds để tạo và thiết lập thông tin đối trả chi tiết
         for (UUID hdctId : hdctIds) {
             HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietService.findById(hdctId);
-            DoiTraChiTiet doiTraChiTietss=doiTraChiTietService.findByHDCT(hdctId);
-            if (doiTraChiTietss==null){
+            DoiTraChiTiet doiTraChiTietss = doiTraChiTietService.findByHDCT(hdctId);
+            if (doiTraChiTietss == null) {
                 DoiTraChiTiet doiTraChiTiet = new DoiTraChiTiet();
                 doiTraChiTiet.setHoaDonChiTiet(hoaDonChiTiet);
                 doiTraChiTiet.setDoiTra(doiTraService.getDoiTraByHoaDon(hoadonId));
@@ -1706,16 +1708,17 @@ public class BanHangOnlineController {
         doiTraChiTietService.saveAll(doiTraChiTiets);
 //        DoiTra doiTra=doiTraService.getDoiTraByHoaDon(hoadonId);
         doiTra.setTinhTrang(0);
-        doiTraService.update(doiTra.getId(),doiTra);
+        doiTraService.update(doiTra.getId(), doiTra);
 
         return "ban-hang-online/trang_hoa_don_khach_hang";
     }
+
     @PostMapping("/ban-hang-online/trang-chu/tim-kiem")
     public String trangchutimkiem(
             Model model,
             @RequestParam("trangchutimkiem") String trangchutimkiem
     ) {
-        System.out.println("-----"+banHangOnlineService.timkiemTrangChu(trangchutimkiem).size());
+        System.out.println("-----" + banHangOnlineService.timkiemTrangChu(trangchutimkiem).size());
         if (idkhachhang.equals("1")) {
             model.addAttribute("idkhachhang", idkhachhang);
         } else {
@@ -1780,7 +1783,7 @@ public class BanHangOnlineController {
             @PathVariable("trangchutimkiem") String trangchutimkiem
     ) {
         model.addAttribute("banhangonline", banHangOnlineService);
-        System.out.println("-------"+trangchutimkiem);
+        System.out.println("-------" + trangchutimkiem);
         model.addAttribute("listsp", banHangOnlineService.timkiemTrangChu(trangchutimkiem));
 
 
@@ -1821,7 +1824,7 @@ public class BanHangOnlineController {
         doiTraService.update(doiTra.getId(), doiTra);
 
 
-        return "redirect:/ban-hang-online/hoa-don-online/" +doiTra.getHoaDon().getKhachHang().getId()+"/full/"+"huydoitra";
+        return "redirect:/ban-hang-online/hoa-don-online/" + doiTra.getHoaDon().getKhachHang().getId() + "/full/" + "huydoitra";
 
 
 //       "/ban-hang-online/hoa-don-online/{idkh}/{tinhtranghoadon}/{thongbaonhunao}"
