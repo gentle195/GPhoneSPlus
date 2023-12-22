@@ -286,53 +286,22 @@ public class DoiTraController {
             IMEI imei0 = imeiService.findById(doiTraChiTiet.getImei().getId());
             imei0.setTinhTrang(0);
             imei0.setNgayCapNhat(Date.valueOf(LocalDate.now()));
-
             imeiService.update(doiTraChiTiet.getImei().getId(), imei0);
             doiTraChiTiet.setImei(imei);
             doiTraChiTiet.setTinhTrang(0);
-
-            if (imei.getChiTietSanPham().getKhuyenMai() == null) {
-                doiTraChiTiet.setTienDoiTra(hdct.getDonGia().subtract(imei.getChiTietSanPham().getGiaBan()));
-                doiTraChiTiet.setDonGia(imei.getChiTietSanPham().getGiaBan());
-            } else {
-                BigDecimal giam = BigDecimal.valueOf(imei.getChiTietSanPham().getKhuyenMai().getSoTienGiam()).divide(BigDecimal.valueOf(100));
-                int giaMoi = (int) Math.floor(Double.valueOf(String.valueOf(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam)))));
-
-                doiTraChiTiet.setDonGia(BigDecimal.valueOf(giaMoi));
-                doiTraChiTiet.setTienDoiTra(hdct.getDonGia().subtract(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam))));
-            }
-
-            doiTraChiTiet.setTienDoiTra(hdct.getDonGia().subtract(doiTraChiTiet.getDonGia()));
-
+            doiTraChiTiet.setDonGia(imei.getChiTietSanPham().getGiaBan());
             doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
-
             imeiService.updatImeiChoXuLy(date, imeiId);
         } else {
-
             doiTraChiTiet.setImei(imei);
             doiTraChiTiet.setTinhTrang(0);
-            if (imei.getChiTietSanPham().getKhuyenMai() == null) {
-                doiTraChiTiet.setTienDoiTra(hdct.getImei().getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan()));
-                doiTraChiTiet.setDonGia(imei.getChiTietSanPham().getGiaBan());
-            } else {
-                BigDecimal giam = BigDecimal.valueOf(imei.getChiTietSanPham().getKhuyenMai().getSoTienGiam()).divide(BigDecimal.valueOf(100));
-                int giaMoi = (int) Math.floor(Double.valueOf(String.valueOf(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam)))));
-
-                doiTraChiTiet.setDonGia(BigDecimal.valueOf(giaMoi));
-                doiTraChiTiet.setTienDoiTra(hdct.getDonGia().subtract(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam))));
-            }
-
             doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
             long millis = System.currentTimeMillis();
             Date date = new Date(millis);
             imeiService.updatImeiChoXuLy(date, imeiId);
 
         }
-
-
         model.addAttribute("doitraId", doitraId);
-
-
         return "redirect:/doi-tra/detail/" + doiTra.getHoaDon().getId() + "?doitraId=" + doitraId + "&hoadonId=" + doiTra.getHoaDon().getId();
 
     }
