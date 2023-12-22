@@ -489,6 +489,17 @@
     }
 </script>
 <script>
+
+
+    $('#doiTraForm input').keypress(function (e) {
+
+        if (e.which === 13) {
+
+            themThongTinDoiTra();
+
+            e.preventDefault();
+        }
+    });
     document.querySelectorAll('.chonSanPhamButton').forEach(button => {
         button.addEventListener('click', function () {
             var hdctId = this.getAttribute('data-idhdct');
