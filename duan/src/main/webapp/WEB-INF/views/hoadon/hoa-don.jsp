@@ -381,7 +381,8 @@
                                             <i class="ti-file btn-icon-prepend"></i>
                                             Detail</a>
                                         <c:if test="${hoaDon.loai== 1 && hoaDon.nhanVien== null && (hoaDon.tinhTrang == 2 || hoaDon.tinhTrang==3)}">
-                                            <a href="/hoa-don/xac-nhan/${hoaDon.id}"
+                                            <a href="/hoa-don-online/xac-nhan/detail/${hoaDon.id}"
+
                                                class="btn btn-info btn-icon-text"
                                                tabindex="-1"
                                                role="button"
