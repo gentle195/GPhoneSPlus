@@ -27,9 +27,8 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             "or pin.loaiPin like %:ten% or ms.ten like %:ten% or chip.ten like %:ten%)")
     List<ChiTietSanPham> search(String ten);
 
-    @Query("select ct from ChiTietSanPham  ct where ct.tinhTrang=0 and ct.giaBan <= " +
-            "(select hdct.donGia from HoaDonChiTiet hdct where hdct.id = " +
-            "(select dtct.hoaDonChiTiet.id from DoiTraChiTiet dtct where dtct.id=:id))")
+    @Query("select ct from ChiTietSanPham  ct where ct.tinhTrang=0 and ct.giaBan = " +
+            "(select hdct.donGia from HoaDonChiTiet hdct left join DoiTraChiTiet dtct on hdct.id=dtct.hoaDonChiTiet.id where dtct.id=:id)")
     List<ChiTietSanPham> searchGia(UUID id);
 
     @Query("select ct from ChiTietSanPham ct left join SanPham sp on ct.sanPham.id=sp.id " +

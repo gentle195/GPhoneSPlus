@@ -40,7 +40,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "                        left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n" +
             "                        left join imei on imei.id = hoa_don_chi_tiet.id_imei\n" +
             "                        left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
-            "                        where YEAR(ngay_thanh_toan) = 2023 and tinh_trang_giao_hang = 3\n" +
+            "                        where YEAR(ngay_thanh_toan) = 2023 and hoa_don.tinh_trang = 2\n" +
             "                        GROUP BY MONTH(ngay_thanh_toan)" +
             "                        ORDER BY thang ASC", nativeQuery = true)
     List<DoanhThuTheoThang> doanhThu();
@@ -56,7 +56,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "                        left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n" +
             "                        left join imei on imei.id = hoa_don_chi_tiet.id_imei\n" +
             "                        left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
-            "                        where YEAR(ngay_thanh_toan) = ?1 and tinh_trang_giao_hang = 3\n" +
+            "                        where YEAR(ngay_thanh_toan) = ?1 and hoa_don.tinh_trang = 2\n" +
             "                        GROUP BY MONTH(ngay_thanh_toan)" +
             "                        ORDER BY thang ASC", nativeQuery = true)
     List<DoanhThuTheoThang> loctheonam(Integer Nam);

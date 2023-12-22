@@ -416,8 +416,7 @@
                                                 Giao hàng hoàn tất
                                             </a>
                                         </c:if>
-                                        <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 1||hoaDon.tinhTrangGiaoHang == 2) && hoaDon.hinhThucThanhToan == 0}">
-
+                                        <c:if test="${hoaDon.loai == 1 && (hoaDon.tinhTrangGiaoHang == 0 || hoaDon.tinhTrangGiaoHang == 1 || hoaDon.tinhTrangGiaoHang == 2) && hoaDon.hinhThucThanhToan == 0}">
                                             <a href="/hoa-don/xac-nhan-huy/${hoaDon.id}"
                                                class="btn btn-danger btn-icon-text"
                                                tabindex="-1"
