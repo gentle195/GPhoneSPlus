@@ -572,7 +572,6 @@
     <table class="table table-striped" style="text-content: center;width: 90%;margin-left: 5%;">
         <thead>
         <tr>
-            <th>Mã đơn hàng</th>
             <th>Ảnh sản phẩm</th>
             <th>Sản phẩm</th>
             <th>Khuyến mãi (%/SP)</th>
@@ -580,73 +579,61 @@
             <th>Số lượng</th>
             <th>Tổng</th>
             <th>Tình trạng</th>
-            <th></th>
+<%--            <th> Chức năng</th>--%>
         </tr>
         </thead>
         <tbody>
         <c:set var="dem" scope="session" value="${0}"/>
-        <c:forEach items="${listhdct}" var="ht" varStatus="stt">
+        <c:forEach items="${banhangonline.dsDDHtheoIDHD(hd.id)}" var="ht" varStatus="stt">
             <c:if test="${stt.index==0}">
                 <tr>
-                    <td>${ht.hoaDon.ma}</td>
                     <td>
-                        <img src="../../../uploads/${ht.imei.chiTietSanPham.urlAnh}" width="40" height="40"
+                        <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}" width="40" height="40"
                              style="border-radius:50% 50% 50% 50%">
                     </td>
                     <td>
-                            ${ht.imei.chiTietSanPham.sanPham.ten} - ${ht.imei.chiTietSanPham.mauSac.ten}
-                        - ${ht.imei.chiTietSanPham.ram.dungLuong} - ${ht.imei.chiTietSanPham.rom.dungLuong}.
+                            ${ht.chiTietSanPham.sanPham.ten} - ${ht.chiTietSanPham.mauSac.ten}
+                        - ${ht.chiTietSanPham.ram.dungLuong} - ${ht.chiTietSanPham.rom.dungLuong}.
                     </td>
                     <td>
 
-                            ${ht.phantram()}%
+                            ${100-ht.donGiaKhiGiam/ht.donGia*100} %
                     </td>
 
                     <td>
-                            ${ht.convertDongiaHDCT()}  VND
+                            ${banhangonline.convertgiatien(ht.donGiaKhiGiam)}  VND
                     </td>
                     <td>
-                            ${banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
+                            ${ht.soLuong}
                     </td>
-                    <td>${banhangonline.dongiaVSsoluongXemHDCT(ht.hoaDon.id,ht.imei.chiTietSanPham.id)}
+                    <td>${banhangonline.convertgiatien(ht.donGiaKhiGiam*ht.soLuong)}
                         VND
                     </td>
                     <td>
-                        <c:if test="${ht.hoaDon.tinhTrang==0}">
+                        <c:if test="${hd.tinhTrang==0}">
                             <p>Chờ xử lý</p>
                         </c:if>
-                        <c:if test="${ht.hoaDon.tinhTrang==1}">
+                        <c:if test="${hd.tinhTrang==1}">
                             <p>Đã xác nhận</p>
                         </c:if>
-                        <c:if test="${ht.hoaDon.tinhTrang==2}">
+                        <c:if test="${hd.tinhTrang==2}">
                             <p>Đã Thanh toán</p>
                         </c:if>
-                        <c:if test="${ht.hoaDon.tinhTrang==3}">
+                        <c:if test="${hd.tinhTrang==3}">
                             <p>Chờ thanh toán</p>
                         </c:if>
-                        <c:if test="${ht.hoaDon.tinhTrang==8}">
+                        <c:if test="${hd.tinhTrang==8}">
                             <p>Đã hủy</p>
                         </c:if>
                     </td>
-                    <td>
-                        <c:if test="${ht.hoaDon.tinhTrangGiaoHang==0}">
-                            <c:if test="${ht.hoaDon.tinhTrang==0}">
-                                <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>
-                            </c:if>
-                        </c:if>
-                            <%--                        <c:if test="${ht.hoaDon.tinhTrang==1}">--%>
+<%--                    <td>--%>
+<%--                        <c:if test="${hd.tinhTrangGiaoHang==0}">--%>
+<%--                            <c:if test="${ht.hoaDon.tinhTrang==0}">--%>
+<%--                                <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>--%>
+<%--                            </c:if>--%>
+<%--                        </c:if>--%>
 
-                            <%--                        </c:if>--%>
-                            <%--                        <c:if test="${ht.hoaDon.tinhTrang==2}">--%>
-
-                            <%--                        </c:if>--%>
-                            <%--                        <c:if test="${ht.hoaDon.tinhTrang==3}">--%>
-
-                            <%--                        </c:if>--%>
-                            <%--                        <c:if test="${ht.hoaDon.tinhTrang==8}">--%>
-
-                            <%--                        </c:if>--%>
-                    </td>
+<%--                    </td>--%>
                 </tr>
                 <c:set var="dem" scope="session" value="${dem+1}"/>
             </c:if>
@@ -659,67 +646,53 @@
                 </c:forEach>
                 <c:if test="${checkck==0}">
                     <tr>
-                        <td>${ht.hoaDon.ma}</td>
                         <td>
-                            <img src="../../../uploads/${ht.imei.chiTietSanPham.urlAnh}" width="40" height="40"
+                            <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}" width="40" height="40"
                                  style="border-radius:50% 50% 50% 50%">
                         </td>
                         <td>
-                                ${ht.imei.chiTietSanPham.sanPham.ten} -
-                                ${ht.imei.chiTietSanPham.mauSac.ten} - ${ht.imei.chiTietSanPham.ram.dungLuong}
-                            - ${ht.imei.chiTietSanPham.rom.dungLuong}.
-                        </td>
-
-
-                        <td>
-                                ${ht.phantram()}%
-
+                                ${ht.chiTietSanPham.sanPham.ten} - ${ht.chiTietSanPham.mauSac.ten}
+                            - ${ht.chiTietSanPham.ram.dungLuong} - ${ht.chiTietSanPham.rom.dungLuong}.
                         </td>
                         <td>
-                                ${ht.convertDongiaHDCT()}  VND
+
+                                ${100-ht.donGiaKhiGiam/ht.donGia*100} %
+                        </td>
+
+                        <td>
+                                ${banhangonline.convertgiatien(ht.donGiaKhiGiam)}  VND
                         </td>
                         <td>
-                                ${banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
+                                ${ht.soLuong}
                         </td>
-                        <td>${banhangonline.dongiaVSsoluongXemHDCT(ht.hoaDon.id,ht.imei.chiTietSanPham.id)}
+                        <td>${banhangonline.convertgiatien(ht.donGiaKhiGiam*ht.soLuong)}
                             VND
                         </td>
                         <td>
-                            <c:if test="${ht.hoaDon.tinhTrang==0}">
+                            <c:if test="${hd.tinhTrang==0}">
                                 <p>Chờ xử lý</p>
                             </c:if>
-                            <c:if test="${ht.hoaDon.tinhTrang==1}">
+                            <c:if test="${hd.tinhTrang==1}">
                                 <p>Đã xác nhận</p>
                             </c:if>
-                            <c:if test="${ht.hoaDon.tinhTrang==2}">
+                            <c:if test="${hd.tinhTrang==2}">
                                 <p>Đã Thanh toán</p>
                             </c:if>
-                            <c:if test="${ht.hoaDon.tinhTrang==3}">
+                            <c:if test="${hd.tinhTrang==3}">
                                 <p>Chờ thanh toán</p>
                             </c:if>
-                            <c:if test="${ht.hoaDon.tinhTrang==8}">
+                            <c:if test="${hd.tinhTrang==8}">
                                 <p>Đã hủy</p>
                             </c:if>
                         </td>
-                        <td>
-                            <c:if test="${ht.hoaDon.tinhTrangGiaoHang==0}">
-                                <c:if test="${ht.hoaDon.tinhTrang==0}">
-                                    <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>
-                                </c:if>
-                            </c:if>
-                            <c:if test="${ht.hoaDon.tinhTrang==1}">
+<%--                        <td>--%>
+<%--                            <c:if test="${hd.tinhTrangGiaoHang==0}">--%>
+<%--                                <c:if test="${ht.hoaDon.tinhTrang==0}">--%>
+<%--                                    <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>--%>
+<%--                                </c:if>--%>
+<%--                            </c:if>--%>
 
-                            </c:if>
-                            <c:if test="${ht.hoaDon.tinhTrang==2}">
-
-                            </c:if>
-                            <c:if test="${ht.hoaDon.tinhTrang==3}">
-
-                            </c:if>
-                            <c:if test="${ht.hoaDon.tinhTrang==8}">
-
-                            </c:if>
-                        </td>
+<%--                        </td>--%>
                     </tr>
                     <c:set var="dem" scope="session" value="${dem+1}"/>
                 </c:if>

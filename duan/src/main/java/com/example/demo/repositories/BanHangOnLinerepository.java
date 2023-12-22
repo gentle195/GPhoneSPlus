@@ -70,12 +70,38 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
     List<HoaDonChiTiet> getHoaDonChiTiet(UUID id);
 
     @Transactional
+    @Query(value = "DECLARE @bienb int;\n" +
+            "DECLARE @bienc int;\n" +
+            "DECLARE @biena int;\n" +
+
+            " SET @bienb = (select COUNT(id_chi_tiet_san_pham) from \n" +
+            " imei where tinh_trang=0 and id_chi_tiet_san_pham=:idctsp) ;\n" +
+
+            "SET @bienc = (select sum(a.so_luong) \n" +
+            "from don_dat_hang a group by a.id_chi_tiet_san_pham,a.tinh_trang\n" +
+            "having tinh_trang=0 and id_chi_tiet_san_pham=:idctsp) ;\n" +
+
+            "if @bienc is null\n" +
+            "            begin\n" +
+            "            set @bienc=0;\n" +
+            "            end\n" +
+
+            "SET @biena=@bienb-@bienc;\n" +
+
+            "if @biena <0\n" +
+            "            begin\n" +
+            "            set @biena=0;\n" +
+            "            end\n" +
+
+            "            SELECT CAST(@biena AS int);", nativeQuery = true)
+    Integer soluongcon(UUID idctsp);
+
+    @Transactional
     @Query(value = "DECLARE @bienb int; " +
             "SET @bienb = (select COUNT(id_chi_tiet_san_pham) from " +
             "imei where tinh_trang=0 and id_chi_tiet_san_pham=:idctsp) ;" +
             "SELECT CAST(@bienb AS int);", nativeQuery = true)
-    Integer soluongcon(UUID idctsp);
-
+    Integer tongimeiTT0cua1ctsp(UUID idctsp);
 
     @Transactional
     @Query(value = "DECLARE @bienb int; " +
@@ -337,8 +363,15 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
 
 
     @Query(value = "select a.id_chi_tiet_san_pham as idctsp,sum(a.so_luong) as slctsp" +
-            " from don_dat_hang a group by a.id_chi_tiet_san_pham,a.so_luong,a.tinh_trang" +
+            " from don_dat_hang a group by a.id_chi_tiet_san_pham,a.tinh_trang" +
             " having tinh_trang=0", nativeQuery = true)
     List<DSfullSanPhamDatHangOnline> dsfullDDHcoTT0ladoixacnhan();
+
+
+
+    @Transactional
+    @Modifying
+    @Query(value = "update  DonDatHang dh set  dh.tinhTrang=1 where dh.hoaDon.id=:idhd")
+    void updateTTdonDatHangkhiDASULytheoIDHD(@Param("idhd") UUID idhd);
 
 }

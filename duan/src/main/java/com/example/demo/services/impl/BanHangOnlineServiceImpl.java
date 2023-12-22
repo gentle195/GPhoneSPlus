@@ -294,6 +294,11 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
         return decimalFormat.format(number);
 
     }
+
+    @Override
+    public List<DonDatHang> dsDDHtheoIDHD(UUID idhd) {
+        return banHangOnLinerepository.dsDDHtheoIDHD(idhd);
+    }
 //    @Override
 //    public Boolean ThemSPvaoGHCT(String idkh, String idctsp) {
 //System.out.println("-------"+idkh+"------"+idctsp);

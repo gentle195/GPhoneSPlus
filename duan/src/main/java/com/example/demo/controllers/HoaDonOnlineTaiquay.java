@@ -442,6 +442,7 @@ public class HoaDonOnlineTaiquay {
                }
 
            }
+          banHangOnLinerepository.updateTTdonDatHangkhiDASULytheoIDHD(idhd);
 
      return "redirect:/hoa-don/hien-thi/tbxacnhanHDonline/"+idhd;
 
