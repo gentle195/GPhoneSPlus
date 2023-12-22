@@ -396,7 +396,7 @@ public class HoaDonServiceImpl implements HoaDonService {
             htmlContentBuilder.append("<p>Tổng giá trị đơn hàng: ").append(formattedTongTienDonHang).append("</p>");
             htmlContentBuilder.append("<p>Phí Ship: ").append(hoaDon.getPhiShip()).append("</p>");
             DoiTra dt = doiTraRepository.getDoiTraByHoaDon(hoaDonId);
-            if (dt.getTinhTrang() == 2) {
+            if (dt.getTinhTrang() == 2 && dt != null) {
                 List<DoiTraChiTiet> list = doiTraChiTietRepository.doiTraChiTiet(hoaDonId);
                 if (list.size() != 0) {
                     htmlContentBuilder.append("<h3>").append("Danh sách sản phẩm đổi hàng").append("</h3>");
@@ -595,7 +595,7 @@ public class HoaDonServiceImpl implements HoaDonService {
             htmlContentBuilder.append("<p>Phí Ship: ").append(hoaDon.getPhiShip()).append("</p>");
 
             DoiTra dt = doiTraRepository.getDoiTraByHoaDon(hoaDonId);
-            if (dt.getTinhTrang() == 2) {
+            if (dt.getTinhTrang() == 2 && dt != null) {
                 List<DoiTraChiTiet> list = doiTraChiTietRepository.doiTraChiTiet(hoaDonId);
                 if (list.size() != 0) {
                     htmlContentBuilder.append("<h3>").append("Danh sách sản phẩm đổi hàng").append("</h3>");
