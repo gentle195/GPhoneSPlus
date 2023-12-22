@@ -953,4 +953,32 @@ public class HoaDonController {
         }
         return "redirect:/hoa-don/hien-thi";
     }
+
+
+
+//    ///thắng làm
+@GetMapping("/hien-thi/{hientb}/{idhdneucan}")
+public String hienThi1(Model model,
+                       @ModelAttribute("hoaDon") HoaDon hoaDon,
+                       @PathVariable("hientb") String hientb,
+                       @PathVariable("idhdneucan") String idhdneucan
+                       ) {
+    dem = 0;
+    List<HoaDon> page = hoaDonService.hoaDon();
+    List<NhanVien> listNhanVien = nhanVienService.findAll();
+    List<KhachHang> listKhachHang = khachHangService.findAll00();
+    List<DiaChi> listDiaChi = diaChiService.getALL0();
+    model.addAttribute("listKhachHang", listKhachHang);
+    model.addAttribute("listNhanVien", listNhanVien);
+    model.addAttribute("listDiaChi", listDiaChi);
+    model.addAttribute("dem", dem);
+    model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+    model.addAttribute("listHoaDon", page);
+
+    if(hientb.equals("tbxacnhanHDonline")){
+        model.addAttribute("batthongbaobenhoadon","Xác nhận hóa đơn online thành công "+hoaDonService.findById(UUID.fromString(idhdneucan)).getMa());
+    }
+    return "home/layout";
+}
+//    hết thắng làm
 }

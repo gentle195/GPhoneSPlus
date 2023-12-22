@@ -556,6 +556,24 @@ ghi_chu NVARCHAR(MAX) NULL,
 FOREIGN KEY (id_khach_hang) REFERENCES khach_hang(id),
 FOREIGN KEY (id_chi_tiet_san_pham) REFERENCES chi_tiet_san_pham(id)
 );
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE don_dat_hang (
+  id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
+  id_hoa_don UNIQUEIDENTIFIER NULL,
+  id_chi_tiet_san_pham UNIQUEIDENTIFIER null,
+  so_luong int DEFAULT 0,
+  tinh_trang int DEFAULT 0,
+  don_gia decimal(20, 0) NULL,
+  don_gia_khi_giam decimal(20, 0) NULL,
+  FOREIGN KEY (id_hoa_don) REFERENCES hoa_don(id),
+  FOREIGN KEY (id_chi_tiet_san_pham) REFERENCES chi_tiet_san_pham(id)
+);
 INSERT INTO anh (ma, ten, url_anh1, url_anh2, url_anh3, tinh_trang, mo_ta)
 VALUES 
 ('A001', 'Imagem 1', 'url_da_imagem1', 'url_da_imagem2', 'url_da_imagem3', 0, 'Descrição da imagem 1'),
@@ -570,7 +588,7 @@ VALUES
   ('HD002', 'Apple', '2022-01-02', 0, N'Hãng điện thoại Apple'),
   ('HD003', 'Xiaomi', '2022-01-03', 0, N'Hãng điện thoại Xiaomi'),
   ('HD004', 'OPPO', '2022-01-04',0, N'Hãng điện thoại OPPO'),
-  ('HD005', 'Huawei', '2022-01-05', , N'Hãng điện thoại Huawei');
+  ('HD005', 'Huawei', '2022-01-05',0 , N'Hãng điện thoại Huawei');
 
 
 
@@ -662,5 +680,5 @@ VALUES
   ('MH005', N'Độ phân giải 8K', '2022-05-30', N'Màn hình có độ phân giải 8K.');
 
 
-
+    update nhan_vien set id_chuc_vu=(select chuc_vu.id from chuc_vu where ten='ADMIN')
 
