@@ -799,7 +799,11 @@ public class HoaDonController {
             ) {
                 total = total.add(hd.getDonGia());
                 if (hoaDonnn.getLoai() == 1) {
-                    hoaDonnn.setTongTien(total.add(hoaDonnn.getPhiShip()));
+                    if(hoaDonnn.getPhiShip()==null){
+                        hoaDonnn.setTongTien(total);
+                    }else{
+                        hoaDonnn.setTongTien(total.add(hoaDonnn.getPhiShip()));
+                    }
                 } else {
                     hoaDonnn.setTongTien(total);
                 }
@@ -820,7 +824,11 @@ public class HoaDonController {
             ) {
                 total = total.add(hd.getDonGia());
                 if (hoaDonnn.getLoai() == 1) {
-                    hoaDonnn.setTongTien(total.add(hoaDonnn.getPhiShip()));
+                    if(hoaDonnn.getPhiShip()==null){
+                        hoaDonnn.setTongTien(total);
+                    }else{
+                        hoaDonnn.setTongTien(total.add(hoaDonnn.getPhiShip()));
+                    }
                 } else {
                     hoaDonnn.setTongTien(total);
                 }
