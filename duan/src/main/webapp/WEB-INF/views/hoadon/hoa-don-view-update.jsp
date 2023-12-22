@@ -636,7 +636,7 @@
                             <td>` + imei.chiTietSanPham.giaBan + `</td>
                             <td>` + productPrice + `</td>
                             <td>` + imei.soImei + `</td>
-                            <td><a class="btn btn-warning btn-icon-text" href="/ban-hang/them-imei/` + imei.id + `">Thêm IMEI</a></td>
+                            <td><a class="btn btn-warning btn-icon-text" href="/hoa-don/them-imei/` + imei.id + `">Thêm IMEI</a></td>
                         </tr>
                         <br>
                         `;
