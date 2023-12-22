@@ -281,6 +281,9 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     public String convertgiatien(BigDecimal giatien) {
+        if(giatien==null){
+            return "Chưa có";
+        }
         // Input number
         long number = Long.valueOf(String.valueOf(giatien));
 

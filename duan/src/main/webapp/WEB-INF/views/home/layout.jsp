@@ -133,9 +133,9 @@
                 <li><a href="/hoa-don/hien-thi" aria-expanded="false"><i
                         class="icon icon-chart-bar-33"></i>Hoá đơn</a>
                 </li>
-<%--                <li><a href="/don-hang/hien-thi" aria-expanded="false"><i--%>
-<%--                        class="icon icon-chart-bar-33"></i>Đơn hàng online</a>--%>
-<%--                </li>--%>
+                <li><a href="/hoa-don-online/hien-thi" aria-expanded="false"><i
+                        class="icon icon-chart-bar-33"></i>Đơn hàng online</a>
+                </li>
                 <li><a href="/doi-tra/hien-thi" aria-expanded="false">
                     <i class="ti-control-shuffle pa"></i>
                     Đổi hàng</a>

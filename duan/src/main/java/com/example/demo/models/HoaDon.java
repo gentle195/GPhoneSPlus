@@ -117,4 +117,15 @@ public class HoaDon {
         // Format the number
         return decimalFormat.format(number);
     }
+
+    public String convertdungdinhdang(BigDecimal tiencan) {
+        // Input number
+        long number = Long.valueOf(String.valueOf(tiencan));
+
+        // Create a DecimalFormat instance with the desired pattern
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+        // Format the number
+        return decimalFormat.format(number);
+    }
 }

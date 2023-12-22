@@ -4,6 +4,7 @@ import com.example.demo.config.Config;
 import com.example.demo.config.UserInfoUserDetails;
 import com.example.demo.models.*;
 import com.example.demo.repositories.BanHangOnLinerepository;
+import com.example.demo.repositories.DonDatHangRepository;
 import com.example.demo.repositories.KhachHangRepository;
 import com.example.demo.services.*;
 import com.example.demo.util.SecurityUtil;
@@ -97,6 +98,8 @@ public class BanHangOnlineController {
 
     @Autowired
     DoiTraService doiTraService;
+    @Autowired
+    DonDatHangRepository donDatHangRepository;
 
 
     // Bắt đầu bán hàng
@@ -480,6 +483,7 @@ public class BanHangOnlineController {
         model.addAttribute("tttong", 1);
 
 //danh sách sản phẩm dưới
+//danh sách sản phẩm dưới
 
         double tong = 0;
         Integer lamchon = 0;
@@ -744,6 +748,7 @@ public class BanHangOnlineController {
 
         if (diaChiService.findById(iddc).getThanhPho().contains("Hà Nội")) {
             if (tienmaORvnp == 1) {
+                //tien mat
                 //        them hd
                 long millis = System.currentTimeMillis();
                 Date date = new Date(millis);
@@ -756,6 +761,7 @@ public class BanHangOnlineController {
                     mhd = "MHD" + sl;
                 }
                 hd.setMa(mhd);
+//        hd.setSdt(gioHangService.findById(idgh).getKhachHang().getSdt());
                 hd.setSdt(sdt);
                 hd.setNguoiNhan(nguoinhan);
                 hd.setTongTien(tongtien);
@@ -771,49 +777,55 @@ public class BanHangOnlineController {
                 hd.setDiaChi(dc);
                 hoaDonService.add(hd);
 //    them hdct
+//            List<GioHangChiTiet> listghct = banHangOnlineService.ListghTheoidghvsTT1(idgh);
+//            for (int a = 0; a < listghct.size(); a = a + 1) {
+//                for (int b = 0; b < listghct.get(a).getSoLuong(); b = b + 1) {
+//                    HoaDonChiTiet hdct = new HoaDonChiTiet();
+//                    hdct.setSoLuong(1);
+//                    hdct.setTinhTrang(0);
+//                    hdct.setDonGia(listghct.get(a).getDonGiaKhiGiam());
+//                    HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
+//                    hdct.setHoaDon(hd1);
+//                    List<IMEI> listimei = banHangOnlineService.timimeitheoidctspVSttO(listghct.get(a).getChiTietSanPham().getId());
+//                    hdct.setImei(listimei.get(0));
+//                    hoaDonChiTietService.add(hdct);
+//// cập nhật trạng thái imei
+//                    IMEI imei = listimei.get(0);
+//                    imei.setTinhTrang(3);
+//                    imei.setNgayCapNhat(date);
+//                    imeiService.add(imei);
+//// cập nhật lại số lượng ctsp của imei đó
+//                    ChiTietSanPham motctsp=imei.getChiTietSanPham();
+//                    motctsp.setSoLuong(motctsp.getSoLuong()-1);
+//                    chiTietSanPhamService.add(motctsp);
+//                }
+//            }
+//  sao chép sản phẩm trong giỏ hàng chi tiết khi đặt hàng tt=0
                 List<GioHangChiTiet> listghct = banHangOnlineService.ListghTheoidghvsTT1(idgh);
-                for (int a = 0; a < listghct.size(); a = a + 1) {
-                    for (int b = 0; b < listghct.get(a).getSoLuong(); b = b + 1) {
-                        HoaDonChiTiet hdct = new HoaDonChiTiet();
-                        hdct.setSoLuong(1);
-                        hdct.setTinhTrang(0);
-                        hdct.setDonGia(listghct.get(a).getDonGiaKhiGiam());
-                        HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
-                        hdct.setHoaDon(hd1);
-                        List<IMEI> listimei = banHangOnlineService.timimeitheoidctspVSttO(listghct.get(a).getChiTietSanPham().getId());
-                        hdct.setImei(listimei.get(0));
-                        hoaDonChiTietService.add(hdct);
-// cập nhật trạng thái imei
-                        IMEI imei = listimei.get(0);
-                        imei.setTinhTrang(3);
-                        imei.setNgayCapNhat(date);
-                        imeiService.add(imei);
-// cập nhật lại số lượng ctsp của imei đó
-                        ChiTietSanPham motctsp = imei.getChiTietSanPham();
-                        motctsp.setSoLuong(motctsp.getSoLuong() - 1);
-                        chiTietSanPhamService.add(motctsp);
-                    }
+                for (GioHangChiTiet ghct1 : listghct) {
+                    DonDatHang ddh = new DonDatHang();
+                    ddh.setHoaDon(banHangOnlineService.timhdtheomahd(mhd));
+                    ddh.setChiTietSanPham(ghct1.getChiTietSanPham());
+                    ddh.setTinhTrang(ghct1.getTinhTrang());
+                    ddh.setSoLuong(ghct1.getSoLuong());
+                    ddh.setDonGia(ghct1.getDonGia());
+                    ddh.setDonGiaKhiGiam(ghct1.getDonGiaKhiGiam());
+                    donDatHangRepository.save(ddh);
                 }
 //xoa ghct TT=0 theo idgh
                 banHangOnlineService.xoaghcttheoIDGHvsTTO(idgh);
+
 //cập nhật hóa đơn; thanh toán khi nhận hàng
                 HoaDon hd1 = banHangOnlineService.timhdtheomahd(mhd);
-                hd1.setTinhTrang(3);
-                hd1.setHinhThucThanhToan(0);
+                hd1.setTinhTrang(3);//chowf thanh toan
+                hd1.setHinhThucThanhToan(0);//thanh toans khi nhan hang
                 hoaDonService.add(hd1);
-                model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(gioHangService.findById(idgh).getKhachHang().getId())).get(0).getId()));
-                model.addAttribute("tttong", 1);
-                model.addAttribute("banhangonline", banHangOnlineService);
-                if (idkhachhang.equals("1")) {
-                    model.addAttribute("idkhachhang", idkhachhang);
-                } else {
-                    model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
-                    model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
-                }
-                return "ban-hang-online/dat_hang_thanh_cong";
+
 
             } else {
 //  thanh toán online
+
+//            return "redirect:/pay/"+idgh+"/"+tongtien+"/"+iddc+"/"+sdt;
 
                 idgh1 = idgh;
                 tienthanhtoan1 = Long.valueOf(String.valueOf(tongtien));
@@ -891,7 +903,19 @@ public class BanHangOnlineController {
 
 
             }
-        } else {
+
+//
+            model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(String.valueOf(gioHangService.findById(idgh).getKhachHang().getId())).get(0).getId()));
+            model.addAttribute("tttong", 1);
+            model.addAttribute("banhangonline", banHangOnlineService);
+            if (idkhachhang.equals("1")) {
+                model.addAttribute("idkhachhang", idkhachhang);
+            } else {
+                model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+                model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+            }
+            return "ban-hang-online/dat_hang_thanh_cong";
+        }else {
             model.addAttribute("listghctTT", banHangOnlineService.ListghctTheoidgh(idgh));
             model.addAttribute("listghct", banHangOnlineService.ListghTheoidghvsTT1(idgh));
             model.addAttribute("banhangonline", banHangOnlineService);
@@ -903,7 +927,6 @@ public class BanHangOnlineController {
             }
             model.addAttribute("thongbaodiachiHN", "Cửa hàng chưa có thể giao hàng ngoài Hà Nội, mong quý khách hàng thông cảm vì sự bất tiện này!");
             return "ban-hang-online/trang-san-pham-duoc-chon-thanh-toan";
-
         }
 
     }
