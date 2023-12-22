@@ -401,7 +401,7 @@ public class HoaDonServiceImpl implements HoaDonService {
                 if (list.size() != 0) {
                     htmlContentBuilder.append("<h3>").append("Danh sách sản phẩm đổi hàng").append("</h3>");
                     htmlContentBuilder.append("<table>");
-                    htmlContentBuilder.append("<tr><th>Sản phẩm cần đổi</th><th>Đơn giá cần đổi</th><th>Sản phẩm đổi mới</th><th>Đơn giá mới</th><th>Lý do đổi trả</th></tr>");
+                    htmlContentBuilder.append("<tr><th>Sản phẩm cần đổi</th><th>Sản phẩm đổi mới</th><th>Lý do đổi trả</th></tr>");
                     for (DoiTraChiTiet doiTraChiTiet : list) {
                         NumberFormat fomatTien = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
                         String fomatTienSanPham = fomatTien.format(doiTraChiTiet.getDonGia());
@@ -413,14 +413,12 @@ public class HoaDonServiceImpl implements HoaDonService {
                                 .append(doiTraChiTiet.getHoaDonChiTiet().getImei().getChiTietSanPham().getRam().getDungLuong()).append("/").append("<br>")
                                 .append(doiTraChiTiet.getHoaDonChiTiet().getImei().getChiTietSanPham().getRom().getDungLuong()).append("/").append("<br>")
                                 .append(doiTraChiTiet.getHoaDonChiTiet().getImei().getSoImei()).append(")").append("</td>");
-                        htmlContentBuilder.append("<td>").append(fomatTienSanPhamCu).append("</td>");
                         htmlContentBuilder.append("<td>").append(doiTraChiTiet.getImei().getChiTietSanPham().getSanPham().getTen())
                                 .append(" (").append(doiTraChiTiet.getImei().getChiTietSanPham().getChip().getTen()).append("/").append("<br>")
                                 .append(doiTraChiTiet.getImei().getChiTietSanPham().getMauSac().getTen()).append("/").append("<br>")
                                 .append(doiTraChiTiet.getImei().getChiTietSanPham().getRam().getDungLuong()).append("/").append("<br>")
                                 .append(doiTraChiTiet.getImei().getChiTietSanPham().getRom().getDungLuong()).append("/").append("<br>")
                                 .append(doiTraChiTiet.getImei().getSoImei()).append(")").append("</td>");
-                        htmlContentBuilder.append("<td>").append(fomatTienSanPham).append("</td>");
                         htmlContentBuilder.append("<td>").append(doiTraChiTiet.getLyDo()).append("</td>");
                         htmlContentBuilder.append("</tr>");
                     }
@@ -602,7 +600,7 @@ public class HoaDonServiceImpl implements HoaDonService {
                 if (list.size() != 0) {
                     htmlContentBuilder.append("<h3>").append("Danh sách sản phẩm đổi hàng").append("</h3>");
                     htmlContentBuilder.append("<table>");
-                    htmlContentBuilder.append("<tr><th>Sản phẩm cần đổi</th><th>Đơn giá cần đổi</th><th>Sản phẩm đổi mới</th><th>Đơn giá mới</th><th>Lý do đổi trả</th></tr>");
+                    htmlContentBuilder.append("<tr><th>Sản phẩm cần đổi</th><th>Sản phẩm đổi mới</th><th>Lý do đổi trả</th></tr>");
                     for (DoiTraChiTiet doiTraChiTiet : list) {
                         NumberFormat fomatTien = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
                         String fomatTienSanPham = fomatTien.format(doiTraChiTiet.getDonGia());
@@ -614,14 +612,12 @@ public class HoaDonServiceImpl implements HoaDonService {
                                 .append(doiTraChiTiet.getHoaDonChiTiet().getImei().getChiTietSanPham().getRam().getDungLuong()).append("/").append("<br>")
                                 .append(doiTraChiTiet.getHoaDonChiTiet().getImei().getChiTietSanPham().getRom().getDungLuong()).append("/").append("<br>")
                                 .append(doiTraChiTiet.getHoaDonChiTiet().getImei().getSoImei()).append(")").append("</td>");
-                        htmlContentBuilder.append("<td>").append(fomatTienSanPhamCu).append("</td>");
                         htmlContentBuilder.append("<td>").append(doiTraChiTiet.getImei().getChiTietSanPham().getSanPham().getTen())
                                 .append(" (").append(doiTraChiTiet.getImei().getChiTietSanPham().getChip().getTen()).append("/").append("<br>")
                                 .append(doiTraChiTiet.getImei().getChiTietSanPham().getMauSac().getTen()).append("/").append("<br>")
                                 .append(doiTraChiTiet.getImei().getChiTietSanPham().getRam().getDungLuong()).append("/").append("<br>")
                                 .append(doiTraChiTiet.getImei().getChiTietSanPham().getRom().getDungLuong()).append("/").append("<br>")
                                 .append(doiTraChiTiet.getImei().getSoImei()).append(")").append("</td>");
-                        htmlContentBuilder.append("<td>").append(fomatTienSanPham).append("</td>");
                         htmlContentBuilder.append("<td>").append(doiTraChiTiet.getLyDo()).append("</td>");
                         htmlContentBuilder.append("</tr>");
                     }
