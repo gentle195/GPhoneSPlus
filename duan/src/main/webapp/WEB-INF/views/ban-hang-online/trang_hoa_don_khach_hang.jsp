@@ -591,22 +591,32 @@
 
                         <td>
                             <c:if test="${ht.tinhTrang==0}">
-                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi tiết
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}"
+                                   onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+                                >Chi tiết
                                 </a><br>
                                 <a class="btn btn-danger"
-                                   href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy hoá đơn</a>
+                                   href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy"
+                                   onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+                                >Hủy hoá đơn</a>
 
                             </c:if>
                             <c:if test="${ht.tinhTrang==1}">
-                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}"
+                                   onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+                                >Chi
                                     tiết
                                 </a><br>
                                 <a class="btn btn-danger"
-                                   href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy hoá đơn</a>
+                                   href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy"
+                                   onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+                                >Hủy hoá đơn</a>
 
                             </c:if>
                             <c:if test="${ht.tinhTrang==2}">
-                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}"
+                                   onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+                                >Chi
                                     tiết
                                 </a><br>
                             </c:if>
@@ -614,19 +624,27 @@
 
                                 <c:if test="${ht.tinhTrangGiaoHang==0 || ht.tinhTrangGiaoHang==1 }">
 
-                                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
+                                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}"
+                                       onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+                                    >Chi
                                         tiết </a><br>
                                     <a class="btn btn-danger"
-                                       href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy">Hủy hoá đơn</a>
+                                       href="/ban-hang-online/xem-hoa-don-chi-tiet/huy-hoa-don/${ht.id}/${mau}/huy"
+                                       onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+                                    >Hủy hoá đơn</a>
 
                                 </c:if>
                                 <c:if test="${ht.tinhTrangGiaoHang!=0 && ht.tinhTrangGiaoHang!=1 }">
-                                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
+                                    <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}"
+                                       onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+                                    >Chi
                                         tiết </a><br>
                                 </c:if>
                             </c:if>
                             <c:if test="${ht.tinhTrang==8}">
-                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}">Chi
+                                <a class="btn btn-info" href="/ban-hang-online/xem-hoa-don-chi-tiet/${ht.id}"
+                                   onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+                                >Chi
                                     tiết
                                 </a><br>
                             </c:if>
@@ -637,7 +655,9 @@
                                 </button><br>
                             </c:if>
                             <c:if test="${ checkHDlist0.contains(ht.ma) }">
-                                <a class="btn btn-primary" style="background-color: #ff0000" href="/ban-hang-online/huy/${ht.id}" type="button">Hủy đổi hàng</a><br>
+                                <a class="btn btn-primary" style="background-color: #ff0000" href="/ban-hang-online/huy/${ht.id}" type="button"
+                                   onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+                                >Hủy đổi hàng</a><br>
                             </c:if>
                         </td>
                     </tr>
@@ -1183,5 +1203,187 @@
     document.getElementById("thongbaohuyhoadon").click();
     </c:if>
 
+</script>
+
+<script>
+    function loadScripts(callback) {
+        const scriptsToLoad = [
+            'https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js',
+            'https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js',
+            'https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js',
+        ];
+
+        const head = document.head || document.getElementsByTagName('head')[0];
+
+        function loadScript(index) {
+            if (index < scriptsToLoad.length) {
+                const script = document.createElement('script');
+                script.src = scriptsToLoad[index];
+                script.onload = function () {
+                    loadScript(index + 1);
+                };
+                head.appendChild(script);
+            } else {
+                // Gọi callback khi tất cả script đã được tải
+                if (typeof callback === 'function') {
+                    callback();
+                }
+            }
+        }
+
+        loadScript(0);
+    }
+
+    loadScripts(function () {
+
+        function showChonSanPhamModal(button) {
+            var hoadonId = button.getAttribute("data-id");
+            console.log("id hoas ddon " + hoadonId);
+
+            $.ajax({
+                type: "GET",
+                url: "/detail-test/" + hoadonId,
+                success: function (data) {
+                    $("#myModal").modal("show");
+                    console.log(data);
+                    updateModalContent(data, hoadonId);
+                },
+                error: function (error) {
+                    console.log("Lỗi:", error);
+                }
+            });
+        }
+
+        function updateModalContent(data, hoadonId) {
+            // Log để kiểm tra giá trị hoadonId và sự kiện được kích hoạt
+            console.log("HoadonId trong updateModalContent:", hoadonId);
+
+            // Xóa dữ liệu cũ trong bảng
+            $("#modalTableBody").empty();
+
+            // Thêm dữ liệu mới từ AJAX vào bảng
+            data.forEach(function (item, index) {
+                var row = "<tr>" +
+                    "<td><input type='checkbox' class='select-checkbox' data-index='" + index + "' data-id='" + item.id + "'></td>" +
+                    "<td>" + item.imei.chiTietSanPham.sanPham.ten + "</td>" +
+                    "<td>" + item.imei.chiTietSanPham.giaBan + "</td>" +
+                    "<td>" + item.imei.chiTietSanPham.sanPham.hangSanPham.ten + "</td>" +
+                    "<td>" + item.imei.chiTietSanPham.giaBan + "</td>" +
+                    "<td>" +
+
+                    "Đổi hàng" +
+
+
+
+                    "</td>" +
+                    "<td class='ghi-chu-td' >" +
+                    "<input type='text' class='form-control ghiChuInput' placeholder='Ghi chú'>" +
+                    "</td>" +
+                    "</tr>";
+                $("#modalTableBody").append(row);
+            });
+            $("#confirmButton").click(function () {
+                var selectedItems = [];
+                var isValid = true; // Flag to track if all inputs are valid
+
+                // Lặp qua các hàng được chọn để lấy thông tin
+                $(".select-checkbox:checked").each(function () {
+                    var itemId = $(this).data("id");
+                    var ghiChuInput = $(this).closest("tr").find(".ghiChuInput");
+                    var ghiChu = ghiChuInput.val();
+
+                    // Kiểm tra nếu input rỗng
+                    if (!ghiChu.trim()) {
+                        isValid = false;
+                        // Hiển thị thông báo lỗi
+                        alert("Vui lòng nhập giá trị cho tất cả các ô Ghi chú.");
+                        // Dừng vòng lặp
+                        return false;
+                    }
+
+                    selectedItems.push({
+                        hdctId: itemId,
+                        ghiChu: ghiChu
+                    });
+                });
+
+                // Nếu có ít nhất một input không hợp lệ, không thực hiện Ajax request
+                if (!isValid) {
+                    return;
+                }
+
+                // Gửi danh sách thông tin đến controller
+                $.ajax({
+                    type: "GET",
+                    url: "/xac-nhan-khachhang",
+                    data: {
+                        hdctIds: selectedItems.map(item => item.hdctId),
+                        hoadonId: hoadonId,
+                        ghiChuList: selectedItems.map(item => item.ghiChu)
+                    },
+                    success: function (response) {
+                        // Xử lý kết quả từ controller nếu cần
+                        location.reload();
+                    },
+                    error: function (error) {
+                        console.error("Error:", error);
+                    }
+                });
+            });
+
+
+
+            // Xử lý sự kiện khi người dùng chọn ô "Chọn tất cả"
+            $("#selectAllCheckbox").change(function () {
+                var isChecked = $(this).prop("checked");
+                $(".select-checkbox").prop("checked", isChecked).trigger("change");
+            });
+
+            // Xử lý sự kiện khi người dùng chọn ô checkbox trong hàng cụ thể
+            $(".select-checkbox").change(function () {
+                var selectedItems = [];
+
+                $(".select-checkbox:checked").each(function () {
+                    var itemId = $(this).data("id");
+                    selectedItems.push(itemId);
+                });
+
+                console.log("Selected Items:", selectedItems);
+
+                // Gửi danh sách itemId đến controller
+                $.ajax({
+                    type: "GET",
+                    url: "/doi-tra-khachhang",
+                    traditional: true,
+                    data: {
+                        hdctIds: selectedItems,
+                        hoadonId: hoadonId
+                    },
+                    success: function (response) {
+                        // Xử lý kết quả từ controller nếu cần
+                    },
+                    error: function (error) {
+                        console.error("Error:", error);
+                    }
+                });
+            });
+
+            // Xử lý sự kiện khi người dùng chọn giá trị trong combobox
+            $(".hinhThucSelect").change(function () {
+                var index = $(this).closest("tr").index();
+                var chonSanPhamBtn = $(".chonSanPhamBtn").eq(index);
+
+                // Ẩn/hiện button Chọn sản phẩm dựa trên giá trị của combobox
+                if ($(this).val() === 'doiSanPham') {
+                    chonSanPhamBtn.show();
+                } else {
+                    chonSanPhamBtn.hide();
+                }
+            });
+        }
+
+// Gọi hàm showChonSanPhamModal khi các script đã được tải
+        window.showChonSanPhamModal = showChonSanPhamModal;
+    });
 </script>
 </html>
