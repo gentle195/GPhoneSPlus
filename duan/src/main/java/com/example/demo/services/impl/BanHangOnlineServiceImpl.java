@@ -281,6 +281,9 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     public String convertgiatien(BigDecimal giatien) {
+        if(giatien==null){
+            return "Chưa có";
+        }
         // Input number
         long number = Long.valueOf(String.valueOf(giatien));
 
@@ -290,6 +293,11 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
         // Format the number
         return decimalFormat.format(number);
 
+    }
+
+    @Override
+    public List<DonDatHang> dsDDHtheoIDHD(UUID idhd) {
+        return banHangOnLinerepository.dsDDHtheoIDHD(idhd);
     }
 //    @Override
 //    public Boolean ThemSPvaoGHCT(String idkh, String idctsp) {
