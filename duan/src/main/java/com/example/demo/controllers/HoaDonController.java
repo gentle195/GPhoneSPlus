@@ -1,14 +1,8 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.ChiTietSanPham;
-import com.example.demo.models.DiaChi;
-import com.example.demo.models.DoiTraChiTiet;
-import com.example.demo.models.HoaDon;
-import com.example.demo.models.HoaDonChiTiet;
-import com.example.demo.models.IMEI;
-import com.example.demo.models.KhachHang;
-import com.example.demo.models.NhanVien;
-import com.example.demo.models.QuyDoi;
+import com.example.demo.models.*;
+import com.example.demo.repositories.BanHangOnLinerepository;
+import com.example.demo.repositories.DonDatHangRepository;
 import com.example.demo.services.BanHangOnlineService;
 import com.example.demo.services.CameraService;
 import com.example.demo.services.ChiTietSanPhamService;
@@ -111,6 +105,10 @@ public class HoaDonController {
     private CameraService cameraService;
     @Autowired
     private DoiTraChiTietService doiTraChiTietService;
+@Autowired
+private BanHangOnLinerepository banHangOnLinerepository;
+    @Autowired
+    private DonDatHangRepository donDatHangRepository ;
 
     private int dem = 0;
     private UUID idHoaDon = null;
@@ -687,7 +685,10 @@ public class HoaDonController {
     @GetMapping("/delete-hoa-don-chi-tiet/{id}")
     public String deleteHDCT(Model model, @PathVariable("id") UUID id,
                              @ModelAttribute("hoaDon") HoaDon hoaDon) {
-
+//Thắng thêm
+        UUID idctsp =hoaDonChiTietService.findById(id).getImei().getChiTietSanPham().getId();
+       HoaDon  HoaDonlienquan=hoaDonChiTietService.findById(id).getHoaDon();
+        /*thắng hết*/
         HoaDonChiTiet hd = hoaDonChiTietService.findById(id);
         ChiTietSanPham ct = chiTietSanPhamService.getChiTiet(hd.getImei().getId());
         ct.setSoLuong(ct.getSoLuong() + 1);
@@ -700,6 +701,21 @@ public class HoaDonController {
         chiTietSanPhamService.update1(ct);
         imeiService.updatImei1(date, id);
         hoaDonChiTietService.delete(id);
+        //Thắng thêm
+
+
+        for (DonDatHang ddh:banHangOnLinerepository.dsDDHtheoIDHD(HoaDonlienquan.getId())) {
+
+                if(banHangOnLinerepository.listIMEItheoIDHDvsIDCTSP(HoaDonlienquan.getId(),ddh.getChiTietSanPham().getId()).size()>0) {
+                    ddh.setSoLuong(banHangOnLinerepository.listIMEItheoIDHDvsIDCTSP(HoaDonlienquan.getId(), ddh.getChiTietSanPham().getId()).size());
+                    donDatHangRepository.save(ddh);
+                }else {
+                    donDatHangRepository.deleteById(ddh.getId());
+
+            }
+        }
+
+//Thắng kết thúc
         List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId());
         if (list.isEmpty()) {
             hoaDonnn.setTongTien(BigDecimal.ZERO);
@@ -785,6 +801,28 @@ public class HoaDonController {
         }
         hdct.setSoLuong(1);
         hoaDonChiTietService.add(hdct);
+        //Thắng thêm
+
+        int kiemtracotrongdonchua=0;
+        for (DonDatHang ddh:banHangOnLinerepository.dsDDHtheoIDHD(hoaDonnn.getId())) {
+            if (ddh.getChiTietSanPham().getId()==imeiService.findById(id).getChiTietSanPham().getId()){
+                ddh.setSoLuong(banHangOnLinerepository.listIMEItheoIDHDvsIDCTSP(hoaDonnn.getId(),imeiService.findById(id).getChiTietSanPham().getId()).size());
+                kiemtracotrongdonchua=1;
+                donDatHangRepository.save(ddh);
+            }
+        }
+        if(kiemtracotrongdonchua==0){
+            DonDatHang ddhthem=new DonDatHang();
+            ddhthem.setSoLuong(1);
+            ddhthem.setHoaDon(hoaDonnn);
+            ddhthem.setDonGia(imeiService.findById(id).getChiTietSanPham().getGiaBan());
+           int dongiakhigiamddh=imeiService.findById(id).getChiTietSanPham().getGiaBan().intValue()/100*(100- banHangOnlineService.tonggiamgia(String.valueOf(imeiService.findById(id).getChiTietSanPham().getId())));
+            ddhthem.setDonGiaKhiGiam(BigDecimal.valueOf(Long.valueOf(String.valueOf(dongiakhigiamddh))));
+            ddhthem.setTinhTrang(1);
+            ddhthem.setChiTietSanPham(imeiService.findById(id).getChiTietSanPham());
+       donDatHangRepository.save(ddhthem);
+        }
+//Thắng kết thúc
         ChiTietSanPham ct = chiTietSanPhamService.getChiTiet(id);
         ct.setSoLuong(ct.getSoLuong() - 1);
         long millis = System.currentTimeMillis();
@@ -896,6 +934,8 @@ public class HoaDonController {
                 imeiService.updatImei(Date.valueOf(LocalDate.now()), hdct.getId());
             }
         }
+
+
         return "redirect:/hoa-don/hien-thi";
     }
 
