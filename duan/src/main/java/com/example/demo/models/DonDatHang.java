@@ -58,6 +58,12 @@ public class DonDatHang {
     private ChiTietSanPham chiTietSanPham;
 
 
+
+    public  Integer phantram(){
+        Double giam=100-Double.valueOf(String.valueOf(donGiaKhiGiam))/Double.valueOf(String.valueOf(donGia))*100;
+        Integer phanTramGiam = giam.intValue(); // Chuyển đổi giá trị Double thành Integer
+        return phanTramGiam;
+    }
     public String basoOchammotlamGHDG() {
         // Input number
         long number = Long.valueOf(String.valueOf(donGia));

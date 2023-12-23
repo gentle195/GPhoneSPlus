@@ -585,118 +585,168 @@
         <tbody>
         <c:set var="dem" scope="session" value="${0}"/>
         <c:forEach items="${banhangonline.dsDDHtheoIDHD(hd.id)}" var="ht" varStatus="stt">
-            <c:if test="${stt.index==0}">
-                <tr>
-                    <td>
-                        <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}" width="40" height="40"
-                             style="border-radius:50% 50% 50% 50%">
-                    </td>
-                    <td>
-                            ${ht.chiTietSanPham.sanPham.ten} - ${ht.chiTietSanPham.mauSac.ten}
-                        - ${ht.chiTietSanPham.ram.dungLuong} - ${ht.chiTietSanPham.rom.dungLuong}.
-                    </td>
-                    <td>
-
-                            ${100-ht.donGiaKhiGiam/ht.donGia*100} %
-                    </td>
-
-                    <td>
-                            ${banhangonline.convertgiatien(ht.donGiaKhiGiam)}  VND
-                    </td>
-                    <td>
-                            ${ht.soLuong}
-                    </td>
-                    <td>${banhangonline.convertgiatien(ht.donGiaKhiGiam*ht.soLuong)}
-                        VND
-                    </td>
-                    <td>
-                        <c:if test="${hd.tinhTrang==0}">
-                            <p>Chờ xử lý</p>
-                        </c:if>
-                        <c:if test="${hd.tinhTrang==1}">
-                            <p>Đã xác nhận</p>
-                        </c:if>
-                        <c:if test="${hd.tinhTrang==2}">
-                            <p>Đã Thanh toán</p>
-                        </c:if>
-                        <c:if test="${hd.tinhTrang==3}">
-                            <p>Chờ thanh toán</p>
-                        </c:if>
-                        <c:if test="${hd.tinhTrang==8}">
-                            <p>Đã hủy</p>
-                        </c:if>
-                    </td>
+<%--            <c:if test="${stt.index==0}">--%>
+<%--                <tr>--%>
 <%--                    <td>--%>
-<%--                        <c:if test="${hd.tinhTrangGiaoHang==0}">--%>
-<%--                            <c:if test="${ht.hoaDon.tinhTrang==0}">--%>
-<%--                                <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>--%>
-<%--                            </c:if>--%>
-<%--                        </c:if>--%>
-
+<%--                        <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}" width="40" height="40"--%>
+<%--                             style="border-radius:50% 50% 50% 50%">--%>
 <%--                    </td>--%>
-                </tr>
-                <c:set var="dem" scope="session" value="${dem+1}"/>
-            </c:if>
-            <c:if test="${stt.index>0}">
-                <c:set var="checkck" scope="session" value="${0}"/>
-                <c:forEach items="${listhdct}" var="ht1" varStatus="stt1" begin="0" end="${stt.index-1}">
-                    <c:if test="${ht.imei.chiTietSanPham.id==ht1.imei.chiTietSanPham.id}">
-                        <c:set var="checkck" scope="session" value="${1}"/>
-                    </c:if>
-                </c:forEach>
-                <c:if test="${checkck==0}">
-                    <tr>
-                        <td>
-                            <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}" width="40" height="40"
-                                 style="border-radius:50% 50% 50% 50%">
-                        </td>
-                        <td>
-                                ${ht.chiTietSanPham.sanPham.ten} - ${ht.chiTietSanPham.mauSac.ten}
-                            - ${ht.chiTietSanPham.ram.dungLuong} - ${ht.chiTietSanPham.rom.dungLuong}.
-                        </td>
-                        <td>
+<%--                    <td>--%>
+<%--                            ${ht.chiTietSanPham.sanPham.ten} - ${ht.chiTietSanPham.mauSac.ten}--%>
+<%--                        - ${ht.chiTietSanPham.ram.dungLuong} - ${ht.chiTietSanPham.rom.dungLuong}.--%>
+<%--                    </td>--%>
+<%--                    <td>--%>
 
-                                ${100-ht.donGiaKhiGiam/ht.donGia*100} %
-                        </td>
+<%--                            ${100-ht.donGiaKhiGiam/ht.donGia*100} %--%>
+<%--                    </td>--%>
 
-                        <td>
-                                ${banhangonline.convertgiatien(ht.donGiaKhiGiam)}  VND
-                        </td>
-                        <td>
-                                ${ht.soLuong}
-                        </td>
-                        <td>${banhangonline.convertgiatien(ht.donGiaKhiGiam*ht.soLuong)}
-                            VND
-                        </td>
-                        <td>
-                            <c:if test="${hd.tinhTrang==0}">
-                                <p>Chờ xử lý</p>
-                            </c:if>
-                            <c:if test="${hd.tinhTrang==1}">
-                                <p>Đã xác nhận</p>
-                            </c:if>
-                            <c:if test="${hd.tinhTrang==2}">
-                                <p>Đã Thanh toán</p>
-                            </c:if>
-                            <c:if test="${hd.tinhTrang==3}">
-                                <p>Chờ thanh toán</p>
-                            </c:if>
-                            <c:if test="${hd.tinhTrang==8}">
-                                <p>Đã hủy</p>
-                            </c:if>
-                        </td>
+<%--                    <td>--%>
+<%--                            ${banhangonline.convertgiatien(ht.donGiaKhiGiam)}  VND--%>
+<%--                    </td>--%>
+<%--                    <td>--%>
+<%--                            ${ht.soLuong}--%>
+<%--                    </td>--%>
+<%--                    <td>${banhangonline.convertgiatien(ht.donGiaKhiGiam*ht.soLuong)}--%>
+<%--                        VND--%>
+<%--                    </td>--%>
+<%--                    <td>--%>
+<%--                        <c:if test="${hd.tinhTrang==0}">--%>
+<%--                            <p>Chờ xử lý</p>--%>
+<%--                        </c:if>--%>
+<%--                        <c:if test="${hd.tinhTrang==1}">--%>
+<%--                            <p>Đã xác nhận</p>--%>
+<%--                        </c:if>--%>
+<%--                        <c:if test="${hd.tinhTrang==2}">--%>
+<%--                            <p>Đã Thanh toán</p>--%>
+<%--                        </c:if>--%>
+<%--                        <c:if test="${hd.tinhTrang==3}">--%>
+<%--                            <p>Chờ thanh toán</p>--%>
+<%--                        </c:if>--%>
+<%--                        <c:if test="${hd.tinhTrang==8}">--%>
+<%--                            <p>Đã hủy</p>--%>
+<%--                        </c:if>--%>
+<%--                    </td>--%>
+<%--&lt;%&ndash;                    <td>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <c:if test="${hd.tinhTrangGiaoHang==0}">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <c:if test="${ht.hoaDon.tinhTrang==0}">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </c:if>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        </c:if>&ndash;%&gt;--%>
+
+<%--&lt;%&ndash;                    </td>&ndash;%&gt;--%>
+<%--                </tr>--%>
+<%--                <c:set var="dem" scope="session" value="${dem+1}"/>--%>
+<%--            </c:if>--%>
+<%--            <c:if test="${stt.index>0}">--%>
+<%--                <c:set var="checkck" scope="session" value="${0}"/>--%>
+<%--                <c:forEach items="${listhdct}" var="ht1" varStatus="stt1" begin="0" end="${stt.index-1}">--%>
+<%--                    <c:if test="${ht.imei.chiTietSanPham.id==ht1.imei.chiTietSanPham.id}">--%>
+<%--                        <c:set var="checkck" scope="session" value="${1}"/>--%>
+<%--                    </c:if>--%>
+<%--                </c:forEach>--%>
+<%--                <c:if test="${checkck==0}">--%>
+<%--                    <tr>--%>
 <%--                        <td>--%>
-<%--                            <c:if test="${hd.tinhTrangGiaoHang==0}">--%>
-<%--                                <c:if test="${ht.hoaDon.tinhTrang==0}">--%>
-<%--                                    <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>--%>
-<%--                                </c:if>--%>
-<%--                            </c:if>--%>
-
+<%--                            <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}" width="40" height="40"--%>
+<%--                                 style="border-radius:50% 50% 50% 50%">--%>
 <%--                        </td>--%>
-                    </tr>
-                    <c:set var="dem" scope="session" value="${dem+1}"/>
-                </c:if>
-            </c:if>
+<%--                        <td>--%>
+<%--                                ${ht.chiTietSanPham.sanPham.ten} - ${ht.chiTietSanPham.mauSac.ten}--%>
+<%--                            - ${ht.chiTietSanPham.ram.dungLuong} - ${ht.chiTietSanPham.rom.dungLuong}.--%>
+<%--                        </td>--%>
+<%--                        <td>--%>
+
+<%--                                ${100-ht.donGiaKhiGiam/ht.donGia*100} %--%>
+<%--                        </td>--%>
+
+<%--                        <td>--%>
+<%--                                ${banhangonline.convertgiatien(ht.donGiaKhiGiam)}  VND--%>
+<%--                        </td>--%>
+<%--                        <td>--%>
+<%--                                ${ht.soLuong}--%>
+<%--                        </td>--%>
+<%--                        <td>${banhangonline.convertgiatien(ht.donGiaKhiGiam*ht.soLuong)}--%>
+<%--                            VND--%>
+<%--                        </td>--%>
+<%--                        <td>--%>
+<%--                            <c:if test="${hd.tinhTrang==0}">--%>
+<%--                                <p>Chờ xử lý</p>--%>
+<%--                            </c:if>--%>
+<%--                            <c:if test="${hd.tinhTrang==1}">--%>
+<%--                                <p>Đã xác nhận</p>--%>
+<%--                            </c:if>--%>
+<%--                            <c:if test="${hd.tinhTrang==2}">--%>
+<%--                                <p>Đã Thanh toán</p>--%>
+<%--                            </c:if>--%>
+<%--                            <c:if test="${hd.tinhTrang==3}">--%>
+<%--                                <p>Chờ thanh toán</p>--%>
+<%--                            </c:if>--%>
+<%--                            <c:if test="${hd.tinhTrang==8}">--%>
+<%--                                <p>Đã hủy</p>--%>
+<%--                            </c:if>--%>
+<%--                        </td>--%>
+<%--&lt;%&ndash;                        <td>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <c:if test="${hd.tinhTrangGiaoHang==0}">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <c:if test="${ht.hoaDon.tinhTrang==0}">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </c:if>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </c:if>&ndash;%&gt;--%>
+
+<%--&lt;%&ndash;                        </td>&ndash;%&gt;--%>
+<%--                    </tr>--%>
+<%--                    <c:set var="dem" scope="session" value="${dem+1}"/>--%>
+<%--                </c:if>--%>
+<%--            </c:if>--%>
+
+            <tr>
+                <td>
+                    <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}" width="40" height="40"
+                         style="border-radius:50% 50% 50% 50%">
+                </td>
+                <td>
+                        ${ht.chiTietSanPham.sanPham.ten} - ${ht.chiTietSanPham.mauSac.ten}
+                    - ${ht.chiTietSanPham.ram.dungLuong} - ${ht.chiTietSanPham.rom.dungLuong}.
+                </td>
+                <td>
+
+                        ${ht.phantram()} %
+                </td>
+
+                <td>
+                        ${banhangonline.convertgiatien(ht.donGiaKhiGiam)}  VND
+                </td>
+                <td>
+                        ${ht.soLuong}
+                </td>
+                <td>${banhangonline.convertgiatien(ht.donGiaKhiGiam*ht.soLuong)}
+                    VND
+                </td>
+                <td>
+                    <c:if test="${hd.tinhTrang==0}">
+                        <p>Chờ xử lý</p>
+                    </c:if>
+                    <c:if test="${hd.tinhTrang==1}">
+                        <p>Đã xác nhận</p>
+                    </c:if>
+                    <c:if test="${hd.tinhTrang==2}">
+                        <p>Đã Thanh toán</p>
+                    </c:if>
+                    <c:if test="${hd.tinhTrang==3}">
+                        <p>Chờ thanh toán</p>
+                    </c:if>
+                    <c:if test="${hd.tinhTrang==8}">
+                        <p>Đã hủy</p>
+                    </c:if>
+                </td>
+                    <%--                    <td>--%>
+                    <%--                        <c:if test="${hd.tinhTrangGiaoHang==0}">--%>
+                    <%--                            <c:if test="${ht.hoaDon.tinhTrang==0}">--%>
+                    <%--                                <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>--%>
+                    <%--                            </c:if>--%>
+                    <%--                        </c:if>--%>
+
+                    <%--                    </td>--%>
+            </tr>
         </c:forEach>
         </tbody>
     </table>

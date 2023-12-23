@@ -682,3 +682,53 @@ VALUES
 
     update nhan_vien set id_chuc_vu=(select chuc_vu.id from chuc_vu where ten='ADMIN')
 
+
+	update imei set tinh_trang=0
+	delete from doi_tra_chi_tiet
+	delete from hoa_don_chi_tiet
+	select * from don_dat_hang
+	delete from gio_hang_chi_tiet
+
+	delete from khach_hang
+	delete from dia_chi
+
+	select * from don_dat_hang
+
+
+	DECLARE @bienb int;
+	DECLARE @bienc int;
+	DECLARE @biena int;
+	SET @bienb = (select COUNT(id_chi_tiet_san_pham) 
+	          from imei 
+	where tinh_trang=0 and id_chi_tiet_san_pham=:idctsp) ;
+	DECLARE @bienc int;
+	SET @bienc = (select sum(a.so_luong) from don_dat_hang a 
+	group by a.id_chi_tiet_san_pham,a.tinh_trang having tinh_trang=0 and id_chi_tiet_san_pham='9835D340-D07C-4CE5-811E-63BDE0C547E3') ;
+	if @bienc is null
+            begin
+            set @bienc=0;
+            end
+			print @bienc
+			 SELECT CAST(@bienc AS int);
+	SET @biena=@bienb-@bienc;
+
+			 if @biena <0
+            begin
+            set @biena=0;
+            end
+            SELECT CAST(@biena AS int);
+
+
+			select * from don_dat_hang
+
+
+			select sum(a.so_luong) 
+           from don_dat_hang a group by a.id_chi_tiet_san_pham,a.tinh_trang
+             having tinh_trang=0 and id_chi_tiet_san_pham=:idctsp
+
+			 select * from imei
+			 update imei set tinh_trang=0
+
+
+			 select * from imei
+			 211111111111118

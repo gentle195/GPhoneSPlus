@@ -1205,6 +1205,9 @@ public class BanHangOnlineController {
         } else if (thongbao.equals("huydoitra")) {
             model.addAttribute("hientbhuy", 0);
             model.addAttribute("ndtb", "Hủy đổi trả thành công");
+        }else if (thongbao.equals("loadtrang")){
+            model.addAttribute("hientbhuy", 0);
+            model.addAttribute("ndtb", "Trạng thái hóa đơn đã thay đổi, load trang để lấy trạng thái mới nhất");
         }
 
 
@@ -1263,16 +1266,29 @@ public class BanHangOnlineController {
             @PathVariable("thongbao") String thongbao
 
     ) {
-        banHangOnlineService.huyhoadon(idhd);
-        banHangOnLinerepository.updateTTdonDatHangkhiDASULytheoIDHD(idhd);
-        for (HoaDonChiTiet hdct : banHangOnLinerepository.timhoadonchitiettheoidhd(idhd)) {
-            ChiTietSanPham motctsp = hdct.getImei().getChiTietSanPham();
-            motctsp.setSoLuong(motctsp.getSoLuong() + 1);
-            chiTietSanPhamService.add(motctsp);
+        if(hoaDonService.findById(idhd).getTinhTrang()==3){
+          if(hoaDonService.findById(idhd).getTinhTrangGiaoHang()==0 || hoaDonService.findById(idhd).getTinhTrangGiaoHang()==1 ){
+              banHangOnlineService.huyhoadon(idhd);
+              banHangOnLinerepository.updateTTdonDatHangkhiDASULytheoIDHD(idhd);
+              return "redirect:/ban-hang-online/hoa-don-online/" + idkhachhang + "/" + tinhtrang + "/" + thongbao;
+          }else {
+
+              return "redirect:/ban-hang-online/hoa-don-online/" + idkhachhang + "/ full/loadtrang";
+
+
+          }
+        }else {
+            return "redirect:/ban-hang-online/hoa-don-online/" + idkhachhang + "/full/loadtrang";
         }
 
+//        for (HoaDonChiTiet hdct : banHangOnLinerepository.timhoadonchitiettheoidhd(idhd)) {
+//            ChiTietSanPham motctsp = hdct.getImei().getChiTietSanPham();
+//            motctsp.setSoLuong(motctsp.getSoLuong() + 1);
+//            chiTietSanPhamService.add(motctsp);
+//        }
 
-        return "redirect:/ban-hang-online/hoa-don-online/" + idkhachhang + "/" + tinhtrang + "/" + thongbao;
+
+//        return "redirect:/ban-hang-online/hoa-don-online/" + idkhachhang + "/" + tinhtrang + "/" + thongbao;
 
     }
 
