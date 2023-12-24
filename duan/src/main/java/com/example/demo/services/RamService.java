@@ -30,6 +30,7 @@ public interface RamService {
     public List<Ram> search0(String ten);
 
     public List<Ram> search1(String ten);
+    boolean existRam(String dungLuong);
 }
 
 

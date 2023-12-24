@@ -331,6 +331,7 @@ public class ChiTietSanPhamController {
         LocalDate localDate = LocalDate.now();
         chiTietSanPham.setNgayTao(Date.valueOf(localDate));
         chiTietSanPham.setTinhTrang(0);
+        chiTietSanPham.setSoLuong(1);
         chiTietSanPhamService.add(chiTietSanPham);
         List<ChiTietSanPham> chiTietSanPhamPage = chiTietSanPhamService.getAllTTOn();
 
@@ -569,6 +570,7 @@ public class ChiTietSanPhamController {
         chiTietSanPham.setNgayTao(ngay);
         chiTietSanPham.setTinhTrang(0);
         chiTietSanPham.setKhuyenMai(ct.getKhuyenMai());
+        chiTietSanPham.setSoLuong(ct.getSoLuong());
 
         chiTietSanPhamService.update(id, chiTietSanPham);
         List<ChiTietSanPham> chiTietSanPhamPage = chiTietSanPhamService.getAllTTOn();

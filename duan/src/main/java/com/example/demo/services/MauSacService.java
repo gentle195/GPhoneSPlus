@@ -30,5 +30,6 @@ public interface MauSacService {
     public List<MauSac> search0(String ten);
 
     public List<MauSac> search1(String ten);
+    public boolean exitstByTen(String ten);
 }
 

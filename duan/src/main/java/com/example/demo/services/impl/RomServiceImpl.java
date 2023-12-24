@@ -99,4 +99,9 @@ public class RomServiceImpl implements RomService {
     public void update0() {
         romRepository.update0();
     }
+
+    @Override
+    public boolean existRom(String dungLuong) {
+        return romRepository.existsByDungLuong(dungLuong);
+    }
 }

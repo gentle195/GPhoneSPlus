@@ -117,4 +117,9 @@ public class SanPhamServiceImpl implements SanPhamService {
     public boolean trungDuLieu(String ten, HangSanPham hangSanPham, Camera camera,ManHinh manHinh,  Anh anh) {
         return sanPhamRepository.existsByTenAndHangSanPhamAndCameraAndManHinhAndAnh(ten, hangSanPham, camera,manHinh,  anh);
     }
+
+    @Override
+    public boolean existSanPham(String ten) {
+        return sanPhamRepository.existsByTen(ten);
+    }
 }

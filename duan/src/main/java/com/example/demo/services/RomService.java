@@ -29,6 +29,7 @@ public interface RomService {
     public List<Rom> getall1();
 
     public void update0();
+    boolean existRom(String dungLuong);
 }
 
 

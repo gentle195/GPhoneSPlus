@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+import com.example.demo.models.DungLuongPin;
 import com.example.demo.models.Pin;
 import com.example.demo.repositories.PinRepository;
 import com.example.demo.services.PinService;
@@ -84,6 +85,11 @@ public class PinServiceImpl implements PinService {
     @Override
     public List<Pin> search1(String ten) {
         return pinRepository.sreach1(ten);
+    }
+
+    @Override
+    public boolean existPin(String loaiPin, String congNghePin, DungLuongPin dungLuongPin) {
+        return pinRepository.existsByLoaiPinAndCongNghePinAndDungLuongPin(loaiPin, congNghePin, dungLuongPin);
     }
 
     @Override

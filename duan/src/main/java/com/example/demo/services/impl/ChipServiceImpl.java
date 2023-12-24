@@ -89,4 +89,9 @@ public class ChipServiceImpl implements ChipService {
         return chipRepository.sreach1(ten);
     }
 
+    @Override
+    public boolean existChip(String ten, String loaiChip) {
+        return chipRepository.existsByTenAndLoaiChip(ten, loaiChip);
+    }
+
 }

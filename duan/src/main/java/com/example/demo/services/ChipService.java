@@ -29,5 +29,6 @@ public interface ChipService {
     public List<Chip> search0(String ten);
 
     public List<Chip> search1(String ten);
+    boolean existChip(String ten,String loaiChip);
 }
 

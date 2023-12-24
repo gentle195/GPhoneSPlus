@@ -67,5 +67,6 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
     List<SanPham> loc(UUID idHang, UUID idMan, UUID idCamera);
 
     boolean existsByTenAndHangSanPhamAndCameraAndManHinhAndAnh(String ten, HangSanPham hangSanPham, Camera camera, ManHinh manHinh,  Anh anh);
+    boolean existsByTen(String ten);
 
 }

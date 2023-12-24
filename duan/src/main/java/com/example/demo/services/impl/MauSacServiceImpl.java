@@ -88,4 +88,9 @@ public class MauSacServiceImpl implements MauSacService {
     public List<MauSac> search1(String ten) {
         return mauSacRepository.search1(ten);
     }
+
+    @Override
+    public boolean exitstByTen(String ten) {
+        return mauSacRepository.existsByTen(ten);
+    }
 }

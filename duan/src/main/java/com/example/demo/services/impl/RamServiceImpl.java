@@ -89,4 +89,9 @@ public class RamServiceImpl implements RamService {
     public List<Ram> search1(String ten) {
         return ramRepository.search1(ten);
     }
+
+    @Override
+    public boolean existRam(String dungLuong) {
+        return ramRepository.existsByDungLuong(dungLuong);
+    }
 }

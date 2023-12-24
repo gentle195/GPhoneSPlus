@@ -203,10 +203,9 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-11">
-                                            <form:label class="form-label" path="namBaoHanh">Năm bảo hành:</form:label>
-                                            <form:input class="form-control" placeholder="" path="namBaoHanh"
-                                                        type="number"/>
-                                            <form:errors path="namBaoHanh" cssStyle="color: red"/>
+                                            <form:label class="form-label" path="moTa">Mô tả:</form:label>
+                                            <form:textarea class="form-control" placeholder="" path="moTa"/>
+                                            <form:errors path="moTa" cssStyle="color: red"/>
                                         </div>
                                     </div>
                                 </div>
@@ -215,22 +214,14 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-11">
-                                            <form:label class="form-label" path="soLuong">Số lượng tồn:</form:label>
-                                            <form:input class="form-control" placeholder="" path="soLuong"
+                                            <form:label class="form-label" path="namBaoHanh">Năm bảo hành:</form:label>
+                                            <form:input class="form-control" placeholder="" path="namBaoHanh"
                                                         type="number"/>
-                                            <form:errors path="soLuong" cssStyle="color: red"/>
+                                            <form:errors path="namBaoHanh" cssStyle="color: red"/>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-11">
-                                            <form:label class="form-label" path="moTa">Mô tả:</form:label>
-                                            <form:textarea class="form-control" placeholder="" path="moTa"/>
-                                            <form:errors path="moTa" cssStyle="color: red"/>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                         <div style="text-align: center">
