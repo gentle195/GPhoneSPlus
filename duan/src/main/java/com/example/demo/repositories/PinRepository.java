@@ -36,4 +36,5 @@ public interface PinRepository extends JpaRepository<Pin, UUID> {
     @Modifying
     @Query(value = "update Pin set tinh_trang = 0, ngay_cap_nhat=convert(date,getdate(),105)", nativeQuery = true)
     void updateTT();
+    boolean existsByLoaiPinAndCongNghePinAndDungLuongPin(String loaiPin,String congNghePin,DungLuongPin dungLuongPin);
 }

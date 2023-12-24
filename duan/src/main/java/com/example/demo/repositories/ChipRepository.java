@@ -33,5 +33,6 @@ public interface ChipRepository extends JpaRepository<Chip, UUID> {
     @Modifying
     @Query(value = "update Chip set tinh_trang=0, ngay_cap_nhat=convert(date,getdate(),105)", nativeQuery = true)
     void updateTT();
+    boolean existsByTenAndLoaiChip(String ten, String loaiChip);
 
 }

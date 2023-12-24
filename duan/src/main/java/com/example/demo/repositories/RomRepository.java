@@ -33,4 +33,5 @@ public interface RomRepository extends JpaRepository<Rom, UUID> {
     @Modifying
     @Query(value = "update rom set tinh_trang=0, ngay_cap_nhat=convert(date,getdate(),105)", nativeQuery = true)
     void update0();
+    boolean existsByDungLuong(String dungLuong);
 }

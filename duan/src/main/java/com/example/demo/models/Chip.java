@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -45,6 +47,7 @@ public class Chip {
     @Column(name = "loai_cpu")
     private String loaiChip;
 
+    @Min(value = 1,message = "Số nhân phải lớn hơn 0")
     @NotNull(message = "Không để trống thông tin")
     @Column(name = "so_nhan")
     private int soNhan;

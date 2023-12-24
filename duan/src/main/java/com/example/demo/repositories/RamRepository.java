@@ -33,4 +33,5 @@ public interface RamRepository extends JpaRepository<Ram, UUID> {
     @Modifying
     @Query(value = "update Ram set tinh_trang=0, ngay_cap_nhat=convert(date,getdate(),105)", nativeQuery = true)
     void updateTT();
+    boolean existsByDungLuong(String dungLuong);
 }

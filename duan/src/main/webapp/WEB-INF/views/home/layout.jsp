@@ -277,4 +277,28 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="../../../js/select-2.js"></script>
+<script>
+
+</script>
 </html>
+
+<script>
+    <c:if test="${modalthemmausac==0}">
+    document.getElementById("modalMauSac").click();
+    </c:if>
+    <c:if test="${modalthemsanpham==0}">
+    document.getElementById("modalSanPham").click();
+    </c:if>
+    <c:if test="${modalthemchip==0}">
+    document.getElementById("modalChip").click();
+    </c:if>
+    <c:if test="${modalthemram==0}">
+    document.getElementById("modalRam").click();
+    </c:if>
+    <c:if test="${modalthemrom==0}">
+    document.getElementById("modalRom").click();
+    </c:if>
+    <c:if test="${modalthempin==0}">
+    document.getElementById("modalPin").click();
+    </c:if>
+</script>

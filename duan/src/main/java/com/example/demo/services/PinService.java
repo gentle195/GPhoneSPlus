@@ -31,6 +31,7 @@ public interface PinService {
     public List<Pin> search0(String ten);
 
     public List<Pin> search1(String ten);
+    boolean existPin(String loaiPin,String congNghePin,DungLuongPin dungLuongPin);
 }
 
 

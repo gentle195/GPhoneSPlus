@@ -44,6 +44,7 @@ public interface SanPhamService {
     public List<SanPham> loc(UUID idHang, UUID idMan, UUID idCamera);
 
     public boolean trungDuLieu(String ten, HangSanPham hangSanPham, Camera camera, ManHinh manHinh, Anh anh);
+    boolean existSanPham(String ten);
 
 }
 
