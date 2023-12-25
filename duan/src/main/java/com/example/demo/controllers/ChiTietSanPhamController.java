@@ -873,7 +873,7 @@ public class ChiTietSanPhamController {
     }
 
 
-//thắng thêm
+    //thắng thêm
     @GetMapping("/hien-thi-het-hang")
     public String hienThisanphamhethang(Model model, @RequestParam("pageNum") Optional<Integer> pageNum
             , @ModelAttribute("imei") IMEI imei
@@ -911,13 +911,13 @@ public class ChiTietSanPhamController {
 
     @PostMapping("/searchhethang")
     public String searchhethang(Model model, @RequestParam("search") String search,
-                         @ModelAttribute("chitietsanpham") ChiTietSanPham chiTietSanPham,
-                         @ModelAttribute(name = "Pin") Pin pin,
-                         @ModelAttribute(name = "chip") Chip chip,
-                         @ModelAttribute(name = "ram") Ram ram,
-                         @ModelAttribute(name = "mauSac") MauSac mauSac,
-                         @ModelAttribute(name = "rom") Rom rom,
-                         @ModelAttribute(name = "sanPham") SanPham sanPham) {
+                                @ModelAttribute("chitietsanpham") ChiTietSanPham chiTietSanPham,
+                                @ModelAttribute(name = "Pin") Pin pin,
+                                @ModelAttribute(name = "chip") Chip chip,
+                                @ModelAttribute(name = "ram") Ram ram,
+                                @ModelAttribute(name = "mauSac") MauSac mauSac,
+                                @ModelAttribute(name = "rom") Rom rom,
+                                @ModelAttribute(name = "sanPham") SanPham sanPham) {
         List<ChiTietSanPham> list = chiTietSanPhamService.search(search);
         model.addAttribute("listCTSP", list);
         model.addAttribute("listSanPham", sanPhamService.findAll0());
@@ -944,19 +944,19 @@ public class ChiTietSanPhamController {
 
     @PostMapping("/lochethang")
     public String lochethang(Model model, @RequestParam(value = "hang", required = false) UUID hang,
-                      @RequestParam(value = "ram", required = false) UUID Ram,
-                      @RequestParam(value = "rom", required = false) UUID Rom,
-                      @RequestParam(value = "dungLuongPin", required = false) UUID dungLuongPin,
-                      @RequestParam(value = "chip", required = false) UUID Chip,
-                      @RequestParam(value = "manHinh", required = false) UUID moTaMan,
-                      @RequestParam(value = "camera", required = false) UUID moTaCam,
-                      @ModelAttribute("chitietsanpham") ChiTietSanPham chiTietSanPham,
-                      @ModelAttribute(name = "Pin") Pin pin,
-                      @ModelAttribute(name = "chip") Chip chip,
-                      @ModelAttribute(name = "ram") Ram ram,
-                      @ModelAttribute(name = "mauSac") MauSac mauSac,
-                      @ModelAttribute(name = "rom") Rom rom,
-                      @ModelAttribute(name = "sanPham") SanPham sanPham) {
+                             @RequestParam(value = "ram", required = false) UUID Ram,
+                             @RequestParam(value = "rom", required = false) UUID Rom,
+                             @RequestParam(value = "dungLuongPin", required = false) UUID dungLuongPin,
+                             @RequestParam(value = "chip", required = false) UUID Chip,
+                             @RequestParam(value = "manHinh", required = false) UUID moTaMan,
+                             @RequestParam(value = "camera", required = false) UUID moTaCam,
+                             @ModelAttribute("chitietsanpham") ChiTietSanPham chiTietSanPham,
+                             @ModelAttribute(name = "Pin") Pin pin,
+                             @ModelAttribute(name = "chip") Chip chip,
+                             @ModelAttribute(name = "ram") Ram ram,
+                             @ModelAttribute(name = "mauSac") MauSac mauSac,
+                             @ModelAttribute(name = "rom") Rom rom,
+                             @ModelAttribute(name = "sanPham") SanPham sanPham) {
         List<ChiTietSanPham> list = chiTietSanPhamService.loc(hang, Ram, Rom, dungLuongPin, Chip, moTaMan, moTaCam);
         model.addAttribute("listCTSP", list);
         model.addAttribute("listSanPham", sanPhamService.findAll0());
@@ -987,19 +987,19 @@ public class ChiTietSanPhamController {
 
     @PostMapping("/locngungban")
     public String locngungban(Model model, @RequestParam(value = "hang", required = false) UUID hang,
-                             @RequestParam(value = "ram", required = false) UUID Ram,
-                             @RequestParam(value = "rom", required = false) UUID Rom,
-                             @RequestParam(value = "dungLuongPin", required = false) UUID dungLuongPin,
-                             @RequestParam(value = "chip", required = false) UUID Chip,
-                             @RequestParam(value = "manHinh", required = false) UUID moTaMan,
-                             @RequestParam(value = "camera", required = false) UUID moTaCam,
-                             @ModelAttribute("chitietsanpham") ChiTietSanPham chiTietSanPham,
-                             @ModelAttribute(name = "Pin") Pin pin,
-                             @ModelAttribute(name = "chip") Chip chip,
-                             @ModelAttribute(name = "ram") Ram ram,
-                             @ModelAttribute(name = "mauSac") MauSac mauSac,
-                             @ModelAttribute(name = "rom") Rom rom,
-                             @ModelAttribute(name = "sanPham") SanPham sanPham) {
+                              @RequestParam(value = "ram", required = false) UUID Ram,
+                              @RequestParam(value = "rom", required = false) UUID Rom,
+                              @RequestParam(value = "dungLuongPin", required = false) UUID dungLuongPin,
+                              @RequestParam(value = "chip", required = false) UUID Chip,
+                              @RequestParam(value = "manHinh", required = false) UUID moTaMan,
+                              @RequestParam(value = "camera", required = false) UUID moTaCam,
+                              @ModelAttribute("chitietsanpham") ChiTietSanPham chiTietSanPham,
+                              @ModelAttribute(name = "Pin") Pin pin,
+                              @ModelAttribute(name = "chip") Chip chip,
+                              @ModelAttribute(name = "ram") Ram ram,
+                              @ModelAttribute(name = "mauSac") MauSac mauSac,
+                              @ModelAttribute(name = "rom") Rom rom,
+                              @ModelAttribute(name = "sanPham") SanPham sanPham) {
         List<ChiTietSanPham> list = banHangOnLinerepository.locctspngungban(hang, Ram, Rom, dungLuongPin, Chip, moTaMan, moTaCam);
         model.addAttribute("listCTSP", list);
         model.addAttribute("listSanPham", sanPhamService.findAll0());
@@ -1028,7 +1028,7 @@ public class ChiTietSanPhamController {
                          @PathVariable("idctsp") UUID idctsp,
                          @PathVariable("tengiaodien") String tengiaodien
 
-                         ) {
+    ) {
 
         model.addAttribute("banHangOnlineService", banHangOnlineService);
         model.addAttribute("banHangOnLinerepository",banHangOnLinerepository);
@@ -1127,7 +1127,7 @@ public class ChiTietSanPhamController {
             model.addAttribute("ma", ma);
             model.addAttribute("tbimei", "IMEI này đã có trong dữ liệu");
 //            model.addAttribute("thongBaoCTSP1", "Imei đã tồn tại!");
-                 model.addAttribute("batmodalthemsolg", 0);
+            model.addAttribute("batmodalthemsolg", 0);
             model.addAttribute("idctspdcchon", imei.getChiTietSanPham().getId());
             if(tengiaodien.equals("giaodienhienthi")){
                 model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
