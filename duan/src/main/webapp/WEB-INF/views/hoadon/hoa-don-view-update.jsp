@@ -329,7 +329,8 @@
                             </c:if>
                             <br>
                             <div style="text-align: center">
-                                <button type="submit" class="btn btn-primary mr-2"
+                                <button type="submit" class="btn btn-primary mr-2"                                                 id="toastr-success-top-right"
+                                        id="toastr-success-top-right"
                                         onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                     Cập nhật thông tin
                                 </button>

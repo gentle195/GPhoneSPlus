@@ -84,6 +84,15 @@ public class HoaDon {
     @Column(name = "tinh_trang_giao_hang")
     private int tinhTrangGiaoHang;
 
+    @Column(name = "to_ward_code")
+    private String toWardCode;
+
+    @Column(name = "to_district_id")
+    private String toDistrictId;
+
+    @Column(name = "service_id")
+    private int serviceId;
+
     //    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "ghi_chu")
     private String ghiChu;
@@ -110,17 +119,6 @@ public class HoaDon {
     public String convertTongtien() {
         // Input number
         long number = Long.valueOf(String.valueOf(tongTien));
-
-        // Create a DecimalFormat instance with the desired pattern
-        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-
-        // Format the number
-        return decimalFormat.format(number);
-    }
-
-    public String convertdungdinhdang(BigDecimal tiencan) {
-        // Input number
-        long number = Long.valueOf(String.valueOf(tiencan));
 
         // Create a DecimalFormat instance with the desired pattern
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
