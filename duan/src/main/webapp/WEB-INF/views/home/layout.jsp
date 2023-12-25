@@ -301,4 +301,22 @@
     <c:if test="${modalthempin==0}">
     document.getElementById("modalPin").click();
     </c:if>
+    //ctsp
+
+    <c:if test="${batmodalthemsolg==0}">
+    document.getElementById("modalthemsolgctsp").click();
+    </c:if>
+
+
+</script>
+<script>
+    function loadSelect2diachi() {
+        $('#selectSanPham2').select2({
+            theme: 'bootstrap-5',
+            dropdownParent: $('#myModal11')
+
+        });
+
+    }
+    loadSelect2diachi();
 </script>
