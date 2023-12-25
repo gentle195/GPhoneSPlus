@@ -19,8 +19,9 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               aria-controls="description" aria-selected="true">Thông tin Chi tiết sản phẩm</a>
+            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin chi tiết
+                sản phẩm</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-da-xoa" role="tab"
@@ -32,7 +33,9 @@
                 sản phẩm</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-het-hang" role="tab"
+            <a
+               class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+               href="/chi-tiet-san-pham/hien-thi-het-hang" role="tab"
                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm hết hàng</a>
         </li>
     </ul>
@@ -40,7 +43,7 @@
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="description" role="tabpanel"
          aria-labelledby="description-tab">
-        <form action="/chi-tiet-san-pham/loc" method="post" onsubmit="return checkLoc()">
+        <form action="/chi-tiet-san-pham/lochethang" method="post" onsubmit="return checkLoc()">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Lọc chi tiết sản phẩm
@@ -144,7 +147,7 @@
                     <h3 style="color: red;font-family: 'Times New Roman';text-align: center">${thongBao}</h3>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title" style="float: left">Danh sách Chi tiết sản phẩm
+                    <h4 class="card-title" style="float: left">Danh sách Chi tiết sản phẩm hết hàng
                         <div class="dropdown-wrapper">
                             <div class="dropdown">
                                 <button type="button" class="btn btn-primary dropdown-toggle"
@@ -241,7 +244,7 @@
                         </div>
                     </h4>
                     <%--            Tìm kiếm               --%>
-                    <form action="/chi-tiet-san-pham/search" method="post">
+                    <form action="/chi-tiet-san-pham/searchhethang" method="post">
                         <div class="input-group" style="width: 30%; float: right">
                             <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                    aria-label="Bạn tìm gì..." name="search">
@@ -276,39 +279,52 @@
                             <tbody>
                             <i class="mdi mdi-border-color"></i>
                             <c:forEach items="${listCTSP}" var="ctsp" varStatus="index">
-                                <c:if test="${banHangOnLinerepository.tongimeiTT0cua1ctsp(ctsp.id)>0}">
-                                <tr>
-                                    <td align="center">
-                                        <img src="/uploads/${ctsp.urlAnh}" width="40" height="40">
-                                    </td>
-                                    <td>${ctsp.ngayTao}</td>
-                                    <td>${ctsp.ngayCapNhat}</td>
-                                    <td>${ctsp.sanPham.ten}</td>
-                                    <td>${ctsp.mauSac.ten}</td>
-                                    <td>${ctsp.chip.ten}</td>
-                                    <td>${ctsp.ram.dungLuong}</td>
-                                    <td>${ctsp.rom.dungLuong}</td>
-                                    <td>${ctsp.pin.dungLuongPin.thongSo}</td>
-                                    <td>${banHangOnlineService.convertgiatien(ctsp.giaBan)} VND</td>
-                                    <td>${ctsp.tinhTrang==0?"Còn kinh doanh":"Ngừng kinh doanh"}</td>
-                                    <td>${ctsp.namBaoHanh}</td>
-                                    <td>${banHangOnLinerepository.tongimeiTT0cua1ctsp(ctsp.id)}</td>
-                                    <td>${ctsp.moTa}</td>
-                                    <td>
-                                        <a href="/chi-tiet-san-pham/view-update/${ctsp.id}"
-                                           class="btn btn-warning btn-icon-text"
-                                           tabindex="-1"
-                                           role="button"
-                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                            <i class="ti-file btn-icon-prepend"></i>
-                                            Update</a>
-                                        <a href="/chi-tiet-san-pham/view-them-nhanh-solg/${ctsp.id}/giaodienhienthi"
-                                           class="btn btn-success"
-                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                <c:if test="${banHangOnLinerepository.tongimeiTT0cua1ctsp(ctsp.id)==0}">
+                                    <tr>
+                                        <td align="center">
+                                            <img src="/uploads/${ctsp.urlAnh}" width="40" height="40">
+                                        </td>
+                                        <td>${ctsp.ngayTao}</td>
+                                        <td>${ctsp.ngayCapNhat}</td>
+                                        <td>${ctsp.sanPham.ten}</td>
+                                        <td>${ctsp.mauSac.ten}</td>
+                                        <td>${ctsp.chip.ten}</td>
+                                        <td>${ctsp.ram.dungLuong}</td>
+                                        <td>${ctsp.rom.dungLuong}</td>
+                                        <td>${ctsp.pin.dungLuongPin.thongSo}</td>
+                                        <td>${banHangOnlineService.convertgiatien(ctsp.giaBan)} VND</td>
+                                        <td>${ctsp.tinhTrang==0?"Còn kinh doanh":"Ngừng kinh doanh"}<br>
+                                            (Hết hàng)
 
-                                            Thêm số lượng hàng</a>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td>${ctsp.namBaoHanh}</td>
+                                        <td>${banHangOnLinerepository.tongimeiTT0cua1ctsp(ctsp.id)}</td>
+                                        <td>${ctsp.moTa}</td>
+                                        <td>
+                                            <a href="/chi-tiet-san-pham/view-update/${ctsp.id}"
+                                               class="btn btn-warning btn-icon-text"
+                                               tabindex="-1"
+                                               role="button"
+                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                                <i class="ti-file btn-icon-prepend"></i>
+                                                Update</a>
+                                            <a href="/chi-tiet-san-pham/delete/${ctsp.id}"
+                                               class="btn btn-danger btn-icon-text"
+                                               tabindex="-1"
+                                               role="button"
+                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                                <i class="ti-reload btn-icon-prepend"></i>
+                                                Status</a>
+
+                                            <a href="/chi-tiet-san-pham/view-them-nhanh-solg/${ctsp.id}/giaodienhethang"
+                                               class="btn btn-success"
+                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+
+                                                Thêm số lượng hàng</a>
+
+
+                                        </td>
+                                    </tr>
                                 </c:if>
                             </c:forEach>
                             </tbody>
@@ -319,6 +335,7 @@
         </div>
     </div>
 </div>
+
 <c:if test="${thongBaoCTSP1 != null}">
     <div id="modalError" class="modal fade">
         <div class="modal-dialog modal-dialog-centered">
@@ -407,9 +424,10 @@
 
 
 
-<button   id="modalthemsolgctsp" style="display: none" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal11">
-    Open modal
-</button>
+
+    <button   id="modalthemsolgctsp" style="display: none" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal11">
+        Open modal
+    </button>
 
 
 <!-- The Modal -->
@@ -424,7 +442,7 @@
                 <div class="tab-content" id="">
                     <div class="tab-pane fade show active"  role="tabpanel"
                          aria-labelledby="description-tab">
-                        <form:form action="/chi-tiet-san-pham/themsolg/giaodienhienthi" method="post" modelAttribute="imei">
+                        <form:form action="/chi-tiet-san-pham/themsolg/giaodienhethang" method="post" modelAttribute="imei">
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-body" style="color: black">
@@ -436,15 +454,15 @@
                                                         <form:select path="chiTietSanPham" class="form-control"
                                                                      cssStyle="font-weight: bold; width: 100%;color: black"
                                                                      id="selectSanPham2" onchange="validateSelect()" >
-                                                            <%--                                                            <option selected disabled>Sản phẩm</option>--%>
+<%--                                                            <option selected disabled>Sản phẩm</option>--%>
                                                             <c:forEach items="${listCTSP}" var="ctsp">
                                                                 <option value="${ctsp.id}"  <c:if test="${idctspdcchon==ctsp.id}">selected</c:if>   >
                                                                         ${ctsp.sanPham.ten} - ${ctsp.mauSac.ten}
                                                                     - ${ctsp.ram.dungLuong} - ${ctsp.rom.dungLuong}
-                                                                    - ${ctsp.chip.ten} - ${ctsp.pin.dungLuongPin.thongSo}
+                                                                            - ${ctsp.chip.ten} - ${ctsp.pin.dungLuongPin.thongSo}
 
-                                                                    -----------
-                                                                    Số lượng còn:${banHangOnLinerepository.tongimeiTT0cua1ctsp(ctsp.id)}
+                                                                            -----------
+                                                                                Số lượng còn:${banHangOnLinerepository.tongimeiTT0cua1ctsp(ctsp.id)}
 
 
 
@@ -498,4 +516,7 @@
         </div>
     </div>
 </div>
+
+
+
 </html>

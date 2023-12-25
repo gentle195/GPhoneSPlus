@@ -176,6 +176,10 @@
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
                aria-controls="description" aria-selected="true" role="tab">Thêm mới chi tiết sản phẩm</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-het-hang" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm hết hàng</a>
+        </li>
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">

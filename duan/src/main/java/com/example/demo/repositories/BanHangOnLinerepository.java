@@ -374,4 +374,25 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
     @Query(value = "update  DonDatHang dh set  dh.tinhTrang=1 where dh.hoaDon.id=:idhd")
     void updateTTdonDatHangkhiDASULytheoIDHD(@Param("idhd") UUID idhd);
 
+
+    @Query("select ct from ChiTietSanPham ct left join SanPham sp on ct.sanPham.id=sp.id " +
+            "left join HangSanPham hang on sp.hangSanPham.id=hang.id left join Ram ram on ct.ram.id=ram.id " +
+            "left join Rom rom on ct.rom.id=rom.id left join Pin pin on ct.pin.id=pin.id " +
+            "left join MauSac ms on ct.mauSac.id=ms.id left join Chip chip on ct.chip.id=chip.id " +
+            "left join DungLuongPin dungLuong on pin.dungLuongPin.id=dungLuong.id " +
+            "left  join ManHinh manHinh on sp.manHinh.id=manHinh.id " +
+            "left join Camera  cam on sp.camera.id=cam.id " +
+            "where ct.tinhTrang=1 and" +
+            " ((:idHang is null or hang.id =:idHang) " +
+            "and (:idRam is null or ram.id=: idRam) " +
+            "and (:idRom is null or rom.id=: idRom) " +
+            "and (:idDLPin is null or dungLuong.id=: idDLPin) " +
+            "and (:idChip is null or chip.id=: idChip) " +
+            "and (:moTaMan is null or manHinh.id =:moTaMan) " +
+            "and (:moTaCam is null or cam.id =:moTaCam) )"
+
+//            +"and (:giaBanMin is null and :giaBanMax is null or ct.giaBan between :giaBanMin and :giaBanMax)"
+    )
+    List<ChiTietSanPham> locctspngungban(UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam);
+
 }

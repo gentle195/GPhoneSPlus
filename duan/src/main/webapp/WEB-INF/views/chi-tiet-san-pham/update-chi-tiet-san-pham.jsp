@@ -29,6 +29,10 @@
             <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-da-xoa" role="tab"
                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xóa</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-het-hang" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm hết hàng</a>
+        </li>
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">
@@ -811,4 +815,9 @@
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
 </html>
