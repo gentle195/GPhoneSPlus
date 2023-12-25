@@ -366,6 +366,10 @@ public class ChiTietSanPhamController {
         model.addAttribute("listCTSP", chiTietSanPhamPage);
         model.addAttribute("banHangOnlineService", banHangOnlineService);
         model.addAttribute("banHangOnLinerepository",banHangOnLinerepository);
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+        model.addAttribute("imei", new IMEI());
+        String ma = "IMEI" + imeiService.findAll().size();
+        model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
         return "home/layout";
 
@@ -623,7 +627,10 @@ public class ChiTietSanPhamController {
         model.addAttribute("thongBaoCTSP", "Thành công");
         model.addAttribute("banHangOnlineService", banHangOnlineService);
         model.addAttribute("banHangOnLinerepository",banHangOnLinerepository);
-
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+        model.addAttribute("imei", new IMEI());
+        String ma = "IMEI" + imeiService.findAll().size();
+        model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
         return "home/layout";
 
@@ -653,6 +660,10 @@ public class ChiTietSanPhamController {
             model.addAttribute("thongBaoCTSP", "Đổi trạng thái thành công!");
             model.addAttribute("banHangOnlineService", banHangOnlineService);
             model.addAttribute("banHangOnLinerepository",banHangOnLinerepository);
+            model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+            model.addAttribute("imei", new IMEI());
+            String ma = "IMEI" + imeiService.findAll().size();
+            model.addAttribute("ma", ma);
             model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
             return "home/layout";
 
@@ -673,6 +684,10 @@ public class ChiTietSanPhamController {
             model.addAttribute("thongBaoCTSP1", "Sản phẩm này còn hàng tồn, không thể đổi trạng thái");
             model.addAttribute("banHangOnlineService", banHangOnlineService);
             model.addAttribute("banHangOnLinerepository",banHangOnLinerepository);
+            model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+            model.addAttribute("imei", new IMEI());
+            String ma = "IMEI" + imeiService.findAll().size();
+            model.addAttribute("ma", ma);
             model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
             return "home/layout";
         }
@@ -699,6 +714,10 @@ public class ChiTietSanPhamController {
         model.addAttribute("thongBaoCTSP", "Khôi phục thành công!");
         model.addAttribute("banHangOnlineService", banHangOnlineService);
         model.addAttribute("banHangOnLinerepository",banHangOnLinerepository);
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+        model.addAttribute("imei", new IMEI());
+        String ma = "IMEI" + imeiService.findAll().size();
+        model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
         return "home/layout";
     }
@@ -820,6 +839,10 @@ public class ChiTietSanPhamController {
         model.addAttribute("listPin", pinService.findAll0());
         model.addAttribute("listManHinh", manHinhService.findAll0());
         model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+        model.addAttribute("imei", new IMEI());
+        String ma = "IMEI" + imeiService.findAll().size();
+        model.addAttribute("ma", ma);
         model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
         model.addAttribute("page", chiTietSanPhamPage.getNumber());
         model.addAttribute("banHangOnlineService", banHangOnlineService);
