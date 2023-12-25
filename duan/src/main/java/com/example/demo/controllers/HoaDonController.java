@@ -43,6 +43,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -156,7 +157,7 @@ public class HoaDonController {
     @GetMapping("/huy/{id}")
     public String huyHoaDon(Model model, @PathVariable("id") UUID id
             , @ModelAttribute("hoaDon") HoaDon hoaDon
-    ) {
+    ) throws IOException {
         HoaDon hd = hoaDonService.findById(id);
         LocalDate ngayCapNhat = LocalDate.now();
         List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
@@ -188,6 +189,7 @@ public class HoaDonController {
         }
         model.addAttribute("hoaDon", hd);
         model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+        System.in.read();
         return "redirect:/hoa-don/hien-thi"; // Chuyển hướng về trang danh sách hóa đơn sau khi hủy
     }
 
@@ -873,7 +875,7 @@ public class HoaDonController {
     }
 
     @GetMapping("/xac-nhan-giao-hang/{id}")
-    public String xacNhanGiaoHang(Model model, @PathVariable("id") UUID id) {
+    public String xacNhanGiaoHang(Model model, @PathVariable("id") UUID id) throws IOException {
         HoaDon hd = hoaDonService.findById(id);
         hd.setTinhTrangGiaoHang(2);
         hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
@@ -894,6 +896,7 @@ public class HoaDonController {
                 imeiService.updatImeiChoXuLy(Date.valueOf(LocalDate.now()), hdct.getId());
             }
         }
+        System.in.read();
         return "redirect:/hoa-don/hien-thi";
     }
 
@@ -929,7 +932,7 @@ public class HoaDonController {
     }
 
     @GetMapping("/xac-nhan-huy/{id}")
-    public String huy(Model model, @PathVariable("id") UUID id) {
+    public String huy(Model model, @PathVariable("id") UUID id) throws IOException {
         HoaDon hd = hoaDonService.findById(id);
         hd.setTinhTrang(8);
         hd.setTinhTrangGiaoHang(8);
@@ -946,11 +949,12 @@ public class HoaDonController {
                 imeiService.updatImei1(Date.valueOf(LocalDate.now()), hdct.getId());
             }
         }
+        System.in.read();
         return "redirect:/hoa-don/hien-thi";
     }
 
     @GetMapping("/xac-nhan-huy-hoan-tien/{id}")
-    public String huyVaHoanTien(Model model, @PathVariable("id") UUID id) {
+    public String huyVaHoanTien(Model model, @PathVariable("id") UUID id) throws IOException {
         HoaDon hd = hoaDonService.findById(id);
         hd.setTinhTrang(9);
         hd.setTinhTrangGiaoHang(8);
@@ -967,6 +971,7 @@ public class HoaDonController {
                 imeiService.updatImei1(Date.valueOf(LocalDate.now()), hdct.getId());
             }
         }
+        System.in.read();
         return "redirect:/hoa-don/hien-thi";
     }
 
