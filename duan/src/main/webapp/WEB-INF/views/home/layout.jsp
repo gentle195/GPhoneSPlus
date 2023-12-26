@@ -303,6 +303,19 @@
     </c:if>
     //ctsp
 
+    <c:if test="${modalthemmanhinh==0}">
+    document.getElementById("modalManHinh").click();
+
+    </c:if>
+    <c:if test="${modalthemhang==0}">
+    document.getElementById("modalHang").click();
+
+    </c:if>
+    <c:if test="${modalthemcamera==0}">
+    document.getElementById("modalCamera").click();
+
+    </c:if>
+
     <c:if test="${batmodalthemsolg==0}">
     document.getElementById("modalthemsolgctsp").click();
     </c:if>

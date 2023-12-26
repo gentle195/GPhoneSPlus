@@ -87,4 +87,10 @@ public class ManHinhServiceImpl implements ManHinhService {
     public List<ManHinh> search1(String ten) {
         return manHinhRepository.sreach1(ten);
     }
+
+    @Override
+    public boolean existManHinh(String thongSo, String loaiCamUng, String tiLe, String doPhanGiai, String tanSoQuet, String congNghe) {
+        return manHinhRepository.existsByThongSoAndLoaiCamUngAndTiLeKhungHinhAndDoPhanGiaiAndTanSoQuetAndCongNghe(thongSo, loaiCamUng, tiLe, doPhanGiai, tanSoQuet, congNghe);
+    }
+
 }

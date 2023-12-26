@@ -332,7 +332,7 @@
                                                         <span class="text-danger">${errorHang}</span>
                                                     </div>
                                                     <div class="col-1">
-                                                        <a type="button" data-bs-toggle="modal"
+                                                        <a type="button" data-bs-toggle="modal" id="modalHang"
                                                            data-bs-target="#exampleModalHangSanPham">
                                                             <img src="/uploads/plus.png"
                                                             />
@@ -362,7 +362,7 @@
                                                         <span class="text-danger">${errorManHinh}</span>
                                                     </div>
                                                     <div class="col-1">
-                                                        <a type="button" data-bs-toggle="modal"
+                                                        <a type="button" data-bs-toggle="modal" id="modalManHinh"
                                                            data-bs-target="#exampleModalManHinh">
                                                             <img src="/uploads/plus.png"
                                                             />
@@ -387,9 +387,10 @@
                                                                           itemValue="id"/>
                                                         </form:select>
                                                         <span class="text-danger">${errorCamera}</span>
+
                                                     </div>
                                                     <div class="col-1">
-                                                        <a type="button" data-bs-toggle="modal"
+                                                        <a type="button" data-bs-toggle="modal" id="modalCamera"
                                                            data-bs-target="#exampleModalCamera">
                                                             <img src="/uploads/plus.png"
                                                             />
@@ -448,6 +449,7 @@
                                                 <div class="col-sm-9">
                                                     <form:input class="form-control" placeholder="" path="thongSo"/>
                                                     <form:errors path="thongSo" cssStyle="color: red"></form:errors>
+                                                    <span class="text-danger">${tbTrungManHinh}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -569,13 +571,15 @@
                                 <div class="form-group">
                                     <form:label path="ten"><b>Tên:</b></form:label>
                                     <form:input path="ten" class="form-control" id="nhapTen"/>
-                                    <span class="text-danger" id="nhapTen1"></span>
+                                    <form:errors path="ten" cssStyle="color: red"></form:errors>
+                                    <span class="text-danger" >${tbTrungHang}</span>
                                 </div>
 
                                 <div class="form-group">
                                     <form:label path="xuatSu"><b>Xuất sứ:</b></form:label>
                                     <form:input path="xuatSu" class="form-control" id="nhapXuatSu"/>
                                     <span class="text-danger" id="nhapXuatSu1"></span>
+                                    <form:errors path="xuatSu" cssStyle="color: red"></form:errors>
                                 </div>
 
                                 <div class="form-group">
@@ -585,7 +589,7 @@
                                 </div>
                                 <div style="text-align: center">
                                     <button type="submit" class="btn btn-primary mr-2"
-                                            onclick="return validateFormHang()" id="btnHang">
+                                            id="btnHang">
                                         Thêm Thông Tin
                                     </button>
                                 </div>
@@ -617,6 +621,7 @@
                                     <form:label path="thongSo"><b>Thông số Camera:</b></form:label>
                                     <form:input class="form-control" placeholder="" path="thongSo"/>
                                     <form:errors path="thongSo" cssStyle="color: red"/>
+                                    <span class="text-danger">${tbTrungCamera}</span>
                                 </div>
                                 <div class="form-group">
                                     <form:label path="moTa"><b>Mô tả:</b></form:label>
@@ -625,7 +630,7 @@
                                 </div>
                                 <div style="text-align: center">
                                     <button type="submit" class="btn btn-primary mr-2"
-                                            onclick="return myFunction1()">
+                                            >
                                         Thêm Thông Tin
                                     </button>
                                 </div>

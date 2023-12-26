@@ -34,4 +34,5 @@ public interface HangSanPhamRepository extends JpaRepository<HangSanPham, UUID> 
     @Modifying
     @Query(value = "update hang_dien_thoai set tinh_trang=0, ngay_cap_nhat=convert(date,getdate(),105)", nativeQuery = true)
     void update0();
+    boolean existsByTen(String ten);
 }

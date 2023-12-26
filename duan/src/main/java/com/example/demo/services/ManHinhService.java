@@ -30,4 +30,5 @@ public interface ManHinhService {
     public List<ManHinh> search0(String ten);
 
     public List<ManHinh> search1(String ten);
+    boolean existManHinh(String thongSo,String loaiCamUng,String tiLe,String doPhanGiai,String tanSoQuet,String congNghe);
 }

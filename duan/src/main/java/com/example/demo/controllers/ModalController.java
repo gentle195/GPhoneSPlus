@@ -699,8 +699,32 @@ public class ModalController {
     public String addManHinh(Model model, @ModelAttribute("ManHinh") @Valid ManHinh manHinh, BindingResult bindingResult,
                              @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("contentPage", "san-pham/add.jsp");
+            model.addAttribute("hangSP", new HangSanPham());
+            model.addAttribute("dulieuxem", new SanPham());
+            model.addAttribute("camera", new Camera());
+            model.addAttribute("anh", new Anh());
             model.addAttribute("listManHinh", manHinhService.findAll0());
+            model.addAttribute("listHangSP", hangSanPhamService.findAll0());
+            model.addAttribute("listCamera", cameraService.findAll0());
+            model.addAttribute("listAnh", anhService.findAll0());
+            model.addAttribute("contentPage", "../san-pham/add.jsp");
+            model.addAttribute("modalthemmanhinh",0);
+
+            return "home/layout";
+        }
+        if (manHinhService.existManHinh(manHinh.getThongSo(),manHinh.getLoaiCamUng(),manHinh.getTiLeKhungHinh(),manHinh.getDoPhanGiai(),manHinh.getTanSoQuet(),manHinh.getCongNghe())){
+            model.addAttribute("hangSP", new HangSanPham());
+            model.addAttribute("dulieuxem", new SanPham());
+            model.addAttribute("camera", new Camera());
+            model.addAttribute("anh", new Anh());
+            model.addAttribute("listManHinh", manHinhService.findAll0());
+            model.addAttribute("listHangSP", hangSanPhamService.findAll0());
+            model.addAttribute("listCamera", cameraService.findAll0());
+            model.addAttribute("listAnh", anhService.findAll0());
+            model.addAttribute("tbTrungManHinh", "Màn hình này đã tồn tại");
+            model.addAttribute("contentPage", "../san-pham/add.jsp");
+            model.addAttribute("modalthemmanhinh",0);
+
             return "home/layout";
         }
         manHinh.setNgayTao(Date.valueOf(LocalDate.now()));
@@ -730,8 +754,35 @@ public class ModalController {
     @PostMapping("/san-pham/modal-add-camera")
     public String addCamera(Model model, @ModelAttribute("camera") @Valid Camera camera, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("contentPage", "san-pham/add.jsp");
+
+            model.addAttribute("hangSP", new HangSanPham());
+
+            model.addAttribute("dulieuxem", new SanPham());
+            model.addAttribute("ManHinh", new ManHinh());
+            model.addAttribute("anh", new Anh());
+            model.addAttribute("listManHinh", manHinhService.findAll0());
+            model.addAttribute("listHangSP", hangSanPhamService.findAll0());
             model.addAttribute("listCamera", cameraService.findAll0());
+            model.addAttribute("listAnh", anhService.findAll0());
+            model.addAttribute("contentPage", "../san-pham/add.jsp");
+            model.addAttribute("modalthemcamera",0);
+
+            return "home/layout";
+        }
+        if (cameraService.existCamera(camera.getThongSo())){
+            model.addAttribute("hangSP", new HangSanPham());
+
+            model.addAttribute("dulieuxem", new SanPham());
+            model.addAttribute("ManHinh", new ManHinh());
+            model.addAttribute("anh", new Anh());
+            model.addAttribute("listManHinh", manHinhService.findAll0());
+            model.addAttribute("listHangSP", hangSanPhamService.findAll0());
+            model.addAttribute("listCamera", cameraService.findAll0());
+            model.addAttribute("listAnh", anhService.findAll0());
+            model.addAttribute("tbTrungCamera", "Camera đã tồn tại");
+            model.addAttribute("contentPage", "../san-pham/add.jsp");
+            model.addAttribute("modalthemcamera",0);
+
             return "home/layout";
         }
         camera.setNgayTao(Date.valueOf(LocalDate.now()));
@@ -759,8 +810,32 @@ public class ModalController {
     public String addHangSanPham(Model model, @ModelAttribute("hangSP") @Valid HangSanPham dulieuxem, BindingResult bindingResult, @RequestParam("num") Optional<Integer> num,
                                  @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("contentPage", "san-pham/add.jsp");
+            model.addAttribute("dulieuxem", new SanPham());
+            model.addAttribute("ManHinh", new ManHinh());
+            model.addAttribute("camera", new Camera());
+            model.addAttribute("anh", new Anh());
+            model.addAttribute("listManHinh", manHinhService.findAll0());
             model.addAttribute("listHangSP", hangSanPhamService.findAll0());
+            model.addAttribute("listCamera", cameraService.findAll0());
+            model.addAttribute("listAnh", anhService.findAll0());
+            model.addAttribute("contentPage", "../san-pham/add.jsp");
+            model.addAttribute("modalthemhang",0);
+
+            return "home/layout";
+        }
+        if (hangSanPhamService.existHang(dulieuxem.getTen())){
+            model.addAttribute("dulieuxem", new SanPham());
+            model.addAttribute("ManHinh", new ManHinh());
+            model.addAttribute("camera", new Camera());
+            model.addAttribute("anh", new Anh());
+            model.addAttribute("listManHinh", manHinhService.findAll0());
+            model.addAttribute("listHangSP", hangSanPhamService.findAll0());
+            model.addAttribute("listCamera", cameraService.findAll0());
+            model.addAttribute("listAnh", anhService.findAll0());
+            model.addAttribute("tbTrungHang", "Hãng trùng");
+            model.addAttribute("contentPage", "../san-pham/add.jsp");
+            model.addAttribute("modalthemhang",0);
+
             return "home/layout";
         }
         dulieuxem.setNgayTao(Date.valueOf(LocalDate.now()));

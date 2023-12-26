@@ -38,4 +38,5 @@ public interface ManHinhRepository extends JpaRepository<ManHinh, UUID> {
     @Modifying
     @Query(value = "update man_hinh set tinh_trang=0, ngay_cap_nhat=convert(date,getdate(),105)", nativeQuery = true)
     void updateTT();
+    boolean existsByThongSoAndLoaiCamUngAndTiLeKhungHinhAndDoPhanGiaiAndTanSoQuetAndCongNghe(String thongSo,String loaiCamUng, String tiLe, String doPhanGiai, String tanSoQuet,String congNghe);
 }
