@@ -86,4 +86,9 @@ public class CameraServiceImpl implements CameraService {
     public List<Camera> search1(String ten) {
         return cameraRepository.sreach1(ten);
     }
+
+    @Override
+    public boolean existCamera(String thongSo) {
+        return cameraRepository.existsByThongSo(thongSo);
+    }
 }

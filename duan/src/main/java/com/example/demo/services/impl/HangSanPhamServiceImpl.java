@@ -93,4 +93,9 @@ public class HangSanPhamServiceImpl implements HangSanPhamService {
     public List<HangSanPham> getall1() {
         return hangSanPhamRepository.getall1();
     }
+
+    @Override
+    public boolean existHang(String ten) {
+        return hangSanPhamRepository.existsByTen(ten);
+    }
 }

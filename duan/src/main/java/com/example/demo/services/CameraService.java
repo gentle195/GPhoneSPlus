@@ -30,5 +30,6 @@ public interface CameraService {
     public List<Camera> search0(String ten);
 
     public List<Camera> search1(String ten);
+    boolean existCamera(String thongSo);
 
 }

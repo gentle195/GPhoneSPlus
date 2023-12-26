@@ -33,4 +33,5 @@ public interface CameraRepository extends JpaRepository<Camera, UUID> {
     @Modifying
     @Query(value = "update Camera set tinh_trang=0, ngay_cap_nhat=convert(date,getdate(),105)", nativeQuery = true)
     void updateTT();
+    boolean existsByThongSo(String thongSo);
 }

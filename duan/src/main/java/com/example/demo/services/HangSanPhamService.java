@@ -31,6 +31,7 @@ public interface HangSanPhamService {
     public List<HangSanPham> getAll0();
 
     public List<HangSanPham> getall1();
+    boolean existHang(String ten);
 }
 
 
