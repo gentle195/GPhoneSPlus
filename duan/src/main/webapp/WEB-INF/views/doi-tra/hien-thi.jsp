@@ -399,26 +399,41 @@
         });
     }
 </script>
-<script>
-    function showChiTietModal(button) {
+
+    <script>
+        function showChiTietModal(button) {
         var hoadonId = $(button).data("hoadonid");
-        console.log("hoadonId: " + hoadonId);
-
-        // Tạo đổi hàng mới và truyền hoadonId
         createDoiTra(hoadonId);
-
-        // Đóng modal cũ
         $("#exampleModalTaoMoi").on('hidden.bs.modal', function (e) {
-            // Xóa nội dung cũ của bảng
-            $("#detailTable tbody").empty();
-
-            // Load lại trang
-            window.location.reload();
-        }).modal('hide');
+        $("#detailTable tbody").empty();
+        window.location.reload();
+    }).modal('hide');
     }
 
-
+        function createDoiTra(hoadonId) {
+        $.ajax({
+            url: "/doi-tra/add-doi-tra?hoadonId=" + hoadonId,
+            type: "POST",
+            success: function (data) {
+                toastr.success("Đổi hàng đã được tạo thành công", "Thành công", {
+                    timeOut: 1500,
+                    closeButton: true,
+                    progressBar: true,
+                    positionClass: "toast-top-right"
+                });
+                // window.location.href = "/doi-tra/hien-thi" ;
+                setTimeout(function () {
+                    window.location.href = "/doi-tra/hien-thi";
+                }, 1500);
+            },
+            error: function (error) {
+                console.log("Lỗi khi tạo đổi hàng mới: " + error);
+            }
+        });
+    }
 </script>
+
+
 
 
 <script>
