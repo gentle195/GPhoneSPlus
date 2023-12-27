@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Focus - Bootstrap Admin Dashboard </title>
     <link rel="stylesheet" href="../../../vendor/toastr/css/toastr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"/>
     <style>
@@ -162,7 +163,14 @@
                                             </td>
                                             <td>${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
                                             <td>${hdct.imei.soImei}</td>
-                                            <td>${hdct.donGia}</td>
+                                            <td>
+                                                <script>
+                                                    var tongTien = ${hdct.donGia};
+                                                    document.write(tongTien.toLocaleString('vi-VN'));
+                                                </script>
+                                                VND</td>
+
+                                                <%--                                            <td>${hdct.donGia}</td>--%>
                                             <td>
                                                 <button class='btn btn-primary chonSanPhamButton'
                                                         data-idhdct="${hdct.id}">Chọn sản phẩm
@@ -212,7 +220,14 @@
                                                         ${hdct.hoaDonChiTiet.imei.chiTietSanPham.ram.dungLuong} -
                                                         ${hdct.hoaDonChiTiet.imei.chiTietSanPham.rom.dungLuong}</td>
                                                 <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
-                                                <td>${hdct.hoaDonChiTiet.imei.chiTietSanPham.giaBan}</td>
+                                                <td>
+                                                    <script>
+                                                        var tongTien = ${hdct.hoaDonChiTiet.imei.chiTietSanPham.giaBan};
+                                                        document.write(tongTien.toLocaleString('vi-VN'));
+                                                    </script>
+                                                    VND</td>
+
+
                                                 <td>
                                                     <c:choose>
                                                         <c:when test="${hdct.hinhThucDoiTra ==0 }">
@@ -223,9 +238,11 @@
                                                                     idRam="${hdct.hoaDonChiTiet.imei.chiTietSanPham.ram.id}"
                                                                     idRom="${hdct.hoaDonChiTiet.imei.chiTietSanPham.rom.id}"
                                                                     idPin="${hdct.hoaDonChiTiet.imei.chiTietSanPham.pin.id}"
-                                                                    onclick='showChonSanPhamModalWithDonGia(${hdct.hoaDonChiTiet.donGia})'
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#newSanPham">
+                                                                    onclick='openModalWithVideo()'
+
+
+
+                                                            >
                                                                 Chọn
                                                             </button>
                                                             <button class='btn btn-primary xoaSanPhamDoiTraButton'
@@ -264,7 +281,7 @@
                                                 <th>Đơn giá cũ</th>
                                                 <th>Sản phẩm đổi sang</th>
                                                 <th>Số IMEI đổi mới</th>
-                                                <th>Đơn giá mới</th>
+
                                             </tr>
                                             </thead>
                                             <tbody id="table-search1">
@@ -281,7 +298,15 @@
                                                             ${hdct.hoaDonChiTiet.imei.chiTietSanPham.ram.dungLuong} -
                                                             ${hdct.hoaDonChiTiet.imei.chiTietSanPham.rom.dungLuong}</td>
                                                     <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
-                                                    <td>${hdct.hoaDonChiTiet.donGia}</td>
+
+                                                    <td>
+                                                        <script>
+                                                            var tongTien = ${hdct.hoaDonChiTiet.donGia};
+                                                            document.write(tongTien.toLocaleString('vi-VN'));
+                                                        </script>
+                                                        VND</td>
+
+
                                                     <td align="center">
                                                         <img src="/uploads/${hdct.imei.chiTietSanPham.urlAnh}"
                                                              width="40"
@@ -293,7 +318,7 @@
                                                             ${hdct.imei.chiTietSanPham.rom.dungLuong}
                                                     </td>
                                                     <td>${hdct.imei.soImei}</td>
-                                                    <td>${hdct.donGia}</td>
+
                                                 </tr>
                                             </c:forEach>
                                             </tbody>
@@ -332,25 +357,35 @@
                         <div>
                             <div class="card-body">
                                 <h4 class="card-title" style="float: left">Sản phẩm</h4>
-                                <%--            Tìm kiếm               --%>
-                                <div class="input-group"
-                                     style="width: 30%; float: right">
-                                    <input type="text"
-                                           class="form-control"
-                                           name="search-imei"
-                                           id="imeiSearchInput"
-                                           placeholder="Tìm kiếm IMEI">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-sm btn-primary"
-                                                type="button"
-                                                id="searchImei"
-                                        >Tìm kiếm
-                                        </button>
+                                <%-- Tìm kiếm --%>
+                                <div class="ban-hang" style="align-items: center; display: flex; justify-content: space-between; align-items: center;margin-left: 100px">
+                                    <div style="flex: 1;">
+                                        <video
+                                                style="border: 1px solid; width: 200px; height: 120px;"
+                                                id="video2"
+                                                autoplay="false"
+                                        ></video>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   name="search-imei"
+                                                   id="imeiSearchInput"
+                                                   placeholder="Tìm kiếm IMEI">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-sm btn-primary"
+                                                        type="button"
+                                                        id="searchImei"
+                                                >Tìm kiếm
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <br>
                                 <br>
-                                <%--           kết thúc tìm kiếm         --%>
+                                <%-- Kết thúc tìm kiếm --%>
                                 <div class="table-responsive">
                                     <div>
                                         <table style="min-width: 1200px; color: black;text-align: center">
@@ -367,8 +402,7 @@
                                                 <th></th>
                                             </tr>
                                             </thead>
-                                            <tbody class="san_pham_search" style="text-align: center"
-                                                   id="banglocthaydoi">
+                                            <tbody class="san_pham_search" style="text-align: center" id="banglocthaydoi">
                                             </tbody>
                                         </table>
                                     </div>
@@ -381,6 +415,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -404,6 +439,8 @@
         </div>
     </div>
 </div>
+
+
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
@@ -418,7 +455,16 @@
             type: 'GET',
             success: function (data) {
                 // Load lại trang sau khi xóa thành công
-                location.reload();
+                toastr.success("Xóa thành công", "Thành công", {
+                    timeOut: 100,
+                    closeButton: true,
+                    progressBar: true,
+                    positionClass: "toast-top-right"
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 100);
+
             },
             error: function (error) {
                 console.error('Lỗi khi xóa', error);
@@ -775,6 +821,7 @@
     });
 </script>
 
+
 <script>
     function loadInterface(interfaceUrl) {
         fetch(interfaceUrl)
@@ -897,4 +944,84 @@
 
 <!-- All init script -->
 <script src="../../../js/plugins-init/toastr-init.js"></script>
+<script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+<%--    <script >--%>
+
+<%--        var globalHdctId;--%>
+
+<%--        document.querySelectorAll('.chonSanPhamDoiTraButton').forEach(button => {--%>
+<%--            button.addEventListener('click', function () {--%>
+<%--                // Lấy giá trị hdct.id từ thuộc tính data--%>
+<%--                var hdctId = this.getAttribute('data-idhdctmoi');--%>
+
+<%--                // Lưu giá trị hdctId vào biến toàn cục--%>
+<%--                globalHdctId = hdctId;--%>
+
+<%--                // Gọi hàm để xử lý với giá trị hdct.id--%>
+
+<%--            });--%>
+<%--        });--%>
+
+
+<%--        let scanner = new Instascan.Scanner({video: document.getElementById('video2')});--%>
+<%--        Instascan.Camera.getCameras().then(function (cameras) {--%>
+<%--            if (cameras.length > 0) {--%>
+<%--                scanner.start(cameras[0]);--%>
+<%--            } else {--%>
+<%--                alert('Cameras found');--%>
+<%--            }--%>
+<%--        }).catch(function (e) {--%>
+<%--            console.error(e);--%>
+<%--        });--%>
+
+<%--        scanner.addListener("scan", function (soimei) {--%>
+<%--            // Chuyển người dùng đến trang controller khi quét thành công--%>
+<%--            &lt;%&ndash;window.location.href =  "/hoa-don-online/them-hoa-don-chi-tiet/"+"${listghcthd.get(0).hoaDon.id}"+"/"+qrcode;&ndash;%&gt;--%>
+<%--            window.location.href =  "/doi-tra/them-imei-qr/"+soimei+"/"+doitraId+"/"+globalHdctId;--%>
+
+<%--        });--%>
+<%--    </script>--%>
+<script>
+    function openModalWithVideo() {
+        // Mở modal
+        $('#newSanPham').modal('show');
+
+        // Khởi tạo và chạy video
+        let video = document.getElementById('video2');
+        let scanner = new Instascan.Scanner({ video: video });
+
+        Instascan.Camera.getCameras().then(function (cameras) {
+            if (cameras.length > 0) {
+                scanner.start(cameras[0]);
+            } else {
+                alert('Cameras not found');
+            }
+        }).catch(function (e) {
+            console.error(e);
+        });
+
+        // Bắt sự kiện khi click ra ngoài modal
+        $('#newSanPham').on('click', function (e) {
+            if (e.target === this) {
+                // Dừng video khi click ra ngoài modal
+                scanner.stop();
+                // Đóng modal
+                $('#newSanPham').modal('hide');
+            }
+        });
+
+        scanner.addListener("scan", function (soimei) {
+            window.location.href = "/doi-tra/them-imei-qr/" + soimei + "/" + doitraId + "/" + globalHdctId;
+        });
+    }
+</script>
+
+
+<script>
+    var errorNotification = "${requestScope.tbkhithemimei}";
+    if (errorNotification) {
+        toastr.error(errorNotification, 'Thông báo');
+    }
+</script>
+
 </html>

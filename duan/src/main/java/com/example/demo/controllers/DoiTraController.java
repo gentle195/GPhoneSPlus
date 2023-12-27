@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.DTO.DTODoiTra;
 import com.example.demo.models.*;
+import com.example.demo.repositories.IMEIRepository;
 import com.example.demo.services.*;
 import com.example.demo.util.SecurityUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -68,6 +70,9 @@ public class DoiTraController {
     private CameraService cameraService;
     @Autowired
     private DoiTraChiTietService doiTraChiTietService;
+
+    @Autowired
+    private IMEIRepository imeiRepository;
 
     private UUID idDT;
 
@@ -253,22 +258,22 @@ public class DoiTraController {
     }
 
 
-    @PostMapping("/add-doi-tra")
-    public String addHoaDon(Model model, @RequestParam("hoadonId") UUID hoadonId) {
-        // Xử lý dữ liệu từ hoadonId và tạo đổi trả mới
-        DoiTra hd = new DoiTra();
-        hd.setMa("DT" + String.valueOf(doiTraService.findAll().size() + 1));
-        hd.setTinhTrang(0);
-        hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
-        hd.setNgayTao(Date.valueOf(LocalDate.now()));
-        HoaDon hoaDon = hoaDonService.findById(hoadonId);
-        hd.setHoaDon(hoaDon); // Sử dụng hoadonId ở đây
-        hd.setKhachHang(hoaDon.getKhachHang());
-        doiTraService.add(hd);
-        model.addAttribute("doitraId", hd.getId());
-        // Trả về dữ liệu nếu cần (không biết cụ thể gì bạn muốn trả về)
-        return "redirect:/doi-tra/hien-thi/";
-    }
+//    @PostMapping("/add-doi-tra")
+//    public String addHoaDon(Model model, @RequestParam("hoadonId") UUID hoadonId) {
+//        // Xử lý dữ liệu từ hoadonId và tạo đổi trả mới
+//        DoiTra hd = new DoiTra();
+//        hd.setMa("DT" + String.valueOf(doiTraService.findAll().size() + 1));
+//        hd.setTinhTrang(0);
+//        hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+//        hd.setNgayTao(Date.valueOf(LocalDate.now()));
+//        HoaDon hoaDon = hoaDonService.findById(hoadonId);
+//        hd.setHoaDon(hoaDon); // Sử dụng hoadonId ở đây
+//        hd.setKhachHang(hoaDon.getKhachHang());
+//        doiTraService.add(hd);
+//        model.addAttribute("doitraId", hd.getId());
+//        // Trả về dữ liệu nếu cần (không biết cụ thể gì bạn muốn trả về)
+//        return "redirect:/doi-tra/hien-thi/";
+//    }
 
 
     @GetMapping("/them-imei/{imeiId}/{doitraId}/{hdctId}")
@@ -753,5 +758,75 @@ public class DoiTraController {
         headers.setContentDispositionFormData("attachment", "phieu_doi_hang" + dt.getHoaDon().getId() + ".pdf");
 
         return ResponseEntity.ok().headers(headers).body(pdfBytes);
+    }
+    @GetMapping("/them-imei-qr/{soImei}/{doitraId}/{hdctId}")
+    public String themImeiQR(@PathVariable("soImei") String soImei, RedirectAttributes redirectAttributes, Model model, @PathVariable UUID hdctId, @PathVariable UUID doitraId) {
+        System.out.println("so imei"+soImei);
+        HoaDonChiTiet hdct = hoaDonChiTietService.findById(hdctId);
+
+
+        DoiTra doiTra = doiTraService.findById(doitraId);
+        DoiTraChiTiet doiTraChiTiet = doiTraChiTietService.findByHDCT(hdctId);
+
+
+        IMEI imei = imeiRepository.getIMEISo(soImei);
+        System.out.println("imei"+imei.getSoImei());
+        if (hdct.getImei().getChiTietSanPham().getId().equals(imei.getChiTietSanPham().getId())) {
+            if (imei.getTinhTrang()==0){
+                if (doiTraChiTiet.getImei() != null) {
+                    long millis = System.currentTimeMillis();
+                    Date date = new Date(millis);
+                    UUID imeiIdne = doiTraChiTiet.getImei().getId();
+                    IMEI imei0 = imeiService.findById(doiTraChiTiet.getImei().getId());
+                    imei0.setTinhTrang(0);
+                    imei0.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+                    imeiService.update(doiTraChiTiet.getImei().getId(), imei0);
+                    doiTraChiTiet.setImei(imei);
+                    doiTraChiTiet.setTinhTrang(0);
+                    doiTraChiTiet.setDonGia(imei.getChiTietSanPham().getGiaBan());
+                    doiTraChiTiet.setTienDoiTra(BigDecimal.ZERO);
+                    doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
+                    imeiService.updatImeiChoXuLy(date, imei.getId());
+                } else {
+                    doiTraChiTiet.setImei(imei);
+                    doiTraChiTiet.setTinhTrang(0);
+                    doiTraChiTiet.setDonGia(imei.getChiTietSanPham().getGiaBan());
+                    doiTraChiTiet.setTienDoiTra(BigDecimal.ZERO);
+                    doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
+                    long millis = System.currentTimeMillis();
+                    Date date = new Date(millis);
+                    imeiService.updatImeiChoXuLy(date, imei.getId());
+
+                }
+            }else{
+                redirectAttributes.addFlashAttribute("tbkhithemimei", "Imei này không trong trạng thái đang bán");
+            }
+        }else{
+            redirectAttributes.addFlashAttribute("tbkhithemimei", "Chỉ được đổi máy tương tự ");
+        }
+        model.addAttribute("doitraId", doitraId);
+        return "redirect:/doi-tra/detail/" + doiTra.getHoaDon().getId() + "?doitraId=" + doitraId + "&hoadonId=" + doiTra.getHoaDon().getId();
+
+    }
+
+    @PostMapping("/add-doi-tra")
+    @ResponseBody
+    public Map<String, String> addHoaDon(Model model, @RequestParam("hoadonId") UUID hoadonId) {
+        Map<String, String> result = new HashMap<>();
+
+        // Xử lý dữ liệu từ hoadonId và tạo đổi trả mới
+        DoiTra hd = new DoiTra();
+        hd.setMa("DT" + String.valueOf(doiTraService.findAll().size() + 1));
+        hd.setTinhTrang(0);
+        hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+        hd.setNgayTao(Date.valueOf(LocalDate.now()));
+        HoaDon hoaDon = hoaDonService.findById(hoadonId);
+        hd.setHoaDon(hoaDon); // Sử dụng hoadonId ở đây
+        hd.setKhachHang(hoaDon.getKhachHang());
+
+        doiTraService.add(hd);
+        result.put("doitraId", hd.getId().toString());
+
+        return result;
     }
 }
