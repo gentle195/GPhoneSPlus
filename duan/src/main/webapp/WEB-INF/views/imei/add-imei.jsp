@@ -52,7 +52,7 @@
                         <form class="forms-sample">
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-11">
+                                    <div class="col-12">
                                         <form:select path="chiTietSanPham" class="form-control"
                                                      cssStyle="font-weight: bold; width: 100%" id="selectSanPham" onchange="validateSelect()">
                                             <option selected disabled>Sản phẩm</option>

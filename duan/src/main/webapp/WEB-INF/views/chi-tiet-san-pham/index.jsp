@@ -33,7 +33,8 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-het-hang" role="tab"
-               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm hết hàng</a>
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm hết
+                hàng</a>
         </li>
     </ul>
 </div>
@@ -153,9 +154,11 @@
                                     Xuất Excel
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a href="/chi-tiet-san-pham/export-excel" class="dropdown-item" tabindex="-1" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản
+                                    <a href="/chi-tiet-san-pham/export-excel" class="dropdown-item" tabindex="-1"
+                                       onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản
                                         phẩm còn kinh doanh</a>
-                                    <a href="/chi-tiet-san-pham/export-excel-chi-tiet-san-pham-ngung-kinh-doanh" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+                                    <a href="/chi-tiet-san-pham/export-excel-chi-tiet-san-pham-ngung-kinh-doanh"
+                                       onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
                                        class="dropdown-item"
                                        tabindex="-1">Sản phẩm ngừng kinh doanh
                                     </a>
@@ -246,7 +249,10 @@
                             <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                    aria-label="Bạn tìm gì..." name="search">
                             <div class="input-group-append">
-                                <button class="btn btn-sm btn-primary" type="submit" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Search</button>
+                                <button class="btn btn-sm btn-primary" type="submit"
+                                        onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                    Search
+                                </button>
                             </div>
                         </div>
 
@@ -277,38 +283,38 @@
                             <i class="mdi mdi-border-color"></i>
                             <c:forEach items="${listCTSP}" var="ctsp" varStatus="index">
                                 <c:if test="${banHangOnLinerepository.tongimeiTT0cua1ctsp(ctsp.id)>0}">
-                                <tr>
-                                    <td align="center">
-                                        <img src="/uploads/${ctsp.urlAnh}" width="40" height="40">
-                                    </td>
-                                    <td>${ctsp.ngayTao}</td>
-                                    <td>${ctsp.ngayCapNhat}</td>
-                                    <td>${ctsp.sanPham.ten}</td>
-                                    <td>${ctsp.mauSac.ten}</td>
-                                    <td>${ctsp.chip.ten}</td>
-                                    <td>${ctsp.ram.dungLuong}</td>
-                                    <td>${ctsp.rom.dungLuong}</td>
-                                    <td>${ctsp.pin.dungLuongPin.thongSo}</td>
-                                    <td>${banHangOnlineService.convertgiatien(ctsp.giaBan)} VND</td>
-                                    <td>${ctsp.tinhTrang==0?"Còn kinh doanh":"Ngừng kinh doanh"}</td>
-                                    <td>${ctsp.namBaoHanh}</td>
-                                    <td>${banHangOnLinerepository.tongimeiTT0cua1ctsp(ctsp.id)}</td>
-                                    <td>${ctsp.moTa}</td>
-                                    <td>
-                                        <a href="/chi-tiet-san-pham/view-update/${ctsp.id}"
-                                           class="btn btn-warning btn-icon-text"
-                                           tabindex="-1"
-                                           role="button"
-                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                            <i class="ti-file btn-icon-prepend"></i>
-                                            Update</a>
-                                        <a href="/chi-tiet-san-pham/view-them-nhanh-solg/${ctsp.id}/giaodienhienthi"
-                                           class="btn btn-success"
-                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                    <tr>
+                                        <td align="center">
+                                            <img src="/uploads/${ctsp.urlAnh}" width="40" height="40">
+                                        </td>
+                                        <td>${ctsp.ngayTao}</td>
+                                        <td>${ctsp.ngayCapNhat}</td>
+                                        <td>${ctsp.sanPham.ten}</td>
+                                        <td>${ctsp.mauSac.ten}</td>
+                                        <td>${ctsp.chip.ten}</td>
+                                        <td>${ctsp.ram.dungLuong}</td>
+                                        <td>${ctsp.rom.dungLuong}</td>
+                                        <td>${ctsp.pin.dungLuongPin.thongSo}</td>
+                                        <td>${banHangOnlineService.convertgiatien(ctsp.giaBan)} VND</td>
+                                        <td>${ctsp.tinhTrang==0?"Còn kinh doanh":"Ngừng kinh doanh"}</td>
+                                        <td>${ctsp.namBaoHanh}</td>
+                                        <td>${banHangOnLinerepository.tongimeiTT0cua1ctsp(ctsp.id)}</td>
+                                        <td>${ctsp.moTa}</td>
+                                        <td>
+                                            <a href="/chi-tiet-san-pham/view-update/${ctsp.id}"
+                                               class="btn btn-warning btn-icon-text"
+                                               tabindex="-1"
+                                               role="button"
+                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                                <i class="ti-file btn-icon-prepend"></i>
+                                                Update</a>
+                                            <a href="/chi-tiet-san-pham/view-them-nhanh-solg/${ctsp.id}/giaodienhienthi"
+                                               class="btn btn-success"
+                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
 
-                                            Thêm số lượng hàng</a>
-                                    </td>
-                                </tr>
+                                                Thêm số lượng hàng</a>
+                                        </td>
+                                    </tr>
                                 </c:if>
                             </c:forEach>
                             </tbody>
@@ -406,8 +412,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
-
-<button   id="modalthemsolgctsp" style="display: none" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal11">
+<button id="modalthemsolgctsp" style="display: none" type="button" class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#myModal11">
     Open modal
 </button>
 
@@ -418,46 +424,38 @@
         <div class="modal-content" style="width: 20cm;margin-left: -5cm">
 
 
-
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="tab-content" id="">
-                    <div class="tab-pane fade show active"  role="tabpanel"
+                    <div class="tab-pane fade show active" role="tabpanel"
                          aria-labelledby="description-tab">
-                        <form:form action="/chi-tiet-san-pham/themsolg/giaodienhienthi" method="post" modelAttribute="imei">
+                        <form:form action="/chi-tiet-san-pham/themsolg/giaodienhienthi" method="post"
+                                   modelAttribute="imei">
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-body" style="color: black">
                                         <form class="forms-sample">
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <div class="col-11">
-                                                        <h1 style="font-size: 15px">Chi tiết sản phẩm:<label class="text-danger">${tbidctsp}</label></h1>
+                                                    <div class="col-12">
+                                                        <h1 style="font-size: 15px">Chi tiết sản phẩm:<label
+                                                                class="text-danger">${tbidctsp}</label></h1>
                                                         <form:select path="chiTietSanPham" class="form-control"
                                                                      cssStyle="font-weight: bold; width: 100%;color: black"
-                                                                     id="selectSanPham2" onchange="validateSelect()" >
-                                                            <%--                                                            <option selected disabled>Sản phẩm</option>--%>
+                                                                     id="selectSanPham2" onchange="validateSelect()">
+                                                            <option selected disabled>Sản phẩm</option>
                                                             <c:forEach items="${listCTSP}" var="ctsp">
-                                                                <option value="${ctsp.id}"  <c:if test="${idctspdcchon==ctsp.id}">selected</c:if>   >
+                                                                <option value="${ctsp.id}"
+                                                                        <c:if test="${idctspdcchon==ctsp.id}">selected</c:if>   >
                                                                         ${ctsp.sanPham.ten} - ${ctsp.mauSac.ten}
                                                                     - ${ctsp.ram.dungLuong} - ${ctsp.rom.dungLuong}
-                                                                    - ${ctsp.chip.ten} - ${ctsp.pin.dungLuongPin.thongSo}
-
-                                                                    -----------
-                                                                    Số lượng còn:${banHangOnLinerepository.tongimeiTT0cua1ctsp(ctsp.id)}
-
-
-
+                                                                    - ${ctsp.chip.ten}
+                                                                    - ${ctsp.pin.dungLuongPin.thongSo}
                                                                 </option>
                                                             </c:forEach>
                                                         </form:select>
 
 
-                                                    </div>
-                                                    <div class="col-1">
-                                                        <a type="button" href="/chi-tiet-san-pham/view-add">
-                                                            <img src="/uploads/plus.png">
-                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -468,7 +466,9 @@
                                                 <form:errors path="ma" cssStyle="color: red"></form:errors>
                                             </div>
                                             <div class="form-group">
-                                                <form:label class="form-label" path="soImei">Imei:<label style="color: red">${tbimei}</label><form:errors path="soImei" cssStyle="color: red"></form:errors></form:label>
+                                                <form:label class="form-label"
+                                                            path="soImei">Imei:<label style="color: red">${tbimei}</label><form:errors
+                                                        path="soImei" cssStyle="color: red"></form:errors></form:label>
                                                 <form:input class="form-control" placeholder="Imei" path="soImei"/>
 
 
@@ -492,7 +492,6 @@
                     </div>
                 </div>
             </div>
-
 
 
         </div>

@@ -6,8 +6,12 @@
 <html lang="en">
 <head>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"
+            integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <%--    table--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -176,11 +180,14 @@
                                  style="border-radius: 10px;width: 3.5cm;margin-top: 10px;width: 180px">
                                 <div>
                                     <div>
-                                        <form action="/thong-tin-ca-nhan-khach-hang" method="post" style="display: none">
+                                        <form action="/thong-tin-ca-nhan-khach-hang" method="post"
+                                              style="display: none">
                                             <input value="${idkhachhang}" name="idKhachHang" style="display: none">
-                                            <button style="" class="btn btn-primary" type="submit" id="taikhoancuatoi">Tài khoản của tôi</button>
+                                            <button style="" class="btn btn-primary" type="submit" id="taikhoancuatoi">
+                                                Tài khoản của tôi
+                                            </button>
                                         </form>
-                                        <a  class="btn btn-primary" type="submit" onclick="anbt()">Tài khoản của tôi</a>
+                                        <a class="btn btn-primary" type="submit" onclick="anbt()">Tài khoản của tôi</a>
 
                                     </div>
                                     <div>
@@ -222,15 +229,15 @@
                         <form action="/ban-hang-online/trang-chu/tim-kiem" method="post">
                             <div class="input-with-button">
 
-                                <input type="text" id="searchInput" name="trangchutimkiem" placeholder="Tìm kiếm sản phẩm...">
+                                <input type="text" id="searchInput" name="trangchutimkiem"
+                                       placeholder="Tìm kiếm sản phẩm...">
                                 <%--                                    <button class="search-btn" type="submit">Search</button>--%>
-
 
 
                             </div>
                         </form>
 
-                        <div  style="  position: absolute;
+                        <div style="  position: absolute;
                         background-color: white;margin-top: 5px;
                         width: 95%; overflow: hidden;z-index: 11;
                         box-shadow: 0 1px 4px 0 rgba(0,0,0,.26);" id="searchResults" class="list-group">
@@ -261,7 +268,8 @@
                                         <div class="cart-list">
 
                                             <c:forEach items="${listghct}" var="ht" varStatus="stt">
-                                                <br><hr>
+                                                <br>
+                                                <hr>
                                                 <div style="border: 1px ;height: 2cm">
                                                     <div style="width: 80%;float: right">
                                                         <label style="font-weight: bold">Sản
@@ -273,13 +281,15 @@
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
                                                             <label style="font-weight: bold">Đơn
                                                                 giá:</label>${ht.basoOchammotlamGHDGKG()}đ -
-                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
+                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG()}
+                                                                đ
+                                                            </del>
                                                         </c:if>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
                                                             <label style="font-weight: bold">Đơn
                                                                 giá:</label>
                                                             ${ht.basoOchammotlamGHDG()} đ
-                                                        </c:if>                                                    </div>
+                                                        </c:if></div>
                                                     <div style="width: 18%;">
                                                         <input type="checkbox" name="checkidghTT" value="${ht.id}"
                                                                onclick="chonsanphamgiohangTT('${stt.index}','${ht.id}','${ht.gioHang.id}');"  ${ht.tinhTrang==0 ?"checked":""}>
@@ -297,7 +307,8 @@
                                             <small> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongsanphamchon()}
                                                 Sản phẩm được chọn</small>
                                             <br>
-                                            <label>Tổng:</label><label id="tongtienghtt">${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}</label><label>đ</label>
+                                            <label>Tổng:</label><label
+                                                id="tongtienghtt">${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}</label><label>đ</label>
 
                                         </div>
                                         <div class="cart-btns">
@@ -435,6 +446,27 @@
                             <input type="text" value="${hd.sdt}" disabled style="width: 97%" class="form-control"/>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-label" style="padding: 5px">Phương thức thanh toán:</label>
+                        <div class="col-sm-9">
+                            <c:if test="${hd.hinhThucThanhToan==2}">
+                                <input type="text" value="Chưa chọn" disabled style="width: 97%" class="form-control"/>
+                            </c:if>
+                            <c:if test="${hd.hinhThucThanhToan==0}">
+                                <input type="text" value="Tiền mặt" disabled style="width: 97%" class="form-control"/>
+                            </c:if>
+                            <c:if test="${hd.hinhThucThanhToan==1}">
+                                <input type="text" value="Chuyển khoản" disabled style="width: 97%"
+                                       class="form-control"/>
+                            </c:if>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-label" style="padding: 5px">Phí ship:</label>
+                        <div class="col-sm-9">
+                            <input type="text" value="${hd.phiShip}" disabled style="width: 97%" class="form-control"/>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-6">
@@ -468,33 +500,6 @@
                                    class="form-control"/>
                         </div>
                     </div>
-
-
-                </div>
-            </div>
-        </div>
-        <div class="row" style="margin-left: 2.5%;width: 95%">
-            <div class="col-4">
-                <div class="row" style="margin: 20px">
-                    <div class="form-group row">
-                        <label class="col-sm-6 col-label" style="padding: 5px">Phương thức thanh toán:</label>
-                        <div class="col-sm-6">
-                            <c:if test="${hd.hinhThucThanhToan==2}">
-                                <input type="text" value="Chưa chọn" disabled style="width: 97%" class="form-control"/>
-                            </c:if>
-                            <c:if test="${hd.hinhThucThanhToan==0}">
-                                <input type="text" value="Tiền mặt" disabled style="width: 97%" class="form-control"/>
-                            </c:if>
-                            <c:if test="${hd.hinhThucThanhToan==1}">
-                                <input type="text" value="Chuyển khoản" disabled style="width: 97%"
-                                       class="form-control"/>
-                            </c:if>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="row" style="margin: 20px">
                     <div class="form-group row">
                         <label class="col-sm-3 col-label" style="padding: 5px">Trạng thái:</label>
                         <div class="col-sm-9">
@@ -518,13 +523,9 @@
                             </c:if>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="row" style="margin: 20px">
                     <div class="form-group row">
-                        <label class="col-sm-5 col-label" style="padding: 5px">Trạng thái giao hàng:</label>
-                        <div class="col-sm-7">
+                        <label class="col-sm-3 col-label" style="padding: 5px">Trạng thái giao hàng:</label>
+                        <div class="col-sm-9">
                             <c:if test="${hd.tinhTrangGiaoHang==0}">
                                 <input type="text" value="Chờ xử lý" disabled style="width: 97%" class="form-control"/>
                             </c:if>
@@ -579,124 +580,124 @@
             <th>Số lượng</th>
             <th>Tổng</th>
             <th>Tình trạng</th>
-<%--            <th> Chức năng</th>--%>
+            <%--            <th> Chức năng</th>--%>
         </tr>
         </thead>
         <tbody>
         <c:set var="dem" scope="session" value="${0}"/>
         <c:forEach items="${banhangonline.dsDDHtheoIDHD(hd.id)}" var="ht" varStatus="stt">
-<%--            <c:if test="${stt.index==0}">--%>
-<%--                <tr>--%>
-<%--                    <td>--%>
-<%--                        <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}" width="40" height="40"--%>
-<%--                             style="border-radius:50% 50% 50% 50%">--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
-<%--                            ${ht.chiTietSanPham.sanPham.ten} - ${ht.chiTietSanPham.mauSac.ten}--%>
-<%--                        - ${ht.chiTietSanPham.ram.dungLuong} - ${ht.chiTietSanPham.rom.dungLuong}.--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
+            <%--            <c:if test="${stt.index==0}">--%>
+            <%--                <tr>--%>
+            <%--                    <td>--%>
+            <%--                        <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}" width="40" height="40"--%>
+            <%--                             style="border-radius:50% 50% 50% 50%">--%>
+            <%--                    </td>--%>
+            <%--                    <td>--%>
+            <%--                            ${ht.chiTietSanPham.sanPham.ten} - ${ht.chiTietSanPham.mauSac.ten}--%>
+            <%--                        - ${ht.chiTietSanPham.ram.dungLuong} - ${ht.chiTietSanPham.rom.dungLuong}.--%>
+            <%--                    </td>--%>
+            <%--                    <td>--%>
 
-<%--                            ${100-ht.donGiaKhiGiam/ht.donGia*100} %--%>
-<%--                    </td>--%>
+            <%--                            ${100-ht.donGiaKhiGiam/ht.donGia*100} %--%>
+            <%--                    </td>--%>
 
-<%--                    <td>--%>
-<%--                            ${banhangonline.convertgiatien(ht.donGiaKhiGiam)}  VND--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
-<%--                            ${ht.soLuong}--%>
-<%--                    </td>--%>
-<%--                    <td>${banhangonline.convertgiatien(ht.donGiaKhiGiam*ht.soLuong)}--%>
-<%--                        VND--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
-<%--                        <c:if test="${hd.tinhTrang==0}">--%>
-<%--                            <p>Chờ xử lý</p>--%>
-<%--                        </c:if>--%>
-<%--                        <c:if test="${hd.tinhTrang==1}">--%>
-<%--                            <p>Đã xác nhận</p>--%>
-<%--                        </c:if>--%>
-<%--                        <c:if test="${hd.tinhTrang==2}">--%>
-<%--                            <p>Đã Thanh toán</p>--%>
-<%--                        </c:if>--%>
-<%--                        <c:if test="${hd.tinhTrang==3}">--%>
-<%--                            <p>Chờ thanh toán</p>--%>
-<%--                        </c:if>--%>
-<%--                        <c:if test="${hd.tinhTrang==8}">--%>
-<%--                            <p>Đã hủy</p>--%>
-<%--                        </c:if>--%>
-<%--                    </td>--%>
-<%--&lt;%&ndash;                    <td>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                        <c:if test="${hd.tinhTrangGiaoHang==0}">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                            <c:if test="${ht.hoaDon.tinhTrang==0}">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                            </c:if>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                        </c:if>&ndash;%&gt;--%>
+            <%--                    <td>--%>
+            <%--                            ${banhangonline.convertgiatien(ht.donGiaKhiGiam)}  VND--%>
+            <%--                    </td>--%>
+            <%--                    <td>--%>
+            <%--                            ${ht.soLuong}--%>
+            <%--                    </td>--%>
+            <%--                    <td>${banhangonline.convertgiatien(ht.donGiaKhiGiam*ht.soLuong)}--%>
+            <%--                        VND--%>
+            <%--                    </td>--%>
+            <%--                    <td>--%>
+            <%--                        <c:if test="${hd.tinhTrang==0}">--%>
+            <%--                            <p>Chờ xử lý</p>--%>
+            <%--                        </c:if>--%>
+            <%--                        <c:if test="${hd.tinhTrang==1}">--%>
+            <%--                            <p>Đã xác nhận</p>--%>
+            <%--                        </c:if>--%>
+            <%--                        <c:if test="${hd.tinhTrang==2}">--%>
+            <%--                            <p>Đã Thanh toán</p>--%>
+            <%--                        </c:if>--%>
+            <%--                        <c:if test="${hd.tinhTrang==3}">--%>
+            <%--                            <p>Chờ thanh toán</p>--%>
+            <%--                        </c:if>--%>
+            <%--                        <c:if test="${hd.tinhTrang==8}">--%>
+            <%--                            <p>Đã hủy</p>--%>
+            <%--                        </c:if>--%>
+            <%--                    </td>--%>
+            <%--&lt;%&ndash;                    <td>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;                        <c:if test="${hd.tinhTrangGiaoHang==0}">&ndash;%&gt;--%>
+            <%--&lt;%&ndash;                            <c:if test="${ht.hoaDon.tinhTrang==0}">&ndash;%&gt;--%>
+            <%--&lt;%&ndash;                                <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;                            </c:if>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;                        </c:if>&ndash;%&gt;--%>
 
-<%--&lt;%&ndash;                    </td>&ndash;%&gt;--%>
-<%--                </tr>--%>
-<%--                <c:set var="dem" scope="session" value="${dem+1}"/>--%>
-<%--            </c:if>--%>
-<%--            <c:if test="${stt.index>0}">--%>
-<%--                <c:set var="checkck" scope="session" value="${0}"/>--%>
-<%--                <c:forEach items="${listhdct}" var="ht1" varStatus="stt1" begin="0" end="${stt.index-1}">--%>
-<%--                    <c:if test="${ht.imei.chiTietSanPham.id==ht1.imei.chiTietSanPham.id}">--%>
-<%--                        <c:set var="checkck" scope="session" value="${1}"/>--%>
-<%--                    </c:if>--%>
-<%--                </c:forEach>--%>
-<%--                <c:if test="${checkck==0}">--%>
-<%--                    <tr>--%>
-<%--                        <td>--%>
-<%--                            <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}" width="40" height="40"--%>
-<%--                                 style="border-radius:50% 50% 50% 50%">--%>
-<%--                        </td>--%>
-<%--                        <td>--%>
-<%--                                ${ht.chiTietSanPham.sanPham.ten} - ${ht.chiTietSanPham.mauSac.ten}--%>
-<%--                            - ${ht.chiTietSanPham.ram.dungLuong} - ${ht.chiTietSanPham.rom.dungLuong}.--%>
-<%--                        </td>--%>
-<%--                        <td>--%>
+            <%--&lt;%&ndash;                    </td>&ndash;%&gt;--%>
+            <%--                </tr>--%>
+            <%--                <c:set var="dem" scope="session" value="${dem+1}"/>--%>
+            <%--            </c:if>--%>
+            <%--            <c:if test="${stt.index>0}">--%>
+            <%--                <c:set var="checkck" scope="session" value="${0}"/>--%>
+            <%--                <c:forEach items="${listhdct}" var="ht1" varStatus="stt1" begin="0" end="${stt.index-1}">--%>
+            <%--                    <c:if test="${ht.imei.chiTietSanPham.id==ht1.imei.chiTietSanPham.id}">--%>
+            <%--                        <c:set var="checkck" scope="session" value="${1}"/>--%>
+            <%--                    </c:if>--%>
+            <%--                </c:forEach>--%>
+            <%--                <c:if test="${checkck==0}">--%>
+            <%--                    <tr>--%>
+            <%--                        <td>--%>
+            <%--                            <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}" width="40" height="40"--%>
+            <%--                                 style="border-radius:50% 50% 50% 50%">--%>
+            <%--                        </td>--%>
+            <%--                        <td>--%>
+            <%--                                ${ht.chiTietSanPham.sanPham.ten} - ${ht.chiTietSanPham.mauSac.ten}--%>
+            <%--                            - ${ht.chiTietSanPham.ram.dungLuong} - ${ht.chiTietSanPham.rom.dungLuong}.--%>
+            <%--                        </td>--%>
+            <%--                        <td>--%>
 
-<%--                                ${100-ht.donGiaKhiGiam/ht.donGia*100} %--%>
-<%--                        </td>--%>
+            <%--                                ${100-ht.donGiaKhiGiam/ht.donGia*100} %--%>
+            <%--                        </td>--%>
 
-<%--                        <td>--%>
-<%--                                ${banhangonline.convertgiatien(ht.donGiaKhiGiam)}  VND--%>
-<%--                        </td>--%>
-<%--                        <td>--%>
-<%--                                ${ht.soLuong}--%>
-<%--                        </td>--%>
-<%--                        <td>${banhangonline.convertgiatien(ht.donGiaKhiGiam*ht.soLuong)}--%>
-<%--                            VND--%>
-<%--                        </td>--%>
-<%--                        <td>--%>
-<%--                            <c:if test="${hd.tinhTrang==0}">--%>
-<%--                                <p>Chờ xử lý</p>--%>
-<%--                            </c:if>--%>
-<%--                            <c:if test="${hd.tinhTrang==1}">--%>
-<%--                                <p>Đã xác nhận</p>--%>
-<%--                            </c:if>--%>
-<%--                            <c:if test="${hd.tinhTrang==2}">--%>
-<%--                                <p>Đã Thanh toán</p>--%>
-<%--                            </c:if>--%>
-<%--                            <c:if test="${hd.tinhTrang==3}">--%>
-<%--                                <p>Chờ thanh toán</p>--%>
-<%--                            </c:if>--%>
-<%--                            <c:if test="${hd.tinhTrang==8}">--%>
-<%--                                <p>Đã hủy</p>--%>
-<%--                            </c:if>--%>
-<%--                        </td>--%>
-<%--&lt;%&ndash;                        <td>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                            <c:if test="${hd.tinhTrangGiaoHang==0}">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                <c:if test="${ht.hoaDon.tinhTrang==0}">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                </c:if>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                            </c:if>&ndash;%&gt;--%>
+            <%--                        <td>--%>
+            <%--                                ${banhangonline.convertgiatien(ht.donGiaKhiGiam)}  VND--%>
+            <%--                        </td>--%>
+            <%--                        <td>--%>
+            <%--                                ${ht.soLuong}--%>
+            <%--                        </td>--%>
+            <%--                        <td>${banhangonline.convertgiatien(ht.donGiaKhiGiam*ht.soLuong)}--%>
+            <%--                            VND--%>
+            <%--                        </td>--%>
+            <%--                        <td>--%>
+            <%--                            <c:if test="${hd.tinhTrang==0}">--%>
+            <%--                                <p>Chờ xử lý</p>--%>
+            <%--                            </c:if>--%>
+            <%--                            <c:if test="${hd.tinhTrang==1}">--%>
+            <%--                                <p>Đã xác nhận</p>--%>
+            <%--                            </c:if>--%>
+            <%--                            <c:if test="${hd.tinhTrang==2}">--%>
+            <%--                                <p>Đã Thanh toán</p>--%>
+            <%--                            </c:if>--%>
+            <%--                            <c:if test="${hd.tinhTrang==3}">--%>
+            <%--                                <p>Chờ thanh toán</p>--%>
+            <%--                            </c:if>--%>
+            <%--                            <c:if test="${hd.tinhTrang==8}">--%>
+            <%--                                <p>Đã hủy</p>--%>
+            <%--                            </c:if>--%>
+            <%--                        </td>--%>
+            <%--&lt;%&ndash;                        <td>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;                            <c:if test="${hd.tinhTrangGiaoHang==0}">&ndash;%&gt;--%>
+            <%--&lt;%&ndash;                                <c:if test="${ht.hoaDon.tinhTrang==0}">&ndash;%&gt;--%>
+            <%--&lt;%&ndash;                                    <a onclick="xoahdct('${ht.id}');" class="btn btn-primary">Hủy</a>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;                                </c:if>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;                            </c:if>&ndash;%&gt;--%>
 
-<%--&lt;%&ndash;                        </td>&ndash;%&gt;--%>
-<%--                    </tr>--%>
-<%--                    <c:set var="dem" scope="session" value="${dem+1}"/>--%>
-<%--                </c:if>--%>
-<%--            </c:if>--%>
+            <%--&lt;%&ndash;                        </td>&ndash;%&gt;--%>
+            <%--                    </tr>--%>
+            <%--                    <c:set var="dem" scope="session" value="${dem+1}"/>--%>
+            <%--                </c:if>--%>
+            <%--            </c:if>--%>
 
             <tr>
                 <td>
@@ -713,7 +714,7 @@
                 </td>
 
                 <td>
-                        ${banhangonline.convertgiatien(ht.donGiaKhiGiam)}  VND
+                        ${banhangonline.convertgiatien(ht.donGiaKhiGiam)} VND
                 </td>
                 <td>
                         ${ht.soLuong}
@@ -759,7 +760,7 @@
 
 
     <c:if test="${not empty listdtct}">
-        <table class="table table-striped" style="text-content: center;width: 90%;margin-left: 5%;margin-bottom: 100px" >
+        <table class="table table-striped" style="text-content: center;width: 90%;margin-left: 5%;margin-bottom: 100px">
 
             <h3 style="text-align: center">Thông tin đổi trả</h3>
             <thead>
@@ -780,12 +781,15 @@
                     <tr>
 
                         <td>
-                            <img src="../../../uploads/${ht.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}" width="40" height="40"
+                            <img src="../../../uploads/${ht.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}" width="40"
+                                 height="40"
                                  style="border-radius:50% 50% 50% 50%">
                         </td>
                         <td>
-                                ${ht.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten} - ${ht.hoaDonChiTiet.imei.chiTietSanPham.mauSac.ten}
-                            - ${ht.hoaDonChiTiet.imei.chiTietSanPham.ram.dungLuong} - ${ht.hoaDonChiTiet.imei.chiTietSanPham.rom.dungLuong}.
+                                ${ht.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten}
+                            - ${ht.hoaDonChiTiet.imei.chiTietSanPham.mauSac.ten}
+                            - ${ht.hoaDonChiTiet.imei.chiTietSanPham.ram.dungLuong}
+                            - ${ht.hoaDonChiTiet.imei.chiTietSanPham.rom.dungLuong}.
                         </td>
                         <td>
                             <img src="../../../uploads/${ht.imei.chiTietSanPham.urlAnh}" width="40" height="40"
@@ -817,11 +821,11 @@
                 </c:if>
 
 
-
                 </tbody>
 
                 <c:if test="${ht.doiTra.tinhTrang==0}">
-                    <a class="btn btn-primary" style="background-color: #ff0000;margin-bottom: -300px;margin-left: 95%" href="/ban-hang-online/huy/${ht.doiTra.id}" type="button">Hủy</a>
+                    <a class="btn btn-primary" style="background-color: #ff0000;margin-bottom: -300px;margin-left: 95%"
+                       href="/ban-hang-online/huy/${ht.doiTra.id}" type="button">Hủy</a>
                 </c:if>
             </c:forEach>
                 <%--        <a href="/ban-hang-online/huy/${ht.doiTra.id}" type="button">Hủy</a>--%>
@@ -845,9 +849,10 @@
                         <input type="text" value="${hd.id}" name="idhd" style="display: none">
                         <br>
                         <div>Người nhận:<label style="background: white;color: red;border: 1px solid white"
-                                               id="tbnguoinhan" ></label></div>
+                                               id="tbnguoinhan"></label></div>
                         <br>
-                        <input type="text" id="ktnguoinhan" name="nguoinhan" value="${hd.nguoiNhan}" style="width: 100%">
+                        <input type="text" id="ktnguoinhan" name="nguoinhan" value="${hd.nguoiNhan}"
+                               style="width: 100%">
                         <br><br>
                         <div>Số điện thoại:<label style="background: white;color: red;border: 1px solid white"
                                                   id="sodienthoai"></label></div>
@@ -918,7 +923,7 @@
 
                             <div>Địa chỉ cụ thể:<label style="background: white;color: red;border: 1px solid white"
                                                        id="tb1"></label></div>
-                            <input type="text" id="themdiachidathangdiachi" name="diachi" style="width: 5cm" ><br>
+                            <input type="text" id="themdiachidathangdiachi" name="diachi" style="width: 5cm"><br>
 
                             <%--                            <h2 id="result"></h2>--%>
                         </div>
@@ -1215,6 +1220,7 @@
         // Bắt đầu quá trình tải script
         loadScript(0);
     }
+
     function loadSelect2diachi() {
         $('#diachids11').select2({
             theme: 'bootstrap-5',
@@ -1232,6 +1238,7 @@
     function anbt() {
         document.getElementById('taikhoancuatoi').click();
     }
+
     function formatAndDisplayValue(elementId) {
         // Lấy giá trị từ thẻ div
         var originalValue = document.getElementById(elementId).textContent;
@@ -1242,6 +1249,7 @@
         // Gán giá trị đã định dạng lại vào thẻ div
         document.getElementById(elementId).textContent = formattedValue;
     }
+
     formatAndDisplayValue("tongtienghtt");
     <c:if test="${batmodalcapnhathdctkh==0}">
     document.getElementById('capnhatthongtingiaohang').click();
@@ -1250,7 +1258,7 @@
 <script>
     var searchResultsContainer = document.getElementById("searchResults");
 
-    document.getElementById("searchInput").addEventListener("input", function() {
+    document.getElementById("searchInput").addEventListener("input", function () {
         var searchValue = this.value.trim().toLowerCase();
         showSearchResults(searchValue);
     });
@@ -1258,7 +1266,7 @@
     function showSearchResults(searchValue) {
         if (searchValue.length > 0) {
             // document.getElementById('saochep').innerHTML=   document.getElementById('searchInput').value
-            loadgiaodientimkiemTrangchu("/ban-hang-online/trang-chu/tim-kiem-loc/"+document.getElementById('searchInput').value);
+            loadgiaodientimkiemTrangchu("/ban-hang-online/trang-chu/tim-kiem-loc/" + document.getElementById('searchInput').value);
             searchResultsContainer.style.display = "";
         } else {
             // Nếu không có ký tự nào, ẩn kết quả
@@ -1280,7 +1288,6 @@
             .catch(error => {
                 console.error('Error loading interface:', error);
             });
-
 
 
     }

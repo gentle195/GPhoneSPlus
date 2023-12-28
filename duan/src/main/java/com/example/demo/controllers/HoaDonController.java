@@ -561,7 +561,7 @@ public class HoaDonController {
                 hd.setKhachHang(hoaDonnn.getKhachHang());
                 hd.setLoai(loai);
                 hd.setHinhThucThanhToan(httt);
-                hd.setPhiShip(BigDecimal.ZERO);
+
                 LocalDate ngayCapNhat = LocalDate.now();
                 List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
                 if (!list.isEmpty()) {
@@ -597,7 +597,7 @@ public class HoaDonController {
                 hd.setKhachHang(hoaDonnn.getKhachHang());
                 hd.setNgayShip(Date.valueOf(LocalDate.now()));
                 hd.setNgayNhan(Date.valueOf(LocalDate.now()));
-                hd.setPhiShip(BigDecimal.ZERO);
+
                 LocalDate ngayCapNhat = LocalDate.now();
                 List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
                 if (!list.isEmpty()) {
@@ -626,7 +626,7 @@ public class HoaDonController {
                 hoaDon.setNgayTao(hoaDonnn.getNgayTao());
                 hoaDon.setNgayShip(Date.valueOf(LocalDate.now()));
                 hoaDon.setNgayNhan(Date.valueOf(LocalDate.now()));
-                hoaDon.setPhiShip(BigDecimal.ZERO);
+                hoaDon.setPhiShip(BigDecimal.valueOf(30000));
                 hoaDon.setMaGiaoDich(hoaDonnn.getMaGiaoDich());
                 hoaDonService.update(id, hoaDon);
             }
@@ -842,10 +842,11 @@ public class HoaDonController {
             System.out.println(total);
             model.addAttribute("tong", String.valueOf(total));
             model.addAttribute("listHoaDonChiTiet", list);
-            model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
             model.addAttribute("hoaDon", hoaDonnn);
-            model.addAttribute("listDiaChi", diaChiService.diaChiThanhToan(hoaDonService.findById(hoaDonnn.getId()).getKhachHang().getId()));
-            return "redirect:/hoa-don/view-update/" + idHoaDon;
+            model.addAttribute("listDiaChi", diaChiService.diaChiThanhToan(hoaDonService.findById(idHoaDon).getKhachHang().getId()));
+            model.addAttribute("thongBaoHoaDon1", "Sản phẩm đã thêm vào hóa đơn");
+            model.addAttribute("contentPage", "../hoadon/hoa-don-view-update.jsp");
+            return "home/layout";
         } else {
             chiTietSanPhamService.update1(ct);
             List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId());
@@ -868,9 +869,10 @@ public class HoaDonController {
             model.addAttribute("tong", String.valueOf(total));
             model.addAttribute("listHoaDonChiTiet", list);
             model.addAttribute("hoaDon", hoaDonnn);
-            model.addAttribute("listChiTietSanPham", chiTietSanPhamService.findAll0());
-            model.addAttribute("listDiaChi", diaChiService.diaChiThanhToan(hoaDonService.findById(hoaDonnn.getId()).getKhachHang().getId()));
-            return "redirect:/hoa-don/view-update/" + idHoaDon;
+            model.addAttribute("listDiaChi", diaChiService.diaChiThanhToan(hoaDonService.findById(idHoaDon).getKhachHang().getId()));
+            model.addAttribute("thongBaoHoaDon1", "Sản phẩm đã thêm vào hóa đơn");
+            model.addAttribute("contentPage", "../hoadon/hoa-don-view-update.jsp");
+            return "home/layout";
         }
     }
 
@@ -882,9 +884,6 @@ public class HoaDonController {
         hd.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         if (hd.getNgayShip() == null) {
             hd.setNgayShip(Date.valueOf(LocalDate.now()));
-        }
-        if (hd.getPhiShip() == null) {
-            hd.setPhiShip(BigDecimal.ZERO);
         }
         hoaDonService.update(id, hd);
         idHoaDon = id;
@@ -926,7 +925,6 @@ public class HoaDonController {
                 imeiService.updatImei(Date.valueOf(LocalDate.now()), hdct.getId());
             }
         }
-
 
         return "redirect:/hoa-don/hien-thi";
     }
@@ -1029,14 +1027,13 @@ public class HoaDonController {
 
         IMEI imei = imeiService.searchSoImei(id);
         if (imei == null) {
-
-            model.addAttribute("thongBaoHoaDon", "Sản phẩm vừa quét đã bán hoặc đang chờ xử lý");
             List<HoaDonChiTiet> listHoaDonChiTiet = hoaDonChiTietService.getHoaDonChiTiet(idHoaDon);
             model.addAttribute("listDiaChi", diaChiService.diaChiThanhToan(hoaDonService.findById(idHoaDon).getKhachHang().getId()));
             HoaDon hoaDon = hoaDonService.findById(idHoaDon);
             loai = hoaDonnn.getLoai();
             httt = hoaDonnn.getHinhThucThanhToan();
             hoaDonnn = hoaDon;
+            model.addAttribute("thongBaoHoaDon", "Sản phẩm vừa quét đã bán hoặc đang chờ xử lý");
             model.addAttribute("hoaDon", hoaDon);
             model.addAttribute("tong", hoaDon.getTongTien());
             model.addAttribute("listHoaDonChiTiet", listHoaDonChiTiet);
