@@ -13,8 +13,117 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"/>
     <link rel="stylesheet" href="../../../vendor/toastr/css/toastr.min.css">
+    <%--thắng làm--%>
+    <style>
+
+
+        .notifications {
+            position: absolute;
+            top: 30px;
+            right: 20px;
+        }
+
+        .toast1 {
+
+            position: relative;
+            padding: 10px;
+            color: #fff;
+            margin-bottom: 10px;
+            width: 400px;
+            display: grid;
+            grid-template-columns: 70px 1fr 70px;
+            border-radius: 5px;
+            --color: #0abf30;
+            background-image: linear-gradient(
+                    to right, #0abf3055, #22242f 30%
+            );
+            animation: show 0.3s ease 1 forwards
+        }
+
+        .toast1 i {
+            color: var(--color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: x-large;
+        }
+
+        .toast1 .title {
+            font-size: x-large;
+            font-weight: bold;
+        }
+
+        .toast1 span, .toast1 i:nth-child(3) {
+            color: #fff;
+            opacity: 0.6;
+        }
+
+        @keyframes show {
+            0% {
+                transform: translateX(100%);
+            }
+            40% {
+                transform: translateX(-5%);
+            }
+            80% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-10%);
+            }
+        }
+
+        .toast1::before {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: seagreen;
+            width: 100%;
+            height: 3px;
+            content: '';
+            box-shadow: 0 0 10px var(--color);
+            animation: timeOut 5s linear 1 forwards
+        }
+
+        @keyframes timeOut {
+            to {
+                width: 0;
+            }
+        }
+
+        .toast1.error {
+            --color: #f24d4c;
+            background-image: linear-gradient(
+                    to right, #f24d4c55, #22242F 30%
+            );
+        }
+
+        .toast1.warning {
+            --color: #e9bd0c;
+            background-image: linear-gradient(
+                    to right, #e9bd0c55, #22242F 30%
+            );
+        }
+
+        .toast1.info {
+            --color: #3498db;
+            background-image: linear-gradient(
+                    to right, #3498db55, #22242F 30%
+            );
+        }
+
+        .dataTables_filter {
+            display: block;
+        }
+
+        .dataTables_info {
+            display: block;
+        }
+    </style>
+    <%--hết thắng làm--%>
 </head>
 <body>
+<button id="error" style="display: none">Error</button>
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
@@ -38,11 +147,11 @@
                         </h4>
                         <div class="basic-dropdown" style="float: right">
                             <div class="dropdown">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" >
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                     <i class="ti-export btn-icon-prepend"></i>
                                     Xuất Excel
                                 </button>
-                                <div class="dropdown-menu" >
+                                <div class="dropdown-menu">
                                     <a href="/hoa-don/export-excel" class="dropdown-item" tabindex="-1">Theo ngày thanh
                                         toán</a>
                                     <a href="/hoa-don/export-excel-ngay-nhan" class="dropdown-item" tabindex="-1">Theo
@@ -280,7 +389,7 @@
                                             <i class="ti-file btn-icon-prepend"></i>
                                             Detail</a>
                                         <c:if test="${hoaDon.loai== 1 && hoaDon.nhanVien== null && (hoaDon.tinhTrang == 2 || hoaDon.tinhTrang==3)}">
-                                            <a href="/hoa-don/xac-nhan/${hoaDon.id}"
+                                            <a href="/hoa-don-online/xac-nhan/detail/${hoaDon.id}"
                                                class="btn btn-info btn-icon-text"
                                                tabindex="-1"
                                                role="button"
@@ -415,6 +524,38 @@
 
         return soNgay <= 7;
     }
+</script>
+<script>
+    let error = document.getElementById('error');
+    let notifications = document.querySelector('.notifications');
+
+    function createToast() {
+        let newToast = document.createElement('div');
+        newToast.innerHTML = `
+            <div class="toast1 Success" style="height: 2cm;">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <div class="content">
+                    <div class="title" style="font-size:20px">${batthongbaobenhoadon}</div>
+
+                </div>
+                <i class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
+            </div>`;
+        notifications.appendChild(newToast);
+        newToast.timeOut = setTimeout(
+            () => newToast.remove(), 5000
+        )
+    }
+
+    error.onclick = function () {
+        let type = 'error';
+        let icon = 'fa-solid fa-circle-exclamation';
+        let title = 'Error';
+        let text = 'This is a error toast.';
+        createToast(type, icon, title, text);
+    }
+
+    <c:if test="${batthongbaobenhoadon !=null}">document.getElementById('error').click()
+    </c:if>
 </script>
 <script src="../../../vendor/global/global.min.js"></script>
 <script src="../../../js/quixnav-init.js"></script>

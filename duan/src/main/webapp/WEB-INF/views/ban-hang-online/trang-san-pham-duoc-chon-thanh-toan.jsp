@@ -464,7 +464,7 @@
                     <div style="color: red"><label>Lưu ý:
                         <br>- Cửa hàng chỉ có thể giao hàng cho các đơn hàng trong khu vực thành phố Hà Nội,
                         rất mong khách hàng chiếu cố cho sự bất tiện này
-                        <br>- Phí ship khách hàng sẽ trao đổi với người giao hàng</label>
+                        <br>- Phí ship của đơn hàng là 30.000 VNĐ với mọi đơn hàng</label>
                     </div>
                 </div>
 
