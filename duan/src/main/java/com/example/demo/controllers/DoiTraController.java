@@ -759,9 +759,10 @@ public class DoiTraController {
 
         return ResponseEntity.ok().headers(headers).body(pdfBytes);
     }
+
     @GetMapping("/them-imei-qr/{soImei}/{doitraId}/{hdctId}")
     public String themImeiQR(@PathVariable("soImei") String soImei, RedirectAttributes redirectAttributes, Model model, @PathVariable UUID hdctId, @PathVariable UUID doitraId) {
-        System.out.println("so imei"+soImei);
+        System.out.println("so imei" + soImei);
         HoaDonChiTiet hdct = hoaDonChiTietService.findById(hdctId);
 
 
@@ -770,9 +771,13 @@ public class DoiTraController {
 
 
         IMEI imei = imeiRepository.getIMEISo(soImei);
-        System.out.println("imei"+imei.getSoImei());
-        if (hdct.getImei().getChiTietSanPham().getId().equals(imei.getChiTietSanPham().getId())) {
-            if (imei.getTinhTrang()==0){
+        System.out.println("imei" + imei.getSoImei());
+        if (hdct.getImei().getChiTietSanPham().getSanPham().getId() == imei.getChiTietSanPham().getSanPham().getId()
+                && hdct.getImei().getChiTietSanPham().getChip().getId() == imei.getChiTietSanPham().getChip().getId()
+                && hdct.getImei().getChiTietSanPham().getRam().getId() == imei.getChiTietSanPham().getRam().getId()
+                && hdct.getImei().getChiTietSanPham().getRom().getId() == imei.getChiTietSanPham().getRom().getId()
+                && hdct.getImei().getChiTietSanPham().getPin().getId() == imei.getChiTietSanPham().getPin().getId()) {
+            if (imei.getTinhTrang() == 0) {
                 if (doiTraChiTiet.getImei() != null) {
                     long millis = System.currentTimeMillis();
                     Date date = new Date(millis);
@@ -798,10 +803,10 @@ public class DoiTraController {
                     imeiService.updatImeiChoXuLy(date, imei.getId());
 
                 }
-            }else{
+            } else {
                 redirectAttributes.addFlashAttribute("tbkhithemimei", "Imei này không trong trạng thái đang bán");
             }
-        }else{
+        } else {
             redirectAttributes.addFlashAttribute("tbkhithemimei", "Chỉ được đổi máy tương tự ");
         }
         model.addAttribute("doitraId", doitraId);

@@ -10,7 +10,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Focus - Bootstrap Admin Dashboard </title>
     <link rel="stylesheet" href="../../../vendor/toastr/css/toastr.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"/>
     <style>
@@ -168,7 +169,8 @@
                                                     var tongTien = ${hdct.donGia};
                                                     document.write(tongTien.toLocaleString('vi-VN'));
                                                 </script>
-                                                VND</td>
+                                                VND
+                                            </td>
 
                                                 <%--                                            <td>${hdct.donGia}</td>--%>
                                             <td>
@@ -225,7 +227,8 @@
                                                         var tongTien = ${hdct.hoaDonChiTiet.imei.chiTietSanPham.giaBan};
                                                         document.write(tongTien.toLocaleString('vi-VN'));
                                                     </script>
-                                                    VND</td>
+                                                    VND
+                                                </td>
 
 
                                                 <td>
@@ -239,7 +242,6 @@
                                                                     idRom="${hdct.hoaDonChiTiet.imei.chiTietSanPham.rom.id}"
                                                                     idPin="${hdct.hoaDonChiTiet.imei.chiTietSanPham.pin.id}"
                                                                     onclick='openModalWithVideo()'
-
 
 
                                                             >
@@ -304,7 +306,8 @@
                                                             var tongTien = ${hdct.hoaDonChiTiet.donGia};
                                                             document.write(tongTien.toLocaleString('vi-VN'));
                                                         </script>
-                                                        VND</td>
+                                                        VND
+                                                    </td>
 
 
                                                     <td align="center">
@@ -358,29 +361,22 @@
                             <div class="card-body">
                                 <h4 class="card-title" style="float: left">Sản phẩm</h4>
                                 <%-- Tìm kiếm --%>
-                                <div class="ban-hang" style="align-items: center; display: flex; justify-content: space-between; align-items: center;margin-left: 100px">
-                                    <div style="flex: 1;">
-                                        <video
-                                                style="border: 1px solid; width: 200px; height: 120px;"
-                                                id="video2"
-                                                autoplay="false"
-                                        ></video>
-                                    </div>
-                                    <div style="flex: 1;">
-                                        <div class="input-group">
-                                            <input type="text"
-                                                   class="form-control"
-                                                   name="search-imei"
-                                                   id="imeiSearchInput"
-                                                   placeholder="Tìm kiếm IMEI">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-sm btn-primary"
-                                                        type="button"
-                                                        id="searchImei"
-                                                >Tìm kiếm
-                                                </button>
-                                            </div>
-                                        </div>
+                                <div class="input-group" style="width: 30%; float: right">
+                                    <button class="btn btn-sm btn-primary"
+                                            type="button" data-bs-toggle="modal"
+                                            data-bs-target="#qrCam">Quét QR
+                                    </button>
+                                    <input type="text"
+                                           class="form-control"
+                                           name="search-imei"
+                                           id="imeiSearchInput"
+                                           placeholder="Tìm kiếm IMEI">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-sm btn-primary"
+                                                type="button"
+                                                id="searchImei"
+                                        >Tìm kiếm
+                                        </button>
                                     </div>
                                 </div>
                                 <br>
@@ -402,7 +398,8 @@
                                                 <th></th>
                                             </tr>
                                             </thead>
-                                            <tbody class="san_pham_search" style="text-align: center" id="banglocthaydoi">
+                                            <tbody class="san_pham_search" style="text-align: center"
+                                                   id="banglocthaydoi">
                                             </tbody>
                                         </table>
                                     </div>
@@ -415,7 +412,32 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="qrCam" tabindex="-1" aria-labelledby="modal-1-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="ban-hang d-flex justify-content-center align-items-center">
+                    <video
+                            style="border: 1px solid; width: 200px; height: 120px;"
+                            id="video2"
+                            autoplay="false"
+                    ></video>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#newSanPham">
+                    Quay về
+                </button>
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -945,42 +967,6 @@
 <!-- All init script -->
 <script src="../../../js/plugins-init/toastr-init.js"></script>
 <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-<%--    <script >--%>
-
-<%--        var globalHdctId;--%>
-
-<%--        document.querySelectorAll('.chonSanPhamDoiTraButton').forEach(button => {--%>
-<%--            button.addEventListener('click', function () {--%>
-<%--                // Lấy giá trị hdct.id từ thuộc tính data--%>
-<%--                var hdctId = this.getAttribute('data-idhdctmoi');--%>
-
-<%--                // Lưu giá trị hdctId vào biến toàn cục--%>
-<%--                globalHdctId = hdctId;--%>
-
-<%--                // Gọi hàm để xử lý với giá trị hdct.id--%>
-
-<%--            });--%>
-<%--        });--%>
-
-
-<%--        let scanner = new Instascan.Scanner({video: document.getElementById('video2')});--%>
-<%--        Instascan.Camera.getCameras().then(function (cameras) {--%>
-<%--            if (cameras.length > 0) {--%>
-<%--                scanner.start(cameras[0]);--%>
-<%--            } else {--%>
-<%--                alert('Cameras found');--%>
-<%--            }--%>
-<%--        }).catch(function (e) {--%>
-<%--            console.error(e);--%>
-<%--        });--%>
-
-<%--        scanner.addListener("scan", function (soimei) {--%>
-<%--            // Chuyển người dùng đến trang controller khi quét thành công--%>
-<%--            &lt;%&ndash;window.location.href =  "/hoa-don-online/them-hoa-don-chi-tiet/"+"${listghcthd.get(0).hoaDon.id}"+"/"+qrcode;&ndash;%&gt;--%>
-<%--            window.location.href =  "/doi-tra/them-imei-qr/"+soimei+"/"+doitraId+"/"+globalHdctId;--%>
-
-<%--        });--%>
-<%--    </script>--%>
 <script>
     function openModalWithVideo() {
         // Mở modal
@@ -988,7 +974,7 @@
 
         // Khởi tạo và chạy video
         let video = document.getElementById('video2');
-        let scanner = new Instascan.Scanner({ video: video });
+        let scanner = new Instascan.Scanner({video: video});
 
         Instascan.Camera.getCameras().then(function (cameras) {
             if (cameras.length > 0) {
