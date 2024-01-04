@@ -24,17 +24,18 @@
                 sản phẩm</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-het-hang" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm hết
+                hàng</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               aria-controls="description" aria-selected="true" role="tab">Sản phẩm đã xóa</a>
+               aria-controls="description" aria-selected="true" role="tab">Sản phẩm ngừng kinh doanh</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/chi-tiet-san-pham/view-add" role="tab"
                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm mới chi tiết
                 sản phẩm</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-het-hang" role="tab"
-               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm hết hàng</a>
         </li>
     </ul>
 </div>
@@ -152,9 +153,11 @@
                                     Xuất Excel
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a href="/chi-tiet-san-pham/export-excel" class="dropdown-item" tabindex="-1" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản
+                                    <a href="/chi-tiet-san-pham/export-excel" class="dropdown-item" tabindex="-1"
+                                       onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản
                                         phẩm còn kinh doanh</a>
-                                    <a href="/chi-tiet-san-pham/export-excel-chi-tiet-san-pham-ngung-kinh-doanh" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+                                    <a href="/chi-tiet-san-pham/export-excel-chi-tiet-san-pham-ngung-kinh-doanh"
+                                       onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
                                        class="dropdown-item"
                                        tabindex="-1">Sản phẩm ngừng kinh doanh
                                     </a>
@@ -241,14 +244,15 @@
                     </h4>
 
                     <%--            Tìm kiếm               --%>
-                    <form action="/chi-tiet-san-pham/search-da-xoa" method="post" >
+                    <form action="/chi-tiet-san-pham/search-da-xoa" method="post">
                         <div class="input-group" style="width: 30%; float: right">
                             <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                    aria-label="Bạn tìm gì..." name="search">
                             <div class="input-group-append">
                                 <button class="btn btn-sm btn-primary" type="submit"
                                         onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
-                                >Search</button>
+                                >Search
+                                </button>
                             </div>
                         </div>
                         <div style="float: right">
@@ -303,7 +307,7 @@
                                     <td>${ctsp.ram.dungLuong}</td>
                                     <td>${ctsp.rom.dungLuong}</td>
                                     <td>${ctsp.pin.dungLuongPin.thongSo}</td>
-                                    <td>${ctsp.giaBan} VND</td>
+                                    <td>${banHangOnlineService.convertgiatien(ctsp.giaBan)} VND</td>
                                     <td>${ctsp.tinhTrang==0?"Còn kinh doanh":"Ngừng kinh doanh"}</td>
                                     <td>${ctsp.namBaoHanh}</td>
                                     <td>${ctsp.soLuong}</td>
@@ -386,6 +390,7 @@
     </div>
 </c:if>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     $(document).ready(function () {
         $('#modalSuccess').modal('show');

@@ -20,6 +20,7 @@
     .form-group {
         margin-bottom: 40px;
     }
+
     .notifications {
         position: absolute;
         top: 30px;
@@ -169,16 +170,18 @@
                 sản phẩm</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-het-hang" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm hết
+                hàng</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-da-xoa" role="tab"
-               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xóa</a>
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm ngừng kinh
+                doanh</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
                aria-controls="description" aria-selected="true" role="tab">Thêm mới chi tiết sản phẩm</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-het-hang" role="tab"
-               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm hết hàng</a>
         </li>
     </ul>
 </div>
@@ -246,7 +249,8 @@
 
                                         </div>
                                         <div class="col-1">
-                                            <a type="button" id="modalChip" data-bs-toggle="modal" data-bs-target="#exampleModalChip">
+                                            <a type="button" id="modalChip" data-bs-toggle="modal"
+                                               data-bs-target="#exampleModalChip">
                                                 <img src="../uploads/plus.png">
                                             </a>
                                         </div>
@@ -264,7 +268,8 @@
 
                                         </div>
                                         <div class="col-1">
-                                            <a type="button" id="modalRom" data-bs-toggle="modal" data-bs-target="#exampleModalRom">
+                                            <a type="button" id="modalRom" data-bs-toggle="modal"
+                                               data-bs-target="#exampleModalRom">
                                                 <img src="../uploads/plus.png">
                                             </a>
                                         </div>
@@ -303,7 +308,8 @@
 
                                         </div>
                                         <div class="col-1">
-                                            <a type="button" id="modalRam" data-bs-toggle="modal" data-bs-target="#exampleModalRam">
+                                            <a type="button" id="modalRam" data-bs-toggle="modal"
+                                               data-bs-target="#exampleModalRam">
                                                 <img src="../uploads/plus.png">
                                             </a>
                                         </div>
@@ -322,7 +328,8 @@
 
                                         </div>
                                         <div class="col-1">
-                                            <a type="button" id="modalPin" data-bs-toggle="modal" data-bs-target="#exampleModalPin">
+                                            <a type="button" id="modalPin" data-bs-toggle="modal"
+                                               data-bs-target="#exampleModalPin">
                                                 <img src="../uploads/plus.png">
                                             </a>
                                         </div>
@@ -367,7 +374,7 @@
                         </div>
                         <div style="text-align: center">
                             <button type="submit" class="btn btn-primary mr-2"
-                                    >
+                            >
                                 Thêm Thông Tin
                             </button>
                         </div>
@@ -416,7 +423,7 @@
                     <div class="text-center">
                             <%--                        <button type="submit" class="btn btn-primary" onclick="validateForm()" >ADD</button>--%>
                         <button type="submit" class="btn btn-primary mr-2" id="btnPin"
-                                >
+                        >
                             Thêm Thông Tin
                         </button>
                     </div>
@@ -444,19 +451,19 @@
                     <div class="mb-3">
                         <form:label path="ten"><b>Tên:</b></form:label>
                         <form:input path="ten" class="form-control" id="tenChip"/>
-                        <span class="text-danger" >${tbChipTrung}</span>
+                        <span class="text-danger">${tbChipTrung}</span>
                         <form:errors path="ten" cssStyle="color: red"></form:errors>
                     </div>
                     <div class="mb-3">
                         <form:label path="loaiChip"><b>Loại Chip:</b></form:label>
                         <form:input path="loaiChip" class="form-control" id="loaiChip"/>
-                        <span class="text-danger" ></span>
+                        <span class="text-danger"></span>
                         <form:errors path="loaiChip" cssStyle="color: red"></form:errors>
                     </div>
                     <div class="mb-3">
                         <form:label path="soNhan"><b>Số Nhân:</b></form:label>
                         <form:input path="soNhan" class="form-control" type="number" id="soNhan"/>
-                        <span class="text-danger" ></span>
+                        <span class="text-danger"></span>
                         <form:errors path="soNhan" cssStyle="color: red"></form:errors>
                     </div>
                     <div class="mb-3">
@@ -471,7 +478,7 @@
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary" id="btnChip"
-                                >Thêm Thông Tin
+                        >Thêm Thông Tin
                         </button>
                     </div>
                 </form:form>
@@ -508,7 +515,7 @@
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary"
-                                >Thêm Thông Tin
+                        >Thêm Thông Tin
                         </button>
                     </div>
                 </form:form>
@@ -798,7 +805,7 @@
 </c:if>
 <br>
 
-<div class="buttons" style="display: none" >
+<div class="buttons" style="display: none">
     <button id="btapdungthanhcong">btapdungthanhcong</button>
 </div>
 </body>
@@ -808,7 +815,8 @@
     // let btt = document.getElementById('btt');
 
     // var btt = document.getElementById("btt");
-    let btapdungthanhcong =document.getElementById('btapdungthanhcong');
+    let btapdungthanhcong = document.getElementById('btapdungthanhcong');
+
     function createToast1() {
 
         let newToast1 = document.createElement('div');
@@ -826,13 +834,13 @@
             () => newToast1.remove(), 5000
         )
     }
-    btapdungthanhcong.onclick=function () {
+
+    btapdungthanhcong.onclick = function () {
         createToast1();
     }
 
-    <c:if test="${tbHien==1}">btapdungthanhcong.click();</c:if>
-
-
+    <c:if test="${tbHien==1}">btapdungthanhcong.click();
+    </c:if>
 
 
     const imageInput = document.getElementById('anhmoi');

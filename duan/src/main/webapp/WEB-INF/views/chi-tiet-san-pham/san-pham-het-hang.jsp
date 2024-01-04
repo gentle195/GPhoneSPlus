@@ -24,19 +24,20 @@
                 sản phẩm</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+               href="/chi-tiet-san-pham/hien-thi-het-hang" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm hết
+                hàng</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-da-xoa" role="tab"
-               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xoá</a>
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm ngừng kinh
+                doanh</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/chi-tiet-san-pham/view-add" role="tab"
                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm mới chi tiết
                 sản phẩm</a>
-        </li>
-        <li class="nav-item">
-            <a
-               class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               href="/chi-tiet-san-pham/hien-thi-het-hang" role="tab"
-               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm hết hàng</a>
         </li>
     </ul>
 </div>
@@ -156,9 +157,11 @@
                                     Xuất Excel
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a href="/chi-tiet-san-pham/export-excel" class="dropdown-item" tabindex="-1" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản
+                                    <a href="/chi-tiet-san-pham/export-excel" class="dropdown-item" tabindex="-1"
+                                       onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản
                                         phẩm còn kinh doanh</a>
-                                    <a href="/chi-tiet-san-pham/export-excel-chi-tiet-san-pham-ngung-kinh-doanh" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+                                    <a href="/chi-tiet-san-pham/export-excel-chi-tiet-san-pham-ngung-kinh-doanh"
+                                       onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
                                        class="dropdown-item"
                                        tabindex="-1">Sản phẩm ngừng kinh doanh
                                     </a>
@@ -249,7 +252,10 @@
                             <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                    aria-label="Bạn tìm gì..." name="search">
                             <div class="input-group-append">
-                                <button class="btn btn-sm btn-primary" type="submit" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Search</button>
+                                <button class="btn btn-sm btn-primary" type="submit"
+                                        onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                    Search
+                                </button>
                             </div>
                         </div>
 
@@ -423,11 +429,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
-
-
-    <button   id="modalthemsolgctsp" style="display: none" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal11">
-        Open modal
-    </button>
+<button id="modalthemsolgctsp" style="display: none" type="button" class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#myModal11">
+    Open modal
+</button>
 
 
 <!-- The Modal -->
@@ -436,13 +441,13 @@
         <div class="modal-content" style="width: 20cm;margin-left: -5cm">
 
 
-
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="tab-content" id="">
-                    <div class="tab-pane fade show active"  role="tabpanel"
+                    <div class="tab-pane fade show active" role="tabpanel"
                          aria-labelledby="description-tab">
-                        <form:form action="/chi-tiet-san-pham/themsolg/giaodienhethang" method="post" modelAttribute="imei">
+                        <form:form action="/chi-tiet-san-pham/themsolg/giaodienhethang" method="post"
+                                   modelAttribute="imei">
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-body" style="color: black">
@@ -450,20 +455,23 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-11">
-                                                        <h1 style="font-size: 15px">Chi tiết sản phẩm:<label class="text-danger">${tbidctsp}</label></h1>
+                                                        <h1 style="font-size: 15px">Chi tiết sản phẩm:<label
+                                                                class="text-danger">${tbidctsp}</label></h1>
                                                         <form:select path="chiTietSanPham" class="form-control"
                                                                      cssStyle="font-weight: bold; width: 100%;color: black"
-                                                                     id="selectSanPham2" onchange="validateSelect()" >
-<%--                                                            <option selected disabled>Sản phẩm</option>--%>
+                                                                     id="selectSanPham2" onchange="validateSelect()">
+                                                            <%--                                                            <option selected disabled>Sản phẩm</option>--%>
                                                             <c:forEach items="${listCTSP}" var="ctsp">
-                                                                <option value="${ctsp.id}"  <c:if test="${idctspdcchon==ctsp.id}">selected</c:if>   >
+                                                                <option value="${ctsp.id}"
+                                                                        <c:if test="${idctspdcchon==ctsp.id}">selected</c:if>   >
                                                                         ${ctsp.sanPham.ten} - ${ctsp.mauSac.ten}
                                                                     - ${ctsp.ram.dungLuong} - ${ctsp.rom.dungLuong}
-                                                                            - ${ctsp.chip.ten} - ${ctsp.pin.dungLuongPin.thongSo}
+                                                                    - ${ctsp.chip.ten}
+                                                                    - ${ctsp.pin.dungLuongPin.thongSo}
 
-                                                                            -----------
-                                                                                Số lượng còn:${banHangOnLinerepository.tongimeiTT0cua1ctsp(ctsp.id)}
-
+                                                                    -----------
+                                                                    Số lượng
+                                                                    còn:${banHangOnLinerepository.tongimeiTT0cua1ctsp(ctsp.id)}
 
 
                                                                 </option>
@@ -486,7 +494,9 @@
                                                 <form:errors path="ma" cssStyle="color: red"></form:errors>
                                             </div>
                                             <div class="form-group">
-                                                <form:label class="form-label" path="soImei">Imei:<label style="color: red">${tbimei}</label><form:errors path="soImei" cssStyle="color: red"></form:errors></form:label>
+                                                <form:label class="form-label"
+                                                            path="soImei">Imei:<label style="color: red">${tbimei}</label><form:errors
+                                                        path="soImei" cssStyle="color: red"></form:errors></form:label>
                                                 <form:input class="form-control" placeholder="Imei" path="soImei"/>
 
 
@@ -512,11 +522,9 @@
             </div>
 
 
-
         </div>
     </div>
 </div>
-
 
 
 </html>
