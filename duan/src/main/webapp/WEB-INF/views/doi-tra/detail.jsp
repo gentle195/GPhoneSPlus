@@ -171,6 +171,8 @@
                                                 </script>
                                                 VND
                                             </td>
+
+                                                <%--                                            <td>${hdct.donGia}</td>--%>
                                             <td>
                                                 <button class='btn btn-primary chonSanPhamButton'
                                                         data-idhdct="${hdct.id}">Chọn sản phẩm
@@ -202,6 +204,7 @@
                                             <th>Thông tin sản phẩm</th>
                                             <th>Số IMEI</th>
                                             <th>Đơn Giá Gốc</th>
+                                            <th>Hình thức</th>
                                             <th colspan="2">Action</th>
                                         </tr>
                                         </thead>
@@ -227,6 +230,17 @@
                                                     </script>
                                                     VND
                                                 </td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${hdct.hinhThucDoiTra ==0 }">
+                                                            Đổi Hàng
+                                                        </c:when>
+                                                        <c:when test="${hdct.hinhThucDoiTra == 1}">
+                                                            Trả Hàng
+                                                        </c:when>
+                                                    </c:choose>
+                                                </td>
+
 
 
                                                 <td>
@@ -263,85 +277,137 @@
                                         </c:forEach>
                                         </tbody>
                                     </table>
-                                </div>
-                                <br>
-                                <c:if test="${dtctlist.size()!=0}">
-                                    <h3 ${not empty dtctlist ? '' : 'style="display: none;"'}
-                                            style="text-align: center;">
-                                        Sản
-                                        phẩm đổi mới</h3>
+                                        <%--                                    <div class="mt-4">--%>
+                                        <%--                                        <form>--%>
+                                        <%--                                            <!-- Thêm các trường và nút submit cho form tiền đổi trả -->--%>
+                                        <%--                                            <div class="form-group">--%>
+                                        <%--                                                <label for="tienDoiTra" style="color: black">Tổng trả lại khách--%>
+                                        <%--                                                    :</label>--%>
+                                        <%--                                                <input type="text" value="${tongTien}" class="form-control"--%>
+                                        <%--                                                       id="tienDoiTra"--%>
+                                        <%--                                                       name="tienDoiTra" readonly>--%>
+                                        <%--                                            </div>--%>
+                                        <%--                                            <!-- Thêm các trường và nút submit cho form tiền đổi trả -->--%>
+                                        <%--                                        </form>--%>
+                                        <%--                                    </div>--%>
+                                        <%--                                    <div>--%>
+                                        <%--                                        <form id="xacNhanForm" action="/doi-tra/xac-nhan" method="post">--%>
+                                        <%--                                            <div class="row">--%>
+                                        <%--                                                <div style="margin-left: 550px">--%>
+                                        <%--                                                    <button type="button" class="btn btn-dark mb-2"--%>
+                                        <%--                                                            id="toastr-success-top-center-doi-tra1"--%>
+                                        <%--                                                            onclick="kiemTraTruocXacNhan()">--%>
+                                        <%--                                                        Xác nhận--%>
+                                        <%--                                                    </button>--%>
+                                        <%--                                                </div>--%>
+                                        <%--                                            </div>--%>
+                                        <%--                                        </form>--%>
+                                        <%--                                    </div>--%>
+                                        <%--                                </div>--%>
                                     <br>
-                                    <div class="table-responsive custom-table">
-                                        <table class="display custom-table" ${not empty dtctlist ? '' : 'style="display: none;"'}
-                                               style="color: black">
-                                            <thead>
-                                            <tr>
-                                                <th>Sản phẩm cần đổi</th>
-                                                <th>IMEI cần đổi</th>
-                                                <th>Đơn giá cũ</th>
-                                                <th>Sản phẩm đổi sang</th>
-                                                <th>Số IMEI đổi mới</th>
-
-                                            </tr>
-                                            </thead>
-                                            <tbody id="table-search1">
-                                            <c:forEach items="${dtctlist}" var="hdct">
+                                    <c:if test="${dtctlist.size()!=0}">
+                                        <h3 ${not empty dtctlist ? '' : 'style="display: none;"'}
+                                                style="text-align: center;">
+                                            Sản
+                                            phẩm đổi mới</h3>
+                                        <br>
+                                        <div class="table-responsive custom-table">
+                                            <table class="display custom-table" ${not empty dtctlist ? '' : 'style="display: none;"'}
+                                                   style="color: black">
+                                                <thead>
                                                 <tr>
-                                                    <td>
-                                                        <img src="/uploads/${hdct.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}"
-                                                             width="40"
-                                                             height="40"> -
-                                                            ${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten}
-                                                        - ${hdct.hoaDonChiTiet.imei.chiTietSanPham.mauSac.ten} -
-                                                            ${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.hangSanPham.ten}
-                                                        -
-                                                            ${hdct.hoaDonChiTiet.imei.chiTietSanPham.ram.dungLuong} -
-                                                            ${hdct.hoaDonChiTiet.imei.chiTietSanPham.rom.dungLuong}</td>
-                                                    <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
-
-                                                    <td>
-                                                        <script>
-                                                            var tongTien = ${hdct.hoaDonChiTiet.donGia};
-                                                            document.write(tongTien.toLocaleString('vi-VN'));
-                                                        </script>
-                                                        VND
-                                                    </td>
-
-
-                                                    <td align="center">
-                                                        <img src="/uploads/${hdct.imei.chiTietSanPham.urlAnh}"
-                                                             width="40"
-                                                             height="40"> -
-                                                            ${hdct.imei.chiTietSanPham.sanPham.ten}
-                                                        - ${hdct.imei.chiTietSanPham.mauSac.ten} -
-                                                            ${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten} -
-                                                            ${hdct.imei.chiTietSanPham.ram.dungLuong} -
-                                                            ${hdct.imei.chiTietSanPham.rom.dungLuong}
-                                                    </td>
-                                                    <td>${hdct.imei.soImei}</td>
+                                                    <th>Sản phẩm cần đổi</th>
+                                                    <th>IMEI cần đổi</th>
+                                                    <th>Đơn giá cũ</th>
+                                                    <th>Sản phẩm đổi sang</th>
+                                                    <th>Số IMEI đổi mới</th>
 
                                                 </tr>
-                                            </c:forEach>
-                                            </tbody>
-                                        </table>
-                                        <br>
-                                        <div>
-                                            <form id="xacNhanForm" action="/doi-tra/xac-nhan" method="post">
-                                                <div class="row">
-                                                    <div style="margin-left: 550px">
-                                                        <button type="button" class="btn btn-dark mb-2"
-                                                                id="toastr-success-top-center-doi-tra1"
-                                                                onclick="kiemTraTruocXacNhan()">
-                                                            Xác nhận
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                                </thead>
+                                                <tbody id="table-search1">
+                                                <c:forEach items="${dtctlist}" var="hdct">
+                                                    <tr>
+                                                        <td>
+                                                            <img src="/uploads/${hdct.hoaDonChiTiet.imei.chiTietSanPham.urlAnh}"
+                                                                 width="40"
+                                                                 height="40"> -
+                                                                ${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.ten}
+                                                            - ${hdct.hoaDonChiTiet.imei.chiTietSanPham.mauSac.ten} -
+                                                                ${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.hangSanPham.ten}
+                                                            -
+                                                                ${hdct.hoaDonChiTiet.imei.chiTietSanPham.ram.dungLuong} -
+                                                                ${hdct.hoaDonChiTiet.imei.chiTietSanPham.rom.dungLuong}</td>
+                                                        <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
+
+                                                        <td>
+                                                            <script>
+                                                                var tongTien = ${hdct.hoaDonChiTiet.donGia};
+                                                                document.write(tongTien.toLocaleString('vi-VN'));
+                                                            </script>
+                                                            VND
+                                                        </td>
+
+
+                                                        <td align="center">
+                                                            <img src="/uploads/${hdct.imei.chiTietSanPham.urlAnh}"
+                                                                 width="40"
+                                                                 height="40"> -
+                                                                ${hdct.imei.chiTietSanPham.sanPham.ten}
+                                                            - ${hdct.imei.chiTietSanPham.mauSac.ten} -
+                                                                ${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten} -
+                                                                ${hdct.imei.chiTietSanPham.ram.dungLuong} -
+                                                                ${hdct.imei.chiTietSanPham.rom.dungLuong}
+                                                        </td>
+                                                        <td>${hdct.imei.soImei}</td>
+
+                                                    </tr>
+                                                </c:forEach>
+                                                </tbody>
+                                            </table>
+                                            <br>
+
+                                                <%--                                        <div>--%>
+                                                <%--                                            <form id="xacNhanForm" action="/doi-tra/xac-nhan" method="post">--%>
+                                                <%--                                                <div class="row">--%>
+                                                <%--                                                    <div style="margin-left: 550px">--%>
+                                                <%--                                                        <button type="button" class="btn btn-dark mb-2"--%>
+                                                <%--                                                                id="toastr-success-top-center-doi-tra1"--%>
+                                                <%--                                                                onclick="kiemTraTruocXacNhan()">--%>
+                                                <%--                                                            Xác nhận--%>
+                                                <%--                                                        </button>--%>
+                                                <%--                                                    </div>--%>
+                                                <%--                                                </div>--%>
+                                                <%--                                            </form>--%>
+                                                <%--                                        </div>--%>
                                         </div>
-                                    </div>
-                                </c:if>
+                                    </c:if>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="mt-4">
+                        <form>
+                            <!-- Thêm các trường và nút submit cho form tiền đổi trả -->
+                            <div class="form-group">
+                                <label for="tienDoiTra" style="color: black">Tổng trả lại khách:</label>
+                                <input type="text" value="${tongTien}" class="form-control formatted-currency"
+                                       id="tienDoiTra" name="tienDoiTra" readonly>
+                            </div>
+                            <!-- Thêm các trường và nút submit cho form tiền đổi trả -->
+                        </form>
+                    </div>
+                    <div>
+                        <form id="xacNhanForm" action="/doi-tra/xac-nhan" method="post">
+                            <div class="row">
+                                <div style="margin-left: 550px">
+                                    <button type="button" class="btn btn-dark mb-2"
+                                            id="toastr-success-top-center-doi-tra1"
+                                            onclick="kiemTraTruocXacNhan()">
+                                        Xác nhận
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -447,8 +513,23 @@
                 <!-- Form để nhập thông tin đổi hàng -->
                 <form id="doiTraForm" style="color:black;">
                     <div class="form-group">
-                        <label for="lyDo">Lý Do Đổi Hàng</label>
-                        <input type="text" class="form-control" id="lyDo" placeholder="Lý do đổi hàng">
+                        <label for="hinhThucDoiTra">Hình Thức Đổi Trả</label>
+                        <select class="form-control" id="hinhThucDoiTra" onchange="hienThiLyDo()">
+                            <option value="0">Đổi hàng</option>
+                            <option value="1">Trả hàng</option>
+                            <!-- Thêm các option khác nếu cần -->
+                        </select>
+
+                        <!-- Các ô input sẽ được ẩn/hiện dựa trên sự kiện onchange của combobox -->
+                        <div class="form-group" id="lyDoDoiHang">
+                            <label for="lyDoDoiHangInput">Lý Do Đổi Hàng</label>
+                            <input type="text" class="form-control" id="lyDoDoiHangInput" placeholder="Lý do đổi hàng">
+                        </div>
+
+                        <div class="form-group" id="lyDoTraHang" style="display: none;">
+                            <label for="lyDoTraHangInput">Lý Do Trả Hàng</label>
+                            <input type="text" class="form-control" id="lyDoTraHangInput" placeholder="Lý do trả hàng">
+                        </div>
                     </div>
                 </form>
             </div>
@@ -467,6 +548,24 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+<script>
+    function hienThiLyDo() {
+        var hinhThucDoiTra = $('#hinhThucDoiTra').val();
+        var lyDoDoiHang = $('#lyDoDoiHang');
+        var lyDoTraHang = $('#lyDoTraHang');
+
+        if (hinhThucDoiTra == '0') {
+            // Nếu chọn Đổi hàng, hiện ô input và label đổi hàng, ẩn ô input và label trả hàng
+            lyDoDoiHang.show();
+            lyDoTraHang.hide();
+        } else {
+            // Nếu chọn Trả hàng, hiện ô input và label trả hàng, ẩn ô input và label đổi hàng
+            lyDoDoiHang.hide();
+            lyDoTraHang.show();
+        }
+    }
+
+</script>
 <script>
     function xoaSanPham(hdctId) {
         // Gửi yêu cầu xóa bất đồng bộ
@@ -581,11 +680,13 @@
     });
 
     function themThongTinDoiTra() {
-        var lyDo = $('#lyDo').val();
-        var hienTrang = 0;
         var hinhThuc = $('#hinhThucDoiTra').val();
-        var hdctId = $('#doiTraForm').data('hdctId');
+        var lyDo = $('#' + (hinhThuc == '0' ? 'lyDoDoiHangInput' : 'lyDoTraHangInput')).val();
+        var hienTrang = 0;
 
+        var hdctId = $('#doiTraForm').data('hdctId');
+        console.log(hinhThuc + "okoklun")
+        console.log("Lý do"+lyDo)
 
         // Thực hiện thêm thông tin và chuyển hướng đến đường dẫn /doi-tra/them-dtct với các tham số truyền vào
         window.location.href = "/doi-tra/them-dtct?hdctId=" + hdctId + "&doitraId=" + doitraId + "&lyDo=" + lyDo + "&hienTrang=" + hienTrang + "&hinhThuc=" + hinhThuc;
@@ -759,6 +860,17 @@
         } catch (err) {
             console.error(err)
         }
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var formattedCurrencyInputs = document.querySelectorAll('.formatted-currency');
+
+        formattedCurrencyInputs.forEach(function (input) {
+            var value = parseFloat(input.value.replace(/[^\d.]/g, '')); // Lấy giá trị số từ chuỗi
+            var formattedValue = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
+            input.value = formattedValue;
+        });
     });
 </script>
 <script>

@@ -140,6 +140,12 @@ public class DoiTraController {
                 .collect(Collectors.toList());
     }
 
+    public List<DoiTraChiTiet> filterDoiTraChiTietByImeiNotNulls(List<DoiTraChiTiet> dtctList) {
+        return dtctList.stream()
+                .filter(dtct -> dtct.getHinhThucDoiTra() == 1)
+                .collect(Collectors.toList());
+    }
+
 
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable("id") UUID id, Model model, @RequestParam("doitraId") UUID doitraId, @RequestParam("hoadonId") UUID hoadonId, @RequestParam("pageNum") Optional<Integer> pageNum,
@@ -171,8 +177,11 @@ public class DoiTraController {
         model.addAttribute("dtct", dtctlist);
 
         List<DoiTraChiTiet> loc = filterDoiTraChiTietByImeiNotNull(dtctlist);
+        List<DoiTraChiTiet> locs = filterDoiTraChiTietByImeiNotNulls(dtctlist);
+
 
         model.addAttribute("dtctlist", loc);
+        model.addAttribute("dtctlists", locs);
 
 //        model.addAttribute("dtct",hdctdt);
 
@@ -377,8 +386,12 @@ public class DoiTraController {
         Map<String, Object> result = new HashMap<>();
 
         List<DoiTraChiTiet> listDTCT = doiTraChiTietService.getDoiTraChiTietByDoiTraId(doiTraID);
+        boolean hasNullImei = listDTCT.stream()
+                .filter(dtct -> dtct.getHinhThucDoiTra() == 0) // Lọc những DoiTraChiTiet có hinhThucDoiTra bằng 0
+                .anyMatch(dtct -> dtct.getImei() == null); // Kiểm tra xem có ít nhất một cái imei nào đó là null không
 
-        boolean hasNullImei = listDTCT.stream().anyMatch(dtct -> dtct.getImei() == null);
+
+
 
         result.put("hasNullImei", hasNullImei);
 
@@ -388,31 +401,59 @@ public class DoiTraController {
     @GetMapping("/them-dtct")
     public String updatethemhdct(Model model, @ModelAttribute("dulieuxem") DoiTraChiTiet dulieuxem,
                                  @RequestParam UUID doitraId, @RequestParam UUID hdctId, @RequestParam String lyDo,
-                                 @RequestParam int hienTrang, HttpServletRequest request) {
+                                 @RequestParam int hienTrang, @RequestParam int hinhThuc, HttpServletRequest request) {
 
         DoiTra doiTra = doiTraService.findById(doitraId);
         HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietService.findById(hdctId);
 
         // Kiểm tra xem HoaDonChiTiet đã tồn tại trong DoiTraChiTiet chưa
         if (!doiTraChiTietService.existsByDoiTraAndHoaDonChiTiet(doiTra, hoaDonChiTiet)) {
-            DoiTraChiTiet doiTraChiTiet = new DoiTraChiTiet();
-            doiTraChiTiet.setTinhTrang(0);
-            doiTraChiTiet.setHoaDonChiTiet(hoaDonChiTiet);
-            doiTraChiTiet.setDoiTra(doiTra);
-            doiTraChiTiet.setHienTrangSanPham(hienTrang);
-            doiTraChiTiet.setHinhThucDoiTra(0);
-            doiTraChiTiet.setLyDo(lyDo);
+            if (hinhThuc ==1){
+                DoiTraChiTiet doiTraChiTiet = new DoiTraChiTiet();
+                doiTraChiTiet.setTinhTrang(0);
+                doiTraChiTiet.setHoaDonChiTiet(hoaDonChiTiet);
+                doiTraChiTiet.setDoiTra(doiTra);
+                doiTraChiTiet.setHienTrangSanPham(hienTrang);
+                doiTraChiTiet.setHinhThucDoiTra(hinhThuc);
+                doiTraChiTiet.setLyDo(lyDo);
+                doiTraChiTiet.setTienDoiTra(hoaDonChiTiet.getDonGia().multiply(new BigDecimal("0.95")));
 
-            doiTraChiTietService.add(doiTraChiTiet);
+                doiTraChiTietService.add(doiTraChiTiet);
+            }else if (hinhThuc==0){
+                DoiTraChiTiet doiTraChiTiet = new DoiTraChiTiet();
+                doiTraChiTiet.setTinhTrang(0);
+                doiTraChiTiet.setHoaDonChiTiet(hoaDonChiTiet);
+                doiTraChiTiet.setDoiTra(doiTra);
+                doiTraChiTiet.setHienTrangSanPham(hienTrang);
+                doiTraChiTiet.setHinhThucDoiTra(hinhThuc);
+
+                doiTraChiTiet.setLyDo(lyDo);
+
+                doiTraChiTietService.add(doiTraChiTiet);
+            }
+
         } else {
-            DoiTraChiTiet doiTraChiTiet = doiTraChiTietService.getDoiTraByHDCT(hdctId);
-            doiTraChiTiet.setTinhTrang(0);
-            doiTraChiTiet.setHoaDonChiTiet(hoaDonChiTiet);
-            doiTraChiTiet.setDoiTra(doiTra);
-            doiTraChiTiet.setHienTrangSanPham(hienTrang);
-            doiTraChiTiet.setHinhThucDoiTra(0);
-            doiTraChiTiet.setLyDo(lyDo);
-            doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
+            if (hinhThuc==1){
+                DoiTraChiTiet doiTraChiTiet = doiTraChiTietService.getDoiTraByHDCT(hdctId);
+                doiTraChiTiet.setTinhTrang(0);
+                doiTraChiTiet.setHoaDonChiTiet(hoaDonChiTiet);
+                doiTraChiTiet.setDoiTra(doiTra);
+                doiTraChiTiet.setHienTrangSanPham(hienTrang);
+                doiTraChiTiet.setHinhThucDoiTra(hinhThuc);
+                doiTraChiTiet.setLyDo(lyDo);
+                doiTraChiTiet.setTienDoiTra(hoaDonChiTiet.getDonGia().multiply(new BigDecimal("0.85")));
+                doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
+            }else if (hinhThuc==0){
+                DoiTraChiTiet doiTraChiTiet = doiTraChiTietService.getDoiTraByHDCT(hdctId);
+                doiTraChiTiet.setTinhTrang(0);
+                doiTraChiTiet.setHoaDonChiTiet(hoaDonChiTiet);
+                doiTraChiTiet.setDoiTra(doiTra);
+                doiTraChiTiet.setHienTrangSanPham(hienTrang);
+                doiTraChiTiet.setHinhThucDoiTra(hinhThuc);
+                doiTraChiTiet.setLyDo(lyDo);
+                doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
+            }
+
         }
 
         return "redirect:/doi-tra/detail/" + doiTra.getHoaDon().getId() + "?doitraId=" + doitraId + "&hoadonId="
@@ -430,24 +471,32 @@ public class DoiTraController {
         for (DoiTraChiTiet dtct : listCHiTietDoiTra
         ) {
             if (dtct.getHienTrangSanPham() == 0) {
+                if (dtct.getHinhThucDoiTra()==1){
+                    IMEI imei = imeiService.findById(dtct.getHoaDonChiTiet().getImei().getId());
+                    imei.setTinhTrang(4);
+                    imei.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+                    imeiService.update(dtct.getHoaDonChiTiet().getImei().getId(), imei);
+                    dtct.setTinhTrang(2);
+                    doiTraChiTietService.update(dtct.getId(), dtct);
 
-                IMEI imei = imeiService.findById(dtct.getHoaDonChiTiet().getImei().getId());
-                imei.setTinhTrang(4);
-                imei.setNgayCapNhat(Date.valueOf(LocalDate.now()));
-                imeiService.update(dtct.getHoaDonChiTiet().getImei().getId(), imei);
-                if (dtct.getImei() != null) {
-                    IMEI imei1 = imeiService.findById(dtct.getImei().getId());
+                }else if (dtct.getHinhThucDoiTra()==0){
+                    IMEI imei = imeiService.findById(dtct.getHoaDonChiTiet().getImei().getId());
+                    imei.setTinhTrang(4);
+                    imei.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+                    imeiService.update(dtct.getHoaDonChiTiet().getImei().getId(), imei);
+                    if (dtct.getImei() != null) {
+                        IMEI imei1 = imeiService.findById(dtct.getImei().getId());
 
-                    imei1.setTinhTrang(1);
-                    imei1.setNgayCapNhat(Date.valueOf(LocalDate.now()));
-                    imeiService.update(dtct.getImei().getId(), imei1);
+                        imei1.setTinhTrang(1);
+                        imei1.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+                        imeiService.update(dtct.getImei().getId(), imei1);
+                    }
+                    dtct.setTinhTrang(2);
+                    doiTraChiTietService.update(dtct.getId(), dtct);
+                    ChiTietSanPham chiTietSanPham = chiTietSanPhamService.getChiTiet(dtct.getImei().getId());
+                    chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong() - 1);
+                    chiTietSanPhamService.update(chiTietSanPham.getId(), chiTietSanPham);
                 }
-                dtct.setTinhTrang(2);
-                doiTraChiTietService.update(dtct.getId(), dtct);
-                ChiTietSanPham chiTietSanPham = chiTietSanPhamService.getChiTiet(dtct.getImei().getId());
-                chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong() - 1);
-                chiTietSanPhamService.update(chiTietSanPham.getId(), chiTietSanPham);
-
             } else if (dtct.getHienTrangSanPham() == 1) {
                 IMEI imei = imeiService.findById(dtct.getHoaDonChiTiet().getImei().getId());
                 imei.setTinhTrang(0);
