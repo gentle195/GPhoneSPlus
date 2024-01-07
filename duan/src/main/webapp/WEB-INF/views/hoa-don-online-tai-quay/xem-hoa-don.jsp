@@ -10,7 +10,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Focus - Bootstrap Admin Dashboard </title>
     <!-- modal -->
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <style>
 
@@ -119,134 +120,297 @@
     }
 </style>
 <body>
-<div class="tab-content">
-    <div class="col-sm-12 shadow p-3 mb-5 bg-body-tertiary rounded">
-        <div class="card-box table-responsive">
-            <a style="float: right; color: white;margin-left: 1cm" class="btn btn-primary"
-               data-bs-toggle="modal"
-               data-bs-target="#tongHopIMEI">Tổng hợp IMEI</a>
-            <div class="basic-dropdown" style="float: right">
-                <div class="dropdown">
-                    <button type="button" class="btn btn-primary dropdown-toggle"
-                            data-toggle="dropdown">
-                        <i class="ti-export btn-icon-prepend"></i>
-                        Xuất Excel
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="/hoa-don-online/excel-don-dat-hang/${listghcthd.get(0).hoaDon.id}"
-                           class="dropdown-item" tabindex="-1">Sản phẩm đặt của hóa
-                            đơn ${listghcthd.get(0).hoaDon.ma} </a>
-                        <a href="/hoa-don-online/excel-don-dat-hang/full"
-                           class="dropdown-item"
-                           tabindex="-1">Tất cả sản phẩm đặt hàng</a>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="description" role="tabpanel"
+         aria-labelledby="description-tab">
 
+        <div class="card">
+            <div class="card-body">
+
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+
+                        <div align="center">
+
+                            <div class="ban-hang" style="align-items: center">
+                                <video
+                                        style="border: 1px "
+                                        id="video1"
+                                        autoplay="true"
+                                        width="200px"
+                                        height="120px"
+                                ></video>
+                            </div>
+
+
+                            <br>
+                            <form action="/hoa-don-online/imei-vao-hdct/${listghcthd.get(0).hoaDon.id}" method="post"
+                                  style="margin-left: 1cm;">
+                                <div class="input-group" style="width: 40%">
+                                    <input style="height: 1cm" type="text" class="form-control" name="imeithem"
+                                           placeholder="Thêm imei">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-sm btn-primary"
+                                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                            Thêm vào hóa đơn
+                                        </button>
+                                    </div>
+                                </div>
+                                <%--                                <P style="color: red"> ${tbkhithemimei}</P>--%>
+                            </form>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
-            <H4>Danh sách sản phẩm</H4>
-            <br>
-            <table id="example" style="color: black;width: 100%">
-                <thead>
-                <tr>
-                    <th>Ảnh</th>
-                    <th>Sản Phẩm</th>
-                    <th>Giá mua</th>
-                    <th>Số lượng</th>
-                    <th>Thành tiền</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${listghcthd}" var="ht" varStatus="stt">
-                    <tr>
-                        <td>
-                            <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}"
-                                 width="40"
-                                 height="40"
-                            >
-                        </td>
-                        <td style=";color: black">
-                                ${ht.chiTietSanPham.sanPham.ten} -
-                                ${ht.chiTietSanPham.sanPham.hangSanPham.ten} -
-                                ${ht.chiTietSanPham.mauSac.ten} -
-                                ${ht.chiTietSanPham.ram.dungLuong} -
-                                ${ht.chiTietSanPham.rom.dungLuong}
-
-                        </td>
-                        <td>
-                                ${ht.basoOchammotlamGHDGKG()} đ
-                        </td>
-                        <td>
-                                ${ht.soLuong}
-                        </td>
-                        <td>
-                                ${ht.tichDONGIAvsSL()} đ
-
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="col-sm-12 shadow p-3 mb-5 bg-body-tertiary rounded">
-        <div class="card-box table-responsive">
-            <a style="float: right; color: white;margin-left: 1cm" class="btn btn-primary"
-               data-bs-toggle="modal"
-               data-bs-target="#themIMEI">Thêm IMEI</a>
-            <a href="/hoa-don-online/xac-nhan/thanh-cong/${listghcthd.get(0).hoaDon.id}"
-               style="float: right" class="btn btn-success"
-               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
-            >Xác nhận đơn hàng</a>
-            <button style="float: right;margin-right: 2cm" type="button" class="btn btn-primary"
-                    data-bs-toggle="modal" data-bs-target="#myModal">
-                Thông tin đơn hàng ${listghcthd.get(0).hoaDon.ma}
-            </button>
-            <H4>Danh sách hóa đơn chi tiết</H4>
-
-            <table id="example2" class="display" style="color: black;">
-                <thead>
-                <tr>
-                    <th>Ảnh</th>
-                    <th>Tên Sản Phẩm</th>
-                    <th>Hãng</th>
-                    <th>Màu Sắc</th>
-                    <th>Ram</th>
-                    <th>Dung Lượng Bộ Nhớ</th>
-                    <th>Số IMEI</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody id="table-search">
-                <i class="mdi mdi-border-color"></i>
-                <c:forEach items="${listhdct}" var="hdct">
-                    <tr>
-                        <td align="center">
-                            <img src="/uploads/${hdct.imei.chiTietSanPham.urlAnh}" width="40"
-                                 height="40">
-                        </td>
-                        <td>${hdct.imei.chiTietSanPham.sanPham.ten}</td>
-                        <td>${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
-                        <td>${hdct.imei.chiTietSanPham.mauSac.ten}</td>
-                        <td>${hdct.imei.chiTietSanPham.ram.dungLuong}</td>
-                        <td>${hdct.imei.chiTietSanPham.rom.dungLuong}</td>
-                        <td>${hdct.imei.soImei}</td>
-                        <td>
-                            <a href="/hoa-don-online/xoa-ctsp/${hdct.id}" class="btn btn-danger"
-                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
-                            >Xóa</a>
-                        </td>
-
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
         </div>
     </div>
 </div>
+
+<div class="tab-content">
+    <div class="tab-pane fade show active" role="tabpanel"
+         aria-labelledby="description-tab">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+                        <a href="/hoa-don-online/xac-nhan/thanh-cong/${listghcthd.get(0).hoaDon.id}"
+                           style="float: right" class="btn btn-success"
+                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+                        >XÁC NHẬN ĐƠN HÀNG</a>
+                        <button style="float: right;margin-right: 1cm" type="button" class="btn btn-primary"
+                                data-bs-toggle="modal" data-bs-target="#myModal">
+                            Thông tin Hóa đơn ${listghcthd.get(0).hoaDon.ma}
+                        </button>
+                        <H4>THÔNG TIN HÓA ĐƠN CHI TIẾT</H4>
+
+                        <table id="example2" class="display" style="color: black;">
+                            <thead>
+                            <tr>
+                                <th>Ảnh</th>
+                                <th>Tên Sản Phẩm</th>
+                                <th>Hãng</th>
+                                <th>Màu Sắc</th>
+                                <th>Ram</th>
+                                <th>Dung Lượng Bộ Nhớ</th>
+                                <th>Số IMEI</th>
+                                <th>Xóa</th>
+                            </tr>
+                            </thead>
+                            <tbody id="table-search">
+                            <i class="mdi mdi-border-color"></i>
+                            <c:forEach items="${listhdct}" var="hdct">
+                                <tr>
+                                    <td align="center">
+                                        <img src="/uploads/${hdct.imei.chiTietSanPham.urlAnh}" width="40"
+                                             height="40">
+                                    </td>
+                                    <td>${hdct.imei.chiTietSanPham.sanPham.ten}</td>
+                                    <td>${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
+                                    <td>${hdct.imei.chiTietSanPham.mauSac.ten}</td>
+                                    <td>${hdct.imei.chiTietSanPham.ram.dungLuong}</td>
+                                    <td>${hdct.imei.chiTietSanPham.rom.dungLuong}</td>
+                                    <td>${hdct.imei.soImei}</td>
+                                    <td>
+                                        <a href="/hoa-don-online/xoa-ctsp/${hdct.id}" class="btn btn-danger"
+                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+                                        >Xóa</a>
+                                    </td>
+
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="tab-content" style="width: 49%;float: right;height: 100%">
+        <div class="tab-pane fade show active" role="tabpanel"
+             aria-labelledby="description-tab">
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+
+                            <H4>TỔNG HỢP IMEI HÓA ĐƠN CHI TIẾT</H4>
+                            <table id="example3" style="color: black">
+                                <br>
+                                <thead>
+                                <tr>
+                                    <th>Ảnh</th>
+                                    <th>Sản Phẩm</th>
+                                    <th>Số lượng</th>
+                                </tr>
+                                </thead>
+                                <c:set var="dem" scope="session" value="${0}"/>
+                                <c:forEach items="${listhdct}" var="ht" varStatus="stt">
+                                    <c:if test="${stt.index==0}">
+                                        <tr>
+                                            <td>
+                                                <img src="/uploads/${ht.imei.chiTietSanPham.urlAnh}" width="40"
+                                                     height="40">
+                                            </td>
+                                            <td>
+                                                    ${ht.imei.chiTietSanPham.sanPham.ten}, <br>
+                                                hãng: ${ht.imei.chiTietSanPham.sanPham.hangSanPham.ten},<br>
+                                                màu: ${ht.imei.chiTietSanPham.mauSac.ten},<br>
+                                                ram: ${ht.imei.chiTietSanPham.ram.dungLuong},<br>
+                                                rom:${ht.imei.chiTietSanPham.rom.dungLuong}<br>
+                                            </td>
+                                            <td>
+                                                    ${banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
+                                            </td>
+
+
+                                        </tr>
+
+                                        <c:set var="dem" scope="session" value="${dem+1}"/>
+                                    </c:if>
+                                    <c:if test="${stt.index>0}">
+                                        <c:set var="checkck" scope="session" value="${0}"/>
+                                        <c:forEach items="${listhdct}" var="ht1" varStatus="stt1" begin="0"
+                                                   end="${stt.index-1}">
+                                            <c:if test="${ht.imei.chiTietSanPham.id==ht1.imei.chiTietSanPham.id}">
+                                                <c:set var="checkck" scope="session" value="${1}"/>
+                                            </c:if>
+                                        </c:forEach>
+                                        <c:if test="${checkck==0}">
+
+                                            <tr>
+                                                <td>
+                                                    <img src="/uploads/${ht.imei.chiTietSanPham.urlAnh}" width="40"
+                                                         height="40">
+                                                </td>
+                                                <td>
+                                                        ${ht.imei.chiTietSanPham.sanPham.ten}, <br>
+                                                    hãng: ${ht.imei.chiTietSanPham.sanPham.hangSanPham.ten},<br>
+                                                    màu: ${ht.imei.chiTietSanPham.mauSac.ten},<br>
+                                                    ram: ${ht.imei.chiTietSanPham.ram.dungLuong},<br>
+                                                    rom${ht.imei.chiTietSanPham.rom.dungLuong}<br>
+                                                </td>
+                                                <td>
+                                                        ${banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
+                                                </td>
+
+
+                                            </tr>
+
+                                            <c:set var="dem" scope="session" value="${dem+1}"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:forEach>
+
+
+                                <c:forEach items="${listhdct}" var="ht">
+
+                                </c:forEach>
+                                </tbody>
+
+                            </table>
+                            <br><br><br><br>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" style="width: 49%;float: left;height: 100%; ">
+        <div class="tab-pane fade show active" role="tabpanel"
+             aria-labelledby="description-tab">
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+                            <H4>DANH SÁCH SẢN PHẨM TRONG ĐƠN ĐẶT HÀNG</H4>
+
+
+                            <div class="basic-dropdown" style="float: right">
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-primary dropdown-toggle"
+                                            data-toggle="dropdown">
+                                        <i class="ti-export btn-icon-prepend"></i>
+                                        Xuất Excel
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a href="/hoa-don-online/excel-don-dat-hang/${listghcthd.get(0).hoaDon.id}"
+                                           class="dropdown-item" tabindex="-1">Sản phẩm đặt của hóa
+                                            đơn ${listghcthd.get(0).hoaDon.ma} </a>
+                                        <a href="/hoa-don-online/excel-don-dat-hang/full" class="dropdown-item"
+                                           tabindex="-1">Tất cả sản phẩm đặt hàng</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <br><br>
+                            <table id="example" style="color: black;width: 20cm">
+                                <thead>
+                                <tr>
+                                    <th>Ảnh</th>
+                                    <th>Sản Phẩm</th>
+                                    <th>Giá mua</th>
+                                    <th>Số lượng</th>
+                                    <th>Thành tiền</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${listghcthd}" var="ht" varStatus="stt">
+                                    <tr>
+                                        <td>
+                                            <img src="../../../uploads/${ht.chiTietSanPham.urlAnh}" width="40"
+                                                 height="40"
+                                            >
+                                        </td>
+                                        <td style=";color: black">
+                                                ${ht.chiTietSanPham.sanPham.ten}, <br>
+                                            hãng: ${ht.chiTietSanPham.sanPham.hangSanPham.ten},<br>
+                                            màu: ${ht.chiTietSanPham.mauSac.ten},<br>
+                                            ram: ${ht.chiTietSanPham.ram.dungLuong},<br>
+
+                                            rom:${ht.chiTietSanPham.rom.dungLuong}
+
+                                        </td>
+                                        <td>
+                                                ${ht.basoOchammotlamGHDGKG()} đ
+                                        </td>
+                                        <td>
+                                                ${ht.soLuong}
+                                        </td>
+                                        <td>
+                                                ${ht.tichDONGIAvsSL()} đ
+
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- The Modal -->
 <div class="modal" id="myModal">
     <div class="modal-dialog">
-        <div class="modal-content" style="width: 150%;margin-left: -25%;color: black">
+        <div class="modal-content" style="width: 150%;margin-left: -25%">
 
             <!-- Modal Header -->
             <div class="modal-header">
@@ -326,156 +490,6 @@
         </div>
     </div>
 </div>
-<div class="modal" id="themIMEI">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="width: 150%;margin-left: -25%">
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-3">
-                        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#qrCam" style="color: black">Quét
-                            QR</a>
-                    </div>
-                    <div class="col-9">
-                        <form action="/hoa-don-online/imei-vao-hdct/${listghcthd.get(0).hoaDon.id}" method="post"
-                              style="margin-left: 1cm;">
-                            <div class="input-group" style="width: 100%">
-                                <input style="height: 1cm" type="text" class="form-control" name="imeithem"
-                                       placeholder="Thêm imei">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-sm btn-primary"
-                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                        Thêm vào hóa đơn
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div>
-
-        </div>
-    </div>
-</div>
-<div class="modal" id="tongHopIMEI">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="width: 150%;margin-left: -25%">
-            <div class="modal-body">
-                <div class="card-box table-responsive">
-                    <H4>Tổng hợp IMEI sản phẩm</H4>
-                    <table id="example3" style="color: black">
-                        <thead>
-                        <tr>
-                            <th>Ảnh</th>
-                            <th>Sản Phẩm</th>
-                            <th>Số lượng</th>
-                        </tr>
-                        </thead>
-                        <c:set var="dem" scope="session" value="${0}"/>
-                        <c:forEach items="${listhdct}" var="ht" varStatus="stt">
-                            <c:if test="${stt.index==0}">
-                                <tr>
-                                    <td>
-                                        <img src="/uploads/${ht.imei.chiTietSanPham.urlAnh}"
-                                             width="40"
-                                             height="40">
-                                    </td>
-                                    <td>
-                                            ${ht.imei.chiTietSanPham.sanPham.ten} -
-                                            ${ht.imei.chiTietSanPham.sanPham.hangSanPham.ten} -
-                                            ${ht.imei.chiTietSanPham.mauSac.ten} -
-                                            ${ht.imei.chiTietSanPham.ram.dungLuong} -
-                                            ${ht.imei.chiTietSanPham.rom.dungLuong} -
-                                    </td>
-                                    <td>
-                                            ${banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
-                                    </td>
-                                </tr>
-
-                                <c:set var="dem" scope="session" value="${dem+1}"/>
-                            </c:if>
-                            <c:if test="${stt.index>0}">
-                                <c:set var="checkck" scope="session" value="${0}"/>
-                                <c:forEach items="${listhdct}" var="ht1" varStatus="stt1" begin="0"
-                                           end="${stt.index-1}">
-                                    <c:if test="${ht.imei.chiTietSanPham.id==ht1.imei.chiTietSanPham.id}">
-                                        <c:set var="checkck" scope="session" value="${1}"/>
-                                    </c:if>
-                                </c:forEach>
-                                <c:if test="${checkck==0}">
-
-                                    <tr>
-                                        <td>
-                                            <img src="/uploads/${ht.imei.chiTietSanPham.urlAnh}"
-                                                 width="40"
-                                                 height="40">
-                                        </td>
-                                        <td>
-                                                ${ht.imei.chiTietSanPham.sanPham.ten} - <br>
-                                                ${ht.imei.chiTietSanPham.sanPham.hangSanPham.ten} -
-                                            <br>
-                                                ${ht.imei.chiTietSanPham.mauSac.ten} - <br>
-                                                ${ht.imei.chiTietSanPham.ram.dungLuong} - <br>
-                                                ${ht.imei.chiTietSanPham.rom.dungLuong}<br>
-                                        </td>
-                                        <td>
-                                                ${banhangonline.listIMEItheoIDHDvsIDCTSP(ht.hoaDon.id,ht.imei.chiTietSanPham.id).size()}
-                                        </td>
-
-
-                                    </tr>
-
-                                    <c:set var="dem" scope="session" value="${dem+1}"/>
-                                </c:if>
-                            </c:if>
-                        </c:forEach>
-
-
-                        <c:forEach items="${listhdct}" var="ht">
-
-                        </c:forEach>
-                        </tbody>
-
-                    </table>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div>
-
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="qrCam" tabindex="-1" aria-labelledby="modal-1-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="ban-hang d-flex justify-content-center align-items-center">
-                    <video
-                            style="border: 1px "
-                            id="video1"
-                            autoplay="true"
-                            width="200px"
-                            height="120px"
-                    ></video>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"
-                        data-bs-toggle="modal"
-                        data-bs-target="#themIMEI">
-                    Quay về
-                </button>
-                <button type="button" class="btn btn-secondary"
-                        data-bs-dismiss="modal">
-                    Close
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <button id="error" style="display: none">Error</button>
 <script>
@@ -511,7 +525,6 @@
     </c:if>
 </script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
 <script>
 

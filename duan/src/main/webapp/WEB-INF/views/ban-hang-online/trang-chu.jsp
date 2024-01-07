@@ -289,7 +289,8 @@
                                         <div class="cart-list">
 
                                             <c:forEach items="${listghct}" var="ht" varStatus="stt">
-                                                <br><hr>
+                                                <br>
+                                                <hr>
                                                 <div style="border: 1px ;height: 2cm">
                                                     <div style="width: 80%;float: right">
                                                         <label style="font-weight: bold">Sản
@@ -302,7 +303,7 @@
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
                                                             <label style="font-weight: bold">Đơn
                                                                 giá:</label>
-<%--                                                            ${ht.basoOchammotlamGHDGKG()}--%>
+                                                            <%--                                                            ${ht.basoOchammotlamGHDGKG()}--%>
                                                             <script>
                                                                 document.write(
                                                                     Number('${ht.basoOchammotlamGHDGKG()}'.replace(/,/g, '')).toLocaleString('de-DE')
@@ -310,18 +311,19 @@
                                                             </script>
                                                             đ -
                                                             <del class="product-old-price">
-<%--                                                                    ${ht.basoOchammotlamGHDG()}--%>
-                                                                        <script>
-                                                                            document.write(
-                                                                                Number('${ht.basoOchammotlamGHDG()}'.replace(/,/g, '')).toLocaleString('de-DE')
-                                                                            );
-                                                                        </script>
-                                                                        đ</del>
+                                                                    <%--                                                                    ${ht.basoOchammotlamGHDG()}--%>
+                                                                <script>
+                                                                    document.write(
+                                                                        Number('${ht.basoOchammotlamGHDG()}'.replace(/,/g, '')).toLocaleString('de-DE')
+                                                                    );
+                                                                </script>
+                                                                đ
+                                                            </del>
                                                         </c:if>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
                                                             <label style="font-weight: bold">Đơn
                                                                 giá:</label>
-<%--                                                           ${ht.basoOchammotlamGHDG()}--%>
+                                                            <%--                                                           ${ht.basoOchammotlamGHDG()}--%>
                                                             <script>
                                                                 document.write(
                                                                     Number('${ht.basoOchammotlamGHDG()}'.replace(/,/g, '')).toLocaleString('de-DE')
@@ -351,11 +353,11 @@
                                             <label>Tổng:</label><label
                                                 id="tongtienghtt">
                                                 ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
-<%--                                                    <script>--%>
-<%--                                                        document.write(--%>
-<%--                                                            Number('${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
-<%--                                                        );--%>
-<%--                                                    </script>--%>
+                                                <%--                                                    <script>--%>
+                                                <%--                                                        document.write(--%>
+                                                <%--                                                            Number('${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+                                                <%--                                                        );--%>
+                                                <%--                                                    </script>--%>
                                         </label><label>đ</label>
                                         </div>
                                         <div class="cart-btns">
@@ -486,7 +488,7 @@
             </button>
         </div>
     </div>
-<%--    SẢN PHẨM MỚI RA MẮT--%>
+    <%--    SẢN PHẨM MỚI RA MẮT--%>
     <div class="section shadow mb-5 bg-body-tertiary rounded" style="width: 1175px">
         <!-- container -->
         <div class="container">
@@ -521,69 +523,41 @@
                                         <c:if test="${banhangonline.soluongcon(ht.id)>0}">
                                             <!-- product -->
 
-                                            <div class="product" >
+                                            <div class="product">
                                                 <a href="/ban-hang-online/chi-tiet-san-pham/${ht.id}">
-                                                <div class="product-img">
-                                                    <img src="/uploads/${ht.urlAnh}" style="width: 100%;height: 6cm"
-                                                         alt="">
-                                                    <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
-                                                        <div class="product-label">
-                                                            <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
-                                                            <span class="new">Giảm giá</span>
-                                                        </div>
-                                                    </c:if>
+                                                    <div class="product-img">
+                                                        <img src="/uploads/${ht.urlAnh}" style="width: 100%;height: 6cm"
+                                                             alt="">
+                                                        <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
+                                                            <div class="product-label">
+                                                                <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
+                                                                <span class="new">Giảm giá</span>
+                                                            </div>
+                                                        </c:if>
 
-                                                </div>
-                                                <div class="product-body"
-                                                     style="text-align: left;word-wrap: break-word;">
-                                                    <p class="product-category">Điện thoại</p>
-                                                    <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
-                                                    <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
-                                                    <h4 class="product-price">
-                                                            <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-<%--                                                            ${banhangonline.sotienkhidagiam(ht.id)}--%>
-                                                                <script>
-                                                                    document.write(
-                                                                        Number('${banhangonline.sotienkhidagiam(ht.id)}'.replace(/,/g, '')).toLocaleString('de-DE')
-                                                                    );
-                                                                </script>
-                                                        <span> ₫</span>
-                                                        <del class="product-old-price"
-                                                             style="float: right">
-
-<%--                                                                ${ht.basoOchammotlam()}--%>
-    <script>
-        document.write(
-            Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
-        );
-    </script>
-                                                            <span>₫</span>
-                                                        </del>
-                                                    </h4>
-                                                    </c:if>
-                                                    <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
-                                                        <h4 class="product-price">
-                                                                <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-<%--                                                                        ${ht.basoOchammotlam()}--%>
-                                                                    <script>
-                                                                        document.write(
-                                                                            Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
-                                                                        );
-                                                                    </script>
-                                                            <span> ₫</span>
-                                                        </h4>
-                                                    </c:if>
-<%--                                                    <div class="product-rating"></div>--%>
-<%--                                                    <div class="product-btns" align="center">--%>
-<%--                                                        <button class="add-to-compare"><a href="/homes"><i--%>
-<%--                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Thêm để so sánh</span>--%>
-<%--                                                        </button>--%>
-<%--                                                        <button class="quick-view"><a--%>
-<%--                                                                href="/ban-hang-online/chi-tiet-san-pham/${ht.id}"><i--%>
-<%--                                                                class="fa fa-eye"></i></a><span class="tooltipp">Xem chi tiết</span>--%>
-<%--                                                        </button>--%>
-<%--                                                    </div>--%>
-                                                </div>
+                                                    </div>
+                                                    <div class="product-body"
+                                                         style="text-align: left;word-wrap: break-word;">
+                                                        <p class="product-category">Điện thoại</p>
+                                                        <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
+                                                        <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
+                                                            <h4 class="product-price">
+                                                                    <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+                                                                    ${banhangonline.sotienkhidagiam(ht.id)}
+                                                                <span> ₫</span>
+                                                                <del class="product-old-price"
+                                                                     style="float: right">${ht.basoOchammotlam()}<span>₫</span>
+                                                                </del>
+                                                            </h4>
+                                                        </c:if>
+                                                        <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
+                                                            <h4 class="product-price">
+                                                                    <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+                                                                    ${ht.basoOchammotlam()}
+                                                                <span> ₫</span>
+                                                            </h4>
+                                                        </c:if>
+                                                    </div>
                                                 </a>
                                             </div>
                                         </c:if>
@@ -601,7 +575,7 @@
         </div>
         <!-- /container -->
     </div>
-<%--    DANH SÁCH SẢN PHẨM KHUYẾN MÃI--%>
+    <%--    DANH SÁCH SẢN PHẨM KHUYẾN MÃI--%>
     <div class="section shadow mb-5 bg-body-tertiary rounded" style="width: 1175px">
         <!-- container -->
         <div class="container">
@@ -627,12 +601,13 @@
                                     <c:forEach items="${listsp}" var="ht" varStatus="stt">
                                         <c:if test="${banhangonline.soluongcon(ht.id)>0}">
                                             <c:if test="${banhangonline.tonggiamgia(ht.id)>0}">
-                                            <!-- product -->
+                                                <!-- product -->
 
-                                                <div class="product" >
+                                                <div class="product">
                                                     <a href="/ban-hang-online/chi-tiet-san-pham/${ht.id}">
                                                         <div class="product-img">
-                                                            <img src="/uploads/${ht.urlAnh}" style="width: 100%;height: 6cm"
+                                                            <img src="/uploads/${ht.urlAnh}"
+                                                                 style="width: 100%;height: 6cm"
                                                                  alt="">
                                                             <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
                                                                 <div class="product-label">
@@ -645,21 +620,22 @@
                                                         <div class="product-body"
                                                              style="text-align: left;word-wrap: break-word;">
                                                             <p class="product-category">Điện thoại</p>
-                                                            <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
+                                                            <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a>
+                                                            </h3>
                                                             <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
                                                                 <h4 class="product-price">
                                                                         <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-<%--                                                                        ${banhangonline.sotienkhidagiam(ht.id)}--%>
+                                                                        <%--                                                                        ${banhangonline.sotienkhidagiam(ht.id)}--%>
 
-                                                                            <script>
-                                                                                document.write(
-                                                                                    Number('${banhangonline.sotienkhidagiam(ht.id)}'.replace(/,/g, '')).toLocaleString('de-DE')
-                                                                                );
-                                                                            </script>
+                                                                    <script>
+                                                                        document.write(
+                                                                            Number('${banhangonline.sotienkhidagiam(ht.id)}'.replace(/,/g, '')).toLocaleString('de-DE')
+                                                                        );
+                                                                    </script>
                                                                     <span> ₫</span>
                                                                     <del class="product-old-price"
                                                                          style="float: right">
-<%--                                                                            ${ht.basoOchammotlam()}--%>
+                                                                            <%--                                                                            ${ht.basoOchammotlam()}--%>
                                                                         <script>
                                                                             document.write(
                                                                                 Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
@@ -672,12 +648,12 @@
                                                             <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
                                                                 <h4 class="product-price">
                                                                         <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-<%--                                                                        ${ht.basoOchammotlam()}--%>
-                                                                            <script>
-                                                                                document.write(
-                                                                                    Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
-                                                                                );
-                                                                            </script>
+                                                                        <%--                                                                        ${ht.basoOchammotlam()}--%>
+                                                                    <script>
+                                                                        document.write(
+                                                                            Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
+                                                                        );
+                                                                    </script>
                                                                     <span> ₫</span>
                                                                 </h4>
                                                             </c:if>
@@ -694,7 +670,7 @@
                                                         </div>
                                                     </a>
                                                 </div>
-                                            <!-- /product -->
+                                                <!-- /product -->
                                             </c:if>
                                         </c:if>
                                     </c:forEach>
@@ -711,15 +687,15 @@
         </div>
         <!-- /container -->
     </div>
-<%--    TOP SẢN PHẨM BÁN CHẠY--%>
+    <%--    TOP SẢN PHẨM BÁN CHẠY--%>
     <c:set var="kiemtra1" scope="session" value="${0}"/>
-<c:forEach items="${listsp}" var="ht" varStatus="stt">
-    <c:if test="${banhangonline.soluongcon(ht.id)>0}">
-        <c:if test="${banhangonline.soluongdaban(ht.id)>0}">
-            <c:set var="kiemtra1" scope="session" value="${1}"/>
+    <c:forEach items="${listsp}" var="ht" varStatus="stt">
+        <c:if test="${banhangonline.soluongcon(ht.id)>0}">
+            <c:if test="${banhangonline.soluongdaban(ht.id)>0}">
+                <c:set var="kiemtra1" scope="session" value="${1}"/>
+            </c:if>
         </c:if>
-    </c:if>
-</c:forEach>
+    </c:forEach>
     <c:if test="${kiemtra1==1}">
         <div class="section shadow mb-5 bg-body-tertiary rounded" style="width: 1175px">
             <!-- container -->
@@ -750,10 +726,11 @@
                                                     <!-- product -->
 
 
-                                                    <div class="product" >
+                                                    <div class="product">
                                                         <a href="/ban-hang-online/chi-tiet-san-pham/${ht.id}">
                                                             <div class="product-img">
-                                                                <img src="/uploads/${ht.urlAnh}" style="width: 100%;height: 6cm"
+                                                                <img src="/uploads/${ht.urlAnh}"
+                                                                     style="width: 100%;height: 6cm"
                                                                      alt="">
                                                                 <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
                                                                     <div class="product-label">
@@ -766,26 +743,27 @@
                                                             <div class="product-body"
                                                                  style="text-align: left;word-wrap: break-word;">
                                                                 <p class="product-category">Điện thoại</p>
-                                                                <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
+                                                                <h3 class="product-name"><a
+                                                                        href="#">${ht.sanPham.ten}</a></h3>
 
                                                                 <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
                                                                     <h4 class="product-price">
                                                                             <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-<%--                                                                            ${banhangonline.sotienkhidagiam(ht.id)}--%>
-                                                                                <script>
-                                                                                    document.write(
-                                                                                        Number('${banhangonline.sotienkhidagiam(ht.id)}'.replace(/,/g, '')).toLocaleString('de-DE')
-                                                                                    );
-                                                                                </script>
+                                                                            <%--                                                                            ${banhangonline.sotienkhidagiam(ht.id)}--%>
+                                                                        <script>
+                                                                            document.write(
+                                                                                Number('${banhangonline.sotienkhidagiam(ht.id)}'.replace(/,/g, '')).toLocaleString('de-DE')
+                                                                            );
+                                                                        </script>
                                                                         <span> ₫</span>
                                                                         <del class="product-old-price"
                                                                              style="float: right">
-<%--                                                                                ${ht.basoOchammotlam()}--%>
-                                                                                    <script>
-                                                                                        document.write(
-                                                                                            Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
-                                                                                        );
-                                                                                    </script>
+                                                                                <%--                                                                                ${ht.basoOchammotlam()}--%>
+                                                                            <script>
+                                                                                document.write(
+                                                                                    Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
+                                                                                );
+                                                                            </script>
                                                                             <span>₫</span>
                                                                         </del>
                                                                     </h4>
@@ -793,12 +771,12 @@
                                                                 <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
                                                                     <h4 class="product-price">
                                                                             <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-<%--                                                                            ${ht.basoOchammotlam()}--%>
-                                                                                <script>
-                                                                                    document.write(
-                                                                                        Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
-                                                                                    );
-                                                                                </script>
+                                                                            <%--                                                                            ${ht.basoOchammotlam()}--%>
+                                                                        <script>
+                                                                            document.write(
+                                                                                Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
+                                                                            );
+                                                                        </script>
                                                                         <span> ₫</span>
                                                                     </h4>
                                                                 </c:if>
@@ -864,7 +842,7 @@
                                         <c:if test="${banhangonline.soluongcon(ht.id)>0}">
                                             <!-- product -->
 
-                                            <div class="product" >
+                                            <div class="product">
                                                 <a href="/ban-hang-online/chi-tiet-san-pham/${ht.id}">
                                                     <div class="product-img">
                                                         <img src="/uploads/${ht.urlAnh}" style="width: 100%;height: 6cm"
@@ -881,25 +859,25 @@
                                                          style="text-align: left;word-wrap: break-word;">
                                                         <p class="product-category">Điện thoại</p>
                                                         <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
-<%--                                                        <div>Đã bán :${banhangonline.soluongdaban(ht.id)}</div>--%>
+                                                            <%--                                                        <div>Đã bán :${banhangonline.soluongdaban(ht.id)}</div>--%>
                                                         <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
                                                             <h4 class="product-price">
                                                                     <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-<%--                                                                    ${banhangonline.sotienkhidagiam(ht.id)}--%>
-                                                                        <script>
-                                                                            document.write(
-                                                                                Number('${banhangonline.sotienkhidagiam(ht.id)}'.replace(/,/g, '')).toLocaleString('de-DE')
-                                                                            );
-                                                                        </script>
+                                                                    <%--                                                                    ${banhangonline.sotienkhidagiam(ht.id)}--%>
+                                                                <script>
+                                                                    document.write(
+                                                                        Number('${banhangonline.sotienkhidagiam(ht.id)}'.replace(/,/g, '')).toLocaleString('de-DE')
+                                                                    );
+                                                                </script>
                                                                 <span> ₫</span>
                                                                 <del class="product-old-price"
                                                                      style="float: right">
-<%--                                                                        ${ht.basoOchammotlam()}--%>
-    <script>
-        document.write(
-            Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
-        );
-    </script>
+                                                                        <%--                                                                        ${ht.basoOchammotlam()}--%>
+                                                                    <script>
+                                                                        document.write(
+                                                                            Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
+                                                                        );
+                                                                    </script>
 
                                                                     <span>₫</span>
                                                                 </del>
@@ -908,13 +886,13 @@
                                                         <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
                                                             <h4 class="product-price">
                                                                     <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-<%--                                                                    ${ht.basoOchammotlam()}--%>
+                                                                    <%--                                                                    ${ht.basoOchammotlam()}--%>
 
-                                                                        <script>
-                                                                            document.write(
-                                                                                Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
-                                                                            );
-                                                                        </script>
+                                                                <script>
+                                                                    document.write(
+                                                                        Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
+                                                                    );
+                                                                </script>
                                                                 <span> ₫</span>
                                                             </h4>
                                                         </c:if>
@@ -1071,8 +1049,6 @@ color: white;border-radius: 5% 5% 5% 5%"
 <%--         src="data:image/png;base64,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">--%>
 <%--    <h2 style="color: white;font-size: 20px;margin-top: 20px">Đã Thêm vào Giỏ hàng</h2>--%>
 <%--</div>--%>
-
-
 
 
 <script>

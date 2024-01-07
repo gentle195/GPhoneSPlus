@@ -7,8 +7,6 @@
 <head>
 
 
-
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -76,7 +74,7 @@
                                                                         path="nguoiNhan">Người nhận hàng:</form:label>
                                                             <div class="col-sm-9">
                                                                 <form:input class="form-control" path="nguoiNhan"
-                                                                           />
+                                                                />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -91,7 +89,8 @@
                                                                                      class="form-control"
                                                                                      id="selectDiaChi">
                                                                             <c:forEach items="${listDiaChi}" var="ht">
-                                                                                <option value="${ht.id}">${ht.diaChi} - ${ht.quan}
+                                                                                <option value="${ht.id}">${ht.diaChi}
+                                                                                    - ${ht.quan}
                                                                                     - ${ht.huyen}
                                                                                     - ${ht.thanhPho}</option>
                                                                             </c:forEach>
@@ -124,7 +123,7 @@
                                                             <form:label class="col-sm-3 col-form-label" path="tongTien"
                                                                         for="tienCanThanhToan">Tổng tiền:</form:label>
                                                             <div class="col-sm-9">
-                                                                <form:input class="form-control" path="tongTien"
+                                                                <form:input class="form-control" path="tongTien" type="money"
                                                                             readonly="true"/>
                                                             </div>
                                                         </div>
@@ -145,7 +144,8 @@
                                                             <form:label class="col-sm-3 col-form-label"
                                                                         path="hinhThucThanhToan">Phương thức thanh toán:</form:label>
                                                             <div class="col-sm-9">
-                                                                <form:select class="form-control" path="hinhThucThanhToan">
+                                                                <form:select class="form-control"
+                                                                             path="hinhThucThanhToan">
                                                                     <form:option value="0">Tiền mặt</form:option>
                                                                     <form:option value="1">Chuyển khoản</form:option>
                                                                 </form:select>
@@ -156,9 +156,10 @@
                                                 <br>
                                                 <div class="row">
                                                     <div class="col-12" style="text-align: center">
-                                                    <button type="submit" class="btn btn-dark mb-2 " id="toastr-success-top-center-thanh-toan">
-                                                        Thanh Toán
-                                                    </button>
+                                                        <button type="submit" class="btn btn-dark mb-2 "
+                                                                id="toastr-success-top-center-thanh-toan">
+                                                            Thanh Toán
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -221,8 +222,20 @@
                                             <td>${hdct.imei.chiTietSanPham.ram.dungLuong}</td>
                                             <td>${hdct.imei.chiTietSanPham.rom.dungLuong}</td>
                                             <td>${hdct.imei.soImei}</td>
-                                            <td>${hdct.donGia}</td>
-                                            <td>${hdct.donGia * hdct.soLuong}</td>
+                                            <td>
+                                                <script>
+                                                    var donGia = ${hdct.donGia};
+                                                    document.write(donGia.toLocaleString('vi-VN'));
+                                                </script>
+                                                VND
+                                            </td>
+                                            <td>
+                                                <script>
+                                                    var tongTien = ${hdct.donGia * hdct.soLuong};
+                                                    document.write(tongTien.toLocaleString('vi-VN'));
+                                                </script>
+                                                VND
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -257,15 +270,14 @@
                                             </form:label>
                                             <div class="col-sm-9">
                                                 <form:input cssStyle="width: 10cm"
-                                                        class="form-control"
-                                                        placeholder=""
-                                                        path="diaChi"
-                                                        id="diachi"/>
+                                                            class="form-control"
+                                                            placeholder=""
+                                                            path="diaChi"
+                                                            id="diachi"/>
                                                 <form:errors
                                                         path="diaChi"
                                                         cssStyle="color: red"/>
                                             </div>
-
 
 
                                         </div>
@@ -282,10 +294,10 @@
                                                 <select name="" id="province" style="width: 10cm">
                                                 </select>
                                                 <form:input cssStyle="display: none"
-                                                        class="form-control"
-                                                        placeholder=""
-                                                        path="thanhPho"
-                                                        id="themdiachidathangthanhpho"
+                                                            class="form-control"
+                                                            placeholder=""
+                                                            path="thanhPho"
+                                                            id="themdiachidathangthanhpho"
                                                 />
 
                                                 <form:errors
@@ -308,10 +320,10 @@
                                                 <select name="" id="district" style="width: 10cm">
                                                 </select>
                                                 <form:input cssStyle="display: none"
-                                                        class="form-control"
-                                                        placeholder=""
-                                                        path="huyen"
-                                                        id="themdiachidathangquan"
+                                                            class="form-control"
+                                                            placeholder=""
+                                                            path="huyen"
+                                                            id="themdiachidathangquan"
                                                 />
 
                                                 <form:errors
@@ -333,23 +345,16 @@
                                                 <select name="" id="ward" style="width: 10cm">
                                                 </select>
                                                 <form:input cssStyle="display: none"
-                                                        class="form-control"
-                                                        placeholder=""
-                                                        path="quan"
-                                                        id="themdiachidathanghuyen"
+                                                            class="form-control"
+                                                            placeholder=""
+                                                            path="quan"
+                                                            id="themdiachidathanghuyen"
                                                 />
-                                                    <%--                                                id="quann" id="themdiachidathanghuyen"--%>
-                                                    <%--                                                id="huyenn themdiachidathangquan"--%>
-                                                    <%--                                                id="thanhPhoo themdiachidathangthanhpho"--%>
-
                                                 <form:errors
                                                         path="quan"
                                                         cssStyle="color: red"/>
-
-
-
-</div>
                                             </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -372,10 +377,14 @@
                 </form:form>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+                        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+                        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"
+                        integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
+                        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="/jsbanhang/API.js"></script>
+                <script src="/jsbanhang/API.js"></script>
             </div>
 
 
@@ -405,9 +414,6 @@
     }
 
     function checkhkh() {
-        <%--                                                id="quann" id="themdiachidathanghuyen"--%>
-        <%--                                                id="huyenn themdiachidathangquan"--%>
-        <%--                                                id="thanhPhoo themdiachidathangthanhpho"--%>
         var diaChi = document.getElementById("diachi").value;
         var quann = document.getElementById("themdiachidathanghuyen").value;
         var huyenn = document.getElementById("themdiachidathangquan").value;

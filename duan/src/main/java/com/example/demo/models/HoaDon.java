@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.NumberFormat;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -45,6 +46,7 @@ public class HoaDon {
     private String sdt;
 
     //    @NotBlank(message = "Không để trống thông tin")
+    @NumberFormat(style = NumberFormat.Style.CURRENCY, pattern = "###,###,###.###")
     @Column(name = "tong_tien")
     private BigDecimal tongTien;
 

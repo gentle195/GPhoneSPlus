@@ -205,6 +205,7 @@
                                             <th>Số IMEI</th>
                                             <th>Đơn Giá Gốc</th>
                                             <th>Hình thức</th>
+                                            <th>Lý do đổi trả</th>
                                             <th colspan="2">Action</th>
                                         </tr>
                                         </thead>
@@ -240,8 +241,7 @@
                                                         </c:when>
                                                     </c:choose>
                                                 </td>
-
-
+                                                <td>${hdct.lyDo}</td>
                                                 <td>
                                                     <c:choose>
                                                         <c:when test="${hdct.hinhThucDoiTra ==0 }">
