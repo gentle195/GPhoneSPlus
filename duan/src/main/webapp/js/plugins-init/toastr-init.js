@@ -119,7 +119,7 @@
                     tapToDismiss: !1
                 })
                 setTimeout(function () {
-                    window.location.href = "/hoa-don/hien-thi-dang-giao-hang";
+                    window.location.href = "/hoa-don/hien-thi-dang-giao";
                 }, 2000);
             }
         ),

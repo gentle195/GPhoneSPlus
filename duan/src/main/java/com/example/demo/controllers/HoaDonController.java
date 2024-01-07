@@ -2245,7 +2245,7 @@ public class HoaDonController {
             }
         }
         System.in.read();
-        return "redirect:/hoa-don/hien-thi-dang-giao-hang";
+        return "redirect:/hoa-don/hien-thi-dang-giao";
     }
 
     @GetMapping("/xac-nhan-huy-hoan-tien-dang-giao/{id}")
@@ -2267,7 +2267,7 @@ public class HoaDonController {
             }
         }
         System.in.read();
-        return "redirect:/hoa-don/hien-thi-dang-giao-hang";
+        return "redirect:/hoa-don/hien-thi-dang-giao";
     }
 
     @GetMapping("/huy-dang-giao/{id}")
@@ -2306,7 +2306,7 @@ public class HoaDonController {
         model.addAttribute("hoaDon", hd);
         model.addAttribute("contentPage", "../hoadon/hoa-don-xac-nhan.jsp");
         System.in.read();
-        return "redirect:/hoa-don/hien-thi-dang-giao-hang"; // Chuyển hướng về trang danh sách hóa đơn sau khi hủy
+        return "redirect:/hoa-don/hien-thi-dang-giao"; // Chuyển hướng về trang danh sách hóa đơn sau khi hủy
     }
 
     @GetMapping("/xac-nhan-huy-cho-giao/{id}")
