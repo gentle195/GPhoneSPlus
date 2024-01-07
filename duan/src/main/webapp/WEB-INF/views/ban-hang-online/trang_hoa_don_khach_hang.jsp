@@ -343,13 +343,13 @@
                                                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
                                                             <label style="font-weight: bold">Đơn
-                                                                giá:</label>${ht.basoOchammotlamGHDGKG()}đ -
-                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
+                                                                giá:</label>${ht.basoOchammotlamGHDGKG2()}đ -
+                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG2()} đ</del>
                                                         </c:if>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
                                                             <label style="font-weight: bold">Đơn
                                                                 giá:</label>
-                                                            ${ht.basoOchammotlamGHDG()} đ
+                                                            ${ht.basoOchammotlamGHDG2()} đ
                                                         </c:if>
                                                     </div>
                                                     <div style="width: 18%;">
@@ -1155,7 +1155,7 @@
         var originalValue = document.getElementById(elementId).textContent;
 
         // Chuyển đổi giá trị sang dạng có dấu chấm phân cách hàng nghìn
-        var formattedValue = Number(originalValue).toLocaleString('en-US');
+        var formattedValue = Number(originalValue).toLocaleString('vi-VN');
 
         // Gán giá trị đã định dạng lại vào thẻ div
         document.getElementById(elementId).textContent = formattedValue;

@@ -83,7 +83,7 @@
                                                          alt="">
                                                     <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
                                                         <div class="product-label">
-                                                            <span class="sale">-${giamgia.tonggiamgia(ht.id)}%</span>
+                                                            <span class="sale">-${giamgia.tonggiamgia2(ht.id)}%</span>
                                                             <span class="new">Giảm giá</span>
                                                         </div>
                                                     </c:if>
@@ -97,10 +97,10 @@
                                                     <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
                                                         <h4 class="product-price">
                                                                 <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-                                                                ${banhangonline.sotienkhidagiam(ht.id)}
+                                                                ${banhangonline.sotienkhidagiam2(ht.id)}
                                                             <span> ₫</span>
                                                             <del class="product-old-price"
-                                                                 style="float: right">${ht.basoOchammotlam()}<span>₫</span>
+                                                                 style="float: right">${ht.basoOchammotlam2()}<span>₫</span>
                                                             </del>
                                                         </h4>
                                                     </c:if>

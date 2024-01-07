@@ -107,6 +107,7 @@ public interface BanHangOnlineService {
     List<HoaDon> searchGiaoThanhCong(UUID id, String ten);
 
     String sotienkhidagiam(UUID idctsp);
+    String sotienkhidagiam2(UUID idctsp);
 
 
     String dongiaVSsoluongXemHDCT(UUID idhd, UUID idctsp);
@@ -114,6 +115,7 @@ public interface BanHangOnlineService {
     List<ChiTietSanPham> timkiemTrangChu(String ten);
 
     String convertgiatien(BigDecimal giatien);
+    String convertgiatien2(BigDecimal giatien);
 
     List<DonDatHang> dsDDHtheoIDHD(UUID idhd);
 }

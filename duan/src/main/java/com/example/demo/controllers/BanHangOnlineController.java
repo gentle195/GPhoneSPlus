@@ -557,16 +557,37 @@ public class BanHangOnlineController {
             @RequestParam("solg") Integer soluong
     ) {
 
+//        if (banHangOnlineService.ListghctTheoIdghvsIdctsp(banHangOnlineService.ListghTheoidkh(idkh).get(0).getId(), idctsp).size() > 0) {
+//            GioHangChiTiet ghctud = banHangOnlineService.ListghctTheoIdghvsIdctsp(banHangOnlineService.ListghTheoidkh(idkh).get(0).getId(), idctsp).get(0);
+//            Integer slud = ghctud.getSoLuong() + soluong;
+//            ghctud.setSoLuong(slud);
+//            gioHangChiTietService.add(ghctud);
+//        } else {
+//            GioHangChiTiet ghct = new GioHangChiTiet();
+//            ghct.setGioHang(banHangOnlineService.ListghTheoidkh(idkh).get(0));
+//            ghct.setChiTietSanPham(chiTietSanPhamService.findById(idctsp));
+//            ghct.setSoLuong(soluong);
+//            ghct.setDonGia(chiTietSanPhamService.findById(idctsp).getGiaBan());
+//            BigDecimal giaban = chiTietSanPhamService.findById(idctsp).getGiaBan();
+//            Integer giaban1 = Integer.valueOf(String.valueOf(giaban));
+//            Integer phantramgiam = banHangOnlineService.tonggiamgia(String.valueOf(idctsp));
+//            Integer dgkg = giaban1 - giaban1 / 100 * phantramgiam;
+//            BigDecimal dgkg1 = BigDecimal.valueOf(Long.valueOf(String.valueOf(dgkg)));
+//            ghct.setDonGiaKhiGiam(dgkg1);
+//            gioHangChiTietService.add(ghct);
+//        }
         if (banHangOnlineService.ListghctTheoIdghvsIdctsp(banHangOnlineService.ListghTheoidkh(idkh).get(0).getId(), idctsp).size() > 0) {
             GioHangChiTiet ghctud = banHangOnlineService.ListghctTheoIdghvsIdctsp(banHangOnlineService.ListghTheoidkh(idkh).get(0).getId(), idctsp).get(0);
-            Integer slud = ghctud.getSoLuong() + soluong;
-            ghctud.setSoLuong(slud);
+            ghctud.setSoLuong(soluong);
+            ghctud.setTinhTrang(0);
             gioHangChiTietService.add(ghctud);
+            banHangOnLinerepository.updatelaighctve1trumotIDGH(ghctud.getId());
         } else {
             GioHangChiTiet ghct = new GioHangChiTiet();
             ghct.setGioHang(banHangOnlineService.ListghTheoidkh(idkh).get(0));
             ghct.setChiTietSanPham(chiTietSanPhamService.findById(idctsp));
             ghct.setSoLuong(soluong);
+            ghct.setTinhTrang(0);
             ghct.setDonGia(chiTietSanPhamService.findById(idctsp).getGiaBan());
             BigDecimal giaban = chiTietSanPhamService.findById(idctsp).getGiaBan();
             Integer giaban1 = Integer.valueOf(String.valueOf(giaban));
@@ -575,7 +596,9 @@ public class BanHangOnlineController {
             BigDecimal dgkg1 = BigDecimal.valueOf(Long.valueOf(String.valueOf(dgkg)));
             ghct.setDonGiaKhiGiam(dgkg1);
             gioHangChiTietService.add(ghct);
+            banHangOnLinerepository.updatelaighctve1trumotIDGH(banHangOnLinerepository.ListghctTheoIdghvsIdctsp(banHangOnlineService.ListghTheoidkh(idkh).get(0).getId(),chiTietSanPhamService.findById(idctsp).getId()).get(0).getId());
         }
+
         model.addAttribute("listghct", banHangOnlineService.ListghctTheoidgh(banHangOnlineService.ListghTheoidkh(idkh).get(0).getId()));
         model.addAttribute("tttong", 1);
         model.addAttribute("banhangonline", banHangOnlineService);
@@ -585,7 +608,9 @@ public class BanHangOnlineController {
             model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
             model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
         }
-        return "ban-hang-online/trang-gio-hang-chi-tiet";
+//        return "ban-hang-online/trang-gio-hang-chi-tiet";
+        return "redirect:/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-mua-hang/"+banHangOnlineService.ListghTheoidkh(idkh).get(0).getId();
+
     }
 
 
@@ -669,6 +694,22 @@ public class BanHangOnlineController {
         return "ban-hang-online/single_page_gio_hang_chi_tiet";
     }
 
+    @GetMapping("/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-mua-hang/{idgh}")
+    public String nutthanhtoantrangghctget(
+            Model model,
+            @PathVariable("idgh") UUID idgh
+    ) {
+        model.addAttribute("listghctTT", banHangOnlineService.ListghctTheoidgh(idgh));
+        model.addAttribute("listghct", banHangOnlineService.ListghTheoidghvsTT1(idgh));
+        model.addAttribute("banhangonline", banHangOnlineService);
+        if (idkhachhang.equals("1")) {
+            model.addAttribute("idkhachhang", idkhachhang);
+        } else {
+            model.addAttribute("khachhangdangnhap", khachHangService.findById(UUID.fromString(idkhachhang)));
+            model.addAttribute("idkhachhang", UUID.fromString(idkhachhang));
+        }
+        return "ban-hang-online/trang-san-pham-duoc-chon-thanh-toan";
+    }
     @PostMapping("/ban-hang-online/san-pham-duoc-chon-thanh-toan/nut-mua-hang")
     public String nutthanhtoantrangghct(
             Model model,
@@ -765,7 +806,9 @@ public class BanHangOnlineController {
 //        hd.setSdt(gioHangService.findById(idgh).getKhachHang().getSdt());
                 hd.setSdt(sdt);
                 hd.setNguoiNhan(nguoinhan);
-                hd.setTongTien(tongtien);
+                Long tt=Long.valueOf(String.valueOf(tongtien)) +Long.valueOf(30000);
+                hd.setTongTien(BigDecimal.valueOf(tt));
+                hd.setPhiShip(BigDecimal.valueOf(Long.valueOf(30000)));
                 hd.setNgayTao(date);
                 hd.setNgayCapNhat(date);
                 hd.setTinhTrang(0);
@@ -998,7 +1041,9 @@ public class BanHangOnlineController {
 //        hd.setSdt(gioHangService.findById(idgh).getKhachHang().getSdt());
             hd.setSdt(sdt1);
             hd.setMaGiaoDich(queryParams.get("vnp_TxnRef"));
-            hd.setTongTien(BigDecimal.valueOf(tienthanhtoan1));
+            Long tt=Long.valueOf(String.valueOf(tienthanhtoan1)) +Long.valueOf(30000);
+            hd.setTongTien(BigDecimal.valueOf(tt));
+            hd.setPhiShip(BigDecimal.valueOf(Long.valueOf(30000)));
             hd.setNgayTao(date);
             hd.setNguoiNhan(nguoinhan1);
             hd.setNgayCapNhat(date);
@@ -1838,7 +1883,14 @@ public class BanHangOnlineController {
     ) {
         model.addAttribute("banhangonline", banHangOnlineService);
         System.out.println("-------" + trangchutimkiem);
-        model.addAttribute("listsp", banHangOnlineService.timkiemTrangChu(trangchutimkiem));
+        List<ChiTietSanPham> listCTSP=new ArrayList<>();
+        for (ChiTietSanPham ct:banHangOnlineService.timkiemTrangChu(trangchutimkiem)
+             ) {
+            if (banHangOnLinerepository.soluongcon(ct.getId())>0){
+                listCTSP.add(ct);
+            }
+        }
+        model.addAttribute("listsp",listCTSP);
 
 
         return "ban-hang-online/singfle_pase_tim_kiem_trang_chu";

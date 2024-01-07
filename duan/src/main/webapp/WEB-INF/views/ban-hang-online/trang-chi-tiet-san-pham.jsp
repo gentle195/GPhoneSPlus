@@ -352,13 +352,13 @@
                                                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
                                                             <label style="font-weight: bold">Đơn
-                                                                giá:</label>${ht.basoOchammotlamGHDGKG()}đ -
-                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
+                                                                giá:</label>${ht.basoOchammotlamGHDGKG2()}đ -
+                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG2()} đ</del>
                                                         </c:if>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
                                                             <label style="font-weight: bold">Đơn
                                                                 giá:</label>
-                                                            ${ht.basoOchammotlamGHDG()} đ
+                                                            ${ht.basoOchammotlamGHDG2()} đ
                                                         </c:if>
                                                     </div>
                                                     <div style="width: 18%;">
@@ -684,8 +684,8 @@
 <%--                            </h4>--%>
                             <c:if test="${banhangonline.tonggiamgia(motctsp.id)>0}">
                                 <h4 class="product-price" ><span
-                                        style="font-size:15px"></span>${banhangonline.sotienkhidagiam(motctsp.id)}₫ -
-                                    <del class="product-old-price">${motctsp.basoOchammotlam()}<span style="font-size:15px">₫</span>
+                                        style="font-size:15px"></span>${banhangonline.sotienkhidagiam2(motctsp.id)}₫ -
+                                    <del class="product-old-price">${motctsp.basoOchammotlam2()}<span style="font-size:15px">₫</span>
                                     </del>
                                 </h4>
                             </c:if>
@@ -696,7 +696,7 @@
 <%--                                    <span> ₫</span>--%>
 <%--                                </h4>--%>
                                 <h4 class="product-price" ><span
-                                        style="font-size:15px"></span> ${motctsp.basoOchammotlam()}₫
+                                        style="font-size:15px"></span> ${motctsp.basoOchammotlam2()}₫
                                 </h4>
                             </c:if>
 
@@ -746,7 +746,8 @@
                                         <div class="" style="margin-left: 0cm">
                                             <BUTTON class="qty-down" type="button">-</BUTTON>
                                             <input type="number" value="0" min="0"
-                                                   max="${banhangonline.soluongcon(motctsp.id)-banhangonline.sl1ctsptronggh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId(),motctsp.id)}"
+<%--                                                   max="${banhangonline.soluongcon(motctsp.id)-banhangonline.sl1ctsptronggh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId(),motctsp.id)}"--%>
+                                                   max="${banhangonline.soluongcon(motctsp.id)}"
                                                    id="input2" style="width: 2cm" name="solg">
                                             <BUTTON class="qty-up" type="button">+</BUTTON>
                                         </div>
@@ -760,12 +761,31 @@
                                            id="thongbaosoluong"></label><br>
                                         <%--                            <p>${idkhachhang}----${motctsp.id}</p>--%>
                                     <button class="add-to-cart-btn" type="button"
-                                            onclick="thongbaothemvaogiohang('${motctsp.id}');"><i
+                                            onclick="thongbaothemvaogiohang('${motctsp.id}');">
+                                        <i
                                             class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
                                     </button>
+
+
+
+
                                     <button class="add-to-cart-btn" id="btthanhtoam" type="button"
-                                            onclick="clickthanhtoanctsp()"><i class="fa fa-shopping-cart"></i> Mua ngay
+                                            <c:if test="${banhangonline.tonggiamgia(motctsp.id)<=0}">
+                                            onclick="clickthanhtoanctsp('${motctsp.giaBan}')"
+                                    </c:if>
+                                            <c:if test="${banhangonline.tonggiamgia(motctsp.id)>0}">
+
+
+                                                onclick="clickthanhtoanctsp('${banhangonline.sotienkhidagiam2(motctsp.id)}')"><i class="fa fa-shopping-cart"></i> Mua ngay
+
+                                            </c:if>
+
+
+
+                                    ><i class="fa fa-shopping-cart"></i> Mua ngay
                                     </button>
+
+
 
 
                                     <input style="display:none;" value="${idkhachhang}" name="idkh">
@@ -1195,17 +1215,17 @@
                                                         <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
                                                             <h4 class="product-price">
                                                                     <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-                                                                    ${banhangonline.sotienkhidagiam(ht.id)}
+                                                                    ${banhangonline.sotienkhidagiam2(ht.id)}
                                                                 <span> ₫</span>
                                                                 <del class="product-old-price"
-                                                                     style="float: right">${ht.basoOchammotlam()}<span>₫</span>
+                                                                     style="float: right">${ht.basoOchammotlam2()}<span>₫</span>
                                                                 </del>
                                                             </h4>
                                                         </c:if>
                                                         <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
                                                             <h4 class="product-price">
                                                                     <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-                                                                    ${ht.basoOchammotlam()}
+                                                                    ${ht.basoOchammotlam2()}
                                                                 <span> ₫</span>
                                                             </h4>
                                                         </c:if>
@@ -1743,7 +1763,7 @@ color: white;border-radius: 5% 5% 5% 5%"
         var originalValue = document.getElementById(elementId).textContent;
 
         // Chuyển đổi giá trị sang dạng có dấu chấm phân cách hàng nghìn
-        var formattedValue = Number(originalValue).toLocaleString('en-US');
+        var formattedValue = Number(originalValue).toLocaleString('vi-VN');
 
         // Gán giá trị đã định dạng lại vào thẻ div
         document.getElementById(elementId).textContent = formattedValue;

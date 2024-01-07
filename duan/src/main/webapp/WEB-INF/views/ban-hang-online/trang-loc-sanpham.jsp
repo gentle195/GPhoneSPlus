@@ -308,13 +308,13 @@
                                                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
                                                             <label style="font-weight: bold">Đơn
-                                                                giá:</label>${ht.basoOchammotlamGHDGKG()}đ -
-                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
+                                                                giá:</label>${ht.basoOchammotlamGHDGKG2()}đ -
+                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG2()} đ</del>
                                                         </c:if>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
                                                             <label style="font-weight: bold">Đơn
                                                                 giá:</label>
-                                                            ${ht.basoOchammotlamGHDG()} đ
+                                                            ${ht.basoOchammotlamGHDG2()} đ
                                                         </c:if>
                                                     </div>
                                                     <div style="width: 18%;">
@@ -586,17 +586,17 @@
                                                             <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
                                                                 <h4 class="product-price">
                                                                         <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-                                                                        ${banhangonline.sotienkhidagiam(ht.id)}
+                                                                        ${banhangonline.sotienkhidagiam2(ht.id)}
                                                                     <span> ₫</span>
                                                                     <del class="product-old-price"
-                                                                         style="float: right">${ht.basoOchammotlam()}<span>₫</span>
+                                                                         style="float: right">${ht.basoOchammotlam2()}<span>₫</span>
                                                                     </del>
                                                                 </h4>
                                                             </c:if>
                                                             <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
                                                                 <h4 class="product-price">
                                                                         <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
-                                                                        ${ht.basoOchammotlam()}
+                                                                        ${ht.basoOchammotlam2()}
                                                                     <span> ₫</span>
                                                                 </h4>
                                                             </c:if>
@@ -986,7 +986,7 @@ color: white;border-radius: 5% 5% 5% 5%"
         var originalValue = document.getElementById(elementId).textContent;
 
         // Chuyển đổi giá trị sang dạng có dấu chấm phân cách hàng nghìn
-        var formattedValue = Number(originalValue).toLocaleString('en-US');
+        var formattedValue = Number(originalValue).toLocaleString('vi-VN');
 
         // Gán giá trị đã định dạng lại vào thẻ div
         document.getElementById(elementId).textContent = formattedValue;

@@ -329,10 +329,10 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
     @Query("select ct from ChiTietSanPham ct left join SanPham sp on ct.sanPham.id=sp.id " +
             "left join HangSanPham hang on sp.hangSanPham.id=hang.id left join Ram ram on ct.ram.id=ram.id" +
             " left join Rom rom on ct.rom.id=rom.id left join Pin pin on ct.pin.id=pin.id left join MauSac ms on ct.mauSac.id=ms.id " +
-            "left join Chip chip on ct.chip.id=chip.id where ct.tinhTrang=0 and  ct.soLuong>0 and" +
+            "left join Chip chip on ct.chip.id=chip.id where ct.tinhTrang=0  and" +
             " (sp.ten like %:ten% or hang.ten like %:ten% or ram.dungLuong like %:ten% or rom.dungLuong like %:ten% " +
             "or pin.loaiPin like %:ten% or ms.ten like %:ten% or chip.ten like %:ten%)")
-    List<ChiTietSanPham> timkiemTrangChu(String ten);
+    List<ChiTietSanPham> timkiemTrangChu(@Param("ten") String ten);
 
 
     @Query("select hd from  HoaDon hd where hd.loai=1 ")
@@ -394,5 +394,13 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
 //            +"and (:giaBanMin is null and :giaBanMax is null or ct.giaBan between :giaBanMin and :giaBanMax)"
     )
     List<ChiTietSanPham> locctspngungban(UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam);
+
+
+
+    @Transactional
+    @Modifying
+    @Query(value = "update GioHangChiTiet ghct set ghct.tinhTrang=1 where ghct.id not in  (select ghct.id from GioHangChiTiet where ghct.id=:idghct)")
+    void updatelaighctve1trumotIDGH(@Param("idghct") UUID idghct);
+
 
 }

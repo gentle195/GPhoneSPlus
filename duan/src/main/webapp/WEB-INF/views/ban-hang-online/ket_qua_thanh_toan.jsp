@@ -332,7 +332,8 @@
                                     <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                         <i class="fa fa-shopping-cart"></i>
                                         <span>Giỏ hàng</span>
-                                        <div class="qty">${banhangonline.ListghctTheoidgh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId()).size()}</div>
+                                        <div class="qty">
+                                                ${banhangonline.ListghctTheoidgh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId()).size()}</div>
                                     </a>
                                     <div class="cart-dropdown" style="width:  13cm">
                                         <div class="cart-list">
@@ -349,13 +350,35 @@
                                                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
                                                             <label style="font-weight: bold">Đơn
-                                                                giá:</label>${ht.basoOchammotlamGHDGKG()}đ -
-                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
+                                                                giá:</label>
+
+<%--                                                            ${ht.basoOchammotlamGHDGKG()}--%>
+                                                            <script>
+                                                                document.write(
+                                                                    Number('${ht.basoOchammotlamGHDGKG()}'.replace(/,/g, '')).toLocaleString('de-DE')
+                                                                );
+                                                            </script>
+                                                            đ -
+                                                            <del class="product-old-price">
+
+<%--                                                                    ${ht.basoOchammotlamGHDG()}--%>
+                                                                        <script>
+                                                                            document.write(
+                                                                                Number('${ht.basoOchammotlamGHDG()}'.replace(/,/g, '')).toLocaleString('de-DE')
+                                                                            );
+                                                                        </script>
+                                                                        đ</del>
                                                         </c:if>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
                                                             <label style="font-weight: bold">Đơn
                                                                 giá:</label>
-                                                            ${ht.basoOchammotlamGHDG()} đ
+<%--                                                            ${ht.basoOchammotlamGHDG()}--%>
+                                                            <script>
+                                                                document.write(
+                                                                    Number('${ht.basoOchammotlamGHDG()}'.replace(/,/g, '')).toLocaleString('de-DE')
+                                                                );
+                                                            </script>
+                                                            đ
                                                         </c:if>
                                                     </div>
                                                     <div style="width: 18%;">
@@ -375,7 +398,11 @@
                                             <small> ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongsanphamchon()}
                                                 Sản phẩm được chọn</small>
                                             <br>
-                                            <label>Tổng:</label><label id="tongtienghtt">${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}</label><label>đ</label>
+                                            <label>Tổng:</label><label id="tongtienghtt">
+                                                ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
+
+
+                                        </label><label>đ</label>
 
                                         </div>
                                         <div class="cart-btns">
@@ -623,26 +650,20 @@
 
 </body>
 <script>
+
     function chonhetgiohangtongTRANGCHU(idgh) {
         // var  idgh1=encodeURIComponent(idgh)
         if (document.getElementsByName('checktongTT')[0].checked == true) {
             var link = '/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/full/0/' + idgh;
             // document.getElementById("ktlink").innerHTML=link
-
             loadgiaodienghctbanhangTrangChu(link);
-
-
+            loadgiaodienghctbanhangTrangChu(link);
         } else {
             var link = '/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/full/1/' + idgh;
             // document.getElementById("ktlink").innerHTML=link
-
             loadgiaodienghctbanhangTrangChu(link);
-
+            loadgiaodienghctbanhangTrangChu(link);
         }
-        loadgiaodienghctbanhang('/ban-hang-online/single_page_gio_hang_chi_tiet');
-        loadgiaodienghctbanhang('/ban-hang-online/single_page_gio_hang_chi_tiet');
-
-        // alert("vdvdvd")
     };
 
     function chonsanphamgiohangTT(vt, idctgh, idgh) {
@@ -652,26 +673,27 @@
         if (document.getElementsByName('checkidghTT')[vt1].checked == true) {
             var link = '/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/' + idctgh + '/0/' + idgh;
             // document.getElementById("ktlink").innerHTML=link
-
             loadgiaodienghctbanhangTrangChu(link);
-            // loadgiaodienghctbanhangTrangChu(link);
-            // loadgiaodienghctbanhang('/ban-hang-online/single_page_gio_hang_chi_tiet');
-
+            loadgiaodienghctbanhangTrangChu(link);
         } else {
             var link = '/ban-hang-online/trang-chu/chon-san-pham-gio-hang-trang-chu/' + idctgh + '/1/' + idgh;
             // document.getElementById("ktlink").innerHTML=link
-
             loadgiaodienghctbanhangTrangChu(link);
-            // loadgiaodienghctbanhangTrangChu(link);
-            // loadgiaodienghctbanhang('/ban-hang-online/single_page_gio_hang_chi_tiet');
-
+            loadgiaodienghctbanhangTrangChu(link);
         }
+    };
 
-        loadgiaodienghctbanhang('/ban-hang-online/single_page_gio_hang_chi_tiet');
-        loadgiaodienghctbanhang('/ban-hang-online/single_page_gio_hang_chi_tiet');
-
+    function thongbaothemvaogiohang(idctsp) {
+        //chạy 2 lần mới ấn dc
+        loadgiaodienghctbanhangTrangChu('/ban-hang-online/them-san-pham-vao-gio-hang/' + idctsp);
+        loadgiaodienghctbanhangTrangChu('/ban-hang-online/them-san-pham-vao-gio-hang/' + idctsp);
+        document.getElementById('thongbaothemgiohang').style.display = '';
+        setTimeout(function () {
+            document.getElementById('thongbaothemgiohang').style.display = 'none';
+        }, 2000); // 2000 milliseconds tương đương với 2 giây
 
     };
+
 
     function loadgiaodienghctbanhangTrangChu(interfaceUrl) {
         fetch(interfaceUrl)
@@ -679,7 +701,8 @@
             .then(data => {
                 const content = document.getElementById('giohangtrangchu');
                 content.innerHTML = data;
-
+                thanhtienbenghct();
+                formatAndDisplayValue("tongtienghtt");
                 loadScripts();
 
 
@@ -688,20 +711,9 @@
                 console.error('Error loading interface:', error);
             });
 
+        document.getElementById('thanhlocctsp').style.display = 'none';
 
     }
-
-
-    function thanhtienbenghct() {
-        var checkdongiakhigiam = document.getElementsByName('checkdongiakhigiam');
-        var checksoluong = document.getElementsByName('checksoluong');
-        var checkthanhtien = document.getElementsByName('checkthanhtien');
-        for (var i = 0; i < checkthanhtien.length; i++) {
-
-            checkthanhtien[i].innerHTML = parseInt(checkdongiakhigiam[i].innerHTML) * parseInt(checksoluong[i].value);
-        }
-    };
-    thanhtienbenghct();
 
     function loadgiaodienghctbanhang(interfaceUrl) {
         fetch(interfaceUrl)
@@ -711,20 +723,113 @@
                 content.innerHTML = data;
                 thanhtienbenghct();
                 loadScripts();
+                loadSelect2();
+
+
             })
             .catch(error => {
                 console.error('Error loading interface:', error);
             });
+
+        document.getElementById('thanhlocctsp').style.display = 'none';
+
+    }
+
+
+    function loadbenloc(interfaceUrl) {
+        fetch(interfaceUrl)
+            .then(response => response.text())
+            .then(data => {
+                const content = document.getElementById('dssanphamloc');
+                content.innerHTML = data;
+                loadScripts();
+            })
+            .catch(error => {
+                console.error('Error loading interface:', error);
+            });
+        document.getElementById('thanhlocctsp').style.display = 'none';
+    }
+
+    function thanhlocctsp(interfaceUrl) {
+        fetch(interfaceUrl)
+            .then(response => response.text())
+            .then(data => {
+
+                const content = document.getElementById('thanhlocctsp');
+                content.innerHTML = data;
+
+                loadScripts();
+
+
+            })
+            .catch(error => {
+                console.error('Error loading interface:', error);
+            });
+        document.getElementById('thanhlocctsp').style.display = 'none';
+    }
+
+    function locbenctsp(interfaceUrl) {
+        fetch(interfaceUrl)
+            .then(response => response.text())
+            .then(data => {
+                const content = document.getElementById('content');
+                content.innerHTML = data;
+
+                loadScripts();
+                loadSelect2();
+
+
+            })
+            .catch(error => {
+                console.error('Error loading interface:', error);
+            });
+        document.getElementById('thanhlocctsp').style.display = 'block';
+    }
+
+    function loadInterface(interfaceUrl) {
+        fetch(interfaceUrl)
+            .then(response => response.text())
+            .then(data => {
+                const content = document.getElementById('content');
+                content.innerHTML = data;
+
+                loadScripts();
+                loadSelect2();
+
+
+            })
+            .catch(error => {
+                console.error('Error loading interface:', error);
+            });
+
+        document.getElementById('thanhlocctsp').style.display = 'none';
+
+
+        if (interfaceUrl.includes('/ban-hang-online/chi-tiet-san-pham/')) {
+            <c:forEach  items="${listsp}" var="ht" varStatus="stt">
+            var kt = '/ban-hang-online/chi-tiet-san-pham/' + '${ht.id}';
+            if (kt == interfaceUrl) {
+                thanhlocctsp('/ban-hang-online/thanh-loc-ctsp/' + '${ht.id}');
+                document.getElementById('thanhlocctsp').style.display = 'block';
+            }
+            </c:forEach>
+
+        }
     }
 
     function loadScripts() {
         const scriptsToLoad = [
-            // '/jsbanhang/jquery.min.js',
-            // '/jsbanhang/bootstrap.min.js',
-            // '/jsbanhang/slick.min.js',
-            // '/jsbanhang/nouislider.min.js',
-            // '/jsbanhang/jquery.zoom.min.js',
-            // '/jsbanhang/main.js'
+            'https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js',
+            'https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js',
+            'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js',
+            'https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js',
+
+            '/jsbanhang/jquery.min.js',
+            '/jsbanhang/bootstrap.min.js',
+            '/jsbanhang/slick.min.js',
+            '/jsbanhang/nouislider.min.js',
+            '/jsbanhang/jquery.zoom.min.js',
+            '/jsbanhang/main.js'
 
         ];
 
@@ -738,7 +843,7 @@
                     loadScript(index + 1);
                 };
                 head.appendChild(script);
-
+                loadSelect2();
             }
         }
 
@@ -747,16 +852,73 @@
     }
 
 
+    function loadSelect2() {
+        // Gọi .select2() cho các phần tử sau khi tất cả các tệp script đã được nạp
+        $('#hangds1').select2({
+            theme: 'bootstrap-5'
+        });
+        $('#camds1').select2({
+            theme: 'bootstrap-5'
+        });
+        $('#mands1').select2({
+            theme: 'bootstrap-5'
+        });
+        $('#mauds1').select2({
+            theme: 'bootstrap-5'
+        });
+        $('#ramds1').select2({
+            theme: 'bootstrap-5'
+        });
+        $('#romds1').select2({
+            theme: 'bootstrap-5'
+        });
+
+        $('#pinds1').select2({
+            theme: 'bootstrap-5'
+        });
+        $('#dungds1').select2({
+            theme: 'bootstrap-5'
+        });
+
+        $('#chipds1').select2({
+            theme: 'bootstrap-5'
+        });
+
+        $('#sands1').select2({
+            theme: 'bootstrap-5'
+        });
+
+        $('#diachids1').select2({
+            theme: 'bootstrap-5'
+        });
+
+        // Gọi .select2() cho các phần tử khác ở đây (tương tự)
+    }
+
+
 </script>
 <script>
     function anbt() {
         document.getElementById('taikhoancuatoi').click();
     }
+
+    function formatAndDisplayValue(elementId) {
+        // Lấy giá trị từ thẻ div
+        var originalValue = document.getElementById(elementId).textContent;
+
+        // Chuyển đổi giá trị sang dạng có dấu chấm phân cách hàng nghìn
+        var formattedValue = Number(originalValue).toLocaleString('vi-VN');
+
+        // Gán giá trị đã định dạng lại vào thẻ div
+        document.getElementById(elementId).textContent = formattedValue;
+    }
+
+    formatAndDisplayValue("tongtienghtt");
 </script>
 <script>
     var searchResultsContainer = document.getElementById("searchResults");
 
-    document.getElementById("searchInput").addEventListener("input", function() {
+    document.getElementById("searchInput").addEventListener("input", function () {
         var searchValue = this.value.trim().toLowerCase();
         showSearchResults(searchValue);
     });
@@ -764,7 +926,7 @@
     function showSearchResults(searchValue) {
         if (searchValue.length > 0) {
             // document.getElementById('saochep').innerHTML=   document.getElementById('searchInput').value
-            loadgiaodientimkiemTrangchu("/ban-hang-online/trang-chu/tim-kiem-loc/"+document.getElementById('searchInput').value);
+            loadgiaodientimkiemTrangchu("/ban-hang-online/trang-chu/tim-kiem-loc/" + document.getElementById('searchInput').value);
             searchResultsContainer.style.display = "";
         } else {
             // Nếu không có ký tự nào, ẩn kết quả
@@ -786,7 +948,6 @@
             .catch(error => {
                 console.error('Error loading interface:', error);
             });
-
 
 
     }

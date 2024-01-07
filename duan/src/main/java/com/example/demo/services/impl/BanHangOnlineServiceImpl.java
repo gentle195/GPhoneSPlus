@@ -261,6 +261,20 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
         return decimalFormat.format(number);
     }
 
+
+    @Override
+    public String sotienkhidagiam2(UUID idctsp) {
+        Long stbandau=Long.valueOf(String.valueOf(chiTietSanPhamService.findById(idctsp).getGiaBan()));
+        Long phamtramgiam=Long.valueOf(String.valueOf(tonggiamgia(String.valueOf(idctsp))));
+        long number =stbandau- stbandau/100*phamtramgiam;
+        // Create a DecimalFormat instance with the desired pattern
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+  
+
+        return  decimalFormat.format(number).replaceAll("[,]", ".");
+    }
+
+
     @Override
     public String dongiaVSsoluongXemHDCT(UUID idhd, UUID idctsp) {
         Long sl = Long.valueOf(String.valueOf(banHangOnLinerepository.listIMEItheoIDHDvsIDCTSP(idhd, idctsp).size()));
@@ -297,6 +311,22 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
         // Format the number
         return decimalFormat.format(number);
+
+    }
+
+    @Override
+    public String convertgiatien2(BigDecimal giatien) {
+        if(giatien==null){
+            return "Chưa có";
+        }
+        // Input number
+        long number = Long.valueOf(String.valueOf(giatien));
+
+        // Create a DecimalFormat instance with the desired pattern
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+        // Format the number
+        return  decimalFormat.format(number).replaceAll("[,]", ".");
 
     }
 
