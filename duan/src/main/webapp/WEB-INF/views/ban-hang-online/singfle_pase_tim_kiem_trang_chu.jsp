@@ -9,25 +9,45 @@
 <body>
 
 <c:forEach items="${listsp}" var="ht" varStatus="stt">
-<a href="/ban-hang-online/chi-tiet-san-pham/${ht.id}" >
-    <img src="../../../uploads/${ht.urlAnh}" width="30" height="30" style="border-radius:50% 50% 50% 50%;">
-    <label style=" font-weight: normal;margin-left: 10px">${ht.sanPham.ten},màu:${ht.mauSac.ten},dung lượng:${ht.rom.dungLuong},..</label>
-<%--    <label style=" font-weight: normal;margin-left: 10px">${ht.basoOchammotlam()}vnd</label>--%>
-    <c:if test="${banhangonline.tonggiamgia(ht.id)>0}">
-        <label style=" font-weight: normal;margin-left: 10px">
-        <label style="font-weight: bold">Đơn
-            giá:</label>${banhangonline.sotienkhidagiam(ht.id)}đ -
-        <del class="product-old-price">${ht.basoOchammotlam()} đ</del>
-        </label>
-    </c:if>
-    <c:if test="${banhangonline.tonggiamgia(ht.id)<=0}">
-        <label style=" font-weight: normal;margin-left: 10px">
-        <label style="font-weight: bold">Đơn
-            giá:</label>
-        ${ht.basoOchammotlam()} đ
-        </label>
-    </c:if>
-</a>
+    <a href="/ban-hang-online/chi-tiet-san-pham/${ht.id}" >
+        <img src="../../../uploads/${ht.urlAnh}" width="30" height="30" style="border-radius:50% 50% 50% 50%;">
+        <label style=" font-weight: normal;margin-left: 10px">${ht.sanPham.ten},màu:${ht.mauSac.ten},dung lượng:${ht.rom.dungLuong},..</label>
+            <%--    <label style=" font-weight: normal;margin-left: 10px">${ht.basoOchammotlam()}vnd</label>--%>
+        <c:if test="${banhangonline.tonggiamgia(ht.id)>0}">
+            <label style=" font-weight: normal;margin-left: 10px">
+                <label style="font-weight: bold">Đơn
+                    giá:</label>
+                                    ${banhangonline.sotienkhidagiam2(ht.id)}
+<%--                <script>--%>
+<%--                    document.write(--%>
+<%--                        Number('${banhangonline.sotienkhidagiam(ht.id)}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                    );--%>
+<%--                </script>--%>
+                đ -
+                <del class="product-old-price">
+                                        ${ht.basoOchammotlam2()}
+<%--                    <script>--%>
+<%--                        document.write(--%>
+<%--                            Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                        );--%>
+<%--                    </script>--%>
+                    đ</del>
+            </label>
+        </c:if>
+        <c:if test="${banhangonline.tonggiamgia(ht.id)<=0}">
+            <label style=" font-weight: normal;margin-left: 10px">
+                <label style="font-weight: bold">Đơn
+                    giá:</label>
+                            ${ht.basoOchammotlam2()}
+<%--                <script>--%>
+<%--                    document.write(--%>
+<%--                        Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                    );--%>
+<%--                </script>--%>
+                đ
+            </label>
+        </c:if>
+    </a>
     <br>
 
 

@@ -90,7 +90,9 @@
                                     <div class="" style="margin-left: 0cm">
                                         <BUTTON class="qty-down" type="button">-</BUTTON>
                                         <input type="number" value="0" min="0"
-                                               max="${banhangonline.soluongcon(motctsp.id)-banhangonline.sl1ctsptronggh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId(),motctsp.id)}"
+<%--                                               max="${banhangonline.soluongcon(motctsp.id)-banhangonline.sl1ctsptronggh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId(),motctsp.id)}"--%>
+                                               max="${banhangonline.soluongcon(motctsp.id)}"
+
                                                id="input2" style="width: 2cm" name="solg">
                                         <BUTTON class="qty-up" type="button">+</BUTTON>
                                     </div>

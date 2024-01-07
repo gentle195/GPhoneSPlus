@@ -117,4 +117,31 @@ public class HoaDon {
         // Format the number
         return decimalFormat.format(number);
     }
+
+    public String convertTongtien2() {
+        // Input number
+        long number = Long.valueOf(String.valueOf(tongTien));
+
+        // Create a DecimalFormat instance with the desired pattern
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+        // Format the number
+        return  decimalFormat.format(number).replaceAll("[,]", ".");
+    }
+
+    public String convertPhiShip2() {
+        // Input number
+        if (phiShip==null){
+            return "0";
+        }else {
+            long number = Long.valueOf(String.valueOf(phiShip));
+
+            // Create a DecimalFormat instance with the desired pattern
+            DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+            // Format the number
+            return  decimalFormat.format(number).replaceAll("[,]", ".");
+        }
+
+    }
 }

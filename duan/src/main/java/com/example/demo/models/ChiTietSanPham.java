@@ -117,4 +117,17 @@ public class ChiTietSanPham {
         // Format the number
         return decimalFormat.format(number);
     }
+
+    public String basoOchammotlam2() {
+        // Input number
+        long number = Long.valueOf(String.valueOf(giaBan));
+
+        // Create a DecimalFormat instance with the desired pattern
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+return  decimalFormat.format(number).replaceAll("[,]", ".");
+
+
+
+    }
 }

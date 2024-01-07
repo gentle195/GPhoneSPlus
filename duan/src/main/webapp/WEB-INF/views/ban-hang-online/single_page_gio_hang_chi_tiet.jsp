@@ -150,12 +150,12 @@
                     </td>
                     <td>
                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
-                            <div name="checkdongiakhigiam">${ht.basoOchammotlamGHDGKG()} đ</div>
+                            <div name="checkdongiakhigiam">${ht.basoOchammotlamGHDGKG2()} đ</div>
                             -
-                            <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
+                            <del class="product-old-price">${ht.basoOchammotlamGHDG2()} đ</del>
                         </c:if>
                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
-                            <div name="checkdongiakhigiam">${ht.basoOchammotlamGHDG()} đ</div>
+                            <div name="checkdongiakhigiam">${ht.basoOchammotlamGHDG2()} đ</div>
                         </c:if>
                     </td>
                     <td>
@@ -171,7 +171,7 @@
                         </button>
                     </td>
                     <td>
-                        <div name="checkthanhtien">${ht.tichDONGIAvsSL()}</div>
+                        <div name="checkthanhtien">${ht.tichDONGIAvsSL2()}</div>
 
                     </td>
                     <td>

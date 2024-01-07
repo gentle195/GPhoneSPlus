@@ -289,13 +289,13 @@
                                                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
                                                             <label style="font-weight: bold">Đơn
-                                                                giá:</label>${ht.basoOchammotlamGHDGKG()}đ -
-                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
+                                                                giá:</label>${ht.basoOchammotlamGHDGKG2()}đ -
+                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG2()} đ</del>
                                                         </c:if>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
                                                             <label style="font-weight: bold">Đơn
                                                                 giá:</label>
-                                                            ${ht.basoOchammotlamGHDG()} đ
+                                                            ${ht.basoOchammotlamGHDG2()} đ
                                                         </c:if>
                                                     </div>
                                                     <div style="width: 18%;">
@@ -483,12 +483,34 @@
                         <td>
 
                             <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
-                                <div name="checkdongiakhigiam">${ht.basoOchammotlamGHDGKG()} đ</div>
+                                <div name="checkdongiakhigiam">
+<%--                                        ${ht.basoOchammotlamGHDGKG()}--%>
+                                            <script>
+                                                document.write(
+                                                    Number('${ht.basoOchammotlamGHDGKG()}'.replace(/,/g, '')).toLocaleString('de-DE')
+                                                );
+                                            </script>
+
+                                            đ</div>
                                 -
-                                <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
+                                <del class="product-old-price">
+<%--                                        ${ht.basoOchammotlamGHDG()}--%>
+                                            <script>
+                                                document.write(
+                                                    Number('${ht.basoOchammotlamGHDG()}'.replace(/,/g, '')).toLocaleString('de-DE')
+                                                );
+                                            </script>
+                                            đ</del>
                             </c:if>
                             <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
-                                <div name="checkdongiakhigiam">${ht.basoOchammotlamGHDG()} đ</div>
+                                <div name="checkdongiakhigiam">
+<%--                                        ${ht.basoOchammotlamGHDG()}--%>
+                                            <script>
+                                                document.write(
+                                                    Number('${ht.basoOchammotlamGHDG()}'.replace(/,/g, '')).toLocaleString('de-DE')
+                                                );
+                                            </script>
+                                    đ</div>
                             </c:if>
 
                         </td>
@@ -505,7 +527,14 @@
                             </button>
                         </td>
                         <td>
-                            <div name="checkthanhtien">${ht.tichDONGIAvsSL()}</div>
+                            <div name="checkthanhtien">
+<%--                                    ${ht.tichDONGIAvsSL()}--%>
+                                        <script>
+                                            document.write(
+                                                Number('${ht.tichDONGIAvsSL()}'.replace(/,/g, '')).toLocaleString('de-DE')
+                                            );
+                                        </script>
+                            </div>
 
                         </td>
                         <td>
@@ -623,8 +652,31 @@
 </div>
 
 
+<div style="position: fixed;
+top: 50%;left: 50%;transform: translate(-50%,-50%);
+display: none;z-index: 2;width: 7cm;height: 5cm;
+background-color: #0b3564;text-align: center;
+color: white;border-radius: 5% 5% 5% 5%"
+     id="tbmuahang">
+    <img style="border-radius: 50% 50% 50% 50%;width: 1.2cm;height: 1.2cm;margin-top: 20px"
+         src="https://banner2.cleanpng.com/20180815/olc/kisspng-clip-art-computer-icons-x-mark-check-mark-image-wrong-incorrect-delete-abort-png-image-picpng-5b744132b85bd6.9451175115343455227551.jpg"
+         >
+
+    <h2 style="color: white;font-size: 20px;margin-top: 20px">
+
+
+        Chỉ chấp nhận tổng <br><= 75.000.000
+
+    </h2>
+</div>
+
+
+
 <%--<button id="btloadgd" onclick=" loadgiaodienghctbanhang('/ban-hang-online/single_page_gio_hang_chi_tiet');"></button>--%>
 <script>
+
+
+
     function chonhetgiohangtongTRANGCHU(idgh) {
         // var  idgh1=encodeURIComponent(idgh)
         if (document.getElementsByName('checktongTT')[0].checked == true) {
@@ -765,7 +817,7 @@
         var originalValue = document.getElementById(elementId).textContent;
 
         // Chuyển đổi giá trị sang dạng có dấu chấm phân cách hàng nghìn
-        var formattedValue = Number(originalValue).toLocaleString('en-US');
+        var formattedValue = Number(originalValue).toLocaleString('vi-VN');
 
         // Gán giá trị đã định dạng lại vào thẻ div
         document.getElementById(elementId).textContent = formattedValue;
@@ -819,6 +871,11 @@
         var soNguyen = parseInt(chuoiSoNguyen, 10);
      if(soNguyen>75000000){
          alert(" Chỉ thanh toán với đơn hàng tối đa 75.000.000 vnd")
+         document.getElementById('tbmuahang').style.display = '';
+         setTimeout(function () {
+             document.getElementById('tbmuahang').style.display = 'none';
+         }, 2000); // 2000 milliseconds tương đương với 2 giây
+
          return false;
      }else {
         return true;

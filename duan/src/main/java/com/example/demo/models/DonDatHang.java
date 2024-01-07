@@ -74,6 +74,16 @@ public class DonDatHang {
         // Format the number
         return decimalFormat.format(number);
     }
+    public String basoOchammotlamGHDG2() {
+        // Input number
+        long number = Long.valueOf(String.valueOf(donGia));
+
+        // Create a DecimalFormat instance with the desired pattern
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+        // Format the number
+        return  decimalFormat.format(number).replaceAll("[,]", ".");
+    }
 
     public String basoOchammotlamGHDGKG() {
         // Input number
@@ -85,6 +95,16 @@ public class DonDatHang {
         // Format the number
         return decimalFormat.format(number);
     }
+    public String basoOchammotlamGHDGKG2() {
+        // Input number
+        long number = Long.valueOf(String.valueOf(donGiaKhiGiam));
+
+        // Create a DecimalFormat instance with the desired pattern
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+        // Format the number
+        return  decimalFormat.format(number).replaceAll("[,]", ".");
+    }
     public String tichDONGIAvsSL() {
         // Input number
 
@@ -95,5 +115,17 @@ public class DonDatHang {
 
         // Format the number
         return decimalFormat.format(number);
+    }
+
+    public String tichDONGIAvsSL2() {
+        // Input number
+
+        long number = Long.valueOf(String.valueOf(donGiaKhiGiam))*Long.valueOf(String.valueOf(soLuong));
+
+        // Create a DecimalFormat instance with the desired pattern
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+        // Format the number
+        return  decimalFormat.format(number).replaceAll("[,]", ".");
     }
 }

@@ -301,13 +301,13 @@
                                                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
                                                             <label style="font-weight: bold">Đơn
-                                                                giá:</label>${ht.basoOchammotlamGHDGKG()}đ -
-                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
+                                                                giá:</label>${ht.basoOchammotlamGHDGKG2()}đ -
+                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG2()} đ</del>
                                                         </c:if>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
                                                             <label style="font-weight: bold">Đơn
                                                                 giá:</label>
-                                                            ${ht.basoOchammotlamGHDG()} đ
+                                                            ${ht.basoOchammotlamGHDG2()} đ
                                                         </c:if>                                                    </div>
                                                     <div style="width: 18%;">
                                                             <%--                                                        <input type="checkbox" name="checkidghTT" value="${ht.id}" onclick="chonsanphamgiohangTT('${stt.index}','${ht.id}','${ht.gioHang.id}');"  ${ht.tinhTrang==0 ?"checked":""}>--%>
@@ -491,7 +491,7 @@
                                         màu sắc: ${ht.chiTietSanPham.mauSac.ten}<label style="margin-left: 40px"></label>Số lượng: ${ht.soLuong}
                                     </div>
                                     <div></div>
-                                    <div>${ht.tichDONGIAvsSL()}</div>
+                                    <div>${ht.tichDONGIAvsSL2()}</div>
                                 </div>
 
                             </div>
@@ -510,7 +510,7 @@
 
                         </div>
                         <div class="order-col">
-                            <div><strong>Tổng tiền</strong></div>
+                            <div><strong>Tổng tiền mua</strong></div>
                             <div >
                                 <strong
                                         class="order-total">
@@ -520,6 +520,25 @@
                         </div>
                         <div id="tongthanhtien" style="color: red;font-size: 0px">
                             ${banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()}
+                        </div>
+                        <div class="order-col">
+                            <div><strong>Phí Ship</strong></div>
+                            <div >
+                                <strong
+                                        class="order-total">
+                                    <div >30.000</div>
+                                </strong>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="order-col">
+                            <div><strong>Tổng tất cả</strong></div>
+                            <div >
+                                <strong
+                                        class="order-total">
+                                    <div >${banhangonline.convertgiatien2(banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()+30000)}</div>
+                                </strong>
+                            </div>
                         </div>
 
                         <div style="float: right;color: red;margin-top: -10px" id="tbtongtien1"></div>
@@ -722,7 +741,23 @@
     </div>
 </main>
 
+<div style="position: fixed;
+top: 50%;left: 50%;transform: translate(-50%,-50%);
+display: none;z-index: 2;width: 7cm;height: 5cm;
+background-color: #0b3564;text-align: center;
+color: white;border-radius: 5% 5% 5% 5%"
+     id="tbmuahang">
+    <img style="border-radius: 50% 50% 50% 50%;width: 1.2cm;height: 1.2cm;margin-top: 20px"
+         src="https://banner2.cleanpng.com/20180815/olc/kisspng-clip-art-computer-icons-x-mark-check-mark-image-wrong-incorrect-delete-abort-png-image-picpng-5b744132b85bd6.9451175115343455227551.jpg"
+    >
 
+    <h2 style="color: white;font-size: 20px;margin-top: 20px">
+
+
+        Chỉ chấp nhận tổng <br><= 75.000.000
+
+    </h2>
+</div>
 <div style="color: #0C9A9A;display: none"></div>
 <script>
     function chonphuongthucthanhtoanVNP() {
@@ -892,7 +927,7 @@
         var originalValue = document.getElementById(elementId).textContent;
 
         // Chuyển đổi giá trị sang dạng có dấu chấm phân cách hàng nghìn
-        var formattedValue = Number(originalValue).toLocaleString('en-US');
+        var formattedValue = Number(originalValue).toLocaleString('vi-VN');
 
         // Gán giá trị đã định dạng lại vào thẻ div
         document.getElementById(elementId).textContent = formattedValue;
