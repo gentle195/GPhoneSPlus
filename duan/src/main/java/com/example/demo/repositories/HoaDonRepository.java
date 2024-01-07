@@ -26,8 +26,20 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
     @Query("select hd from HoaDon hd where  hd.loai=1 order by hd.ngayTao desc ")
     List<HoaDon> donHang();
 
-    @Query("select hd from HoaDon hd order by hd.ngayTao desc")
+    @Query("select hd from HoaDon hd where (hd.tinhTrang= 0 or hd.tinhTrang= 1 or hd.tinhTrang= 2 or hd.tinhTrang= 3) and hd.tinhTrangGiaoHang =0 order by hd.ngayTao desc")
     List<HoaDon> hoaDon();
+
+    @Query("select hd from HoaDon hd where hd.tinhTrangGiaoHang =1 order by hd.ngayTao desc")
+    List<HoaDon> hoaDonChoGiaoHang();
+
+    @Query("select hd from HoaDon hd where hd.tinhTrangGiaoHang =2 order by hd.ngayTao desc")
+    List<HoaDon> hoaDonDangGiaoHang();
+
+    @Query("select hd from HoaDon hd where hd.tinhTrangGiaoHang =3 order by hd.ngayTao desc")
+    List<HoaDon> hoaDonHoanTat();
+
+    @Query("select hd from HoaDon hd where hd.tinhTrangGiaoHang =8 or hd.tinhTrang =8 or hd.tinhTrang =9 order by hd.ngayTao desc")
+    List<HoaDon> hoaDonDaHuy();
 
     @Query("select hd from HoaDon hd left join KhachHang kh on hd.khachHang.id=kh.id where kh.id=:id")
     List<HoaDon> hoaDonKH(UUID id);
@@ -42,8 +54,40 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
             "LEFT JOIN NhanVien nv ON hd.nhanVien.id = nv.id " +
             "LEFT JOIN DiaChi dc ON hd.diaChi.id = dc.id " +
             "LEFT JOIN QuyDoi qd ON hd.quyDoi.id = qd.id " +
-            "WHERE hd.ma LIKE %:ten% OR kh.hoTen LIKE %:ten% OR nv.hoTen LIKE %:ten% OR dc.diaChi LIKE %:ten% OR qd.soTienQuyDoi = :soTienQuyDoi OR hd.sdt like %:ten%")
+            "WHERE (hd.ma LIKE %:ten% OR kh.hoTen LIKE %:ten% OR nv.hoTen LIKE %:ten% OR dc.diaChi LIKE %:ten% OR qd.soTienQuyDoi = :soTienQuyDoi OR hd.sdt like %:ten%) and (hd.tinhTrang= 0 or hd.tinhTrang= 1 or hd.tinhTrang= 2 or hd.tinhTrang= 3) and hd.tinhTrangGiaoHang =0")
     List<HoaDon> search(@Param("ten") String ten, @Param("soTienQuyDoi") BigDecimal soTienQuyDoi);
+
+    @Query("SELECT hd FROM HoaDon hd " +
+            "LEFT JOIN KhachHang kh ON hd.khachHang.id = kh.id " +
+            "LEFT JOIN NhanVien nv ON hd.nhanVien.id = nv.id " +
+            "LEFT JOIN DiaChi dc ON hd.diaChi.id = dc.id " +
+            "LEFT JOIN QuyDoi qd ON hd.quyDoi.id = qd.id " +
+            "WHERE (hd.ma LIKE %:ten% OR kh.hoTen LIKE %:ten% OR nv.hoTen LIKE %:ten% OR dc.diaChi LIKE %:ten% OR qd.soTienQuyDoi = :soTienQuyDoi OR hd.sdt like %:ten%) and hd.tinhTrangGiaoHang =1")
+    List<HoaDon> searchChoGiaoHang(@Param("ten") String ten, @Param("soTienQuyDoi") BigDecimal soTienQuyDoi);
+
+    @Query("SELECT hd FROM HoaDon hd " +
+            "LEFT JOIN KhachHang kh ON hd.khachHang.id = kh.id " +
+            "LEFT JOIN NhanVien nv ON hd.nhanVien.id = nv.id " +
+            "LEFT JOIN DiaChi dc ON hd.diaChi.id = dc.id " +
+            "LEFT JOIN QuyDoi qd ON hd.quyDoi.id = qd.id " +
+            "WHERE (hd.ma LIKE %:ten% OR kh.hoTen LIKE %:ten% OR nv.hoTen LIKE %:ten% OR dc.diaChi LIKE %:ten% OR qd.soTienQuyDoi = :soTienQuyDoi OR hd.sdt like %:ten%) and hd.tinhTrangGiaoHang =2")
+    List<HoaDon> searchDangGiaoHang(@Param("ten") String ten, @Param("soTienQuyDoi") BigDecimal soTienQuyDoi);
+
+    @Query("SELECT hd FROM HoaDon hd " +
+            "LEFT JOIN KhachHang kh ON hd.khachHang.id = kh.id " +
+            "LEFT JOIN NhanVien nv ON hd.nhanVien.id = nv.id " +
+            "LEFT JOIN DiaChi dc ON hd.diaChi.id = dc.id " +
+            "LEFT JOIN QuyDoi qd ON hd.quyDoi.id = qd.id " +
+            "WHERE (hd.ma LIKE %:ten% OR kh.hoTen LIKE %:ten% OR nv.hoTen LIKE %:ten% OR dc.diaChi LIKE %:ten% OR qd.soTienQuyDoi = :soTienQuyDoi OR hd.sdt like %:ten%) and hd.tinhTrangGiaoHang =3")
+    List<HoaDon> searchHoanTat(@Param("ten") String ten, @Param("soTienQuyDoi") BigDecimal soTienQuyDoi);
+
+    @Query("SELECT hd FROM HoaDon hd " +
+            "LEFT JOIN KhachHang kh ON hd.khachHang.id = kh.id " +
+            "LEFT JOIN NhanVien nv ON hd.nhanVien.id = nv.id " +
+            "LEFT JOIN DiaChi dc ON hd.diaChi.id = dc.id " +
+            "LEFT JOIN QuyDoi qd ON hd.quyDoi.id = qd.id " +
+            "WHERE (hd.ma LIKE %:ten% OR kh.hoTen LIKE %:ten% OR nv.hoTen LIKE %:ten% OR dc.diaChi LIKE %:ten% OR qd.soTienQuyDoi = :soTienQuyDoi OR hd.sdt like %:ten%) and hd.tinhTrangGiaoHang =8")
+    List<HoaDon> searchDaHuy(@Param("ten") String ten, @Param("soTienQuyDoi") BigDecimal soTienQuyDoi);
 
     @Query("select hd from HoaDon hd " +
             "LEFT JOIN KhachHang kh ON hd.khachHang.id = kh.id  " +
@@ -52,8 +96,7 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
             " where (:idKH IS NULL OR kh.id=:idKH) " +
             "and (:idNV IS NULL OR nv.id=:idNV)  " +
             "and (:idDC IS NULL OR dc.id=:idDC) " +
-            "AND (:trangThai is null or hd.tinhTrang=:trangThai)" +
-            "AND (:trangThaiGiaoHang is null or hd.tinhTrangGiaoHang=:trangThaiGiaoHang)" +
+            "AND (hd.tinhTrangGiaoHang=0)" + "AND (hd.tinhTrang= 0 or hd.tinhTrang= 1 or hd.tinhTrang= 2 or hd.tinhTrang= 3)" +
             "and(:loai is null or hd.loai=:loai) AND " +
             "((:startDate IS NULL OR :endDate IS NULL) OR hd.ngayThanhToan >= COALESCE(:startDate, hd.ngayThanhToan) " +
             "and hd.ngayThanhToan <= COALESCE(:endDate, hd.ngayThanhToan))  " +
@@ -62,7 +105,103 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
             "AND ((:receiveStartDate IS NULL OR :receiveEndDate IS NULL) OR hd.ngayNhan >= COALESCE(:receiveStartDate, hd.ngayNhan) " +
             "and hd.ngayNhan <= COALESCE(:receiveEndDate, hd.ngayNhan)) ")
     List<HoaDon> loc1(
-            UUID idKH, UUID idNV, UUID idDC, Integer trangThai, Integer trangThaiGiaoHang, Integer loai,
+            UUID idKH, UUID idNV, UUID idDC, Integer loai,
+            @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+            @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+            @RequestParam(value = "shipStartDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date shipStartDate,
+            @RequestParam(value = "shipEndDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date shipEndDate,
+            @RequestParam(value = "receiveStartDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date receiveStartDate,
+            @RequestParam(value = "receiveEndDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date receiveEndDate);
+
+    @Query("select hd from HoaDon hd " +
+            "LEFT JOIN KhachHang kh ON hd.khachHang.id = kh.id  " +
+            "LEFT JOIN NhanVien nv ON hd.nhanVien.id = nv.id " +
+            "LEFT JOIN DiaChi dc ON hd.diaChi.id = dc.id " +
+            " where (:idKH IS NULL OR kh.id=:idKH) " +
+            "and (:idNV IS NULL OR nv.id=:idNV)  " +
+            "and (:idDC IS NULL OR dc.id=:idDC) " +
+            "AND (hd.tinhTrangGiaoHang=1)" +
+            "and(:loai is null or hd.loai=:loai) AND " +
+            "((:startDate IS NULL OR :endDate IS NULL) OR hd.ngayThanhToan >= COALESCE(:startDate, hd.ngayThanhToan) " +
+            "and hd.ngayThanhToan <= COALESCE(:endDate, hd.ngayThanhToan))  " +
+            "AND ((:shipStartDate IS NULL OR :shipEndDate IS NULL) OR hd.ngayShip >= COALESCE(:shipStartDate, hd.ngayShip) " +
+            "and hd.ngayShip <= COALESCE(:shipEndDate, hd.ngayShip))  " +
+            "AND ((:receiveStartDate IS NULL OR :receiveEndDate IS NULL) OR hd.ngayNhan >= COALESCE(:receiveStartDate, hd.ngayNhan) " +
+            "and hd.ngayNhan <= COALESCE(:receiveEndDate, hd.ngayNhan)) ")
+    List<HoaDon> locChoGiaoHang(
+            UUID idKH, UUID idNV, UUID idDC, Integer loai,
+            @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+            @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+            @RequestParam(value = "shipStartDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date shipStartDate,
+            @RequestParam(value = "shipEndDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date shipEndDate,
+            @RequestParam(value = "receiveStartDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date receiveStartDate,
+            @RequestParam(value = "receiveEndDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date receiveEndDate);
+
+    @Query("select hd from HoaDon hd " +
+            "LEFT JOIN KhachHang kh ON hd.khachHang.id = kh.id  " +
+            "LEFT JOIN NhanVien nv ON hd.nhanVien.id = nv.id " +
+            "LEFT JOIN DiaChi dc ON hd.diaChi.id = dc.id " +
+            " where (:idKH IS NULL OR kh.id=:idKH) " +
+            "and (:idNV IS NULL OR nv.id=:idNV)  " +
+            "and (:idDC IS NULL OR dc.id=:idDC) " +
+            "AND (hd.tinhTrangGiaoHang=2)" +
+            "and(:loai is null or hd.loai=:loai) AND " +
+            "((:startDate IS NULL OR :endDate IS NULL) OR hd.ngayThanhToan >= COALESCE(:startDate, hd.ngayThanhToan) " +
+            "and hd.ngayThanhToan <= COALESCE(:endDate, hd.ngayThanhToan))  " +
+            "AND ((:shipStartDate IS NULL OR :shipEndDate IS NULL) OR hd.ngayShip >= COALESCE(:shipStartDate, hd.ngayShip) " +
+            "and hd.ngayShip <= COALESCE(:shipEndDate, hd.ngayShip))  " +
+            "AND ((:receiveStartDate IS NULL OR :receiveEndDate IS NULL) OR hd.ngayNhan >= COALESCE(:receiveStartDate, hd.ngayNhan) " +
+            "and hd.ngayNhan <= COALESCE(:receiveEndDate, hd.ngayNhan)) ")
+    List<HoaDon> locDangGiaoGiaoHang(
+            UUID idKH, UUID idNV, UUID idDC, Integer loai,
+            @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+            @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+            @RequestParam(value = "shipStartDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date shipStartDate,
+            @RequestParam(value = "shipEndDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date shipEndDate,
+            @RequestParam(value = "receiveStartDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date receiveStartDate,
+            @RequestParam(value = "receiveEndDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date receiveEndDate);
+
+    @Query("select hd from HoaDon hd " +
+            "LEFT JOIN KhachHang kh ON hd.khachHang.id = kh.id  " +
+            "LEFT JOIN NhanVien nv ON hd.nhanVien.id = nv.id " +
+            "LEFT JOIN DiaChi dc ON hd.diaChi.id = dc.id " +
+            " where (:idKH IS NULL OR kh.id=:idKH) " +
+            "and (:idNV IS NULL OR nv.id=:idNV)  " +
+            "and (:idDC IS NULL OR dc.id=:idDC) " +
+            "AND (hd.tinhTrangGiaoHang=3)" +
+            "and(:loai is null or hd.loai=:loai) AND " +
+            "((:startDate IS NULL OR :endDate IS NULL) OR hd.ngayThanhToan >= COALESCE(:startDate, hd.ngayThanhToan) " +
+            "and hd.ngayThanhToan <= COALESCE(:endDate, hd.ngayThanhToan))  " +
+            "AND ((:shipStartDate IS NULL OR :shipEndDate IS NULL) OR hd.ngayShip >= COALESCE(:shipStartDate, hd.ngayShip) " +
+            "and hd.ngayShip <= COALESCE(:shipEndDate, hd.ngayShip))  " +
+            "AND ((:receiveStartDate IS NULL OR :receiveEndDate IS NULL) OR hd.ngayNhan >= COALESCE(:receiveStartDate, hd.ngayNhan) " +
+            "and hd.ngayNhan <= COALESCE(:receiveEndDate, hd.ngayNhan)) ")
+    List<HoaDon> locHoanTat(
+            UUID idKH, UUID idNV, UUID idDC, Integer loai,
+            @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+            @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+            @RequestParam(value = "shipStartDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date shipStartDate,
+            @RequestParam(value = "shipEndDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date shipEndDate,
+            @RequestParam(value = "receiveStartDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date receiveStartDate,
+            @RequestParam(value = "receiveEndDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date receiveEndDate);
+
+    @Query("select hd from HoaDon hd " +
+            "LEFT JOIN KhachHang kh ON hd.khachHang.id = kh.id  " +
+            "LEFT JOIN NhanVien nv ON hd.nhanVien.id = nv.id " +
+            "LEFT JOIN DiaChi dc ON hd.diaChi.id = dc.id " +
+            " where (:idKH IS NULL OR kh.id=:idKH) " +
+            "and (:idNV IS NULL OR nv.id=:idNV)  " +
+            "and (:idDC IS NULL OR dc.id=:idDC) " +
+            "AND (hd.tinhTrangGiaoHang=8)" +
+            "and(:loai is null or hd.loai=:loai) AND " +
+            "((:startDate IS NULL OR :endDate IS NULL) OR hd.ngayThanhToan >= COALESCE(:startDate, hd.ngayThanhToan) " +
+            "and hd.ngayThanhToan <= COALESCE(:endDate, hd.ngayThanhToan))  " +
+            "AND ((:shipStartDate IS NULL OR :shipEndDate IS NULL) OR hd.ngayShip >= COALESCE(:shipStartDate, hd.ngayShip) " +
+            "and hd.ngayShip <= COALESCE(:shipEndDate, hd.ngayShip))  " +
+            "AND ((:receiveStartDate IS NULL OR :receiveEndDate IS NULL) OR hd.ngayNhan >= COALESCE(:receiveStartDate, hd.ngayNhan) " +
+            "and hd.ngayNhan <= COALESCE(:receiveEndDate, hd.ngayNhan)) ")
+    List<HoaDon> locDaHuy(
+            UUID idKH, UUID idNV, UUID idDC, Integer loai,
             @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
             @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
             @RequestParam(value = "shipStartDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date shipStartDate,

@@ -79,6 +79,26 @@ public class HoaDonServiceImpl implements HoaDonService {
     }
 
     @Override
+    public List<HoaDon> hoaDonChoGiaoHang() {
+        return hoaDonRepository.hoaDonChoGiaoHang();
+    }
+
+    @Override
+    public List<HoaDon> hoaDonDangGiaoHang() {
+        return hoaDonRepository.hoaDonDangGiaoHang();
+    }
+
+    @Override
+    public List<HoaDon> hoaDonHoanTat() {
+        return hoaDonRepository.hoaDonHoanTat();
+    }
+
+    @Override
+    public List<HoaDon> hoaDonDaHuy() {
+        return hoaDonRepository.hoaDonDaHuy();
+    }
+
+    @Override
     public List<HoaDon> findAll() {
         return hoaDonRepository.findAll();
     }
@@ -163,12 +183,14 @@ public class HoaDonServiceImpl implements HoaDonService {
                 }
                 // Cập nhật tình trạng và ngày cập nhật sau khi xử lý tất cả HoaDonChiTiet
                 hd.setTinhTrang(8);
+                hd.setTinhTrangGiaoHang(8);
                 hd.setGhiChu("Treo hóa đơn quá lâu");
                 hd.setNgayCapNhat(getDate);
                 hoaDonRepository.save(hd);
             } else {
                 // Cập nhật tình trạng và ngày cập nhật sau khi xử lý tất cả HoaDonChiTiet
                 hd.setTinhTrang(8);
+                hd.setTinhTrangGiaoHang(8);
                 hd.setGhiChu("Treo hóa đơn quá lâu");
                 hd.setNgayCapNhat(getDate);
                 hoaDonRepository.save(hd);
@@ -195,12 +217,52 @@ public class HoaDonServiceImpl implements HoaDonService {
     }
 
     @Override
-    public List<HoaDon> loc1(UUID idKH, UUID idNV, UUID idDC, Integer trangThai, Integer trangThaiGiaoHang, Integer loai,
+    public List<HoaDon> searchChoGiaoHang(String ten, BigDecimal soTienQuyDoi) {
+        return hoaDonRepository.searchChoGiaoHang(ten, soTienQuyDoi);
+    }
+
+    @Override
+    public List<HoaDon> searchDangGiaoHang(String ten, BigDecimal soTienQuyDoi) {
+        return hoaDonRepository.searchDangGiaoHang(ten, soTienQuyDoi);
+    }
+
+    @Override
+    public List<HoaDon> searchHoanTat(String ten, BigDecimal soTienQuyDoi) {
+        return hoaDonRepository.searchHoanTat(ten, soTienQuyDoi);
+    }
+
+    @Override
+    public List<HoaDon> searchDaHuy(String ten, BigDecimal soTienQuyDoi) {
+        return hoaDonRepository.searchDaHuy(ten, soTienQuyDoi);
+    }
+
+    @Override
+    public List<HoaDon> loc1(UUID idKH, UUID idNV, UUID idDC, Integer loai,
                              Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate
     ) {
-        return hoaDonRepository.loc1(idKH, idNV, idDC, trangThai, trangThaiGiaoHang, loai,
+        return hoaDonRepository.loc1(idKH, idNV, idDC, loai,
                 startDate, endDate, shipStartDate, shipEndDate, receiveStartDate, receiveEndDate
         );
+    }
+
+    @Override
+    public List<HoaDon> locChoGiaoHang(UUID idKH, UUID idNV, UUID idDC, Integer loai, Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate) {
+        return hoaDonRepository.locChoGiaoHang(idKH, idNV, idDC, loai, startDate, endDate, shipStartDate, shipEndDate, receiveStartDate, receiveEndDate);
+    }
+
+    @Override
+    public List<HoaDon> locDangGiaoHang(UUID idKH, UUID idNV, UUID idDC, Integer loai, Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate) {
+        return hoaDonRepository.locDangGiaoGiaoHang(idKH, idNV, idDC, loai, startDate, endDate, shipStartDate, shipEndDate, receiveStartDate, receiveEndDate);
+    }
+
+    @Override
+    public List<HoaDon> locHoanTat(UUID idKH, UUID idNV, UUID idDC, Integer loai, Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate) {
+        return hoaDonRepository.locHoanTat(idKH, idNV, idDC, loai, startDate, endDate, shipStartDate, shipEndDate, receiveStartDate, receiveEndDate);
+    }
+
+    @Override
+    public List<HoaDon> locDaHuy(UUID idKH, UUID idNV, UUID idDC, Integer loai, Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate) {
+        return hoaDonRepository.locDaHuy(idKH, idNV, idDC, loai, startDate, endDate, shipStartDate, shipEndDate, receiveStartDate, receiveEndDate);
     }
 
     @Override
@@ -396,8 +458,8 @@ public class HoaDonServiceImpl implements HoaDonService {
             htmlContentBuilder.append("<p>Tổng giá trị đơn hàng: ").append(formattedTongTienDonHang).append("</p>");
             htmlContentBuilder.append("<p>Phí Ship: ").append(hoaDon.getPhiShip()).append("</p>");
             DoiTra dt = doiTraRepository.getDoiTraByHoaDon(hoaDonId);
-            if (dt != null ) {
-                if(dt.getTinhTrang() == 2){
+            if (dt != null) {
+                if (dt.getTinhTrang() == 2) {
                     List<DoiTraChiTiet> list = doiTraChiTietRepository.doiTraChiTiet(hoaDonId);
                     if (list.size() != 0) {
                         htmlContentBuilder.append("<h3>").append("Danh sách sản phẩm đổi hàng").append("</h3>");
@@ -594,8 +656,8 @@ public class HoaDonServiceImpl implements HoaDonService {
             htmlContentBuilder.append("<p>Phí Ship: ").append(hoaDon.getPhiShip()).append("</p>");
 
             DoiTra dt = doiTraRepository.getDoiTraByHoaDon(hoaDonId);
-            if (dt != null ) {
-                if(dt.getTinhTrang() == 2){
+            if (dt != null) {
+                if (dt.getTinhTrang() == 2) {
                     List<DoiTraChiTiet> list = doiTraChiTietRepository.doiTraChiTiet(hoaDonId);
                     if (list.size() != 0) {
                         htmlContentBuilder.append("<h3>").append("Danh sách sản phẩm đổi hàng").append("</h3>");

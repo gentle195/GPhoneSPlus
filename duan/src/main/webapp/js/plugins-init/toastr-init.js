@@ -2,32 +2,32 @@
     "use strict"
 
 
-/*******************
-Toastr
-*******************/
+    /*******************
+     Toastr
+     *******************/
 
     $("#toastr-success-top-right").on("click", function () {
-                toastr.success("Xác nhận thành công", "Thông báo", {
-                    timeOut: 1500,
-                    closeButton: !0,
-                    debug: !1,
-                    newestOnTop: !0,
-                    progressBar: !0,
-                    positionClass: "toast-top-right",
-                    preventDuplicates: !0,
-                    onclick: null,
-                    showDuration: "300",
-                    hideDuration: "1000",
-                    extendedTimeOut: "1000",
-                    showEasing: "swing",
-                    hideEasing: "linear",
-                    showMethod: "fadeIn",
-                    hideMethod: "fadeOut",
-                    tapToDismiss: !1
-                })
-            }
-        ),
-        $("#toastr-success-top-right-hoa-don").on("click", function () {
+            toastr.success("Xác nhận thành công", "Thông báo", {
+                timeOut: 1500,
+                closeButton: !0,
+                debug: !1,
+                newestOnTop: !0,
+                progressBar: !0,
+                positionClass: "toast-top-right",
+                preventDuplicates: !0,
+                onclick: null,
+                showDuration: "300",
+                hideDuration: "1000",
+                extendedTimeOut: "1000",
+                showEasing: "swing",
+                hideEasing: "linear",
+                showMethod: "fadeIn",
+                hideMethod: "fadeOut",
+                tapToDismiss: !1
+            })
+        }
+    ),
+        $("#toastr-success-top-right-hoa-don-cho-xac-nhan").on("click", function () {
                 toastr.success("Xác nhận thành công", "Thông báo", {
                     timeOut: 1500,
                     closeButton: !0,
@@ -48,6 +48,126 @@ Toastr
                 })
                 setTimeout(function () {
                     window.location.href = "/hoa-don/hien-thi";
+                }, 2000);
+            }
+        ),
+        $("#toastr-success-top-right-hoa-don-da-xac-nhan").on("click", function () {
+                toastr.success("Xác nhận thành công", "Thông báo", {
+                    timeOut: 1500,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+                })
+                setTimeout(function () {
+                    window.location.href = "/hoa-don/hien-thi-xac-nhan";
+                }, 2000);
+            }
+        ),
+        $("#toastr-success-top-right-hoa-don-cho-giao").on("click", function () {
+                toastr.success("Xác nhận thành công", "Thông báo", {
+                    timeOut: 1500,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+                })
+                setTimeout(function () {
+                    window.location.href = "/hoa-don/hien-thi-cho-giao-hang";
+                }, 2000);
+            }
+        ),
+        $("#toastr-success-top-right-hoa-don-dang-giao").on("click", function () {
+                toastr.success("Xác nhận thành công", "Thông báo", {
+                    timeOut: 1500,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+                })
+                setTimeout(function () {
+                    window.location.href = "/hoa-don/hien-thi-dang-giao-hang";
+                }, 2000);
+            }
+        ),
+        $("#toastr-success-top-right-hoa-don-hoan-tat").on("click", function () {
+                toastr.success("Xác nhận thành công", "Thông báo", {
+                    timeOut: 1500,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+                })
+                setTimeout(function () {
+                    window.location.href = "/hoa-don/hien-thi-hoan-tat";
+                }, 2000);
+            }
+        ),
+        $("#toastr-success-top-right-hoa-don-da-huy").on("click", function () {
+                toastr.success("Xác nhận thành công", "Thông báo", {
+                    timeOut: 1500,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+                })
+                setTimeout(function () {
+                    window.location.href = "/hoa-don/hien-thi-da-huy";
                 }, 2000);
             }
         ),
@@ -72,9 +192,9 @@ Toastr
                     tapToDismiss: !1
 
                 })
-               setTimeout(function () {
-                window.location.href = "/ban-hang/hien-thi";
-            }, 1500);
+                setTimeout(function () {
+                    window.location.href = "/ban-hang/hien-thi";
+                }, 1500);
             }
         ),
 
@@ -124,7 +244,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-success-bottom-left").on("click", function () {
                 toastr.success("This Is Success Message", "Bottom Left", {
@@ -146,7 +265,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-success-top-left").on("click", function () {
                 toastr.success("This Is Success Message", "Top Left", {
@@ -168,7 +286,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-success-top-full-width").on("click", function () {
                 toastr.success("This Is Success Message", "Top Full Width", {
@@ -190,7 +307,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-success-bottom-full-width").on("click", function () {
                 toastr.success("This Is Success Message", "Bottom Full Width", {
@@ -212,7 +328,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-success-top-center").on("click", function () {
                 toastr.success("This Is Success Message", "Top Center", {
@@ -234,7 +349,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-success-bottom-center").on("click", function () {
                 toastr.success("This Is Success Message", "Bottom Center", {
@@ -256,7 +370,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-info-top-right").on("click", function () {
                 toastr.info("This Is info Message", "Top Right", {
@@ -278,7 +391,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-info-bottom-right").on("click", function () {
                 toastr.info("This Is info Message", "Bottom Right", {
@@ -300,7 +412,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-info-bottom-left").on("click", function () {
                 toastr.info("This Is info Message", "Bottom Left", {
@@ -322,7 +433,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-info-top-left").on("click", function () {
                 toastr.info("This Is info Message", "Top Left", {
@@ -344,7 +454,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-info-top-full-width").on("click", function () {
                 toastr.info("This Is info Message", "Top Full Width", {
@@ -366,7 +475,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-info-bottom-full-width").on("click", function () {
                 toastr.info("This Is info Message", "Bottom Full Width", {
@@ -388,7 +496,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-info-top-center").on("click", function () {
                 toastr.info("This Is info Message", "Top Center", {
@@ -410,7 +517,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-info-bottom-center").on("click", function () {
                 toastr.info("This Is info Message", "Bottom Center", {
@@ -432,7 +538,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-warning-top-right").on("click", function () {
                 toastr.warning("This Is warning Message", "Top Right", {
@@ -454,7 +559,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-warning-bottom-right").on("click", function () {
                 toastr.warning("This Is warning Message", "Bottom Right", {
@@ -476,7 +580,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-warning-bottom-left").on("click", function () {
                 toastr.warning("This Is warning Message", "Bottom Left", {
@@ -498,7 +601,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-warning-top-left").on("click", function () {
                 toastr.warning("This Is warning Message", "Top Left", {
@@ -520,7 +622,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-warning-top-full-width").on("click", function () {
                 toastr.warning("This Is warning Message", "Top Full Width", {
@@ -542,7 +643,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-warning-bottom-full-width").on("click", function () {
                 toastr.warning("This Is warning Message", "Bottom Full Width", {
@@ -564,7 +664,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-warning-top-center").on("click", function () {
                 toastr.warning("This Is warning Message", "Top Center", {
@@ -586,7 +685,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-warning-bottom-center").on("click", function () {
                 toastr.warning("This Is warning Message", "Bottom Center", {
@@ -608,7 +706,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-danger-top-right").on("click", function () {
                 toastr.error("This Is error Message", "Top Right", {
@@ -630,7 +727,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-danger-bottom-right").on("click", function () {
                 toastr.error("This Is error Message", "Bottom Right", {
@@ -652,7 +748,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-danger-bottom-left").on("click", function () {
                 toastr.error("This Is error Message", "Bottom Left", {
@@ -674,7 +769,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-danger-top-left").on("click", function () {
                 toastr.error("This Is error Message", "Top Left", {
@@ -696,7 +790,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-danger-top-full-width").on("click", function () {
                 toastr.error("This Is error Message", "Top Full Width", {
@@ -718,7 +811,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-danger-bottom-full-width").on("click", function () {
                 toastr.error("This Is error Message", "Bottom Full Width", {
@@ -740,7 +832,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-danger-top-center").on("click", function () {
                 toastr.error("This Is error Message", "Top Center", {
@@ -762,7 +853,6 @@ Toastr
                     tapToDismiss: !1
                 })
             }
-
         ),
         $("#toastr-danger-bottom-center").on("click", function () {
             toastr.error("This Is error Message", "Bottom Center", {

@@ -47,6 +47,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -83,27 +84,6 @@ public class HoaDonController {
 
     @Autowired
     private BanHangOnlineService banHangOnlineService;
-
-    @Autowired
-    private SanPhamService sanPhamService;
-    @Autowired
-    private MauSacService mauSacService;
-    @Autowired
-    private ChipService chipService;
-    @Autowired
-    private RamService ramService;
-    @Autowired
-    private RomService romService;
-    @Autowired
-    private PinService pinService;
-    @Autowired
-    private HangSanPhamService hangSanPhamService;
-    @Autowired
-    private DungLuongPinService dungLuongPinService;
-    @Autowired
-    private ManHinhService manHinhService;
-    @Autowired
-    private CameraService cameraService;
     @Autowired
     private DoiTraChiTietService doiTraChiTietService;
     @Autowired
@@ -122,6 +102,13 @@ public class HoaDonController {
     public String hienThi(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon) {
         dem = 0;
         List<HoaDon> page = hoaDonService.hoaDon();
+        List<HoaDon> list = new ArrayList();
+        for (HoaDon hd : page
+        ) {
+            if (hd.getNhanVien() == null || hd.getKhachHang() == null) {
+                list.add(hd);
+            }
+        }
         List<NhanVien> listNhanVien = nhanVienService.findAll();
         List<KhachHang> listKhachHang = khachHangService.findAll00();
         List<DiaChi> listDiaChi = diaChiService.getALL0();
@@ -130,7 +117,94 @@ public class HoaDonController {
         model.addAttribute("listDiaChi", listDiaChi);
         model.addAttribute("dem", dem);
         model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
-        model.addAttribute("listHoaDon", page);
+        model.addAttribute("listHoaDon", list);
+        return "home/layout";
+    }
+
+    @GetMapping("/hien-thi-xac-nhan")
+    public String hienThiXacNhan(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon) {
+        dem = 0;
+        List<HoaDon> page = hoaDonService.hoaDon();
+        List<HoaDon> list = new ArrayList();
+        for (HoaDon hd : page
+        ) {
+            if (hd.getNhanVien() != null && hd.getKhachHang() != null) {
+                list.add(hd);
+            }
+        }
+        List<NhanVien> listNhanVien = nhanVienService.findAll();
+        List<KhachHang> listKhachHang = khachHangService.findAll00();
+        List<DiaChi> listDiaChi = diaChiService.getALL0();
+        model.addAttribute("listKhachHang", listKhachHang);
+        model.addAttribute("listNhanVien", listNhanVien);
+        model.addAttribute("listDiaChi", listDiaChi);
+        model.addAttribute("dem", dem);
+        model.addAttribute("contentPage", "../hoadon/hoa-don-xac-nhan.jsp");
+        model.addAttribute("listHoaDon", list);
+        return "home/layout";
+    }
+
+    @GetMapping("/hien-thi-cho-giao")
+    public String hienThiChoGiaoHang(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon) {
+        dem = 0;
+        List<HoaDon> list = hoaDonService.hoaDonChoGiaoHang();
+        List<NhanVien> listNhanVien = nhanVienService.findAll();
+        List<KhachHang> listKhachHang = khachHangService.findAll00();
+        List<DiaChi> listDiaChi = diaChiService.getALL0();
+        model.addAttribute("listKhachHang", listKhachHang);
+        model.addAttribute("listNhanVien", listNhanVien);
+        model.addAttribute("listDiaChi", listDiaChi);
+        model.addAttribute("dem", dem);
+        model.addAttribute("contentPage", "../hoadon/hoa-don-cho-giao-hang.jsp");
+        model.addAttribute("listHoaDon", list);
+        return "home/layout";
+    }
+
+    @GetMapping("/hien-thi-dang-giao")
+    public String hienThiDangGiaoHang(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon) {
+        dem = 0;
+        List<HoaDon> list = hoaDonService.hoaDonDangGiaoHang();
+        List<NhanVien> listNhanVien = nhanVienService.findAll();
+        List<KhachHang> listKhachHang = khachHangService.findAll00();
+        List<DiaChi> listDiaChi = diaChiService.getALL0();
+        model.addAttribute("listKhachHang", listKhachHang);
+        model.addAttribute("listNhanVien", listNhanVien);
+        model.addAttribute("listDiaChi", listDiaChi);
+        model.addAttribute("dem", dem);
+        model.addAttribute("contentPage", "../hoadon/hoa-don-dang-giao-hang.jsp");
+        model.addAttribute("listHoaDon", list);
+        return "home/layout";
+    }
+
+    @GetMapping("/hien-thi-hoan-tat")
+    public String hienThiHoanTat(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon) {
+        dem = 0;
+        List<HoaDon> list = hoaDonService.hoaDonHoanTat();
+        List<NhanVien> listNhanVien = nhanVienService.findAll();
+        List<KhachHang> listKhachHang = khachHangService.findAll00();
+        List<DiaChi> listDiaChi = diaChiService.getALL0();
+        model.addAttribute("listKhachHang", listKhachHang);
+        model.addAttribute("listNhanVien", listNhanVien);
+        model.addAttribute("listDiaChi", listDiaChi);
+        model.addAttribute("dem", dem);
+        model.addAttribute("contentPage", "../hoadon/hoa-don-hoan-tat.jsp");
+        model.addAttribute("listHoaDon", list);
+        return "home/layout";
+    }
+
+    @GetMapping("/hien-thi-da-huy")
+    public String hhoaDonDaHuy(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon) {
+        dem = 0;
+        List<HoaDon> list = hoaDonService.hoaDonDaHuy();
+        List<NhanVien> listNhanVien = nhanVienService.findAll();
+        List<KhachHang> listKhachHang = khachHangService.findAll00();
+        List<DiaChi> listDiaChi = diaChiService.getALL0();
+        model.addAttribute("listKhachHang", listKhachHang);
+        model.addAttribute("listNhanVien", listNhanVien);
+        model.addAttribute("listDiaChi", listDiaChi);
+        model.addAttribute("dem", dem);
+        model.addAttribute("contentPage", "../hoadon/hoa-don-da-huy.jsp");
+        model.addAttribute("listHoaDon", list);
         return "home/layout";
     }
 
@@ -141,7 +215,14 @@ public class HoaDonController {
 
         dem = 1;
         model.addAttribute("dem", dem);
-        List<HoaDon> list = hoaDonService.search(search, soTienQuyDoi);
+        List<HoaDon> page = hoaDonService.search(search, soTienQuyDoi);
+        List<HoaDon> list = new ArrayList();
+        for (HoaDon hd : page
+        ) {
+            if (hd.getNhanVien() == null || hd.getKhachHang() == null) {
+                list.add(hd);
+            }
+        }
         List<NhanVien> listNhanVien = nhanVienService.findAll();
         List<KhachHang> listKhachHang = khachHangService.findAll();
         List<DiaChi> listDiaChi = diaChiService.findAll();
@@ -151,55 +232,128 @@ public class HoaDonController {
         model.addAttribute("listDiaChi", listDiaChi);
         model.addAttribute("listHoaDon", list);
         model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+        model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
         return "home/layout";
     }
 
-    @GetMapping("/huy/{id}")
-    public String huyHoaDon(Model model, @PathVariable("id") UUID id
-            , @ModelAttribute("hoaDon") HoaDon hoaDon
-    ) throws IOException {
-        HoaDon hd = hoaDonService.findById(id);
-        LocalDate ngayCapNhat = LocalDate.now();
-        List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
-        if (!list.isEmpty()) {
-            for (HoaDonChiTiet hdct : list
-            ) {
-                ChiTietSanPham ctsp = chiTietSanPhamService.getChiTiet(hdct.getImei().getId());
-                ctsp.setSoLuong(ctsp.getSoLuong() + 1);
-                long millis = System.currentTimeMillis();
-                Date date = new Date(millis);
-                ctsp.setNgayTao(date);
-                if (ctsp.getSoLuong() > 0) {
-                    ctsp.setTinhTrang(0);
-                }
-                chiTietSanPhamService.update1(ctsp);
-                imeiService.updatImei1(date, hdct.getId());
-                hdct.setTinhTrang(8);
-                hoaDonChiTietService.update(hdct.getId(), hdct);
+    @PostMapping("/search-xac-nhan")
+    public String searchXacNhan(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon,
+                                @RequestParam("search") String search,
+                                @RequestParam(name = "soTienQuyDoi", required = false) BigDecimal soTienQuyDoi) {
+
+        dem = 1;
+        model.addAttribute("dem", dem);
+        List<HoaDon> page = hoaDonService.search(search, soTienQuyDoi);
+        List<HoaDon> list = new ArrayList();
+        for (HoaDon hd : page
+        ) {
+            if (hd.getNhanVien() != null && hd.getKhachHang() != null) {
+                list.add(hd);
             }
-            hd.setTinhTrang(8);
-            hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
-            hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
-            hoaDonService.update(id, hd);
-        } else {
-            hd.setTinhTrang(8);
-            hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
-            hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
-            hoaDonService.update(id, hd);
         }
-        model.addAttribute("hoaDon", hd);
-        model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
-        System.in.read();
-        return "redirect:/hoa-don/hien-thi"; // Chuyển hướng về trang danh sách hóa đơn sau khi hủy
+        List<NhanVien> listNhanVien = nhanVienService.findAll();
+        List<KhachHang> listKhachHang = khachHangService.findAll();
+        List<DiaChi> listDiaChi = diaChiService.findAll();
+        model.addAttribute("dem", dem);
+        model.addAttribute("listKhachHang", listKhachHang);
+        model.addAttribute("listNhanVien", listNhanVien);
+        model.addAttribute("listDiaChi", listDiaChi);
+        model.addAttribute("listHoaDon", list);
+        model.addAttribute("contentPage", "../hoadon/hoa-don-xac-nhan.jsp");
+        model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+        return "home/layout";
     }
+
+    @PostMapping("/search-cho-giao-hang")
+    public String searchChoGiaoHang(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon,
+                                    @RequestParam("search") String search,
+                                    @RequestParam(name = "soTienQuyDoi", required = false) BigDecimal soTienQuyDoi) {
+
+        dem = 1;
+        model.addAttribute("dem", dem);
+        List<HoaDon> list = hoaDonService.searchChoGiaoHang(search, soTienQuyDoi);
+        List<NhanVien> listNhanVien = nhanVienService.findAll();
+        List<KhachHang> listKhachHang = khachHangService.findAll();
+        List<DiaChi> listDiaChi = diaChiService.findAll();
+        model.addAttribute("dem", dem);
+        model.addAttribute("listKhachHang", listKhachHang);
+        model.addAttribute("listNhanVien", listNhanVien);
+        model.addAttribute("listDiaChi", listDiaChi);
+        model.addAttribute("listHoaDon", list);
+        model.addAttribute("contentPage", "../hoadon/hoa-don-cho-giao-hang.jsp");
+        model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+        return "home/layout";
+    }
+
+    @PostMapping("/search-dang-giao-hang")
+    public String searchDangGiaoHang(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon,
+                                     @RequestParam("search") String search,
+                                     @RequestParam(name = "soTienQuyDoi", required = false) BigDecimal soTienQuyDoi) {
+
+        dem = 1;
+        model.addAttribute("dem", dem);
+        List<HoaDon> list = hoaDonService.searchDangGiaoHang(search, soTienQuyDoi);
+        List<NhanVien> listNhanVien = nhanVienService.findAll();
+        List<KhachHang> listKhachHang = khachHangService.findAll();
+        List<DiaChi> listDiaChi = diaChiService.findAll();
+        model.addAttribute("dem", dem);
+        model.addAttribute("listKhachHang", listKhachHang);
+        model.addAttribute("listNhanVien", listNhanVien);
+        model.addAttribute("listDiaChi", listDiaChi);
+        model.addAttribute("listHoaDon", list);
+        model.addAttribute("contentPage", "../hoadon/hoa-don-dang-giao-hang.jsp");
+        model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+        return "home/layout";
+    }
+
+    @PostMapping("/search-hoan-tat")
+    public String searchHoanTat(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon,
+                                @RequestParam("search") String search,
+                                @RequestParam(name = "soTienQuyDoi", required = false) BigDecimal soTienQuyDoi) {
+
+        dem = 1;
+        model.addAttribute("dem", dem);
+        List<HoaDon> list = hoaDonService.searchHoanTat(search, soTienQuyDoi);
+        List<NhanVien> listNhanVien = nhanVienService.findAll();
+        List<KhachHang> listKhachHang = khachHangService.findAll();
+        List<DiaChi> listDiaChi = diaChiService.findAll();
+        model.addAttribute("dem", dem);
+        model.addAttribute("listKhachHang", listKhachHang);
+        model.addAttribute("listNhanVien", listNhanVien);
+        model.addAttribute("listDiaChi", listDiaChi);
+        model.addAttribute("listHoaDon", list);
+        model.addAttribute("contentPage", "../hoadon/hoa-don-hoan-tat.jsp");
+        model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+        return "home/layout";
+    }
+
+    @PostMapping("/search-da-huy")
+    public String searchDaHuy(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon,
+                              @RequestParam("search") String search,
+                              @RequestParam(name = "soTienQuyDoi", required = false) BigDecimal soTienQuyDoi) {
+
+        dem = 1;
+        model.addAttribute("dem", dem);
+        List<HoaDon> list = hoaDonService.searchDaHuy(search, soTienQuyDoi);
+        List<NhanVien> listNhanVien = nhanVienService.findAll();
+        List<KhachHang> listKhachHang = khachHangService.findAll();
+        List<DiaChi> listDiaChi = diaChiService.findAll();
+        model.addAttribute("dem", dem);
+        model.addAttribute("listKhachHang", listKhachHang);
+        model.addAttribute("listNhanVien", listNhanVien);
+        model.addAttribute("listDiaChi", listDiaChi);
+        model.addAttribute("listHoaDon", list);
+        model.addAttribute("contentPage", "../hoadon/hoa-don-da-huy.jsp");
+        model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+        return "home/layout";
+    }
+
 
     @PostMapping("/loc")
     public String loc1(Model model,
                        @RequestParam(value = "nhanVien", required = false) UUID idNV,
                        @RequestParam(value = "khachHang", required = false) UUID idKH,
                        @RequestParam(value = "diaChi", required = false) UUID idDC,
-                       @RequestParam(value = "trangThai", required = false) Integer trangThai,
-                       @RequestParam(value = "trangThaiGiaoHang", required = false) Integer trangThaiGiaoHang,
                        @RequestParam(value = "loaiHoaDon", required = false) Integer loaiHoaDon,
                        @RequestParam(value = "startDate", required = false) String startDate,
                        @RequestParam(value = "receiveStartDate", required = false) String receiveStartDate,
@@ -214,12 +368,349 @@ public class HoaDonController {
                        @RequestParam("pageNum") Optional<Integer> pageNum,
                        @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
 
-        Sort sort = Sort.by("ngayTao").descending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), 5);
+        List<HoaDon> list = new ArrayList<>();
         dem = 2;
         if (receiveStartDate.isEmpty() && shipStartDate.isEmpty() &&
                 receiveEndDate.isEmpty() && shipEndDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
-            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, trangThai, trangThaiGiaoHang, loaiHoaDon,
+            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, null, null, null, null
+            );
+            for (HoaDon hd : listHoaDon
+            ) {
+                if (hd.getNhanVien() == null || hd.getKhachHang() == null) {
+                    list.add(hd);
+                }
+            }
+            model.addAttribute("listHoaDon", list);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (receiveStartDate.isEmpty() && shipStartDate.isEmpty() && receiveEndDate.isEmpty() && shipEndDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), null, null, null, null
+            );
+            for (HoaDon hd : listHoaDon
+            ) {
+                if (hd.getNhanVien() == null || hd.getKhachHang() == null) {
+                    list.add(hd);
+                }
+            }
+            model.addAttribute("listHoaDon", list);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (shipEndDate.isEmpty() && shipStartDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, null, null, Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            for (HoaDon hd : listHoaDon
+            ) {
+                if (hd.getNhanVien() == null || hd.getKhachHang() == null) {
+                    list.add(hd);
+                }
+            }
+            model.addAttribute("listHoaDon", list);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (receiveEndDate.isEmpty() && receiveStartDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), null, null
+            );
+            for (HoaDon hd : listHoaDon
+            ) {
+                if (hd.getNhanVien() == null || hd.getKhachHang() == null) {
+                    list.add(hd);
+                }
+            }
+            model.addAttribute("listHoaDon", list);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (shipEndDate.isEmpty() && shipStartDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), null, null, Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            for (HoaDon hd : listHoaDon
+            ) {
+                if (hd.getNhanVien() == null || hd.getKhachHang() == null) {
+                    list.add(hd);
+                }
+            }
+            model.addAttribute("listHoaDon", list);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (receiveEndDate.isEmpty() && receiveStartDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), null, null
+            );
+            for (HoaDon hd : listHoaDon
+            ) {
+                if (hd.getNhanVien() == null || hd.getKhachHang() == null) {
+                    list.add(hd);
+                }
+            }
+            model.addAttribute("listHoaDon", list);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            for (HoaDon hd : listHoaDon
+            ) {
+                if (hd.getNhanVien() == null || hd.getKhachHang() == null) {
+                    list.add(hd);
+                }
+            }
+            model.addAttribute("listHoaDon", list);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else {
+            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            for (HoaDon hd : listHoaDon
+            ) {
+                if (hd.getNhanVien() == null || hd.getKhachHang() == null) {
+                    list.add(hd);
+                }
+            }
+            model.addAttribute("listHoaDon", list);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        }
+    }
+
+    @PostMapping("/loc-xac-nhan")
+    public String locXacNhan(Model model,
+                             @RequestParam(value = "nhanVien", required = false) UUID idNV,
+                             @RequestParam(value = "khachHang", required = false) UUID idKH,
+                             @RequestParam(value = "diaChi", required = false) UUID idDC,
+                             @RequestParam(value = "loaiHoaDon", required = false) Integer loaiHoaDon,
+                             @RequestParam(value = "startDate", required = false) String startDate,
+                             @RequestParam(value = "receiveStartDate", required = false) String receiveStartDate,
+                             @RequestParam(value = "shipStartDate", required = false) String shipStartDate,
+                             @RequestParam(value = "endDate", required = false) String endDate,
+                             @RequestParam(value = "receiveEndDate", required = false) String receiveEndDate,
+                             @RequestParam(value = "shipEndDate", required = false) String shipEndDate,
+                             @ModelAttribute("nhanVien") NhanVien nhanVien,
+                             @ModelAttribute("khachHang") KhachHang khachHang,
+                             @ModelAttribute("diaChi") DiaChi diaChi,
+                             @ModelAttribute("hoaDon") HoaDon hoaDon,
+                             @RequestParam("pageNum") Optional<Integer> pageNum,
+                             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+
+        List<HoaDon> list = new ArrayList<>();
+        dem = 2;
+        if (receiveStartDate.isEmpty() && shipStartDate.isEmpty() &&
+                receiveEndDate.isEmpty() && shipEndDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, null, null, null, null
+            );
+            for (HoaDon hd : listHoaDon
+            ) {
+                if (hd.getNhanVien() != null && hd.getKhachHang() != null) {
+                    list.add(hd);
+                }
+            }
+            model.addAttribute("listHoaDon", list);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-xac-nhan.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (receiveStartDate.isEmpty() && shipStartDate.isEmpty() && receiveEndDate.isEmpty() && shipEndDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), null, null, null, null
+            );
+            for (HoaDon hd : listHoaDon
+            ) {
+                if (hd.getNhanVien() != null && hd.getKhachHang() != null) {
+                    list.add(hd);
+                }
+            }
+            model.addAttribute("listHoaDon", list);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-xac-nhan.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (shipEndDate.isEmpty() && shipStartDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, null, null, Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            for (HoaDon hd : listHoaDon
+            ) {
+                if (hd.getNhanVien() != null && hd.getKhachHang() != null) {
+                    list.add(hd);
+                }
+            }
+            model.addAttribute("listHoaDon", list);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-xac-nhan.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (receiveEndDate.isEmpty() && receiveStartDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), null, null
+            );
+            for (HoaDon hd : listHoaDon
+            ) {
+                if (hd.getNhanVien() != null && hd.getKhachHang() != null) {
+                    list.add(hd);
+                }
+            }
+            model.addAttribute("listHoaDon", list);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-xac-nhan.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (shipEndDate.isEmpty() && shipStartDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), null, null, Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            for (HoaDon hd : listHoaDon
+            ) {
+                if (hd.getNhanVien() != null && hd.getKhachHang() != null) {
+                    list.add(hd);
+                }
+            }
+            model.addAttribute("listHoaDon", list);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-xac-nhan.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (receiveEndDate.isEmpty() && receiveStartDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), null, null
+            );
+            for (HoaDon hd : listHoaDon
+            ) {
+                if (hd.getNhanVien() != null && hd.getKhachHang() != null) {
+                    list.add(hd);
+                }
+            }
+            model.addAttribute("listHoaDon", list);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-xac-nhan.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            for (HoaDon hd : listHoaDon
+            ) {
+                if (hd.getNhanVien() != null && hd.getKhachHang() != null) {
+                    list.add(hd);
+                }
+            }
+            model.addAttribute("listHoaDon", list);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-xac-nhan.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else {
+            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            for (HoaDon hd : listHoaDon
+            ) {
+                if (hd.getNhanVien() != null && hd.getKhachHang() != null) {
+                    list.add(hd);
+                }
+            }
+            model.addAttribute("listHoaDon", list);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-xac-nhan.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        }
+    }
+
+    @PostMapping("/loc-cho-giao-hang")
+    public String locChoGiaoHang(Model model,
+                                 @RequestParam(value = "nhanVien", required = false) UUID idNV,
+                                 @RequestParam(value = "khachHang", required = false) UUID idKH,
+                                 @RequestParam(value = "diaChi", required = false) UUID idDC,
+                                 @RequestParam(value = "loaiHoaDon", required = false) Integer loaiHoaDon,
+                                 @RequestParam(value = "startDate", required = false) String startDate,
+                                 @RequestParam(value = "receiveStartDate", required = false) String receiveStartDate,
+                                 @RequestParam(value = "shipStartDate", required = false) String shipStartDate,
+                                 @RequestParam(value = "endDate", required = false) String endDate,
+                                 @RequestParam(value = "receiveEndDate", required = false) String receiveEndDate,
+                                 @RequestParam(value = "shipEndDate", required = false) String shipEndDate,
+                                 @ModelAttribute("nhanVien") NhanVien nhanVien,
+                                 @ModelAttribute("khachHang") KhachHang khachHang,
+                                 @ModelAttribute("diaChi") DiaChi diaChi,
+                                 @ModelAttribute("hoaDon") HoaDon hoaDon,
+                                 @RequestParam("pageNum") Optional<Integer> pageNum,
+                                 @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+
+        List<HoaDon> list = new ArrayList<>();
+        dem = 2;
+        if (receiveStartDate.isEmpty() && shipStartDate.isEmpty() &&
+                receiveEndDate.isEmpty() && shipEndDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locChoGiaoHang(idKH, idNV, idDC, loaiHoaDon,
                     null, null, null, null, null, null
             );
             model.addAttribute("listHoaDon", listHoaDon);
@@ -227,10 +718,11 @@ public class HoaDonController {
             model.addAttribute("listKhachHang", khachHangService.findAll00());
             model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listDiaChi", diaChiService.getALL0());
-            model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+            model.addAttribute("contentPage", "../hoadon/hoa-don-cho-giao-hang.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
             return "home/layout";
         } else if (receiveStartDate.isEmpty() && shipStartDate.isEmpty() && receiveEndDate.isEmpty() && shipEndDate.isEmpty()) {
-            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, trangThai, trangThaiGiaoHang, loaiHoaDon,
+            List<HoaDon> listHoaDon = hoaDonService.locChoGiaoHang(idKH, idNV, idDC, loaiHoaDon,
                     Date.valueOf(startDate), Date.valueOf(endDate), null, null, null, null
             );
             model.addAttribute("listHoaDon", listHoaDon);
@@ -238,10 +730,11 @@ public class HoaDonController {
             model.addAttribute("listKhachHang", khachHangService.findAll00());
             model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listDiaChi", diaChiService.getALL0());
-            model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+            model.addAttribute("contentPage", "../hoadon/hoa-don-cho-giao-hang.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
             return "home/layout";
         } else if (shipEndDate.isEmpty() && shipStartDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
-            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, trangThai, trangThaiGiaoHang, loaiHoaDon,
+            List<HoaDon> listHoaDon = hoaDonService.locChoGiaoHang(idKH, idNV, idDC, loaiHoaDon,
                     null, null, null, null, Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
             );
             model.addAttribute("listHoaDon", listHoaDon);
@@ -249,10 +742,11 @@ public class HoaDonController {
             model.addAttribute("listKhachHang", khachHangService.findAll00());
             model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listDiaChi", diaChiService.getALL0());
-            model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+            model.addAttribute("contentPage", "../hoadon/hoa-don-cho-giao-hang.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
             return "home/layout";
         } else if (receiveEndDate.isEmpty() && receiveStartDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
-            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, trangThai, trangThaiGiaoHang, loaiHoaDon,
+            List<HoaDon> listHoaDon = hoaDonService.locChoGiaoHang(idKH, idNV, idDC, loaiHoaDon,
                     null, null, Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), null, null
             );
             model.addAttribute("listHoaDon", listHoaDon);
@@ -260,10 +754,11 @@ public class HoaDonController {
             model.addAttribute("listKhachHang", khachHangService.findAll00());
             model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listDiaChi", diaChiService.getALL0());
-            model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+            model.addAttribute("contentPage", "../hoadon/hoa-don-cho-giao-hang.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
             return "home/layout";
         } else if (shipEndDate.isEmpty() && shipStartDate.isEmpty()) {
-            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, trangThai, trangThaiGiaoHang, loaiHoaDon,
+            List<HoaDon> listHoaDon = hoaDonService.locChoGiaoHang(idKH, idNV, idDC, loaiHoaDon,
                     Date.valueOf(startDate), Date.valueOf(endDate), null, null, Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
             );
             model.addAttribute("listHoaDon", listHoaDon);
@@ -271,10 +766,11 @@ public class HoaDonController {
             model.addAttribute("listKhachHang", khachHangService.findAll00());
             model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listDiaChi", diaChiService.getALL0());
-            model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+            model.addAttribute("contentPage", "../hoadon/hoa-don-cho-giao-hang.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
             return "home/layout";
         } else if (receiveEndDate.isEmpty() && receiveStartDate.isEmpty()) {
-            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, trangThai, trangThaiGiaoHang, loaiHoaDon,
+            List<HoaDon> listHoaDon = hoaDonService.locChoGiaoHang(idKH, idNV, idDC, loaiHoaDon,
                     Date.valueOf(startDate), Date.valueOf(endDate), Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), null, null
             );
             model.addAttribute("listHoaDon", listHoaDon);
@@ -282,10 +778,11 @@ public class HoaDonController {
             model.addAttribute("listKhachHang", khachHangService.findAll00());
             model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listDiaChi", diaChiService.getALL0());
-            model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+            model.addAttribute("contentPage", "../hoadon/hoa-don-cho-giao-hang.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
             return "home/layout";
         } else if (startDate.isEmpty() && endDate.isEmpty()) {
-            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, trangThai, trangThaiGiaoHang, loaiHoaDon,
+            List<HoaDon> listHoaDon = hoaDonService.locChoGiaoHang(idKH, idNV, idDC, loaiHoaDon,
                     null, null, Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
             );
             model.addAttribute("listHoaDon", listHoaDon);
@@ -293,10 +790,11 @@ public class HoaDonController {
             model.addAttribute("listKhachHang", khachHangService.findAll00());
             model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listDiaChi", diaChiService.getALL0());
-            model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+            model.addAttribute("contentPage", "../hoadon/hoa-don-cho-giao-hang.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
             return "home/layout";
         } else {
-            List<HoaDon> listHoaDon = hoaDonService.loc1(idKH, idNV, idDC, trangThai, trangThaiGiaoHang, loaiHoaDon,
+            List<HoaDon> listHoaDon = hoaDonService.locChoGiaoHang(idKH, idNV, idDC, loaiHoaDon,
                     Date.valueOf(startDate), Date.valueOf(endDate), Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
             );
             model.addAttribute("listHoaDon", listHoaDon);
@@ -304,7 +802,371 @@ public class HoaDonController {
             model.addAttribute("listKhachHang", khachHangService.findAll00());
             model.addAttribute("listNhanVien", nhanVienService.findAll());
             model.addAttribute("listDiaChi", diaChiService.getALL0());
-            model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+            model.addAttribute("contentPage", "../hoadon/hoa-don-cho-giao-hang.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        }
+    }
+
+    @PostMapping("/loc-dang-giao-hang")
+    public String locDangGiaoHang(Model model,
+                                  @RequestParam(value = "nhanVien", required = false) UUID idNV,
+                                  @RequestParam(value = "khachHang", required = false) UUID idKH,
+                                  @RequestParam(value = "diaChi", required = false) UUID idDC,
+                                  @RequestParam(value = "loaiHoaDon", required = false) Integer loaiHoaDon,
+                                  @RequestParam(value = "startDate", required = false) String startDate,
+                                  @RequestParam(value = "receiveStartDate", required = false) String receiveStartDate,
+                                  @RequestParam(value = "shipStartDate", required = false) String shipStartDate,
+                                  @RequestParam(value = "endDate", required = false) String endDate,
+                                  @RequestParam(value = "receiveEndDate", required = false) String receiveEndDate,
+                                  @RequestParam(value = "shipEndDate", required = false) String shipEndDate,
+                                  @ModelAttribute("nhanVien") NhanVien nhanVien,
+                                  @ModelAttribute("khachHang") KhachHang khachHang,
+                                  @ModelAttribute("diaChi") DiaChi diaChi,
+                                  @ModelAttribute("hoaDon") HoaDon hoaDon,
+                                  @RequestParam("pageNum") Optional<Integer> pageNum,
+                                  @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+
+        List<HoaDon> list = new ArrayList<>();
+        dem = 2;
+        if (receiveStartDate.isEmpty() && shipStartDate.isEmpty() &&
+                receiveEndDate.isEmpty() && shipEndDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locDangGiaoHang(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, null, null, null, null
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-dang-giao-hang.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (receiveStartDate.isEmpty() && shipStartDate.isEmpty() && receiveEndDate.isEmpty() && shipEndDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locDangGiaoHang(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), null, null, null, null
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-dang-giao-hang.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (shipEndDate.isEmpty() && shipStartDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locDangGiaoHang(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, null, null, Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-dang-giao-hang.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (receiveEndDate.isEmpty() && receiveStartDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locDangGiaoHang(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), null, null
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-dang-giao-hang.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (shipEndDate.isEmpty() && shipStartDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locDangGiaoHang(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), null, null, Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-dang-giao-hang.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (receiveEndDate.isEmpty() && receiveStartDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locDangGiaoHang(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), null, null
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-dang-giao-hang.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locDangGiaoHang(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-dang-giao-hang.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else {
+            List<HoaDon> listHoaDon = hoaDonService.locDangGiaoHang(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-dang-giao-hang.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        }
+    }
+
+    @PostMapping("/loc-hoan-tat")
+    public String locHoanTat(Model model,
+                             @RequestParam(value = "nhanVien", required = false) UUID idNV,
+                             @RequestParam(value = "khachHang", required = false) UUID idKH,
+                             @RequestParam(value = "diaChi", required = false) UUID idDC,
+                             @RequestParam(value = "loaiHoaDon", required = false) Integer loaiHoaDon,
+                             @RequestParam(value = "startDate", required = false) String startDate,
+                             @RequestParam(value = "receiveStartDate", required = false) String receiveStartDate,
+                             @RequestParam(value = "shipStartDate", required = false) String shipStartDate,
+                             @RequestParam(value = "endDate", required = false) String endDate,
+                             @RequestParam(value = "receiveEndDate", required = false) String receiveEndDate,
+                             @RequestParam(value = "shipEndDate", required = false) String shipEndDate,
+                             @ModelAttribute("nhanVien") NhanVien nhanVien,
+                             @ModelAttribute("khachHang") KhachHang khachHang,
+                             @ModelAttribute("diaChi") DiaChi diaChi,
+                             @ModelAttribute("hoaDon") HoaDon hoaDon,
+                             @RequestParam("pageNum") Optional<Integer> pageNum,
+                             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+
+        List<HoaDon> list = new ArrayList<>();
+        dem = 2;
+        if (receiveStartDate.isEmpty() && shipStartDate.isEmpty() &&
+                receiveEndDate.isEmpty() && shipEndDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locHoanTat(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, null, null, null, null
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-hoan-tat.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (receiveStartDate.isEmpty() && shipStartDate.isEmpty() && receiveEndDate.isEmpty() && shipEndDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locHoanTat(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), null, null, null, null
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-hoan-tat.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (shipEndDate.isEmpty() && shipStartDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locHoanTat(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, null, null, Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-hoan-tat.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (receiveEndDate.isEmpty() && receiveStartDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locHoanTat(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), null, null
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-hoan-tat.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (shipEndDate.isEmpty() && shipStartDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locHoanTat(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), null, null, Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-hoan-tat.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (receiveEndDate.isEmpty() && receiveStartDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locHoanTat(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), null, null
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-hoan-tat.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locHoanTat(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-hoan-tat.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else {
+            List<HoaDon> listHoaDon = hoaDonService.locHoanTat(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-hoan-tat.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        }
+    }
+
+    @PostMapping("/loc-da-huy")
+    public String locDaHuy(Model model,
+                             @RequestParam(value = "nhanVien", required = false) UUID idNV,
+                             @RequestParam(value = "khachHang", required = false) UUID idKH,
+                             @RequestParam(value = "diaChi", required = false) UUID idDC,
+                             @RequestParam(value = "loaiHoaDon", required = false) Integer loaiHoaDon,
+                             @RequestParam(value = "startDate", required = false) String startDate,
+                             @RequestParam(value = "receiveStartDate", required = false) String receiveStartDate,
+                             @RequestParam(value = "shipStartDate", required = false) String shipStartDate,
+                             @RequestParam(value = "endDate", required = false) String endDate,
+                             @RequestParam(value = "receiveEndDate", required = false) String receiveEndDate,
+                             @RequestParam(value = "shipEndDate", required = false) String shipEndDate,
+                             @ModelAttribute("nhanVien") NhanVien nhanVien,
+                             @ModelAttribute("khachHang") KhachHang khachHang,
+                             @ModelAttribute("diaChi") DiaChi diaChi,
+                             @ModelAttribute("hoaDon") HoaDon hoaDon,
+                             @RequestParam("pageNum") Optional<Integer> pageNum,
+                             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+
+        List<HoaDon> list = new ArrayList<>();
+        dem = 2;
+        if (receiveStartDate.isEmpty() && shipStartDate.isEmpty() &&
+                receiveEndDate.isEmpty() && shipEndDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locDaHuy(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, null, null, null, null
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-da-huy.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (receiveStartDate.isEmpty() && shipStartDate.isEmpty() && receiveEndDate.isEmpty() && shipEndDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locDaHuy(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), null, null, null, null
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-da-huy.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (shipEndDate.isEmpty() && shipStartDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locDaHuy(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, null, null, Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-da-huy.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (receiveEndDate.isEmpty() && receiveStartDate.isEmpty() && startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locDaHuy(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), null, null
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-da-huy.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (shipEndDate.isEmpty() && shipStartDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locDaHuy(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), null, null, Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-da-huy.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (receiveEndDate.isEmpty() && receiveStartDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locDaHuy(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), null, null
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-da-huy.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else if (startDate.isEmpty() && endDate.isEmpty()) {
+            List<HoaDon> listHoaDon = hoaDonService.locDaHuy(idKH, idNV, idDC, loaiHoaDon,
+                    null, null, Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-da-huy.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
+            return "home/layout";
+        } else {
+            List<HoaDon> listHoaDon = hoaDonService.locDaHuy(idKH, idNV, idDC, loaiHoaDon,
+                    Date.valueOf(startDate), Date.valueOf(endDate), Date.valueOf(shipStartDate), Date.valueOf(shipEndDate), Date.valueOf(receiveStartDate), Date.valueOf(receiveEndDate)
+            );
+            model.addAttribute("listHoaDon", listHoaDon);
+            model.addAttribute("dem", dem);
+            model.addAttribute("listKhachHang", khachHangService.findAll00());
+            model.addAttribute("listNhanVien", nhanVienService.findAll());
+            model.addAttribute("listDiaChi", diaChiService.getALL0());
+            model.addAttribute("contentPage", "../hoadon/hoa-don-da-huy.jsp");
+            model.addAttribute("thongBaoLoc", "Lọc thông tin thành công");
             return "home/layout";
         }
     }
@@ -335,8 +1197,20 @@ public class HoaDonController {
         return "home/layout";
     }
 
-    @GetMapping("/xuat-pdf/{id}")
+    @GetMapping("/xuat-pdf-cho-giao/{id}")
     public ResponseEntity<byte[]> xuatPDF(@PathVariable("id") UUID id) {
+        ResponseEntity<byte[]> responseEntity = hoaDonService.generatePdfDonTaiQuay(id);
+        byte[] pdfBytes = responseEntity.getBody();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "hoa_don_" + id + ".pdf");
+
+        return ResponseEntity.ok().headers(headers).body(pdfBytes);
+    }
+
+    @GetMapping("/xuat-pdf-hoan-tat/{id}")
+    public ResponseEntity<byte[]> xuatPDFHoanTat(@PathVariable("id") UUID id) {
         ResponseEntity<byte[]> responseEntity = hoaDonService.generatePdfDonTaiQuay(id);
         byte[] pdfBytes = responseEntity.getBody();
 
@@ -401,7 +1275,7 @@ public class HoaDonController {
     }
 
     //update thông tin khi trạng thái là đang chờ, chờ xác nhận...
-    @GetMapping("/view-update/{id}")
+    @GetMapping("/view-update-xac-nhan/{id}")
     public String viewUpdate(Model model, @PathVariable("id") UUID id) {
         List<NhanVien> listNhanVien = nhanVienService.findAll();
         List<KhachHang> listKhachHang = khachHangService.findAll();
@@ -422,8 +1296,29 @@ public class HoaDonController {
         return "home/layout";
     }
 
+    @GetMapping("/view-update-cho-giao/{id}")
+    public String viewUpdateChoGiao(Model model, @PathVariable("id") UUID id) {
+        List<NhanVien> listNhanVien = nhanVienService.findAll();
+        List<KhachHang> listKhachHang = khachHangService.findAll();
+        dem = 4;
+        idHoaDon = id;
+        List<HoaDonChiTiet> listHoaDonChiTiet = hoaDonChiTietService.getHoaDonChiTiet(id);
+        model.addAttribute("listKhachHang", listKhachHang);
+        model.addAttribute("listNhanVien", listNhanVien);
+        model.addAttribute("listDiaChi", diaChiService.diaChiThanhToan(hoaDonService.findById(id).getKhachHang().getId()));
+        HoaDon hoaDon = hoaDonService.findById(id);
+        loai = hoaDonnn.getLoai();
+        httt = hoaDonnn.getHinhThucThanhToan();
+        hoaDonnn = hoaDon;
+        model.addAttribute("hoaDon", hoaDon);
+        model.addAttribute("tong", hoaDon.getTongTien());
+        model.addAttribute("listHoaDonChiTiet", listHoaDonChiTiet);
+        model.addAttribute("contentPage", "../hoadon/hoa-don-view-update.jsp");
+        return "home/layout";
+    }
+
     //
-    @PostMapping("/update/{id}")
+    @PostMapping("/update-da-xac-nhan/{id}")
     public String Update(Model model, @PathVariable("id") UUID id,
                          @ModelAttribute("hoaDon") HoaDon hoaDon) {
         HoaDon hd = hoaDonService.findById(id);
@@ -497,7 +1392,7 @@ public class HoaDonController {
                     hoaDonService.update(id, hoaDon);
                 }
                 hoaDonnn = hoaDon;
-                return "redirect:/hoa-don/hien-thi";
+                return "redirect:/hoa-don/hien-thi-xac-nhan";
             } else {
                 hoaDon.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
                 hoaDon.setKhachHang(hoaDonnn.getKhachHang());
@@ -553,7 +1448,7 @@ public class HoaDonController {
                     hoaDonService.update(id, hoaDon);
                 }
                 hoaDonnn = hoaDon;
-                return "redirect:/hoa-don/hien-thi";
+                return "redirect:/hoa-don/hien-thi-xac-nhan";
             }
         } else {
             if (hoaDon.getTinhTrang() == 8) {
@@ -584,13 +1479,13 @@ public class HoaDonController {
                     hd.setTinhTrangGiaoHang(8);
                     hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
                     hoaDonService.update(id, hd);
-                    return "redirect:/hoa-don/hien-thi";
+                    return "redirect:/hoa-don/hien-thi-xac-nhan";
                 } else {
                     hd.setTinhTrang(8);
                     hd.setTinhTrangGiaoHang(8);
                     hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
                     hoaDonService.update(id, hd);
-                    return "redirect:/hoa-don/hien-thi";
+                    return "redirect:/hoa-don/hien-thi-xac-nhan";
                 }
             } else if (hoaDon.getTinhTrang() == 2) {
                 hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
@@ -631,7 +1526,220 @@ public class HoaDonController {
                 hoaDonService.update(id, hoaDon);
             }
             hoaDonnn = hoaDon;
-            return "redirect:/hoa-don/hien-thi";
+            return "redirect:/hoa-don/hien-thi-xac-nhan";
+        }
+
+    }
+
+    @PostMapping("/update-cho-giao/{id}")
+    public String UpdateChoGiao(Model model, @PathVariable("id") UUID id,
+                                @ModelAttribute("hoaDon") HoaDon hoaDon) {
+        HoaDon hd = hoaDonService.findById(id);
+        if (hd.getLoai() == 1) {
+            LocalDate ngayShip = hoaDon.getNgayShip().toLocalDate();
+            int check = LocalDate.now().compareTo(ngayShip);
+            System.out.println(check);
+            if (check > 0) {
+                model.addAttribute("listDiaChi", diaChiService.findAll0());
+                model.addAttribute("hoaDon", hoaDonnn);
+                model.addAttribute("listHoaDonChiTiet", hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId()));
+                model.addAttribute("thongBao", "Ngày ship không được nhỏ hơn ngày hiện tại");
+                model.addAttribute("contentPage", "../hoadon/hoa-don-view-update.jsp");
+                return "home/layout";
+            } else if (check < 0) {
+                hoaDon.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+                hoaDon.setKhachHang(hoaDonnn.getKhachHang());
+                hoaDon.setMaGiaoDich(hoaDonnn.getMaGiaoDich());
+                hoaDon.setLoai(hoaDonnn.getLoai());
+                hoaDon.setHinhThucThanhToan(hoaDonnn.getHinhThucThanhToan());
+                hoaDon.setTinhTrangGiaoHang(1);
+                hoaDon.setNgayTao(hoaDonnn.getNgayTao());
+
+                if (hoaDonnn.getTinhTrang() == 2) {
+                    hoaDon.setTinhTrang(hoaDonnn.getTinhTrang());
+                    LocalDate ngayCapNhat = LocalDate.now();
+
+                    List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDon.getId());
+                    if (!list.isEmpty()) {
+                        for (HoaDonChiTiet hdct : list
+                        ) {
+                            long millis = System.currentTimeMillis();
+                            Date date = new Date(millis);
+                            imeiService.updatImei(date, hdct.getId());
+                            hdct.setTinhTrang(1);
+                            hoaDonChiTietService.update(hdct.getId(), hdct);
+                        }
+                        hoaDon.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                        hoaDon.setNgayThanhToan(hoaDonnn.getNgayThanhToan());
+                        hoaDonService.update(id, hoaDon);
+                    } else {
+                        hoaDon.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                        hoaDon.setNgayThanhToan(hoaDonnn.getNgayThanhToan());
+                        hoaDonService.update(id, hoaDon);
+                    }
+                } else if (hoaDonnn.getTinhTrang() == 3) {
+                    hoaDon.setTinhTrang(hoaDonnn.getTinhTrang());
+                    hoaDon.setMaGiaoDich(hoaDonnn.getMaGiaoDich());
+                    LocalDate ngayCapNhat = LocalDate.now();
+                    List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDon.getId());
+                    if (!list.isEmpty()) {
+                        for (HoaDonChiTiet hdct : list
+                        ) {
+                            long millis = System.currentTimeMillis();
+                            Date date = new Date(millis);
+                            imeiService.updatImeiChoXuLy(date, hdct.getId());
+                            hdct.setTinhTrang(1);
+                            hoaDonChiTietService.update(hdct.getId(), hdct);
+                        }
+                        hoaDon.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                        hoaDonService.update(id, hoaDon);
+                    } else {
+                        hoaDon.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                        hoaDonService.update(id, hoaDon);
+                    }
+                } else {
+                    hoaDon.setId(id);
+                    hoaDon.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+                    hoaDon.setNgayTao(hoaDonnn.getNgayTao());
+                    hoaDon.setMaGiaoDich(hoaDonnn.getMaGiaoDich());
+                    hoaDonService.update(id, hoaDon);
+                }
+                hoaDonnn = hoaDon;
+                return "redirect:/hoa-don/hien-thi-cho-giao-hang";
+            } else {
+                hoaDon.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+                hoaDon.setKhachHang(hoaDonnn.getKhachHang());
+                hoaDon.setLoai(hoaDonnn.getLoai());
+                hoaDon.setHinhThucThanhToan(hoaDonnn.getHinhThucThanhToan());
+                hoaDon.setTinhTrangGiaoHang(2);
+                hoaDon.setNgayTao(hoaDonnn.getNgayTao());
+                hoaDon.setMaGiaoDich(hoaDonnn.getMaGiaoDich());
+                if (hoaDonnn.getTinhTrang() == 2) {
+                    hoaDon.setTinhTrang(hoaDonnn.getTinhTrang());
+                    LocalDate ngayCapNhat = LocalDate.now();
+                    List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDon.getId());
+                    if (!list.isEmpty()) {
+                        for (HoaDonChiTiet hdct : list
+                        ) {
+                            long millis = System.currentTimeMillis();
+                            Date date = new Date(millis);
+                            imeiService.updatImei(date, hdct.getId());
+                            hdct.setTinhTrang(1);
+                            hoaDonChiTietService.update(hdct.getId(), hdct);
+                        }
+                        hoaDon.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                        hoaDon.setNgayThanhToan(hoaDonnn.getNgayThanhToan());
+                        hoaDonService.update(id, hoaDon);
+                    } else {
+                        hoaDon.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                        hoaDon.setNgayThanhToan(hoaDonnn.getNgayThanhToan());
+                        hoaDonService.update(id, hoaDon);
+                    }
+                } else if (hoaDonnn.getTinhTrang() == 3) {
+                    hoaDon.setTinhTrang(hoaDonnn.getTinhTrang());
+                    LocalDate ngayCapNhat = LocalDate.now();
+                    List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDon.getId());
+                    if (!list.isEmpty()) {
+                        for (HoaDonChiTiet hdct : list
+                        ) {
+                            long millis = System.currentTimeMillis();
+                            Date date = new Date(millis);
+                            imeiService.updatImeiChoXuLy(date, hdct.getId());
+                            hdct.setTinhTrang(1);
+                            hoaDonChiTietService.update(hdct.getId(), hdct);
+                        }
+                        hoaDon.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                        hoaDonService.update(id, hoaDon);
+                    } else {
+                        hoaDon.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                        hoaDonService.update(id, hoaDon);
+                    }
+                } else {
+                    hoaDon.setId(id);
+                    hoaDon.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+                    hoaDon.setNgayTao(hoaDonnn.getNgayTao());
+                    hoaDonService.update(id, hoaDon);
+                }
+                hoaDonnn = hoaDon;
+                return "redirect:/hoa-don/hien-thi-cho-giao-hang";
+            }
+        } else {
+            if (hoaDon.getTinhTrang() == 8) {
+                hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+                hd.setKhachHang(hoaDonnn.getKhachHang());
+                hd.setLoai(loai);
+                hd.setHinhThucThanhToan(httt);
+
+                LocalDate ngayCapNhat = LocalDate.now();
+                List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
+                if (!list.isEmpty()) {
+                    for (HoaDonChiTiet hdct : list
+                    ) {
+                        ChiTietSanPham ctsp = chiTietSanPhamService.getChiTiet(hdct.getImei().getId());
+                        ctsp.setSoLuong(ctsp.getSoLuong() + 1);
+                        long millis = System.currentTimeMillis();
+                        Date date = new Date(millis);
+                        ctsp.setNgayTao(date);
+                        if (ctsp.getSoLuong() > 0) {
+                            ctsp.setTinhTrang(0);
+                        }
+                        chiTietSanPhamService.update1(ctsp);
+                        imeiService.updatImei1(date, hdct.getId());
+                        hdct.setTinhTrang(8);
+                        hoaDonChiTietService.update(hdct.getId(), hdct);
+                    }
+                    hd.setTinhTrang(8);
+                    hd.setTinhTrangGiaoHang(8);
+                    hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                    hoaDonService.update(id, hd);
+                    return "redirect:/hoa-don/hien-thi-cho-giao-hang";
+                } else {
+                    hd.setTinhTrang(8);
+                    hd.setTinhTrangGiaoHang(8);
+                    hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                    hoaDonService.update(id, hd);
+                    return "redirect:/hoa-don/hien-thi-cho-giao-hang";
+                }
+            } else if (hoaDon.getTinhTrang() == 2) {
+                hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+                hd.setKhachHang(hoaDonnn.getKhachHang());
+                hd.setNgayShip(Date.valueOf(LocalDate.now()));
+                hd.setNgayNhan(Date.valueOf(LocalDate.now()));
+
+                LocalDate ngayCapNhat = LocalDate.now();
+                List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
+                if (!list.isEmpty()) {
+                    for (HoaDonChiTiet hdct : list
+                    ) {
+                        long millis = System.currentTimeMillis();
+                        Date date = new Date(millis);
+                        imeiService.updatImei(date, hdct.getId());
+                        hdct.setTinhTrang(1);
+                        hoaDonChiTietService.update(hdct.getId(), hdct);
+                    }
+                    hd.setTinhTrang(2);
+                    hd.setTinhTrangGiaoHang(3);
+                    hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                    hoaDonService.update(id, hd);
+                } else {
+                    hd.setTinhTrang(2);
+                    hd.setTinhTrangGiaoHang(3);
+                    hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+                    hoaDonService.update(id, hd);
+                }
+            } else {
+                hoaDon.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+                hoaDon.setKhachHang(hoaDonnn.getKhachHang());
+                hoaDon.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+                hoaDon.setNgayTao(hoaDonnn.getNgayTao());
+                hoaDon.setNgayShip(Date.valueOf(LocalDate.now()));
+                hoaDon.setNgayNhan(Date.valueOf(LocalDate.now()));
+                hoaDon.setPhiShip(BigDecimal.valueOf(30000));
+                hoaDon.setMaGiaoDich(hoaDonnn.getMaGiaoDich());
+                hoaDonService.update(id, hoaDon);
+            }
+            hoaDonnn = hoaDon;
+            return "redirect:/hoa-don/hien-thi-cho-giao-hang";
         }
 
     }
@@ -732,43 +1840,6 @@ public class HoaDonController {
         model.addAttribute("listKhachHang", khachHangService.findAll0());
         model.addAttribute("listDiaChi", diaChiService.findAll0());
         return "redirect:/hoa-don/view-update/" + idHoaDon;
-    }
-
-    @GetMapping("/loc/ban-hang-tai-quay/{hang}/{rom}/{manHinh}/{camera}/{ram}/{chip}/{dungLuongPin}/{giaBanMin}/{giaBanMax}")
-    public String loc(Model model
-            , @PathVariable("hang") String hang,
-                      @PathVariable("ram") String ram,
-                      @PathVariable("rom") String rom,
-                      @PathVariable("dungLuongPin") String dungLuongPin,
-                      @PathVariable("chip") String chip,
-                      @PathVariable("manHinh") String moTaMan,
-                      @PathVariable("camera") String moTaCam
-    ) {
-        List<ChiTietSanPham> list = banHangOnlineService.locbanhang(hang, moTaCam, moTaMan, "null", ram, rom, "null", dungLuongPin, chip, "null");
-        model.addAttribute("listChiTietSanPham", list);
-        System.out.println("fjdkjffhkfhsf");
-
-        return "hoa-don/bang-loc";
-    }
-
-    @GetMapping("/loc/ban-hang-tai-quay/{x1}/{x2}/{x3}/{x4}/{x5}/{x6}/{x7}/{x8}/{x9}/{x10}")
-    public String locbanhang(
-            Model model,
-            @PathVariable("x1") String x1,
-            @PathVariable("x2") String x2,
-            @PathVariable("x3") String x3,
-            @PathVariable("x4") String x4,
-            @PathVariable("x5") String x5,
-            @PathVariable("x6") String x6,
-            @PathVariable("x7") String x7,
-            @PathVariable("x8") String x8,
-            @PathVariable("x9") String x9,
-            @PathVariable("x10") String x10
-    ) {
-
-        model.addAttribute("banhangonline", banHangOnlineService);
-        model.addAttribute("listChiTietSanPham", banHangOnlineService.locbanhang(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10));
-        return "hoa-don/bang-loc";
     }
 
     @GetMapping("/them-imei/{id}")
@@ -929,7 +2000,67 @@ public class HoaDonController {
         return "redirect:/hoa-don/hien-thi";
     }
 
-    @GetMapping("/xac-nhan-huy/{id}")
+    @GetMapping("/xac-nhan/{id}")
+    public String xacNhan(Model model, @PathVariable("id") UUID id) {
+        HoaDon hd = hoaDonService.findById(id);
+        hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+        hd.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        hoaDonService.update(id, hd);
+        idHoaDon = id;
+        List<HoaDonChiTiet> listHoaDonChiTiet = hoaDonChiTietService.getHoaDonChiTiet(id);
+        if (!listHoaDonChiTiet.isEmpty()) {
+            for (HoaDonChiTiet hdct : listHoaDonChiTiet
+            ) {
+                if (hd.getTinhTrang() == 3) {
+                    System.out.println(hdct.getId());
+                    imeiService.updatImeiChoXuLy(Date.valueOf(LocalDate.now()), hdct.getId());
+                }
+
+            }
+        }
+        return "redirect:/hoa-don/hien-thi";
+    }
+
+    @GetMapping("/huy-cho-xac-nhan/{id}")
+    public String huyHoaDon(Model model, @PathVariable("id") UUID id
+            , @ModelAttribute("hoaDon") HoaDon hoaDon
+    ) throws IOException {
+        HoaDon hd = hoaDonService.findById(id);
+        LocalDate ngayCapNhat = LocalDate.now();
+        List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
+        if (!list.isEmpty()) {
+            for (HoaDonChiTiet hdct : list
+            ) {
+                ChiTietSanPham ctsp = chiTietSanPhamService.getChiTiet(hdct.getImei().getId());
+                ctsp.setSoLuong(ctsp.getSoLuong() + 1);
+                long millis = System.currentTimeMillis();
+                Date date = new Date(millis);
+                ctsp.setNgayTao(date);
+                if (ctsp.getSoLuong() > 0) {
+                    ctsp.setTinhTrang(0);
+                }
+                chiTietSanPhamService.update1(ctsp);
+                imeiService.updatImei1(date, hdct.getId());
+                hdct.setTinhTrang(8);
+                hoaDonChiTietService.update(hdct.getId(), hdct);
+            }
+            hd.setTinhTrang(8);
+            hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+            hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+            hoaDonService.update(id, hd);
+        } else {
+            hd.setTinhTrang(8);
+            hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+            hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+            hoaDonService.update(id, hd);
+        }
+        model.addAttribute("hoaDon", hd);
+        model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
+        System.in.read();
+        return "redirect:/hoa-don/hien-thi"; // Chuyển hướng về trang danh sách hóa đơn sau khi hủy
+    }
+
+    @GetMapping("/xac-nhan-huy-cho-xac-nhan/{id}")
     public String huy(Model model, @PathVariable("id") UUID id) throws IOException {
         HoaDon hd = hoaDonService.findById(id);
         hd.setTinhTrang(8);
@@ -951,7 +2082,7 @@ public class HoaDonController {
         return "redirect:/hoa-don/hien-thi";
     }
 
-    @GetMapping("/xac-nhan-huy-hoan-tien/{id}")
+    @GetMapping("/xac-nhan-huy-hoan-tien-cho-xac-nhan/{id}")
     public String huyVaHoanTien(Model model, @PathVariable("id") UUID id) throws IOException {
         HoaDon hd = hoaDonService.findById(id);
         hd.setTinhTrang(9);
@@ -973,9 +2104,51 @@ public class HoaDonController {
         return "redirect:/hoa-don/hien-thi";
     }
 
-    @GetMapping("/xac-nhan/{id}")
-    public String xacNhan(Model model, @PathVariable("id") UUID id) {
+    @GetMapping("/huy-da-xac-nhan/{id}")
+    public String huyHoaDonDaXacNhan(Model model, @PathVariable("id") UUID id
+            , @ModelAttribute("hoaDon") HoaDon hoaDon
+    ) throws IOException {
         HoaDon hd = hoaDonService.findById(id);
+        LocalDate ngayCapNhat = LocalDate.now();
+        List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
+        if (!list.isEmpty()) {
+            for (HoaDonChiTiet hdct : list
+            ) {
+                ChiTietSanPham ctsp = chiTietSanPhamService.getChiTiet(hdct.getImei().getId());
+                ctsp.setSoLuong(ctsp.getSoLuong() + 1);
+                long millis = System.currentTimeMillis();
+                Date date = new Date(millis);
+                ctsp.setNgayTao(date);
+                if (ctsp.getSoLuong() > 0) {
+                    ctsp.setTinhTrang(0);
+                }
+                chiTietSanPhamService.update1(ctsp);
+                imeiService.updatImei1(date, hdct.getId());
+                hdct.setTinhTrang(8);
+                hoaDonChiTietService.update(hdct.getId(), hdct);
+            }
+            hd.setTinhTrang(8);
+            hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+            hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+            hoaDonService.update(id, hd);
+        } else {
+            hd.setTinhTrang(8);
+            hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+            hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+            hoaDonService.update(id, hd);
+        }
+        model.addAttribute("hoaDon", hd);
+        model.addAttribute("contentPage", "../hoadon/hoa-don-xac-nhan.jsp");
+        System.in.read();
+        return "redirect:/hoa-don/hien-thi-xac-nhan"; // Chuyển hướng về trang danh sách hóa đơn sau khi hủy
+    }
+
+    @GetMapping("/xac-nhan-huy-da-xac-nhan/{id}")
+    public String huyDaXacNhan(Model model, @PathVariable("id") UUID id) throws IOException {
+        HoaDon hd = hoaDonService.findById(id);
+        hd.setTinhTrang(8);
+        hd.setTinhTrangGiaoHang(8);
+
         hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
         hd.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         hoaDonService.update(id, hd);
@@ -984,14 +2157,200 @@ public class HoaDonController {
         if (!listHoaDonChiTiet.isEmpty()) {
             for (HoaDonChiTiet hdct : listHoaDonChiTiet
             ) {
-                if (hd.getTinhTrang() == 3) {
-                    System.out.println(hdct.getId());
-                    imeiService.updatImeiChoXuLy(Date.valueOf(LocalDate.now()), hdct.getId());
-                }
-
+                System.out.println(hdct.getId());
+                imeiService.updatImei1(Date.valueOf(LocalDate.now()), hdct.getId());
             }
         }
-        return "redirect:/hoa-don/hien-thi";
+        System.in.read();
+        return "redirect:/hoa-don/hien-thi-xac-nhan";
+    }
+
+    @GetMapping("/xac-nhan-huy-hoan-tien-da-xac-nhan/{id}")
+    public String huyVaHoanTienDaXacNhan(Model model, @PathVariable("id") UUID id) throws IOException {
+        HoaDon hd = hoaDonService.findById(id);
+        hd.setTinhTrang(9);
+        hd.setTinhTrangGiaoHang(8);
+
+        hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+        hd.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        hoaDonService.update(id, hd);
+        idHoaDon = id;
+        List<HoaDonChiTiet> listHoaDonChiTiet = hoaDonChiTietService.getHoaDonChiTiet(id);
+        if (!listHoaDonChiTiet.isEmpty()) {
+            for (HoaDonChiTiet hdct : listHoaDonChiTiet
+            ) {
+                System.out.println(hdct.getId());
+                imeiService.updatImei1(Date.valueOf(LocalDate.now()), hdct.getId());
+            }
+        }
+        System.in.read();
+        return "redirect:/hoa-don/hien-thi-xac-nhan";
+    }
+
+    @GetMapping("/huy-cho-giao/{id}")
+    public String huyHoaDonDangGiao(Model model, @PathVariable("id") UUID id
+            , @ModelAttribute("hoaDon") HoaDon hoaDon
+    ) throws IOException {
+        HoaDon hd = hoaDonService.findById(id);
+        LocalDate ngayCapNhat = LocalDate.now();
+        List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
+        if (!list.isEmpty()) {
+            for (HoaDonChiTiet hdct : list
+            ) {
+                ChiTietSanPham ctsp = chiTietSanPhamService.getChiTiet(hdct.getImei().getId());
+                ctsp.setSoLuong(ctsp.getSoLuong() + 1);
+                long millis = System.currentTimeMillis();
+                Date date = new Date(millis);
+                ctsp.setNgayTao(date);
+                if (ctsp.getSoLuong() > 0) {
+                    ctsp.setTinhTrang(0);
+                }
+                chiTietSanPhamService.update1(ctsp);
+                imeiService.updatImei1(date, hdct.getId());
+                hdct.setTinhTrang(8);
+                hoaDonChiTietService.update(hdct.getId(), hdct);
+            }
+            hd.setTinhTrang(8);
+            hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+            hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+            hoaDonService.update(id, hd);
+        } else {
+            hd.setTinhTrang(8);
+            hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+            hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+            hoaDonService.update(id, hd);
+        }
+        model.addAttribute("hoaDon", hd);
+        model.addAttribute("contentPage", "../hoadon/hoa-don-xac-nhan.jsp");
+        System.in.read();
+        return "redirect:/hoa-don/hien-thi-cho-giao-hang"; // Chuyển hướng về trang danh sách hóa đơn sau khi hủy
+    }
+
+    @GetMapping("/xac-nhan-huy-dang-giao/{id}")
+    public String huyDangGiao(Model model, @PathVariable("id") UUID id) throws IOException {
+        HoaDon hd = hoaDonService.findById(id);
+        hd.setTinhTrang(8);
+        hd.setTinhTrangGiaoHang(8);
+
+        hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+        hd.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        hoaDonService.update(id, hd);
+        idHoaDon = id;
+        List<HoaDonChiTiet> listHoaDonChiTiet = hoaDonChiTietService.getHoaDonChiTiet(id);
+        if (!listHoaDonChiTiet.isEmpty()) {
+            for (HoaDonChiTiet hdct : listHoaDonChiTiet
+            ) {
+                System.out.println(hdct.getId());
+                imeiService.updatImei1(Date.valueOf(LocalDate.now()), hdct.getId());
+            }
+        }
+        System.in.read();
+        return "redirect:/hoa-don/hien-thi-dang-giao-hang";
+    }
+
+    @GetMapping("/xac-nhan-huy-hoan-tien-dang-giao/{id}")
+    public String huyVaHoanTienDangGiao(Model model, @PathVariable("id") UUID id) throws IOException {
+        HoaDon hd = hoaDonService.findById(id);
+        hd.setTinhTrang(9);
+        hd.setTinhTrangGiaoHang(8);
+
+        hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+        hd.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        hoaDonService.update(id, hd);
+        idHoaDon = id;
+        List<HoaDonChiTiet> listHoaDonChiTiet = hoaDonChiTietService.getHoaDonChiTiet(id);
+        if (!listHoaDonChiTiet.isEmpty()) {
+            for (HoaDonChiTiet hdct : listHoaDonChiTiet
+            ) {
+                System.out.println(hdct.getId());
+                imeiService.updatImei1(Date.valueOf(LocalDate.now()), hdct.getId());
+            }
+        }
+        System.in.read();
+        return "redirect:/hoa-don/hien-thi-dang-giao-hang";
+    }
+
+    @GetMapping("/huy-dang-giao/{id}")
+    public String huyHoaDonChoGiao(Model model, @PathVariable("id") UUID id
+            , @ModelAttribute("hoaDon") HoaDon hoaDon
+    ) throws IOException {
+        HoaDon hd = hoaDonService.findById(id);
+        LocalDate ngayCapNhat = LocalDate.now();
+        List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hd.getId());
+        if (!list.isEmpty()) {
+            for (HoaDonChiTiet hdct : list
+            ) {
+                ChiTietSanPham ctsp = chiTietSanPhamService.getChiTiet(hdct.getImei().getId());
+                ctsp.setSoLuong(ctsp.getSoLuong() + 1);
+                long millis = System.currentTimeMillis();
+                Date date = new Date(millis);
+                ctsp.setNgayTao(date);
+                if (ctsp.getSoLuong() > 0) {
+                    ctsp.setTinhTrang(0);
+                }
+                chiTietSanPhamService.update1(ctsp);
+                imeiService.updatImei1(date, hdct.getId());
+                hdct.setTinhTrang(8);
+                hoaDonChiTietService.update(hdct.getId(), hdct);
+            }
+            hd.setTinhTrang(8);
+            hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+            hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+            hoaDonService.update(id, hd);
+        } else {
+            hd.setTinhTrang(8);
+            hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
+            hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+            hoaDonService.update(id, hd);
+        }
+        model.addAttribute("hoaDon", hd);
+        model.addAttribute("contentPage", "../hoadon/hoa-don-xac-nhan.jsp");
+        System.in.read();
+        return "redirect:/hoa-don/hien-thi-dang-giao-hang"; // Chuyển hướng về trang danh sách hóa đơn sau khi hủy
+    }
+
+    @GetMapping("/xac-nhan-huy-cho-giao/{id}")
+    public String huyChoGiao(Model model, @PathVariable("id") UUID id) throws IOException {
+        HoaDon hd = hoaDonService.findById(id);
+        hd.setTinhTrang(8);
+        hd.setTinhTrangGiaoHang(8);
+
+        hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+        hd.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        hoaDonService.update(id, hd);
+        idHoaDon = id;
+        List<HoaDonChiTiet> listHoaDonChiTiet = hoaDonChiTietService.getHoaDonChiTiet(id);
+        if (!listHoaDonChiTiet.isEmpty()) {
+            for (HoaDonChiTiet hdct : listHoaDonChiTiet
+            ) {
+                System.out.println(hdct.getId());
+                imeiService.updatImei1(Date.valueOf(LocalDate.now()), hdct.getId());
+            }
+        }
+        System.in.read();
+        return "redirect:/hoa-don/hien-thi-cho-giao-hang";
+    }
+
+    @GetMapping("/xac-nhan-huy-hoan-tien-cho-giao/{id}")
+    public String huyVaHoanTienChoGiao(Model model, @PathVariable("id") UUID id) throws IOException {
+        HoaDon hd = hoaDonService.findById(id);
+        hd.setTinhTrang(9);
+        hd.setTinhTrangGiaoHang(8);
+
+        hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+        hd.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        hoaDonService.update(id, hd);
+        idHoaDon = id;
+        List<HoaDonChiTiet> listHoaDonChiTiet = hoaDonChiTietService.getHoaDonChiTiet(id);
+        if (!listHoaDonChiTiet.isEmpty()) {
+            for (HoaDonChiTiet hdct : listHoaDonChiTiet
+            ) {
+                System.out.println(hdct.getId());
+                imeiService.updatImei1(Date.valueOf(LocalDate.now()), hdct.getId());
+            }
+        }
+        System.in.read();
+        return "redirect:/hoa-don/hien-thi-cho-giao-hang";
     }
 
 

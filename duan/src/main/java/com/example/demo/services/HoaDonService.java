@@ -19,6 +19,14 @@ public interface HoaDonService {
 
     public List<HoaDon> hoaDon();
 
+    public List<HoaDon> hoaDonChoGiaoHang();
+
+    public List<HoaDon> hoaDonDangGiaoHang();
+
+    public List<HoaDon> hoaDonHoanTat();
+
+    public List<HoaDon> hoaDonDaHuy();
+
     public List<HoaDon> findAll();
 
     public List<HoaDon> searchDoiTra(String search);
@@ -43,8 +51,32 @@ public interface HoaDonService {
 
     public List<HoaDon> search(String ten, BigDecimal soTienQuyDoi);
 
-    public List<HoaDon> loc1(UUID idKH, UUID idNV, UUID idDC, Integer trangThai, Integer trangThaiGiaoHang, Integer loai,
+    public List<HoaDon> searchChoGiaoHang(String ten, BigDecimal soTienQuyDoi);
+
+    public List<HoaDon> searchDangGiaoHang(String ten, BigDecimal soTienQuyDoi);
+
+    public List<HoaDon> searchHoanTat(String ten, BigDecimal soTienQuyDoi);
+
+    public List<HoaDon> searchDaHuy(String ten, BigDecimal soTienQuyDoi);
+
+    public List<HoaDon> loc1(UUID idKH, UUID idNV, UUID idDC, Integer loai,
                              Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate
+    );
+
+    public List<HoaDon> locChoGiaoHang(UUID idKH, UUID idNV, UUID idDC, Integer loai,
+                                       Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate
+    );
+
+    public List<HoaDon> locDangGiaoHang(UUID idKH, UUID idNV, UUID idDC, Integer loai,
+                                        Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate
+    );
+
+    public List<HoaDon> locHoanTat(UUID idKH, UUID idNV, UUID idDC, Integer loai,
+                                   Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate
+    );
+
+    public List<HoaDon> locDaHuy(UUID idKH, UUID idNV, UUID idDC, Integer loai,
+                                   Date startDate, Date endDate, Date shipStartDate, Date shipEndDate, Date receiveStartDate, Date receiveEndDate
     );
 
     public List<HoaDon> locDonHang(UUID idKH, UUID idNV, UUID idDC, Integer trangThai,

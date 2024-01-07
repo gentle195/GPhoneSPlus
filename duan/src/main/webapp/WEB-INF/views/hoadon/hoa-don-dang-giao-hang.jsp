@@ -161,25 +161,29 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="description-tab" data-toggle="tab" href="hoa-don/hien-thi" role="tab"
-               aria-controls="description" aria-selected="true">Hóa đơn chưa xác nhận</a>
+            <a class="nav-link" href="/hoa-don/hien-thi" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn
+                chưa xác nhận</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/hoa-don/hien-thi-xac-nhan" role="tab"
-               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn đã
-                xác nhận</a>
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn đã xác nhận</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/hoa-don/hien-thi-cho-giao" role="tab"
-               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn chờ giao hàng</a>
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn chờ giao
+                hàng</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/hoa-don/hien-thi-dang-giao" role="tab"
-               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn đang giao hàng</a>
+            <a class="nav-link active" id="description-tab" data-toggle="tab" href="/hoa-don/hien-thi-dang-giao"
+               role="tab"
+               aria-controls="description" aria-selected="true">Hóa đơn đang giao
+                hàng</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/hoa-don/hien-thi-hoan-tat" role="tab"
-               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn hoàn tất</a>
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn giao hàng
+                hoàn tất</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/hoa-don/hien-thi-da-huy" role="tab"
@@ -216,7 +220,7 @@
                     <br>
                     <br>
                     <div class="loc" style="color:black;">
-                        <form:form action="/hoa-don/loc" method="post" modelAttribute="hoaDon">
+                        <form:form action="/hoa-don/loc-dang-giao-hang" method="post" modelAttribute="hoaDon">
                             <div class="row" style="margin-top: 10px">
                                 <div class="col-md-4">
                                     <div class="form-group row">
@@ -330,7 +334,7 @@
                     </div>
                     <br>
 <%--                    <div class="search">--%>
-<%--                        <form action="/hoa-don/search" method="post">--%>
+<%--                        <form action="/hoa-don/search-dang-giao-hang" method="post">--%>
 <%--                            <div class="input-group" style="width: 30%; float: right">--%>
 <%--                                <input type="text" class="form-control" placeholder="Bạn tìm gì..."--%>
 <%--                                       aria-label="Bạn tìm gì..." name="search">--%>
@@ -342,7 +346,7 @@
 <%--                    </div>--%>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table id="example" class="display" style="color: black; width: 1800px">
+                        <table id="example" class="display" style="color: black; width: 1700px">
                             <thead>
                             <tr>
                                 <th>Mã hóa đơn</th>
@@ -386,33 +390,22 @@
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                             <i class="ti-file btn-icon-prepend"></i>
                                             Detail</a>
-                                        <c:if test="${hoaDon.loai== 1 && hoaDon.nhanVien== null && (hoaDon.tinhTrang == 2 || hoaDon.tinhTrang==3)}">
-                                            <a href="/hoa-don-online/xac-nhan/detail/${hoaDon.id}"
-                                               class="btn btn-info btn-icon-text"
-                                               tabindex="-1"
-                                               role="button"
-                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                     fill="currentColor" class="bi bi-check-circle-fill"
-                                                     viewBox="0 0 16 16">
-                                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                                                </svg>
-                                                Xác nhận đơn hàng</a>
-                                        </c:if>
-                                        <c:if test="${hoaDon.loai== 0 && (hoaDon.tinhTrang == 0|| hoaDon.tinhTrang == 1|| hoaDon.tinhTrang == 3)}">
-                                            <a href="/hoa-don/huy-cho-xac-nhan/${hoaDon.id}"
-                                               id="toastr-success-top-right-hoa-don-cho-xac-nhan"
-                                               class="btn btn-danger btn-icon-text"
-                                               tabindex="-1"
-                                               role="button"
-                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                                <i class="fas fa-times-circle"></i>
-                                                Hủy đơn tại quầy</a>
-                                        </c:if>
-                                        <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 0 || hoaDon.tinhTrangGiaoHang == 1 || hoaDon.tinhTrangGiaoHang == 2) && hoaDon.hinhThucThanhToan == 0}">
 
-                                            <a href="/hoa-don/xac-nhan-huy-cho-xac-nhan/${hoaDon.id}"
-                                               id="toastr-success-top-right-hoa-don-cho-xac-nhan"
+                                        <c:if test="${hoaDon.loai== 1 && hoaDon.tinhTrangGiaoHang == 2 && (hoaDon.tinhTrang==2||hoaDon.tinhTrang==3) && hoaDon.nhanVien!= null}">
+                                            <a href="/hoa-don/xac-nhan-giao-hang-hoan-tat/${hoaDon.id}"
+                                               id="toastr-success-top-right-hoa-don-dang-giao"
+                                               class="btn btn-outline-success btn-icon-text"
+                                               tabindex="-1"
+                                               role="button"
+                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                                <img src="/uploads/shipped.png">
+                                                Giao hàng hoàn tất
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 0 ||hoaDon.tinhTrangGiaoHang == 1 || hoaDon.tinhTrangGiaoHang == 2) && hoaDon.hinhThucThanhToan == 0}">
+
+                                            <a href="/hoa-don/xac-nhan-huy-dang-giao/${hoaDon.id}"
+                                               id="toastr-success-top-right-hoa-don-dang-giao"
                                                class="btn btn-danger btn-icon-text"
                                                tabindex="-1"
                                                role="button"
@@ -423,14 +416,24 @@
                                         </c:if>
                                         <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 0|| hoaDon.tinhTrangGiaoHang == 1 || hoaDon.tinhTrangGiaoHang == 2) && hoaDon.hinhThucThanhToan == 1}">
 
-                                            <a href="/hoa-don/xac-nhan-huy-hoan-tien-cho-xac-nhan/${hoaDon.id}"
-                                               id="toastr-success-top-right-hoa-don-cho-xac-nhan"
+                                            <a href="/hoa-don/xac-nhan-huy-hoan-tien-dang-giao/${hoaDon.id}"
+                                               id="toastr-success-top-right-hoa-don-dang-giao"
                                                class="btn btn-danger btn-icon-text"
                                                tabindex="-1"
                                                role="button"
                                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                                 <i class="fas fa-times-circle"></i>
                                                 Hủy đơn online thanh toán VNPay</a>
+                                        </c:if>
+                                        <c:if test="${hoaDon.loai== 0 && (hoaDon.tinhTrang == 0|| hoaDon.tinhTrang == 1|| hoaDon.tinhTrang == 3)}">
+                                            <a href="/hoa-don/huy-dang-giao/${hoaDon.id}"
+                                               id="toastr-success-top-right-hoa-don-dang-giao"
+                                               class="btn btn-danger btn-icon-text"
+                                               tabindex="-1"
+                                               role="button"
+                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                                <i class="fas fa-times-circle"></i>
+                                                Hủy đơn tại quầy</a>
                                         </c:if>
                                     </td>
                                 </tr>
