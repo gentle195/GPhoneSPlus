@@ -1275,7 +1275,7 @@ public class HoaDonController {
     }
 
     //update thông tin khi trạng thái là đang chờ, chờ xác nhận...
-    @GetMapping("/view-update-xac-nhan/{id}")
+    @GetMapping("/view-update-da-xac-nhan/{id}")
     public String viewUpdate(Model model, @PathVariable("id") UUID id) {
         List<NhanVien> listNhanVien = nhanVienService.findAll();
         List<KhachHang> listKhachHang = khachHangService.findAll();
@@ -1292,7 +1292,7 @@ public class HoaDonController {
         model.addAttribute("hoaDon", hoaDon);
         model.addAttribute("tong", hoaDon.getTongTien());
         model.addAttribute("listHoaDonChiTiet", listHoaDonChiTiet);
-        model.addAttribute("contentPage", "../hoadon/hoa-don-view-update.jsp");
+        model.addAttribute("contentPage", "../hoadon/hoa-don-view-update-da-xac-nhan.jsp");
         return "home/layout";
     }
 
@@ -1331,7 +1331,7 @@ public class HoaDonController {
                 model.addAttribute("hoaDon", hoaDonnn);
                 model.addAttribute("listHoaDonChiTiet", hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId()));
                 model.addAttribute("thongBao", "Ngày ship không được nhỏ hơn ngày hiện tại");
-                model.addAttribute("contentPage", "../hoadon/hoa-don-view-update.jsp");
+                model.addAttribute("contentPage", "../hoadon/hoa-don-view-update-da-xac-nhan.jsp");
                 return "home/layout";
             } else if (check < 0) {
                 hoaDon.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));

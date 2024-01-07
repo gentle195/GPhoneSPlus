@@ -242,7 +242,6 @@
                                                 </td>
 
 
-
                                                 <td>
                                                     <c:choose>
                                                         <c:when test="${hdct.hinhThucDoiTra ==0 }">
@@ -335,8 +334,10 @@
                                                             - ${hdct.hoaDonChiTiet.imei.chiTietSanPham.mauSac.ten} -
                                                                 ${hdct.hoaDonChiTiet.imei.chiTietSanPham.sanPham.hangSanPham.ten}
                                                             -
-                                                                ${hdct.hoaDonChiTiet.imei.chiTietSanPham.ram.dungLuong} -
-                                                                ${hdct.hoaDonChiTiet.imei.chiTietSanPham.rom.dungLuong}</td>
+                                                                ${hdct.hoaDonChiTiet.imei.chiTietSanPham.ram.dungLuong}
+                                                            -
+                                                                ${hdct.hoaDonChiTiet.imei.chiTietSanPham.rom.dungLuong}
+                                                        </td>
                                                         <td>${hdct.hoaDonChiTiet.imei.soImei}</td>
 
                                                         <td>
@@ -365,20 +366,6 @@
                                                 </tbody>
                                             </table>
                                             <br>
-
-                                                <%--                                        <div>--%>
-                                                <%--                                            <form id="xacNhanForm" action="/doi-tra/xac-nhan" method="post">--%>
-                                                <%--                                                <div class="row">--%>
-                                                <%--                                                    <div style="margin-left: 550px">--%>
-                                                <%--                                                        <button type="button" class="btn btn-dark mb-2"--%>
-                                                <%--                                                                id="toastr-success-top-center-doi-tra1"--%>
-                                                <%--                                                                onclick="kiemTraTruocXacNhan()">--%>
-                                                <%--                                                            Xác nhận--%>
-                                                <%--                                                        </button>--%>
-                                                <%--                                                    </div>--%>
-                                                <%--                                                </div>--%>
-                                                <%--                                            </form>--%>
-                                                <%--                                        </div>--%>
                                         </div>
                                     </c:if>
                                 </div>
@@ -513,21 +500,19 @@
                 <!-- Form để nhập thông tin đổi hàng -->
                 <form id="doiTraForm" style="color:black;">
                     <div class="form-group">
-                        <label for="hinhThucDoiTra">Hình Thức Đổi Trả</label>
                         <select class="form-control" id="hinhThucDoiTra" onchange="hienThiLyDo()">
+                            <option disabled selected>Chọn hình thức đổi trả</option>
                             <option value="0">Đổi hàng</option>
                             <option value="1">Trả hàng</option>
                             <!-- Thêm các option khác nếu cần -->
                         </select>
-
+                        <br>
                         <!-- Các ô input sẽ được ẩn/hiện dựa trên sự kiện onchange của combobox -->
                         <div class="form-group" id="lyDoDoiHang">
-                            <label for="lyDoDoiHangInput">Lý Do Đổi Hàng</label>
                             <input type="text" class="form-control" id="lyDoDoiHangInput" placeholder="Lý do đổi hàng">
                         </div>
 
                         <div class="form-group" id="lyDoTraHang" style="display: none;">
-                            <label for="lyDoTraHangInput">Lý Do Trả Hàng</label>
                             <input type="text" class="form-control" id="lyDoTraHangInput" placeholder="Lý do trả hàng">
                         </div>
                     </div>
@@ -683,10 +668,15 @@
         var hinhThuc = $('#hinhThucDoiTra').val();
         var lyDo = $('#' + (hinhThuc == '0' ? 'lyDoDoiHangInput' : 'lyDoTraHangInput')).val();
         var hienTrang = 0;
+        if (lyDo === "") {
 
+            toastr.error('Lý do không được để trống');
+            timeOut: 1500
+            return;
+        }
         var hdctId = $('#doiTraForm').data('hdctId');
         console.log(hinhThuc + "okoklun")
-        console.log("Lý do"+lyDo)
+        console.log("Lý do" + lyDo)
 
         // Thực hiện thêm thông tin và chuyển hướng đến đường dẫn /doi-tra/them-dtct với các tham số truyền vào
         window.location.href = "/doi-tra/them-dtct?hdctId=" + hdctId + "&doitraId=" + doitraId + "&lyDo=" + lyDo + "&hienTrang=" + hienTrang + "&hinhThuc=" + hinhThuc;
@@ -868,7 +858,7 @@
 
         formattedCurrencyInputs.forEach(function (input) {
             var value = parseFloat(input.value.replace(/[^\d.]/g, '')); // Lấy giá trị số từ chuỗi
-            var formattedValue = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
+            var formattedValue = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(value);
             input.value = formattedValue;
         });
     });

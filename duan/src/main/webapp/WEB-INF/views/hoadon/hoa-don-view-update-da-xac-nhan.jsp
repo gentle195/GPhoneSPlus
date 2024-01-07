@@ -192,7 +192,7 @@
                                 </c:if>
 
                                 <br><br>
-                                <form:form action="/hoa-don/update-cho-giao/${hoaDon.id}" method="post"
+                                <form:form action="/hoa-don/update-da-xac-nhan/${hoaDon.id}" method="post"
                                            modelAttribute="hoaDon">
                                     <div class="row">
                                         <div class="col-md-6">
