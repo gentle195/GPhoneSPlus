@@ -157,6 +157,7 @@ public class BanHangTaiQuayController {
             }
             hd.setMa(mhd);
             hd.setTinhTrang(0);
+            hd.setTinhTrangGiaoHang(0);
             hd.setLoai(0);
             hd.setNgayTao(Date.valueOf(LocalDate.now()));
             hd.setNhanVien(nhanVien);
@@ -291,11 +292,13 @@ public class BanHangTaiQuayController {
                 hoaDonChiTietService.update(hdct.getId(), hdct);
             }
             hd.setTinhTrang(8);
+            hd.setTinhTrangGiaoHang(8);
             hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
             hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
             hoaDonService.update(id, hd);
         } else {
             hd.setTinhTrang(8);
+            hd.setTinhTrangGiaoHang(8);
             hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
             hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
             hoaDonService.update(id, hd);

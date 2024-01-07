@@ -90,7 +90,28 @@
             <a href="/hoa-don/hien-thi" class="nav-link"
                tabindex="-1"
                role="button">
-                Trang Hóa đơn</a>
+                Hóa đơn chờ xác nhận</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/hoa-don/hien-thi-xac-nhan" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn đã
+                xác nhận</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/hoa-don/hien-thi-cho-giao" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn chờ giao hàng</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/hoa-don/hien-thi-dang-giao" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn đang giao hàng</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/hoa-don/hien-thi-hoan-tat" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn hoàn tất</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/hoa-don/hien-thi-da-huy" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn đã hủy</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
@@ -173,265 +194,279 @@
                                 <br><br>
                                 <form:form action="/hoa-don/update/${hoaDon.id}" method="post"
                                            modelAttribute="hoaDon">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Mã đơn hàng:</label>
-                                            <div class="col-sm-9">
-                                                <form:input class="form-control" id="form-control" readonly="true"
-                                                            placeholder=""
-                                                            path="ma"/>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Mã đơn hàng:</label>
+                                                <div class="col-sm-9">
+                                                    <form:input class="form-control" id="form-control" readonly="true"
+                                                                placeholder=""
+                                                                path="ma"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Khách hàng đặt:
+                                                </label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control"
+                                                           value="${hoaDon.khachHang.hoTen}" readonly>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Khách hàng đặt:
-                                            </label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control"
-                                                       value="${hoaDon.khachHang.hoTen}" readonly>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Người nhận:
-                                            </label>
-                                            <div class="col-sm-9">
-                                                <form:input path="nguoiNhan" type="text" class="form-control"
-                                                            value="${hoaDon.khachHang.hoTen}"/>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Người nhận:
+                                                </label>
+                                                <div class="col-sm-9">
+                                                    <form:input path="nguoiNhan" type="text" class="form-control"
+                                                                value="${hoaDon.khachHang.hoTen}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">SĐT nhận hàng:
+                                                </label>
+                                                <div class="col-sm-9">
+                                                    <form:input class="form-control" placeholder=""
+                                                                path="sdt"/>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">SĐT nhận hàng:
-                                            </label>
-                                            <div class="col-sm-9">
-                                                <form:input class="form-control" placeholder=""
-                                                            path="sdt"/>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Địa chỉ:</label>
+                                                <div class="col-sm-9">
+                                                    <form:select path="diaChi"
+                                                                 class="form-control" id="selectDiaChiDonHang">
+                                                        <c:forEach items="${listDiaChi}" var="ht">
+                                                            <option value="${ht.id}">${ht.diaChi} - ${ht.quan}
+                                                                - ${ht.huyen}
+                                                                - ${ht.thanhPho}</option>
+                                                        </c:forEach>
+                                                    </form:select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Hình thức thanh toán:</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" placeholder="" readonly="true"
+                                                           value="${hoaDon.hinhThucThanhToan == 0 ? 'Tiền mặt' : 'Chuyển khoản'}"
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Địa chỉ:</label>
-                                            <div class="col-sm-9">
-                                                <form:select path="diaChi"
-                                                             class="form-control" id="selectDiaChiDonHang">
-                                                    <c:forEach items="${listDiaChi}" var="ht">
-                                                        <option value="${ht.id}">${ht.diaChi} - ${ht.quan}
-                                                            - ${ht.huyen}
-                                                            - ${ht.thanhPho}</option>
-                                                    </c:forEach>
-                                                </form:select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Hình thức thanh toán:</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" placeholder="" readonly="true"
-                                                       value="${hoaDon.hinhThucThanhToan == 0 ? 'Tiền mặt' : 'Chuyển khoản'}"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <c:if test="${hoaDon.loai==1}">
-                                                                            <div class="row">
-                                    <%--                                            <div class="col-md-6">--%>
-                                    <%--                                                <div class="form-group row">--%>
-                                    <%--                                                    <label class="col-sm-3 col-form-label">Phí ship:--%>
-                                    <%--                                                    </label>--%>
-                                    <%--                                                    <div class="col-sm-9">--%>
-                                    <%--                                                        <form:input path="phiShip" type="number" class="form-control"/>--%>
-                                    <%--&lt;%&ndash;                                                                    id="phiShipDonHang"&ndash;%&gt;--%>
+                                    <c:if test="${hoaDon.loai==1}">
+                                        <div class="row">
+                                                <%--                                            <div class="col-md-6">--%>
+                                                <%--                                                <div class="form-group row">--%>
+                                                <%--                                                    <label class="col-sm-3 col-form-label">Phí ship:--%>
+                                                <%--                                                    </label>--%>
+                                                <%--                                                    <div class="col-sm-9">--%>
+                                                <%--                                                        <form:input path="phiShip" type="number" class="form-control"/>--%>
+                                                <%--&lt;%&ndash;                                                                    id="phiShipDonHang"&ndash;%&gt;--%>
 
-                                    <%--                                                    </div>--%>
-                                    <%--                                                </div>--%>
-                                    <%--                                            </div>--%>
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Tổng tiền đơn hàng:
-                                        </label>
-                                        <div class="col-sm-9">
-                                            <form:input class="form-control" path="tongTien" readonly="true" type="number" step="0.01" />
-                                                <%--                                                                    id="tongTienShip"--%>
+                                                <%--                                                    </div>--%>
+                                                <%--                                                </div>--%>
+                                                <%--                                            </div>--%>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Tổng tiền đơn hàng:
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <form:input class="form-control" path="tongTien" readonly="true"
+                                                                    type="number" step="0.01"/>
+                                                            <%--                                                                    id="tongTienShip"--%>
 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Ngày ship:
-                                            <div style="color: crimson;float: right"></div>
-                                        </label>
-                                        <div class="col-sm-9">
-                                            <form:input class="form-control" type="date"
-                                                        placeholder=""
-                                                        path="ngayShip" required="true"/>
-                                            <label style="color: red">${thongBao}</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-
-                                    <%--                                            <div class="col-md-6">--%>
-                                    <%--                                                <div class="form-group row">--%>
-                                    <%--                                                    <label class="col-sm-3 col-form-label">Tổng tiền cả ship:--%>
-                                    <%--                                                        <div id="tb" style="color: crimson;float: right"></div>--%>
-                                    <%--                                                    </label>--%>
-                                    <%--                                                    <div class="col-sm-9">--%>
-                                    <%--                                                        <form:input class="form-control" id="tongTienShip"--%>
-                                    <%--                                                                    path="tongTien" readonly="true"/>--%>
-                                    <%--                                                    </div>--%>
-                                    <%--                                                </div>--%>
-                                    <%--                                            </div>--%>
-                            </div>
-                            </c:if>
-                            <c:if test="${hoaDon.loai==0}">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Tổng tiền đơn hàng:
-                                            </label>
-                                            <div class="col-sm-9">
-                                                <form:input class="form-control" id="tongTienShip"
-                                                            path="tongTien" readonly="true"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Ngày ship:
+                                                        <div style="color: crimson;float: right"></div>
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <form:input class="form-control" type="date"
+                                                                    placeholder=""
+                                                                    path="ngayShip" required="true"/>
+                                                        <label style="color: red">${thongBao}</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Trạng thái:
-                                            </label>
-                                            <div class="col-sm-9">
-                                                <form:select path="tinhTrang" class="form-control">
-                                                    <form:option value="0">Đang chờ</form:option>
-                                                    <form:option value="1">Đã xác nhận</form:option>
-                                                    <form:option value="3">Chờ thanh toán</form:option>
-                                                    <form:option value="2">Đã thanh toán</form:option>
-                                                    <form:option value="8">Đã hủy</form:option>
-                                                </form:select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:if>
-                            <br>
-                            <div style="text-align: center">
-                                <button type="submit" class="btn btn-primary mr-2"                                                 id="toastr-success-top-right"
-                                        id="toastr-success-top-right"
-                                        onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                    Cập nhật thông tin
-                                </button>
-                            </div>
+                                        <div class="row">
 
-                            </form:form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 grid-margin">
-        <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
-                <div>
-                    <div class="card-body" style="text-align: center">
-                        <c:if test="${(hoaDon.tinhTrang==0||hoaDon.tinhTrang==1||hoaDon.tinhTrang==3) && (hoaDon.tinhTrangGiaoHang==1|| hoaDon.tinhTrangGiaoHang==0)}">
-                            <a
-                                    class="btn btn-secondary"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#newSanPham">Thêm sản phẩm</a>
-                        </c:if>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 grid-margin">
-        <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
-                <div>
-                    <div class="card-body">
-                        <h3 style="text-align: center;">Hóa đơn chi tiết</h3>
-                        <br>
-                        <div class="search">
-                            <div class="input-group" style="width: 30%; float: right">
-                                <input type="text" class="form-control" placeholder="Bạn tìm gì..."
-                                       aria-label="Bạn tìm gì..." name="search" id="search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-sm btn-primary" type="button" id="button-search">
-                                        Search
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="example2" class="display">
-                                <thead>
-                                <tr>
-                                    <th>Tên Sản Phẩm</th>
-                                    <th>Ảnh</th>
-                                    <th>Hãng</th>
-                                    <th>Màu Sắc</th>
-                                    <th>Ram</th>
-                                    <th>Dung Lượng Bộ Nhớ</th>
-                                    <th>Số IMEI</th>
-                                    <th>Đơn Giá</th>
-                                    <th>Thành tiền</th>
-                                    <c:if test="${(hoaDon.tinhTrang==0 || hoaDon.tinhTrang==1 || hoaDon.tinhTrang==3) && (hoaDon.tinhTrangGiaoHang==1 || hoaDon.tinhTrangGiaoHang==0) && listHoaDonChiTiet.size()>1}">
-                                        <th></th>
+                                                <%--                                            <div class="col-md-6">--%>
+                                                <%--                                                <div class="form-group row">--%>
+                                                <%--                                                    <label class="col-sm-3 col-form-label">Tổng tiền cả ship:--%>
+                                                <%--                                                        <div id="tb" style="color: crimson;float: right"></div>--%>
+                                                <%--                                                    </label>--%>
+                                                <%--                                                    <div class="col-sm-9">--%>
+                                                <%--                                                        <form:input class="form-control" id="tongTienShip"--%>
+                                                <%--                                                                    path="tongTien" readonly="true"/>--%>
+                                                <%--                                                    </div>--%>
+                                                <%--                                                </div>--%>
+                                                <%--                                            </div>--%>
+                                        </div>
                                     </c:if>
+                                    <c:if test="${hoaDon.loai==0}">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Tổng tiền đơn hàng:
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <form:input class="form-control" id="tongTienShip"
+                                                                    path="tongTien" readonly="true"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Trạng thái:
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <form:select path="tinhTrang" class="form-control">
+                                                            <form:option value="0">Đang chờ</form:option>
+                                                            <form:option value="1">Đã xác nhận</form:option>
+                                                            <form:option value="3">Chờ thanh toán</form:option>
+                                                            <form:option value="2">Đã thanh toán</form:option>
+                                                            <form:option value="8">Đã hủy</form:option>
+                                                        </form:select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:if>
+                                    <br>
+                                    <div style="text-align: center">
+                                        <button type="submit" class="btn btn-primary mr-2" id="toastr-success-top-right"
+                                                id="toastr-success-top-right"
+                                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                            Cập nhật thông tin
+                                        </button>
+                                    </div>
 
-                                </tr>
-                                </thead>
-                                <tbody id="table-search">
-                                <i class="mdi mdi-border-color"></i>
-                                <c:forEach items="${listHoaDonChiTiet}" var="hdct">
+                                </form:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 grid-margin">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div>
+                        <div class="card-body" style="text-align: center">
+                            <c:if test="${(hoaDon.tinhTrang==0||hoaDon.tinhTrang==1||hoaDon.tinhTrang==3) && (hoaDon.tinhTrangGiaoHang==1|| hoaDon.tinhTrangGiaoHang==0)}">
+                                <a
+                                        class="btn btn-secondary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#newSanPham">Thêm sản phẩm</a>
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 grid-margin">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div>
+                        <div class="card-body">
+                            <h3 style="text-align: center;">Hóa đơn chi tiết</h3>
+                            <br>
+                            <div class="search">
+                                <div class="input-group" style="width: 30%; float: right">
+                                    <input type="text" class="form-control" placeholder="Bạn tìm gì..."
+                                           aria-label="Bạn tìm gì..." name="search" id="search">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-sm btn-primary" type="button" id="button-search">
+                                            Search
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="example2" class="display">
+                                    <thead>
                                     <tr>
-                                        <td>${hdct.imei.chiTietSanPham.sanPham.ten}</td>
-                                        <td align="center">
-                                            <img src="/uploads/${hdct.imei.chiTietSanPham.urlAnh}" width="40"
-                                                 height="40">
-                                        </td>
-                                        <td>${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
-                                        <td>${hdct.imei.chiTietSanPham.mauSac.ten}</td>
-                                        <td>${hdct.imei.chiTietSanPham.ram.dungLuong}</td>
-                                        <td>${hdct.imei.chiTietSanPham.rom.dungLuong}</td>
-                                        <td>${hdct.imei.soImei}</td>
-                                        <td>${hdct.donGia}</td>
-                                        <td>${hdct.donGia * hdct.soLuong}</td>
-                                        <c:if test="${(hoaDon.tinhTrang==0 || hoaDon.tinhTrang==1 || hoaDon.tinhTrang==3) && (hoaDon.tinhTrangGiaoHang==1 || hoaDon.tinhTrangGiaoHang==0)&& listHoaDonChiTiet.size()>1}">
-                                            <td>
-                                                <button class="btn  btn-icon-text"><a
-                                                        href="/hoa-don/delete-hoa-don-chi-tiet/${hdct.id}"
-                                                        onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
-                                                ><img src="/uploads/delete.png" width="24px" height="24px"></a>
-                                                </button>
-                                            </td>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Ảnh</th>
+                                        <th>Hãng</th>
+                                        <th>Màu Sắc</th>
+                                        <th>Ram</th>
+                                        <th>Dung Lượng Bộ Nhớ</th>
+                                        <th>Số IMEI</th>
+                                        <th>Đơn Giá</th>
+                                        <th>Thành tiền</th>
+                                        <c:if test="${(hoaDon.tinhTrang==0 || hoaDon.tinhTrang==1 || hoaDon.tinhTrang==3) && (hoaDon.tinhTrangGiaoHang==1 || hoaDon.tinhTrangGiaoHang==0) && listHoaDonChiTiet.size()>1}">
+                                            <th></th>
                                         </c:if>
+
                                     </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody id="table-search">
+                                    <i class="mdi mdi-border-color"></i>
+                                    <c:forEach items="${listHoaDonChiTiet}" var="hdct">
+                                        <tr>
+                                            <td>${hdct.imei.chiTietSanPham.sanPham.ten}</td>
+                                            <td align="center">
+                                                <img src="/uploads/${hdct.imei.chiTietSanPham.urlAnh}" width="40"
+                                                     height="40">
+                                            </td>
+                                            <td>${hdct.imei.chiTietSanPham.sanPham.hangSanPham.ten}</td>
+                                            <td>${hdct.imei.chiTietSanPham.mauSac.ten}</td>
+                                            <td>${hdct.imei.chiTietSanPham.ram.dungLuong}</td>
+                                            <td>${hdct.imei.chiTietSanPham.rom.dungLuong}</td>
+                                            <td>${hdct.imei.soImei}</td>
+                                            <td>
+                                                <script>
+                                                    var donGia = ${hdct.donGia};
+                                                    document.write(donGia.toLocaleString('vi-VN'));
+                                                </script>
+                                                VND
+                                            </td>
+
+                                            <td>
+                                                <script>
+                                                    var tongTien = ${hdct.donGia * hdct.soLuong};
+                                                    document.write(tongTien.toLocaleString('vi-VN'));
+                                                </script>
+                                                VND
+                                            </td>
+                                            <c:if test="${(hoaDon.tinhTrang==0 || hoaDon.tinhTrang==1 || hoaDon.tinhTrang==3) && (hoaDon.tinhTrangGiaoHang==1 || hoaDon.tinhTrangGiaoHang==0)&& listHoaDonChiTiet.size()>1}">
+                                                <td>
+                                                    <button class="btn  btn-icon-text"><a
+                                                            href="/hoa-don/delete-hoa-don-chi-tiet/${hdct.id}"
+                                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+                                                    ><img src="/uploads/delete.png" width="24px" height="24px"></a>
+                                                    </button>
+                                                </td>
+                                            </c:if>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <c:if test="${thongBaoHoaDon != null}">
     <div id="modalError" class="modal fade">
@@ -649,8 +684,8 @@
                             <td>` + hdct.imei.chiTietSanPham.ram.dungLuong + `</td>
                             <td>` + hdct.imei.chiTietSanPham.rom.dungLuong + `</td>
                             <td>` + hdct.imei.soImei + `</td>
-                            <td>` + hdct.donGia + `</td>
-                            <td>` + hdct.donGia * hdct.soLuong + `</td>
+                            <td>` + new Intl.NumberFormat("vi-VN").format(hdct.donGia) + ` VND</td>
+                            <td>` + new Intl.NumberFormat("vi-VN").format(hdct.donGia * hdct.soLuong) + ` VND</td>
                             <td>
                                 <button class="btn  btn-icon-text"><a
                                 href="/hoa-don/delete-hoa-don-chi-tiet/` + hdct.id + `"
@@ -671,8 +706,8 @@
                             <td>` + hdct.imei.chiTietSanPham.ram.dungLuong + `</td>
                             <td>` + hdct.imei.chiTietSanPham.rom.dungLuong + `</td>
                             <td>` + hdct.imei.soImei + `</td>
-                            <td>` + hdct.donGia + `</td>
-                            <td>` + hdct.donGia * hdct.soLuong + `</td>
+                            <td>` + new Intl.NumberFormat("vi-VN").format(hdct.donGia) + ` VND</td>
+                            <td>` + new Intl.NumberFormat("vi-VN").format(hdct.donGia * hdct.soLuong) + ` VND</td>
                         </tr>
                         `;
                         html += tr;
@@ -739,8 +774,8 @@
                             <td>` + imei.chiTietSanPham.mauSac.ten + `</td>
                             <td>` + imei.chiTietSanPham.ram.dungLuong + `</td>
                             <td>` + imei.chiTietSanPham.rom.dungLuong + `</td>
-                            <td>` + imei.chiTietSanPham.giaBan + `</td>
-                            <td>` + productPrice + `</td>
+                            <td>` + new Intl.NumberFormat("vi-VN").format(imei.chiTietSanPham.giaBan) + ` VND</td>
+                            <td>` + new Intl.NumberFormat("vi-VN").format(productPrice) + ` VND</td>
                             <td>` + imei.soImei + `</td>
                             <td><a class="btn btn-warning btn-icon-text" href="/hoa-don/them-imei/` + imei.id + `">Thêm IMEI</a></td>
                         </tr>

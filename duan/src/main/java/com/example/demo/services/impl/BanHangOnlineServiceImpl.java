@@ -17,6 +17,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 @Service
 public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     @Autowired
@@ -25,9 +26,10 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     ChiTietSanPhamService chiTietSanPhamService;
     @Autowired
     GioHangChiTietService gioHangChiTietService;
+
     @Override
     public Integer tonggiamgia(String idctsp) {
-        if(banHangOnLinerepository.tonggiamgia(UUID.fromString(idctsp))==null) {
+        if (banHangOnLinerepository.tonggiamgia(UUID.fromString(idctsp)) == null) {
             return 0;
         }
 
@@ -65,17 +67,17 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
                                            String idDLPin,
                                            String idChip,
                                            String tenSP
-    )
-    {        return banHangOnLinerepository.locbanhang(idHang,
-            moTaCam,
-            moTaMan,
-            moTaMau,
-            idRam,
-            idRom,
-            idPin,
-            idDLPin,
-            idChip,
-            tenSP);
+    ) {
+        return banHangOnLinerepository.locbanhang(idHang,
+                moTaCam,
+                moTaMan,
+                moTaMau,
+                idRam,
+                idRom,
+                idPin,
+                idDLPin,
+                idChip,
+                tenSP);
     }
 
     @Override
@@ -90,7 +92,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     public Integer sl1ctsptronggh(UUID idgh, UUID idctsp) {
-        return banHangOnLinerepository.sl1ctsptronggh(idgh,idctsp);
+        return banHangOnLinerepository.sl1ctsptronggh(idgh, idctsp);
     }
 
     @Override
@@ -100,7 +102,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     public List<GioHangChiTiet> ListghctTheoIdghvsIdctsp(UUID idgh, UUID idctsp) {
-        return banHangOnLinerepository.ListghctTheoIdghvsIdctsp(idgh,idctsp);
+        return banHangOnLinerepository.ListghctTheoIdghvsIdctsp(idgh, idctsp);
     }
 
     @Override
@@ -110,7 +112,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     public void trangthaighct(Integer trangthai, UUID idgh) {
-        banHangOnLinerepository.trangthaighct(trangthai,idgh);
+        banHangOnLinerepository.trangthaighct(trangthai, idgh);
     }
 
     @Override
@@ -150,7 +152,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     public List<HoaDonChiTiet> listIMEItheoIDHDvsIDCTSP(UUID idhd, UUID idctsp) {
-        return banHangOnLinerepository.listIMEItheoIDHDvsIDCTSP(idhd,idctsp);
+        return banHangOnLinerepository.listIMEItheoIDHDvsIDCTSP(idhd, idctsp);
     }
 
     @Override
@@ -162,12 +164,12 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     public void updateimeiTTveOtheoIDHDvsIDCTSP(UUID idhd, UUID idctsp) {
-        banHangOnLinerepository.updateimeiTTveOtheoIDHDvsIDCTSP(idhd,idctsp);
+        banHangOnLinerepository.updateimeiTTveOtheoIDHDvsIDCTSP(idhd, idctsp);
     }
 
     @Override
     public void XoahdcttheoIDHDvsIDCTSP(UUID idhd, UUID idctsp) {
-        banHangOnLinerepository.XoahdcttheoIDHDvsIDCTSP(idhd,idctsp);
+        banHangOnLinerepository.XoahdcttheoIDHDvsIDCTSP(idhd, idctsp);
     }
 
     @Override
@@ -199,7 +201,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     public Page<HoaDon> cacDonHang(UUID idkh, Pageable pageable) {
-        return banHangOnLinerepository.cacDonHang(idkh,pageable);
+        return banHangOnLinerepository.cacDonHang(idkh, pageable);
     }
 
 
@@ -222,10 +224,12 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     public List<HoaDon> search2(UUID id, String ten) {
         return banHangOnLinerepository.searchDH2(id, ten);
     }
+
     @Override
     public List<HoaDon> search3(UUID id, String ten) {
         return banHangOnLinerepository.searchDH3(id, ten);
     }
+
     @Override
     public List<HoaDon> search8(UUID id, String ten) {
         return banHangOnLinerepository.searchDH8(id, ten);
@@ -243,24 +247,25 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     public List<HoaDon> searchGiaoThanhCong(UUID id, String ten) {
-        return banHangOnLinerepository.searchDHThanhCong(id,ten);
+        return banHangOnLinerepository.searchDHThanhCong(id, ten);
     }
 
     @Override
     public String sotienkhidagiam(UUID idctsp) {
-        Long stbandau=Long.valueOf(String.valueOf(chiTietSanPhamService.findById(idctsp).getGiaBan()));
-        Long phamtramgiam=Long.valueOf(String.valueOf(tonggiamgia(String.valueOf(idctsp))));
-        long number =stbandau- stbandau/100*phamtramgiam;
+        Long stbandau = Long.valueOf(String.valueOf(chiTietSanPhamService.findById(idctsp).getGiaBan()));
+        Long phamtramgiam = Long.valueOf(String.valueOf(tonggiamgia(String.valueOf(idctsp))));
+        long number = stbandau - stbandau / 100 * phamtramgiam;
         // Create a DecimalFormat instance with the desired pattern
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         // Format the number
         return decimalFormat.format(number);
     }
+
     @Override
     public String dongiaVSsoluongXemHDCT(UUID idhd, UUID idctsp) {
-        Long sl=Long.valueOf(String.valueOf(banHangOnLinerepository.listIMEItheoIDHDvsIDCTSP(idhd,idctsp).size())) ;
-        Long dongia=Long.valueOf(String.valueOf(banHangOnLinerepository.listIMEItheoIDHDvsIDCTSP(idhd,idctsp).get(0).getDonGia()));
-        long number =sl*dongia;
+        Long sl = Long.valueOf(String.valueOf(banHangOnLinerepository.listIMEItheoIDHDvsIDCTSP(idhd, idctsp).size()));
+        Long dongia = Long.valueOf(String.valueOf(banHangOnLinerepository.listIMEItheoIDHDvsIDCTSP(idhd, idctsp).get(0).getDonGia()));
+        long number = sl * dongia;
         // Create a DecimalFormat instance with the desired pattern
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         // Format the number
@@ -269,10 +274,10 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     public List<ChiTietSanPham> timkiemTrangChu(String ten) {
-        List<ChiTietSanPham> list=banHangOnLinerepository.timkiemTrangChu(ten);
-        List<ChiTietSanPham> list1=new ArrayList<>();
-        for (ChiTietSanPham ct:list) {
-            if(banHangOnLinerepository.soluongcon(ct.getId())>0){
+        List<ChiTietSanPham> list = banHangOnLinerepository.timkiemTrangChu(ten);
+        List<ChiTietSanPham> list1 = new ArrayList<>();
+        for (ChiTietSanPham ct : list) {
+            if (banHangOnLinerepository.soluongcon(ct.getId()) > 0) {
                 list1.add(ct);
             }
         }
@@ -281,7 +286,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     public String convertgiatien(BigDecimal giatien) {
-        if(giatien==null){
+        if (giatien == null) {
             return "Chưa có";
         }
         // Input number
@@ -299,24 +304,4 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     public List<DonDatHang> dsDDHtheoIDHD(UUID idhd) {
         return banHangOnLinerepository.dsDDHtheoIDHD(idhd);
     }
-//    @Override
-//    public Boolean ThemSPvaoGHCT(String idkh, String idctsp) {
-//System.out.println("-------"+idkh+"------"+idctsp);
-////        if (ListghctTheoIdghvsIdctsp(ListghTheoidkh(String.valueOf(idkh)).get(0).getId(), idctsp).size() <= 0) {
-////            GioHangChiTiet ghct = new GioHangChiTiet();
-////            ghct.setGioHang(ListghTheoidkh(String.valueOf(idkh)).get(0));
-////            ghct.setChiTietSanPham(chiTietSanPhamService.findById(idctsp));
-////            ghct.setSoLuong(1);
-////            ghct.setDonGia(chiTietSanPhamService.findById(idctsp).getGiaBan());
-////            BigDecimal giaban = chiTietSanPhamService.findById(idctsp).getGiaBan();
-////            Integer giaban1 = Integer.valueOf(String.valueOf(giaban));
-////            Integer phantramgiam = tonggiamgia(String.valueOf(idctsp));
-////            Integer dgkg = giaban1 - giaban1 / 100 * phantramgiam;
-////            BigDecimal dgkg1 = BigDecimal.valueOf(Long.valueOf(String.valueOf(dgkg)));
-////            ghct.setDonGiaKhiGiam(dgkg1);
-////            gioHangChiTietService.add(ghct);
-////
-////        }
-//        return true;
-//    }
 }

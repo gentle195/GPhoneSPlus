@@ -171,8 +171,6 @@
                                                 </script>
                                                 VND
                                             </td>
-
-                                                <%--                                            <td>${hdct.donGia}</td>--%>
                                             <td>
                                                 <button class='btn btn-primary chonSanPhamButton'
                                                         data-idhdct="${hdct.id}">Chọn sản phẩm
