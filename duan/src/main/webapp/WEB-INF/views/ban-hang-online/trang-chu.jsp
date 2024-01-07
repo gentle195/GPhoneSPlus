@@ -156,36 +156,6 @@
 </head>
 <body style="background-color: #fdfff2">
 
-<%--<div style="width: 5cm;height: 5cm; overflow: auto;border: 1px solid #ccc;">--%>
-
-<%--    <p>Mffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p>--%>
-<%--    <p>More content...</p>--%>
-<%--</div>--%>
-
-
-<%--    <div class="input-group mb-3">--%>
-<%--        <input type="text" class="form-control" id="searchInput" placeholder="Tìm kiếm">--%>
-<%--    </div>--%>
-
-<%--    <div style="border: 1px solid red" id="searchResults" class="list-group">--%>
-<%--<div id="saochep"></div>--%>
-<%--        <div id="danhsachloctimkiemTT" style="border: 2px solid">--%>
-
-<%--        </div>--%>
-<%--    </div>--%>
-
-
-<!-- HEADER -->
-
 <header>
 
     <div id="top-header">

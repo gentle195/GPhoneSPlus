@@ -170,8 +170,20 @@
                                     <td>${hdct.imei.chiTietSanPham.ram.dungLuong}</td>
                                     <td>${hdct.imei.chiTietSanPham.rom.dungLuong}</td>
                                     <td>${hdct.imei.soImei}</td>
-                                    <td>${hdct.donGia}</td>
-                                    <td>${hdct.donGia * hdct.soLuong}</td>
+                                    <td>
+                                        <script>
+                                            var donGia = ${hdct.donGia};
+                                            document.write(donGia.toLocaleString('vi-VN'));
+                                        </script>
+                                        VND
+                                    </td>
+                                    <td>
+                                        <script>
+                                            var tongTien = ${hdct.donGia * hdct.soLuong};
+                                            document.write(tongTien.toLocaleString('vi-VN'));
+                                        </script>
+                                        VND
+                                    </td>
                                     <td>
                                         <button class="btn  btn-icon-text"><a
                                                 href="/ban-hang/delete-hoa-don-chi-tiet/${hdct.id}"
@@ -800,7 +812,8 @@
                             <td>` + imei.chiTietSanPham.ram.dungLuong + `</td>
                             <td>` + imei.chiTietSanPham.rom.dungLuong + `</td>
                             <td>` + imei.chiTietSanPham.giaBan + `</td>
-                            <td>` + productPrice + `</td>
+                            <td>` + new Intl.NumberFormat("vi-VN").format(imei.chiTietSanPham.giaBan) + ` VND</td>
+                            <td>` + new Intl.NumberFormat("vi-VN").format(productPrice) + ` VND</td>
                             <td>` + imei.soImei + `</td>
                             <td><a class="btn btn-warning btn-icon-text" href="/ban-hang/them-imei/` + imei.id + `">Thêm IMEI</a></td>
                         </tr>

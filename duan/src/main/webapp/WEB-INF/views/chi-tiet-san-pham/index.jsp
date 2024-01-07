@@ -29,7 +29,8 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-da-xoa" role="tab"
-               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm ngừng kinh doanh</a>
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm ngừng kinh
+                doanh</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/chi-tiet-san-pham/view-add" role="tab"
@@ -295,7 +296,13 @@
                                         <td>${ctsp.ram.dungLuong}</td>
                                         <td>${ctsp.rom.dungLuong}</td>
                                         <td>${ctsp.pin.dungLuongPin.thongSo}</td>
-                                        <td>${banHangOnlineService.convertgiatien(ctsp.giaBan)} VND</td>
+                                        <td>
+                                            <script>
+                                                var donGia = ${ctsp.giaBan};
+                                                document.write(donGia.toLocaleString('vi-VN'));
+                                            </script>
+                                            VND
+                                        </td>
                                         <td>${ctsp.tinhTrang==0?"Còn kinh doanh":"Ngừng kinh doanh"}</td>
                                         <td>${ctsp.namBaoHanh}</td>
                                         <td>${banHangOnLinerepository.tongimeiTT0cua1ctsp(ctsp.id)}</td>

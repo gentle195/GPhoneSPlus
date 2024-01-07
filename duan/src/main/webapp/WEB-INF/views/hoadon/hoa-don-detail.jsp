@@ -94,7 +94,7 @@
         </li>
     </ul>
 </div>
-<div class="tab-content" id="myTabContent" >
+<div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
         <div class="col-12 grid-margin">
             <div class="col-lg-12 grid-margin stretch-card">
@@ -363,8 +363,21 @@
                                         <td>${hdct.imei.chiTietSanPham.ram.dungLuong}</td>
                                         <td>${hdct.imei.chiTietSanPham.rom.dungLuong}</td>
                                         <td>${hdct.imei.soImei}</td>
-                                        <td>${hdct.donGia}</td>
-                                        <td>${hdct.donGia * hdct.soLuong}</td>
+                                        <td>
+                                            <script>
+                                                var donGia = ${hdct.donGia};
+                                                document.write(donGia.toLocaleString('vi-VN'));
+                                            </script>
+                                            VND
+                                        </td>
+
+                                        <td>
+                                            <script>
+                                                var tongTien = ${hdct.donGia * hdct.soLuong};
+                                                document.write(tongTien.toLocaleString('vi-VN'));
+                                            </script>
+                                            VND
+                                        </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -375,7 +388,8 @@
                         <c:if test="${listDoiTraChiTiet.size() != 0}">
                             <h3 style="text-align: center;">Danh sách đổi trả</h3>
                             <div class="table-responsive">
-                                <table class="display" id="example2" style="color: black;width: 2000px;text-align: center">
+                                <table class="display" id="example2"
+                                       style="color: black;width: 2000px;text-align: center">
                                     <thead>
                                     <tr>
                                         <th>Thông tin sản phẩm cần đổi</th>
@@ -399,7 +413,13 @@
                                                     ${hdct.hoaDonChiTiet.imei.chiTietSanPham.rom.dungLuong} -
                                                     ${hdct.hoaDonChiTiet.imei.soImei}
                                             </td>
-                                            <td>${hdct.hoaDonChiTiet.donGia}</td>
+                                            <td>
+                                                <script>
+                                                    var donGia = ${hdct.hoaDonChiTiet.donGia};
+                                                    document.write(donGia.toLocaleString('vi-VN'));
+                                                </script>
+                                                VND
+                                            </td>
                                             <td align="center">
                                                 <img src="/uploads/${hdct.imei.chiTietSanPham.urlAnh}" width="40"
                                                      height="40"> -
@@ -410,7 +430,13 @@
                                                     ${hdct.imei.chiTietSanPham.rom.dungLuong}
                                             </td>
                                             <td>${hdct.imei.soImei}</td>
-                                            <td>${hdct.donGia}</td>
+                                            <td>
+                                                <script>
+                                                    var donGia = ${hdct.donGia};
+                                                    document.write(donGia.toLocaleString('vi-VN'));
+                                                </script>
+                                                VND
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -450,8 +476,8 @@
                 <td>` + hdct.imei.chiTietSanPham.ram.dungLuong + `</td>
                 <td>` + hdct.imei.chiTietSanPham.rom.dungLuong + `</td>
                 <td>` + hdct.imei.soImei + `</td>
-                <td>` + hdct.donGia + `</td>
-                <td>` + hdct.donGia * hdct.soLuong + `</td>
+                <td>` + new Intl.NumberFormat("vi-VN").format(hdct.donGia) + ` VND</td>
+                <td>` + new Intl.NumberFormat("vi-VN").format(hdct.donGia * hdct.soLuong) + ` VND</td>
             </tr>
             `;
                 html += tr;
