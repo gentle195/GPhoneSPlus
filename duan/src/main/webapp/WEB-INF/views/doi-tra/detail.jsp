@@ -509,11 +509,35 @@
                         <br>
                         <!-- Các ô input sẽ được ẩn/hiện dựa trên sự kiện onchange của combobox -->
                         <div class="form-group" id="lyDoDoiHang">
-                            <input type="text" class="form-control" id="lyDoDoiHangInput" placeholder="Lý do đổi hàng">
+                            <label for="lyDoDoiHangSelect">Lý Do Đổi Hàng</label>
+                            <select class="form-control" id="lyDoDoiHangSelect" onchange="hienThiInputKhac()">
+                                <option value="Lỗi Thiết Kế">Lỗi Thiết Kế</option>
+                                <option value="Lỗi Phần Cứng">Lỗi Phần Cứng</option>
+                                <option value="Lỗi Phần Mềm">Lỗi Phần Mềm</option>
+                                <option value="khac">Khác</option>
+                            </select>
+
+                            <!-- Input cho lựa chọn "Khác" -->
+                            <div id="inputKhac" style="display: none;">
+                                <label for="lyDoDoiHangInputKhac">Lý Do Khác</label>
+                                <input type="text" class="form-control" id="lyDoDoiHangInputKhac" placeholder="Lý do đổi hàng khác">
+                            </div>
                         </div>
 
-                        <div class="form-group" id="lyDoTraHang" style="display: none;">
-                            <input type="text" class="form-control" id="lyDoTraHangInput" placeholder="Lý do trả hàng">
+                        <div class="form-group" id="lyDoTraHang">
+                            <label for="lyDoTraHangSelect">Lý Do Trả Hàng</label>
+                            <select class="form-control" id="lyDoTraHangSelect" onchange="hienThiInputKhac1()">
+                                <option value="Lỗi Thiết Kế">Lỗi Thiết Kế</option>
+                                <option value="Lỗi Phần Cứng">Lỗi Phần Cứng</option>
+                                <option value="Lỗi Phần Mềm">Lỗi Phần Mềm</option>
+                                <option value="Không phù hợp với nhu cầu khách hàng">Không phù hợp với nhu cầu khách hàng</option>
+                                <option value="khac">Khác</option>
+                            </select>
+
+                            <div id="inputKhacTraHang" style="display: none;">
+                                <label for="lyDoTraHangInputKhac">Lý Do Khác</label>
+                                <input type="text" class="form-control" id="lyDoTraHangInputKhac" placeholder="Lý do trả hàng khác">
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -533,6 +557,59 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+
+<script>
+    function hienThiInputKhac() {
+        var lyDoDoiHangSelect = document.getElementById('lyDoDoiHangSelect');
+        var inputKhac = document.getElementById('inputKhac');
+
+        if (lyDoDoiHangSelect.value === 'khac') {
+            inputKhac.style.display = 'block';
+        } else {
+            inputKhac.style.display = 'none';
+        }
+    }
+
+    function hienThiInputKhac1() {
+        var lyDoDoiHangSelect = document.getElementById('lyDoTraHangSelect');
+        var inputKhac = document.getElementById('inputKhacTraHang');
+
+        if (lyDoDoiHangSelect.value === 'khac') {
+            inputKhac.style.display = 'block';
+        } else {
+            inputKhac.style.display = 'none';
+        }
+    }
+
+    function layGiaTriLyDo() {
+        var lyDoDoiHangSelect = document.getElementById('lyDoDoiHangSelect');
+        var lyDoDoiHangInputKhac = document.getElementById('lyDoDoiHangInputKhac');
+
+        var lyDo;
+
+        if (lyDoDoiHangSelect.value === 'khac') {
+            lyDo = lyDoDoiHangInputKhac.value.trim();
+        } else {
+            lyDo = lyDoDoiHangSelect.value;
+        }
+
+        return lyDo;
+    }
+    function layGiaTriLyDo1() {
+        var lyDoDoiHangSelect = document.getElementById('lyDoTraHangSelect');
+        var lyDoDoiHangInputKhac = document.getElementById('lyDoTraHangInputKhac');
+
+        var lyDo;
+
+        if (lyDoDoiHangSelect.value === 'khac') {
+            lyDo = lyDoDoiHangInputKhac.value.trim();
+        } else {
+            lyDo = lyDoDoiHangSelect.value;
+        }
+
+        return lyDo;
+    }
+</script>
 <script>
     $(document).ready(function () {
         $('#lyDoDoiHang, #lyDoTraHang').hide();
@@ -667,7 +744,13 @@
 
     function themThongTinDoiTra() {
         var hinhThuc = $('#hinhThucDoiTra').val();
-        var lyDo = $('#' + (hinhThuc == '0' ? 'lyDoDoiHangInput' : 'lyDoTraHangInput')).val().trim();
+        var lyDo;
+        if (hinhThuc === '0') {
+
+            lyDo = layGiaTriLyDo()
+        } else if (hinhThuc === '1') {
+            lyDo = layGiaTriLyDo1()
+        }
         var hienTrang = 0;
 
         if (hinhThuc === null || hinhThuc === undefined) {
@@ -681,7 +764,7 @@
         }
 
         var hdctId = $('#doiTraForm').data('hdctId');
-        var doitraId = $('#doiTraForm').data('doitraId');
+
 
         console.log(hinhThuc + "okoklun");
         console.log("Lý do" + lyDo);
