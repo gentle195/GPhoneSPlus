@@ -501,7 +501,7 @@
                 <form id="doiTraForm" style="color:black;">
                     <div class="form-group">
                         <select class="form-control" id="hinhThucDoiTra" onchange="hienThiLyDo()">
-                            <option disabled selected>Chọn hình thức đổi trả</option>
+                                <option disabled selected>Chọn hình thức đổi trả</option>
                             <option value="0">Đổi hàng</option>
                             <option value="1">Trả hàng</option>
                             <!-- Thêm các option khác nếu cần -->
@@ -534,22 +534,25 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 <script>
+    $(document).ready(function () {
+        $('#lyDoDoiHang, #lyDoTraHang').hide();
+
+
+    });
+
     function hienThiLyDo() {
         var hinhThucDoiTra = $('#hinhThucDoiTra').val();
         var lyDoDoiHang = $('#lyDoDoiHang');
         var lyDoTraHang = $('#lyDoTraHang');
 
+        $('#lyDoDoiHang, #lyDoTraHang').hide();
+
         if (hinhThucDoiTra == '0') {
-            // Nếu chọn Đổi hàng, hiện ô input và label đổi hàng, ẩn ô input và label trả hàng
             lyDoDoiHang.show();
-            lyDoTraHang.hide();
         } else {
-            // Nếu chọn Trả hàng, hiện ô input và label trả hàng, ẩn ô input và label đổi hàng
-            lyDoDoiHang.hide();
             lyDoTraHang.show();
         }
     }
-
 </script>
 <script>
     function xoaSanPham(hdctId) {
@@ -558,7 +561,6 @@
             url: '/doi-tra/delete-hdct/' + doitraId + '/' + hdctId,
             type: 'GET',
             success: function (data) {
-                // Load lại trang sau khi xóa thành công
                 toastr.success("Xóa thành công", "Thành công", {
                     timeOut: 100,
                     closeButton: true,
@@ -658,7 +660,6 @@
             // Hiển thị modal
             $('#myModal').modal('show');
 
-            // Lưu thông tin hdctId và doitraId trong form để sử dụng khi thêm
             $('#doiTraForm').data('hdctId', hdctId);
             $('#doiTraForm').data('doitraId', doitraId);
         });
@@ -666,19 +667,25 @@
 
     function themThongTinDoiTra() {
         var hinhThuc = $('#hinhThucDoiTra').val();
-        var lyDo = $('#' + (hinhThuc == '0' ? 'lyDoDoiHangInput' : 'lyDoTraHangInput')).val();
+        var lyDo = $('#' + (hinhThuc == '0' ? 'lyDoDoiHangInput' : 'lyDoTraHangInput')).val().trim();
         var hienTrang = 0;
-        if (lyDo === "") {
 
-            toastr.error('Lý do không được để trống');
-            timeOut: 1500
+        if (hinhThuc === null || hinhThuc === undefined) {
+            toastr.error('Vui lòng chọn hình thức đổi trả');
             return;
         }
-        var hdctId = $('#doiTraForm').data('hdctId');
-        console.log(hinhThuc + "okoklun")
-        console.log("Lý do" + lyDo)
 
-        // Thực hiện thêm thông tin và chuyển hướng đến đường dẫn /doi-tra/them-dtct với các tham số truyền vào
+        if (lyDo === "") {
+            toastr.error('Lý do không được để trống');
+            return;
+        }
+
+        var hdctId = $('#doiTraForm').data('hdctId');
+        var doitraId = $('#doiTraForm').data('doitraId');
+
+        console.log(hinhThuc + "okoklun");
+        console.log("Lý do" + lyDo);
+
         window.location.href = "/doi-tra/them-dtct?hdctId=" + hdctId + "&doitraId=" + doitraId + "&lyDo=" + lyDo + "&hienTrang=" + hienTrang + "&hinhThuc=" + hinhThuc;
     }
 </script>
