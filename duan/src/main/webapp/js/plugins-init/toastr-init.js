@@ -95,7 +95,7 @@
                     tapToDismiss: !1
                 })
                 setTimeout(function () {
-                    window.location.href = "/hoa-don/hien-thi-cho-giao-hang";
+                    window.location.href = "/hoa-don/hien-thi-cho-giao";
                 }, 2000);
             }
         ),

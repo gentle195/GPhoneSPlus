@@ -1605,7 +1605,7 @@ public class HoaDonController {
                     hoaDonService.update(id, hoaDon);
                 }
                 hoaDonnn = hoaDon;
-                return "redirect:/hoa-don/hien-thi-cho-giao-hang";
+                return "redirect:/hoa-don/hien-thi-cho-giao";
             } else {
                 hoaDon.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
                 hoaDon.setKhachHang(hoaDonnn.getKhachHang());
@@ -1661,7 +1661,7 @@ public class HoaDonController {
                     hoaDonService.update(id, hoaDon);
                 }
                 hoaDonnn = hoaDon;
-                return "redirect:/hoa-don/hien-thi-cho-giao-hang";
+                return "redirect:/hoa-don/hien-thi-cho-giao";
             }
         } else {
             if (hoaDon.getTinhTrang() == 8) {
@@ -1692,13 +1692,13 @@ public class HoaDonController {
                     hd.setTinhTrangGiaoHang(8);
                     hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
                     hoaDonService.update(id, hd);
-                    return "redirect:/hoa-don/hien-thi-cho-giao-hang";
+                    return "redirect:/hoa-don/hien-thi-cho-giao";
                 } else {
                     hd.setTinhTrang(8);
                     hd.setTinhTrangGiaoHang(8);
                     hd.setNgayCapNhat(Date.valueOf(ngayCapNhat));
                     hoaDonService.update(id, hd);
-                    return "redirect:/hoa-don/hien-thi-cho-giao-hang";
+                    return "redirect:/hoa-don/hien-thi-cho-giao";
                 }
             } else if (hoaDon.getTinhTrang() == 2) {
                 hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
@@ -1739,7 +1739,7 @@ public class HoaDonController {
                 hoaDonService.update(id, hoaDon);
             }
             hoaDonnn = hoaDon;
-            return "redirect:/hoa-don/hien-thi-cho-giao-hang";
+            return "redirect:/hoa-don/hien-thi-cho-giao";
         }
 
     }
@@ -2223,7 +2223,7 @@ public class HoaDonController {
         model.addAttribute("hoaDon", hd);
         model.addAttribute("contentPage", "../hoadon/hoa-don-xac-nhan.jsp");
         System.in.read();
-        return "redirect:/hoa-don/hien-thi-cho-giao-hang"; // Chuyển hướng về trang danh sách hóa đơn sau khi hủy
+        return "redirect:/hoa-don/hien-thi-cho-giao"; // Chuyển hướng về trang danh sách hóa đơn sau khi hủy
     }
 
     @GetMapping("/xac-nhan-huy-dang-giao/{id}")
@@ -2328,7 +2328,7 @@ public class HoaDonController {
             }
         }
         System.in.read();
-        return "redirect:/hoa-don/hien-thi-cho-giao-hang";
+        return "redirect:/hoa-don/hien-thi-cho-giao";
     }
 
     @GetMapping("/xac-nhan-huy-hoan-tien-cho-giao/{id}")
@@ -2350,7 +2350,7 @@ public class HoaDonController {
             }
         }
         System.in.read();
-        return "redirect:/hoa-don/hien-thi-cho-giao-hang";
+        return "redirect:/hoa-don/hien-thi-cho-giao";
     }
 
 
