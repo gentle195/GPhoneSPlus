@@ -1333,7 +1333,8 @@ public class HoaDonController {
                 model.addAttribute("thongBao", "Ngày ship không được nhỏ hơn ngày hiện tại");
                 model.addAttribute("contentPage", "../hoadon/hoa-don-view-update-da-xac-nhan.jsp");
                 return "home/layout";
-            } else if (check < 0) {
+            }
+            else if (check < 0) {
                 hoaDon.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
                 hoaDon.setKhachHang(hoaDonnn.getKhachHang());
                 hoaDon.setMaGiaoDich(hoaDonnn.getMaGiaoDich());
@@ -1341,6 +1342,7 @@ public class HoaDonController {
                 hoaDon.setHinhThucThanhToan(hoaDonnn.getHinhThucThanhToan());
                 hoaDon.setTinhTrangGiaoHang(1);
                 hoaDon.setNgayTao(hoaDonnn.getNgayTao());
+                hoaDon.setPhiShip(hoaDonnn.getPhiShip());
 
                 if (hoaDonnn.getTinhTrang() == 2) {
                     hoaDon.setTinhTrang(hoaDonnn.getTinhTrang());
@@ -1393,7 +1395,8 @@ public class HoaDonController {
                 }
                 hoaDonnn = hoaDon;
                 return "redirect:/hoa-don/hien-thi-xac-nhan";
-            } else {
+            }
+            else {
                 hoaDon.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
                 hoaDon.setKhachHang(hoaDonnn.getKhachHang());
                 hoaDon.setLoai(hoaDonnn.getLoai());
@@ -1401,6 +1404,7 @@ public class HoaDonController {
                 hoaDon.setTinhTrangGiaoHang(2);
                 hoaDon.setNgayTao(hoaDonnn.getNgayTao());
                 hoaDon.setMaGiaoDich(hoaDonnn.getMaGiaoDich());
+                hoaDon.setPhiShip(hoaDonnn.getPhiShip());
                 if (hoaDonnn.getTinhTrang() == 2) {
                     hoaDon.setTinhTrang(hoaDonnn.getTinhTrang());
                     LocalDate ngayCapNhat = LocalDate.now();
@@ -1554,6 +1558,7 @@ public class HoaDonController {
                 hoaDon.setHinhThucThanhToan(hoaDonnn.getHinhThucThanhToan());
                 hoaDon.setTinhTrangGiaoHang(1);
                 hoaDon.setNgayTao(hoaDonnn.getNgayTao());
+                hoaDon.setPhiShip(hoaDonnn.getPhiShip());
 
                 if (hoaDonnn.getTinhTrang() == 2) {
                     hoaDon.setTinhTrang(hoaDonnn.getTinhTrang());
@@ -1614,6 +1619,7 @@ public class HoaDonController {
                 hoaDon.setTinhTrangGiaoHang(2);
                 hoaDon.setNgayTao(hoaDonnn.getNgayTao());
                 hoaDon.setMaGiaoDich(hoaDonnn.getMaGiaoDich());
+                hoaDon.setPhiShip(hoaDonnn.getPhiShip());
                 if (hoaDonnn.getTinhTrang() == 2) {
                     hoaDon.setTinhTrang(hoaDonnn.getTinhTrang());
                     LocalDate ngayCapNhat = LocalDate.now();
@@ -1947,7 +1953,7 @@ public class HoaDonController {
         }
     }
 
-    @GetMapping("/xac-nhan-giao-hang/{id}")
+    @GetMapping("/xac-nhan-giao-hang-cho-giao/{id}")
     public String xacNhanGiaoHang(Model model, @PathVariable("id") UUID id) throws IOException {
         HoaDon hd = hoaDonService.findById(id);
         hd.setTinhTrangGiaoHang(2);
@@ -1967,7 +1973,7 @@ public class HoaDonController {
             }
         }
         System.in.read();
-        return "redirect:/hoa-don/hien-thi";
+        return "redirect:/hoa-don/hien-thi-cho-giao";
     }
 
     @GetMapping("/xac-nhan-giao-hang-hoan-tat/{id}")
@@ -1997,7 +2003,7 @@ public class HoaDonController {
             }
         }
 
-        return "redirect:/hoa-don/hien-thi";
+        return "redirect:/hoa-don/hien-thi-dang-giao";
     }
 
     @GetMapping("/xac-nhan/{id}")
@@ -2363,6 +2369,13 @@ public class HoaDonController {
     ) {
         dem = 0;
         List<HoaDon> page = hoaDonService.hoaDon();
+        List<HoaDon> list = new ArrayList();
+        for (HoaDon hd : page
+        ) {
+            if (hd.getNhanVien() == null || hd.getKhachHang() == null) {
+                list.add(hd);
+            }
+        }
         List<NhanVien> listNhanVien = nhanVienService.findAll();
         List<KhachHang> listKhachHang = khachHangService.findAll00();
         List<DiaChi> listDiaChi = diaChiService.getALL0();
@@ -2371,7 +2384,7 @@ public class HoaDonController {
         model.addAttribute("listDiaChi", listDiaChi);
         model.addAttribute("dem", dem);
         model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
-        model.addAttribute("listHoaDon", page);
+        model.addAttribute("listHoaDon", list);
 
         if (hientb.equals("tbxacnhanHDonline")) {
             model.addAttribute("batthongbaobenhoadon", "Xác nhận hóa đơn online thành công " + hoaDonService.findById(UUID.fromString(idhdneucan)).getMa());

@@ -276,33 +276,6 @@
                                         </c:forEach>
                                         </tbody>
                                     </table>
-                                        <%--                                    <div class="mt-4">--%>
-                                        <%--                                        <form>--%>
-                                        <%--                                            <!-- Thêm các trường và nút submit cho form tiền đổi trả -->--%>
-                                        <%--                                            <div class="form-group">--%>
-                                        <%--                                                <label for="tienDoiTra" style="color: black">Tổng trả lại khách--%>
-                                        <%--                                                    :</label>--%>
-                                        <%--                                                <input type="text" value="${tongTien}" class="form-control"--%>
-                                        <%--                                                       id="tienDoiTra"--%>
-                                        <%--                                                       name="tienDoiTra" readonly>--%>
-                                        <%--                                            </div>--%>
-                                        <%--                                            <!-- Thêm các trường và nút submit cho form tiền đổi trả -->--%>
-                                        <%--                                        </form>--%>
-                                        <%--                                    </div>--%>
-                                        <%--                                    <div>--%>
-                                        <%--                                        <form id="xacNhanForm" action="/doi-tra/xac-nhan" method="post">--%>
-                                        <%--                                            <div class="row">--%>
-                                        <%--                                                <div style="margin-left: 550px">--%>
-                                        <%--                                                    <button type="button" class="btn btn-dark mb-2"--%>
-                                        <%--                                                            id="toastr-success-top-center-doi-tra1"--%>
-                                        <%--                                                            onclick="kiemTraTruocXacNhan()">--%>
-                                        <%--                                                        Xác nhận--%>
-                                        <%--                                                    </button>--%>
-                                        <%--                                                </div>--%>
-                                        <%--                                            </div>--%>
-                                        <%--                                        </form>--%>
-                                        <%--                                    </div>--%>
-                                        <%--                                </div>--%>
                                     <br>
                                     <c:if test="${dtctlist.size()!=0}">
                                         <h3 ${not empty dtctlist ? '' : 'style="display: none;"'}
@@ -530,7 +503,6 @@
                                 <option value="Lỗi Thiết Kế">Lỗi Thiết Kế</option>
                                 <option value="Lỗi Phần Cứng">Lỗi Phần Cứng</option>
                                 <option value="Lỗi Phần Mềm">Lỗi Phần Mềm</option>
-                                <option value="Không phù hợp với nhu cầu khách hàng">Không phù hợp với nhu cầu khách hàng</option>
                                 <option value="khac">Khác</option>
                             </select>
 
