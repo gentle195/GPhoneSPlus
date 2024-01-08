@@ -87,10 +87,9 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a href="/hoa-don/hien-thi" class="nav-link"
-               tabindex="-1"
-               role="button">
-                Hóa đơn chờ xác nhận</a>
+            <a class="nav-link" href="/hoa-don/hien-thi" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn
+                chưa xác nhận</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/hoa-don/hien-thi-xac-nhan" role="tab"
@@ -285,7 +284,7 @@
                                                     </label>
                                                     <div class="col-sm-9">
                                                         <form:input class="form-control" path="tongTien" readonly="true"
-                                                                    type="number" step="0.01"/>
+                                                                    />
                                                             <%--                                                                    id="tongTienShip"--%>
 
                                                     </div>

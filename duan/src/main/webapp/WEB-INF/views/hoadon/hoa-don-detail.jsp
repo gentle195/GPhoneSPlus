@@ -83,10 +83,30 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a href="/hoa-don/hien-thi" class="nav-link"
-               tabindex="-1"
-               role="button">
-                Trang Hóa đơn</a>
+            <a class="nav-link" href="/hoa-don/hien-thi" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn
+                chưa xác nhận</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/hoa-don/hien-thi-xac-nhan" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn đã
+                xác nhận</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/hoa-don/hien-thi-cho-giao" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn chờ giao hàng</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/hoa-don/hien-thi-dang-giao" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn đang giao hàng</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/hoa-don/hien-thi-hoan-tat" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn hoàn tất</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/hoa-don/hien-thi-da-huy" role="tab"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Hóa đơn đã hủy</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
@@ -247,7 +267,7 @@
                                             <label class="col-sm-3 col-form-label">Phí ship:
                                             </label>
                                             <div class="col-sm-9">
-                                                <form:input path="phiShip" type="number" class="form-control"
+                                                <form:input path="phiShip" class="form-control"
                                                             id="phiShipDonHang"/>
                                             </div>
                                         </div>
