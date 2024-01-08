@@ -301,13 +301,13 @@
                                                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
                                                             <label style="font-weight: bold">Đơn
-                                                                giá:</label>${ht.basoOchammotlamGHDGKG2()}đ -
-                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG2()} đ</del>
+                                                                giá:</label>${ht.basoOchammotlamGHDGKG()}đ -
+                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
                                                         </c:if>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
                                                             <label style="font-weight: bold">Đơn
                                                                 giá:</label>
-                                                            ${ht.basoOchammotlamGHDG2()} đ
+                                                            ${ht.basoOchammotlamGHDG()} đ
                                                         </c:if>                                                    </div>
                                                     <div style="width: 18%;">
                                                             <%--                                                        <input type="checkbox" name="checkidghTT" value="${ht.id}" onclick="chonsanphamgiohangTT('${stt.index}','${ht.id}','${ht.gioHang.id}');"  ${ht.tinhTrang==0 ?"checked":""}>--%>
@@ -491,7 +491,7 @@
                                         màu sắc: ${ht.chiTietSanPham.mauSac.ten}<label style="margin-left: 40px"></label>Số lượng: ${ht.soLuong}
                                     </div>
                                     <div></div>
-                                    <div>${ht.tichDONGIAvsSL2()}</div>
+                                    <div>${ht.tichDONGIAvsSL()}</div>
                                 </div>
 
                             </div>
@@ -536,7 +536,7 @@
                             <div >
                                 <strong
                                         class="order-total">
-                                    <div >${banhangonline.convertgiatien2(banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()+30000)}</div>
+                                    <div >${banhangonline.convertgiatien(banhangonline.TongtienvsTongspchon(listghct.get(0).gioHang.id).gettongtien()+30000)}</div>
                                 </strong>
                             </div>
                         </div>

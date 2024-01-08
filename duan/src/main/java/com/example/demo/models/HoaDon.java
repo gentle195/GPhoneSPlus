@@ -131,7 +131,7 @@ public class HoaDon {
         return  decimalFormat.format(number).replaceAll("[,]", ".");
     }
 
-    public String convertPhiShip2() {
+    public String convertPhiShip() {
         // Input number
         if (phiShip==null){
             return "0";
@@ -142,8 +142,7 @@ public class HoaDon {
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
 
             // Format the number
-            return  decimalFormat.format(number).replaceAll("[,]", ".");
-        }
+            return decimalFormat.format(number);        }
 
     }
 }

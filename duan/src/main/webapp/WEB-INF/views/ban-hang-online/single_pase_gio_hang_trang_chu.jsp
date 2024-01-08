@@ -28,13 +28,13 @@
                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
                             <label style="font-weight: bold">Đơn
-                                giá:</label>${ht.basoOchammotlamGHDGKG2()}đ -
-                            <del class="product-old-price">${ht.basoOchammotlamGHDG2()} đ</del>
+                                giá:</label>${ht.basoOchammotlamGHDGKG()}đ -
+                            <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
                         </c:if>
                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
                             <label style="font-weight: bold">Đơn
                                 giá:</label>
-                            ${ht.basoOchammotlamGHDG2()} đ
+                            ${ht.basoOchammotlamGHDG()} đ
                         </c:if>
                     </div>
                     <div style="width: 18%;">

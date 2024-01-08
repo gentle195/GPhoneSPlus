@@ -352,13 +352,13 @@
                                                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
                                                             <label style="font-weight: bold">Đơn
-                                                                giá:</label>${ht.basoOchammotlamGHDGKG2()}đ -
-                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG2()} đ</del>
+                                                                giá:</label>${ht.basoOchammotlamGHDGKG()}đ -
+                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG()} đ</del>
                                                         </c:if>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
                                                             <label style="font-weight: bold">Đơn
                                                                 giá:</label>
-                                                            ${ht.basoOchammotlamGHDG2()} đ
+                                                            ${ht.basoOchammotlamGHDG()} đ
                                                         </c:if>
                                                     </div>
                                                     <div style="width: 18%;">
@@ -684,8 +684,8 @@
 <%--                            </h4>--%>
                             <c:if test="${banhangonline.tonggiamgia(motctsp.id)>0}">
                                 <h4 class="product-price" ><span
-                                        style="font-size:15px"></span>${banhangonline.sotienkhidagiam2(motctsp.id)}₫ -
-                                    <del class="product-old-price">${motctsp.basoOchammotlam2()}<span style="font-size:15px">₫</span>
+                                        style="font-size:15px"></span>${banhangonline.sotienkhidagiam(motctsp.id)}₫ -
+                                    <del class="product-old-price">${motctsp.basoOchammotlam()}<span style="font-size:15px">₫</span>
                                     </del>
                                 </h4>
                             </c:if>
@@ -696,7 +696,7 @@
 <%--                                    <span> ₫</span>--%>
 <%--                                </h4>--%>
                                 <h4 class="product-price" ><span
-                                        style="font-size:15px"></span> ${motctsp.basoOchammotlam2()}₫
+                                        style="font-size:15px"></span> ${motctsp.basoOchammotlam()}₫
                                 </h4>
                             </c:if>
 
@@ -761,7 +761,7 @@
                                            id="thongbaosoluong"></label><br>
                                         <%--                            <p>${idkhachhang}----${motctsp.id}</p>--%>
                                     <button class="add-to-cart-btn" type="button"
-                                            onclick="thongbaothemvaogiohang('${motctsp.id}');">
+                                            onclick="thongbaothemvaogiohang('${motctsp.id}','${banhangonline.soluongcon(motctsp.id)-banhangonline.sl1ctsptronggh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId(),motctsp.id)}');">
                                         <i
                                             class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
                                     </button>
@@ -776,13 +776,12 @@
                                             <c:if test="${banhangonline.tonggiamgia(motctsp.id)>0}">
 
 
-                                                onclick="clickthanhtoanctsp('${banhangonline.sotienkhidagiam2(motctsp.id)}')"><i class="fa fa-shopping-cart"></i> Mua ngay
+                                                onclick="clickthanhtoanctsp('${banhangonline.sotienkhidagiam3(motctsp.id)}')"
 
                                             </c:if>
 
+                                                ><i class="fa fa-shopping-cart"></i> Mua ngay
 
-
-                                    ><i class="fa fa-shopping-cart"></i> Mua ngay
                                     </button>
 
 
@@ -1442,7 +1441,23 @@ color: white;border-radius: 5% 5% 5% 5%"
     <h2 style="color: white;font-size: 20px;margin-top: 20px">Đã Thêm vào Giỏ hàng</h2>
 </div>
 
+<div style="position: fixed;
+top: 50%;left: 50%;transform: translate(-50%,-50%);
+display: none;z-index: 2;width: 7cm;height: 5cm;
+background-color: #0b3564;text-align: center;
+color: white;border-radius: 5% 5% 5% 5%"
+     id="thongbaothemgiohang1">
+    <img style="border-radius: 50% 50% 50% 50%;width: 1.2cm;height: 1.2cm;margin-top: 20px"
+         src="https://banner2.cleanpng.com/20180815/olc/kisspng-clip-art-computer-icons-x-mark-check-mark-image-wrong-incorrect-delete-abort-png-image-picpng-5b744132b85bd6.9451175115343455227551.jpg"
+    >
 
+    <h2 style="color: white;font-size: 20px;margin-top: 20px">
+
+
+        Chỉ chấp nhận tổng <br><= 75.000.000
+
+    </h2>
+</div>
 <script>
     // /////////////////////////////////////////
     // Lấy thẻ input bằng ID
@@ -1566,13 +1581,26 @@ color: white;border-radius: 5% 5% 5% 5%"
         // clickradio();
     };
 
-    function thongbaothemvaogiohang(idctsp) {
-        loadgiaodienghctbanhangTrangChu('/ban-hang-online/them-san-pham-vao-gio-hang/' + idctsp);
+    function thongbaothemvaogiohang(idctsp,maxgan) {
+        var solgchon=document.getElementById("input2").value;
+        // alert(solgchon)
+ var maxkt=maxgan;
+if(solgchon<=0){
+    document.getElementById('thongbaosoluong').innerHTML="chưa nhập số lượng"
+}else {
+    if(parseInt(solgchon)>parseInt(maxkt)){
+        document.getElementById('thongbaosoluong').innerHTML=" tối đa thêm tiếp ="+maxkt;
+    }else {
+        loadgiaodienghctbanhangTrangChu('/ban-hang-online/them-san-pham-vao-gio-hang/' + idctsp+'/'+solgchon);
         clickradio();
         document.getElementById('thongbaothemgiohang').style.display = '';
         setTimeout(function () {
             document.getElementById('thongbaothemgiohang').style.display = 'none';
         }, 2000); // 2000 milliseconds tương đương với 2 giây
+    }
+}
+
+
 
     };
 

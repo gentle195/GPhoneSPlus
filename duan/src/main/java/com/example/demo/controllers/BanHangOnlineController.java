@@ -1561,21 +1561,42 @@ public class BanHangOnlineController {
     }
 
 
-    @GetMapping("/ban-hang-online/them-san-pham-vao-gio-hang/{idctsp}")
+    @GetMapping("/ban-hang-online/them-san-pham-vao-gio-hang/{idctsp}/{solg}")
     public String themvaogiohang(
             Model model,
-            @PathVariable("idctsp") UUID idctsp
+            @PathVariable("idctsp") UUID idctsp,
+            @PathVariable("solg") Integer soluong
     ) {
-        if (banHangOnlineService.ListghctTheoIdghvsIdctsp(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId(), idctsp).size() <= 0) {
+//        if (banHangOnlineService.ListghctTheoIdghvsIdctsp(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId(), idctsp).size() <= 0) {
+//            GioHangChiTiet ghct = new GioHangChiTiet();
+//            ghct.setGioHang(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0));
+//            ghct.setChiTietSanPham(chiTietSanPhamService.findById(idctsp));
+//            ghct.setSoLuong(1);
+//            ghct.setDonGia(chiTietSanPhamService.findById(idctsp).getGiaBan());
+//            BigDecimal giaban = chiTietSanPhamService.findById(idctsp).getGiaBan();
+//            Long giaban1 = Long.valueOf(String.valueOf(giaban));
+//            Long phantramgiam = Long.valueOf(banHangOnlineService.tonggiamgia(String.valueOf(idctsp)));
+//            Long dgkg = giaban1 - giaban1 / 100 * phantramgiam;
+//            BigDecimal dgkg1 = BigDecimal.valueOf(Long.valueOf(String.valueOf(dgkg)));
+//            ghct.setDonGiaKhiGiam(dgkg1);
+//            gioHangChiTietService.add(ghct);
+//        }
+
+                if (banHangOnlineService.ListghctTheoIdghvsIdctsp(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId(), idctsp).size() > 0) {
+            GioHangChiTiet ghctud = banHangOnlineService.ListghctTheoIdghvsIdctsp(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0).getId(), idctsp).get(0);
+            Integer slud = ghctud.getSoLuong() + soluong;
+            ghctud.setSoLuong(slud);
+            gioHangChiTietService.add(ghctud);
+        } else {
             GioHangChiTiet ghct = new GioHangChiTiet();
             ghct.setGioHang(banHangOnlineService.ListghTheoidkh(idkhachhang).get(0));
             ghct.setChiTietSanPham(chiTietSanPhamService.findById(idctsp));
-            ghct.setSoLuong(1);
+            ghct.setSoLuong(soluong);
             ghct.setDonGia(chiTietSanPhamService.findById(idctsp).getGiaBan());
             BigDecimal giaban = chiTietSanPhamService.findById(idctsp).getGiaBan();
-            Long giaban1 = Long.valueOf(String.valueOf(giaban));
-            Long phantramgiam = Long.valueOf(banHangOnlineService.tonggiamgia(String.valueOf(idctsp)));
-            Long dgkg = giaban1 - giaban1 / 100 * phantramgiam;
+            Integer giaban1 = Integer.valueOf(String.valueOf(giaban));
+            Integer phantramgiam = banHangOnlineService.tonggiamgia(String.valueOf(idctsp));
+            Integer dgkg = giaban1 - giaban1 / 100 * phantramgiam;
             BigDecimal dgkg1 = BigDecimal.valueOf(Long.valueOf(String.valueOf(dgkg)));
             ghct.setDonGiaKhiGiam(dgkg1);
             gioHangChiTietService.add(ghct);

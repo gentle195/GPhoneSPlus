@@ -17,7 +17,7 @@
             <label style=" font-weight: normal;margin-left: 10px">
                 <label style="font-weight: bold">Đơn
                     giá:</label>
-                                    ${banhangonline.sotienkhidagiam2(ht.id)}
+                                    ${banhangonline.sotienkhidagiam(ht.id)}
 <%--                <script>--%>
 <%--                    document.write(--%>
 <%--                        Number('${banhangonline.sotienkhidagiam(ht.id)}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
@@ -25,7 +25,7 @@
 <%--                </script>--%>
                 đ -
                 <del class="product-old-price">
-                                        ${ht.basoOchammotlam2()}
+                                        ${ht.basoOchammotlam()}
 <%--                    <script>--%>
 <%--                        document.write(--%>
 <%--                            Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
@@ -38,7 +38,7 @@
             <label style=" font-weight: normal;margin-left: 10px">
                 <label style="font-weight: bold">Đơn
                     giá:</label>
-                            ${ht.basoOchammotlam2()}
+                            ${ht.basoOchammotlam()}
 <%--                <script>--%>
 <%--                    document.write(--%>
 <%--                        Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>

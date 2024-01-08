@@ -108,6 +108,7 @@ public interface BanHangOnlineService {
 
     String sotienkhidagiam(UUID idctsp);
     String sotienkhidagiam2(UUID idctsp);
+    String sotienkhidagiam3(UUID idctsp);
 
 
     String dongiaVSsoluongXemHDCT(UUID idhd, UUID idctsp);

@@ -274,6 +274,18 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
         return  decimalFormat.format(number).replaceAll("[,]", ".");
     }
 
+    @Override
+    public String sotienkhidagiam3(UUID idctsp) {
+        Long stbandau=Long.valueOf(String.valueOf(chiTietSanPhamService.findById(idctsp).getGiaBan()));
+        Long phamtramgiam=Long.valueOf(String.valueOf(tonggiamgia(String.valueOf(idctsp))));
+        long number =stbandau- stbandau/100*phamtramgiam;
+        // Create a DecimalFormat instance with the desired pattern
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+
+        return  String.valueOf(number);
+    }
+
 
     @Override
     public String dongiaVSsoluongXemHDCT(UUID idhd, UUID idctsp) {
