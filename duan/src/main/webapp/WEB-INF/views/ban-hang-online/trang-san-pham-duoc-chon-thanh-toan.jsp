@@ -658,7 +658,9 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Chính sách</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Chính sách - </h1>
+                    <b><a href="/ban-hang-online/chinh-sach-doi-tra" style="color: #00A2FF"><em><u>Chi tiết xem tại đây</u></em></a></b>
+
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -672,7 +674,7 @@
                     <b> 1. Điều kiện đổi sản phẩm:</b>
                     <br>
                     <br>
-                    - Sản phẩm không trùng khớp về màu sắc, mẫu mã, size theo đơn hàng.
+                    - Sản phẩm không trùng khớp về màu sắc, mẫu mã, size theo đơn hàng thì sẽ không được hỗ trợ đổi hàng
                     <br>
                     - Lỗi kỹ thuật do nhà sản xuất.
                     <br>
@@ -701,14 +703,14 @@
                     <br>
                     - Đối với khách hàng tạo phiếu đổi hàng online trên website cửa hàng:
                     <br>
-                        Ngay sau khi nhận được phiếu đổi hàng của Quý khách hàng, chúng tôi sẽ liên lạc với quý khách hàng và
-                        sẽ hẹn khách có thể mang máy đến trực tiếp tại cửa hàng để nhân viên quán có thể kiểm tra và đưa ra hướng giải quyết tốt nhất
+                    Ngay sau khi nhận được phiếu đổi hàng của Quý khách hàng, chúng tôi sẽ liên lạc với quý khách hàng và
+                    sẽ hẹn khách có thể mang máy đến trực tiếp tại cửa hàng để nhân viên quán có thể kiểm tra và đưa ra hướng giải quyết tốt nhất
                     <br>
                     - Đối với khách hàng đến đổi hàng trực tiếp tại cửa hàng:
                     <br>
-                        Khách hàng đem sản phẩm cần đổi đến trực tiếp tại cửa hàng trên hóa đơn, nhân viên cửa hàng sẽ kiểm
-                        tra tình trạng sản phẩm và đưa ra hướng giải quyết ngay tại của hàng. Nhân viên tại cửa hàng sẽ tư
-                        vấn cụ thể để khách hàng chọn lựa phương án tốt nhất.
+                    Khách hàng đem sản phẩm cần đổi đến trực tiếp tại cửa hàng trên hóa đơn, nhân viên cửa hàng sẽ kiểm
+                    tra tình trạng sản phẩm và đưa ra hướng giải quyết ngay tại của hàng. Nhân viên tại cửa hàng sẽ tư
+                    vấn cụ thể để khách hàng chọn lựa phương án tốt nhất.
                     <br>
                     <br>
                     <b> 4. Hình thức đổi sản phẩm:</b>
@@ -722,10 +724,20 @@
                     dung lượng bố nhớ, dung lượng ram, cùng 1 dòng chip đối với những máy chạy hệ điều hành android và có thể khác màu máy so với sản phẩm cần đổi
                     <br>
                     <br>
+                    <b> 5. Lý do đổi hàng:</b>
+                    <br>
+                    <br>
+                    <P><b>- Lỗi phần cứng:</b> Lỗi phần cứng là lỗi xảy ra do hư hỏng phần cứng của điện thoại, chẳng hạn như màn hình bị nứt, camera bị mờ, loa bị rè,...<br>
+                        <b>- Lỗi phần mềm:</b> Lỗi phần mềm là lỗi xảy ra do lỗi trong hệ điều hành hoặc ứng dụng của điện thoại, chẳng hạn như điện thoại bị treo, bị lag, không thể mở ứng dụng,...<br>
+                        <b>- Lỗi thiết kế:</b> Lỗi thiết kế là lỗi xảy ra do thiết kế của điện thoại không đúng với thiết kế ban đầu về kích thước, thiếu tính năng theo thiết kế ban đầu ví dụ: sản phẩm sai so với thiết kế thực tế(sai kích thước, thiếu chức năng mặc định của điện thoại...)
+                    </p> <br>
                     <b>Ví dụ: Iphone 15 pro max có dung lượng ram là 16GB, dung lượng bộ nhớ 1TB,
                         màu trắng có thể đổi sang 1 chiếc Iphone 15 pro max có ram 16GB, dung lượng bộ nhớ 1TB và có thể sang màu khác như đen, vàng nếu khách hàng muốn đổi,
                         hoặc nếu màu tương tự hết chúng tôi xin phép khách hàng có thể đổi sang màu đang có sẵn trong của hàng</b>
                     <br>
+<br>
+                    <b><a href="/ban-hang-online/chinh-sach-doi-tra" style="color: #00A2FF"><em><u>Chi tiết xem tại đây</u></em></a></b>
+
                     <br>
                     <hr>
                     <b style="color: red"> Lưu ý: GPhoneS Store khuyến khích Quý khách hàng nên chụp ảnh sản phẩm trước khi đổi hàng hóa, việc lưu

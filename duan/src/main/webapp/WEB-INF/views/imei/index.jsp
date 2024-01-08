@@ -41,6 +41,10 @@
             <a class="nav-link" href="/imei/hien-thi-imei-loi" role="tab"
             >Imei lỗi</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/imei/chinh-sach-su-ly-imei-loi" role="tab" style="color: blue"
+            >Chính sách sử lý imei lỗi</a>
+        </li>
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">

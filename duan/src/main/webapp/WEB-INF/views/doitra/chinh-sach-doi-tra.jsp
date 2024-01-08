@@ -158,12 +158,12 @@
 
                                     </div>
                                     <div>
-                                        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}"
+                                        <a href="/ban-hang-online/hoa-don-online/${idkhachhang}/full/xem"
                                            class="btn btn-primary">Đơn hàng</a>
                                     </div>
                                     <div>
                                         <a href="/ban-hang-online/chinh-sach-doi-tra" class="btn btn-primary" style=""
-                                           onclick="">Chính sách đổi hàng</a>
+                                           onclick="">Chính sách đổi trả</a>
                                     </div>
                                     <div>
                                         <a href="/logout" class="btn btn-primary" style="" onclick="">Đăng xuất</a>
@@ -346,10 +346,8 @@
                 <c:if test="${idkhachhang !='1'}">
                     <li><a href="/ban-hang-online/home">TRANG CHỦ</a></li>
                 </c:if>
-                <li><a href="#">ƯU ĐÃI HẤP DẪN</a></li>
-                <li><a href="#">LOẠI</a></li>
                 <li><a href="/ban-hang-online/dien-thoai-thong-minh">ĐIỆN THOẠI THÔNG MINH</a></li>
-                <li><a href="/ban-hang-online/chinh-sach-doi-tra" style="color: #00A2FF">/CHÍNH SÁCH ĐỔI TRẢ</a></li>
+                <li><a href="/ban-hang-online/chinh-sach-doi-tra" style="color: #00A2FF">/CHÍNH SÁCH ĐỔI HOẶC TRẢ HÀNG</a></li>
             </ul>
             <!-- /NAV -->
         </div>
@@ -365,14 +363,10 @@
 <main style="margin-left: 5cm; margin-right: 5cm">
     <div class="body">
         <br>
-        <h2>Chính sách đổi hàng sản phẩm của GphoneS Store</h2>
+        <h2>I. Chính sách đổi sản phẩm của GphoneS Store</h2>
         <br>
-        <p>Để mang đến sự thuận tiện và trải nghiệm tốt nhất cho khách hàng, <strong>GphoneS Store</strong> có những
-            chính sách
-            phù hợp khi khách hàng có nhu cầu đổi hàng sản phẩm. Chúng tôi luôn mong muốn mang lại cho khách hàng
-            những sản phẩm và chất lượng phục vụ tốt nhất.</p>
-        <p>Việc đổi hàng sản phẩm đi kèm một số điều kiện cụ thể, Quý khách vui lòng tham khảo thông tin chi
-            tiết bên dưới :</p>
+        <p>Để mang đến sự thuận tiện và trải nghiệm tốt nhất cho khách hàng, GphoneS Store có những chính sách phù hợp khi khách hàng có nhu cầu đổi hoặc trả sản phẩm(hiện tại cửa hàng chúng tôi chỉ cho đổi hàng, và chưa thể trả hàng). Chúng tôi luôn mong muốn mang lại cho khách hàng những sản phẩm và chất lượng phục vụ tốt nhất.</p>
+        <p>Việc đổi hàng sản phẩm đi kèm một số điều kiện cụ thể, Quý khách vui lòng tham khảo thông tin chi tiết bên dưới:</p>
         <br>
         <table>
             <thead>
@@ -390,7 +384,7 @@
                 <td style="border: 2px solid black; font-weight: bold">1) Đối tượng áp dụng</td>
                 <td style="border: 2px solid black;">
                     <p>Khách hàng</p>
-                    <p>* Áp dụng cho tất cả sản phẩm mua hàng online qua website và trực tiếp tại <strong>GphoneS
+                    <p>* Áp dụng đối với sản phẩm mua hàng online qua website và trực tiếp tại <strong>GphoneS
                         Store</strong></p>
                     <p>* Chúng tôi không hỗ trợ cho những đơn hàng mua tại địa điểm khác.
                     </p>
@@ -399,14 +393,14 @@
             <tr>
                 <td style="border: 2px solid black;font-weight: bold">2) Điều kiện đổi hàng</td>
                 <td style="border: 2px solid black;">
-                    <p>* Sản phẩm không trùng khớp về màu sắc, mẫu mã, size theo đơn hàng.</p>
+                    <p>* Sản phẩm không trùng khớp về màu sắc, mẫu mã, size theo đơn hàng thì sẽ không được hỗ trợ đổi hàng</p>
                     <p>* Lỗi kỹ thuật do nhà sản xuất.</p>
                     <p>* Sản phẩm đổi hàng phải còn mới, nguyên vẹn, không bị dính nước, không có dấu hiệu rơi vỡ</p>
                     <p>* Sản phẩm phải còn đầy đủ tem, nhãn mác, thẻ bảo hành và hoá đơn mua hàng.</p>
                     <p>* Sản phẩm đổi hàng còn trong thời hạn cho phép đổi hàng.</p>
-                    <p>* Khách hàng chỉ có thể hàng sản phẩm với điều kiện <strong>GphoneS Store</strong> không có sản
-                        phẩm cùng loại khác (màu sắc,
-                        mẫu mã, kích thước) thay thế.</p>
+<%--                    <p>* Khách hàng chỉ có thể đổi sản phẩm với điều kiện <strong>GphoneS Store</strong> không có sản--%>
+<%--                        phẩm cùng loại khác (màu sắc,--%>
+<%--                        mẫu mã, kích thước) thay thế.</p>--%>
                 </td>
             </tr>
             <tr>
@@ -418,8 +412,9 @@
             <tr>
                 <td style="border: 2px solid black;font-weight: bold">4) Thời hạn thực hiện đổi hàng</td>
                 <td style="border: 2px solid black;">
-                    <p>Thời hạn đổi sản phẩm: 7 ngày đối với khách hàng mua online và 7 ngày đối với khách hàng mua trực
+                    <p>* Thời hạn đổi sản phẩm: 7 ngày đối với khách hàng mua online và 7 ngày đối với khách hàng mua trực
                         tiếp tại cửa hàng kể từ ngày khách nhận được hàng.</p>
+                    <p>* Nếu vượt quá thời gian quy định trên thì chúng tôi sẽ không nhận đổi sản phẩm với bất kì lý do nào.</p>
                 </td>
             </tr>
             <tr>
@@ -427,27 +422,130 @@
                 <td style="border: 2px solid black;">
                     <P>* Sản phẩm chỉ được đổi một lần duy nhất
                         <br>
-                        Quý khách vui lòng đến trực tiếp cửa hàng GPhoneS Store ghi trên hoá đơn mua hàng (đối với khách
-                        hàng ở Hà Nội)
+                        Quý khách vui lòng đến trực tiếp cửa hàng GPhoneS Store ghi trên hoá đơn mua hàng.
                         <br>
-                        Đối với khách hàng ở khu vực khác, vui lòng gọi điện trực tiếp đến số điện thoại 098123456 hoặc
-                        gửi yêu cầu qua mail gphonespluss@gmail.com Sau khi nhận được mail phản hồi xác nhận đồng ý từ
-                        GPhoneS, Quý khách đóng gói sản phẩm kèm đầy đủ phụ kiện, hoá đơn, phiếu bảo hành, …và gửi về
-                        địa chỉ
-                        số 3 phố Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội.
+                       * Chúng tôi chỉ xác nhận đổi hàng sang những sản phẩm có cùng model máy như cùng dòng máy,
+                        dung lượng bố nhớ, dung lượng ram, cùng 1 dòng chip đối với những máy chạy hệ điều hành android và có thể khác màu máy so với sản phẩm cần đổi
+<%--                        Đối với khách hàng ở khu vực khác, vui lòng gọi điện trực tiếp đến số điện thoại 098123456 hoặc--%>
+<%--                        gửi yêu cầu qua mail gphonespluss@gmail.com Sau khi nhận được mail phản hồi xác nhận đồng ý từ--%>
+<%--                        GPhoneS, Quý khách đóng gói sản phẩm kèm đầy đủ phụ kiện, hoá đơn, phiếu bảo hành, …và gửi về--%>
+                    <p> * Địa chỉ: số 3 phố Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội.
+                    </p> <p> * Gmail: gphonespluss@gmail.com</p>
                         <br>
-                        Chúng tôi chỉ xác nhận đổi hàng sang những sản phẩm giá nhỏ hơn hoặc bằng giá của sản phẩm cần
+                       * Chúng tôi chỉ xác nhận đổi hàng sang những sản phẩm bằng giá của sản phẩm cần
                         đổi
                     </P>
                 </td>
             </tr>
-            </tbody>
+            <tr>
+                <td style="border: 2px solid black;font-weight: bold">6) Lý do đổi hàng</td>
+                <td style="border: 2px solid black;">
+                    <P><b>* Lỗi phần cứng:</b> Lỗi phần cứng là lỗi xảy ra do hư hỏng phần cứng của điện thoại, chẳng hạn như màn hình bị nứt, camera bị mờ, loa bị rè,...<br>
+                        <b>* Lỗi phần mềm:</b> Lỗi phần mềm là lỗi xảy ra do lỗi trong hệ điều hành hoặc ứng dụng của điện thoại, chẳng hạn như điện thoại bị treo, bị lag, không thể mở ứng dụng,...<br>
+                        <b>* Lỗi thiết kế:</b> Lỗi thiết kế là lỗi xảy ra do thiết kế của điện thoại không đúng với thiết kế ban đầu về kích thước, thiếu tính năng theo thiết kế ban đầu ví dụ: sản phẩm sai so với thiết kế thực tế(sai kích thước, thiếu chức năng mặc định của điện thoại...)
+                    </p>
 
+                </td>
+            </tr>
+            </tbody>
         </table>
+        <br><p><b>Ví dụ:</b> Iphone 15 pro max có dung lượng ram là 16GB, dung lượng bộ nhớ 1TB, màu trắng có thể đổi sang 1 chiếc Iphone 15 pro max có ram 16GB, dung lượng bộ nhớ 1TB và có thể sang màu khác như đen, vàng nếu khách hàng muốn đổi, hoặc nếu màu tương tự hết chúng tôi xin phép khách hàng có thể đổi sang màu đang có sẵn trong của hàng
+    </p>
+<br>
+        <h2>II. Chính sách trả sản phẩm của GphoneS Store</h2>
+        <br>
+        <table>
+            <thead>
+            <tr style="">
+                <th style="width: 250px; border: 2px solid black;padding-top: 0.5cm;text-align: center; padding-bottom: 0.5cm; font-size: 18px">
+                    Mục
+                </th>
+                <th style="width: 1000px; border: 2px solid black;padding-top: 0.5cm;text-align: center; padding-bottom: 0.5cm; font-size: 18px">
+                    Nội dung chính sách
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style="border: 2px solid black; font-weight: bold">1) Đối tượng áp dụng</td>
+                <td style="border: 2px solid black;">
+                    <p>Khách hàng</p>
+                    <p>* Áp dụng đối với sản phẩm mua hàng online qua website và trực tiếp tại <strong>GphoneS
+                        Store</strong></p>
+                    <p>* Chúng tôi không hỗ trợ cho những đơn hàng mua tại địa điểm khác.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border: 2px solid black;font-weight: bold">2) Điều kiện trả hàng</td>
+                <td style="border: 2px solid black;">
+                    <p>* Sản phẩm không trùng khớp về màu sắc, mẫu mã, size theo đơn hàng thì sẽ không được hỗ trợ trả hàng</p>
+                    <p>* Lỗi kỹ thuật do nhà sản xuất.</p>
+                    <p>* Sản phẩm trả hàng phải còn mới, nguyên vẹn, không bị dính nước, không có dấu hiệu rơi vỡ</p>
+                    <p>* Sản phẩm phải còn đầy đủ tem, nhãn mác, thẻ bảo hành và hoá đơn mua hàng.</p>
+                    <p>* Sản phẩm khách muốn trả hàng còn trong thời hạn cho phép trả hàng.</p>
+                    <%--                    <p>* Khách hàng chỉ có thể đổi sản phẩm với điều kiện <strong>GphoneS Store</strong> không có sản--%>
+                    <%--                        phẩm cùng loại khác (màu sắc,--%>
+                    <%--                        mẫu mã, kích thước) thay thế.</p>--%>
+                </td>
+            </tr>
+            <tr>
+                <td style="border: 2px solid black;font-weight: bold">3) Thời hạn trả hàng</td>
+                <td style="border: 2px solid black;">
+                    <p>* <strong> 7 ngày </strong> kể từ ngày khách nhận được hàng </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border: 2px solid black;font-weight: bold">4) Thời hạn thực hiện trả hàng</td>
+                <td style="border: 2px solid black;">
+                    <p>* Thời hạn trả sản phẩm: 7 ngày kể từ ngày khách nhận được hàng đối với khách hàng mua online và 7 ngày đối với khách hàng mua trực
+                        tiếp tại cửa hàng</p>
+                    <p>* Nếu vượt quá thời gian quy định(vượt quá 7 ngày) thì chúng tôi sẽ không nhận trả sản phẩm với bất kì lý do nào.</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border: 2px solid black;font-weight: bold">5) Hình thức trả hàng</td>
+                <td style="border: 2px solid black;">
+                    <P>* Sản phẩm chỉ được trả khi phù hợp với chính sách của cửa hàng
+                        <br>
+                       * Quý khách vui lòng đến trực tiếp cửa hàng GPhoneS Store ghi trên hoá đơn mua hàng.
+                        <br>
+                       <p> * Địa chỉ: số 3 phố Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội.</p>
+                    <p> * Gmail: gphonespluss@gmail.com</p>
+
+                    </P>
+                </td>
+            </tr>
+            <tr>
+                <td style="border: 2px solid black;font-weight: bold">6) Hoàn tiền cho khách</td>
+                <td style="border: 2px solid black;">
+                    <p> * Khách hàng sẽ được hoàn 95% số tiền so với số tiền được ghi trong hóa đơn.</p>
+               <p>* Nếu sản phẩm khách muốn trả là sản phẩm lúc khách mua hàng được giảm giá thì sẽ được cửa hàng trả lại hoàn toàn tiền. </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border: 2px solid black;font-weight: bold">7) Lý do trả hàng</td>
+                <td style="border: 2px solid black;">
+                    <P><b>* Lỗi phần cứng:</b> Lỗi phần cứng là lỗi xảy ra do hư hỏng phần cứng của điện thoại, chẳng hạn như màn hình bị nứt, camera bị mờ, loa bị rè,...<br>
+                        <b>* Lỗi phần mềm:</b> Lỗi phần mềm là lỗi xảy ra do lỗi trong hệ điều hành hoặc ứng dụng của điện thoại, chẳng hạn như điện thoại bị treo, bị lag, không thể mở ứng dụng,...<br>
+
+                        <b>* Lỗi thiết kế:</b> Lỗi thiết kế là lỗi xảy ra do thiết kế của điện thoại không đúng với thiết kế ban đầu về kích thước, thiếu tính năng theo thiết kế ban đầu ví dụ: sản phẩm sai so với thiết kế thực tế(sai kích thước, thiếu chức năng mặc định của điện thoại...)
+
+<%--                        <b>* Sản phẩm không phù hợp với người dùng:</b> khách hàng không hài lòng về sản phẩm của cửa hàng, không hài lòng về màu sắc, chất liệu...--%>
+
+                    </p>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br><p>
+        <b>Ví dụ:</b> Khách hàng mua Iphone 15 pro max có dung lượng ram là 16GB, dung lượng bộ nhớ 1TB, màu trắng được ghi rõ ràng trong hóa đơn thì khi sản phẩm bị lỗi khách hàng được quyền trả sản phẩm đó cho cửa hàng và nhận lại 95% số tiền so với số tiền trong hóa đơn. Nếu lúc mua sản phẩm này đang được giảm giá thì khách hàng sẽ được cửa hàng hoàn trả lại đúng số tiền ban đầu. Cảm ơn quý khách!
+
         <br>
         <p><i class="fa fa-exclamation-triangle" style=" font-weight: bold; color: red"> LƯU Ý:</i>
-            * GPhoneS Store khuyến khích Quý khách hàng nên chụp ảnh sản phẩm trước khi đổi hàng hóa, việc lưu giữ sản
-            phẩm sẽ giúp khách hàng làm bằng chứng nếu có những vấn đề phát sinh trong quá trình đổi hàng.</p>
+            * GPhoneS Store khuyến khích Quý khách hàng nên chụp ảnh sản phẩm trước khi đổi hoặc trả hàng hóa, việc lưu giữ sản
+            phẩm sẽ giúp khách hàng làm bằng chứng nếu có những vấn đề phát sinh trong quá trình đổi, trả hàng.</p>
 
     </div>
 </main>
@@ -847,3 +945,5 @@
 <script src="/jsbanhang/main.js"></script>
 </body>
 </html>
+
+
