@@ -352,31 +352,31 @@
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
                                                             <label style="font-weight: bold">Đơn
                                                                 giá:</label>
-<%--                                                            ${ht.basoOchammotlamGHDGKG()}--%>
-                                                            <script>
-                                                                document.write(
-                                                                    Number('${ht.basoOchammotlamGHDGKG()}'.replace(/,/g, '')).toLocaleString('de-DE')
-                                                                );
-                                                            </script>
+                                                            ${ht.basoOchammotlamGHDGKG()}
+<%--                                                            <script>--%>
+<%--                                                                document.write(--%>
+<%--                                                                    Number('${ht.basoOchammotlamGHDGKG()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                                );--%>
+<%--                                                            </script>--%>
                                                             đ -
                                                             <del class="product-old-price">
-<%--                                                                    ${ht.basoOchammotlamGHDG()}--%>
-                                                                        <script>
-                                                                            document.write(
-                                                                                Number('${ht.basoOchammotlamGHDG()}'.replace(/,/g, '')).toLocaleString('de-DE')
-                                                                            );
-                                                                        </script>
+                                                                    ${ht.basoOchammotlamGHDG()}
+<%--                                                                        <script>--%>
+<%--                                                                            document.write(--%>
+<%--                                                                                Number('${ht.basoOchammotlamGHDG()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                                            );--%>
+<%--                                                                        </script>--%>
                                                                         đ</del>
                                                         </c:if>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
                                                             <label style="font-weight: bold">Đơn
                                                                 giá:</label>
-<%--                                                            ${ht.basoOchammotlamGHDG()}--%>
-                                                            <script>
-                                                                document.write(
-                                                                    Number('${ht.basoOchammotlamGHDGKG()}'.replace(/,/g, '')).toLocaleString('de-DE')
-                                                                );
-                                                            </script>
+                                                            ${ht.basoOchammotlamGHDG()}
+<%--                                                            <script>--%>
+<%--                                                                document.write(--%>
+<%--                                                                    Number('${ht.basoOchammotlamGHDGKG()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                                );--%>
+<%--                                                            </script>--%>
                                                             đ
                                                         </c:if>
 

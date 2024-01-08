@@ -514,7 +514,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                                         dung lượng:${ht.ram.dungLuong},rom:${ht.rom.dungLuong}<br>
                                     </td>
                                     <td>
-                                            ${ht.basoOchammotlam2()} VND
+                                            ${ht.basoOchammotlam()} VND
                                     </td>
                                     <td>
 
@@ -525,7 +525,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                                         Kết thúc:${ht.khuyenMai.ngayKetThuc}
                                     </td>
                                     <td>
-                                         ${banhangonline.convertgiatien2(ht.giaBan-ht.giaBan/100*khuyenMaiRepository.tonggiamgia(ht.id))}  VND
+                                         ${banhangonline.convertgiatien(ht.giaBan-ht.giaBan/100*khuyenMaiRepository.tonggiamgia(ht.id))}  VND
                                     </td>
                                     <td>
                                         <c:if test="${ht.khuyenMai==null}">

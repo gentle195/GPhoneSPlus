@@ -108,11 +108,20 @@
 
                                     <%--                            <p>${idkhachhang}----${motctsp.id}</p>--%>
                                 <button class="add-to-cart-btn" type="button"
-                                        onclick="thongbaothemvaogiohang('${motctsp.id}');"><i
+                                        onclick="thongbaothemvaogiohang('${motctsp.id}','${banhangonline.soluongcon(motctsp.id)-banhangonline.sl1ctsptronggh(banhangonline.ListghTheoidkh(idkhachhang).get(0).getId(),motctsp.id)}');"><i
                                         class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
                                 </button>
                                 <button class="add-to-cart-btn" id="btthanhtoam" type="button"
-                                        onclick="clickthanhtoanctsp()"><i class="fa fa-shopping-cart"></i> Mua ngay
+                                        <c:if test="${banhangonline.tonggiamgia(motctsp.id)<=0}">
+                                            onclick="clickthanhtoanctsp('${motctsp.giaBan}')"
+                                        </c:if>
+                                <c:if test="${banhangonline.tonggiamgia(motctsp.id)>0}">
+
+
+                                        onclick="clickthanhtoanctsp('${banhangonline.sotienkhidagiam3(motctsp.id)}')"
+
+                                </c:if>
+                                ><i class="fa fa-shopping-cart"></i> Mua ngay
                                 </button>
 
 

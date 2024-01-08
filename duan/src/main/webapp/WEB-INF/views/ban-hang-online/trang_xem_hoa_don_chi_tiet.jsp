@@ -280,15 +280,15 @@
                                                         <label style="font-weight: bold">Số lượng:</label> ${ht.soLuong}<br>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
                                                             <label style="font-weight: bold">Đơn
-                                                                giá:</label>${ht.basoOchammotlamGHDGKG2()}đ -
-                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG2()}
+                                                                giá:</label>${ht.basoOchammotlamGHDGKG()}đ -
+                                                            <del class="product-old-price">${ht.basoOchammotlamGHDG()}
                                                                 đ
                                                             </del>
                                                         </c:if>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
                                                             <label style="font-weight: bold">Đơn
                                                                 giá:</label>
-                                                            ${ht.basoOchammotlamGHDG2()} đ
+                                                            ${ht.basoOchammotlamGHDG()} đ
                                                         </c:if></div>
                                                     <div style="width: 18%;">
                                                         <input type="checkbox" name="checkidghTT" value="${ht.id}"
@@ -464,7 +464,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-label" style="padding: 5px">Phí ship:</label>
                         <div class="col-sm-9">
-                            <input type="text" value="${hd.convertPhiShip2()}" disabled style="width: 97%" class="form-control"/>
+                            <input type="text" value="${hd.convertPhiShip()}" disabled style="width: 97%" class="form-control"/>
                         </div>
                     </div>
                 </div>
@@ -489,7 +489,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-label" style="padding: 5px">Tổng tiền:</label>
                         <div class="col-sm-9">
-                            <input type="text" value="${hd.convertTongtien2()} VNĐ" disabled style="width: 97%"
+                            <input type="text" value="${hd.convertTongtien()} VNĐ" disabled style="width: 97%"
                                    class="form-control"/>
                         </div>
                     </div>
@@ -714,12 +714,12 @@
                 </td>
 
                 <td>
-                        ${banhangonline.convertgiatien2(ht.donGiaKhiGiam)} VND
+                        ${banhangonline.convertgiatien(ht.donGiaKhiGiam)} VND
                 </td>
                 <td>
                         ${ht.soLuong}
                 </td>
-                <td>${banhangonline.convertgiatien2(ht.donGiaKhiGiam*ht.soLuong)}
+                <td>${banhangonline.convertgiatien(ht.donGiaKhiGiam*ht.soLuong)}
                     VND
                 </td>
                 <td>

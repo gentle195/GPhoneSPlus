@@ -303,6 +303,7 @@
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
                                                             <label style="font-weight: bold">Đơn
                                                                 giá:</label>
+<<<<<<< Updated upstream
                                                             <%--                                                            ${ht.basoOchammotlamGHDGKG()}--%>
                                                             <script>
                                                                 document.write(
@@ -319,16 +320,42 @@
                                                                 </script>
                                                                 đ
                                                             </del>
+=======
+                                                            ${ht.basoOchammotlamGHDGKG()}
+<%--                                                            <script>--%>
+<%--                                                                document.write(--%>
+<%--                                                                    Number('${ht.basoOchammotlamGHDGKG()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                                );--%>
+<%--                                                            </script>--%>
+                                                            đ -
+                                                            <del class="product-old-price">
+                                                                    ${ht.basoOchammotlamGHDG()}
+<%--                                                                        <script>--%>
+<%--                                                                            document.write(--%>
+<%--                                                                                Number('${ht.basoOchammotlamGHDG()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                                            );--%>
+<%--                                                                        </script>--%>
+                                                                        đ</del>
+>>>>>>> Stashed changes
                                                         </c:if>
                                                         <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
                                                             <label style="font-weight: bold">Đơn
                                                                 giá:</label>
+<<<<<<< Updated upstream
                                                             <%--                                                           ${ht.basoOchammotlamGHDG()}--%>
                                                             <script>
                                                                 document.write(
                                                                     Number('${ht.basoOchammotlamGHDG()}'.replace(/,/g, '')).toLocaleString('de-DE')
                                                                 );
                                                             </script>
+=======
+                                                           ${ht.basoOchammotlamGHDG()}
+<%--                                                            <script>--%>
+<%--                                                                document.write(--%>
+<%--                                                                    Number('${ht.basoOchammotlamGHDG()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                                );--%>
+<%--                                                            </script>--%>
+>>>>>>> Stashed changes
                                                             đ
                                                         </c:if>
                                                     </div>
@@ -535,6 +562,7 @@
                                                             </div>
                                                         </c:if>
 
+<<<<<<< Updated upstream
                                                     </div>
                                                     <div class="product-body"
                                                          style="text-align: left;word-wrap: break-word;">
@@ -558,6 +586,59 @@
                                                             </h4>
                                                         </c:if>
                                                     </div>
+=======
+                                                </div>
+                                                <div class="product-body"
+                                                     style="text-align: left;word-wrap: break-word;">
+                                                    <p class="product-category">Điện thoại</p>
+                                                    <h3 class="product-name"><a href="#">${ht.sanPham.ten}</a></h3>
+                                                    <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
+                                                    <h4 class="product-price">
+                                                            <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+                                                            ${banhangonline.sotienkhidagiam(ht.id)}
+<%--                                                                <script>--%>
+<%--                                                                    document.write(--%>
+<%--                                                                        Number('${banhangonline.sotienkhidagiam(ht.id)}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                                    );--%>
+<%--                                                                </script>--%>
+                                                        <span> ₫</span>
+                                                        <del class="product-old-price"
+                                                             style="float: right">
+
+                                                                ${ht.basoOchammotlam()}
+<%--    <script>--%>
+<%--        document.write(--%>
+<%--            Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--        );--%>
+<%--    </script>--%>
+                                                            <span>₫</span>
+                                                        </del>
+                                                    </h4>
+                                                    </c:if>
+                                                    <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
+                                                        <h4 class="product-price">
+                                                                <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+                                                                        ${ht.basoOchammotlam()}
+<%--                                                                    <script>--%>
+<%--                                                                        document.write(--%>
+<%--                                                                            Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                                        );--%>
+<%--                                                                    </script>--%>
+                                                            <span> ₫</span>
+                                                        </h4>
+                                                    </c:if>
+<%--                                                    <div class="product-rating"></div>--%>
+<%--                                                    <div class="product-btns" align="center">--%>
+<%--                                                        <button class="add-to-compare"><a href="/homes"><i--%>
+<%--                                                                class="fa fa-exchange"></i></a><span class="tooltipp">Thêm để so sánh</span>--%>
+<%--                                                        </button>--%>
+<%--                                                        <button class="quick-view"><a--%>
+<%--                                                                href="/ban-hang-online/chi-tiet-san-pham/${ht.id}"><i--%>
+<%--                                                                class="fa fa-eye"></i></a><span class="tooltipp">Xem chi tiết</span>--%>
+<%--                                                        </button>--%>
+<%--                                                    </div>--%>
+                                                </div>
+>>>>>>> Stashed changes
                                                 </a>
                                             </div>
                                         </c:if>
@@ -625,6 +706,7 @@
                                                             <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
                                                                 <h4 class="product-price">
                                                                         <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+<<<<<<< Updated upstream
                                                                         <%--                                                                        ${banhangonline.sotienkhidagiam(ht.id)}--%>
 
                                                                     <script>
@@ -641,6 +723,24 @@
                                                                                 Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
                                                                             );
                                                                         </script>
+=======
+                                                                        ${banhangonline.sotienkhidagiam(ht.id)}
+
+<%--                                                                            <script>--%>
+<%--                                                                                document.write(--%>
+<%--                                                                                    Number('${banhangonline.sotienkhidagiam(ht.id)}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                                                );--%>
+<%--                                                                            </script>--%>
+                                                                    <span> ₫</span>
+                                                                    <del class="product-old-price"
+                                                                         style="float: right">
+                                                                            ${ht.basoOchammotlam()}
+<%--                                                                        <script>--%>
+<%--                                                                            document.write(--%>
+<%--                                                                                Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                                            );--%>
+<%--                                                                        </script>--%>
+>>>>>>> Stashed changes
                                                                         <span>₫</span>
                                                                     </del>
                                                                 </h4>
@@ -648,12 +748,21 @@
                                                             <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
                                                                 <h4 class="product-price">
                                                                         <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+<<<<<<< Updated upstream
                                                                         <%--                                                                        ${ht.basoOchammotlam()}--%>
                                                                     <script>
                                                                         document.write(
                                                                             Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
                                                                         );
                                                                     </script>
+=======
+                                                                        ${ht.basoOchammotlam()}
+<%--                                                                            <script>--%>
+<%--                                                                                document.write(--%>
+<%--                                                                                    Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                                                );--%>
+<%--                                                                            </script>--%>
+>>>>>>> Stashed changes
                                                                     <span> ₫</span>
                                                                 </h4>
                                                             </c:if>
@@ -749,6 +858,7 @@
                                                                 <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
                                                                     <h4 class="product-price">
                                                                             <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+<<<<<<< Updated upstream
                                                                             <%--                                                                            ${banhangonline.sotienkhidagiam(ht.id)}--%>
                                                                         <script>
                                                                             document.write(
@@ -764,6 +874,23 @@
                                                                                     Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
                                                                                 );
                                                                             </script>
+=======
+<%--                                                                            ${banhangonline.sotienkhidagiam(ht.id)}--%>
+<%--                                                                                <script>--%>
+<%--                                                                                    document.write(--%>
+<%--                                                                                        Number('${banhangonline.sotienkhidagiam(ht.id)}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                                                    );--%>
+<%--                                                                                </script>--%>
+                                                                        <span> ₫</span>
+                                                                        <del class="product-old-price"
+                                                                             style="float: right">
+                                                                                ${ht.basoOchammotlam()}
+<%--                                                                                    <script>--%>
+<%--                                                                                        document.write(--%>
+<%--                                                                                            Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                                                        );--%>
+<%--                                                                                    </script>--%>
+>>>>>>> Stashed changes
                                                                             <span>₫</span>
                                                                         </del>
                                                                     </h4>
@@ -771,12 +898,21 @@
                                                                 <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
                                                                     <h4 class="product-price">
                                                                             <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+<<<<<<< Updated upstream
                                                                             <%--                                                                            ${ht.basoOchammotlam()}--%>
                                                                         <script>
                                                                             document.write(
                                                                                 Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
                                                                             );
                                                                         </script>
+=======
+                                                                            ${ht.basoOchammotlam()}
+<%--                                                                                <script>--%>
+<%--                                                                                    document.write(--%>
+<%--                                                                                        Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                                                    );--%>
+<%--                                                                                </script>--%>
+>>>>>>> Stashed changes
                                                                         <span> ₫</span>
                                                                     </h4>
                                                                 </c:if>
@@ -863,6 +999,7 @@
                                                         <c:if test="${giamgia.tonggiamgia(ht.id)>0}">
                                                             <h4 class="product-price">
                                                                     <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+<<<<<<< Updated upstream
                                                                     <%--                                                                    ${banhangonline.sotienkhidagiam(ht.id)}--%>
                                                                 <script>
                                                                     document.write(
@@ -878,6 +1015,23 @@
                                                                             Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
                                                                         );
                                                                     </script>
+=======
+<%--                                                                    ${banhangonline.sotienkhidagiam(ht.id)}--%>
+<%--                                                                        <script>--%>
+<%--                                                                            document.write(--%>
+<%--                                                                                Number('${banhangonline.sotienkhidagiam(ht.id)}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                                            );--%>
+<%--                                                                        </script>--%>
+                                                                <span> ₫</span>
+                                                                <del class="product-old-price"
+                                                                     style="float: right">
+                                                                        ${ht.basoOchammotlam()}
+<%--    <script>--%>
+<%--        document.write(--%>
+<%--            Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--        );--%>
+<%--    </script>--%>
+>>>>>>> Stashed changes
 
                                                                     <span>₫</span>
                                                                 </del>
@@ -886,6 +1040,7 @@
                                                         <c:if test="${giamgia.tonggiamgia(ht.id)<=0}">
                                                             <h4 class="product-price">
                                                                     <%--                                                            ${ht.giaBan-ht.giaBan/100*giamgia.tonggiamgia(ht.id)}--%>
+<<<<<<< Updated upstream
                                                                     <%--                                                                    ${ht.basoOchammotlam()}--%>
 
                                                                 <script>
@@ -893,6 +1048,15 @@
                                                                         Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')
                                                                     );
                                                                 </script>
+=======
+                                                                    ${ht.basoOchammotlam()}
+
+<%--                                                                        <script>--%>
+<%--                                                                            document.write(--%>
+<%--                                                                                Number('${ht.basoOchammotlam()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                                            );--%>
+<%--                                                                        </script>--%>
+>>>>>>> Stashed changes
                                                                 <span> ₫</span>
                                                             </h4>
                                                         </c:if>

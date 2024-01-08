@@ -484,32 +484,32 @@
 
                             <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)>0}">
                                 <div name="checkdongiakhigiam">
-<%--                                        ${ht.basoOchammotlamGHDGKG()}--%>
-                                            <script>
-                                                document.write(
-                                                    Number('${ht.basoOchammotlamGHDGKG()}'.replace(/,/g, '')).toLocaleString('de-DE')
-                                                );
-                                            </script>
+                                        ${ht.basoOchammotlamGHDGKG()}
+<%--                                            <script>--%>
+<%--                                                document.write(--%>
+<%--                                                    Number('${ht.basoOchammotlamGHDGKG()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                );--%>
+<%--                                            </script>--%>
 
                                             đ</div>
                                 -
                                 <del class="product-old-price">
-<%--                                        ${ht.basoOchammotlamGHDG()}--%>
-                                            <script>
-                                                document.write(
-                                                    Number('${ht.basoOchammotlamGHDG()}'.replace(/,/g, '')).toLocaleString('de-DE')
-                                                );
-                                            </script>
+                                        ${ht.basoOchammotlamGHDG()}
+<%--                                            <script>--%>
+<%--                                                document.write(--%>
+<%--                                                    Number('${ht.basoOchammotlamGHDG()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                );--%>
+<%--                                            </script>--%>
                                             đ</del>
                             </c:if>
                             <c:if test="${banhangonline.tonggiamgia(ht.chiTietSanPham.id)<=0}">
                                 <div name="checkdongiakhigiam">
-<%--                                        ${ht.basoOchammotlamGHDG()}--%>
-                                            <script>
-                                                document.write(
-                                                    Number('${ht.basoOchammotlamGHDG()}'.replace(/,/g, '')).toLocaleString('de-DE')
-                                                );
-                                            </script>
+                                        ${ht.basoOchammotlamGHDG()}
+<%--                                            <script>--%>
+<%--                                                document.write(--%>
+<%--                                                    Number('${ht.basoOchammotlamGHDG()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                                );--%>
+<%--                                            </script>--%>
                                     đ</div>
                             </c:if>
 
@@ -528,12 +528,12 @@
                         </td>
                         <td>
                             <div name="checkthanhtien">
-<%--                                    ${ht.tichDONGIAvsSL()}--%>
-                                        <script>
-                                            document.write(
-                                                Number('${ht.tichDONGIAvsSL()}'.replace(/,/g, '')).toLocaleString('de-DE')
-                                            );
-                                        </script>
+                                    ${ht.tichDONGIAvsSL()}
+<%--                                        <script>--%>
+<%--                                            document.write(--%>
+<%--                                                Number('${ht.tichDONGIAvsSL()}'.replace(/,/g, '')).toLocaleString('de-DE')--%>
+<%--                                            );--%>
+<%--                                        </script>--%>
                             </div>
 
                         </td>
