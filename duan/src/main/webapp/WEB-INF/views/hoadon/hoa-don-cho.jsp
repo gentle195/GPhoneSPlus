@@ -81,8 +81,7 @@
                                         <label class="col-sm-3 col-form-label">Tổng tiền:
                                         </label>
                                         <div class="col-sm-9">
-                                            <form:input class="form-control" placeholder=""
-                                                        path="tongTien"/>
+                                            <form:input class="form-control" placeholder="" path="tongTien" name="tongTien"/>
                                         </div>
                                     </div>
                                 </div>
@@ -167,4 +166,5 @@
 
 
 </script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </html>
