@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Focus - Bootstrap Admin Dashboard </title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../../../vendor/toastr/css/toastr.min.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
@@ -258,6 +259,7 @@
                         <div style="float: right">
                             <a href="/chi-tiet-san-pham/khoi-phuc-tat-ca" class="btn btn-danger btn-icon-text"
                                tabindex="-1"
+                               id="toastr-success-top-right-chi-tiet-san-pham"
                                role="button"
                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                 <i class="ti-reload btn-icon-prepend"></i>
@@ -397,6 +399,12 @@
 </c:if>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../../vendor/global/global.min.js"></script>
+<script src="../../../js/quixnav-init.js"></script>
+<script src="../../../vendor/toastr/js/toastr.min.js"></script>
+
+<!-- All init script -->
+<script src="../../../js/plugins-init/toastr-init.js"></script>
 <script>
     $(document).ready(function () {
         $('#modalSuccess').modal('show');

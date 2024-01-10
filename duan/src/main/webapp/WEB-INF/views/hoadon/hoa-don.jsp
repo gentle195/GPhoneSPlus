@@ -342,7 +342,7 @@
 <%--                    </div>--%>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table id="example" class="display" style="color: black">
+                        <table id="example" class="display" style="color: black;width: 1600px">
                             <thead>
                             <tr>
                                 <th>Mã hóa đơn</th>

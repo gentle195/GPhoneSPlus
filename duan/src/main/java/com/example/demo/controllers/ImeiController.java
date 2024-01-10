@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.IMEI;
+import com.example.demo.repositories.IMEIRepository;
 import com.example.demo.services.ChiTietSanPhamService;
 import com.example.demo.services.IMEIService;
 import com.example.demo.util.QRCodeGenerator;
@@ -31,18 +32,20 @@ import java.time.LocalDate;
 import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/imei")
 public class ImeiController {
     @Autowired
     IMEIService imeiService;
+    @Autowired
+    IMEIRepository imeiRepository;
 
-    QRCodeGenerator qrCodeGenerator;
     @Autowired
     ChiTietSanPhamService chiTietSanPhamService;
     private Date ngay;
-
+    private UUID idCu;
     @GetMapping("/hien-thi")
     public String hienThi(Model model) {
         List<IMEI> imeiPage = imeiService.getImeiOn();
@@ -107,7 +110,7 @@ public class ImeiController {
     }
 
     @GetMapping("/hien-thi-imei-loi")
-    public String hienThiImeiLoi(Model model) {
+    public String hienThiImeiLoi(Model model, @ModelAttribute("IMEILoi") IMEI imeiLoi) {
         List<IMEI> imeiPage = imeiService.findImeiLoi();
         model.addAttribute("listImei", imeiPage);
         model.addAttribute("contentPage", "../imei/imei-loi.jsp");
@@ -127,11 +130,73 @@ public class ImeiController {
     }
 
     @GetMapping("/khoi-phuc-imei-loi/{id}")
-    public String khoiPhucImeiLoi(@PathVariable("id") UUID id) {
-        IMEI imei = imeiService.findById(id);
-        imei.setTinhTrang(0);
-        imeiService.add(imei);
-        return "redirect:/imei/hien-thi-imei-loi";
+    public String khoiPhucImeiLoi(@PathVariable("id") UUID id, Model model, @ModelAttribute("IMEILoi") IMEI imeiLoi) {
+        imeiLoi = imeiRepository.findById(id).orElse(null);
+        idCu=id;
+        model.addAttribute("IMEILoi", imeiLoi);
+        model.addAttribute("listImei", imeiService.findImeiLoi());
+        model.addAttribute("batmodaldetailupdatekm", 0);
+        model.addAttribute("contentPage", "../imei/imei-loi.jsp");
+        return "home/layout";
+    }
+
+    @PostMapping("/thay-doi-imei-loi")
+    public String CapNhatIMEI( Model model, @ModelAttribute("IMEILoi") IMEI imeiLoi,
+                              @RequestParam("imeiMoi") String newIMEI) throws IOException, WriterException {
+        if (newIMEI.isEmpty() || newIMEI.length() < 15 || newIMEI.length() > 15) {
+            model.addAttribute("thongBao", "IMEI không được để trống và có độ dài là 15 ký tự");
+            imeiLoi = imeiRepository.findById(idCu).orElse(null);
+            model.addAttribute("IMEILoi", imeiLoi);
+            model.addAttribute("listImei", imeiService.findImeiLoi());
+            model.addAttribute("batmodaldetailupdatekm", 0);
+            model.addAttribute("contentPage", "../imei/imei-loi.jsp");
+            return "home/layout";
+        } else {
+            Pattern pattern = Pattern.compile("^([0-9]{15})$");
+            boolean valid = pattern.matcher(newIMEI).matches();
+            if (valid) {
+                if (imeiService.existImei(newIMEI)) {
+                    model.addAttribute("thongBao", "IMEI này đã có trong dữ liệu");
+                    imeiLoi = imeiRepository.findById(idCu).orElse(null);
+                    model.addAttribute("IMEILoi", imeiLoi);
+                    model.addAttribute("listImei", imeiService.findImeiLoi());
+                    model.addAttribute("batmodaldetailupdatekm", 0);
+                    model.addAttribute("contentPage", "../imei/imei-loi.jsp");
+                    return "home/layout";
+                }
+                IMEI imei =imeiService.findById(idCu);
+                String lichSuThayDoi= "Thông tin IMEI cũ: "
+                        +imei.getChiTietSanPham().getSanPham().getTen()+" - "
+                        +imei.getChiTietSanPham().getSanPham().getHangSanPham().getTen()+" - "
+                        +imei.getChiTietSanPham().getChip().getTen()+" - "
+                        +imei.getChiTietSanPham().getRam().getDungLuong()+" - "
+                        +imei.getChiTietSanPham().getRom().getDungLuong()+" - "
+                        +imei.getSoImei()
+                        ;
+                imei.setLichSu(lichSuThayDoi);
+                imei.setSoImei(newIMEI);
+                imei.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+                imei.setTinhTrang(0);
+                String projectRootPath = System.getProperty("user.dir");
+                String outputFolderPath = projectRootPath + "/src/main/webapp/maqr";
+                QRCodeGenerator.generatorQRCode(imei, outputFolderPath);
+                imei.setMaQr(imei.getSoImei() + ".png");
+                imeiService.update(idCu,imei);
+                model.addAttribute("thongBaoThanhCong", "IMEI đã được cập nhật thành công");
+                model.addAttribute("listImei", imeiService.findImeiLoi());
+                model.addAttribute("contentPage", "../imei/imei-loi.jsp");
+                return "home/layout";
+            } else {
+                model.addAttribute("thongBao", "IMEI không đúng định dạng");
+                imeiLoi = imeiRepository.findById(idCu).orElse(null);
+                model.addAttribute("IMEILoi", imeiLoi);
+                model.addAttribute("listImei", imeiService.findImeiLoi());
+                model.addAttribute("batmodaldetailupdatekm", 0);
+                model.addAttribute("contentPage", "../imei/imei-loi.jsp");
+                return "home/layout";
+            }
+        }
+
     }
 
     @GetMapping("/khoi-phuc-tat-ca-imei-loi")
@@ -154,12 +219,13 @@ public class ImeiController {
     }
 
     @GetMapping("/khoi-phuc-tat-ca")
-    public String khoiPhucAll() {
+    public String khoiPhucAll() throws IOException {
         List<IMEI> list = imeiService.findAll3();
         for (IMEI imei : list) {
             imei.setTinhTrang(0);
             imeiService.add(imei);
         }
+        System.in.read();
         return "redirect:/imei/hien-thi-da-xoa";
     }
 
@@ -251,7 +317,7 @@ public class ImeiController {
 
     @PostMapping("/update/{id}")
     public String update(Model model, @PathVariable("id") UUID id, @Valid @ModelAttribute("imeiupdate") IMEI imei,
-                         BindingResult result) {
+                         BindingResult result) throws IOException, WriterException {
         if (result.hasErrors()) {
             model.addAttribute("listCTSP", chiTietSanPhamService.findAll());
             model.addAttribute("contentPage", "../imei/update-imei.jsp");
@@ -266,8 +332,17 @@ public class ImeiController {
         LocalDate localDate = LocalDate.now();
         imei1.setNgayCapNhat(Date.valueOf(localDate));
         imei1.setTinhTrang(imei.getTinhTrang());
-        imeiService.update(id, imei1);
-        return "redirect:/imei/hien-thi";
+        if (imei1.getSoImei().equals(imei.getSoImei())) {
+            imeiService.update(id, imei1);
+            return "redirect:/imei/hien-thi";
+        } else {
+            String projectRootPath = System.getProperty("user.dir");
+            String outputFolderPath = projectRootPath + "/src/main/webapp/maqr";
+            QRCodeGenerator.generatorQRCode(imei, outputFolderPath);
+            imei.setMaQr(imei.getSoImei() + ".png");
+            imeiService.update(id, imei1);
+            return "redirect:/imei/hien-thi";
+        }
     }
 
     @ResponseBody

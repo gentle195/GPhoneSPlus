@@ -725,7 +725,7 @@ public class ChiTietSanPhamController {
 
     @GetMapping("/khoi-phuc-tat-ca")
     public String khoiPhucAll(@RequestParam("pageNum") Optional<Integer> pageNum,
-                              @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize, Model model) {
+                              @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize, Model model) throws IOException {
 
         List<ChiTietSanPham> chiTietSanPhams = chiTietSanPhamService.finAllTTOff();
         for (ChiTietSanPham ctsp : chiTietSanPhams) {
@@ -753,6 +753,7 @@ public class ChiTietSanPhamController {
         model.addAttribute("page", page.getNumber());
         model.addAttribute("banHangOnlineService", banHangOnlineService);
         model.addAttribute("banHangOnLinerepository", banHangOnLinerepository);
+        System.in.read();
         return "redirect:/chi-tiet-san-pham/hien-thi-het-hang";
     }
 

@@ -1052,22 +1052,22 @@ public class HoaDonController {
 
     @PostMapping("/loc-da-huy")
     public String locDaHuy(Model model,
-                             @RequestParam(value = "nhanVien", required = false) UUID idNV,
-                             @RequestParam(value = "khachHang", required = false) UUID idKH,
-                             @RequestParam(value = "diaChi", required = false) UUID idDC,
-                             @RequestParam(value = "loaiHoaDon", required = false) Integer loaiHoaDon,
-                             @RequestParam(value = "startDate", required = false) String startDate,
-                             @RequestParam(value = "receiveStartDate", required = false) String receiveStartDate,
-                             @RequestParam(value = "shipStartDate", required = false) String shipStartDate,
-                             @RequestParam(value = "endDate", required = false) String endDate,
-                             @RequestParam(value = "receiveEndDate", required = false) String receiveEndDate,
-                             @RequestParam(value = "shipEndDate", required = false) String shipEndDate,
-                             @ModelAttribute("nhanVien") NhanVien nhanVien,
-                             @ModelAttribute("khachHang") KhachHang khachHang,
-                             @ModelAttribute("diaChi") DiaChi diaChi,
-                             @ModelAttribute("hoaDon") HoaDon hoaDon,
-                             @RequestParam("pageNum") Optional<Integer> pageNum,
-                             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+                           @RequestParam(value = "nhanVien", required = false) UUID idNV,
+                           @RequestParam(value = "khachHang", required = false) UUID idKH,
+                           @RequestParam(value = "diaChi", required = false) UUID idDC,
+                           @RequestParam(value = "loaiHoaDon", required = false) Integer loaiHoaDon,
+                           @RequestParam(value = "startDate", required = false) String startDate,
+                           @RequestParam(value = "receiveStartDate", required = false) String receiveStartDate,
+                           @RequestParam(value = "shipStartDate", required = false) String shipStartDate,
+                           @RequestParam(value = "endDate", required = false) String endDate,
+                           @RequestParam(value = "receiveEndDate", required = false) String receiveEndDate,
+                           @RequestParam(value = "shipEndDate", required = false) String shipEndDate,
+                           @ModelAttribute("nhanVien") NhanVien nhanVien,
+                           @ModelAttribute("khachHang") KhachHang khachHang,
+                           @ModelAttribute("diaChi") DiaChi diaChi,
+                           @ModelAttribute("hoaDon") HoaDon hoaDon,
+                           @RequestParam("pageNum") Optional<Integer> pageNum,
+                           @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
 
         List<HoaDon> list = new ArrayList<>();
         dem = 2;
@@ -1333,8 +1333,7 @@ public class HoaDonController {
                 model.addAttribute("thongBao", "Ngày ship không được nhỏ hơn ngày hiện tại");
                 model.addAttribute("contentPage", "../hoadon/hoa-don-view-update-da-xac-nhan.jsp");
                 return "home/layout";
-            }
-            else if (check < 0) {
+            } else if (check < 0) {
                 hoaDon.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
                 hoaDon.setKhachHang(hoaDonnn.getKhachHang());
                 hoaDon.setMaGiaoDich(hoaDonnn.getMaGiaoDich());
@@ -1395,8 +1394,7 @@ public class HoaDonController {
                 }
                 hoaDonnn = hoaDon;
                 return "redirect:/hoa-don/hien-thi-xac-nhan";
-            }
-            else {
+            } else {
                 hoaDon.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
                 hoaDon.setKhachHang(hoaDonnn.getKhachHang());
                 hoaDon.setLoai(hoaDonnn.getLoai());
@@ -1974,6 +1972,29 @@ public class HoaDonController {
         }
         System.in.read();
         return "redirect:/hoa-don/hien-thi-cho-giao";
+    }
+
+    @GetMapping("/xac-nhan-giao-hang-da-xac-nhan/{id}")
+    public String xacNhanGiaoHangDẫcNhan(Model model, @PathVariable("id") UUID id) throws IOException {
+        HoaDon hd = hoaDonService.findById(id);
+        hd.setTinhTrangGiaoHang(2);
+        hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
+        hd.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        if (hd.getNgayShip() == null) {
+            hd.setNgayShip(Date.valueOf(LocalDate.now()));
+        }
+        hoaDonService.update(id, hd);
+        idHoaDon = id;
+        List<HoaDonChiTiet> listHoaDonChiTiet = hoaDonChiTietService.getHoaDonChiTiet(id);
+        if (!listHoaDonChiTiet.isEmpty()) {
+            for (HoaDonChiTiet hdct : listHoaDonChiTiet
+            ) {
+                System.out.println(hdct.getId());
+                imeiService.updatImeiChoXuLy(Date.valueOf(LocalDate.now()), hdct.getId());
+            }
+        }
+        System.in.read();
+        return "redirect:/hoa-don/hien-thi-xac-nhan";
     }
 
     @GetMapping("/xac-nhan-giao-hang-hoan-tat/{id}")

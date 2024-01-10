@@ -333,17 +333,17 @@
                         </form:form>
                     </div>
                     <br>
-<%--                    <div class="search">--%>
-<%--                        <form action="/hoa-don/search-xac-nhan" method="post">--%>
-<%--                            <div class="input-group" style="width: 30%; float: right">--%>
-<%--                                <input type="text" class="form-control" placeholder="Bạn tìm gì..."--%>
-<%--                                       aria-label="Bạn tìm gì..." name="search">--%>
-<%--                                <div class="input-group-append">--%>
-<%--                                    <button class="btn btn-sm btn-primary" type="submit">Search</button>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </form>--%>
-<%--                    </div>--%>
+                    <%--                    <div class="search">--%>
+                    <%--                        <form action="/hoa-don/search-xac-nhan" method="post">--%>
+                    <%--                            <div class="input-group" style="width: 30%; float: right">--%>
+                    <%--                                <input type="text" class="form-control" placeholder="Bạn tìm gì..."--%>
+                    <%--                                       aria-label="Bạn tìm gì..." name="search">--%>
+                    <%--                                <div class="input-group-append">--%>
+                    <%--                                    <button class="btn btn-sm btn-primary" type="submit">Search</button>--%>
+                    <%--                                </div>--%>
+                    <%--                            </div>--%>
+                    <%--                        </form>--%>
+                    <%--                    </div>--%>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
                         <table id="example" class="display" style="color: black; width: 1700px">
@@ -390,6 +390,30 @@
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                             <i class="ti-file btn-icon-prepend"></i>
                                             Detail</a>
+                                        <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 1 || hoaDon.tinhTrangGiaoHang == 0) && hoaDon.nhanVien!= null && hoaDon.tinhTrang != 9}">
+                                            <a href="/hoa-don/xac-nhan-giao-hang-da-xac-nhan/${hoaDon.id}"
+                                               id="toastr-success-top-right-hoa-don-da-xac-nhan"
+                                               class="btn btn-info btn-icon-text"
+                                               tabindex="-1"
+                                               role="button"
+                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
+                                                    <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456M12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+                                                </svg>
+                                                Giao hàng</a>
+                                        </c:if>
+                                        <c:if test="${(hoaDon.tinhTrang == 0|| hoaDon.tinhTrang == 1|| hoaDon.tinhTrang == 3 &&
+                                         hoaDon.tinhTrangGiaoHang != 2 && hoaDon.tinhTrangGiaoHang != 3 || (hoaDon.tinhTrang == 2 && hoaDon.loai==1  && hoaDon.tinhTrangGiaoHang != 2 && hoaDon.tinhTrangGiaoHang != 3))
+                                          && hoaDon.tinhTrang != 9 && hoaDon.khachHang!= null && hoaDon.nhanVien!= null }">
+                                            <a href="/hoa-don/view-update-da-xac-nhan/${hoaDon.id}"
+                                               class="btn btn-warning btn-icon-text"
+                                               tabindex="-1"
+                                               role="button"
+                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                                <i class="ti-reload btn-icon-prepend"></i>
+                                                Update thông tin</a>
+                                        </c:if>
                                         <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 0 || hoaDon.tinhTrangGiaoHang == 1 || hoaDon.tinhTrangGiaoHang == 2) && hoaDon.hinhThucThanhToan == 0}">
 
                                             <a href="/hoa-don/xac-nhan-huy-da-xac-nhan/${hoaDon.id}"
@@ -422,17 +446,6 @@
                                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                                 <i class="fas fa-times-circle"></i>
                                                 Hủy đơn tại quầy</a>
-                                        </c:if>
-                                        <c:if test="${(hoaDon.tinhTrang == 0|| hoaDon.tinhTrang == 1|| hoaDon.tinhTrang == 3 &&
-                                         hoaDon.tinhTrangGiaoHang != 2 && hoaDon.tinhTrangGiaoHang != 3 || (hoaDon.tinhTrang == 2 && hoaDon.loai==1  && hoaDon.tinhTrangGiaoHang != 2 && hoaDon.tinhTrangGiaoHang != 3))
-                                          && hoaDon.tinhTrang != 9 && hoaDon.khachHang!= null && hoaDon.nhanVien!= null }">
-                                            <a href="/hoa-don/view-update-da-xac-nhan/${hoaDon.id}"
-                                               class="btn btn-warning btn-icon-text"
-                                               tabindex="-1"
-                                               role="button"
-                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                                <i class="ti-reload btn-icon-prepend"></i>
-                                                Update thông tin</a>
                                         </c:if>
                                     </td>
                                 </tr>

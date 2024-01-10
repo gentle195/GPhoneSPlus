@@ -72,7 +72,7 @@
                     backgroundColor: '#36a2eb',
                 },
                 {
-                    label: 'Tiền đổi hàng',
+                    label: 'Tiền đổi trả',
                     data: data.map(item => item.tienDoiTra),
                     borderWidth: 1,
                     yAxisID: 'y',

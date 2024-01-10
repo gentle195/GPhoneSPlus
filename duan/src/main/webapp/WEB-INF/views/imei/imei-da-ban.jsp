@@ -15,24 +15,32 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/imei/hien-thi" role="tab"
-              >Thông tin Imei</a>
+            <a class="nav-link"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+               href="/imei/hien-thi" role="tab"
+            >Thông tin Imei</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               aria-controls="description" aria-selected="true">Imei đã bán</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/imei/view-add" role="tab"
-              >Thêm thông tin
+            <a class="nav-link"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+               href="/imei/view-add" role="tab"
+            >Thêm thông tin
                 Imei</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/imei/hien-thi-da-xoa" role="tab"
-              >Imei đã xoá</a>
+            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+               aria-controls="description" aria-selected="true">Imei đã bán - chờ xử lý</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/imei/hien-thi-imei-loi" role="tab"
+            <a class="nav-link"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+               href="/imei/hien-thi-da-xoa" role="tab"
+            >Imei đã xoá</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+               href="/imei/hien-thi-imei-loi" role="tab"
             >Imei lỗi</a>
         </li>
     </ul>
@@ -58,7 +66,7 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table  style="color: black; width: 1400px;"  id="example" class="display">
+                        <table style="color: black; width: 1400px;" id="example" class="display">
                             <thead>
                             <tr>
                                 <th scope="col">Mã</th>
@@ -67,6 +75,7 @@
                                 <th scope="col">Sản phẩm</th>
                                 <th scope="col">Số imei</th>
                                 <th scope="col">Tình trạng</th>
+                                <th scope="col">Lịch sử thay đổi</th>
                                 <th scope="col">Mô tả</th>
                                 <th scope="col"></th>
                             </tr>
@@ -89,6 +98,7 @@
                                         <c:if test="${imei.tinhTrang == 2}">Đã hủy</c:if>
                                         <c:if test="${imei.tinhTrang == 3}">Chờ xử lý</c:if>
                                     </td>
+                                    <td>${imei.lichSu}</td>
                                     <td>${imei.moTa}</td>
                                     <td>
                                         <a href="/imei/show-qr/${imei.id}"

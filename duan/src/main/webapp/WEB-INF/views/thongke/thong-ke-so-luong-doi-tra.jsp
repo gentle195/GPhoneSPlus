@@ -71,20 +71,15 @@
     </div>
 </c:if>
 <div class="row">
-    <div class="col-6"><h3>Biểu đồ thống kê số sản phẩm đổi hàng</h3>
-        <div class="card">
-            <div class="card-body">
-                <canvas id="myChart"></canvas>
-            </div>
-        </div>
-    </div>
-    <div class="col-6"><h3>Biểu đồ thống kê số sản phẩm lỗi</h3>
+    <div class="col-4"></div>
+    <div class="col-4" style="align-content: center"><h3>Biểu đồ thống kê số sản phẩm lỗi</h3>
         <div class="card">
             <div class="card-body">
                 <canvas id="myChart2"></canvas>
             </div>
         </div>
     </div>
+    <div class="col-4"></div>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>

@@ -235,7 +235,7 @@ CREATE TABLE chi_tiet_san_pham (
   FOREIGN KEY (id_ram) REFERENCES ram(id),
   FOREIGN KEY (id_rom) REFERENCES rom(id),
   FOREIGN KEY (id_pin) REFERENCES pin(id),
-     FOREIGN KEY (id_khuyen_mai) REFERENCES khuyen_mai(id)
+  FOREIGN KEY (id_khuyen_mai) REFERENCES khuyen_mai(id)
 );
 
 
@@ -253,6 +253,7 @@ CREATE TABLE imei (
   ngay_cap_nhat DATE NULL,
   tinh_trang INT DEFAULT 0,
   mo_ta NVARCHAR(MAX) NULL,
+  lich_su_doi_loi NVARCHAR(MAX) NULL,
   FOREIGN KEY (id_chi_tiet_san_pham) REFERENCES chi_tiet_san_pham(id)
 );
 

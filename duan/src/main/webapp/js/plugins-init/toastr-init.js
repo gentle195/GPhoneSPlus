@@ -27,9 +27,57 @@
             })
         }
     ),
+        $("#toastr-success-top-right-chi-tiet-san-pham").on("click", function () {
+                toastr.success("Xác nhận thành công", "Thông báo", {
+                    timeOut: 3000,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+                })
+                setTimeout(function () {
+                    window.location.href = "/chi-tiet-san-pham/hien-thi-het-hang";
+                }, 3000);
+            }
+        ),
+        $("#toastr-success-top-right-imei").on("click", function () {
+                toastr.success("Xác nhận thành công", "Thông báo", {
+                    timeOut: 3000,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+                })
+                setTimeout(function () {
+                    window.location.href = "/imei/hien-thi-da-xoa";
+                }, 3000);
+            }
+        ),
         $("#toastr-success-top-right-hoa-don-cho-xac-nhan").on("click", function () {
                 toastr.success("Xác nhận thành công", "Thông báo", {
-                    timeOut: 1500,
+                    timeOut: 3000,
                     closeButton: !0,
                     debug: !1,
                     newestOnTop: !0,
@@ -48,12 +96,12 @@
                 })
                 setTimeout(function () {
                     window.location.href = "/hoa-don/hien-thi";
-                }, 2000);
+                }, 3000);
             }
         ),
         $("#toastr-success-top-right-hoa-don-da-xac-nhan").on("click", function () {
                 toastr.success("Xác nhận thành công", "Thông báo", {
-                    timeOut: 1500,
+                    timeOut: 3000,
                     closeButton: !0,
                     debug: !1,
                     newestOnTop: !0,
@@ -72,12 +120,12 @@
                 })
                 setTimeout(function () {
                     window.location.href = "/hoa-don/hien-thi-xac-nhan";
-                }, 2000);
+                }, 3000);
             }
         ),
         $("#toastr-success-top-right-hoa-don-cho-giao").on("click", function () {
                 toastr.success("Xác nhận thành công", "Thông báo", {
-                    timeOut: 1500,
+                    timeOut: 3000,
                     closeButton: !0,
                     debug: !1,
                     newestOnTop: !0,
@@ -96,12 +144,12 @@
                 })
                 setTimeout(function () {
                     window.location.href = "/hoa-don/hien-thi-cho-giao";
-                }, 2000);
+                }, 3000);
             }
         ),
         $("#toastr-success-top-right-hoa-don-dang-giao").on("click", function () {
                 toastr.success("Xác nhận thành công", "Thông báo", {
-                    timeOut: 1500,
+                    timeOut: 3000,
                     closeButton: !0,
                     debug: !1,
                     newestOnTop: !0,
@@ -120,12 +168,12 @@
                 })
                 setTimeout(function () {
                     window.location.href = "/hoa-don/hien-thi-dang-giao";
-                }, 2000);
+                }, 3000);
             }
         ),
         $("#toastr-success-top-right-hoa-don-hoan-tat").on("click", function () {
                 toastr.success("Xác nhận thành công", "Thông báo", {
-                    timeOut: 1500,
+                    timeOut: 3000,
                     closeButton: !0,
                     debug: !1,
                     newestOnTop: !0,
@@ -144,12 +192,12 @@
                 })
                 setTimeout(function () {
                     window.location.href = "/hoa-don/hien-thi-hoan-tat";
-                }, 2000);
+                }, 3000);
             }
         ),
         $("#toastr-success-top-right-hoa-don-da-huy").on("click", function () {
                 toastr.success("Xác nhận thành công", "Thông báo", {
-                    timeOut: 1500,
+                    timeOut: 3000,
                     closeButton: !0,
                     debug: !1,
                     newestOnTop: !0,
@@ -168,13 +216,13 @@
                 })
                 setTimeout(function () {
                     window.location.href = "/hoa-don/hien-thi-da-huy";
-                }, 2000);
+                }, 3000);
             }
         ),
         // thanh toán
         $("#toastr-success-top-center-thanh-toan").on("click", function () {
                 toastr.success("Thanh toán thành công", "Thông báo", {
-                    timeOut: 1500,
+                    timeOut: 3000,
                     closeButton: !0,
                     debug: !1,
                     newestOnTop: !0,
@@ -194,14 +242,14 @@
                 })
                 setTimeout(function () {
                     window.location.href = "/ban-hang/hien-thi";
-                }, 1500);
+                }, 3000);
             }
         ),
 
 
         $("#toastr-success-top-center-doi-tra").on("click", function () {
                 toastr.success("Đổi hàng thành công", "Thông báo", {
-                    timeOut: 1500,
+                    timeOut: 3000,
                     closeButton: !0,
                     debug: !1,
                     newestOnTop: !0,
@@ -221,7 +269,7 @@
                 })
                 setTimeout(function () {
                     window.location.href = "/doi-tra/hien-thi";
-                }, 1500);
+                }, 3000);
             }
         ),
         $("#toastr-success-bottom-right").on("click", function () {
