@@ -8,6 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../../vendor/toastr/css/toastr.min.css">
     <title>GPhoneS Store </title>
     <!-- Favicon icon -->
 </head>
@@ -15,24 +16,32 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/imei/hien-thi" role="tab"
-               >Thông tin Imei</a>
+            <a class="nav-link"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+               href="/imei/hien-thi" role="tab"
+            >Thông tin Imei</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/imei/view-add" role="tab"
-               >Thêm thông tin
+            <a class="nav-link"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+               href="/imei/view-add" role="tab"
+            >Thêm thông tin
                 Imei</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/imei/hien-thi-da-ban" role="tab"
-               >Imei đã bán</a>
+            <a class="nav-link"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+               href="/imei/hien-thi-da-ban" role="tab"
+            >Imei đã bán - chờ xử lý</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
                aria-controls="description" aria-selected="true">Imei đã xoá</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/imei/hien-thi-imei-loi" role="tab"
+            <a class="nav-link"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+               href="/imei/hien-thi-imei-loi" role="tab"
             >Imei lỗi</a>
         </li>
     </ul>
@@ -57,6 +66,7 @@
                         <div style="float: right">
                             <a href="/imei/khoi-phuc-tat-ca" class="btn btn-danger btn-icon-text"
                                tabindex="-1"
+                               id="toastr-success-top-right-imei"
                                role="button"
                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                 <i class="ti-reload btn-icon-prepend"></i>
@@ -76,6 +86,7 @@
                                 <th scope="col">Sản phẩm</th>
                                 <th scope="col">Số imei</th>
                                 <th scope="col">Tình trạng</th>
+                                <th scope="col">Lịch sử thay đổi</th>
                                 <th scope="col">Mô tả</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -99,6 +110,7 @@
                                         <c:if test="${imei.tinhTrang == 3}">Chờ xử lý</c:if>
                                     </td>
 
+                                    <td>${imei.lichSu}</td>
                                     <td>${imei.moTa}</td>
                                     <td>
 
@@ -159,6 +171,12 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script src="../../../vendor/global/global.min.js"></script>
+<script src="../../../js/quixnav-init.js"></script>
+<script src="../../../vendor/toastr/js/toastr.min.js"></script>
+
+<!-- All init script -->
+<script src="../../../js/plugins-init/toastr-init.js"></script>
 
 <script>
     $(document).ready(function () {

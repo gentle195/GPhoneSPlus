@@ -223,7 +223,10 @@
                     <br>
 
                     <div align="center">
-                        <button type="submit" class="btn btn-warning" id="bthkh" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"  >Thêm khuyến mãi</button>
+                        <button type="submit" class="btn btn-warning" id="bthkh"
+                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                            Thêm khuyến mãi
+                        </button>
                     </div>
 
 
@@ -262,15 +265,19 @@
                 <select style="float: right;margin-right: 8cm;height: 1cm" id="selectOption"
                         onchange="choncomboboxtinhtrangkm()">
                     <option style=" font-weight: bold;"><a>Trạng thái khuyến mãi</a></option>
-                    <option value="all" data-link="/khuyen-mai/tinh-trang/all" <c:if test="${dongbo=='all'}">selected</c:if>><a>Tất cả</a></option>
-                    <option value="2" data-link="/khuyen-mai/tinh-trang/2" <c:if test="${dongbo=='2'}">selected</c:if>><a>Chưa diễn ra</a></option>
-                    <option value="0" data-link="/khuyen-mai/tinh-trang/0" <c:if test="${dongbo=='0'}">selected</c:if>><a>Đang diễn ra</a></option>
-                    <option value="1" data-link="/khuyen-mai/tinh-trang/1" <c:if test="${dongbo=='1'}">selected</c:if>><a>Đã kết thúc</a></option>
+                    <option value="all" data-link="/khuyen-mai/tinh-trang/all"
+                            <c:if test="${dongbo=='all'}">selected</c:if>><a>Tất cả</a></option>
+                    <option value="2" data-link="/khuyen-mai/tinh-trang/2" <c:if test="${dongbo=='2'}">selected</c:if>>
+                        <a>Chưa diễn ra</a></option>
+                    <option value="0" data-link="/khuyen-mai/tinh-trang/0" <c:if test="${dongbo=='0'}">selected</c:if>>
+                        <a>Đang diễn ra</a></option>
+                    <option value="1" data-link="/khuyen-mai/tinh-trang/1" <c:if test="${dongbo=='1'}">selected</c:if>>
+                        <a>Đã kết thúc</a></option>
                 </select>
 
 
                 <button type="button" id="modalthemkm" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#myModalthemkm"   >
+                        data-bs-target="#myModalthemkm">
                     Thêm khuyến mãi
                 </button>
                 <br>
@@ -309,18 +316,18 @@
                                     <td>
                                         <c:if test="${ht.tinhTrang==0}">
                                             <p style="color: blue">
-                                            Khuyến mãi đang áp dụng
+                                                Khuyến mãi đang áp dụng
                                             </p>
 
                                         </c:if>
                                         <c:if test="${ht.tinhTrang==1}">
                                             <p style="color: red">
-                                            Khuyến mãi đã hết hạn
+                                                Khuyến mãi đã hết hạn
                                             </p>
                                         </c:if>
                                         <c:if test="${ht.tinhTrang==2}">
                                             <p style="color: #00FF00">
-                                            Khuyến mãi chưa bắt đầu
+                                                Khuyến mãi chưa bắt đầu
                                             </p>
                                         </c:if>
 
@@ -330,16 +337,20 @@
                                     <td>
                                         <c:if test="${ht.tinhTrang==1}">
                                             <a href="/khuyen-mai/detail-khuyen-mai/${ht.id}" class="btn btn-success"
-                                               onclick="return confirm('Bạn muốn xem khuyến mãi')"  style="background-color: yellow;width: 4cm">Xem khuyến mãi</a>
+                                               onclick="return confirm('Bạn muốn xem khuyến mãi')"
+                                               style="background-color: yellow;width: 4cm">Xem khuyến mãi</a>
                                         </c:if>
 
                                         <c:if test="${ht.tinhTrang!=1}">
-                                            <a href="/khuyen-mai/ap-dung-khuyen-mai/${ht.id}" class="btn btn-success" style="width: 4cm"
+                                            <a href="/khuyen-mai/ap-dung-khuyen-mai/${ht.id}" class="btn btn-success"
+                                               style="width: 4cm"
                                                onclick="return confirm('Bạn muốn áp dụng khuyến mãi')">Áp dụng</a>
                                             <a href="/khuyen-mai/detail-khuyen-mai/${ht.id}" class="btn btn-success"
-                                               onclick="return confirm('Bạn muốn xem khuyến mãi')" style="background-color: yellow;width: 4cm">Xem khuyến mãi</a>
+                                               onclick="return confirm('Bạn muốn xem khuyến mãi')"
+                                               style="background-color: yellow;width: 4cm">Xem khuyến mãi</a>
                                         </c:if>
-                                        <a href="/khuyen-mai/huy-khuyen-mai/${ht.id}" class="btn btn-success" style="background-color: red;width: 4cm"
+                                        <a href="/khuyen-mai/huy-khuyen-mai/${ht.id}" class="btn btn-success"
+                                           style="background-color: red;width: 4cm"
                                            onclick="return confirm('Các chi tiết sản phẩm đang ap dụng khuyến mãi mày sẽ không áp dụng khuyến mãi này nữa')">Hủy </a>
 
                                     </td>
@@ -360,7 +371,6 @@
         data-bs-target="#myModalapdungkhuyemmai">
     Bat modal ap dung 1 khuyeen mai
 </button>
-</div>
 
 <!-- The Modal -->
 <div class="modal" id="myModalapdungkhuyemmai">
@@ -392,92 +402,91 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                             </div>
                             <div id="max" style="display: none">${max}</div>
                         </div>
-                        <div style="width: 75%;padding-left: 1cm" >
+                        <div style="width: 75%;padding-left: 1cm">
 
 
-                                    <label style="width: 4cm" >
-                                        <select class="form-control" id="hangds1" onchange="clickcombobox()">
-                                            <option selected value="null">Hãng sản phẩm</option>
-                                            <c:forEach items="${hangds}" var="ht">
-                                                <option value="${ht.ten}">${ht.ten}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </label >
-                                    <label style="width: 4cm">
-                                        <select class="form-control" id="camds1" onchange="clickcombobox()">
-                                            <option selected value="null">Camera</option>
-                                            <c:forEach items="${camds}" var="ht">
-                                                <option value="${ht.thongSo}">${ht.thongSo}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </label >
-                                    <label style="width: 4cm">
-                                        <select class="form-control" id="mands1" onchange="clickcombobox()">
-                                            <option selected value="null">Màn hình</option>
-                                            <c:forEach items="${mands}" var="ht">
-                                                <option value="${ht.thongSo}">${ht.thongSo}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </label>
+                            <label style="width: 4cm">
+                                <select class="form-control" id="hangds1" onchange="clickcombobox()">
+                                    <option selected value="null">Hãng sản phẩm</option>
+                                    <c:forEach items="${hangds}" var="ht">
+                                        <option value="${ht.ten}">${ht.ten}</option>
+                                    </c:forEach>
+                                </select>
+                            </label>
+                            <label style="width: 4cm">
+                                <select class="form-control" id="camds1" onchange="clickcombobox()">
+                                    <option selected value="null">Camera</option>
+                                    <c:forEach items="${camds}" var="ht">
+                                        <option value="${ht.thongSo}">${ht.thongSo}</option>
+                                    </c:forEach>
+                                </select>
+                            </label>
+                            <label style="width: 4cm">
+                                <select class="form-control" id="mands1" onchange="clickcombobox()">
+                                    <option selected value="null">Màn hình</option>
+                                    <c:forEach items="${mands}" var="ht">
+                                        <option value="${ht.thongSo}">${ht.thongSo}</option>
+                                    </c:forEach>
+                                </select>
+                            </label>
 
-                                    <label style="width: 4cm">
-                                        <select class="form-control" id="mauds1" onchange="clickcombobox()">
-                                            <option selected value="null">Màu sắc</option>
-                                            <c:forEach items="${mauds}" var="ht">
-                                                <option value="${ht.ten}">${ht.ten}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </label>
-                                    <label style="width: 4cm">
-                                        <select class="form-control" id="ramds1" onchange="clickcombobox()">
-                                            <option selected value="null">Ram</option>
-                                            <c:forEach items="${ramds}" var="ht">
-                                                <option value="${ht.dungLuong}">${ht.dungLuong}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </label>
+                            <label style="width: 4cm">
+                                <select class="form-control" id="mauds1" onchange="clickcombobox()">
+                                    <option selected value="null">Màu sắc</option>
+                                    <c:forEach items="${mauds}" var="ht">
+                                        <option value="${ht.ten}">${ht.ten}</option>
+                                    </c:forEach>
+                                </select>
+                            </label>
+                            <label style="width: 4cm">
+                                <select class="form-control" id="ramds1" onchange="clickcombobox()">
+                                    <option selected value="null">Ram</option>
+                                    <c:forEach items="${ramds}" var="ht">
+                                        <option value="${ht.dungLuong}">${ht.dungLuong}</option>
+                                    </c:forEach>
+                                </select>
+                            </label>
                             <br>
-                                    <label style="width: 4cm">
-                                        <select class="form-control" id="romds1" onchange="clickcombobox()">
-                                            <option selected value="null">Rom</option>
-                                            <c:forEach items="${romds}" var="ht">
-                                                <option value="${ht.dungLuong}">${ht.dungLuong}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </label>
-                                    <label style="width: 4cm">
-                                        <select class="form-control" id="pinds1" onchange="clickcombobox()">
-                                            <option selected value="null">Pin</option>
-                                            <c:forEach items="${pinds}" var="ht">
-                                                <option value="${ht.loaiPin}">${ht.loaiPin}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </label>
-                                    <label style="width: 4cm">
-                                        <select class="form-control" id="dungds1" onchange="clickcombobox()">
-                                            <option selected value="null">Dung lượng pin</option>
-                                            <c:forEach items="${dungds}" var="ht">
-                                                <option value="${ht.thongSo}">${ht.thongSo}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </label>
-                                    <label style="width: 4cm">
-                                        <select class="form-control" id="chipds1" onchange="clickcombobox()">
-                                            <option selected value="null">Chíp</option>
-                                            <c:forEach items="${chipds}" var="ht">
-                                                <option value="${ht.ten}">${ht.ten}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </label>
-                                    <label style="width: 4cm">
-                                        <select class="form-control" id="sands1" onchange="clickcombobox()">
-                                            <option selected value="null">Sản phẩm</option>
-                                            <c:forEach items="${sands}" var="ht">
-                                                <option value="${ht.ten}">${ht.ten}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </label>
-
+                            <label style="width: 4cm">
+                                <select class="form-control" id="romds1" onchange="clickcombobox()">
+                                    <option selected value="null">Rom</option>
+                                    <c:forEach items="${romds}" var="ht">
+                                        <option value="${ht.dungLuong}">${ht.dungLuong}</option>
+                                    </c:forEach>
+                                </select>
+                            </label>
+                            <label style="width: 4cm">
+                                <select class="form-control" id="pinds1" onchange="clickcombobox()">
+                                    <option selected value="null">Pin</option>
+                                    <c:forEach items="${pinds}" var="ht">
+                                        <option value="${ht.loaiPin}">${ht.loaiPin}</option>
+                                    </c:forEach>
+                                </select>
+                            </label>
+                            <label style="width: 4cm">
+                                <select class="form-control" id="dungds1" onchange="clickcombobox()">
+                                    <option selected value="null">Dung lượng pin</option>
+                                    <c:forEach items="${dungds}" var="ht">
+                                        <option value="${ht.thongSo}">${ht.thongSo}</option>
+                                    </c:forEach>
+                                </select>
+                            </label>
+                            <label style="width: 4cm">
+                                <select class="form-control" id="chipds1" onchange="clickcombobox()">
+                                    <option selected value="null">Chíp</option>
+                                    <c:forEach items="${chipds}" var="ht">
+                                        <option value="${ht.ten}">${ht.ten}</option>
+                                    </c:forEach>
+                                </select>
+                            </label>
+                            <label style="width: 4cm">
+                                <select class="form-control" id="sands1" onchange="clickcombobox()">
+                                    <option selected value="null">Sản phẩm</option>
+                                    <c:forEach items="${sands}" var="ht">
+                                        <option value="${ht.ten}">${ht.ten}</option>
+                                    </c:forEach>
+                                </select>
+                            </label>
 
 
                             <div id="vt"></div>
@@ -525,7 +534,8 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                                         Kết thúc:${ht.khuyenMai.ngayKetThuc}
                                     </td>
                                     <td>
-                                         ${banhangonline.convertgiatien(ht.giaBan-ht.giaBan/100*khuyenMaiRepository.tonggiamgia(ht.id))}  VND
+                                            ${banhangonline.convertgiatien(ht.giaBan-ht.giaBan/100*khuyenMaiRepository.tonggiamgia(ht.id))}
+                                        VND
                                     </td>
                                     <td>
                                         <c:if test="${ht.khuyenMai==null}">
@@ -596,7 +606,6 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
         data-bs-target="#myModalsuaKM">
     Open modal
 </button>
-</div>
 
 <!-- The Modal -->
 <div class="modal" id="myModalsuaKM">
@@ -663,7 +672,10 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                     <br>
 
                     <div align="center">
-                        <button type="submit" class="btn btn-warning" id="" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">UPDATE</button>
+                        <button type="submit" class="btn btn-warning" id=""
+                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                            UPDATE
+                        </button>
                     </div>
 
 
@@ -690,7 +702,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
 </div>
 <script>
     function choncomboboxtinhtrangkm() {
-        if(confirm('Bạn có muốn thực hiện thao tác này không ? ')) {
+        if (confirm('Bạn có muốn thực hiện thao tác này không ? ')) {
             var selectElement = document.getElementById("selectOption");
             // Get the selected option value and its associated link
             var selectedOption = selectElement.value;
@@ -698,7 +710,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
 
             // Navigate to the selected link
             window.location.href = selectedLink;
-        }else {
+        } else {
             return false
         }
     }
@@ -1126,31 +1138,31 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
         var x11 = encodeURIComponent(document.getElementById("value1").value);
         var x12 = encodeURIComponent(document.getElementById("value2").value);
 
-       if(confirm('Bạn có muốn thực hiện thao tác này không ? ')){
-           if (document.getElementById("value1").value.trim() === '' || document.getElementById("value2").value.trim() === '') {
-               document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
-           } else {
-               if (parseFloat(x11) > parseFloat(x12)) {
-                   document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
+        if (confirm('Bạn có muốn thực hiện thao tác này không ? ')) {
+            if (document.getElementById("value1").value.trim() === '' || document.getElementById("value2").value.trim() === '') {
+                document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
+            } else {
+                if (parseFloat(x11) > parseFloat(x12)) {
+                    document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
 
-               } else {
-                   document.getElementById("thongbaokhoang").innerHTML = "";
+                } else {
+                    document.getElementById("thongbaokhoang").innerHTML = "";
 
-                   var link = '/khuyen-mai/huy-ap-dung-vao-1-ctsp/' + idctsp + '/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;
-                   ;
-                   // document.getElementById("vt").innerHTML=link
-                   loadbenloc(link);
-                   // document.getElementById("demo").innerHTML = "You selected: " + x;
-                   document.getElementById('error1').click();
+                    var link = '/khuyen-mai/huy-ap-dung-vao-1-ctsp/' + idctsp + '/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;
+                    ;
+                    // document.getElementById("vt").innerHTML=link
+                    loadbenloc(link);
+                    // document.getElementById("demo").innerHTML = "You selected: " + x;
+                    document.getElementById('error1').click();
 
-                   // var  link1 = '/khuyen-mai/loc-ban-hang/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;
-                   //   // document.getElementById("vt").innerHTML=link
-                   //   loadbenloc(link1);
-               }
-           }
-       }else {
-           return false;
-       }
+                    // var  link1 = '/khuyen-mai/loc-ban-hang/' + x1 + '/' + x2 + '/' + x3 + '/' + x4 + '/' + x5 + '/' + x6 + '/' + x7 + '/' + x8 + '/' + x9 + '/' + x10 + '/' + x11 + '/' + x12;
+                    //   // document.getElementById("vt").innerHTML=link
+                    //   loadbenloc(link1);
+                }
+            }
+        } else {
+            return false;
+        }
 
 
     }
@@ -1168,7 +1180,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
         var x10 = encodeURIComponent(document.getElementById("sands1").value);
         var x11 = encodeURIComponent(document.getElementById("value1").value);
         var x12 = encodeURIComponent(document.getElementById("value2").value);
-        if(confirm('Bạn có muốn thực hiện thao tác này không ? ')) {
+        if (confirm('Bạn có muốn thực hiện thao tác này không ? ')) {
             if (document.getElementById("value1").value.trim() === '' || document.getElementById("value2").value.trim() === '') {
                 document.getElementById("thongbaokhoang").innerHTML = "Không hợp lệ ";
             } else {
@@ -1189,7 +1201,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                     // loadbenloc(link);
                 }
             }
-        }else {
+        } else {
             return false;
         }
     }

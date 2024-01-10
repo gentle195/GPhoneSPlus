@@ -499,7 +499,7 @@ public class DoiTraController {
                 }
             } else if (dtct.getHienTrangSanPham() == 1) {
                 IMEI imei = imeiService.findById(dtct.getHoaDonChiTiet().getImei().getId());
-                imei.setTinhTrang(0);
+                imei.setTinhTrang(4);
                 imei.setNgayCapNhat(Date.valueOf(LocalDate.now()));
                 imeiService.update(dtct.getHoaDonChiTiet().getImei().getId(), imei);
                 if (dtct.getImei() != null) {

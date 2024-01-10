@@ -9,27 +9,70 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>GPhoneS Store </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     <!-- Favicon icon -->
 </head>
 <body>
+<c:if test="${thongBaoThanhCong != null}">
+    <div id="modalSuccess" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="swal2-icon swal2-success swal2-animate-success-icon"
+                                 style="display: block;">
+                                <div class="swal2-success-circular-line-left"
+                                     style="background: rgb(255, 255, 255);"></div>
+                                <span class="swal2-success-line-tip swal2-animate-success-line-tip"></span> <span
+                                    class="swal2-success-line-long swal2-animate-success-line-long"></span>
+                                <div class="swal2-success-ring"></div>
+                                <div class="swal2-success-fix" style="background: rgb(255, 255, 255);"></div>
+                                <div class="swal2-success-circular-line-right"
+                                     style="background: rgb(255, 255, 255);"></div>
+                            </div>
+                            <h4 style="color: #10ae05;margin: 10px;text-align: center">${thongBaoThanhCong}</h4>
+                        </div>
+                        <div class="col-12" style="text-align: center;margin-top: 20px">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                                Xác nhận
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</c:if>
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" href="/imei/hien-thi" role="tab"
-               >Thông tin Imei</a>
+            <a class="nav-link"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+               href="/imei/hien-thi" role="tab"
+            >Thông tin Imei</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/imei/view-add" role="tab"
-               >Thêm thông tin
+            <a class="nav-link"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+               href="/imei/view-add" role="tab"
+            >Thêm thông tin
                 Imei</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/imei/hien-thi-da-ban" role="tab"
-               >Imei đã bán</a>
+            <a class="nav-link"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+               href="/imei/hien-thi-da-ban" role="tab"
+            >Imei đã bán - chờ xử lý</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/imei/hien-thi-da-xoa" role="tab"
-               >Imei đã xoá</a>
+            <a class="nav-link"
+               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
+               href="/imei/hien-thi-da-xoa" role="tab"
+            >Imei đã xoá</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
@@ -55,16 +98,6 @@
                                 <button class="btn btn-sm btn-primary" type="submit">Search</button>
                             </div>
                         </div>
-                        <div style="float: right">
-                            <a href="/imei/khoi-phuc-tat-ca-imei-loi" class="btn btn-danger btn-icon-text"
-                               tabindex="-1"
-                               role="button"
-                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                <i class="ti-reload btn-icon-prepend"></i>
-                                Khôi phục tất cả</a>
-                        </div>
-
-
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
@@ -77,6 +110,7 @@
                                 <th scope="col">Sản phẩm</th>
                                 <th scope="col">Số imei</th>
                                 <th scope="col">Tình trạng</th>
+                                <th scope="col">Lịch sử thay đổi</th>
                                 <th scope="col">Mô tả</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -100,16 +134,14 @@
                                         <c:if test="${imei.tinhTrang == 3}">Chờ xử lý</c:if>
                                     </td>
 
+                                    <td>${imei.lichSu}</td>
                                     <td>${imei.moTa}</td>
                                     <td>
 
                                         <a href="/imei/khoi-phuc-imei-loi/${imei.id}"
-                                           class="btn btn-danger btn-icon-text"
-                                           tabindex="-1"
-                                           role="button"
-                                           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                           class="btn btn-danger btn-icon-text">
                                             <i class="ti-reload btn-icon-prepend"></i>
-                                            Khôi phục</a>
+                                            Thay đổi IMEI</a>
                                         <a href="/imei/show-qr/${imei.id}"
                                            class="btn btn-info btn-icon-text"
                                            data-bs-toggle="modal"
@@ -157,9 +189,57 @@
         </div>
     </div>
 </div>
+<button style="display: none" type="button" id="modaldetailupdatekm" class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#xuLyIMEI">
+    Open modal
+</button>
+<div class="modal" id="xuLyIMEI">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body" style="color: black">
+                <form:form action="/imei/thay-doi-imei-loi" method="post" modelAttribute="IMEILoi">
+                    <div class="form-group">
+                        <form:label class="form-label" path="soImei">IMEI Lỗi:</form:label>
+                        <form:input class="form-control" placeholder="Imei" path="soImei"/>
+                        <form:errors path="soImei" cssStyle="color: red"></form:errors>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">IMEI Mới: </label>
+                        <input type="text" class="form-control" name="imeiMoi">
+                        <label style="color: red">${thongBao}</label>
+                    </div>
+                    <div style="text-align: center">
+                        <button type="submit" class="btn btn-primary mr-2"
+                                onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                            Cập nhật IMEI
+                        </button>
+                    </div>
+                </form:form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        $('#modalSuccess').modal('show');
+    });
+</script>
+<script>
+    <c:if test="${batmodaldetailupdatekm==0}">
+    document.getElementById('modaldetailupdatekm').click();
+    </c:if>
+</script>
 
 <script>
     $(document).ready(function () {
@@ -189,7 +269,4 @@
         });
     });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
 </html>

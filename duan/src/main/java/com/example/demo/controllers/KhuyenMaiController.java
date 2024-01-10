@@ -87,16 +87,19 @@ public class KhuyenMaiController {
     private KhuyenMaiRepository khuyenMaiRepository;
 
     @Scheduled(fixedRate = 1000)
-    public void soCTSPbangsoIMEI(){
-        for (ChiTietSanPham km:chiTietSanPhamService.findAll()) {
+    public void soCTSPbangsoIMEI() {
+        for (ChiTietSanPham km : chiTietSanPhamService.findAll()) {
 //            km.setSoLuong(banHangOnlineService.soluongcon(String.valueOf(km.getId())));
 //            chiTietSanPhamService.add(km);
         }
         khuyenMaiRepository.xoalienketKM1();
-    };
+    }
+
+    ;
+
     @Scheduled(fixedRate = 1000)
-    public void kiemtrangayhientaiVSkhoangtimegiamgia(){
-        for (KhuyenMai km:khuyenMaiRepository.findAll()) {
+    public void kiemtrangayhientaiVSkhoangtimegiamgia() {
+        for (KhuyenMai km : khuyenMaiRepository.findAll()) {
             String batdau = km.getNgayBatDau();
             String ketthuc = km.getNgayKetThuc();
 
@@ -114,34 +117,35 @@ public class KhuyenMaiController {
             if (currentDateTime.isAfter(batdauDateTime) && currentDateTime.isBefore(ketthucDateTime)) {
                 km.setTinhTrang(0);
                 khuyenMaiRepository.save(km);
-            } else  if (currentDateTime.isBefore(batdauDateTime)) {
+            } else if (currentDateTime.isBefore(batdauDateTime)) {
                 km.setTinhTrang(2); // hoặc làm gì đó tương ứng với trường hợp này
                 khuyenMaiRepository.save(km);
-            }
-            else {
+            } else {
                 km.setTinhTrang(1);
                 khuyenMaiRepository.save(km);
             }
         }
         khuyenMaiRepository.xoalienketKM1();
-    };
+    }
+
+    ;
 
     @Scheduled(fixedRate = 1000)
-    public    void loadtiengiamghct(){
+    public void loadtiengiamghct() {
         for (GioHangChiTiet ghct : gioHangChiTietService.findAll()) {
 
             ChiTietSanPham ctsp = chiTietSanPhamService.findById(ghct.getChiTietSanPham().getId());
-            UUID idkm=null;
+            UUID idkm = null;
             try {
-                idkm=ctsp.getKhuyenMai().getId();
-            }catch (Exception e){
-                idkm=null;
+                idkm = ctsp.getKhuyenMai().getId();
+            } catch (Exception e) {
+                idkm = null;
             }
             if (idkm == null) {
                 ghct.setDonGiaKhiGiam(ctsp.getGiaBan());
                 gioHangChiTietService.add(ghct);
             } else {
-                KhuyenMai km=khuyenMaiRepository.findById(idkm).get();
+                KhuyenMai km = khuyenMaiRepository.findById(idkm).get();
                 if (km.getTinhTrang() == 0) {
                     Long giagoc = Long.valueOf(String.valueOf(ctsp.getGiaBan()));
                     Long phamtramgiam = Long.valueOf(String.valueOf(km.getSoTienGiam()));
@@ -153,18 +157,19 @@ public class KhuyenMaiController {
                 }
             }
 
-            GioHangChiTiet ghctdg=ghct;
+            GioHangChiTiet ghctdg = ghct;
             ghctdg.setDonGia(ctsp.getGiaBan());
             gioHangChiTietService.add(ghctdg);
         }
-    };
+    }
 
+    ;
 
 
     public String dinhangCHUOIsangJSP(String ngaycan) {
         // Input date and time string
 //        String inputDateTime = "29-11-2023 17:09:00";
-        String inputDateTime =ngaycan;
+        String inputDateTime = ngaycan;
 
         // Define the input format
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -176,17 +181,18 @@ public class KhuyenMaiController {
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 
         // Format the LocalDateTime to the desired output format
-        return  dateTime.format(outputFormatter);
+        return dateTime.format(outputFormatter);
 
     }
 
-    public Integer kt(Integer so){
-        if(so==Integer.valueOf(0)){
+    public Integer kt(Integer so) {
+        if (so == Integer.valueOf(0)) {
             return Integer.valueOf(1);
         }
         return so;
     }
-    public String dinhdangngaytujsp( String inputString) {
+
+    public String dinhdangngaytujsp(String inputString) {
 
 
         // Tạo đối tượng LocalDateTime từ chuỗi
@@ -199,14 +205,14 @@ public class KhuyenMaiController {
     }
 
 
-    public boolean isNgayKetThucAfterNgayBatDau(String ngayBatDau,String ngayKetThuc) {
+    public boolean isNgayKetThucAfterNgayBatDau(String ngayBatDau, String ngayKetThuc) {
         // Tạo đối tượng LocalDateTime từ chuỗi
         LocalDateTime ngayBT = LocalDateTime.parse(ngayBatDau, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         LocalDateTime ngayKT = LocalDateTime.parse(ngayKetThuc, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 
         // Định dạng lại theo định dạng mong muốn
-        String ngayBT1=ngayBT.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
-        String ngayKT1=ngayKT.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+        String ngayBT1 = ngayBT.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+        String ngayKT1 = ngayKT.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
 
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -219,7 +225,7 @@ public class KhuyenMaiController {
         return ketThucDateTime.isAfter(batDauDateTime);
     }
 
-    public boolean isNgayKetThucAfterNgayBatDauupdate(String ngayBatDau,String ngayKetThuc) {
+    public boolean isNgayKetThucAfterNgayBatDauupdate(String ngayBatDau, String ngayKetThuc) {
 
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -231,6 +237,7 @@ public class KhuyenMaiController {
         // Kiểm tra xem ngayKetThuc có lớn hơn ngayBatDau không
         return ketThucDateTime.isAfter(batDauDateTime);
     }
+
     public boolean isNgayKetThucAfterNgayHienTai(String ngayKetThuc) {
         // Tạo đối tượng LocalDateTime từ chuỗi
 
@@ -240,9 +247,7 @@ public class KhuyenMaiController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         LocalDateTime currentDateTime = LocalDateTime.now();
         String ngayHT1 = currentDateTime.format(formatter);
-        String ngayKT1=ngayKT.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
-
-
+        String ngayKT1 = ngayKT.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
 
 
         // Chuyển đổi chuỗi ngayBatDau và ngayKetThuc thành đối tượng LocalDateTime
@@ -263,8 +268,6 @@ public class KhuyenMaiController {
         String ngayHT1 = currentDateTime.format(formatter);
 
 
-
-
         // Chuyển đổi chuỗi ngayBatDau và ngayKetThuc thành đối tượng LocalDateTime
         LocalDateTime hienTaiDateTime = LocalDateTime.parse(ngayHT1, formatter);
         LocalDateTime ketThucDateTime = LocalDateTime.parse(ngayKetThuc, formatter);
@@ -283,14 +286,14 @@ public class KhuyenMaiController {
 //            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
 //            @ModelAttribute("khmodal") KhachHang khachHang1
     ) {
-        model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+        model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
 
 //        Sort sort = Sort.by("ma").descending();
 //        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
 //        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
         model.addAttribute("dulieu", khuyenMaiRepository.findAll());
 //        model.addAttribute("total", kt(list.getTotalPages()));
-        model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
+        model.addAttribute("contentPage", "../khuyen-mai/khuyen-mai.jsp");
         model.addAttribute("banhangonline", banHangOnlineService);
         model.addAttribute("hangds", hangSanPhamService.findAll0());
         model.addAttribute("camds", cameraService.findAll0());
@@ -327,7 +330,6 @@ public class KhuyenMaiController {
 //    }
 
 
-
     @PostMapping("/khuyen-mai/add")
     public String updateadd(Model model,
 //
@@ -344,30 +346,30 @@ public class KhuyenMaiController {
         LocalDateTime currentDateTime = LocalDateTime.now();
         String formattedDateTime = currentDateTime.format(formatter);
         if (bindingResult.hasErrors()) {
-            model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+            model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
 //            Sort sort = Sort.by("ma").descending();
 //            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
 //            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
-            model.addAttribute("dulieu",khuyenMaiRepository.findAll());
+            model.addAttribute("dulieu", khuyenMaiRepository.findAll());
 //            model.addAttribute("total", kt(list.getTotalPages()));
 
-            model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
-            model.addAttribute("momdalthemkm",0);
+            model.addAttribute("contentPage", "../khuyen-mai/khuyen-mai.jsp");
+            model.addAttribute("momdalthemkm", 0);
             return "home/layout";
         }
 
-        if(isNgayKetThucAfterNgayBatDau(khuyenMai.getNgayBatDau(),khuyenMai.getNgayKetThuc())==false){
-            model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+        if (isNgayKetThucAfterNgayBatDau(khuyenMai.getNgayBatDau(), khuyenMai.getNgayKetThuc()) == false) {
+            model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
             Sort sort = Sort.by("ma").descending();
 //            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
 //            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
 
-            model.addAttribute("dulieu",khuyenMaiRepository.findAll());
+            model.addAttribute("dulieu", khuyenMaiRepository.findAll());
 //            model.addAttribute("total", kt(list.getTotalPages()));
 
-            model.addAttribute("momdalthongbaongayKT","Ngày kết thúc phải sau ngày bắt đầu");
-            model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
-            model.addAttribute("momdalthemkm",0);
+            model.addAttribute("momdalthongbaongayKT", "Ngày kết thúc phải sau ngày bắt đầu");
+            model.addAttribute("contentPage", "../khuyen-mai/khuyen-mai.jsp");
+            model.addAttribute("momdalthemkm", 0);
 
             model.addAttribute("hangds", hangSanPhamService.findAll0());
             model.addAttribute("camds", cameraService.findAll0());
@@ -393,7 +395,7 @@ public class KhuyenMaiController {
         }
 
 
-        if(isNgayKetThucAfterNgayHienTai(khuyenMai.getNgayKetThuc())==false){
+        if (isNgayKetThucAfterNgayHienTai(khuyenMai.getNgayKetThuc()) == false) {
 //            model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
 //            Sort sort = Sort.by("ma").descending();
 //            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
@@ -402,9 +404,9 @@ public class KhuyenMaiController {
             model.addAttribute("dulieu", khuyenMaiRepository.findAll());
 //            model.addAttribute("total", kt(list.getTotalPages()));
 
-            model.addAttribute("momdalthongbaongayKT","Ngày kết thúc phải sau ngày hiện tại");
-            model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
-            model.addAttribute("momdalthemkm",0);
+            model.addAttribute("momdalthongbaongayKT", "Ngày kết thúc phải sau ngày hiện tại");
+            model.addAttribute("contentPage", "../khuyen-mai/khuyen-mai.jsp");
+            model.addAttribute("momdalthemkm", 0);
 
             model.addAttribute("hangds", hangSanPhamService.findAll0());
             model.addAttribute("camds", cameraService.findAll0());
@@ -431,10 +433,10 @@ public class KhuyenMaiController {
         Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(0, 1, sort);
         List<KhuyenMai> litskm1 = khuyenMaiRepository.danhsachgiamdan();
-        String mhd="";
-        if(litskm1.size()<=0){
-             mhd="MKM00";
-        }else {
+        String mhd = "";
+        if (litskm1.size() <= 0) {
+            mhd = "MKM00";
+        } else {
             String inputString = litskm1.get(0).getMa();
 
             // Sử dụng phương thức substring để tách chuỗi
@@ -442,11 +444,11 @@ public class KhuyenMaiController {
             String suffix = inputString.substring(3);
 
 
-            Integer sl =Integer.valueOf(suffix)+1;
+            Integer sl = Integer.valueOf(suffix) + 1;
 
-            if(sl<10){
+            if (sl < 10) {
                 mhd = "MKM0" + sl;
-            }else {
+            } else {
                 mhd = "MKM" + sl;
             }
         }
@@ -462,14 +464,14 @@ public class KhuyenMaiController {
         khuyenMaiRepository.save(khuyenMai);
 
 
-        model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+        model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
 //        Sort sort = Sort.by("ma").descending();
 //        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
 //        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
         model.addAttribute("dulieu", khuyenMaiRepository.findAll());
 //        model.addAttribute("total", kt(list.getTotalPages()));
-        model.addAttribute("km",new KhuyenMai());
-        model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
+        model.addAttribute("km", new KhuyenMai());
+        model.addAttribute("contentPage", "../khuyen-mai/khuyen-mai.jsp");
         model.addAttribute("tbThemKMOK", 0);
         model.addAttribute("NDTB", "Thêm khuyến mãi thành công");
 
@@ -496,7 +498,8 @@ public class KhuyenMaiController {
         return "home/layout";
     }
 
-UUID idkmdangchon=null;
+    UUID idkmdangchon = null;
+
     @GetMapping("/khuyen-mai/ap-dung-khuyen-mai/{idkm}")
     public String apdungkhuyenmai(
             Model model,
@@ -508,17 +511,17 @@ UUID idkmdangchon=null;
 
     ) {
         model.addAttribute("banhangonline", banHangOnlineService);
-        KhuyenMai kmchon=khuyenMaiRepository.findById(idkm).orElse(null);
-        model.addAttribute("kmchon",kmchon);
-        idkmdangchon=idkm;
-        model.addAttribute("batmodalapdungkm",0);
-        model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+        KhuyenMai kmchon = khuyenMaiRepository.findById(idkm).orElse(null);
+        model.addAttribute("kmchon", kmchon);
+        idkmdangchon = idkm;
+        model.addAttribute("batmodalapdungkm", 0);
+        model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
 //        Sort sort = Sort.by("ma").descending();
 //        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
 //        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
-        model.addAttribute("dulieu",khuyenMaiRepository.findAll());
+        model.addAttribute("dulieu", khuyenMaiRepository.findAll());
 //        model.addAttribute("total", kt(list.getTotalPages()));
-        model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
+        model.addAttribute("contentPage", "../khuyen-mai/khuyen-mai.jsp");
 
         model.addAttribute("hangds", hangSanPhamService.findAll0());
         model.addAttribute("camds", cameraService.findAll0());
@@ -564,9 +567,9 @@ UUID idkmdangchon=null;
 
     ) {
         model.addAttribute("banhangonline", banHangOnlineService);
-           khuyenMaiRepository.HuyApDungKMvs1ctsp(idctsp);
-        model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
-        model.addAttribute("kmchon",khuyenMaiRepository.findById(idkmdangchon).orElse(null));
+        khuyenMaiRepository.HuyApDungKMvs1ctsp(idctsp);
+        model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
+        model.addAttribute("kmchon", khuyenMaiRepository.findById(idkmdangchon).orElse(null));
         model.addAttribute("listctsp", banHangOnlineService.locbanhangcoGIATIEN(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, BigDecimal.valueOf(Double.valueOf(x11)), BigDecimal.valueOf(Double.valueOf(x12))));
 
 
@@ -597,18 +600,18 @@ UUID idkmdangchon=null;
 
     ) {
         model.addAttribute("banhangonline", banHangOnlineService);
-        ChiTietSanPham ctsp=chiTietSanPhamService.findById(idctsp);
+        ChiTietSanPham ctsp = chiTietSanPhamService.findById(idctsp);
         ctsp.setKhuyenMai(khuyenMaiRepository.findById(idkm).orElse(null));
         chiTietSanPhamService.add(ctsp);
 //        model.addAttribute("tbapdungKMvsCTSP",0);
-        model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+        model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
 
         model.addAttribute("listctsp", banHangOnlineService.locbanhangcoGIATIEN(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, BigDecimal.valueOf(Double.valueOf(x11)), BigDecimal.valueOf(Double.valueOf(x12))));
 
-        KhuyenMai kmchon=khuyenMaiRepository.findById(idkm).orElse(null);
-        model.addAttribute("kmchon",kmchon);
+        KhuyenMai kmchon = khuyenMaiRepository.findById(idkm).orElse(null);
+        model.addAttribute("kmchon", kmchon);
 //        model.addAttribute("batmodalapdungkm",0);
-        model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+        model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
 //        Sort sort = Sort.by("ma").descending();
 //        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
 //        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
@@ -651,24 +654,24 @@ UUID idkmdangchon=null;
 
     ) {
         model.addAttribute("banhangonline", banHangOnlineService);
-        khuyenMaiupdate=khuyenMaiRepository.findById(idkm).orElse(null);
-        String NBTCC=khuyenMaiupdate.getNgayBatDau();
-        String NKTCC=khuyenMaiupdate.getNgayKetThuc();
+        khuyenMaiupdate = khuyenMaiRepository.findById(idkm).orElse(null);
+        String NBTCC = khuyenMaiupdate.getNgayBatDau();
+        String NKTCC = khuyenMaiupdate.getNgayKetThuc();
 
-        model.addAttribute("NBTCC",dinhangCHUOIsangJSP(NBTCC));
-        model.addAttribute("NKTCC",dinhangCHUOIsangJSP(NKTCC));
+        model.addAttribute("NBTCC", dinhangCHUOIsangJSP(NBTCC));
+        model.addAttribute("NKTCC", dinhangCHUOIsangJSP(NKTCC));
 
-        model.addAttribute("kmupdate",khuyenMaiupdate);
-        model.addAttribute("kmupdate",khuyenMaiupdate);
-        model.addAttribute("kmchon",khuyenMaiupdate);
-        model.addAttribute("batmodaldetailupdatekm",0);
-        model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+        model.addAttribute("kmupdate", khuyenMaiupdate);
+        model.addAttribute("kmupdate", khuyenMaiupdate);
+        model.addAttribute("kmchon", khuyenMaiupdate);
+        model.addAttribute("batmodaldetailupdatekm", 0);
+        model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
 //        Sort sort = Sort.by("ma").descending();
 //        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
 //        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
-        model.addAttribute("dulieu",khuyenMaiRepository.findAll());
+        model.addAttribute("dulieu", khuyenMaiRepository.findAll());
 //        model.addAttribute("total", kt(list.getTotalPages()));
-        model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
+        model.addAttribute("contentPage", "../khuyen-mai/khuyen-mai.jsp");
 
         model.addAttribute("hangds", hangSanPhamService.findAll0());
         model.addAttribute("camds", cameraService.findAll0());
@@ -696,46 +699,64 @@ UUID idkmdangchon=null;
 
     @PostMapping("/khuyen-mai/update")
     public String updateKM(Model model,
-//
-//
                            @ModelAttribute("kmupdate") @Valid KhuyenMai khuyenMaiupdate,
                            BindingResult bindingResult,
-//                           @RequestParam("num") Optional<Integer> num,
-//                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size,
-                           @ModelAttribute("km")  KhuyenMai khuyenMai
-//                           @RequestParam("NBDupdate") String NBDupdate,
-//                           @RequestParam("NKTupdate") String NKTupdate
-//
+                           @ModelAttribute("km") KhuyenMai khuyenMai
     ) {
-//        khuyenMaiupdate.setNgayBatDau(NBDupdate);
-//        khuyenMaiupdate.setNgayKetThuc(NKTupdate);
-
         model.addAttribute("banhangonline", banHangOnlineService);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         LocalDateTime currentDateTime = LocalDateTime.now();
         String formattedDateTime = currentDateTime.format(formatter);
         if (bindingResult.hasErrors()) {
-//            model.addAttribute("NBTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayBatDau()));
-//            model.addAttribute("NKTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayKetThuc()));
-            if(khuyenMaiupdate.getNgayBatDau().isEmpty()==true && khuyenMaiupdate.getNgayKetThuc().isEmpty()==false  ){
-                model.addAttribute("NKTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayKetThuc()));
-            }else  if (khuyenMaiupdate.getNgayBatDau().isEmpty()==false && khuyenMaiupdate.getNgayKetThuc().isEmpty()==true){
-                model.addAttribute("NBTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayBatDau()));
-            }else  if (khuyenMaiupdate.getNgayBatDau().isEmpty()==false && khuyenMaiupdate.getNgayKetThuc().isEmpty()==false){
-                model.addAttribute("NBTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayBatDau()));
-                model.addAttribute("NKTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayKetThuc()));
+            if (khuyenMaiupdate.getNgayBatDau().isEmpty() == true && khuyenMaiupdate.getNgayKetThuc().isEmpty() == false) {
+                model.addAttribute("NKTCC", dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayKetThuc()));
+            } else if (khuyenMaiupdate.getNgayBatDau().isEmpty() == false && khuyenMaiupdate.getNgayKetThuc().isEmpty() == true) {
+                model.addAttribute("NBTCC", dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayBatDau()));
+            } else if (khuyenMaiupdate.getNgayBatDau().isEmpty() == false && khuyenMaiupdate.getNgayKetThuc().isEmpty() == false) {
+                model.addAttribute("NBTCC", dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayBatDau()));
+                model.addAttribute("NKTCC", dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayKetThuc()));
+            } else {
             }
+            model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
+            model.addAttribute("dulieu", khuyenMaiRepository.findAll());
+            model.addAttribute("contentPage", "../khuyen-mai/khuyen-mai.jsp");
+            model.addAttribute("batmodaldetailupdatekm", 0);
 
-            else {}
-            model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+            model.addAttribute("hangds", hangSanPhamService.findAll0());
+            model.addAttribute("camds", cameraService.findAll0());
+            model.addAttribute("mands", manHinhService.findAll0());
+            model.addAttribute("mauds", mauSacService.findAll0());
+            model.addAttribute("ramds", ramService.findAll0());
+            model.addAttribute("romds", romService.findAll0());
+            model.addAttribute("pinds", pinService.findAll0());
+            model.addAttribute("dungds", dungLuongPinService.findAll0());
+            model.addAttribute("chipds", chipService.findAll0());
+            model.addAttribute("sands", sanPhamService.findAll0());
+            Long max = Long.valueOf('0');
+            for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
+
+                if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
+                    max = Long.valueOf(String.valueOf(ct.getGiaBan()));
+                }
+            }
+            model.addAttribute("max", String.valueOf(max));
+            return "home/layout";
+        }
+
+        if (isNgayKetThucAfterNgayBatDauupdate(khuyenMaiupdate.getNgayBatDau(), khuyenMaiupdate.getNgayKetThuc()) == false) {
+            model.addAttribute("NBTCC", dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayBatDau()));
+            model.addAttribute("NKTCC", dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayKetThuc()));
+            model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
 //            Sort sort = Sort.by("ma").descending();
 //            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
 //            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+
             model.addAttribute("dulieu", khuyenMaiRepository.findAll());
 //            model.addAttribute("total", kt(list.getTotalPages()));
 
-            model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
-            model.addAttribute("batmodaldetailupdatekm",0);
+            model.addAttribute("momdalthongbaongayKT1", "Ngày kết thúc phải sau ngày bắt đầu");
+            model.addAttribute("contentPage", "../khuyen-mai/khuyen-mai.jsp");
+            model.addAttribute("batmodaldetailupdatekm", 0);
 
             model.addAttribute("hangds", hangSanPhamService.findAll0());
             model.addAttribute("camds", cameraService.findAll0());
@@ -760,59 +781,17 @@ UUID idkmdangchon=null;
             return "home/layout";
         }
 
-        if(isNgayKetThucAfterNgayBatDauupdate(khuyenMaiupdate.getNgayBatDau(),khuyenMaiupdate.getNgayKetThuc())==false){
-            model.addAttribute("NBTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayBatDau()));
-            model.addAttribute("NKTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayKetThuc()));
-            model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
-//            Sort sort = Sort.by("ma").descending();
-//            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-//            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
+
+        if (isNgayKetThucAfterNgayHienTaiupdate(khuyenMaiupdate.getNgayKetThuc()) == false) {
+            model.addAttribute("NBTCC", dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayBatDau()));
+            model.addAttribute("NKTCC", dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayKetThuc()));
+            model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
 
             model.addAttribute("dulieu", khuyenMaiRepository.findAll());
-//            model.addAttribute("total", kt(list.getTotalPages()));
 
-            model.addAttribute("momdalthongbaongayKT1","Ngày kết thúc phải sau ngày bắt đầu");
-            model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
-            model.addAttribute("batmodaldetailupdatekm",0);
-
-            model.addAttribute("hangds", hangSanPhamService.findAll0());
-            model.addAttribute("camds", cameraService.findAll0());
-            model.addAttribute("mands", manHinhService.findAll0());
-            model.addAttribute("mauds", mauSacService.findAll0());
-            model.addAttribute("ramds", ramService.findAll0());
-            model.addAttribute("romds", romService.findAll0());
-            model.addAttribute("pinds", pinService.findAll0());
-            model.addAttribute("dungds", dungLuongPinService.findAll0());
-            model.addAttribute("chipds", chipService.findAll0());
-            model.addAttribute("sands", sanPhamService.findAll0());
-            //        //gia max
-            Long max = Long.valueOf('0');
-            for (ChiTietSanPham ct : chiTietSanPhamService.findAll()) {
-
-                if (Long.valueOf(String.valueOf(ct.getGiaBan())) > max) {
-                    max = Long.valueOf(String.valueOf(ct.getGiaBan()));
-                }
-            }
-//System.out.println("taco---"+max);
-            model.addAttribute("max", String.valueOf(max));
-            return "home/layout";
-        }
-
-
-        if(isNgayKetThucAfterNgayHienTaiupdate(khuyenMaiupdate.getNgayKetThuc())==false){
-            model.addAttribute("NBTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayBatDau()));
-            model.addAttribute("NKTCC",dinhangCHUOIsangJSP(khuyenMaiupdate.getNgayKetThuc()));
-            model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
-//            Sort sort = Sort.by("ma").descending();
-//            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-//            Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
-
-            model.addAttribute("dulieu", khuyenMaiRepository.findAll());
-//            model.addAttribute("total", kt(list.getTotalPages()));
-
-            model.addAttribute("momdalthongbaongayKT1","Ngày kết thúc phải sau ngày hiện tại");
-            model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
-            model.addAttribute("batmodaldetailupdatekm",0);
+            model.addAttribute("momdalthongbaongayKT1", "Ngày kết thúc phải sau ngày hiện tại");
+            model.addAttribute("contentPage", "../khuyen-mai/khuyen-mai.jsp");
+            model.addAttribute("batmodaldetailupdatekm", 0);
 
             model.addAttribute("hangds", hangSanPhamService.findAll0());
             model.addAttribute("camds", cameraService.findAll0());
@@ -843,14 +822,14 @@ UUID idkmdangchon=null;
         khuyenMaiRepository.save(khuyenMaiupdate);
 
 
-        model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+        model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
 //        Sort sort = Sort.by("ma").descending();
 //        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
 //        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
-        model.addAttribute("dulieu",khuyenMaiRepository.findAll());
+        model.addAttribute("dulieu", khuyenMaiRepository.findAll());
 //        model.addAttribute("total", kt(list.getTotalPages()));
-        model.addAttribute("km",new KhuyenMai());
-        model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
+        model.addAttribute("km", new KhuyenMai());
+        model.addAttribute("contentPage", "../khuyen-mai/khuyen-mai.jsp");
         model.addAttribute("tbUPDATEkmOK", 0);
 
         model.addAttribute("hangds", hangSanPhamService.findAll0());
@@ -877,15 +856,13 @@ UUID idkmdangchon=null;
     }
 
 
-
-
     @PostMapping("/khuyen-mai/tim-kiem")
     public String timmt(
             Model model,
-            @ModelAttribute("kmupdate")  KhuyenMai khuyenMaiupdate,
+            @ModelAttribute("kmupdate") KhuyenMai khuyenMaiupdate,
 //            @RequestParam("num") Optional<Integer> num,
 //            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size,
-            @ModelAttribute("km")  KhuyenMai khuyenMai,
+            @ModelAttribute("km") KhuyenMai khuyenMai,
             @RequestParam("matk") String mt
 
     ) {
@@ -894,12 +871,12 @@ UUID idkmdangchon=null;
 //        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
 //        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
 
-        model.addAttribute("dulieu",khuyenMaiRepository.timkiemKM(mt));
+        model.addAttribute("dulieu", khuyenMaiRepository.timkiemKM(mt));
 //        model.addAttribute("total", kt(list.getTotalPages()));
         model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
 
 
-        model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
+        model.addAttribute("contentPage", "../khuyen-mai/khuyen-mai.jsp");
 
         model.addAttribute("hangds", hangSanPhamService.findAll0());
         model.addAttribute("camds", cameraService.findAll0());
@@ -944,23 +921,22 @@ UUID idkmdangchon=null;
             @PathVariable("x12") String x12
     ) {
 
-        KhuyenMai kmchon=khuyenMaiRepository.findById(idkmdangchon).orElse(null);
-        model.addAttribute("kmchon",kmchon);
+        KhuyenMai kmchon = khuyenMaiRepository.findById(idkmdangchon).orElse(null);
+        model.addAttribute("kmchon", kmchon);
 
         model.addAttribute("banhangonline", banHangOnlineService);
         model.addAttribute("banhangonline", banHangOnlineService);
-        model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+        model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
         model.addAttribute("listctsp", banHangOnlineService.locbanhangcoGIATIEN(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, BigDecimal.valueOf(Double.valueOf(x11)), BigDecimal.valueOf(Double.valueOf(x12))));
 
         return "khuyen-mai/single_pase_giao-dien-loc-khuyen-mai";
     }
 
 
-
     @GetMapping("/khuyen-mai/huy-khuyen-mai/{idkm}")
     public String xoakhuyenmai(
             Model model,
-@PathVariable("idkm") UUID idkm,
+            @PathVariable("idkm") UUID idkm,
             @ModelAttribute("km") KhuyenMai khuyenMai,
             @ModelAttribute("kmupdate") KhuyenMai khuyenMaiupdate
 //            @RequestParam("num") Optional<Integer> num,
@@ -968,16 +944,16 @@ UUID idkmdangchon=null;
 //            @ModelAttribute("khmodal") KhachHang khachHang1
     ) {
         model.addAttribute("banhangonline", banHangOnlineService);
-      khuyenMaiRepository.XoaKhuyenMai(idkm);
+        khuyenMaiRepository.XoaKhuyenMai(idkm);
 
-        model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+        model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
 
 //        Sort sort = Sort.by("ma").descending();
 //        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
 //        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
         model.addAttribute("dulieu", khuyenMaiRepository.findAll());
 //        model.addAttribute("total", kt(list.getTotalPages()));
-        model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
+        model.addAttribute("contentPage", "../khuyen-mai/khuyen-mai.jsp");
 
         model.addAttribute("hangds", hangSanPhamService.findAll0());
         model.addAttribute("camds", cameraService.findAll0());
@@ -1001,10 +977,9 @@ UUID idkmdangchon=null;
         model.addAttribute("max", String.valueOf(max));
 
 
-        model.addAttribute("tbhuyKM",0);
+        model.addAttribute("tbhuyKM", 0);
         return "home/layout";
     }
-
 
 
     @GetMapping("khuyen-mai/tinh-trang/{tinhtrang}")
@@ -1019,34 +994,33 @@ UUID idkmdangchon=null;
             @PathVariable("tinhtrang") String tinhtrang
     ) {
         model.addAttribute("banhangonline", banHangOnlineService);
-        model.addAttribute("khuyenMaiRepository",khuyenMaiRepository);
+        model.addAttribute("khuyenMaiRepository", khuyenMaiRepository);
 
 //        Sort sort = Sort.by("ma").descending();
 //        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
 //        Page<KhuyenMai> list = khuyenMaiRepository.fillalllPageable(pageable);
-        if(tinhtrang.equals("all")){
+        if (tinhtrang.equals("all")) {
             model.addAttribute("dulieu", khuyenMaiRepository.findAll());
-            model.addAttribute("dongbo","all");
-        }
-        else if(tinhtrang.equals("2")){
+            model.addAttribute("dongbo", "all");
+        } else if (tinhtrang.equals("2")) {
             model.addAttribute("dulieu", khuyenMaiRepository.TimTrangThaiKM(2));
-            model.addAttribute("dongbo","2");
+            model.addAttribute("dongbo", "2");
 
-        }else if(tinhtrang.equals("0")){
+        } else if (tinhtrang.equals("0")) {
             model.addAttribute("dulieu", khuyenMaiRepository.TimTrangThaiKM(0));
-            model.addAttribute("dongbo","0");
+            model.addAttribute("dongbo", "0");
 
-        }else if(tinhtrang.equals("1")){
+        } else if (tinhtrang.equals("1")) {
             model.addAttribute("dulieu", khuyenMaiRepository.TimTrangThaiKM(1));
-            model.addAttribute("dongbo","1");
+            model.addAttribute("dongbo", "1");
 
-        }else {
+        } else {
             model.addAttribute("dulieu", khuyenMaiRepository.findAll());
-            model.addAttribute("dongbo","all");
+            model.addAttribute("dongbo", "all");
         }
 
 //        model.addAttribute("total", kt(list.getTotalPages()));
-        model.addAttribute("contentPage","../khuyen-mai/khuyen-mai.jsp");
+        model.addAttribute("contentPage", "../khuyen-mai/khuyen-mai.jsp");
 
         model.addAttribute("hangds", hangSanPhamService.findAll0());
         model.addAttribute("camds", cameraService.findAll0());
@@ -1076,7 +1050,7 @@ UUID idkmdangchon=null;
     @GetMapping("/vi-du")
     public String xoakhuyenmai(
             Model model
-    ){
+    ) {
         model.addAttribute("banhangonline", banHangOnlineService);
         model.addAttribute("dulieu", khuyenMaiRepository.findAll());
         return "khuyen-mai/vidu";

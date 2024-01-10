@@ -28,7 +28,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "imei",uniqueConstraints = {@UniqueConstraint(columnNames = {"so_imei"})})
+@Table(name = "imei", uniqueConstraints = {@UniqueConstraint(columnNames = {"so_imei"})})
 public class IMEI {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -40,7 +40,7 @@ public class IMEI {
     private String ma;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Pattern(regexp = "\\d{15}",message = "Imei phải là số và có đúng 15 kí tự")
+    @Pattern(regexp = "\\d{15}", message = "Imei phải là số và có đúng 15 kí tự")
     @Column(name = "so_imei")
     private String soImei;
 
@@ -57,9 +57,12 @@ public class IMEI {
     @Column(name = "tinh_trang")
     private int tinhTrang;
 
-//    @NotBlank(message = "Không để trống thông tin")
+    //    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")
     private String moTa;
+
+    @Column(name = "lich_su_doi_loi")
+    private String lichSu;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_chi_tiet_san_pham")
