@@ -89,6 +89,11 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title" style="float: left">Danh sách Imei lỗi</h4>
+
+                    <li class="nav-item">
+                        <a href="/imei/chinh-sach-xu-ly-imei-loi" role="tab" style="text-align: left; font-style: italic; color: blue; text-decoration: underline; margin-left: 5px">
+                             ==>Xem chính sách xử lý imei lỗi tại đây</a>
+                    </li>
                     <%--            Tìm kiếm               --%>
                     <form action="/imei/search-imei-loi" method="post">
                         <div class="input-group" style="width: 30%; float: right">

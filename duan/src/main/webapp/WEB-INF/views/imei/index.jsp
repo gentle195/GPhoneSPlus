@@ -49,12 +49,12 @@
                href="/imei/hien-thi-imei-loi" role="tab"
             >Imei lỗi</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link"
-               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"
-               href="/imei/chinh-sach-su-ly-imei-loi" role="tab"
-            >Chính sách sử lý imei lỗi</a>
-        </li>
+<%--        <li class="nav-item">--%>
+<%--            <a class="nav-link"--%>
+<%--               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;"--%>
+<%--               href="/imei/chinh-sach-su-ly-imei-loi" role="tab"--%>
+<%--            >Chính sách sử lý imei lỗi</a>--%>
+<%--        </li>--%>
     </ul>
 </div>
 <div class="tab-content" id="myTabContent">

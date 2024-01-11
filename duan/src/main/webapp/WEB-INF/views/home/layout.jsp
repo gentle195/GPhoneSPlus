@@ -140,6 +140,10 @@
                     <i class="ti-control-shuffle pa"></i>
                     Đổi hàng</a>
                 </li>
+                <li><a href="/imei/chinh-sach" aria-expanded="false">
+                    <i class="icon icon-book-open-2"></i>
+                    Chính sách</a>
+                </li>
 
                 <li class="nav-label">Quản lý</li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
