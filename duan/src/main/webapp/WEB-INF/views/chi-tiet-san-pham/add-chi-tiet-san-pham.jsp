@@ -870,6 +870,14 @@
         $('#modalError').modal('show');
     });
 </script>
+<script>
+    // Kiểm tra xem selectedSanPham có giá trị không
+    var selectedSanPhamId = "${selectedSanPham.id}";
+    if (selectedSanPhamId !== "") {
+        // Chọn sản phẩm có id là selectedSanPhamId
+        $('select[name="sanPham"]').val(selectedSanPhamId);
+    }
+</script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
