@@ -165,6 +165,7 @@
 
 <body style="background-color: #fdfff2">
 <!-- HEADER -->
+
 <header>
     <div id="top-header">
         <div class="container">
@@ -470,14 +471,24 @@
 
                 <!-- Order Details -->
                 <div class="col-md-6 order-details">
+
                     <div class="section-title text-center">
+                        <button style="display: none;float: right"
+                                id="ktsldh" type="button" class="btn btn-danger"
+                                data-bs-toggle="modal" data-bs-target="#myModaltbsldathang">
+                            Kiểm tra số lượng
+                        </button>
                         <h3 class="title">Sản Phẩm</h3>
+
                     </div>
                     <div class="order-summary">
                         <div class="order-col">
                             <div style="width: 10cm"><strong>Sản phẩm</strong></div>
 
-                            <div ><strong>Thành tiền</strong></div>
+                            <div >
+                                <strong>Thành tiền</strong>
+
+                            </div>
                         </div>
                         <div style="height: 5cm; overflow: auto;padding-right: 1cm">
                         <c:forEach items="${listghct}" var="ht" varStatus="stt">
@@ -771,6 +782,69 @@ color: white;border-radius: 5% 5% 5% 5%"
     </h2>
 </div>
 <div style="color: #0C9A9A;display: none"></div>
+
+
+
+
+
+
+
+
+
+
+<!-- The Modal -->
+<div class="modal" id="myModaltbsldathang">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+
+
+            <!-- Modal body -->
+            <div class="modal-body">
+               <h4 style="text-align: center;font-size: 20px" >${thongbaosoluongdathang}</h4>
+
+                 Số lượng sản phẩm quá số lượng :  ${listctspkt.size()}
+                <br>
+                <br>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Ảnh</th>
+                        <th>Sản phẩm </th>
+                        <th>Số lượng đặt tối đa</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <c:if test="${thongbaosoluongdathang != null}">
+                        <c:forEach items="${listctspkt}" var="ht">
+                            <tr>
+                                <td>
+                                    <img src="../../../uploads/${ht.urlAnh}"
+                                         width="50" height="50"
+                                         style="border-radius:50% 50% 50% 50%;border: 1px solid black">
+                                </td>
+                                <td>
+                                        ${ht.sanPham.ten},<br> ram: ${ht.ram.dungLuong}, <br>
+                                            rom: ${ht.rom.dungLuong}<br>
+                                    màu sắc: ${ht.mauSac.ten}
+                                </td>
+                                <td>${banhangonline.soluongcon(ht.id)}</td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Modal footer -->
+
+
+        </div>
+    </div>
+</div>
 <script>
     function chonphuongthucthanhtoanVNP() {
         document.getElementById('phuongthucthanhtoanform').value='2';
@@ -1021,6 +1095,11 @@ color: white;border-radius: 5% 5% 5% 5%"
 
 
 <script src="/jsbanhang/API.js"></script>
-
+<script>
+    <c:if test="${thongbaosoluongdathang != null}">
+    document.getElementById('ktsldh').style.display='';
+    document.getElementById('ktsldh').click();
+    </c:if>
+</script>
 </body>
 </html>
