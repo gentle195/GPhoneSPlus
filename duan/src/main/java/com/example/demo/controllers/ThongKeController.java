@@ -171,6 +171,11 @@ public class ThongKeController {
             model.addAttribute("contentPage", "../thongke/thong-ke-so-luong-doi-tra.jsp");
             return "home/layout";
         } else {
+            List<DoanhThuHang> doanhThuTheoHang = thongKeService.doanhThuHang();
+            model.addAttribute("listDoanhThuHang", doanhThuTheoHang);
+
+            List<DoanhThuHang> locHang = thongKeService.locdoanhThuHang(startDate, endDate);
+            model.addAttribute("listDoanhThuHang", locHang);
             List<SoLuongDoiTraHang> locSoLuongDoiTraHang = thongKeService.locSoLuongDoiTraHang(startDate, endDate);
             List<SoLuongDoiTraHang> locSoLuongSanPhamLoi = thongKeService.locSoLuongSanPhamLoi(startDate, endDate);
             model.addAttribute("listSoLuongDoiTraHang", locSoLuongDoiTraHang);

@@ -71,15 +71,21 @@
     </div>
 </c:if>
 <div class="row">
-    <div class="col-4"></div>
-    <div class="col-4" style="align-content: center"><h3>Biểu đồ thống kê số sản phẩm lỗi</h3>
+    <div class="col-6"><h3>Biểu đồ thống kê số sản phẩm lỗi</h3>
         <div class="card">
             <div class="card-body">
                 <canvas id="myChart2"></canvas>
             </div>
         </div>
     </div>
-    <div class="col-4"></div>
+
+    <div class="col-6"><h3>Biểu đồ thống kê doanh thu hãng</h3>
+        <div class="card">
+            <div class="card-body">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -92,28 +98,30 @@
     });
 </script>
 <script>
-    const ctx = document.getElementById('myChart');
     const data = [];
 
-    <c:forEach items="${listSoLuongDoiTraHang}" var="SLDTH" varStatus="index">
+    <c:forEach items="${listDoanhThuHang}" var="DTH" varStatus="index">
     data.push({
-        tenHang: "${SLDTH.getTenHang()}",
-        soLuong:  ${SLDTH.getSoLuong()}
+        tenHang: "${DTH.getTenHang()}",
+        doanhThu: ${DTH.getDoanhThuThucTe()},
     });
     </c:forEach>
+
+    const ctx = document.getElementById('myChart');
 
     new Chart(ctx, {
         type: 'pie',
         data: {
             labels: data.map(item => item.tenHang),
             datasets: [{
-                label: 'Số lượng sản phẩm đổi hàng',
-                data: data.map(item => item.soLuong),
+                label: 'Doanh Thu',
+                data: data.map(item => item.doanhThu),
                 borderWidth: 1,
                 percentage: true, // Thêm thuộc tính này để hiển thị phần trăm
             }],
         },
     });
+
 
 
     const ctx2 = document.getElementById('myChart2');
