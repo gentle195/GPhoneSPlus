@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.Anh;
 import com.example.demo.models.Camera;
+import com.example.demo.models.ChiTietSanPham;
 import com.example.demo.models.Chip;
 import com.example.demo.models.HangSanPham;
 import com.example.demo.models.IMEI;
@@ -11,11 +12,20 @@ import com.example.demo.models.Pin;
 import com.example.demo.models.Ram;
 import com.example.demo.models.Rom;
 import com.example.demo.models.SanPham;
+import com.example.demo.repositories.BanHangOnLinerepository;
 import com.example.demo.services.AnhService;
+import com.example.demo.services.BanHangOnlineService;
 import com.example.demo.services.CameraService;
+import com.example.demo.services.ChiTietSanPhamService;
+import com.example.demo.services.ChipService;
+import com.example.demo.services.DungLuongPinService;
 import com.example.demo.services.HangSanPhamService;
 import com.example.demo.services.IMEIService;
 import com.example.demo.services.ManHinhService;
+import com.example.demo.services.MauSacService;
+import com.example.demo.services.PinService;
+import com.example.demo.services.RamService;
+import com.example.demo.services.RomService;
 import com.example.demo.services.SanPhamService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +63,28 @@ public class SanPhamController {
     AnhService anhService;
     @Autowired
     IMEIService imeiService;
+
+    @Autowired
+    ChiTietSanPhamService chiTietSanPhamService;
+
+    @Autowired
+    MauSacService mauSacService;
+    @Autowired
+    ChipService chipService;
+    @Autowired
+    RamService ramService;
+    @Autowired
+    RomService romService;
+    @Autowired
+    PinService pinService;
+
+    @Autowired
+    DungLuongPinService dungLuongPinService;
+
+    @Autowired
+    BanHangOnlineService banHangOnlineService;
+    @Autowired
+    BanHangOnLinerepository banHangOnLinerepository;
 
     @GetMapping("/san-pham/hien-thi")
     public String hienthi(@ModelAttribute("dulieuxem") SanPham dulieuxem,
@@ -135,7 +167,7 @@ public class SanPhamController {
                       @ModelAttribute("camera") Camera camera,
                       @ModelAttribute("ManHinh") ManHinh manHinh,
                       @ModelAttribute("anh") Anh anh) {
-        if (bindingResult.hasErrors()||dulieuxem.getAnh()==null) {
+        if (bindingResult.hasErrors() || dulieuxem.getAnh() == null) {
             model.addAttribute("listManHinh", manHinhService.findAll0());
             model.addAttribute("listHangSP", hangSanPhamService.findAll0());
             model.addAttribute("listCamera", cameraService.findAll0());
@@ -144,7 +176,7 @@ public class SanPhamController {
             model.addAttribute("contentPage", "../san-pham/add.jsp");
             return "home/layout";
         }
-        if (bindingResult.hasErrors()||dulieuxem.getHangSanPham()==null) {
+        if (bindingResult.hasErrors() || dulieuxem.getHangSanPham() == null) {
             model.addAttribute("listManHinh", manHinhService.findAll0());
             model.addAttribute("listHangSP", hangSanPhamService.findAll0());
             model.addAttribute("listCamera", cameraService.findAll0());
@@ -153,7 +185,7 @@ public class SanPhamController {
             model.addAttribute("contentPage", "../san-pham/add.jsp");
             return "home/layout";
         }
-        if (bindingResult.hasErrors()||dulieuxem.getManHinh()==null) {
+        if (bindingResult.hasErrors() || dulieuxem.getManHinh() == null) {
             model.addAttribute("listManHinh", manHinhService.findAll0());
             model.addAttribute("listHangSP", hangSanPhamService.findAll0());
             model.addAttribute("listCamera", cameraService.findAll0());
@@ -162,7 +194,7 @@ public class SanPhamController {
             model.addAttribute("contentPage", "../san-pham/add.jsp");
             return "home/layout";
         }
-        if (bindingResult.hasErrors()||dulieuxem.getCamera()==null) {
+        if (bindingResult.hasErrors() || dulieuxem.getCamera() == null) {
             model.addAttribute("listManHinh", manHinhService.findAll0());
             model.addAttribute("listHangSP", hangSanPhamService.findAll0());
             model.addAttribute("listCamera", cameraService.findAll0());
@@ -171,8 +203,8 @@ public class SanPhamController {
             model.addAttribute("contentPage", "../san-pham/add.jsp");
             return "home/layout";
         }
-        if (sanPhamService.trungDuLieu(dulieuxem.getTen(), dulieuxem.getHangSanPham(),dulieuxem.getCamera(), dulieuxem.getManHinh(),  dulieuxem.getAnh())){
-           model.addAttribute("hangSP", new HangSanPham());
+        if (sanPhamService.trungDuLieu(dulieuxem.getTen(), dulieuxem.getHangSanPham(), dulieuxem.getCamera(), dulieuxem.getManHinh(), dulieuxem.getAnh())) {
+            model.addAttribute("hangSP", new HangSanPham());
             model.addAttribute("ManHinh", new ManHinh());
             model.addAttribute("camera", new Camera());
             model.addAttribute("anh", new Anh());
@@ -340,5 +372,37 @@ public class SanPhamController {
         model.addAttribute("listCamera", cameraService.findAll());
         model.addAttribute("contentPage", "../san-pham/hien-thi.jsp");
         return "home/layout";
+    }
+
+    @GetMapping("/san-pham/them-vao-ctsp/{id}")
+    public String themVaoCTSP(Model model, @PathVariable("id") UUID id,@ModelAttribute(name = "Pin") Pin pin,
+                              @ModelAttribute(name = "chip") Chip chip,
+                              @ModelAttribute(name = "ram") Ram ram,
+                              @ModelAttribute(name = "mauSac") MauSac mauSac,
+                              @ModelAttribute(name = "rom") Rom rom,
+                              @ModelAttribute(name = "sanPham") SanPham sanPham,
+                              @ModelAttribute(name = "chitietsanpham") ChiTietSanPham chiTietSanPham) {
+        SanPham sanPham1 = sanPhamService.findById(id);
+        model.addAttribute("selectedSanPham",sanPham1);
+
+        model.addAttribute("banHangOnlineService", banHangOnlineService);
+        model.addAttribute("banHangOnLinerepository", banHangOnLinerepository);
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
+
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/add-chi-tiet-san-pham.jsp");
+
+
+
+        return "home/layout";
+
     }
 }
