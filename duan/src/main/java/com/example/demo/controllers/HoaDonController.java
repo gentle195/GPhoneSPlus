@@ -2081,6 +2081,8 @@ public class HoaDonController {
             hd.setNhanVien(nhanVienService.findById(SecurityUtil.getId().getId()));
             hoaDonService.update(id, hd);
         }
+
+banHangOnLinerepository.xoaDDHtheoIDHD(id);
         model.addAttribute("hoaDon", hd);
         model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
         System.in.read();
@@ -2380,7 +2382,7 @@ public class HoaDonController {
         return "redirect:/hoa-don/hien-thi-cho-giao";
     }
 
-
+// alo nút hủy hóa đơn online đâu
     //    ///thắng làm
     @GetMapping("/hien-thi/{hientb}/{idhdneucan}")
     public String hienThi1(Model model,

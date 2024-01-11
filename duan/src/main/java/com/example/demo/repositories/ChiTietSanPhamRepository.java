@@ -48,6 +48,7 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             "left join Camera  cam on sp.camera.id=cam.id " +
             "where ct.tinhTrang=0 and" +
             " ((:idHang is null or hang.id =:idHang) " +
+            "and (:idSanPham is null or sp.id=: idSanPham) " +
             "and (:idRam is null or ram.id=: idRam) " +
             "and (:idRom is null or rom.id=: idRom) " +
             "and (:idDLPin is null or dungLuong.id=: idDLPin) " +
@@ -57,7 +58,7 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
 
 //            +"and (:giaBanMin is null and :giaBanMax is null or ct.giaBan between :giaBanMin and :giaBanMax)"
     )
-    List<ChiTietSanPham> loc(UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam);
+    List<ChiTietSanPham> loc(UUID idSanPham, UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam);
 
     @Query("select ct from ChiTietSanPham ct left join SanPham sp on ct.sanPham.id=sp.id " +
             "left join HangSanPham hang on sp.hangSanPham.id=hang.id left join Ram ram on ct.ram.id=ram.id " +

@@ -95,7 +95,18 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <select name="idSanPham" class="form-control" style="font-weight: bold; width: 100%"
+                                            id="selectSanPham">
+                                        <option selected disabled>Sản Phẩm</option>
+                                        <c:forEach items="${listSanPham}" var="sp" varStatus="i">
+                                            <option value="${sp.id}">${sp.ten}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <select name="rom" class="form-control" style="font-weight: bold; width: 100%"
                                             id="selectRom">
@@ -106,7 +117,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <select name="ram" class="form-control" style="font-weight: bold; width: 100%"
                                             id="selectRam">
@@ -117,7 +128,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <select name="camera" class="form-control" style="font-weight: bold; width: 100%"
                                             id="selectCamera">
@@ -387,38 +398,6 @@
         </div>
     </div>
 </c:if>
-</body>
-<script>
-    document.querySelectorAll('.dropdown-menu').forEach(function (dropdown) {
-        dropdown.style.display = 'none';
-    });
-
-    // Hiển thị/ẩn các dropdown menu con khi người dùng chọn một giá trị từ dropdown menu cha
-    document.querySelectorAll('.dropdown-toggle').forEach(function (dropdown) {
-        dropdown.addEventListener('click', function () {
-            const dropdownMenu = dropdown.nextElementSibling;
-
-            if (dropdownMenu.style.display === 'block') {
-                dropdownMenu.style.display = 'none';
-            } else {
-                dropdownMenu.style.display = 'block';
-            }
-        });
-    });
-</script>
-<script>
-    $(document).ready(function () {
-        $('#modalSuccess').modal('show');
-    });
-</script>
-<script>
-    $(document).ready(function () {
-        $('#modalError').modal('show');
-    });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
 <button id="modalthemsolgctsp" style="display: none" type="button" class="btn btn-primary" data-bs-toggle="modal"
         data-bs-target="#myModal11">
     Open modal
@@ -504,4 +483,35 @@
         </div>
     </div>
 </div>
+</body>
+<script>
+    document.querySelectorAll('.dropdown-menu').forEach(function (dropdown) {
+        dropdown.style.display = 'none';
+    });
+
+    // Hiển thị/ẩn các dropdown menu con khi người dùng chọn một giá trị từ dropdown menu cha
+    document.querySelectorAll('.dropdown-toggle').forEach(function (dropdown) {
+        dropdown.addEventListener('click', function () {
+            const dropdownMenu = dropdown.nextElementSibling;
+
+            if (dropdownMenu.style.display === 'block') {
+                dropdownMenu.style.display = 'none';
+            } else {
+                dropdownMenu.style.display = 'block';
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#modalSuccess').modal('show');
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#modalError').modal('show');
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </html>

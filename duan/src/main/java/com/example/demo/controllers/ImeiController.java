@@ -1,9 +1,8 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.IMEI;
+import com.example.demo.models.*;
 import com.example.demo.repositories.IMEIRepository;
-import com.example.demo.services.ChiTietSanPhamService;
-import com.example.demo.services.IMEIService;
+import com.example.demo.services.*;
 import com.example.demo.util.QRCodeGenerator;
 import com.google.zxing.WriterException;
 import jakarta.validation.Valid;
@@ -41,13 +40,43 @@ public class ImeiController {
     IMEIService imeiService;
     @Autowired
     IMEIRepository imeiRepository;
-
     @Autowired
     ChiTietSanPhamService chiTietSanPhamService;
+    @Autowired
+    SanPhamService sanPhamService;
+    @Autowired
+    MauSacService mauSacService;
+    @Autowired
+    ChipService chipService;
+    @Autowired
+    RamService ramService;
+    @Autowired
+    RomService romService;
+    @Autowired
+    PinService pinService;
+    @Autowired
+    HangSanPhamService hangSanPhamService;
+    @Autowired
+    DungLuongPinService dungLuongPinService;
+    @Autowired
+    ManHinhService manHinhService;
+    @Autowired
+    CameraService cameraService;
     private Date ngay;
     private UUID idCu;
+
     @GetMapping("/hien-thi")
     public String hienThi(Model model) {
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
         List<IMEI> imeiPage = imeiService.getImeiOn();
         model.addAttribute("listImei", imeiPage);
         model.addAttribute("contentPage", "../imei/index.jsp");
@@ -95,6 +124,16 @@ public class ImeiController {
 
     @GetMapping("/hien-thi-da-ban")
     public String hienThiDaBan(Model model) {
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
         List<IMEI> imeiPage = imeiService.getImeiOfff();
         model.addAttribute("listImei", imeiPage);
         model.addAttribute("contentPage", "../imei/imei-da-ban.jsp");
@@ -103,6 +142,16 @@ public class ImeiController {
 
     @GetMapping("/hien-thi-da-xoa")
     public String hienThiDaXoa(Model model) {
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
         List<IMEI> imeiPage = imeiService.getImeiOff3();
         model.addAttribute("listImei", imeiPage);
         model.addAttribute("contentPage", "../imei/imei-da-xoa.jsp");
@@ -111,6 +160,16 @@ public class ImeiController {
 
     @GetMapping("/hien-thi-imei-loi")
     public String hienThiImeiLoi(Model model, @ModelAttribute("IMEILoi") IMEI imeiLoi) {
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
         List<IMEI> imeiPage = imeiService.findImeiLoi();
         model.addAttribute("listImei", imeiPage);
         model.addAttribute("contentPage", "../imei/imei-loi.jsp");
@@ -132,7 +191,7 @@ public class ImeiController {
     @GetMapping("/khoi-phuc-imei-loi/{id}")
     public String khoiPhucImeiLoi(@PathVariable("id") UUID id, Model model, @ModelAttribute("IMEILoi") IMEI imeiLoi) {
         imeiLoi = imeiRepository.findById(id).orElse(null);
-        idCu=id;
+        idCu = id;
         model.addAttribute("IMEILoi", imeiLoi);
         model.addAttribute("listImei", imeiService.findImeiLoi());
         model.addAttribute("batmodaldetailupdatekm", 0);
@@ -141,7 +200,7 @@ public class ImeiController {
     }
 
     @PostMapping("/thay-doi-imei-loi")
-    public String CapNhatIMEI( Model model, @ModelAttribute("IMEILoi") IMEI imeiLoi,
+    public String CapNhatIMEI(Model model, @ModelAttribute("IMEILoi") IMEI imeiLoi,
                               @RequestParam("imeiMoi") String newIMEI) throws IOException, WriterException {
         if (newIMEI.isEmpty() || newIMEI.length() < 15 || newIMEI.length() > 15) {
             model.addAttribute("thongBao", "IMEI không được để trống và có độ dài là 15 ký tự");
@@ -164,15 +223,14 @@ public class ImeiController {
                     model.addAttribute("contentPage", "../imei/imei-loi.jsp");
                     return "home/layout";
                 }
-                IMEI imei =imeiService.findById(idCu);
-                String lichSuThayDoi= "Thông tin IMEI cũ: "
-                        +imei.getChiTietSanPham().getSanPham().getTen()+" - "
-                        +imei.getChiTietSanPham().getSanPham().getHangSanPham().getTen()+" - "
-                        +imei.getChiTietSanPham().getChip().getTen()+" - "
-                        +imei.getChiTietSanPham().getRam().getDungLuong()+" - "
-                        +imei.getChiTietSanPham().getRom().getDungLuong()+" - "
-                        +imei.getSoImei()
-                        ;
+                IMEI imei = imeiService.findById(idCu);
+                String lichSuThayDoi = "Thông tin IMEI cũ: "
+                        + imei.getChiTietSanPham().getSanPham().getTen() + " - "
+                        + imei.getChiTietSanPham().getSanPham().getHangSanPham().getTen() + " - "
+                        + imei.getChiTietSanPham().getChip().getTen() + " - "
+                        + imei.getChiTietSanPham().getRam().getDungLuong() + " - "
+                        + imei.getChiTietSanPham().getRom().getDungLuong() + " - "
+                        + imei.getSoImei();
                 imei.setLichSu(lichSuThayDoi);
                 imei.setSoImei(newIMEI);
                 imei.setNgayCapNhat(Date.valueOf(LocalDate.now()));
@@ -181,7 +239,7 @@ public class ImeiController {
                 String outputFolderPath = projectRootPath + "/src/main/webapp/maqr";
                 QRCodeGenerator.generatorQRCode(imei, outputFolderPath);
                 imei.setMaQr(imei.getSoImei() + ".png");
-                imeiService.update(idCu,imei);
+                imeiService.update(idCu, imei);
                 model.addAttribute("thongBaoThanhCong", "IMEI đã được cập nhật thành công");
                 model.addAttribute("listImei", imeiService.findImeiLoi());
                 model.addAttribute("contentPage", "../imei/imei-loi.jsp");
@@ -369,4 +427,140 @@ public class ImeiController {
         return "home/layout";
     }
 
+    @PostMapping("/loc-chua-ban")
+    public String loc(Model model, @RequestParam(value = "hang", required = false) UUID hang,
+                      @RequestParam(value = "idSanPham", required = false) UUID idSanPhamm,
+                      @RequestParam(value = "ram", required = false) UUID Ram,
+                      @RequestParam(value = "rom", required = false) UUID Rom,
+                      @RequestParam(value = "dungLuongPin", required = false) UUID dungLuongPin,
+                      @RequestParam(value = "chip", required = false) UUID Chip,
+                      @RequestParam(value = "manHinh", required = false) UUID moTaMan,
+                      @RequestParam(value = "camera", required = false) UUID moTaCam,
+                      @ModelAttribute("chitietsanpham") ChiTietSanPham chiTietSanPham,
+                      @ModelAttribute(name = "Pin") Pin pin,
+                      @ModelAttribute(name = "chip") Chip chip,
+                      @ModelAttribute(name = "ram") Ram ram,
+                      @ModelAttribute(name = "mauSac") MauSac mauSac,
+                      @ModelAttribute(name = "rom") Rom rom,
+                      @ModelAttribute(name = "sanPham") SanPham sanPham) {
+        List<IMEI> list = imeiRepository.locChuaBan(idSanPhamm, hang, Ram, Rom, dungLuongPin, Chip, moTaMan, moTaCam);
+        model.addAttribute("listImei", list);
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("thongBaoCTSP", "Lọc dữ liệu thành công");
+
+        model.addAttribute("contentPage", "../imei/index.jsp");
+        return "home/layout";
+    }
+
+    @PostMapping("/loc-da-ban")
+    public String locDaBan(Model model, @RequestParam(value = "hang", required = false) UUID hang,
+                           @RequestParam(value = "idSanPham", required = false) UUID idSanPhamm,
+                           @RequestParam(value = "ram", required = false) UUID Ram,
+                           @RequestParam(value = "rom", required = false) UUID Rom,
+                           @RequestParam(value = "dungLuongPin", required = false) UUID dungLuongPin,
+                           @RequestParam(value = "chip", required = false) UUID Chip,
+                           @RequestParam(value = "manHinh", required = false) UUID moTaMan,
+                           @RequestParam(value = "camera", required = false) UUID moTaCam,
+                           @ModelAttribute("chitietsanpham") ChiTietSanPham chiTietSanPham,
+                           @ModelAttribute(name = "Pin") Pin pin,
+                           @ModelAttribute(name = "chip") Chip chip,
+                           @ModelAttribute(name = "ram") Ram ram,
+                           @ModelAttribute(name = "mauSac") MauSac mauSac,
+                           @ModelAttribute(name = "rom") Rom rom,
+                           @ModelAttribute(name = "sanPham") SanPham sanPham) {
+        List<IMEI> list = imeiRepository.locDaBan(idSanPhamm, hang, Ram, Rom, dungLuongPin, Chip, moTaMan, moTaCam);
+        model.addAttribute("listImei", list);
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("thongBaoCTSP", "Lọc dữ liệu thành công");
+
+        model.addAttribute("contentPage", "../imei/imei-da-ban.jsp");
+        return "home/layout";
+    }
+
+    @PostMapping("/loc-da-xoa")
+    public String locDaXoa(Model model, @RequestParam(value = "hang", required = false) UUID hang,
+                           @RequestParam(value = "idSanPham", required = false) UUID idSanPhamm,
+                           @RequestParam(value = "ram", required = false) UUID Ram,
+                           @RequestParam(value = "rom", required = false) UUID Rom,
+                           @RequestParam(value = "dungLuongPin", required = false) UUID dungLuongPin,
+                           @RequestParam(value = "chip", required = false) UUID Chip,
+                           @RequestParam(value = "manHinh", required = false) UUID moTaMan,
+                           @RequestParam(value = "camera", required = false) UUID moTaCam,
+                           @ModelAttribute("chitietsanpham") ChiTietSanPham chiTietSanPham,
+                           @ModelAttribute(name = "Pin") Pin pin,
+                           @ModelAttribute(name = "chip") Chip chip,
+                           @ModelAttribute(name = "ram") Ram ram,
+                           @ModelAttribute(name = "mauSac") MauSac mauSac,
+                           @ModelAttribute(name = "rom") Rom rom,
+                           @ModelAttribute(name = "sanPham") SanPham sanPham) {
+        List<IMEI> list = imeiRepository.locDaXoa(idSanPhamm, hang, Ram, Rom, dungLuongPin, Chip, moTaMan, moTaCam);
+        model.addAttribute("listImei", list);
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("thongBaoCTSP", "Lọc dữ liệu thành công");
+
+        model.addAttribute("contentPage", "../imei/imei-da-xoa.jsp");
+        return "home/layout";
+    }
+
+    @PostMapping("/loc-loi")
+    public String locLoi(Model model, @RequestParam(value = "hang", required = false) UUID hang,
+                         @RequestParam(value = "idSanPham", required = false) UUID idSanPhamm,
+                         @RequestParam(value = "ram", required = false) UUID Ram,
+                         @RequestParam(value = "rom", required = false) UUID Rom,
+                         @RequestParam(value = "dungLuongPin", required = false) UUID dungLuongPin,
+                         @RequestParam(value = "chip", required = false) UUID Chip,
+                         @RequestParam(value = "manHinh", required = false) UUID moTaMan,
+                         @RequestParam(value = "camera", required = false) UUID moTaCam,
+                         @ModelAttribute("chitietsanpham") ChiTietSanPham chiTietSanPham,
+                         @ModelAttribute(name = "Pin") Pin pin,
+                         @ModelAttribute(name = "chip") Chip chip,
+                         @ModelAttribute(name = "ram") Ram ram,
+                         @ModelAttribute(name = "mauSac") MauSac mauSac,
+                         @ModelAttribute(name = "rom") Rom rom,
+                         @ModelAttribute(name = "sanPham") SanPham sanPham
+                        , @ModelAttribute("IMEILoi") IMEI imeiLoi) {
+        List<IMEI> list = imeiRepository.locLoi(idSanPhamm, hang, Ram, Rom, dungLuongPin, Chip, moTaMan, moTaCam);
+        model.addAttribute("listImei", list);
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
+        model.addAttribute("thongBaoThanhCong", "Lọc dữ liệu thành công");
+
+        model.addAttribute("contentPage", "../imei/imei-loi.jsp");
+        return "home/layout";
+    }
 }

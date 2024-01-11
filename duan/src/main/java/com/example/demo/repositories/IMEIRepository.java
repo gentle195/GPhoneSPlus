@@ -19,6 +19,7 @@ import java.util.UUID;
 public interface IMEIRepository extends JpaRepository<IMEI, UUID> {
     @Query("select i from IMEI i left join ChiTietSanPham ct on i.chiTietSanPham.id=ct.id where ct.id=:id and i.tinhTrang=0")
     List<IMEI> getIMEI(UUID id);
+
     @Query("select i from IMEI i where  i.soImei=:soImei")
     IMEI getIMEISo(@Param("soImei") String soImei);
 
@@ -99,4 +100,89 @@ public interface IMEIRepository extends JpaRepository<IMEI, UUID> {
     List<IMEI> statusCTSP(UUID id);
 
     boolean existsBySoImei(String imei);
+
+    @Query("select imei from IMEI imei left join ChiTietSanPham ct on imei.chiTietSanPham.id=ct.id left join SanPham sp on ct.sanPham.id=sp.id " +
+            "left join HangSanPham hang on sp.hangSanPham.id=hang.id left join Ram ram on ct.ram.id=ram.id " +
+            "left join Rom rom on ct.rom.id=rom.id left join Pin pin on ct.pin.id=pin.id " +
+            "left join MauSac ms on ct.mauSac.id=ms.id left join Chip chip on ct.chip.id=chip.id " +
+            "left join DungLuongPin dungLuong on pin.dungLuongPin.id=dungLuong.id " +
+            "left  join ManHinh manHinh on sp.manHinh.id=manHinh.id " +
+            "left join Camera  cam on sp.camera.id=cam.id " +
+            "where imei.tinhTrang=0 and" +
+            " ((:idHang is null or hang.id =:idHang) " +
+            "and (:idSanPham is null or sp.id=: idSanPham) " +
+            "and (:idRam is null or ram.id=: idRam) " +
+            "and (:idRom is null or rom.id=: idRom) " +
+            "and (:idDLPin is null or ct.id=: idDLPin) " +
+            "and (:idChip is null or chip.id=: idChip) " +
+            "and (:moTaMan is null or manHinh.id =:moTaMan) " +
+            "and (:moTaCam is null or cam.id =:moTaCam) )"
+
+//            +"and (:giaBanMin is null and :giaBanMax is null or ct.giaBan between :giaBanMin and :giaBanMax)"
+    )
+    List<IMEI> locChuaBan(UUID idSanPham, UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam);
+
+    @Query("select imei from IMEI imei left join ChiTietSanPham ct on imei.chiTietSanPham.id=ct.id left join SanPham sp on ct.sanPham.id=sp.id " +
+            "left join HangSanPham hang on sp.hangSanPham.id=hang.id left join Ram ram on ct.ram.id=ram.id " +
+            "left join Rom rom on ct.rom.id=rom.id left join Pin pin on ct.pin.id=pin.id " +
+            "left join MauSac ms on ct.mauSac.id=ms.id left join Chip chip on ct.chip.id=chip.id " +
+            "left join DungLuongPin dungLuong on pin.dungLuongPin.id=dungLuong.id " +
+            "left  join ManHinh manHinh on sp.manHinh.id=manHinh.id " +
+            "left join Camera  cam on sp.camera.id=cam.id " +
+            "where (imei.tinhTrang=1 or imei.tinhTrang=3) and" +
+            " ((:idHang is null or hang.id =:idHang) " +
+            "and (:idSanPham is null or sp.id=: idSanPham) " +
+            "and (:idRam is null or ram.id=: idRam) " +
+            "and (:idRom is null or rom.id=: idRom) " +
+            "and (:idDLPin is null or ct.id=: idDLPin) " +
+            "and (:idChip is null or chip.id=: idChip) " +
+            "and (:moTaMan is null or manHinh.id =:moTaMan) " +
+            "and (:moTaCam is null or cam.id =:moTaCam) )"
+
+//            +"and (:giaBanMin is null and :giaBanMax is null or ct.giaBan between :giaBanMin and :giaBanMax)"
+    )
+    List<IMEI> locDaBan(UUID idSanPham, UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam);
+
+    @Query("select imei from IMEI imei left join ChiTietSanPham ct on imei.chiTietSanPham.id=ct.id left join SanPham sp on ct.sanPham.id=sp.id " +
+            "left join HangSanPham hang on sp.hangSanPham.id=hang.id left join Ram ram on ct.ram.id=ram.id " +
+            "left join Rom rom on ct.rom.id=rom.id left join Pin pin on ct.pin.id=pin.id " +
+            "left join MauSac ms on ct.mauSac.id=ms.id left join Chip chip on ct.chip.id=chip.id " +
+            "left join DungLuongPin dungLuong on pin.dungLuongPin.id=dungLuong.id " +
+            "left  join ManHinh manHinh on sp.manHinh.id=manHinh.id " +
+            "left join Camera  cam on sp.camera.id=cam.id " +
+            "where imei.tinhTrang=2 and" +
+            " ((:idHang is null or hang.id =:idHang) " +
+            "and (:idSanPham is null or sp.id=: idSanPham) " +
+            "and (:idRam is null or ram.id=: idRam) " +
+            "and (:idRom is null or rom.id=: idRom) " +
+            "and (:idDLPin is null or ct.id=: idDLPin) " +
+            "and (:idChip is null or chip.id=: idChip) " +
+            "and (:moTaMan is null or manHinh.id =:moTaMan) " +
+            "and (:moTaCam is null or cam.id =:moTaCam) )"
+
+//            +"and (:giaBanMin is null and :giaBanMax is null or ct.giaBan between :giaBanMin and :giaBanMax)"
+    )
+    List<IMEI> locDaXoa(UUID idSanPham, UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam);
+
+    @Query("select imei from IMEI imei left join ChiTietSanPham ct on imei.chiTietSanPham.id=ct.id left join SanPham sp on ct.sanPham.id=sp.id " +
+            "left join HangSanPham hang on sp.hangSanPham.id=hang.id left join Ram ram on ct.ram.id=ram.id " +
+            "left join Rom rom on ct.rom.id=rom.id left join Pin pin on ct.pin.id=pin.id " +
+            "left join MauSac ms on ct.mauSac.id=ms.id left join Chip chip on ct.chip.id=chip.id " +
+            "left join DungLuongPin dungLuong on pin.dungLuongPin.id=dungLuong.id " +
+            "left  join ManHinh manHinh on sp.manHinh.id=manHinh.id " +
+            "left join Camera  cam on sp.camera.id=cam.id " +
+            "where imei.tinhTrang=4 and" +
+            " ((:idHang is null or hang.id =:idHang) " +
+            "and (:idSanPham is null or sp.id=: idSanPham) " +
+            "and (:idRam is null or ram.id=: idRam) " +
+            "and (:idRom is null or rom.id=: idRom) " +
+            "and (:idDLPin is null or ct.id=: idDLPin) " +
+            "and (:idChip is null or chip.id=: idChip) " +
+            "and (:moTaMan is null or manHinh.id =:moTaMan) " +
+            "and (:moTaCam is null or cam.id =:moTaCam) )"
+
+//            +"and (:giaBanMin is null and :giaBanMax is null or ct.giaBan between :giaBanMin and :giaBanMax)"
+    )
+    List<IMEI> locLoi(UUID idSanPham, UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam);
+
 }

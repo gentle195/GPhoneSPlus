@@ -96,7 +96,18 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <select name="idSanPham" class="form-control" style="font-weight: bold; width: 100%"
+                                            id="selectSanPham">
+                                        <option selected disabled>Sản Phẩm</option>
+                                        <c:forEach items="${listSanPham}" var="sp" varStatus="i">
+                                            <option value="${sp.id}">${sp.ten}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <select name="rom" class="form-control" style="font-weight: bold; width: 100%"
                                             id="selectRom">
@@ -107,7 +118,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <select name="ram" class="form-control" style="font-weight: bold; width: 100%"
                                             id="selectRam">
@@ -118,7 +129,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <select name="camera" class="form-control" style="font-weight: bold; width: 100%"
                                             id="selectCamera">
