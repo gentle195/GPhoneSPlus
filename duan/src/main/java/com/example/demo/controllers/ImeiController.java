@@ -352,4 +352,21 @@ public class ImeiController {
         System.out.println(1);
         return list;
     }
+
+    @GetMapping("/chinh-sach")
+    public String hienThiChinhSach(Model model) {
+        model.addAttribute("contentPage", "../doitra/chinh-sach-admin.jsp");
+        return "home/layout";
+
+    }
+
+    //chinh-sach-imei-loi
+    @GetMapping("/chinh-sach-xu-ly-imei-loi")
+    public String chinhSachXuLyImeiLoi(Model model) {
+//        List<IMEI> imeiPage = imeiService.findImeiLoi();
+//        model.addAttribute("listImei", imeiPage);
+        model.addAttribute("contentPage", "../imei/chinh-sach-xu-ly-imei-loi.jsp");
+        return "home/layout";
+    }
+
 }
