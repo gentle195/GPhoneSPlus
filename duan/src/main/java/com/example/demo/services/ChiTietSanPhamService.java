@@ -25,7 +25,7 @@ public interface ChiTietSanPhamService {
 
     public List<ChiTietSanPham> search1(String ten);
 
-    public List<ChiTietSanPham> loc(UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam);
+    public List<ChiTietSanPham> loc(UUID idSanPham,UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam);
 
     public List<ChiTietSanPham> locBanHang(UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam, BigDecimal giaBanMin, BigDecimal giaBanMax);
 

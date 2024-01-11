@@ -9,9 +9,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>GPhoneS Store </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     <!-- Favicon icon -->
 </head>
 <body>
+<c:if test="${thongBaoCTSP != null}">
+    <div id="modalSuccess" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="swal2-icon swal2-success swal2-animate-success-icon"
+                                 style="display: block;">
+                                <div class="swal2-success-circular-line-left"
+                                     style="background: rgb(255, 255, 255);"></div>
+                                <span class="swal2-success-line-tip swal2-animate-success-line-tip"></span> <span
+                                    class="swal2-success-line-long swal2-animate-success-line-long"></span>
+                                <div class="swal2-success-ring"></div>
+                                <div class="swal2-success-fix" style="background: rgb(255, 255, 255);"></div>
+                                <div class="swal2-success-circular-line-right"
+                                     style="background: rgb(255, 255, 255);"></div>
+                            </div>
+                            <h4 style="color: #10ae05;margin: 10px;text-align: center">${thongBaoCTSP}</h4>
+                        </div>
+                        <div class="col-12" style="text-align: center;margin-top: 20px">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                                Xác nhận
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</c:if>
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
@@ -48,7 +83,116 @@
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="description" role="tabpanel"
          aria-labelledby="description-tab">
-
+        <form action="/imei/loc-da-ban" method="post" onsubmit="return checkLoc()">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Lọc IMEI
+                    </h4>
+                    <form class="forms-sample">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <select name="dungLuongPin" class="form-control"
+                                            style="font-weight: bold; width: 100%" id="selectPin">
+                                        <option selected disabled>Chi tiết sản phẩm</option>
+                                        <c:forEach items="${listCTSP}" var="ctsp" varStatus="i">
+                                            <option value="${ctsp.id}">${ctsp.sanPham.ten} - ${ctsp.mauSac.ten}
+                                                - ${ctsp.ram.dungLuong} - ${ctsp.rom.dungLuong} - ${ctsp.chip.ten} - ${ctsp.pin.dungLuongPin.thongSo}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <select name="hang" class="form-control" style="font-weight: bold; width: 100%"
+                                            id="selectHang">
+                                        <option selected disabled>Hãng</option>
+                                        <c:forEach items="${listHang}" var="hang" varStatus="i">
+                                            <option value="${hang.id}">${hang.ten}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <select name="chip" class="form-control" style="font-weight: bold; width: 100%"
+                                            id="selectChip">
+                                        <option selected disabled>Chip</option>
+                                        <c:forEach items="${listChip}" var="chip" varStatus="i">
+                                            <option value="${chip.id}">${chip.ten}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <select name="manHinh" class="form-control" style="font-weight: bold; width: 100%"
+                                            id="selectManHinh">
+                                        <option selected disabled>Màn Hình</option>
+                                        <c:forEach items="${listManHinh}" var="man" varStatus="i">
+                                            <option value="${man.id}">${man.thongSo}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <select name="idSanPham" class="form-control" style="font-weight: bold; width: 100%"
+                                            id="selectSanPham">
+                                        <option selected disabled>Sản Phẩm</option>
+                                        <c:forEach items="${listSanPham}" var="sp" varStatus="i">
+                                            <option value="${sp.id}">${sp.ten}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <select name="rom" class="form-control" style="font-weight: bold; width: 100%"
+                                            id="selectRom">
+                                        <option selected disabled>Rom</option>
+                                        <c:forEach items="${listRom}" var="rom" varStatus="i">
+                                            <option value="${rom.id}">${rom.dungLuong}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <select name="ram" class="form-control" style="font-weight: bold; width: 100%"
+                                            id="selectRam">
+                                        <option selected disabled>Ram</option>
+                                        <c:forEach items="${listRam}" var="ram" varStatus="i">
+                                            <option value="${ram.id}">${ram.dungLuong}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <select name="camera" class="form-control" style="font-weight: bold; width: 100%"
+                                            id="selectCamera">
+                                        <option selected disabled>Camera</option>
+                                        <c:forEach items="${listCamera}" var="cam" varStatus="i">
+                                            <option value="${cam.id}">${cam.thongSo}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="text-align: center">
+                            <button type="submit" class="btn btn-primary mr-2"
+                                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                Lọc Thông Tin
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <%--    </div>--%>
+        </form>
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
@@ -66,7 +210,7 @@
                     </form>
                     <%--           kết thúc tìm kiếm         --%>
                     <div class="table-responsive">
-                        <table style="color: black; width: 1400px;" id="example" class="display">
+                        <table style="color: black; width: 1600px;" id="example" class="display">
                             <thead>
                             <tr>
                                 <th scope="col">Mã</th>
@@ -151,6 +295,11 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        $('#modalSuccess').modal('show');
+    });
+</script>
 
 <script>
     $(document).ready(function () {

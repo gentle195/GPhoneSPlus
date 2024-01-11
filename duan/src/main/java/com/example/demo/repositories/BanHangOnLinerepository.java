@@ -236,6 +236,11 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
     @Query("delete from GioHangChiTiet ghct where ghct.gioHang.id=:idgh and ghct.tinhTrang=0")
     void xoaghcttheoIDGHvsTTO(@Param("idgh") UUID idgh);
 
+    @Transactional
+    @Modifying
+    @Query("delete from DonDatHang ghct where ghct.hoaDon.id=:idhd ")
+    void xoaDDHtheoIDHD(@Param("idhd") UUID idhd);
+
     @Query("select hd from  HoaDon hd where hd.khachHang.id=:idkh")
     List<HoaDon> timhoadontheoidkh(@Param("idkh") UUID idkh);
 
@@ -360,13 +365,10 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
     IMEI timIMEItheosoImei(@Param("soimei") String soimei);
 
 
-
-
     @Query(value = "select a.id_chi_tiet_san_pham as idctsp,sum(a.so_luong) as slctsp" +
             " from don_dat_hang a group by a.id_chi_tiet_san_pham,a.tinh_trang" +
             " having tinh_trang=0", nativeQuery = true)
     List<DSfullSanPhamDatHangOnline> dsfullDDHcoTT0ladoixacnhan();
-
 
 
     @Transactional
@@ -384,6 +386,7 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
             "left join Camera  cam on sp.camera.id=cam.id " +
             "where ct.tinhTrang=1 and" +
             " ((:idHang is null or hang.id =:idHang) " +
+            "and (:idSanPham is null or sp.id=: idSanPham) " +
             "and (:idRam is null or ram.id=: idRam) " +
             "and (:idRom is null or rom.id=: idRom) " +
             "and (:idDLPin is null or dungLuong.id=: idDLPin) " +
@@ -393,8 +396,7 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
 
 //            +"and (:giaBanMin is null and :giaBanMax is null or ct.giaBan between :giaBanMin and :giaBanMax)"
     )
-    List<ChiTietSanPham> locctspngungban(UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam);
-
+    List<ChiTietSanPham> locctspngungban(UUID idSanPham, UUID idHang, UUID idRam, UUID idRom, UUID idDLPin, UUID idChip, UUID moTaMan, UUID moTaCam);
 
 
     @Transactional

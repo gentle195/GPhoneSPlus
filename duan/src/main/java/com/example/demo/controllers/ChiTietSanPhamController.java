@@ -106,6 +106,16 @@ public class ChiTietSanPhamController {
     @GetMapping("/hien-thi-da-xoa")
     public String hienThiDaXoa(Model model, @RequestParam("pageNum") Optional<Integer> pageNum
     ) {
+        model.addAttribute("listSanPham", sanPhamService.findAll0());
+        model.addAttribute("listMauSac", mauSacService.findAll0());
+        model.addAttribute("listChip", chipService.findAll0());
+        model.addAttribute("listRam", ramService.findAll0());
+        model.addAttribute("listRom", romService.findAll0());
+        model.addAttribute("listHang", hangSanPhamService.findAll0());
+        model.addAttribute("dungLuongPin", dungLuongPinService.findAll0());
+        model.addAttribute("listPin", pinService.findAll0());
+        model.addAttribute("listManHinh", manHinhService.findAll0());
+        model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("banHangOnlineService", banHangOnlineService);
         model.addAttribute("banHangOnLinerepository", banHangOnLinerepository);
         List<ChiTietSanPham> chiTietSanPhamPage = chiTietSanPhamService.getAllTTOff();
@@ -855,6 +865,7 @@ public class ChiTietSanPhamController {
 
     @PostMapping("/loc")
     public String loc(Model model, @RequestParam(value = "hang", required = false) UUID hang,
+                      @RequestParam(value = "idSanPham", required = false) UUID idSanPhamm,
                       @RequestParam(value = "ram", required = false) UUID Ram,
                       @RequestParam(value = "rom", required = false) UUID Rom,
                       @RequestParam(value = "dungLuongPin", required = false) UUID dungLuongPin,
@@ -868,7 +879,7 @@ public class ChiTietSanPhamController {
                       @ModelAttribute(name = "mauSac") MauSac mauSac,
                       @ModelAttribute(name = "rom") Rom rom,
                       @ModelAttribute(name = "sanPham") SanPham sanPham) {
-        List<ChiTietSanPham> list = chiTietSanPhamService.loc(hang, Ram, Rom, dungLuongPin, Chip, moTaMan, moTaCam);
+        List<ChiTietSanPham> list = chiTietSanPhamService.loc(idSanPhamm, hang, Ram, Rom, dungLuongPin, Chip, moTaMan, moTaCam);
         model.addAttribute("listCTSP", list);
         model.addAttribute("listSanPham", sanPhamService.findAll0());
         model.addAttribute("listMauSac", mauSacService.findAll0());
@@ -882,9 +893,6 @@ public class ChiTietSanPhamController {
         model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("banHangOnlineService", banHangOnlineService);
         model.addAttribute("banHangOnLinerepository", banHangOnLinerepository);
-
-
-        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
         model.addAttribute("imei", new IMEI());
         String ma = "IMEI" + imeiService.findAll().size();
         model.addAttribute("ma", ma);
@@ -968,6 +976,7 @@ public class ChiTietSanPhamController {
     @PostMapping("/lochethang")
     public String lochethang(Model model, @RequestParam(value = "hang", required = false) UUID hang,
                              @RequestParam(value = "ram", required = false) UUID Ram,
+                             @RequestParam(value = "idSanPham", required = false) UUID idSanPham,
                              @RequestParam(value = "rom", required = false) UUID Rom,
                              @RequestParam(value = "dungLuongPin", required = false) UUID dungLuongPin,
                              @RequestParam(value = "chip", required = false) UUID Chip,
@@ -980,7 +989,7 @@ public class ChiTietSanPhamController {
                              @ModelAttribute(name = "mauSac") MauSac mauSac,
                              @ModelAttribute(name = "rom") Rom rom,
                              @ModelAttribute(name = "sanPham") SanPham sanPham) {
-        List<ChiTietSanPham> list = chiTietSanPhamService.loc(hang, Ram, Rom, dungLuongPin, Chip, moTaMan, moTaCam);
+        List<ChiTietSanPham> list = chiTietSanPhamService.loc(idSanPham, hang, Ram, Rom, dungLuongPin, Chip, moTaMan, moTaCam);
         model.addAttribute("listCTSP", list);
         model.addAttribute("listSanPham", sanPhamService.findAll0());
         model.addAttribute("listMauSac", mauSacService.findAll0());
@@ -994,8 +1003,6 @@ public class ChiTietSanPhamController {
         model.addAttribute("listCamera", cameraService.findAll0());
         model.addAttribute("banHangOnlineService", banHangOnlineService);
         model.addAttribute("banHangOnLinerepository", banHangOnLinerepository);
-
-        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
         model.addAttribute("imei", new IMEI());
         String ma = "IMEI" + imeiService.findAll().size();
         model.addAttribute("ma", ma);
@@ -1012,6 +1019,7 @@ public class ChiTietSanPhamController {
     public String locngungban(Model model, @RequestParam(value = "hang", required = false) UUID hang,
                               @RequestParam(value = "ram", required = false) UUID Ram,
                               @RequestParam(value = "rom", required = false) UUID Rom,
+                              @RequestParam(value = "idSanPham", required = false) UUID idSanPham,
                               @RequestParam(value = "dungLuongPin", required = false) UUID dungLuongPin,
                               @RequestParam(value = "chip", required = false) UUID Chip,
                               @RequestParam(value = "manHinh", required = false) UUID moTaMan,
@@ -1023,7 +1031,7 @@ public class ChiTietSanPhamController {
                               @ModelAttribute(name = "mauSac") MauSac mauSac,
                               @ModelAttribute(name = "rom") Rom rom,
                               @ModelAttribute(name = "sanPham") SanPham sanPham) {
-        List<ChiTietSanPham> list = banHangOnLinerepository.locctspngungban(hang, Ram, Rom, dungLuongPin, Chip, moTaMan, moTaCam);
+        List<ChiTietSanPham> list = banHangOnLinerepository.locctspngungban(idSanPham,hang, Ram, Rom, dungLuongPin, Chip, moTaMan, moTaCam);
         model.addAttribute("listCTSP", list);
         model.addAttribute("listSanPham", sanPhamService.findAll0());
         model.addAttribute("listMauSac", mauSacService.findAll0());
