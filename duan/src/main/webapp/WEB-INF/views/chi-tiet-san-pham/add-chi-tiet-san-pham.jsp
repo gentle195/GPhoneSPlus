@@ -232,7 +232,7 @@
                                         <div class="col-1">
                                             <a type="button" id="modalSanPham" data-bs-toggle="modal"
                                                data-bs-target="#exampleModalSanPham">
-                                                <img src="../uploads/plus.png">
+                                                <img src="/uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>
@@ -251,7 +251,7 @@
                                         <div class="col-1">
                                             <a type="button" id="modalChip" data-bs-toggle="modal"
                                                data-bs-target="#exampleModalChip">
-                                                <img src="../uploads/plus.png">
+                                                <img src="/uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>
@@ -270,7 +270,7 @@
                                         <div class="col-1">
                                             <a type="button" id="modalRom" data-bs-toggle="modal"
                                                data-bs-target="#exampleModalRom">
-                                                <img src="../uploads/plus.png">
+                                                <img src="/uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>
@@ -291,7 +291,7 @@
                                         <div class="col-1">
                                             <a type="button" id="modalMauSac" data-bs-toggle="modal"
                                                data-bs-target="#exampleModalMauSac">
-                                                <img src="../uploads/plus.png">
+                                                <img src="/uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>
@@ -310,7 +310,7 @@
                                         <div class="col-1">
                                             <a type="button" id="modalRam" data-bs-toggle="modal"
                                                data-bs-target="#exampleModalRam">
-                                                <img src="../uploads/plus.png">
+                                                <img src="/uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>
@@ -330,7 +330,7 @@
                                         <div class="col-1">
                                             <a type="button" id="modalPin" data-bs-toggle="modal"
                                                data-bs-target="#exampleModalPin">
-                                                <img src="../uploads/plus.png">
+                                                <img src="/uploads/plus.png">
                                             </a>
                                         </div>
                                     </div>

@@ -190,12 +190,17 @@
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                             <i class="ti-reload btn-icon-prepend"></i>
                                             Status</a>
-                                        <a href="/san-pham/them-vao-ctsp/${list.id}" class="btn btn-success btn-icon-text"
+                                        <a href="/san-pham/them-vao-ctsp/${list.id}"  class="btn btn-success btn-icon-text"
                                            tabindex="-1"
                                            role="button"
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
 
                                             Thêm vào CTSP</a>
+                                        <form action="/san-pham/them-vao-ctsp/${list.id}" method="post">
+                                            <button class="btn btn-success" type="submit" onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                                Thêm vào CTSP1
+                                            </button>
+                                        </form>
 
                                     </td>
                                 </tr>
