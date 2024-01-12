@@ -405,7 +405,7 @@
                                         <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 0 ||hoaDon.tinhTrangGiaoHang == 1 || hoaDon.tinhTrangGiaoHang == 2) && hoaDon.hinhThucThanhToan == 0}">
 
                                             <a href="/hoa-don/xac-nhan-huy-dang-giao/${hoaDon.id}"
-                                               id="toastr-success-top-right-hoa-don-dang-giao"
+                                               id="toastr-success-top-right-hoa-don-dang-giao-2"
                                                class="btn btn-danger btn-icon-text"
                                                tabindex="-1"
                                                role="button"
@@ -417,7 +417,7 @@
                                         <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 0|| hoaDon.tinhTrangGiaoHang == 1 || hoaDon.tinhTrangGiaoHang == 2) && hoaDon.hinhThucThanhToan == 1}">
 
                                             <a href="/hoa-don/xac-nhan-huy-hoan-tien-dang-giao/${hoaDon.id}"
-                                               id="toastr-success-top-right-hoa-don-dang-giao"
+                                               id="toastr-success-top-right-hoa-don-dang-giao-3"
                                                class="btn btn-danger btn-icon-text"
                                                tabindex="-1"
                                                role="button"
@@ -427,7 +427,7 @@
                                         </c:if>
                                         <c:if test="${hoaDon.loai== 0 && (hoaDon.tinhTrang == 0|| hoaDon.tinhTrang == 1|| hoaDon.tinhTrang == 3)}">
                                             <a href="/hoa-don/huy-dang-giao/${hoaDon.id}"
-                                               id="toastr-success-top-right-hoa-don-dang-giao"
+                                               id="toastr-success-top-right-hoa-don-dang-giao-4"
                                                class="btn btn-danger btn-icon-text"
                                                tabindex="-1"
                                                role="button"

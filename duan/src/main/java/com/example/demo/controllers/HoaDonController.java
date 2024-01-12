@@ -2082,7 +2082,7 @@ public class HoaDonController {
             hoaDonService.update(id, hd);
         }
 
-banHangOnLinerepository.xoaDDHtheoIDHD(id);
+banHangOnLinerepository.updateTTdonDatHangkhiDASULytheoIDHD(id);
         model.addAttribute("hoaDon", hd);
         model.addAttribute("contentPage", "../hoadon/hoa-don.jsp");
         System.in.read();
@@ -2167,7 +2167,6 @@ banHangOnLinerepository.xoaDDHtheoIDHD(id);
             hoaDonService.update(id, hd);
         }
         model.addAttribute("hoaDon", hd);
-        model.addAttribute("contentPage", "../hoadon/hoa-don-xac-nhan.jsp");
         System.in.read();
         return "redirect:/hoa-don/hien-thi-xac-nhan"; // Chuyển hướng về trang danh sách hóa đơn sau khi hủy
     }

@@ -409,7 +409,7 @@
                                         <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 0 ||hoaDon.tinhTrangGiaoHang == 1 || hoaDon.tinhTrangGiaoHang == 2) && hoaDon.hinhThucThanhToan == 0}">
 
                                             <a href="/hoa-don/xac-nhan-huy-cho-giao/${hoaDon.id}"
-                                               id="toastr-success-top-right-hoa-don-cho-giao"
+                                               id="toastr-success-top-right-hoa-don-cho-giao-2"
                                                class="btn btn-danger btn-icon-text"
                                                tabindex="-1"
                                                role="button"
@@ -421,7 +421,7 @@
                                         <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 0|| hoaDon.tinhTrangGiaoHang == 1 || hoaDon.tinhTrangGiaoHang == 2) && hoaDon.hinhThucThanhToan == 1}">
 
                                             <a href="/hoa-don/xac-nhan-huy-hoan-tien-cho-giao/${hoaDon.id}"
-                                               id="toastr-success-top-right-hoa-don-cho-giao"
+                                               id="toastr-success-top-right-hoa-don-cho-giao-3"
                                                class="btn btn-danger btn-icon-text"
                                                tabindex="-1"
                                                role="button"
@@ -431,7 +431,7 @@
                                         </c:if>
                                         <c:if test="${hoaDon.loai== 0 && (hoaDon.tinhTrang == 0|| hoaDon.tinhTrang == 1|| hoaDon.tinhTrang == 3)}">
                                             <a href="/hoa-don/huy-cho-giao/${hoaDon.id}"
-                                               id="toastr-success-top-right-hoa-don-cho-giao"
+                                               id="toastr-success-top-right-hoa-don-cho-giao-4"
                                                class="btn btn-danger btn-icon-text"
                                                tabindex="-1"
                                                role="button"
@@ -452,7 +452,7 @@
                                         </c:if>
                                         <c:if test="${(hoaDon.tinhTrang == 2||hoaDon.tinhTrang == 3) && hoaDon.nhanVien!= null}">
                                             <a href="/hoa-don/xuat-pdf-cho-giao/${hoaDon.id}"
-                                               id="toastr-success-top-right-hoa-don-cho-giao"
+                                               id="toastr-success-top-right-hoa-don-cho-giao-5"
                                                class="btn btn-outline-success btn-icon-text"
                                                tabindex="-1"
                                                role="button"

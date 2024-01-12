@@ -417,7 +417,7 @@
                                         <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 0 || hoaDon.tinhTrangGiaoHang == 1 || hoaDon.tinhTrangGiaoHang == 2) && hoaDon.hinhThucThanhToan == 0}">
 
                                             <a href="/hoa-don/xac-nhan-huy-da-xac-nhan/${hoaDon.id}"
-                                               id="toastr-success-top-right-hoa-don-da-xac-nhan"
+                                               id="toastr-success-top-right-hoa-don-da-xac-nhan-2"
                                                class="btn btn-danger btn-icon-text"
                                                tabindex="-1"
                                                role="button"
@@ -429,7 +429,7 @@
                                         <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 0|| hoaDon.tinhTrangGiaoHang == 1 || hoaDon.tinhTrangGiaoHang == 2) && hoaDon.hinhThucThanhToan == 1}">
 
                                             <a href="/hoa-don/xac-nhan-huy-hoan-tien-da-xac-nhan/${hoaDon.id}"
-                                               id="toastr-success-top-right-hoa-don-da-xac-nhan"
+                                               id="toastr-success-top-right-hoa-don-da-xac-nhan-3"
                                                class="btn btn-danger btn-icon-text"
                                                tabindex="-1"
                                                role="button"
@@ -439,7 +439,7 @@
                                         </c:if>
                                         <c:if test="${hoaDon.loai== 0 && (hoaDon.tinhTrang == 0|| hoaDon.tinhTrang == 1|| hoaDon.tinhTrang == 3)}">
                                             <a href="/hoa-don/huy-da-xac-nhan/${hoaDon.id}"
-                                               id="toastr-success-top-right-hoa-don-da-xac-nhan"
+                                               id="toastr-success-top-right-hoa-don-da-xac-nhan-4"
                                                class="btn btn-danger btn-icon-text"
                                                tabindex="-1"
                                                role="button"

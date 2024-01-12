@@ -409,29 +409,6 @@
                                                 <i class="fas fa-times-circle"></i>
                                                 Hủy đơn tại quầy</a>
                                         </c:if>
-                                        <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 0 || hoaDon.tinhTrangGiaoHang == 1 || hoaDon.tinhTrangGiaoHang == 2) && hoaDon.hinhThucThanhToan == 0}">
-
-                                            <a href="/hoa-don/xac-nhan-huy-cho-xac-nhan/${hoaDon.id}"
-                                               id="toastr-success-top-right-hoa-don-cho-xac-nhan"
-                                               class="btn btn-danger btn-icon-text"
-                                               tabindex="-1"
-                                               role="button"
-                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                                <i class="fas fa-times-circle"></i>
-                                                Hủy đơn online thanh toán khi nhận hàng</a>
-
-                                        </c:if>
-                                        <c:if test="${hoaDon.loai== 1 && (hoaDon.tinhTrangGiaoHang == 0|| hoaDon.tinhTrangGiaoHang == 1 || hoaDon.tinhTrangGiaoHang == 2) && hoaDon.hinhThucThanhToan == 1}">
-
-                                            <a href="/hoa-don/xac-nhan-huy-hoan-tien-cho-xac-nhan/${hoaDon.id}"
-                                               id="toastr-success-top-right-hoa-don-cho-xac-nhan"
-                                               class="btn btn-danger btn-icon-text"
-                                               tabindex="-1"
-                                               role="button"
-                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                                <i class="fas fa-times-circle"></i>
-                                                Hủy đơn online thanh toán VNPay</a>
-                                        </c:if>
                                     </td>
                                 </tr>
                             </c:forEach>
