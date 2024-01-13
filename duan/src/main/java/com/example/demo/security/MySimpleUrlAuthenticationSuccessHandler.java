@@ -1,10 +1,12 @@
 package com.example.demo.security;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -22,6 +24,8 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
     protected Log logger = LogFactory.getLog(this.getClass());
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
+
 
 //    @Override
 //    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
