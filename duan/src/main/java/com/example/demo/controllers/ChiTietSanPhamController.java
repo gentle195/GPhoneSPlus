@@ -349,7 +349,7 @@ public class ChiTietSanPhamController {
 
             return "home/layout";
         }
-        model.addAttribute("thongBaoCTSP", "Thêm thành công <a href=\"/chi-tiet-san-pham/hien-thi-het-hang\">Xem ngay</a>");
+        model.addAttribute("thongBaoCTSP", "Thêm thành công");
 
 
 
@@ -381,7 +381,7 @@ public class ChiTietSanPhamController {
         model.addAttribute("imei", new IMEI());
         String ma = "IMEI" + imeiService.findAll().size();
         model.addAttribute("ma", ma);
-        model.addAttribute("contentPage", "../chi-tiet-san-pham/index.jsp");
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/san-pham-het-hang.jsp");
         return "home/layout";
 
 
