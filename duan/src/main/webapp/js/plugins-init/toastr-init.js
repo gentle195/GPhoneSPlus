@@ -195,6 +195,30 @@
                 }, 2000);
             }
         ),
+        $("#toastr-success-top-right-hoa-don-da-xac-nhan-5").on("click", function () {
+            toastr.success("Xác nhận thành công", "Thông báo", {
+                timeOut: 2000,
+                closeButton: !0,
+                debug: !1,
+                newestOnTop: !0,
+                progressBar: !0,
+                positionClass: "toast-top-right",
+                preventDuplicates: !0,
+                onclick: null,
+                showDuration: "300",
+                hideDuration: "1000",
+                extendedTimeOut: "1000",
+                showEasing: "swing",
+                hideEasing: "linear",
+                showMethod: "fadeIn",
+                hideMethod: "fadeOut",
+                tapToDismiss: !1
+            })
+            setTimeout(function () {
+                window.location.href = "/hoa-don/hien-thi-xac-nhan";
+            }, 2000);
+        }
+    ),
         $("#toastr-success-top-right-hoa-don-cho-giao").on("click", function () {
                 toastr.success("Xác nhận thành công", "Thông báo", {
                     timeOut: 2000,

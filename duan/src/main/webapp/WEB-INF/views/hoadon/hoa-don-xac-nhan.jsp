@@ -447,6 +447,16 @@
                                                 <i class="fas fa-times-circle"></i>
                                                 Hủy đơn tại quầy</a>
                                         </c:if>
+                                        <c:if test="${(hoaDon.tinhTrang == 2||hoaDon.tinhTrang == 3) && hoaDon.nhanVien!= null}">
+                                            <a href="/hoa-don/xuat-pdf-hoan-tat/${hoaDon.id}"
+                                               id="toastr-success-top-right-hoa-don-da-xac-nhan-5"
+                                               class="btn btn-outline-success btn-icon-text"
+                                               tabindex="-1"
+                                               role="button"
+                                               onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                                <i class="ti-file btn-icon-prepend"></i>
+                                                Xuất PDF</a>
+                                        </c:if>
                                     </td>
                                 </tr>
                             </c:forEach>
