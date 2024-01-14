@@ -811,7 +811,6 @@ public class DoiTraController {
 
     @GetMapping("/them-imei-qr/{soImei}/{doitraId}/{hdctId}")
     public String themImeiQR(@PathVariable("soImei") String soImei, RedirectAttributes redirectAttributes, Model model, @PathVariable UUID hdctId, @PathVariable UUID doitraId) {
-        System.out.println("so imei" + soImei);
         HoaDonChiTiet hdct = hoaDonChiTietService.findById(hdctId);
 
 
@@ -819,49 +818,52 @@ public class DoiTraController {
         DoiTraChiTiet doiTraChiTiet = doiTraChiTietService.findByHDCT(hdctId);
 
 
-        IMEI imei = imeiRepository.getIMEISo(soImei);
-        System.out.println("imei" + imei.getSoImei());
-        if (hdct.getImei().getChiTietSanPham().getSanPham().getId() == imei.getChiTietSanPham().getSanPham().getId()
-                && hdct.getImei().getChiTietSanPham().getChip().getId() == imei.getChiTietSanPham().getChip().getId()
-                && hdct.getImei().getChiTietSanPham().getRam().getId() == imei.getChiTietSanPham().getRam().getId()
-                && hdct.getImei().getChiTietSanPham().getRom().getId() == imei.getChiTietSanPham().getRom().getId()
-                && hdct.getImei().getChiTietSanPham().getPin().getId() == imei.getChiTietSanPham().getPin().getId()) {
-            if (imei.getTinhTrang() == 0) {
-                if (doiTraChiTiet.getImei() != null) {
-                    long millis = System.currentTimeMillis();
-                    Date date = new Date(millis);
-                    UUID imeiIdne = doiTraChiTiet.getImei().getId();
-                    IMEI imei0 = imeiService.findById(doiTraChiTiet.getImei().getId());
-                    imei0.setTinhTrang(0);
-                    imei0.setNgayCapNhat(Date.valueOf(LocalDate.now()));
-                    imeiService.update(doiTraChiTiet.getImei().getId(), imei0);
-                    doiTraChiTiet.setImei(imei);
-                    doiTraChiTiet.setTinhTrang(0);
-                    doiTraChiTiet.setDonGia(imei.getChiTietSanPham().getGiaBan());
-                    doiTraChiTiet.setTienDoiTra(BigDecimal.ZERO);
-                    doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
-                    imeiService.updatImeiChoXuLy(date, imei.getId());
-                } else {
-                    doiTraChiTiet.setImei(imei);
-                    doiTraChiTiet.setTinhTrang(0);
-                    doiTraChiTiet.setDonGia(imei.getChiTietSanPham().getGiaBan());
-                    doiTraChiTiet.setTienDoiTra(BigDecimal.ZERO);
-                    doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
-                    long millis = System.currentTimeMillis();
-                    Date date = new Date(millis);
-                    imeiService.updatImeiChoXuLy(date, imei.getId());
+        IMEI imei = imeiService.searchSoImei(soImei);
+        if (imei == null) {
+            redirectAttributes.addFlashAttribute("tbkhithemimei", "Imei không tồn tại trong hệ thống ");
+        } else {
+            if (hdct.getImei().getChiTietSanPham().getSanPham().getId() == imei.getChiTietSanPham().getSanPham().getId()
+                    && hdct.getImei().getChiTietSanPham().getChip().getId() == imei.getChiTietSanPham().getChip().getId()
+                    && hdct.getImei().getChiTietSanPham().getRam().getId() == imei.getChiTietSanPham().getRam().getId()
+                    && hdct.getImei().getChiTietSanPham().getRom().getId() == imei.getChiTietSanPham().getRom().getId()
+                    && hdct.getImei().getChiTietSanPham().getPin().getId() == imei.getChiTietSanPham().getPin().getId()) {
+                if (imei.getTinhTrang() == 0) {
+                    if (doiTraChiTiet.getImei() != null) {
+                        long millis = System.currentTimeMillis();
+                        Date date = new Date(millis);
+                        UUID imeiIdne = doiTraChiTiet.getImei().getId();
+                        IMEI imei0 = imeiService.findById(doiTraChiTiet.getImei().getId());
+                        imei0.setTinhTrang(0);
+                        imei0.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+                        imeiService.update(doiTraChiTiet.getImei().getId(), imei0);
+                        doiTraChiTiet.setImei(imei);
+                        doiTraChiTiet.setTinhTrang(0);
+                        doiTraChiTiet.setDonGia(imei.getChiTietSanPham().getGiaBan());
+                        doiTraChiTiet.setTienDoiTra(BigDecimal.ZERO);
+                        doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
+                        imeiService.updatImeiChoXuLy(date, imei.getId());
+                    } else {
+                        doiTraChiTiet.setImei(imei);
+                        doiTraChiTiet.setTinhTrang(0);
+                        doiTraChiTiet.setDonGia(imei.getChiTietSanPham().getGiaBan());
+                        doiTraChiTiet.setTienDoiTra(BigDecimal.ZERO);
+                        doiTraChiTietService.update(doiTraChiTiet.getId(), doiTraChiTiet);
+                        long millis = System.currentTimeMillis();
+                        Date date = new Date(millis);
+                        imeiService.updatImeiChoXuLy(date, imei.getId());
 
+                    }
+                } else {
+                    redirectAttributes.addFlashAttribute("tbkhithemimei", "Imei này không trong trạng thái đang bán");
                 }
             } else {
-                redirectAttributes.addFlashAttribute("tbkhithemimei", "Imei này không trong trạng thái đang bán");
+                redirectAttributes.addFlashAttribute("tbkhithemimei", "Chỉ được đổi máy tương tự ");
             }
-        } else {
-            redirectAttributes.addFlashAttribute("tbkhithemimei", "Chỉ được đổi máy tương tự ");
         }
         model.addAttribute("doitraId", doitraId);
         return "redirect:/doi-tra/detail/" + doiTra.getHoaDon().getId() + "?doitraId=" + doitraId + "&hoadonId=" + doiTra.getHoaDon().getId();
-
     }
+
 
     @PostMapping("/add-doi-tra")
     @ResponseBody
