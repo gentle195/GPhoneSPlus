@@ -29,36 +29,32 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "hoa_don WHERE YEAR(ngay_thanh_toan) = ? GROUP BY thang", nativeQuery = true)
     List<DoanhThuTheoThang> getDoanhThusInYear(int year);
 
-    @Query(value = "SELECT MONTH(hoa_don.ngay_thanh_toan) AS thang,\n" +
-            "                        COUNT(hoa_don_chi_tiet.so_luong) as soLuongSP,\n" +
-            "                        COALESCE(SUM(phi_ship), 0) as PhiShip,\n" +
-            "                        COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) AS TienDoiTra,\n" +
-            "                        SUM(hoa_don_chi_tiet.don_gia) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - COALESCE(SUM(phi_ship), 0)   AS DoanhThuThucTe,        \n" +
-            "                        SUM(chi_tiet_san_pham.gia_ban) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - COALESCE(SUM(phi_ship), 0) AS DoanhThuChuaKhuyenMai\n" +
-            "                        FROM hoa_don left join hoa_don_chi_tiet on  hoa_don_chi_tiet.id_hoa_don = hoa_don.id \n" +
-            "                        left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
-            "                        left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n" +
-            "                        left join imei on imei.id = hoa_don_chi_tiet.id_imei\n" +
-            "                        left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
-            "                        where YEAR(ngay_thanh_toan) = 2023 and hoa_don.tinh_trang = 2\n" +
-            "                        GROUP BY MONTH(ngay_thanh_toan)" +
-            "                        ORDER BY thang ASC", nativeQuery = true)
+    @Query(value = "Select MONTH(hoa_don.ngay_thanh_toan) AS thang,\n" +
+            "COUNT(hoa_don_chi_tiet.so_luong) as soLuongSP,\n" +
+            "COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) AS TienDoiTra,\n" +
+            "SUM(hoa_don_chi_tiet.don_gia) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - COALESCE(SUM(phi_ship), 0)   AS DoanhThuThucTe,  \n" +
+            "SUM(chi_tiet_san_pham.gia_ban) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - COALESCE(SUM(phi_ship), 0) AS DoanhThuChuaKhuyenMai\n" +
+            "FROM hoa_don left join hoa_don_chi_tiet on  hoa_don_chi_tiet.id_hoa_don = hoa_don.id \t\t\t\n" +
+            "left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_hoa_don_chi_tiet = hoa_don_chi_tiet.id\n" +
+            "left join imei on imei.id = hoa_don_chi_tiet.id_imei\n" +
+            "left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
+            "where YEAR(ngay_thanh_toan) = 2024 and hoa_don.tinh_trang = 2\n" +
+            "GROUP BY MONTH(ngay_thanh_toan)\n" +
+            "                                    ORDER BY thang ASC", nativeQuery = true)
     List<DoanhThuTheoThang> doanhThu();
 
-    @Query(value = "SELECT MONTH(hoa_don.ngay_thanh_toan) AS thang,\n" +
-            "                        COUNT(hoa_don_chi_tiet.so_luong) as soLuongSP,\n" +
-            "                        COALESCE(SUM(phi_ship), 0) as PhiShip,\n" +
-            "                        COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) AS TienDoiTra,\n" +
-            "                        SUM(hoa_don_chi_tiet.don_gia) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - COALESCE(SUM(phi_ship), 0)   AS DoanhThuThucTe,        \n" +
-            "                        SUM(chi_tiet_san_pham.gia_ban) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - COALESCE(SUM(phi_ship), 0) AS DoanhThuChuaKhuyenMai\n" +
-            "                        FROM hoa_don left join hoa_don_chi_tiet on  hoa_don_chi_tiet.id_hoa_don = hoa_don.id \n" +
-            "                        left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
-            "                        left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n" +
-            "                        left join imei on imei.id = hoa_don_chi_tiet.id_imei\n" +
-            "                        left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
-            "                        where YEAR(ngay_thanh_toan) = ?1 and hoa_don.tinh_trang = 2\n" +
-            "                        GROUP BY MONTH(ngay_thanh_toan)" +
-            "                        ORDER BY thang ASC", nativeQuery = true)
+    @Query(value = "Select MONTH(hoa_don.ngay_thanh_toan) AS thang,\n" +
+            "COUNT(hoa_don_chi_tiet.so_luong) as soLuongSP,\n" +
+            "COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) AS TienDoiTra,\n" +
+            "SUM(hoa_don_chi_tiet.don_gia) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - COALESCE(SUM(phi_ship), 0)   AS DoanhThuThucTe,  \n" +
+            "SUM(chi_tiet_san_pham.gia_ban) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - COALESCE(SUM(phi_ship), 0) AS DoanhThuChuaKhuyenMai\n" +
+            "FROM hoa_don left join hoa_don_chi_tiet on  hoa_don_chi_tiet.id_hoa_don = hoa_don.id \t\t\t\n" +
+            "left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_hoa_don_chi_tiet = hoa_don_chi_tiet.id\n" +
+            "left join imei on imei.id = hoa_don_chi_tiet.id_imei\n" +
+            "left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
+            "where YEAR(ngay_thanh_toan) = ?1  and hoa_don.tinh_trang = 2\n" +
+            "GROUP BY MONTH(ngay_thanh_toan)\n" +
+            "ORDER BY thang ASC", nativeQuery = true)
     List<DoanhThuTheoThang> loctheonam(Integer Nam);
 
     @Query(value = "SELECT YEAR(ngay_thanh_toan) AS Nam FROM hoa_don GROUP BY YEAR(ngay_thanh_toan)", nativeQuery = true)
@@ -105,34 +101,32 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
     List<DoanhThuSanPham> selectedHang();
 
     @Query(value = " select hang_dien_thoai.ten AS tenHang,\n" +
-            "COALESCE(SUM(hoa_don_chi_tiet.don_gia),0) as doanhThuCu,\n" +
-            "COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra),0) as tienDoiTra,\n" +
-            "COALESCE(SUM(hoa_don_chi_tiet.don_gia) -  COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra),0),0) AS doanhThuThucTe\n" +
-            "from hoa_don \n" +
-            "left join hoa_don_chi_tiet on hoa_don_chi_tiet.id_hoa_don = hoa_don.id\n" +
-            "left join imei on imei.id = hoa_don_chi_tiet.id_imei\n" +
-            "left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
-            "left join san_pham on san_pham.id = chi_tiet_san_pham.id_san_pham\n" +
-            "left join hang_dien_thoai on hang_dien_thoai.id = san_pham.id_hang\n" +
-            "left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
-            "left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n" +
-            "GROUP BY hang_dien_thoai.ten\n", nativeQuery = true)
+            "            COALESCE(SUM(hoa_don_chi_tiet.don_gia),0) as doanhThuCu,\n" +
+            "            COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra),0) as tienDoiTra,\n" +
+            "            COALESCE(SUM(hoa_don_chi_tiet.don_gia) -  COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra) - COALESCE(SUM(phi_ship), 0),0),0) AS doanhThuThucTe\n" +
+            "            from hoa_don \n" +
+            "            left join hoa_don_chi_tiet on hoa_don_chi_tiet.id_hoa_don = hoa_don.id\n" +
+            "            left join imei on imei.id = hoa_don_chi_tiet.id_imei\n" +
+            "            left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
+            "            left join san_pham on san_pham.id = chi_tiet_san_pham.id_san_pham\n" +
+            "            left join hang_dien_thoai on hang_dien_thoai.id = san_pham.id_hang\n" +
+            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_hoa_don_chi_tiet = hoa_don_chi_tiet.id\n" +
+            "            GROUP BY hang_dien_thoai.ten\n", nativeQuery = true)
     List<DoanhThuHang> doanhThuHang();
 
     @Query(value = " select hang_dien_thoai.ten AS tenHang,\n" +
-            "COALESCE(SUM(hoa_don_chi_tiet.don_gia),0) as DoanhThuCu,\n" +
-            "COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra),0) as TienDoiTra,\n" +
-            "COALESCE(SUM(hoa_don_chi_tiet.don_gia) -  COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra),0),0) AS DoanhThuThucTe\n" +
-            "from hoa_don \n" +
-            "left join hoa_don_chi_tiet on hoa_don_chi_tiet.id_hoa_don = hoa_don.id\n" +
-            "left join imei on imei.id = hoa_don_chi_tiet.id_imei\n" +
-            "left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
-            "left join san_pham on san_pham.id = chi_tiet_san_pham.id_san_pham\n" +
-            "left join hang_dien_thoai on hang_dien_thoai.id = san_pham.id_hang\n" +
-            "left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
-            "left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n" +
-            "WHERE hoa_don.ngay_thanh_toan BETWEEN :startDate AND :endDate\n" +
-            "GROUP BY hang_dien_thoai.ten\n", nativeQuery = true)
+            "            COALESCE(SUM(hoa_don_chi_tiet.don_gia),0) as doanhThuCu,\n" +
+            "            COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra),0) as tienDoiTra,\n" +
+            "            SUM(hoa_don_chi_tiet.don_gia) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - COALESCE(SUM(phi_ship), 0)   AS DoanhThuThucTe  \n" +
+            "            from hoa_don \n" +
+            "            left join hoa_don_chi_tiet on hoa_don_chi_tiet.id_hoa_don = hoa_don.id\n" +
+            "            left join imei on imei.id = hoa_don_chi_tiet.id_imei\n" +
+            "            left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
+            "            left join san_pham on san_pham.id = chi_tiet_san_pham.id_san_pham\n" +
+            "            left join hang_dien_thoai on hang_dien_thoai.id = san_pham.id_hang\n" +
+            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_hoa_don_chi_tiet = hoa_don_chi_tiet.id\n" +
+            "            WHERE hoa_don.ngay_thanh_toan BETWEEN :startDate AND :endDate\n" +
+            "            GROUP BY hang_dien_thoai.ten", nativeQuery = true)
     List<DoanhThuHang> locdoanhThuHang(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     @Query(value = "SELECT nhan_vien.ho_ten AS tenNhanVien,\n" +
@@ -143,8 +137,8 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "            SUM(tong_tien) AS DoanhThuCu\n" +
             "            FROM hoa_don left join nhan_vien on hoa_don.id_nhan_vien = nhan_vien.id " +
             "            left join hoa_don_chi_tiet on hoa_don.id = hoa_don_chi_tiet.id_hoa_don\n" +
-            "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
-            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id" +
+
+            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_hoa_don_chi_tiet = hoa_don_chi_tiet.id" +
             "            where hoa_don.tinh_trang = 2 and hoa_don.tinh_trang_giao_hang = 3" +
             "            GROUP BY nhan_vien.ho_ten", nativeQuery = true)
     List<DoanhThuNhanVien> doanhThuNhanVien();
@@ -157,8 +151,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "            SUM(tong_tien) AS DoanhThuCu\n" +
             "            FROM hoa_don left join nhan_vien on hoa_don.id_nhan_vien = nhan_vien.id " +
             "            left join hoa_don_chi_tiet on hoa_don.id = hoa_don_chi_tiet.id_hoa_don\n" +
-            "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
-            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id" +
+            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_hoa_don_chi_tiet = hoa_don_chi_tiet.id" +
             "            where hoa_don.tinh_trang = 2 and hoa_don.tinh_trang_giao_hang = 3" +
             "            AND ngay_thanh_toan BETWEEN :startDate AND :endDate\n" +
             "            GROUP BY nhan_vien.ho_ten", nativeQuery = true)
@@ -177,8 +170,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "                LEFT JOIN chi_tiet_san_pham ON imei.id_chi_tiet_san_pham = chi_tiet_san_pham.id\n" +
             "                LEFT JOIN san_pham ON chi_tiet_san_pham.id_san_pham = san_pham.id\n" +
             "                LEFT JOIN khach_hang ON hoa_don.id_khach_hang = khach_hang.id\n" +
-            "                left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
-            "                left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n" +
+            "                left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_hoa_don_chi_tiet = hoa_don_chi_tiet.id\n" +
             "                GROUP BY CASE WHEN YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) < 25 THEN N'Dưới 25'\n" +
             "                WHEN YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) >= 25 AND YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) < 35 THEN N'Từ 25 đến 35 tuổi'\n" +
             "                WHEN YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) >= 35 AND YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) < 45 THEN N'Từ 35 đến 45 tuổi'\n" +
@@ -187,14 +179,14 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "                END", nativeQuery = true)
     List<DoanhThuKhachHang> doanhThuKhachHang();
 
-    @Query(value = "SELECT khach_hang.gioi_tinh as gioiTinh," +
-            "SUM(tong_tien) - SUM(doi_tra_chi_tiet.tien_doi_tra) - COALESCE(SUM(phi_ship), 0) as DoanhThu\n" +
-            "FROM hoa_don\n" +
-            "LEFT JOIN khach_hang ON hoa_don.id_khach_hang = khach_hang.id\n" +
-            "left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
-            "left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n"+
-            "WHERE hoa_don.tinh_trang = 2 and hoa_don.tinh_trang_giao_hang = 3\n" +
-            "Group by khach_hang.gioi_tinh", nativeQuery = true)
+    @Query(value = "SELECT khach_hang.gioi_tinh as gioiTinh,\n" +
+            "            SUM(hoa_don_chi_tiet.don_gia) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - COALESCE(SUM(phi_ship), 0)   AS DoanhThu\n" +
+            "            FROM hoa_don\n" +
+            "            left join hoa_don_chi_tiet on hoa_don_chi_tiet.id_hoa_don = hoa_don.id\n" +
+            "            LEFT JOIN khach_hang ON hoa_don.id_khach_hang = khach_hang.id\n" +
+            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_hoa_don_chi_tiet = hoa_don_chi_tiet.id\n" +
+            "            WHERE hoa_don.tinh_trang = 2 and hoa_don.tinh_trang_giao_hang = 3\n" +
+            "            Group by khach_hang.gioi_tinh", nativeQuery = true)
     List<DoanhThuKhachHang> doanhThuKhachHangGioiTinh();
 
     @Query(value = "       SELECT CASE WHEN YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) < 25 THEN N'Dưới 25'\n" +
@@ -210,8 +202,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "                            LEFT JOIN chi_tiet_san_pham ON imei.id_chi_tiet_san_pham = chi_tiet_san_pham.id\n" +
             "                            LEFT JOIN san_pham ON chi_tiet_san_pham.id_san_pham = san_pham.id\n" +
             "                            LEFT JOIN khach_hang ON hoa_don.id_khach_hang = khach_hang.id\n" +
-            "                            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
-            "                            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n" +
+            "                            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_hoa_don_chi_tiet = hoa_don_chi_tiet.id\n" +
             "                            GROUP BY CASE WHEN YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) < 25 THEN N'Dưới 25'\n" +
             "                            WHEN YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) >= 25 AND YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) < 35 THEN N'Từ 25 đến 35 tuổi'\n" +
             "                            WHEN YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) >= 35 AND YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) < 45 THEN N'Từ 35 đến 45 tuổi'\n" +
@@ -223,10 +214,9 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
     @Query(value = "SELECT khach_hang.gioi_tinh as gioiTinh,\n" +
             "            SUM(hoa_don_chi_tiet.don_gia) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - COALESCE(SUM(phi_ship), 0)   AS DoanhThu\n" +
             "            FROM hoa_don\n" +
+            "            left join hoa_don_chi_tiet on hoa_don_chi_tiet.id_hoa_don = hoa_don.id\n" +
             "            LEFT JOIN khach_hang ON hoa_don.id_khach_hang = khach_hang.id\n" +
-            "                        left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
-            "                        left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n" +
-            "                        left join hoa_don_chi_tiet on hoa_don_chi_tiet.id_hoa_don = hoa_don.id\n" +
+            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_hoa_don_chi_tiet = hoa_don_chi_tiet.id\n" +
             "            WHERE hoa_don.tinh_trang = 2 and hoa_don.tinh_trang_giao_hang = 3\n" +
             "            Group by khach_hang.gioi_tinh", nativeQuery = true)
     List<DoanhThuKhachHang> locDoanhThuKhachHangGioiTinh(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
@@ -239,8 +229,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "            left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
             "            left join san_pham on san_pham.id = chi_tiet_san_pham.id_san_pham\n" +
             "            left join hang_dien_thoai on hang_dien_thoai.id = san_pham.id_hang\n" +
-            "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
-            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_doi_tra = doi_tra.id\n" +
+            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_hoa_don_chi_tiet = hoa_don_chi_tiet.id\n" +
             "            where doi_tra_chi_tiet.hien_trang_san_pham = 1" +
             "            GROUP BY hang_dien_thoai.ten", nativeQuery = true)
     List<SoLuongDoiTraHang> SoLuongDoiTraHang();
@@ -253,7 +242,8 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "            left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
             "            left join san_pham on san_pham.id = chi_tiet_san_pham.id_san_pham\n" +
             "            left join hang_dien_thoai on hang_dien_thoai.id = san_pham.id_hang\n" +
-            "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
+            "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id" +
+            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_hoa_don_chi_tiet = hoa_don_chi_tiet.id\n" +
             "            where imei.tinh_trang = 0" +
             "            and ngay_doi_tra BETWEEN :startDate AND :endDate\n" +
             "            GROUP BY hang_dien_thoai.ten", nativeQuery = true)
@@ -267,7 +257,8 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "            left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
             "            left join san_pham on san_pham.id = chi_tiet_san_pham.id_san_pham\n" +
             "            left join hang_dien_thoai on hang_dien_thoai.id = san_pham.id_hang\n" +
-            "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id\n" +
+            "            left join doi_tra on doi_tra.id_hoa_don = hoa_don.id" +
+            "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_hoa_don_chi_tiet = hoa_don_chi_tiet.id\n" +
             "            where imei.tinh_trang = 4" +
             "            and ngay_doi_tra BETWEEN :startDate AND :endDate\n" +
             "            GROUP BY hang_dien_thoai.ten", nativeQuery = true)
