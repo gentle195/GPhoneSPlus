@@ -203,6 +203,7 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "                            LEFT JOIN san_pham ON chi_tiet_san_pham.id_san_pham = san_pham.id\n" +
             "                            LEFT JOIN khach_hang ON hoa_don.id_khach_hang = khach_hang.id\n" +
             "                            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_hoa_don_chi_tiet = hoa_don_chi_tiet.id\n" +
+            "                            where hoa_don.ngay_thanh_toan BETWEEN :startDate AND :endDate   " +
             "                            GROUP BY CASE WHEN YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) < 25 THEN N'Dưới 25'\n" +
             "                            WHEN YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) >= 25 AND YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) < 35 THEN N'Từ 25 đến 35 tuổi'\n" +
             "                            WHEN YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) >= 35 AND YEAR(GETDATE()) - YEAR(khach_hang.ngay_sinh) < 45 THEN N'Từ 35 đến 45 tuổi'\n" +
@@ -217,7 +218,8 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "            left join hoa_don_chi_tiet on hoa_don_chi_tiet.id_hoa_don = hoa_don.id\n" +
             "            LEFT JOIN khach_hang ON hoa_don.id_khach_hang = khach_hang.id\n" +
             "            left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_hoa_don_chi_tiet = hoa_don_chi_tiet.id\n" +
-            "            WHERE hoa_don.tinh_trang = 2 and hoa_don.tinh_trang_giao_hang = 3\n" +
+            "            WHERE hoa_don.tinh_trang = 2 and hoa_don.tinh_trang_giao_hang = 3" +
+            "            and hoa_don.ngay_thanh_toan BETWEEN :startDate AND :endDate\n" +
             "            Group by khach_hang.gioi_tinh", nativeQuery = true)
     List<DoanhThuKhachHang> locDoanhThuKhachHangGioiTinh(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
