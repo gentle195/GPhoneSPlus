@@ -349,7 +349,7 @@ public class ChiTietSanPhamController {
 
             return "home/layout";
         }
-        model.addAttribute("thongBaoCTSP", "Thêm thành công");
+        model.addAttribute("thongBaoCTSP", "Thêm thành công <a href=\"/chi-tiet-san-pham/hien-thi-het-hang\">Xem ngay</a>");
 
 
 
