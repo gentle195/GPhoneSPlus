@@ -265,7 +265,13 @@
                                         <td>${hoaDon.getHoTenNhanVien()}</td>
                                         <td>${hoaDon.getDiaChi()}-${hoaDon.getQuan()}-${hoaDon.getHuyen()}-${hoaDon.getThanhPho()}</td>
                                         <td>${hoaDon.getSDT()}</td>
-                                        <td>${hoaDon.getTongTien()}</td>
+                                        <td>
+                                            <script>
+                                                var donGia = ${hoaDon.tongTien};
+                                                document.write(donGia.toLocaleString('vi-VN'));
+                                            </script>
+                                            VND
+                                        </td>
                                         <td>
                                             <c:if test="${hoaDon.getHinhThuc() == 1}">Online</c:if>
                                             <c:if test="${hoaDon.getHinhThuc() == 0}">Tiền mặt</c:if>
