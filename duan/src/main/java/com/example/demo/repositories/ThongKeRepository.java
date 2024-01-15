@@ -38,10 +38,28 @@ public interface ThongKeRepository extends JpaRepository<HoaDon, UUID> {
             "left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_hoa_don_chi_tiet = hoa_don_chi_tiet.id\n" +
             "left join imei on imei.id = hoa_don_chi_tiet.id_imei\n" +
             "left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
-            "where YEAR(ngay_thanh_toan) = 2024 and hoa_don.tinh_trang = 2\n" +
+            "where YEAR(ngay_thanh_toan) = 2023 and hoa_don.tinh_trang = 2\n" +
             "GROUP BY MONTH(ngay_thanh_toan)\n" +
             "                                    ORDER BY thang ASC", nativeQuery = true)
     List<DoanhThuTheoThang> doanhThu();
+
+    @Query(value = " SELECT DAY(hoa_don.ngay_thanh_toan) AS ngay,\n" +
+            " MONTH(hoa_don.ngay_thanh_toan) AS thang,\n" +
+            " YEAR(hoa_don.ngay_thanh_toan) AS nam,\n" +
+            " COUNT(hoa_don_chi_tiet.so_luong) as soLuongSP,\n" +
+            " COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) AS TienDoiTra,\n" +
+            " SUM(hoa_don_chi_tiet.don_gia) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - COALESCE(SUM(phi_ship), 0) AS DoanhThuThucTe, \n" +
+            " SUM(chi_tiet_san_pham.gia_ban) - COALESCE(SUM(doi_tra_chi_tiet.tien_doi_tra), 0) - COALESCE(SUM(phi_ship), 0) AS DoanhThuChuaKhuyenMai\n" +
+            "FROM hoa_don left join hoa_don_chi_tiet on hoa_don_chi_tiet.id_hoa_don = hoa_don.id \n" +
+            "left join doi_tra_chi_tiet on doi_tra_chi_tiet.id_hoa_don_chi_tiet = hoa_don_chi_tiet.id\n" +
+            "left join imei on imei.id = hoa_don_chi_tiet.id_imei\n" +
+            "left join chi_tiet_san_pham on chi_tiet_san_pham.id = imei.id_chi_tiet_san_pham\n" +
+            "where YEAR(ngay_thanh_toan) = 2024 and hoa_don.tinh_trang = 2\n" +
+            "and DAY(hoa_don.ngay_thanh_toan) = DAY(GETDATE())\n" +
+            "GROUP BY DAY(ngay_thanh_toan),\n" +
+            " MONTH(hoa_don.ngay_thanh_toan),\n" +
+            " YEAR(hoa_don.ngay_thanh_toan) ", nativeQuery = true)
+    List<DoanhThuTheoThang> doanhThuNgay();
 
     @Query(value = "Select MONTH(hoa_don.ngay_thanh_toan) AS thang,\n" +
             "COUNT(hoa_don_chi_tiet.so_luong) as soLuongSP,\n" +
