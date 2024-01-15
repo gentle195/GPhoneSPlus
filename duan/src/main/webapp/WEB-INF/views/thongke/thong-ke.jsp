@@ -14,8 +14,22 @@
 
 <body>
 
+<div class="col-lg-3 col-sm-6" style="margin-left: 450px">
+    <div class="card">
+        <div class="stat-widget-two card-body">
+            <div class="stat-content">
+                <c:forEach items="${listDoanhThuNgay}" var="dtNgay">
+                    <div class="stat-text" style="color: black">Doanh thu ngày ${dtNgay.getNgay()}/${dtNgay.getThang()}/${dtNgay.getNam()} </div>
 
-
+                    <div class="stat-digit"> <script>
+                        var tongTien = ${dtNgay.getDoanhThuThucTe()};
+                        document.write(tongTien.toLocaleString('vi-VN'));
+                    </script> VNĐ</div>
+                </c:forEach>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="card">
     <h4 class="card-title">Biểu đồ doanh thu các tháng trong năm </h4>
     <form action="/thong-ke/loc-nam" method="post" style="text-align: right">

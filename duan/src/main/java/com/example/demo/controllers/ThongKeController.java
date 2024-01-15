@@ -6,6 +6,7 @@ import com.example.demo.DTO.DoanhThuNhanVien;
 import com.example.demo.DTO.DoanhThuSanPham;
 import com.example.demo.DTO.DoanhThuTheoThang;
 import com.example.demo.DTO.SoLuongDoiTraHang;
+import com.example.demo.repositories.ThongKeRepository;
 import com.example.demo.services.ThongKeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,13 +27,17 @@ import java.util.List;
 public class ThongKeController {
 
     @Autowired
+    private ThongKeRepository thongKeRepository;
+
+    @Autowired
     private ThongKeService thongKeService;
 
     @GetMapping("/hien-thi")
     public String hienThi(Model model) {
-
+        List<DoanhThuTheoThang> doanhThuNgay = thongKeRepository.doanhThuNgay();
         List<DoanhThuTheoThang> doanhThuTheoThangs = thongKeService.doanhThu();
         List<DoanhThuTheoThang> selected = thongKeService.selectedYear();
+        model.addAttribute("listDoanhThuNgay", doanhThuNgay);
         model.addAttribute("listYear", selected);
         model.addAttribute("listDoanhThu", doanhThuTheoThangs);
         DecimalFormat df = new DecimalFormat("#,###");

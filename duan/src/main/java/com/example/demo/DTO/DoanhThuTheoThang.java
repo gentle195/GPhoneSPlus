@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public interface DoanhThuTheoThang {
 
+    Integer getNgay();
     Integer getThang();
     Integer getNam();
     Integer getSoLuongSP();
