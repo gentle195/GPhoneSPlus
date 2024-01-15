@@ -48,6 +48,8 @@ public class ThongKeController {
 
     @PostMapping("/loc-nam")
     public String locNam(Model model, @ModelAttribute("namSelect") Integer nam) {
+        List<DoanhThuTheoThang> doanhThuNgay = thongKeRepository.doanhThuNgay();
+        model.addAttribute("listDoanhThuNgay", doanhThuNgay);
         List<DoanhThuTheoThang> selected = thongKeService.selectedYear();
         model.addAttribute("listYear", selected);
         List<DoanhThuTheoThang> doanhThuTheoThangs = thongKeService.loctheonam(nam);
