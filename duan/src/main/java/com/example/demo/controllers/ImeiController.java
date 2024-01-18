@@ -325,16 +325,6 @@ public class ImeiController {
             model.addAttribute("contentPage", "../imei/add-imei.jsp");
             return "home/layout";
         }
-        List<IMEI> i = imeiService.fct(imei.getChiTietSanPham().getId());
-        if (imei.getChiTietSanPham().getSoLuong() < i.size()) {
-            model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
-
-
-            model.addAttribute("ma", ma);
-            model.addAttribute("thongBao", "Quá số lượng tồn");
-            model.addAttribute("contentPage", "../imei/add-imei.jsp");
-            return "home/layout";
-        }
 
         String projectRootPath = System.getProperty("user.dir");
         String outputFolderPath = projectRootPath + "/src/main/webapp/maqr";

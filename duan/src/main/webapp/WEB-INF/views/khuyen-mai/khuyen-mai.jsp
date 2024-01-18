@@ -180,7 +180,7 @@
             <br>
             <!-- Modal Header -->
             <div>
-                <h4 style="text-align: center">Thêm khuyến mãi</h4>
+                <h4 style="text-align: center">Thêm khuyến mại</h4>
             </div>
 
             <!-- Modal body -->
@@ -190,7 +190,7 @@
 
                     <br>
 
-                    Tên khuyến mãi: <form:errors path="ten" cssStyle="color: red"></form:errors>
+                    Tên khuyến mại: <form:errors path="ten" cssStyle="color: red"></form:errors>
                     <form:input class="form-control" placeholder="" path="ten" value=""/>
 
 
@@ -225,7 +225,7 @@
                     <div align="center">
                         <button type="submit" class="btn btn-warning" id="bthkh"
                                 onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                            Thêm khuyến mãi
+                            Thêm khuyến mại
                         </button>
                     </div>
 
@@ -264,7 +264,7 @@
 
                 <select style="float: right;margin-right: 8cm;height: 1cm" id="selectOption"
                         onchange="choncomboboxtinhtrangkm()">
-                    <option style=" font-weight: bold;"><a>Trạng thái khuyến mãi</a></option>
+                    <option style=" font-weight: bold;"><a>Trạng thái khuyến mại</a></option>
                     <option value="all" data-link="/khuyen-mai/tinh-trang/all"
                             <c:if test="${dongbo=='all'}">selected</c:if>><a>Tất cả</a></option>
                     <option value="2" data-link="/khuyen-mai/tinh-trang/2" <c:if test="${dongbo=='2'}">selected</c:if>>
@@ -278,7 +278,7 @@
 
                 <button type="button" id="modalthemkm" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#myModalthemkm">
-                    Thêm khuyến mãi
+                    Thêm khuyến mại
                 </button>
                 <br>
                 <br>
@@ -316,18 +316,18 @@
                                     <td>
                                         <c:if test="${ht.tinhTrang==0}">
                                             <p style="color: blue">
-                                                Khuyến mãi đang áp dụng
+                                                Khuyến mại đang áp dụng
                                             </p>
 
                                         </c:if>
                                         <c:if test="${ht.tinhTrang==1}">
                                             <p style="color: red">
-                                                Khuyến mãi đã hết hạn
+                                                Khuyến mại đã hết hạn
                                             </p>
                                         </c:if>
                                         <c:if test="${ht.tinhTrang==2}">
                                             <p style="color: #00FF00">
-                                                Khuyến mãi chưa bắt đầu
+                                                Khuyến mại chưa bắt đầu
                                             </p>
                                         </c:if>
 
@@ -337,21 +337,21 @@
                                     <td>
                                         <c:if test="${ht.tinhTrang==1}">
                                             <a href="/khuyen-mai/detail-khuyen-mai/${ht.id}" class="btn btn-success"
-                                               onclick="return confirm('Bạn muốn xem khuyến mãi')"
-                                               style="background-color: yellow;width: 4cm">Xem khuyến mãi</a>
+                                               onclick="return confirm('Bạn muốn xem khuyến mại')"
+                                               style="background-color: yellow;width: 4cm">Xem khuyến mại</a>
                                         </c:if>
 
                                         <c:if test="${ht.tinhTrang!=1}">
                                             <a href="/khuyen-mai/ap-dung-khuyen-mai/${ht.id}" class="btn btn-success"
                                                style="width: 4cm"
-                                               onclick="return confirm('Bạn muốn áp dụng khuyến mãi')">Áp dụng</a>
+                                               onclick="return confirm('Bạn muốn áp dụng khuyến mại')">Áp dụng</a>
                                             <a href="/khuyen-mai/detail-khuyen-mai/${ht.id}" class="btn btn-success"
-                                               onclick="return confirm('Bạn muốn xem khuyến mãi')"
-                                               style="background-color: yellow;width: 4cm">Xem khuyến mãi</a>
+                                               onclick="return confirm('Bạn muốn xem khuyến mại')"
+                                               style="background-color: yellow;width: 4cm">Xem khuyến mại</a>
                                         </c:if>
                                         <a href="/khuyen-mai/huy-khuyen-mai/${ht.id}" class="btn btn-success"
                                            style="background-color: red;width: 4cm"
-                                           onclick="return confirm('Các chi tiết sản phẩm đang ap dụng khuyến mãi mày sẽ không áp dụng khuyến mãi này nữa')">Hủy </a>
+                                           onclick="return confirm('Các chi tiết sản phẩm đang ap dụng khuyến mại mày sẽ không áp dụng khuyến mại này nữa')">Hủy </a>
 
                                     </td>
 
@@ -383,7 +383,7 @@ top: 8%;left: 80%;transform: translate(-50%,-50%);
 display: block;z-index: 2;width: 7cm;height: 1cm;
 "></div>
             <div style="margin-top: 0.5cm;z-index: 22">
-                <h4 align="center">Áp dụng khuyến mãi: ${kmchon.ma}</h4>
+                <h4 align="center">Áp dụng khuyến mại: ${kmchon.ma}</h4>
 
             </div>
             <!-- Modal body -->
@@ -528,8 +528,8 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                                     <td>
 
                                             ${ht.khuyenMai.soTienGiam}% <br>
-                                        Mã khuyến mãi:${ht.khuyenMai.ma}<br>
-                                        Tên khuyến mãi:${ht.khuyenMai.ten}<br>
+                                        Mã khuyến mại:${ht.khuyenMai.ma}<br>
+                                        Tên khuyến mại:${ht.khuyenMai.ten}<br>
                                         Bắt đầu:${ht.khuyenMai.ngayBatDau}<br>
                                         Kết thúc:${ht.khuyenMai.ngayKetThuc}
                                     </td>
@@ -616,8 +616,8 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
             <div class="apdungthanhcongupdate" style="margin-left: 85%;width:10%;z-index: 88;position: absolute"></div>
 
             <div>
-                <h4 style="text-align: center">UPDATE khuyến mãi</h4>
-                <h4 style="text-align: center">Mã khuyến mãi:${kmchon.ma}</h4>
+                <h4 style="text-align: center">UPDATE khuyến mại</h4>
+                <h4 style="text-align: center">Mã khuyến mại:${kmchon.ma}</h4>
             </div>
 
             <!-- Modal body -->
@@ -637,7 +637,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
 
                     <br>
 
-                    Tên khuyến mãi: <form:errors path="ten" cssStyle="color: red"></form:errors>
+                    Tên khuyến mại: <form:errors path="ten" cssStyle="color: red"></form:errors>
                     <form:input class="form-control" placeholder="" path="ten" value=""/>
 
 
@@ -782,7 +782,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                 <i class="fa-solid fa-circle-check"></i>
                 <div class="content">
                     <div class="title">Thành công</div>
-                    <span>Áp dụng khuyến mãi thành công</span>
+                    <span>Áp dụng khuyến mại thành công</span>
                 </div>
                 <i class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
             </div>`;
@@ -813,7 +813,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                 <i style="color: red" class="fa-solid fa-circle-exclamation"></i>
                 <div class="content">
                     <div class="title">Thành công</div>
-                    <span>Hủy Áp dụng khuyến mãi thành công</span>
+                    <span>Hủy Áp dụng khuyến mại thành công</span>
                 </div>
                 <i style="color: red" class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
             </div>`;
@@ -890,7 +890,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                 <i style="color: red" class="fa-solid fa-circle-exclamation"></i>
                 <div class="content">
                     <div class="title">Thành công</div>
-                    <span>Hủy khuyến mãi thành công</span>
+                    <span>Hủy khuyến mại thành công</span>
                 </div>
                 <i style="color: red" class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
             </div>`;
@@ -917,7 +917,7 @@ display: block;z-index: 2;width: 7cm;height: 1cm;
                 <i class="fa-solid fa-circle-check"></i>
                 <div class="content">
                     <div class="title">Thành công</div>
-                    <span>Sửa khuyến mãi thành công</span>
+                    <span>Sửa khuyến mại thành công</span>
                 </div>
                 <i class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
             </div>`;

@@ -640,8 +640,8 @@
                 if (tien % 1 !== 0 || tien < 0) {
                     document.getElementById('tienKhachDua1').innerHTML = 'Tiền khách đưa phải là số nguyên dương';
                     document.getElementById('bthd').type = 'button';
-                    return false;
-                } else if ((parseFloat(tien) - parseFloat(tongTien)) >= 10000000) {
+                    return false
+                } else if ((parseFloat(tien) - parseFloat(toString(tongTien))) > 0) {
                     document.getElementById('tienKhachDua1').innerHTML = 'Tiền khách đưa đang quá lớn';
                     document.getElementById('bthd').type = 'button';
                     return false;
@@ -811,7 +811,6 @@
                             <td>` + imei.chiTietSanPham.mauSac.ten + `</td>
                             <td>` + imei.chiTietSanPham.ram.dungLuong + `</td>
                             <td>` + imei.chiTietSanPham.rom.dungLuong + `</td>
-                            <td>` + imei.chiTietSanPham.giaBan + `</td>
                             <td>` + new Intl.NumberFormat("vi-VN").format(imei.chiTietSanPham.giaBan) + ` VND</td>
                             <td>` + new Intl.NumberFormat("vi-VN").format(productPrice) + ` VND</td>
                             <td>` + imei.soImei + `</td>

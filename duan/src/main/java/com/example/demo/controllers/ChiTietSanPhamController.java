@@ -792,8 +792,6 @@ public class ChiTietSanPhamController {
         model.addAttribute("banHangOnlineService", banHangOnlineService);
         model.addAttribute("banHangOnLinerepository", banHangOnLinerepository);
 
-
-        model.addAttribute("listCTSP", chiTietSanPhamService.findAll0());
         model.addAttribute("imei", new IMEI());
         String ma = "IMEI" + imeiService.findAll().size();
         model.addAttribute("ma", ma);

@@ -138,7 +138,7 @@
 <%--                </li>--%>
                 <li><a href="/doi-tra/hien-thi" aria-expanded="false">
                     <i class="ti-control-shuffle pa"></i>
-                    Đổi hàng</a>
+                    Đổi trả</a>
                 </li>
                 <li><a href="/imei/chinh-sach" aria-expanded="false">
                     <i class="icon icon-book-open-2"></i>
@@ -149,7 +149,7 @@
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                         class="icon icon-world-2"></i><span class="nav-text">Quản lý sản phẩm</span></a>
                     <ul aria-expanded="false">
-                        <li><a href="/khuyen-mai/hien-thi">Khuyến mãi</a></li>
+                        <li><a href="/khuyen-mai/hien-thi">Khuyến mại</a></li>
                         <li><a href="/imei/hien-thi">IMEI Sản Phẩm</a></li>
                         <li><a href="/chi-tiet-san-pham/hien-thi">Chi Tiết Sản Phẩm</a></li>
                         <li><a href="/san-pham/hien-thi">Sản Phẩm</a></li>

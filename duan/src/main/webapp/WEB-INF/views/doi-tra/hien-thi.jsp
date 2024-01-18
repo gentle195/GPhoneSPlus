@@ -42,17 +42,16 @@
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="/doi-tra/hien-thi" role="tab"
-               aria-controls="description" aria-selected="true">Chờ xác nhận đổi hàng</a>
+               aria-controls="description" aria-selected="true">Chờ xác nhận đổi trả</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/doi-tra/hien-thi-tu-choi-tra" role="tab">Từ chối đổi hàng </a>
+            <a class="nav-link" href="/doi-tra/hien-thi-tu-choi-tra" role="tab">Từ chối đổi trả </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/doi-tra/thanh-cong" role="tab">Đổi hàng thành công </a>
+            <a class="nav-link" href="/doi-tra/thanh-cong" role="tab">Đổi trả thành công </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalTaoMoi" role="tab">Tạo mới phiếu đổi
-                hàng</a>
+            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalTaoMoi" role="tab">Tạo mới phiếu đổi trả</a>
         </li>
     </ul>
 </div>
@@ -63,7 +62,7 @@
             <div class="card">
                 <div class="card-body">
                     <div>
-                        <h4 class="card-title" style="float: left">Danh sách hóa đơn chờ đổi hàng
+                        <h4 class="card-title" style="float: left">Danh sách hóa đơn chờ đổi trả
                         </h4>
                     </div>
                     <br>
@@ -103,7 +102,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Từ ngày đổi hàng:</label>
+                                        <label class="col-sm-4 col-form-label">Từ ngày đổi trả:</label>
                                         <div class="col-sm-8">
                                             <input type="date" name="startDate" class="form-control"
                                                    placeholder="Từ ngày">
@@ -123,7 +122,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Đến ngày đổi hàng:</label>
+                                        <label class="col-sm-4 col-form-label">Đến ngày đổi trả:</label>
                                         <div class="col-sm-8">
                                             <input type="date" name="endDate" class="form-control"
                                                    placeholder="Từ ngày">
@@ -142,7 +141,7 @@
                             </div>
                             <div align="center">
                                 <BUTTON type="submit" class="btn btn-warning" style="" id="bt">
-                                    Lọc hóa đơn
+                                    Lọc phiếu đổi trả
                                 </BUTTON>
                             </div>
                         </form:form>
@@ -164,7 +163,7 @@
                         <table id="example3" class="display" style="color: black; width: 1500px;text-align: center">
                             <thead>
                             <tr>
-                                <th>Mã phiếu đổi hàng</th>
+                                <th>Mã phiếu đổi trả</th>
                                 <th>Ngày tạo</th>
                                 <th>Mã hóa đơn</th>
                                 <th>Tên khách hàng</th>
@@ -205,7 +204,7 @@
                                            role="button"
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                             <i class="fas fa-times-circle"></i>
-                                            Từ chối phiếu đổi hàng
+                                            Từ chối phiếu đổi trả
                                         </a>
 
 
@@ -225,7 +224,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered"> <!-- Sử dụng lớp 'modal-lg' để làm cho modal lớn hơn -->
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabelAnh">Chọn hóa đơn đổi hàng</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabelAnh">Chọn hóa đơn đổi trả</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -392,7 +391,7 @@
 </script>
 <script>
     function createDoiTra(hoadonId) {
-        // Gọi Controller để tạo đổi hàng mới và truyền hoadonId
+        // Gọi Controller để tạo đổi trả mới và truyền hoadonId
         $.ajax({
             url: "/doi-tra/add-doi-tra?hoadonId=" + hoadonId,
             type: "POST",
@@ -400,7 +399,7 @@
                 // Xử lý kết quả nếu cần
             },
             error: function (error) {
-                console.log("Lỗi khi tạo đổi hàng mới: " + error);
+                console.log("Lỗi khi tạo đổi trả mới: " + error);
             }
         });
     }
@@ -421,7 +420,7 @@
             url: "/doi-tra/add-doi-tra?hoadonId=" + hoadonId,
             type: "POST",
             success: function (data) {
-                toastr.success("Đổi hàng đã được tạo thành công", "Thành công", {
+                toastr.success("Đổi trả đã được tạo thành công", "Thành công", {
                     timeOut: 1500,
                     closeButton: true,
                     progressBar: true,
@@ -433,7 +432,7 @@
                 }, 1500);
             },
             error: function (error) {
-                console.log("Lỗi khi tạo đổi hàng mới: " + error);
+                console.log("Lỗi khi tạo đổi trả mới: " + error);
             }
         });
     }

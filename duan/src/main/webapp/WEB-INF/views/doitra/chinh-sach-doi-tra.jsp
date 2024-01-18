@@ -441,7 +441,6 @@
                 <td style="border: 2px solid black;font-weight: bold">6) Lý do đổi hàng</td>
                 <td style="border: 2px solid black;">
                     <P><b>* Lỗi phần cứng:</b> Lỗi phần cứng là lỗi xảy ra do hư hỏng phần cứng của điện thoại, chẳng hạn như màn hình bị nứt, camera bị mờ, loa bị rè,...<br>
-                        <b>* Lỗi phần mềm:</b> Lỗi phần mềm là lỗi xảy ra do lỗi trong hệ điều hành hoặc ứng dụng của điện thoại, chẳng hạn như điện thoại bị treo, bị lag, không thể mở ứng dụng,...<br>
                         <b>* Lỗi thiết kế:</b> Lỗi thiết kế là lỗi xảy ra do thiết kế của điện thoại không đúng với thiết kế ban đầu về kích thước, thiếu tính năng theo thiết kế ban đầu ví dụ: sản phẩm sai so với thiết kế thực tế(sai kích thước, thiếu chức năng mặc định của điện thoại...)
                     </p>
 
@@ -527,8 +526,6 @@
                 <td style="border: 2px solid black;font-weight: bold">7) Lý do trả hàng</td>
                 <td style="border: 2px solid black;">
                     <P><b>* Lỗi phần cứng:</b> Lỗi phần cứng là lỗi xảy ra do hư hỏng phần cứng của điện thoại, chẳng hạn như màn hình bị nứt, camera bị mờ, loa bị rè,...<br>
-                        <b>* Lỗi phần mềm:</b> Lỗi phần mềm là lỗi xảy ra do lỗi trong hệ điều hành hoặc ứng dụng của điện thoại, chẳng hạn như điện thoại bị treo, bị lag, không thể mở ứng dụng,...<br>
-
                         <b>* Lỗi thiết kế:</b> Lỗi thiết kế là lỗi xảy ra do thiết kế của điện thoại không đúng với thiết kế ban đầu về kích thước, thiếu tính năng theo thiết kế ban đầu ví dụ: sản phẩm sai so với thiết kế thực tế(sai kích thước, thiếu chức năng mặc định của điện thoại...)
 
 <%--                        <b>* Sản phẩm không phù hợp với người dùng:</b> khách hàng không hài lòng về sản phẩm của cửa hàng, không hài lòng về màu sắc, chất liệu...--%>

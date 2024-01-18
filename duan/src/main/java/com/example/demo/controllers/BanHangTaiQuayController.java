@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.*;
+import com.example.demo.repositories.BanHangOnLinerepository;
 import com.example.demo.services.*;
 import com.example.demo.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +70,8 @@ public class BanHangTaiQuayController {
     private CameraService cameraService;
     @Autowired
     private BanHangOnlineService banHangOnlineService;
+    @Autowired
+    private BanHangOnLinerepository banHangOnLinerepository;
     @Autowired
     MailerService mailer;
     @Autowired
@@ -374,7 +377,7 @@ public class BanHangTaiQuayController {
             } else {
                 System.out.println(108);
                 BigDecimal giam = BigDecimal.valueOf(imei.getChiTietSanPham().getKhuyenMai().getSoTienGiam()).divide(BigDecimal.valueOf(100));
-                int giaMoi= (int) Math.floor(Double.valueOf(String.valueOf(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam)))));
+                int giaMoi = (int) Math.floor(Double.valueOf(String.valueOf(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam)))));
 
                 hdct.setDonGia(BigDecimal.valueOf(giaMoi));
                 System.out.println(giam);
@@ -387,7 +390,7 @@ public class BanHangTaiQuayController {
             Date date = new Date(millis);
             ct.setNgayCapNhat(date);
             imeiService.updatImeiChoXuLy(date, id);
-            if (ct.getSoLuong() == 0) {
+            if (banHangOnLinerepository.tongimeiTT0cua1ctsp(ct.getId()) == 0) {
                 ct.setTinhTrang(1);
                 chiTietSanPhamService.update1(ct);
                 List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId());
@@ -769,7 +772,7 @@ public class BanHangTaiQuayController {
             } else {
                 System.out.println(108);
                 BigDecimal giam = BigDecimal.valueOf(imei.getChiTietSanPham().getKhuyenMai().getSoTienGiam()).divide(BigDecimal.valueOf(100));
-                int giaMoi= (int) Math.floor(Double.valueOf(String.valueOf(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam)))));
+                int giaMoi = (int) Math.floor(Double.valueOf(String.valueOf(imei.getChiTietSanPham().getGiaBan().subtract(imei.getChiTietSanPham().getGiaBan().multiply(giam)))));
 
                 hdct.setDonGia(BigDecimal.valueOf(giaMoi));
                 System.out.println(giam);
@@ -780,9 +783,9 @@ public class BanHangTaiQuayController {
             ct.setSoLuong(ct.getSoLuong() - 1);
             long millis = System.currentTimeMillis();
             Date date = new Date(millis);
-            ct.setNgayTao(date);
+            ct.setNgayCapNhat(date);
             imeiService.updatImeiChoXuLy(date, imei.getId());
-            if (ct.getSoLuong() == 0) {
+            if (banHangOnLinerepository.tongimeiTT0cua1ctsp(ct.getId()) == 0) {
                 ct.setTinhTrang(1);
                 chiTietSanPhamService.update1(ct);
                 List<HoaDonChiTiet> list = hoaDonChiTietService.getHoaDonChiTiet(hoaDonnn.getId());

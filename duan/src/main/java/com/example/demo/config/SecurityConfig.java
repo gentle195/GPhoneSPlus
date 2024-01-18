@@ -71,7 +71,7 @@ public class SecurityConfig {
                         "/hang-khach-hang/view-add","/hang-khach-hang/add",
 
                         "/hoa-don/**",
-                        "/imei/hien-thi","/imei/search-on","/imei/search-off-1","/imei/search-off-2","/imei/hien-thi-da-ban","/imei/hien-thi-da-xoa",
+                        "/imei/hien-thi","/imei/search-on","/imei/search-off-1","/imei/search-off-2","/imei/hien-thi-da-ban","/imei/hien-thi-da-xoa","/imei/loc-da-ban","/imei/loc-loi","/imei/loc-da-xoa","/imei/loc-chua-ban",
                         "/khach-hang/hien-thi","/khach-hang/tim-kiem","/khach-hang/tim-kiem-tung-xoa","khach-hang/khach-hang-tung-xoa","/khach-hang/view-add",
                         "/khach-hang/add","/khach-hang/them-hang-khach-hang-add",
                         "/man-hinh/hien-thi","/man-hinh/hien-thi-delete","/man-hinh/search-0","/man-hinh/search-1",

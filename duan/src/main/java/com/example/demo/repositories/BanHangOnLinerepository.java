@@ -349,16 +349,15 @@ public interface BanHangOnLinerepository extends JpaRepository<KhachHang, UUID> 
 
 
     @Transactional
-    @Query(value = "DECLARE @bienb int;\n" +
-            "set @bienb=(\n" +
-            "select count (a.id) from hoa_don_chi_tiet a join imei b on a.id_imei=b.id \n" +
-            "group by a.id,a.id_hoa_don,b.id_chi_tiet_san_pham having a.id_hoa_don=:idhd and b.id_chi_tiet_san_pham=:idctsp \n" +
-            ")\n" +
-            "if @bienb is null\n" +
-            "begin\n" +
-            "set @bienb=0;\n" +
-            "end\n" +
-            "SELECT CAST(@bienb AS int); ", nativeQuery = true)
+    @Query(value = "SELECT SUM(sl1ctspTRONGhdctTHEOidhdVSisctsp) AS total_count\n" +
+            "FROM (\n" +
+            "    SELECT COUNT(a.id) AS sl1ctspTRONGhdctTHEOidhdVSisctsp\n" +
+            "    FROM hoa_don_chi_tiet a\n" +
+            "    JOIN imei b ON a.id_imei = b.id\n" +
+            "    WHERE a.id_hoa_don = :idhd\n" +
+            "      AND b.id_chi_tiet_san_pham = :idctsp\n" +
+            "    GROUP BY a.id, a.id_hoa_don, b.id_chi_tiet_san_pham\n" +
+            ") AS counts", nativeQuery = true)
     Integer sl1ctspTRONGhdctTHEOidhdVSisctsp(@Param("idhd") UUID idhd, @Param("idctsp") UUID idctsp);
 
     @Query("select hd from  IMEI hd where hd.soImei=:soimei ")

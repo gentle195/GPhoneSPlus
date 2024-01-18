@@ -21,14 +21,14 @@
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
             <a class="nav-link" href="/doi-tra/hien-thi" role="tab"
-            >Chờ xác nhận đổi hàng</a>
+            >Chờ xác nhận đổi trả</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="/doi-tra/hien-thi-tu-choi-tra"
-               role="tab" aria-controls="description" aria-selected="true">Từ chối đổi hàng </a>
+               role="tab" aria-controls="description" aria-selected="true">Từ chối đổi trả </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/doi-tra/thanh-cong" role="tab">Đổi hàng thành công </a>
+            <a class="nav-link" href="/doi-tra/thanh-cong" role="tab">Đổi trả thành công </a>
         </li>
     </ul>
 </div>
@@ -39,7 +39,7 @@
             <div class="card">
                 <div class="card-body">
                     <div>
-                        <h4 class="card-title" style="float: left">Danh sách hóa đơn ttừ chối đổi hàng
+                        <h4 class="card-title" style="float: left">Danh sách hóa đơn ttừ chối đổi trả
                         </h4>
                     </div>
                     <br>
@@ -79,7 +79,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Từ ngày đổi hàng:</label>
+                                        <label class="col-sm-4 col-form-label">Từ ngày đổi trả:</label>
                                         <div class="col-sm-8">
                                             <input type="date" name="startDate" class="form-control"
                                                    placeholder="Từ ngày">
@@ -99,7 +99,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Đến ngày đổi hàng:</label>
+                                        <label class="col-sm-4 col-form-label">Đến ngày đổi trả:</label>
                                         <div class="col-sm-8">
                                             <input type="date" name="endDate" class="form-control"
                                                    placeholder="Từ ngày">
@@ -140,7 +140,7 @@
                         <table id="example" class="display" style="color: black; width: 1500px">
                             <thead>
                             <tr>
-                                <th>Mã đổi hàng</th>
+                                <th>Mã đổi trả</th>
                                 <th>Ngày tạo</th>
                                 <th>Mã hóa đơn</th>
                                 <th>Tên khách hàng</th>
@@ -162,7 +162,7 @@
                                     <td>${doitra.nhanVien.hoTen}</td>
                                     <td>
                                         <c:if test="${doitra.tinhTrang == 0}">Đang chờ</c:if>
-                                        <c:if test="${doitra.tinhTrang == 2}">Đã xác nhận đổi hàng</c:if>
+                                        <c:if test="${doitra.tinhTrang == 2}">Đã xác nhận đổi trả</c:if>
                                         <c:if test="${doitra.tinhTrang == 1}">Đã từ chối</c:if>
                                     </td>
                                     <td>
@@ -172,7 +172,7 @@
                                            role="button"
                                            onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                             <i class="ti-reload btn-icon-prepend"></i>
-                                            Tái đổi hàng
+                                            Tái đổi trả
                                         </a>
 
                                     </td>

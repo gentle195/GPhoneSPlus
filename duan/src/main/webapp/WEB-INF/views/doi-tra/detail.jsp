@@ -122,11 +122,11 @@
             <a href="/doi-tra/hien-thi" class="nav-link"
                tabindex="-1"
                role="button">
-                Trang Hóa đơn</a>
+                Trang phiếu đổi trả</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               aria-controls="description" aria-selected="true">Xem hóa đơn</a>
+               aria-controls="description" aria-selected="true">Xem phiếu đổi trả</a>
         </li>
     </ul>
 </div>
@@ -486,7 +486,6 @@
                             <select class="form-control" id="lyDoDoiHangSelect" onchange="hienThiInputKhac()">
                                 <option value="Lỗi Thiết Kế">Lỗi Thiết Kế</option>
                                 <option value="Lỗi Phần Cứng">Lỗi Phần Cứng</option>
-                                <option value="Lỗi Phần Mềm">Lỗi Phần Mềm</option>
                                 <option value="khac">Khác</option>
                             </select>
 
@@ -502,7 +501,6 @@
                             <select class="form-control" id="lyDoTraHangSelect" onchange="hienThiInputKhac1()">
                                 <option value="Lỗi Thiết Kế">Lỗi Thiết Kế</option>
                                 <option value="Lỗi Phần Cứng">Lỗi Phần Cứng</option>
-                                <option value="Lỗi Phần Mềm">Lỗi Phần Mềm</option>
                                 <option value="khac">Khác</option>
                             </select>
 

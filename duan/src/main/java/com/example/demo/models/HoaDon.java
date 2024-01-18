@@ -45,8 +45,7 @@ public class HoaDon {
     @Column(name = "sdt")
     private String sdt;
 
-    //    @NotBlank(message = "Không để trống thông tin")
-    @NumberFormat(style = NumberFormat.Style.CURRENCY, pattern = "###,###,###.###")
+    //    @NotBlank(message = "Không để trống thông tin"
     @Column(name = "tong_tien")
     private BigDecimal tongTien;
 

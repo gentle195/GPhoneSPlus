@@ -130,7 +130,7 @@
     <c:forEach items="${listlocSoLuongSanPhamLoi}" var="SLDTH" >
     data2.push({
         tenHang: "${SLDTH.getTenHang()}",
-        soLuong:  ${SLDTH.getSoLuong()}
+        soLuong:  ${SLDTH.getSoLuong()},
     });
     </c:forEach>
 
